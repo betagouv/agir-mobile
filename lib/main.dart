@@ -7,13 +7,14 @@ import 'package:agir/interactions/adapters/interactions_http_repository.dart';
 import 'package:agir/interactions/redux/interactions_middleware.dart';
 import 'package:agir/interactions/redux/interactions_reducer.dart';
 import 'package:agir/interactions/redux/interactions_state.dart';
+import 'package:agir/ui/home_widget.dart';
 import 'package:agir/ui/interaction_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 
-import 'ui/authentification.dart';
+import 'ui/authentification_widget.dart';
 
 Future main() async {
   //TODO injecter les dépendances
@@ -23,8 +24,10 @@ Future main() async {
     combineReducers<AgirState>(
         [...createAuthentificationReducers(), ...createInteractionsReducers()]),
     middleware: [
-      ...AuthentificationMiddlewares.createAuthentificationMiddlewares(AuthentificationHttpRepository()),
-      ...InteractionsMiddlewares.createInteractionMiddlewares(InteractionsHttpRepository())
+      ...AuthentificationMiddlewares.createAuthentificationMiddlewares(
+          AuthentificationHttpRepository()),
+      ...InteractionsMiddlewares.createInteractionMiddlewares(
+          InteractionsHttpRepository())
     ],
     initialState:
         AgirState(const UtilisateurState("", ""), InteractionsState([])),
@@ -63,7 +66,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          initialRoute: 'login',
+          initialRoute: 'home',
           onGenerateRoute: (RouteSettings settings) {
             switch (settings.name) {
               case 'login':
@@ -73,10 +76,15 @@ class MyApp extends StatelessWidget {
                       builder: (_) => LoginPage(),
                       settings: settings);
                 }
-              case 'home':
+              case 'coach':
                 return MaterialPageRoute(
                     fullscreenDialog: false,
                     builder: (_) => InteractionWidget(),
+                    settings: settings);
+              case 'home':
+                return MaterialPageRoute(
+                    fullscreenDialog: false,
+                    builder: (_) => HomePage(),
                     settings: settings);
             }
           },

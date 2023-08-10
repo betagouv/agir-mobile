@@ -96,3 +96,13 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
   assets:
     - env/
+    - assets/
+
+  fonts:
+    - family: Marianne
+      fonts:
+        - asset: fonts/Marianne-Regular.otf
+        - asset: fonts/Marianne-Regular.otf
+          weight: 400
+        - asset: fonts/Marianne-Bold.otf
+          weight: 700

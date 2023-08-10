@@ -1,4 +1,5 @@
 import 'package:agir/authentification/redux/authentification_actions.dart';
+import 'package:agir/ui/interaction_widget.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -33,11 +34,16 @@ class LoginPage extends StatelessWidget {
       converter: (store) => LoginViewModel(store.state),
       distinct: true,
       onDidChange: (LoginViewModel? old, LoginViewModel? actual) {
-        if(old?.loginViewState != actual?.loginViewState && actual?.loginViewState == LoginViewState.LOGGED) {
-          Navigator.pushReplacementNamed(context, 'home', arguments: HomeArgs("Toto"));
+        if (old?.loginViewState != actual?.loginViewState &&
+            actual?.loginViewState == LoginViewState.LOGGED) {
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => InteractionWidget()),
+            (route) => false,
+          );
         }
       },
-      builder:(BuildContext context, LoginViewModel vm) => Scaffold(
+      builder: (BuildContext context, LoginViewModel vm) => Scaffold(
         body: SafeArea(
           child: Center(
             child: Container(
