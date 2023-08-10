@@ -1,4 +1,4 @@
-package com.example.mobile
+package fr.gouv.beta.agir
 
 import io.flutter.embedding.android.FlutterActivity
 
