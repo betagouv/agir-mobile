@@ -1,5 +1,5 @@
 import 'package:agir/authentification/redux/authentification_actions.dart';
-import 'package:agir/ui/interaction_widget.dart';
+import 'package:agir/ui/landing_widget.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -33,64 +33,62 @@ class LoginPage extends StatelessWidget {
     return StoreConnector<AgirState, LoginViewModel>(
       converter: (store) => LoginViewModel(store.state),
       distinct: true,
-      onDidChange: (LoginViewModel? old, LoginViewModel? actual) {
-        if (old?.loginViewState != actual?.loginViewState &&
-            actual?.loginViewState == LoginViewState.LOGGED) {
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (context) => InteractionWidget()),
-            (route) => false,
-          );
+      onWillChange: (LoginViewModel? old, LoginViewModel? actual) {
+        if (actual?.loginViewState == LoginViewState.LOGGED) {
+          Navigator.pushReplacementNamed(context, "coach");
+        }
+      },
+      onInitialBuild: (LoginViewModel vm) {
+        if (vm.loginViewState == LoginViewState.LOGGED) {
+          Navigator.pushReplacementNamed(context, "coach");
         }
       },
       builder: (BuildContext context, LoginViewModel vm) => Scaffold(
-        body: SafeArea(
-          child: Center(
-            child: Container(
-              width: MediaQuery.of(context).size.width * 0.8,
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.16),
-                    blurRadius: 6,
-                    offset: const Offset(0, 6),
+        body: Center(
+          child: Container(
+            width: MediaQuery.of(context).size.width * 0.8,
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.16),
+                  blurRadius: 6,
+                  offset: const Offset(0, 6),
+                ),
+              ],
+              color: Colors.white,
+            ),
+            child: Column(
+              children: [
+                const Text(
+                  'Agir !',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 20),
+                const Text(
+                  'L’accompagnement personnalisé pour réduire votre empreinte écologique',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 20),
+                const Text('Mesurez les impacts de vos usages au quotidien \n'
+                    'Simulez des aides pertinentes adaptées à votre situation \n'
+                    'Testez vos connaissances'),
+                const SizedBox(height: 20),
+                TextFormField(
+                  controller: _usernameController,
+                  decoration: const InputDecoration(
+                    labelText: 'Identifiant',
                   ),
-                ],
-                color: Colors.white,
-              ),
-              child: Column(
-                children: [
-                  const Text(
-                    'Agir !',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 20),
-                  const Text(
-                    'L’accompagnement personnalisé pour réduire votre empreinte écologique',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 20),
-                  const Text('Mesurez les impacts de vos usages au quotidien \n'
-                      'Simulez des aides pertinentes adaptées à votre situation \n'
-                      'Testez vos connaissances'),
-                  const SizedBox(height: 20),
-                  TextFormField(
-                    controller: _usernameController,
-                    decoration: const InputDecoration(
-                      labelText: 'Identifiant',
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () =>
-                        doAuthentification(_usernameController.text, context),
-                    child: const Text('Se connecter'),
-                  ),
-                ],
-              ),
+                ),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () =>
+                      doAuthentification(_usernameController.text, context),
+                  child: const Text('Se connecter'),
+                ),
+              ],
             ),
           ),
         ),

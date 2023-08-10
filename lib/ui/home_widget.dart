@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'authentification_widget.dart';
-
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
