@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -30,8 +31,8 @@ class HomePage extends StatelessWidget {
                       children: [
                         Padding(
                           padding: const EdgeInsets.fromLTRB(16, 2, 16, 0),
-                          child: Image.asset(
-                            "assets/ic-info.png",
+                          child: SvgPicture.asset(
+                            "assets/ic-info.svg",
                             alignment: Alignment.topCenter,
                             width: 24,
                           ),

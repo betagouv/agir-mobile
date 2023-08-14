@@ -1,3 +1,4 @@
+import 'package:agir/ui/theme/text_styles/agir_text_styles.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -117,23 +118,17 @@ class InteractionsWidget extends StatelessWidget {
             .dispatch(LoadInteractionsActions(store.state.utilisateurState.id));
       },
       builder: (BuildContext context, InteractionsViewModel vm) => Column(
-        children: buildInteractionsCells(vm),
         crossAxisAlignment: CrossAxisAlignment.start,
+        children: buildInteractionsCells(vm),
       ),
     );
   }
 
   List<Widget> buildInteractionsCells(InteractionsViewModel vm) {
     return [
-      const Text(
+      Text(
         "Votre parcours d'actions",
-        style: TextStyle(
-          fontFamily: 'Marianne',
-          fontWeight: FontWeight.w700,
-          fontSize: 28,
-          color: Colors.black,
-          height: 1.5,
-        ),
+        style: AgirTextStyles.Agir28BlackBoldTextStyle(),
         textAlign: TextAlign.start,
       ),
       ...(vm.interactions
@@ -145,37 +140,30 @@ class InteractionsWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ClipRRect(
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(8),
                         bottomLeft: Radius.circular(8)), // Image border
                     child: SizedBox.fromSize(
-                      size: Size.fromRadius(48), // Image radius
+                      size: const Size.fromRadius(48), // Image radius
                       child: Image.network(interaction.illustrationURL,
                           fit: BoxFit.cover),
                     ),
                   ),
-                  SizedBox(width: 12.0),
+                  const SizedBox(width: 12.0),
                   Expanded(
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                        SizedBox(height: 4.0),
-                        Text(
-                          interaction.categorie,
-                          style: const TextStyle(
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey),
-                        ),
+                        const SizedBox(height: 4.0),
+                        Text(interaction.categorie,
+                            style: AgirTextStyles.Agir14BlackTextStyle()),
                         Padding(
                           padding: const EdgeInsets.only(top: 8.0),
                           child: Text(
                             interaction.titre.length > 30
                                 ? "${interaction.titre.substring(0, 30)}..."
                                 : interaction.titre,
-                            style: TextStyle(
-                                fontSize: 18.0, fontWeight: FontWeight.bold),
-                          ),
+                            style: AgirTextStyles.Agir20BlackBoldTextStyle()),
                         ),
                       ]))
                 ],

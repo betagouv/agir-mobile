@@ -13,7 +13,7 @@ class CoachScreen extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [CoachUserWidget(), const SizedBox(height: 24), InteractionsWidget(), InteractionsWidget()],
+            children: [CoachUserWidget(), const SizedBox(height: 24), InteractionsWidget()],
           ),
         ),
       ),

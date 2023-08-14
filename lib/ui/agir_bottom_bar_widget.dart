@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 // ignore: must_be_immutable
 class AgirBottomNavigationBar extends StatefulWidget {
@@ -6,7 +7,8 @@ class AgirBottomNavigationBar extends StatefulWidget {
 
   final ValueChanged<int> onSelectedItem;
 
-  AgirBottomNavigationBar({super.key, required this.onSelectedItem, this.currentIndex = 0});
+  AgirBottomNavigationBar(
+      {super.key, required this.onSelectedItem, this.currentIndex = 0});
 
   @override
   State<AgirBottomNavigationBar> createState() =>
@@ -19,17 +21,17 @@ class _AgirBottomNavigationBarState extends State<AgirBottomNavigationBar> {
     return Container(
       height: 52,
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-        buildNavigationBarItem("assets/ic-home.png", 0, "Agir !"),
-        buildNavigationBarItem("assets/ic-dashboard.png", 1, "Tableau de Bord"),
-        buildNavigationBarItem("assets/ic-aide.png", 2, "Mes Aides"),
-        buildNavigationBarItem("assets/ic-communaute.png", 3, "Communauté"),
+        buildNavigationBarItem("assets/ic-home.svg", 0, "Agir !"),
+        buildNavigationBarItem("assets/ic-dashboard.svg", 1, "Tableau de Bord"),
+        buildNavigationBarItem("assets/ic-aide.svg", 2, "Mes Aides"),
+        buildNavigationBarItem("assets/ic-communaute.svg", 3, "Communauté"),
       ]),
     );
   }
 
   Widget buildNavigationBarItem(String imageName, int index, String label) {
     return InkWell(
-      child: getItem(imageName,index,label),
+      child: getItem(imageName, index, label),
       onTap: () {
         setState(() {
           widget.currentIndex = index;
@@ -37,16 +39,21 @@ class _AgirBottomNavigationBarState extends State<AgirBottomNavigationBar> {
         widget.onSelectedItem(index);
       },
     );
-
   }
 
   Widget getItem(String imageName, int index, String label) {
     if (index == widget.currentIndex) {
       return Row(
-        children: [Image.asset(imageName), Text(label)],
+        children: [
+          SvgPicture.asset(imageName),
+          const SizedBox(
+            width: 8,
+          ),
+          Text(label)
+        ],
       );
     } else {
-      return Image.asset(imageName);
+      return SvgPicture.asset(imageName);
     }
   }
 }
