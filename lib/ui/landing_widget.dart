@@ -1,6 +1,8 @@
 import 'package:agir/ui/agir_bottom_bar_widget.dart';
 import 'package:agir/ui/coach_screen.dart';
+import 'package:agir/ui/theme/text_styles/agir_text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 // ignore: must_be_immutable
 class LandingPage extends StatefulWidget {
@@ -22,42 +24,26 @@ class _LandingPageState extends State<LandingPage> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Image.asset("assets/ic-user.png", height: 32, width: 32),
+              SvgPicture.asset("assets/ic-user.svg", height: 32, width: 32),
               const SizedBox(
                 width: 8,
               ),
-              const Text("8 tonnes / ans",
-                  style: TextStyle(
-                    fontFamily: 'Marianne',
-                    fontWeight: FontWeight.normal,
-                    fontSize: 20,
-                    color: Colors.black,
-                  )),
+              Text("8 tonnes / ans",
+                  style: AgirTextStyles.Agir20BlackTextStyle()),
               const SizedBox(
                 width: 16,
               ),
-              const Text("|",
-                  style: TextStyle(
-                    fontFamily: 'Marianne',
-                    fontWeight: FontWeight.normal,
-                    fontSize: 20,
-                    color: Colors.black,
-                  )),
+              Text("|",
+                  style: AgirTextStyles.Agir20BlackTextStyle()),
               const SizedBox(
                 width: 16,
               ),
-              const Text("304",
-                  style: TextStyle(
-                    fontFamily: 'Marianne',
-                    fontWeight: FontWeight.w700,
-                    fontSize: 20,
-                    color: Colors.black,
-                    height: 1.5,
-                  )),
+              Text("304",
+                  style: AgirTextStyles.Agir20BlackBoldTextStyle()),
               const SizedBox(
                 width: 4,
               ),
-              Image.asset("assets/ic-leaf.png", height: 32, width: 32),
+              SvgPicture.asset("assets/ic-leaf.svg", height: 32, width: 32),
             ],
           ),
         ),
