@@ -7,13 +7,14 @@ import 'package:agir/interactions/adapters/interactions_http_repository.dart';
 import 'package:agir/interactions/redux/interactions_middleware.dart';
 import 'package:agir/interactions/redux/interactions_reducer.dart';
 import 'package:agir/interactions/redux/interactions_state.dart';
-import 'package:agir/ui/interaction_widget.dart';
+import 'package:agir/ui/home_widget.dart';
+import 'package:agir/ui/landing_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 
-import 'ui/authentification.dart';
+import 'ui/authentification_widget.dart';
 
 Future main() async {
   //TODO injecter les dépendances
@@ -23,8 +24,10 @@ Future main() async {
     combineReducers<AgirState>(
         [...createAuthentificationReducers(), ...createInteractionsReducers()]),
     middleware: [
-      ...AuthentificationMiddlewares.createAuthentificationMiddlewares(AuthentificationHttpRepository()),
-      ...InteractionsMiddlewares.createInteractionMiddlewares(InteractionsHttpRepository())
+      ...AuthentificationMiddlewares.createAuthentificationMiddlewares(
+          AuthentificationHttpRepository()),
+      ...InteractionsMiddlewares.createInteractionMiddlewares(
+          InteractionsHttpRepository())
     ],
     initialState:
         AgirState(const UtilisateurState("", ""), InteractionsState([])),
@@ -40,49 +43,56 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return StoreProvider<AgirState>(
-        store: store,
-        child: MaterialApp(
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            // This is the theme of your application.
-            //
-            // TRY THIS: Try running your application with "flutter run". You'll see
-            // the application has a purple toolbar. Then, without quitting the app,
-            // try changing the seedColor in the colorScheme below to Colors.green
-            // and then invoke "hot reload" (save your changes or press the "hot
-            // reload" button in a Flutter-supported IDE, or press "r" if you used
-            // the command line to start the app).
-            //
-            // Notice that the counter didn't reset back to zero; the application
-            // state is not lost during the reload. To reset the state, use hot
-            // restart instead.
-            //
-            // This works for code too, not just values: Most code changes can be
-            // tested with just a hot reload.
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
-          ),
-          initialRoute: 'login',
-          onGenerateRoute: (RouteSettings settings) {
-            switch (settings.name) {
-              case 'login':
-                {
+    return SafeArea(
+      child: StoreProvider<AgirState>(
+          store: store,
+          child: MaterialApp(
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              // This is the theme of your application.
+              //
+              // TRY THIS: Try running your application with "flutter run". You'll see
+              // the application has a purple toolbar. Then, without quitting the app,
+              // try changing the seedColor in the colorScheme below to Colors.green
+              // and then invoke "hot reload" (save your changes or press the "hot
+              // reload" button in a Flutter-supported IDE, or press "r" if you used
+              // the command line to start the app).
+              //
+              // Notice that the counter didn't reset back to zero; the application
+              // state is not lost during the reload. To reset the state, use hot
+              // restart instead.
+              //
+              // This works for code too, not just values: Most code changes can be
+              // tested with just a hot reload.
+              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+              useMaterial3: true,
+            ),
+            initialRoute: 'home',
+            onGenerateRoute: (RouteSettings settings) {
+              switch (settings.name) {
+                case 'login':
+                  {
+                    return MaterialPageRoute(
+                        fullscreenDialog: false,
+                        builder: (_) => LoginPage(),
+                        settings: settings);
+                  }
+                case 'coach':
                   return MaterialPageRoute(
                       fullscreenDialog: false,
-                      builder: (_) => LoginPage(),
+                      builder: (_) => LandingPage(),
                       settings: settings);
-                }
-              case 'home':
-                return MaterialPageRoute(
-                    fullscreenDialog: false,
-                    builder: (_) => InteractionWidget(),
-                    settings: settings);
-            }
-          },
+                case 'home':
+                  return MaterialPageRoute(
+                      fullscreenDialog: false,
+                      builder: (_) => HomePage(),
+                      settings: settings);
+              }
+            },
 
-          //home: LoginPage(),
-        ));
+            //home: LoginPage(),
+          )),
+    );
   }
 }
 

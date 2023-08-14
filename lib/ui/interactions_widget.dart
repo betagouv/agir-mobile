@@ -1,9 +1,9 @@
-import 'package:agir/agir_state.dart';
-import 'package:agir/interactions/fetchInteractions_usecase.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
+import '../agir_state.dart';
+import '../interactions/fetchInteractions_usecase.dart';
 import '../interactions/redux/interactions_actions.dart';
 
 class InteractionDisplayModel {
@@ -41,7 +41,6 @@ class InteractionsViewModel extends Equatable {
   const InteractionsViewModel._internal(this.interactions);
 
   factory InteractionsViewModel(AgirState agirState) {
-    debugPrint("id : ${agirState.utilisateurState.id}");
     final interactions = agirState.interactionsState.interactions
         .map((e) => InteractionDisplayModel(
               e.id,
@@ -107,71 +106,81 @@ class InteractionsViewModel extends Equatable {
   }
 }
 
-class InteractionWidget extends StatelessWidget {
+class InteractionsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Interactions List'),
-      ),
-      body: StoreConnector<AgirState, InteractionsViewModel>(
-        converter: (store) => InteractionsViewModel(store.state),
-        distinct: true,
-        onInit: (store) {
-          store.dispatch(
-              LoadInteractionsActions(store.state.utilisateurState.id));
-        },
-        builder: (BuildContext context, InteractionsViewModel vm) =>
-            ListView.builder(
-          itemCount: vm.interactions.length,
-          itemBuilder: (context, index) {
-            InteractionDisplayModel interaction = vm.interactions[index];
-            return Card(
-                elevation: 2.0,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0)),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: 120.0,
-                      height: 120.0,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(interaction.illustrationURL),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 12.0),
-                    Expanded(
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                          SizedBox(height: 4.0),
-                          Text(
-                            interaction.categorie,
-                            style: const TextStyle(
-                                fontSize: 14.0,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.grey),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 8.0),
-                            child: Text(
-                              interaction.titre.length > 30
-                                  ? "${interaction.titre.substring(0, 30)}..."
-                                  : interaction.titre,
-                              style: TextStyle(
-                                  fontSize: 18.0, fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ]))
-                  ],
-                ));
-          },
-        ),
+    return StoreConnector<AgirState, InteractionsViewModel>(
+      converter: (store) => InteractionsViewModel(store.state),
+      distinct: true,
+      onInit: (store) {
+        store
+            .dispatch(LoadInteractionsActions(store.state.utilisateurState.id));
+      },
+      builder: (BuildContext context, InteractionsViewModel vm) => Column(
+        children: buildInteractionsCells(vm),
+        crossAxisAlignment: CrossAxisAlignment.start,
       ),
     );
+  }
+
+  List<Widget> buildInteractionsCells(InteractionsViewModel vm) {
+    return [
+      const Text(
+        "Votre parcours d'actions",
+        style: TextStyle(
+          fontFamily: 'Marianne',
+          fontWeight: FontWeight.w700,
+          fontSize: 28,
+          color: Colors.black,
+          height: 1.5,
+        ),
+        textAlign: TextAlign.start,
+      ),
+      ...(vm.interactions
+          .map((interaction) => Card(
+              elevation: 2.0,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.0)),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(8),
+                        bottomLeft: Radius.circular(8)), // Image border
+                    child: SizedBox.fromSize(
+                      size: Size.fromRadius(48), // Image radius
+                      child: Image.network(interaction.illustrationURL,
+                          fit: BoxFit.cover),
+                    ),
+                  ),
+                  SizedBox(width: 12.0),
+                  Expanded(
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                        SizedBox(height: 4.0),
+                        Text(
+                          interaction.categorie,
+                          style: const TextStyle(
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: Text(
+                            interaction.titre.length > 30
+                                ? "${interaction.titre.substring(0, 30)}..."
+                                : interaction.titre,
+                            style: TextStyle(
+                                fontSize: 18.0, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ]))
+                ],
+              )))
+          .toList())
+    ];
   }
 }
