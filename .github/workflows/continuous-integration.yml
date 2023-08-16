@@ -77,13 +77,6 @@ jobs:
         env:
           STAGING_GOOGLE_SERVICE_B64: ${{ secrets.STAGING_GOOGLE_SERVICE_B64 }}
 
-      - name: Write key properties
-        shell: bash
-        run: |
-          echo "$STAGING_KEY_PROPERTIES_B64" | base64 --decode > android/key.properties
-        env:
-          STAGING_KEY_PROPERTIES_B64: ${{ secrets.STAGING_KEY_PROPERTIES_B64 }}
-
       - name: Write env
         shell: bash
         run: |
@@ -104,11 +97,11 @@ jobs:
           --release \
           --build-number=${{ needs.pre-build.outputs.date }}
 
-      - name: CEJ - Deploy Android apk to Firebase App Distribution
+      - name: Deploy Android apk to Firebase App Distribution
         run: |
           firebase appdistribution:distribute build/app/outputs/flutter-apk/app-staging-release.apk \
             --token "$STAGING_FIREBASE_CI_TOKEN" \
             --app "$STAGING_ANDROID_APP_ID" \
         env:
           STAGING_FIREBASE_CI_TOKEN: ${{ secrets.STAGING_FIREBASE_CI_TOKEN }}
-          CEJ_STAGING_ANDROID_APP_ID: ${{ secrets.STAGING_ANDROID_APP_ID }}
+          STAGING_ANDROID_APP_ID: ${{ secrets.STAGING_ANDROID_APP_ID }}
