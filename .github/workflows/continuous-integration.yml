@@ -102,6 +102,7 @@ jobs:
           firebase appdistribution:distribute build/app/outputs/flutter-apk/app-staging-release.apk \
             --token "$STAGING_FIREBASE_CI_TOKEN" \
             --app "$STAGING_ANDROID_APP_ID" \
+            --groups agir-team
         env:
           STAGING_FIREBASE_CI_TOKEN: ${{ secrets.STAGING_FIREBASE_CI_TOKEN }}
           STAGING_ANDROID_APP_ID: ${{ secrets.STAGING_ANDROID_APP_ID }}
