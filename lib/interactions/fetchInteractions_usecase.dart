@@ -8,6 +8,7 @@ enum InteractionCategorie {
   TRANSPORTS,
 }
 
+
 enum InteractionType {
   QUIZ,
   ARTICLE,
