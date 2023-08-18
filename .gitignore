@@ -47,4 +47,8 @@ app.*.map.json
 google-services.json
 GoogleService-Info.plist
 
+ios/*.plist
+ios/*.p12
+ios/*.p8
+
 /env/.env
