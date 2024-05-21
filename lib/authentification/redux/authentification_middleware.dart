@@ -1,5 +1,4 @@
 import 'package:agir/agir_state.dart';
-import 'package:agir/authentification/adapters/authentification_http_repository.dart';
 import 'package:agir/authentification/authenticateUser_usecase.dart';
 import 'package:agir/authentification/ports/authentification_repository.dart';
 import 'package:redux/redux.dart';

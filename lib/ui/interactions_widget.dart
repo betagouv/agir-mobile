@@ -108,6 +108,8 @@ class InteractionsViewModel extends Equatable {
 }
 
 class InteractionsWidget extends StatelessWidget {
+  const InteractionsWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AgirState, InteractionsViewModel>(

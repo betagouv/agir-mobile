@@ -85,9 +85,10 @@ class MyApp extends StatelessWidget {
                 case 'home':
                   return MaterialPageRoute(
                       fullscreenDialog: false,
-                      builder: (_) => HomePage(),
+                      builder: (_) => const HomePage(),
                       settings: settings);
               }
+              return null;
             },
 
             //home: LoginPage(),

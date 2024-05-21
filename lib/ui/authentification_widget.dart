@@ -1,5 +1,4 @@
 import 'package:agir/authentification/redux/authentification_actions.dart';
-import 'package:agir/ui/landing_widget.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -27,6 +26,8 @@ class LoginViewModel extends Equatable {
 
 class LoginPage extends StatelessWidget {
   final TextEditingController _usernameController = TextEditingController();
+
+  LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {

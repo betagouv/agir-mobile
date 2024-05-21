@@ -8,6 +8,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 class LandingPage extends StatefulWidget {
   int currentNavigationBarIndex = 0;
 
+  LandingPage({super.key});
+
   @override
   State<LandingPage> createState() => _LandingPageState();
 }
@@ -62,7 +64,7 @@ class _LandingPageState extends State<LandingPage> {
 
   Widget displayCurrentScreen() {
     if (widget.currentNavigationBarIndex == 0) {
-      return CoachScreen();
+      return const CoachScreen();
     } else {
       return const SizedBox();
     }

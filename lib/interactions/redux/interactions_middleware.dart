@@ -1,5 +1,4 @@
 import 'package:agir/agir_state.dart';
-import 'package:agir/interactions/adapters/interactions_http_repository.dart';
 import 'package:agir/interactions/fetchInteractions_usecase.dart';
 import 'package:agir/interactions/ports/interactions_repository.dart';
 import 'package:redux/redux.dart';

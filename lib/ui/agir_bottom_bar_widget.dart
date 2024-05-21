@@ -18,7 +18,7 @@ class AgirBottomNavigationBar extends StatefulWidget {
 class _AgirBottomNavigationBarState extends State<AgirBottomNavigationBar> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 52,
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
         buildNavigationBarItem("assets/ic-home.svg", 0, "Agir !"),

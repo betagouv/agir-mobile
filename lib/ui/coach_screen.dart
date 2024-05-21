@@ -4,16 +4,18 @@ import 'coach_user_widget.dart';
 import 'interactions_widget.dart';
 
 class CoachScreen extends StatelessWidget {
+  const CoachScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+          padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [CoachUserWidget(), const SizedBox(height: 24), InteractionsWidget()],
+            children: [CoachUserWidget(), SizedBox(height: 24), InteractionsWidget()],
           ),
         ),
       ),

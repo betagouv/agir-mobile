@@ -13,6 +13,8 @@ class CoachUserViewModel {
 }
 
 class CoachUserWidget extends StatelessWidget {
+  const CoachUserWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AgirState, CoachUserViewModel>(
