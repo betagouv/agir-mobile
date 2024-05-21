@@ -1,0 +1,31 @@
+name: continuous-integration
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - .github/workflows/continuous-integration.yml
+      - agir/**
+  pull_request:
+    branches: ["main"]
+    paths:
+      - .github/workflows/continuous-integration.yml
+      - agir/**
+
+jobs:
+  continuous-integration:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: agir
+    steps:
+      - name: 📚 Git Checkout
+        uses: actions/checkout@v3
+      - name: 🐦 Install flutter
+        uses: subosito/flutter-action@v2
+      - name: 🎨 Check format
+        run: dart format . --set-exit-if-changed
+      - name: 🚨 Check lint
+        run: flutter analyze --fatal-infos --fatal-warnings .
+      - name: ✅ Run tests
+        run: flutter test --test-randomize-ordering-seed random

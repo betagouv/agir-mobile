@@ -1,0 +1,22 @@
+{
+    "dart.analysisExcludedFolders": ["old"],
+    "[dart]": {
+      "editor.bracketPairColorization.enabled": true,
+      "editor.formatOnSave": true,
+      "editor.formatOnType": true,
+      "editor.selectionHighlight": false,
+      "editor.suggest.snippetsPreventQuickSuggestions": false,
+      "editor.suggestSelection": "first",
+      "editor.tabCompletion": "onlySnippets",
+      "editor.wordBasedSuggestions": "off",
+    },
+    "files.exclude": {
+      "**/pubspec.lock": true,
+      "**/pubspec_overrides.yaml": true,
+      "**/.dart_tool/": true,
+      "**/.flutter-plugins-dependencies": true,
+      "**/.flutter-plugins": true,
+      "**/build/": true,
+      "**/coverage/": true
+    }
+  }
