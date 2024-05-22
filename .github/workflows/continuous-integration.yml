@@ -5,13 +5,13 @@ on:
     branches: ["main"]
     paths:
       - .github/workflows/continuous-integration.yml
-      - agir/**
+      - app/**
       - packages/**
   pull_request:
     branches: ["main"]
     paths:
       - .github/workflows/continuous-integration.yml
-      - agir/**
+      - app/**
       - packages/**
 
 jobs:
@@ -30,7 +30,7 @@ jobs:
         uses: subosito/flutter-action@v2
       - name: ✅ Check app (format, lint, tests)
         run: |
-          cd agir
+          cd app
           dart format $(find . -name '*.dart' -not -name '*.g.dart') --set-exit-if-changed
           flutter analyze --fatal-infos --fatal-warnings
           flutter test --test-randomize-ordering-seed random

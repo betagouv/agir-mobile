@@ -1,5 +1,6 @@
 name: agir_lints
 description: A starting point for Dart libraries or applications.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 0.0.1
 
 environment:
