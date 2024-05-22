@@ -1,3 +1,5 @@
-# agir
+# AGIR
 
-A new Flutter project.
+## Pour commencer
+
+1. [Release](./docs/release.md)
