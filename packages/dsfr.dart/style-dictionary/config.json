@@ -1,0 +1,25 @@
+{
+  "source": ["tokens/**/*.json"],
+  "platforms": {
+    "flutter-separate": {
+      "transformGroup": "flutter-separate",
+      "buildPath": "../lib/src/fondamentaux/",
+      "files": [
+        {
+          "destination": "colors.g.dart",
+          "format": "flutter/class.dart",
+          "className": "DsfrColors",
+          "type": "color",
+          "filter": { "attributes": {"category": "color"} }
+        },
+        {
+          "destination": "spacing.g.dart",
+          "format": "flutter/class.dart",
+          "className": "DsfrSpacings",
+          "type": "float",
+          "filter": { "attributes": {"category": "spacing"} }
+        }
+      ]
+    }
+  }
+}

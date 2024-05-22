@@ -6,26 +6,40 @@ on:
     paths:
       - .github/workflows/continuous-integration.yml
       - agir/**
+      - packages/**
   pull_request:
     branches: ["main"]
     paths:
       - .github/workflows/continuous-integration.yml
       - agir/**
+      - packages/**
 
 jobs:
   continuous-integration:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: agir
     steps:
       - name: 📚 Git Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            dsfr:
+              - 'packages/dsfr.dart/**'
       - name: 🐦 Install flutter
         uses: subosito/flutter-action@v2
-      - name: 🎨 Check format
-        run: dart format . --set-exit-if-changed
-      - name: 🚨 Check lint
-        run: flutter analyze --fatal-infos --fatal-warnings .
-      - name: ✅ Run tests
-        run: flutter test --test-randomize-ordering-seed random
+      - name: ✅ Check app (format, lint, tests)
+        run: |
+          cd agir
+          dart format $(find . -name '*.dart' -not -name '*.g.dart') --set-exit-if-changed
+          flutter analyze --fatal-infos --fatal-warnings
+          flutter test --test-randomize-ordering-seed random
+          cd -
+      - name: ✅ Check dsfr (format, lint, tests)
+        if: steps.filter.outputs.dsfr == 'true'
+        run: |
+          cd packages/dsfr.dart
+          dart format $(find . -name '*.dart' -not -name '*.g.dart') --set-exit-if-changed
+          flutter analyze --fatal-infos --fatal-warnings
+          flutter test --test-randomize-ordering-seed random
+          cd -

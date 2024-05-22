@@ -1,0 +1,41 @@
+name: dsfr 
+description: "A new Flutter package project."
+version: 0.0.1
+homepage:
+environment:
+  sdk: 3.4.0
+  flutter: 3.22.0
+dependencies:
+  flutter:
+    sdk: flutter
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  icon_font_generator:
+    git:
+      url: https://github.com/Jupi007/icon_font_generator.git
+      ref: yaru
+flutter:
+  fonts:
+    - family: Marianne
+      fonts:
+        - asset: assets/fonts/Marianne-Light.otf
+          weight: 300
+        - asset: assets/fonts/Marianne-LightItalic.otf
+          weight: 300
+          style: italic
+        - asset: assets/fonts/Marianne-Regular.otf
+          weight: 400
+        - asset: assets/fonts/Marianne-RegularItalic.otf
+          weight: 400
+          style: italic
+        - asset: assets/fonts/Marianne-Medium.otf
+          weight: 500
+        - asset: assets/fonts/Marianne-Bold.otf
+          weight: 700
+        - asset: assets/fonts/Marianne-BoldItalic.otf
+          weight: 700
+          style: italic
+    - family: DsfrIcons
+      fonts:
+        - asset: assets/icons/Dsfr-Icons.otf

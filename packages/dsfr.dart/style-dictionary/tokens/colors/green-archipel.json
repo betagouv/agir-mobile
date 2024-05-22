@@ -1,0 +1,39 @@
+{
+  "color": {
+    "green-archipel": {
+      "75"             : {"value": "#152021"},
+      "75-active"      : {"value": "#3f5759"},
+      "75-hover"       : {"value": "#2f4345"},
+      "100"            : {"value": "#1a2628"},
+      "100-active"     : {"value": "#465f63"},
+      "100-hover"      : {"value": "#364a4e"},
+      "125"            : {"value": "#1f2c2e"},
+      "125-active"     : {"value": "#4d676b"},
+      "125-hover"      : {"value": "#3c5255"},
+      "200"            : {"value": "#233e41"},
+      "200-active"     : {"value": "#4d7f85"},
+      "200-hover"      : {"value": "#3e686d"},
+      "sun-391"        : {"value": "#006A6F"},
+      "sun-391-active" : {"value": "#00bbc3"},
+      "sun-391-hover"  : {"value": "#009fa7"},
+      "main-557"       : {"value": "#009099"},
+      "main-557-active": {"value": "#00e0ee"},
+      "main-557-hover" : {"value": "#00c6d2"},
+      "moon-716"       : {"value": "#34BAB5"},
+      "moon-716-active": {"value": "#419ca4"},
+      "moon-716-hover" : {"value": "#43e9e2"},
+      "850"            : {"value": "#60e0eb"},
+      "850-active"     : {"value": "#419ca4"},
+      "850-hover"      : {"value": "#4cb4bd"},
+      "925"            : {"value": "#a6f2fa"},
+      "925-active"     : {"value": "#58c5cf"},
+      "925-hover"      : {"value": "#62dbe5"},
+      "950"            : {"value": "#c7f6fc"},
+      "950-active"     : {"value": "#5bd8e3"},
+      "950-hover"      : {"value": "#64ecf8"},
+      "975"            : {"value": "#e5fbfd"},
+      "975-active"     : {"value": "#73e9f0"},
+      "975-hover"      : {"value": "#99f2f8"}
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "color": {
+    "red-marianne": {
+      "main-472"       : {"value": "#E0000F"},
+      "main-472-active": {"value": "#FF4245"},
+      "main-472-hover" : {"value": "#FF2930"}
+    }
+  }
+}

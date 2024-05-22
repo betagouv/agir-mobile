@@ -1,0 +1,42 @@
+{
+  "color": {
+    "blue-france": {
+      "75"             : {"value": "#1b1b35"},
+      "75-active"      : {"value": "#4d4d83"},
+      "75-hover"       : {"value": "#3a3a68"},
+      "100"            : {"value": "#21213f"},
+      "100-active"     : {"value": "#56568c"},
+      "100-hover"      : {"value": "#424275"},
+      "113"            : {"value": "#00008F"},
+      "113-active"     : {"value": "#2424FF"},
+      "113-hover"      : {"value": "#1414FF"},
+      "125"            : {"value": "#272747"},
+      "125-active"     : {"value": "#5e5e90"},
+      "125-hover"      : {"value": "#4a4a7d"},
+      "200"            : {"value": "#313178"},
+      "200-active"     : {"value": "#6c6cbb"},
+      "200-hover"      : {"value": "#5757ad"},
+      "625"            : {"value": "#8585f6"},
+      "625-active"     : {"value": "#c6c6fb"},
+      "625-hover"      : {"value": "#b1b1f9"},
+      "850"            : {"value": "#cacafb"},
+      "850-active"     : {"value": "#8b8bf6"},
+      "850-hover"      : {"value": "#a1a1f8"},
+      "925"            : {"value": "#e3e3fd"},
+      "925-active"     : {"value": "#adadf9"},
+      "925-hover"      : {"value": "#c1c1fb"},
+      "950"            : {"value": "#ececfe"},
+      "950-active"     : {"value": "#bbbbfc"},
+      "950-hover"      : {"value": "#cecefc"},
+      "975"            : {"value": "#f5f5fe"},
+      "975-active"     : {"value": "#cbcbfa"},
+      "975-hover"      : {"value": "#dcdcfc"},
+      "main-525"       : {"value": "#6a6af4"},
+      "main-525-active": {"value": "#aeaef9"},
+      "main-525-hover" : {"value": "#9898f8"},
+      "sun-113"        : {"value": "#000091"},
+      "sun-113-active" : {"value": "#2323ff"},
+      "sun-113-hover"  : {"value": "#1212ff"}
+    }
+  }
+}
