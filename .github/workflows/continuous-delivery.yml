@@ -18,6 +18,7 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.3'
+      - run: bundle install
       - run: bundle exec fastlane update_plugins
       - name: 🚀 Deploy Android development application
         run: bundle exec fastlane development
@@ -35,6 +36,7 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.3'
+      - run: bundle install
       - run: bundle exec fastlane update_plugins
       - name: 🚀 Deploy Android development application
         run: bundle exec fastlane development
