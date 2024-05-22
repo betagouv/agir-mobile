@@ -1,0 +1,4 @@
+# melos_managed_dependency_overrides: agir_lints
+dependency_overrides:
+  agir_lints:
+    path: ../packages/agir_lints

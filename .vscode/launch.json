@@ -3,7 +3,7 @@
     "configurations": [
       {
         "name": "[DEV] Agir",
-        "cwd": "agir",
+        "cwd": "app",
         "request": "launch",
         "type": "dart",
         "args": [
@@ -13,7 +13,7 @@
       },
       {
         "name": "Agir",
-        "cwd": "agir",
+        "cwd": "app",
         "request": "launch",
         "type": "dart",
         "args": [

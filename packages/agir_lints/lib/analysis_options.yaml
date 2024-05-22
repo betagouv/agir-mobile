@@ -18,10 +18,12 @@ analyzer:
 
 linter:
   rules:
+    always_specify_types: false
+    avoid_classes_with_only_static_members: false
     avoid_final_parameters: false # incompatible with `prefer_final_parameters`.
-    avoid_types_on_closure_parameters: false # incompatible with `always_specify_types`.
     diagnostic_describe_all_properties: false
     prefer_double_quotes: false # incompatible with `prefer_single_quotes`.
+    prefer_relative_imports: false # incompatible with `always_use_package_imports`.
     public_member_api_docs: false
     type_annotate_public_apis: false
     unnecessary_final: false # incompatible with `prefer_final_parameters`.

@@ -1,13 +1,17 @@
 name: dsfr 
 description: "A new Flutter package project."
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 0.0.1
 homepage:
+
 environment:
   sdk: 3.4.0
   flutter: 3.22.0
+
 dependencies:
   flutter:
     sdk: flutter
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -15,6 +19,7 @@ dev_dependencies:
     git:
       url: https://github.com/Jupi007/icon_font_generator.git
       ref: yaru
+
 flutter:
   fonts:
     - family: Marianne

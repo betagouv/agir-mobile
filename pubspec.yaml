@@ -1,0 +1,6 @@
+name: agir_melos
+
+environment:
+  sdk: 3.4.0
+dev_dependencies:
+  melos: ^6.0.0

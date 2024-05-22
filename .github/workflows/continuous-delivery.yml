@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: agir/android
+        working-directory: app/android
     steps:
       - name: 📚 Git checkout
         uses: actions/checkout@v3
@@ -26,7 +26,7 @@ jobs:
   #   runs-on: macos-latest
   #   defaults:
   #     run:
-  #       working-directory: agir/ios
+  #       working-directory: app/ios
   #   steps:
   #     - name: 📚 Git checkout
   #       uses: actions/checkout@v3
