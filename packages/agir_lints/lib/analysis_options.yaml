@@ -1,0 +1,27 @@
+include: all_lints.yaml
+
+analyzer:
+  language:
+    strict-casts: true
+    strict-inference: true
+    strict-raw-types: true
+  errors:
+    close_sinks: ignore
+    collection_methods_unrelated_type: error
+    included_file_warning: ignore
+    missing_required_param: error
+    missing_return: error
+    record_literal_one_positional_no_trailing_comma: error
+    unrelated_type_equality_checks: error
+  exclude: ["**/*.g.dart"]
+
+
+linter:
+  rules:
+    avoid_final_parameters: false # incompatible with `prefer_final_parameters`.
+    avoid_types_on_closure_parameters: false # incompatible with `always_specify_types`.
+    diagnostic_describe_all_properties: false
+    prefer_double_quotes: false # incompatible with `prefer_single_quotes`.
+    public_member_api_docs: false
+    type_annotate_public_apis: false
+    unnecessary_final: false # incompatible with `prefer_final_parameters`.
