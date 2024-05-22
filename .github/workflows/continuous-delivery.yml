@@ -18,10 +18,9 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.3'
+          bundler-cache: true
       - name: 🚀 Deploy Android development application
-        run: | 
-          bundle install
-          bundle exec fastlane development
+        run: bundle exec fastlane development
   # continuous-delivery-ios:
   #   runs-on: macos-latest
   #   defaults:
@@ -33,10 +32,10 @@ jobs:
   #     - name: 🐦 Install flutter
   #       uses: subosito/flutter-action@v2
   #     - name: 💎 Install ruby
-  #       uses: ruby/setup-ruby@v1
-  #       with:
-  #         ruby-version: '3.3'
-  #     - run: bundle install
+  #     uses: ruby/setup-ruby@v1
+  #     with:
+  #       ruby-version: '3.3'
+  #       bundler-cache: true
   #     - name: 🚀 Deploy Android development application
   #       run: | 
   #         bundle install
