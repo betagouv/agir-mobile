@@ -15,7 +15,9 @@ jobs:
       - name: 🐦 Install flutter
         uses: subosito/flutter-action@v2
       - name: 🚀 Deploy Android development application
-        run: bundle exec fastlane development
+        run: |
+          gem install bundler
+          bundle exec fastlane development
   continuous-delivery-ios:
     runs-on: macos-latest
     defaults:
@@ -27,4 +29,6 @@ jobs:
       - name: 🐦 Install flutter
         uses: subosito/flutter-action@v2
       - name: 🚀 Deploy Android development application
-        run: bundle exec fastlane development
+        run: |
+          gem install bundler
+          bundle exec fastlane development
