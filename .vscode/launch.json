@@ -2,10 +2,24 @@
     "version": "0.2.0",
     "configurations": [
       {
+        "name": "[DEV] Agir",
+        "cwd": "agir",
+        "request": "launch",
+        "type": "dart",
+        "args": [
+          "--flavor",
+          "development"
+        ]
+      },
+      {
         "name": "Agir",
         "cwd": "agir",
         "request": "launch",
-        "type": "dart"
-      }
+        "type": "dart",
+        "args": [
+          "--flavor",
+          "production"
+        ]
+      },
     ]
   }
