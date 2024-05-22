@@ -1,0 +1,18 @@
+name: continuous-delivery
+
+on:
+    workflow_dispatch:
+
+jobs:
+  continuous-delivery:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: agir
+    steps:
+      - name: 📚 Git checkout
+        uses: actions/checkout@v3
+      - name: 🐦 Install flutter
+        uses: subosito/flutter-action@v2
+      - name: 🚀 Deploy app
+        run: cd android && fastlane development
