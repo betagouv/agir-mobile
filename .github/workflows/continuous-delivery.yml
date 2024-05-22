@@ -14,7 +14,10 @@ jobs:
         uses: actions/checkout@v3
       - name: 🐦 Install flutter
         uses: subosito/flutter-action@v2
-      - uses: ruby/setup-ruby@v1
+      - name: 💎 Install ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
       - run: bundle exec fastlane update_plugins
       - name: 🚀 Deploy Android development application
         run: bundle exec fastlane development
@@ -28,7 +31,10 @@ jobs:
         uses: actions/checkout@v3
       - name: 🐦 Install flutter
         uses: subosito/flutter-action@v2
-      - uses: ruby/setup-ruby@v1
+      - name: 💎 Install ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
       - run: bundle exec fastlane update_plugins
       - name: 🚀 Deploy Android development application
         run: bundle exec fastlane development
