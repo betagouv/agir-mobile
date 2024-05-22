@@ -18,25 +18,26 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.3'
-      - run: bundle install
-      - run: bundle exec fastlane update_plugins
       - name: 🚀 Deploy Android development application
-        run: bundle exec fastlane development
-  continuous-delivery-ios:
-    runs-on: macos-latest
-    defaults:
-      run:
-        working-directory: agir/ios
-    steps:
-      - name: 📚 Git checkout
-        uses: actions/checkout@v3
-      - name: 🐦 Install flutter
-        uses: subosito/flutter-action@v2
-      - name: 💎 Install ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.3'
-      - run: bundle install
-      - run: bundle exec fastlane update_plugins
-      - name: 🚀 Deploy Android development application
-        run: bundle exec fastlane development
+        run: | 
+          bundle install
+          bundle exec fastlane development
+  # continuous-delivery-ios:
+  #   runs-on: macos-latest
+  #   defaults:
+  #     run:
+  #       working-directory: agir/ios
+  #   steps:
+  #     - name: 📚 Git checkout
+  #       uses: actions/checkout@v3
+  #     - name: 🐦 Install flutter
+  #       uses: subosito/flutter-action@v2
+  #     - name: 💎 Install ruby
+  #       uses: ruby/setup-ruby@v1
+  #       with:
+  #         ruby-version: '3.3'
+  #     - run: bundle install
+  #     - name: 🚀 Deploy Android development application
+  #       run: | 
+  #         bundle install
+  #         bundle exec fastlane development
