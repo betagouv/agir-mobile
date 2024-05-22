@@ -13,6 +13,7 @@ dependencies:
 dev_dependencies:
   agir_lints:
     path: ../packages/agir_lints
+  flutter_launcher_icons: ^0.13.1
   flutter_test:
     sdk: flutter
 
