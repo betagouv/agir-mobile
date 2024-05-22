@@ -19,6 +19,7 @@ jobs:
         with:
           ruby-version: '3.3'
           bundler-cache: true
+      - run: bundle install
       - name: 🚀 Deploy Android development application
         run: bundle exec fastlane development
   # continuous-delivery-ios:
@@ -36,7 +37,6 @@ jobs:
   #     with:
   #       ruby-version: '3.3'
   #       bundler-cache: true
+  #     - run: bundle install
   #     - name: 🚀 Deploy Android development application
-  #       run: | 
-  #         bundle install
-  #         bundle exec fastlane development
+  #       run: bundle exec fastlane development
