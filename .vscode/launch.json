@@ -21,5 +21,11 @@
           "production"
         ]
       },
+      {
+        "name": "dsfr",
+        "cwd": "packages/dsfr.dart/example",
+        "request": "launch",
+        "type": "dart"
+      },
     ]
   }

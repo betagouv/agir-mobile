@@ -1,0 +1,18 @@
+{
+  "color": {
+    "warning": {
+      "100"       : {"value": "#361e19"},
+      "100-active": {"value": "#825045"},
+      "100-hover" : {"value": "#653C34"},
+      "425"       : {"value": "#B34000"},
+      "425-active": {"value": "#FF7B57"},
+      "425-hover" : {"value": "#FF621A"},
+      "625"       : {"value": "#FC5D00"},
+      "625-active": {"value": "#FFA494"},
+      "625-hover" : {"value": "#FF8F75"},
+      "950"       : {"value": "#FFE9E6"},
+      "950-active": {"value": "#FFB1A3"},
+      "950-hover" : {"value": "#FFC6BD"}
+    }
+  }
+}
