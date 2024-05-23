@@ -44,3 +44,6 @@ app.*.map.json
 
 # Result of fastlane
 **/fastlane/report.xml
+
+# Example
+**/example/pubspec.lock

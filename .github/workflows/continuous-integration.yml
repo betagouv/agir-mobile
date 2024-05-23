@@ -14,32 +14,24 @@ on:
       - app/**
       - packages/**
 
+env:
+  FLUTTER_VERSION: 3.22.1
+
 jobs:
   continuous-integration:
     runs-on: ubuntu-latest
     steps:
       - name: 📚 Git Checkout
         uses: actions/checkout@v4
-      - uses: dorny/paths-filter@v3
-        id: filter
         with:
-          filters: |
-            dsfr:
-              - 'packages/dsfr.dart/**'
+          fetch-depth: 0
       - name: 🐦 Install flutter
         uses: subosito/flutter-action@v2
-      - name: ✅ Check app (format, lint, tests)
-        run: |
-          cd app
-          dart format $(find . -name '*.dart' -not -name '*.g.dart') --set-exit-if-changed
-          flutter analyze --fatal-infos --fatal-warnings
-          flutter test --test-randomize-ordering-seed random
-          cd -
-      - name: ✅ Check dsfr (format, lint, tests)
-        if: steps.filter.outputs.dsfr == 'true'
-        run: |
-          cd packages/dsfr.dart
-          dart format $(find . -name '*.dart' -not -name '*.g.dart') --set-exit-if-changed
-          flutter analyze --fatal-infos --fatal-warnings
-          flutter test --test-randomize-ordering-seed random
-          cd -
+        with:
+          cache: true
+          channel: stable
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+      - run: dart pub global activate melos
+      - run: melos run format_check_diff
+      - run: melos run analyze_diff
+      - run: melos run test_diff

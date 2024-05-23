@@ -1,4 +1,6 @@
-# melos_managed_dependency_overrides: agir_lints
+# melos_managed_dependency_overrides: agir_lints,dsfr
 dependency_overrides:
   agir_lints:
     path: ../packages/agir_lints
+  dsfr:
+    path: ../packages/dsfr.dart
