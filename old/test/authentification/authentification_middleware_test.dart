@@ -19,7 +19,7 @@ class AuthentificationRepositoryForTest implements AuthentificationRepository {
 void main() {
   group("Tests du middleware", () {
     test(
-        "DoAuthentificationAction doit sauvegarder l'utilisateur dans le store en cas de succès",
+        "DoAuthentificationAction doit sauvegarder Iel dans le store en cas de succès",
         () async {
       // GIVEN
       final store = Store<AgirState>(
@@ -34,7 +34,8 @@ void main() {
       // WHEN
       await store.dispatch(DoAuthentificationAction("Dorian"));
       // THEN
-      expect(store.state.utilisateurState, const UtilisateurState("1", "Dorian"));
+      expect(
+          store.state.utilisateurState, const UtilisateurState("1", "Dorian"));
     });
   });
 }

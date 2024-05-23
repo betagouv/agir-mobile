@@ -1,19 +1,19 @@
 {
     "spacing": {
-        "s0v5": {"value": "2"  },
-        "s1v" : {"value": "4"  },
-        "s1v5": {"value": "4"  },
-        "s1w" : {"value": "8"  },
-        "s3v" : {"value": "12" },
-        "s2w" : {"value": "16" },
-        "s3w" : {"value": "24" },
-        "s4w" : {"value": "32" },
-        "s5w" : {"value": "40" },
-        "s6w" : {"value": "48" },
-        "s7w" : {"value": "56" },
-        "s8w" : {"value": "64" },
-        "s9w" : {"value": "72" },
-        "s12w": {"value": "96" },
-        "s15w": {"value": "120"}
+        "s0v5": {"value": "2.0"  },
+        "s1v" : {"value": "4.0"  },
+        "s1v5": {"value": "4.0"  },
+        "s1w" : {"value": "8.0"  },
+        "s3v" : {"value": "12.0" },
+        "s2w" : {"value": "16.0" },
+        "s3w" : {"value": "24.0" },
+        "s4w" : {"value": "32.0" },
+        "s5w" : {"value": "40.0" },
+        "s6w" : {"value": "48.0" },
+        "s7w" : {"value": "56.0" },
+        "s8w" : {"value": "64.0" },
+        "s9w" : {"value": "72.0" },
+        "s12w": {"value": "96.0" },
+        "s15w": {"value": "120.0"}
     }
 }

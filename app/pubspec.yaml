@@ -8,17 +8,24 @@ environment:
   flutter: 3.22.1
 
 dependencies:
+  dsfr:
+    path: ../packages/dsfr.dart
   flutter:
     sdk: flutter
+  flutter_carousel_widget: ^2.2.0
+  flutter_markdown: ^0.7.1
+  flutter_svg: ^2.0.10+1
+  go_router: ^14.1.3
 
 dev_dependencies:
   agir_lints:
     path: ../packages/agir_lints
-  dsfr:
-    path: ../packages/dsfr.dart
   flutter_launcher_icons: ^0.13.1
   flutter_test:
     sdk: flutter
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/logos/

@@ -2,17 +2,17 @@ import 'package:dsfr/dsfr.dart';
 import 'package:dsfr_example/page_item.dart';
 import 'package:flutter/material.dart';
 
-class ButtonsPage extends StatelessWidget {
-  const ButtonsPage({super.key});
+class LinksPage extends StatelessWidget {
+  const LinksPage({super.key});
 
   static final model = PageItem(
-    title: 'Bouton',
-    pageBuilder: (final context) => const ButtonsPage(),
+    title: 'Lien',
+    pageBuilder: (final context) => const LinksPage(),
   );
 
   @override
   Widget build(final BuildContext context) {
-    const label = 'Bouton';
+    const label = 'Label lien';
     const gap = SizedBox(height: 16);
     void onTap() {}
 
@@ -20,9 +20,9 @@ class ButtonsPage extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       child: Column(
         children: [
-          const DsfrButton.lg(label: label),
+          const DsfrLink.md(label: label),
           gap,
-          DsfrButton.lg(label: label, onTap: onTap),
+          DsfrLink.md(label: label, onTap: onTap),
         ],
       ),
     );

@@ -7,19 +7,19 @@ import 'helpers.dart';
 
 void main() {
   group(
-    'Bouton',
+    'Lien',
     () {
       testWidgets('Voir le label', (final tester) async {
-        const label = 'Label bouton';
-        await tester.pumpWidget(app(const DsfrButton.lg(label: label)));
+        const label = 'Label lien';
+        await tester.pumpWidget(app(const DsfrLink.md(label: label)));
         expect(find.text(label), findsOneWidget);
       });
 
       testWidgets('Appuyer', (final tester) async {
-        const label = 'Label bouton';
+        const label = 'Label lien';
         final completer = Completer<void>();
         await tester.pumpWidget(
-          app(DsfrButton.lg(label: label, onTap: completer.complete)),
+          app(DsfrLink.md(label: label, onTap: completer.complete)),
         );
 
         await tester.tap(find.text(label));
@@ -31,14 +31,14 @@ void main() {
         () {
           testWidgets('État désactivé', (final tester) async {
             final handle = tester.ensureSemantics();
-            const label = 'Label bouton';
-            await tester.pumpWidget(app(const DsfrButton.lg(label: label)));
+            const label = 'Label lien';
+            await tester.pumpWidget(app(const DsfrLink.md(label: label)));
 
             expect(
               tester.getSemantics(find.text(label)),
               matchesSemantics(
                 label: label,
-                isButton: true,
+                isLink: true,
                 hasEnabledState: true,
               ),
             );
@@ -47,14 +47,14 @@ void main() {
 
           testWidgets('État activé', (final tester) async {
             final handle = tester.ensureSemantics();
-            const label = 'Label bouton';
+            const label = 'Label lien';
             await tester
-                .pumpWidget(app(DsfrButton.lg(label: label, onTap: () {})));
+                .pumpWidget(app(DsfrLink.md(label: label, onTap: () {})));
             expect(
               tester.getSemantics(find.text(label)),
               matchesSemantics(
                 label: label,
-                isButton: true,
+                isLink: true,
                 hasTapAction: true,
                 isFocusable: true,
                 hasEnabledState: true,
