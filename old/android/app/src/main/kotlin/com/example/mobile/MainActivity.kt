@@ -1,4 +1,4 @@
-package fr.gouv.beta.agir
+package fr.gouv.beta.fnv.app
 
 import io.flutter.embedding.android.FlutterActivity
 
