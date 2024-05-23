@@ -5,6 +5,7 @@ version: 0.1.0
 
 environment:
   sdk: 3.4.1
+  flutter: 3.22.1
 
 dependencies:
   flutter:
