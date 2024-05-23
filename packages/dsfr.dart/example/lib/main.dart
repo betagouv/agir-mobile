@@ -2,6 +2,7 @@ import 'package:dsfr_example/buttons_page.dart';
 import 'package:dsfr_example/colors_page.dart';
 import 'package:dsfr_example/fonts_page.dart';
 import 'package:dsfr_example/icons_page.dart';
+import 'package:dsfr_example/links_page.dart';
 import 'package:dsfr_example/master_page.dart';
 import 'package:flutter/material.dart';
 
@@ -17,10 +18,11 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: MasterPage(
           pageItems: [
+            ButtonsPage.model,
             ColorsPage.model,
             FontsPage.model,
             IconsPage.model,
-            ButtonsPage.model,
+            LinksPage.model,
           ],
         ),
       );

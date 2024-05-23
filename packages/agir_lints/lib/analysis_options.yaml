@@ -22,6 +22,7 @@ linter:
     avoid_classes_with_only_static_members: false
     avoid_final_parameters: false # incompatible with `prefer_final_parameters`.
     diagnostic_describe_all_properties: false
+    lines_longer_than_80_chars: false
     prefer_double_quotes: false # incompatible with `prefer_single_quotes`.
     prefer_relative_imports: false # incompatible with `always_use_package_imports`.
     public_member_api_docs: false

@@ -1,18 +1,33 @@
+import 'dart:ui';
+
+import 'package:agir/src/app.dart';
+import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MainApp());
+  WidgetsFlutterBinding.ensureInitialized();
+
+  _registerErrorHandlers();
+
+  runApp(const App());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+void _registerErrorHandlers() {
+  FlutterError.onError = (final details) {
+    FlutterError.presentError(details);
+    debugPrint(details.toString());
+  };
 
-  @override
-  Widget build(final BuildContext context) => const MaterialApp(
-        home: Scaffold(
-          body: Center(
-            child: Text('Hello World!'),
-          ),
+  PlatformDispatcher.instance.onError = (final error, final stack) {
+    debugPrint(error.toString());
+    return true;
+  };
+
+  ErrorWidget.builder = (final details) => Scaffold(
+        appBar: AppBar(
+          backgroundColor: DsfrColors.redMarianneMain472,
+          title: const Text('An error occurred'),
         ),
+        body: Center(child: Text(details.toString())),
       );
 }
