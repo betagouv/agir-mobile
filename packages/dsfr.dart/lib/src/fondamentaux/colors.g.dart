@@ -4,7 +4,7 @@
 //
 
 // Do not edit directly
-// Generated on Thu, 23 May 2024 09:31:22 GMT
+// Generated on Tue, 28 May 2024 08:56:58 GMT
 
 
 
@@ -230,39 +230,48 @@ class DsfrColors {
     static const grey100 = Color(0xFF242424);
     static const grey1000 = Color(0xFFFFFFFF);
     static const grey1000Active = Color(0xFFEDEDED);
-    static const grey1000Hover = Color(0xFFF5F5F5);
-    static const grey100Active = Color(0xFF5C5C5C);
+    static const grey1000Hover = Color(0xFFF6F6F6);
+    static const grey100Active = Color(0xFF5B5B5B);
     static const grey100Hover = Color(0xFF474747);
-    static const grey125 = Color(0xFF292929);
+    static const grey125 = Color(0xFF2A2A2A);
     static const grey125Active = Color(0xFF636363);
-    static const grey125Hover = Color(0xFF4F4F4F);
-    static const grey200 = Color(0xFF3B3B3B);
-    static const grey200Active = Color(0xFF787878);
+    static const grey125Hover = Color(0xFF4E4E4E);
+    static const grey150 = Color(0xFF2F2F2F);
+    static const grey150Active = Color(0xFF696969);
+    static const grey150Hover = Color(0xFF545454);
+    static const grey175 = Color(0xFF353535);
+    static const grey175Active = Color(0xFF717171);
+    static const grey175Hover = Color(0xFF5C5C5C);
+    static const grey200 = Color(0xFF3A3A3A);
+    static const grey200Active = Color(0xFF777777);
     static const grey200Hover = Color(0xFF616161);
     static const grey425 = Color(0xFF666666);
     static const grey425Active = Color(0xFFA6A6A6);
     static const grey425Hover = Color(0xFF919191);
     static const grey50 = Color(0xFF161616);
     static const grey50Active = Color(0xFF474747);
-    static const grey50Hover = Color(0xFF333333);
+    static const grey50Hover = Color(0xFF343434);
     static const grey625 = Color(0xFF929292);
     static const grey625Active = Color(0xFFCECECE);
     static const grey625Hover = Color(0xFFBBBBBB);
-    static const grey75 = Color(0xFF1F1F1F);
-    static const grey75Active = Color(0xFFCFCFCF);
-    static const grey75Hover = Color(0xFF404040);
-    static const grey850 = Color(0xFFCFCFCF);
-    static const grey850Active = Color(0xFF949494);
+    static const grey75 = Color(0xFF1E1E1E);
+    static const grey75Active = Color(0xFF525252);
+    static const grey75Hover = Color(0xFF3F3F3F);
+    static const grey850 = Color(0xFFCECECE);
+    static const grey850Active = Color(0xFF939393);
     static const grey850Hover = Color(0xFFA8A8A8);
+    static const grey900 = Color(0xFFDDDDDD);
+    static const grey900Active = Color(0xFFA7A7A7);
+    static const grey900Hover = Color(0xFFBBBBBB);
     static const grey925 = Color(0xFFE5E5E5);
     static const grey925Active = Color(0xFFB2B2B2);
     static const grey925Hover = Color(0xFFC5C5C5);
-    static const grey950 = Color(0xFFEDEDED);
-    static const grey950Active = Color(0xFFC2C2C2);
-    static const grey950Hover = Color(0xFFD1D1D1);
-    static const grey975 = Color(0xFFF5F5F5);
+    static const grey950 = Color(0xFFEEEEEE);
+    static const grey950Active = Color(0xFFC1C1C1);
+    static const grey950Hover = Color(0xFFD2D2D2);
+    static const grey975 = Color(0xFFF6F6F6);
     static const grey975Active = Color(0xFFCFCFCF);
-    static const grey975Hover = Color(0xFFDEDEDE);
+    static const grey975Hover = Color(0xFFDFDFDF);
     static const info100 = Color(0xFF1D2437);
     static const info100Active = Color(0xFF4C5B85);
     static const info100Hover = Color(0xFF3C4768);
