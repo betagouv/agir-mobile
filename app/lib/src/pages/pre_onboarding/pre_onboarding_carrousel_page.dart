@@ -1,5 +1,6 @@
-import 'package:agir/src/assets/images.dart';
-import 'package:agir/src/l10n/l10n.dart';
+import 'package:app/src/assets/images.dart';
+import 'package:app/src/l10n/l10n.dart';
+import 'package:app/src/pages/authentification/se_connecter_page.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
@@ -63,7 +64,7 @@ class _PreOnboardingCarrouselPageState extends State<PreOnboardingCarrouselPage>
                   child: SafeArea(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                        horizontal: DsfrSpacings.s2w,
+                        horizontal: DsfrSpacings.s3w,
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,8 +93,10 @@ class _PreOnboardingCarrouselPageState extends State<PreOnboardingCarrouselPage>
                           const SizedBox(height: DsfrSpacings.s3w),
                           Center(
                             child: DsfrLink.md(
-                              label: Localisation.seConnecter,
-                              onTap: () {},
+                              label: Localisation.jaiDejaUnCompte,
+                              onTap: () async {
+                                await context.pushNamed(SeConnecterPage.name);
+                              },
                             ),
                           ),
                           const SizedBox(height: DsfrSpacings.s7w),
@@ -106,7 +109,7 @@ class _PreOnboardingCarrouselPageState extends State<PreOnboardingCarrouselPage>
             ),
             SafeArea(
               child: Padding(
-                padding: const EdgeInsets.only(bottom: DsfrSpacings.s2w),
+                padding: const EdgeInsets.only(bottom: DsfrSpacings.s3w),
                 child: TabPageSelector(
                   controller: _tabController,
                   indicatorSize: 8,
@@ -138,7 +141,7 @@ class Polaroid extends StatelessWidget {
 
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.all(DsfrSpacings.s2w),
+        padding: const EdgeInsets.all(DsfrSpacings.s3w),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

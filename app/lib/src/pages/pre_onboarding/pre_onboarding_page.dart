@@ -1,7 +1,7 @@
-import 'package:agir/src/assets/images.dart';
-import 'package:agir/src/assets/svgs.dart';
-import 'package:agir/src/l10n/l10n.dart';
-import 'package:agir/src/pages/pre_onboarding/pre_onboarding_carrousel_page.dart';
+import 'package:app/src/assets/images.dart';
+import 'package:app/src/assets/svgs.dart';
+import 'package:app/src/l10n/l10n.dart';
+import 'package:app/src/pages/pre_onboarding/pre_onboarding_carrousel_page.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -23,7 +23,7 @@ class PreOnboardingPage extends StatelessWidget {
   Widget build(final BuildContext context) => Scaffold(
         body: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(DsfrSpacings.s2w),
+            padding: const EdgeInsets.all(DsfrSpacings.s3w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -33,7 +33,7 @@ class PreOnboardingPage extends StatelessWidget {
                   Localisation.preOnboardingTitre,
                   style: DsfrFonts.displayXs,
                 ),
-                const SizedBox(height: DsfrSpacings.s2w),
+                const SizedBox(height: DsfrSpacings.s3w),
                 Row(
                   children: [
                     SvgPicture.asset(
@@ -49,9 +49,8 @@ class PreOnboardingPage extends StatelessWidget {
                 const Spacer(),
                 DsfrButton.lg(
                   label: Localisation.commencer,
-                  onTap: () async {
-                    await context.pushNamed(PreOnboardingCarrouselPage.name);
-                  },
+                  onTap: () async =>
+                      context.pushNamed(PreOnboardingCarrouselPage.name),
                 ),
               ],
             ),

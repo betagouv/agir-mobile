@@ -17,7 +17,7 @@ class LinksPage extends StatelessWidget {
     void onTap() {}
 
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(24),
       child: Column(
         children: [
           const DsfrLink.md(label: label),

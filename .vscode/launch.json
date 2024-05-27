@@ -8,7 +8,9 @@
         "type": "dart",
         "args": [
           "--flavor",
-          "development"
+          "development",
+          "--dart-define-from-file",
+          "env.development.json"
         ]
       },
       {
@@ -18,7 +20,9 @@
         "type": "dart",
         "args": [
           "--flavor",
-          "production"
+          "production",
+          "--dart-define-from-file",
+          "env.json"
         ]
       },
       {
