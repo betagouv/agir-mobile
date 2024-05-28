@@ -12,6 +12,7 @@
 
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
+require 'time'
 
 default_platform(:android)
 
@@ -20,13 +21,16 @@ platform :android do
   lane :development do
     sh("flutter", "clean")
     sh("flutter", "pub", "get")
-    sh("flutter", "build", "appbundle", "--flavor", "development",
-                                        "--obfuscate", 
-                                        "--split-debug-info=build/app/outputs/symbols")
-    # firebase_app_distribution(
-    #   groups: "agir-team",
-    #   release_notes_file: "../../../release-notes.txt",
-    #   service_credentials_file: "./app/google-services.json",
-    # )
+    sh("flutter", "build", "apk", "--flavor", "development",
+                                  "--dart-define-from-file", "env.development.json",
+                                  "--build-number", Time.now.to_i.to_s )
+    firebase_app_distribution(
+      app: ENV["DEV_APP_ID_ANDROID"],
+      firebase_cli_token: ENV["FIREBASE_TOKEN"],
+      groups: "agir-team",
+      release_notes_file: "../release-notes.txt",
+      android_artifact_type: "APK",
+      android_artifact_path: "../build/app/outputs/flutter-apk/app-development-release.apk"
+    )
   end
 end

@@ -26,9 +26,13 @@ jobs:
         with:
           ruby-version: '3.3'
           bundler-cache: true
+      - run: echo "${{ secrets.DEV_FLUTTER_ENV }}" | base64 --decode > ../env.development.json
       - run: bundle install
       - name: 🚀 Deploy Android development application
         run: bundle exec fastlane development
+        env:
+           DEV_APP_ID_ANDROID: ${{ secrets.DEV_APP_ID_ANDROID }}
+           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN_LSA }}
   # continuous-delivery-ios:
   #   runs-on: macos-latest
   #   defaults:
@@ -42,7 +46,7 @@ jobs:
   #       with:
   #         cache: true
   #         channel: stable
-  #         flutter-version: $${{ env.FLUTTER_VERSION }}
+  #         flutter-version: ${{ env.FLUTTER_VERSION }}
   #     - name: 💎 Install ruby
   #       uses: ruby/setup-ruby@v1
   #       with:
