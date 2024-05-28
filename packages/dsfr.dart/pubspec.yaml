@@ -21,6 +21,7 @@ dev_dependencies:
       ref: yaru
 
 flutter:
+  uses-material-design: true
   fonts:
     - family: Marianne
       fonts:
