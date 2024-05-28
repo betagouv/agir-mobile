@@ -41,7 +41,7 @@ class AuthentificationApiClient extends BaseClient {
   }) async {
     final response = await super.post(
       Uri.parse(
-        '${apiUrl.valeur.scheme}://${apiUrl.valeur.host}${apiUrl.valeur.path}/${url.path}',
+        '${apiUrl.valeur.scheme}://${apiUrl.valeur.host}${apiUrl.valeur.path}${url.path}',
       ),
       headers: headers,
       body: body,
