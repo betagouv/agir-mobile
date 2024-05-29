@@ -19,5 +19,6 @@ class Localisation {
   static const String adresseElectronique = 'Adresse électronique';
   static const String motDePasse = 'Mot de passe';
   static const String motDePasseOublie = 'Mot de passe oublié ?';
-  static const String bonjour = 'Bonjour,';
+  static const String bonjour = 'Bonjour,\n';
+  static String prenomExclamation(final String value) => '$value !';
 }

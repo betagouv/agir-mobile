@@ -3,10 +3,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 
 class RequestMathcher extends Matcher {
-  RequestMathcher(this.url, this.bodyFields);
+  RequestMathcher(this.url, {this.bodyFields});
 
   final String url;
-  final Map<String, dynamic> bodyFields;
+  final Map<String, dynamic>? bodyFields;
 
   @override
   Description describe(final Description description) => description.add('Ok');
@@ -18,6 +18,6 @@ class RequestMathcher extends Matcher {
     }
 
     return item.url.toString().endsWith(url) &&
-        mapEquals(item.bodyFields, bodyFields);
+        (bodyFields == null || mapEquals(item.bodyFields, bodyFields));
   }
 }

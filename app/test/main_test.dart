@@ -15,7 +15,7 @@ void main() {
     setUpWidgets(tester);
     await ielEstConnecte(tester);
     await ielLanceLapplication(tester);
-    await ielVoitLeTexte(tester, Localisation.bonjour);
+    await ielVoitLeTexteDansTexteRiche(tester, Localisation.bonjour);
   });
 
   testWidgets("Iel lance l'application pour la première fois",
@@ -58,6 +58,6 @@ void main() {
       enterText: 'M07D3P4553',
     );
     await ielAppuieSur(tester, Localisation.seConnecter);
-    await ielVoitLeTexte(tester, Localisation.bonjour);
+    await ielVoitLeTexteDansTexteRiche(tester, Localisation.bonjour);
   });
 }

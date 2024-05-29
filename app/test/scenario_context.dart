@@ -9,4 +9,5 @@ class ScenarioContext {
 
   AuthentificationStatut authentificationStatut =
       AuthentificationStatut.pasConnecte;
+  String prenom = 'Lucas';
 }

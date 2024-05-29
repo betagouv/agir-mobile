@@ -5,17 +5,19 @@ import 'package:flutter_test/flutter_test.dart';
 
 import '../authentification_repository_mock.dart';
 import '../scenario_context.dart';
+import '../utilisateur_repository_mock.dart';
 
 /// Iel lance l'application
 Future<void> ielLanceLapplication(final WidgetTester tester) async {
   final authentificationStatusManager = AuthentificationStatutManager()
     ..gererAuthentificationStatut(ScenarioContext().authentificationStatut);
-  final authentificationRepositoryMock =
-      AuthentificationRepositoryMock(authentificationStatusManager);
   await tester.pumpFrames(
     App(
-      authentificationRepository: authentificationRepositoryMock,
       authentificationStatusManager: authentificationStatusManager,
+      authentificationRepository:
+          AuthentificationRepositoryMock(authentificationStatusManager),
+      utilisateurRepository:
+          UtilisateurRepositoryMock(ScenarioContext().prenom),
     ),
     Durations.short1,
   );
