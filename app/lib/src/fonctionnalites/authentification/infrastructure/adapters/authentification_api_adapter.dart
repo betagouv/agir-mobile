@@ -23,15 +23,15 @@ class AuthentificationApiAdapter implements AuthentificationRepository {
         'mot_de_passe': informationDeConnexion.motDePasse,
       },
     );
-    if (response.statusCode == 201) {
-      final json = jsonDecode(response.body) as Map<String, dynamic>;
-      final token = json['token'] as String;
-      final utilisateur = json['utilisateur'] as Map<String, dynamic>;
-      final utilisateurId = utilisateur['id'] as String;
-      await _apiClient.sauvegarderTokenEtUtilisateurId(token, utilisateurId);
-    } else {
+    if (response.statusCode != 201) {
       return;
     }
+
+    final json = jsonDecode(response.body) as Map<String, dynamic>;
+    final token = json['token'] as String;
+    final utilisateur = json['utilisateur'] as Map<String, dynamic>;
+    final utilisateurId = utilisateur['id'] as String;
+    await _apiClient.sauvegarderTokenEtUtilisateurId(token, utilisateurId);
   }
 
   @override
