@@ -12,7 +12,6 @@
 
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
-require 'time'
 
 default_platform(:android)
 
@@ -23,7 +22,9 @@ platform :android do
     sh("flutter", "pub", "get")
     sh("flutter", "build", "apk", "--flavor", "development",
                                   "--dart-define-from-file", "env.development.json",
-                                  "--build-number", Time.now.to_i.to_s )
+                                  "--build-number", ENV["GITHUB_RUN_NUMBER"])
+
+    # https://firebase.google.com/docs/app-distribution/android/distribute-fastlane
     firebase_app_distribution(
       app: ENV["DEV_APP_ID_ANDROID"],
       firebase_cli_token: ENV["FIREBASE_TOKEN"],

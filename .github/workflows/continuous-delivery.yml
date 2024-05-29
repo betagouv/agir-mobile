@@ -52,6 +52,10 @@ jobs:
   #       with:
   #         ruby-version: '3.3'
   #         bundler-cache: true
+  #     - run: echo "${{ secrets.DEV_FLUTTER_ENV }}" | base64 --decode > ../env.development.json
   #     - run: bundle install
-  #     - name: 🚀 Deploy Android development application
+  #     - name: 🚀 Deploy iOS development application
   #       run: bundle exec fastlane development
+  #       env:
+  #          DEV_APP_ID_IOS: ${{ secrets.DEV_APP_ID_IOS }}
+  #          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN_LSA }}
