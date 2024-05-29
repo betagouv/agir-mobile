@@ -20,7 +20,7 @@ class SeConnecterPage extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => Scaffold(
-        resizeToAvoidBottomInset: true,
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(),
         body: SafeArea(
           child: Padding(
@@ -46,7 +46,7 @@ class SeConnecterPage extends StatelessWidget {
                         .add(SeConnecterAdresseMailAChange(value));
                   },
                 ),
-                const SizedBox(height: DsfrSpacings.s3v),
+                const SizedBox(height: DsfrSpacings.s2w),
                 DsfrInput(
                   label: Localisation.motDePasse,
                   keyboardType: TextInputType.visiblePassword,
@@ -57,8 +57,6 @@ class SeConnecterPage extends StatelessWidget {
                         .add(SeConnecterMotDePasseAChange(value));
                   },
                 ),
-                const SizedBox(height: DsfrSpacings.s3v),
-                DsfrLink.md(label: Localisation.motDePasseOublie, onTap: () {}),
                 const Spacer(),
                 DsfrButton.lg(
                   label: Localisation.seConnecter,
