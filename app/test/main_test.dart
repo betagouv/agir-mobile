@@ -47,5 +47,17 @@ void main() {
     await ielGlisseDeLaDroiteVersLaGauche(tester);
     await ielAppuieSur(tester, Localisation.jaiDejaUnCompte);
     await ielVoitLeTexte(tester, Localisation.seConnecterAvecSonCompte);
+    await ielEcritDansLeChamp(
+      tester,
+      label: Localisation.adresseElectronique,
+      enterText: 'joe@doe.com',
+    );
+    await ielEcritDansLeChamp(
+      tester,
+      label: Localisation.motDePasse,
+      enterText: 'M07D3P4553',
+    );
+    await ielAppuieSur(tester, Localisation.seConnecter);
+    await ielVoitLeTexte(tester, Localisation.bonjour);
   });
 }
