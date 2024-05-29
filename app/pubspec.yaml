@@ -17,9 +17,9 @@ dependencies:
   flutter_markdown: 0.7.1
   flutter_secure_storage: 9.2.2
   flutter_svg: 2.0.10+1
-  go_router: 14.1.3
+  go_router: 14.1.4
   http: 1.2.1
-  meta: 1.12.0
+  meta: any # lock by flutter_test
 
 dev_dependencies:
   agir_lints:
