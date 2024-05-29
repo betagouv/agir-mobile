@@ -88,7 +88,9 @@ class _PreOnboardingCarrouselPageState extends State<PreOnboardingCarrouselPage>
                           const Spacer(),
                           DsfrButton.lg(
                             label: Localisation.suivant,
-                            onTap: () {},
+                            onTap: () async {
+                              await context.pushNamed(SeConnecterPage.name);
+                            },
                           ),
                           const SizedBox(height: DsfrSpacings.s3w),
                           Center(
@@ -99,7 +101,7 @@ class _PreOnboardingCarrouselPageState extends State<PreOnboardingCarrouselPage>
                               },
                             ),
                           ),
-                          const SizedBox(height: DsfrSpacings.s7w),
+                          const SizedBox(height: DsfrSpacings.s8w),
                         ],
                       ),
                     ),
