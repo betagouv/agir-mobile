@@ -8,6 +8,7 @@ import 'package:app/src/fonctionnalites/authentification/infrastructure/adapters
 import 'package:app/src/fonctionnalites/authentification/infrastructure/adapters/authentification_api_adapter.dart';
 import 'package:app/src/fonctionnalites/authentification/infrastructure/adapters/authentification_api_client.dart';
 import 'package:app/src/fonctionnalites/authentification/infrastructure/adapters/authentification_token_storage.dart';
+import 'package:app/src/fonctionnalites/utilisateur/infrastructure/adapters/utilisateur_api_adapter.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -34,15 +35,18 @@ Future<void> main() async {
 
   await authentificationTokenStorage.initialise();
 
+  final apiClient = AuthentificationApiClient(
+    apiUrl: ApiUrl(Uri.parse(apiUrl)),
+    authentificationTokenStorage: authentificationTokenStorage,
+  );
+
   runApp(
     App(
       authentificationRepository: AuthentificationApiAdapter(
-        apiClient: AuthentificationApiClient(
-          apiUrl: ApiUrl(Uri.parse(apiUrl)),
-          authentificationTokenStorage: authentificationTokenStorage,
-        ),
+        apiClient: apiClient,
       ),
       authentificationStatusManager: authentificationStatusManager,
+      utilisateurRepository: UtilisateurApiAdapter(apiClient: apiClient),
     ),
   );
 }

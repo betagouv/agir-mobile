@@ -37,6 +37,7 @@ void main() {
       // Arrange
       final client = ClientMock()
         ..postSuccess(
+          path: '/utilisateurs/login',
           bodyFields: {
             'email': informationDeConnexion.adresseMail,
             'mot_de_passe': informationDeConnexion.motDePasse,

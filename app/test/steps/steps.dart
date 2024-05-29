@@ -4,5 +4,7 @@ export 'iel_ecrit_dans_le_champ.dart';
 export 'iel_est_connecte.dart';
 export 'iel_glisse_de_la_droite_vers_la_gauche.dart';
 export 'iel_lance_lapplication.dart';
+export 'iel_sappelle.dart';
 export 'iel_voit_le_texte.dart';
+export 'iel_voit_le_texte_dans_texte_riche.dart';
 export 'iel_voit_le_texte_markdown.dart';

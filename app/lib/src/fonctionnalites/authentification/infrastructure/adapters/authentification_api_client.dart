@@ -33,22 +33,32 @@ class AuthentificationApiClient extends BaseClient {
       _authentificationTokenStorage.recupererUtilisateurId();
 
   @override
+  Future<Response> get(
+    final Uri url, {
+    final Map<String, String>? headers,
+  }) async =>
+      super.get(
+        _uriParse(url),
+        headers: headers,
+      );
+
+  Uri _uriParse(final Uri url) => Uri.parse(
+        '${apiUrl.valeur.scheme}://${apiUrl.valeur.host}${apiUrl.valeur.path}${url.path}',
+      );
+
+  @override
   Future<Response> post(
     final Uri url, {
     final Map<String, String>? headers,
     final Object? body,
     final Encoding? encoding,
-  }) async {
-    final response = await super.post(
-      Uri.parse(
-        '${apiUrl.valeur.scheme}://${apiUrl.valeur.host}${apiUrl.valeur.path}${url.path}',
-      ),
-      headers: headers,
-      body: body,
-      encoding: encoding,
-    );
-    return response;
-  }
+  }) async =>
+      super.post(
+        _uriParse(url),
+        headers: headers,
+        body: body,
+        encoding: encoding,
+      );
 
   @override
   Future<StreamedResponse> send(final BaseRequest request) async {
