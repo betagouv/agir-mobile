@@ -1,5 +1,6 @@
 import 'package:app/src/design_system/composants/app_bar.dart';
 import 'package:app/src/design_system/fondamentaux/colors.dart';
+import 'package:app/src/fonctionnalites/aides/widgets/mes_aides.dart';
 import 'package:app/src/fonctionnalites/authentification/domain/ports/authentification_repository.dart';
 import 'package:app/src/fonctionnalites/utilisateur/bloc/utilisateur_bloc.dart';
 import 'package:app/src/fonctionnalites/utilisateur/bloc/utilisateur_event.dart';
@@ -54,6 +55,7 @@ class AccueilPage extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s3w),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 if (state.aLesAides) ...[
                   const MesAides(),

@@ -1,9 +1,12 @@
+export 'iel_a_debloque_ces_fonctionnalites.dart';
+export 'iel_a_les_aides_suivantes.dart';
 export 'iel_appuie_sur.dart';
 export 'iel_appuie_sur_commencer.dart';
 export 'iel_ecrit_dans_le_champ.dart';
 export 'iel_est_connecte.dart';
 export 'iel_glisse_de_la_droite_vers_la_gauche.dart';
 export 'iel_lance_lapplication.dart';
+export 'iel_ne_voit_pas_le_texte.dart';
 export 'iel_sappelle.dart';
 export 'iel_voit_le_texte.dart';
 export 'iel_voit_le_texte_dans_texte_riche.dart';

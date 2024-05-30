@@ -22,6 +22,14 @@ class UtilisateurApiAdapter implements UtilisateurRepository {
     }
 
     final json = jsonDecode(response.body) as Map<String, dynamic>;
-    return Utilisateur(prenom: json['prenom'] as String);
+
+    return Utilisateur(
+      prenom: json['prenom'] as String,
+      fonctionnalitesDebloquees:
+          (json['fonctionnalites_debloquees'] as List<dynamic>)
+              .where((final e) => e == Fonctionnalites.aides.name)
+              .map((final e) => Fonctionnalites.values.byName(e as String))
+              .toList(),
+    );
   }
 }

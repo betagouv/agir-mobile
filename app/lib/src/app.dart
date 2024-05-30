@@ -1,3 +1,4 @@
+import 'package:app/src/fonctionnalites/aides/domain/ports/aides_repository.dart';
 import 'package:app/src/fonctionnalites/authentification/domain/authentification_statut_manager.dart';
 import 'package:app/src/fonctionnalites/authentification/domain/ports/authentification_repository.dart';
 import 'package:app/src/fonctionnalites/se_connecter/bloc/se_connecter_bloc.dart';
@@ -14,12 +15,14 @@ class App extends StatefulWidget {
     required this.authentificationStatusManager,
     required this.authentificationRepository,
     required this.utilisateurRepository,
+    required this.aidesRepository,
     super.key,
   });
 
   final AuthentificationStatutManager authentificationStatusManager;
   final AuthentificationRepository authentificationRepository;
   final UtilisateurRepository utilisateurRepository;
+  final AidesRepository aidesRepository;
 
   @override
   State<App> createState() => _AppState();
@@ -37,9 +40,15 @@ class _AppState extends State<App> {
   }
 
   @override
-  Widget build(final BuildContext context) =>
-      RepositoryProvider<AuthentificationRepository>.value(
-        value: widget.authentificationRepository,
+  Widget build(final BuildContext context) => MultiRepositoryProvider(
+        providers: [
+          RepositoryProvider<AuthentificationRepository>.value(
+            value: widget.authentificationRepository,
+          ),
+          RepositoryProvider<AidesRepository>.value(
+            value: widget.aidesRepository,
+          ),
+        ],
         child: MultiBlocProvider(
           providers: [
             BlocProvider(

@@ -8,6 +8,7 @@ environment:
   flutter: 3.22.1
 
 dependencies:
+  collection: ^1.18.0
   dsfr:
     path: ../packages/dsfr.dart
   equatable: ^2.0.5
