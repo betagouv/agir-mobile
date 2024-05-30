@@ -17,6 +17,9 @@ void main() {
       const aide1 = 'Rénover son logement';
       const aide2 = 'Acheter un vélo';
       const aide3 = 'Composter ses déchets';
+      const thematique1 = '🏡 Logement';
+      const thematique2 = '🚗 Transports';
+      const thematique3 = '🗑️ Déchets';
       final client = ClientMock()
         ..getSuccess(
           path: '/utilisateurs/$utilisateurId/aides',
@@ -31,7 +34,7 @@ void main() {
         "is_simulateur": false,
         "codes_postaux": [],
         "thematiques": ["logement"],
-        "thematiques_label": ["🏡 Logement"],
+        "thematiques_label": ["$thematique1"],
         "montant_max": null,
         "besoin_desc": "Rénover son logement",
         "besoin": "reno_logement"
@@ -44,7 +47,7 @@ void main() {
         "is_simulateur": true,
         "codes_postaux": [],
         "thematiques": ["transport"],
-        "thematiques_label": ["🚗 Transports"],
+        "thematiques_label": ["$thematique2"],
         "montant_max": 1500,
         "besoin_desc": "Acheter un vélo",
         "besoin": "acheter_velo"
@@ -60,7 +63,7 @@ void main() {
             " 21160", " 21121", " 21600", " 21160", " 21370", " 21850", " 21240"
         ],
         "thematiques": ["dechet"],
-        "thematiques_label": ["🗑️ Déchets"],
+        "thematiques_label": ["$thematique3"],
         "montant_max": null,
         "besoin_desc": "Composter ses déchets",
         "besoin": "composter"
@@ -91,7 +94,11 @@ void main() {
       final aides = await adapter.recupereLesAides();
 
       // Assert
-      expect(aides, [aide1, aide2, aide3].map((final e) => Aide(titre: e)));
+      expect(aides, [
+        const Aide(titre: aide1, thematique: thematique1),
+        const Aide(titre: aide2, thematique: thematique2),
+        const Aide(titre: aide3, thematique: thematique3),
+      ]);
     });
   });
 }

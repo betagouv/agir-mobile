@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
-final class AidesState extends Equatable {
-  const AidesState(this.titres);
+final class AidesAccueilState extends Equatable {
+  const AidesAccueilState(this.titres);
 
   final List<String> titres;
 

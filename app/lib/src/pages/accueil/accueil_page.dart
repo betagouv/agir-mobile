@@ -49,20 +49,18 @@ class AccueilPage extends StatelessWidget {
           ],
         ),
       ),
-      body: ColoredBox(
-        color: FnvColors.accueilFond,
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s3w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                if (state.aLesAides) ...[
-                  const MesAides(),
-                  const SizedBox(height: DsfrSpacings.s5w),
-                ],
+      backgroundColor: FnvColors.accueilFond,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s3w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              if (state.aLesAides) ...[
+                const MesAides(),
+                const SizedBox(height: DsfrSpacings.s5w),
               ],
-            ),
+            ],
           ),
         ),
       ),

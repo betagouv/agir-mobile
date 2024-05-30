@@ -7,45 +7,69 @@ import 'set_up_widgets.dart';
 import 'steps/steps.dart';
 
 void main() {
-  testWidgets(
-      "Iel n'a pas débloqué les aides alors iel ne les voit pas sur la page d'accueil",
-      (final tester) async {
-    setUpWidgets(tester);
-    await ielEstConnecte(tester);
-    await ielLanceLapplication(tester);
-    await ielNeVoitPasLeTexte(tester, Localisation.mesAides);
-  });
+  group('Aides', () {
+    const aide1 =
+        Aide(titre: 'Rénover son logement', thematique: '🏡 Logement');
+    const aide2 = Aide(titre: 'Acheter un vélo', thematique: '🚗 Transports');
+    const aide3 =
+        Aide(titre: 'Composter ses déchets', thematique: '🗑️ Déchets');
+    const aide4 =
+        Aide(titre: 'Gérer ses déchets verts', thematique: '🗑️ Déchets');
 
-  testWidgets(
-      "Iel a débloqué les aides alors iel voit le titre sur la page d'accueil",
-      (final tester) async {
-    setUpWidgets(tester);
-    await ielADebloqueCesFonctionnalites(tester, [Fonctionnalites.aides]);
-    await ielEstConnecte(tester);
-    await ielLanceLapplication(tester);
-    await ielVoitLeTexte(tester, Localisation.mesAides);
-  });
+    group('Accueil', () {
+      testWidgets(
+          "Iel n'a pas débloqué les aides alors iel ne les voit pas sur la page d'accueil",
+          (final tester) async {
+        setUpWidgets(tester);
+        await ielEstConnecte(tester);
+        await ielLanceLapplication(tester);
+        await ielNeVoitPasLeTexte(tester, Localisation.accueilMesAides);
+      });
 
-  testWidgets(
-      "Iel a débloqué les aides alors iel voit les 2 premieres sur la page d'accueil",
-      (final tester) async {
-    setUpWidgets(tester);
-    await ielADebloqueCesFonctionnalites(tester, [Fonctionnalites.aides]);
-    const aide1 = 'Rénover son logement';
-    const aide2 = 'Acheter un vélo';
-    const aide3 = 'Composter ses déchets';
-    await ielALesAidesSuivantes(
-      tester,
-      [
-        const Aide(titre: aide1),
-        const Aide(titre: aide2),
-        const Aide(titre: aide3),
-      ],
-    );
-    await ielEstConnecte(tester);
-    await ielLanceLapplication(tester);
-    await ielVoitLeTexte(tester, aide1);
-    await ielVoitLeTexte(tester, aide2);
-    await ielNeVoitPasLeTexte(tester, aide3);
+      testWidgets(
+          "Iel a débloqué les aides alors iel voit le titre sur la page d'accueil",
+          (final tester) async {
+        setUpWidgets(tester);
+        await ielADebloqueCesFonctionnalites(tester, [Fonctionnalites.aides]);
+        await ielEstConnecte(tester);
+        await ielLanceLapplication(tester);
+        await ielVoitLeTexte(tester, Localisation.accueilMesAides);
+      });
+
+      testWidgets(
+          "Iel a débloqué les aides alors iel voit les 2 premieres sur la page d'accueil",
+          (final tester) async {
+        setUpWidgets(tester);
+        await ielADebloqueCesFonctionnalites(tester, [Fonctionnalites.aides]);
+        await ielALesAidesSuivantes(tester, [aide1, aide2, aide3]);
+        await ielEstConnecte(tester);
+        await ielLanceLapplication(tester);
+        await ielVoitLeTexte(tester, aide1.titre);
+        await ielVoitLeTexte(tester, aide2.titre);
+        await ielNeVoitPasLeTexte(tester, aide3.titre);
+      });
+    });
+    group('Vos aides', () {
+      testWidgets('Iel a débloqué les aides alors iel voit toutes les aides',
+          (final tester) async {
+        setUpWidgets(tester);
+        await ielADebloqueCesFonctionnalites(tester, [Fonctionnalites.aides]);
+        await ielALesAidesSuivantes(tester, [aide1, aide2, aide3, aide4]);
+        await ielEstConnecte(tester);
+        await ielLanceLapplication(tester);
+        await ielAppuieSur(tester, Localisation.accueilMesAidesLien);
+        await ielVoitLeTexte(tester, Localisation.vosAidesTitre);
+
+        await ielVoitLeTexte(tester, aide1.thematique);
+        await ielVoitLeTexte(tester, aide1.titre);
+
+        await ielVoitLeTexte(tester, aide2.thematique);
+        await ielVoitLeTexte(tester, aide2.titre);
+
+        await ielVoitLeTexte(tester, aide3.thematique);
+        await ielVoitLeTexte(tester, aide3.titre);
+        await ielVoitLeTexte(tester, aide4.titre);
+      });
+    });
   });
 }

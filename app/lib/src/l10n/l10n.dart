@@ -20,6 +20,10 @@ class Localisation {
   static const String motDePasse = 'Mot de passe';
   static const String motDePasseOublie = 'Mot de passe oublié ?';
   static const String bonjour = 'Bonjour,\n';
-  static const String mesAides = 'Mes aides';
   static String prenomExclamation(final String value) => '$value !';
+  static const String accueilMesAides = 'Mes aides';
+  static const String accueilMesAidesLien = 'Voir toutes les aides';
+  static const String vosAidesTitre = 'Vos aides disponibles';
+  static const String vosAidesSousTitre =
+      'Accédez à toutes les aides publiques locales ou nationales pour la transition écologique en fonction de votre situation.';
 }
