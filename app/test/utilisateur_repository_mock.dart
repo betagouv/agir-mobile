@@ -2,11 +2,17 @@ import 'package:app/src/fonctionnalites/utilisateur/domain/ports/utilisateur_rep
 import 'package:app/src/fonctionnalites/utilisateur/domain/utilisateur.dart';
 
 class UtilisateurRepositoryMock implements UtilisateurRepository {
-  UtilisateurRepositoryMock(this.prenom);
+  UtilisateurRepositoryMock({
+    required this.prenom,
+    required this.fonctionnalitesDebloquees,
+  });
 
   String prenom;
+  List<Fonctionnalites> fonctionnalitesDebloquees;
 
   @override
-  Future<Utilisateur> recupereUtilisateur() async =>
-      Utilisateur(prenom: prenom);
+  Future<Utilisateur> recupereUtilisateur() async => Utilisateur(
+        prenom: prenom,
+        fonctionnalitesDebloquees: fonctionnalitesDebloquees,
+      );
 }

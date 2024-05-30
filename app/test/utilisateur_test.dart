@@ -1,5 +1,4 @@
 import 'package:app/src/l10n/l10n.dart';
-import 'package:app/src/pages/accueil/accueil_page.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'set_up_widgets.dart';

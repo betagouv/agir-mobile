@@ -3,6 +3,7 @@ import 'package:app/src/fonctionnalites/authentification/domain/authentification
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../aides_repository_mock.dart';
 import '../authentification_repository_mock.dart';
 import '../scenario_context.dart';
 import '../utilisateur_repository_mock.dart';
@@ -16,8 +17,11 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
       authentificationStatusManager: authentificationStatusManager,
       authentificationRepository:
           AuthentificationRepositoryMock(authentificationStatusManager),
-      utilisateurRepository:
-          UtilisateurRepositoryMock(ScenarioContext().prenom),
+      utilisateurRepository: UtilisateurRepositoryMock(
+        prenom: ScenarioContext().prenom,
+        fonctionnalitesDebloquees: ScenarioContext().fonctionnalitesDebloquees,
+      ),
+      aidesRepository: AidesRepositoryMock(ScenarioContext().aides),
     ),
     Durations.short1,
   );

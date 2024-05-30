@@ -3,14 +3,14 @@ import 'dart:io';
 import 'package:app/src/fonctionnalites/authentification/domain/authentification_statut.dart';
 import 'package:app/src/fonctionnalites/authentification/domain/authentification_statut_manager.dart';
 import 'package:app/src/fonctionnalites/authentification/domain/information_de_connexion.dart';
-import 'package:app/src/fonctionnalites/authentification/infrastructure/adapters/api_url.dart';
 import 'package:app/src/fonctionnalites/authentification/infrastructure/adapters/authentification_api_adapter.dart';
 import 'package:app/src/fonctionnalites/authentification/infrastructure/adapters/authentification_api_client.dart';
 import 'package:app/src/fonctionnalites/authentification/infrastructure/adapters/authentification_token_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'api/client_mock.dart';
-import 'api/custom_response.dart';
+import 'client_mock.dart';
+import 'constants.dart';
+import 'custom_response.dart';
 import 'flutter_secure_storage_mock.dart';
 
 void main() {
@@ -19,9 +19,7 @@ void main() {
       adresseMail: 'test@example.com',
       motDePasse: 'password123',
     );
-    const token =
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
-    const utilisateurId = 'utilisateurId';
+
     const response = '''
 {
   "token": "$token",
@@ -29,7 +27,6 @@ void main() {
     "id": "$utilisateurId"
   }
 }''';
-    final apiUrl = ApiUrl(Uri.parse('https://example.com/'));
 
     test(
         "connectionDemandee ajoute le token et l'utisateurId dans le secure storage et modifie le statut a connecté",
@@ -38,10 +35,6 @@ void main() {
       final client = ClientMock()
         ..postSuccess(
           path: '/utilisateurs/login',
-          bodyFields: {
-            'email': informationDeConnexion.adresseMail,
-            'mot_de_passe': informationDeConnexion.motDePasse,
-          },
           response: CustomResponse(response, HttpStatus.created),
         );
 

@@ -3,6 +3,7 @@
 import 'dart:ui';
 
 import 'package:app/src/app.dart';
+import 'package:app/src/fonctionnalites/aides/infrastructure/adapters/aides_api_adapter.dart';
 import 'package:app/src/fonctionnalites/authentification/domain/authentification_statut_manager.dart';
 import 'package:app/src/fonctionnalites/authentification/infrastructure/adapters/api_url.dart';
 import 'package:app/src/fonctionnalites/authentification/infrastructure/adapters/authentification_api_adapter.dart';
@@ -47,6 +48,7 @@ Future<void> main() async {
       ),
       authentificationStatusManager: authentificationStatusManager,
       utilisateurRepository: UtilisateurApiAdapter(apiClient: apiClient),
+      aidesRepository: AidesApiAdapter(apiClient: apiClient),
     ),
   );
 }
