@@ -33,6 +33,21 @@ class AccueilPage extends StatelessWidget {
       appBar: FnvAppBar(
         title: _AppBarTitle(firstName: state.prenom),
       ),
+      drawer: Drawer(
+        shape: const RoundedRectangleBorder(),
+        child: ListView(
+          children: [
+            DsfrButton.lg(
+              label: 'Se déconnecter',
+              onTap: () async {
+                await context
+                    .read<AuthentificationRepository>()
+                    .deconnectionDemandee();
+              },
+            ),
+          ],
+        ),
+      ),
       body: ColoredBox(
         color: FnvColors.accueilFond,
         child: SafeArea(
@@ -40,14 +55,10 @@ class AccueilPage extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s3w),
             child: Column(
               children: [
-                DsfrButton.lg(
-                  label: 'Se déconnecter',
-                  onTap: () async {
-                    await context
-                        .read<AuthentificationRepository>()
-                        .deconnectionDemandee();
-                  },
-                ),
+                if (state.aLesAides) ...[
+                  const MesAides(),
+                  const SizedBox(height: DsfrSpacings.s5w),
+                ],
               ],
             ),
           ),

@@ -39,7 +39,9 @@ class FnvAppBar extends StatelessWidget implements PreferredSizeWidget {
                       ),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Scaffold.of(context).openDrawer();
+                  },
                 ),
                 const SizedBox(width: DsfrSpacings.s1w),
                 Expanded(child: title),
