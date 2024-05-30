@@ -24,12 +24,16 @@ class AidesApiAdapter implements AidesRepository {
     }
 
     final json = jsonDecode(response.body) as List<dynamic>;
-    final aides = json
-        .map(
-          (final e) =>
-              Aide(titre: (e as Map<String, dynamic>)['titre'] as String),
-        )
-        .toList();
+    final aides = json.map(
+      (final e) {
+        final f = e as Map<String, dynamic>;
+        return Aide(
+          titre: f['titre'] as String,
+          thematique:
+              (f['thematiques_label'] as List<dynamic>).cast<String>().first,
+        );
+      },
+    ).toList();
     return aides;
   }
 }

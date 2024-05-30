@@ -1,6 +1,7 @@
 import 'package:app/src/fonctionnalites/authentification/domain/authentification_statut.dart';
 import 'package:app/src/fonctionnalites/authentification/domain/authentification_statut_manager.dart';
 import 'package:app/src/pages/accueil/accueil_page.dart';
+import 'package:app/src/pages/aides/aides_page.dart';
 import 'package:app/src/pages/authentification/se_connecter_page.dart';
 import 'package:app/src/pages/pre_onboarding/pre_onboarding_carrousel_page.dart';
 import 'package:app/src/pages/pre_onboarding/pre_onboarding_page.dart';
@@ -27,7 +28,8 @@ GoRouter goRouter({
               return AccueilPage.path;
             }
           case AuthentificationStatut.pasConnecte:
-            if (path.startsWith(AccueilPage.path)) {
+            if (path.startsWith(AccueilPage.path) ||
+                path.startsWith(AidesPage.path)) {
               return PreOnboardingPage.path;
             }
         }
@@ -40,5 +42,6 @@ GoRouter goRouter({
         PreOnboardingCarrouselPage.route(),
         SeConnecterPage.route(),
         AccueilPage.route(),
+        AidesPage.route(),
       ],
     );
