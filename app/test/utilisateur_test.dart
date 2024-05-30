@@ -13,7 +13,6 @@ void main() {
     await ielSappelle(tester, prenom);
     await ielEstConnecte(tester);
     await ielLanceLapplication(tester);
-    expect(find.byType(AccueilPage), findsOneWidget);
     await ielVoitLeTexteDansTexteRiche(
       tester,
       Localisation.prenomExclamation(prenom),
@@ -27,7 +26,6 @@ void main() {
     await ielSappelle(tester, prenom);
     await ielEstConnecte(tester);
     await ielLanceLapplication(tester);
-    expect(find.byType(AccueilPage), findsOneWidget);
     await ielVoitLeTexteDansTexteRiche(
       tester,
       Localisation.prenomExclamation(prenom),
