@@ -26,7 +26,7 @@ class AidesBloc extends Bloc<AidesEvent, AidesState> {
       aidesModel.add(AideThematiqueModel(thematique));
       aides
           .where((final e) => e.thematique == thematique)
-          .forEach((final e) => aidesModel.add(AideTitreModel(e.titre)));
+          .forEach((final e) => aidesModel.add(AideModel(e)));
     }
     emit(AidesState(aides: aidesModel));
   }

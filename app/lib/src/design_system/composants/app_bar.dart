@@ -1,5 +1,6 @@
 import 'package:app/src/design_system/fondamentaux/colors.dart';
 import 'package:app/src/design_system/fondamentaux/rounded_rectangle_border.dart';
+import 'package:app/src/design_system/fondamentaux/shadows.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -15,8 +16,12 @@ class FnvAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double preferredHeight;
 
   @override
-  Widget build(final BuildContext context) => ColoredBox(
-        color: FnvColors.appBarFond,
+  Widget build(final BuildContext context) => DecoratedBox(
+        decoration: const ShapeDecoration(
+          shape: roundedRectangleBorder,
+          color: FnvColors.appBarFond,
+          shadows: appBarOmbre,
+        ),
         child: SafeArea(
           bottom: false,
           left: false,

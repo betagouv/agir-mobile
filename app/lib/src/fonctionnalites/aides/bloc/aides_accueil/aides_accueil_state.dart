@@ -1,10 +1,11 @@
+import 'package:app/src/fonctionnalites/aides/domain/aide.dart';
 import 'package:equatable/equatable.dart';
 
 final class AidesAccueilState extends Equatable {
-  const AidesAccueilState(this.titres);
+  const AidesAccueilState(this.aides);
 
-  final List<String> titres;
+  final List<Aide> aides;
 
   @override
-  List<Object> get props => [titres];
+  List<Object> get props => [aides];
 }

@@ -14,12 +14,19 @@ void main() {
   group('AidesApiAdapter', () {
     test('recupereLesAides', () async {
       // Arrange
-      const aide1 = 'Rénover son logement';
-      const aide2 = 'Acheter un vélo';
-      const aide3 = 'Composter ses déchets';
       const thematique1 = '🏡 Logement';
+      const aide1 = 'Rénover son logement';
+      const contenu1 = '<p>contenu1</p>';
+
       const thematique2 = '🚗 Transports';
+      const aide2 = 'Acheter un vélo';
+      const montantMax = 1500;
+      const contenu2 = 'contenu2';
+
       const thematique3 = '🗑️ Déchets';
+      const aide3 = 'Composter ses déchets';
+      const contenu3 = 'contenu3';
+
       final client = ClientMock()
         ..getSuccess(
           path: '/utilisateurs/$utilisateurId/aides',
@@ -29,7 +36,7 @@ void main() {
     {
         "content_id": "9",
         "titre": "$aide1",
-        "contenu": "contenu1",
+        "contenu": "$contenu1",
         "url_simulateur": null,
         "is_simulateur": false,
         "codes_postaux": [],
@@ -42,20 +49,20 @@ void main() {
     {
         "content_id": "3",
         "titre": "$aide2",
-        "contenu": "contenu2",
+        "contenu": "$contenu2",
         "url_simulateur": "/vos-aides/velo",
         "is_simulateur": true,
         "codes_postaux": [],
         "thematiques": ["transport"],
         "thematiques_label": ["$thematique2"],
-        "montant_max": 1500,
+        "montant_max": $montantMax,
         "besoin_desc": "Acheter un vélo",
         "besoin": "acheter_velo"
     },
     {
         "content_id": "25",
         "titre": "$aide3",
-        "contenu": "contenu3",
+        "contenu": "$contenu3",
         "url_simulateur": null,
         "is_simulateur": false,
         "codes_postaux": [
@@ -95,9 +102,22 @@ void main() {
 
       // Assert
       expect(aides, [
-        const Aide(titre: aide1, thematique: thematique1),
-        const Aide(titre: aide2, thematique: thematique2),
-        const Aide(titre: aide3, thematique: thematique3),
+        const Aide(
+          titre: aide1,
+          thematique: thematique1,
+          contenu: contenu1,
+        ),
+        const Aide(
+          titre: aide2,
+          thematique: thematique2,
+          montantMax: montantMax,
+          contenu: contenu2,
+        ),
+        const Aide(
+          titre: aide3,
+          thematique: thematique3,
+          contenu: contenu3,
+        ),
       ]);
     });
   });

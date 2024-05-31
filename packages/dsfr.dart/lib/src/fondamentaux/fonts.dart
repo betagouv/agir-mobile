@@ -11,6 +11,12 @@ class DsfrTextStyle extends TextStyle {
           fontSize: fontSize,
           height: height / fontSize,
         );
+
+  const DsfrTextStyle.fontFamily()
+      : super(
+          package: 'dsfr',
+          fontFamily: 'Marianne',
+        );
 }
 
 class DsfrFonts {

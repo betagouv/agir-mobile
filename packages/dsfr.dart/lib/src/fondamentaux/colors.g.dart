@@ -4,7 +4,7 @@
 //
 
 // Do not edit directly
-// Generated on Tue, 28 May 2024 08:56:58 GMT
+// Generated on Fri, 31 May 2024 14:33:35 GMT
 
 
 
@@ -284,6 +284,39 @@ class DsfrColors {
     static const info950 = Color(0xFFE8EDFF);
     static const info950Active = Color(0xFFA8BEFF);
     static const info950Hover = Color(0xFFC2D1FF);
+    static const purpleGlycine100 = Color(0xFF2C202B);
+    static const purpleGlycine100Active = Color(0xFF6C536A);
+    static const purpleGlycine100Hover = Color(0xFF554053);
+    static const purpleGlycine125 = Color(0xFF332632);
+    static const purpleGlycine125Active = Color(0xFF755B73);
+    static const purpleGlycine125Hover = Color(0xFF5D485C);
+    static const purpleGlycine200 = Color(0xFF502E4D);
+    static const purpleGlycine200Active = Color(0xFFA1629C);
+    static const purpleGlycine200Hover = Color(0xFF855080);
+    static const purpleGlycine75 = Color(0xFF251A24);
+    static const purpleGlycine75Active = Color(0xFF634A60);
+    static const purpleGlycine75Hover = Color(0xFF4C394A);
+    static const purpleGlycine850 = Color(0xFFFBB8F6);
+    static const purpleGlycine850Active = Color(0xFFF767EF);
+    static const purpleGlycine850Hover = Color(0xFFF983F1);
+    static const purpleGlycine925 = Color(0xFFFDDBFA);
+    static const purpleGlycine925Active = Color(0xFFFA96F2);
+    static const purpleGlycine925Hover = Color(0xFFFBAFF5);
+    static const purpleGlycine950 = Color(0xFFFEE7FC);
+    static const purpleGlycine950Active = Color(0xFFFCA8F6);
+    static const purpleGlycine950Hover = Color(0xFFFDC0F8);
+    static const purpleGlycine975 = Color(0xFFFEF3FD);
+    static const purpleGlycine975Active = Color(0xFFFABFF5);
+    static const purpleGlycine975Hover = Color(0xFFFCD4F8);
+    static const purpleGlycineMain494 = Color(0xFFA558A0);
+    static const purpleGlycineMain494Active = Color(0xFFDB9CD6);
+    static const purpleGlycineMain494Hover = Color(0xFFD282CD);
+    static const purpleGlycineMoon630 = Color(0xFFCE70CC);
+    static const purpleGlycineMoon630Active = Color(0xFFE7BBE6);
+    static const purpleGlycineMoon630Hover = Color(0xFFDFA4DD);
+    static const purpleGlycineSun319 = Color(0xFF6E445A);
+    static const purpleGlycineSun319Active = Color(0xFFBB7F9E);
+    static const purpleGlycineSun319Hover = Color(0xFFA66989);
     static const redMarianneMain472 = Color(0xFFE0000F);
     static const redMarianneMain472Active = Color(0xFFFF4245);
     static const redMarianneMain472Hover = Color(0xFFFF2930);

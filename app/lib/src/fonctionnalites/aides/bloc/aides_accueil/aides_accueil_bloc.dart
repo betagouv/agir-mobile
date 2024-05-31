@@ -19,6 +19,6 @@ class AidesAccueilBloc extends Bloc<AidesAccueilEvent, AidesAccueilState> {
     final Emitter<AidesAccueilState> emit,
   ) async {
     final aides = await _aidesRepository.recupereLesAides();
-    emit(AidesAccueilState(aides.take(2).map((final e) => e.titre).toList()));
+    emit(AidesAccueilState(aides.take(2).toList()));
   }
 }

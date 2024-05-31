@@ -5,6 +5,7 @@ import 'package:dsfr_example/icons_page.dart';
 import 'package:dsfr_example/inputs_page.dart';
 import 'package:dsfr_example/links_page.dart';
 import 'package:dsfr_example/master_page.dart';
+import 'package:dsfr_example/tags_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
             IconsPage.model,
             InputsPage.model,
             LinksPage.model,
+            TagsPage.model,
           ],
         ),
       );

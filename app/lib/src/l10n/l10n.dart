@@ -26,4 +26,5 @@ class Localisation {
   static const String vosAidesTitre = 'Vos aides disponibles';
   static const String vosAidesSousTitre =
       'Accédez à toutes les aides publiques locales ou nationales pour la transition écologique en fonction de votre situation.';
+  static String jusqua(final int value) => "Jusqu'à $value€";
 }

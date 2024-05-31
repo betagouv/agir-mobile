@@ -1,29 +1,43 @@
 import 'package:app/src/design_system/fondamentaux/colors.dart';
 import 'package:app/src/design_system/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/src/design_system/fondamentaux/shadows.dart';
+import 'package:app/src/fonctionnalites/aides/bloc/aide/aide_bloc.dart';
+import 'package:app/src/fonctionnalites/aides/bloc/aide/aide_event.dart';
+import 'package:app/src/fonctionnalites/aides/domain/aide.dart';
+import 'package:app/src/pages/aides/aide_page.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class CarteAide extends StatelessWidget {
-  const CarteAide({required this.titre, super.key});
+  const CarteAide({required this.aide, super.key});
 
-  final String titre;
+  final Aide aide;
 
   @override
-  Widget build(final BuildContext context) => DecoratedBox(
-        decoration: const ShapeDecoration(
-          shape: roundedRectangleBorder,
-          color: FnvColors.carteFond,
-          shadows: shadows,
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(DsfrSpacings.s2w),
-          child: Row(
-            children: [
-              Expanded(child: Text(titre, style: DsfrFonts.bodyMdMedium)),
-              const SizedBox(width: DsfrSpacings.s1w),
-              const Icon(DsfrIcons.systemArrowRightSLine),
-            ],
+  Widget build(final BuildContext context) => InkWell(
+        onTap: () async {
+          context.read<AideBloc>().add(AideSelectionnee(aide));
+          await GoRouter.of(context).pushNamed(AidePage.name);
+        },
+        child: DecoratedBox(
+          decoration: const ShapeDecoration(
+            shape: roundedRectangleBorder,
+            color: FnvColors.carteFond,
+            shadows: carteOmbre,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(DsfrSpacings.s2w),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(aide.titre, style: DsfrFonts.bodyMdMedium),
+                ),
+                const SizedBox(width: DsfrSpacings.s1w),
+                const Icon(DsfrIcons.systemArrowRightSLine),
+              ],
+            ),
           ),
         ),
       );

@@ -8,13 +8,27 @@ import 'steps/steps.dart';
 
 void main() {
   group('Aides', () {
-    const aide1 =
-        Aide(titre: 'Rénover son logement', thematique: '🏡 Logement');
-    const aide2 = Aide(titre: 'Acheter un vélo', thematique: '🚗 Transports');
-    const aide3 =
-        Aide(titre: 'Composter ses déchets', thematique: '🗑️ Déchets');
-    const aide4 =
-        Aide(titre: 'Gérer ses déchets verts', thematique: '🗑️ Déchets');
+    const aide1 = Aide(
+      titre: 'Rénover son logement',
+      thematique: '🏡 Logement',
+      contenu: '',
+    );
+    const aide2 = Aide(
+      titre: 'Acheter un vélo',
+      thematique: '🚗 Transports',
+      montantMax: 1500,
+      contenu: '<p>Contenu</p>',
+    );
+    const aide3 = Aide(
+      titre: 'Composter ses déchets',
+      thematique: '🗑️ Déchets',
+      contenu: '',
+    );
+    const aide4 = Aide(
+      titre: 'Gérer ses déchets verts',
+      thematique: '🗑️ Déchets',
+      contenu: '',
+    );
 
     group('Accueil', () {
       testWidgets(
@@ -48,7 +62,23 @@ void main() {
         await ielVoitLeTexte(tester, aide2.titre);
         await ielNeVoitPasLeTexte(tester, aide3.titre);
       });
+
+      testWidgets(
+          'Iel a débloqué les aides et iel clique sur la premiere aide alors iel arrive sur la page de détail',
+          (final tester) async {
+        setUpWidgets(tester);
+        await ielADebloqueCesFonctionnalites(tester, [Fonctionnalites.aides]);
+        await ielALesAidesSuivantes(tester, [aide1, aide2, aide3]);
+        await ielEstConnecte(tester);
+        await ielLanceLapplication(tester);
+        await ielAppuieSur(tester, aide2.titre);
+        await ielVoitLeTexte(tester, aide2.thematique);
+        await ielVoitLeTexte(tester, aide2.titre);
+        await ielVoitLeTexte(tester, Localisation.jusqua(aide2.montantMax!));
+        await ielVoitLeTexteDansTexteRiche(tester, 'Contenu');
+      });
     });
+
     group('Vos aides', () {
       testWidgets('Iel a débloqué les aides alors iel voit toutes les aides',
           (final tester) async {
