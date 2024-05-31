@@ -14,9 +14,8 @@ class UtilisateurApiAdapter implements UtilisateurRepository {
 
   @override
   Future<Utilisateur> recupereUtilisateur() async {
-    final response = await _apiClient.get(
-      Uri.parse('/utilisateurs/${await _apiClient.recupererUtilisateurId()}'),
-    );
+    final id = await _apiClient.recupererUtilisateurId();
+    final response = await _apiClient.get(Uri.parse('/utilisateurs/$id'));
     if (response.statusCode != 200) {
       throw UnimplementedError();
     }
