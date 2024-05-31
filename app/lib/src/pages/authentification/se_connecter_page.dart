@@ -21,7 +21,10 @@ class SeConnecterPage extends StatelessWidget {
   @override
   Widget build(final BuildContext context) => Scaffold(
         resizeToAvoidBottomInset: false,
-        appBar: AppBar(backgroundColor: Colors.white),
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          iconTheme: const IconThemeData(color: DsfrColors.blueFranceSun113),
+        ),
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.only(
