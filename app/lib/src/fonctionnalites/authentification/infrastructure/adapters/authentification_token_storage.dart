@@ -37,10 +37,10 @@ class AuthentificationTokenStorage {
     final String token,
     final String utilisateurId,
   ) async {
-    _authentificationStatusManager
-        .gererAuthentificationStatut(AuthentificationStatut.connecte);
     await _secureStorage.write(key: _tokenKey, value: token);
     await _secureStorage.write(key: _utilisateurIdKey, value: utilisateurId);
+    _authentificationStatusManager
+        .gererAuthentificationStatut(AuthentificationStatut.connecte);
   }
 
   Future<void> supprimerTokenEtUtilisateurId() async {
