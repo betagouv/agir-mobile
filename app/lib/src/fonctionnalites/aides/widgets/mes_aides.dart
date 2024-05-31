@@ -31,16 +31,16 @@ class MesAides extends StatelessWidget {
           BlocBuilder<AidesAccueilBloc, AidesAccueilState>(
             bloc: bloc,
             builder: (final context, final state) {
-              if (state.titres.isEmpty) {
+              if (state.aides.isEmpty) {
                 return const SizedBox();
               }
-              final aides = state.titres;
+              final aides = state.aides;
               return ListView.separated(
                 shrinkWrap: true,
                 itemCount: aides.length,
                 itemBuilder: (final context, final index) {
                   final aide = aides[index];
-                  return CarteAide(titre: aide);
+                  return CarteAide(aide: aide);
                 },
                 separatorBuilder: (final context, final index) =>
                     const SizedBox(height: DsfrSpacings.s1w),

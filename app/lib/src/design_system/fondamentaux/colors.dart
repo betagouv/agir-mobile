@@ -7,4 +7,5 @@ class FnvColors {
   static const accueilFond = Color(0xFFF7F8F8);
   static const aidesFond = Color(0xFFFBFBFB);
   static const carteFond = Color(0xFFFFFFFF);
+  static const tagForeground = Color(0xFF432636);
 }

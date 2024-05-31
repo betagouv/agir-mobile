@@ -1,3 +1,4 @@
+import 'package:app/src/fonctionnalites/aides/bloc/aide/aide_bloc.dart';
 import 'package:app/src/fonctionnalites/aides/domain/ports/aides_repository.dart';
 import 'package:app/src/fonctionnalites/authentification/domain/authentification_statut_manager.dart';
 import 'package:app/src/fonctionnalites/authentification/domain/ports/authentification_repository.dart';
@@ -61,6 +62,7 @@ class _AppState extends State<App> {
                 utilisateurRepository: widget.utilisateurRepository,
               ),
             ),
+            BlocProvider(create: (final context) => AideBloc()),
           ],
           child: MaterialApp.router(
             routerConfig: _goRouter,

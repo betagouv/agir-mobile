@@ -61,11 +61,17 @@ class AidesPage extends StatelessWidget {
                   final aide = aides[index];
                   if (aide is AideThematiqueModel) {
                     return Padding(
-                      padding: const EdgeInsets.only(top: 32, bottom: 16),
-                      child: Text(aide.value, style: DsfrFonts.headline4),
+                      padding: const EdgeInsets.only(
+                        top: DsfrSpacings.s4w,
+                        bottom: DsfrSpacings.s2w,
+                      ),
+                      child: Text(aide.thematique, style: DsfrFonts.headline4),
                     );
                   }
-                  return CarteAide(titre: aide.value);
+                  if (aide is AideModel) {
+                    return CarteAide(aide: aide.value);
+                  }
+                  return const SizedBox.shrink();
                 },
                 separatorBuilder: (final context, final index) =>
                     const SizedBox(height: DsfrSpacings.s1w),

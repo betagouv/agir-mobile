@@ -31,6 +31,8 @@ class AidesApiAdapter implements AidesRepository {
           titre: f['titre'] as String,
           thematique:
               (f['thematiques_label'] as List<dynamic>).cast<String>().first,
+          montantMax: (f['montant_max'] as num?)?.toInt(),
+          contenu: f['contenu'] as String,
         );
       },
     ).toList();
