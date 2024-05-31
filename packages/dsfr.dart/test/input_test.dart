@@ -13,7 +13,7 @@ void main() {
           app(
             DsfrInput(
               label: label,
-              onChanged: (final String value) {},
+              onChanged: (final value) {},
             ),
           ),
         );
@@ -27,7 +27,7 @@ void main() {
           app(
             DsfrInput(
               label: label,
-              onChanged: (final String value) {},
+              onChanged: (final value) {},
             ),
           ),
         );

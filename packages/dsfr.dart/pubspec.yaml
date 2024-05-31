@@ -13,6 +13,8 @@ dependencies:
     sdk: flutter
 
 dev_dependencies:
+  agir_lints:
+    path: ../agir_lints
   flutter_test:
     sdk: flutter
   icon_font_generator:
