@@ -18,7 +18,7 @@ class FnvAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(final BuildContext context) => DecoratedBox(
         decoration: const ShapeDecoration(
-          shape: roundedRectangleBorder,
+          shape: RoundedRectangleBorder(),
           color: FnvColors.appBarFond,
           shadows: appBarOmbre,
         ),
@@ -38,6 +38,8 @@ class FnvAppBar extends StatelessWidget implements PreferredSizeWidget {
                           ? DsfrIcons.systemArrowLeftLine
                           : DsfrIcons.systemMenuFill,
                       color: DsfrColors.blueFranceSun113,
+                      semanticLabel:
+                          GoRouter.of(context).canPop() ? 'Retour' : 'Menu',
                     ),
                     iconSize: 24,
                     padding: const EdgeInsets.all(DsfrSpacings.s1w),
