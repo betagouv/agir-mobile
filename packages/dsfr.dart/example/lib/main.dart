@@ -1,3 +1,4 @@
+import 'package:dsfr_example/accordions_page.dart';
 import 'package:dsfr_example/buttons_page.dart';
 import 'package:dsfr_example/colors_page.dart';
 import 'package:dsfr_example/fonts_page.dart';
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: MasterPage(
           pageItems: [
+            AccordionsPage.model,
             ButtonsPage.model,
             ColorsPage.model,
             FontsPage.model,
