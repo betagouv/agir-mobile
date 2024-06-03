@@ -1,7 +1,7 @@
 export 'iel_a_debloque_ces_fonctionnalites.dart';
 export 'iel_a_les_aides_suivantes.dart';
 export 'iel_appuie_sur.dart';
-export 'iel_appuie_sur_commencer.dart';
+export 'iel_appuie_sur_accesibilite.dart';
 export 'iel_ecrit_dans_le_champ.dart';
 export 'iel_est_connecte.dart';
 export 'iel_glisse_de_la_droite_vers_la_gauche.dart';

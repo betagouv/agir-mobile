@@ -1,10 +1,13 @@
 import 'package:app/src/design_system/composants/app_bar.dart';
 import 'package:app/src/design_system/fondamentaux/colors.dart';
+import 'package:app/src/design_system/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/src/fonctionnalites/aides/widgets/mes_aides.dart';
 import 'package:app/src/fonctionnalites/authentification/domain/ports/authentification_repository.dart';
 import 'package:app/src/fonctionnalites/utilisateur/bloc/utilisateur_bloc.dart';
 import 'package:app/src/fonctionnalites/utilisateur/bloc/utilisateur_event.dart';
+import 'package:app/src/fonctionnalites/version/widgets/version_label.dart';
 import 'package:app/src/l10n/l10n.dart';
+import 'package:app/src/pages/aides/aides_page.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,15 +39,60 @@ class AccueilPage extends StatelessWidget {
       ),
       drawer: Drawer(
         shape: const RoundedRectangleBorder(),
-        child: ListView(
+        child: Column(
           children: [
-            DsfrButton.lg(
-              label: 'Se déconnecter',
-              onTap: () async {
-                await context
-                    .read<AuthentificationRepository>()
-                    .deconnectionDemandee();
-              },
+            FnvAppBar(
+              leading: IconButton(
+                icon: const Icon(
+                  DsfrIcons.systemCloseLine,
+                  color: DsfrColors.blueFranceSun113,
+                  semanticLabel: Localisation.fermer,
+                ),
+                iconSize: 24,
+                padding: const EdgeInsets.all(DsfrSpacings.s1w),
+                style: const ButtonStyle(
+                  shape: WidgetStatePropertyAll(roundedRectangleBorder),
+                ),
+                onPressed: () => GoRouter.of(context).pop(),
+              ),
+              title: const Text(
+                Localisation.menu,
+                style: DsfrTextStyle(
+                  fontSize: 16,
+                  height: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            Expanded(
+              child: ColoredBox(
+                color: Colors.white,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: DsfrSpacings.s3w),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (state.aLesAides)
+                        DsfrLink.md(
+                          label: Localisation.menuAides,
+                          onTap: () async => context.pushNamed(AidesPage.name),
+                        ),
+                      const Spacer(),
+                      DsfrLink.md(
+                        label: 'Se déconnecter',
+                        onTap: () async {
+                          await context
+                              .read<AuthentificationRepository>()
+                              .deconnectionDemandee();
+                        },
+                      ),
+                      const SizedBox(height: DsfrSpacings.s3w),
+                      const Align(child: VersionLabel()),
+                    ],
+                  ),
+                ),
+              ),
             ),
           ],
         ),

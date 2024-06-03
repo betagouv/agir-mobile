@@ -1,7 +1,7 @@
 name: app
 description: ""
 publish_to: 'none'
-version: 0.1.0
+version: 0.1.0+1
 
 environment:
   sdk: 3.4.1
@@ -23,6 +23,7 @@ dependencies:
   go_router: 14.1.4
   http: 1.2.1
   meta: any # lock by flutter_test
+  package_info_plus: ^8.0.0
 
 dev_dependencies:
   agir_lints:
