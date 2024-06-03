@@ -1,5 +1,6 @@
 import 'package:app/src/assets/images.dart';
 import 'package:app/src/assets/svgs.dart';
+import 'package:app/src/fonctionnalites/version/widgets/version_label.dart';
 import 'package:app/src/l10n/l10n.dart';
 import 'package:app/src/pages/pre_onboarding/pre_onboarding_carrousel_page.dart';
 import 'package:dsfr/dsfr.dart';
@@ -23,7 +24,7 @@ class PreOnboardingPage extends StatelessWidget {
   Widget build(final BuildContext context) => Scaffold(
         body: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(DsfrSpacings.s3w),
+            padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s3w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -52,6 +53,8 @@ class PreOnboardingPage extends StatelessWidget {
                   onTap: () async =>
                       context.pushNamed(PreOnboardingCarrouselPage.name),
                 ),
+                const SizedBox(height: DsfrSpacings.s3w),
+                const Align(child: VersionLabel()),
               ],
             ),
           ),

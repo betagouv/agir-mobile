@@ -21,10 +21,14 @@ class Localisation {
   static const String motDePasseOublie = 'Mot de passe oublié ?';
   static const String bonjour = 'Bonjour,\n';
   static String prenomExclamation(final String value) => '$value !';
+  static const String menuAides = 'Aides';
   static const String accueilMesAides = 'Mes aides';
   static const String accueilMesAidesLien = 'Voir toutes les aides';
   static const String vosAidesTitre = 'Vos aides disponibles';
   static const String vosAidesSousTitre =
       'Accédez à toutes les aides publiques locales ou nationales pour la transition écologique en fonction de votre situation.';
   static String jusqua(final int value) => "Jusqu'à $value€";
+  static const String fermer = 'Fermer';
+  static const String retour = 'Retour';
+  static const String menu = 'Menu';
 }

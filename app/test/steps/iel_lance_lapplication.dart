@@ -7,6 +7,7 @@ import '../aides_repository_mock.dart';
 import '../authentification_repository_mock.dart';
 import '../scenario_context.dart';
 import '../utilisateur_repository_mock.dart';
+import '../version_repository_mock.dart';
 
 /// Iel lance l'application
 Future<void> ielLanceLapplication(final WidgetTester tester) async {
@@ -22,6 +23,7 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
         fonctionnalitesDebloquees: ScenarioContext().fonctionnalitesDebloquees,
       ),
       aidesRepository: AidesRepositoryMock(ScenarioContext().aides),
+      versionRepository: VersionRepositoryMock(),
     ),
     Durations.short1,
   );

@@ -23,7 +23,7 @@ void main() {
     setUpWidgets(tester);
     await ielLanceLapplication(tester);
     await ielVoitLeTexte(tester, Localisation.preOnboardingTitre);
-    await ielAppuieSurCommencer(tester);
+    await ielAppuieSur(tester, Localisation.commencer);
     await ielVoitLeTexteMarkdown(tester, Localisation.preOnboarding1);
     await ielGlisseDeLaDroiteVersLaGauche(tester);
     await ielVoitLeTexteMarkdown(tester, Localisation.preOnboarding2);
@@ -38,7 +38,7 @@ void main() {
     setUpWidgets(tester);
     await ielLanceLapplication(tester);
     await ielVoitLeTexte(tester, Localisation.preOnboardingTitre);
-    await ielAppuieSurCommencer(tester);
+    await ielAppuieSur(tester, Localisation.commencer);
     await ielVoitLeTexteMarkdown(tester, Localisation.preOnboarding1);
     await ielGlisseDeLaDroiteVersLaGauche(tester);
     await ielVoitLeTexteMarkdown(tester, Localisation.preOnboarding2);

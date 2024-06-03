@@ -5,6 +5,9 @@ import 'package:app/src/fonctionnalites/authentification/domain/ports/authentifi
 import 'package:app/src/fonctionnalites/se_connecter/bloc/se_connecter_bloc.dart';
 import 'package:app/src/fonctionnalites/utilisateur/bloc/utilisateur_bloc.dart';
 import 'package:app/src/fonctionnalites/utilisateur/domain/ports/utilisateur_repository.dart';
+import 'package:app/src/fonctionnalites/version/bloc/version_bloc.dart';
+import 'package:app/src/fonctionnalites/version/bloc/version_event.dart';
+import 'package:app/src/fonctionnalites/version/domain/ports/version_repository.dart';
 import 'package:app/src/router/app_router.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +20,7 @@ class App extends StatefulWidget {
     required this.authentificationRepository,
     required this.utilisateurRepository,
     required this.aidesRepository,
+    required this.versionRepository,
     super.key,
   });
 
@@ -24,6 +28,7 @@ class App extends StatefulWidget {
   final AuthentificationRepository authentificationRepository;
   final UtilisateurRepository utilisateurRepository;
   final AidesRepository aidesRepository;
+  final VersionRepository versionRepository;
 
   @override
   State<App> createState() => _AppState();
@@ -43,12 +48,8 @@ class _AppState extends State<App> {
   @override
   Widget build(final BuildContext context) => MultiRepositoryProvider(
         providers: [
-          RepositoryProvider<AuthentificationRepository>.value(
-            value: widget.authentificationRepository,
-          ),
-          RepositoryProvider<AidesRepository>.value(
-            value: widget.aidesRepository,
-          ),
+          RepositoryProvider.value(value: widget.authentificationRepository),
+          RepositoryProvider.value(value: widget.aidesRepository),
         ],
         child: MultiBlocProvider(
           providers: [
@@ -63,6 +64,11 @@ class _AppState extends State<App> {
               ),
             ),
             BlocProvider(create: (final context) => AideBloc()),
+            BlocProvider(
+              create: (final context) =>
+                  VersionBloc(versionRepository: widget.versionRepository)
+                    ..add(const VersionDemandee()),
+            ),
           ],
           child: MaterialApp.router(
             routerConfig: _goRouter,
