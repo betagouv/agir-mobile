@@ -1,3 +1,4 @@
+export 'accordions.dart';
 export 'buttons.dart';
 export 'input.dart';
 export 'links.dart';
