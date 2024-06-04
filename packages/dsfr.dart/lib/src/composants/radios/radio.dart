@@ -20,6 +20,7 @@ class DsfrRadioButton<T> extends StatelessWidget {
         onTap: () {
           onChanged.call(value);
         },
+        behavior: HitTestBehavior.opaque,
         child: DecoratedBox(
           decoration: BoxDecoration(
             border: Border.fromBorderSide(
@@ -41,9 +42,11 @@ class DsfrRadioButton<T> extends StatelessWidget {
                       const WidgetStatePropertyAll(DsfrColors.blueFranceSun113),
                   onChanged: null,
                 ),
-                Text(
-                  title,
-                  style: DsfrFonts.bodySm,
+                Expanded(
+                  child: Text(
+                    title,
+                    style: DsfrFonts.bodySm,
+                  ),
                 ),
               ],
             ),

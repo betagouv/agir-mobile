@@ -36,14 +36,24 @@ class AuthentificationApiClient extends http.BaseClient {
   Future<http.Response> get(
     final Uri url, {
     final Map<String, String>? headers,
-  }) async =>
+  }) =>
       super.get(
         _uriParse(url),
         headers: headers,
       );
 
-  Uri _uriParse(final Uri url) => Uri.parse(
-        '${apiUrl.valeur.scheme}://${apiUrl.valeur.host}${apiUrl.valeur.path}${url.path}',
+  @override
+  Future<http.Response> patch(
+    final Uri url, {
+    final Map<String, String>? headers,
+    final Object? body,
+    final Encoding? encoding,
+  }) =>
+      super.patch(
+        _uriParse(url),
+        headers: headers,
+        body: body,
+        encoding: encoding,
       );
 
   @override
@@ -52,12 +62,16 @@ class AuthentificationApiClient extends http.BaseClient {
     final Map<String, String>? headers,
     final Object? body,
     final Encoding? encoding,
-  }) async =>
+  }) =>
       super.post(
         _uriParse(url),
         headers: headers,
         body: body,
         encoding: encoding,
+      );
+
+  Uri _uriParse(final Uri url) => Uri.parse(
+        '${apiUrl.valeur.scheme}://${apiUrl.valeur.host}${apiUrl.valeur.path}${url.path}${url.hasQuery ? '?${url.query}' : ''}',
       );
 
   @override
@@ -66,6 +80,8 @@ class AuthentificationApiClient extends http.BaseClient {
     if (token != null) {
       request.headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
     }
+    request.headers[HttpHeaders.contentTypeHeader] =
+        'application/json; charset=UTF-8';
     return _inner.send(request);
   }
 

@@ -10,8 +10,17 @@ const carteOmbre = [
 
 const appBarOmbre = [
   BoxShadow(
+    blurStyle: BlurStyle.outer,
     blurRadius: 10,
     offset: Offset(0, 2),
     color: Color(0x0A000000),
+  ),
+];
+
+const bottomNavigationBarOmbre = [
+  BoxShadow(
+    blurStyle: BlurStyle.outer,
+    blurRadius: 18,
+    color: Color(0x0D000000),
   ),
 ];

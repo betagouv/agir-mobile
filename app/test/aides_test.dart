@@ -74,7 +74,10 @@ void main() {
         await ielAppuieSur(tester, aide2.titre);
         await ielVoitLeTexte(tester, aide2.thematique);
         await ielVoitLeTexte(tester, aide2.titre);
-        await ielVoitLeTexte(tester, Localisation.jusqua(aide2.montantMax!));
+        await ielVoitLeTexteDansTexteRiche(
+          tester,
+          Localisation.euro(aide2.montantMax!),
+        );
         await ielVoitLeTexteDansTexteRiche(tester, 'Contenu');
       });
     });

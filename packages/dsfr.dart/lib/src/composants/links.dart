@@ -5,19 +5,43 @@ class DsfrLink extends StatefulWidget {
   const DsfrLink._({
     required this.label,
     required this.textStyle,
+    required this.underlineThickness,
     required this.focusBorderWidth,
     required this.focusPadding,
+    required this.iconSize,
+    this.icon,
     this.onTap,
     super.key,
   });
 
-  const DsfrLink.md({
+  const DsfrLink.sm({
     required final String label,
+    final IconData? icon,
     final VoidCallback? onTap,
     final Key? key,
   }) : this._(
           label: label,
+          icon: icon,
+          iconSize: 16,
+          textStyle: DsfrFonts.bodySm,
+          underlineThickness: 1.75,
+          focusBorderWidth: 2,
+          focusPadding: const EdgeInsets.all(4),
+          onTap: onTap,
+          key: key,
+        );
+
+  const DsfrLink.md({
+    required final String label,
+    final IconData? icon,
+    final VoidCallback? onTap,
+    final Key? key,
+  }) : this._(
+          label: label,
+          icon: icon,
+          iconSize: 16,
           textStyle: DsfrFonts.bodyMd,
+          underlineThickness: 2,
           focusBorderWidth: 2,
           focusPadding: const EdgeInsets.all(4),
           onTap: onTap,
@@ -25,8 +49,11 @@ class DsfrLink extends StatefulWidget {
         );
 
   final String label;
+  final IconData? icon;
+  final double iconSize;
   final VoidCallback? onTap;
   final TextStyle textStyle;
+  final double underlineThickness;
   final double focusBorderWidth;
   final EdgeInsetsGeometry focusPadding;
 
@@ -99,13 +126,29 @@ class _DsfrLinkState extends State<DsfrLink> with MaterialStateMixin<DsfrLink> {
                 ? Border(
                     bottom: BorderSide(
                       color: foregroundColor.resolve(materialStates),
-                      width: isPressed || isHovered ? 2 : 1,
+                      width: isPressed || isHovered
+                          ? widget.underlineThickness
+                          : 1,
                     ),
                   )
                 : null,
           ),
-          child: Text(
-            widget.label,
+          child: Text.rich(
+            TextSpan(
+              text: widget.label,
+              children: [
+                if (widget.icon != null) ...[
+                  const WidgetSpan(child: SizedBox(width: DsfrSpacings.s1w)),
+                  WidgetSpan(
+                    child: Icon(
+                      widget.icon,
+                      size: widget.iconSize,
+                      color: foregroundColor.resolve(materialStates),
+                    ),
+                  ),
+                ],
+              ],
+            ),
             style: widget.textStyle.copyWith(
               color: foregroundColor.resolve(materialStates),
               backgroundColor: backgroundColor.resolve(materialStates),

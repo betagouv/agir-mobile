@@ -15,15 +15,15 @@ void main() {
         const body2 = 'Body 2';
         await tester.pumpWidget(
           app(
-            DsfrAccordionsGroup(
+            const DsfrAccordionsGroup(
               values: [
                 DsfrAccordion(
-                  header: const Text(header1),
-                  body: const Text(body1),
+                  header: Text(header1),
+                  body: Text(body1),
                 ),
                 DsfrAccordion(
-                  header: const Text(header2),
-                  body: const Text(body2),
+                  header: Text(header2),
+                  body: Text(body2),
                 ),
               ],
             ),
@@ -36,15 +36,15 @@ void main() {
         const body1 = 'Body 1';
         await tester.pumpWidget(
           app(
-            DsfrAccordionsGroup(
+            const DsfrAccordionsGroup(
               values: [
                 DsfrAccordion(
-                  header: const Text(header1),
-                  body: const Text(body1),
+                  header: Text(header1),
+                  body: Text(body1),
                 ),
                 DsfrAccordion(
-                  header: const Text('Header 2'),
-                  body: const Text('Body 2'),
+                  header: Text('Header 2'),
+                  body: Text('Body 2'),
                 ),
               ],
             ),

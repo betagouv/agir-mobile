@@ -4,6 +4,7 @@ import 'package:app/src/design_system/fondamentaux/shadows.dart';
 import 'package:app/src/fonctionnalites/aides/bloc/aide/aide_bloc.dart';
 import 'package:app/src/fonctionnalites/aides/bloc/aide/aide_event.dart';
 import 'package:app/src/fonctionnalites/aides/domain/aide.dart';
+import 'package:app/src/fonctionnalites/aides/widgets/tag_simulateur.dart';
 import 'package:app/src/pages/aides/aide_page.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,11 @@ class CarteAide extends StatelessWidget {
                 Expanded(
                   child: Text(aide.titre, style: DsfrFonts.bodyMdMedium),
                 ),
-                const SizedBox(width: DsfrSpacings.s1w),
+                if (aide.aUnSimulateur) ...[
+                  const SizedBox(width: DsfrSpacings.s1v),
+                  const TagSimulateur(),
+                ],
+                const SizedBox(width: DsfrSpacings.s1v),
                 const Icon(DsfrIcons.systemArrowRightSLine),
               ],
             ),

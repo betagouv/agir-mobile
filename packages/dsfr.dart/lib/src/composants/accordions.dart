@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 // ignore: avoid_positional_boolean_parameters
 typedef DsfrAccordionCallback = void Function(int panelIndex, bool isExpanded);
 
+@immutable
 class DsfrAccordion {
-  DsfrAccordion({required this.header, required this.body});
+  const DsfrAccordion({required this.header, required this.body});
 
   final Widget header;
   final Widget body;
@@ -34,14 +35,12 @@ class _DsfrAccordionsGroupState extends State<DsfrAccordionsGroup> {
     return Column(
       children: [
         divider,
-        ListView.separated(
-          shrinkWrap: true,
-          itemCount: widget.values.length,
-          itemBuilder: (final context, final index) {
-            final item = widget.values[index];
+        ...widget.values.indexed.map(
+          (final e) {
+            final index = e.$1;
             return _DsfrAccordion(
               index: index,
-              item: item,
+              item: e.$2,
               isExpanded: _panelIndex == index && _isExpanded,
               accordionCallback: (final panelIndex, final isExpanded) {
                 setState(() {
@@ -51,8 +50,7 @@ class _DsfrAccordionsGroupState extends State<DsfrAccordionsGroup> {
               },
             );
           },
-          separatorBuilder: (final context, final index) => divider,
-        ),
+        ).separator(divider),
         divider,
       ],
     );
@@ -95,6 +93,7 @@ class _DsfrAccordion extends StatelessWidget {
                       color: DsfrColors.blueFranceSun113,
                       size: DsfrSpacings.s2w,
                     ),
+                    const SizedBox(width: DsfrSpacings.s2w),
                   ],
                 ),
               ),

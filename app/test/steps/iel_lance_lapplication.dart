@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import '../aides_repository_mock.dart';
 import '../authentification_repository_mock.dart';
+import '../communes_repository_mock.dart';
 import '../scenario_context.dart';
 import '../utilisateur_repository_mock.dart';
 import '../version_repository_mock.dart';
@@ -24,6 +25,8 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
       ),
       aidesRepository: AidesRepositoryMock(ScenarioContext().aides),
       versionRepository: VersionRepositoryMock(),
+      communesRepository: CommunesRepositoryMock(ScenarioContext().communes),
+      aideVeloRepository: ScenarioContext().aideVeloRepositoryMock,
     ),
     Durations.short1,
   );
