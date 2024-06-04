@@ -1,6 +1,7 @@
 import 'package:dsfr_example/accordions_page.dart';
 import 'package:dsfr_example/buttons_page.dart';
 import 'package:dsfr_example/colors_page.dart';
+import 'package:dsfr_example/select_page.dart';
 import 'package:dsfr_example/fonts_page.dart';
 import 'package:dsfr_example/icons_page.dart';
 import 'package:dsfr_example/inputs_page.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
             AccordionsPage.model,
             ButtonsPage.model,
             ColorsPage.model,
+            SelectPage.model,
             FontsPage.model,
             IconsPage.model,
             InputsPage.model,

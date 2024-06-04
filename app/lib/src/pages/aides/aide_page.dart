@@ -1,8 +1,10 @@
 import 'package:app/src/design_system/composants/app_bar.dart';
+import 'package:app/src/design_system/composants/bottom_bar.dart';
 import 'package:app/src/design_system/fondamentaux/colors.dart';
 import 'package:app/src/fonctionnalites/aides/bloc/aide/aide_bloc.dart';
-import 'package:app/src/fonctionnalites/aides/bloc/aide/aide_state.dart';
+import 'package:app/src/fonctionnalites/aides/widgets/tag_simulateur.dart';
 import 'package:app/src/l10n/l10n.dart';
+import 'package:app/src/pages/aides/aide_simulateur_velo_page.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,46 +27,64 @@ class AidePage extends StatelessWidget {
       );
 
   @override
-  Widget build(final BuildContext context) => Scaffold(
-        appBar: const FnvAppBar(),
-        backgroundColor: FnvColors.aidesFond,
-        body: BlocBuilder<AideBloc, AideState>(
-          builder: (final context, final state) {
-            final aide = state.aide;
-            return ListView(
-              padding: const EdgeInsets.all(DsfrSpacings.s3w),
+  Widget build(final BuildContext context) {
+    final aide = context.watch<AideBloc>().state.aide;
+    return Scaffold(
+      appBar: const FnvAppBar(),
+      backgroundColor: FnvColors.aidesFond,
+      body: ListView(
+        padding: const EdgeInsets.all(DsfrSpacings.s3w),
+        children: [
+          Text(
+            aide.thematique,
+            style: DsfrFonts.bodySmMedium,
+          ),
+          const SizedBox(height: DsfrSpacings.s2w),
+          Text(
+            aide.titre,
+            style: DsfrFonts.headline2,
+          ),
+          if (aide.aUnSimulateur || aide.montantMax != null) ...[
+            const SizedBox(height: DsfrSpacings.s1w),
+            Wrap(
+              spacing: DsfrSpacings.s1w,
               children: [
-                Text(
-                  aide.thematique,
-                  style: DsfrFonts.bodySmMedium,
-                ),
-                const SizedBox(height: DsfrSpacings.s2w),
-                Text(
-                  aide.titre,
-                  style: DsfrFonts.headline2,
-                ),
-                if (aide.montantMax != null) ...[
-                  const SizedBox(height: DsfrSpacings.s1w),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: DsfrTag.sm(
-                      label: Localisation.jusqua(aide.montantMax!),
-                      foregroundColor: FnvColors.tagForeground,
-                      backgroundColor: DsfrColors.purpleGlycine925Hover,
+                if (aide.montantMax != null)
+                  DsfrTag.sm(
+                    label: TextSpan(
+                      text: Localisation.jusqua +
+                          Localisation.euro(aide.montantMax!),
                     ),
+                    foregroundColor: FnvColors.tagForeground,
+                    backgroundColor: DsfrColors.purpleGlycine925Hover,
                   ),
-                ],
-                const SizedBox(height: DsfrSpacings.s3w),
-                HtmlWidget(
-                  aide.contenu,
-                  factoryBuilder: MyUrlLauncherFactory.new,
-                  textStyle: const DsfrTextStyle.fontFamily(),
-                ),
+                if (aide.aUnSimulateur) const TagSimulateur(),
               ],
-            );
-          },
-        ),
-      );
+            ),
+          ],
+          const SizedBox(height: DsfrSpacings.s3w),
+          HtmlWidget(
+            aide.contenu,
+            factoryBuilder: MyUrlLauncherFactory.new,
+            textStyle: const DsfrTextStyle.fontFamily(),
+          ),
+        ],
+      ),
+      bottomNavigationBar: aide.aUnSimulateur
+          ? FnvBottomBar(
+              child: DsfrButton.lg(
+                label: Localisation.accederAuSimulateur,
+                onTap: () async {
+                  if (aide.estSimulateurVelo) {
+                    await GoRouter.of(context)
+                        .pushNamed(AideSimulateurVeloPage.name);
+                  }
+                },
+              ),
+            )
+          : null,
+    );
+  }
 }
 
 /// Besoin de faire notre propre implementation car les urls web retourne faux à l'appel de canLaunchUrl

@@ -26,6 +26,7 @@ void main() {
 
         expect(completer.isCompleted, true);
       });
+
       group(
         'Accessibilité',
         () {

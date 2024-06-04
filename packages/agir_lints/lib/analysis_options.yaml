@@ -20,6 +20,7 @@ analyzer:
 linter:
   rules:
     always_specify_types: false
+    avoid_annotating_with_dynamic: false
     avoid_classes_with_only_static_members: false
     avoid_final_parameters: false # incompatible with `prefer_final_parameters`.
     diagnostic_describe_all_properties: false

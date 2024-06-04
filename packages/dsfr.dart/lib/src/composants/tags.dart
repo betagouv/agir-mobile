@@ -8,13 +8,17 @@ class DsfrTag extends StatelessWidget {
     required this.backgroundColor,
     required this.foregroundColor,
     required this.padding,
+    this.icon,
+    this.onTap,
     super.key,
   });
 
   const DsfrTag.sm({
-    required final String label,
+    required final InlineSpan label,
     required final Color backgroundColor,
     required final Color foregroundColor,
+    final IconData? icon,
+    final GestureTapCallback? onTap,
     final Key? key,
   }) : this._(
           label: label,
@@ -25,10 +29,36 @@ class DsfrTag extends StatelessWidget {
             horizontal: DsfrSpacings.s1w,
             vertical: DsfrSpacings.s0v5,
           ),
+          icon: icon,
+          onTap: onTap,
           key: key,
         );
 
-  final String label;
+  const DsfrTag.md({
+    required final InlineSpan label,
+    required final Color backgroundColor,
+    required final Color foregroundColor,
+    final IconData? icon,
+    final GestureTapCallback? onTap,
+    final Key? key,
+  }) : this._(
+          label: label,
+          backgroundColor: backgroundColor,
+          foregroundColor: foregroundColor,
+          textStyle: DsfrFonts.bodySm,
+          padding: const EdgeInsets.symmetric(
+            horizontal: DsfrSpacings.s3v,
+            vertical: DsfrSpacings.s1v,
+          ),
+          icon: icon,
+          onTap: onTap,
+          key: key,
+        );
+
+  final IconData? icon;
+  final InlineSpan label;
+  final GestureTapCallback? onTap;
+
   final TextStyle textStyle;
   final Color backgroundColor;
   final Color foregroundColor;
@@ -40,11 +70,31 @@ class DsfrTag extends StatelessWidget {
           shape: const StadiumBorder(),
           color: backgroundColor,
         ),
-        child: Padding(
-          padding: padding,
-          child: Text(
-            label,
-            style: textStyle.copyWith(color: foregroundColor),
+        child: GestureDetector(
+          onTap: onTap,
+          child: Padding(
+            padding: padding,
+            child: Text.rich(
+              TextSpan(
+                children: [
+                  if (icon != null) ...[
+                    WidgetSpan(
+                      alignment: PlaceholderAlignment.middle,
+                      child: Icon(
+                        icon,
+                        size: DsfrSpacings.s3v,
+                        color: foregroundColor,
+                      ),
+                    ),
+                    const WidgetSpan(
+                      child: SizedBox(width: DsfrSpacings.s1v),
+                    ),
+                  ],
+                  label,
+                ],
+              ),
+              style: textStyle.copyWith(color: foregroundColor),
+            ),
           ),
         ),
       );

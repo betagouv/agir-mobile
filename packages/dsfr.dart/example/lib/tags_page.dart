@@ -16,7 +16,7 @@ class TagsPage extends StatelessWidget {
         child: Column(
           children: [
             DsfrTag.sm(
-              label: 'Label tag',
+              label: TextSpan(text: 'Label tag'),
               backgroundColor: DsfrColors.blueFrance925,
               foregroundColor: DsfrColors.blueFranceSun113,
             ),

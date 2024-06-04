@@ -22,6 +22,7 @@ void main() {
       const aide2 = 'Acheter un vélo';
       const montantMax = 1500;
       const contenu2 = 'contenu2';
+      const urlSimulateur2 = '/vos-aides/velo';
 
       const thematique3 = '🗑️ Déchets';
       const aide3 = 'Composter ses déchets';
@@ -50,7 +51,7 @@ void main() {
         "content_id": "3",
         "titre": "$aide2",
         "contenu": "$contenu2",
-        "url_simulateur": "/vos-aides/velo",
+        "url_simulateur": "$urlSimulateur2",
         "is_simulateur": true,
         "codes_postaux": [],
         "thematiques": ["transport"],
@@ -112,6 +113,7 @@ void main() {
           thematique: thematique2,
           montantMax: montantMax,
           contenu: contenu2,
+          urlSimulateur: urlSimulateur2,
         ),
         const Aide(
           titre: aide3,

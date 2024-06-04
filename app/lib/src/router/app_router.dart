@@ -2,6 +2,8 @@ import 'package:app/src/fonctionnalites/authentification/domain/authentification
 import 'package:app/src/fonctionnalites/authentification/domain/authentification_statut_manager.dart';
 import 'package:app/src/pages/accueil/accueil_page.dart';
 import 'package:app/src/pages/aides/aide_page.dart';
+import 'package:app/src/pages/aides/aide_simulateur_velo_disponibles_page.dart';
+import 'package:app/src/pages/aides/aide_simulateur_velo_page.dart';
 import 'package:app/src/pages/aides/aides_page.dart';
 import 'package:app/src/pages/authentification/se_connecter_page.dart';
 import 'package:app/src/pages/pre_onboarding/pre_onboarding_carrousel_page.dart';
@@ -31,7 +33,9 @@ GoRouter goRouter({
           case AuthentificationStatut.pasConnecte:
             if (path.startsWith(AccueilPage.path) ||
                 path.startsWith(AidesPage.path) ||
-                path.startsWith(AidePage.path)) {
+                path.startsWith(AidePage.path) ||
+                path.startsWith(AideSimulateurVeloPage.path) ||
+                path.startsWith(AideSimulateurVeloDisponiblePage.path)) {
               return PreOnboardingPage.path;
             }
         }
@@ -46,5 +50,10 @@ GoRouter goRouter({
         AccueilPage.route(),
         AidesPage.route(),
         AidePage.route(),
+        AideSimulateurVeloPage.route(
+          routes: [
+            AideSimulateurVeloDisponiblePage.route(),
+          ],
+        ),
       ],
     );

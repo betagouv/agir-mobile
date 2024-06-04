@@ -14,9 +14,10 @@ class AidesApiAdapter implements AidesRepository {
 
   @override
   Future<List<Aide>> recupereLesAides() async {
+    final utilisateurId = await _apiClient.recupererUtilisateurId();
     final response = await _apiClient.get(
       Uri.parse(
-        '/utilisateurs/${await _apiClient.recupererUtilisateurId()}/aides',
+        '/utilisateurs/$utilisateurId/aides',
       ),
     );
     if (response.statusCode != 200) {
@@ -33,6 +34,7 @@ class AidesApiAdapter implements AidesRepository {
               (f['thematiques_label'] as List<dynamic>).cast<String>().first,
           montantMax: (f['montant_max'] as num?)?.toInt(),
           contenu: f['contenu'] as String,
+          urlSimulateur: f['url_simulateur'] as String?,
         );
       },
     ).toList();

@@ -6,12 +6,16 @@ class Aide extends Equatable {
     required this.thematique,
     required this.contenu,
     this.montantMax,
+    this.urlSimulateur,
   });
 
   final String titre;
   final String thematique;
   final String contenu;
   final int? montantMax;
+  final String? urlSimulateur;
+  bool get aUnSimulateur => urlSimulateur != null;
+  bool get estSimulateurVelo => urlSimulateur == '/vos-aides/velo';
 
   @override
   List<Object?> get props => [
@@ -19,5 +23,6 @@ class Aide extends Equatable {
         thematique,
         contenu,
         montantMax,
+        urlSimulateur,
       ];
 }

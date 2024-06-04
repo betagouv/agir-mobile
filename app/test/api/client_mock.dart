@@ -18,6 +18,16 @@ class ClientMock extends Mock implements http.Client {
     ).thenAnswer((final _) async => response);
   }
 
+  void patchSuccess({
+    required final String path,
+    required final CustomResponse response,
+  }) {
+    registerFallbackValue(RequestFake());
+    when(
+      () => send(any(that: RequestMathcher(path))),
+    ).thenAnswer((final _) async => response);
+  }
+
   void postSuccess({
     required final String path,
     required final CustomResponse response,

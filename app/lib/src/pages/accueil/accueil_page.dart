@@ -1,6 +1,7 @@
 import 'package:app/src/design_system/composants/app_bar.dart';
 import 'package:app/src/design_system/fondamentaux/colors.dart';
 import 'package:app/src/design_system/fondamentaux/rounded_rectangle_border.dart';
+import 'package:app/src/design_system/fondamentaux/text_styles.dart';
 import 'package:app/src/fonctionnalites/aides/widgets/mes_aides.dart';
 import 'package:app/src/fonctionnalites/authentification/domain/ports/authentification_repository.dart';
 import 'package:app/src/fonctionnalites/utilisateur/bloc/utilisateur_bloc.dart';
@@ -57,11 +58,7 @@ class AccueilPage extends StatelessWidget {
               ),
               title: const Text(
                 Localisation.menu,
-                style: DsfrTextStyle(
-                  fontSize: 16,
-                  height: 20,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: DsfrTextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
             ),
             Expanded(
@@ -123,10 +120,7 @@ class _AppBarTitle extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    const font = DsfrTextStyle(
-      fontSize: 16,
-      height: 20,
-    );
+    const font = FnvTextStyles.appBarTitleStyle;
     return Text.rich(
       TextSpan(
         text: Localisation.bonjour,

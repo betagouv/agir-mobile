@@ -54,3 +54,4 @@ app.*.map.json
 !**/env.template.json
 # Firebase Google Services
 **/google-services.json
+app/devtools_options.yaml

@@ -9,4 +9,6 @@ class FnvColors {
   static const aidesFond = Color(0xFFFBFBFB);
   static const carteFond = Color(0xFFFFFFFF);
   static const tagForeground = Color(0xFF432636);
+  static const aideTagBackground = Color(0xFFE8E8FF);
+  static const dividerColor = Color(0xFFDEE0EB);
 }

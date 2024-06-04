@@ -1,34 +1,75 @@
 class Localisation {
-  static const String commencer = 'Commencer';
-  static const String preOnboardingTitre =
+  static const commencer = 'Commencer';
+  static const preOnboardingTitre =
       'Ensemble,\naméliorons\nnos habitudes\nau jour le jour';
-  static const String preOnboarding1 =
+  static const preOnboarding1 =
       'L’accompagnement personnalisé qui vous offre des solutions réalisables, **pour vous**';
-  static const String preOnboarding2 =
+  static const preOnboarding2 =
       'Rejoignez plus de **160 000** utilisateurs engagés';
-  static const String preOnboarding3 =
+  static const preOnboarding3 =
       'Faites des **économies** en instaurant des habitudes durables';
-  static const String preOnboardingFinTitre =
+  static const preOnboardingFinTitre =
       'Faites un premier pas en estimant rapidement les principaux impacts de vos usages';
-  static const String preOnboardingFinSousTitre =
+  static const preOnboardingFinSousTitre =
       'Les questions suivantes nous aideront à calculer une approximation de votre empreinte carbone et vous proposer des conseils personnalisés';
-  static const String suivant = 'Suivant';
-  static const String jaiDejaUnCompte = "J'ai déjà un compte";
-  static const String seConnecterAvecSonCompte = 'Se connecter avec son compte';
-  static const String seConnecter = 'Se connecter';
-  static const String adresseElectronique = 'Adresse électronique';
-  static const String motDePasse = 'Mot de passe';
-  static const String motDePasseOublie = 'Mot de passe oublié ?';
-  static const String bonjour = 'Bonjour,\n';
+  static const suivant = 'Suivant';
+  static const jaiDejaUnCompte = "J'ai déjà un compte";
+  static const seConnecterAvecSonCompte = 'Se connecter avec son compte';
+  static const seConnecter = 'Se connecter';
+  static const adresseElectronique = 'Adresse électronique';
+  static const motDePasse = 'Mot de passe';
+  static const motDePasseOublie = 'Mot de passe oublié ?';
+  static const bonjour = 'Bonjour,\n';
   static String prenomExclamation(final String value) => '$value !';
-  static const String menuAides = 'Aides';
-  static const String accueilMesAides = 'Mes aides';
-  static const String accueilMesAidesLien = 'Voir toutes les aides';
-  static const String vosAidesTitre = 'Vos aides disponibles';
-  static const String vosAidesSousTitre =
+  static const menuAides = 'Aides';
+  static const accueilMesAides = 'Mes aides';
+  static const accueilMesAidesLien = 'Voir toutes les aides';
+  static const vosAidesTitre = 'Vos aides disponibles';
+  static const vosAidesSousTitre =
       'Accédez à toutes les aides publiques locales ou nationales pour la transition écologique en fonction de votre situation.';
-  static String jusqua(final int value) => "Jusqu'à $value€";
-  static const String fermer = 'Fermer';
-  static const String retour = 'Retour';
-  static const String menu = 'Menu';
+  static const jusqua = "Jusqu'à ";
+  static const fermer = 'Fermer';
+  static const retour = 'Retour';
+  static const menu = 'Menu';
+  static const simulateur = 'Simulateur';
+  static const accederAuSimulateur = 'Accéder au simulateur';
+  static const simulerMonAide = 'Simuler mon aide';
+  static const acheterUnVelo = 'Acheter un vélo';
+  static const prixDuVelo = 'Prix du vélo';
+  static const prixDuVeloExplications =
+      'À titre indicatif, voici quelques prix moyens';
+  static String veloLabel(final String text) => '$text : ';
+
+  static const aideVeloAvertissement =
+      'Veuillez compléter ces informations afin de débuter l’estimation';
+  static const codePostal = 'Code postal';
+  static const ville = 'Ville';
+  static const revenuQuestion = 'Quelle est votre tranche de revenus ?';
+  static const nombrePartsFiscales = 'Nombre de parts fiscales de votre foyer';
+  static const nombrePartsFiscalesDescription =
+      '(Pré-calculé à partir des membres de votre foyer)';
+  static const revenuFiscal = 'Revenu fiscal de référence de votre foyer';
+  static const tranche0 = 'Moins de 16 000 €';
+  static const tranche1 = 'De 16 000 € à 35 000 €';
+  static const tranche2 = 'Plus de 35 000 €';
+  static const ouTrouverCesInformations = 'Où trouver ces informations ?';
+  static const ouTrouverCesInformationsReponse = '''
+Le **revenu fiscal de référence** et votre **nombre de parts** se trouvent sur la 1ère page de votre dernier avis d’impôt.
+
+**Nombre de part**
+
+Si vous ne disposez pas de votre dernier avis d’impôt, renseignez 1 part pour chaque adulte de votre foyer fiscal, puis 0,5 part par enfant jusqu’à 2 enfants, puis 1 part par enfant à partir du 3ème enfant.
+
+Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme des revenus de toutes les personnes avec lequelles vous partagez vos déclarations d’impôts (pour toute l’année) pour vous faire une première idée.''';
+  static const plusDaide = "Plus d'aide";
+  static const pourquoiCesQuestions = 'Pourquoi ces questions ?';
+  static const pourquoiCesQuestionsReponse =
+      'Votre **revenu fiscal de référence** et le **nombre de parts** permettent d’afficher les aides en fonction de vos ressources.';
+  static const estimerMesAides = 'Estimer mes aides';
+  static const vosAidesDisponibles = 'Vos aides disponibles';
+  static const revenirAuSimulateur = 'Revenir au simulateur';
+  static const aucuneAideDisponible = 'Aucune aide\ndisponible';
+  static const voirLesDemarches = 'Voir les démarches';
+  static const propulsePar = 'Propulsé par ';
+  static String euro(final int value) => '$value €';
 }

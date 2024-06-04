@@ -6,7 +6,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AideBloc extends Bloc<AideEvent, AideState> {
   AideBloc()
-      : super(const AideState(Aide(titre: '', thematique: '', contenu: ''))) {
+      : super(
+          const AideState(
+            Aide(
+              titre: '',
+              thematique: '',
+              contenu: '',
+            ),
+          ),
+        ) {
     on<AideSelectionnee>(_onSelectionnee);
   }
 

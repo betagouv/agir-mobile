@@ -3,12 +3,14 @@
 import 'dart:ui';
 
 import 'package:app/src/app.dart';
+import 'package:app/src/fonctionnalites/aides/infrastructure/adapters/aide_velo_api_adapter.dart';
 import 'package:app/src/fonctionnalites/aides/infrastructure/adapters/aides_api_adapter.dart';
 import 'package:app/src/fonctionnalites/authentification/domain/authentification_statut_manager.dart';
 import 'package:app/src/fonctionnalites/authentification/infrastructure/adapters/api_url.dart';
 import 'package:app/src/fonctionnalites/authentification/infrastructure/adapters/authentification_api_adapter.dart';
 import 'package:app/src/fonctionnalites/authentification/infrastructure/adapters/authentification_api_client.dart';
 import 'package:app/src/fonctionnalites/authentification/infrastructure/adapters/authentification_token_storage.dart';
+import 'package:app/src/fonctionnalites/communes/infrastructure/adapters/communes_api_adapter.dart';
 import 'package:app/src/fonctionnalites/utilisateur/infrastructure/adapters/utilisateur_api_adapter.dart';
 import 'package:app/src/fonctionnalites/version/infrastructure/adapters/version_adapter.dart';
 import 'package:dsfr/dsfr.dart';
@@ -54,6 +56,8 @@ Future<void> main() async {
       utilisateurRepository: UtilisateurApiAdapter(apiClient: apiClient),
       aidesRepository: AidesApiAdapter(apiClient: apiClient),
       versionRepository: VersionAdapter(packageInfo: packageInfo),
+      communesRepository: CommunesApiAdapter(apiClient: apiClient),
+      aideVeloRepository: AideVeloApiAdapter(apiClient: apiClient),
     ),
   );
 }

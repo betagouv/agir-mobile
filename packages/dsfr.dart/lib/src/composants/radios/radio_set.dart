@@ -29,26 +29,21 @@ class _DsfrRadioButtonSetState<T> extends State<DsfrRadioButtonSet<T>> {
       children: [
         Text(widget.title, style: DsfrFonts.bodyMd),
         const SizedBox(height: DsfrSpacings.s1w),
-        ListView.separated(
-          shrinkWrap: true,
-          itemCount: values.length,
-          itemBuilder: (final context, final index) {
-            final item = values.entries.elementAt(index);
-            return DsfrRadioButton(
-              title: item.value,
-              value: item.key,
-              groupValue: _value,
-              onChanged: (final value) {
-                setState(() {
-                  _value = value;
-                  widget.onCallback.call(_value);
-                });
-              },
-            );
-          },
-          separatorBuilder: (final context, final index) =>
-              const SizedBox(height: DsfrSpacings.s1w),
-        ),
+        ...values.entries
+            .map(
+              (final e) => DsfrRadioButton(
+                title: e.value,
+                value: e.key,
+                groupValue: _value,
+                onChanged: (final value) {
+                  setState(() {
+                    _value = value;
+                    widget.onCallback.call(_value);
+                  });
+                },
+              ),
+            )
+            .separator(const SizedBox(height: DsfrSpacings.s1w)),
       ],
     );
   }
