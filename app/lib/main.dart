@@ -11,6 +11,7 @@ import 'package:app/src/fonctionnalites/authentification/infrastructure/adapters
 import 'package:app/src/fonctionnalites/authentification/infrastructure/adapters/authentification_api_client.dart';
 import 'package:app/src/fonctionnalites/authentification/infrastructure/adapters/authentification_token_storage.dart';
 import 'package:app/src/fonctionnalites/communes/infrastructure/adapters/communes_api_adapter.dart';
+import 'package:app/src/fonctionnalites/profil/infrastructure/adapters/profil_api_adapter.dart';
 import 'package:app/src/fonctionnalites/utilisateur/infrastructure/adapters/utilisateur_api_adapter.dart';
 import 'package:app/src/fonctionnalites/version/infrastructure/adapters/version_adapter.dart';
 import 'package:dsfr/dsfr.dart';
@@ -58,6 +59,7 @@ Future<void> main() async {
       versionRepository: VersionAdapter(packageInfo: packageInfo),
       communesRepository: CommunesApiAdapter(apiClient: apiClient),
       aideVeloRepository: AideVeloApiAdapter(apiClient: apiClient),
+      profilRepository: const ProfilApiAdapter(),
     ),
   );
 }

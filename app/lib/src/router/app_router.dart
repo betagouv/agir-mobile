@@ -8,6 +8,7 @@ import 'package:app/src/pages/aides/aides_page.dart';
 import 'package:app/src/pages/authentification/se_connecter_page.dart';
 import 'package:app/src/pages/pre_onboarding/pre_onboarding_carrousel_page.dart';
 import 'package:app/src/pages/pre_onboarding/pre_onboarding_page.dart';
+import 'package:app/src/pages/profil/profil_page.dart';
 import 'package:app/src/router/go_router_refresh_stream.dart';
 import 'package:go_router/go_router.dart';
 
@@ -25,6 +26,7 @@ GoRouter goRouter({
         AideSimulateurVeloPage.route(
           routes: [AideSimulateurVeloDisponiblePage.route],
         ),
+        ProfilPage.route,
       ],
       redirect: (final context, final state) {
         final path = state.uri.path;
@@ -46,7 +48,8 @@ GoRouter goRouter({
                 path.startsWith(AidesPage.path) ||
                 path.startsWith(AidePage.path) ||
                 path.startsWith(AideSimulateurVeloPage.path) ||
-                path.startsWith(AideSimulateurVeloDisponiblePage.path)) {
+                path.startsWith(AideSimulateurVeloDisponiblePage.path) ||
+                path.startsWith(ProfilPage.path)) {
               return PreOnboardingPage.path;
             }
         }
