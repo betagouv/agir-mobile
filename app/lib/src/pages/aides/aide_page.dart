@@ -5,10 +5,12 @@ import 'package:app/src/fonctionnalites/aides/bloc/aide/aide_state.dart';
 import 'package:app/src/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:fwfh_url_launcher/fwfh_url_launcher.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AidePage extends StatelessWidget {
   const AidePage({super.key});
@@ -65,4 +67,20 @@ class AidePage extends StatelessWidget {
       );
 }
 
-class MyUrlLauncherFactory extends WidgetFactory with UrlLauncherFactory {}
+/// Besoin de faire notre propre implementation car les urls web retourne faux à l'appel de canLaunchUrl
+class MyUrlLauncherFactory extends WidgetFactory with UrlLauncherFactory {
+  @override
+  Future<bool> onTapUrl(final String url) async {
+    final result = await super.onTapUrl(url);
+    if (result) {
+      return result;
+    }
+
+    try {
+      return await launchUrl(Uri.parse(url));
+    } on PlatformException catch (error) {
+      debugPrint('Could not launch "$url": $error');
+      return false;
+    }
+  }
+}
