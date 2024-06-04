@@ -12,6 +12,8 @@ class ScenarioContext {
   AuthentificationStatut authentificationStatut =
       AuthentificationStatut.pasConnecte;
   String prenom = 'Lucas';
+  String nom = 'Saudon';
+  String adresseElectronique = 'lucas@saudon.fr';
   List<Fonctionnalites> fonctionnalitesDebloquees = <Fonctionnalites>[];
   AideVeloParType aideVeloParType = const AideVeloParType(
     mecaniqueSimple: [],

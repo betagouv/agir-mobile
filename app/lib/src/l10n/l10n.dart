@@ -84,4 +84,6 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const voirLesDemarches = 'Voir les démarches';
   static const propulsePar = 'Propulsé par ';
   static String euro(final int value) => '$value €';
+  static const monProfil = 'Mon profil';
+  static const identitePersonnelle = 'Identité personnelle';
 }

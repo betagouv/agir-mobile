@@ -9,6 +9,7 @@ import 'package:app/src/fonctionnalites/utilisateur/bloc/utilisateur_event.dart'
 import 'package:app/src/fonctionnalites/version/widgets/version_label.dart';
 import 'package:app/src/l10n/l10n.dart';
 import 'package:app/src/pages/aides/aides_page.dart';
+import 'package:app/src/pages/profil/profil_page.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -92,6 +93,10 @@ class AccueilPage extends StatelessWidget {
                           onTap: () async => context.pushNamed(AidesPage.name),
                         ),
                       const Spacer(),
+                      DsfrLink.md(
+                        label: Localisation.monProfil,
+                        onTap: () async => context.pushNamed(ProfilPage.name),
+                      ),
                       DsfrLink.md(
                         label: 'Se déconnecter',
                         onTap: () async => _handleSeDeconnecter(context),

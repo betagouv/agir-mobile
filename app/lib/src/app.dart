@@ -5,6 +5,8 @@ import 'package:app/src/fonctionnalites/aides/domain/ports/aides_repository.dart
 import 'package:app/src/fonctionnalites/authentification/domain/authentification_statut_manager.dart';
 import 'package:app/src/fonctionnalites/authentification/domain/ports/authentification_repository.dart';
 import 'package:app/src/fonctionnalites/communes/domain/ports/communes_repository.dart';
+import 'package:app/src/fonctionnalites/profil/bloc/profil_bloc.dart';
+import 'package:app/src/fonctionnalites/profil/domain/ports/profil_repository.dart';
 import 'package:app/src/fonctionnalites/se_connecter/bloc/se_connecter_bloc.dart';
 import 'package:app/src/fonctionnalites/utilisateur/bloc/utilisateur_bloc.dart';
 import 'package:app/src/fonctionnalites/utilisateur/domain/ports/utilisateur_repository.dart';
@@ -27,6 +29,7 @@ class App extends StatefulWidget {
     required this.versionRepository,
     required this.communesRepository,
     required this.aideVeloRepository,
+    required this.profilRepository,
     super.key,
   });
 
@@ -37,6 +40,7 @@ class App extends StatefulWidget {
   final VersionRepository versionRepository;
   final CommunesRepository communesRepository;
   final AideVeloRepository aideVeloRepository;
+  final ProfilRepository profilRepository;
 
   @override
   State<App> createState() => _AppState();
@@ -88,6 +92,10 @@ class _AppState extends State<App> {
                 communesRepository: widget.communesRepository,
                 aideVeloRepository: widget.aideVeloRepository,
               ),
+            ),
+            BlocProvider(
+              create: (final context) =>
+                  ProfilBloc(profilRepository: widget.profilRepository),
             ),
           ],
           child: MaterialApp.router(
