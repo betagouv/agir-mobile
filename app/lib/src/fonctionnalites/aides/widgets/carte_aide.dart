@@ -16,17 +16,17 @@ class CarteAide extends StatelessWidget {
   final Aide aide;
 
   @override
-  Widget build(final BuildContext context) => InkWell(
-        onTap: () async {
-          context.read<AideBloc>().add(AideSelectionnee(aide));
-          await GoRouter.of(context).pushNamed(AidePage.name);
-        },
-        child: DecoratedBox(
-          decoration: const ShapeDecoration(
-            shape: roundedRectangleBorder,
-            color: FnvColors.carteFond,
-            shadows: carteOmbre,
-          ),
+  Widget build(final BuildContext context) => DecoratedBox(
+        decoration: const ShapeDecoration(
+          shape: roundedRectangleBorder,
+          color: FnvColors.carteFond,
+          shadows: carteOmbre,
+        ),
+        child: GestureDetector(
+          onTap: () async {
+            context.read<AideBloc>().add(AideSelectionnee(aide));
+            await GoRouter.of(context).pushNamed(AidePage.name);
+          },
           child: Padding(
             padding: const EdgeInsets.all(DsfrSpacings.s2w),
             child: Row(
