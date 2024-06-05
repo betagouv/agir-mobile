@@ -5,3 +5,6 @@ version: 0.0.1
 
 environment:
   sdk: 3.4.3
+
+dev_dependencies:
+  dart_code_metrics_presets: 2.13.0

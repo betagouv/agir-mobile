@@ -21,7 +21,7 @@ class AideVeloApiAdapter implements AideVeloRepository {
     required final double nombreDePartsFiscales,
     required final int revenuFiscal,
   }) async {
-    final utilisateurId = await _apiClient.recupererUtilisateurId();
+    final utilisateurId = await _apiClient.recupererUtilisateurId;
     final responses = await Future.wait([
       _apiClient.patch(
         Uri.parse('/utilisateurs/$utilisateurId/profile'),
@@ -52,38 +52,40 @@ class AideVeloApiAdapter implements AideVeloRepository {
     }
     final json = jsonDecode(response.body) as Map<String, dynamic>;
 
-    AideVeloCollectivite toAideVeloCollectivite(final dynamic e) {
-      final f = e as Map<String, dynamic>;
-      return AideVeloCollectivite(
-        kind: f['kind'] as String,
-        value: f['value'] as String,
-      );
-    }
-
-    AideVelo toAideVelo(final dynamic e) {
-      final f = e as Map<String, dynamic>;
-      return AideVelo(
-        libelle: f['libelle'] as String,
-        description: f['description'] as String,
-        lien: f['lien'] as String,
-        collectivite: toAideVeloCollectivite(f['collectivite']),
-        montant: (f['montant'] as num).toInt(),
-        plafond: (f['montant'] as num).toInt(),
-        logo: f['logo'] as String,
-      );
-    }
-
     return AideVeloParType(
       mecaniqueSimple:
-          (json['mécanique simple'] as List<dynamic>).map(toAideVelo).toList(),
+          (json['mécanique simple'] as List<dynamic>).map(_toAideVelo).toList(),
       electrique:
-          (json['électrique'] as List<dynamic>).map(toAideVelo).toList(),
-      cargo: (json['cargo'] as List<dynamic>).map(toAideVelo).toList(),
+          (json['électrique'] as List<dynamic>).map(_toAideVelo).toList(),
+      cargo: (json['cargo'] as List<dynamic>).map(_toAideVelo).toList(),
       cargoElectrique:
-          (json['cargo électrique'] as List<dynamic>).map(toAideVelo).toList(),
-      pliant: (json['pliant'] as List<dynamic>).map(toAideVelo).toList(),
+          (json['cargo électrique'] as List<dynamic>).map(_toAideVelo).toList(),
+      pliant: (json['pliant'] as List<dynamic>).map(_toAideVelo).toList(),
       motorisation:
-          (json['motorisation'] as List<dynamic>).map(toAideVelo).toList(),
+          (json['motorisation'] as List<dynamic>).map(_toAideVelo).toList(),
     );
   }
+}
+
+AideVelo _toAideVelo(final dynamic e) {
+  final f = e as Map<String, dynamic>;
+
+  return AideVelo(
+    libelle: f['libelle'] as String,
+    description: f['description'] as String,
+    lien: f['lien'] as String,
+    collectivite: _toAideVeloCollectivite(f['collectivite']),
+    montant: (f['montant'] as num).toInt(),
+    plafond: (f['plafond'] as num).toInt(),
+    logo: f['logo'] as String,
+  );
+}
+
+AideVeloCollectivite _toAideVeloCollectivite(final dynamic e) {
+  final f = e as Map<String, dynamic>;
+
+  return AideVeloCollectivite(
+    kind: f['kind'] as String,
+    value: f['value'] as String,
+  );
 }

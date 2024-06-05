@@ -6,9 +6,8 @@ import 'package:app/src/fonctionnalites/aides/domain/ports/aides_repository.dart
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AidesBloc extends Bloc<AidesEvent, AidesState> {
-  AidesBloc({
-    required final AidesRepository aidesRepository,
-  })  : _aidesRepository = aidesRepository,
+  AidesBloc({required final AidesRepository aidesRepository})
+      : _aidesRepository = aidesRepository,
         super(const AidesState(aides: [])) {
     on<AidesRecuperationDemandee>(_onRecuperationDemandee);
   }

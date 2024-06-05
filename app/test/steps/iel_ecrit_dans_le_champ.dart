@@ -1,7 +1,7 @@
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-/// Iel écrit dans le champ
+/// Iel écrit dans le champ.
 Future<void> ielEcritDansLeChamp(
   final WidgetTester tester, {
   required final String label,

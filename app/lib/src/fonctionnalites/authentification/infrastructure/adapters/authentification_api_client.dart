@@ -1,3 +1,5 @@
+// ignore_for_file: avoid-collection-mutating-methods
+
 import 'dart:convert';
 import 'dart:io';
 
@@ -13,8 +15,8 @@ class AuthentificationApiClient extends http.BaseClient {
   })  : _inner = inner ?? http.Client(),
         _authentificationTokenStorage = authentificationTokenStorage;
 
-  final http.Client _inner;
   final ApiUrl apiUrl;
+  final http.Client _inner;
   final AuthentificationTokenStorage _authentificationTokenStorage;
 
   Future<void> sauvegarderTokenEtUtilisateurId(
@@ -29,18 +31,15 @@ class AuthentificationApiClient extends http.BaseClient {
   Future<void> supprimerTokenEtUtilisateurId() async =>
       _authentificationTokenStorage.supprimerTokenEtUtilisateurId();
 
-  Future<String?> recupererUtilisateurId() async =>
-      _authentificationTokenStorage.recupererUtilisateurId();
+  Future<String?> get recupererUtilisateurId async =>
+      _authentificationTokenStorage.recupererUtilisateurId;
 
   @override
   Future<http.Response> get(
     final Uri url, {
     final Map<String, String>? headers,
   }) =>
-      super.get(
-        _uriParse(url),
-        headers: headers,
-      );
+      super.get(_uriParse(url), headers: headers);
 
   @override
   Future<http.Response> patch(
@@ -76,12 +75,13 @@ class AuthentificationApiClient extends http.BaseClient {
 
   @override
   Future<http.StreamedResponse> send(final http.BaseRequest request) async {
-    final token = await _authentificationTokenStorage.recupererToken();
+    final token = await _authentificationTokenStorage.recupererToken;
     if (token != null) {
       request.headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
     }
     request.headers[HttpHeaders.contentTypeHeader] =
         'application/json; charset=UTF-8';
+
     return _inner.send(request);
   }
 

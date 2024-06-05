@@ -6,29 +6,25 @@ import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+const preferredHeight = 59.0;
+
 class FnvAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const FnvAppBar({
-    this.leading,
-    this.title,
-    this.preferredHeight = 59,
-    super.key,
-  });
+  const FnvAppBar({this.leading, this.title, super.key});
 
   final IconButton? leading;
   final Widget? title;
-  final double preferredHeight;
 
   @override
   Widget build(final BuildContext context) => DecoratedBox(
         decoration: const ShapeDecoration(
-          shape: RoundedRectangleBorder(),
           color: FnvColors.appBarFond,
           shadows: appBarOmbre,
+          shape: RoundedRectangleBorder(),
         ),
         child: SafeArea(
-          bottom: false,
           left: false,
           right: false,
+          bottom: false,
           child: SizedBox(
             height: preferredHeight,
             child: Padding(
@@ -37,6 +33,14 @@ class FnvAppBar extends StatelessWidget implements PreferredSizeWidget {
                 children: [
                   leading ??
                       IconButton(
+                        iconSize: 24,
+                        padding: const EdgeInsets.all(DsfrSpacings.s1w),
+                        onPressed: () => GoRouter.of(context).canPop()
+                            ? GoRouter.of(context).pop()
+                            : Scaffold.of(context).openDrawer(),
+                        style: const ButtonStyle(
+                          shape: WidgetStatePropertyAll(roundedRectangleBorder),
+                        ),
                         icon: Icon(
                           GoRouter.of(context).canPop()
                               ? DsfrIcons.systemArrowLeftLine
@@ -46,14 +50,6 @@ class FnvAppBar extends StatelessWidget implements PreferredSizeWidget {
                               ? Localisation.retour
                               : Localisation.menu,
                         ),
-                        iconSize: 24,
-                        padding: const EdgeInsets.all(DsfrSpacings.s1w),
-                        style: const ButtonStyle(
-                          shape: WidgetStatePropertyAll(roundedRectangleBorder),
-                        ),
-                        onPressed: () => GoRouter.of(context).canPop()
-                            ? GoRouter.of(context).pop()
-                            : Scaffold.of(context).openDrawer(),
                       ),
                   if (title != null) ...[
                     const SizedBox(width: DsfrSpacings.s1w),
@@ -67,5 +63,5 @@ class FnvAppBar extends StatelessWidget implements PreferredSizeWidget {
       );
 
   @override
-  Size get preferredSize => Size.fromHeight(preferredHeight);
+  Size get preferredSize => const Size.fromHeight(preferredHeight);
 }

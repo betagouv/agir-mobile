@@ -20,30 +20,24 @@ class AidePage extends StatelessWidget {
   static const name = 'aide';
   static const path = '/$name';
 
-  static GoRoute route() => GoRoute(
-        name: name,
+  static GoRoute get route => GoRoute(
         path: path,
+        name: name,
         builder: (final context, final state) => const AidePage(),
       );
 
   @override
   Widget build(final BuildContext context) {
     final aide = context.watch<AideBloc>().state.aide;
+
     return Scaffold(
       appBar: const FnvAppBar(),
-      backgroundColor: FnvColors.aidesFond,
       body: ListView(
         padding: const EdgeInsets.all(DsfrSpacings.s3w),
         children: [
-          Text(
-            aide.thematique,
-            style: DsfrFonts.bodySmMedium,
-          ),
+          Text(aide.thematique, style: DsfrFonts.bodySmMedium),
           const SizedBox(height: DsfrSpacings.s2w),
-          Text(
-            aide.titre,
-            style: DsfrFonts.headline2,
-          ),
+          Text(aide.titre, style: DsfrFonts.headline2),
           if (aide.aUnSimulateur || aide.montantMax != null) ...[
             const SizedBox(height: DsfrSpacings.s1w),
             Wrap(
@@ -55,8 +49,8 @@ class AidePage extends StatelessWidget {
                       text: Localisation.jusqua +
                           Localisation.euro(aide.montantMax!),
                     ),
-                    foregroundColor: FnvColors.tagForeground,
                     backgroundColor: DsfrColors.purpleGlycine925Hover,
+                    foregroundColor: FnvColors.tagForeground,
                   ),
                 if (aide.aUnSimulateur) const TagSimulateur(),
               ],
@@ -83,11 +77,12 @@ class AidePage extends StatelessWidget {
               ),
             )
           : null,
+      backgroundColor: FnvColors.aidesFond,
     );
   }
 }
 
-/// Besoin de faire notre propre implementation car les urls web retourne faux à l'appel de canLaunchUrl
+/// Besoin de faire notre propre implementation car les urls web retourne faux à l'appel de canLaunchUrl.
 class MyUrlLauncherFactory extends WidgetFactory with UrlLauncherFactory {
   @override
   Future<bool> onTapUrl(final String url) async {
@@ -100,6 +95,7 @@ class MyUrlLauncherFactory extends WidgetFactory with UrlLauncherFactory {
       return await launchUrl(Uri.parse(url));
     } on PlatformException catch (error) {
       debugPrint('Could not launch "$url": $error');
+
       return false;
     }
   }

@@ -13,7 +13,7 @@ import 'flutter_secure_storage_mock.dart';
 void main() {
   group('UtilisateurApiAdapter', () {
     test('recupereUtilisateur', () async {
-      // Arrange
+      // Arrange.
       const prenom = 'Lucas';
       const aides = Fonctionnalites.aides;
       final client = ClientMock()
@@ -30,13 +30,12 @@ void main() {
     "${aides.name}"
   ]
 }''',
-            200,
           ),
         );
 
       final authentificationTokenStorage = AuthentificationTokenStorage(
-        authentificationStatusManager: AuthentificationStatutManager(),
         secureStorage: FlutterSecureStorageMock(),
+        authentificationStatusManager: AuthentificationStatutManager(),
       );
       await authentificationTokenStorage.sauvegarderTokenEtUtilisateurId(
         token,
@@ -45,16 +44,16 @@ void main() {
 
       final adapter = UtilisateurApiAdapter(
         apiClient: AuthentificationApiClient(
-          inner: client,
           apiUrl: apiUrl,
           authentificationTokenStorage: authentificationTokenStorage,
+          inner: client,
         ),
       );
 
-      // Act
+      // Act.
       final utilisateur = await adapter.recupereUtilisateur();
 
-      // Assert
+      // Assert.
       expect(
         utilisateur,
         const Utilisateur(prenom: prenom, fonctionnalitesDebloquees: [aides]),
@@ -62,7 +61,7 @@ void main() {
     });
 
     test('recupereUtilisateur avec une fonctionnalités non connue', () async {
-      // Arrange
+      // Arrange.
       const prenom = 'Lucas';
       const aides = Fonctionnalites.aides;
       final client = ClientMock()
@@ -80,13 +79,12 @@ void main() {
     "nouveau"
   ]
 }''',
-            200,
           ),
         );
 
       final authentificationTokenStorage = AuthentificationTokenStorage(
-        authentificationStatusManager: AuthentificationStatutManager(),
         secureStorage: FlutterSecureStorageMock(),
+        authentificationStatusManager: AuthentificationStatutManager(),
       );
       await authentificationTokenStorage.sauvegarderTokenEtUtilisateurId(
         token,
@@ -95,16 +93,16 @@ void main() {
 
       final adapter = UtilisateurApiAdapter(
         apiClient: AuthentificationApiClient(
-          inner: client,
           apiUrl: apiUrl,
           authentificationTokenStorage: authentificationTokenStorage,
+          inner: client,
         ),
       );
 
-      // Act
+      // Act.
       final utilisateur = await adapter.recupereUtilisateur();
 
-      // Assert
+      // Assert.
       expect(utilisateur.fonctionnalitesDebloquees, [aides]);
     });
   });

@@ -14,9 +14,9 @@ class PreOnboardingPage extends StatelessWidget {
   static const name = 'pre-onboarding';
   static const path = '/$name';
 
-  static GoRoute route() => GoRoute(
-        name: name,
+  static GoRoute get route => GoRoute(
         path: path,
+        name: name,
         builder: (final context, final state) => const PreOnboardingPage(),
       );
 
@@ -26,8 +26,8 @@ class PreOnboardingPage extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s3w),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const SizedBox(height: DsfrSpacings.s15w),
                 const Text(

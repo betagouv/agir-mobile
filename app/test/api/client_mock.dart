@@ -13,9 +13,8 @@ class ClientMock extends Mock implements http.Client {
     required final CustomResponse response,
   }) {
     registerFallbackValue(RequestFake());
-    when(
-      () => send(any(that: RequestMathcher(path))),
-    ).thenAnswer((final _) async => response);
+    when(() => send(any(that: RequestMathcher(path))))
+        .thenAnswer((final _) async => response);
   }
 
   void patchSuccess({
@@ -23,9 +22,8 @@ class ClientMock extends Mock implements http.Client {
     required final CustomResponse response,
   }) {
     registerFallbackValue(RequestFake());
-    when(
-      () => send(any(that: RequestMathcher(path))),
-    ).thenAnswer((final _) async => response);
+    when(() => send(any(that: RequestMathcher(path))))
+        .thenAnswer((final _) async => response);
   }
 
   void postSuccess({
@@ -33,8 +31,7 @@ class ClientMock extends Mock implements http.Client {
     required final CustomResponse response,
   }) {
     registerFallbackValue(RequestFake());
-    when(
-      () => send(any(that: RequestMathcher(path))),
-    ).thenAnswer((final _) async => response);
+    when(() => send(any(that: RequestMathcher(path))))
+        .thenAnswer((final _) async => response);
   }
 }

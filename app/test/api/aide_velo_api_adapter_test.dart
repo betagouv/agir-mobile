@@ -77,11 +77,11 @@ void main() {
       final client = ClientMock()
         ..patchSuccess(
           path: '/utilisateurs/$utilisateurId/profile',
-          response: CustomResponse('', 200),
+          response: CustomResponse(''),
         )
         ..patchSuccess(
           path: '/utilisateurs/$utilisateurId/logement',
-          response: CustomResponse('', 200),
+          response: CustomResponse(''),
         )
         ..postSuccess(
           path: '/utilisateurs/$utilisateurId/simulerAideVelo',
@@ -136,13 +136,12 @@ void main() {
     "motorisation": []
 }
 ''',
-            200,
           ),
         );
 
       final authentificationTokenStorage = AuthentificationTokenStorage(
-        authentificationStatusManager: AuthentificationStatutManager(),
         secureStorage: FlutterSecureStorageMock(),
+        authentificationStatusManager: AuthentificationStatutManager(),
       );
       await authentificationTokenStorage.sauvegarderTokenEtUtilisateurId(
         token,
@@ -151,9 +150,9 @@ void main() {
 
       final adapter = AideVeloApiAdapter(
         apiClient: AuthentificationApiClient(
-          inner: client,
           apiUrl: apiUrl,
           authentificationTokenStorage: authentificationTokenStorage,
+          inner: client,
         ),
       );
 
@@ -166,18 +165,26 @@ void main() {
       );
       verify(
         () => client.send(
-          any(that: RequestMathcher('/utilisateurs/$utilisateurId/profile')),
-        ),
-      );
-      verify(
-        () => client.send(
-          any(that: RequestMathcher('/utilisateurs/$utilisateurId/logement')),
+          any(
+            that: const RequestMathcher(
+              '/utilisateurs/$utilisateurId/profile',
+            ),
+          ),
         ),
       );
       verify(
         () => client.send(
           any(
-            that: RequestMathcher(
+            that: const RequestMathcher(
+              '/utilisateurs/$utilisateurId/logement',
+            ),
+          ),
+        ),
+      );
+      verify(
+        () => client.send(
+          any(
+            that: const RequestMathcher(
               '/utilisateurs/$utilisateurId/simulerAideVelo',
             ),
           ),

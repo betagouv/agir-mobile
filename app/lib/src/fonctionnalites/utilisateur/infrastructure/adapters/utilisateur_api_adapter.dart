@@ -6,7 +6,7 @@ import 'package:app/src/fonctionnalites/utilisateur/domain/ports/utilisateur_rep
 import 'package:app/src/fonctionnalites/utilisateur/domain/utilisateur.dart';
 
 class UtilisateurApiAdapter implements UtilisateurRepository {
-  UtilisateurApiAdapter({
+  const UtilisateurApiAdapter({
     required final AuthentificationApiClient apiClient,
   }) : _apiClient = apiClient;
 
@@ -14,7 +14,7 @@ class UtilisateurApiAdapter implements UtilisateurRepository {
 
   @override
   Future<Utilisateur> recupereUtilisateur() async {
-    final id = await _apiClient.recupererUtilisateurId();
+    final id = await _apiClient.recupererUtilisateurId;
     final response = await _apiClient.get(Uri.parse('/utilisateurs/$id'));
     if (response.statusCode != 200) {
       throw UnimplementedError();

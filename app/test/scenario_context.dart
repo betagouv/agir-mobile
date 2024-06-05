@@ -7,10 +7,6 @@ import 'aide_velo_repository_mock.dart';
 class ScenarioContext {
   factory ScenarioContext() => _instance ??= ScenarioContext._();
   ScenarioContext._();
-  static ScenarioContext? _instance;
-
-  void dispose() => _instance = null;
-
   AuthentificationStatut authentificationStatut =
       AuthentificationStatut.pasConnecte;
   String prenom = 'Lucas';
@@ -18,4 +14,7 @@ class ScenarioContext {
   List<Aide> aides = <Aide>[];
   List<String> communes = <String>[];
   AideVeloRepositoryMock aideVeloRepositoryMock = AideVeloRepositoryMock();
+  static ScenarioContext? _instance;
+
+  void dispose() => _instance = null;
 }

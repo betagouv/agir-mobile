@@ -20,13 +20,14 @@ class AccueilPage extends StatelessWidget {
   static const name = 'accueil';
   static const path = '/$name';
 
-  static GoRoute route() => GoRoute(
-        name: name,
+  static GoRoute get route => GoRoute(
         path: path,
+        name: name,
         builder: (final context, final state) {
           context
               .read<UtilisateurBloc>()
               .add(const UtilsateurRecuperationDemandee());
+
           return const AccueilPage();
         },
       );
@@ -34,9 +35,22 @@ class AccueilPage extends StatelessWidget {
   @override
   Widget build(final BuildContext context) {
     final state = context.watch<UtilisateurBloc>().state;
+
     return Scaffold(
-      appBar: FnvAppBar(
-        title: _AppBarTitle(firstName: state.prenom),
+      appBar: FnvAppBar(title: _AppBarTitle(firstName: state.prenom)),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s3w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              if (state.aLesAides) ...[
+                const MesAides(),
+                const SizedBox(height: DsfrSpacings.s5w),
+              ],
+            ],
+          ),
+        ),
       ),
       drawer: Drawer(
         shape: const RoundedRectangleBorder(),
@@ -44,21 +58,21 @@ class AccueilPage extends StatelessWidget {
           children: [
             FnvAppBar(
               leading: IconButton(
+                iconSize: 24,
+                padding: const EdgeInsets.all(DsfrSpacings.s1w),
+                onPressed: () => GoRouter.of(context).pop(),
+                style: const ButtonStyle(
+                  shape: WidgetStatePropertyAll(roundedRectangleBorder),
+                ),
                 icon: const Icon(
                   DsfrIcons.systemCloseLine,
                   color: DsfrColors.blueFranceSun113,
                   semanticLabel: Localisation.fermer,
                 ),
-                iconSize: 24,
-                padding: const EdgeInsets.all(DsfrSpacings.s1w),
-                style: const ButtonStyle(
-                  shape: WidgetStatePropertyAll(roundedRectangleBorder),
-                ),
-                onPressed: () => GoRouter.of(context).pop(),
               ),
               title: const Text(
                 Localisation.menu,
-                style: DsfrTextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                style: DsfrTextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
             ),
             Expanded(
@@ -95,20 +109,6 @@ class AccueilPage extends StatelessWidget {
         ),
       ),
       backgroundColor: FnvColors.accueilFond,
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s3w),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              if (state.aLesAides) ...[
-                const MesAides(),
-                const SizedBox(height: DsfrSpacings.s5w),
-              ],
-            ],
-          ),
-        ),
-      ),
     );
   }
 }
@@ -121,6 +121,7 @@ class _AppBarTitle extends StatelessWidget {
   @override
   Widget build(final BuildContext context) {
     const font = FnvTextStyles.appBarTitleStyle;
+
     return Text.rich(
       TextSpan(
         text: Localisation.bonjour,

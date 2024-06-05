@@ -1,4 +1,6 @@
-import 'package:dsfr/dsfr.dart';
+import 'package:dsfr/src/fondamentaux/colors.g.dart';
+import 'package:dsfr/src/fondamentaux/fonts.dart';
+import 'package:dsfr/src/fondamentaux/spacing.g.dart';
 import 'package:flutter/material.dart';
 
 class DsfrRadioButton<T> extends StatelessWidget {
@@ -18,7 +20,7 @@ class DsfrRadioButton<T> extends StatelessWidget {
   @override
   Widget build(final BuildContext context) => GestureDetector(
         onTap: () {
-          onChanged.call(value);
+          onChanged(value);
         },
         behavior: HitTestBehavior.opaque,
         child: DecoratedBox(
@@ -38,16 +40,11 @@ class DsfrRadioButton<T> extends StatelessWidget {
                 Radio<T>(
                   value: value,
                   groupValue: groupValue,
+                  onChanged: null,
                   fillColor:
                       const WidgetStatePropertyAll(DsfrColors.blueFranceSun113),
-                  onChanged: null,
                 ),
-                Expanded(
-                  child: Text(
-                    title,
-                    style: DsfrFonts.bodySm,
-                  ),
-                ),
+                Expanded(child: Text(title, style: DsfrFonts.bodySm)),
               ],
             ),
           ),

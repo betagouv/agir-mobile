@@ -1,7 +1,11 @@
-import 'package:dsfr/dsfr.dart';
+import 'package:dsfr/src/fondamentaux/colors.g.dart';
+import 'package:dsfr/src/fondamentaux/icons.g.dart';
+import 'package:dsfr/src/fondamentaux/spacing.g.dart';
+import 'package:dsfr/src/helpers/iterable_extension.dart';
 import 'package:flutter/material.dart';
 
-// ignore: avoid_positional_boolean_parameters
+// C'est un typedef, on peut pas faire de parametre nommé.
+// ignore: avoid_positional_boolean_parameters, prefer-named-boolean-parameters
 typedef DsfrAccordionCallback = void Function(int panelIndex, bool isExpanded);
 
 @immutable
@@ -28,29 +32,29 @@ class _DsfrAccordionsGroupState extends State<DsfrAccordionsGroup> {
   @override
   Widget build(final context) {
     const divider = Divider(
-      color: DsfrColors.grey900,
       height: 0,
       thickness: 0,
+      color: DsfrColors.grey900,
     );
+
     return Column(
       children: [
         divider,
-        ...widget.values.indexed.map(
-          (final e) {
-            final index = e.$1;
-            return _DsfrAccordion(
-              index: index,
-              item: e.$2,
-              isExpanded: _panelIndex == index && _isExpanded,
-              accordionCallback: (final panelIndex, final isExpanded) {
-                setState(() {
-                  _panelIndex = panelIndex;
-                  _isExpanded = isExpanded;
-                });
-              },
-            );
-          },
-        ).separator(divider),
+        ...widget.values.indexed.map((final (int, DsfrAccordion) e) {
+          final index = e.$1;
+
+          return _DsfrAccordion(
+            index: index,
+            item: e.$2,
+            isExpanded: _panelIndex == index && _isExpanded,
+            onAccordionCallback: (final panelIndex, final isExpanded) {
+              setState(() {
+                _panelIndex = panelIndex;
+                _isExpanded = isExpanded;
+              });
+            },
+          );
+        }).separator(divider),
         divider,
       ],
     );
@@ -62,13 +66,13 @@ class _DsfrAccordion extends StatelessWidget {
     required this.index,
     required this.item,
     required this.isExpanded,
-    required this.accordionCallback,
+    required this.onAccordionCallback,
   });
 
   final int index;
   final DsfrAccordion item;
   final bool isExpanded;
-  final DsfrAccordionCallback accordionCallback;
+  final DsfrAccordionCallback onAccordionCallback;
 
   @override
   Widget build(final BuildContext context) => Column(
@@ -78,7 +82,7 @@ class _DsfrAccordion extends StatelessWidget {
             color: isExpanded ? DsfrColors.blueFrance925 : Colors.transparent,
             child: GestureDetector(
               onTap: () {
-                accordionCallback.call(index, !isExpanded);
+                onAccordionCallback(index, !isExpanded);
               },
               behavior: HitTestBehavior.opaque,
               child: Padding(
@@ -90,8 +94,8 @@ class _DsfrAccordion extends StatelessWidget {
                       isExpanded
                           ? DsfrIcons.systemArrowUpSLine
                           : DsfrIcons.systemArrowDownSLine,
-                      color: DsfrColors.blueFranceSun113,
                       size: DsfrSpacings.s2w,
+                      color: DsfrColors.blueFranceSun113,
                     ),
                     const SizedBox(width: DsfrSpacings.s2w),
                   ],

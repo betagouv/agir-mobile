@@ -29,70 +29,72 @@ void main() {
 }''';
 
     test(
-        "connectionDemandee ajoute le token et l'utisateurId dans le secure storage et modifie le statut a connecté",
-        () async {
-      // Arrange
-      final client = ClientMock()
-        ..postSuccess(
-          path: '/utilisateurs/login',
-          response: CustomResponse(response, HttpStatus.created),
+      "connectionDemandee ajoute le token et l'utisateurId dans le secure storage et modifie le statut a connecté",
+      () async {
+        // Arrange.
+        final client = ClientMock()
+          ..postSuccess(
+            path: '/utilisateurs/login',
+            response: CustomResponse(response, statusCode: HttpStatus.created),
+          );
+
+        final flutterSecureStorageMock = FlutterSecureStorageMock();
+        final authentificationStatutManager = AuthentificationStatutManager();
+
+        final adapter = AuthentificationApiAdapter(
+          apiClient: AuthentificationApiClient(
+            apiUrl: apiUrl,
+            authentificationTokenStorage: AuthentificationTokenStorage(
+              secureStorage: flutterSecureStorageMock,
+              authentificationStatusManager: authentificationStatutManager,
+            ),
+            inner: client,
+          ),
         );
 
-      final flutterSecureStorageMock = FlutterSecureStorageMock();
-      final authentificationStatutManager = AuthentificationStatutManager();
+        // Act.
+        await adapter.connectionDemandee(informationDeConnexion);
 
-      final adapter = AuthentificationApiAdapter(
-        apiClient: AuthentificationApiClient(
-          inner: client,
-          apiUrl: apiUrl,
-          authentificationTokenStorage: AuthentificationTokenStorage(
-            authentificationStatusManager: authentificationStatutManager,
-            secureStorage: flutterSecureStorageMock,
-          ),
-        ),
-      );
-
-      // Act
-      await adapter.connectionDemandee(informationDeConnexion);
-
-      // Assert
-      expect(
-        await flutterSecureStorageMock.readAll(),
-        {'token': token, 'utilisateurId': utilisateurId},
-      );
-      expect(
-        authentificationStatutManager.statutActuel(),
-        AuthentificationStatut.connecte,
-      );
-    });
+        // Assert.
+        expect(
+          await flutterSecureStorageMock.readAll(),
+          {'token': token, 'utilisateurId': utilisateurId},
+        );
+        expect(
+          authentificationStatutManager.statutActuel,
+          AuthentificationStatut.connecte,
+        );
+      },
+    );
 
     test(
-        "deconnectionDemandee supprime le token et l'utisateurId dans le secure storage et modifie le statut a pas connecté",
-        () async {
-      // Arrange
-      final flutterSecureStorageMock = FlutterSecureStorageMock();
-      final authentificationStatutManager = AuthentificationStatutManager();
+      "deconnectionDemandee supprime le token et l'utisateurId dans le secure storage et modifie le statut a pas connecté",
+      () async {
+        // Arrange.
+        final flutterSecureStorageMock = FlutterSecureStorageMock();
+        final authentificationStatutManager = AuthentificationStatutManager();
 
-      final adapter = AuthentificationApiAdapter(
-        apiClient: AuthentificationApiClient(
-          inner: ClientMock(),
-          apiUrl: apiUrl,
-          authentificationTokenStorage: AuthentificationTokenStorage(
-            authentificationStatusManager: authentificationStatutManager,
-            secureStorage: flutterSecureStorageMock,
+        final adapter = AuthentificationApiAdapter(
+          apiClient: AuthentificationApiClient(
+            apiUrl: apiUrl,
+            authentificationTokenStorage: AuthentificationTokenStorage(
+              secureStorage: flutterSecureStorageMock,
+              authentificationStatusManager: authentificationStatutManager,
+            ),
+            inner: ClientMock(),
           ),
-        ),
-      );
+        );
 
-      // Act
-      await adapter.deconnectionDemandee();
+        // Act.
+        await adapter.deconnectionDemandee();
 
-      // Assert
-      expect(await flutterSecureStorageMock.readAll(), <String, dynamic>{});
-      expect(
-        authentificationStatutManager.statutActuel(),
-        AuthentificationStatut.pasConnecte,
-      );
-    });
+        // Assert.
+        expect(await flutterSecureStorageMock.readAll(), <String, dynamic>{});
+        expect(
+          authentificationStatutManager.statutActuel,
+          AuthentificationStatut.pasConnecte,
+        );
+      },
+    );
   });
 }

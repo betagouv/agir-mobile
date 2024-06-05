@@ -19,9 +19,9 @@ class CarteAide extends StatelessWidget {
   @override
   Widget build(final BuildContext context) => DecoratedBox(
         decoration: const ShapeDecoration(
-          shape: roundedRectangleBorder,
           color: FnvColors.carteFond,
           shadows: carteOmbre,
+          shape: roundedRectangleBorder,
         ),
         child: GestureDetector(
           onTap: () async {

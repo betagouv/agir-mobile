@@ -4,15 +4,13 @@ import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 
 class TagSimulateur extends StatelessWidget {
-  const TagSimulateur({
-    super.key,
-  });
+  const TagSimulateur({super.key});
 
   @override
   Widget build(final BuildContext context) => const DsfrTag.sm(
-        icon: DsfrIcons.financeMoneyEuroCircleLine,
         label: TextSpan(text: Localisation.simulateur),
-        foregroundColor: DsfrColors.grey50,
         backgroundColor: FnvColors.aideTagBackground,
+        foregroundColor: DsfrColors.grey50,
+        icon: DsfrIcons.financeMoneyEuroCircleLine,
       );
 }

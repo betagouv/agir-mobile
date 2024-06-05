@@ -4,7 +4,7 @@ import 'package:app/src/fonctionnalites/authentification/domain/information_de_c
 import 'package:app/src/fonctionnalites/authentification/domain/ports/authentification_repository.dart';
 
 class AuthentificationRepositoryMock implements AuthentificationRepository {
-  AuthentificationRepositoryMock(this.authentificationStatusManager);
+  const AuthentificationRepositoryMock(this.authentificationStatusManager);
 
   final AuthentificationStatutManager authentificationStatusManager;
 

@@ -2,7 +2,7 @@ import 'package:app/src/fonctionnalites/version/domain/ports/version_repository.
 import 'package:package_info_plus/package_info_plus.dart';
 
 class VersionAdapter implements VersionRepository {
-  VersionAdapter({required final PackageInfo packageInfo})
+  const VersionAdapter({required final PackageInfo packageInfo})
       : _packageInfo = packageInfo;
 
   final PackageInfo _packageInfo;

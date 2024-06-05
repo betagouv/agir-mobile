@@ -6,7 +6,7 @@ import 'package:app/src/fonctionnalites/authentification/domain/ports/authentifi
 import 'package:app/src/fonctionnalites/authentification/infrastructure/adapters/authentification_api_client.dart';
 
 class AuthentificationApiAdapter implements AuthentificationRepository {
-  AuthentificationApiAdapter({
+  const AuthentificationApiAdapter({
     required final AuthentificationApiClient apiClient,
   }) : _apiClient = apiClient;
 

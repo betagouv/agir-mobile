@@ -1,20 +1,17 @@
+// ignore_for_file: avoid-mutating-parameters
+
 import 'dart:ui';
 
 import 'package:flutter_test/flutter_test.dart';
 
 class DeviceInfo {
-  DeviceInfo({
+  const DeviceInfo({
     required this.devicePixelRatio,
     required this.height,
     required this.width,
   });
 
-  DeviceInfo.iPhone11()
-      : this(
-          devicePixelRatio: 2,
-          width: 414,
-          height: 896,
-        );
+  DeviceInfo.iPhone11() : this(devicePixelRatio: 2, height: 896, width: 414);
 
   static void setup(final WidgetTester tester) {
     final deviceWindowInfo = DeviceInfo.iPhone11();
@@ -29,8 +26,5 @@ class DeviceInfo {
   final double height;
   final double width;
 
-  Size get size => Size(
-        devicePixelRatio * width,
-        devicePixelRatio * height,
-      );
+  Size get size => Size(devicePixelRatio * width, devicePixelRatio * height);
 }

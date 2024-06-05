@@ -53,6 +53,12 @@ class _AppState extends State<App> {
   }
 
   @override
+  void dispose() {
+    _goRouter.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(final BuildContext context) => MultiRepositoryProvider(
         providers: [
           RepositoryProvider.value(value: widget.authentificationRepository),

@@ -6,38 +6,36 @@ import 'package:app/src/fonctionnalites/aides/domain/ports/aides_repository.dart
 import 'package:app/src/fonctionnalites/authentification/infrastructure/adapters/authentification_api_client.dart';
 
 class AidesApiAdapter implements AidesRepository {
-  AidesApiAdapter({
-    required final AuthentificationApiClient apiClient,
-  }) : _apiClient = apiClient;
+  const AidesApiAdapter({required final AuthentificationApiClient apiClient})
+      : _apiClient = apiClient;
 
   final AuthentificationApiClient _apiClient;
 
   @override
   Future<List<Aide>> recupereLesAides() async {
-    final utilisateurId = await _apiClient.recupererUtilisateurId();
+    final utilisateurId = await _apiClient.recupererUtilisateurId;
     final response = await _apiClient.get(
-      Uri.parse(
-        '/utilisateurs/$utilisateurId/aides',
-      ),
+      Uri.parse('/utilisateurs/$utilisateurId/aides'),
     );
     if (response.statusCode != 200) {
       throw UnimplementedError();
     }
 
     final json = jsonDecode(response.body) as List<dynamic>;
-    final aides = json.map(
-      (final e) {
-        final f = e as Map<String, dynamic>;
-        return Aide(
-          titre: f['titre'] as String,
-          thematique:
-              (f['thematiques_label'] as List<dynamic>).cast<String>().first,
-          montantMax: (f['montant_max'] as num?)?.toInt(),
-          contenu: f['contenu'] as String,
-          urlSimulateur: f['url_simulateur'] as String?,
-        );
-      },
-    ).toList();
-    return aides;
+
+    return json.map((final e) {
+      final f = e as Map<String, dynamic>;
+
+      return Aide(
+        titre: f['titre'] as String,
+        thematique: (f['thematiques_label'] as List<dynamic>)
+                .cast<String>()
+                .firstOrNull ??
+            '',
+        contenu: f['contenu'] as String,
+        montantMax: (f['montant_max'] as num?)?.toInt(),
+        urlSimulateur: f['url_simulateur'] as String?,
+      );
+    }).toList();
   }
 }

@@ -33,25 +33,24 @@ void main() {
   "SAMPANS",
   "VILLETTE LES DOLE"
 ]''',
-            200,
           ),
         );
 
       final adapter = CommunesApiAdapter(
         apiClient: AuthentificationApiClient(
-          inner: client,
           apiUrl: apiUrl,
           authentificationTokenStorage: AuthentificationTokenStorage(
-            authentificationStatusManager: AuthentificationStatutManager(),
             secureStorage: FlutterSecureStorageMock(),
+            authentificationStatusManager: AuthentificationStatutManager(),
           ),
+          inner: client,
         ),
       );
 
-      // Act
+      // Act.
       final communes = await adapter.recupererLesCommunes('39100');
 
-      // Assert
+      // Assert.
       expect(communes, [
         'AUTHUME',
         'BAVERANS',

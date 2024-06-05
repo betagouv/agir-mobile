@@ -1,4 +1,6 @@
-import 'package:dsfr/dsfr.dart';
+import 'package:dsfr/src/fondamentaux/colors.g.dart';
+import 'package:dsfr/src/fondamentaux/fonts.dart';
+import 'package:dsfr/src/fondamentaux/spacing.g.dart';
 import 'package:flutter/material.dart';
 
 class DsfrLink extends StatefulWidget {
@@ -21,12 +23,12 @@ class DsfrLink extends StatefulWidget {
     final Key? key,
   }) : this._(
           label: label,
-          icon: icon,
-          iconSize: 16,
           textStyle: DsfrFonts.bodySm,
           underlineThickness: 1.75,
           focusBorderWidth: 2,
           focusPadding: const EdgeInsets.all(4),
+          iconSize: 16,
+          icon: icon,
           onTap: onTap,
           key: key,
         );
@@ -38,12 +40,12 @@ class DsfrLink extends StatefulWidget {
     final Key? key,
   }) : this._(
           label: label,
-          icon: icon,
-          iconSize: 16,
           textStyle: DsfrFonts.bodyMd,
           underlineThickness: 2,
           focusBorderWidth: 2,
           focusPadding: const EdgeInsets.all(4),
+          iconSize: 16,
+          icon: icon,
           onTap: onTap,
           key: key,
         );
@@ -64,36 +66,27 @@ class DsfrLink extends StatefulWidget {
 class DsfrLinkForegroundColor extends WidgetStateColor {
   DsfrLinkForegroundColor() : super(_default.value);
 
-  static const Color _default = DsfrColors.blueFranceSun113;
-  static const Color _disabled = DsfrColors.grey625;
+  static const _default = DsfrColors.blueFranceSun113;
+  static const _disabled = DsfrColors.grey625;
 
   @override
-  Color resolve(final Set<WidgetState> states) {
-    if (states.contains(WidgetState.disabled)) {
-      return _disabled;
-    }
-    return _default;
-  }
+  Color resolve(final Set<WidgetState> states) =>
+      states.contains(WidgetState.disabled) ? _disabled : _default;
 }
 
 class DsfrLinkBackgroundColor extends WidgetStateColor {
   DsfrLinkBackgroundColor() : super(_default.value);
 
-  static const Color _default = Colors.transparent;
-  static const Color _active = Color(0x21000000); // Noir 8%;
-
+  static const _default = Colors.transparent;
+  static const _active = Color(0x21000000);
   @override
-  Color resolve(final Set<WidgetState> states) {
-    if (states.contains(WidgetState.pressed)) {
-      return _active;
-    }
-    return _default;
-  }
+  Color resolve(final Set<WidgetState> states) =>
+      states.contains(WidgetState.pressed) ? _active : _default;
 }
 
 class _DsfrLinkState extends State<DsfrLink> with MaterialStateMixin<DsfrLink> {
-  final foregroundColor = DsfrLinkForegroundColor();
-  final backgroundColor = DsfrLinkBackgroundColor();
+  final _foregroundColor = DsfrLinkForegroundColor();
+  final _backgroundColor = DsfrLinkBackgroundColor();
 
   @override
   void initState() {
@@ -109,23 +102,24 @@ class _DsfrLinkState extends State<DsfrLink> with MaterialStateMixin<DsfrLink> {
 
   @override
   Widget build(final BuildContext context) {
-    final Widget link = Semantics(
-      link: true,
+    final resolveForegroundColor = _foregroundColor.resolve(materialStates);
+    final link = Semantics(
       enabled: widget.onTap != null,
+      link: true,
       child: InkWell(
-        onFocusChange: updateMaterialState(WidgetState.focused),
-        onHover: updateMaterialState(WidgetState.hovered),
-        onHighlightChanged: updateMaterialState(WidgetState.pressed),
         onTap: widget.onTap,
-        canRequestFocus: widget.onTap != null,
+        onHighlightChanged: updateMaterialState(WidgetState.pressed),
+        onHover: updateMaterialState(WidgetState.hovered),
         highlightColor: Colors.transparent,
         splashFactory: NoSplash.splashFactory,
+        canRequestFocus: widget.onTap != null,
+        onFocusChange: updateMaterialState(WidgetState.focused),
         child: DecoratedBox(
           decoration: BoxDecoration(
             border: !isFocused && !isDisabled
                 ? Border(
                     bottom: BorderSide(
-                      color: foregroundColor.resolve(materialStates),
+                      color: resolveForegroundColor,
                       width: isPressed || isHovered
                           ? widget.underlineThickness
                           : 1,
@@ -143,38 +137,33 @@ class _DsfrLinkState extends State<DsfrLink> with MaterialStateMixin<DsfrLink> {
                     child: Icon(
                       widget.icon,
                       size: widget.iconSize,
-                      color: foregroundColor.resolve(materialStates),
+                      color: resolveForegroundColor,
                     ),
                   ),
                 ],
               ],
             ),
             style: widget.textStyle.copyWith(
-              color: foregroundColor.resolve(materialStates),
-              backgroundColor: backgroundColor.resolve(materialStates),
+              color: resolveForegroundColor,
+              backgroundColor: _backgroundColor.resolve(materialStates),
             ),
           ),
         ),
       ),
     );
 
-    if (!isFocused) {
-      return link;
-    }
-
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        border: Border.fromBorderSide(
-          BorderSide(
-            color: DsfrColors.focus525,
-            width: widget.focusBorderWidth,
-          ),
-        ),
-      ),
-      child: Padding(
-        padding: widget.focusPadding,
-        child: link,
-      ),
-    );
+    return isFocused
+        ? DecoratedBox(
+            decoration: BoxDecoration(
+              border: Border.fromBorderSide(
+                BorderSide(
+                  color: DsfrColors.focus525,
+                  width: widget.focusBorderWidth,
+                ),
+              ),
+            ),
+            child: Padding(padding: widget.focusPadding, child: link),
+          )
+        : link;
   }
 }

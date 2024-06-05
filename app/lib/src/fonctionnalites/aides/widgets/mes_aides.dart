@@ -1,7 +1,6 @@
 import 'package:app/src/fonctionnalites/aides/bloc/aides_accueil/aides_accueil_bloc.dart';
 import 'package:app/src/fonctionnalites/aides/bloc/aides_accueil/aides_accueil_event.dart';
 import 'package:app/src/fonctionnalites/aides/bloc/aides_accueil/aides_accueil_state.dart';
-import 'package:app/src/fonctionnalites/aides/domain/ports/aides_repository.dart';
 import 'package:app/src/fonctionnalites/aides/widgets/carte_aide.dart';
 import 'package:app/src/l10n/l10n.dart';
 import 'package:app/src/pages/aides/aides_page.dart';
@@ -15,9 +14,9 @@ class MesAides extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    final bloc = AidesAccueilBloc(
-      aidesRepository: context.read<AidesRepository>(),
-    )..add(const AidesAccueilRecuperationDemandee());
+    final bloc = AidesAccueilBloc(aidesRepository: context.read())
+      ..add(const AidesAccueilRecuperationDemandee());
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
       child: Column(
@@ -29,24 +28,26 @@ class MesAides extends StatelessWidget {
           ),
           const SizedBox(height: DsfrSpacings.s3w),
           BlocBuilder<AidesAccueilBloc, AidesAccueilState>(
-            bloc: bloc,
             builder: (final context, final state) {
               if (state.aides.isEmpty) {
                 return const SizedBox();
               }
               final aides = state.aides;
+
               return ListView.separated(
-                shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: aides.length,
+                shrinkWrap: true,
                 itemBuilder: (final context, final index) {
                   final aide = aides[index];
+
                   return CarteAide(aide: aide);
                 },
                 separatorBuilder: (final context, final index) =>
                     const SizedBox(height: DsfrSpacings.s1w),
+                itemCount: aides.length,
               );
             },
+            bloc: bloc,
           ),
           const SizedBox(height: DsfrSpacings.s2w),
           DsfrLink.md(

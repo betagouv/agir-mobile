@@ -5,3 +5,4 @@
 ## Pour commencer
 
 1. [Release](./docs/release.md)
+1. [DCM](./docs/dcm.md)
