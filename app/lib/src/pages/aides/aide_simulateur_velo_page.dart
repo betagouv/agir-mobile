@@ -22,8 +22,8 @@ class AideSimulateurVeloPage extends StatefulWidget {
   static const path = '/$name';
 
   static GoRoute route({required final List<RouteBase> routes}) => GoRoute(
-        name: name,
         path: path,
+        name: name,
         builder: (final context, final state) => const AideSimulateurVeloPage(),
         routes: routes,
       );
@@ -33,30 +33,33 @@ class AideSimulateurVeloPage extends StatefulWidget {
 }
 
 class _AideSimulateurVeloPageState extends State<AideSimulateurVeloPage> {
-  final prixVeloControlleur = TextEditingController();
+  final _prixVeloControlleur = TextEditingController();
+
+  @override
+  void dispose() {
+    _prixVeloControlleur.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(final BuildContext context) {
     const inputWidth = 97.0;
-    prixVeloControlleur.text =
+    _prixVeloControlleur.text =
         context.read<AideVeloBloc>().state.prix.toString();
+
     return Scaffold(
       appBar: const FnvAppBar(),
-      backgroundColor: FnvColors.aidesFond,
       body: ListView(
         padding: const EdgeInsets.symmetric(
-          horizontal: DsfrSpacings.s2w,
           vertical: DsfrSpacings.s3w,
+          horizontal: DsfrSpacings.s2w,
         ),
         children: [
           const Text(
             Localisation.simulerMonAide,
             style: DsfrFonts.headline2,
           ),
-          const Text(
-            Localisation.acheterUnVelo,
-            style: DsfrFonts.bodyXl,
-          ),
+          const Text(Localisation.acheterUnVelo, style: DsfrFonts.bodyXl),
           const SizedBox(height: DsfrSpacings.s2w),
           Align(
             alignment: Alignment.centerLeft,
@@ -64,8 +67,6 @@ class _AideSimulateurVeloPageState extends State<AideSimulateurVeloPage> {
               width: 114,
               child: DsfrInput(
                 label: Localisation.prixDuVelo,
-                keyboardType: TextInputType.number,
-                controller: prixVeloControlleur,
                 onChanged: (final value) {
                   final parse = int.tryParse(value);
                   if (parse == null) {
@@ -73,6 +74,8 @@ class _AideSimulateurVeloPageState extends State<AideSimulateurVeloPage> {
                   }
                   context.read<AideVeloBloc>().add(AideVeloPrixChange(parse));
                 },
+                controller: _prixVeloControlleur,
+                keyboardType: TextInputType.number,
               ),
             ),
           ),
@@ -82,36 +85,33 @@ class _AideSimulateurVeloPageState extends State<AideSimulateurVeloPage> {
             style: FnvTextStyles.prixExplicationsStyle,
           ),
           const SizedBox(height: DsfrSpacings.s1w),
-          ...VeloPourSimulateur.values.map(
-            (final e) {
-              const foregroundColor = DsfrColors.grey50;
-              return Align(
-                alignment: Alignment.centerLeft,
-                child: DsfrTag.md(
-                  label: TextSpan(
-                    text: Localisation.veloLabel(e.label),
-                    children: [
-                      TextSpan(
-                        text: Localisation.euro(e.prix),
-                        style: const TextStyle(
-                          decoration: TextDecoration.underline,
-                          decorationColor: foregroundColor,
-                        ),
+          ...VeloPourSimulateur.values.map((final e) {
+            const foregroundColor = DsfrColors.grey50;
+
+            return Align(
+              alignment: Alignment.centerLeft,
+              child: DsfrTag.md(
+                label: TextSpan(
+                  text: Localisation.veloLabel(e.label),
+                  children: [
+                    TextSpan(
+                      text: Localisation.euro(e.prix),
+                      style: const TextStyle(
+                        decoration: TextDecoration.underline,
+                        decorationColor: foregroundColor,
                       ),
-                    ],
-                  ),
-                  backgroundColor: DsfrColors.info950,
-                  foregroundColor: foregroundColor,
-                  onTap: () {
-                    context
-                        .read<AideVeloBloc>()
-                        .add(AideVeloPrixChange(e.prix));
-                    prixVeloControlleur.text = '${e.prix}';
-                  },
+                    ),
+                  ],
                 ),
-              );
-            },
-          ).separator(const SizedBox(height: DsfrSpacings.s1w)),
+                backgroundColor: DsfrColors.info950,
+                foregroundColor: foregroundColor,
+                onTap: () {
+                  context.read<AideVeloBloc>().add(AideVeloPrixChange(e.prix));
+                  _prixVeloControlleur.text = '${e.prix}';
+                },
+              ),
+            );
+          }).separator(const SizedBox(height: DsfrSpacings.s1w)),
           const SizedBox(height: DsfrSpacings.s4w),
           const Divider(color: FnvColors.dividerColor),
           const SizedBox(height: DsfrSpacings.s3w),
@@ -136,7 +136,7 @@ class _AideSimulateurVeloPageState extends State<AideSimulateurVeloPage> {
                       .watch<AideVeloBloc>()
                       .state
                       .communes
-                      .map((final e) => DropdownMenuEntry(label: e, value: e))
+                      .map((final e) => DropdownMenuEntry(value: e, label: e))
                       .toList(),
                   onSelected: (final value) {
                     if (value == null) {
@@ -158,8 +158,6 @@ class _AideSimulateurVeloPageState extends State<AideSimulateurVeloPage> {
           const SizedBox(height: DsfrSpacings.s1v),
           DsfrInput(
             label: Localisation.nombrePartsFiscales,
-            hint: Localisation.nombrePartsFiscalesDescription,
-            width: inputWidth,
             onChanged: (final value) {
               final parse = double.tryParse(value);
               if (parse == null) {
@@ -170,6 +168,8 @@ class _AideSimulateurVeloPageState extends State<AideSimulateurVeloPage> {
                   .read<AideVeloBloc>()
                   .add(AideVeloNombreDePartsFiscalesChange(parse));
             },
+            hint: Localisation.nombrePartsFiscalesDescription,
+            width: inputWidth,
           ),
           const SizedBox(height: DsfrSpacings.s3w),
           DsfrRadioButtonSet(
@@ -239,6 +239,7 @@ class _AideSimulateurVeloPageState extends State<AideSimulateurVeloPage> {
           },
         ),
       ),
+      backgroundColor: FnvColors.aidesFond,
     );
   }
 }
@@ -256,9 +257,7 @@ class _AccordionBody extends StatelessWidget {
 }
 
 class _AccordionHeader extends StatelessWidget {
-  const _AccordionHeader({
-    required this.text,
-  });
+  const _AccordionHeader({required this.text});
 
   final String text;
 
@@ -272,12 +271,7 @@ class _AccordionHeader extends StatelessWidget {
               color: DsfrColors.blueFranceSun113,
             ),
             const SizedBox(width: DsfrSpacings.s1w),
-            Expanded(
-              child: Text(
-                text,
-                style: DsfrFonts.bodySmMedium,
-              ),
-            ),
+            Expanded(child: Text(text, style: DsfrFonts.bodySmMedium)),
           ],
         ),
       );

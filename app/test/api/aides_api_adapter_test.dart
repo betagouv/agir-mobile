@@ -13,7 +13,7 @@ import 'flutter_secure_storage_mock.dart';
 void main() {
   group('AidesApiAdapter', () {
     test('recupereLesAides', () async {
-      // Arrange
+      // Arrange.
       const thematique1 = '🏡 Logement';
       const aide1 = 'Rénover son logement';
       const contenu1 = '<p>contenu1</p>';
@@ -77,13 +77,12 @@ void main() {
         "besoin": "composter"
     }
 ]''',
-            200,
           ),
         );
 
       final authentificationTokenStorage = AuthentificationTokenStorage(
-        authentificationStatusManager: AuthentificationStatutManager(),
         secureStorage: FlutterSecureStorageMock(),
+        authentificationStatusManager: AuthentificationStatutManager(),
       );
       await authentificationTokenStorage.sauvegarderTokenEtUtilisateurId(
         token,
@@ -92,34 +91,26 @@ void main() {
 
       final adapter = AidesApiAdapter(
         apiClient: AuthentificationApiClient(
-          inner: client,
           apiUrl: apiUrl,
           authentificationTokenStorage: authentificationTokenStorage,
+          inner: client,
         ),
       );
 
-      // Act
+      // Act.
       final aides = await adapter.recupereLesAides();
 
-      // Assert
+      // Assert.
       expect(aides, [
-        const Aide(
-          titre: aide1,
-          thematique: thematique1,
-          contenu: contenu1,
-        ),
+        const Aide(titre: aide1, thematique: thematique1, contenu: contenu1),
         const Aide(
           titre: aide2,
           thematique: thematique2,
-          montantMax: montantMax,
           contenu: contenu2,
+          montantMax: montantMax,
           urlSimulateur: urlSimulateur2,
         ),
-        const Aide(
-          titre: aide3,
-          thematique: thematique3,
-          contenu: contenu3,
-        ),
+        const Aide(titre: aide3, thematique: thematique3, contenu: contenu3),
       ]);
     });
   });

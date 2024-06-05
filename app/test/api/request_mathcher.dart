@@ -1,8 +1,10 @@
+// ignore_for_file: avoid_bool_literals_in_conditional_expressions
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 
 class RequestMathcher extends Matcher {
-  RequestMathcher(this.url);
+  const RequestMathcher(this.url);
 
   final String url;
 
@@ -10,11 +12,6 @@ class RequestMathcher extends Matcher {
   Description describe(final Description description) => description.add('Ok');
 
   @override
-  bool matches(final item, final Map<dynamic, dynamic> matchState) {
-    if (item is! http.Request) {
-      return false;
-    }
-
-    return item.url.toString().endsWith(url);
-  }
+  bool matches(final item, final Map<dynamic, dynamic> matchState) =>
+      item is http.Request ? item.url.toString().endsWith(url) : false;
 }

@@ -15,22 +15,24 @@ class AuthentificationTokenStorage {
   final AuthentificationStatutManager _authentificationStatusManager;
 
   Future<bool> initialise() async {
-    final token = await recupererToken();
-    if (token != null) {
-      _authentificationStatusManager
-          .gererAuthentificationStatut(AuthentificationStatut.connecte);
-    } else {
+    final token = await recupererToken;
+    if (token == null) {
       _authentificationStatusManager
           .gererAuthentificationStatut(AuthentificationStatut.pasConnecte);
+    } else {
+      _authentificationStatusManager
+          .gererAuthentificationStatut(AuthentificationStatut.connecte);
     }
+
     return true;
   }
 
   final _tokenKey = 'token';
-  Future<String?> recupererToken() async => _secureStorage.read(key: _tokenKey);
+  Future<String?> get recupererToken async =>
+      _secureStorage.read(key: _tokenKey);
 
   final _utilisateurIdKey = 'utilisateurId';
-  Future<String?> recupererUtilisateurId() async =>
+  Future<String?> get recupererUtilisateurId async =>
       _secureStorage.read(key: _utilisateurIdKey);
 
   Future<void> sauvegarderTokenEtUtilisateurId(

@@ -10,10 +10,7 @@ class Utilisateur extends Equatable {
   final List<Fonctionnalites> fonctionnalitesDebloquees;
 
   @override
-  List<Object?> get props => [
-        prenom,
-        fonctionnalitesDebloquees,
-      ];
+  List<Object?> get props => [prenom, fonctionnalitesDebloquees];
 }
 
 enum Fonctionnalites {

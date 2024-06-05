@@ -1,4 +1,7 @@
-import 'package:dsfr/dsfr.dart';
+import 'package:dsfr/src/composants/radios/radio.dart';
+import 'package:dsfr/src/fondamentaux/fonts.dart';
+import 'package:dsfr/src/fondamentaux/spacing.g.dart';
+import 'package:dsfr/src/helpers/iterable_extension.dart';
 import 'package:flutter/material.dart';
 
 typedef Callback<T> = void Function(T value);
@@ -25,6 +28,7 @@ class _DsfrRadioButtonSetState<T> extends State<DsfrRadioButtonSet<T>> {
   @override
   Widget build(final BuildContext context) {
     final values = widget.values;
+
     return Column(
       children: [
         Text(widget.title, style: DsfrFonts.bodyMd),
@@ -38,7 +42,7 @@ class _DsfrRadioButtonSetState<T> extends State<DsfrRadioButtonSet<T>> {
                 onChanged: (final value) {
                   setState(() {
                     _value = value;
-                    widget.onCallback.call(_value);
+                    widget.onCallback(_value);
                   });
                 },
               ),

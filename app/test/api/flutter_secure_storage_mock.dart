@@ -1,3 +1,5 @@
+// ignore_for_file: avoid-collection-mutating-methods
+
 import 'package:flutter/src/foundation/basic_types.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
@@ -50,13 +52,8 @@ class FlutterSecureStorageMock implements FlutterSecureStorage {
     final WebOptions? webOptions,
     final MacOsOptions? mOptions,
     final WindowsOptions? wOptions,
-  }) async {
-    if (_map.containsKey(key)) {
-      return _map[key];
-    }
-
-    return null;
-  }
+  }) async =>
+      _map.containsKey(key) ? _map[key] : null;
 
   @override
   Future<Map<String, String>> readAll({
@@ -105,7 +102,7 @@ class FlutterSecureStorageMock implements FlutterSecureStorage {
       throw UnimplementedError();
 
   @override
-  Stream<bool>? get onCupertinoProtectedDataAvailabilityChanged =>
+  Stream<bool> get onCupertinoProtectedDataAvailabilityChanged =>
       throw UnimplementedError();
 
   @override

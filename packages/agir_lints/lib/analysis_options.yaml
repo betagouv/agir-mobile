@@ -31,3 +31,62 @@ linter:
     public_member_api_docs: false
     type_annotate_public_apis: false
     unnecessary_final: false # incompatible with `prefer_final_parameters`.
+
+dart_code_metrics:
+  extends:
+    - package:dart_code_metrics_presets/all.yaml
+    - package:dart_code_metrics_presets/bloc.yaml
+    - package:dart_code_metrics_presets/equatable.yaml
+  rules:
+    - avoid-ignoring-return-values: false
+    - avoid-late-keyword: false
+    - avoid-returning-cascades: false
+    - parameters-ordering: false
+    - avoid-shadowing: false
+    - prefer-match-file-name: false
+    - no-magic-number: false
+    - member-ordering:
+        order:
+          - constructors
+          - public-fields
+          - private-fields
+    - avoid-top-level-members-in-tests: false
+    - avoid-dynamic: false
+    - arguments-ordering:
+        last:
+          - child
+          - children
+    - avoid-non-null-assertion: false
+    - avoid-positional-record-field-access: false
+    - missing-test-assertion: false
+    - avoid-non-ascii-symbols: false
+    - no-magic-string: false
+    - prefer-explicit-type-arguments: false
+    - avoid-similar-names: false
+    - prefer-static-class: false
+    - prefer-prefixed-global-constants: false
+    - prefer-widget-private-members:
+        ignore-static: true
+    - prefer-correct-identifier-length: false
+    - prefer-single-declaration-per-file: false
+    - prefer-single-widget-per-file:
+        ignore-private-widgets: true
+    - no-equal-arguments: false
+    - prefer-test-matchers: false
+    - enum-constants-ordering: false
+    - avoid-nested-conditional-expressions: false
+    - avoid-duplicate-collection-elements: false
+    - check-is-not-closed-after-async-gap: false
+    - prefer-named-parameters:
+        max-number: 2
+    - prefer-for-loop-in-children: false
+    - avoid-passing-self-as-argument: false # voir pour réactiver
+    - avoid-long-functions: false # voir pour réactiver
+    - no-empty-block: false # voir pour réactiver
+    - avoid-missing-image-alt: false # voir pour réactiver
+    - prefer-extracting-callbacks: false # à réactiver
+    - avoid-shrink-wrap-in-lists: false # à réactiver
+    - avoid-passing-async-when-sync-expected: false # à réactiver
+    - avoid-async-call-in-sync-function: false # à réactiver
+    - avoid-redundant-async: false # voir pour réactiver
+    - avoid-nullable-interpolation: false # à réactiver

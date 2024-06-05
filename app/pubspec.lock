@@ -104,6 +104,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
+  dart_code_metrics_presets:
+    dependency: "direct dev"
+    description:
+      name: dart_code_metrics_presets
+      sha256: "2fb7c4a2dd9627fff0493bbfdf1b6049bc218836559cc10aeaff3f460eed4ca8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.13.0"
   dsfr:
     dependency: "direct main"
     description:
@@ -359,7 +367,7 @@ packages:
     source: hosted
     version: "0.8.0"
   meta:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: meta
       sha256: "7687075e408b093f36e6bbf6c91878cc0d4cd10f409506f7bc996f68220b9136"

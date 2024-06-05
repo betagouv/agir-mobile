@@ -1,4 +1,7 @@
-import 'package:dsfr/dsfr.dart';
+import 'package:dsfr/src/fondamentaux/colors.g.dart';
+import 'package:dsfr/src/fondamentaux/fonts.dart';
+import 'package:dsfr/src/fondamentaux/icons.g.dart';
+import 'package:dsfr/src/fondamentaux/spacing.g.dart';
 import 'package:flutter/material.dart';
 
 class DsfrSelect<T> extends StatelessWidget {
@@ -7,7 +10,6 @@ class DsfrSelect<T> extends StatelessWidget {
     required this.dropdownMenuEntries,
     required this.onSelected,
     this.hint,
-    this.width,
     this.labelStyle = DsfrFonts.bodyMd,
     this.labelColor = DsfrColors.grey50,
     this.hintStyle = DsfrFonts.bodyXs,
@@ -26,7 +28,6 @@ class DsfrSelect<T> extends StatelessWidget {
   final List<DropdownMenuEntry<T>> dropdownMenuEntries;
   final ValueChanged<T?> onSelected;
 
-  final double? width;
   final TextStyle labelStyle;
   final Color labelColor;
   final TextStyle hintStyle;
@@ -50,13 +51,12 @@ class DsfrSelect<T> extends StatelessWidget {
 
     return _Label(
       label: label,
-      labelColor: labelColor,
-      labelStyle: labelStyle,
       hint: hint,
-      hintColor: hintColor,
+      labelStyle: labelStyle,
+      labelColor: labelColor,
       hintStyle: hintStyle,
+      hintColor: hintColor,
       child: DropdownMenu(
-        textStyle: inputStyle,
         trailingIcon: const Icon(
           DsfrIcons.systemArrowDownSLine,
           size: DsfrSpacings.s2w,
@@ -65,17 +65,18 @@ class DsfrSelect<T> extends StatelessWidget {
           DsfrIcons.systemArrowUpSLine,
           size: DsfrSpacings.s2w,
         ),
+        textStyle: inputStyle,
         inputDecorationTheme: InputDecorationTheme(
           filled: true,
           fillColor: fillColor,
-          enabledBorder: underlineInputBorder,
           focusedBorder: underlineInputBorder,
+          enabledBorder: underlineInputBorder,
           border: underlineInputBorder,
           constraints: inputConstraints,
         ),
         onSelected: onSelected,
-        dropdownMenuEntries: dropdownMenuEntries,
         expandedInsets: EdgeInsets.zero,
+        dropdownMenuEntries: dropdownMenuEntries,
       ),
     );
   }
@@ -105,16 +106,10 @@ class _Label extends StatelessWidget {
   Widget build(final BuildContext context) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(
-            label,
-            style: labelStyle.copyWith(color: labelColor),
-          ),
+          Text(label, style: labelStyle.copyWith(color: labelColor)),
           if (hint != null) ...[
             const SizedBox(height: DsfrSpacings.s1v),
-            Text(
-              hint!,
-              style: hintStyle.copyWith(color: hintColor),
-            ),
+            Text(hint!, style: hintStyle.copyWith(color: hintColor)),
           ],
           const SizedBox(height: DsfrSpacings.s1w),
           child,

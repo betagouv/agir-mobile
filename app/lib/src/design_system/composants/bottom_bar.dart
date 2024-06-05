@@ -3,28 +3,22 @@ import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 
 class FnvBottomBar extends StatelessWidget {
-  const FnvBottomBar({
-    required this.child,
-    super.key,
-  });
+  const FnvBottomBar({required this.child, super.key});
 
   final Widget child;
 
   @override
   Widget build(final BuildContext context) => DecoratedBox(
         decoration: const ShapeDecoration(
-          shape: RoundedRectangleBorder(),
           shadows: bottomNavigationBarOmbre,
+          shape: RoundedRectangleBorder(),
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal: DsfrSpacings.s2w,
             vertical: DsfrSpacings.s3w,
+            horizontal: DsfrSpacings.s2w,
           ),
-          child: SizedBox(
-            height: DsfrSpacings.s6w,
-            child: child,
-          ),
+          child: SizedBox(height: DsfrSpacings.s6w, child: child),
         ),
       );
 }

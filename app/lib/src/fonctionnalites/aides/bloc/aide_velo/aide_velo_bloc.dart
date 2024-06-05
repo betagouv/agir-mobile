@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:app/src/fonctionnalites/aides/bloc/aide_velo/aide_velo_event.dart';
 import 'package:app/src/fonctionnalites/aides/bloc/aide_velo/aide_velo_state.dart';
 import 'package:app/src/fonctionnalites/aides/domain/ports/aide_velo_repository.dart';
@@ -24,10 +25,10 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
   final CommunesRepository _communesRepository;
   final AideVeloRepository _aideVeloRepository;
 
-  Future<void> _onPrixChange(
+  void _onPrixChange(
     final AideVeloPrixChange event,
     final Emitter<AideVeloState> emit,
-  ) async {
+  ) {
     emit(state.copyWith(prix: event.valeur));
   }
 
@@ -40,24 +41,24 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
     emit(state.copyWith(codePostal: event.valeur, communes: communes));
   }
 
-  Future<void> _onVilleChange(
+  void _onVilleChange(
     final AideVeloVilleChange event,
     final Emitter<AideVeloState> emit,
-  ) async {
+  ) {
     emit(state.copyWith(ville: event.valeur));
   }
 
-  Future<void> _onNombreDePartsFiscalesChange(
+  void _onNombreDePartsFiscalesChange(
     final AideVeloNombreDePartsFiscalesChange event,
     final Emitter<AideVeloState> emit,
-  ) async {
+  ) {
     emit(state.copyWith(nombreDePartsFiscales: event.valeur));
   }
 
-  Future<void> _onRevenuFiscalChange(
+  void _onRevenuFiscalChange(
     final AideVeloRevenuFiscalChange event,
     final Emitter<AideVeloState> emit,
-  ) async {
+  ) {
     emit(state.copyWith(revenuFiscal: event.valeur));
   }
 
@@ -72,7 +73,7 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
       nombreDePartsFiscales: state.nombreDePartsFiscales,
       revenuFiscal: state.revenuFiscal,
     );
-    final viewModels = <AideDisponiblesViewModel>[
+    final viewModels = [
       AideDisponiblesViewModel(
         titre: 'Acheter un vélo mécanique',
         montantTotal: aidesDisponibles.mecaniqueSimple

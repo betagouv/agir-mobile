@@ -1,4 +1,4 @@
-class Localisation {
+abstract final class Localisation {
   static const commencer = 'Commencer';
   static const preOnboardingTitre =
       'Ensemble,\naméliorons\nnos habitudes\nau jour le jour';
@@ -18,7 +18,6 @@ class Localisation {
   static const seConnecter = 'Se connecter';
   static const adresseElectronique = 'Adresse électronique';
   static const motDePasse = 'Mot de passe';
-  static const motDePasseOublie = 'Mot de passe oublié ?';
   static const bonjour = 'Bonjour,\n';
   static String prenomExclamation(final String value) => '$value !';
   static const menuAides = 'Aides';

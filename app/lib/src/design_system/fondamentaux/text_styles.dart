@@ -2,11 +2,11 @@ import 'dart:ui';
 
 import 'package:dsfr/dsfr.dart';
 
-class FnvTextStyles {
-  FnvTextStyles._();
+abstract final class FnvTextStyles {
+  const FnvTextStyles._();
 
   static const appBarTitleStyle = DsfrFonts.bodyMd;
 
   static const prixExplicationsStyle =
-      DsfrTextStyle(fontWeight: FontWeight.bold, fontSize: 14);
+      DsfrTextStyle(fontSize: 14, fontWeight: FontWeight.bold);
 }

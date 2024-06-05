@@ -9,10 +9,8 @@ class FnvAlert extends StatelessWidget {
     super.key,
   });
 
-  const FnvAlert.warning({
-    required final String label,
-    final Key? key,
-  }) : this._(
+  const FnvAlert.warning({required final String label, final Key? key})
+      : this._(
           icon: DsfrIcons.systemFrWarningFill,
           label: label,
           color: DsfrColors.warning625,
@@ -26,11 +24,7 @@ class FnvAlert extends StatelessWidget {
   @override
   Widget build(final BuildContext context) => Row(
         children: [
-          Icon(
-            icon,
-            color: color,
-            size: DsfrSpacings.s2w,
-          ),
+          Icon(icon, size: DsfrSpacings.s2w, color: color),
           const SizedBox(width: DsfrSpacings.s1w),
           Expanded(
             child: Text(label, style: DsfrFonts.bodySm.copyWith(color: color)),

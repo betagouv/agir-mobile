@@ -1,14 +1,15 @@
 import 'package:flutter/widgets.dart';
 
 extension IterableExtension on Iterable<Widget> {
-  Iterable<Widget> separator(final Widget element) sync* {
-    final iterator = this.iterator;
-    if (iterator.moveNext()) {
-      yield iterator.current;
-      while (iterator.moveNext()) {
-        yield element;
-        yield iterator.current;
+  Iterable<Widget> separator(final Widget element) {
+    final result = <Widget>[];
+    for (final widget in this) {
+      if (result.isNotEmpty) {
+        result.add(element);
       }
+      result.add(widget);
     }
+
+    return result;
   }
 }

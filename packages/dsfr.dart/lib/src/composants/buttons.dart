@@ -1,4 +1,5 @@
-import 'package:dsfr/dsfr.dart';
+import 'package:dsfr/src/fondamentaux/colors.g.dart';
+import 'package:dsfr/src/fondamentaux/fonts.dart';
 import 'package:flutter/material.dart';
 
 class DsfrButton extends StatefulWidget {
@@ -17,7 +18,7 @@ class DsfrButton extends StatefulWidget {
     final VoidCallback? onTap,
     final Key? key,
   }) : this._(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 24),
           label: label,
           textStyle: DsfrFonts.bodyLgMedium,
           focusBorderWidth: 2,
@@ -40,10 +41,10 @@ class DsfrButton extends StatefulWidget {
 class DsfrButtonBackgroundColor extends WidgetStateColor {
   DsfrButtonBackgroundColor() : super(_default.value);
 
-  static const Color _default = DsfrColors.blueFranceSun113;
-  static const Color _active = DsfrColors.blueFranceSun113Active;
-  static const Color _hover = DsfrColors.blueFranceSun113Hover;
-  static const Color _disabled = DsfrColors.grey925;
+  static const _default = DsfrColors.blueFranceSun113;
+  static const _active = DsfrColors.blueFranceSun113Active;
+  static const _hover = DsfrColors.blueFranceSun113Hover;
+  static const _disabled = DsfrColors.grey925;
 
   @override
   Color resolve(final Set<WidgetState> states) {
@@ -53,32 +54,26 @@ class DsfrButtonBackgroundColor extends WidgetStateColor {
     if (states.contains(WidgetState.pressed)) {
       return _active;
     }
-    if (states.contains(WidgetState.hovered)) {
-      return _hover;
-    }
-    return _default;
+
+    return states.contains(WidgetState.hovered) ? _hover : _default;
   }
 }
 
 class DsfrButtonForegroundColor extends WidgetStateColor {
   DsfrButtonForegroundColor() : super(_default.value);
 
-  static const Color _default = DsfrColors.blueFrance975;
-  static const Color _disabled = DsfrColors.grey625;
+  static const _default = DsfrColors.blueFrance975;
+  static const _disabled = DsfrColors.grey625;
 
   @override
-  Color resolve(final Set<WidgetState> states) {
-    if (states.contains(WidgetState.disabled)) {
-      return _disabled;
-    }
-    return _default;
-  }
+  Color resolve(final Set<WidgetState> states) =>
+      states.contains(WidgetState.disabled) ? _disabled : _default;
 }
 
 class _DsfrButtonState extends State<DsfrButton>
     with MaterialStateMixin<DsfrButton> {
-  final backgroundColor = DsfrButtonBackgroundColor();
-  final foregroundColor = DsfrButtonForegroundColor();
+  final _backgroundColor = DsfrButtonBackgroundColor();
+  final _foregroundColor = DsfrButtonForegroundColor();
 
   @override
   void initState() {
@@ -94,24 +89,24 @@ class _DsfrButtonState extends State<DsfrButton>
 
   @override
   Widget build(final BuildContext context) {
-    final Widget button = Semantics(
-      button: true,
+    final button = Semantics(
       enabled: widget.onTap != null,
+      button: true,
       child: InkWell(
-        onFocusChange: updateMaterialState(WidgetState.focused),
-        onHover: updateMaterialState(WidgetState.hovered),
-        onHighlightChanged: updateMaterialState(WidgetState.pressed),
         onTap: widget.onTap,
+        onHighlightChanged: updateMaterialState(WidgetState.pressed),
+        onHover: updateMaterialState(WidgetState.hovered),
         canRequestFocus: widget.onTap != null,
+        onFocusChange: updateMaterialState(WidgetState.focused),
         child: ColoredBox(
-          color: backgroundColor.resolve(materialStates),
+          color: _backgroundColor.resolve(materialStates),
           child: Padding(
             padding: widget.padding,
             child: Center(
               child: Text(
                 widget.label,
                 style: widget.textStyle
-                    .copyWith(color: foregroundColor.resolve(materialStates)),
+                    .copyWith(color: _foregroundColor.resolve(materialStates)),
               ),
             ),
           ),
@@ -119,23 +114,18 @@ class _DsfrButtonState extends State<DsfrButton>
       ),
     );
 
-    if (!isFocused) {
-      return button;
-    }
-
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        border: Border.fromBorderSide(
-          BorderSide(
-            color: DsfrColors.focus525,
-            width: widget.focusBorderWidth,
-          ),
-        ),
-      ),
-      child: Padding(
-        padding: widget.focusPadding,
-        child: button,
-      ),
-    );
+    return isFocused
+        ? DecoratedBox(
+            decoration: BoxDecoration(
+              border: Border.fromBorderSide(
+                BorderSide(
+                  color: DsfrColors.focus525,
+                  width: widget.focusBorderWidth,
+                ),
+              ),
+            ),
+            child: Padding(padding: widget.focusPadding, child: button),
+          )
+        : button;
   }
 }

@@ -1,0 +1,8 @@
+{
+    "recommendations": [
+        "felixangelov.bloc"          ,
+        "dart-code.flutter"          ,
+        "dart-code.dart-code"        ,
+        "dcmdev.dcm-vscode-extension"
+    ]
+}

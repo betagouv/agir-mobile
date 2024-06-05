@@ -16,9 +16,9 @@ class AideSimulateurVeloDisponiblePage extends StatelessWidget {
   static const name = 'aide-simulateur-velo-disponible';
   static const path = name;
 
-  static GoRoute route() => GoRoute(
-        name: name,
+  static GoRoute get route => GoRoute(
         path: path,
+        name: name,
         builder: (final context, final state) =>
             const AideSimulateurVeloDisponiblePage(),
       );
@@ -26,13 +26,13 @@ class AideSimulateurVeloDisponiblePage extends StatelessWidget {
   @override
   Widget build(final BuildContext context) {
     final state = context.watch<AideVeloBloc>().state;
+
     return Scaffold(
       appBar: const FnvAppBar(),
-      backgroundColor: FnvColors.aidesFond,
       body: ListView(
         padding: const EdgeInsets.symmetric(
-          horizontal: DsfrSpacings.s2w,
           vertical: DsfrSpacings.s3w,
+          horizontal: DsfrSpacings.s2w,
         ),
         children: [
           const Text(
@@ -54,10 +54,7 @@ class AideSimulateurVeloDisponiblePage extends StatelessWidget {
                 .toList(),
           ),
           const SizedBox(height: DsfrSpacings.s3w),
-          const Text(
-            Localisation.propulsePar,
-            style: DsfrFonts.bodyXs,
-          ),
+          const Text(Localisation.propulsePar, style: DsfrFonts.bodyXs),
         ],
       ),
       bottomNavigationBar: FnvBottomBar(
@@ -66,15 +63,13 @@ class AideSimulateurVeloDisponiblePage extends StatelessWidget {
           onTap: () => GoRouter.of(context).pop(),
         ),
       ),
+      backgroundColor: FnvColors.aidesFond,
     );
   }
 }
 
 class _Header extends StatelessWidget {
-  const _Header({
-    required this.titre,
-    required this.montantMax,
-  });
+  const _Header({required this.titre, required this.montantMax});
 
   final String titre;
   final int? montantMax;
@@ -84,16 +79,11 @@ class _Header extends StatelessWidget {
         padding: const EdgeInsets.only(right: DsfrSpacings.s2w),
         child: Row(
           children: [
-            Expanded(
-              child: Text(
-                titre,
-                style: DsfrFonts.bodyMd,
-              ),
-            ),
+            Expanded(child: Text(titre, style: DsfrFonts.bodyMd)),
             Text(
-              montantMax != null
-                  ? Localisation.jusqua + Localisation.euro(montantMax!)
-                  : Localisation.aucuneAideDisponible,
+              montantMax == null
+                  ? Localisation.aucuneAideDisponible
+                  : Localisation.jusqua + Localisation.euro(montantMax!),
               style: DsfrFonts.bodyMd,
             ),
           ],
@@ -102,9 +92,7 @@ class _Header extends StatelessWidget {
 }
 
 class _Body extends StatelessWidget {
-  const _Body({
-    required this.aides,
-  });
+  const _Body({required this.aides});
 
   final List<AideVelo> aides;
 

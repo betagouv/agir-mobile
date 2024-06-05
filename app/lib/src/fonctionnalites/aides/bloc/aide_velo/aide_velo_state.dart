@@ -75,9 +75,5 @@ class AideDisponiblesViewModel extends Equatable {
   final List<AideVelo> aides;
 
   @override
-  List<Object?> get props => [
-        titre,
-        montantTotal,
-        aides,
-      ];
+  List<Object?> get props => [titre, montantTotal, aides];
 }

@@ -49,10 +49,10 @@ Future<void> main() async {
 
   runApp(
     App(
+      authentificationStatusManager: authentificationStatusManager,
       authentificationRepository: AuthentificationApiAdapter(
         apiClient: apiClient,
       ),
-      authentificationStatusManager: authentificationStatusManager,
       utilisateurRepository: UtilisateurApiAdapter(apiClient: apiClient),
       aidesRepository: AidesApiAdapter(apiClient: apiClient),
       versionRepository: VersionAdapter(packageInfo: packageInfo),
@@ -70,13 +70,14 @@ void _registerErrorHandlers() {
 
   PlatformDispatcher.instance.onError = (final error, final stack) {
     debugPrint(error.toString());
+
     return true;
   };
 
   ErrorWidget.builder = (final details) => Scaffold(
         appBar: AppBar(
-          backgroundColor: DsfrColors.redMarianneMain472,
           title: const Text('An error occurred'),
+          backgroundColor: DsfrColors.redMarianneMain472,
         ),
         body: Center(child: Text(details.toString())),
       );

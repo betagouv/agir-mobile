@@ -15,21 +15,32 @@ GoRouter goRouter({
   required final AuthentificationStatutManager authentificationStatusManager,
 }) =>
     GoRouter(
-      debugLogDiagnostics: true,
-      initialLocation: PreOnboardingPage.path,
+      routes: [
+        PreOnboardingPage.route,
+        PreOnboardingCarrouselPage.route,
+        SeConnecterPage.route,
+        AccueilPage.route,
+        AidesPage.route,
+        AidePage.route,
+        AideSimulateurVeloPage.route(
+          routes: [AideSimulateurVeloDisponiblePage.route],
+        ),
+      ],
       redirect: (final context, final state) {
         final path = state.uri.path;
 
-        final statutActuel = authentificationStatusManager.statutActuel();
+        final statutActuel = authentificationStatusManager.statutActuel;
         switch (statutActuel) {
           case AuthentificationStatut.inconnu:
             return PreOnboardingPage.path;
+
           case AuthentificationStatut.connecte:
             if (path.startsWith(PreOnboardingPage.path) ||
                 path.startsWith(PreOnboardingCarrouselPage.path) ||
                 path.startsWith(SeConnecterPage.path)) {
               return AccueilPage.path;
             }
+
           case AuthentificationStatut.pasConnecte:
             if (path.startsWith(AccueilPage.path) ||
                 path.startsWith(AidesPage.path) ||
@@ -39,21 +50,11 @@ GoRouter goRouter({
               return PreOnboardingPage.path;
             }
         }
+
         return null;
       },
       refreshListenable:
-          GoRouterRefreshStream(authentificationStatusManager.statutModifie()),
-      routes: [
-        PreOnboardingPage.route(),
-        PreOnboardingCarrouselPage.route(),
-        SeConnecterPage.route(),
-        AccueilPage.route(),
-        AidesPage.route(),
-        AidePage.route(),
-        AideSimulateurVeloPage.route(
-          routes: [
-            AideSimulateurVeloDisponiblePage.route(),
-          ],
-        ),
-      ],
+          GoRouterRefreshStream(authentificationStatusManager.statutModifie),
+      initialLocation: PreOnboardingPage.path,
+      debugLogDiagnostics: true,
     );

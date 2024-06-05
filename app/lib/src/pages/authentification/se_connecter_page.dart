@@ -12,15 +12,14 @@ class SeConnecterPage extends StatelessWidget {
   static const name = 'authentification';
   static const path = '/$name';
 
-  static GoRoute route() => GoRoute(
-        name: name,
+  static GoRoute get route => GoRoute(
         path: path,
+        name: name,
         builder: (final context, final state) => const SeConnecterPage(),
       );
 
   @override
   Widget build(final BuildContext context) => Scaffold(
-        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           backgroundColor: Colors.white,
           iconTheme: const IconThemeData(color: DsfrColors.blueFranceSun113),
@@ -29,8 +28,8 @@ class SeConnecterPage extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(
               left: DsfrSpacings.s3w,
-              bottom: DsfrSpacings.s3w,
               right: DsfrSpacings.s3w,
+              bottom: DsfrSpacings.s3w,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,23 +41,23 @@ class SeConnecterPage extends StatelessWidget {
                 const SizedBox(height: DsfrSpacings.s3w),
                 DsfrInput(
                   label: Localisation.adresseElectronique,
-                  keyboardType: TextInputType.emailAddress,
                   onChanged: (final value) {
                     context
                         .read<SeConnecterBloc>()
                         .add(SeConnecterAdresseMailAChange(value));
                   },
+                  keyboardType: TextInputType.emailAddress,
                 ),
                 const SizedBox(height: DsfrSpacings.s2w),
                 DsfrInput(
                   label: Localisation.motDePasse,
-                  keyboardType: TextInputType.visiblePassword,
-                  passwordMode: true,
                   onChanged: (final value) {
                     context
                         .read<SeConnecterBloc>()
                         .add(SeConnecterMotDePasseAChange(value));
                   },
+                  passwordMode: true,
+                  keyboardType: TextInputType.visiblePassword,
                 ),
                 const Spacer(),
                 DsfrButton.lg(
@@ -73,5 +72,6 @@ class SeConnecterPage extends StatelessWidget {
             ),
           ),
         ),
+        resizeToAvoidBottomInset: false,
       );
 }

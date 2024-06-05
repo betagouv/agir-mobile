@@ -1,4 +1,6 @@
-import 'package:dsfr/dsfr.dart';
+import 'package:dsfr/src/fondamentaux/colors.g.dart';
+import 'package:dsfr/src/fondamentaux/fonts.dart';
+import 'package:dsfr/src/fondamentaux/spacing.g.dart';
 import 'package:flutter/material.dart';
 
 class DsfrInput extends StatefulWidget {
@@ -54,18 +56,16 @@ class DsfrInput extends StatefulWidget {
 
 class _DsfrInputState extends State<DsfrInput> {
   final _focusNode = FocusNode();
-  bool isFocused = false;
+  bool _isFocused = false;
 
   @override
   void initState() {
     super.initState();
-    _focusNode.addListener(
-      () {
-        setState(() {
-          isFocused = _focusNode.hasFocus;
-        });
-      },
-    );
+    _focusNode.addListener(() {
+      setState(() {
+        _isFocused = _focusNode.hasFocus;
+      });
+    });
   }
 
   @override
@@ -98,25 +98,23 @@ class _DsfrInputState extends State<DsfrInput> {
             style: widget.hintStyle.copyWith(color: widget.hintColor),
           ),
         ],
-        SizedBox(
-          height: isFocused ? DsfrSpacings.s1v : DsfrSpacings.s1w,
-        ),
+        SizedBox(height: _isFocused ? DsfrSpacings.s1v : DsfrSpacings.s1w),
         DecoratedBox(
-          decoration: isFocused
+          decoration: _isFocused
               ? BoxDecoration(
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(widget.radius),
-                  ),
                   border: Border.fromBorderSide(
                     BorderSide(
                       color: widget.focusColor,
                       width: widget.focusThickness,
                     ),
                   ),
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(widget.radius),
+                  ),
                 )
               : const BoxDecoration(),
           child: Padding(
-            padding: isFocused
+            padding: _isFocused
                 ? widget.focusPadding
                     .add(EdgeInsets.only(bottom: widget.inputBorderWidth))
                 : EdgeInsets.zero,
@@ -124,20 +122,20 @@ class _DsfrInputState extends State<DsfrInput> {
               width: widget.width,
               child: TextField(
                 controller: widget.controller,
-                style: widget.inputStyle,
                 focusNode: _focusNode,
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: widget.fillColor,
-                  enabledBorder: underlineInputBorder,
                   focusedBorder: underlineInputBorder,
+                  enabledBorder: underlineInputBorder,
                   border: underlineInputBorder,
                   constraints: widget.inputConstraints,
                 ),
                 keyboardType: widget.keyboardType,
+                style: widget.inputStyle,
                 obscureText: widget.passwordMode,
-                enableSuggestions: !widget.passwordMode,
                 autocorrect: !widget.passwordMode,
+                enableSuggestions: !widget.passwordMode,
                 onChanged: widget.onChanged,
               ),
             ),

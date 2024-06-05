@@ -11,9 +11,9 @@ class PreOnboardingCarrouselPage extends StatefulWidget {
 
   static const name = 'pre-onboarding-carrousel';
   static const path = '/$name';
-  static GoRoute route() => GoRoute(
-        name: name,
+  static GoRoute get route => GoRoute(
         path: path,
+        name: name,
         builder: (final context, final state) =>
             const PreOnboardingCarrouselPage(),
       );
@@ -47,15 +47,15 @@ class _PreOnboardingCarrouselPageState extends State<PreOnboardingCarrouselPage>
             TabBarView(
               controller: _tabController,
               children: [
-                Polaroid(
+                _Polaroid(
                   image: Image.asset(AssetsImages.preOnboarding1),
                   titre: Localisation.preOnboarding1,
                 ),
-                Polaroid(
+                _Polaroid(
                   image: Image.asset(AssetsImages.preOnboarding2),
                   titre: Localisation.preOnboarding2,
                 ),
-                Polaroid(
+                _Polaroid(
                   image: Image.asset(AssetsImages.preOnboarding3),
                   titre: Localisation.preOnboarding3,
                 ),
@@ -72,8 +72,8 @@ class _PreOnboardingCarrouselPageState extends State<PreOnboardingCarrouselPage>
                           const SizedBox(height: DsfrSpacings.s8w),
                           const Icon(
                             DsfrIcons.businessBarChartBoxFill,
-                            color: DsfrColors.blueFranceSun113,
                             size: 56,
+                            color: DsfrColors.blueFranceSun113,
                           ),
                           const SizedBox(height: DsfrSpacings.s3w),
                           const Text(
@@ -115,9 +115,9 @@ class _PreOnboardingCarrouselPageState extends State<PreOnboardingCarrouselPage>
                 child: TabPageSelector(
                   controller: _tabController,
                   indicatorSize: 8,
-                  borderStyle: BorderStyle.none,
-                  selectedColor: DsfrColors.blueFrance113,
                   color: DsfrColors.blueFrance975Hover,
+                  selectedColor: DsfrColors.blueFrance113,
+                  borderStyle: BorderStyle.none,
                 ),
               ),
             ),
@@ -126,12 +126,8 @@ class _PreOnboardingCarrouselPageState extends State<PreOnboardingCarrouselPage>
       );
 }
 
-class Polaroid extends StatelessWidget {
-  const Polaroid({
-    required this.image,
-    required this.titre,
-    super.key,
-  });
+class _Polaroid extends StatelessWidget {
+  const _Polaroid({required this.image, required this.titre});
 
   final Widget image;
   final String titre;

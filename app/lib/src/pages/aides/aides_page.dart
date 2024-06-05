@@ -16,9 +16,9 @@ class AidesPage extends StatelessWidget {
   static const name = 'aides';
   static const path = '/$name';
 
-  static GoRoute route() => GoRoute(
-        name: name,
+  static GoRoute get route => GoRoute(
         path: path,
+        name: name,
         builder: (final context, final state) => const AidesPage(),
       );
 
@@ -26,13 +26,13 @@ class AidesPage extends StatelessWidget {
   Widget build(final BuildContext context) {
     final bloc = AidesBloc(aidesRepository: context.read())
       ..add(const AidesRecuperationDemandee());
+
     return Scaffold(
       appBar: const FnvAppBar(),
-      backgroundColor: FnvColors.aidesFond,
       body: BlocBuilder<AidesBloc, AidesState>(
-        bloc: bloc,
         builder: (final context, final state) {
           final aides = state.aides;
+
           return ListView(
             padding: const EdgeInsets.all(DsfrSpacings.s3w),
             children: [
@@ -54,32 +54,29 @@ class AidesPage extends StatelessWidget {
                 ),
               ),
               ListView.separated(
-                shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: aides.length,
-                itemBuilder: (final context, final index) {
-                  final aide = aides[index];
-                  if (aide is AideThematiqueModel) {
-                    return Padding(
+                shrinkWrap: true,
+                itemBuilder: (final context, final index) =>
+                    switch (aides[index]) {
+                  final AideThematiqueModel a => Padding(
                       padding: const EdgeInsets.only(
                         top: DsfrSpacings.s4w,
                         bottom: DsfrSpacings.s2w,
                       ),
-                      child: Text(aide.thematique, style: DsfrFonts.headline4),
-                    );
-                  }
-                  if (aide is AideModel) {
-                    return CarteAide(aide: aide.value);
-                  }
-                  return const SizedBox.shrink();
+                      child: Text(a.thematique, style: DsfrFonts.headline4),
+                    ),
+                  final AideModel a => CarteAide(aide: a.value),
                 },
                 separatorBuilder: (final context, final index) =>
                     const SizedBox(height: DsfrSpacings.s1w),
+                itemCount: aides.length,
               ),
             ],
           );
         },
+        bloc: bloc,
       ),
+      backgroundColor: FnvColors.aidesFond,
     );
   }
 }

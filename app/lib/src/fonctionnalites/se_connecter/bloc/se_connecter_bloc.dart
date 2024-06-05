@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:app/src/fonctionnalites/authentification/domain/information_de_connexion.dart';
 import 'package:app/src/fonctionnalites/authentification/domain/ports/authentification_repository.dart';
 import 'package:app/src/fonctionnalites/se_connecter/bloc/se_connecter_event.dart';
@@ -17,17 +18,17 @@ class SeConnecterBloc extends Bloc<SeConnecterEvent, SeConnecterState> {
 
   final AuthentificationRepository _authentificationRepository;
 
-  Future<void> _onAdresseMailAChange(
+  void _onAdresseMailAChange(
     final SeConnecterAdresseMailAChange event,
     final Emitter<SeConnecterState> emit,
-  ) async {
+  ) {
     emit(state.copyWith(adresseMail: event.valeur));
   }
 
-  Future<void> _onMotDePasseAChange(
+  void _onMotDePasseAChange(
     final SeConnecterMotDePasseAChange event,
     final Emitter<SeConnecterState> emit,
-  ) async {
+  ) {
     emit(state.copyWith(motDePasse: event.valeur));
   }
 

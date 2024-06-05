@@ -1,4 +1,7 @@
+// ignore_for_file: match-getter-setter-field-names
+
 import 'dart:async';
+
 import 'package:app/src/fonctionnalites/authentification/domain/authentification_statut.dart';
 
 class AuthentificationStatutManager {
@@ -11,11 +14,7 @@ class AuthentificationStatutManager {
     _controller.add(_statut);
   }
 
-  AuthentificationStatut statutActuel() => _statut;
+  AuthentificationStatut get statutActuel => _statut;
 
-  Stream<AuthentificationStatut> statutModifie() => _controller.stream;
-
-  Future<void> dispose() async {
-    await _controller.close();
-  }
+  Stream<AuthentificationStatut> get statutModifie => _controller.stream;
 }

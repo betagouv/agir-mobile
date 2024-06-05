@@ -11,16 +11,6 @@ class AideVeloParType extends Equatable {
     required this.motorisation,
   });
 
-  const AideVeloParType.empty()
-      : this(
-          mecaniqueSimple: const [],
-          electrique: const [],
-          cargo: const [],
-          cargoElectrique: const [],
-          pliant: const [],
-          motorisation: const [],
-        );
-
   final List<AideVelo> mecaniqueSimple;
   final List<AideVelo> electrique;
   final List<AideVelo> cargo;

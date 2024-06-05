@@ -1,4 +1,5 @@
-import 'package:dsfr/dsfr.dart';
+import 'package:dsfr/src/fondamentaux/fonts.dart';
+import 'package:dsfr/src/fondamentaux/spacing.g.dart';
 import 'package:flutter/material.dart';
 
 class DsfrTag extends StatelessWidget {
@@ -22,12 +23,12 @@ class DsfrTag extends StatelessWidget {
     final Key? key,
   }) : this._(
           label: label,
+          textStyle: DsfrFonts.bodyXs,
           backgroundColor: backgroundColor,
           foregroundColor: foregroundColor,
-          textStyle: DsfrFonts.bodyXs,
           padding: const EdgeInsets.symmetric(
-            horizontal: DsfrSpacings.s1w,
             vertical: DsfrSpacings.s0v5,
+            horizontal: DsfrSpacings.s1w,
           ),
           icon: icon,
           onTap: onTap,
@@ -43,12 +44,12 @@ class DsfrTag extends StatelessWidget {
     final Key? key,
   }) : this._(
           label: label,
+          textStyle: DsfrFonts.bodySm,
           backgroundColor: backgroundColor,
           foregroundColor: foregroundColor,
-          textStyle: DsfrFonts.bodySm,
           padding: const EdgeInsets.symmetric(
-            horizontal: DsfrSpacings.s3v,
             vertical: DsfrSpacings.s1v,
+            horizontal: DsfrSpacings.s3v,
           ),
           icon: icon,
           onTap: onTap,
@@ -67,8 +68,8 @@ class DsfrTag extends StatelessWidget {
   @override
   Widget build(final BuildContext context) => DecoratedBox(
         decoration: ShapeDecoration(
-          shape: const StadiumBorder(),
           color: backgroundColor,
+          shape: const StadiumBorder(),
         ),
         child: GestureDetector(
           onTap: onTap,
