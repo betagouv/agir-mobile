@@ -35,6 +35,56 @@ class AideSimulateurVeloPage extends StatefulWidget {
 class _AideSimulateurVeloPageState extends State<AideSimulateurVeloPage> {
   final _prixVeloControlleur = TextEditingController();
 
+  void _handlePrix(final BuildContext context, final String value) {
+    final parse = int.tryParse(value);
+    if (parse == null) {
+      return;
+    }
+    context.read<AideVeloBloc>().add(AideVeloPrixChange(parse));
+  }
+
+  void _handleTagPrix(final BuildContext context, final int prix) {
+    context.read<AideVeloBloc>().add(AideVeloPrixChange(prix));
+    _prixVeloControlleur.text = '$prix';
+  }
+
+  void _handleVille(final BuildContext context, final String? value) {
+    if (value == null) {
+      return;
+    }
+    context.read<AideVeloBloc>().add(AideVeloVilleChange(value));
+  }
+
+  void _handleNombreDePartsFiscales(
+    final BuildContext context,
+    final String value,
+  ) {
+    final parse = double.tryParse(value);
+    if (parse == null) {
+      return;
+    }
+
+    context
+        .read<AideVeloBloc>()
+        .add(AideVeloNombreDePartsFiscalesChange(parse));
+  }
+
+  void _handleRevenuFiscal(final BuildContext context, final int? value) {
+    if (value == null) {
+      return;
+    }
+    context.read<AideVeloBloc>().add(AideVeloRevenuFiscalChange(value));
+  }
+
+  Future<void> _handlePlusDaide() async {
+    await launchUrlString('https://example.com');
+  }
+
+  Future<void> _handleEstimationDemandee(final BuildContext context) async {
+    context.read<AideVeloBloc>().add(const AideVeloEstimationDemandee());
+    await GoRouter.of(context).pushNamed(AideSimulateurVeloDisponiblePage.name);
+  }
+
   @override
   void dispose() {
     _prixVeloControlleur.dispose();
@@ -67,13 +117,7 @@ class _AideSimulateurVeloPageState extends State<AideSimulateurVeloPage> {
               width: 114,
               child: DsfrInput(
                 label: Localisation.prixDuVelo,
-                onChanged: (final value) {
-                  final parse = int.tryParse(value);
-                  if (parse == null) {
-                    return;
-                  }
-                  context.read<AideVeloBloc>().add(AideVeloPrixChange(parse));
-                },
+                onChanged: (final value) => _handlePrix(context, value),
                 controller: _prixVeloControlleur,
                 keyboardType: TextInputType.number,
               ),
@@ -105,10 +149,7 @@ class _AideSimulateurVeloPageState extends State<AideSimulateurVeloPage> {
                 ),
                 backgroundColor: DsfrColors.info950,
                 foregroundColor: foregroundColor,
-                onTap: () {
-                  context.read<AideVeloBloc>().add(AideVeloPrixChange(e.prix));
-                  _prixVeloControlleur.text = '${e.prix}';
-                },
+                onTap: () => _handleTagPrix(context, e.prix),
               ),
             );
           }).separator(const SizedBox(height: DsfrSpacings.s1w)),
@@ -138,14 +179,7 @@ class _AideSimulateurVeloPageState extends State<AideSimulateurVeloPage> {
                       .communes
                       .map((final e) => DropdownMenuEntry(value: e, label: e))
                       .toList(),
-                  onSelected: (final value) {
-                    if (value == null) {
-                      return;
-                    }
-                    context
-                        .read<AideVeloBloc>()
-                        .add(AideVeloVilleChange(value));
-                  },
+                  onSelected: (final value) => _handleVille(context, value),
                 ),
               ),
             ],
@@ -158,16 +192,8 @@ class _AideSimulateurVeloPageState extends State<AideSimulateurVeloPage> {
           const SizedBox(height: DsfrSpacings.s1v),
           DsfrInput(
             label: Localisation.nombrePartsFiscales,
-            onChanged: (final value) {
-              final parse = double.tryParse(value);
-              if (parse == null) {
-                return;
-              }
-
-              context
-                  .read<AideVeloBloc>()
-                  .add(AideVeloNombreDePartsFiscalesChange(parse));
-            },
+            onChanged: (final value) =>
+                _handleNombreDePartsFiscales(context, value),
             hint: Localisation.nombrePartsFiscalesDescription,
             width: inputWidth,
           ),
@@ -179,14 +205,7 @@ class _AideSimulateurVeloPageState extends State<AideSimulateurVeloPage> {
               16000: Localisation.tranche1,
               35000: Localisation.tranche2,
             },
-            onCallback: (final value) {
-              if (value == null) {
-                return;
-              }
-              context
-                  .read<AideVeloBloc>()
-                  .add(AideVeloRevenuFiscalChange(value));
-            },
+            onCallback: (final value) => _handleRevenuFiscal(context, value),
           ),
           const SizedBox(height: DsfrSpacings.s3w),
           DsfrAccordionsGroup(
@@ -206,9 +225,7 @@ class _AideSimulateurVeloPageState extends State<AideSimulateurVeloPage> {
                       DsfrLink.sm(
                         label: Localisation.plusDaide,
                         icon: DsfrIcons.systemExternalLinkFill,
-                        onTap: () async {
-                          await launchUrlString('https://example.com');
-                        },
+                        onTap: _handlePlusDaide,
                       ),
                     ],
                   ),
@@ -230,13 +247,7 @@ class _AideSimulateurVeloPageState extends State<AideSimulateurVeloPage> {
       bottomNavigationBar: FnvBottomBar(
         child: DsfrButton.lg(
           label: Localisation.estimerMesAides,
-          onTap: () async {
-            context
-                .read<AideVeloBloc>()
-                .add(const AideVeloEstimationDemandee());
-            await GoRouter.of(context)
-                .pushNamed(AideSimulateurVeloDisponiblePage.name);
-          },
+          onTap: () async => _handleEstimationDemandee(context),
         ),
       ),
       backgroundColor: FnvColors.aidesFond,

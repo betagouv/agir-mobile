@@ -25,6 +25,11 @@ class DsfrRadioButtonSet<T> extends StatefulWidget {
 class _DsfrRadioButtonSetState<T> extends State<DsfrRadioButtonSet<T>> {
   T? _value;
 
+  void _handleChange(final T? value) => setState(() {
+        _value = value;
+        widget.onCallback(_value);
+      });
+
   @override
   Widget build(final BuildContext context) {
     final values = widget.values;
@@ -35,16 +40,11 @@ class _DsfrRadioButtonSetState<T> extends State<DsfrRadioButtonSet<T>> {
         const SizedBox(height: DsfrSpacings.s1w),
         ...values.entries
             .map(
-              (final e) => DsfrRadioButton(
+              (final e) => DsfrRadioButton<T?>(
                 title: e.value,
                 value: e.key,
                 groupValue: _value,
-                onChanged: (final value) {
-                  setState(() {
-                    _value = value;
-                    widget.onCallback(_value);
-                  });
-                },
+                onChanged: _handleChange,
               ),
             )
             .separator(const SizedBox(height: DsfrSpacings.s1w)),

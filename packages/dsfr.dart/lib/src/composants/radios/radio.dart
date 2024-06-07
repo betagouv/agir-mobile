@@ -17,11 +17,11 @@ class DsfrRadioButton<T> extends StatelessWidget {
   final T groupValue;
   final ValueChanged<T?> onChanged;
 
+  void _handleChange() => onChanged(value);
+
   @override
   Widget build(final BuildContext context) => GestureDetector(
-        onTap: () {
-          onChanged(value);
-        },
+        onTap: _handleChange,
         behavior: HitTestBehavior.opaque,
         child: DecoratedBox(
           decoration: BoxDecoration(

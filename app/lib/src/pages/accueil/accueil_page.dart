@@ -32,6 +32,9 @@ class AccueilPage extends StatelessWidget {
         },
       );
 
+  Future<void> _handleSeDeconnecter(final BuildContext context) async =>
+      context.read<AuthentificationRepository>().deconnectionDemandee();
+
   @override
   Widget build(final BuildContext context) {
     final state = context.watch<UtilisateurBloc>().state;
@@ -92,11 +95,7 @@ class AccueilPage extends StatelessWidget {
                       const Spacer(),
                       DsfrLink.md(
                         label: 'Se déconnecter',
-                        onTap: () async {
-                          await context
-                              .read<AuthentificationRepository>()
-                              .deconnectionDemandee();
-                        },
+                        onTap: () async => _handleSeDeconnecter(context),
                       ),
                       const SizedBox(height: DsfrSpacings.s3w),
                       const Align(child: VersionLabel()),

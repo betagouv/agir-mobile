@@ -80,13 +80,12 @@ dart_code_metrics:
     - prefer-named-parameters:
         max-number: 2
     - prefer-for-loop-in-children: false
+    - no-empty-block: false
+    - avoid-passing-async-when-sync-expected: false
+    - avoid-redundant-async: false
+    - avoid-long-functions:
+        exclude:
+          - test/**
     - avoid-passing-self-as-argument: false # voir pour réactiver
-    - avoid-long-functions: false # voir pour réactiver
-    - no-empty-block: false # voir pour réactiver
     - avoid-missing-image-alt: false # voir pour réactiver
-    - prefer-extracting-callbacks: false # à réactiver
     - avoid-shrink-wrap-in-lists: false # à réactiver
-    - avoid-passing-async-when-sync-expected: false # à réactiver
-    - avoid-async-call-in-sync-function: false # à réactiver
-    - avoid-redundant-async: false # voir pour réactiver
-    - avoid-nullable-interpolation: false # à réactiver

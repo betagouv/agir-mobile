@@ -18,6 +18,18 @@ class SeConnecterPage extends StatelessWidget {
         builder: (final context, final state) => const SeConnecterPage(),
       );
 
+  void _handleAdresseMail(final BuildContext context, final String value) {
+    context.read<SeConnecterBloc>().add(SeConnecterAdresseMailAChange(value));
+  }
+
+  void _handleMotDePasse(final BuildContext context, final String value) {
+    context.read<SeConnecterBloc>().add(SeConnecterMotDePasseAChange(value));
+  }
+
+  void _handleSeConnecter(final BuildContext context) {
+    context.read<SeConnecterBloc>().add(const SeConnecterConnexionDemandee());
+  }
+
   @override
   Widget build(final BuildContext context) => Scaffold(
         appBar: AppBar(
@@ -41,32 +53,21 @@ class SeConnecterPage extends StatelessWidget {
                 const SizedBox(height: DsfrSpacings.s3w),
                 DsfrInput(
                   label: Localisation.adresseElectronique,
-                  onChanged: (final value) {
-                    context
-                        .read<SeConnecterBloc>()
-                        .add(SeConnecterAdresseMailAChange(value));
-                  },
+                  onChanged: (final value) =>
+                      _handleAdresseMail(context, value),
                   keyboardType: TextInputType.emailAddress,
                 ),
                 const SizedBox(height: DsfrSpacings.s2w),
                 DsfrInput(
                   label: Localisation.motDePasse,
-                  onChanged: (final value) {
-                    context
-                        .read<SeConnecterBloc>()
-                        .add(SeConnecterMotDePasseAChange(value));
-                  },
+                  onChanged: (final value) => _handleMotDePasse(context, value),
                   passwordMode: true,
                   keyboardType: TextInputType.visiblePassword,
                 ),
                 const Spacer(),
                 DsfrButton.lg(
                   label: Localisation.seConnecter,
-                  onTap: () {
-                    context
-                        .read<SeConnecterBloc>()
-                        .add(const SeConnecterConnexionDemandee());
-                  },
+                  onTap: () => _handleSeConnecter(context),
                 ),
               ],
             ),

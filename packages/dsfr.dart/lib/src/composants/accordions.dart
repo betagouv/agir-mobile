@@ -29,6 +29,12 @@ class _DsfrAccordionsGroupState extends State<DsfrAccordionsGroup> {
   int? _panelIndex;
   bool _isExpanded = false;
 
+  void _handleCallback(final int? panelIndex, final bool isExpanded) =>
+      setState(() {
+        _panelIndex = panelIndex;
+        _isExpanded = isExpanded;
+      });
+
   @override
   Widget build(final context) {
     const divider = Divider(
@@ -47,12 +53,7 @@ class _DsfrAccordionsGroupState extends State<DsfrAccordionsGroup> {
             index: index,
             item: e.$2,
             isExpanded: _panelIndex == index && _isExpanded,
-            onAccordionCallback: (final panelIndex, final isExpanded) {
-              setState(() {
-                _panelIndex = panelIndex;
-                _isExpanded = isExpanded;
-              });
-            },
+            onAccordionCallback: _handleCallback,
           );
         }).separator(divider),
         divider,
@@ -74,6 +75,8 @@ class _DsfrAccordion extends StatelessWidget {
   final bool isExpanded;
   final DsfrAccordionCallback onAccordionCallback;
 
+  void _handleTap() => onAccordionCallback(index, !isExpanded);
+
   @override
   Widget build(final BuildContext context) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -81,9 +84,7 @@ class _DsfrAccordion extends StatelessWidget {
           ColoredBox(
             color: isExpanded ? DsfrColors.blueFrance925 : Colors.transparent,
             child: GestureDetector(
-              onTap: () {
-                onAccordionCallback(index, !isExpanded);
-              },
+              onTap: _handleTap,
               behavior: HitTestBehavior.opaque,
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s3v),

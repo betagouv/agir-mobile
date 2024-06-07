@@ -33,6 +33,10 @@ class _PreOnboardingCarrouselPageState extends State<PreOnboardingCarrouselPage>
     _tabController = TabController(length: 4, vsync: this);
   }
 
+  Future<void> _handleAllerASeConnecter(final BuildContext context) async {
+    await context.pushNamed(SeConnecterPage.name);
+  }
+
   @override
   void dispose() {
     _tabController.dispose();
@@ -88,17 +92,15 @@ class _PreOnboardingCarrouselPageState extends State<PreOnboardingCarrouselPage>
                           const Spacer(),
                           DsfrButton.lg(
                             label: Localisation.suivant,
-                            onTap: () async {
-                              await context.pushNamed(SeConnecterPage.name);
-                            },
+                            onTap: () async =>
+                                _handleAllerASeConnecter(context),
                           ),
                           const SizedBox(height: DsfrSpacings.s3w),
                           Center(
                             child: DsfrLink.md(
                               label: Localisation.jaiDejaUnCompte,
-                              onTap: () async {
-                                await context.pushNamed(SeConnecterPage.name);
-                              },
+                              onTap: () async =>
+                                  _handleAllerASeConnecter(context),
                             ),
                           ),
                           const SizedBox(height: DsfrSpacings.s8w),
