@@ -14,11 +14,14 @@ class AidesApiAdapter implements AidesRepository {
   @override
   Future<List<Aide>> recupereLesAides() async {
     final utilisateurId = await _apiClient.recupererUtilisateurId;
+    if (utilisateurId == null) {
+      throw Exception();
+    }
     final response = await _apiClient.get(
       Uri.parse('/utilisateurs/$utilisateurId/aides'),
     );
     if (response.statusCode != 200) {
-      throw UnimplementedError();
+      throw Exception();
     }
 
     final json = jsonDecode(response.body) as List<dynamic>;

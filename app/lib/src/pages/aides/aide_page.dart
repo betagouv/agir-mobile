@@ -2,6 +2,7 @@ import 'package:app/src/design_system/composants/app_bar.dart';
 import 'package:app/src/design_system/composants/bottom_bar.dart';
 import 'package:app/src/design_system/fondamentaux/colors.dart';
 import 'package:app/src/fonctionnalites/aides/bloc/aide/aide_bloc.dart';
+import 'package:app/src/fonctionnalites/aides/domain/aide.dart';
 import 'package:app/src/fonctionnalites/aides/widgets/tag_simulateur.dart';
 import 'package:app/src/l10n/l10n.dart';
 import 'package:app/src/pages/aides/aide_simulateur_velo_page.dart';
@@ -25,6 +26,15 @@ class AidePage extends StatelessWidget {
         name: name,
         builder: (final context, final state) => const AidePage(),
       );
+
+  Future<void> _handleAccederAuSimulateur(
+    final BuildContext context,
+    final Aide aide,
+  ) async {
+    if (aide.estSimulateurVelo) {
+      await GoRouter.of(context).pushNamed(AideSimulateurVeloPage.name);
+    }
+  }
 
   @override
   Widget build(final BuildContext context) {
@@ -68,12 +78,7 @@ class AidePage extends StatelessWidget {
           ? FnvBottomBar(
               child: DsfrButton.lg(
                 label: Localisation.accederAuSimulateur,
-                onTap: () async {
-                  if (aide.estSimulateurVelo) {
-                    await GoRouter.of(context)
-                        .pushNamed(AideSimulateurVeloPage.name);
-                  }
-                },
+                onTap: () async => _handleAccederAuSimulateur(context, aide),
               ),
             )
           : null,

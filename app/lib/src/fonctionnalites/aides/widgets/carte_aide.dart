@@ -16,6 +16,11 @@ class CarteAide extends StatelessWidget {
 
   final Aide aide;
 
+  Future<void> _handleTap(final BuildContext context) async {
+    context.read<AideBloc>().add(AideSelectionnee(aide));
+    await GoRouter.of(context).pushNamed(AidePage.name);
+  }
+
   @override
   Widget build(final BuildContext context) => DecoratedBox(
         decoration: const ShapeDecoration(
@@ -24,10 +29,7 @@ class CarteAide extends StatelessWidget {
           shape: roundedRectangleBorder,
         ),
         child: GestureDetector(
-          onTap: () async {
-            context.read<AideBloc>().add(AideSelectionnee(aide));
-            await GoRouter.of(context).pushNamed(AidePage.name);
-          },
+          onTap: () async => _handleTap(context),
           child: Padding(
             padding: const EdgeInsets.all(DsfrSpacings.s2w),
             child: Row(

@@ -96,6 +96,9 @@ class _Body extends StatelessWidget {
 
   final List<AideVelo> aides;
 
+  Future<bool> _handleVoirLesDemarches(final AideVelo e) =>
+      launchUrlString(e.lien);
+
   @override
   Widget build(final BuildContext context) => Padding(
         padding: const EdgeInsets.all(DsfrSpacings.s2w),
@@ -122,9 +125,7 @@ class _Body extends StatelessWidget {
                           DsfrLink.sm(
                             label: Localisation.voirLesDemarches,
                             icon: DsfrIcons.systemExternalLinkFill,
-                            onTap: () async {
-                              await launchUrlString(e.lien);
-                            },
+                            onTap: () async => _handleVoirLesDemarches(e),
                           ),
                         ],
                       ),

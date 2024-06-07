@@ -22,6 +22,9 @@ class AideVeloApiAdapter implements AideVeloRepository {
     required final int revenuFiscal,
   }) async {
     final utilisateurId = await _apiClient.recupererUtilisateurId;
+    if (utilisateurId == null) {
+      throw Exception();
+    }
     final responses = await Future.wait([
       _apiClient.patch(
         Uri.parse('/utilisateurs/$utilisateurId/profile'),
@@ -38,7 +41,7 @@ class AideVeloApiAdapter implements AideVeloRepository {
 
     for (final response in responses) {
       if (response.statusCode != 200) {
-        throw Exception('Failed to update profile or logement');
+        throw Exception();
       }
     }
 
@@ -48,7 +51,7 @@ class AideVeloApiAdapter implements AideVeloRepository {
     );
 
     if (response.statusCode != 200) {
-      throw UnimplementedError();
+      throw Exception();
     }
     final json = jsonDecode(response.body) as Map<String, dynamic>;
 
