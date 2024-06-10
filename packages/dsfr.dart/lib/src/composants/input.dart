@@ -2,12 +2,14 @@ import 'package:dsfr/src/fondamentaux/colors.g.dart';
 import 'package:dsfr/src/fondamentaux/fonts.dart';
 import 'package:dsfr/src/fondamentaux/spacing.g.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class DsfrInput extends StatefulWidget {
   const DsfrInput({
     required this.label,
     required this.onChanged,
     this.hint,
+    this.suffixText,
     this.controller,
     this.width,
     this.labelStyle = DsfrFonts.bodyMd,
@@ -15,6 +17,7 @@ class DsfrInput extends StatefulWidget {
     this.hintStyle = DsfrFonts.bodyXs,
     this.hintColor = DsfrColors.grey425,
     this.inputStyle = DsfrFonts.bodyMd,
+    this.textAlign = TextAlign.start,
     this.passwordMode = false,
     this.keyboardType,
     this.inputBorderColor = DsfrColors.grey200,
@@ -25,11 +28,13 @@ class DsfrInput extends StatefulWidget {
     this.focusColor = DsfrColors.focus525,
     this.focusThickness = 2,
     this.focusPadding = const EdgeInsets.all(4),
+    this.inputFormatters,
     super.key,
   });
 
   final String label;
   final String? hint;
+  final String? suffixText;
   final TextEditingController? controller;
   final ValueChanged<String> onChanged;
 
@@ -39,6 +44,7 @@ class DsfrInput extends StatefulWidget {
   final TextStyle hintStyle;
   final Color hintColor;
   final TextStyle inputStyle;
+  final TextAlign textAlign;
   final bool passwordMode;
   final TextInputType? keyboardType;
   final Color inputBorderColor;
@@ -49,6 +55,7 @@ class DsfrInput extends StatefulWidget {
   final Color focusColor;
   final double focusThickness;
   final EdgeInsetsGeometry focusPadding;
+  final List<TextInputFormatter>? inputFormatters;
 
   @override
   State<DsfrInput> createState() => _DsfrInputState();
@@ -124,6 +131,8 @@ class _DsfrInputState extends State<DsfrInput> {
                 controller: widget.controller,
                 focusNode: _focusNode,
                 decoration: InputDecoration(
+                  suffixText: widget.suffixText,
+                  suffixStyle: widget.inputStyle,
                   filled: true,
                   fillColor: widget.fillColor,
                   focusedBorder: underlineInputBorder,
@@ -133,10 +142,12 @@ class _DsfrInputState extends State<DsfrInput> {
                 ),
                 keyboardType: widget.keyboardType,
                 style: widget.inputStyle,
+                textAlign: widget.textAlign,
                 obscureText: widget.passwordMode,
                 autocorrect: !widget.passwordMode,
                 enableSuggestions: !widget.passwordMode,
                 onChanged: widget.onChanged,
+                inputFormatters: widget.inputFormatters,
               ),
             ),
           ),

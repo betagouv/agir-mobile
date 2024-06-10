@@ -15,6 +15,7 @@ import 'package:app/src/router/app_router.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
 
 class App extends StatefulWidget {
@@ -96,6 +97,13 @@ class _AppState extends State<App> {
               scaffoldBackgroundColor: Colors.white,
               appBarTheme: const AppBarTheme(backgroundColor: Colors.white),
             ),
+            locale: const Locale('fr', 'FR'),
+            localizationsDelegates: const [
+              GlobalCupertinoLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+            ],
+            supportedLocales: const [Locale('fr', 'FR')],
           ),
         ),
       );
