@@ -10,6 +10,7 @@ import 'package:app/src/l10n/l10n.dart';
 import 'package:app/src/pages/aides/aide_simulateur_velo_disponibles_page.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:go_router/go_router.dart';
@@ -59,11 +60,10 @@ class _AideSimulateurVeloPageState extends State<AideSimulateurVeloPage> {
     final BuildContext context,
     final String value,
   ) {
-    final parse = double.tryParse(value);
+    final parse = double.tryParse(value.replaceFirst(',', '.'));
     if (parse == null) {
       return;
     }
-
     context
         .read<AideVeloBloc>()
         .add(AideVeloNombreDePartsFiscalesChange(parse));
@@ -118,8 +118,11 @@ class _AideSimulateurVeloPageState extends State<AideSimulateurVeloPage> {
               child: DsfrInput(
                 label: Localisation.prixDuVelo,
                 onChanged: (final value) => _handlePrix(context, value),
+                suffixText: '€',
                 controller: _prixVeloControlleur,
+                textAlign: TextAlign.end,
                 keyboardType: TextInputType.number,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               ),
             ),
           ),
@@ -167,6 +170,11 @@ class _AideSimulateurVeloPageState extends State<AideSimulateurVeloPage> {
                   onChanged: (final value) => context
                       .read<AideVeloBloc>()
                       .add(AideVeloCodePostalChange(value)),
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                    LengthLimitingTextInputFormatter(5),
+                  ],
                 ),
               ),
               const SizedBox(width: DsfrSpacings.s2w),
@@ -196,6 +204,8 @@ class _AideSimulateurVeloPageState extends State<AideSimulateurVeloPage> {
                 _handleNombreDePartsFiscales(context, value),
             hint: Localisation.nombrePartsFiscalesDescription,
             width: inputWidth,
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+            inputFormatters: const [],
           ),
           const SizedBox(height: DsfrSpacings.s3w),
           DsfrRadioButtonSet(
