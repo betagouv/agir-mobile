@@ -1,5 +1,13 @@
 version: 2
 updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    reviewers:
+      - "lsaudon"
+    commit-message:
+      prefix: "chore: "
   - package-ecosystem: "pub"
     directory: "/app"
     schedule:
