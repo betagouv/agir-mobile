@@ -18,10 +18,10 @@ class AuthentificationApiAdapter implements AuthentificationRepository {
   ) async {
     final response = await _apiClient.post(
       Uri.parse('/utilisateurs/login'),
-      body: {
+      body: jsonEncode({
         'email': informationDeConnexion.adresseMail,
         'mot_de_passe': informationDeConnexion.motDePasse,
-      },
+      }),
     );
     if (response.statusCode != 201) {
       return;
