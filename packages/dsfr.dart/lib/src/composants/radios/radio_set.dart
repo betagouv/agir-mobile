@@ -11,11 +11,13 @@ class DsfrRadioButtonSet<T> extends StatefulWidget {
     required this.title,
     required this.values,
     required this.onCallback,
+    this.initialValue,
     super.key,
   });
 
   final String title;
   final Map<T, String> values;
+  final T? initialValue;
   final Callback<T?> onCallback;
 
   @override
@@ -24,6 +26,12 @@ class DsfrRadioButtonSet<T> extends StatefulWidget {
 
 class _DsfrRadioButtonSetState<T> extends State<DsfrRadioButtonSet<T>> {
   T? _value;
+
+  @override
+  void initState() {
+    super.initState();
+    _value = widget.initialValue;
+  }
 
   void _handleChange(final T? value) => setState(() {
         _value = value;
@@ -35,6 +43,7 @@ class _DsfrRadioButtonSetState<T> extends State<DsfrRadioButtonSet<T>> {
     final values = widget.values;
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(widget.title, style: DsfrFonts.bodyMd),
         const SizedBox(height: DsfrSpacings.s1w),

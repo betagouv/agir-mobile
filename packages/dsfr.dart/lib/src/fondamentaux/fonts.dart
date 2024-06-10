@@ -71,5 +71,8 @@ abstract final class DsfrFonts {
   static const bodySmMedium =
       DsfrTextStyle(fontSize: 14, fontWeight: FontWeight.w500);
 
+  static const bodySmBold =
+      DsfrTextStyle(fontSize: 14, fontWeight: FontWeight.bold);
+
   static const bodyXs = DsfrTextStyle(fontSize: 12);
 }

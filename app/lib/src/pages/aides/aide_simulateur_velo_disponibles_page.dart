@@ -125,6 +125,7 @@ class _Body extends StatelessWidget {
                           DsfrLink.sm(
                             label: Localisation.voirLesDemarches,
                             icon: DsfrIcons.systemExternalLinkFill,
+                            iconPosition: DsfrLinkIconPosition.end,
                             onTap: () async => _handleVoirLesDemarches(e),
                           ),
                         ],

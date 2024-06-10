@@ -7,6 +7,10 @@ sealed class AideVeloEvent extends Equatable {
   List<Object> get props => [];
 }
 
+final class AideVeloInformationsDemandee extends AideVeloEvent {
+  const AideVeloInformationsDemandee();
+}
+
 final class AideVeloPrixChange extends AideVeloEvent {
   const AideVeloPrixChange(this.valeur);
 
@@ -14,6 +18,10 @@ final class AideVeloPrixChange extends AideVeloEvent {
 
   @override
   List<Object> get props => [valeur];
+}
+
+final class AideVeloModificationDemandee extends AideVeloEvent {
+  const AideVeloModificationDemandee();
 }
 
 final class AideVeloCodePostalChange extends AideVeloEvent {

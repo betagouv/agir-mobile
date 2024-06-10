@@ -3,6 +3,7 @@ import 'package:app/src/fonctionnalites/authentification/domain/authentification
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../aide_velo_repository_mock.dart';
 import '../aides_repository_mock.dart';
 import '../authentification_repository_mock.dart';
 import '../communes_repository_mock.dart';
@@ -14,6 +15,10 @@ import '../version_repository_mock.dart';
 Future<void> ielLanceLapplication(final WidgetTester tester) async {
   final authentificationStatusManager = AuthentificationStatutManager()
     ..gererAuthentificationStatut(ScenarioContext().authentificationStatut);
+  ScenarioContext().aideVeloRepositoryMock = AideVeloRepositoryMock(
+    aideVeloParType: ScenarioContext().aideVeloParType,
+    profil: ScenarioContext().aideVeloInformations,
+  );
   await tester.pumpFrames(
     App(
       authentificationStatusManager: authentificationStatusManager,
@@ -26,7 +31,7 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
       aidesRepository: AidesRepositoryMock(ScenarioContext().aides),
       versionRepository: const VersionRepositoryMock(),
       communesRepository: CommunesRepositoryMock(ScenarioContext().communes),
-      aideVeloRepository: ScenarioContext().aideVeloRepositoryMock,
+      aideVeloRepository: ScenarioContext().aideVeloRepositoryMock!,
     ),
     Durations.short1,
   );

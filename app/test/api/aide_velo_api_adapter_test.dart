@@ -1,5 +1,6 @@
 import 'package:app/src/fonctionnalites/aides/domain/aide_velo.dart';
 import 'package:app/src/fonctionnalites/aides/domain/aide_velo_collectivite.dart';
+import 'package:app/src/fonctionnalites/aides/domain/aide_velo_informations.dart';
 import 'package:app/src/fonctionnalites/aides/domain/aide_velo_par_type.dart';
 import 'package:app/src/fonctionnalites/aides/infrastructure/adapters/aide_velo_api_adapter.dart';
 import 'package:app/src/fonctionnalites/authentification/domain/authentification_statut_manager.dart';
@@ -73,6 +74,70 @@ const aideVeloParType = AideVeloParType(
 
 void main() {
   group('AideVeloApiAdapter', () {
+    test('recupererProfil', () async {
+      final client = ClientMock()
+        ..getSuccess(
+          path: '/utilisateurs/$utilisateurId/profile',
+          response: CustomResponse('''
+{
+    "email": "ww@w.com",
+    "nom": "WWW",
+    "prenom": "Wojtek",
+    "code_postal": "75001",
+    "commune": "PARIS 01",
+    "revenu_fiscal": 16000,
+    "nombre_de_parts_fiscales": 2.5,
+    "abonnement_ter_loire": false,
+    "onboarding_result": {
+        "logement"    : 3,
+        "transports"  : 4,
+        "alimentation": 1,
+        "consommation": 2
+    },
+    "logement": {
+        "nombre_adultes": 2,
+        "nombre_enfants": 1,
+        "code_postal": "75001",
+        "commune": "PARIS 01",
+        "type": "maison",
+        "superficie": "superficie_70",
+        "proprietaire": true,
+        "chauffage": "gaz",
+        "plus_de_15_ans": null,
+        "dpe": null
+    }
+}'''),
+        );
+
+      final authentificationTokenStorage = AuthentificationTokenStorage(
+        secureStorage: FlutterSecureStorageMock(),
+        authentificationStatusManager: AuthentificationStatutManager(),
+      );
+      await authentificationTokenStorage.sauvegarderTokenEtUtilisateurId(
+        token,
+        utilisateurId,
+      );
+
+      final adapter = AideVeloApiAdapter(
+        apiClient: AuthentificationApiClient(
+          apiUrl: apiUrl,
+          authentificationTokenStorage: authentificationTokenStorage,
+          inner: client,
+        ),
+      );
+
+      final result = await adapter.recupererProfil();
+      expect(
+        result,
+        const AideVeloInformations(
+          codePostal: '75001',
+          ville: 'PARIS 01',
+          nombreDePartsFiscales: 2.5,
+          revenuFiscal: 16000,
+        ),
+      );
+    });
+
     test('simuler', () async {
       final client = ClientMock()
         ..patchSuccess(
