@@ -9,6 +9,8 @@ class DsfrSelect<T> extends StatelessWidget {
     required this.label,
     required this.dropdownMenuEntries,
     required this.onSelected,
+    this.controller,
+    this.initialSelection,
     this.hint,
     this.labelStyle = DsfrFonts.bodyMd,
     this.labelColor = DsfrColors.grey50,
@@ -27,6 +29,8 @@ class DsfrSelect<T> extends StatelessWidget {
   final String? hint;
   final List<DropdownMenuEntry<T>> dropdownMenuEntries;
   final ValueChanged<T?> onSelected;
+  final TextEditingController? controller;
+  final T? initialSelection;
 
   final TextStyle labelStyle;
   final Color labelColor;
@@ -74,6 +78,8 @@ class DsfrSelect<T> extends StatelessWidget {
           border: underlineInputBorder,
           constraints: inputConstraints,
         ),
+        controller: controller,
+        initialSelection: initialSelection,
         onSelected: onSelected,
         expandedInsets: EdgeInsets.zero,
         dropdownMenuEntries: dropdownMenuEntries,

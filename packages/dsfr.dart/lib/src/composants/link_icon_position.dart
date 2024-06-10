@@ -1,0 +1,4 @@
+enum DsfrLinkIconPosition {
+  start,
+  end,
+}

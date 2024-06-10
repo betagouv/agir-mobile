@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:app/src/fonctionnalites/aides/domain/aide_velo.dart';
 import 'package:app/src/fonctionnalites/aides/domain/aide_velo_collectivite.dart';
+import 'package:app/src/fonctionnalites/aides/domain/aide_velo_informations.dart';
 import 'package:app/src/fonctionnalites/aides/domain/aide_velo_par_type.dart';
 import 'package:app/src/fonctionnalites/aides/domain/ports/aide_velo_repository.dart';
 import 'package:app/src/fonctionnalites/authentification/infrastructure/adapters/authentification_api_client.dart';
@@ -12,6 +13,31 @@ class AideVeloApiAdapter implements AideVeloRepository {
   }) : _apiClient = apiClient;
 
   final AuthentificationApiClient _apiClient;
+
+  @override
+  Future<AideVeloInformations> recupererProfil() async {
+    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    if (utilisateurId == null) {
+      throw Exception();
+    }
+
+    final response =
+        await _apiClient.get(Uri.parse('/utilisateurs/$utilisateurId/profile'));
+
+    if (response.statusCode != 200) {
+      throw Exception();
+    }
+
+    final json = jsonDecode(response.body) as Map<String, dynamic>;
+
+    return AideVeloInformations(
+      codePostal: json['code_postal'] as String,
+      ville: json['commune'] as String,
+      nombreDePartsFiscales:
+          (json['nombre_de_parts_fiscales'] as num).toDouble(),
+      revenuFiscal: (json['revenu_fiscal'] as num?)?.toInt(),
+    );
+  }
 
   @override
   Future<AideVeloParType> simuler({

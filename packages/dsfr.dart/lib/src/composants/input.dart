@@ -1,3 +1,5 @@
+// ignore_for_file: prefer-correct-callback-field-name
+
 import 'package:dsfr/src/fondamentaux/colors.g.dart';
 import 'package:dsfr/src/fondamentaux/fonts.dart';
 import 'package:dsfr/src/fondamentaux/spacing.g.dart';
@@ -11,6 +13,8 @@ class DsfrInput extends StatefulWidget {
     this.hint,
     this.suffixText,
     this.controller,
+    this.initialValue,
+    this.validator,
     this.width,
     this.labelStyle = DsfrFonts.bodyMd,
     this.labelColor = DsfrColors.grey50,
@@ -36,7 +40,9 @@ class DsfrInput extends StatefulWidget {
   final String? hint;
   final String? suffixText;
   final TextEditingController? controller;
+  final String? initialValue;
   final ValueChanged<String> onChanged;
+  final FormFieldValidator<String>? validator;
 
   final double? width;
   final TextStyle labelStyle;
@@ -127,8 +133,9 @@ class _DsfrInputState extends State<DsfrInput> {
                 : EdgeInsets.zero,
             child: SizedBox(
               width: widget.width,
-              child: TextField(
+              child: TextFormField(
                 controller: widget.controller,
+                initialValue: widget.initialValue,
                 focusNode: _focusNode,
                 decoration: InputDecoration(
                   suffixText: widget.suffixText,
@@ -147,6 +154,7 @@ class _DsfrInputState extends State<DsfrInput> {
                 autocorrect: !widget.passwordMode,
                 enableSuggestions: !widget.passwordMode,
                 onChanged: widget.onChanged,
+                validator: widget.validator,
                 inputFormatters: widget.inputFormatters,
               ),
             ),

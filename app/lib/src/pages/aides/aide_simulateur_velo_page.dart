@@ -14,9 +14,16 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:go_router/go_router.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
-class AideSimulateurVeloPage extends StatefulWidget {
+const _inputWidth = 97.0;
+
+const _revenusFiscals = {
+  0: Localisation.tranche0,
+  16000: Localisation.tranche1,
+  35000: Localisation.tranche2,
+};
+
+class AideSimulateurVeloPage extends StatelessWidget {
   const AideSimulateurVeloPage({super.key});
 
   static const name = 'aide-simulateur-velo';
@@ -30,10 +37,48 @@ class AideSimulateurVeloPage extends StatefulWidget {
       );
 
   @override
-  State<AideSimulateurVeloPage> createState() => _AideSimulateurVeloPageState();
+  Widget build(final BuildContext context) {
+    context.read<AideVeloBloc>().add(const AideVeloInformationsDemandee());
+
+    return const _AideSimulateurVeloView();
+  }
 }
 
-class _AideSimulateurVeloPageState extends State<AideSimulateurVeloPage> {
+class _AideSimulateurVeloView extends StatelessWidget {
+  const _AideSimulateurVeloView();
+
+  @override
+  Widget build(final BuildContext context) => Scaffold(
+        appBar: const FnvAppBar(),
+        body: ListView(
+          padding: const EdgeInsets.symmetric(
+            vertical: DsfrSpacings.s3w,
+            horizontal: DsfrSpacings.s2w,
+          ),
+          children: const [
+            Text(Localisation.simulerMonAide, style: DsfrFonts.headline2),
+            Text(Localisation.acheterUnVelo, style: DsfrFonts.bodyXl),
+            SizedBox(height: DsfrSpacings.s2w),
+            _Prix(),
+            SizedBox(height: DsfrSpacings.s4w),
+            Divider(color: FnvColors.dividerColor),
+            SizedBox(height: DsfrSpacings.s3w),
+            _ElementsNecessaireAuCalcul(),
+          ],
+        ),
+        bottomNavigationBar: const FnvBottomBar(child: _EstimerMesAides()),
+        backgroundColor: FnvColors.aidesFond,
+      );
+}
+
+class _Prix extends StatefulWidget {
+  const _Prix();
+
+  @override
+  State<_Prix> createState() => _PrixState();
+}
+
+class _PrixState extends State<_Prix> {
   final _prixVeloControlleur = TextEditingController();
 
   void _handlePrix(final BuildContext context, final String value) {
@@ -49,42 +94,6 @@ class _AideSimulateurVeloPageState extends State<AideSimulateurVeloPage> {
     _prixVeloControlleur.text = '$prix';
   }
 
-  void _handleVille(final BuildContext context, final String? value) {
-    if (value == null) {
-      return;
-    }
-    context.read<AideVeloBloc>().add(AideVeloVilleChange(value));
-  }
-
-  void _handleNombreDePartsFiscales(
-    final BuildContext context,
-    final String value,
-  ) {
-    final parse = double.tryParse(value.replaceFirst(',', '.'));
-    if (parse == null) {
-      return;
-    }
-    context
-        .read<AideVeloBloc>()
-        .add(AideVeloNombreDePartsFiscalesChange(parse));
-  }
-
-  void _handleRevenuFiscal(final BuildContext context, final int? value) {
-    if (value == null) {
-      return;
-    }
-    context.read<AideVeloBloc>().add(AideVeloRevenuFiscalChange(value));
-  }
-
-  Future<void> _handlePlusDaide() async {
-    await launchUrlString('https://example.com');
-  }
-
-  Future<void> _handleEstimationDemandee(final BuildContext context) async {
-    context.read<AideVeloBloc>().add(const AideVeloEstimationDemandee());
-    await GoRouter.of(context).pushNamed(AideSimulateurVeloDisponiblePage.name);
-  }
-
   @override
   void dispose() {
     _prixVeloControlleur.dispose();
@@ -93,176 +102,347 @@ class _AideSimulateurVeloPageState extends State<AideSimulateurVeloPage> {
 
   @override
   Widget build(final BuildContext context) {
-    const inputWidth = 97.0;
     _prixVeloControlleur.text =
         context.read<AideVeloBloc>().state.prix.toString();
 
-    return Scaffold(
-      appBar: const FnvAppBar(),
-      body: ListView(
-        padding: const EdgeInsets.symmetric(
-          vertical: DsfrSpacings.s3w,
-          horizontal: DsfrSpacings.s2w,
-        ),
-        children: [
-          const Text(
-            Localisation.simulerMonAide,
-            style: DsfrFonts.headline2,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Align(
+          alignment: Alignment.centerLeft,
+          child: SizedBox(
+            width: 114,
+            child: DsfrInput(
+              label: Localisation.prixDuVelo,
+              onChanged: (final value) => _handlePrix(context, value),
+              suffixText: '€',
+              controller: _prixVeloControlleur,
+              validator: (final value) => value == null || value.isEmpty
+                  ? Localisation.prixDuVeloObligatoire
+                  : null,
+              textAlign: TextAlign.end,
+              keyboardType: TextInputType.number,
+              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            ),
           ),
-          const Text(Localisation.acheterUnVelo, style: DsfrFonts.bodyXl),
-          const SizedBox(height: DsfrSpacings.s2w),
-          Align(
+        ),
+        const SizedBox(height: DsfrSpacings.s2w),
+        const Text(
+          Localisation.prixDuVeloExplications,
+          style: FnvTextStyles.prixExplicationsStyle,
+        ),
+        const SizedBox(height: DsfrSpacings.s1w),
+        ...VeloPourSimulateur.values.map((final e) {
+          const foregroundColor = DsfrColors.grey50;
+
+          return Align(
             alignment: Alignment.centerLeft,
-            child: SizedBox(
-              width: 114,
-              child: DsfrInput(
-                label: Localisation.prixDuVelo,
-                onChanged: (final value) => _handlePrix(context, value),
-                suffixText: '€',
-                controller: _prixVeloControlleur,
-                textAlign: TextAlign.end,
-                keyboardType: TextInputType.number,
-                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            child: DsfrTag.md(
+              label: TextSpan(
+                text: Localisation.veloLabel(e.label),
+                children: [
+                  TextSpan(
+                    text: Localisation.euro(e.prix),
+                    style: const TextStyle(
+                      decoration: TextDecoration.underline,
+                      decorationColor: foregroundColor,
+                    ),
+                  ),
+                ],
+              ),
+              backgroundColor: DsfrColors.info950,
+              foregroundColor: foregroundColor,
+              onTap: () => _handleTagPrix(context, e.prix),
+            ),
+          );
+        }).separator(const SizedBox(height: DsfrSpacings.s1w)),
+      ],
+    );
+  }
+}
+
+class _ElementsNecessaireAuCalcul extends StatelessWidget {
+  const _ElementsNecessaireAuCalcul();
+
+  void _handleModification(final BuildContext context) =>
+      context.read<AideVeloBloc>().add(const AideVeloModificationDemandee());
+
+  @override
+  Widget build(final BuildContext context) {
+    final state = context.watch<AideVeloBloc>().state;
+    final bodySmMediumBlue =
+        DsfrFonts.bodySmMedium.copyWith(color: DsfrColors.blueFranceSun113);
+
+    return state.veutModifierLesInformations
+        ? Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const _Avertissement(),
+              const _CodePostalEtVille(),
+              const SizedBox(height: DsfrSpacings.s3w),
+              Text(
+                Localisation.revenuQuestion,
+                style: DsfrFonts.headline6.copyWith(color: DsfrColors.grey50),
+              ),
+              const SizedBox(height: DsfrSpacings.s1v),
+              const _NombreDePartsFiscales(),
+              const SizedBox(height: DsfrSpacings.s3w),
+              const _RevenuFiscal(),
+              const SizedBox(height: DsfrSpacings.s3w),
+              const _Questions(),
+            ],
+          )
+        : Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const Row(
+                children: [
+                  Icon(DsfrIcons.systemErrorWarningLine, size: 16),
+                  SizedBox(width: DsfrSpacings.s1v),
+                  Expanded(
+                    child: Text(
+                      Localisation.elementsNecessaireAuCalcul,
+                      style: DsfrFonts.bodySmBold,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: DsfrSpacings.s1v),
+              Text.rich(
+                TextSpan(
+                  text: Localisation.donneesUtiliseesPart1,
+                  children: [
+                    TextSpan(
+                      text: Localisation.donneesUtiliseesCodePostalEtVille(
+                        codePostal: state.codePostal,
+                        ville: state.ville,
+                      ),
+                      style: bodySmMediumBlue,
+                    ),
+                    const TextSpan(text: Localisation.donneesUtiliseesPart2),
+                    TextSpan(
+                      text: Localisation.donneesUtiliseesRevenuFiscal(
+                        _revenusFiscals[state.revenuFiscal] ?? '',
+                      ),
+                      style: bodySmMediumBlue,
+                    ),
+                    const TextSpan(text: Localisation.donneesUtiliseesPart3),
+                    TextSpan(
+                      text: Localisation.donneesUtiliseesNombreDeParts(
+                        state.nombreDePartsFiscales,
+                      ),
+                      style: bodySmMediumBlue,
+                    ),
+                    const TextSpan(text: Localisation.point),
+                  ],
+                ),
+                style: DsfrFonts.bodySm,
+              ),
+              const SizedBox(height: DsfrSpacings.s3v),
+              Align(
+                alignment: Alignment.centerRight,
+                child: DsfrLink.md(
+                  label: Localisation.modifier,
+                  icon: DsfrIcons.designPencilFill,
+                  onTap: () => _handleModification(context),
+                ),
+              ),
+            ],
+          );
+  }
+}
+
+class _Avertissement extends StatelessWidget {
+  const _Avertissement();
+
+  @override
+  Widget build(final BuildContext context) =>
+      context.watch<AideVeloBloc>().state.estValide
+          ? const SizedBox.shrink()
+          : const Column(
+              children: [
+                FnvAlert.warning(label: Localisation.aideVeloAvertissement),
+                SizedBox(height: DsfrSpacings.s2w),
+              ],
+            );
+}
+
+class _CodePostalEtVille extends StatefulWidget {
+  const _CodePostalEtVille();
+
+  @override
+  State<_CodePostalEtVille> createState() => _CodePostalEtVilleState();
+}
+
+class _CodePostalEtVilleState extends State<_CodePostalEtVille> {
+  late final _textEditingController = TextEditingController();
+
+  void _handleCodePostal(final BuildContext context, final String value) {
+    context.read<AideVeloBloc>().add(AideVeloCodePostalChange(value));
+    _handleVille(context, '');
+    _textEditingController.clear();
+  }
+
+  void _handleVille(final BuildContext context, final String? value) {
+    if (value == null) {
+      return;
+    }
+    context.read<AideVeloBloc>().add(AideVeloVilleChange(value));
+  }
+
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(final BuildContext context) {
+    final state = context.read<AideVeloBloc>().state;
+
+    final communes = context.watch<AideVeloBloc>().state.communes;
+    if (communes.length == 1) {
+      final ville = communes.firstOrNull!;
+      _textEditingController.text = ville;
+      _handleVille(context, ville);
+    } else {
+      _textEditingController.text = state.ville;
+    }
+
+    return Row(
+      children: [
+        SizedBox(
+          width: _inputWidth,
+          child: DsfrInput(
+            label: Localisation.codePostal,
+            onChanged: (final value) => _handleCodePostal(context, value),
+            initialValue: state.codePostal,
+            keyboardType: TextInputType.number,
+            inputFormatters: [
+              FilteringTextInputFormatter.digitsOnly,
+              LengthLimitingTextInputFormatter(5),
+            ],
+          ),
+        ),
+        const SizedBox(width: DsfrSpacings.s2w),
+        Expanded(
+          child: DsfrSelect<String>(
+            label: Localisation.ville,
+            dropdownMenuEntries: communes
+                .map((final e) => DropdownMenuEntry(value: e, label: e))
+                .toList(),
+            onSelected: (final value) => _handleVille(context, value),
+            controller: _textEditingController,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _NombreDePartsFiscales extends StatelessWidget {
+  const _NombreDePartsFiscales();
+
+  void _handleNombreDePartsFiscales(
+    final BuildContext context,
+    final String value,
+  ) {
+    final parse = double.tryParse(value.replaceFirst(',', '.'));
+    if (parse == null) {
+      context
+          .read<AideVeloBloc>()
+          .add(const AideVeloNombreDePartsFiscalesChange(0));
+
+      return;
+    }
+    context
+        .read<AideVeloBloc>()
+        .add(AideVeloNombreDePartsFiscalesChange(parse));
+  }
+
+  @override
+  Widget build(final BuildContext context) {
+    final nombreDePartsFiscales =
+        context.read<AideVeloBloc>().state.nombreDePartsFiscales;
+
+    return DsfrInput(
+      label: Localisation.nombreDePartsFiscales,
+      onChanged: (final value) => _handleNombreDePartsFiscales(context, value),
+      hint: Localisation.nombreDePartsFiscalesDescription,
+      initialValue: '$nombreDePartsFiscales',
+      width: _inputWidth,
+      keyboardType: const TextInputType.numberWithOptions(decimal: true),
+      inputFormatters: [FilteringTextInputFormatter.allow(RegExp('[0-9,.]'))],
+    );
+  }
+}
+
+class _RevenuFiscal extends StatelessWidget {
+  const _RevenuFiscal();
+
+  void _handleRevenuFiscal(final BuildContext context, final int? value) {
+    if (value == null) {
+      return;
+    }
+    context.read<AideVeloBloc>().add(AideVeloRevenuFiscalChange(value));
+  }
+
+  @override
+  Widget build(final BuildContext context) => DsfrRadioButtonSet(
+        title: Localisation.revenuFiscal,
+        values: _revenusFiscals,
+        onCallback: (final value) => _handleRevenuFiscal(context, value),
+        initialValue: context.read<AideVeloBloc>().state.revenuFiscal,
+      );
+}
+
+class _EstimerMesAides extends StatelessWidget {
+  const _EstimerMesAides();
+
+  VoidCallback? _handleEstimerMesAides(final BuildContext context) =>
+      context.watch<AideVeloBloc>().state.estValide
+          ? () async {
+              context
+                  .read<AideVeloBloc>()
+                  .add(const AideVeloEstimationDemandee());
+              await GoRouter.of(context)
+                  .pushNamed(AideSimulateurVeloDisponiblePage.name);
+            }
+          : null;
+
+  @override
+  Widget build(final BuildContext context) => DsfrButton.lg(
+        label: Localisation.estimerMesAides,
+        onTap: _handleEstimerMesAides(context),
+      );
+}
+
+class _Questions extends StatelessWidget {
+  const _Questions();
+
+  @override
+  Widget build(final BuildContext context) => const DsfrAccordionsGroup(
+        values: [
+          DsfrAccordion(
+            header: _AccordionHeader(
+              text: Localisation.ouTrouverCesInformations,
+            ),
+            body: _AccordionBody(
+              child: MarkdownBody(
+                data: Localisation.ouTrouverCesInformationsReponse,
               ),
             ),
           ),
-          const SizedBox(height: DsfrSpacings.s2w),
-          const Text(
-            Localisation.prixDuVeloExplications,
-            style: FnvTextStyles.prixExplicationsStyle,
-          ),
-          const SizedBox(height: DsfrSpacings.s1w),
-          ...VeloPourSimulateur.values.map((final e) {
-            const foregroundColor = DsfrColors.grey50;
-
-            return Align(
-              alignment: Alignment.centerLeft,
-              child: DsfrTag.md(
-                label: TextSpan(
-                  text: Localisation.veloLabel(e.label),
-                  children: [
-                    TextSpan(
-                      text: Localisation.euro(e.prix),
-                      style: const TextStyle(
-                        decoration: TextDecoration.underline,
-                        decorationColor: foregroundColor,
-                      ),
-                    ),
-                  ],
-                ),
-                backgroundColor: DsfrColors.info950,
-                foregroundColor: foregroundColor,
-                onTap: () => _handleTagPrix(context, e.prix),
+          DsfrAccordion(
+            header: _AccordionHeader(text: Localisation.pourquoiCesQuestions),
+            body: _AccordionBody(
+              child: MarkdownBody(
+                data: Localisation.pourquoiCesQuestionsReponse,
               ),
-            );
-          }).separator(const SizedBox(height: DsfrSpacings.s1w)),
-          const SizedBox(height: DsfrSpacings.s4w),
-          const Divider(color: FnvColors.dividerColor),
-          const SizedBox(height: DsfrSpacings.s3w),
-          const FnvAlert.warning(label: Localisation.aideVeloAvertissement),
-          const SizedBox(height: DsfrSpacings.s2w),
-          Row(
-            children: [
-              SizedBox(
-                width: inputWidth,
-                child: DsfrInput(
-                  label: Localisation.codePostal,
-                  onChanged: (final value) => context
-                      .read<AideVeloBloc>()
-                      .add(AideVeloCodePostalChange(value)),
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [
-                    FilteringTextInputFormatter.digitsOnly,
-                    LengthLimitingTextInputFormatter(5),
-                  ],
-                ),
-              ),
-              const SizedBox(width: DsfrSpacings.s2w),
-              Expanded(
-                child: DsfrSelect<String>(
-                  label: Localisation.ville,
-                  dropdownMenuEntries: context
-                      .watch<AideVeloBloc>()
-                      .state
-                      .communes
-                      .map((final e) => DropdownMenuEntry(value: e, label: e))
-                      .toList(),
-                  onSelected: (final value) => _handleVille(context, value),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: DsfrSpacings.s3w),
-          Text(
-            Localisation.revenuQuestion,
-            style: DsfrFonts.headline6.copyWith(color: DsfrColors.grey50),
-          ),
-          const SizedBox(height: DsfrSpacings.s1v),
-          DsfrInput(
-            label: Localisation.nombrePartsFiscales,
-            onChanged: (final value) =>
-                _handleNombreDePartsFiscales(context, value),
-            hint: Localisation.nombrePartsFiscalesDescription,
-            width: inputWidth,
-            keyboardType: const TextInputType.numberWithOptions(decimal: true),
-            inputFormatters: const [],
-          ),
-          const SizedBox(height: DsfrSpacings.s3w),
-          DsfrRadioButtonSet(
-            title: Localisation.revenuFiscal,
-            values: const {
-              0: Localisation.tranche0,
-              16000: Localisation.tranche1,
-              35000: Localisation.tranche2,
-            },
-            onCallback: (final value) => _handleRevenuFiscal(context, value),
-          ),
-          const SizedBox(height: DsfrSpacings.s3w),
-          DsfrAccordionsGroup(
-            values: [
-              DsfrAccordion(
-                header: const _AccordionHeader(
-                  text: Localisation.ouTrouverCesInformations,
-                ),
-                body: _AccordionBody(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const MarkdownBody(
-                        data: Localisation.ouTrouverCesInformationsReponse,
-                      ),
-                      const SizedBox(height: DsfrSpacings.s3w),
-                      DsfrLink.sm(
-                        label: Localisation.plusDaide,
-                        icon: DsfrIcons.systemExternalLinkFill,
-                        onTap: _handlePlusDaide,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              const DsfrAccordion(
-                header:
-                    _AccordionHeader(text: Localisation.pourquoiCesQuestions),
-                body: _AccordionBody(
-                  child: MarkdownBody(
-                    data: Localisation.pourquoiCesQuestionsReponse,
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
         ],
-      ),
-      bottomNavigationBar: FnvBottomBar(
-        child: DsfrButton.lg(
-          label: Localisation.estimerMesAides,
-          onTap: () async => _handleEstimationDemandee(context),
-        ),
-      ),
-      backgroundColor: FnvColors.aidesFond,
-    );
-  }
+      );
 }
 
 class _AccordionBody extends StatelessWidget {

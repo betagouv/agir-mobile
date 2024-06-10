@@ -10,6 +10,7 @@ final class AideVeloState extends Equatable {
     required this.nombreDePartsFiscales,
     required this.revenuFiscal,
     required this.aidesDisponibles,
+    required this.veutModifierLesInformations,
   });
 
   const AideVeloState.empty()
@@ -19,20 +20,37 @@ final class AideVeloState extends Equatable {
           communes: const [],
           ville: '',
           nombreDePartsFiscales: 1,
-          revenuFiscal: 0,
+          revenuFiscal: null,
           aidesDisponibles: const [],
+          veutModifierLesInformations: false,
         );
 
   final int prix;
+  final bool veutModifierLesInformations;
   final String codePostal;
   final List<String> communes;
   final String ville;
   final double nombreDePartsFiscales;
-  final int revenuFiscal;
+  final int? revenuFiscal;
+
+  bool get prixEstValide => prix > 0;
+  bool get codePostalEstValide =>
+      codePostal.isNotEmpty && codePostal.length == 5;
+  bool get villeEstValide => ville.isNotEmpty;
+  bool get nombreDePartsFiscalesEstValide => nombreDePartsFiscales > 0;
+  bool get revenuFiscalEstValide => revenuFiscal != null && revenuFiscal! >= 0;
+  bool get estValide =>
+      prixEstValide &&
+      codePostalEstValide &&
+      villeEstValide &&
+      nombreDePartsFiscalesEstValide &&
+      revenuFiscalEstValide;
+
   final List<AideDisponiblesViewModel> aidesDisponibles;
 
   AideVeloState copyWith({
     final int? prix,
+    final bool? veutModifierLesInformations,
     final String? codePostal,
     final List<String>? communes,
     final String? ville,
@@ -49,10 +67,12 @@ final class AideVeloState extends Equatable {
             nombreDePartsFiscales ?? this.nombreDePartsFiscales,
         revenuFiscal: revenuFiscal ?? this.revenuFiscal,
         aidesDisponibles: aidesDisponibles ?? this.aidesDisponibles,
+        veutModifierLesInformations:
+            veutModifierLesInformations ?? this.veutModifierLesInformations,
       );
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         prix,
         codePostal,
         communes,
@@ -60,6 +80,7 @@ final class AideVeloState extends Equatable {
         nombreDePartsFiscales,
         revenuFiscal,
         aidesDisponibles,
+        veutModifierLesInformations,
       ];
 }
 
