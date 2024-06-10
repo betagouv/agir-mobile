@@ -9,14 +9,6 @@ updates:
     commit-message:
       prefix: "chore: "
   - package-ecosystem: "pub"
-    directory: "/packages/dsfr.dart"
-    schedule:
-      interval: "daily"
-    reviewers:
-      - "lsaudon"
-    commit-message:
-      prefix: "chore: "
-  - package-ecosystem: "pub"
     directory: "/packages/agir_lints"
     schedule:
       interval: "daily"
