@@ -14,7 +14,7 @@ jobs:
         working-directory: app/android
     steps:
       - name: 📚 Git checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: 🐦 Install flutter
         uses: subosito/flutter-action@v2
         with:
@@ -43,7 +43,7 @@ jobs:
   #       working-directory: app/ios
   #   steps:
   #     - name: 📚 Git checkout
-  #       uses: actions/checkout@v3
+  #       uses: actions/checkout@v4
   #     - name: 🐦 Install flutter
   #       uses: subosito/flutter-action@v2
   #       with:
