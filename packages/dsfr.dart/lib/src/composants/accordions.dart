@@ -1,3 +1,4 @@
+import 'package:dsfr/src/composants/divider.dart';
 import 'package:dsfr/src/fondamentaux/colors.g.dart';
 import 'package:dsfr/src/fondamentaux/icons.g.dart';
 import 'package:dsfr/src/fondamentaux/spacing.g.dart';
@@ -8,7 +9,6 @@ import 'package:flutter/material.dart';
 // ignore: avoid_positional_boolean_parameters, prefer-named-boolean-parameters
 typedef DsfrAccordionCallback = void Function(int panelIndex, bool isExpanded);
 
-@immutable
 class DsfrAccordion {
   const DsfrAccordion({required this.header, required this.body});
 
@@ -37,11 +37,7 @@ class _DsfrAccordionsGroupState extends State<DsfrAccordionsGroup> {
 
   @override
   Widget build(final context) {
-    const divider = Divider(
-      height: 0,
-      thickness: 0,
-      color: DsfrColors.grey900,
-    );
+    const divider = DsfrDivider();
 
     return Column(
       children: [
