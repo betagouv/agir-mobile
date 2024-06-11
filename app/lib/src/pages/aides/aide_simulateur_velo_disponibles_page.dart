@@ -100,12 +100,12 @@ class _Body extends StatelessWidget {
       launchUrlString(e.lien);
 
   @override
-  Widget build(final BuildContext context) => Padding(
-        padding: const EdgeInsets.all(DsfrSpacings.s2w),
-        child: Column(
-          children: aides
-              .map(
-                (final e) => Row(
+  Widget build(final BuildContext context) => Column(
+        children: aides
+            .map(
+              (final e) => Padding(
+                padding: const EdgeInsets.all(DsfrSpacings.s2w),
+                child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Image.network(
@@ -138,8 +138,9 @@ class _Body extends StatelessWidget {
                     ),
                   ],
                 ),
-              )
-              .toList(),
-        ),
+              ),
+            )
+            .separator(const Divider())
+            .toList(),
       );
 }

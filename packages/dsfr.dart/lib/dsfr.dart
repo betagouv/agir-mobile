@@ -1,5 +1,6 @@
 export 'src/composants/accordions.dart';
 export 'src/composants/buttons.dart';
+export 'src/composants/divider.dart';
 export 'src/composants/input.dart';
 export 'src/composants/link_icon_position.dart';
 export 'src/composants/links.dart';
