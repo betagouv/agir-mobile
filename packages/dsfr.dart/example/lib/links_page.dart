@@ -19,10 +19,25 @@ class LinksPage extends StatelessWidget {
     return SingleChildScrollView(
       padding: const EdgeInsets.all(24),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const DsfrLink.md(label: label),
           gap,
           DsfrLink.md(label: label, onTap: onTap),
+          gap,
+          DsfrLink.md(
+            label: label,
+            onTap: onTap,
+            icon: DsfrIcons.systemArrowLeftLine,
+            iconPosition: DsfrLinkIconPosition.start,
+          ),
+          gap,
+          DsfrLink.md(
+            label: label,
+            onTap: onTap,
+            icon: DsfrIcons.systemArrowLeftLine,
+            iconPosition: DsfrLinkIconPosition.end,
+          ),
         ],
       ),
     );

@@ -75,7 +75,7 @@ class AccueilPage extends StatelessWidget {
               ),
               title: const Text(
                 Localisation.menu,
-                style: DsfrTextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                style: DsfrFonts.bodyMdBold,
               ),
             ),
             Expanded(

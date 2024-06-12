@@ -154,6 +154,8 @@ class _DsfrInputState extends State<DsfrInput> {
                 autocorrect: !widget.passwordMode,
                 enableSuggestions: !widget.passwordMode,
                 onChanged: widget.onChanged,
+                onTapOutside: (final event) =>
+                    FocusManager.instance.primaryFocus?.unfocus(),
                 validator: widget.validator,
                 inputFormatters: widget.inputFormatters,
               ),

@@ -8,12 +8,20 @@ import 'package:flutter/material.dart';
 // C'est un typedef, on peut pas faire de parametre nommé.
 // ignore: avoid_positional_boolean_parameters, prefer-named-boolean-parameters
 typedef DsfrAccordionCallback = void Function(int panelIndex, bool isExpanded);
+// C'est un typedef, on peut pas faire de parametre nommé.
+// ignore: avoid_positional_boolean_parameters, prefer-named-boolean-parameters
+typedef DsfrAccordionHeaderBuilder = Widget Function(bool isExpanded);
 
 class DsfrAccordion {
-  const DsfrAccordion({required this.header, required this.body});
+  const DsfrAccordion({
+    required this.headerBuilder,
+    required this.body,
+    this.isEnable = true,
+  });
 
-  final Widget header;
+  final DsfrAccordionHeaderBuilder headerBuilder;
   final Widget body;
+  final bool isEnable;
 }
 
 class DsfrAccordionsGroup extends StatefulWidget {
@@ -80,34 +88,43 @@ class _DsfrAccordion extends StatelessWidget {
           ColoredBox(
             color: isExpanded ? DsfrColors.blueFrance925 : Colors.transparent,
             child: GestureDetector(
-              onTap: _handleTap,
+              onTap: item.isEnable ? _handleTap : null,
               behavior: HitTestBehavior.opaque,
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s3v),
                 child: Row(
                   children: [
-                    Expanded(child: item.header),
-                    Icon(
-                      isExpanded
-                          ? DsfrIcons.systemArrowUpSLine
-                          : DsfrIcons.systemArrowDownSLine,
-                      size: DsfrSpacings.s2w,
-                      color: DsfrColors.blueFranceSun113,
-                    ),
+                    Expanded(child: item.headerBuilder(isExpanded)),
+                    if (item.isEnable)
+                      AnimatedRotation(
+                        turns: isExpanded ? -0.5 : 0,
+                        duration: Durations.short4,
+                        child: const Icon(
+                          DsfrIcons.systemArrowDownSLine,
+                          size: DsfrSpacings.s2w,
+                          color: DsfrColors.blueFranceSun113,
+                        ),
+                      ),
                     const SizedBox(width: DsfrSpacings.s2w),
                   ],
                 ),
               ),
             ),
           ),
-          if (isExpanded)
-            Padding(
+          AnimatedCrossFade(
+            firstChild: const SizedBox.shrink(),
+            secondChild: Padding(
               padding: const EdgeInsets.only(
                 top: DsfrSpacings.s2w,
                 bottom: DsfrSpacings.s3w,
               ),
               child: item.body,
             ),
+            crossFadeState: isExpanded
+                ? CrossFadeState.showSecond
+                : CrossFadeState.showFirst,
+            duration: Durations.short4,
+          ),
         ],
       );
 }

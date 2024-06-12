@@ -68,7 +68,13 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
   ) async {
     final communes =
         await _communesRepository.recupererLesCommunes(event.valeur);
-    emit(state.copyWith(codePostal: event.valeur, communes: communes));
+    emit(
+      state.copyWith(
+        codePostal: event.valeur,
+        communes: communes,
+        ville: '',
+      ),
+    );
   }
 
   void _onVilleChange(

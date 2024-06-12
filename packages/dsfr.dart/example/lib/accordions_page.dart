@@ -19,11 +19,12 @@ class AccordionsPage extends StatelessWidget {
           DsfrAccordionsGroup(
             values: [
               DsfrAccordion(
-                header: Text('Header 1'),
+                headerBuilder: (isExpanded) =>
+                    isExpanded ? Text('Header Expanded 1') : Text('Header 1'),
                 body: Text('Body 1'),
               ),
               DsfrAccordion(
-                header: Text('Header 2'),
+                headerBuilder: (isExpanded) => Text('Header 2'),
                 body: Text('Body 2'),
               ),
             ],

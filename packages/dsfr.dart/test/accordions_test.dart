@@ -12,11 +12,17 @@ void main() {
       const header2 = 'Header 2';
       const body2 = 'Body 2';
       await tester.pumpWidget(
-        const App(
+        App(
           child: DsfrAccordionsGroup(
             values: [
-              DsfrAccordion(header: Text(header1), body: Text(body1)),
-              DsfrAccordion(header: Text(header2), body: Text(body2)),
+              DsfrAccordion(
+                headerBuilder: (final isExpanded) => const Text(header1),
+                body: const Text(body1),
+              ),
+              DsfrAccordion(
+                headerBuilder: (final isExpanded) => const Text(header2),
+                body: const Text(body2),
+              ),
             ],
           ),
         ),
@@ -27,11 +33,17 @@ void main() {
       const header1 = 'Header 1';
       const body1 = 'Body 1';
       await tester.pumpWidget(
-        const App(
+        App(
           child: DsfrAccordionsGroup(
             values: [
-              DsfrAccordion(header: Text(header1), body: Text(body1)),
-              DsfrAccordion(header: Text('Header 2'), body: Text('Body 2')),
+              DsfrAccordion(
+                headerBuilder: (final isExpanded) => const Text(header1),
+                body: const Text(body1),
+              ),
+              DsfrAccordion(
+                headerBuilder: (final isExpanded) => const Text('Header 2'),
+                body: const Text('Body 2'),
+              ),
             ],
           ),
         ),

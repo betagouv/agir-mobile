@@ -81,19 +81,8 @@ class DsfrLinkForegroundColor extends WidgetStateColor {
       states.contains(WidgetState.disabled) ? _disabled : _default;
 }
 
-class DsfrLinkBackgroundColor extends WidgetStateColor {
-  DsfrLinkBackgroundColor() : super(_default.value);
-
-  static const _default = Colors.transparent;
-  static const _active = Color(0x21000000);
-  @override
-  Color resolve(final Set<WidgetState> states) =>
-      states.contains(WidgetState.pressed) ? _active : _default;
-}
-
 class _DsfrLinkState extends State<DsfrLink> with MaterialStateMixin<DsfrLink> {
   final _foregroundColor = DsfrLinkForegroundColor();
-  final _backgroundColor = DsfrLinkBackgroundColor();
 
   @override
   void initState() {
@@ -117,7 +106,7 @@ class _DsfrLinkState extends State<DsfrLink> with MaterialStateMixin<DsfrLink> {
         onTap: widget.onTap,
         onHighlightChanged: updateMaterialState(WidgetState.pressed),
         onHover: updateMaterialState(WidgetState.hovered),
-        highlightColor: Colors.transparent,
+        highlightColor: const Color(0x21000000),
         splashFactory: NoSplash.splashFactory,
         canRequestFocus: widget.onTap != null,
         onFocusChange: updateMaterialState(WidgetState.focused),
@@ -170,10 +159,7 @@ class _DsfrLinkState extends State<DsfrLink> with MaterialStateMixin<DsfrLink> {
                       ],
                     ],
             ),
-            style: widget.textStyle.copyWith(
-              color: resolveForegroundColor,
-              backgroundColor: _backgroundColor.resolve(materialStates),
-            ),
+            style: widget.textStyle.copyWith(color: resolveForegroundColor),
           ),
         ),
       ),

@@ -15,9 +15,22 @@ class InputsPage extends StatelessWidget {
         padding: const EdgeInsets.all(24),
         child: Column(
           children: [
-            DsfrInput(
-              label: 'Label',
-              onChanged: (final String value) {},
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: DsfrInput(
+                    label: 'Label',
+                    onChanged: (final String value) {},
+                  ),
+                ),
+                Expanded(
+                  child: DsfrInput(
+                    label: 'Label',
+                    onChanged: (final String value) {},
+                  ),
+                ),
+              ],
             ),
           ],
         ),

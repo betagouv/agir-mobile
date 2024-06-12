@@ -1,5 +1,7 @@
 // ignore_for_file: avoid-missing-interpolation
 
+import 'dart:io';
+
 import 'package:app/src/fonctionnalites/aides/domain/aide.dart';
 import 'package:app/src/fonctionnalites/aides/domain/aide_velo_informations.dart';
 import 'package:app/src/fonctionnalites/aides/domain/velo_pour_simulateur.dart';
@@ -104,6 +106,7 @@ void main() {
     testWidgets(
       "Iel rempli le formulaire et iel demande l'estimation de l'aide alors il arrive sur la page des aides disponibles",
       (final tester) async {
+        HttpOverrides.global = null;
         setUpWidgets(tester);
 
         leServeurRetourneLesAidesVeloParType(aideVeloParType);
@@ -166,7 +169,7 @@ void main() {
         );
         await _allerSurLeSimulateurVelo(tester, aide2);
         await ielScrolle(tester, Localisation.modifier);
-        ielVoitLeTexte(Localisation.elementsNecessaireAuCalcul);
+        ielVoitLeTexteDansTexteRiche(Localisation.elementsNecessaireAuCalcul);
         ielVoitLeTexteDansTexteRiche(
           Localisation.donneesUtiliseesCodePostalEtVille(
             codePostal: codePostal,
