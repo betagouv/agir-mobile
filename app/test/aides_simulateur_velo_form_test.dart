@@ -145,6 +145,7 @@ void main() {
     testWidgets(
       'Iel met le prix à 0 euros alors le bouton estimer mes aides est désactiver',
       (final tester) async {
+        setUpWidgets(tester);
         await _allerSurLeSimulateurVelo(tester, aide2);
         await ielEcritDansLeChamp(
           tester,
@@ -159,6 +160,7 @@ void main() {
     testWidgets(
       'Iel arrive sur la page avec les informations déjà renseignées',
       (final tester) async {
+        setUpWidgets(tester);
         ielACesInformationsDeProfile(
           const AideVeloInformations(
             codePostal: codePostal,
@@ -188,6 +190,7 @@ void main() {
     testWidgets(
       'Iel veut modifier ces informations, les données sont préremplis',
       (final tester) async {
+        setUpWidgets(tester);
         ielACesInformationsDeProfile(
           const AideVeloInformations(
             codePostal: codePostal,
@@ -210,6 +213,7 @@ void main() {
     testWidgets(
       'Iel modifie le code postal alors la ville est réinitialisé',
       (final tester) async {
+        setUpWidgets(tester);
         leServeurRetourneCetteListeDeCommunes(['AUTHUME', commune]);
         ielACesInformationsDeProfile(
           const AideVeloInformations(
@@ -234,6 +238,7 @@ void main() {
     testWidgets(
       "Après avoir clique sur modifier il retourne sur la page de l'aide et reclique sur accéder au simulateur, la page doit être réinitialisée",
       (final tester) async {
+        setUpWidgets(tester);
         ielACesInformationsDeProfile(
           const AideVeloInformations(
             codePostal: codePostal,
