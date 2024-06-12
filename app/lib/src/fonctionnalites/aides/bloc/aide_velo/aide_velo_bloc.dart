@@ -42,6 +42,7 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
         revenuFiscal: informations.revenuFiscal,
         aidesDisponibles: const [],
         veutModifierLesInformations: false,
+        aideVeloStatut: AideVeloStatut.initial,
       ),
     );
   }
@@ -105,6 +106,7 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
     if (!state.estValide) {
       return;
     }
+    emit(state.copyWith(aideVeloStatut: AideVeloStatut.chargement));
     final aidesDisponibles = await _aideVeloRepository.simuler(
       prix: state.prix,
       codePostal: state.codePostal,
@@ -130,6 +132,7 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
             aides: value,
           );
         }).toList(),
+        aideVeloStatut: AideVeloStatut.succes,
       ),
     );
   }

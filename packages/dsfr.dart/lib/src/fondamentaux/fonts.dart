@@ -40,7 +40,7 @@ abstract final class DsfrFonts {
       DsfrTextStyle(fontSize: 32, lineHeight: 32, fontWeight: FontWeight.bold);
 
   static const headline2 =
-      DsfrTextStyle(fontSize: 28, lineHeight: 28, fontWeight: FontWeight.bold);
+      DsfrTextStyle(fontSize: 28, lineHeight: 34, fontWeight: FontWeight.bold);
 
   static const headline3 =
       DsfrTextStyle(fontSize: 24, lineHeight: 24, fontWeight: FontWeight.bold);
@@ -81,4 +81,7 @@ abstract final class DsfrFonts {
       DsfrTextStyle(fontSize: 14, lineHeight: 24, fontWeight: FontWeight.bold);
 
   static const bodyXs = DsfrTextStyle(fontSize: 12, lineHeight: 20);
+
+  static const bodyXsBold =
+      DsfrTextStyle(fontSize: 12, lineHeight: 20, fontWeight: FontWeight.bold);
 }

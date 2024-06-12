@@ -13,7 +13,6 @@
     "editor.wordBasedSuggestions": "off",
   },
   "editor.codeActionsOnSave": {
-    "source.fixAll": "always",
     "source.organizeImports": "always",
     "source.dcm.fixAll": "always"
   },
