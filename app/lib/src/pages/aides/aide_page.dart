@@ -70,8 +70,9 @@ class AidePage extends StatelessWidget {
           HtmlWidget(
             aide.contenu,
             factoryBuilder: MyUrlLauncherFactory.new,
-            textStyle: const DsfrTextStyle.fontFamily(),
+            textStyle: const DsfrTextStyle(fontSize: 15, lineHeight: 24),
           ),
+          const SizedBox(height: DsfrSpacings.s6w),
         ],
       ),
       bottomNavigationBar: aide.aUnSimulateur

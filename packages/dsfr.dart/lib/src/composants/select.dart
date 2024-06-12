@@ -14,6 +14,7 @@ class DsfrSelect<T> extends StatelessWidget {
     this.hint,
     this.labelStyle = DsfrFonts.bodyMd,
     this.labelColor = DsfrColors.grey50,
+    this.labelDisableColor = DsfrColors.grey625,
     this.hintStyle = DsfrFonts.bodyXs,
     this.hintColor = DsfrColors.grey425,
     this.inputStyle = DsfrFonts.bodyMd,
@@ -34,6 +35,7 @@ class DsfrSelect<T> extends StatelessWidget {
 
   final TextStyle labelStyle;
   final Color labelColor;
+  final Color labelDisableColor;
   final TextStyle hintStyle;
   final Color hintColor;
   final TextStyle inputStyle;
@@ -57,10 +59,12 @@ class DsfrSelect<T> extends StatelessWidget {
       label: label,
       hint: hint,
       labelStyle: labelStyle,
-      labelColor: labelColor,
+      labelColor:
+          dropdownMenuEntries.isNotEmpty ? labelColor : labelDisableColor,
       hintStyle: hintStyle,
       hintColor: hintColor,
       child: DropdownMenu(
+        enabled: dropdownMenuEntries.isNotEmpty,
         trailingIcon: const Icon(
           DsfrIcons.systemArrowDownSLine,
           size: DsfrSpacings.s2w,

@@ -14,9 +14,19 @@ class TagsPage extends StatelessWidget {
   Widget build(final BuildContext context) => const SingleChildScrollView(
         padding: EdgeInsets.all(24),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             DsfrTag.sm(
               label: TextSpan(text: 'Label tag'),
+              backgroundColor: DsfrColors.blueFrance925,
+              foregroundColor: DsfrColors.blueFranceSun113,
+            ),
+            SizedBox(
+              height: DsfrSpacings.s1w,
+            ),
+            DsfrTag.sm(
+              label: TextSpan(text: 'Label tag'),
+              icon: DsfrIcons.financeMoneyEuroCircleLine,
               backgroundColor: DsfrColors.blueFrance925,
               foregroundColor: DsfrColors.blueFranceSun113,
             ),

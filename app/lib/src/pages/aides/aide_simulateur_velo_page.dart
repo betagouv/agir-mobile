@@ -137,7 +137,7 @@ class _PrixState extends State<_Prix> {
 
           return Align(
             alignment: Alignment.centerLeft,
-            child: DsfrTag.md(
+            child: DsfrTag.sm(
               label: TextSpan(
                 text: Localisation.veloLabel(e.label),
                 children: [
@@ -155,7 +155,7 @@ class _PrixState extends State<_Prix> {
               onTap: () => _handleTagPrix(context, e.prix),
             ),
           );
-        }).separator(const SizedBox(height: DsfrSpacings.s1w)),
+        }).separator(const SizedBox(height: 10)),
       ],
     );
   }
@@ -195,17 +195,18 @@ class _ElementsNecessaireAuCalcul extends StatelessWidget {
         : Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Row(
-                children: [
-                  Icon(DsfrIcons.systemErrorWarningLine, size: 16),
-                  SizedBox(width: DsfrSpacings.s1v),
-                  Expanded(
-                    child: Text(
-                      Localisation.elementsNecessaireAuCalcul,
-                      style: DsfrFonts.bodySmBold,
+              const Text.rich(
+                TextSpan(
+                  children: [
+                    WidgetSpan(
+                      alignment: PlaceholderAlignment.middle,
+                      child: Icon(DsfrIcons.systemErrorWarningLine, size: 16),
                     ),
-                  ),
-                ],
+                    WidgetSpan(child: SizedBox(width: DsfrSpacings.s1v)),
+                    TextSpan(text: Localisation.elementsNecessaireAuCalcul),
+                  ],
+                ),
+                style: DsfrFonts.bodySmBold,
               ),
               const SizedBox(height: DsfrSpacings.s1v),
               Text.rich(
@@ -279,7 +280,6 @@ class _CodePostalEtVilleState extends State<_CodePostalEtVille> {
 
   void _handleCodePostal(final BuildContext context, final String value) {
     context.read<AideVeloBloc>().add(AideVeloCodePostalChange(value));
-    _handleVille(context, '');
     _textEditingController.clear();
   }
 
@@ -298,11 +298,9 @@ class _CodePostalEtVilleState extends State<_CodePostalEtVille> {
 
   @override
   Widget build(final BuildContext context) {
-    final state = context.read<AideVeloBloc>().state;
-
-    final communes = context.watch<AideVeloBloc>().state.communes;
-    if (communes.length == 1) {
-      final ville = communes.firstOrNull!;
+    final state = context.watch<AideVeloBloc>().state;
+    if (state.communes.length == 1) {
+      final ville = state.communes.firstOrNull!;
       _textEditingController.text = ville;
       _handleVille(context, ville);
     } else {
@@ -310,9 +308,10 @@ class _CodePostalEtVilleState extends State<_CodePostalEtVille> {
     }
 
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
-          width: _inputWidth,
+          width: MediaQuery.textScalerOf(context).scale(_inputWidth),
           child: DsfrInput(
             label: Localisation.codePostal,
             onChanged: (final value) => _handleCodePostal(context, value),
@@ -328,7 +327,7 @@ class _CodePostalEtVilleState extends State<_CodePostalEtVille> {
         Expanded(
           child: DsfrSelect<String>(
             label: Localisation.ville,
-            dropdownMenuEntries: communes
+            dropdownMenuEntries: state.communes
                 .map((final e) => DropdownMenuEntry(value: e, label: e))
                 .toList(),
             onSelected: (final value) => _handleVille(context, value),
@@ -370,7 +369,7 @@ class _NombreDePartsFiscales extends StatelessWidget {
       onChanged: (final value) => _handleNombreDePartsFiscales(context, value),
       hint: Localisation.nombreDePartsFiscalesDescription,
       initialValue: '$nombreDePartsFiscales',
-      width: _inputWidth,
+      width: MediaQuery.textScalerOf(context).scale(_inputWidth),
       keyboardType: const TextInputType.numberWithOptions(decimal: true),
       inputFormatters: [FilteringTextInputFormatter.allow(RegExp('[0-9,.]'))],
     );
@@ -421,21 +420,25 @@ class _Questions extends StatelessWidget {
   const _Questions();
 
   @override
-  Widget build(final BuildContext context) => const DsfrAccordionsGroup(
+  Widget build(final BuildContext context) => DsfrAccordionsGroup(
         values: [
           DsfrAccordion(
-            header: _AccordionHeader(
+            headerBuilder: (final isExpanded) => const _AccordionHeader(
               text: Localisation.ouTrouverCesInformations,
             ),
             body: _AccordionBody(
               child: MarkdownBody(
                 data: Localisation.ouTrouverCesInformationsReponse,
+                styleSheet: MarkdownStyleSheet(
+                  p: const DsfrTextStyle(fontSize: 15, lineHeight: 24),
+                ),
               ),
             ),
           ),
           DsfrAccordion(
-            header: _AccordionHeader(text: Localisation.pourquoiCesQuestions),
-            body: _AccordionBody(
+            headerBuilder: (final isExpanded) =>
+                const _AccordionHeader(text: Localisation.pourquoiCesQuestions),
+            body: const _AccordionBody(
               child: MarkdownBody(
                 data: Localisation.pourquoiCesQuestionsReponse,
               ),
@@ -465,15 +468,21 @@ class _AccordionHeader extends StatelessWidget {
   @override
   Widget build(final BuildContext context) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s1w),
-        child: Row(
-          children: [
-            const Icon(
-              DsfrIcons.systemQuestionFill,
-              color: DsfrColors.blueFranceSun113,
-            ),
-            const SizedBox(width: DsfrSpacings.s1w),
-            Expanded(child: Text(text, style: DsfrFonts.bodySmMedium)),
-          ],
+        child: Text.rich(
+          TextSpan(
+            children: [
+              const WidgetSpan(
+                alignment: PlaceholderAlignment.middle,
+                child: Icon(
+                  DsfrIcons.systemQuestionFill,
+                  color: DsfrColors.blueFranceSun113,
+                ),
+              ),
+              const WidgetSpan(child: SizedBox(width: DsfrSpacings.s1w)),
+              TextSpan(text: text),
+            ],
+          ),
+          style: DsfrFonts.bodySmMedium,
         ),
       );
 }

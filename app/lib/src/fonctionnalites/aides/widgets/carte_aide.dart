@@ -28,22 +28,27 @@ class CarteAide extends StatelessWidget {
           shadows: carteOmbre,
           shape: roundedRectangleBorder,
         ),
-        child: GestureDetector(
-          onTap: () async => _handleTap(context),
-          child: Padding(
-            padding: const EdgeInsets.all(DsfrSpacings.s2w),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Text(aide.titre, style: DsfrFonts.bodyMdMedium),
-                ),
-                if (aide.aUnSimulateur) ...[
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: () async => _handleTap(context),
+            borderRadius:
+                roundedRectangleBorder.borderRadius.resolve(TextDirection.ltr),
+            child: Padding(
+              padding: const EdgeInsets.all(DsfrSpacings.s2w),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(aide.titre, style: DsfrFonts.bodyMdMedium),
+                  ),
+                  if (aide.aUnSimulateur) ...[
+                    const SizedBox(width: DsfrSpacings.s1v),
+                    const TagSimulateur(),
+                  ],
                   const SizedBox(width: DsfrSpacings.s1v),
-                  const TagSimulateur(),
+                  const Icon(DsfrIcons.systemArrowRightSLine),
                 ],
-                const SizedBox(width: DsfrSpacings.s1v),
-                const Icon(DsfrIcons.systemArrowRightSLine),
-              ],
+              ),
             ),
           ),
         ),

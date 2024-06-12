@@ -23,34 +23,10 @@ class DsfrTag extends StatelessWidget {
     final Key? key,
   }) : this._(
           label: label,
-          textStyle: DsfrFonts.bodyXs,
+          textStyle: const DsfrTextStyle(fontSize: 12, lineHeight: 22),
           backgroundColor: backgroundColor,
           foregroundColor: foregroundColor,
-          padding: const EdgeInsets.symmetric(
-            vertical: DsfrSpacings.s0v5,
-            horizontal: DsfrSpacings.s1w,
-          ),
-          icon: icon,
-          onTap: onTap,
-          key: key,
-        );
-
-  const DsfrTag.md({
-    required final InlineSpan label,
-    required final Color backgroundColor,
-    required final Color foregroundColor,
-    final IconData? icon,
-    final GestureTapCallback? onTap,
-    final Key? key,
-  }) : this._(
-          label: label,
-          textStyle: DsfrFonts.bodySm,
-          backgroundColor: backgroundColor,
-          foregroundColor: foregroundColor,
-          padding: const EdgeInsets.symmetric(
-            vertical: DsfrSpacings.s1v,
-            horizontal: DsfrSpacings.s3v,
-          ),
+          padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 8),
           icon: icon,
           onTap: onTap,
           key: key,
@@ -73,6 +49,7 @@ class DsfrTag extends StatelessWidget {
         ),
         child: GestureDetector(
           onTap: onTap,
+          behavior: HitTestBehavior.opaque,
           child: Padding(
             padding: padding,
             child: Text.rich(
@@ -81,11 +58,8 @@ class DsfrTag extends StatelessWidget {
                   if (icon != null) ...[
                     WidgetSpan(
                       alignment: PlaceholderAlignment.middle,
-                      child: Icon(
-                        icon,
-                        size: DsfrSpacings.s3v,
-                        color: foregroundColor,
-                      ),
+                      baseline: TextBaseline.alphabetic,
+                      child: Icon(icon, size: 12, color: foregroundColor),
                     ),
                     const WidgetSpan(
                       child: SizedBox(width: DsfrSpacings.s1v),
