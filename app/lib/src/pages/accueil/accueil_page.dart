@@ -44,8 +44,7 @@ class AccueilPage extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s3w),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+          child: ListView(
             children: [
               if (state.aLesAides) ...[
                 const MesAides(),

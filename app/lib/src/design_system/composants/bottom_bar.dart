@@ -1,3 +1,5 @@
+// ignore_for_file: avoid-single-child-column-or-row
+
 import 'package:app/src/design_system/fondamentaux/shadows.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
@@ -13,12 +15,17 @@ class FnvBottomBar extends StatelessWidget {
           shadows: bottomNavigationBarOmbre,
           shape: RoundedRectangleBorder(),
         ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: DsfrSpacings.s3w,
-            horizontal: DsfrSpacings.s2w,
-          ),
-          child: SizedBox(height: DsfrSpacings.s6w, child: child),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: DsfrSpacings.s3w,
+                horizontal: DsfrSpacings.s2w,
+              ),
+              child: child,
+            ),
+          ],
         ),
       );
 }
