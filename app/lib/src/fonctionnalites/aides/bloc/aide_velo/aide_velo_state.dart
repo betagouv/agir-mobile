@@ -1,6 +1,8 @@
 import 'package:app/src/fonctionnalites/aides/domain/aide_velo.dart';
 import 'package:equatable/equatable.dart';
 
+enum AideVeloStatut { initial, chargement, succes }
+
 final class AideVeloState extends Equatable {
   const AideVeloState({
     required this.prix,
@@ -11,6 +13,7 @@ final class AideVeloState extends Equatable {
     required this.revenuFiscal,
     required this.aidesDisponibles,
     required this.veutModifierLesInformations,
+    required this.aideVeloStatut,
   });
 
   const AideVeloState.empty()
@@ -23,6 +26,7 @@ final class AideVeloState extends Equatable {
           revenuFiscal: null,
           aidesDisponibles: const [],
           veutModifierLesInformations: false,
+          aideVeloStatut: AideVeloStatut.initial,
         );
 
   final int prix;
@@ -32,6 +36,7 @@ final class AideVeloState extends Equatable {
   final String ville;
   final double nombreDePartsFiscales;
   final int? revenuFiscal;
+  final AideVeloStatut aideVeloStatut;
 
   bool get prixEstValide => prix > 0;
   bool get codePostalEstValide =>
@@ -57,6 +62,7 @@ final class AideVeloState extends Equatable {
     final double? nombreDePartsFiscales,
     final int? revenuFiscal,
     final List<AideDisponiblesViewModel>? aidesDisponibles,
+    final AideVeloStatut? aideVeloStatut,
   }) =>
       AideVeloState(
         prix: prix ?? this.prix,
@@ -69,6 +75,7 @@ final class AideVeloState extends Equatable {
         aidesDisponibles: aidesDisponibles ?? this.aidesDisponibles,
         veutModifierLesInformations:
             veutModifierLesInformations ?? this.veutModifierLesInformations,
+        aideVeloStatut: aideVeloStatut ?? this.aideVeloStatut,
       );
 
   @override
@@ -81,6 +88,7 @@ final class AideVeloState extends Equatable {
         revenuFiscal,
         aidesDisponibles,
         veutModifierLesInformations,
+        aideVeloStatut,
       ];
 }
 

@@ -1,12 +1,15 @@
+import 'package:app/src/assets/svgs.dart';
 import 'package:app/src/design_system/composants/app_bar.dart';
 import 'package:app/src/design_system/composants/bottom_bar.dart';
 import 'package:app/src/design_system/fondamentaux/colors.dart';
 import 'package:app/src/fonctionnalites/aides/bloc/aide_velo/aide_velo_bloc.dart';
+import 'package:app/src/fonctionnalites/aides/bloc/aide_velo/aide_velo_state.dart';
 import 'package:app/src/fonctionnalites/aides/domain/aide_velo.dart';
 import 'package:app/src/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -39,26 +42,55 @@ class AideSimulateurVeloDisponiblePage extends StatelessWidget {
               style: DsfrFonts.headline2,
             ),
           ),
-          const SizedBox(height: DsfrSpacings.s1w),
-          DsfrAccordionsGroup(
-            values: state.aidesDisponibles
-                .map(
-                  (final e) => DsfrAccordion(
-                    headerBuilder: (final isExpanded) => _Header(
-                      titre: e.titre,
-                      montantMax: e.montantTotal,
-                      isExpanded: isExpanded,
+          const SizedBox(height: DsfrSpacings.s2w),
+          if (state.aideVeloStatut == AideVeloStatut.chargement)
+            const Center(child: CircularProgressIndicator())
+          else
+            DsfrAccordionsGroup(
+              values: state.aidesDisponibles
+                  .map(
+                    (final e) => DsfrAccordion(
+                      headerBuilder: (final isExpanded) => _Header(
+                        titre: e.titre,
+                        montantMax: e.montantTotal,
+                        isExpanded: isExpanded,
+                      ),
+                      body: _Body(aides: e.aides),
+                      isEnable: e.aides.isNotEmpty,
                     ),
-                    body: _Body(aides: e.aides),
-                    isEnable: e.aides.isNotEmpty,
-                  ),
-                )
-                .toList(),
-          ),
+                  )
+                  .toList(),
+            ),
           const SizedBox(height: DsfrSpacings.s3w),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
-            child: Text(Localisation.propulsePar, style: DsfrFonts.bodyXs),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
+            child: Text.rich(
+              TextSpan(
+                children: [
+                  const TextSpan(
+                    text: Localisation.propulsePar,
+                    style: DsfrFonts.bodyXsBold,
+                  ),
+                  WidgetSpan(
+                    alignment: PlaceholderAlignment.baseline,
+                    baseline: TextBaseline.alphabetic,
+                    child: SvgPicture.asset(
+                      AssetsSvgs.mesAidesVeloTexte,
+                      height: 9,
+                    ),
+                  ),
+                  const WidgetSpan(child: SizedBox(width: DsfrSpacings.s1v)),
+                  WidgetSpan(
+                    alignment: PlaceholderAlignment.baseline,
+                    baseline: TextBaseline.alphabetic,
+                    child: SvgPicture.asset(
+                      AssetsSvgs.mesAidesVeloLogo,
+                      height: 9,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         ],
       ),
