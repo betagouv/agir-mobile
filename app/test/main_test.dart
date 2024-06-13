@@ -49,7 +49,7 @@ void main() {
       await ielLanceLapplication(tester);
       ielVoitLeTexte(Localisation.preOnboardingTitre);
       await ielAppuieSur(tester, Localisation.jaiDejaUnCompte);
-      ielVoitLeTexte(Localisation.seConnecterAvecSonCompte);
+      ielVoitLeTexte(Localisation.seConnecter, n: 2);
       await ielEcritDansLeChamp(
         tester,
         label: Localisation.adresseElectronique,
@@ -79,7 +79,7 @@ void main() {
       ielVoitLeTexteMarkdown(tester, Localisation.preOnboarding3);
       await ielGlisseDeLaDroiteVersLaGauche(tester);
       await ielAppuieSur(tester, Localisation.jaiDejaUnCompte);
-      ielVoitLeTexte(Localisation.seConnecterAvecSonCompte);
+      ielVoitLeTexte(Localisation.seConnecter, n: 2);
       await ielEcritDansLeChamp(
         tester,
         label: Localisation.adresseElectronique,

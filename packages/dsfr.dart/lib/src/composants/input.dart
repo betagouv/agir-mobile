@@ -1,5 +1,6 @@
 // ignore_for_file: prefer-correct-callback-field-name
 
+import 'package:dsfr/src/composants/checkbox.dart';
 import 'package:dsfr/src/fondamentaux/colors.g.dart';
 import 'package:dsfr/src/fondamentaux/fonts.dart';
 import 'package:dsfr/src/fondamentaux/spacing.g.dart';
@@ -22,7 +23,7 @@ class DsfrInput extends StatefulWidget {
     this.hintColor = DsfrColors.grey425,
     this.inputStyle = DsfrFonts.bodyMd,
     this.textAlign = TextAlign.start,
-    this.passwordMode = false,
+    this.isPasswordMode = false,
     this.keyboardType,
     this.inputBorderColor = DsfrColors.grey200,
     this.inputBorderWidth = 2,
@@ -51,7 +52,7 @@ class DsfrInput extends StatefulWidget {
   final Color hintColor;
   final TextStyle inputStyle;
   final TextAlign textAlign;
-  final bool passwordMode;
+  final bool isPasswordMode;
   final TextInputType? keyboardType;
   final Color inputBorderColor;
   final double inputBorderWidth;
@@ -69,17 +70,10 @@ class DsfrInput extends StatefulWidget {
 
 class _DsfrInputState extends State<DsfrInput> {
   final _focusNode = FocusNode();
-  bool _isFocused = false;
+  bool _passwordVisibility = false;
 
-  @override
-  void initState() {
-    super.initState();
-    _focusNode.addListener(() {
-      setState(() {
-        _isFocused = _focusNode.hasFocus;
-      });
-    });
-  }
+  void _handlePasswordVisibility(final bool value) =>
+      setState(() => _passwordVisibility = value);
 
   @override
   void dispose() {
@@ -97,13 +91,30 @@ class _DsfrInputState extends State<DsfrInput> {
       borderRadius: BorderRadius.vertical(top: Radius.circular(widget.radius)),
     );
 
+    Widget label = Text(
+      widget.label,
+      style: widget.labelStyle.copyWith(color: widget.labelColor),
+    );
+
+    if (widget.isPasswordMode) {
+      label = Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Flexible(child: label),
+          if (widget.isPasswordMode)
+            DsfrCheckbox.sm(
+              label: 'Afficher',
+              value: _passwordVisibility,
+              onChanged: _handlePasswordVisibility,
+            ),
+        ],
+      );
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          widget.label,
-          style: widget.labelStyle.copyWith(color: widget.labelColor),
-        ),
+        label,
         if (widget.hint != null) ...[
           const SizedBox(height: DsfrSpacings.s1v),
           Text(
@@ -111,9 +122,11 @@ class _DsfrInputState extends State<DsfrInput> {
             style: widget.hintStyle.copyWith(color: widget.hintColor),
           ),
         ],
-        SizedBox(height: _isFocused ? DsfrSpacings.s1v : DsfrSpacings.s1w),
+        SizedBox(
+          height: _focusNode.hasFocus ? DsfrSpacings.s1v : DsfrSpacings.s1w,
+        ),
         DecoratedBox(
-          decoration: _isFocused
+          decoration: _focusNode.hasFocus
               ? BoxDecoration(
                   border: Border.fromBorderSide(
                     BorderSide(
@@ -127,7 +140,7 @@ class _DsfrInputState extends State<DsfrInput> {
                 )
               : const BoxDecoration(),
           child: Padding(
-            padding: _isFocused
+            padding: _focusNode.hasFocus
                 ? widget.focusPadding
                     .add(EdgeInsets.only(bottom: widget.inputBorderWidth))
                 : EdgeInsets.zero,
@@ -150,9 +163,9 @@ class _DsfrInputState extends State<DsfrInput> {
                 keyboardType: widget.keyboardType,
                 style: widget.inputStyle,
                 textAlign: widget.textAlign,
-                obscureText: widget.passwordMode,
-                autocorrect: !widget.passwordMode,
-                enableSuggestions: !widget.passwordMode,
+                obscureText: widget.isPasswordMode && !_passwordVisibility,
+                autocorrect: !widget.isPasswordMode,
+                enableSuggestions: !widget.isPasswordMode,
                 onChanged: widget.onChanged,
                 onTapOutside: (final event) =>
                     FocusManager.instance.primaryFocus?.unfocus(),

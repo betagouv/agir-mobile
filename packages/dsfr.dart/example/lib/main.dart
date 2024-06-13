@@ -1,13 +1,14 @@
 import 'package:dsfr_example/accordions_page.dart';
 import 'package:dsfr_example/buttons_page.dart';
+import 'package:dsfr_example/checkbox_page.dart';
 import 'package:dsfr_example/colors_page.dart';
-import 'package:dsfr_example/select_page.dart';
 import 'package:dsfr_example/fonts_page.dart';
 import 'package:dsfr_example/icons_page.dart';
 import 'package:dsfr_example/inputs_page.dart';
 import 'package:dsfr_example/links_page.dart';
 import 'package:dsfr_example/master_page.dart';
 import 'package:dsfr_example/radios_page.dart';
+import 'package:dsfr_example/select_page.dart';
 import 'package:dsfr_example/tags_page.dart';
 import 'package:flutter/material.dart';
 
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
           pageItems: [
             AccordionsPage.model,
             ButtonsPage.model,
+            CheckboxPage.model,
             ColorsPage.model,
             SelectPage.model,
             FontsPage.model,

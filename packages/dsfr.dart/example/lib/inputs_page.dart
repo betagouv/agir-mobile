@@ -32,6 +32,13 @@ class InputsPage extends StatelessWidget {
                 ),
               ],
             ),
+            DsfrInput(
+              label: 'Password',
+              isPasswordMode: true,
+              onChanged: (final String value) {
+                print(value);
+              },
+            ),
           ],
         ),
       );

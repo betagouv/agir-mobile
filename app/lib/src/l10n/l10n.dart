@@ -14,7 +14,6 @@ abstract final class Localisation {
       'Les questions suivantes nous aideront à calculer une approximation de votre empreinte carbone et vous proposer des conseils personnalisés';
   static const suivant = 'Suivant';
   static const jaiDejaUnCompte = "J'ai déjà un compte";
-  static const seConnecterAvecSonCompte = 'Se connecter avec son compte';
   static const seConnecter = 'Se connecter';
   static const adresseElectronique = 'Adresse électronique';
   static const motDePasse = 'Mot de passe';

@@ -1,5 +1,6 @@
 import 'package:app/src/fonctionnalites/se_connecter/bloc/se_connecter_bloc.dart';
 import 'package:app/src/fonctionnalites/se_connecter/bloc/se_connecter_event.dart';
+import 'package:app/src/fonctionnalites/se_connecter/bloc/se_connecter_state.dart';
 import 'package:app/src/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +48,7 @@ class SeConnecterPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  Localisation.seConnecterAvecSonCompte,
+                  Localisation.seConnecter,
                   style: DsfrFonts.headline1,
                 ),
                 const SizedBox(height: DsfrSpacings.s3w),
@@ -61,13 +62,16 @@ class SeConnecterPage extends StatelessWidget {
                 DsfrInput(
                   label: Localisation.motDePasse,
                   onChanged: (final value) => _handleMotDePasse(context, value),
-                  passwordMode: true,
+                  isPasswordMode: true,
                   keyboardType: TextInputType.visiblePassword,
                 ),
                 const Spacer(),
-                DsfrButton.lg(
-                  label: Localisation.seConnecter,
-                  onTap: () => _handleSeConnecter(context),
+                BlocSelector<SeConnecterBloc, SeConnecterState, bool>(
+                  selector: (final state) => state.estValide,
+                  builder: (final context, final state) => DsfrButton.lg(
+                    label: Localisation.seConnecter,
+                    onTap: state ? () => _handleSeConnecter(context) : null,
+                  ),
                 ),
               ],
             ),
