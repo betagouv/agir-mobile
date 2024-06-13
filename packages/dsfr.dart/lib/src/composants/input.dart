@@ -70,14 +70,29 @@ class DsfrInput extends StatefulWidget {
 
 class _DsfrInputState extends State<DsfrInput> {
   final _focusNode = FocusNode();
+  bool _isFocused = false;
   bool _passwordVisibility = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode.addListener(_listener);
+  }
+
+  void _listener() {
+    setState(() {
+      _isFocused = _focusNode.hasFocus;
+    });
+  }
 
   void _handlePasswordVisibility(final bool value) =>
       setState(() => _passwordVisibility = value);
 
   @override
   void dispose() {
-    _focusNode.dispose();
+    _focusNode
+      ..removeListener(_listener)
+      ..dispose();
     super.dispose();
   }
 
@@ -122,11 +137,9 @@ class _DsfrInputState extends State<DsfrInput> {
             style: widget.hintStyle.copyWith(color: widget.hintColor),
           ),
         ],
-        SizedBox(
-          height: _focusNode.hasFocus ? DsfrSpacings.s1v : DsfrSpacings.s1w,
-        ),
+        SizedBox(height: _isFocused ? DsfrSpacings.s1v : DsfrSpacings.s1w),
         DecoratedBox(
-          decoration: _focusNode.hasFocus
+          decoration: _isFocused
               ? BoxDecoration(
                   border: Border.fromBorderSide(
                     BorderSide(
@@ -140,7 +153,7 @@ class _DsfrInputState extends State<DsfrInput> {
                 )
               : const BoxDecoration(),
           child: Padding(
-            padding: _focusNode.hasFocus
+            padding: _isFocused
                 ? widget.focusPadding
                     .add(EdgeInsets.only(bottom: widget.inputBorderWidth))
                 : EdgeInsets.zero,
