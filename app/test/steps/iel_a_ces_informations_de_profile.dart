@@ -1,4 +1,4 @@
-import 'package:app/src/fonctionnalites/aides/domain/aide_velo_informations.dart';
+import 'package:app/features/aides/simulateur_velo/domain/value_objects/aide_velo_informations.dart';
 
 import '../scenario_context.dart';
 

@@ -1,11 +1,11 @@
 import 'dart:io';
 
-import 'package:app/src/fonctionnalites/authentification/domain/authentification_statut.dart';
-import 'package:app/src/fonctionnalites/authentification/domain/authentification_statut_manager.dart';
-import 'package:app/src/fonctionnalites/authentification/domain/information_de_connexion.dart';
-import 'package:app/src/fonctionnalites/authentification/infrastructure/adapters/authentification_api_adapter.dart';
-import 'package:app/src/fonctionnalites/authentification/infrastructure/adapters/authentification_api_client.dart';
-import 'package:app/src/fonctionnalites/authentification/infrastructure/adapters/authentification_token_storage.dart';
+import 'package:app/features/authentification/domain/entities/authentification_statut_manager.dart';
+import 'package:app/features/authentification/domain/value_objects/authentification_statut.dart';
+import 'package:app/features/authentification/domain/value_objects/information_de_connexion.dart';
+import 'package:app/features/authentification/infrastructure/adapters/api/authentification_api_adapter.dart';
+import 'package:app/features/authentification/infrastructure/adapters/api/authentification_api_client.dart';
+import 'package:app/features/authentification/infrastructure/adapters/api/authentification_token_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'client_mock.dart';

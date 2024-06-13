@@ -1,22 +1,22 @@
-import 'package:app/src/app.dart';
-import 'package:app/src/fonctionnalites/authentification/domain/authentification_statut_manager.dart';
+import 'package:app/app/app.dart';
+import 'package:app/features/authentification/domain/entities/authentification_statut_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../aide_velo_repository_mock.dart';
-import '../aides_repository_mock.dart';
-import '../authentification_repository_mock.dart';
-import '../communes_repository_mock.dart';
-import '../profil_repository_mock.dart';
+import '../mocks/aide_velo_port_mock.dart';
+import '../mocks/aides_port_mock.dart';
+import '../mocks/authentification_port_mock.dart';
+import '../mocks/communes_port_mock.dart';
+import '../mocks/profil_port_mock.dart';
+import '../mocks/utilisateur_port_mock.dart';
+import '../mocks/version_port_mock.dart';
 import '../scenario_context.dart';
-import '../utilisateur_repository_mock.dart';
-import '../version_repository_mock.dart';
 
 /// Iel lance l'application.
 Future<void> ielLanceLapplication(final WidgetTester tester) async {
   final authentificationStatusManager = AuthentificationStatutManager()
     ..gererAuthentificationStatut(ScenarioContext().authentificationStatut);
-  ScenarioContext().aideVeloRepositoryMock = AideVeloRepositoryMock(
+  ScenarioContext().aideVeloRepositoryMock = AideVeloPortMock(
     aideVeloParType: ScenarioContext().aideVeloParType,
     profil: ScenarioContext().aideVeloInformations,
   );
@@ -25,16 +25,16 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
     App(
       authentificationStatusManager: authentificationStatusManager,
       authentificationRepository:
-          AuthentificationRepositoryMock(authentificationStatusManager),
-      utilisateurRepository: UtilisateurRepositoryMock(
+          AuthentificationPortMock(authentificationStatusManager),
+      utilisateurRepository: UtilisateurPortMock(
         prenom: prenom,
         fonctionnalitesDebloquees: ScenarioContext().fonctionnalitesDebloquees,
       ),
-      aidesRepository: AidesRepositoryMock(ScenarioContext().aides),
-      versionRepository: const VersionRepositoryMock(),
-      communesRepository: CommunesRepositoryMock(ScenarioContext().communes),
+      aidesRepository: AidesPortMock(ScenarioContext().aides),
+      versionRepository: const VersionPortMock(),
+      communesRepository: CommunesPortMock(ScenarioContext().communes),
       aideVeloRepository: ScenarioContext().aideVeloRepositoryMock!,
-      profilRepository: ProfilRepositoryMock(
+      profilRepository: ProfilPortMock(
         prenom: prenom,
         nom: ScenarioContext().nom,
         adresseElectronique: ScenarioContext().adresseElectronique,

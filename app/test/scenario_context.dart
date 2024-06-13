@@ -1,10 +1,10 @@
-import 'package:app/src/fonctionnalites/aides/domain/aide.dart';
-import 'package:app/src/fonctionnalites/aides/domain/aide_velo_informations.dart';
-import 'package:app/src/fonctionnalites/aides/domain/aide_velo_par_type.dart';
-import 'package:app/src/fonctionnalites/authentification/domain/authentification_statut.dart';
-import 'package:app/src/fonctionnalites/utilisateur/domain/utilisateur.dart';
+import 'package:app/features/aides/domain/entities/aide.dart';
+import 'package:app/features/aides/simulateur_velo/domain/value_objects/aide_velo_informations.dart';
+import 'package:app/features/aides/simulateur_velo/domain/value_objects/aide_velo_par_type.dart';
+import 'package:app/features/authentification/domain/value_objects/authentification_statut.dart';
+import 'package:app/features/utilisateur/domain/entities/utilisateur.dart';
 
-import 'aide_velo_repository_mock.dart';
+import 'mocks/aide_velo_port_mock.dart';
 
 class ScenarioContext {
   factory ScenarioContext() => _instance ??= ScenarioContext._();
@@ -31,7 +31,7 @@ class ScenarioContext {
   );
   List<Aide> aides = <Aide>[];
   List<String> communes = <String>[];
-  AideVeloRepositoryMock? aideVeloRepositoryMock;
+  AideVeloPortMock? aideVeloRepositoryMock;
   static ScenarioContext? _instance;
 
   void dispose() => _instance = null;

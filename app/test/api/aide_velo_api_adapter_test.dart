@@ -1,11 +1,10 @@
-import 'package:app/src/fonctionnalites/aides/domain/aide_velo.dart';
-import 'package:app/src/fonctionnalites/aides/domain/aide_velo_collectivite.dart';
-import 'package:app/src/fonctionnalites/aides/domain/aide_velo_informations.dart';
-import 'package:app/src/fonctionnalites/aides/domain/aide_velo_par_type.dart';
-import 'package:app/src/fonctionnalites/aides/infrastructure/adapters/aide_velo_api_adapter.dart';
-import 'package:app/src/fonctionnalites/authentification/domain/authentification_statut_manager.dart';
-import 'package:app/src/fonctionnalites/authentification/infrastructure/adapters/authentification_api_client.dart';
-import 'package:app/src/fonctionnalites/authentification/infrastructure/adapters/authentification_token_storage.dart';
+import 'package:app/features/aides/infrastructure/adapters/aide_velo_api_adapter.dart';
+import 'package:app/features/aides/simulateur_velo/domain/value_objects/aide_velo.dart';
+import 'package:app/features/aides/simulateur_velo/domain/value_objects/aide_velo_informations.dart';
+import 'package:app/features/aides/simulateur_velo/domain/value_objects/aide_velo_par_type.dart';
+import 'package:app/features/authentification/domain/entities/authentification_statut_manager.dart';
+import 'package:app/features/authentification/infrastructure/adapters/api/authentification_api_client.dart';
+import 'package:app/features/authentification/infrastructure/adapters/api/authentification_token_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -23,7 +22,6 @@ const aideVeloParType = AideVeloParType(
       description:
           'Nouveau bonus vélo électrique applicable à partir du 14 février 2024.',
       lien: 'https://www.service-public.fr/particuliers/vosdroits/F36828',
-      collectivite: AideVeloCollectivite(kind: 'pays', value: 'France'),
       montant: 300,
       plafond: 300,
       logo:
@@ -36,7 +34,6 @@ const aideVeloParType = AideVeloParType(
       description:
           'Nouveau bonus vélo cargo applicable à partir du 14 février 2024.',
       lien: 'https://www.service-public.fr/particuliers/vosdroits/F36828',
-      collectivite: AideVeloCollectivite(kind: 'pays', value: 'France'),
       montant: 400,
       plafond: 400,
       logo:
@@ -49,7 +46,6 @@ const aideVeloParType = AideVeloParType(
       description:
           'Nouveau bonus vélo cargo électrique applicable à partir du 14 février 2024.',
       lien: 'https://www.service-public.fr/particuliers/vosdroits/F36828',
-      collectivite: AideVeloCollectivite(kind: 'pays', value: 'France'),
       montant: 400,
       plafond: 400,
       logo:
@@ -62,7 +58,6 @@ const aideVeloParType = AideVeloParType(
       description:
           'Nouveau bonus vélo pliant applicable à partir du 14 février 2024.',
       lien: 'https://www.service-public.fr/particuliers/vosdroits/F36828',
-      collectivite: AideVeloCollectivite(kind: 'pays', value: 'France'),
       montant: 400,
       plafond: 400,
       logo:

@@ -1,4 +1,4 @@
-import 'package:app/src/fonctionnalites/authentification/domain/authentification_statut.dart';
+import 'package:app/features/authentification/domain/value_objects/authentification_statut.dart';
 
 import '../scenario_context.dart';
 
