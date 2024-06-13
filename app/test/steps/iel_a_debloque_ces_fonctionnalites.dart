@@ -1,4 +1,4 @@
-import 'package:app/src/fonctionnalites/utilisateur/domain/utilisateur.dart';
+import 'package:app/features/utilisateur/domain/entities/utilisateur.dart';
 
 import '../scenario_context.dart';
 

@@ -1,6 +1,6 @@
-import 'package:app/src/fonctionnalites/aides/domain/aide.dart';
-import 'package:app/src/fonctionnalites/utilisateur/domain/utilisateur.dart';
-import 'package:app/src/l10n/l10n.dart';
+import 'package:app/features/aides/domain/entities/aide.dart';
+import 'package:app/features/utilisateur/domain/entities/utilisateur.dart';
+import 'package:app/l10n/l10n.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'set_up_widgets.dart';

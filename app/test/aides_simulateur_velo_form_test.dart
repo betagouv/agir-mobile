@@ -2,11 +2,11 @@
 
 import 'dart:io';
 
-import 'package:app/src/fonctionnalites/aides/domain/aide.dart';
-import 'package:app/src/fonctionnalites/aides/domain/aide_velo_informations.dart';
-import 'package:app/src/fonctionnalites/aides/domain/velo_pour_simulateur.dart';
-import 'package:app/src/fonctionnalites/utilisateur/domain/utilisateur.dart';
-import 'package:app/src/l10n/l10n.dart';
+import 'package:app/features/aides/domain/entities/aide.dart';
+import 'package:app/features/aides/simulateur_velo/domain/value_objects/aide_velo_informations.dart';
+import 'package:app/features/aides/simulateur_velo/domain/value_objects/velo_pour_simulateur.dart';
+import 'package:app/features/utilisateur/domain/entities/utilisateur.dart';
+import 'package:app/l10n/l10n.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'api/aide_velo_api_adapter_test.dart';

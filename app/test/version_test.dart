@@ -1,4 +1,4 @@
-import 'package:app/src/l10n/l10n.dart';
+import 'package:app/l10n/l10n.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'set_up_widgets.dart';
