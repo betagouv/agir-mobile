@@ -1,4 +1,5 @@
 import 'package:app/src/assets/images.dart';
+import 'package:app/src/fonctionnalites/commun/presentation/widgets/jai_deja_un_compte.dart';
 import 'package:app/src/l10n/l10n.dart';
 import 'package:app/src/pages/authentification/se_connecter_page.dart';
 import 'package:dsfr/dsfr.dart';
@@ -96,13 +97,7 @@ class _PreOnboardingCarrouselPageState extends State<PreOnboardingCarrouselPage>
                                 _handleAllerASeConnecter(context),
                           ),
                           const SizedBox(height: DsfrSpacings.s3w),
-                          Center(
-                            child: DsfrLink.md(
-                              label: Localisation.jaiDejaUnCompte,
-                              onTap: () async =>
-                                  _handleAllerASeConnecter(context),
-                            ),
-                          ),
+                          const JaiDejaUnCompteWidget(),
                           const SizedBox(height: DsfrSpacings.s8w),
                         ],
                       ),
