@@ -43,6 +43,29 @@ void main() {
   );
 
   testWidgets(
+    "Iel lance l'application pour la première fois skip le preonboarding et se connecte",
+    (final tester) async {
+      setUpWidgets(tester);
+      await ielLanceLapplication(tester);
+      ielVoitLeTexte(Localisation.preOnboardingTitre);
+      await ielAppuieSur(tester, Localisation.jaiDejaUnCompte);
+      ielVoitLeTexte(Localisation.seConnecterAvecSonCompte);
+      await ielEcritDansLeChamp(
+        tester,
+        label: Localisation.adresseElectronique,
+        enterText: 'joe@doe.com',
+      );
+      await ielEcritDansLeChamp(
+        tester,
+        label: Localisation.motDePasse,
+        enterText: 'M07D3P4553',
+      );
+      await ielAppuieSur(tester, Localisation.seConnecter);
+      ielVoitLeTexteDansTexteRiche(Localisation.bonjour);
+    },
+  );
+
+  testWidgets(
     "Iel lance l'application pour la première fois et se connecte",
     (final tester) async {
       setUpWidgets(tester);

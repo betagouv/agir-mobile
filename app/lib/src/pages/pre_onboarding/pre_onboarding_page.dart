@@ -1,5 +1,6 @@
 import 'package:app/src/assets/images.dart';
 import 'package:app/src/assets/svgs.dart';
+import 'package:app/src/fonctionnalites/commun/presentation/widgets/jai_deja_un_compte.dart';
 import 'package:app/src/fonctionnalites/version/widgets/version_label.dart';
 import 'package:app/src/l10n/l10n.dart';
 import 'package:app/src/pages/pre_onboarding/pre_onboarding_carrousel_page.dart';
@@ -53,6 +54,8 @@ class PreOnboardingPage extends StatelessWidget {
                   onTap: () async =>
                       context.pushNamed(PreOnboardingCarrouselPage.name),
                 ),
+                const SizedBox(height: DsfrSpacings.s3w),
+                const JaiDejaUnCompteWidget(),
                 const SizedBox(height: DsfrSpacings.s3w),
                 const Align(child: VersionLabel()),
               ],
