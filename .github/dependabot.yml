@@ -1,42 +1,84 @@
 version: 2
 updates:
-  - package-ecosystem: "github-actions"
+  - package-ecosystem: github-actions
     directory: "/"
     schedule:
-      interval: "daily"
-    reviewers:
-      - "lsaudon"
+      interval: weekly
     commit-message:
       prefix: "chore: "
-  - package-ecosystem: "pub"
-    directory: "/app"
+  - package-ecosystem: pub
+    directory: /app
     schedule:
-      interval: "daily"
-    reviewers:
-      - "lsaudon"
+      interval: daily
     commit-message:
       prefix: "chore: "
-  - package-ecosystem: "pub"
+  - package-ecosystem: pub
     directory: "/packages/agir_lints"
     schedule:
-      interval: "daily"
-    reviewers:
-      - "lsaudon"
+      interval: daily
     commit-message:
       prefix: "chore: "
-  - package-ecosystem: "pub"
+  - package-ecosystem: pub
     directory: "/packages/dsfr.dart"
     schedule:
-      interval: "daily"
+      interval: daily
     reviewers:
       - "lsaudon"
     commit-message:
       prefix: "chore: "
-  - package-ecosystem: "pub"
+  - package-ecosystem: pub
     directory: "/packages/dsfr.dart/example"
     schedule:
-      interval: "daily"
+      interval: daily
     reviewers:
       - "lsaudon"
     commit-message:
       prefix: "chore: "
+  - package-ecosystem: bundler
+    directory: /app/android
+    schedule:
+      interval: weekly
+    groups:
+      app-android-bundler:
+        patterns:
+          - "*"
+  - package-ecosystem: bundler
+    directory: /app/ios
+    schedule:
+      interval: weekly
+    groups:
+      app-ios-bundler:
+        patterns:
+          - "*"
+  - package-ecosystem: gradle
+    directory: /app/android/app
+    schedule:
+      interval: weekly
+    groups:
+      app-android-app-gradle:
+        patterns:
+          - "*"
+  - package-ecosystem: gradle
+    directory: /app/android
+    schedule:
+      interval: weekly
+    groups:
+      app-android-gradle:
+        patterns:
+          - "*"
+  - package-ecosystem: gradle
+    directory: /packages/dsfr.dart/example/android/app
+    schedule:
+      interval: weekly
+    groups:
+      packages-dsfr-dart-example-android-app-gradle:
+        patterns:
+          - "*"
+  - package-ecosystem: gradle
+    directory: /packages/dsfr.dart/example/android
+    schedule:
+      interval: weekly
+    groups:
+      packages-dsfr-dart-example-android-gradle:
+        patterns:
+          - "*"
