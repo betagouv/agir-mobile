@@ -1,7 +1,4 @@
 {
-  "dart.analysisExcludedFolders": [
-    "old"
-  ],
   "[dart]": {
     "editor.bracketPairColorization.enabled": true,
     "editor.formatOnSave": true,
