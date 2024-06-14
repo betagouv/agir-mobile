@@ -19,6 +19,7 @@ analyzer:
 
 linter:
   rules:
+    always_put_required_named_parameters_first: false
     always_specify_types: false
     avoid_annotating_with_dynamic: false
     avoid_classes_with_only_static_members: false

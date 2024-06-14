@@ -11,7 +11,7 @@ const preferredHeight = 59.0;
 class FnvAppBar extends StatelessWidget implements PreferredSizeWidget {
   const FnvAppBar({this.leading, this.title, super.key});
 
-  final IconButton? leading;
+  final Widget? leading;
   final Widget? title;
 
   @override
@@ -39,7 +39,9 @@ class FnvAppBar extends StatelessWidget implements PreferredSizeWidget {
                             ? GoRouter.of(context).pop()
                             : Scaffold.of(context).openDrawer(),
                         style: const ButtonStyle(
-                          shape: WidgetStatePropertyAll(roundedRectangleBorder),
+                          shape: WidgetStatePropertyAll(
+                            roundedRectangleBorder,
+                          ),
                         ),
                         icon: Icon(
                           GoRouter.of(context).canPop()

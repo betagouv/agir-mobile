@@ -8,7 +8,7 @@ class JaiDejaUnCompteWidget extends StatelessWidget {
   const JaiDejaUnCompteWidget({super.key});
 
   Future<void> _handleAllerASeConnecter(final BuildContext context) async {
-    await context.pushNamed(SeConnecterPage.name);
+    await GoRouter.of(context).pushNamed(SeConnecterPage.name);
   }
 
   @override
