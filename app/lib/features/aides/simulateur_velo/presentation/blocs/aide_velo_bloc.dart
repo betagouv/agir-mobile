@@ -4,15 +4,18 @@ import 'package:app/features/aides/simulateur_velo/domain/ports/aide_velo_port.d
 import 'package:app/features/aides/simulateur_velo/presentation/blocs/aide_velo_event.dart';
 import 'package:app/features/aides/simulateur_velo/presentation/blocs/aide_velo_state.dart';
 import 'package:app/features/communes/domain/ports/communes_port.dart';
+import 'package:app/features/profil/domain/ports/profil_port.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
   AideVeloBloc({
-    required final CommunesPort communesRepository,
-    required final AideVeloPort aideVeloRepository,
-  })  : _communesRepository = communesRepository,
-        _aideVeloRepository = aideVeloRepository,
+    required final ProfilPort profilPort,
+    required final CommunesPort communesPort,
+    required final AideVeloPort aideVeloPort,
+  })  : _profilPort = profilPort,
+        _communesPort = communesPort,
+        _aideVeloPort = aideVeloPort,
         super(const AideVeloState.empty()) {
     on<AideVeloInformationsDemandee>(_onInformationsDemandee);
     on<AideVeloModificationDemandee>(_onModificationDemandee);
@@ -24,14 +27,15 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
     on<AideVeloEstimationDemandee>(_onEstimationDemandee);
   }
 
-  final CommunesPort _communesRepository;
-  final AideVeloPort _aideVeloRepository;
+  final CommunesPort _communesPort;
+  final ProfilPort _profilPort;
+  final AideVeloPort _aideVeloPort;
 
   Future<void> _onInformationsDemandee(
     final AideVeloInformationsDemandee event,
     final Emitter<AideVeloState> emit,
   ) async {
-    final informations = await _aideVeloRepository.recupererProfil();
+    final informations = await _profilPort.recupererProfil();
     emit(
       AideVeloState(
         prix: 1000,
@@ -51,8 +55,7 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
     final AideVeloModificationDemandee event,
     final Emitter<AideVeloState> emit,
   ) async {
-    final communes =
-        await _communesRepository.recupererLesCommunes(state.codePostal);
+    final communes = await _communesPort.recupererLesCommunes(state.codePostal);
     emit(state.copyWith(veutModifierLesInformations: true, communes: communes));
   }
 
@@ -67,8 +70,7 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
     final AideVeloCodePostalChange event,
     final Emitter<AideVeloState> emit,
   ) async {
-    final communes =
-        await _communesRepository.recupererLesCommunes(event.valeur);
+    final communes = await _communesPort.recupererLesCommunes(event.valeur);
     emit(
       state.copyWith(
         codePostal: event.valeur,
@@ -107,7 +109,7 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
       return;
     }
     emit(state.copyWith(aideVeloStatut: AideVeloStatut.chargement));
-    final aidesDisponibles = await _aideVeloRepository.simuler(
+    final aidesDisponibles = await _aideVeloPort.simuler(
       prix: state.prix,
       codePostal: state.codePostal,
       ville: state.ville,

@@ -14,7 +14,7 @@ class MesAides extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    final bloc = AidesAccueilBloc(aidesRepository: context.read())
+    final bloc = AidesAccueilBloc(aidesPort: context.read())
       ..add(const AidesAccueilRecuperationDemandee());
 
     return Padding(

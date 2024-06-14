@@ -11,20 +11,29 @@ import 'steps/iel_voit_le_texte.dart';
 
 void main() {
   testWidgets(
-    'Iel va sur la page profil',
+    'Iel va sur la page profil et voit les éléments disponibles',
     (final tester) async {
       setUpWidgets(tester);
-      const prenom = 'Michel';
-      const nom = 'Dupont';
-      ielSappelle(prenom, nom: nom);
-      ielEstConnecte();
-      await ielLanceLapplication(tester);
-      await ielAppuieSurAccessibilite(tester, Localisation.menu);
-      await ielAppuieSur(tester, Localisation.monProfil);
-      ielVoitLeTexte(Localisation.identitePersonnelle);
-      ielVoitLeTexte(prenom);
-      ielVoitLeTexte(nom);
+      await _allerSurMonProfil(tester);
+      ielVoitLeTexte(Localisation.monProfil);
+      ielVoitLeTexte(Localisation.vosInformations);
     },
-    skip: true,
   );
+
+  testWidgets('Allez sur la page Mes informations', (final tester) async {
+    setUpWidgets(tester);
+    await _allerSurMonProfil(tester);
+    await ielAppuieSur(tester, Localisation.vosInformations);
+    ielVoitLeTexte(Localisation.mesInformations);
+  });
+}
+
+Future<void> _allerSurMonProfil(final WidgetTester tester) async {
+  const prenom = 'Michel';
+  const nom = 'Dupont';
+  ielSappelle(prenom, nom: nom);
+  ielEstConnecte();
+  await ielLanceLapplication(tester);
+  await ielAppuieSurAccessibilite(tester, Localisation.menu);
+  await ielAppuieSur(tester, Localisation.monProfil);
 }

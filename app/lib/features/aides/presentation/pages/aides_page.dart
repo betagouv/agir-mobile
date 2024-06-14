@@ -23,7 +23,7 @@ class AidesPage extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    final bloc = AidesBloc(aidesRepository: context.read())
+    final bloc = AidesBloc(aidesPort: context.read())
       ..add(const AidesRecuperationDemandee());
 
     return RootPage(

@@ -1,9 +1,6 @@
-import 'package:app/features/aides/simulateur_velo/domain/value_objects/aide_velo_informations.dart';
 import 'package:app/features/aides/simulateur_velo/domain/value_objects/aide_velo_par_type.dart';
 
 abstract interface class AideVeloPort {
-  Future<AideVeloInformations> recupererProfil();
-
   Future<AideVeloParType> simuler({
     required final int prix,
     required final String codePostal,

@@ -6,19 +6,19 @@ import 'package:app/features/aides/presentation/blocs/aides_accueil/aides_accuei
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AidesAccueilBloc extends Bloc<AidesAccueilEvent, AidesAccueilState> {
-  AidesAccueilBloc({required final AidesPort aidesRepository})
-      : _aidesRepository = aidesRepository,
+  AidesAccueilBloc({required final AidesPort aidesPort})
+      : _aidesPort = aidesPort,
         super(const AidesAccueilState([])) {
     on<AidesAccueilRecuperationDemandee>(_onRecuperationDemandee);
   }
 
-  final AidesPort _aidesRepository;
+  final AidesPort _aidesPort;
 
   Future<void> _onRecuperationDemandee(
     final AidesAccueilRecuperationDemandee event,
     final Emitter<AidesAccueilState> emit,
   ) async {
-    final aides = await _aidesRepository.recupereLesAides();
+    final aides = await _aidesPort.recupereLesAides();
     emit(AidesAccueilState(aides.take(2).toList()));
   }
 }

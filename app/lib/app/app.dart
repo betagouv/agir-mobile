@@ -8,7 +8,6 @@ import 'package:app/features/authentification/domain/ports/authentification_port
 import 'package:app/features/authentification/presentation/blocs/se_connecter_bloc.dart';
 import 'package:app/features/communes/domain/ports/communes_port.dart';
 import 'package:app/features/profil/domain/ports/profil_port.dart';
-import 'package:app/features/profil/presentation/blocs/profil_bloc.dart';
 import 'package:app/features/utilisateur/domain/ports/utilisateur_port.dart';
 import 'package:app/features/utilisateur/presentation/blocs/utilisateur_bloc.dart';
 import 'package:app/features/version/domain/ports/version_port.dart';
@@ -23,24 +22,24 @@ import 'package:go_router/go_router.dart';
 class App extends StatefulWidget {
   const App({
     required this.authentificationStatusManager,
-    required this.authentificationRepository,
-    required this.utilisateurRepository,
-    required this.aidesRepository,
-    required this.versionRepository,
-    required this.communesRepository,
-    required this.aideVeloRepository,
-    required this.profilRepository,
+    required this.authentificationPort,
+    required this.utilisateurPort,
+    required this.aidesPort,
+    required this.versionPort,
+    required this.communesPort,
+    required this.aideVeloPort,
+    required this.profilPort,
     super.key,
   });
 
   final AuthentificationStatutManager authentificationStatusManager;
-  final AuthentificationPort authentificationRepository;
-  final UtilisateurPort utilisateurRepository;
-  final AidesPort aidesRepository;
-  final VersionPort versionRepository;
-  final CommunesPort communesRepository;
-  final AideVeloPort aideVeloRepository;
-  final ProfilPort profilRepository;
+  final AuthentificationPort authentificationPort;
+  final UtilisateurPort utilisateurPort;
+  final AidesPort aidesPort;
+  final VersionPort versionPort;
+  final CommunesPort communesPort;
+  final AideVeloPort aideVeloPort;
+  final ProfilPort profilPort;
 
   @override
   State<App> createState() => _AppState();
@@ -66,36 +65,34 @@ class _AppState extends State<App> {
   @override
   Widget build(final BuildContext context) => MultiRepositoryProvider(
         providers: [
-          RepositoryProvider.value(value: widget.authentificationRepository),
-          RepositoryProvider.value(value: widget.aidesRepository),
+          RepositoryProvider.value(value: widget.authentificationPort),
+          RepositoryProvider.value(value: widget.aidesPort),
+          RepositoryProvider.value(value: widget.profilPort),
         ],
         child: MultiBlocProvider(
           providers: [
             BlocProvider(
               create: (final context) => SeConnecterBloc(
-                authentificationRepository: widget.authentificationRepository,
+                authentificationPort: widget.authentificationPort,
               ),
             ),
             BlocProvider(
               create: (final context) => UtilisateurBloc(
-                utilisateurRepository: widget.utilisateurRepository,
+                utilisateurPort: widget.utilisateurPort,
               ),
             ),
             BlocProvider(create: (final context) => AideBloc()),
             BlocProvider(
               create: (final context) =>
-                  VersionBloc(versionRepository: widget.versionRepository)
+                  VersionBloc(versionPort: widget.versionPort)
                     ..add(const VersionDemandee()),
             ),
             BlocProvider(
               create: (final context) => AideVeloBloc(
-                communesRepository: widget.communesRepository,
-                aideVeloRepository: widget.aideVeloRepository,
+                profilPort: widget.profilPort,
+                communesPort: widget.communesPort,
+                aideVeloPort: widget.aideVeloPort,
               ),
-            ),
-            BlocProvider(
-              create: (final context) =>
-                  ProfilBloc(profilRepository: widget.profilRepository),
             ),
           ],
           child: MaterialApp.router(

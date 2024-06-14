@@ -4,17 +4,17 @@ import 'package:app/features/version/presentation/blocs/version_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class VersionBloc extends Bloc<VersionEvent, VersionState> {
-  VersionBloc({required final VersionPort versionRepository})
-      : _versionRepository = versionRepository,
+  VersionBloc({required final VersionPort versionPort})
+      : _versionPort = versionPort,
         super(const VersionState('')) {
     on<VersionDemandee>(_onDemandee);
   }
 
-  final VersionPort _versionRepository;
+  final VersionPort _versionPort;
 
   void _onDemandee(
     final VersionDemandee event,
     final Emitter<VersionState> emit,
   ) =>
-      emit(VersionState(_versionRepository.versionDemandee()));
+      emit(VersionState(_versionPort.versionDemandee()));
 }

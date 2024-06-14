@@ -62,6 +62,7 @@ dart_code_metrics:
     - missing-test-assertion: false
     - avoid-non-ascii-symbols: false
     - no-magic-string: false
+    - prefer-correct-type-name: false
     - prefer-explicit-type-arguments: false
     - avoid-similar-names: false
     - prefer-static-class: false

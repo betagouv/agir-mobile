@@ -46,7 +46,7 @@ abstract final class DsfrFonts {
       DsfrTextStyle(fontSize: 24, lineHeight: 24, fontWeight: FontWeight.bold);
 
   static const headline4 =
-      DsfrTextStyle(fontSize: 22, lineHeight: 22, fontWeight: FontWeight.bold);
+      DsfrTextStyle(fontSize: 22, lineHeight: 28, fontWeight: FontWeight.bold);
 
   static const headline5 =
       DsfrTextStyle(fontSize: 20, lineHeight: 20, fontWeight: FontWeight.bold);

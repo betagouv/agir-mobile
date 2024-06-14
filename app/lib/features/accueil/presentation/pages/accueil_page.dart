@@ -34,16 +34,14 @@ class AccueilPage extends StatelessWidget {
     return RootPage(
       title: const _AppBarTitle(),
       body: SafeArea(
-        child: Padding(
+        child: ListView(
           padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s3w),
-          child: ListView(
-            children: [
-              if (state.aLesAides) ...[
-                const MesAides(),
-                const SizedBox(height: DsfrSpacings.s5w),
-              ],
+          children: [
+            if (state.aLesAides) ...[
+              const MesAides(),
+              const SizedBox(height: DsfrSpacings.s5w),
             ],
-          ),
+          ],
         ),
       ),
     );

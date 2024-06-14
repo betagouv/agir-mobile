@@ -1,13 +1,9 @@
 import 'package:app/features/aides/simulateur_velo/domain/ports/aide_velo_port.dart';
-import 'package:app/features/aides/simulateur_velo/domain/value_objects/aide_velo_informations.dart';
 import 'package:app/features/aides/simulateur_velo/domain/value_objects/aide_velo_par_type.dart';
 
 class AideVeloPortMock implements AideVeloPort {
-  AideVeloPortMock({
-    required final AideVeloParType aideVeloParType,
-    required final AideVeloInformations profil,
-  })  : _aideVeloParType = aideVeloParType,
-        _profil = profil;
+  AideVeloPortMock({required final AideVeloParType aideVeloParType})
+      : _aideVeloParType = aideVeloParType;
 
   int prix = 0;
   String codePostal = '';
@@ -16,10 +12,6 @@ class AideVeloPortMock implements AideVeloPort {
   int revenuFiscal = 0;
 
   final AideVeloParType _aideVeloParType;
-  final AideVeloInformations _profil;
-
-  @override
-  Future<AideVeloInformations> recupererProfil() async => _profil;
 
   @override
   Future<AideVeloParType> simuler({

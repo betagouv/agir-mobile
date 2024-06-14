@@ -86,5 +86,14 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const propulsePar = 'Propulsé par ';
   static String euro(final int value) => '$value €';
   static const monProfil = 'Mon profil';
-  static const identitePersonnelle = 'Identité personnelle';
+  static const vosInformations = 'Vos informations';
+  static const mesInformations = 'Mes informations';
+  static const votreIdentite = 'Votre identité';
+  static const prenom = 'Prénom';
+  static const nom = 'Nom';
+  static const adresseCourrierElectronique = 'Adresse courrier électronique';
+  static const adresseCourrierElectroniqueDescription =
+      'Format attendu : nom@domaine.fr';
+  static const donneesPersonnelles = 'Données personnelles';
+  static const mettreAJourVosInformations = 'Mettre à jour vos informations';
 }
