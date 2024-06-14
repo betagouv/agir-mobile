@@ -51,15 +51,13 @@ Future<void> main() async {
   runApp(
     App(
       authentificationStatusManager: authentificationStatusManager,
-      authentificationRepository: AuthentificationApiAdapter(
-        apiClient: apiClient,
-      ),
-      utilisateurRepository: UtilisateurApiAdapter(apiClient: apiClient),
-      aidesRepository: AidesApiAdapter(apiClient: apiClient),
-      versionRepository: VersionAdapter(packageInfo: packageInfo),
-      communesRepository: CommunesApiAdapter(apiClient: apiClient),
-      aideVeloRepository: AideVeloApiAdapter(apiClient: apiClient),
-      profilRepository: const ProfilApiAdapter(),
+      authentificationPort: AuthentificationApiAdapter(apiClient: apiClient),
+      utilisateurPort: UtilisateurApiAdapter(apiClient: apiClient),
+      aidesPort: AidesApiAdapter(apiClient: apiClient),
+      versionPort: VersionAdapter(packageInfo: packageInfo),
+      communesPort: CommunesApiAdapter(apiClient: apiClient),
+      aideVeloPort: AideVeloApiAdapter(apiClient: apiClient),
+      profilPort: ProfilApiAdapter(apiClient: apiClient),
     ),
   );
 }

@@ -7,8 +7,8 @@ import 'package:app/features/utilisateur/presentation/blocs/utilisateur_state.da
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UtilisateurBloc extends Bloc<UtilisateurEvent, UtilisateurState> {
-  UtilisateurBloc({required final UtilisateurPort utilisateurRepository})
-      : _utilisateurRepository = utilisateurRepository,
+  UtilisateurBloc({required final UtilisateurPort utilisateurPort})
+      : _utilisateurPort = utilisateurPort,
         super(const UtilisateurState(prenom: '', aLesAides: false)) {
     on<UtilsateurRecuperationDemandee>(_onRecuperationDemandee);
   }
@@ -17,7 +17,7 @@ class UtilisateurBloc extends Bloc<UtilisateurEvent, UtilisateurState> {
     final UtilsateurRecuperationDemandee event,
     final Emitter<UtilisateurState> emit,
   ) async {
-    final utilisateur = await _utilisateurRepository.recupereUtilisateur();
+    final utilisateur = await _utilisateurPort.recupereUtilisateur();
     emit(
       UtilisateurState(
         prenom: utilisateur.prenom,
@@ -27,5 +27,5 @@ class UtilisateurBloc extends Bloc<UtilisateurEvent, UtilisateurState> {
     );
   }
 
-  final UtilisateurPort _utilisateurRepository;
+  final UtilisateurPort _utilisateurPort;
 }

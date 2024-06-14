@@ -366,8 +366,8 @@ class _NombreDePartsFiscales extends StatelessWidget {
 
     return DsfrInput(
       label: Localisation.nombreDePartsFiscales,
-      onChanged: (final value) => _handleNombreDePartsFiscales(context, value),
       hint: Localisation.nombreDePartsFiscalesDescription,
+      onChanged: (final value) => _handleNombreDePartsFiscales(context, value),
       initialValue: '$nombreDePartsFiscales',
       width: MediaQuery.textScalerOf(context).scale(_inputWidth),
       keyboardType: const TextInputType.numberWithOptions(decimal: true),
@@ -438,9 +438,12 @@ class _Questions extends StatelessWidget {
           DsfrAccordion(
             headerBuilder: (final isExpanded) =>
                 const _AccordionHeader(text: Localisation.pourquoiCesQuestions),
-            body: const _AccordionBody(
+            body: _AccordionBody(
               child: MarkdownBody(
                 data: Localisation.pourquoiCesQuestionsReponse,
+                styleSheet: MarkdownStyleSheet(
+                  p: const DsfrTextStyle(fontSize: 15, lineHeight: 24),
+                ),
               ),
             ),
           ),

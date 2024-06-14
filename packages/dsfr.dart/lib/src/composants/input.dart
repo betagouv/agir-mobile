@@ -10,8 +10,8 @@ import 'package:flutter/services.dart';
 class DsfrInput extends StatefulWidget {
   const DsfrInput({
     required this.label,
-    required this.onChanged,
     this.hint,
+    required this.onChanged,
     this.suffixText,
     this.controller,
     this.initialValue,

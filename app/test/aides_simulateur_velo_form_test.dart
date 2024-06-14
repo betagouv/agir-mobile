@@ -3,7 +3,6 @@
 import 'dart:io';
 
 import 'package:app/features/aides/domain/entities/aide.dart';
-import 'package:app/features/aides/simulateur_velo/domain/value_objects/aide_velo_informations.dart';
 import 'package:app/features/aides/simulateur_velo/domain/value_objects/velo_pour_simulateur.dart';
 import 'package:app/features/utilisateur/domain/entities/utilisateur.dart';
 import 'package:app/l10n/l10n.dart';
@@ -130,12 +129,12 @@ void main() {
         await ielAppuieSur(tester, tranche);
         await ielAppuieSur(tester, Localisation.estimerMesAides);
 
-        final aideVeloRepositoryMock = ScenarioContext().aideVeloRepositoryMock;
-        expect(aideVeloRepositoryMock!.prix, prixParDefaut);
-        expect(aideVeloRepositoryMock.codePostal, codePostal);
-        expect(aideVeloRepositoryMock.ville, commune);
-        expect(aideVeloRepositoryMock.nombreDePartsFiscales, nombreDePart);
-        expect(aideVeloRepositoryMock.revenuFiscal, revenuFiscal);
+        final aideVeloPortMock = ScenarioContext().aideVeloPortMock;
+        expect(aideVeloPortMock!.prix, prixParDefaut);
+        expect(aideVeloPortMock.codePostal, codePostal);
+        expect(aideVeloPortMock.ville, commune);
+        expect(aideVeloPortMock.nombreDePartsFiscales, nombreDePart);
+        expect(aideVeloPortMock.revenuFiscal, revenuFiscal);
 
         ielVoitLeTexte(Localisation.vosAidesDisponibles);
         ielVoitLeTexte(Localisation.aucuneAideDisponible, n: 2);
@@ -161,13 +160,11 @@ void main() {
       'Iel arrive sur la page avec les informations déjà renseignées',
       (final tester) async {
         setUpWidgets(tester);
-        ielACesInformationsDeProfile(
-          const AideVeloInformations(
-            codePostal: codePostal,
-            ville: commune,
-            nombreDePartsFiscales: nombreDePart,
-            revenuFiscal: revenuFiscal,
-          ),
+        ielACesInformationsDeProfil(
+          codePostal: codePostal,
+          ville: commune,
+          nombreDePartsFiscales: nombreDePart,
+          revenuFiscal: revenuFiscal,
         );
         await _allerSurLeSimulateurVelo(tester, aide2);
         await ielScrolle(tester, Localisation.modifier);
@@ -191,13 +188,11 @@ void main() {
       'Iel veut modifier ces informations, les données sont préremplis',
       (final tester) async {
         setUpWidgets(tester);
-        ielACesInformationsDeProfile(
-          const AideVeloInformations(
-            codePostal: codePostal,
-            ville: commune,
-            nombreDePartsFiscales: nombreDePart,
-            revenuFiscal: revenuFiscal,
-          ),
+        ielACesInformationsDeProfil(
+          codePostal: codePostal,
+          ville: commune,
+          nombreDePartsFiscales: nombreDePart,
+          revenuFiscal: revenuFiscal,
         );
         await _allerSurLeSimulateurVelo(tester, aide2);
         await ielScrolle(tester, Localisation.modifier);
@@ -215,13 +210,11 @@ void main() {
       (final tester) async {
         setUpWidgets(tester);
         leServeurRetourneCetteListeDeCommunes(['AUTHUME', commune]);
-        ielACesInformationsDeProfile(
-          const AideVeloInformations(
-            codePostal: codePostal,
-            ville: commune,
-            nombreDePartsFiscales: nombreDePart,
-            revenuFiscal: revenuFiscal,
-          ),
+        ielACesInformationsDeProfil(
+          codePostal: codePostal,
+          ville: commune,
+          nombreDePartsFiscales: nombreDePart,
+          revenuFiscal: revenuFiscal,
         );
         await _allerSurLeSimulateurVelo(tester, aide2);
         await ielScrolle(tester, Localisation.modifier);
@@ -239,13 +232,11 @@ void main() {
       "Après avoir clique sur modifier il retourne sur la page de l'aide et reclique sur accéder au simulateur, la page doit être réinitialisée",
       (final tester) async {
         setUpWidgets(tester);
-        ielACesInformationsDeProfile(
-          const AideVeloInformations(
-            codePostal: codePostal,
-            ville: commune,
-            nombreDePartsFiscales: nombreDePart,
-            revenuFiscal: revenuFiscal,
-          ),
+        ielACesInformationsDeProfil(
+          codePostal: codePostal,
+          ville: commune,
+          nombreDePartsFiscales: nombreDePart,
+          revenuFiscal: revenuFiscal,
         );
         await _allerSurLeSimulateurVelo(tester, aide2);
         await ielScrolle(tester, Localisation.modifier);

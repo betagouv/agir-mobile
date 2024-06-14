@@ -8,15 +8,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SeConnecterBloc extends Bloc<SeConnecterEvent, SeConnecterState> {
   SeConnecterBloc({
-    required final AuthentificationPort authentificationRepository,
-  })  : _authentificationRepository = authentificationRepository,
+    required final AuthentificationPort authentificationPort,
+  })  : _authentificationPort = authentificationPort,
         super(const SeConnecterState()) {
     on<SeConnecterAdresseMailAChange>(_onAdresseMailAChange);
     on<SeConnecterMotDePasseAChange>(_onMotDePasseAChange);
     on<SeConnecterConnexionDemandee>(_onConnexionDemandee);
   }
 
-  final AuthentificationPort _authentificationRepository;
+  final AuthentificationPort _authentificationPort;
 
   void _onAdresseMailAChange(
     final SeConnecterAdresseMailAChange event,
@@ -40,7 +40,6 @@ class SeConnecterBloc extends Bloc<SeConnecterEvent, SeConnecterState> {
       adresseMail: state.adresseMail,
       motDePasse: state.motDePasse,
     );
-    await _authentificationRepository
-        .connectionDemandee(informationDeConnexion);
+    await _authentificationPort.connectionDemandee(informationDeConnexion);
   }
 }

@@ -20,8 +20,8 @@ void main() {
         App(
           child: DsfrInput(
             label: 'Label',
-            onChanged: (final value) {},
             hint: hint,
+            onChanged: (final value) {},
           ),
         ),
       );
@@ -35,8 +35,8 @@ void main() {
         App(
           child: DsfrInput(
             label: 'Label',
-            onChanged: (final value) {},
             hint: 'Indice',
+            onChanged: (final value) {},
             controller: controller,
           ),
         ),

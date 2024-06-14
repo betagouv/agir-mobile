@@ -16,29 +16,33 @@ import '../scenario_context.dart';
 Future<void> ielLanceLapplication(final WidgetTester tester) async {
   final authentificationStatusManager = AuthentificationStatutManager()
     ..gererAuthentificationStatut(ScenarioContext().authentificationStatut);
-  ScenarioContext().aideVeloRepositoryMock = AideVeloPortMock(
+  ScenarioContext().aideVeloPortMock = AideVeloPortMock(
     aideVeloParType: ScenarioContext().aideVeloParType,
-    profil: ScenarioContext().aideVeloInformations,
   );
   final prenom = ScenarioContext().prenom;
+  ScenarioContext().profilPortMock = ProfilPortMock(
+    prenom: prenom,
+    nom: ScenarioContext().nom,
+    email: ScenarioContext().email,
+    codePostal: ScenarioContext().codePostal,
+    ville: ScenarioContext().ville,
+    nombreDePartsFiscales: ScenarioContext().nombreDePartsFiscales,
+    revenuFiscal: ScenarioContext().revenuFiscal,
+  );
   await tester.pumpFrames(
     App(
       authentificationStatusManager: authentificationStatusManager,
-      authentificationRepository:
+      authentificationPort:
           AuthentificationPortMock(authentificationStatusManager),
-      utilisateurRepository: UtilisateurPortMock(
+      utilisateurPort: UtilisateurPortMock(
         prenom: prenom,
         fonctionnalitesDebloquees: ScenarioContext().fonctionnalitesDebloquees,
       ),
-      aidesRepository: AidesPortMock(ScenarioContext().aides),
-      versionRepository: const VersionPortMock(),
-      communesRepository: CommunesPortMock(ScenarioContext().communes),
-      aideVeloRepository: ScenarioContext().aideVeloRepositoryMock!,
-      profilRepository: ProfilPortMock(
-        prenom: prenom,
-        nom: ScenarioContext().nom,
-        adresseElectronique: ScenarioContext().adresseElectronique,
-      ),
+      aidesPort: AidesPortMock(ScenarioContext().aides),
+      versionPort: const VersionPortMock(),
+      communesPort: CommunesPortMock(ScenarioContext().communes),
+      aideVeloPort: ScenarioContext().aideVeloPortMock!,
+      profilPort: ScenarioContext().profilPortMock!,
     ),
     Durations.short1,
   );
