@@ -14,7 +14,7 @@ class Aide extends Equatable {
   final String contenu;
   final int? montantMax;
   final String? urlSimulateur;
-  bool get aUnSimulateur => urlSimulateur != null;
+  bool get aUnSimulateur => urlSimulateur != null && urlSimulateur!.isNotEmpty;
   bool get estSimulateurVelo => urlSimulateur == '/vos-aides/velo';
 
   @override
