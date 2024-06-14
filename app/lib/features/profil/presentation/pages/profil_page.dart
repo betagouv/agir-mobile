@@ -1,3 +1,4 @@
+import 'package:app/features/menu/presentation/pages/root_page.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class ProfilPage extends StatelessWidget {
       );
 
   @override
-  Widget build(final BuildContext context) => const Scaffold(
+  Widget build(final BuildContext context) => const RootPage(
         body: SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: DsfrSpacings.s3w),

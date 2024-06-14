@@ -35,7 +35,7 @@ class _PreOnboardingCarrouselPageState extends State<PreOnboardingCarrouselPage>
   }
 
   Future<void> _handleAllerASeConnecter(final BuildContext context) async {
-    await context.pushNamed(SeConnecterPage.name);
+    await GoRouter.of(context).pushNamed(SeConnecterPage.name);
   }
 
   @override

@@ -51,8 +51,8 @@ class PreOnboardingPage extends StatelessWidget {
                 const Spacer(),
                 DsfrButton.lg(
                   label: Localisation.commencer,
-                  onTap: () async =>
-                      context.pushNamed(PreOnboardingCarrouselPage.name),
+                  onTap: () async => GoRouter.of(context)
+                      .pushNamed(PreOnboardingCarrouselPage.name),
                 ),
                 const SizedBox(height: DsfrSpacings.s3w),
                 const JaiDejaUnCompteWidget(),

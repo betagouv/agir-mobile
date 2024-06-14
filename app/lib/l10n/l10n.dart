@@ -19,6 +19,7 @@ abstract final class Localisation {
   static const motDePasse = 'Mot de passe';
   static const bonjour = 'Bonjour,\n';
   static String prenomExclamation(final String value) => '$value !';
+  static const menuAccueil = 'Accueil';
   static const menuAides = 'Aides';
   static const accueilMesAides = 'Mes aides';
   static const accueilMesAidesLien = 'Voir toutes les aides';
