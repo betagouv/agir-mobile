@@ -4,24 +4,32 @@ updates:
     directory: "/"
     schedule:
       interval: weekly
+    time: "08:00"
+    timezone: "Europe/Paris"
     commit-message:
       prefix: "chore: "
   - package-ecosystem: pub
     directory: /app
     schedule:
       interval: daily
+    time: "08:00"
+    timezone: "Europe/Paris"
     commit-message:
       prefix: "chore: "
   - package-ecosystem: pub
     directory: "/packages/agir_lints"
     schedule:
       interval: daily
+    time: "08:00"
+    timezone: "Europe/Paris"
     commit-message:
       prefix: "chore: "
   - package-ecosystem: pub
     directory: "/packages/dsfr.dart"
     schedule:
       interval: daily
+    time: "08:00"
+    timezone: "Europe/Paris"
     reviewers:
       - "lsaudon"
     commit-message:
@@ -30,6 +38,8 @@ updates:
     directory: "/packages/dsfr.dart/example"
     schedule:
       interval: daily
+    time: "08:00"
+    timezone: "Europe/Paris"
     reviewers:
       - "lsaudon"
     commit-message:
@@ -38,6 +48,8 @@ updates:
     directory: /app/android
     schedule:
       interval: weekly
+    time: "08:00"
+    timezone: "Europe/Paris"
     groups:
       app-android-bundler:
         patterns:
@@ -46,6 +58,8 @@ updates:
     directory: /app/ios
     schedule:
       interval: weekly
+    time: "08:00"
+    timezone: "Europe/Paris"
     groups:
       app-ios-bundler:
         patterns:
@@ -54,6 +68,8 @@ updates:
     directory: /app/android/app
     schedule:
       interval: weekly
+    time: "08:00"
+    timezone: "Europe/Paris"
     groups:
       app-android-app-gradle:
         patterns:
@@ -62,6 +78,8 @@ updates:
     directory: /app/android
     schedule:
       interval: weekly
+    time: "08:00"
+    timezone: "Europe/Paris"
     groups:
       app-android-gradle:
         patterns:
@@ -70,6 +88,8 @@ updates:
     directory: /packages/dsfr.dart/example/android/app
     schedule:
       interval: weekly
+    time: "08:00"
+    timezone: "Europe/Paris"
     groups:
       packages-dsfr-dart-example-android-app-gradle:
         patterns:
@@ -78,6 +98,8 @@ updates:
     directory: /packages/dsfr.dart/example/android
     schedule:
       interval: weekly
+    time: "08:00"
+    timezone: "Europe/Paris"
     groups:
       packages-dsfr-dart-example-android-gradle:
         patterns:
