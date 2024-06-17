@@ -1,4 +1,6 @@
 abstract final class AssetsImages {
+  const AssetsImages._();
+
   static const franceNationVerte = 'assets/logos/logo_fnv.png';
   static const preOnboarding1 = 'assets/images/preonboarding1.png';
   static const preOnboarding2 = 'assets/images/preonboarding2.png';

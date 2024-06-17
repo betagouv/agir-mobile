@@ -1,5 +1,5 @@
-import 'package:app/features/profil/presentation/blocs/mes_informations_bloc.dart';
-import 'package:app/features/profil/presentation/blocs/mes_informations_event.dart';
+import 'package:app/features/profil/mes_informations/presentation/blocs/mes_informations_bloc.dart';
+import 'package:app/features/profil/mes_informations/presentation/blocs/mes_informations_event.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';

@@ -1,7 +1,7 @@
-import 'package:app/features/profil/presentation/blocs/mes_informations_bloc.dart';
-import 'package:app/features/profil/presentation/blocs/mes_informations_event.dart';
-import 'package:app/features/profil/presentation/blocs/mes_informations_state.dart';
-import 'package:app/features/profil/presentation/widgets/mes_informations_form.dart';
+import 'package:app/features/profil/mes_informations/presentation/blocs/mes_informations_bloc.dart';
+import 'package:app/features/profil/mes_informations/presentation/blocs/mes_informations_event.dart';
+import 'package:app/features/profil/mes_informations/presentation/blocs/mes_informations_state.dart';
+import 'package:app/features/profil/mes_informations/presentation/widgets/mes_informations_form.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:app/shared/widgets/composants/app_bar.dart';
 import 'package:app/shared/widgets/composants/bottom_bar.dart';
@@ -27,6 +27,13 @@ class MesInformationsPage extends StatelessWidget {
         ),
       );
 
+  void _handleMettreAJour(final BuildContext context) {
+    context
+        .read<MesInformationsBloc>()
+        .add(const MesInformationsMiseAJourDemandee());
+    GoRouter.of(context).pop();
+  }
+
   @override
   Widget build(final BuildContext context) => Scaffold(
         appBar: const FnvAppBar(),
@@ -47,9 +54,7 @@ class MesInformationsPage extends StatelessWidget {
         bottomNavigationBar: FnvBottomBar(
           child: DsfrButton.lg(
             label: Localisation.mettreAJourVosInformations,
-            onTap: () => context
-                .read<MesInformationsBloc>()
-                .add(const MesInformationsMiseAJourDemandee()),
+            onTap: () => _handleMettreAJour(context),
           ),
         ),
       );

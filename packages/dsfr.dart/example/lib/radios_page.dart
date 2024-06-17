@@ -21,7 +21,7 @@ class _RadiosPageState extends State<RadiosPage> {
         padding: EdgeInsets.all(24),
         child: Column(
           children: [
-            DsfrRadioButtonSet<int>(
+            DsfrRadioButtonSet(
               title: 'Revenu fiscal de référence de votre foyer',
               values: {
                 1: 'Moins de 16 000 €',

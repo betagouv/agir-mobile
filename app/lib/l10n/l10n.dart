@@ -1,4 +1,6 @@
 abstract final class Localisation {
+  const Localisation._();
+
   static const commencer = 'Commencer';
   static const preOnboardingTitre =
       'Ensemble,\naméliorons\nnos habitudes\nau jour le jour';
@@ -41,11 +43,11 @@ abstract final class Localisation {
   static String veloLabel(final String text) => '$text : ';
   static const elementsNecessaireAuCalcul = 'Éléments nécessaires au calcul';
   static const donneesUtiliseesPart1 = 'Données utilisées : code postal ';
-  static String donneesUtiliseesCodePostalEtVille({
+  static String donneesUtiliseesCodePostalEtCommune({
     required final String codePostal,
-    required final String ville,
+    required final String commune,
   }) =>
-      '($codePostal - $ville)';
+      '($codePostal - $commune)';
   static const donneesUtiliseesPart2 = ', revenu fiscal de référence ';
   static String donneesUtiliseesRevenuFiscal(final String value) =>
       '(${value.toLowerCase()})';
@@ -56,7 +58,7 @@ abstract final class Localisation {
   static const aideVeloAvertissement =
       'Veuillez compléter ces informations afin de débuter l’estimation';
   static const codePostal = 'Code postal';
-  static const ville = 'Ville';
+  static const commune = 'Commune';
   static const revenuQuestion = 'Quelle est votre tranche de revenus ?';
   static const nombreDePartsFiscales =
       'Nombre de parts fiscales de votre foyer';
@@ -96,4 +98,44 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
       'Format attendu : nom@domaine.fr';
   static const donneesPersonnelles = 'Données personnelles';
   static const mettreAJourVosInformations = 'Mettre à jour vos informations';
+  static const votreLogement = 'Votre logement';
+  static const monLogement = 'Mon logement';
+  static const combienEtesVousDansVotreLogement =
+      'Combien êtes-vous dans votre logement (vous inclus) ?';
+  static const adultes = 'Adulte(s)';
+  static const enfants = 'Enfant(s) - moins de 18 ans';
+  static const votreResidencePrincipaleEst =
+      'Votre résidence principale est ...';
+  static const unAppartement = 'Un appartement';
+  static const uneMaison = 'Une maison';
+  static const vousEtesProprietaireDeVotreLogement =
+      'Vous êtes propriétaire de votre logement ?';
+  static const oui = 'Oui';
+  static const non = 'Non';
+  static const quelleEstLaSuperficie = 'Quelle est la superficie ?';
+  static const moinsDe35m2 = 'Moins de 35 m²';
+  static const entre35et70m2 = 'Entre 35 et 70 m²';
+  static const entre70et100m2 = 'Entre 70 et 100 m²';
+  static const entre100et150m2 = 'Entre 100 et 150 m²';
+  static const plusDe150m2 = 'Plus de 150 m²';
+  static const quelleEstVotreModeDeChauffagePrincipal =
+      'Quelle est votre mode de chauffage principal ?';
+  static const electricite = 'Électricité';
+  static const boisPellets = 'Bois / Pellets';
+  static const fioul = 'Fioul';
+  static const gaz = 'Gaz';
+  static const autreJeNeSaisPas = 'Autre / Je ne sais pas';
+  static const votreLogementPlusDe15Ans =
+      'Votre logement a-t-il plus de 15 ans ?';
+  static const legendePourLEnsembleDesElements =
+      'Légende pour l’ensemble des éléments ';
+  static const dpeA = 'A';
+  static const dpeB = 'B';
+  static const dpeC = 'C';
+  static const dpeD = 'D';
+  static const dpeE = 'E';
+  static const dpeF = 'F';
+  static const dpeG = 'G';
+  static const dpeJeNeSaisPas = 'Je ne sais pas';
+  static const dpeExplication = "**Qu'est-ce qu'un DPE ?**";
 }

@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:app/features/authentification/infrastructure/adapters/api/authentification_api_client.dart';
-import 'package:app/features/profil/domain/entities/mes_informations.dart';
 import 'package:app/features/profil/domain/ports/profil_port.dart';
+import 'package:app/features/profil/infrastructure/adapters/logement_mapper.dart';
+import 'package:app/features/profil/mes_informations/domain/entities/mes_informations.dart';
+import 'package:app/features/profil/mon_logement/domain/entities/logement.dart';
 
 class ProfilApiAdapter implements ProfilPort {
   const ProfilApiAdapter({
@@ -52,16 +54,52 @@ class ProfilApiAdapter implements ProfilPort {
       throw Exception();
     }
 
-    final response = await _apiClient.patch(
-      Uri.parse('/utilisateurs/$utilisateurId/profile'),
-      body: jsonEncode({
-        'email': email,
-        'nom': nom,
-        'nombre_de_parts_fiscales': nombreDePartsFiscales,
-        'prenom': prenom,
-        'revenu_fiscal': revenuFiscal,
-      }),
-    );
+    final uri = Uri.parse('/utilisateurs/$utilisateurId/profile');
+    final body = jsonEncode({
+      'email': email,
+      'nom': nom,
+      'nombre_de_parts_fiscales': nombreDePartsFiscales,
+      'prenom': prenom,
+      'revenu_fiscal': revenuFiscal,
+    });
+
+    final response = await _apiClient.patch(uri, body: body);
+
+    if (response.statusCode != 200) {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<Logement> recupererLogement() async {
+    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    if (utilisateurId == null) {
+      throw Exception();
+    }
+
+    final response = await _apiClient
+        .get(Uri.parse('/utilisateurs/$utilisateurId/logement'));
+
+    if (response.statusCode != 200) {
+      throw Exception();
+    }
+
+    final json = jsonDecode(response.body) as Map<String, dynamic>;
+
+    return LogementMapper.mapLogementFromJson(json);
+  }
+
+  @override
+  Future<void> mettreAJourLogement({required final Logement logement}) async {
+    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    if (utilisateurId == null) {
+      throw Exception();
+    }
+
+    final uri = Uri.parse('/utilisateurs/$utilisateurId/logement');
+    final body = jsonEncode(LogementMapper.mapLogementToJson(logement));
+
+    final response = await _apiClient.patch(uri, body: body);
 
     if (response.statusCode != 200) {
       throw Exception();

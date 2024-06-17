@@ -5,11 +5,7 @@ import 'package:dsfr/src/fondamentaux/spacing.g.dart';
 import 'package:dsfr/src/helpers/iterable_extension.dart';
 import 'package:flutter/material.dart';
 
-// C'est un typedef, on peut pas faire de parametre nommé.
-// ignore: avoid_positional_boolean_parameters, prefer-named-boolean-parameters
 typedef DsfrAccordionCallback = void Function(int panelIndex, bool isExpanded);
-// C'est un typedef, on peut pas faire de parametre nommé.
-// ignore: avoid_positional_boolean_parameters, prefer-named-boolean-parameters
 typedef DsfrAccordionHeaderBuilder = Widget Function(bool isExpanded);
 
 class DsfrAccordion {

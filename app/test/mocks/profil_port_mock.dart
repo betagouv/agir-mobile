@@ -1,5 +1,7 @@
-import 'package:app/features/profil/domain/entities/mes_informations.dart';
 import 'package:app/features/profil/domain/ports/profil_port.dart';
+import 'package:app/features/profil/mes_informations/domain/entities/mes_informations.dart';
+import 'package:app/features/profil/mon_logement/domain/entities/logement.dart';
+import 'package:app/features/profil/mon_logement/presentation/blocs/mon_logement_state.dart';
 
 class ProfilPortMock implements ProfilPort {
   ProfilPortMock({
@@ -7,7 +9,15 @@ class ProfilPortMock implements ProfilPort {
     required this.nom,
     required this.email,
     required this.codePostal,
-    required this.ville,
+    required this.commune,
+    required this.nombreAdultes,
+    required this.nombreEnfants,
+    required this.typeDeLogement,
+    required this.estProprietaire,
+    required this.superficie,
+    required this.chauffage,
+    required this.plusDe15Ans,
+    required this.dpe,
     required this.nombreDePartsFiscales,
     required this.revenuFiscal,
   });
@@ -16,7 +26,15 @@ class ProfilPortMock implements ProfilPort {
   String nom;
   String email;
   String codePostal;
-  String ville;
+  String commune;
+  int nombreAdultes;
+  int nombreEnfants;
+  TypeDeLogement? typeDeLogement;
+  bool? estProprietaire;
+  Superficie? superficie;
+  Chauffage? chauffage;
+  bool? plusDe15Ans;
+  Dpe? dpe;
   double nombreDePartsFiscales;
   int? revenuFiscal;
 
@@ -26,7 +44,7 @@ class ProfilPortMock implements ProfilPort {
         nom: nom,
         email: email,
         codePostal: codePostal,
-        ville: ville,
+        ville: commune,
         nombreDePartsFiscales: nombreDePartsFiscales,
         revenuFiscal: revenuFiscal,
       );
@@ -44,5 +62,33 @@ class ProfilPortMock implements ProfilPort {
     this.email = email;
     this.nombreDePartsFiscales = nombreDePartsFiscales;
     this.revenuFiscal = revenuFiscal;
+  }
+
+  @override
+  Future<Logement> recupererLogement() async => Logement(
+        codePostal: codePostal,
+        commune: commune,
+        nombreAdultes: nombreAdultes,
+        nombreEnfants: nombreEnfants,
+        typeDeLogement: typeDeLogement,
+        estProprietaire: estProprietaire,
+        superficie: superficie,
+        chauffage: chauffage,
+        plusDe15Ans: plusDe15Ans,
+        dpe: dpe,
+      );
+
+  @override
+  Future<void> mettreAJourLogement({required final Logement logement}) async {
+    codePostal = logement.codePostal;
+    commune = logement.commune;
+    nombreAdultes = logement.nombreAdultes;
+    nombreEnfants = logement.nombreEnfants;
+    typeDeLogement = logement.typeDeLogement;
+    estProprietaire = logement.estProprietaire;
+    superficie = logement.superficie;
+    chauffage = logement.chauffage;
+    plusDe15Ans = logement.plusDe15Ans;
+    dpe = logement.dpe;
   }
 }

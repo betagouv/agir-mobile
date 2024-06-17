@@ -100,7 +100,7 @@ Future<void> _allerSurMesInformations(final WidgetTester tester) async {
   ielSappelle(prenom, nom: nom);
   ielACesInformationsDeProfil(
     codePostal: '75018',
-    ville: 'Paris',
+    commune: 'Paris',
     nombreDePartsFiscales: 1,
     revenuFiscal: 16000,
   );
