@@ -1,5 +1,6 @@
 import 'package:app/features/menu/presentation/pages/root_page.dart';
-import 'package:app/features/profil/presentation/pages/mes_informations_page.dart';
+import 'package:app/features/profil/mes_informations/presentation/pages/mes_informations_page.dart';
+import 'package:app/features/profil/mon_logement/presentation/pages/mon_logement_page.dart';
 import 'package:app/features/profil/presentation/widgets/profil_title.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:app/shared/widgets/composants/card.dart';
@@ -30,11 +31,22 @@ class ProfilPage extends StatelessWidget {
             children: [
               const ProfilTitle(title: Localisation.monProfil),
               FnvCard(
-                child: _MenuElement(
-                  icon: DsfrIcons.userAccountCircleLine,
-                  label: Localisation.vosInformations,
-                  onTap: () async =>
-                      GoRouter.of(context).pushNamed(MesInformationsPage.name),
+                child: Column(
+                  children: [
+                    _MenuElement(
+                      icon: DsfrIcons.userAccountCircleLine,
+                      label: Localisation.vosInformations,
+                      onTap: () async => GoRouter.of(context)
+                          .pushNamed(MesInformationsPage.name),
+                    ),
+                    const DsfrDivider(),
+                    _MenuElement(
+                      icon: DsfrIcons.buildingsHome4Line,
+                      label: Localisation.votreLogement,
+                      onTap: () async =>
+                          GoRouter.of(context).pushNamed(MonLogementPage.name),
+                    ),
+                  ],
                 ),
               ),
             ],

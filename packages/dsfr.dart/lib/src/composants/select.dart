@@ -7,11 +7,11 @@ import 'package:flutter/material.dart';
 class DsfrSelect<T> extends StatelessWidget {
   const DsfrSelect({
     required this.label,
+    this.hint,
     required this.dropdownMenuEntries,
     required this.onSelected,
     this.controller,
     this.initialSelection,
-    this.hint,
     this.labelStyle = DsfrFonts.bodyMd,
     this.labelColor = DsfrColors.grey50,
     this.labelDisableColor = DsfrColors.grey625,

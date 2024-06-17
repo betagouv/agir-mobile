@@ -162,7 +162,7 @@ void main() {
         setUpWidgets(tester);
         ielACesInformationsDeProfil(
           codePostal: codePostal,
-          ville: commune,
+          commune: commune,
           nombreDePartsFiscales: nombreDePart,
           revenuFiscal: revenuFiscal,
         );
@@ -170,9 +170,9 @@ void main() {
         await ielScrolle(tester, Localisation.modifier);
         ielVoitLeTexteDansTexteRiche(Localisation.elementsNecessaireAuCalcul);
         ielVoitLeTexteDansTexteRiche(
-          Localisation.donneesUtiliseesCodePostalEtVille(
+          Localisation.donneesUtiliseesCodePostalEtCommune(
             codePostal: codePostal,
-            ville: commune,
+            commune: commune,
           ),
         );
         ielVoitLeTexteDansTexteRiche(
@@ -190,7 +190,7 @@ void main() {
         setUpWidgets(tester);
         ielACesInformationsDeProfil(
           codePostal: codePostal,
-          ville: commune,
+          commune: commune,
           nombreDePartsFiscales: nombreDePart,
           revenuFiscal: revenuFiscal,
         );
@@ -212,7 +212,7 @@ void main() {
         leServeurRetourneCetteListeDeCommunes(['AUTHUME', commune]);
         ielACesInformationsDeProfil(
           codePostal: codePostal,
-          ville: commune,
+          commune: commune,
           nombreDePartsFiscales: nombreDePart,
           revenuFiscal: revenuFiscal,
         );
@@ -234,7 +234,7 @@ void main() {
         setUpWidgets(tester);
         ielACesInformationsDeProfil(
           codePostal: codePostal,
-          ville: commune,
+          commune: commune,
           nombreDePartsFiscales: nombreDePart,
           revenuFiscal: revenuFiscal,
         );

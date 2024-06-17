@@ -214,9 +214,9 @@ class _ElementsNecessaireAuCalcul extends StatelessWidget {
                   text: Localisation.donneesUtiliseesPart1,
                   children: [
                     TextSpan(
-                      text: Localisation.donneesUtiliseesCodePostalEtVille(
+                      text: Localisation.donneesUtiliseesCodePostalEtCommune(
                         codePostal: state.codePostal,
-                        ville: state.ville,
+                        commune: state.ville,
                       ),
                       style: bodySmMediumBlue,
                     ),
@@ -283,7 +283,7 @@ class _CodePostalEtVilleState extends State<_CodePostalEtVille> {
     _textEditingController.clear();
   }
 
-  void _handleVille(final BuildContext context, final String? value) {
+  void _handleCommune(final BuildContext context, final String? value) {
     if (value == null) {
       return;
     }
@@ -302,7 +302,7 @@ class _CodePostalEtVilleState extends State<_CodePostalEtVille> {
     if (state.communes.length == 1) {
       final ville = state.communes.firstOrNull!;
       _textEditingController.text = ville;
-      _handleVille(context, ville);
+      _handleCommune(context, ville);
     } else {
       _textEditingController.text = state.ville;
     }
@@ -326,11 +326,11 @@ class _CodePostalEtVilleState extends State<_CodePostalEtVille> {
         const SizedBox(width: DsfrSpacings.s2w),
         Expanded(
           child: DsfrSelect<String>(
-            label: Localisation.ville,
+            label: Localisation.commune,
             dropdownMenuEntries: state.communes
                 .map((final e) => DropdownMenuEntry(value: e, label: e))
                 .toList(),
-            onSelected: (final value) => _handleVille(context, value),
+            onSelected: (final value) => _handleCommune(context, value),
             controller: _textEditingController,
           ),
         ),

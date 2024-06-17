@@ -68,6 +68,7 @@ class _AppState extends State<App> {
           RepositoryProvider.value(value: widget.authentificationPort),
           RepositoryProvider.value(value: widget.aidesPort),
           RepositoryProvider.value(value: widget.profilPort),
+          RepositoryProvider.value(value: widget.communesPort),
         ],
         child: MultiBlocProvider(
           providers: [

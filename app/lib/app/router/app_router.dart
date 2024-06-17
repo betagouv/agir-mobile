@@ -9,7 +9,8 @@ import 'package:app/features/authentification/domain/value_objects/authentificat
 import 'package:app/features/authentification/presentation/pages/se_connecter_page.dart';
 import 'package:app/features/pre_onboarding/presentation/pages/pre_onboarding_carrousel_page.dart';
 import 'package:app/features/pre_onboarding/presentation/pages/pre_onboarding_page.dart';
-import 'package:app/features/profil/presentation/pages/mes_informations_page.dart';
+import 'package:app/features/profil/mes_informations/presentation/pages/mes_informations_page.dart';
+import 'package:app/features/profil/mon_logement/presentation/pages/mon_logement_page.dart';
 import 'package:app/features/profil/presentation/pages/profil_page.dart';
 import 'package:go_router/go_router.dart';
 
@@ -29,6 +30,7 @@ GoRouter goRouter({
         ),
         ProfilPage.route,
         MesInformationsPage.route,
+        MonLogementPage.route,
       ],
       redirect: (final context, final state) {
         final path = state.uri.path;
@@ -52,7 +54,8 @@ GoRouter goRouter({
                 path.startsWith(AideSimulateurVeloPage.path) ||
                 path.startsWith(AideSimulateurVeloDisponiblePage.path) ||
                 path.startsWith(ProfilPage.path) ||
-                path.startsWith(MesInformationsPage.path)) {
+                path.startsWith(MesInformationsPage.path) ||
+                path.startsWith(MonLogementPage.path)) {
               return PreOnboardingPage.path;
             }
         }

@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:app/features/profil/domain/ports/profil_port.dart';
-import 'package:app/features/profil/presentation/blocs/mes_informations_event.dart';
-import 'package:app/features/profil/presentation/blocs/mes_informations_state.dart';
+import 'package:app/features/profil/mes_informations/presentation/blocs/mes_informations_event.dart';
+import 'package:app/features/profil/mes_informations/presentation/blocs/mes_informations_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MesInformationsBloc

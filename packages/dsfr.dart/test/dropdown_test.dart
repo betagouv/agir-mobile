@@ -28,9 +28,9 @@ void main() {
         App(
           child: DsfrSelect(
             label: 'Label',
+            hint: hint,
             dropdownMenuEntries: const [],
             onSelected: (final value) {},
-            hint: hint,
           ),
         ),
       );
