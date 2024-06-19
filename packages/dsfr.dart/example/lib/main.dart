@@ -7,6 +7,7 @@ import 'package:dsfr_example/icons_page.dart';
 import 'package:dsfr_example/inputs_page.dart';
 import 'package:dsfr_example/links_page.dart';
 import 'package:dsfr_example/master_page.dart';
+import 'package:dsfr_example/modals_page.dart';
 import 'package:dsfr_example/radios_page.dart';
 import 'package:dsfr_example/select_page.dart';
 import 'package:dsfr_example/tags_page.dart';
@@ -21,7 +22,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => MaterialApp(
-        debugShowCheckedModeBanner: false,
         home: MasterPage(
           pageItems: [
             AccordionsPage.model,
@@ -33,9 +33,11 @@ class MyApp extends StatelessWidget {
             IconsPage.model,
             InputsPage.model,
             LinksPage.model,
+            ModalsPage.model,
             RadiosPage.model,
             TagsPage.model,
           ],
         ),
+        debugShowCheckedModeBanner: false,
       );
 }

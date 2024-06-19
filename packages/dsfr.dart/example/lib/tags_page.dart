@@ -21,14 +21,12 @@ class TagsPage extends StatelessWidget {
               backgroundColor: DsfrColors.blueFrance925,
               foregroundColor: DsfrColors.blueFranceSun113,
             ),
-            SizedBox(
-              height: DsfrSpacings.s1w,
-            ),
+            SizedBox(height: DsfrSpacings.s1w),
             DsfrTag.sm(
               label: TextSpan(text: 'Label tag'),
-              icon: DsfrIcons.financeMoneyEuroCircleLine,
               backgroundColor: DsfrColors.blueFrance925,
               foregroundColor: DsfrColors.blueFranceSun113,
+              icon: DsfrIcons.financeMoneyEuroCircleLine,
             ),
           ],
         ),

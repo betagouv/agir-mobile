@@ -10,11 +10,12 @@ class LinksPage extends StatelessWidget {
     pageBuilder: (final context) => const LinksPage(),
   );
 
+  void _handleTap() {}
+
   @override
   Widget build(final BuildContext context) {
     const label = 'Label lien';
     const gap = SizedBox(height: 16);
-    void onTap() {}
 
     return SingleChildScrollView(
       padding: const EdgeInsets.all(24),
@@ -23,20 +24,19 @@ class LinksPage extends StatelessWidget {
         children: [
           const DsfrLink.md(label: label),
           gap,
-          DsfrLink.md(label: label, onTap: onTap),
+          DsfrLink.md(label: label, onTap: _handleTap),
           gap,
           DsfrLink.md(
             label: label,
-            onTap: onTap,
             icon: DsfrIcons.systemArrowLeftLine,
-            iconPosition: DsfrLinkIconPosition.start,
+            onTap: _handleTap,
           ),
           gap,
           DsfrLink.md(
             label: label,
-            onTap: onTap,
             icon: DsfrIcons.systemArrowLeftLine,
             iconPosition: DsfrLinkIconPosition.end,
+            onTap: _handleTap,
           ),
         ],
       ),

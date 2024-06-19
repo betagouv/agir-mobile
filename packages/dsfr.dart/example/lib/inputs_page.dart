@@ -11,40 +11,32 @@ class InputsPage extends StatelessWidget {
   );
 
   @override
-  Widget build(final BuildContext context) => SingleChildScrollView(
+  Widget build(final BuildContext context) => ListView(
         padding: const EdgeInsets.all(24),
-        child: Column(
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: DsfrInput(
-                    label: 'Label',
-                    onChanged: (final String value) {},
-                  ),
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: DsfrInput(
+                  label: 'Label',
+                  onChanged: (final value) {},
                 ),
-                Expanded(
-                  child: DsfrInput(
-                    label: 'Label',
-                    onChanged: (final String value) {},
-                  ),
+              ),
+              Expanded(
+                child: DsfrInput(
+                  label: 'Label',
+                  onChanged: (final value) {},
                 ),
-              ],
-            ),
-            DsfrInput(
-              label: 'Password',
-              isPasswordMode: true,
-              onChanged: (final String value) {
-                print(value);
-              },
-            ),
-            DsfrInputHeadless(
-              onChanged: (String value) {
-                print(value);
-              },
-            ),
-          ],
-        ),
+              ),
+            ],
+          ),
+          const DsfrInput(
+            label: 'Password',
+            onChanged: print,
+            isPasswordMode: true,
+          ),
+          const DsfrInputHeadless(onChanged: print),
+        ],
       );
 }

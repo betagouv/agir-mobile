@@ -101,7 +101,7 @@ class _MenuItems extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s3w),
           child: DsfrLink.md(
-            label: 'Se déconnecter',
+            label: Localisation.seDeconnecter,
             onTap: () async =>
                 context.read<AuthentificationPort>().deconnectionDemandee(),
           ),

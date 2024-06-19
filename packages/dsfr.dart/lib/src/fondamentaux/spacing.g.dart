@@ -4,7 +4,7 @@
 //
 
 // Do not edit directly
-// Generated on Fri, 31 May 2024 14:33:35 GMT
+// Generated on Thu, 20 Jun 2024 14:52:28 GMT
 
 
 
@@ -17,7 +17,7 @@ class DsfrSpacings {
     static const s12w = 96.0;
     static const s15w = 120.0;
     static const s1v = 4.0;
-    static const s1v5 = 4.0;
+    static const s1v5 = 6.0;
     static const s1w = 8.0;
     static const s2w = 16.0;
     static const s3v = 12.0;

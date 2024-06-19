@@ -1,7 +1,7 @@
 import 'package:app/features/aides/domain/entities/aide.dart';
 import 'package:app/features/aides/simulateur_velo/domain/value_objects/aide_velo_par_type.dart';
 import 'package:app/features/authentification/domain/value_objects/authentification_statut.dart';
-import 'package:app/features/profil/mon_logement/presentation/blocs/mon_logement_state.dart';
+import 'package:app/features/profil/logement/presentation/blocs/mon_logement_state.dart';
 import 'package:app/features/utilisateur/domain/entities/utilisateur.dart';
 
 import 'mocks/aide_velo_port_mock.dart';

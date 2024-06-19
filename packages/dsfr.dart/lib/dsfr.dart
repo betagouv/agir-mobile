@@ -1,11 +1,12 @@
 export 'src/composants/accordions.dart';
-export 'src/composants/buttons.dart';
+export 'src/composants/buttons/button.dart';
 export 'src/composants/checkbox.dart';
 export 'src/composants/divider.dart';
 export 'src/composants/input.dart';
 export 'src/composants/input_headless.dart';
 export 'src/composants/link_icon_position.dart';
 export 'src/composants/links.dart';
+export 'src/composants/modal.dart';
 export 'src/composants/radios/radio.dart';
 export 'src/composants/radios/radio_set.dart';
 export 'src/composants/radios/radio_set_headless.dart';

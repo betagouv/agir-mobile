@@ -1,6 +1,6 @@
 // ignore_for_file: avoid-long-parameter-list
 
-import 'package:app/features/profil/mon_logement/presentation/blocs/mon_logement_state.dart';
+import 'package:app/features/profil/logement/presentation/blocs/mon_logement_state.dart';
 
 import '../scenario_context.dart';
 

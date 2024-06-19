@@ -95,8 +95,10 @@ class AideSimulateurVeloDisponiblePage extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: FnvBottomBar(
-        child: DsfrButton.lg(
+        child: DsfrButton(
           label: Localisation.revenirAuSimulateur,
+          variant: DsfrButtonVariant.primary,
+          size: DsfrButtonSize.lg,
           onTap: () => GoRouter.of(context).pop(),
         ),
       ),

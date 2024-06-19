@@ -9,7 +9,15 @@ void main() {
   group('Bouton', () {
     testWidgets('Voir le label', (final tester) async {
       const label = 'Label bouton';
-      await tester.pumpWidget(const App(child: DsfrButton.lg(label: label)));
+      await tester.pumpWidget(
+        const App(
+          child: DsfrButton(
+            label: label,
+            variant: DsfrButtonVariant.primary,
+            size: DsfrButtonSize.lg,
+          ),
+        ),
+      );
       expect(find.text(label), findsOneWidget);
     });
 
@@ -17,7 +25,14 @@ void main() {
       const label = 'Label bouton';
       final completer = Completer<void>();
       await tester.pumpWidget(
-        App(child: DsfrButton.lg(label: label, onTap: completer.complete)),
+        App(
+          child: DsfrButton(
+            label: label,
+            variant: DsfrButtonVariant.primary,
+            size: DsfrButtonSize.lg,
+            onTap: completer.complete,
+          ),
+        ),
       );
 
       await tester.tap(find.text(label));
@@ -28,7 +43,15 @@ void main() {
       testWidgets('État désactivé', (final tester) async {
         final handle = tester.ensureSemantics();
         const label = 'Label bouton';
-        await tester.pumpWidget(const App(child: DsfrButton.lg(label: label)));
+        await tester.pumpWidget(
+          const App(
+            child: DsfrButton(
+              label: label,
+              variant: DsfrButtonVariant.primary,
+              size: DsfrButtonSize.lg,
+            ),
+          ),
+        );
 
         expect(
           tester.getSemantics(find.text(label)),
@@ -44,8 +67,16 @@ void main() {
       testWidgets('État activé', (final tester) async {
         final handle = tester.ensureSemantics();
         const label = 'Label bouton';
-        await tester
-            .pumpWidget(App(child: DsfrButton.lg(label: label, onTap: () {})));
+        await tester.pumpWidget(
+          App(
+            child: DsfrButton(
+              label: label,
+              variant: DsfrButtonVariant.primary,
+              size: DsfrButtonSize.lg,
+              onTap: () {},
+            ),
+          ),
+        );
         expect(
           tester.getSemantics(find.text(label)),
           matchesSemantics(

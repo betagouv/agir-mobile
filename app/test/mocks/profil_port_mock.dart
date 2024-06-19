@@ -1,7 +1,7 @@
 import 'package:app/features/profil/domain/ports/profil_port.dart';
-import 'package:app/features/profil/mes_informations/domain/entities/mes_informations.dart';
-import 'package:app/features/profil/mon_logement/domain/entities/logement.dart';
-import 'package:app/features/profil/mon_logement/presentation/blocs/mon_logement_state.dart';
+import 'package:app/features/profil/informations/domain/entities/mes_informations.dart';
+import 'package:app/features/profil/logement/domain/entities/logement.dart';
+import 'package:app/features/profil/logement/presentation/blocs/mon_logement_state.dart';
 
 class ProfilPortMock implements ProfilPort {
   ProfilPortMock({
@@ -37,9 +37,10 @@ class ProfilPortMock implements ProfilPort {
   Dpe? dpe;
   double nombreDePartsFiscales;
   int? revenuFiscal;
+  bool supprimerLeCompteAppele = false;
 
   @override
-  Future<MesInformations> recupererProfil() async => MesInformations(
+  Future<Informations> recupererProfil() async => Informations(
         prenom: prenom,
         nom: nom,
         email: email,
@@ -90,5 +91,10 @@ class ProfilPortMock implements ProfilPort {
     chauffage = logement.chauffage;
     plusDe15Ans = logement.plusDe15Ans;
     dpe = logement.dpe;
+  }
+
+  @override
+  Future<void> supprimerLeCompte() async {
+    supprimerLeCompteAppele = true;
   }
 }

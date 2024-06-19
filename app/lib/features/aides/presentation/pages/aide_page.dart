@@ -19,7 +19,7 @@ class AidePage extends StatelessWidget {
   const AidePage({super.key});
 
   static const name = 'aide';
-  static const path = '/$name';
+  static const path = name;
 
   static GoRoute get route => GoRoute(
         path: path,
@@ -77,8 +77,10 @@ class AidePage extends StatelessWidget {
       ),
       bottomNavigationBar: aide.aUnSimulateur
           ? FnvBottomBar(
-              child: DsfrButton.lg(
+              child: DsfrButton(
                 label: Localisation.accederAuSimulateur,
+                variant: DsfrButtonVariant.primary,
+                size: DsfrButtonSize.lg,
                 onTap: () async => _handleAccederAuSimulateur(context, aide),
               ),
             )

@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:app/features/authentification/infrastructure/adapters/api/authentification_api_client.dart';
 import 'package:app/features/profil/domain/ports/profil_port.dart';
+import 'package:app/features/profil/informations/domain/entities/mes_informations.dart';
 import 'package:app/features/profil/infrastructure/adapters/logement_mapper.dart';
-import 'package:app/features/profil/mes_informations/domain/entities/mes_informations.dart';
-import 'package:app/features/profil/mon_logement/domain/entities/logement.dart';
+import 'package:app/features/profil/logement/domain/entities/logement.dart';
 
 class ProfilApiAdapter implements ProfilPort {
   const ProfilApiAdapter({
@@ -14,7 +14,7 @@ class ProfilApiAdapter implements ProfilPort {
   final AuthentificationApiClient _apiClient;
 
   @override
-  Future<MesInformations> recupererProfil() async {
+  Future<Informations> recupererProfil() async {
     final utilisateurId = await _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
       throw Exception();
@@ -29,7 +29,7 @@ class ProfilApiAdapter implements ProfilPort {
 
     final json = jsonDecode(response.body) as Map<String, dynamic>;
 
-    return MesInformations(
+    return Informations(
       prenom: json['prenom'] as String,
       nom: json['nom'] as String,
       email: json['email'] as String,
@@ -100,6 +100,22 @@ class ProfilApiAdapter implements ProfilPort {
     final body = jsonEncode(LogementMapper.mapLogementToJson(logement));
 
     final response = await _apiClient.patch(uri, body: body);
+
+    if (response.statusCode != 200) {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<void> supprimerLeCompte() async {
+    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    if (utilisateurId == null) {
+      throw Exception();
+    }
+
+    final uri = Uri.parse('/utilisateurs/$utilisateurId');
+
+    final response = await _apiClient.delete(uri);
 
     if (response.statusCode != 200) {
       throw Exception();

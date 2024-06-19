@@ -87,6 +87,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const voirLesDemarches = 'Voir les démarches';
   static const propulsePar = 'Propulsé par ';
   static String euro(final int value) => '$value €';
+  static const seDeconnecter = 'Se déconnecter';
   static const monProfil = 'Mon profil';
   static const vosInformations = 'Vos informations';
   static const votreIdentite = 'Votre identité';
@@ -135,5 +136,16 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const dpeF = 'F';
   static const dpeG = 'G';
   static const dpeJeNeSaisPas = 'Je ne sais pas';
-  static const dpeExplication = "**Qu'est-ce qu'un DPE ?**";
+  static const dpeExplication = "**Qu'est-ce qu'un DPE ?**";
+  static const optionsAvancees = 'Options avancées';
+  static const changerVotreMotDePasse = 'Changer votre mot de passe';
+  static const supprimerVotreCompte = 'Supprimer votre compte';
+  static const supprimerVotreCompteContenu =
+      'Vous pouvez à tous moments choisir de supprimer votre compte ainsi que l’ensemble des données qui y sont associées. ';
+  static const attentionAucuneDonneeNePourraEtreRecuperee =
+      'Attention, aucune donnée ne pourra être récupérée.';
+  static const supprimerVotreCompteConfirmation =
+      'Veuillez confirmer la suppression du compte';
+  static const confirmer = 'Confirmer';
+  static const annuler = 'Annuler';
 }

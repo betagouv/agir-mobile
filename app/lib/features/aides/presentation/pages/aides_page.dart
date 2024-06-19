@@ -13,7 +13,7 @@ class AidesPage extends StatelessWidget {
   const AidesPage({super.key});
 
   static const name = 'aides';
-  static const path = '/$name';
+  static const path = name;
 
   static GoRoute get route => GoRoute(
         path: path,

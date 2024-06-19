@@ -11,25 +11,23 @@ class SelectPage extends StatelessWidget {
   );
 
   @override
-  Widget build(final BuildContext context) => SingleChildScrollView(
+  Widget build(final BuildContext context) => ListView(
         padding: const EdgeInsets.all(24),
-        child: Column(
-          children: [
-            DsfrSelect(
-              label: 'Label',
-              dropdownMenuEntries: [
-                DropdownMenuEntry(label: 'Un', value: 1),
-                DropdownMenuEntry(label: 'Deux', value: 2),
-                DropdownMenuEntry(label: 'Trois', value: 3),
-              ],
-              onSelected: (final value) {},
-            ),
-            DsfrSelect(
-              label: 'Label',
-              dropdownMenuEntries: [],
-              onSelected: (final value) {},
-            ),
-          ],
-        ),
+        children: [
+          DsfrSelect(
+            label: 'Label',
+            dropdownMenuEntries: const [
+              DropdownMenuEntry(value: 1, label: 'Un'),
+              DropdownMenuEntry(value: 2, label: 'Deux'),
+              DropdownMenuEntry(value: 3, label: 'Trois'),
+            ],
+            onSelected: (final value) {},
+          ),
+          DsfrSelect(
+            label: 'Label',
+            dropdownMenuEntries: const [],
+            onSelected: (final value) {},
+          ),
+        ],
       );
 }
