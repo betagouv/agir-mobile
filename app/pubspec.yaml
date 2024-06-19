@@ -8,8 +8,8 @@ environment:
   flutter: 3.22.2
 
 dependencies:
-  collection: ^1.18.0
-  cupertino_icons: ^1.0.8
+  collection: any # Dépend de flutter_test
+  cupertino_icons: 1.0.8
   dsfr:
     path: ../packages/dsfr.dart
   equatable: 2.0.5
