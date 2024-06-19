@@ -1,5 +1,5 @@
-import 'package:app/features/profil/mon_logement/domain/entities/logement.dart';
-import 'package:app/features/profil/mon_logement/presentation/blocs/mon_logement_state.dart';
+import 'package:app/features/profil/logement/domain/entities/logement.dart';
+import 'package:app/features/profil/logement/presentation/blocs/mon_logement_state.dart';
 
 abstract final class LogementMapper {
   const LogementMapper._();

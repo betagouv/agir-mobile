@@ -11,7 +11,7 @@ class PreOnboardingCarrouselPage extends StatefulWidget {
   const PreOnboardingCarrouselPage({super.key});
 
   static const name = 'pre-onboarding-carrousel';
-  static const path = '/$name';
+  static const path = name;
   static GoRoute get route => GoRoute(
         path: path,
         name: name,
@@ -91,8 +91,10 @@ class _PreOnboardingCarrouselPageState extends State<PreOnboardingCarrouselPage>
                             style: DsfrFonts.bodyMd,
                           ),
                           const Spacer(),
-                          DsfrButton.lg(
+                          DsfrButton(
                             label: Localisation.suivant,
+                            variant: DsfrButtonVariant.primary,
+                            size: DsfrButtonSize.lg,
                             onTap: () async =>
                                 _handleAllerASeConnecter(context),
                           ),

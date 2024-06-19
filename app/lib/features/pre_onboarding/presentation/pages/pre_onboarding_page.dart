@@ -13,7 +13,7 @@ class PreOnboardingPage extends StatelessWidget {
   const PreOnboardingPage({super.key});
 
   static const name = 'pre-onboarding';
-  static const path = '/$name';
+  static const path = name;
 
   static GoRoute get route => GoRoute(
         path: path,
@@ -49,8 +49,10 @@ class PreOnboardingPage extends StatelessWidget {
                   ],
                 ),
                 const Spacer(),
-                DsfrButton.lg(
+                DsfrButton(
                   label: Localisation.commencer,
+                  variant: DsfrButtonVariant.primary,
+                  size: DsfrButtonSize.lg,
                   onTap: () async => GoRouter.of(context)
                       .pushNamed(PreOnboardingCarrouselPage.name),
                 ),

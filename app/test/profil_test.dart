@@ -17,6 +17,8 @@ void main() {
       await _allerSurMonProfil(tester);
       ielVoitLeTexte(Localisation.monProfil);
       ielVoitLeTexte(Localisation.vosInformations);
+      ielVoitLeTexte(Localisation.votreLogement);
+      ielVoitLeTexte(Localisation.optionsAvancees);
     },
   );
 
@@ -25,6 +27,20 @@ void main() {
     await _allerSurMonProfil(tester);
     await ielAppuieSur(tester, Localisation.vosInformations);
     ielVoitLeTexte(Localisation.vosInformations);
+  });
+
+  testWidgets('Allez sur la page Mon logement', (final tester) async {
+    setUpWidgets(tester);
+    await _allerSurMonProfil(tester);
+    await ielAppuieSur(tester, Localisation.votreLogement);
+    ielVoitLeTexte(Localisation.votreLogement);
+  });
+
+  testWidgets('Allez sur la page Options avancées', (final tester) async {
+    setUpWidgets(tester);
+    await _allerSurMonProfil(tester);
+    await ielAppuieSur(tester, Localisation.optionsAvancees);
+    ielVoitLeTexte(Localisation.optionsAvancees);
   });
 }
 

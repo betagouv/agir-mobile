@@ -11,7 +11,7 @@ class SeConnecterPage extends StatelessWidget {
   const SeConnecterPage({super.key});
 
   static const name = 'authentification';
-  static const path = '/$name';
+  static const path = name;
 
   static GoRoute get route => GoRoute(
         path: path,
@@ -68,8 +68,10 @@ class SeConnecterPage extends StatelessWidget {
                 const Spacer(),
                 BlocSelector<SeConnecterBloc, SeConnecterState, bool>(
                   selector: (final state) => state.estValide,
-                  builder: (final context, final state) => DsfrButton.lg(
+                  builder: (final context, final state) => DsfrButton(
                     label: Localisation.seConnecter,
+                    variant: DsfrButtonVariant.primary,
+                    size: DsfrButtonSize.lg,
                     onTap: state ? () => _handleSeConnecter(context) : null,
                   ),
                 ),

@@ -27,7 +27,7 @@ class AideSimulateurVeloPage extends StatelessWidget {
   const AideSimulateurVeloPage({super.key});
 
   static const name = 'aide-simulateur-velo';
-  static const path = '/$name';
+  static const path = name;
 
   static GoRoute route({required final List<RouteBase> routes}) => GoRoute(
         path: path,
@@ -410,8 +410,10 @@ class _EstimerMesAides extends StatelessWidget {
           : null;
 
   @override
-  Widget build(final BuildContext context) => DsfrButton.lg(
+  Widget build(final BuildContext context) => DsfrButton(
         label: Localisation.estimerMesAides,
+        variant: DsfrButtonVariant.primary,
+        size: DsfrButtonSize.lg,
         onTap: _handleEstimerMesAides(context),
       );
 }

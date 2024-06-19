@@ -40,9 +40,13 @@ dart_code_metrics:
     - package:dart_code_metrics_presets/bloc.yaml
     - package:dart_code_metrics_presets/equatable.yaml
   rules:
+    - avoid-duplicate-test-assertions: false
     - avoid-ignoring-return-values: false
     - avoid-late-keyword: false
     - avoid-returning-cascades: false
+    - prefer-moving-to-variable:
+        exclude:
+          - test/**
     - parameters-ordering: false
     - avoid-shadowing: false
     - prefer-match-file-name: false

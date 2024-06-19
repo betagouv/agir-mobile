@@ -4,7 +4,7 @@
 //
 
 // Do not edit directly
-// Generated on Fri, 31 May 2024 14:33:35 GMT
+// Generated on Thu, 20 Jun 2024 14:52:28 GMT
 
 
 
@@ -52,9 +52,9 @@ class DsfrColors {
     static const error100 = Color(0xFF3A1D1D);
     static const error100Active = Color(0xFF8A4C4C);
     static const error100Hover = Color(0xFF6D3B3B);
-    static const error425 = Color(0xFFCC0300);
-    static const error425Active = Color(0xFFFF4242);
-    static const error425Hover = Color(0xFFFF2724);
+    static const error425 = Color(0xFFCE0500);
+    static const error425Active = Color(0xFFFF4140);
+    static const error425Hover = Color(0xFFFF2725);
     static const error625 = Color(0xFFFF5757);
     static const error625Active = Color(0xFFFFA8A8);
     static const error625Hover = Color(0xFFFF8A8A);

@@ -1,17 +1,18 @@
 // ignore_for_file: unused-code
-
-import 'package:flutter/rendering.dart';
+import 'package:dsfr/src/fondamentaux/colors.g.dart';
+import 'package:flutter/material.dart';
 
 class DsfrTextStyle extends TextStyle {
   const DsfrTextStyle({
     required final double fontSize,
-    required final double lineHeight,
+    final double? lineHeight,
     super.fontWeight = FontWeight.normal,
+    super.color = DsfrColors.grey50,
   }) : super(
           package: 'dsfr',
           fontFamily: 'Marianne',
           fontSize: fontSize,
-          height: lineHeight / fontSize,
+          height: lineHeight == null ? null : lineHeight / fontSize,
         );
 
   const DsfrTextStyle.fontFamily()

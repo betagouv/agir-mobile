@@ -1,0 +1,37 @@
+import 'package:app/features/profil/presentation/widgets/profil_title.dart';
+import 'package:app/features/profil/supprimer_compte/presentation/widgets/supprimer_compte.dart';
+import 'package:app/l10n/l10n.dart';
+import 'package:app/shared/widgets/composants/app_bar.dart';
+import 'package:app/shared/widgets/fondamentaux/colors.dart';
+import 'package:dsfr/dsfr.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+class OptionsAvanceesPage extends StatelessWidget {
+  const OptionsAvanceesPage({super.key});
+
+  static const name = 'options-avancees';
+  static const path = name;
+
+  static GoRoute get route => GoRoute(
+        path: path,
+        name: name,
+        builder: (final context, final state) => const OptionsAvanceesPage(),
+      );
+
+  @override
+  Widget build(final BuildContext context) => Scaffold(
+        appBar: const FnvAppBar(),
+        body: ListView(
+          padding: const EdgeInsets.symmetric(
+            vertical: DsfrSpacings.s3w,
+            horizontal: DsfrSpacings.s2w,
+          ),
+          children: const [
+            ProfilTitle(title: Localisation.optionsAvancees),
+            SupprimerCompte(),
+          ],
+        ),
+        backgroundColor: FnvColors.aidesFond,
+      );
+}

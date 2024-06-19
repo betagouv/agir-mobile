@@ -10,20 +10,54 @@ class ButtonsPage extends StatelessWidget {
     pageBuilder: (final context) => const ButtonsPage(),
   );
 
+  void _handleTap() {}
+
   @override
   Widget build(final BuildContext context) {
     const label = 'Bouton';
-    const gap = SizedBox(height: 16);
-    void onTap() {}
+    const gap = SizedBox(height: DsfrSpacings.s2w);
+
+    final children = <Widget>[];
+    for (final variant in DsfrButtonVariant.values) {
+      for (final size in DsfrButtonSize.values) {
+        children
+          ..add(Text('variant: ${variant.name}, size: ${size.name}'))
+          ..add(DsfrButton(label: label, variant: variant, size: size))
+          ..add(
+            DsfrButton(
+              label: label,
+              variant: variant,
+              size: size,
+              onTap: _handleTap,
+            ),
+          )
+          ..add(
+            DsfrButton(
+              label: label,
+              icon: DsfrIcons.buildingsAncientGateFill,
+              variant: variant,
+              size: size,
+              onTap: _handleTap,
+            ),
+          )
+          ..add(
+            DsfrButton(
+              label: label,
+              icon: DsfrIcons.buildingsAncientGateFill,
+              iconLocation: DsfrButtonIconLocation.right,
+              variant: variant,
+              size: size,
+              onTap: _handleTap,
+            ),
+          );
+      }
+    }
 
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(24),
+      padding: const EdgeInsets.all(DsfrSpacings.s3w),
       child: Column(
-        children: [
-          const DsfrButton.lg(label: label),
-          gap,
-          DsfrButton.lg(label: label, onTap: onTap),
-        ],
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: children.separator(gap).toList(),
       ),
     );
   }

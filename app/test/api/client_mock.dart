@@ -34,4 +34,13 @@ class ClientMock extends Mock implements http.Client {
     when(() => send(any(that: RequestMathcher(path))))
         .thenAnswer((final _) async => response);
   }
+
+  void deleteSuccess({
+    required final String path,
+    required final CustomResponse response,
+  }) {
+    registerFallbackValue(RequestFake());
+    when(() => send(any(that: RequestMathcher(path))))
+        .thenAnswer((final _) async => response);
+  }
 }

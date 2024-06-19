@@ -1,3 +1,5 @@
+// ignore_for_file: prefer-correct-handler-name
+
 import 'package:dsfr/dsfr.dart';
 import 'package:dsfr_example/page_item.dart';
 import 'package:flutter/material.dart';
@@ -17,30 +19,26 @@ class CheckboxPage extends StatefulWidget {
 class _CheckboxPageState extends State<CheckboxPage> {
   bool _value = false;
   @override
-  Widget build(final BuildContext context) => SingleChildScrollView(
+  Widget build(final BuildContext context) => ListView(
         padding: const EdgeInsets.all(24),
-        child: Column(
-          children: [
-            DsfrCheckbox.sm(
-              label: 'Label',
-              value: _value,
-              onChanged: (bool? value) {
-                setState(() {
-                  _value = value ?? false;
-                });
-              },
-            ),
-            DsfrCheckbox.sm(
-              label: 'Label',
-              value: false,
-              onChanged: (bool? value) {},
-            ),
-            DsfrCheckbox.sm(
-              label: 'Label',
-              value: true,
-              onChanged: (bool? value) {},
-            ),
-          ],
-        ),
+        children: [
+          DsfrCheckbox.sm(
+            label: 'Label',
+            value: _value,
+            onChanged: (final value) => setState(() {
+              _value = value;
+            }),
+          ),
+          DsfrCheckbox.sm(
+            label: 'Label',
+            value: false,
+            onChanged: (final value) {},
+          ),
+          DsfrCheckbox.sm(
+            label: 'Label',
+            value: true,
+            onChanged: (final value) {},
+          ),
+        ],
       );
 }

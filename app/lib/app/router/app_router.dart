@@ -9,9 +9,11 @@ import 'package:app/features/authentification/domain/value_objects/authentificat
 import 'package:app/features/authentification/presentation/pages/se_connecter_page.dart';
 import 'package:app/features/pre_onboarding/presentation/pages/pre_onboarding_carrousel_page.dart';
 import 'package:app/features/pre_onboarding/presentation/pages/pre_onboarding_page.dart';
-import 'package:app/features/profil/mes_informations/presentation/pages/mes_informations_page.dart';
-import 'package:app/features/profil/mon_logement/presentation/pages/mon_logement_page.dart';
+import 'package:app/features/profil/informations/presentation/pages/mes_informations_page.dart';
+import 'package:app/features/profil/logement/presentation/pages/mon_logement_page.dart';
+import 'package:app/features/profil/presentation/pages/options_avancees_page.dart';
 import 'package:app/features/profil/presentation/pages/profil_page.dart';
+import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
 GoRouter goRouter({
@@ -19,18 +21,37 @@ GoRouter goRouter({
 }) =>
     GoRouter(
       routes: [
-        PreOnboardingPage.route,
-        PreOnboardingCarrouselPage.route,
-        SeConnecterPage.route,
-        AccueilPage.route,
-        AidesPage.route,
-        AidePage.route,
-        AideSimulateurVeloPage.route(
-          routes: [AideSimulateurVeloDisponiblePage.route],
+        GoRoute(
+          path: '/',
+          builder: (final context, final state) => const SizedBox(),
+          routes: [
+            GoRoute(
+              path: 'unauthenticated',
+              builder: (final context, final state) => const SizedBox(),
+              routes: [
+                PreOnboardingPage.route,
+                PreOnboardingCarrouselPage.route,
+                SeConnecterPage.route,
+              ],
+            ),
+            GoRoute(
+              path: 'authenticated',
+              builder: (final context, final state) => const SizedBox(),
+              routes: [
+                AccueilPage.route,
+                AidesPage.route,
+                AidePage.route,
+                AideSimulateurVeloPage.route(
+                  routes: [AideSimulateurVeloDisponiblePage.route],
+                ),
+                ProfilPage.route,
+                MesInformationsPage.route,
+                MonLogementPage.route,
+                OptionsAvanceesPage.route,
+              ],
+            ),
+          ],
         ),
-        ProfilPage.route,
-        MesInformationsPage.route,
-        MonLogementPage.route,
       ],
       redirect: (final context, final state) {
         final path = state.uri.path;
@@ -38,25 +59,16 @@ GoRouter goRouter({
         final statutActuel = authentificationStatusManager.statutActuel;
         switch (statutActuel) {
           case AuthentificationStatut.inconnu:
-            return PreOnboardingPage.path;
+            return '/unauthenticated/${PreOnboardingPage.path}';
 
           case AuthentificationStatut.connecte:
-            if (path.startsWith(PreOnboardingPage.path) ||
-                path.startsWith(PreOnboardingCarrouselPage.path) ||
-                path.startsWith(SeConnecterPage.path)) {
-              return AccueilPage.path;
+            if (path.startsWith('/unauthenticated')) {
+              return '/authenticated/${AccueilPage.path}';
             }
 
           case AuthentificationStatut.pasConnecte:
-            if (path.startsWith(AccueilPage.path) ||
-                path.startsWith(AidesPage.path) ||
-                path.startsWith(AidePage.path) ||
-                path.startsWith(AideSimulateurVeloPage.path) ||
-                path.startsWith(AideSimulateurVeloDisponiblePage.path) ||
-                path.startsWith(ProfilPage.path) ||
-                path.startsWith(MesInformationsPage.path) ||
-                path.startsWith(MonLogementPage.path)) {
-              return PreOnboardingPage.path;
+            if (path.startsWith('/authenticated')) {
+              return '/unauthenticated/${PreOnboardingPage.path}';
             }
         }
 
@@ -64,6 +76,6 @@ GoRouter goRouter({
       },
       refreshListenable:
           GoRouterRefreshStream(authentificationStatusManager.statutModifie),
-      initialLocation: PreOnboardingPage.path,
+      initialLocation: '/unauthenticated/${PreOnboardingPage.path}',
       debugLogDiagnostics: true,
     );

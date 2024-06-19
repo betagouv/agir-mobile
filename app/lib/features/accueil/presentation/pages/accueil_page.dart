@@ -13,7 +13,7 @@ class AccueilPage extends StatelessWidget {
   const AccueilPage({super.key});
 
   static const name = 'accueil';
-  static const path = '/$name';
+  static const path = name;
 
   static GoRoute get route => GoRoute(
         path: path,
@@ -33,16 +33,14 @@ class AccueilPage extends StatelessWidget {
 
     return RootPage(
       title: const _AppBarTitle(),
-      body: SafeArea(
-        child: ListView(
-          padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s3w),
-          children: [
-            if (state.aLesAides) ...[
-              const MesAides(),
-              const SizedBox(height: DsfrSpacings.s5w),
-            ],
+      body: ListView(
+        padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s3w),
+        children: [
+          if (state.aLesAides) ...[
+            const MesAides(),
+            const SizedBox(height: DsfrSpacings.s5w),
           ],
-        ),
+        ],
       ),
     );
   }

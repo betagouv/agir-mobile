@@ -1,10 +1,10 @@
 import 'package:app/features/authentification/domain/entities/authentification_statut_manager.dart';
 import 'package:app/features/authentification/infrastructure/adapters/api/authentification_api_client.dart';
 import 'package:app/features/authentification/infrastructure/adapters/api/authentification_token_storage.dart';
+import 'package:app/features/profil/informations/domain/entities/mes_informations.dart';
 import 'package:app/features/profil/infrastructure/adapters/profil_api_adapter.dart';
-import 'package:app/features/profil/mes_informations/domain/entities/mes_informations.dart';
-import 'package:app/features/profil/mon_logement/domain/entities/logement.dart';
-import 'package:app/features/profil/mon_logement/presentation/blocs/mon_logement_state.dart';
+import 'package:app/features/profil/logement/domain/entities/logement.dart';
+import 'package:app/features/profil/logement/presentation/blocs/mon_logement_state.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -71,7 +71,7 @@ void main() {
       final result = await adapter.recupererProfil();
       expect(
         result,
-        const MesInformations(
+        const Informations(
           prenom: 'Wojtek',
           nom: 'WWW',
           email: 'ww@w.com',
@@ -244,6 +244,33 @@ void main() {
           ),
         ),
       );
+    });
+
+    test('supprimerLeCompte', () async {
+      const path = '/utilisateurs/$utilisateurId';
+      final client = ClientMock()
+        ..deleteSuccess(path: path, response: CustomResponse(''));
+
+      final authentificationTokenStorage = AuthentificationTokenStorage(
+        secureStorage: FlutterSecureStorageMock(),
+        authentificationStatusManager: AuthentificationStatutManager(),
+      );
+      await authentificationTokenStorage.sauvegarderTokenEtUtilisateurId(
+        token,
+        utilisateurId,
+      );
+
+      final adapter = ProfilApiAdapter(
+        apiClient: AuthentificationApiClient(
+          apiUrl: apiUrl,
+          authentificationTokenStorage: authentificationTokenStorage,
+          inner: client,
+        ),
+      );
+
+      await adapter.supprimerLeCompte();
+
+      verify(() => client.send(any(that: const RequestMathcher(path))));
     });
   });
 }
