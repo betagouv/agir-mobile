@@ -59,9 +59,12 @@ abstract final class DsfrFonts {
   static const bodyXlMedium =
       DsfrTextStyle(fontSize: 20, lineHeight: 20, fontWeight: FontWeight.w500);
 
-  static const bodyLg = DsfrTextStyle(fontSize: 18, lineHeight: 18);
+  static const bodyLg = DsfrTextStyle(fontSize: 18, lineHeight: 24);
 
   static const bodyLgMedium =
+      DsfrTextStyle(fontSize: 18, lineHeight: 28, fontWeight: FontWeight.w500);
+
+  static const bodyLgBold =
       DsfrTextStyle(fontSize: 18, lineHeight: 28, fontWeight: FontWeight.w500);
 
   static const bodyMd = DsfrTextStyle(fontSize: 16, lineHeight: 24);

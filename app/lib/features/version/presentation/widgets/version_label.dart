@@ -1,5 +1,6 @@
 import 'package:app/features/version/presentation/blocs/version_bloc.dart';
 import 'package:app/features/version/presentation/blocs/version_state.dart';
+import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,6 +10,9 @@ class VersionLabel extends StatelessWidget {
   @override
   Widget build(final BuildContext context) =>
       BlocBuilder<VersionBloc, VersionState>(
-        builder: (final context, final state) => Text(state.value),
+        builder: (final context, final state) => Text(
+          state.value,
+          style: DsfrFonts.bodyMd.copyWith(color: const Color(0x7F000000)),
+        ),
       );
 }

@@ -12,32 +12,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-Future<void> _redirigeSiLaPageCourantEstDifferente(
-  final BuildContext context,
-  final String name,
-) async {
-  final router = GoRouter.of(context);
-  if (GoRouterState.of(context).name == name) {
-    Scaffold.of(context).closeDrawer();
-
-    return;
-  }
-  await router.pushReplacementNamed(name);
-}
-
 class Menu extends StatelessWidget {
   const Menu({super.key});
-
-  Future<void> _handleTapOnAccueil(final BuildContext context) async =>
-      _redirigeSiLaPageCourantEstDifferente(context, AccueilPage.name);
-
-  Future<void> _handleTapOnProfile(final BuildContext context) async =>
-      _redirigeSiLaPageCourantEstDifferente(context, ProfilPage.name);
 
   @override
   Widget build(final BuildContext context) => Drawer(
         shape: const RoundedRectangleBorder(),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             FnvAppBar(
               leading: IconButton(
@@ -58,59 +40,151 @@ class Menu extends StatelessWidget {
                 style: DsfrFonts.bodyMdBold,
               ),
             ),
-            Expanded(
-              child: ColoredBox(
-                color: Colors.white,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: DsfrSpacings.s3w,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      DsfrLink.md(
-                        label: Localisation.menuAccueil,
-                        onTap: () async => _handleTapOnAccueil(context),
-                      ),
-                      const _MenuAides(),
-                      const Spacer(),
-                      DsfrLink.md(
-                        label: Localisation.monProfil,
-                        onTap: () async => _handleTapOnProfile(context),
-                      ),
-                      DsfrLink.md(
-                        label: 'Se déconnecter',
-                        onTap: () async => context
-                            .read<AuthentificationPort>()
-                            .deconnectionDemandee(),
-                      ),
-                      const SizedBox(height: DsfrSpacings.s3w),
-                      const Align(child: VersionLabel()),
-                    ],
-                  ),
-                ),
-              ),
+            const Expanded(
+              child: ColoredBox(color: Colors.white, child: _MenuItems()),
             ),
           ],
         ),
       );
 }
 
-class _MenuAides extends StatelessWidget {
-  const _MenuAides();
+class _MenuItems extends StatelessWidget {
+  const _MenuItems();
+
+  Future<void> _redirigeSiLaPageCourantEstDifferente(
+    final BuildContext context,
+    final String name,
+  ) async {
+    if (GoRouterState.of(context).name == name) {
+      Scaffold.of(context).closeDrawer();
+
+      return;
+    }
+    await GoRouter.of(context).pushReplacementNamed(name);
+  }
+
+  Future<void> _handleTapOnAccueil(final BuildContext context) async =>
+      _redirigeSiLaPageCourantEstDifferente(context, AccueilPage.name);
 
   Future<void> _handleTapOnAides(final BuildContext context) async =>
       _redirigeSiLaPageCourantEstDifferente(context, AidesPage.name);
+
+  Future<void> _handleTapOnProfile(final BuildContext context) async =>
+      _redirigeSiLaPageCourantEstDifferente(context, ProfilPage.name);
+
+  @override
+  Widget build(final BuildContext context) {
+    final groupValue = GoRouterState.of(context).name ?? AccueilPage.name;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _MenuItem(
+          label: Localisation.menuAccueil,
+          value: AccueilPage.name,
+          groupValue: groupValue,
+          onTap: () async => _handleTapOnAccueil(context),
+        ),
+        const SizedBox(height: DsfrSpacings.s2w),
+        _MenuAides(
+          groupTitle: groupValue,
+          onTap: () async => _handleTapOnAides(context),
+        ),
+        const Spacer(),
+        _MenuItem(
+          label: Localisation.monProfil,
+          value: ProfilPage.name,
+          groupValue: groupValue,
+          onTap: () async => _handleTapOnProfile(context),
+        ),
+        const SizedBox(height: DsfrSpacings.s2w),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s3w),
+          child: DsfrLink.md(
+            label: 'Se déconnecter',
+            onTap: () async =>
+                context.read<AuthentificationPort>().deconnectionDemandee(),
+          ),
+        ),
+        const SizedBox(height: DsfrSpacings.s2w),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: DsfrSpacings.s3w),
+          child: VersionLabel(),
+        ),
+        const SizedBox(height: DsfrSpacings.s3w),
+      ],
+    );
+  }
+}
+
+class _MenuAides extends StatelessWidget {
+  const _MenuAides({required this.groupTitle, required this.onTap});
+
+  final String groupTitle;
+  final VoidCallback? onTap;
 
   @override
   Widget build(final BuildContext context) {
     final state = context.watch<UtilisateurBloc>().state;
 
     return state.aLesAides
-        ? DsfrLink.md(
+        ? _MenuItem(
             label: Localisation.menuAides,
-            onTap: () async => _handleTapOnAides(context),
+            value: AidesPage.name,
+            groupValue: groupTitle,
+            onTap: onTap,
           )
         : const SizedBox.shrink();
+  }
+}
+
+class _MenuItem extends StatelessWidget {
+  const _MenuItem({
+    required this.label,
+    required this.value,
+    required this.groupValue,
+    required this.onTap,
+  });
+
+  final String label;
+  final String value;
+  final String groupValue;
+  final VoidCallback? onTap;
+
+  @override
+  Widget build(final BuildContext context) {
+    final isCurrentPage = groupValue == value;
+
+    return GestureDetector(
+      onTap: onTap,
+      behavior: HitTestBehavior.opaque,
+      child: Stack(
+        alignment: Alignment.centerLeft,
+        children: [
+          if (isCurrentPage)
+            const DecoratedBox(
+              decoration: ShapeDecoration(
+                color: DsfrColors.blueFranceSun113,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.horizontal(
+                    right: Radius.circular(DsfrSpacings.s0v5),
+                  ),
+                ),
+              ),
+              child: SizedBox(width: 3, height: 24),
+            ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s3w),
+            child: Text(
+              label,
+              style: isCurrentPage
+                  ? DsfrFonts.bodyLgBold
+                      .copyWith(color: DsfrColors.blueFranceSun113)
+                  : DsfrFonts.bodyLg.copyWith(color: DsfrColors.grey50),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
