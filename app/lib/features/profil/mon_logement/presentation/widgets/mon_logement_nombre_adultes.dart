@@ -21,15 +21,25 @@ class MonLogementNombreAdultes extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
+    const adultes = Localisation.adultes;
     final nombreAdultes = context
         .select<MonLogementBloc, int>((final bloc) => bloc.state.nombreAdultes);
 
-    return DsfrInput(
-      label: Localisation.adultes,
-      onChanged: (final value) => _handleNombreAdultes(context, value),
-      initialValue: nombreAdultes.toString(),
-      keyboardType: TextInputType.number,
-      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+    return Row(
+      children: [
+        SizedBox(
+          width: MediaQuery.textScalerOf(context).scale(97),
+          child: DsfrInputHeadless(
+            initialValue: nombreAdultes.toString(),
+            onChanged: (final value) => _handleNombreAdultes(context, value),
+            keyboardType: TextInputType.number,
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            key: const ValueKey(adultes),
+          ),
+        ),
+        const SizedBox(width: DsfrSpacings.s1v),
+        const Expanded(child: Text(adultes, style: DsfrFonts.bodySm)),
+      ],
     );
   }
 }

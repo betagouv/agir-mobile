@@ -1,4 +1,5 @@
 import 'package:dsfr/dsfr.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 /// Iel écrit dans le champ.
@@ -9,10 +10,12 @@ Future<void> ielEcritDansLeChamp(
 }) async {
   await tester.enterText(
     find.byWidgetPredicate(
-      (final widget) => widget is DsfrInput && widget.label == label,
+      (final widget) =>
+          widget is DsfrInputHeadless && widget.key == ValueKey(label),
     ),
     enterText,
   );
+
   await tester.testTextInput.receiveAction(TextInputAction.done);
   await tester.pump();
 }

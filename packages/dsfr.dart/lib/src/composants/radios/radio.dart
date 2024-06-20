@@ -36,15 +36,17 @@ class DsfrRadioButton<T> extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(right: DsfrSpacings.s2w),
             child: Row(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Radio<T>(
+                  key: ValueKey(title),
                   value: value,
                   groupValue: groupValue,
                   onChanged: null,
                   fillColor:
                       const WidgetStatePropertyAll(DsfrColors.blueFranceSun113),
                 ),
-                Expanded(child: Text(title, style: DsfrFonts.bodySm)),
+                Text(title, style: DsfrFonts.bodySm),
               ],
             ),
           ),

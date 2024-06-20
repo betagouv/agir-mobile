@@ -24,7 +24,7 @@ void main() {
     setUpWidgets(tester);
     await _allerSurMonProfil(tester);
     await ielAppuieSur(tester, Localisation.vosInformations);
-    ielVoitLeTexte(Localisation.mesInformations);
+    ielVoitLeTexte(Localisation.vosInformations);
   });
 }
 

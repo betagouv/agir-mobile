@@ -89,7 +89,6 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static String euro(final int value) => '$value €';
   static const monProfil = 'Mon profil';
   static const vosInformations = 'Vos informations';
-  static const mesInformations = 'Mes informations';
   static const votreIdentite = 'Votre identité';
   static const prenom = 'Prénom';
   static const nom = 'Nom';
@@ -99,11 +98,11 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const donneesPersonnelles = 'Données personnelles';
   static const mettreAJourVosInformations = 'Mettre à jour vos informations';
   static const votreLogement = 'Votre logement';
-  static const monLogement = 'Mon logement';
+  static const ouHabitezVous = 'Où habitez-vous ?';
   static const combienEtesVousDansVotreLogement =
       'Combien êtes-vous dans votre logement (vous inclus) ?';
   static const adultes = 'Adulte(s)';
-  static const enfants = 'Enfant(s) - moins de 18 ans';
+  static const enfants = 'Enfant(s) de moins de 18 ans';
   static const votreResidencePrincipaleEst =
       'Votre résidence principale est ...';
   static const unAppartement = 'Un appartement';
@@ -127,8 +126,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const autreJeNeSaisPas = 'Autre / Je ne sais pas';
   static const votreLogementPlusDe15Ans =
       'Votre logement a-t-il plus de 15 ans ?';
-  static const legendePourLEnsembleDesElements =
-      'Légende pour l’ensemble des éléments ';
+  static const consommationsEnergetiques = 'Consommations énergétiques';
   static const dpeA = 'A';
   static const dpeB = 'B';
   static const dpeC = 'C';
@@ -137,5 +135,5 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const dpeF = 'F';
   static const dpeG = 'G';
   static const dpeJeNeSaisPas = 'Je ne sais pas';
-  static const dpeExplication = "**Qu'est-ce qu'un DPE ?**";
+  static const dpeExplication = "**Qu'est-ce qu'un DPE ?**";
 }

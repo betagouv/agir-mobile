@@ -121,7 +121,7 @@ class _Label extends StatelessWidget {
             const SizedBox(height: DsfrSpacings.s1v),
             Text(hint!, style: hintStyle.copyWith(color: hintColor)),
           ],
-          const SizedBox(height: DsfrSpacings.s1w),
+          const SizedBox(height: DsfrSpacings.s1v),
           child,
         ],
       );

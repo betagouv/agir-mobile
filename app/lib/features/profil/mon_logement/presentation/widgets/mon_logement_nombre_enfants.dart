@@ -24,12 +24,23 @@ class MonLogementNombreEnfants extends StatelessWidget {
     final nombreEnfants = context
         .select<MonLogementBloc, int>((final bloc) => bloc.state.nombreEnfants);
 
-    return DsfrInput(
-      label: Localisation.enfants,
-      onChanged: (final value) => _handleNombreEnfants(context, value),
-      initialValue: nombreEnfants.toString(),
-      keyboardType: TextInputType.number,
-      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+    const enfants = Localisation.enfants;
+
+    return Row(
+      children: [
+        SizedBox(
+          width: MediaQuery.textScalerOf(context).scale(97),
+          child: DsfrInputHeadless(
+            initialValue: nombreEnfants.toString(),
+            onChanged: (final value) => _handleNombreEnfants(context, value),
+            keyboardType: TextInputType.number,
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            key: const ValueKey(enfants),
+          ),
+        ),
+        const SizedBox(width: DsfrSpacings.s1v),
+        const Expanded(child: Text(enfants, style: DsfrFonts.bodySm)),
+      ],
     );
   }
 }

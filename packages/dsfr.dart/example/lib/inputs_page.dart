@@ -39,6 +39,11 @@ class InputsPage extends StatelessWidget {
                 print(value);
               },
             ),
+            DsfrInputHeadless(
+              onChanged: (String value) {
+                print(value);
+              },
+            ),
           ],
         ),
       );

@@ -20,7 +20,7 @@ class MesInformationsForm extends StatelessWidget {
           horizontal: DsfrSpacings.s2w,
         ),
         children: const [
-          ProfilTitle(title: Localisation.mesInformations),
+          ProfilTitle(title: Localisation.vosInformations),
           ProfilTitrePartie(titre: Localisation.votreIdentite),
           SizedBox(height: DsfrSpacings.s2w),
           MesInformationsPrenom(),

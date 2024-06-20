@@ -1,6 +1,7 @@
 // ignore_for_file: prefer-correct-callback-field-name
 
 import 'package:dsfr/src/composants/checkbox.dart';
+import 'package:dsfr/src/composants/input_headless.dart';
 import 'package:dsfr/src/fondamentaux/colors.g.dart';
 import 'package:dsfr/src/fondamentaux/fonts.dart';
 import 'package:dsfr/src/fondamentaux/spacing.g.dart';
@@ -21,18 +22,9 @@ class DsfrInput extends StatefulWidget {
     this.labelColor = DsfrColors.grey50,
     this.hintStyle = DsfrFonts.bodyXs,
     this.hintColor = DsfrColors.grey425,
-    this.inputStyle = DsfrFonts.bodyMd,
     this.textAlign = TextAlign.start,
     this.isPasswordMode = false,
     this.keyboardType,
-    this.inputBorderColor = DsfrColors.grey200,
-    this.inputBorderWidth = 2,
-    this.inputConstraints = const BoxConstraints(maxHeight: 48),
-    this.fillColor = DsfrColors.grey950,
-    this.radius = 4,
-    this.focusColor = DsfrColors.focus525,
-    this.focusThickness = 2,
-    this.focusPadding = const EdgeInsets.all(4),
     this.inputFormatters,
     super.key,
   });
@@ -50,18 +42,9 @@ class DsfrInput extends StatefulWidget {
   final Color labelColor;
   final TextStyle hintStyle;
   final Color hintColor;
-  final TextStyle inputStyle;
   final TextAlign textAlign;
   final bool isPasswordMode;
   final TextInputType? keyboardType;
-  final Color inputBorderColor;
-  final double inputBorderWidth;
-  final BoxConstraints inputConstraints;
-  final Color fillColor;
-  final double radius;
-  final Color focusColor;
-  final double focusThickness;
-  final EdgeInsetsGeometry focusPadding;
   final List<TextInputFormatter>? inputFormatters;
 
   @override
@@ -69,45 +52,16 @@ class DsfrInput extends StatefulWidget {
 }
 
 class _DsfrInputState extends State<DsfrInput> {
-  final _focusNode = FocusNode();
-  bool _isFocused = false;
   bool _passwordVisibility = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _focusNode.addListener(_listener);
-  }
-
-  void _listener() {
-    setState(() {
-      _isFocused = _focusNode.hasFocus;
-    });
-  }
 
   void _handlePasswordVisibility(final bool value) =>
       setState(() => _passwordVisibility = value);
 
   @override
-  void dispose() {
-    _focusNode
-      ..removeListener(_listener)
-      ..dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(final BuildContext context) {
-    final underlineInputBorder = UnderlineInputBorder(
-      borderSide: BorderSide(
-        color: widget.inputBorderColor,
-        width: widget.inputBorderWidth,
-      ),
-      borderRadius: BorderRadius.vertical(top: Radius.circular(widget.radius)),
-    );
-
+    final labelText = widget.label;
     Widget label = Text(
-      widget.label,
+      labelText,
       style: widget.labelStyle.copyWith(color: widget.labelColor),
     );
 
@@ -137,56 +91,19 @@ class _DsfrInputState extends State<DsfrInput> {
             style: widget.hintStyle.copyWith(color: widget.hintColor),
           ),
         ],
-        SizedBox(height: _isFocused ? DsfrSpacings.s1v : DsfrSpacings.s1w),
-        DecoratedBox(
-          decoration: _isFocused
-              ? BoxDecoration(
-                  border: Border.fromBorderSide(
-                    BorderSide(
-                      color: widget.focusColor,
-                      width: widget.focusThickness,
-                    ),
-                  ),
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(widget.radius),
-                  ),
-                )
-              : const BoxDecoration(),
-          child: Padding(
-            padding: _isFocused
-                ? widget.focusPadding
-                    .add(EdgeInsets.only(bottom: widget.inputBorderWidth))
-                : EdgeInsets.zero,
-            child: SizedBox(
-              width: widget.width,
-              child: TextFormField(
-                controller: widget.controller,
-                initialValue: widget.initialValue,
-                focusNode: _focusNode,
-                decoration: InputDecoration(
-                  suffixText: widget.suffixText,
-                  suffixStyle: widget.inputStyle,
-                  filled: true,
-                  fillColor: widget.fillColor,
-                  focusedBorder: underlineInputBorder,
-                  enabledBorder: underlineInputBorder,
-                  border: underlineInputBorder,
-                  constraints: widget.inputConstraints,
-                ),
-                keyboardType: widget.keyboardType,
-                style: widget.inputStyle,
-                textAlign: widget.textAlign,
-                obscureText: widget.isPasswordMode && !_passwordVisibility,
-                autocorrect: !widget.isPasswordMode,
-                enableSuggestions: !widget.isPasswordMode,
-                onChanged: widget.onChanged,
-                onTapOutside: (final event) =>
-                    FocusManager.instance.primaryFocus?.unfocus(),
-                validator: widget.validator,
-                inputFormatters: widget.inputFormatters,
-              ),
-            ),
-          ),
+        DsfrInputHeadless(
+          initialValue: widget.initialValue,
+          controller: widget.controller,
+          suffixText: widget.suffixText,
+          onChanged: widget.onChanged,
+          validator: widget.validator,
+          keyboardType: widget.keyboardType,
+          width: widget.width,
+          isPasswordMode: widget.isPasswordMode,
+          passwordVisibility: _passwordVisibility,
+          textAlign: widget.textAlign,
+          inputFormatters: widget.inputFormatters,
+          key: ValueKey(labelText),
         ),
       ],
     );
