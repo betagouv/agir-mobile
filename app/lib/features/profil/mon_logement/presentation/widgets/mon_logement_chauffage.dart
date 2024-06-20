@@ -1,6 +1,7 @@
 import 'package:app/features/profil/mon_logement/presentation/blocs/mon_logement_bloc.dart';
 import 'package:app/features/profil/mon_logement/presentation/blocs/mon_logement_event.dart';
 import 'package:app/features/profil/mon_logement/presentation/blocs/mon_logement_state.dart';
+import 'package:app/features/profil/mon_logement/presentation/widgets/mon_logement_titre_et_contenu.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
@@ -15,19 +16,21 @@ class MonLogementChauffage extends StatelessWidget {
       (final bloc) => bloc.state.chauffage,
     );
 
-    return DsfrRadioButtonSet(
-      title: Localisation.quelleEstVotreModeDeChauffagePrincipal,
-      values: const {
-        Chauffage.electricite: Localisation.electricite,
-        Chauffage.boisPellets: Localisation.boisPellets,
-        Chauffage.fioul: Localisation.fioul,
-        Chauffage.gaz: Localisation.gaz,
-        Chauffage.autre: Localisation.autreJeNeSaisPas,
-      },
-      onCallback: (final value) => context
-          .read<MonLogementBloc>()
-          .add(MonLogementChauffageChange(value)),
-      initialValue: chauffage,
+    return MonLogementTitreEtContenu(
+      titre: Localisation.quelleEstVotreModeDeChauffagePrincipal,
+      contenu: DsfrRadioButtonSetHeadless(
+        values: const {
+          Chauffage.electricite: Localisation.electricite,
+          Chauffage.boisPellets: Localisation.boisPellets,
+          Chauffage.fioul: Localisation.fioul,
+          Chauffage.gaz: Localisation.gaz,
+          Chauffage.autre: Localisation.autreJeNeSaisPas,
+        },
+        onCallback: (final value) => context
+            .read<MonLogementBloc>()
+            .add(MonLogementChauffageChange(value)),
+        initialValue: chauffage,
+      ),
     );
   }
 }

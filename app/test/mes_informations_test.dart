@@ -19,7 +19,7 @@ void main() {
   testWidgets('Voir tous les textes', (final tester) async {
     setUpWidgets(tester);
     await _allerSurMesInformations(tester);
-    ielVoitLeTexte(Localisation.mesInformations);
+    ielVoitLeTexte(Localisation.vosInformations);
     ielVoitLeTexte(Localisation.votreIdentite);
     ielVoitLeTexte(Localisation.prenom);
     ielVoitLeTexte(Localisation.nom);

@@ -2,6 +2,7 @@
 
 import 'package:app/features/profil/mon_logement/presentation/blocs/mon_logement_bloc.dart';
 import 'package:app/features/profil/mon_logement/presentation/blocs/mon_logement_event.dart';
+import 'package:app/features/profil/mon_logement/presentation/widgets/mon_logement_titre_et_contenu.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
@@ -16,13 +17,15 @@ class MonLogementEstProprietaire extends StatelessWidget {
       (final bloc) => bloc.state.estProprietaire,
     );
 
-    return DsfrRadioButtonSet(
-      title: Localisation.vousEtesProprietaireDeVotreLogement,
-      values: const {true: Localisation.oui, false: Localisation.non},
-      onCallback: (final value) => context
-          .read<MonLogementBloc>()
-          .add(MonLogementEstProprietaireChange(value)),
-      initialValue: estProprietaire,
+    return MonLogementTitreEtContenu(
+      titre: Localisation.vousEtesProprietaireDeVotreLogement,
+      contenu: DsfrRadioButtonSetHeadless(
+        values: const {true: Localisation.oui, false: Localisation.non},
+        onCallback: (final value) => context
+            .read<MonLogementBloc>()
+            .add(MonLogementEstProprietaireChange(value)),
+        initialValue: estProprietaire,
+      ),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:app/features/profil/mon_logement/presentation/blocs/mon_logement_bloc.dart';
 import 'package:app/features/profil/mon_logement/presentation/blocs/mon_logement_event.dart';
 import 'package:app/features/profil/mon_logement/presentation/blocs/mon_logement_state.dart';
+import 'package:app/features/profil/mon_logement/presentation/widgets/mon_logement_titre_et_contenu.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
@@ -25,14 +26,16 @@ class MonLogementResidencePrincipale extends StatelessWidget {
       (final bloc) => bloc.state.typeDeLogement,
     );
 
-    return DsfrRadioButtonSet(
-      title: Localisation.votreResidencePrincipaleEst,
-      values: const {
-        TypeDeLogement.appartement: Localisation.unAppartement,
-        TypeDeLogement.maison: Localisation.uneMaison,
-      },
-      onCallback: (final value) => _handleTypeDeLogement(context, value),
-      initialValue: typeDeLogement,
+    return MonLogementTitreEtContenu(
+      titre: Localisation.votreResidencePrincipaleEst,
+      contenu: DsfrRadioButtonSetHeadless(
+        values: const {
+          TypeDeLogement.appartement: Localisation.unAppartement,
+          TypeDeLogement.maison: Localisation.uneMaison,
+        },
+        onCallback: (final value) => _handleTypeDeLogement(context, value),
+        initialValue: typeDeLogement,
+      ),
     );
   }
 }

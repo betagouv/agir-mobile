@@ -27,7 +27,7 @@ void main() {
   testWidgets('Voir tous les textes', (final tester) async {
     setUpWidgets(tester);
     await _allerSurMonLogement(tester);
-    ielVoitLeTexte(Localisation.monLogement);
+    ielVoitLeTexte(Localisation.votreLogement);
     ielVoitLeTexte(Localisation.codePostal);
     ielVoitLeTexte(Localisation.commune);
     ielVoitLeTexte(Localisation.combienEtesVousDansVotreLogement);
@@ -56,7 +56,7 @@ void main() {
     ielVoitLeTexte(Localisation.votreLogementPlusDe15Ans);
     ielVoitLeTexte(Localisation.oui);
     ielVoitLeTexte(Localisation.non);
-    ielVoitLeTexte(Localisation.legendePourLEnsembleDesElements);
+    ielVoitLeTexte(Localisation.consommationsEnergetiques);
     ielVoitLeTexte(Localisation.dpeA);
     ielVoitLeTexte(Localisation.dpeB);
     ielVoitLeTexte(Localisation.dpeC);
@@ -123,16 +123,16 @@ void main() {
       );
       await ielScrolle(tester, Localisation.votreResidencePrincipaleEst);
       await ielAppuieSur(tester, Localisation.unAppartement);
-      await ielScrolle(
-        tester,
-        Localisation.vousEtesProprietaireDeVotreLogement,
-      );
       await ielAppuieSur(tester, Localisation.oui);
       await ielAppuieSur(tester, Localisation.moinsDe35m2);
+
+      await ielScrolle(
+        tester,
+        Localisation.quelleEstVotreModeDeChauffagePrincipal,
+      );
       await ielAppuieSur(tester, Localisation.electricite);
-      await ielScrolle(tester, Localisation.votreLogementPlusDe15Ans);
       await ielAppuieSur(tester, Localisation.oui);
-      await ielScrolle(tester, Localisation.legendePourLEnsembleDesElements);
+      await ielScrolle(tester, Localisation.consommationsEnergetiques);
       await ielAppuieSur(tester, Localisation.dpeC);
 
       await ielAppuieSur(tester, Localisation.mettreAJourVosInformations);
