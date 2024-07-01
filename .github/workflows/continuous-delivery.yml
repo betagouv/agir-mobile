@@ -7,11 +7,44 @@ env:
   FLUTTER_VERSION: 3.22.2
 
 jobs:
-  continuous-delivery-android:
-    runs-on: ubuntu-latest
+  # continuous-delivery-android:
+  #   runs-on: ubuntu-latest
+  #   defaults:
+  #     run:
+  #       working-directory: app/android
+  #   steps:
+  #     - name: 📚 Git checkout
+  #       uses: actions/checkout@v4
+  #     - name: 🐦 Install flutter
+  #       uses: subosito/flutter-action@v2
+  #       with:
+  #         cache: true
+  #         channel: stable
+  #         flutter-version: ${{ env.FLUTTER_VERSION }}
+  #     - name: 💎 Install ruby
+  #       uses: ruby/setup-ruby@v1
+  #       with:
+  #         ruby-version: '3.3'
+  #         bundler-cache: true
+  #     - name: 🔑 Add env secrets
+  #       run: echo "${{ secrets.DEV_FLUTTER_ENV }}" | base64 --decode > ../env.development.json
+  #     - name: 📚 Install bundle
+  #       run: bundle install
+  #     - name: Build app
+  #       run: |
+  #         flutter config --no-cli-animations
+  #         flutter build apk --flavor development --dart-define-from-file env.development.json --build-number ${GITHUB_RUN_NUMBER}
+  #     - name: 🚀 Deploy Android development application
+  #       run: bundle exec fastlane development
+  #       env:
+  #          JAVA_HOME: /usr/lib/jvm/temurin-17-jdk-amd64
+  #          DEV_APP_ID_ANDROID: ${{ secrets.DEV_APP_ID_ANDROID }}
+  #          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN_LSA }}
+  continuous-delivery-ios:
+    runs-on: macos-latest
     defaults:
       run:
-        working-directory: app/android
+        working-directory: app/ios
     steps:
       - name: 📚 Git checkout
         uses: actions/checkout@v4
@@ -27,38 +60,33 @@ jobs:
           ruby-version: '3.3'
           bundler-cache: true
       - name: 🔑 Add env secrets
-        run: echo "${{ secrets.DEV_FLUTTER_ENV }}" | base64 --decode > ../env.development.json
-      - name: 📚 Install bundle
-        run: bundle install
-      - name: 🚀 Deploy Android development application
-        run: bundle exec fastlane development
-        env:
-           JAVA_HOME: /usr/lib/jvm/temurin-17-jdk-amd64
-           DEV_APP_ID_ANDROID: ${{ secrets.DEV_APP_ID_ANDROID }}
-           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN_LSA }}
-  # continuous-delivery-ios:
-  #   runs-on: macos-latest
-  #   defaults:
-  #     run:
-  #       working-directory: app/ios
-  #   steps:
-  #     - name: 📚 Git checkout
-  #       uses: actions/checkout@v4
-  #     - name: 🐦 Install flutter
-  #       uses: subosito/flutter-action@v2
-  #       with:
-  #         cache: true
-  #         channel: stable
-  #         flutter-version: ${{ env.FLUTTER_VERSION }}
-  #     - name: 💎 Install ruby
-  #       uses: ruby/setup-ruby@v1
-  #       with:
-  #         ruby-version: '3.3'
-  #         bundler-cache: true
-  #     - run: echo "${{ secrets.DEV_FLUTTER_ENV }}" | base64 --decode > ../env.development.json
-  #     - run: bundle install
-  #     - name: 🚀 Deploy iOS development application
-  #       run: bundle exec fastlane development
-  #       env:
-  #          DEV_APP_ID_IOS: ${{ secrets.DEV_APP_ID_IOS }}
-  #          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN_LSA }}
+        run: echo "${{ secrets.DEV_FLUTTER_ENV }}" | base64 --decode -o ../env.development.json
+      - name: Add p12 certificate
+        run: |
+          keychainPassword='cat /dev/urandom | LC_ALL=C tr -dc 'a-zA-Z0-9' | fold -w 50 | head -n 1'
+          security create-keychain -p "$keychainPassword" ios_signing_temp.keychain
+          security set-keychain-settings -lut 21600 ios_signing_temp.keychain
+          security unlock-keychain -p "$keychainPassword" ios_signing_temp.keychain
+
+          echo "${{ secrets.DEV_P12_FILE }}" | base64 --decode -o Certificates.p12
+          security import Certificates.p12 -P "${{ secrets.DEV_P12_PWD }}" -A -t cert -f pkcs12 -k ios_signing_temp.keychain
+          security list-keychain -d user -s ios_signing_temp.keychain
+      - name: Add provisioning profile
+        run: |
+          echo ${{ secrets.DEV_IOS_PROFILE }} | base64 --decode -o ProvisioningProfile.mobileprovision
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          uuid=`security cms -D -i ProvisioningProfile.mobileprovision | grep -aA1 UUID | grep -o "[-a-zA-Z0-9]\{36\}"`
+          cp ProvisioningProfile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/$uuid.mobileprovision
+      - name: Add exportOptions
+        run: echo ${{ secrets.DEV_IOS_PLIST }} | base64 --decode -o exportOptions.plist
+      - name: Build application
+        run: |
+          flutter config --no-cli-animations
+          flutter build ipa --flavor development --dart-define-from-file env.development.json --build-number ${GITHUB_RUN_NUMBER} --export-options-plist exportOptions.plist
+      # - name: 📚 Install bundle
+      #   run: bundle install
+      # - name: 🚀 Deploy iOS development application
+      #   run: bundle exec fastlane development
+      #   env:
+      #      DEV_APP_ID_IOS: ${{ secrets.DEV_APP_ID_IOS }}
+      #      FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN_LSA }}
