@@ -72,13 +72,16 @@ class _PreOnboardingCarrouselPageState extends State<PreOnboardingCarrouselPage>
                         horizontal: DsfrSpacings.s3w,
                       ),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           const SizedBox(height: DsfrSpacings.s8w),
-                          const Icon(
-                            DsfrIcons.businessBarChartBoxFill,
-                            size: 56,
-                            color: DsfrColors.blueFranceSun113,
+                          const Align(
+                            alignment: Alignment.centerLeft,
+                            child: Icon(
+                              DsfrIcons.businessBarChartBoxFill,
+                              size: 56,
+                              color: DsfrColors.blueFranceSun113,
+                            ),
                           ),
                           const SizedBox(height: DsfrSpacings.s3w),
                           const Text(
