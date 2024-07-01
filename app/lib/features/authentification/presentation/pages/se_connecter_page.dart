@@ -45,7 +45,7 @@ class SeConnecterPage extends StatelessWidget {
               bottom: DsfrSpacings.s3w,
             ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const Text(
                   Localisation.seConnecter,
