@@ -262,7 +262,7 @@ class _Avertissement extends StatelessWidget {
           ? const SizedBox.shrink()
           : const Column(
               children: [
-                FnvAlert.warning(label: Localisation.aideVeloAvertissement),
+                FnvAlert.error(label: Localisation.aideVeloAvertissement),
                 SizedBox(height: DsfrSpacings.s2w),
               ],
             );
