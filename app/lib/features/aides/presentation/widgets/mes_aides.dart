@@ -24,7 +24,7 @@ class MesAides extends StatelessWidget {
         children: [
           const Text(
             Localisation.accueilMesAides,
-            style: DsfrFonts.headline4,
+            style: DsfrTextStyle.headline4(),
           ),
           const SizedBox(height: DsfrSpacings.s3w),
           BlocBuilder<AidesAccueilBloc, AidesAccueilState>(

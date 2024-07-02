@@ -180,7 +180,7 @@ class _FvnDpeEtiquette extends StatelessWidget {
   Widget build(final BuildContext context) {
     Widget customPaint = Padding(
       padding: const EdgeInsets.all(DsfrSpacings.s1w),
-      child: Text(label, style: DsfrFonts.bodyMdBold),
+      child: Text(label, style: const DsfrTextStyle.bodyMdBold()),
     );
 
     if (color != null) {
@@ -190,7 +190,7 @@ class _FvnDpeEtiquette extends StatelessWidget {
           padding: const EdgeInsets.all(DsfrSpacings.s1w),
           child: Text(
             label,
-            style: DsfrFonts.bodyMdBold.copyWith(color: Colors.white),
+            style: const DsfrTextStyle.bodyMdBold(color: Colors.white),
           ),
         ),
       );

@@ -81,7 +81,9 @@ class _MenuElement extends StatelessWidget {
           children: [
             Icon(icon, color: iconColor),
             const SizedBox(width: DsfrSpacings.s1w),
-            Expanded(child: Text(label, style: DsfrFonts.bodyMdMedium)),
+            Expanded(
+              child: Text(label, style: const DsfrTextStyle.bodyMdMedium()),
+            ),
             const SizedBox(width: DsfrSpacings.s1w),
             const Icon(DsfrIcons.systemArrowRightSLine, color: iconColor),
           ],

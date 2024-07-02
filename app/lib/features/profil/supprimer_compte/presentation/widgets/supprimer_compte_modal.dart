@@ -12,16 +12,16 @@ class SupprimerCompteModal extends StatelessWidget {
         children: [
           const Text(
             Localisation.supprimerVotreCompteConfirmation,
-            style: DsfrFonts.headline4,
+            style: DsfrTextStyle.headline4(),
           ),
           const SizedBox(height: DsfrSpacings.s2w),
           const Text(
             Localisation.supprimerVotreCompteContenu,
-            style: DsfrFonts.bodyMd,
+            style: DsfrTextStyle.bodyMd(),
           ),
           const Text(
             Localisation.attentionAucuneDonneeNePourraEtreRecuperee,
-            style: DsfrFonts.bodyMdBold,
+            style: DsfrTextStyle.bodyMdBold(),
           ),
           const SizedBox(height: DsfrSpacings.s4w),
           DsfrButton(

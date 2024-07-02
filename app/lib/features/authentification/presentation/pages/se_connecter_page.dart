@@ -49,7 +49,7 @@ class SeConnecterPage extends StatelessWidget {
               children: [
                 const Text(
                   Localisation.seConnecter,
-                  style: DsfrFonts.headline1,
+                  style: DsfrTextStyle.headline1(),
                 ),
                 const SizedBox(height: DsfrSpacings.s3w),
                 DsfrInput(

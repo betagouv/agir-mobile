@@ -34,9 +34,7 @@ class DsfrFormMessage extends StatelessWidget {
       children: [
         Icon(_getIconByType(type), size: DsfrSpacings.s2w, color: color),
         const SizedBox(width: DsfrSpacings.s1v),
-        Flexible(
-          child: Text(text, style: DsfrFonts.bodyXs.copyWith(color: color)),
-        ),
+        Flexible(child: Text(text, style: DsfrTextStyle.bodyXs(color: color))),
       ],
     );
   }

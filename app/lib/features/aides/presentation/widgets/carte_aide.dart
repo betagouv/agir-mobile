@@ -26,7 +26,10 @@ class CarteAide extends StatelessWidget {
           padding: const EdgeInsets.all(DsfrSpacings.s2w),
           child: Row(
             children: [
-              Expanded(child: Text(aide.titre, style: DsfrFonts.bodyMdMedium)),
+              Expanded(
+                child:
+                    Text(aide.titre, style: const DsfrTextStyle.bodyMdMedium()),
+              ),
               if (aide.aUnSimulateur) ...[
                 const SizedBox(width: DsfrSpacings.s1v),
                 const TagSimulateur(),

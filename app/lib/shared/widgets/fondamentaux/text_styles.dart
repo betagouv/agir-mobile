@@ -4,5 +4,5 @@ abstract final class FnvTextStyles {
   const FnvTextStyles._();
 
   static const appBarTitleStyle = DsfrTextStyle(fontSize: 16, lineHeight: 20);
-  static const prixExplicationsStyle = DsfrFonts.bodySmBold;
+  static const prixExplicationsStyle = DsfrTextStyle.bodySmBold();
 }

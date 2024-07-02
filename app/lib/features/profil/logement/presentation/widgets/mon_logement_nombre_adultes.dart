@@ -38,7 +38,7 @@ class MonLogementNombreAdultes extends StatelessWidget {
           ),
         ),
         const SizedBox(width: DsfrSpacings.s1v),
-        const Expanded(child: Text(adultes, style: DsfrFonts.bodySm)),
+        const Expanded(child: Text(adultes, style: DsfrTextStyle.bodySm())),
       ],
     );
   }

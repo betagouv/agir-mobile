@@ -21,7 +21,7 @@ class DsfrRadioButtonSet<T> extends StatelessWidget {
   Widget build(final BuildContext context) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: DsfrFonts.bodyMd),
+          Text(title, style: const DsfrTextStyle.bodyMd()),
           const SizedBox(height: DsfrSpacings.s1w),
           DsfrRadioButtonSetHeadless(
             values: values,

@@ -12,7 +12,7 @@ class VersionLabel extends StatelessWidget {
       BlocBuilder<VersionBloc, VersionState>(
         builder: (final context, final state) => Text(
           state.value,
-          style: DsfrFonts.bodyMd.copyWith(color: const Color(0x7F000000)),
+          style: const DsfrTextStyle.bodyMd(color: Color(0x7F000000)),
         ),
       );
 }

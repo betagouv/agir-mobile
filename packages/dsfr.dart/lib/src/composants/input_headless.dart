@@ -19,7 +19,7 @@ class DsfrInputHeadless extends StatefulWidget {
     this.fillColor = DsfrColors.grey950,
     this.radius = DsfrSpacings.s1v,
     this.textAlign = TextAlign.start,
-    this.inputStyle = DsfrFonts.bodyMd,
+    this.inputStyle = const DsfrTextStyle.bodyMd(),
     this.inputBorderColor = DsfrColors.grey200,
     this.inputBorderWidth = DsfrSpacings.s0v5,
     this.inputConstraints = const BoxConstraints(maxHeight: DsfrSpacings.s6w),

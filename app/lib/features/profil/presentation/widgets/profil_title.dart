@@ -10,7 +10,7 @@ class ProfilTitle extends StatelessWidget {
   Widget build(final BuildContext context) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: DsfrFonts.headline2),
+          Text(title, style: const DsfrTextStyle.headline2()),
           const SizedBox(height: DsfrSpacings.s3w),
           const DsfrDivider(
             width: DsfrSpacings.s4w,
