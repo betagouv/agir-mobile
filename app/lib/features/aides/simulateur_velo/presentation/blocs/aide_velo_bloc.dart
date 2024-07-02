@@ -39,9 +39,9 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
     emit(
       AideVeloState(
         prix: 1000,
-        codePostal: informations.codePostal,
+        codePostal: informations.codePostal ?? '',
         communes: const [],
-        ville: informations.ville,
+        ville: informations.ville ?? '',
         nombreDePartsFiscales: informations.nombreDePartsFiscales,
         revenuFiscal: informations.revenuFiscal,
         aidesDisponibles: const [],

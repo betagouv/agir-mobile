@@ -14,8 +14,8 @@ class Informations extends Equatable {
   final String prenom;
   final String nom;
   final String email;
-  final String codePostal;
-  final String ville;
+  final String? codePostal;
+  final String? ville;
   final double nombreDePartsFiscales;
   final int? revenuFiscal;
 

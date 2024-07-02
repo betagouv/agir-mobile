@@ -19,10 +19,10 @@ abstract final class LogementMapper {
 
   static Logement mapLogementFromJson(final Map<String, dynamic> json) =>
       Logement(
-        codePostal: json['code_postal'] as String,
-        commune: json['commune'] as String,
-        nombreAdultes: (json['nombre_adultes'] as num).toInt(),
-        nombreEnfants: (json['nombre_enfants'] as num).toInt(),
+        codePostal: json['code_postal'] as String?,
+        commune: json['commune'] as String?,
+        nombreAdultes: (json['nombre_adultes'] as num?)?.toInt(),
+        nombreEnfants: (json['nombre_enfants'] as num?)?.toInt(),
         typeDeLogement: _mapTypeDeLogementFromJson(json['type'] as String?),
         estProprietaire: json['proprietaire'] as bool?,
         superficie: _mapSuperficieFromJson(json['superficie'] as String?),

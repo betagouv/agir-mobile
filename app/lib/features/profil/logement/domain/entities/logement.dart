@@ -15,10 +15,10 @@ class Logement extends Equatable {
     required this.dpe,
   });
 
-  final String codePostal;
-  final String commune;
-  final int nombreAdultes;
-  final int nombreEnfants;
+  final String? codePostal;
+  final String? commune;
+  final int? nombreAdultes;
+  final int? nombreEnfants;
   final TypeDeLogement? typeDeLogement;
   final bool? estProprietaire;
   final Superficie? superficie;

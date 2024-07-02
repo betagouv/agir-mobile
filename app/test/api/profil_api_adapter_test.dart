@@ -187,6 +187,50 @@ void main() {
       );
     });
 
+    test('recupererLogement vide', () async {
+      final client = ClientMock()
+        ..getSuccess(
+          path: '/utilisateurs/$utilisateurId/logement',
+          response: CustomResponse('''
+{
+}'''),
+        );
+
+      final authentificationTokenStorage = AuthentificationTokenStorage(
+        secureStorage: FlutterSecureStorageMock(),
+        authentificationStatusManager: AuthentificationStatutManager(),
+      );
+      await authentificationTokenStorage.sauvegarderTokenEtUtilisateurId(
+        token,
+        utilisateurId,
+      );
+
+      final adapter = ProfilApiAdapter(
+        apiClient: AuthentificationApiClient(
+          apiUrl: apiUrl,
+          authentificationTokenStorage: authentificationTokenStorage,
+          inner: client,
+        ),
+      );
+
+      final result = await adapter.recupererLogement();
+      expect(
+        result,
+        const Logement(
+          codePostal: null,
+          commune: null,
+          nombreAdultes: null,
+          nombreEnfants: null,
+          typeDeLogement: null,
+          estProprietaire: null,
+          superficie: null,
+          chauffage: null,
+          plusDe15Ans: null,
+          dpe: null,
+        ),
+      );
+    });
+
     test('mettreAJourLogement', () async {
       const path = '/utilisateurs/$utilisateurId/logement';
       final client = ClientMock()

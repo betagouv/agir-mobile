@@ -33,8 +33,8 @@ class ProfilApiAdapter implements ProfilPort {
       prenom: json['prenom'] as String,
       nom: json['nom'] as String,
       email: json['email'] as String,
-      codePostal: json['code_postal'] as String,
-      ville: json['commune'] as String,
+      codePostal: json['code_postal'] as String?,
+      ville: json['commune'] as String?,
       nombreDePartsFiscales:
           (json['nombre_de_parts_fiscales'] as num).toDouble(),
       revenuFiscal: (json['revenu_fiscal'] as num?)?.toInt(),
