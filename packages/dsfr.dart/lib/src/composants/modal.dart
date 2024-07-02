@@ -30,17 +30,20 @@ class DsfrModal extends StatelessWidget {
           padding: const EdgeInsets.all(DsfrSpacings.s2w),
           child: Column(
             mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Align(
-                alignment: Alignment.centerRight,
-                child: DsfrButton(
-                  label: 'Fermer',
-                  icon: DsfrIcons.systemCloseLine,
-                  iconLocation: DsfrButtonIconLocation.right,
-                  variant: DsfrButtonVariant.tertiaryWithouBorder,
-                  size: DsfrButtonSize.sm,
-                  onTap: () => Navigator.of(context).pop(),
-                ),
+              Row(
+                children: [
+                  const Spacer(),
+                  DsfrButton(
+                    label: 'Fermer',
+                    icon: DsfrIcons.systemCloseLine,
+                    iconLocation: DsfrButtonIconLocation.right,
+                    variant: DsfrButtonVariant.tertiaryWithouBorder,
+                    size: DsfrButtonSize.sm,
+                    onTap: () => Navigator.of(context).pop(),
+                  ),
+                ],
               ),
               const SizedBox(height: DsfrSpacings.s1w),
               child,

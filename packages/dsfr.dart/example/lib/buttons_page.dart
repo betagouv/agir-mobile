@@ -56,7 +56,7 @@ class ButtonsPage extends StatelessWidget {
     return SingleChildScrollView(
       padding: const EdgeInsets.all(DsfrSpacings.s3w),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: children.separator(gap).toList(),
       ),
     );
