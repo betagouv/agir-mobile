@@ -38,6 +38,7 @@ class ProfilPortMock implements ProfilPort {
   double nombreDePartsFiscales;
   int? revenuFiscal;
   bool supprimerLeCompteAppele = false;
+  bool changerLeMotDePasseAppele = false;
 
   @override
   Future<Informations> recupererProfil() async => Informations(
@@ -96,5 +97,10 @@ class ProfilPortMock implements ProfilPort {
   @override
   Future<void> supprimerLeCompte() async {
     supprimerLeCompteAppele = true;
+  }
+
+  @override
+  Future<void> changerMotDePasse({required final String motDePasse}) async {
+    changerLeMotDePasseAppele = true;
   }
 }

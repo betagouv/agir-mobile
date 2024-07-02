@@ -7,7 +7,6 @@ import 'steps/iel_appuie_sur.dart';
 import 'steps/iel_appuie_sur_accesibilite.dart';
 import 'steps/iel_est_connecte.dart';
 import 'steps/iel_lance_lapplication.dart';
-import 'steps/iel_sappelle.dart';
 import 'steps/iel_voit_le_texte.dart';
 
 void main() {
@@ -39,9 +38,6 @@ void main() {
 }
 
 Future<void> _allerSurSuppressionCompte(final WidgetTester tester) async {
-  const prenom = 'Michel';
-  const nom = 'Dupont';
-  ielSappelle(prenom, nom: nom);
   ielEstConnecte();
   await ielLanceLapplication(tester);
   await ielAppuieSurAccessibilite(tester, Localisation.menu);

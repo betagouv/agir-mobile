@@ -1,3 +1,4 @@
+import 'package:app/features/profil/changer_mot_de_passe/presentation/widgets/changer_mot_de_passe.dart';
 import 'package:app/features/profil/presentation/widgets/profil_title.dart';
 import 'package:app/features/profil/supprimer_compte/presentation/widgets/supprimer_compte.dart';
 import 'package:app/l10n/l10n.dart';
@@ -29,6 +30,8 @@ class OptionsAvanceesPage extends StatelessWidget {
           ),
           children: const [
             ProfilTitle(title: Localisation.optionsAvancees),
+            ChangerMotDePasse(),
+            SizedBox(height: DsfrSpacings.s5w),
             SupprimerCompte(),
           ],
         ),

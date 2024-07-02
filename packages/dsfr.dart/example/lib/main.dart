@@ -3,6 +3,7 @@ import 'package:dsfr_example/buttons_page.dart';
 import 'package:dsfr_example/checkbox_page.dart';
 import 'package:dsfr_example/colors_page.dart';
 import 'package:dsfr_example/fonts_page.dart';
+import 'package:dsfr_example/form_messages_page.dart';
 import 'package:dsfr_example/icons_page.dart';
 import 'package:dsfr_example/inputs_page.dart';
 import 'package:dsfr_example/links_page.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
             ColorsPage.model,
             SelectPage.model,
             FontsPage.model,
+            FormMessagesPage.model,
             IconsPage.model,
             InputsPage.model,
             LinksPage.model,

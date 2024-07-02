@@ -132,6 +132,7 @@ void main() {
         ),
       );
     });
+
     test('recupererLogement', () async {
       final client = ClientMock()
         ..getSuccess(
@@ -271,6 +272,45 @@ void main() {
       await adapter.supprimerLeCompte();
 
       verify(() => client.send(any(that: const RequestMathcher(path))));
+    });
+
+    test('changerMotDePasse', () async {
+      final client = ClientMock()
+        ..patchSuccess(
+          path: '/utilisateurs/$utilisateurId/profile',
+          response: CustomResponse(''),
+        );
+
+      final authentificationTokenStorage = AuthentificationTokenStorage(
+        secureStorage: FlutterSecureStorageMock(),
+        authentificationStatusManager: AuthentificationStatutManager(),
+      );
+      await authentificationTokenStorage.sauvegarderTokenEtUtilisateurId(
+        token,
+        utilisateurId,
+      );
+
+      final adapter = ProfilApiAdapter(
+        apiClient: AuthentificationApiClient(
+          apiUrl: apiUrl,
+          authentificationTokenStorage: authentificationTokenStorage,
+          inner: client,
+        ),
+      );
+
+      const motDePasse = 'M07D3P4553';
+      await adapter.changerMotDePasse(motDePasse: motDePasse);
+
+      verify(
+        () => client.send(
+          any(
+            that: const RequestMathcher(
+              '/utilisateurs/$utilisateurId/profile',
+              body: '{"mot_de_passe":"$motDePasse"}',
+            ),
+          ),
+        ),
+      );
     });
   });
 }
