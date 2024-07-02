@@ -37,8 +37,10 @@ class MonLogementBloc extends Bloc<MonLogementEvent, MonLogementState> {
   ) async {
     emit(state.copyWith(statut: MonLogementStatut.chargement));
     final logement = await _profilPort.recupererLogement();
-    final communes =
-        await _communesPort.recupererLesCommunes(logement.codePostal);
+    final communes = logement.codePostal == null
+        ? <String>[]
+        : await _communesPort.recupererLesCommunes(logement.codePostal!);
+
     emit(
       state.copyWith(
         codePostal: logement.codePostal,

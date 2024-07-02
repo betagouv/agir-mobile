@@ -25,10 +25,10 @@ class ProfilPortMock implements ProfilPort {
   String prenom;
   String nom;
   String email;
-  String codePostal;
-  String commune;
-  int nombreAdultes;
-  int nombreEnfants;
+  String? codePostal;
+  String? commune;
+  int? nombreAdultes;
+  int? nombreEnfants;
   TypeDeLogement? typeDeLogement;
   bool? estProprietaire;
   Superficie? superficie;
