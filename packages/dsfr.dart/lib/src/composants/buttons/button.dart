@@ -48,7 +48,7 @@ class DsfrButton extends StatelessWidget {
       List<Widget> children = [
         buttonIcon,
         const SizedBox(width: DsfrSpacings.s1w),
-        Expanded(child: child),
+        Flexible(child: child),
       ];
       if (iconLocation == DsfrButtonIconLocation.right) {
         children = children.reversed.toList();
@@ -61,9 +61,11 @@ class DsfrButton extends StatelessWidget {
       variant: variant,
       size: size,
       onTap: onTap,
-      child: SizedBox(
-        height: MediaQuery.textScalerOf(context).scale(DsfrSpacings.s3w),
-        child: child,
+      child: Center(
+        child: SizedBox(
+          height: MediaQuery.textScalerOf(context).scale(DsfrSpacings.s3w),
+          child: child,
+        ),
       ),
     );
   }
