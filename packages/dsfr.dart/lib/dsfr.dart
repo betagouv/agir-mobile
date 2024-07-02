@@ -2,6 +2,7 @@ export 'src/composants/accordions.dart';
 export 'src/composants/buttons/button.dart';
 export 'src/composants/checkbox.dart';
 export 'src/composants/divider.dart';
+export 'src/composants/form_message.dart';
 export 'src/composants/input.dart';
 export 'src/composants/input_headless.dart';
 export 'src/composants/link_icon_position.dart';

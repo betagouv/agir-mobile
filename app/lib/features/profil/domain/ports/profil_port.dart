@@ -16,4 +16,6 @@ abstract interface class ProfilPort {
   Future<void> mettreAJourLogement({required final Logement logement});
 
   Future<void> supprimerLeCompte();
+
+  Future<void> changerMotDePasse({required final String motDePasse});
 }

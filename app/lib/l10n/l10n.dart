@@ -19,6 +19,14 @@ abstract final class Localisation {
   static const seConnecter = 'Se connecter';
   static const adresseElectronique = 'Adresse électronique';
   static const motDePasse = 'Mot de passe';
+  static const votreMotDePasseDoitContenir =
+      'Votre mot de passe doit contenir :';
+  static const motDePasse12CaractresMinimum = '12 caractères minimum';
+  static const motDePasse1MajusculeEt1Minuscule =
+      'Au moins 1 majuscule et 1 minuscule';
+  static const motDePasse1CaractreSpecialMinimum =
+      '1 caractère spécial minimum';
+  static const motDePasse1ChiffreMinimum = '1 chiffre minimum';
   static const bonjour = 'Bonjour,\n';
   static String prenomExclamation(final String value) => '$value !';
   static const menuAccueil = 'Accueil';
@@ -139,6 +147,8 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const dpeExplication = "**Qu'est-ce qu'un DPE ?**";
   static const optionsAvancees = 'Options avancées';
   static const changerVotreMotDePasse = 'Changer votre mot de passe';
+  static const changerVotreMotDePasseConfirmation =
+      'Votre mot de passe a été changé.';
   static const supprimerVotreCompte = 'Supprimer votre compte';
   static const supprimerVotreCompteContenu =
       'Vous pouvez à tous moments choisir de supprimer votre compte ainsi que l’ensemble des données qui y sont associées. ';

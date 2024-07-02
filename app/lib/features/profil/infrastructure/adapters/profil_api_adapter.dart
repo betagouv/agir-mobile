@@ -121,4 +121,21 @@ class ProfilApiAdapter implements ProfilPort {
       throw Exception();
     }
   }
+
+  @override
+  Future<void> changerMotDePasse({required final String motDePasse}) async {
+    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    if (utilisateurId == null) {
+      throw Exception();
+    }
+
+    final uri = Uri.parse('/utilisateurs/$utilisateurId/profile');
+    final body = jsonEncode({'mot_de_passe': motDePasse});
+
+    final response = await _apiClient.patch(uri, body: body);
+
+    if (response.statusCode != 200) {
+      throw Exception();
+    }
+  }
 }
