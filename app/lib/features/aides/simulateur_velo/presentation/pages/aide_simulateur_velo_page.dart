@@ -56,8 +56,8 @@ class _AideSimulateurVeloView extends StatelessWidget {
             horizontal: DsfrSpacings.s2w,
           ),
           children: const [
-            Text(Localisation.simulerMonAide, style: DsfrFonts.headline2),
-            Text(Localisation.acheterUnVelo, style: DsfrFonts.bodyXl),
+            Text(Localisation.simulerMonAide, style: DsfrTextStyle.headline2()),
+            Text(Localisation.acheterUnVelo, style: DsfrTextStyle.bodyXl()),
             SizedBox(height: DsfrSpacings.s2w),
             _Prix(),
             SizedBox(height: DsfrSpacings.s4w),
@@ -170,26 +170,26 @@ class _ElementsNecessaireAuCalcul extends StatelessWidget {
   @override
   Widget build(final BuildContext context) {
     final state = context.watch<AideVeloBloc>().state;
-    final bodySmMediumBlue =
-        DsfrFonts.bodySmMedium.copyWith(color: DsfrColors.blueFranceSun113);
+    const bodySmMediumBlue =
+        DsfrTextStyle.bodySmMedium(color: DsfrColors.blueFranceSun113);
 
     return state.veutModifierLesInformations
-        ? Column(
+        ? const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const _Avertissement(),
-              const _CodePostalEtVille(),
-              const SizedBox(height: DsfrSpacings.s3w),
+              _Avertissement(),
+              _CodePostalEtVille(),
+              SizedBox(height: DsfrSpacings.s3w),
               Text(
                 Localisation.revenuQuestion,
-                style: DsfrFonts.headline6.copyWith(color: DsfrColors.grey50),
+                style: DsfrTextStyle.headline6(),
               ),
-              const SizedBox(height: DsfrSpacings.s1v),
-              const _NombreDePartsFiscales(),
-              const SizedBox(height: DsfrSpacings.s3w),
-              const _RevenuFiscal(),
-              const SizedBox(height: DsfrSpacings.s3w),
-              const _Questions(),
+              SizedBox(height: DsfrSpacings.s1v),
+              _NombreDePartsFiscales(),
+              SizedBox(height: DsfrSpacings.s3w),
+              _RevenuFiscal(),
+              SizedBox(height: DsfrSpacings.s3w),
+              _Questions(),
             ],
           )
         : Column(
@@ -206,7 +206,7 @@ class _ElementsNecessaireAuCalcul extends StatelessWidget {
                     TextSpan(text: Localisation.elementsNecessaireAuCalcul),
                   ],
                 ),
-                style: DsfrFonts.bodySmBold,
+                style: DsfrTextStyle.bodySmBold(),
               ),
               const SizedBox(height: DsfrSpacings.s1v),
               Text.rich(
@@ -237,7 +237,7 @@ class _ElementsNecessaireAuCalcul extends StatelessWidget {
                     const TextSpan(text: Localisation.point),
                   ],
                 ),
-                style: DsfrFonts.bodySm,
+                style: const DsfrTextStyle.bodySm(),
               ),
               const SizedBox(height: DsfrSpacings.s3v),
               Align(
@@ -487,7 +487,7 @@ class _AccordionHeader extends StatelessWidget {
               TextSpan(text: text),
             ],
           ),
-          style: DsfrFonts.bodySmMedium,
+          style: const DsfrTextStyle.bodySmMedium(),
         ),
       );
 }

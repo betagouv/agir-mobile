@@ -86,12 +86,12 @@ class _PreOnboardingCarrouselPageState extends State<PreOnboardingCarrouselPage>
                           const SizedBox(height: DsfrSpacings.s3w),
                           const Text(
                             Localisation.preOnboardingFinTitre,
-                            style: DsfrFonts.headline4,
+                            style: DsfrTextStyle.headline4(),
                           ),
                           const SizedBox(height: DsfrSpacings.s1w),
                           const Text(
                             Localisation.preOnboardingFinSousTitre,
-                            style: DsfrFonts.bodyMd,
+                            style: DsfrTextStyle.bodyMd(),
                           ),
                           const Spacer(),
                           DsfrButton(
@@ -136,7 +136,7 @@ class _Polaroid extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    const p = DsfrFonts.bodyXlMedium;
+    const p = DsfrTextStyle.bodyXlMedium();
     final strong = p.copyWith(fontWeight: FontWeight.w800);
 
     return SafeArea(

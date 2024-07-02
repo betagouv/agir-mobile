@@ -26,7 +26,7 @@ class DsfrLink extends StatefulWidget {
     final Key? key,
   }) : this._(
           label: label,
-          textStyle: DsfrFonts.bodySm,
+          textStyle: const DsfrTextStyle.bodySm(),
           underlineThickness: 1.75,
           focusBorderWidth: 2,
           focusPadding: const EdgeInsets.all(4),
@@ -45,7 +45,7 @@ class DsfrLink extends StatefulWidget {
     final Key? key,
   }) : this._(
           label: label,
-          textStyle: DsfrFonts.bodyMd,
+          textStyle: const DsfrTextStyle.bodyMd(),
           underlineThickness: 2,
           focusBorderWidth: 2,
           focusPadding: const EdgeInsets.all(4),

@@ -89,9 +89,9 @@ class _MotDePasse extends StatelessWidget {
             isPasswordMode: true,
             keyboardType: TextInputType.visiblePassword,
           ),
-          Text(
+          const Text(
             Localisation.votreMotDePasseDoitContenir,
-            style: DsfrFonts.bodyXs.copyWith(color: DsfrColors.grey425),
+            style: DsfrTextStyle.bodyXs(color: DsfrColors.grey425),
           ),
           const _DouzeCarateresMinimum(),
           const _AuMoinsUnMajusculeEtUneMinuscule(),

@@ -36,12 +36,12 @@ class AidesPage extends StatelessWidget {
             children: [
               const Text(
                 Localisation.vosAidesTitre,
-                style: DsfrFonts.headline2,
+                style: DsfrTextStyle.headline2(),
               ),
               const SizedBox(height: DsfrSpacings.s1w),
               const Text(
                 Localisation.vosAidesSousTitre,
-                style: DsfrFonts.bodyMd,
+                style: DsfrTextStyle.bodyMd(),
               ),
               const SizedBox(height: DsfrSpacings.s3w),
               const Align(
@@ -61,7 +61,10 @@ class AidesPage extends StatelessWidget {
                         top: DsfrSpacings.s4w,
                         bottom: DsfrSpacings.s2w,
                       ),
-                      child: Text(a.thematique, style: DsfrFonts.headline4),
+                      child: Text(
+                        a.thematique,
+                        style: const DsfrTextStyle.headline4(),
+                      ),
                     ),
                   final AideModel a => CarteAide(aide: a.value),
                 },

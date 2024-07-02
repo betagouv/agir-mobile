@@ -32,7 +32,7 @@ class DsfrCheckbox extends StatelessWidget {
     const dimension = 16.0;
     const iconColor = DsfrColors.blueFrance975;
     const backgroundColor = DsfrColors.blueFranceSun113;
-    const labelStyle = DsfrFonts.bodyMd;
+    const labelStyle = DsfrTextStyle.bodyMd();
     const borderRadius = BorderRadius.all(Radius.circular(4));
     const gap = DsfrSpacings.s1w;
 

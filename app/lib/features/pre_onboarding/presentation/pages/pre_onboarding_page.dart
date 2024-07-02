@@ -33,7 +33,7 @@ class PreOnboardingPage extends StatelessWidget {
                 const SizedBox(height: DsfrSpacings.s15w),
                 const Text(
                   Localisation.preOnboardingTitre,
-                  style: DsfrFonts.displayXs,
+                  style: DsfrTextStyle.displayXs(),
                 ),
                 const SizedBox(height: DsfrSpacings.s3w),
                 Row(

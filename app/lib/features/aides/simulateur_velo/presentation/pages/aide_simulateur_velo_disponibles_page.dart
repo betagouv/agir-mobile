@@ -39,7 +39,7 @@ class AideSimulateurVeloDisponiblePage extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
             child: Text(
               Localisation.vosAidesDisponibles,
-              style: DsfrFonts.headline2,
+              style: DsfrTextStyle.headline2(),
             ),
           ),
           const SizedBox(height: DsfrSpacings.s2w),
@@ -69,7 +69,7 @@ class AideSimulateurVeloDisponiblePage extends StatelessWidget {
                 children: [
                   const TextSpan(
                     text: Localisation.propulsePar,
-                    style: DsfrFonts.bodyXsBold,
+                    style: DsfrTextStyle.bodyXsBold(),
                   ),
                   WidgetSpan(
                     alignment: PlaceholderAlignment.baseline,
@@ -126,7 +126,9 @@ class _Header extends StatelessWidget {
             Expanded(
               child: Text(
                 titre,
-                style: isExpanded ? DsfrFonts.bodyMdBold : DsfrFonts.bodyMd,
+                style: isExpanded
+                    ? const DsfrTextStyle.bodyMdBold()
+                    : const DsfrTextStyle.bodyMd(),
               ),
             ),
             const SizedBox(width: DsfrSpacings.s1w),
@@ -136,18 +138,18 @@ class _Header extends StatelessWidget {
                     ? [
                         const TextSpan(
                           text: Localisation.aucuneAideDisponible,
-                          style: DsfrFonts.bodyMdBold,
+                          style: DsfrTextStyle.bodyMdBold(),
                         ),
                       ]
                     : [
                         const TextSpan(text: Localisation.jusqua),
                         TextSpan(
                           text: Localisation.euro(montantMax!),
-                          style: DsfrFonts.bodyMdBold,
+                          style: const DsfrTextStyle.bodyMdBold(),
                         ),
                       ],
               ),
-              style: DsfrFonts.bodyMd,
+              style: const DsfrTextStyle.bodyMd(),
             ),
           ],
         ),
@@ -181,11 +183,14 @@ class _Body extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(e.libelle, style: DsfrFonts.bodyMdBold),
+                          Text(
+                            e.libelle,
+                            style: const DsfrTextStyle.bodyMdBold(),
+                          ),
                           const SizedBox(height: DsfrSpacings.s1v),
                           Text(
                             e.description.replaceAll('\n', ''),
-                            style: DsfrFonts.bodyXs,
+                            style: const DsfrTextStyle.bodyXs(),
                           ),
                           const SizedBox(height: DsfrSpacings.s1v),
                           DsfrLink.sm(
@@ -200,7 +205,7 @@ class _Body extends StatelessWidget {
                     const SizedBox(width: DsfrSpacings.s1w),
                     Text(
                       Localisation.euro(e.montant),
-                      style: DsfrFonts.bodyMdBold,
+                      style: const DsfrTextStyle.bodyMdBold(),
                     ),
                   ],
                 ),

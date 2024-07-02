@@ -45,9 +45,9 @@ class AidePage extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(DsfrSpacings.s3w),
         children: [
-          Text(aide.thematique, style: DsfrFonts.bodySmMedium),
+          Text(aide.thematique, style: const DsfrTextStyle.bodySmMedium()),
           const SizedBox(height: DsfrSpacings.s2w),
-          Text(aide.titre, style: DsfrFonts.headline2),
+          Text(aide.titre, style: const DsfrTextStyle.headline2()),
           if (aide.aUnSimulateur || aide.montantMax != null) ...[
             const SizedBox(height: DsfrSpacings.s1w),
             Wrap(

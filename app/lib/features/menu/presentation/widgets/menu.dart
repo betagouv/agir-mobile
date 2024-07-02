@@ -37,7 +37,7 @@ class Menu extends StatelessWidget {
               ),
               title: const Text(
                 Localisation.menu,
-                style: DsfrFonts.bodyMdBold,
+                style: DsfrTextStyle.bodyMdBold(),
               ),
             ),
             const Expanded(
@@ -178,9 +178,10 @@ class _MenuItem extends StatelessWidget {
             child: Text(
               label,
               style: isCurrentPage
-                  ? DsfrFonts.bodyLgBold
-                      .copyWith(color: DsfrColors.blueFranceSun113)
-                  : DsfrFonts.bodyLg.copyWith(color: DsfrColors.grey50),
+                  ? const DsfrTextStyle.bodyLgBold(
+                      color: DsfrColors.blueFranceSun113,
+                    )
+                  : const DsfrTextStyle.bodyLg(),
             ),
           ),
         ],

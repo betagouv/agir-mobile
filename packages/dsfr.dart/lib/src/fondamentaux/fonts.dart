@@ -15,77 +15,173 @@ class DsfrTextStyle extends TextStyle {
           height: lineHeight == null ? null : lineHeight / fontSize,
         );
 
+  const DsfrTextStyle.displayXl({final Color color = DsfrColors.grey50})
+      : this(
+          fontSize: 72,
+          lineHeight: 72,
+          fontWeight: FontWeight.bold,
+          color: color,
+        );
+
+  const DsfrTextStyle.displayLg({final Color color = DsfrColors.grey50})
+      : this(
+          fontSize: 64,
+          lineHeight: 64,
+          fontWeight: FontWeight.bold,
+          color: color,
+        );
+
+  const DsfrTextStyle.displayMd({final Color color = DsfrColors.grey50})
+      : this(
+          fontSize: 56,
+          lineHeight: 56,
+          fontWeight: FontWeight.bold,
+          color: color,
+        );
+
+  const DsfrTextStyle.displaySm({final Color color = DsfrColors.grey50})
+      : this(
+          fontSize: 48,
+          lineHeight: 48,
+          fontWeight: FontWeight.bold,
+          color: color,
+        );
+
+  const DsfrTextStyle.displayXs({final Color color = DsfrColors.grey50})
+      : this(
+          fontSize: 40,
+          lineHeight: 40,
+          fontWeight: FontWeight.bold,
+          color: color,
+        );
+
+  const DsfrTextStyle.headline1({final Color color = DsfrColors.grey50})
+      : this(
+          fontSize: 32,
+          lineHeight: 32,
+          fontWeight: FontWeight.bold,
+          color: color,
+        );
+
+  const DsfrTextStyle.headline2({final Color color = DsfrColors.grey50})
+      : this(
+          fontSize: 28,
+          lineHeight: 34,
+          fontWeight: FontWeight.bold,
+          color: color,
+        );
+
+  const DsfrTextStyle.headline3({final Color color = DsfrColors.grey50})
+      : this(
+          fontSize: 24,
+          lineHeight: 24,
+          fontWeight: FontWeight.bold,
+          color: color,
+        );
+
+  const DsfrTextStyle.headline4({final Color color = DsfrColors.grey50})
+      : this(
+          fontSize: 22,
+          lineHeight: 28,
+          fontWeight: FontWeight.bold,
+          color: color,
+        );
+
+  const DsfrTextStyle.headline5({final Color color = DsfrColors.grey50})
+      : this(
+          fontSize: 20,
+          lineHeight: 20,
+          fontWeight: FontWeight.bold,
+          color: color,
+        );
+
+  const DsfrTextStyle.headline6({final Color color = DsfrColors.grey50})
+      : this(
+          fontSize: 18,
+          lineHeight: 20,
+          fontWeight: FontWeight.bold,
+          color: color,
+        );
+
+  const DsfrTextStyle.bodyXl({final Color color = DsfrColors.grey50})
+      : this(fontSize: 20, lineHeight: 20, color: color);
+
+  const DsfrTextStyle.bodyXlMedium({final Color color = DsfrColors.grey50})
+      : this(
+          fontSize: 20,
+          lineHeight: 20,
+          fontWeight: FontWeight.w500,
+          color: color,
+        );
+
+  const DsfrTextStyle.bodyLg({final Color color = DsfrColors.grey50})
+      : this(fontSize: 18, lineHeight: 24, color: color);
+
+  const DsfrTextStyle.bodyLgMedium({final Color color = DsfrColors.grey50})
+      : this(
+          fontSize: 18,
+          lineHeight: 28,
+          fontWeight: FontWeight.w500,
+          color: color,
+        );
+
+  const DsfrTextStyle.bodyLgBold({final Color color = DsfrColors.grey50})
+      : this(
+          fontSize: 18,
+          lineHeight: 28,
+          fontWeight: FontWeight.w500,
+          color: color,
+        );
+
+  const DsfrTextStyle.bodyMd({final Color color = DsfrColors.grey50})
+      : this(fontSize: 16, lineHeight: 24, color: color);
+
+  const DsfrTextStyle.bodyMdMedium({final Color color = DsfrColors.grey50})
+      : this(
+          fontSize: 16,
+          lineHeight: 20,
+          fontWeight: FontWeight.w500,
+          color: color,
+        );
+
+  const DsfrTextStyle.bodyMdBold({final Color color = DsfrColors.grey50})
+      : this(
+          fontSize: 16,
+          lineHeight: 20,
+          fontWeight: FontWeight.bold,
+          color: color,
+        );
+
+  const DsfrTextStyle.bodySm({final Color color = DsfrColors.grey50})
+      : this(fontSize: 14, lineHeight: 20, color: color);
+
+  const DsfrTextStyle.bodySmMedium({final Color color = DsfrColors.grey50})
+      : this(
+          fontSize: 14,
+          lineHeight: 24,
+          fontWeight: FontWeight.w500,
+          color: color,
+        );
+
+  const DsfrTextStyle.bodySmBold({final Color color = DsfrColors.grey50})
+      : this(
+          fontSize: 14,
+          lineHeight: 24,
+          fontWeight: FontWeight.bold,
+          color: color,
+        );
+
+  const DsfrTextStyle.bodyXs({final Color color = DsfrColors.grey50})
+      : this(fontSize: 12, lineHeight: 20, color: color);
+
+  const DsfrTextStyle.bodyXsBold({final Color color = DsfrColors.grey50})
+      : this(
+          fontSize: 12,
+          lineHeight: 20,
+          fontWeight: FontWeight.bold,
+          color: color,
+        );
+
   const DsfrTextStyle.fontFamily()
       : super(package: 'dsfr', fontFamily: 'Marianne');
-}
-
-abstract final class DsfrFonts {
-  const DsfrFonts._();
-
-  static const displayXl =
-      DsfrTextStyle(fontSize: 72, lineHeight: 72, fontWeight: FontWeight.bold);
-
-  static const displayLg =
-      DsfrTextStyle(fontSize: 64, lineHeight: 64, fontWeight: FontWeight.bold);
-
-  static const displayMd =
-      DsfrTextStyle(fontSize: 56, lineHeight: 56, fontWeight: FontWeight.bold);
-
-  static const displaySm =
-      DsfrTextStyle(fontSize: 48, lineHeight: 48, fontWeight: FontWeight.bold);
-
-  static const displayXs =
-      DsfrTextStyle(fontSize: 40, lineHeight: 40, fontWeight: FontWeight.bold);
-
-  static const headline1 =
-      DsfrTextStyle(fontSize: 32, lineHeight: 32, fontWeight: FontWeight.bold);
-
-  static const headline2 =
-      DsfrTextStyle(fontSize: 28, lineHeight: 34, fontWeight: FontWeight.bold);
-
-  static const headline3 =
-      DsfrTextStyle(fontSize: 24, lineHeight: 24, fontWeight: FontWeight.bold);
-
-  static const headline4 =
-      DsfrTextStyle(fontSize: 22, lineHeight: 28, fontWeight: FontWeight.bold);
-
-  static const headline5 =
-      DsfrTextStyle(fontSize: 20, lineHeight: 20, fontWeight: FontWeight.bold);
-
-  static const headline6 =
-      DsfrTextStyle(fontSize: 18, lineHeight: 20, fontWeight: FontWeight.bold);
-
-  static const bodyXl = DsfrTextStyle(fontSize: 20, lineHeight: 20);
-
-  static const bodyXlMedium =
-      DsfrTextStyle(fontSize: 20, lineHeight: 20, fontWeight: FontWeight.w500);
-
-  static const bodyLg = DsfrTextStyle(fontSize: 18, lineHeight: 24);
-
-  static const bodyLgMedium =
-      DsfrTextStyle(fontSize: 18, lineHeight: 28, fontWeight: FontWeight.w500);
-
-  static const bodyLgBold =
-      DsfrTextStyle(fontSize: 18, lineHeight: 28, fontWeight: FontWeight.w500);
-
-  static const bodyMd = DsfrTextStyle(fontSize: 16, lineHeight: 24);
-
-  static const bodyMdMedium =
-      DsfrTextStyle(fontSize: 16, lineHeight: 20, fontWeight: FontWeight.w500);
-
-  static const bodyMdBold =
-      DsfrTextStyle(fontSize: 16, lineHeight: 20, fontWeight: FontWeight.bold);
-
-  static const bodySm = DsfrTextStyle(fontSize: 14, lineHeight: 20);
-
-  static const bodySmMedium =
-      DsfrTextStyle(fontSize: 14, lineHeight: 24, fontWeight: FontWeight.w500);
-
-  static const bodySmBold =
-      DsfrTextStyle(fontSize: 14, lineHeight: 24, fontWeight: FontWeight.bold);
-
-  static const bodyXs = DsfrTextStyle(fontSize: 12, lineHeight: 20);
-
-  static const bodyXsBold =
-      DsfrTextStyle(fontSize: 12, lineHeight: 20, fontWeight: FontWeight.bold);
 }

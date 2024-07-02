@@ -27,7 +27,7 @@ class FnvAlert extends StatelessWidget {
           Icon(icon, size: DsfrSpacings.s2w, color: color),
           const SizedBox(width: DsfrSpacings.s1w),
           Expanded(
-            child: Text(label, style: DsfrFonts.bodySm.copyWith(color: color)),
+            child: Text(label, style: DsfrTextStyle.bodySm(color: color)),
           ),
         ],
       );
