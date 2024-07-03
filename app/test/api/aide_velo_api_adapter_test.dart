@@ -154,7 +154,7 @@ void main() {
       final result = await adapter.simuler(
         prix: 1000,
         codePostal: '39100',
-        ville: 'BAVERANS',
+        commune: 'BAVERANS',
         nombreDePartsFiscales: 2.5,
         revenuFiscal: 16000,
       );

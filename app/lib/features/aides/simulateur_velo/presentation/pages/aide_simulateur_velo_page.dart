@@ -172,7 +172,7 @@ class _ElementsNecessaireAuCalcul extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _Avertissement(),
-              _CodePostalEtVille(),
+              _CodePostalEtCommune(),
               SizedBox(height: DsfrSpacings.s3w),
               Text(
                 Localisation.revenuQuestion,
@@ -210,7 +210,7 @@ class _ElementsNecessaireAuCalcul extends StatelessWidget {
                     TextSpan(
                       text: Localisation.donneesUtiliseesCodePostalEtCommune(
                         codePostal: state.codePostal,
-                        commune: state.ville,
+                        commune: state.commune,
                       ),
                       style: bodySmMediumBlue,
                     ),
@@ -262,14 +262,14 @@ class _Avertissement extends StatelessWidget {
             );
 }
 
-class _CodePostalEtVille extends StatefulWidget {
-  const _CodePostalEtVille();
+class _CodePostalEtCommune extends StatefulWidget {
+  const _CodePostalEtCommune();
 
   @override
-  State<_CodePostalEtVille> createState() => _CodePostalEtVilleState();
+  State<_CodePostalEtCommune> createState() => _CodePostalEtCommuneState();
 }
 
-class _CodePostalEtVilleState extends State<_CodePostalEtVille> {
+class _CodePostalEtCommuneState extends State<_CodePostalEtCommune> {
   late final _textEditingController = TextEditingController();
 
   void _handleCodePostal(final BuildContext context, final String value) {
@@ -281,7 +281,7 @@ class _CodePostalEtVilleState extends State<_CodePostalEtVille> {
     if (value == null) {
       return;
     }
-    context.read<AideVeloBloc>().add(AideVeloVilleChange(value));
+    context.read<AideVeloBloc>().add(AideVeloCommuneChange(value));
   }
 
   @override
@@ -294,11 +294,11 @@ class _CodePostalEtVilleState extends State<_CodePostalEtVille> {
   Widget build(final BuildContext context) {
     final state = context.watch<AideVeloBloc>().state;
     if (state.communes.length == 1) {
-      final ville = state.communes.firstOrNull!;
-      _textEditingController.text = ville;
-      _handleCommune(context, ville);
+      final commune = state.communes.firstOrNull!;
+      _textEditingController.text = commune;
+      _handleCommune(context, commune);
     } else {
-      _textEditingController.text = state.ville;
+      _textEditingController.text = state.commune;
     }
 
     return Row(

@@ -16,7 +16,7 @@ class AideVeloApiAdapter implements AideVeloPort {
   Future<AideVeloParType> simuler({
     required final int prix,
     required final String codePostal,
-    required final String ville,
+    required final String commune,
     required final double nombreDePartsFiscales,
     required final int revenuFiscal,
   }) async {
@@ -34,7 +34,7 @@ class AideVeloApiAdapter implements AideVeloPort {
       ),
       _apiClient.patch(
         Uri.parse('/utilisateurs/$utilisateurId/logement'),
-        body: jsonEncode({'code_postal': codePostal, 'commune': ville}),
+        body: jsonEncode({'code_postal': codePostal, 'commune': commune}),
       ),
     ]);
 

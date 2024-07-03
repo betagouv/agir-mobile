@@ -6,7 +6,7 @@ class Informations extends Equatable {
     required this.nom,
     required this.email,
     required this.codePostal,
-    required this.ville,
+    required this.commune,
     required this.nombreDePartsFiscales,
     required this.revenuFiscal,
   });
@@ -15,7 +15,7 @@ class Informations extends Equatable {
   final String nom;
   final String email;
   final String? codePostal;
-  final String? ville;
+  final String? commune;
   final double nombreDePartsFiscales;
   final int? revenuFiscal;
 
@@ -25,7 +25,7 @@ class Informations extends Equatable {
         nom,
         email,
         codePostal,
-        ville,
+        commune,
         nombreDePartsFiscales,
         revenuFiscal,
       ];

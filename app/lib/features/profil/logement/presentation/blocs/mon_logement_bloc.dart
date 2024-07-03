@@ -59,11 +59,19 @@ class MonLogementBloc extends Bloc<MonLogementEvent, MonLogementState> {
     );
   }
 
-  void _onCodePostalChange(
+  Future<void> _onCodePostalChange(
     final MonLogementCodePostalChange event,
     final Emitter<MonLogementState> emit,
-  ) =>
-      emit(state.copyWith(codePostal: event.valeur));
+  ) async {
+    final communes = await _communesPort.recupererLesCommunes(event.valeur);
+    emit(
+      state.copyWith(
+        codePostal: event.valeur,
+        communes: communes,
+        commune: '',
+      ),
+    );
+  }
 
   void _onCommuneChange(
     final MonLogementCommuneChange event,

@@ -76,7 +76,7 @@ void main() {
           nom: 'WWW',
           email: 'ww@w.com',
           codePostal: '75001',
-          ville: 'PARIS 01',
+          commune: 'PARIS 01',
           nombreDePartsFiscales: 2.5,
           revenuFiscal: 16000,
         ),
