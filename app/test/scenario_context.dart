@@ -2,9 +2,11 @@ import 'package:app/features/aides/domain/entities/aide.dart';
 import 'package:app/features/aides/simulateur_velo/domain/value_objects/aide_velo_par_type.dart';
 import 'package:app/features/authentification/domain/value_objects/authentification_statut.dart';
 import 'package:app/features/profil/logement/presentation/blocs/mon_logement_state.dart';
+import 'package:app/features/profil/mieux_vous_connaitre/domain/question.dart';
 import 'package:app/features/utilisateur/domain/entities/utilisateur.dart';
 
 import 'mocks/aide_velo_port_mock.dart';
+import 'mocks/mieux_vous_connaitre_port_mock.dart';
 import 'mocks/profil_port_mock.dart';
 
 class ScenarioContext {
@@ -38,8 +40,11 @@ class ScenarioContext {
   );
   List<Aide> aides = <Aide>[];
   List<String> communes = <String>[];
+  List<Question> questions = <Question>[];
+
   AideVeloPortMock? aideVeloPortMock;
   ProfilPortMock? profilPortMock;
+  MieuxVousConnaitrePortMock? mieuxVousConnaitrePortMock;
   static ScenarioContext? _instance;
 
   void dispose() => _instance = null;

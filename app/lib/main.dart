@@ -12,6 +12,7 @@ import 'package:app/features/authentification/infrastructure/adapters/api/authen
 import 'package:app/features/authentification/infrastructure/adapters/api/authentification_token_storage.dart';
 import 'package:app/features/communes/infrastructure/adapters/communes_api_adapter.dart';
 import 'package:app/features/profil/infrastructure/adapters/profil_api_adapter.dart';
+import 'package:app/features/profil/mieux_vous_connaitre/infrastructure/adapters/mieux_vous_connaitre_api_adapter.dart';
 import 'package:app/features/utilisateur/infrastructure/adapters/utilisateur_api_adapter.dart';
 import 'package:app/features/version/infrastructure/adapters/version_adapter.dart';
 import 'package:dsfr/dsfr.dart';
@@ -58,6 +59,8 @@ Future<void> main() async {
       communesPort: CommunesApiAdapter(apiClient: apiClient),
       aideVeloPort: AideVeloApiAdapter(apiClient: apiClient),
       profilPort: ProfilApiAdapter(apiClient: apiClient),
+      mieuxVousConnaitrePort:
+          MieuxVousConnaitreApiAdapter(apiClient: apiClient),
     ),
   );
 }

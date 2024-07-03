@@ -8,6 +8,8 @@ import 'package:app/features/authentification/domain/ports/authentification_port
 import 'package:app/features/authentification/presentation/blocs/se_connecter_bloc.dart';
 import 'package:app/features/communes/domain/ports/communes_port.dart';
 import 'package:app/features/profil/domain/ports/profil_port.dart';
+import 'package:app/features/profil/mieux_vous_connaitre/domain/ports/mieux_vous_connaitre_port.dart';
+import 'package:app/features/profil/mieux_vous_connaitre/presentation/blocs/mieux_vous_connaitre_bloc.dart';
 import 'package:app/features/utilisateur/domain/ports/utilisateur_port.dart';
 import 'package:app/features/utilisateur/presentation/blocs/utilisateur_bloc.dart';
 import 'package:app/features/version/domain/ports/version_port.dart';
@@ -29,6 +31,7 @@ class App extends StatefulWidget {
     required this.communesPort,
     required this.aideVeloPort,
     required this.profilPort,
+    required this.mieuxVousConnaitrePort,
     super.key,
   });
 
@@ -40,6 +43,7 @@ class App extends StatefulWidget {
   final CommunesPort communesPort;
   final AideVeloPort aideVeloPort;
   final ProfilPort profilPort;
+  final MieuxVousConnaitrePort mieuxVousConnaitrePort;
 
   @override
   State<App> createState() => _AppState();
@@ -93,6 +97,11 @@ class _AppState extends State<App> {
                 profilPort: widget.profilPort,
                 communesPort: widget.communesPort,
                 aideVeloPort: widget.aideVeloPort,
+              ),
+            ),
+            BlocProvider(
+              create: (final context) => MieuxVousConnaitreBloc(
+                mieuxVousConnaitrePort: widget.mieuxVousConnaitrePort,
               ),
             ),
           ],
