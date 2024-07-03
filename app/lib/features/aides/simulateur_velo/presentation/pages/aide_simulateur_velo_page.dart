@@ -17,12 +17,6 @@ import 'package:go_router/go_router.dart';
 
 const _inputWidth = 97.0;
 
-const _revenusFiscals = {
-  0: Localisation.tranche0,
-  16000: Localisation.tranche1,
-  35000: Localisation.tranche2,
-};
-
 class AideSimulateurVeloPage extends StatelessWidget {
   const AideSimulateurVeloPage({super.key});
 
@@ -223,7 +217,7 @@ class _ElementsNecessaireAuCalcul extends StatelessWidget {
                     const TextSpan(text: Localisation.donneesUtiliseesPart2),
                     TextSpan(
                       text: Localisation.donneesUtiliseesRevenuFiscal(
-                        _revenusFiscals[state.revenuFiscal] ?? '',
+                        state.revenuFiscal,
                       ),
                       style: bodySmMediumBlue,
                     ),
@@ -379,19 +373,24 @@ class _NombreDePartsFiscales extends StatelessWidget {
 class _RevenuFiscal extends StatelessWidget {
   const _RevenuFiscal();
 
-  void _handleRevenuFiscal(final BuildContext context, final int? value) {
-    if (value == null) {
+  void _handleRevenuFiscal(final BuildContext context, final String value) {
+    final parse = int.tryParse(value);
+    if (parse == null) {
       return;
     }
-    context.read<AideVeloBloc>().add(AideVeloRevenuFiscalChange(value));
+    context.read<AideVeloBloc>().add(AideVeloRevenuFiscalChange(parse));
   }
 
   @override
-  Widget build(final BuildContext context) => DsfrRadioButtonSet(
-        title: Localisation.revenuFiscal,
-        values: _revenusFiscals,
-        onCallback: (final value) => _handleRevenuFiscal(context, value),
-        initialValue: context.read<AideVeloBloc>().state.revenuFiscal,
+  Widget build(final BuildContext context) => DsfrInput(
+        label: Localisation.revenuFiscal,
+        onChanged: (final value) => _handleRevenuFiscal(context, value),
+        suffixText: '€',
+        initialValue:
+            context.read<AideVeloBloc>().state.revenuFiscal?.toString(),
+        textAlign: TextAlign.end,
+        keyboardType: TextInputType.number,
+        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
       );
 }
 

@@ -11,7 +11,6 @@ import 'steps/iel_est_connecte.dart';
 import 'steps/iel_lance_lapplication.dart';
 import 'steps/iel_sappelle.dart';
 import 'steps/iel_scrolle.dart';
-import 'steps/iel_voit_le_bouton_radio_avec_ce_texte_selectionne.dart';
 import 'steps/iel_voit_le_texte.dart';
 import 'steps/iel_voit_le_texte_markdown.dart';
 
@@ -30,9 +29,6 @@ void main() {
     ielVoitLeTexte(Localisation.nombreDePartsFiscalesDescription);
     await ielScrolle(tester, Localisation.revenuFiscal);
     ielVoitLeTexte(Localisation.revenuFiscal);
-    ielVoitLeTexte(Localisation.tranche0);
-    ielVoitLeTexte(Localisation.tranche1);
-    ielVoitLeTexte(Localisation.tranche2);
     ielVoitLeTexteMarkdown(tester, Localisation.pourquoiCesQuestionsReponse);
     ielVoitLeTexte(Localisation.mettreAJourVosInformations);
   });
@@ -45,7 +41,11 @@ void main() {
     ielVoitLeTexte(ScenarioContext().email);
     await ielScrolle(tester, Localisation.revenuFiscal);
     ielVoitLeTexte(ScenarioContext().nombreDePartsFiscales.toString());
-    ielVoitLeBoutonRadioAvecCeTexteSelectionne(Localisation.tranche1);
+    await ielEcritDansLeChamp(
+      tester,
+      label: Localisation.revenuFiscal,
+      enterText: '20000',
+    );
   });
 
   testWidgets(
@@ -57,7 +57,6 @@ void main() {
       const prenom = 'Nouveau prenom';
       const email = 'nouveau@email.com';
       const nombreDePartsFiscales = 2.5;
-      const tranche = Localisation.tranche2;
       const trancheValeur = 35000;
 
       await ielEcritDansLeChamp(
@@ -81,7 +80,11 @@ void main() {
         label: Localisation.nombreDePartsFiscales,
         enterText: nombreDePartsFiscales.toString(),
       );
-      await ielAppuieSur(tester, tranche);
+      await ielEcritDansLeChamp(
+        tester,
+        label: Localisation.revenuFiscal,
+        enterText: trancheValeur.toString(),
+      );
       await ielAppuieSur(tester, Localisation.mettreAJourVosInformations);
 
       final profilPortMock = ScenarioContext().profilPortMock!;

@@ -57,8 +57,8 @@ abstract final class Localisation {
   }) =>
       '($codePostal - $commune)';
   static const donneesUtiliseesPart2 = ', revenu fiscal de référence ';
-  static String donneesUtiliseesRevenuFiscal(final String value) =>
-      '(${value.toLowerCase()})';
+  static String donneesUtiliseesRevenuFiscal(final int? value) =>
+      '(${value == null ? '' : euro(value)})';
   static const donneesUtiliseesPart3 = ', nombre de parts ';
   static String donneesUtiliseesNombreDeParts(final double value) => '($value)';
   static const point = '.';
@@ -73,9 +73,6 @@ abstract final class Localisation {
   static const nombreDePartsFiscalesDescription =
       '(Pré-calculé à partir des membres de votre foyer)';
   static const revenuFiscal = 'Revenu fiscal de référence de votre foyer';
-  static const tranche0 = 'Moins de 16 000 €';
-  static const tranche1 = 'De 16 000 € à 35 000 €';
-  static const tranche2 = 'Plus de 35 000 €';
   static const ouTrouverCesInformations = 'Où trouver ces informations ?';
   static const ouTrouverCesInformationsReponse = '''
 Le **revenu fiscal de référence** et votre **nombre de parts** se trouvent sur la 1ère page de votre dernier avis d’impôt.
