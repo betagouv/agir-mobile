@@ -11,6 +11,7 @@ import 'package:app/features/pre_onboarding/presentation/pages/pre_onboarding_ca
 import 'package:app/features/pre_onboarding/presentation/pages/pre_onboarding_page.dart';
 import 'package:app/features/profil/informations/presentation/pages/mes_informations_page.dart';
 import 'package:app/features/profil/logement/presentation/pages/mon_logement_page.dart';
+import 'package:app/features/profil/mieux_vous_connaitre/presentation/pages/mieux_vous_connaitre_page.dart';
 import 'package:app/features/profil/presentation/pages/options_avancees_page.dart';
 import 'package:app/features/profil/presentation/pages/profil_page.dart';
 import 'package:flutter/widgets.dart';
@@ -47,6 +48,7 @@ GoRouter goRouter({
                 ProfilPage.route,
                 MesInformationsPage.route,
                 MonLogementPage.route,
+                MieuxVousConnaitrePage.route,
                 OptionsAvanceesPage.route,
               ],
             ),

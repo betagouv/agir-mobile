@@ -95,6 +95,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const seDeconnecter = 'Se déconnecter';
   static const monProfil = 'Mon profil';
   static const vosInformations = 'Vos informations';
+  static const mieuxVousConnaitre = 'Mieux vous connaître';
   static const votreIdentite = 'Votre identité';
   static const prenom = 'Prénom';
   static const nom = 'Nom';
@@ -155,4 +156,13 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
       'Veuillez confirmer la suppression du compte';
   static const confirmer = 'Confirmer';
   static const annuler = 'Annuler';
+  static const lesCategories = 'Les catégories';
+  static const lesCategoriesTout = 'Tout';
+  static const lesCategoriesAlimentation = 'En cuisine';
+  static const lesCategoriesTransport = 'Les transports';
+  static const lesCategoriesLogement = 'À la maison';
+  static const lesCategoriesConsommation = 'En courses';
+  static const lesCategoriesClimat = 'La planète';
+  static const lesCategoriesDechet = 'Déchets';
+  static const lesCategoriesLoisir = 'Les vacances';
 }

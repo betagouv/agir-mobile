@@ -7,6 +7,7 @@ import '../mocks/aide_velo_port_mock.dart';
 import '../mocks/aides_port_mock.dart';
 import '../mocks/authentification_port_mock.dart';
 import '../mocks/communes_port_mock.dart';
+import '../mocks/mieux_vous_connaitre_port_mock.dart';
 import '../mocks/profil_port_mock.dart';
 import '../mocks/utilisateur_port_mock.dart';
 import '../mocks/version_port_mock.dart';
@@ -37,6 +38,10 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
     nombreDePartsFiscales: ScenarioContext().nombreDePartsFiscales,
     revenuFiscal: ScenarioContext().revenuFiscal,
   );
+
+  ScenarioContext().mieuxVousConnaitrePortMock =
+      MieuxVousConnaitrePortMock(questions: ScenarioContext().questions);
+
   await tester.pumpFrames(
     App(
       authentificationStatusManager: authentificationStatusManager,
@@ -51,6 +56,7 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
       communesPort: CommunesPortMock(ScenarioContext().communes),
       aideVeloPort: ScenarioContext().aideVeloPortMock!,
       profilPort: ScenarioContext().profilPortMock!,
+      mieuxVousConnaitrePort: ScenarioContext().mieuxVousConnaitrePortMock!,
     ),
     Durations.short1,
   );
