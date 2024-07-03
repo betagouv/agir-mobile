@@ -42,7 +42,6 @@ void main() {
     const commune = 'DOLE';
     const nombreDePart = 2.5;
     const revenuFiscal = 16000;
-    const tranche = Localisation.tranche1;
 
     testWidgets(
       'Iel voit le prix de 1000 euros par défaut',
@@ -126,7 +125,11 @@ void main() {
           label: Localisation.nombreDePartsFiscales,
           enterText: nombreDePart.toString(),
         );
-        await ielAppuieSur(tester, tranche);
+        await ielEcritDansLeChamp(
+          tester,
+          label: Localisation.revenuFiscal,
+          enterText: revenuFiscal.toString(),
+        );
         await ielAppuieSur(tester, Localisation.estimerMesAides);
 
         final aideVeloPortMock = ScenarioContext().aideVeloPortMock;
@@ -179,7 +182,7 @@ void main() {
           Localisation.donneesUtiliseesNombreDeParts(nombreDePart),
         );
         ielVoitLeTexteDansTexteRiche(
-          Localisation.donneesUtiliseesRevenuFiscal(tranche),
+          Localisation.donneesUtiliseesRevenuFiscal(revenuFiscal),
         );
       },
     );
@@ -201,7 +204,7 @@ void main() {
         ielVoitLeTexteDansTexteRiche(commune);
         ielVoitLeTexteDansTexteRiche('$nombreDePart');
         ielVoitLeTexteDansTexteRiche(commune);
-        ielVoitLeTexteDansTexteRiche(tranche);
+        ielVoitLeTexteDansTexteRiche(revenuFiscal.toString());
       },
     );
 

@@ -3,18 +3,20 @@ import 'package:app/features/profil/informations/presentation/blocs/mes_informat
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MesInformationsRevenuFiscal extends StatelessWidget {
   const MesInformationsRevenuFiscal({super.key});
 
-  void _handleRevenuFiscal(final BuildContext context, final int? value) {
-    if (value == null) {
+  void _handleRevenuFiscal(final BuildContext context, final String value) {
+    final parse = int.tryParse(value);
+    if (parse == null) {
       return;
     }
     context
         .read<MesInformationsBloc>()
-        .add(MesInformationsRevenuFiscalChange(value));
+        .add(MesInformationsRevenuFiscalChange(parse));
   }
 
   @override
@@ -23,15 +25,14 @@ class MesInformationsRevenuFiscal extends StatelessWidget {
       (final bloc) => bloc.state.revenuFiscal,
     );
 
-    return DsfrRadioButtonSet(
-      title: Localisation.revenuFiscal,
-      values: const {
-        0: Localisation.tranche0,
-        16000: Localisation.tranche1,
-        35000: Localisation.tranche2,
-      },
-      onCallback: (final value) => _handleRevenuFiscal(context, value),
-      initialValue: revenuFiscal,
+    return DsfrInput(
+      label: Localisation.revenuFiscal,
+      onChanged: (final value) => _handleRevenuFiscal(context, value),
+      suffixText: '€',
+      initialValue: revenuFiscal?.toString(),
+      textAlign: TextAlign.end,
+      keyboardType: TextInputType.number,
+      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
     );
   }
 }

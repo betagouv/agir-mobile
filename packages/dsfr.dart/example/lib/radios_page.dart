@@ -23,17 +23,13 @@ class _RadiosPageState extends State<RadiosPage> {
         padding: const EdgeInsets.all(24),
         children: [
           DsfrRadioButtonSet(
-            title: 'Revenu fiscal de référence de votre foyer',
-            values: const {
-              1: 'Moins de 16 000 €',
-              2: 'De 16 000 € à 35 000 €',
-              3: 'Plus de 35 000 €',
-            },
+            title: 'Radios',
+            values: const {1: 'Un', 2: 'Deux', 3: 'Trois'},
             onCallback: (final p0) {},
           ),
           const SizedBox(height: DsfrSpacings.s3w),
           DsfrRadioButton<int>(
-            title: 'Moins de 16 000 €',
+            title: 'Un',
             value: 0,
             groupValue: _value,
             onChanged: (final value) {
@@ -46,7 +42,7 @@ class _RadiosPageState extends State<RadiosPage> {
           ),
           const SizedBox(height: DsfrSpacings.s1w),
           DsfrRadioButton<int>(
-            title: 'De 16 000 € à 35 000 €',
+            title: 'Deux',
             value: 1,
             groupValue: _value,
             onChanged: (final value) {
@@ -59,7 +55,7 @@ class _RadiosPageState extends State<RadiosPage> {
           ),
           const SizedBox(height: DsfrSpacings.s1w),
           DsfrRadioButton<int>(
-            title: 'Plus de 35 000 €',
+            title: 'Trois',
             value: 2,
             groupValue: _value,
             onChanged: (final value) {
