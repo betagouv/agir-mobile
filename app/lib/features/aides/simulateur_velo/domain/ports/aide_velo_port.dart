@@ -4,7 +4,7 @@ abstract interface class AideVeloPort {
   Future<AideVeloParType> simuler({
     required final int prix,
     required final String codePostal,
-    required final String ville,
+    required final String commune,
     required final double nombreDePartsFiscales,
     required final int revenuFiscal,
   });

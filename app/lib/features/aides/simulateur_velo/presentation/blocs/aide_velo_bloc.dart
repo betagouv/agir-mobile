@@ -21,7 +21,7 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
     on<AideVeloModificationDemandee>(_onModificationDemandee);
     on<AideVeloPrixChange>(_onPrixChange);
     on<AideVeloCodePostalChange>(_onCodePostalChange);
-    on<AideVeloVilleChange>(_onVilleChange);
+    on<AideVeloCommuneChange>(_onCommuneChange);
     on<AideVeloNombreDePartsFiscalesChange>(_onNombreDePartsFiscalesChange);
     on<AideVeloRevenuFiscalChange>(_onRevenuFiscalChange);
     on<AideVeloEstimationDemandee>(_onEstimationDemandee);
@@ -41,7 +41,7 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
         prix: 1000,
         codePostal: informations.codePostal ?? '',
         communes: const [],
-        ville: informations.ville ?? '',
+        commune: informations.commune ?? '',
         nombreDePartsFiscales: informations.nombreDePartsFiscales,
         revenuFiscal: informations.revenuFiscal,
         aidesDisponibles: const [],
@@ -75,16 +75,16 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
       state.copyWith(
         codePostal: event.valeur,
         communes: communes,
-        ville: '',
+        commune: '',
       ),
     );
   }
 
-  void _onVilleChange(
-    final AideVeloVilleChange event,
+  void _onCommuneChange(
+    final AideVeloCommuneChange event,
     final Emitter<AideVeloState> emit,
   ) {
-    emit(state.copyWith(ville: event.valeur));
+    emit(state.copyWith(commune: event.valeur));
   }
 
   void _onNombreDePartsFiscalesChange(
@@ -112,7 +112,7 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
     final aidesDisponibles = await _aideVeloPort.simuler(
       prix: state.prix,
       codePostal: state.codePostal,
-      ville: state.ville,
+      commune: state.commune,
       nombreDePartsFiscales: state.nombreDePartsFiscales,
       revenuFiscal: state.revenuFiscal!,
     );

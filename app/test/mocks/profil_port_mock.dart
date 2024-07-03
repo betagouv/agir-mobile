@@ -46,7 +46,7 @@ class ProfilPortMock implements ProfilPort {
         nom: nom,
         email: email,
         codePostal: codePostal,
-        ville: commune,
+        commune: commune,
         nombreDePartsFiscales: nombreDePartsFiscales,
         revenuFiscal: revenuFiscal,
       );

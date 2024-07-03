@@ -19,6 +19,11 @@ class _MonLogementCodePostalEtCommuneState
     extends State<MonLogementCodePostalEtCommune> {
   late final _textEditingController = TextEditingController();
 
+  void _handleCodePostal(final BuildContext context, final String value) {
+    context.read<MonLogementBloc>().add(MonLogementCodePostalChange(value));
+    _textEditingController.clear();
+  }
+
   void _handleCommune(final BuildContext context, final String? value) {
     if (value == null) {
       return;
@@ -34,13 +39,14 @@ class _MonLogementCodePostalEtCommuneState
 
   @override
   Widget build(final BuildContext context) {
-    final codePostal = context
-        .select<MonLogementBloc, String>((final bloc) => bloc.state.codePostal);
-    final communes = context.select<MonLogementBloc, List<String>>(
-      (final bloc) => bloc.state.communes,
-    );
-    final commune = context
-        .select<MonLogementBloc, String>((final bloc) => bloc.state.commune);
+    final state = context.watch<MonLogementBloc>().state;
+    if (state.communes.length == 1) {
+      final commune = state.communes.firstOrNull!;
+      _textEditingController.text = commune;
+      _handleCommune(context, commune);
+    } else {
+      _textEditingController.text = state.commune;
+    }
 
     return MonLogementTitreEtContenu(
       titre: Localisation.ouHabitezVous,
@@ -51,10 +57,8 @@ class _MonLogementCodePostalEtCommuneState
             width: MediaQuery.textScalerOf(context).scale(97),
             child: DsfrInput(
               label: Localisation.codePostal,
-              onChanged: (final value) => context
-                  .read<MonLogementBloc>()
-                  .add(MonLogementCodePostalChange(value)),
-              initialValue: codePostal,
+              onChanged: (final value) => _handleCodePostal(context, value),
+              initialValue: state.codePostal,
               keyboardType: TextInputType.number,
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,
@@ -66,12 +70,11 @@ class _MonLogementCodePostalEtCommuneState
           Expanded(
             child: DsfrSelect<String>(
               label: Localisation.commune,
-              dropdownMenuEntries: communes
+              dropdownMenuEntries: state.communes
                   .map((final e) => DropdownMenuEntry(value: e, label: e))
                   .toList(),
               onSelected: (final value) => _handleCommune(context, value),
               controller: _textEditingController,
-              initialSelection: commune,
             ),
           ),
         ],

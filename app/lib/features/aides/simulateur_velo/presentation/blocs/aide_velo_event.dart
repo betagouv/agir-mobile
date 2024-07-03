@@ -33,8 +33,8 @@ final class AideVeloCodePostalChange extends AideVeloEvent {
   List<Object> get props => [valeur];
 }
 
-final class AideVeloVilleChange extends AideVeloEvent {
-  const AideVeloVilleChange(this.valeur);
+final class AideVeloCommuneChange extends AideVeloEvent {
+  const AideVeloCommuneChange(this.valeur);
 
   final String valeur;
 

@@ -7,7 +7,7 @@ class AideVeloPortMock implements AideVeloPort {
 
   int prix = 0;
   String codePostal = '';
-  String ville = '';
+  String commune = '';
   double nombreDePartsFiscales = 0;
   int revenuFiscal = 0;
 
@@ -17,13 +17,13 @@ class AideVeloPortMock implements AideVeloPort {
   Future<AideVeloParType> simuler({
     required final int prix,
     required final String codePostal,
-    required final String ville,
+    required final String commune,
     required final double nombreDePartsFiscales,
     required final int revenuFiscal,
   }) async {
     this.prix = prix;
     this.codePostal = codePostal;
-    this.ville = ville;
+    this.commune = commune;
     this.nombreDePartsFiscales = nombreDePartsFiscales;
     this.revenuFiscal = revenuFiscal;
 

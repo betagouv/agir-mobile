@@ -135,7 +135,7 @@ void main() {
         final aideVeloPortMock = ScenarioContext().aideVeloPortMock;
         expect(aideVeloPortMock!.prix, prixParDefaut);
         expect(aideVeloPortMock.codePostal, codePostal);
-        expect(aideVeloPortMock.ville, commune);
+        expect(aideVeloPortMock.commune, commune);
         expect(aideVeloPortMock.nombreDePartsFiscales, nombreDePart);
         expect(aideVeloPortMock.revenuFiscal, revenuFiscal);
 
@@ -209,7 +209,7 @@ void main() {
     );
 
     testWidgets(
-      'Iel modifie le code postal alors la ville est réinitialisé',
+      'Iel modifie le code postal alors la commune est réinitialisé',
       (final tester) async {
         setUpWidgets(tester);
         leServeurRetourneCetteListeDeCommunes(['AUTHUME', commune]);
