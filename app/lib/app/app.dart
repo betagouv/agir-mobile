@@ -9,7 +9,8 @@ import 'package:app/features/authentification/presentation/blocs/se_connecter_bl
 import 'package:app/features/communes/domain/ports/communes_port.dart';
 import 'package:app/features/profil/domain/ports/profil_port.dart';
 import 'package:app/features/profil/mieux_vous_connaitre/domain/ports/mieux_vous_connaitre_port.dart';
-import 'package:app/features/profil/mieux_vous_connaitre/presentation/blocs/mieux_vous_connaitre_bloc.dart';
+import 'package:app/features/profil/mieux_vous_connaitre/presentation/element/blocs/mieux_vous_connaitre_edit_bloc.dart';
+import 'package:app/features/profil/mieux_vous_connaitre/presentation/liste/blocs/mieux_vous_connaitre_bloc.dart';
 import 'package:app/features/utilisateur/domain/ports/utilisateur_port.dart';
 import 'package:app/features/utilisateur/presentation/blocs/utilisateur_bloc.dart';
 import 'package:app/features/version/domain/ports/version_port.dart';
@@ -101,6 +102,11 @@ class _AppState extends State<App> {
             ),
             BlocProvider(
               create: (final context) => MieuxVousConnaitreBloc(
+                mieuxVousConnaitrePort: widget.mieuxVousConnaitrePort,
+              ),
+            ),
+            BlocProvider(
+              create: (final context) => MieuxVousConnaitreEditBloc(
                 mieuxVousConnaitrePort: widget.mieuxVousConnaitrePort,
               ),
             ),

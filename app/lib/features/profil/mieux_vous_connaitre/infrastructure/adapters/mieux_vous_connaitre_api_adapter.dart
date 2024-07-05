@@ -29,7 +29,28 @@ class MieuxVousConnaitreApiAdapter implements MieuxVousConnaitrePort {
 
     return json
         .map((final e) => QuestionMapper.fromJson(e as Map<String, dynamic>))
-        .where((final e) => e.reponse.isNotEmpty)
+        .where((final e) => e.reponses.isNotEmpty)
         .toList();
+  }
+
+  @override
+  Future<void> mettreAJour({
+    required final String id,
+    required final List<String> reponses,
+  }) async {
+    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    if (utilisateurId == null) {
+      throw Exception();
+    }
+
+    final body = jsonEncode({'reponse': reponses});
+    final response = await _apiClient.put(
+      Uri.parse('/utilisateurs/$utilisateurId/questionsKYC/$id'),
+      body: body,
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception();
+    }
   }
 }

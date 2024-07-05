@@ -41,6 +41,6 @@ final class MieuxVousConnaitreState extends Equatable {
       );
 
   @override
-  List<Object?> get props =>
+  List<Object> get props =>
       [questions, questionsParCategorie, thematiqueSelectionnee, statut];
 }

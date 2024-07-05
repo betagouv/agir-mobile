@@ -1,6 +1,6 @@
 import 'package:app/features/profil/mieux_vous_connaitre/domain/question.dart';
-import 'package:app/features/profil/mieux_vous_connaitre/presentation/blocs/mieux_vous_connaitre_bloc.dart';
-import 'package:app/features/profil/mieux_vous_connaitre/presentation/blocs/mieux_vous_connaitre_event.dart';
+import 'package:app/features/profil/mieux_vous_connaitre/presentation/liste/blocs/mieux_vous_connaitre_bloc.dart';
+import 'package:app/features/profil/mieux_vous_connaitre/presentation/liste/blocs/mieux_vous_connaitre_event.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';

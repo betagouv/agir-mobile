@@ -1,7 +1,7 @@
 import 'package:app/features/menu/presentation/pages/root_page.dart';
 import 'package:app/features/profil/informations/presentation/pages/mes_informations_page.dart';
 import 'package:app/features/profil/logement/presentation/pages/mon_logement_page.dart';
-import 'package:app/features/profil/mieux_vous_connaitre/presentation/pages/mieux_vous_connaitre_page.dart';
+import 'package:app/features/profil/mieux_vous_connaitre/presentation/liste/pages/mieux_vous_connaitre_page.dart';
 import 'package:app/features/profil/presentation/pages/options_avancees_page.dart';
 import 'package:app/features/profil/presentation/widgets/profil_title.dart';
 import 'package:app/l10n/l10n.dart';

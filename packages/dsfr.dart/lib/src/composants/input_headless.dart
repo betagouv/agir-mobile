@@ -18,6 +18,8 @@ class DsfrInputHeadless extends StatefulWidget {
     this.passwordVisibility = false,
     this.fillColor = DsfrColors.grey950,
     this.radius = DsfrSpacings.s1v,
+    this.maxLines = 1,
+    this.minLines = 1,
     this.textAlign = TextAlign.start,
     this.inputStyle = const DsfrTextStyle.bodyMd(),
     this.inputBorderColor = DsfrColors.grey200,
@@ -40,10 +42,12 @@ class DsfrInputHeadless extends StatefulWidget {
   final TextStyle inputStyle;
   final TextAlign textAlign;
   final bool isPasswordMode;
+  final int? maxLines;
+  final int? minLines;
   final TextInputType? keyboardType;
   final Color inputBorderColor;
   final double inputBorderWidth;
-  final BoxConstraints inputConstraints;
+  final BoxConstraints? inputConstraints;
   final Color fillColor;
   final double radius;
   final Color focusColor;
@@ -124,6 +128,8 @@ class _DsfrInputHeadlessState extends State<DsfrInputHeadless> {
             obscureText: widget.isPasswordMode && !widget.passwordVisibility,
             autocorrect: !widget.isPasswordMode,
             enableSuggestions: !widget.isPasswordMode,
+            maxLines: widget.maxLines,
+            minLines: widget.minLines,
             onChanged: widget.onChanged,
             onTapOutside: (final event) =>
                 FocusManager.instance.primaryFocus?.unfocus(),
