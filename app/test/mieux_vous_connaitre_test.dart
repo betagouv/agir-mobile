@@ -20,10 +20,10 @@ void main() {
       const Question(
         id: 'KYC005',
         question: question,
-        reponse: [reponse],
+        reponses: [reponse],
         categorie: 'recommandation',
         points: 5,
-        type: QuestionType.choixUnique,
+        type: ReponseType.choixUnique,
         reponsesPossibles: [
           'J’ai un emploi',
           'Je suis sans emploi',
@@ -49,10 +49,10 @@ void main() {
       const Question(
         id: 'KYC005',
         question: question,
-        reponse: ['J’ai un emploi'],
+        reponses: ['J’ai un emploi'],
         categorie: 'recommandation',
         points: 5,
-        type: QuestionType.libre,
+        type: ReponseType.libre,
         reponsesPossibles: [],
         deNosGestesClimat: false,
         thematique: Thematique.climat,
@@ -60,17 +60,17 @@ void main() {
       const Question(
         id: 'KYC006',
         question: question2,
-        reponse: ['Je consomme des produits locaux'],
+        reponses: ['Je consomme des produits locaux'],
         categorie: 'recommandation',
         points: 5,
-        type: QuestionType.libre,
+        type: ReponseType.libre,
         reponsesPossibles: [],
         deNosGestesClimat: false,
         thematique: Thematique.consommation,
       ),
     ]);
     await _allerSurMesInformations(tester);
-    await ielAppuieSur(tester, 'En courses');
+    await ielAppuieSur(tester, Localisation.lesCategoriesConsommation);
     ielNeVoitPasLeTexte(question);
     ielVoitLeTexte(question2);
   });

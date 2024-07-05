@@ -103,6 +103,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const adresseCourrierElectroniqueDescription =
       'Format attendu : nom@domaine.fr';
   static const donneesPersonnelles = 'Données personnelles';
+  static const mettreAJour = 'Mettre à jour';
   static const mettreAJourVosInformations = 'Mettre à jour vos informations';
   static const votreLogement = 'Votre logement';
   static const ouHabitezVous = 'Où habitez-vous ?';
@@ -165,4 +166,5 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const lesCategoriesClimat = 'La planète';
   static const lesCategoriesDechet = 'Déchets';
   static const lesCategoriesLoisir = 'Les vacances';
+  static const maReponse = 'Ma réponse';
 }

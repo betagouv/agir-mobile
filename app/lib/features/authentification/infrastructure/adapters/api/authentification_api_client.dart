@@ -83,6 +83,20 @@ class AuthentificationApiClient extends http.BaseClient {
         encoding: encoding,
       );
 
+  @override
+  Future<http.Response> put(
+    final Uri url, {
+    final Map<String, String>? headers,
+    final Object? body,
+    final Encoding? encoding,
+  }) =>
+      super.put(
+        _uriParse(url),
+        headers: headers,
+        body: body,
+        encoding: encoding,
+      );
+
   Uri _uriParse(final Uri url) => Uri.parse(
         '${apiUrl.valeur.scheme}://${apiUrl.valeur.host}${apiUrl.valeur.path}${url.path}${url.hasQuery ? '?${url.query}' : ''}',
       );

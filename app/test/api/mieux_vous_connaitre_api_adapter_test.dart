@@ -4,11 +4,13 @@ import 'package:app/features/authentification/infrastructure/adapters/api/authen
 import 'package:app/features/profil/mieux_vous_connaitre/domain/question.dart';
 import 'package:app/features/profil/mieux_vous_connaitre/infrastructure/adapters/mieux_vous_connaitre_api_adapter.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 
 import 'client_mock.dart';
 import 'constants.dart';
 import 'custom_response.dart';
 import 'flutter_secure_storage_mock.dart';
+import 'request_mathcher.dart';
 
 void main() {
   test('recupererLesQuestions', () async {
@@ -109,10 +111,10 @@ void main() {
         const Question(
           id: 'KYC005',
           question: 'Quelle est votre situation professionnelle ?',
-          reponse: ['J’ai un emploi'],
+          reponses: ['J’ai un emploi'],
           categorie: 'recommandation',
           points: 5,
-          type: QuestionType.choixUnique,
+          type: ReponseType.choixUnique,
           reponsesPossibles: [
             'J’ai un emploi',
             'Je suis sans emploi',
@@ -127,10 +129,10 @@ void main() {
           id: 'KYC_motivation',
           question:
               'Qu’est-ce qui vous motive le plus pour adopter des habitudes écologiques ?',
-          reponse: ['Famille ou génération future', 'Conscience écologique'],
+          reponses: ['Famille ou génération future', 'Conscience écologique'],
           categorie: 'mission',
           points: 5,
-          type: QuestionType.choixMultiple,
+          type: ReponseType.choixMultiple,
           reponsesPossibles: [
             'Santé et bien être',
             'Famille ou génération future',
@@ -145,15 +147,54 @@ void main() {
           id: 'KYC_compost_idee',
           question:
               'Quelles sont vos idées reçues ou freins concernant le compost ?',
-          reponse: ['Blabla'],
+          reponses: ['Blabla'],
           categorie: 'mission',
           points: 5,
-          type: QuestionType.libre,
+          type: ReponseType.libre,
           reponsesPossibles: [],
           deNosGestesClimat: false,
           thematique: Thematique.climat,
         ),
       ]),
+    );
+  });
+
+  test('mettreAJour', () async {
+    const id = 'KYC005';
+    final client = ClientMock()
+      ..putSuccess(
+        path: '/utilisateurs/$utilisateurId/questionsKYC/$id',
+        response: CustomResponse(''),
+      );
+
+    final authentificationTokenStorage = AuthentificationTokenStorage(
+      secureStorage: FlutterSecureStorageMock(),
+      authentificationStatusManager: AuthentificationStatutManager(),
+    );
+    await authentificationTokenStorage.sauvegarderTokenEtUtilisateurId(
+      token,
+      utilisateurId,
+    );
+
+    final adapter = MieuxVousConnaitreApiAdapter(
+      apiClient: AuthentificationApiClient(
+        apiUrl: apiUrl,
+        authentificationTokenStorage: authentificationTokenStorage,
+        inner: client,
+      ),
+    );
+
+    await adapter.mettreAJour(id: id, reponses: ['J’ai un emploi']);
+
+    verify(
+      () => client.send(
+        any(
+          that: const RequestMathcher(
+            '/utilisateurs/$utilisateurId/questionsKYC/$id',
+            body: '{"reponse":["J’ai un emploi"]}',
+          ),
+        ),
+      ),
     );
   });
 }

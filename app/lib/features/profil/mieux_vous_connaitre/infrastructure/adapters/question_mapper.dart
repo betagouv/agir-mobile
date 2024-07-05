@@ -8,7 +8,7 @@ abstract final class QuestionMapper {
   static Question fromJson(final Map<String, dynamic> json) => Question(
         id: json['id'] as String,
         question: json['question'] as String,
-        reponse: (json['reponse'] as List<dynamic>)
+        reponses: (json['reponse'] as List<dynamic>)
             .map((final e) => e as String)
             .toList(),
         categorie: json['categorie'] as String,
@@ -21,12 +21,12 @@ abstract final class QuestionMapper {
         thematique: _mapThematiqueFromJson(json['thematique'] as String),
       );
 
-  static QuestionType _mapTypeDeQuestionFromJson(final String? type) =>
+  static ReponseType _mapTypeDeQuestionFromJson(final String? type) =>
       switch (type) {
-        'choix_multiple' => QuestionType.choixMultiple,
-        'choix_unique' => QuestionType.choixUnique,
-        'libre' => QuestionType.libre,
-        _ => QuestionType.libre,
+        'choix_multiple' => ReponseType.choixMultiple,
+        'choix_unique' => ReponseType.choixUnique,
+        'libre' => ReponseType.libre,
+        _ => ReponseType.libre,
       };
 
   static Thematique _mapThematiqueFromJson(final String? type) =>

@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:app/features/profil/mieux_vous_connaitre/domain/ports/mieux_vous_connaitre_port.dart';
-import 'package:app/features/profil/mieux_vous_connaitre/presentation/blocs/mieux_vous_connaitre_event.dart';
-import 'package:app/features/profil/mieux_vous_connaitre/presentation/blocs/mieux_vous_connaitre_state.dart';
+import 'package:app/features/profil/mieux_vous_connaitre/presentation/liste/blocs/mieux_vous_connaitre_event.dart';
+import 'package:app/features/profil/mieux_vous_connaitre/presentation/liste/blocs/mieux_vous_connaitre_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fpdart/fpdart.dart';
 
