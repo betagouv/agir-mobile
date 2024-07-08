@@ -46,7 +46,9 @@ class DsfrRadioButton<T> extends StatelessWidget {
                   fillColor:
                       const WidgetStatePropertyAll(DsfrColors.blueFranceSun113),
                 ),
-                Text(title, style: const DsfrTextStyle.bodySm()),
+                Flexible(
+                  child: Text(title, style: const DsfrTextStyle.bodySm()),
+                ),
               ],
             ),
           ),
