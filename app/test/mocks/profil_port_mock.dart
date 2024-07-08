@@ -2,6 +2,7 @@ import 'package:app/features/profil/domain/ports/profil_port.dart';
 import 'package:app/features/profil/informations/domain/entities/mes_informations.dart';
 import 'package:app/features/profil/logement/domain/entities/logement.dart';
 import 'package:app/features/profil/logement/presentation/blocs/mon_logement_state.dart';
+import 'package:fpdart/fpdart.dart';
 
 class ProfilPortMock implements ProfilPort {
   ProfilPortMock({
@@ -41,18 +42,21 @@ class ProfilPortMock implements ProfilPort {
   bool changerLeMotDePasseAppele = false;
 
   @override
-  Future<Informations> recupererProfil() async => Informations(
-        prenom: prenom,
-        nom: nom,
-        email: email,
-        codePostal: codePostal,
-        commune: commune,
-        nombreDePartsFiscales: nombreDePartsFiscales,
-        revenuFiscal: revenuFiscal,
+  Future<Either<Exception, Informations>> recupererProfil() async =>
+      Either.right(
+        Informations(
+          prenom: prenom,
+          nom: nom,
+          email: email,
+          codePostal: codePostal,
+          commune: commune,
+          nombreDePartsFiscales: nombreDePartsFiscales,
+          revenuFiscal: revenuFiscal,
+        ),
       );
 
   @override
-  Future<void> mettreAJour({
+  Future<Either<Exception, void>> mettreAJour({
     required final String prenom,
     required final String nom,
     required final String email,
@@ -64,24 +68,30 @@ class ProfilPortMock implements ProfilPort {
     this.email = email;
     this.nombreDePartsFiscales = nombreDePartsFiscales;
     this.revenuFiscal = revenuFiscal;
+
+    return Either.right(null);
   }
 
   @override
-  Future<Logement> recupererLogement() async => Logement(
-        codePostal: codePostal,
-        commune: commune,
-        nombreAdultes: nombreAdultes,
-        nombreEnfants: nombreEnfants,
-        typeDeLogement: typeDeLogement,
-        estProprietaire: estProprietaire,
-        superficie: superficie,
-        chauffage: chauffage,
-        plusDe15Ans: plusDe15Ans,
-        dpe: dpe,
+  Future<Either<Exception, Logement>> recupererLogement() async => Either.right(
+        Logement(
+          codePostal: codePostal,
+          commune: commune,
+          nombreAdultes: nombreAdultes,
+          nombreEnfants: nombreEnfants,
+          typeDeLogement: typeDeLogement,
+          estProprietaire: estProprietaire,
+          superficie: superficie,
+          chauffage: chauffage,
+          plusDe15Ans: plusDe15Ans,
+          dpe: dpe,
+        ),
       );
 
   @override
-  Future<void> mettreAJourLogement({required final Logement logement}) async {
+  Future<Either<Exception, void>> mettreAJourLogement({
+    required final Logement logement,
+  }) async {
     codePostal = logement.codePostal;
     commune = logement.commune;
     nombreAdultes = logement.nombreAdultes;
@@ -92,15 +102,23 @@ class ProfilPortMock implements ProfilPort {
     chauffage = logement.chauffage;
     plusDe15Ans = logement.plusDe15Ans;
     dpe = logement.dpe;
+
+    return Either.right(null);
   }
 
   @override
-  Future<void> supprimerLeCompte() async {
+  Future<Either<Exception, void>> supprimerLeCompte() async {
     supprimerLeCompteAppele = true;
+
+    return Either.right(null);
   }
 
   @override
-  Future<void> changerMotDePasse({required final String motDePasse}) async {
+  Future<Either<Exception, void>> changerMotDePasse({
+    required final String motDePasse,
+  }) async {
     changerLeMotDePasseAppele = true;
+
+    return Either.right(null);
   }
 }

@@ -6,6 +6,7 @@ import 'package:app/features/profil/infrastructure/adapters/profil_api_adapter.d
 import 'package:app/features/profil/logement/domain/entities/logement.dart';
 import 'package:app/features/profil/logement/presentation/blocs/mon_logement_state.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
 
 import 'client_mock.dart';
@@ -70,7 +71,7 @@ void main() {
 
       final result = await adapter.recupererProfil();
       expect(
-        result,
+        result.getRight().getOrElse(() => throw Exception()),
         const Informations(
           prenom: 'Wojtek',
           nom: 'WWW',
@@ -171,7 +172,7 @@ void main() {
 
       final result = await adapter.recupererLogement();
       expect(
-        result,
+        result.getRight().getOrElse(() => throw Exception()),
         const Logement(
           codePostal: '75001',
           commune: 'PARIS 01',
@@ -215,7 +216,7 @@ void main() {
 
       final result = await adapter.recupererLogement();
       expect(
-        result,
+        result.getRight().getOrElse(() => throw Exception()),
         const Logement(
           codePostal: null,
           commune: null,

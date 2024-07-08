@@ -6,6 +6,7 @@ import 'package:app/features/profil/logement/domain/entities/logement.dart';
 import 'package:app/features/profil/logement/presentation/blocs/mon_logement_event.dart';
 import 'package:app/features/profil/logement/presentation/blocs/mon_logement_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fpdart/fpdart.dart';
 
 class MonLogementBloc extends Bloc<MonLogementEvent, MonLogementState> {
   MonLogementBloc({
@@ -36,27 +37,30 @@ class MonLogementBloc extends Bloc<MonLogementEvent, MonLogementState> {
     final Emitter<MonLogementState> emit,
   ) async {
     emit(state.copyWith(statut: MonLogementStatut.chargement));
-    final logement = await _profilPort.recupererLogement();
-    final communes = logement.codePostal == null
-        ? <String>[]
-        : await _communesPort.recupererLesCommunes(logement.codePostal!);
+    final result = await _profilPort.recupererLogement();
+    if (result.isRight()) {
+      final logement = result.getRight().getOrElse(() => throw Exception());
+      final communes = logement.codePostal == null
+          ? <String>[]
+          : await _communesPort.recupererLesCommunes(logement.codePostal!);
 
-    emit(
-      state.copyWith(
-        codePostal: logement.codePostal,
-        communes: communes,
-        commune: logement.commune,
-        nombreAdultes: logement.nombreAdultes,
-        nombreEnfants: logement.nombreEnfants,
-        typeDeLogement: logement.typeDeLogement,
-        estProprietaire: logement.estProprietaire,
-        superficie: logement.superficie,
-        chauffage: logement.chauffage,
-        plusDe15Ans: logement.plusDe15Ans,
-        dpe: logement.dpe,
-        statut: MonLogementStatut.succes,
-      ),
-    );
+      emit(
+        state.copyWith(
+          codePostal: logement.codePostal,
+          communes: communes,
+          commune: logement.commune,
+          nombreAdultes: logement.nombreAdultes,
+          nombreEnfants: logement.nombreEnfants,
+          typeDeLogement: logement.typeDeLogement,
+          estProprietaire: logement.estProprietaire,
+          superficie: logement.superficie,
+          chauffage: logement.chauffage,
+          plusDe15Ans: logement.plusDe15Ans,
+          dpe: logement.dpe,
+          statut: MonLogementStatut.succes,
+        ),
+      );
+    }
   }
 
   Future<void> _onCodePostalChange(

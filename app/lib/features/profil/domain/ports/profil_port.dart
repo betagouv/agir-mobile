@@ -1,9 +1,11 @@
 import 'package:app/features/profil/informations/domain/entities/mes_informations.dart';
 import 'package:app/features/profil/logement/domain/entities/logement.dart';
+import 'package:fpdart/fpdart.dart';
 
 abstract interface class ProfilPort {
-  Future<Informations> recupererProfil();
-  Future<void> mettreAJour({
+  Future<Either<Exception, Informations>> recupererProfil();
+
+  Future<Either<Exception, void>> mettreAJour({
     required final String prenom,
     required final String nom,
     required final String email,
@@ -11,11 +13,15 @@ abstract interface class ProfilPort {
     required final int? revenuFiscal,
   });
 
-  Future<Logement> recupererLogement();
+  Future<Either<Exception, Logement>> recupererLogement();
 
-  Future<void> mettreAJourLogement({required final Logement logement});
+  Future<Either<Exception, void>> mettreAJourLogement({
+    required final Logement logement,
+  });
 
-  Future<void> supprimerLeCompte();
+  Future<Either<Exception, void>> supprimerLeCompte();
 
-  Future<void> changerMotDePasse({required final String motDePasse});
+  Future<Either<Exception, void>> changerMotDePasse({
+    required final String motDePasse,
+  });
 }
