@@ -4,6 +4,7 @@ import 'package:app/features/authentification/infrastructure/adapters/api/authen
 import 'package:app/features/utilisateur/domain/entities/utilisateur.dart';
 import 'package:app/features/utilisateur/infrastructure/adapters/utilisateur_api_adapter.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:fpdart/fpdart.dart';
 
 import 'client_mock.dart';
 import 'constants.dart';
@@ -55,7 +56,7 @@ void main() {
 
       // Assert.
       expect(
-        utilisateur,
+        utilisateur.getRight().getOrElse(() => throw Exception()),
         const Utilisateur(prenom: prenom, fonctionnalitesDebloquees: [aides]),
       );
     });
@@ -100,9 +101,10 @@ void main() {
       );
 
       // Act.
-      final utilisateur = await adapter.recupereUtilisateur();
+      final result = await adapter.recupereUtilisateur();
 
       // Assert.
+      final utilisateur = result.getRight().getOrElse(() => throw Exception());
       expect(utilisateur.fonctionnalitesDebloquees, [aides]);
     });
   });

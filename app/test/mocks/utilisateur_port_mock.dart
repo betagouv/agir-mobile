@@ -1,5 +1,6 @@
 import 'package:app/features/utilisateur/domain/entities/utilisateur.dart';
 import 'package:app/features/utilisateur/domain/ports/utilisateur_port.dart';
+import 'package:fpdart/fpdart.dart';
 
 class UtilisateurPortMock implements UtilisateurPort {
   UtilisateurPortMock({
@@ -11,8 +12,11 @@ class UtilisateurPortMock implements UtilisateurPort {
   List<Fonctionnalites> fonctionnalitesDebloquees;
 
   @override
-  Future<Utilisateur> recupereUtilisateur() async => Utilisateur(
-        prenom: prenom,
-        fonctionnalitesDebloquees: fonctionnalitesDebloquees,
+  Future<Either<Exception, Utilisateur>> recupereUtilisateur() async =>
+      Either.right(
+        Utilisateur(
+          prenom: prenom,
+          fonctionnalitesDebloquees: fonctionnalitesDebloquees,
+        ),
       );
 }
