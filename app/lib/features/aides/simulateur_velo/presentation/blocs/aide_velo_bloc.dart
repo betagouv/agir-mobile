@@ -55,7 +55,9 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
     final AideVeloModificationDemandee event,
     final Emitter<AideVeloState> emit,
   ) async {
-    final communes = await _communesPort.recupererLesCommunes(state.codePostal);
+    final communes = state.codePostal.length == 5
+        ? await _communesPort.recupererLesCommunes(state.codePostal)
+        : <String>[];
     emit(state.copyWith(veutModifierLesInformations: true, communes: communes));
   }
 
@@ -70,7 +72,9 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
     final AideVeloCodePostalChange event,
     final Emitter<AideVeloState> emit,
   ) async {
-    final communes = await _communesPort.recupererLesCommunes(event.valeur);
+    final communes = event.valeur.length == 5
+        ? await _communesPort.recupererLesCommunes(event.valeur)
+        : <String>[];
     emit(
       state.copyWith(
         codePostal: event.valeur,
