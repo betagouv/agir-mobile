@@ -41,13 +41,13 @@ class MonLogementBloc extends Bloc<MonLogementEvent, MonLogementState> {
     if (result.isRight()) {
       final logement = result.getRight().getOrElse(() => throw Exception());
       final communes = logement.codePostal == null
-          ? <String>[]
+          ? Either<Exception, List<String>>.right(<String>[])
           : await _communesPort.recupererLesCommunes(logement.codePostal!);
 
       emit(
         state.copyWith(
           codePostal: logement.codePostal,
-          communes: communes,
+          communes: communes.getRight().getOrElse(() => throw Exception()),
           commune: logement.commune,
           nombreAdultes: logement.nombreAdultes,
           nombreEnfants: logement.nombreEnfants,
@@ -67,14 +67,20 @@ class MonLogementBloc extends Bloc<MonLogementEvent, MonLogementState> {
     final MonLogementCodePostalChange event,
     final Emitter<MonLogementState> emit,
   ) async {
-    final communes = await _communesPort.recupererLesCommunes(event.valeur);
-    emit(
-      state.copyWith(
-        codePostal: event.valeur,
-        communes: communes,
-        commune: '',
-      ),
-    );
+    final result = state.codePostal.length == 5
+        ? await _communesPort.recupererLesCommunes(state.codePostal)
+        : Either<Exception, List<String>>.right(<String>[]);
+
+    if (result.isRight()) {
+      final communes = result.getRight().getOrElse(() => throw Exception());
+      emit(
+        state.copyWith(
+          codePostal: event.valeur,
+          communes: communes,
+          commune: '',
+        ),
+      );
+    }
   }
 
   void _onCommuneChange(
