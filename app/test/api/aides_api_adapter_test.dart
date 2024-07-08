@@ -4,6 +4,7 @@ import 'package:app/features/authentification/domain/entities/authentification_s
 import 'package:app/features/authentification/infrastructure/adapters/api/authentification_api_client.dart';
 import 'package:app/features/authentification/infrastructure/adapters/api/authentification_token_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:fpdart/fpdart.dart';
 
 import 'client_mock.dart';
 import 'constants.dart';
@@ -101,7 +102,7 @@ void main() {
       final aides = await adapter.recupereLesAides();
 
       // Assert.
-      expect(aides, [
+      expect(aides.getRight().getOrElse(() => throw Exception()), [
         const Aide(titre: aide1, thematique: thematique1, contenu: contenu1),
         const Aide(
           titre: aide2,

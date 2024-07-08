@@ -1,5 +1,6 @@
 import 'package:app/features/aides/domain/entities/aide.dart';
 import 'package:app/features/aides/domain/ports/aides_port.dart';
+import 'package:fpdart/fpdart.dart';
 
 class AidesPortMock implements AidesPort {
   AidesPortMock(this.aides);
@@ -7,5 +8,6 @@ class AidesPortMock implements AidesPort {
   List<Aide> aides;
 
   @override
-  Future<List<Aide>> recupereLesAides() async => aides;
+  Future<Either<Exception, List<Aide>>> recupereLesAides() async =>
+      Either.right(aides);
 }
