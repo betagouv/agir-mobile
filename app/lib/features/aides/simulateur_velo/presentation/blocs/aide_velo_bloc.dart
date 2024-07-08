@@ -7,6 +7,7 @@ import 'package:app/features/communes/domain/ports/communes_port.dart';
 import 'package:app/features/profil/domain/ports/profil_port.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fpdart/fpdart.dart';
 
 class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
   AideVeloBloc({
@@ -35,20 +36,23 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
     final AideVeloInformationsDemandee event,
     final Emitter<AideVeloState> emit,
   ) async {
-    final informations = await _profilPort.recupererProfil();
-    emit(
-      AideVeloState(
-        prix: 1000,
-        codePostal: informations.codePostal ?? '',
-        communes: const [],
-        commune: informations.commune ?? '',
-        nombreDePartsFiscales: informations.nombreDePartsFiscales,
-        revenuFiscal: informations.revenuFiscal,
-        aidesDisponibles: const [],
-        veutModifierLesInformations: false,
-        aideVeloStatut: AideVeloStatut.initial,
-      ),
-    );
+    final result = await _profilPort.recupererProfil();
+    if (result.isRight()) {
+      final informations = result.getRight().getOrElse(() => throw Exception());
+      emit(
+        AideVeloState(
+          prix: 1000,
+          codePostal: informations.codePostal ?? '',
+          communes: const [],
+          commune: informations.commune ?? '',
+          nombreDePartsFiscales: informations.nombreDePartsFiscales,
+          revenuFiscal: informations.revenuFiscal,
+          aidesDisponibles: const [],
+          veutModifierLesInformations: false,
+          aideVeloStatut: AideVeloStatut.initial,
+        ),
+      );
+    }
   }
 
   Future<void> _onModificationDemandee(

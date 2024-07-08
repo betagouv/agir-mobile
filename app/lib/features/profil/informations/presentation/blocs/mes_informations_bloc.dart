@@ -4,6 +4,7 @@ import 'package:app/features/profil/domain/ports/profil_port.dart';
 import 'package:app/features/profil/informations/presentation/blocs/mes_informations_event.dart';
 import 'package:app/features/profil/informations/presentation/blocs/mes_informations_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fpdart/fpdart.dart';
 
 class MesInformationsBloc
     extends Bloc<MesInformationsEvent, MesInformationsState> {
@@ -28,17 +29,20 @@ class MesInformationsBloc
     final Emitter<MesInformationsState> emit,
   ) async {
     emit(state.copyWith(statut: MesInformationsStatut.chargement));
-    final profil = await _profilPort.recupererProfil();
-    emit(
-      MesInformationsState(
-        prenom: profil.prenom,
-        nom: profil.nom,
-        email: profil.email,
-        nombreDePartsFiscales: profil.nombreDePartsFiscales,
-        revenuFiscal: profil.revenuFiscal,
-        statut: MesInformationsStatut.succes,
-      ),
-    );
+    final result = await _profilPort.recupererProfil();
+    if (result.isRight()) {
+      final profil = result.getRight().getOrElse(() => throw Exception());
+      emit(
+        MesInformationsState(
+          prenom: profil.prenom,
+          nom: profil.nom,
+          email: profil.email,
+          nombreDePartsFiscales: profil.nombreDePartsFiscales,
+          revenuFiscal: profil.revenuFiscal,
+          statut: MesInformationsStatut.succes,
+        ),
+      );
+    }
   }
 
   void _onPrenomChange(
