@@ -25,7 +25,7 @@ class AuthentificationApiAdapter implements AuthentificationPort {
       }),
     );
     if (response.statusCode != 201) {
-      return Either.left(Exception('Erreur lors de la connexion'));
+      return Left(Exception('Erreur lors de la connexion'));
     }
 
     final json = jsonDecode(response.body) as Map<String, dynamic>;
@@ -34,13 +34,13 @@ class AuthentificationApiAdapter implements AuthentificationPort {
     final utilisateurId = utilisateur['id'] as String;
     await _apiClient.sauvegarderTokenEtUtilisateurId(token, utilisateurId);
 
-    return Either.right(null);
+    return const Right(null);
   }
 
   @override
   Future<Either<Exception, void>> deconnectionDemandee() async {
     await _apiClient.supprimerTokenEtUtilisateurId();
 
-    return Either.right(null);
+    return const Right(null);
   }
 }

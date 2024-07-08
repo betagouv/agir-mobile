@@ -19,7 +19,7 @@ class CommunesApiAdapter implements CommunesPort {
         await _apiClient.get(Uri.parse('/communes?code_postal=$codePostal'));
 
     return response.statusCode == 200
-        ? Either.right((jsonDecode(response.body) as List<dynamic>).cast())
-        : Either.left(Exception('Erreur lors de la récupération des communes'));
+        ? Right((jsonDecode(response.body) as List<dynamic>).cast())
+        : Left(Exception('Erreur lors de la récupération des communes'));
   }
 }

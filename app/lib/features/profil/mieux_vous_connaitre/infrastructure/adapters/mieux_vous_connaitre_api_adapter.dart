@@ -19,20 +19,18 @@ class MieuxVousConnaitreApiAdapter implements MieuxVousConnaitrePort {
       recupererLesQuestionsDejaRepondue() async {
     final utilisateurId = await _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
-      return Either.left(const UtilisateurIdNonTrouveException());
+      return const Left(UtilisateurIdNonTrouveException());
     }
 
     final response = await _apiClient
         .get(Uri.parse('/utilisateurs/$utilisateurId/questionsKYC'));
 
     if (response.statusCode != 200) {
-      return Either.left(
-        Exception('Erreur lors de la récupération des questions'),
-      );
+      return Left(Exception('Erreur lors de la récupération des questions'));
     }
     final json = jsonDecode(response.body) as List<dynamic>;
 
-    return Either.right(
+    return Right(
       json
           .map((final e) => QuestionMapper.fromJson(e as Map<String, dynamic>))
           .where((final e) => e.reponses.isNotEmpty)
@@ -47,7 +45,7 @@ class MieuxVousConnaitreApiAdapter implements MieuxVousConnaitrePort {
   }) async {
     final utilisateurId = await _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
-      return Either.left(const UtilisateurIdNonTrouveException());
+      return const Left(UtilisateurIdNonTrouveException());
     }
 
     final body = jsonEncode({'reponse': reponses});
@@ -57,9 +55,7 @@ class MieuxVousConnaitreApiAdapter implements MieuxVousConnaitrePort {
     );
 
     return response.statusCode == 200
-        ? Either.right(null)
-        : Either.left(
-            Exception('Erreur lors de la mise à jour des réponses'),
-          );
+        ? const Right(null)
+        : Left(Exception('Erreur lors de la mise à jour des réponses'));
   }
 }

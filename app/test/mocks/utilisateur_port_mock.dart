@@ -12,8 +12,7 @@ class UtilisateurPortMock implements UtilisateurPort {
   List<Fonctionnalites> fonctionnalitesDebloquees;
 
   @override
-  Future<Either<Exception, Utilisateur>> recupereUtilisateur() async =>
-      Either.right(
+  Future<Either<Exception, Utilisateur>> recupereUtilisateur() async => Right(
         Utilisateur(
           prenom: prenom,
           fonctionnalitesDebloquees: fonctionnalitesDebloquees,

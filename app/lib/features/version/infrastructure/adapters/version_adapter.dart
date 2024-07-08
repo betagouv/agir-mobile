@@ -10,5 +10,5 @@ class VersionAdapter implements VersionPort {
 
   @override
   Either<Exception, String> versionDemandee() =>
-      Either.right('${_packageInfo.version}+${_packageInfo.buildNumber}');
+      Right('${_packageInfo.version}+${_packageInfo.buildNumber}');
 }

@@ -18,18 +18,18 @@ class UtilisateurApiAdapter implements UtilisateurPort {
   Future<Either<Exception, Utilisateur>> recupereUtilisateur() async {
     final id = await _apiClient.recupererUtilisateurId;
     if (id == null) {
-      return Either.left(const UtilisateurIdNonTrouveException());
+      return const Left(UtilisateurIdNonTrouveException());
     }
     final response = await _apiClient.get(Uri.parse('/utilisateurs/$id'));
     if (response.statusCode != 200) {
-      return Either.left(
+      return Left(
         Exception("Erreur lors de la récupération de l'utilisateur"),
       );
     }
 
     final json = jsonDecode(response.body) as Map<String, dynamic>;
 
-    return Either.right(
+    return Right(
       Utilisateur(
         prenom: json['prenom'] as String,
         fonctionnalitesDebloquees:

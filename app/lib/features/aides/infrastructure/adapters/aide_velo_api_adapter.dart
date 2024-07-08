@@ -24,7 +24,7 @@ class AideVeloApiAdapter implements AideVeloPort {
   }) async {
     final utilisateurId = await _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
-      return Either.left(const UtilisateurIdNonTrouveException());
+      return const Left(UtilisateurIdNonTrouveException());
     }
 
     final result = await _mettreAJourProfilEtLogement(
@@ -36,7 +36,7 @@ class AideVeloApiAdapter implements AideVeloPort {
     );
 
     if (result.isLeft()) {
-      return Either.left(result.getLeft().getOrElse(() => throw Exception()));
+      return Left(result.getLeft().getOrElse(() => throw Exception()));
     }
 
     final response = await _apiClient.post(
@@ -45,13 +45,11 @@ class AideVeloApiAdapter implements AideVeloPort {
     );
 
     if (response.statusCode != 200) {
-      return Either.left(
-        Exception("Erreur lors de la simulation de l'aide vélo"),
-      );
+      return Left(Exception("Erreur lors de la simulation de l'aide vélo"));
     }
     final json = jsonDecode(response.body) as Map<String, dynamic>;
 
-    return Either.right(
+    return Right(
       AideVeloParType(
         mecaniqueSimple: (json['mécanique simple'] as List<dynamic>)
             .map(_toAideVelo)
@@ -92,13 +90,11 @@ class AideVeloApiAdapter implements AideVeloPort {
 
     for (final response in responses) {
       if (response.statusCode != 200) {
-        return Either.left(
-          Exception('Erreur lors de la mise à jour du profil'),
-        );
+        return Left(Exception('Erreur lors de la mise à jour du profil'));
       }
     }
 
-    return Either.right(null);
+    return const Right(null);
   }
 }
 
