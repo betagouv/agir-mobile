@@ -10,11 +10,11 @@ class UtilisateurBloc extends Bloc<UtilisateurEvent, UtilisateurState> {
   UtilisateurBloc({required final UtilisateurPort utilisateurPort})
       : _utilisateurPort = utilisateurPort,
         super(const UtilisateurState(prenom: '', aLesAides: false)) {
-    on<UtilsateurRecuperationDemandee>(_onRecuperationDemandee);
+    on<UtilisateurRecuperationDemandee>(_onRecuperationDemandee);
   }
 
   Future<void> _onRecuperationDemandee(
-    final UtilsateurRecuperationDemandee event,
+    final UtilisateurRecuperationDemandee event,
     final Emitter<UtilisateurState> emit,
   ) async {
     final utilisateur = await _utilisateurPort.recupereUtilisateur();

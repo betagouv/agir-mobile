@@ -7,6 +7,6 @@ sealed class UtilisateurEvent extends Equatable {
   List<Object> get props => [];
 }
 
-final class UtilsateurRecuperationDemandee extends UtilisateurEvent {
-  const UtilsateurRecuperationDemandee();
+final class UtilisateurRecuperationDemandee extends UtilisateurEvent {
+  const UtilisateurRecuperationDemandee();
 }
