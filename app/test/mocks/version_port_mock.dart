@@ -1,8 +1,9 @@
 import 'package:app/features/version/domain/ports/version_port.dart';
+import 'package:fpdart/fpdart.dart';
 
 class VersionPortMock implements VersionPort {
   const VersionPortMock();
 
   @override
-  String versionDemandee() => '1.2.3+4';
+  Either<Exception, String> versionDemandee() => Either.right('1.2.3+4');
 }
