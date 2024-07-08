@@ -5,6 +5,7 @@ import 'package:app/features/utilisateur/domain/ports/utilisateur_port.dart';
 import 'package:app/features/utilisateur/presentation/blocs/utilisateur_event.dart';
 import 'package:app/features/utilisateur/presentation/blocs/utilisateur_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fpdart/fpdart.dart';
 
 class UtilisateurBloc extends Bloc<UtilisateurEvent, UtilisateurState> {
   UtilisateurBloc({required final UtilisateurPort utilisateurPort})
@@ -13,19 +14,22 @@ class UtilisateurBloc extends Bloc<UtilisateurEvent, UtilisateurState> {
     on<UtilisateurRecuperationDemandee>(_onRecuperationDemandee);
   }
 
+  final UtilisateurPort _utilisateurPort;
+
   Future<void> _onRecuperationDemandee(
     final UtilisateurRecuperationDemandee event,
     final Emitter<UtilisateurState> emit,
   ) async {
-    final utilisateur = await _utilisateurPort.recupereUtilisateur();
-    emit(
-      UtilisateurState(
-        prenom: utilisateur.prenom,
-        aLesAides: utilisateur.fonctionnalitesDebloquees
-            .contains(Fonctionnalites.aides),
-      ),
-    );
+    final result = await _utilisateurPort.recupereUtilisateur();
+    if (result.isRight()) {
+      final utilisateur = result.getRight().getOrElse(() => throw Exception());
+      emit(
+        UtilisateurState(
+          prenom: utilisateur.prenom,
+          aLesAides: utilisateur.fonctionnalitesDebloquees
+              .contains(Fonctionnalites.aides),
+        ),
+      );
+    }
   }
-
-  final UtilisateurPort _utilisateurPort;
 }
