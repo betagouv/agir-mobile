@@ -4,6 +4,7 @@ import 'package:app/features/authentification/infrastructure/adapters/api/authen
 import 'package:app/features/profil/mieux_vous_connaitre/domain/question.dart';
 import 'package:app/features/profil/mieux_vous_connaitre/infrastructure/adapters/mieux_vous_connaitre_api_adapter.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
 
 import 'client_mock.dart';
@@ -106,7 +107,7 @@ void main() {
 
     final result = await adapter.recupererLesQuestionsDejaRepondue();
     expect(
-      result,
+      result.getRight().getOrElse(() => throw Exception()),
       equals([
         const Question(
           id: 'KYC005',

@@ -23,15 +23,19 @@ class MieuxVousConnaitreBloc
     final Emitter<MieuxVousConnaitreState> emit,
   ) async {
     emit(state.copyWith(statut: MieuxVousConnaitreStatut.chargement));
-    final questions =
+    final result =
         await _mieuxVousConnaitrePort.recupererLesQuestionsDejaRepondue();
-    emit(
-      state.copyWith(
-        questions: questions,
-        questionsParCategorie: questions,
-        statut: MieuxVousConnaitreStatut.succes,
-      ),
-    );
+    if (result.isRight()) {
+      final questions = result.getRight().getOrElse(() => throw Exception());
+
+      emit(
+        state.copyWith(
+          questions: questions,
+          questionsParCategorie: questions,
+          statut: MieuxVousConnaitreStatut.succes,
+        ),
+      );
+    }
   }
 
   void _onThematiqueSelectionnee(
