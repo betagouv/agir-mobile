@@ -4,6 +4,8 @@ import 'package:app/features/aides/simulateur_velo/domain/ports/aide_velo_port.d
 import 'package:app/features/aides/simulateur_velo/domain/value_objects/aide_velo.dart';
 import 'package:app/features/aides/simulateur_velo/domain/value_objects/aide_velo_par_type.dart';
 import 'package:app/features/authentification/infrastructure/adapters/api/authentification_api_client.dart';
+import 'package:app/features/profil/domain/utilisateur_id_non_trouve_exception.dart';
+import 'package:fpdart/fpdart.dart';
 
 class AideVeloApiAdapter implements AideVeloPort {
   const AideVeloApiAdapter({
@@ -13,7 +15,7 @@ class AideVeloApiAdapter implements AideVeloPort {
   final AuthentificationApiClient _apiClient;
 
   @override
-  Future<AideVeloParType> simuler({
+  Future<Either<Exception, AideVeloParType>> simuler({
     required final int prix,
     required final String codePostal,
     required final String commune,
@@ -22,8 +24,58 @@ class AideVeloApiAdapter implements AideVeloPort {
   }) async {
     final utilisateurId = await _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
-      throw Exception();
+      return Either.left(const UtilisateurIdNonTrouveException());
     }
+
+    final result = await _mettreAJourProfilEtLogement(
+      utilisateurId: utilisateurId,
+      nombreDePartsFiscales: nombreDePartsFiscales,
+      revenuFiscal: revenuFiscal,
+      codePostal: codePostal,
+      commune: commune,
+    );
+
+    if (result.isLeft()) {
+      return Either.left(result.getLeft().getOrElse(() => throw Exception()));
+    }
+
+    final response = await _apiClient.post(
+      Uri.parse('/utilisateurs/$utilisateurId/simulerAideVelo'),
+      body: jsonEncode({'prix_du_velo': prix}),
+    );
+
+    if (response.statusCode != 200) {
+      return Either.left(
+        Exception("Erreur lors de la simulation de l'aide vélo"),
+      );
+    }
+    final json = jsonDecode(response.body) as Map<String, dynamic>;
+
+    return Either.right(
+      AideVeloParType(
+        mecaniqueSimple: (json['mécanique simple'] as List<dynamic>)
+            .map(_toAideVelo)
+            .toList(),
+        electrique:
+            (json['électrique'] as List<dynamic>).map(_toAideVelo).toList(),
+        cargo: (json['cargo'] as List<dynamic>).map(_toAideVelo).toList(),
+        cargoElectrique: (json['cargo électrique'] as List<dynamic>)
+            .map(_toAideVelo)
+            .toList(),
+        pliant: (json['pliant'] as List<dynamic>).map(_toAideVelo).toList(),
+        motorisation:
+            (json['motorisation'] as List<dynamic>).map(_toAideVelo).toList(),
+      ),
+    );
+  }
+
+  Future<Either<Exception, void>> _mettreAJourProfilEtLogement({
+    required final String utilisateurId,
+    required final double nombreDePartsFiscales,
+    required final int revenuFiscal,
+    required final String codePostal,
+    required final String commune,
+  }) async {
     final responses = await Future.wait([
       _apiClient.patch(
         Uri.parse('/utilisateurs/$utilisateurId/profile'),
@@ -40,32 +92,13 @@ class AideVeloApiAdapter implements AideVeloPort {
 
     for (final response in responses) {
       if (response.statusCode != 200) {
-        throw Exception();
+        return Either.left(
+          Exception('Erreur lors de la mise à jour du profil'),
+        );
       }
     }
 
-    final response = await _apiClient.post(
-      Uri.parse('/utilisateurs/$utilisateurId/simulerAideVelo'),
-      body: jsonEncode({'prix_du_velo': prix}),
-    );
-
-    if (response.statusCode != 200) {
-      throw Exception();
-    }
-    final json = jsonDecode(response.body) as Map<String, dynamic>;
-
-    return AideVeloParType(
-      mecaniqueSimple:
-          (json['mécanique simple'] as List<dynamic>).map(_toAideVelo).toList(),
-      electrique:
-          (json['électrique'] as List<dynamic>).map(_toAideVelo).toList(),
-      cargo: (json['cargo'] as List<dynamic>).map(_toAideVelo).toList(),
-      cargoElectrique:
-          (json['cargo électrique'] as List<dynamic>).map(_toAideVelo).toList(),
-      pliant: (json['pliant'] as List<dynamic>).map(_toAideVelo).toList(),
-      motorisation:
-          (json['motorisation'] as List<dynamic>).map(_toAideVelo).toList(),
-    );
+    return Either.right(null);
   }
 }
 
