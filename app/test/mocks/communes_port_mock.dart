@@ -1,4 +1,5 @@
 import 'package:app/features/communes/domain/ports/communes_port.dart';
+import 'package:fpdart/fpdart.dart';
 
 class CommunesPortMock implements CommunesPort {
   const CommunesPortMock(this.communes);
@@ -6,6 +7,8 @@ class CommunesPortMock implements CommunesPort {
   final List<String> communes;
 
   @override
-  Future<List<String>> recupererLesCommunes(final String codePostal) async =>
-      communes;
+  Future<Either<Exception, List<String>>> recupererLesCommunes(
+    final String codePostal,
+  ) async =>
+      Either.right(communes);
 }

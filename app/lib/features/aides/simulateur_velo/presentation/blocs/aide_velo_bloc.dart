@@ -59,10 +59,19 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
     final AideVeloModificationDemandee event,
     final Emitter<AideVeloState> emit,
   ) async {
-    final communes = state.codePostal.length == 5
+    final result = state.codePostal.length == 5
         ? await _communesPort.recupererLesCommunes(state.codePostal)
-        : <String>[];
-    emit(state.copyWith(veutModifierLesInformations: true, communes: communes));
+        : Either<Exception, List<String>>.right(<String>[]);
+
+    if (result.isRight()) {
+      final communes = result.getRight().getOrElse(() => throw Exception());
+      emit(
+        state.copyWith(
+          veutModifierLesInformations: true,
+          communes: communes,
+        ),
+      );
+    }
   }
 
   void _onPrixChange(
@@ -76,16 +85,19 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
     final AideVeloCodePostalChange event,
     final Emitter<AideVeloState> emit,
   ) async {
-    final communes = event.valeur.length == 5
+    final result = event.valeur.length == 5
         ? await _communesPort.recupererLesCommunes(event.valeur)
-        : <String>[];
-    emit(
-      state.copyWith(
-        codePostal: event.valeur,
-        communes: communes,
-        commune: '',
-      ),
-    );
+        : Either<Exception, List<String>>.right(<String>[]);
+    if (result.isRight()) {
+      final communes = result.getRight().getOrElse(() => throw Exception());
+      emit(
+        state.copyWith(
+          codePostal: event.valeur,
+          communes: communes,
+          commune: '',
+        ),
+      );
+    }
   }
 
   void _onCommuneChange(

@@ -3,6 +3,7 @@ import 'package:app/features/authentification/infrastructure/adapters/api/authen
 import 'package:app/features/authentification/infrastructure/adapters/api/authentification_token_storage.dart';
 import 'package:app/features/communes/infrastructure/adapters/communes_api_adapter.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:fpdart/fpdart.dart';
 
 import 'client_mock.dart';
 import 'constants.dart';
@@ -51,7 +52,7 @@ void main() {
       final communes = await adapter.recupererLesCommunes('39100');
 
       // Assert.
-      expect(communes, [
+      expect(communes.getRight().getOrElse(() => throw Exception()), [
         'AUTHUME',
         'BAVERANS',
         'BREVANS',
