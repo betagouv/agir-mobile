@@ -28,14 +28,14 @@ class SupprimerCompteModal extends StatelessWidget {
             label: Localisation.confirmer,
             variant: DsfrButtonVariant.primary,
             size: DsfrButtonSize.lg,
-            onTap: () => GoRouter.of(context).pop(true),
+            onPressed: () => GoRouter.of(context).pop(true),
           ),
           const SizedBox(height: DsfrSpacings.s2w),
           DsfrButton(
             label: Localisation.annuler,
             variant: DsfrButtonVariant.secondary,
             size: DsfrButtonSize.lg,
-            onTap: () => GoRouter.of(context).pop(false),
+            onPressed: () => GoRouter.of(context).pop(false),
           ),
         ],
       );

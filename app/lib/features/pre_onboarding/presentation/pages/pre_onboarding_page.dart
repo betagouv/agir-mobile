@@ -53,7 +53,7 @@ class PreOnboardingPage extends StatelessWidget {
                   label: Localisation.commencer,
                   variant: DsfrButtonVariant.primary,
                   size: DsfrButtonSize.lg,
-                  onTap: () async => GoRouter.of(context)
+                  onPressed: () async => GoRouter.of(context)
                       .pushNamed(PreOnboardingCarrouselPage.name),
                 ),
                 const SizedBox(height: DsfrSpacings.s3w),

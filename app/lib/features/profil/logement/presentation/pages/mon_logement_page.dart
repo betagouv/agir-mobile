@@ -20,14 +20,21 @@ class MonLogementPage extends StatelessWidget {
   static GoRoute get route => GoRoute(
         path: path,
         name: name,
-        builder: (final context, final state) => BlocProvider(
-          create: (final context) => MonLogementBloc(
-            profilPort: context.read(),
-            communesPort: context.read(),
-          )..add(const MonLogementRecuperationDemandee()),
-          child: const MonLogementPage(),
-        ),
+        builder: (final context, final state) => const MonLogementPage(),
       );
+
+  @override
+  Widget build(final BuildContext context) => BlocProvider(
+        create: (final context) => MonLogementBloc(
+          profilPort: context.read(),
+          communesPort: context.read(),
+        )..add(const MonLogementRecuperationDemandee()),
+        child: const _MonLogementView(),
+      );
+}
+
+class _MonLogementView extends StatelessWidget {
+  const _MonLogementView();
 
   void _handleMettreAJour(final BuildContext context) {
     context.read<MonLogementBloc>().add(const MonLogementMiseAJourDemandee());
@@ -54,7 +61,7 @@ class MonLogementPage extends StatelessWidget {
             label: Localisation.mettreAJourVosInformations,
             variant: DsfrButtonVariant.primary,
             size: DsfrButtonSize.lg,
-            onTap: () => _handleMettreAJour(context),
+            onPressed: () => _handleMettreAJour(context),
           ),
         ),
         backgroundColor: FnvColors.aidesFond,

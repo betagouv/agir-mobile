@@ -30,7 +30,7 @@ void main() {
             label: label,
             variant: DsfrButtonVariant.primary,
             size: DsfrButtonSize.lg,
-            onTap: completer.complete,
+            onPressed: completer.complete,
           ),
         ),
       );
@@ -73,7 +73,7 @@ void main() {
               label: label,
               variant: DsfrButtonVariant.primary,
               size: DsfrButtonSize.lg,
-              onTap: () {},
+              onPressed: () {},
             ),
           ),
         );

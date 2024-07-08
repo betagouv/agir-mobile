@@ -97,7 +97,7 @@ class MieuxVousConnaitreEditPage extends StatelessWidget {
               icon: DsfrIcons.deviceSave3Fill,
               variant: DsfrButtonVariant.primary,
               size: DsfrButtonSize.lg,
-              onTap: () => context
+              onPressed: () => context
                   .read<MieuxVousConnaitreEditBloc>()
                   .add(MieuxVousConnaitreEditMisAJourDemandee(question.id)),
             ),

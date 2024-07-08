@@ -397,23 +397,20 @@ class _RevenuFiscal extends StatelessWidget {
 class _EstimerMesAides extends StatelessWidget {
   const _EstimerMesAides();
 
-  VoidCallback? _handleEstimerMesAides(final BuildContext context) =>
-      context.watch<AideVeloBloc>().state.estValide
-          ? () async {
-              context
-                  .read<AideVeloBloc>()
-                  .add(const AideVeloEstimationDemandee());
-              await GoRouter.of(context)
-                  .pushNamed(AideSimulateurVeloDisponiblePage.name);
-            }
-          : null;
-
   @override
   Widget build(final BuildContext context) => DsfrButton(
         label: Localisation.estimerMesAides,
         variant: DsfrButtonVariant.primary,
         size: DsfrButtonSize.lg,
-        onTap: _handleEstimerMesAides(context),
+        onPressed: context.watch<AideVeloBloc>().state.estValide
+            ? () async {
+                context
+                    .read<AideVeloBloc>()
+                    .add(const AideVeloEstimationDemandee());
+                await GoRouter.of(context)
+                    .pushNamed(AideSimulateurVeloDisponiblePage.name);
+              }
+            : null,
       );
 }
 

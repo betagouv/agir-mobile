@@ -98,7 +98,7 @@ class _PreOnboardingCarrouselPageState extends State<PreOnboardingCarrouselPage>
                             label: Localisation.suivant,
                             variant: DsfrButtonVariant.primary,
                             size: DsfrButtonSize.lg,
-                            onTap: () async =>
+                            onPressed: () async =>
                                 _handleAllerASeConnecter(context),
                           ),
                           const SizedBox(height: DsfrSpacings.s3w),

@@ -72,7 +72,7 @@ class SeConnecterPage extends StatelessWidget {
                     label: Localisation.seConnecter,
                     variant: DsfrButtonVariant.primary,
                     size: DsfrButtonSize.lg,
-                    onTap: state ? () => _handleSeConnecter(context) : null,
+                    onPressed: state ? () => _handleSeConnecter(context) : null,
                   ),
                 ),
               ],
