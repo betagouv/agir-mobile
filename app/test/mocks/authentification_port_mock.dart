@@ -2,6 +2,7 @@ import 'package:app/features/authentification/domain/entities/authentification_s
 import 'package:app/features/authentification/domain/ports/authentification_port.dart';
 import 'package:app/features/authentification/domain/value_objects/authentification_statut.dart';
 import 'package:app/features/authentification/domain/value_objects/information_de_connexion.dart';
+import 'package:fpdart/fpdart.dart';
 
 class AuthentificationPortMock implements AuthentificationPort {
   const AuthentificationPortMock(this.authentificationStatusManager);
@@ -9,16 +10,20 @@ class AuthentificationPortMock implements AuthentificationPort {
   final AuthentificationStatutManager authentificationStatusManager;
 
   @override
-  Future<void> connectionDemandee(
+  Future<Either<Exception, void>> connectionDemandee(
     final InformationDeConnexion informationDeConnexion,
   ) async {
     authentificationStatusManager
         .gererAuthentificationStatut(AuthentificationStatut.connecte);
+
+    return Either.right(null);
   }
 
   @override
-  Future<void> deconnectionDemandee() async {
+  Future<Either<Exception, void>> deconnectionDemandee() async {
     authentificationStatusManager
         .gererAuthentificationStatut(AuthentificationStatut.pasConnecte);
+
+    return Either.right(null);
   }
 }
