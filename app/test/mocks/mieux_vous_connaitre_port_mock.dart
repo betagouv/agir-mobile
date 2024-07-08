@@ -12,7 +12,7 @@ class MieuxVousConnaitrePortMock implements MieuxVousConnaitrePort {
 
   @override
   Future<Either<Exception, List<Question>>>
-      recupererLesQuestionsDejaRepondue() async => Either.right(questions);
+      recupererLesQuestionsDejaRepondue() async => Right(questions);
 
   @override
   Future<Either<Exception, void>> mettreAJour({
@@ -26,6 +26,6 @@ class MieuxVousConnaitrePortMock implements MieuxVousConnaitrePort {
         ..add(question.copyWith(reponses: reponses));
     }
 
-    return Either.right(null);
+    return const Right(null);
   }
 }

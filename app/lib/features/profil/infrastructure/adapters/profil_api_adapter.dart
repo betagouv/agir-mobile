@@ -19,19 +19,19 @@ class ProfilApiAdapter implements ProfilPort {
   Future<Either<Exception, Informations>> recupererProfil() async {
     final utilisateurId = await _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
-      return Either.left(const UtilisateurIdNonTrouveException());
+      return const Left(UtilisateurIdNonTrouveException());
     }
 
     final response =
         await _apiClient.get(Uri.parse('/utilisateurs/$utilisateurId/profile'));
 
     if (response.statusCode != 200) {
-      return Either.left(Exception('Erreur lors de la récupération du profil'));
+      return Left(Exception('Erreur lors de la récupération du profil'));
     }
 
     final json = jsonDecode(response.body) as Map<String, dynamic>;
 
-    return Either.right(
+    return Right(
       Informations(
         prenom: json['prenom'] as String,
         nom: json['nom'] as String,
@@ -55,7 +55,7 @@ class ProfilApiAdapter implements ProfilPort {
   }) async {
     final utilisateurId = await _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
-      return Either.left(const UtilisateurIdNonTrouveException());
+      return const Left(UtilisateurIdNonTrouveException());
     }
 
     final uri = Uri.parse('/utilisateurs/$utilisateurId/profile');
@@ -70,29 +70,27 @@ class ProfilApiAdapter implements ProfilPort {
     final response = await _apiClient.patch(uri, body: body);
 
     return response.statusCode == 200
-        ? Either.right(null)
-        : Either.left(Exception('Erreur lors de la mise à jour du profil'));
+        ? const Right(null)
+        : Left(Exception('Erreur lors de la mise à jour du profil'));
   }
 
   @override
   Future<Either<Exception, Logement>> recupererLogement() async {
     final utilisateurId = await _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
-      return Either.left(const UtilisateurIdNonTrouveException());
+      return const Left(UtilisateurIdNonTrouveException());
     }
 
     final response = await _apiClient
         .get(Uri.parse('/utilisateurs/$utilisateurId/logement'));
 
     if (response.statusCode != 200) {
-      return Either.left(
-        Exception('Erreur lors de la récupération du logement'),
-      );
+      return Left(Exception('Erreur lors de la récupération du logement'));
     }
 
     final json = jsonDecode(response.body) as Map<String, dynamic>;
 
-    return Either.right(LogementMapper.mapLogementFromJson(json));
+    return Right(LogementMapper.mapLogementFromJson(json));
   }
 
   @override
@@ -101,7 +99,7 @@ class ProfilApiAdapter implements ProfilPort {
   }) async {
     final utilisateurId = await _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
-      return Either.left(const UtilisateurIdNonTrouveException());
+      return const Left(UtilisateurIdNonTrouveException());
     }
 
     final uri = Uri.parse('/utilisateurs/$utilisateurId/logement');
@@ -110,17 +108,15 @@ class ProfilApiAdapter implements ProfilPort {
     final response = await _apiClient.patch(uri, body: body);
 
     return response.statusCode == 200
-        ? Either.right(null)
-        : Either.left(
-            Exception('Erreur lors de la mise à jour du logement'),
-          );
+        ? const Right(null)
+        : Left(Exception('Erreur lors de la mise à jour du logement'));
   }
 
   @override
   Future<Either<Exception, void>> supprimerLeCompte() async {
     final utilisateurId = await _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
-      return Either.left(const UtilisateurIdNonTrouveException());
+      return const Left(UtilisateurIdNonTrouveException());
     }
 
     final uri = Uri.parse('/utilisateurs/$utilisateurId');
@@ -128,8 +124,8 @@ class ProfilApiAdapter implements ProfilPort {
     final response = await _apiClient.delete(uri);
 
     return response.statusCode == 200
-        ? Either.right(null)
-        : Either.left(Exception('Erreur lors de la suppression du compte'));
+        ? const Right(null)
+        : Left(Exception('Erreur lors de la suppression du compte'));
   }
 
   @override
@@ -138,7 +134,7 @@ class ProfilApiAdapter implements ProfilPort {
   }) async {
     final utilisateurId = await _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
-      return Either.left(const UtilisateurIdNonTrouveException());
+      return const Left(UtilisateurIdNonTrouveException());
     }
 
     final uri = Uri.parse('/utilisateurs/$utilisateurId/profile');
@@ -147,9 +143,7 @@ class ProfilApiAdapter implements ProfilPort {
     final response = await _apiClient.patch(uri, body: body);
 
     return response.statusCode == 200
-        ? Either.right(null)
-        : Either.left(
-            Exception('Erreur lors de la mise à jour du mot de passe'),
-          );
+        ? const Right(null)
+        : Left(Exception('Erreur lors de la mise à jour du mot de passe'));
   }
 }

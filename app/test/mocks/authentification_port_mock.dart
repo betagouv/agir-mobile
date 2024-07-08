@@ -16,7 +16,7 @@ class AuthentificationPortMock implements AuthentificationPort {
     authentificationStatusManager
         .gererAuthentificationStatut(AuthentificationStatut.connecte);
 
-    return Either.right(null);
+    return const Right(null);
   }
 
   @override
@@ -24,6 +24,6 @@ class AuthentificationPortMock implements AuthentificationPort {
     authentificationStatusManager
         .gererAuthentificationStatut(AuthentificationStatut.pasConnecte);
 
-    return Either.right(null);
+    return const Right(null);
   }
 }

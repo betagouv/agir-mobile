@@ -5,5 +5,5 @@ class VersionPortMock implements VersionPort {
   const VersionPortMock();
 
   @override
-  Either<Exception, String> versionDemandee() => Either.right('1.2.3+4');
+  Either<Exception, String> versionDemandee() => const Right('1.2.3+4');
 }

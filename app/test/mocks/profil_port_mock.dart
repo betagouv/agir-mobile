@@ -42,8 +42,7 @@ class ProfilPortMock implements ProfilPort {
   bool changerLeMotDePasseAppele = false;
 
   @override
-  Future<Either<Exception, Informations>> recupererProfil() async =>
-      Either.right(
+  Future<Either<Exception, Informations>> recupererProfil() async => Right(
         Informations(
           prenom: prenom,
           nom: nom,
@@ -69,11 +68,11 @@ class ProfilPortMock implements ProfilPort {
     this.nombreDePartsFiscales = nombreDePartsFiscales;
     this.revenuFiscal = revenuFiscal;
 
-    return Either.right(null);
+    return const Right(null);
   }
 
   @override
-  Future<Either<Exception, Logement>> recupererLogement() async => Either.right(
+  Future<Either<Exception, Logement>> recupererLogement() async => Right(
         Logement(
           codePostal: codePostal,
           commune: commune,
@@ -103,14 +102,14 @@ class ProfilPortMock implements ProfilPort {
     plusDe15Ans = logement.plusDe15Ans;
     dpe = logement.dpe;
 
-    return Either.right(null);
+    return const Right(null);
   }
 
   @override
   Future<Either<Exception, void>> supprimerLeCompte() async {
     supprimerLeCompteAppele = true;
 
-    return Either.right(null);
+    return const Right(null);
   }
 
   @override
@@ -119,6 +118,6 @@ class ProfilPortMock implements ProfilPort {
   }) async {
     changerLeMotDePasseAppele = true;
 
-    return Either.right(null);
+    return const Right(null);
   }
 }

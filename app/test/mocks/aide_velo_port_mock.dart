@@ -28,6 +28,6 @@ class AideVeloPortMock implements AideVeloPort {
     this.nombreDePartsFiscales = nombreDePartsFiscales;
     this.revenuFiscal = revenuFiscal;
 
-    return Either.right(_aideVeloParType);
+    return Right(_aideVeloParType);
   }
 }

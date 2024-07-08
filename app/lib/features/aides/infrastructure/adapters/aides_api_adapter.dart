@@ -17,18 +17,18 @@ class AidesApiAdapter implements AidesPort {
   Future<Either<Exception, List<Aide>>> recupereLesAides() async {
     final utilisateurId = await _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
-      return Either.left(const UtilisateurIdNonTrouveException());
+      return const Left(UtilisateurIdNonTrouveException());
     }
     final response = await _apiClient.get(
       Uri.parse('/utilisateurs/$utilisateurId/aides'),
     );
     if (response.statusCode != 200) {
-      return Either.left(Exception('Erreur lors de la récupération des aides'));
+      return Left(Exception('Erreur lors de la récupération des aides'));
     }
 
     final json = jsonDecode(response.body) as List<dynamic>;
 
-    return Either.right(
+    return Right(
       json.map((final e) {
         final f = e as Map<String, dynamic>;
 
