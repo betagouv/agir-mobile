@@ -81,5 +81,4 @@ GoRouter goRouter({
       refreshListenable:
           GoRouterRefreshStream(authentificationStatusManager.statutModifie),
       initialLocation: '/unauthenticated/${PreOnboardingPage.path}',
-      debugLogDiagnostics: true,
     );
