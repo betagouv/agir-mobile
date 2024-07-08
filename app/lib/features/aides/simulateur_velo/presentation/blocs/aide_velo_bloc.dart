@@ -117,33 +117,38 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
       return;
     }
     emit(state.copyWith(aideVeloStatut: AideVeloStatut.chargement));
-    final aidesDisponibles = await _aideVeloPort.simuler(
+    final result = await _aideVeloPort.simuler(
       prix: state.prix,
       codePostal: state.codePostal,
       commune: state.commune,
       nombreDePartsFiscales: state.nombreDePartsFiscales,
       revenuFiscal: state.revenuFiscal!,
     );
-    emit(
-      state.copyWith(
-        aidesDisponibles: {
-          'Acheter un vélo cargo': aidesDisponibles.cargo,
-          'Acheter un vélo mécanique': aidesDisponibles.mecaniqueSimple,
-          '⚡Acheter un vélo cargo électrique': aidesDisponibles.cargoElectrique,
-          '⚡Acheter un vélo électrique': aidesDisponibles.electrique,
-          '⚡️ Transformer un vélo classique en électrique':
-              aidesDisponibles.motorisation,
-        }.entries.map((final e) {
-          final value = e.value;
+    if (result.isRight()) {
+      final aidesDisponibles =
+          result.getRight().getOrElse(() => throw Exception());
+      emit(
+        state.copyWith(
+          aidesDisponibles: {
+            'Acheter un vélo cargo': aidesDisponibles.cargo,
+            'Acheter un vélo mécanique': aidesDisponibles.mecaniqueSimple,
+            '⚡Acheter un vélo cargo électrique':
+                aidesDisponibles.cargoElectrique,
+            '⚡Acheter un vélo électrique': aidesDisponibles.electrique,
+            '⚡️ Transformer un vélo classique en électrique':
+                aidesDisponibles.motorisation,
+          }.entries.map((final e) {
+            final value = e.value;
 
-          return AideDisponiblesViewModel(
-            titre: e.key,
-            montantTotal: value.map((final e) => e.montant).maxOrNull,
-            aides: value,
-          );
-        }).toList(),
-        aideVeloStatut: AideVeloStatut.succes,
-      ),
-    );
+            return AideDisponiblesViewModel(
+              titre: e.key,
+              montantTotal: value.map((final e) => e.montant).maxOrNull,
+              aides: value,
+            );
+          }).toList(),
+          aideVeloStatut: AideVeloStatut.succes,
+        ),
+      );
+    }
   }
 }

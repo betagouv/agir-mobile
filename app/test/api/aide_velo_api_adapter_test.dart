@@ -5,6 +5,7 @@ import 'package:app/features/authentification/domain/entities/authentification_s
 import 'package:app/features/authentification/infrastructure/adapters/api/authentification_api_client.dart';
 import 'package:app/features/authentification/infrastructure/adapters/api/authentification_token_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
 
 import 'client_mock.dart';
@@ -185,7 +186,10 @@ void main() {
           ),
         ),
       );
-      expect(result, aideVeloParType);
+      expect(
+        result.getRight().getOrElse(() => throw Exception()),
+        aideVeloParType,
+      );
     });
   });
 }

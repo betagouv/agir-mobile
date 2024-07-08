@@ -1,5 +1,6 @@
 import 'package:app/features/aides/simulateur_velo/domain/ports/aide_velo_port.dart';
 import 'package:app/features/aides/simulateur_velo/domain/value_objects/aide_velo_par_type.dart';
+import 'package:fpdart/fpdart.dart';
 
 class AideVeloPortMock implements AideVeloPort {
   AideVeloPortMock({required final AideVeloParType aideVeloParType})
@@ -14,7 +15,7 @@ class AideVeloPortMock implements AideVeloPort {
   final AideVeloParType _aideVeloParType;
 
   @override
-  Future<AideVeloParType> simuler({
+  Future<Either<Exception, AideVeloParType>> simuler({
     required final int prix,
     required final String codePostal,
     required final String commune,
@@ -27,6 +28,6 @@ class AideVeloPortMock implements AideVeloPort {
     this.nombreDePartsFiscales = nombreDePartsFiscales;
     this.revenuFiscal = revenuFiscal;
 
-    return _aideVeloParType;
+    return Either.right(_aideVeloParType);
   }
 }
