@@ -99,7 +99,7 @@ class AideSimulateurVeloDisponiblePage extends StatelessWidget {
           label: Localisation.revenirAuSimulateur,
           variant: DsfrButtonVariant.primary,
           size: DsfrButtonSize.lg,
-          onTap: () => GoRouter.of(context).pop(),
+          onPressed: () => GoRouter.of(context).pop(),
         ),
       ),
       backgroundColor: FnvColors.aidesFond,

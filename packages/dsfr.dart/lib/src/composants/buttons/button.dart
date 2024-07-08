@@ -18,7 +18,7 @@ class DsfrButton extends StatelessWidget {
     this.iconLocation = DsfrButtonIconLocation.left,
     required this.variant,
     required this.size,
-    this.onTap,
+    this.onPressed,
     super.key,
   });
 
@@ -27,7 +27,7 @@ class DsfrButton extends StatelessWidget {
   final DsfrButtonIconLocation iconLocation;
   final DsfrButtonVariant variant;
   final DsfrButtonSize size;
-  final VoidCallback? onTap;
+  final VoidCallback? onPressed;
 
   double _getSize(final DsfrButtonSize size) {
     switch (size) {
@@ -60,7 +60,7 @@ class DsfrButton extends StatelessWidget {
     return DsfrRawButton(
       variant: variant,
       size: size,
-      onTap: onTap,
+      onTap: onPressed,
       child: Center(
         child: SizedBox(
           height: MediaQuery.textScalerOf(context).scale(DsfrSpacings.s3w),

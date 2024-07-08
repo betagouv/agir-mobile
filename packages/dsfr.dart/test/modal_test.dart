@@ -32,7 +32,7 @@ class _Modal extends StatelessWidget {
         label: buttonLabel,
         variant: DsfrButtonVariant.primary,
         size: DsfrButtonSize.lg,
-        onTap: () async => DsfrModal.showModal(
+        onPressed: () async => DsfrModal.showModal(
           context: context,
           builder: (final context) => const SizedBox(),
         ),

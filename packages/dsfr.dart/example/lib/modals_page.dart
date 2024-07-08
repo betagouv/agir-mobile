@@ -20,7 +20,7 @@ class ModalsPage extends StatelessWidget {
             label: 'Ouvrir la bottom sheet',
             variant: DsfrButtonVariant.primary,
             size: DsfrButtonSize.lg,
-            onTap: () async {
+            onPressed: () async {
               await DsfrModal.showModal<void>(
                 context: context,
                 builder: (final context) => Column(
@@ -44,7 +44,7 @@ class ModalsPage extends StatelessWidget {
                       label: 'Confirmer',
                       variant: DsfrButtonVariant.primary,
                       size: DsfrButtonSize.lg,
-                      onTap: () {
+                      onPressed: () {
                         Navigator.of(context).pop();
                       },
                     ),
@@ -53,7 +53,7 @@ class ModalsPage extends StatelessWidget {
                       label: 'Annuler',
                       variant: DsfrButtonVariant.secondary,
                       size: DsfrButtonSize.lg,
-                      onTap: () {
+                      onPressed: () {
                         Navigator.of(context).pop();
                       },
                     ),

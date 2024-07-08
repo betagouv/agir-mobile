@@ -28,7 +28,7 @@ class ButtonsPage extends StatelessWidget {
               label: label,
               variant: variant,
               size: size,
-              onTap: _handleTap,
+              onPressed: _handleTap,
             ),
           )
           ..add(
@@ -37,7 +37,7 @@ class ButtonsPage extends StatelessWidget {
               icon: DsfrIcons.buildingsAncientGateFill,
               variant: variant,
               size: size,
-              onTap: _handleTap,
+              onPressed: _handleTap,
             ),
           )
           ..add(
@@ -47,7 +47,7 @@ class ButtonsPage extends StatelessWidget {
               iconLocation: DsfrButtonIconLocation.right,
               variant: variant,
               size: size,
-              onTap: _handleTap,
+              onPressed: _handleTap,
             ),
           );
       }

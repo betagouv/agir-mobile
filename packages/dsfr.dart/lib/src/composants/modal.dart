@@ -41,7 +41,7 @@ class DsfrModal extends StatelessWidget {
                     iconLocation: DsfrButtonIconLocation.right,
                     variant: DsfrButtonVariant.tertiaryWithouBorder,
                     size: DsfrButtonSize.sm,
-                    onTap: () => Navigator.of(context).pop(),
+                    onPressed: () => Navigator.of(context).pop(),
                   ),
                 ],
               ),

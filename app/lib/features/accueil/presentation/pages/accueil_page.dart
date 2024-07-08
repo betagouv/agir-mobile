@@ -18,30 +18,32 @@ class AccueilPage extends StatelessWidget {
   static GoRoute get route => GoRoute(
         path: path,
         name: name,
-        builder: (final context, final state) {
-          context
-              .read<UtilisateurBloc>()
-              .add(const UtilsateurRecuperationDemandee());
-
-          return const AccueilPage();
-        },
+        builder: (final context, final state) => const AccueilPage(),
       );
 
   @override
   Widget build(final BuildContext context) {
-    final state = context.watch<UtilisateurBloc>().state;
+    context
+        .read<UtilisateurBloc>()
+        .add(const UtilisateurRecuperationDemandee());
 
-    return RootPage(
-      title: const _AppBarTitle(),
-      body: ListView(
-        padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s3w),
-        children: [
-          if (state.aLesAides) ...[
-            const MesAides(),
-            const SizedBox(height: DsfrSpacings.s5w),
-          ],
-        ],
-      ),
+    return Builder(
+      builder: (final context) {
+        final state = context.watch<UtilisateurBloc>().state;
+
+        return RootPage(
+          title: const _AppBarTitle(),
+          body: ListView(
+            padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s3w),
+            children: [
+              if (state.aLesAides) ...[
+                const MesAides(),
+                const SizedBox(height: DsfrSpacings.s5w),
+              ],
+            ],
+          ),
+        );
+      },
     );
   }
 }

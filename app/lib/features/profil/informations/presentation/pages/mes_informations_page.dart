@@ -20,20 +20,20 @@ class MesInformationsPage extends StatelessWidget {
   static GoRoute get route => GoRoute(
         path: path,
         name: name,
-        builder: (final context, final state) => BlocProvider(
-          create: (final context) =>
-              MesInformationsBloc(profilPort: context.read())
-                ..add(const MesInformationsRecuperationDemandee()),
-          child: const MesInformationsPage(),
-        ),
+        builder: (final context, final state) => const MesInformationsPage(),
       );
 
-  void _handleMettreAJour(final BuildContext context) {
-    context
-        .read<MesInformationsBloc>()
-        .add(const MesInformationsMiseAJourDemandee());
-    GoRouter.of(context).pop();
-  }
+  @override
+  Widget build(final BuildContext context) => BlocProvider(
+        create: (final context) =>
+            MesInformationsBloc(profilPort: context.read())
+              ..add(const MesInformationsRecuperationDemandee()),
+        child: const _MesInformationsView(),
+      );
+}
+
+class _MesInformationsView extends StatelessWidget {
+  const _MesInformationsView();
 
   @override
   Widget build(final BuildContext context) => Scaffold(
@@ -55,7 +55,9 @@ class MesInformationsPage extends StatelessWidget {
             label: Localisation.mettreAJourVosInformations,
             variant: DsfrButtonVariant.primary,
             size: DsfrButtonSize.lg,
-            onTap: () => _handleMettreAJour(context),
+            onPressed: () => context
+                .read<MesInformationsBloc>()
+                .add(const MesInformationsMiseAJourDemandee()),
           ),
         ),
         backgroundColor: FnvColors.aidesFond,

@@ -81,7 +81,8 @@ class AidePage extends StatelessWidget {
                 label: Localisation.accederAuSimulateur,
                 variant: DsfrButtonVariant.primary,
                 size: DsfrButtonSize.lg,
-                onTap: () async => _handleAccederAuSimulateur(context, aide),
+                onPressed: () async =>
+                    _handleAccederAuSimulateur(context, aide),
               ),
             )
           : null,
