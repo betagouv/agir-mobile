@@ -3,6 +3,7 @@
 import 'package:app/features/profil/mieux_vous_connaitre/domain/ports/mieux_vous_connaitre_port.dart';
 import 'package:app/features/profil/mieux_vous_connaitre/domain/question.dart';
 import 'package:collection/collection.dart';
+import 'package:fpdart/fpdart.dart';
 
 class MieuxVousConnaitrePortMock implements MieuxVousConnaitrePort {
   MieuxVousConnaitrePortMock({required this.questions});
@@ -10,10 +11,11 @@ class MieuxVousConnaitrePortMock implements MieuxVousConnaitrePort {
   List<Question> questions;
 
   @override
-  Future<List<Question>> recupererLesQuestionsDejaRepondue() async => questions;
+  Future<Either<Exception, List<Question>>>
+      recupererLesQuestionsDejaRepondue() async => Either.right(questions);
 
   @override
-  Future<void> mettreAJour({
+  Future<Either<Exception, void>> mettreAJour({
     required final String id,
     required final List<String> reponses,
   }) async {
@@ -23,5 +25,7 @@ class MieuxVousConnaitrePortMock implements MieuxVousConnaitrePort {
         ..removeWhere((final e) => e.id == id)
         ..add(question.copyWith(reponses: reponses));
     }
+
+    return Either.right(null);
   }
 }
