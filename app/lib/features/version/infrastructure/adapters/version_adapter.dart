@@ -1,4 +1,5 @@
 import 'package:app/features/version/domain/ports/version_port.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 class VersionAdapter implements VersionPort {
@@ -8,6 +9,6 @@ class VersionAdapter implements VersionPort {
   final PackageInfo _packageInfo;
 
   @override
-  String versionDemandee() =>
-      '${_packageInfo.version}+${_packageInfo.buildNumber}';
+  Either<Exception, String> versionDemandee() =>
+      Either.right('${_packageInfo.version}+${_packageInfo.buildNumber}');
 }

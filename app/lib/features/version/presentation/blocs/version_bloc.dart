@@ -2,6 +2,7 @@ import 'package:app/features/version/domain/ports/version_port.dart';
 import 'package:app/features/version/presentation/blocs/version_event.dart';
 import 'package:app/features/version/presentation/blocs/version_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fpdart/fpdart.dart';
 
 class VersionBloc extends Bloc<VersionEvent, VersionState> {
   VersionBloc({required final VersionPort versionPort})
@@ -15,6 +16,11 @@ class VersionBloc extends Bloc<VersionEvent, VersionState> {
   void _onDemandee(
     final VersionDemandee event,
     final Emitter<VersionState> emit,
-  ) =>
-      emit(VersionState(_versionPort.versionDemandee()));
+  ) {
+    final result = _versionPort.versionDemandee();
+    if (result.isRight()) {
+      final version = result.getRight().getOrElse(() => throw Exception());
+      emit(VersionState(version));
+    }
+  }
 }
