@@ -135,6 +135,56 @@ void main() {
       ielVoitLeTexte([...reponses, reponseEnPlus].join(' - '));
     },
   );
+
+  testWidgets('Modifier plusieurs questions', (final tester) async {
+    const question = 'Quelle est votre situation professionnelle ?';
+    const reponse = 'J’ai un emploi';
+
+    const question2 = 'Qui joue en première base ?';
+    const reponse2 = 'Personne ne joue en première base';
+    const nouvelleReponse2 = "C'est qui qui qui joue en première base";
+    leServeurRetourneCesQuestions([
+      const Question(
+        id: 'KYC005',
+        question: question,
+        reponses: [reponse],
+        categorie: 'recommandation',
+        points: 5,
+        type: ReponseType.libre,
+        reponsesPossibles: [],
+        deNosGestesClimat: false,
+        thematique: Thematique.climat,
+      ),
+      const Question(
+        id: 'KYC006',
+        question: question2,
+        reponses: [reponse2],
+        categorie: 'recommandation',
+        points: 5,
+        type: ReponseType.choixUnique,
+        reponsesPossibles: [reponse2, nouvelleReponse2],
+        deNosGestesClimat: false,
+        thematique: Thematique.loisir,
+      ),
+    ]);
+
+    await _allerSurMesInformations(tester);
+    await ielAppuieSur(tester, question);
+    const nouvelleReponse = "Je n'ai pas d'emploi";
+    await ielEcritDansLeChamp(
+      tester,
+      label: Localisation.maReponse,
+      enterText: nouvelleReponse,
+    );
+    await ielAppuieSur(tester, Localisation.mettreAJour);
+    ielVoitLeTexte(Localisation.mieuxVousConnaitre);
+    ielVoitLeTexte(nouvelleReponse);
+    await ielAppuieSur(tester, question2);
+    await ielAppuieSur(tester, nouvelleReponse2);
+    await ielAppuieSur(tester, Localisation.mettreAJour);
+    ielVoitLeTexte(Localisation.mieuxVousConnaitre);
+    ielVoitLeTexte(nouvelleReponse2);
+  });
 }
 
 Future<void> _allerSurMesInformations(final WidgetTester tester) async {
