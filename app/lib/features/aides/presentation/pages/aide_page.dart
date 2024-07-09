@@ -13,6 +13,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:fwfh_url_launcher/fwfh_url_launcher.dart';
 import 'package:go_router/go_router.dart';
+import 'package:html/dom.dart' as dom;
 import 'package:url_launcher/url_launcher.dart';
 
 class AidePage extends StatelessWidget {
@@ -35,6 +36,13 @@ class AidePage extends StatelessWidget {
       await GoRouter.of(context).pushNamed(AideSimulateurVeloPage.name);
     }
   }
+
+  /// Le CMS peut retourner des balises `<li>` avec des balises `<p>` dedans.
+  /// Cela pose des problèmes de mise en forme, alors on retire les marges.
+  Map<String, String>? _handlePDansLi(final dom.Element element) =>
+      element.parent?.localName == 'li' && element.localName == 'p'
+          ? {'margin': '0'}
+          : null;
 
   @override
   Widget build(final BuildContext context) {
@@ -69,6 +77,7 @@ class AidePage extends StatelessWidget {
           const SizedBox(height: DsfrSpacings.s3w),
           HtmlWidget(
             aide.contenu,
+            customStylesBuilder: _handlePDansLi,
             factoryBuilder: MyUrlLauncherFactory.new,
             textStyle: const DsfrTextStyle(fontSize: 15, lineHeight: 24),
           ),
