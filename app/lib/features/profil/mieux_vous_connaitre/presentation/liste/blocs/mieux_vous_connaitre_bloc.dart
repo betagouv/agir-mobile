@@ -45,7 +45,9 @@ class MieuxVousConnaitreBloc
     emit(
       state.copyWith(
         questionsParCategorie: state.questions
-            .where((final e) => e.thematique == event.valeur)
+            .where(
+              (final e) => event.valeur == null || e.thematique == event.valeur,
+            )
             .toList(),
         thematiqueSelectionnee: Option.of(event.valeur),
       ),
