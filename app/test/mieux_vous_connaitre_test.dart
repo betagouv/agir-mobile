@@ -73,6 +73,9 @@ void main() {
     await ielAppuieSur(tester, Localisation.lesCategoriesConsommation);
     ielNeVoitPasLeTexte(question);
     ielVoitLeTexte(question2);
+    await ielAppuieSur(tester, Localisation.lesCategoriesTout);
+    ielVoitLeTexte(question);
+    ielVoitLeTexte(question2);
   });
 }
 
