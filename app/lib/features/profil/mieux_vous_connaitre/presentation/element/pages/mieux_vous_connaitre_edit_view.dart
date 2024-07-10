@@ -31,7 +31,7 @@ class MieuxVousConnaitreEditView extends StatelessWidget {
           const MieuxVousConnaitreRecuperationDemandee(),
         );
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Mise à jour effectuée')),
+      const SnackBar(content: Text(Localisation.miseAJourEffectuee)),
     );
     GoRouter.of(context).pop();
   }

@@ -35,6 +35,16 @@ class MesInformationsPage extends StatelessWidget {
 class _MesInformationsView extends StatelessWidget {
   const _MesInformationsView();
 
+  void _handleMettreAJour(final BuildContext context) {
+    context
+        .read<MesInformationsBloc>()
+        .add(const MesInformationsMiseAJourDemandee());
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text(Localisation.miseAJourEffectuee)),
+    );
+    GoRouter.of(context).pop();
+  }
+
   @override
   Widget build(final BuildContext context) => Scaffold(
         appBar: const FnvAppBar(),
@@ -55,9 +65,7 @@ class _MesInformationsView extends StatelessWidget {
             label: Localisation.mettreAJourVosInformations,
             variant: DsfrButtonVariant.primary,
             size: DsfrButtonSize.lg,
-            onPressed: () => context
-                .read<MesInformationsBloc>()
-                .add(const MesInformationsMiseAJourDemandee()),
+            onPressed: () => _handleMettreAJour(context),
           ),
         ),
         backgroundColor: FnvColors.aidesFond,
