@@ -19,11 +19,13 @@ class DsfrTag extends StatelessWidget {
     required final Color backgroundColor,
     required final Color foregroundColor,
     final IconData? icon,
+    final TextStyle? textStyle,
     final GestureTapCallback? onTap,
     final Key? key,
   }) : this._(
           label: label,
-          textStyle: const DsfrTextStyle(fontSize: 12, lineHeight: 22),
+          textStyle:
+              textStyle ?? const DsfrTextStyle(fontSize: 12, lineHeight: 22),
           backgroundColor: backgroundColor,
           foregroundColor: foregroundColor,
           padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 8),

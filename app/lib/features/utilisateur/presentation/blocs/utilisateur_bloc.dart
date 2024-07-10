@@ -10,7 +10,13 @@ import 'package:fpdart/fpdart.dart';
 class UtilisateurBloc extends Bloc<UtilisateurEvent, UtilisateurState> {
   UtilisateurBloc({required final UtilisateurPort utilisateurPort})
       : _utilisateurPort = utilisateurPort,
-        super(const UtilisateurState(prenom: '', aLesAides: false)) {
+        super(
+          const UtilisateurState(
+            prenom: '',
+            aLesAides: false,
+            aLesRecommandations: false,
+          ),
+        ) {
     on<UtilisateurRecuperationDemandee>(_onRecuperationDemandee);
   }
 
@@ -28,6 +34,8 @@ class UtilisateurBloc extends Bloc<UtilisateurEvent, UtilisateurState> {
           prenom: utilisateur.prenom,
           aLesAides: utilisateur.fonctionnalitesDebloquees
               .contains(Fonctionnalites.aides),
+          aLesRecommandations: utilisateur.fonctionnalitesDebloquees
+              .contains(Fonctionnalites.recommandations),
         ),
       );
     }

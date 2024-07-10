@@ -10,6 +10,8 @@ import 'package:app/features/communes/domain/ports/communes_port.dart';
 import 'package:app/features/profil/domain/ports/profil_port.dart';
 import 'package:app/features/profil/mieux_vous_connaitre/domain/ports/mieux_vous_connaitre_port.dart';
 import 'package:app/features/profil/mieux_vous_connaitre/presentation/liste/blocs/mieux_vous_connaitre_bloc.dart';
+import 'package:app/features/recommandations/domain/ports/recommandations_port.dart';
+import 'package:app/features/recommandations/presentation/blocs/recommandations_bloc.dart';
 import 'package:app/features/utilisateur/domain/ports/utilisateur_port.dart';
 import 'package:app/features/utilisateur/presentation/blocs/utilisateur_bloc.dart';
 import 'package:app/features/version/domain/ports/version_port.dart';
@@ -27,6 +29,7 @@ class App extends StatefulWidget {
     required this.authentificationPort,
     required this.utilisateurPort,
     required this.aidesPort,
+    required this.recommandationsPort,
     required this.versionPort,
     required this.communesPort,
     required this.aideVeloPort,
@@ -39,6 +42,7 @@ class App extends StatefulWidget {
   final AuthentificationPort authentificationPort;
   final UtilisateurPort utilisateurPort;
   final AidesPort aidesPort;
+  final RecommandationsPort recommandationsPort;
   final VersionPort versionPort;
   final CommunesPort communesPort;
   final AideVeloPort aideVeloPort;
@@ -98,6 +102,11 @@ class _AppState extends State<App> {
                 profilPort: widget.profilPort,
                 communesPort: widget.communesPort,
                 aideVeloPort: widget.aideVeloPort,
+              ),
+            ),
+            BlocProvider(
+              create: (final context) => RecommandationsBloc(
+                recommandationsPort: widget.recommandationsPort,
               ),
             ),
             BlocProvider(

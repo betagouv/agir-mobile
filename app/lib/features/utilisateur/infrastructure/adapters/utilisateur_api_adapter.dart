@@ -34,7 +34,11 @@ class UtilisateurApiAdapter implements UtilisateurPort {
         prenom: json['prenom'] as String,
         fonctionnalitesDebloquees:
             (json['fonctionnalites_debloquees'] as List<dynamic>)
-                .where((final e) => e == Fonctionnalites.aides.name)
+                .where(
+                  (final e) =>
+                      e == Fonctionnalites.aides.name ||
+                      e == Fonctionnalites.recommandations.name,
+                )
                 .map((final e) => Fonctionnalites.values.byName(e as String))
                 .toList(),
       ),

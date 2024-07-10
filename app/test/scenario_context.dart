@@ -3,6 +3,7 @@ import 'package:app/features/aides/simulateur_velo/domain/value_objects/aide_vel
 import 'package:app/features/authentification/domain/value_objects/authentification_statut.dart';
 import 'package:app/features/profil/logement/presentation/blocs/mon_logement_state.dart';
 import 'package:app/features/profil/mieux_vous_connaitre/domain/question.dart';
+import 'package:app/features/recommandations/domain/recommandation.dart';
 import 'package:app/features/utilisateur/domain/entities/utilisateur.dart';
 
 import 'mocks/aide_velo_port_mock.dart';
@@ -39,6 +40,7 @@ class ScenarioContext {
     motorisation: [],
   );
   List<Aide> aides = <Aide>[];
+  List<Recommandation> recommandations = <Recommandation>[];
   List<String> communes = <String>[];
   List<Question> questions = <Question>[];
 

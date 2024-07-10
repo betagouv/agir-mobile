@@ -33,6 +33,9 @@ abstract final class Localisation {
   static const menuAides = 'Aides';
   static const accueilMesAides = 'Mes aides';
   static const accueilMesAidesLien = 'Voir toutes les aides';
+  static const accueilRecommandationsTitre = 'Recommandé, pour vous';
+  static const accueilRecommandationsSousTitre =
+      'Une sélection d’articles et de services, pour vous, selon vos préférences !';
   static const vosAidesTitre = 'Vos aides disponibles';
   static const vosAidesSousTitre =
       'Accédez à toutes les aides publiques locales ou nationales pour la transition écologique en fonction de votre situation.';

@@ -129,7 +129,7 @@ class DsfrTextStyle extends TextStyle {
       : this(
           fontSize: 18,
           lineHeight: 28,
-          fontWeight: FontWeight.w500,
+          fontWeight: FontWeight.bold,
           color: color,
         );
 
