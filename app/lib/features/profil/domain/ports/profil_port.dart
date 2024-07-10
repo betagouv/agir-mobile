@@ -1,4 +1,4 @@
-import 'package:app/features/profil/informations/domain/entities/mes_informations.dart';
+import 'package:app/features/profil/informations/domain/entities/informations.dart';
 import 'package:app/features/profil/logement/domain/entities/logement.dart';
 import 'package:fpdart/fpdart.dart';
 

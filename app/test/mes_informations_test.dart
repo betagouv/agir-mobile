@@ -1,4 +1,5 @@
 import 'package:app/l10n/l10n.dart';
+import 'package:app/shared/number_format.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'scenario_context.dart';
@@ -40,7 +41,9 @@ void main() {
     ielVoitLeTexte(ScenarioContext().prenom);
     ielVoitLeTexte(ScenarioContext().email);
     await ielScrolle(tester, Localisation.revenuFiscal);
-    ielVoitLeTexte(ScenarioContext().nombreDePartsFiscales.toString());
+    ielVoitLeTexte(
+      FnvNumberFormat.formatNumber(ScenarioContext().nombreDePartsFiscales),
+    );
     await ielEcritDansLeChamp(
       tester,
       label: Localisation.revenuFiscal,
@@ -110,6 +113,6 @@ Future<void> _allerSurMesInformations(final WidgetTester tester) async {
   ielEstConnecte();
   await ielLanceLapplication(tester);
   await ielAppuieSurAccessibilite(tester, Localisation.menu);
-  await ielAppuieSur(tester, Localisation.monProfil);
+  await ielAppuieSur(tester, Localisation.votreProfil);
   await ielAppuieSur(tester, Localisation.vosInformations);
 }

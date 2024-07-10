@@ -92,7 +92,7 @@ class _MenuItems extends StatelessWidget {
         ),
         const Spacer(),
         _MenuItem(
-          label: Localisation.monProfil,
+          label: Localisation.votreProfil,
           value: ProfilPage.name,
           groupValue: groupValue,
           onTap: () async => _handleTapOnProfile(context),

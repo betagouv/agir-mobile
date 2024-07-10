@@ -93,7 +93,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const propulsePar = 'Propulsé par ';
   static String euro(final int value) => '$value €';
   static const seDeconnecter = 'Se déconnecter';
-  static const monProfil = 'Mon profil';
+  static const votreProfil = 'Votre profil';
   static const vosInformations = 'Vos informations';
   static const mieuxVousConnaitre = 'Mieux vous connaître';
   static const votreIdentite = 'Votre identité';

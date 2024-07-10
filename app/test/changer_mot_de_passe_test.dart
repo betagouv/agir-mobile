@@ -164,6 +164,6 @@ Future<void> _allerSurOptionsAvancees(final WidgetTester tester) async {
   ielEstConnecte();
   await ielLanceLapplication(tester);
   await ielAppuieSurAccessibilite(tester, Localisation.menu);
-  await ielAppuieSur(tester, Localisation.monProfil);
+  await ielAppuieSur(tester, Localisation.votreProfil);
   await ielAppuieSur(tester, Localisation.optionsAvancees);
 }

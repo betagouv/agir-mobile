@@ -30,7 +30,7 @@ class ProfilPage extends StatelessWidget {
             horizontal: DsfrSpacings.s2w,
           ),
           children: [
-            const ProfilTitle(title: Localisation.monProfil),
+            const ProfilTitle(title: Localisation.votreProfil),
             FnvCard(
               child: Column(
                 children: [
