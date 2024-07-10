@@ -13,6 +13,7 @@ import 'package:app/features/authentification/infrastructure/adapters/api/authen
 import 'package:app/features/communes/infrastructure/adapters/communes_api_adapter.dart';
 import 'package:app/features/profil/infrastructure/adapters/profil_api_adapter.dart';
 import 'package:app/features/profil/mieux_vous_connaitre/infrastructure/adapters/mieux_vous_connaitre_api_adapter.dart';
+import 'package:app/features/recommandations/infrastructure/adapters/recommandations_api_adapter.dart';
 import 'package:app/features/utilisateur/infrastructure/adapters/utilisateur_api_adapter.dart';
 import 'package:app/features/version/infrastructure/adapters/version_adapter.dart';
 import 'package:dsfr/dsfr.dart';
@@ -55,6 +56,7 @@ Future<void> main() async {
       authentificationPort: AuthentificationApiAdapter(apiClient: apiClient),
       utilisateurPort: UtilisateurApiAdapter(apiClient: apiClient),
       aidesPort: AidesApiAdapter(apiClient: apiClient),
+      recommandationsPort: RecommandationsApiAdapter(apiClient: apiClient),
       versionPort: VersionAdapter(packageInfo: packageInfo),
       communesPort: CommunesApiAdapter(apiClient: apiClient),
       aideVeloPort: AideVeloApiAdapter(apiClient: apiClient),

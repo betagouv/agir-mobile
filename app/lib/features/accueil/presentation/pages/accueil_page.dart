@@ -1,5 +1,6 @@
 import 'package:app/features/aides/presentation/widgets/mes_aides.dart';
 import 'package:app/features/menu/presentation/pages/root_page.dart';
+import 'package:app/features/recommandations/presentation/widgets/mes_recommandations.dart';
 import 'package:app/features/utilisateur/presentation/blocs/utilisateur_bloc.dart';
 import 'package:app/features/utilisateur/presentation/blocs/utilisateur_event.dart';
 import 'package:app/l10n/l10n.dart';
@@ -38,8 +39,9 @@ class AccueilPage extends StatelessWidget {
             children: [
               if (state.aLesAides) ...[
                 const MesAides(),
-                const SizedBox(height: DsfrSpacings.s5w),
+                const SizedBox(height: DsfrSpacings.s4w),
               ],
+              if (state.aLesRecommandations) const MesRecommandations(),
             ],
           ),
         );
