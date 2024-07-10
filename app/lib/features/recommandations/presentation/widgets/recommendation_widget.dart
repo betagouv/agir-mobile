@@ -1,10 +1,13 @@
+import 'package:app/features/articles/presentation/pages/article_page.dart';
 import 'package:app/shared/widgets/fondamentaux/colors.dart';
 import 'package:app/shared/widgets/fondamentaux/shadows.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class RecommendationWidget extends StatelessWidget {
   const RecommendationWidget({
+    required this.id,
     required this.points,
     required this.imageUrl,
     required this.tagLabel,
@@ -12,6 +15,7 @@ class RecommendationWidget extends StatelessWidget {
     super.key,
   });
 
+  final String id;
   final String points;
   final String imageUrl;
   final String tagLabel;
@@ -23,49 +27,55 @@ class RecommendationWidget extends StatelessWidget {
 
     const borderRadius = BorderRadius.all(Radius.circular(DsfrSpacings.s1w));
 
-    return DecoratedBox(
-      decoration: const ShapeDecoration(
-        color: Colors.white,
-        shadows: recommandationOmbre,
-        shape: RoundedRectangleBorder(borderRadius: borderRadius),
+    return GestureDetector(
+      onTap: () async => GoRouter.of(context).pushNamed(
+        ArticlePage.name,
+        pathParameters: {'id': id},
       ),
-      child: Padding(
-        padding: const EdgeInsets.only(
-          left: DsfrSpacings.s1v5,
-          top: DsfrSpacings.s1v5,
-          right: DsfrSpacings.s1v5,
-          bottom: DsfrSpacings.s3v,
+      child: DecoratedBox(
+        decoration: const ShapeDecoration(
+          color: Colors.white,
+          shadows: recommandationOmbre,
+          shape: RoundedRectangleBorder(borderRadius: borderRadius),
         ),
-        child: SizedBox(
-          width: width,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Stack(
-                alignment: Alignment.topRight,
-                children: [
-                  _Image(
-                    imageUrl: imageUrl,
-                    width: width,
-                    borderRadius: borderRadius,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      top: DsfrSpacings.s1v5,
-                      right: DsfrSpacings.s1v5,
-                    ),
-                    child: _Points(
-                      points: points,
+        child: Padding(
+          padding: const EdgeInsets.only(
+            left: DsfrSpacings.s1v5,
+            top: DsfrSpacings.s1v5,
+            right: DsfrSpacings.s1v5,
+            bottom: DsfrSpacings.s3v,
+          ),
+          child: SizedBox(
+            width: width,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Stack(
+                  alignment: Alignment.topRight,
+                  children: [
+                    _Image(
+                      imageUrl: imageUrl,
+                      width: width,
                       borderRadius: borderRadius,
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: DsfrSpacings.s1v5),
-              _Tag(tagLabel: tagLabel),
-              const SizedBox(height: DsfrSpacings.s1w),
-              Flexible(child: _Title(titre: titre)),
-            ],
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: DsfrSpacings.s1v5,
+                        right: DsfrSpacings.s1v5,
+                      ),
+                      child: _Points(
+                        points: points,
+                        borderRadius: borderRadius,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: DsfrSpacings.s1v5),
+                _Tag(tagLabel: tagLabel),
+                const SizedBox(height: DsfrSpacings.s1w),
+                Flexible(child: _Title(titre: titre)),
+              ],
+            ),
           ),
         ),
       ),

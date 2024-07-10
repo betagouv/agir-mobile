@@ -66,7 +66,7 @@ class DsfrTextStyle extends TextStyle {
   const DsfrTextStyle.headline2({final Color color = DsfrColors.grey50})
       : this(
           fontSize: 28,
-          lineHeight: 34,
+          lineHeight: 28,
           fontWeight: FontWeight.bold,
           color: color,
         );
@@ -98,7 +98,7 @@ class DsfrTextStyle extends TextStyle {
   const DsfrTextStyle.headline6({final Color color = DsfrColors.grey50})
       : this(
           fontSize: 18,
-          lineHeight: 20,
+          lineHeight: 18,
           fontWeight: FontWeight.bold,
           color: color,
         );

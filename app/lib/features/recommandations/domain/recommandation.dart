@@ -3,17 +3,19 @@ import 'package:equatable/equatable.dart';
 
 class Recommandation extends Equatable {
   const Recommandation({
+    required this.id,
     required this.titre,
     required this.imageUrl,
     required this.points,
     required this.thematique,
   });
 
+  final String id;
   final String titre;
   final String imageUrl;
   final int points;
   final Thematique thematique;
 
   @override
-  List<Object> get props => [titre, imageUrl, points, thematique];
+  List<Object> get props => [id, titre, imageUrl, points, thematique];
 }

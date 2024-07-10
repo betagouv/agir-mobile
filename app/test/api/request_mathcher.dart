@@ -13,8 +13,9 @@ class RequestMathcher extends Matcher {
   Description describe(final Description description) => description.add('Ok');
 
   @override
-  bool matches(final item, final Map<dynamic, dynamic> matchState) => item
-          is http.Request
-      ? item.url.toString().endsWith(url) && (body == null || body == item.body)
-      : false;
+  bool matches(final item, final Map<dynamic, dynamic> matchState) =>
+      item is http.Request
+          ? Uri.decodeComponent(item.url.toString()).endsWith(url) &&
+              (body == null || body == item.body)
+          : false;
 }

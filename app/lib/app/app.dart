@@ -3,6 +3,7 @@ import 'package:app/features/aides/domain/ports/aides_port.dart';
 import 'package:app/features/aides/presentation/blocs/aide/aide_bloc.dart';
 import 'package:app/features/aides/simulateur_velo/domain/ports/aide_velo_port.dart';
 import 'package:app/features/aides/simulateur_velo/presentation/blocs/aide_velo_bloc.dart';
+import 'package:app/features/articles/domain/ports/articles_port.dart';
 import 'package:app/features/authentification/domain/entities/authentification_statut_manager.dart';
 import 'package:app/features/authentification/domain/ports/authentification_port.dart';
 import 'package:app/features/authentification/presentation/blocs/se_connecter_bloc.dart';
@@ -30,6 +31,7 @@ class App extends StatefulWidget {
     required this.utilisateurPort,
     required this.aidesPort,
     required this.recommandationsPort,
+    required this.articlesPort,
     required this.versionPort,
     required this.communesPort,
     required this.aideVeloPort,
@@ -43,6 +45,7 @@ class App extends StatefulWidget {
   final UtilisateurPort utilisateurPort;
   final AidesPort aidesPort;
   final RecommandationsPort recommandationsPort;
+  final ArticlesPort articlesPort;
   final VersionPort versionPort;
   final CommunesPort communesPort;
   final AideVeloPort aideVeloPort;
@@ -75,6 +78,7 @@ class _AppState extends State<App> {
         providers: [
           RepositoryProvider.value(value: widget.authentificationPort),
           RepositoryProvider.value(value: widget.aidesPort),
+          RepositoryProvider.value(value: widget.articlesPort),
           RepositoryProvider.value(value: widget.profilPort),
           RepositoryProvider.value(value: widget.communesPort),
           RepositoryProvider.value(value: widget.mieuxVousConnaitrePort),

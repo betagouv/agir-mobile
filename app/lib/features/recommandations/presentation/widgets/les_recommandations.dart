@@ -23,6 +23,7 @@ class LesRecommandations extends StatelessWidget {
           final element = recommandations[index];
 
           return RecommendationWidget(
+            id: element.id,
             points: '${element.points}',
             imageUrl: element.imageUrl,
             tagLabel: switch (element.thematique) {
