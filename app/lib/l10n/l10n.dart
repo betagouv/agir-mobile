@@ -105,6 +105,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const donneesPersonnelles = 'Données personnelles';
   static const mettreAJour = 'Mettre à jour';
   static const mettreAJourVosInformations = 'Mettre à jour vos informations';
+  static const miseAJourEffectuee = 'Mise à jour effectuée';
   static const votreLogement = 'Votre logement';
   static const ouHabitezVous = 'Où habitez-vous ?';
   static const combienEtesVousDansVotreLogement =
