@@ -150,7 +150,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
       'Votre mot de passe a été changé.';
   static const supprimerVotreCompte = 'Supprimer votre compte';
   static const supprimerVotreCompteContenu =
-      'Vous pouvez à tous moments choisir de supprimer votre compte ainsi que l’ensemble des données qui y sont associées. ';
+      'Vous pouvez à tout moment choisir de supprimer votre compte ainsi que l’ensemble des données qui y sont associées. ';
   static const attentionAucuneDonneeNePourraEtreRecuperee =
       'Attention, aucune donnée ne pourra être récupérée.';
   static const supprimerVotreCompteConfirmation =
