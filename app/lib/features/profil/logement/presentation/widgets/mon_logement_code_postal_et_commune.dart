@@ -43,7 +43,6 @@ class _MonLogementCodePostalEtCommuneState
     if (state.communes.length == 1) {
       final commune = state.communes.firstOrNull!;
       _textEditingController.text = commune;
-      _handleCommune(context, commune);
     } else {
       _textEditingController.text = state.commune;
     }

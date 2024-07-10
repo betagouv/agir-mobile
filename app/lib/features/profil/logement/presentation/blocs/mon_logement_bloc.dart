@@ -67,17 +67,16 @@ class MonLogementBloc extends Bloc<MonLogementEvent, MonLogementState> {
     final MonLogementCodePostalChange event,
     final Emitter<MonLogementState> emit,
   ) async {
-    final result = state.codePostal.length == 5
-        ? await _communesPort.recupererLesCommunes(state.codePostal)
-        : Either<Exception, List<String>>.right(<String>[]);
-
+    final result = (event.valeur.length == 5
+        ? await _communesPort.recupererLesCommunes(event.valeur)
+        : Either<Exception, List<String>>.right(<String>[]));
     if (result.isRight()) {
       final communes = result.getRight().getOrElse(() => throw Exception());
       emit(
         state.copyWith(
           codePostal: event.valeur,
           communes: communes,
-          commune: '',
+          commune: communes.length == 1 ? communes.firstOrNull : null,
         ),
       );
     }
