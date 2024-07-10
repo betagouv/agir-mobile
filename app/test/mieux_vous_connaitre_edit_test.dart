@@ -192,6 +192,6 @@ Future<void> _allerSurMesInformations(final WidgetTester tester) async {
 
   await ielLanceLapplication(tester);
   await ielAppuieSurAccessibilite(tester, Localisation.menu);
-  await ielAppuieSur(tester, Localisation.monProfil);
+  await ielAppuieSur(tester, Localisation.votreProfil);
   await ielAppuieSur(tester, Localisation.mieuxVousConnaitre);
 }

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:app/features/authentification/infrastructure/adapters/api/authentification_api_client.dart';
 import 'package:app/features/profil/domain/ports/profil_port.dart';
 import 'package:app/features/profil/domain/utilisateur_id_non_trouve_exception.dart';
-import 'package:app/features/profil/informations/domain/entities/mes_informations.dart';
+import 'package:app/features/profil/informations/domain/entities/informations.dart';
 import 'package:app/features/profil/infrastructure/adapters/logement_mapper.dart';
 import 'package:app/features/profil/logement/domain/entities/logement.dart';
 import 'package:fpdart/fpdart.dart';

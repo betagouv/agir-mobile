@@ -15,7 +15,7 @@ void main() {
     (final tester) async {
       setUpWidgets(tester);
       await _allerSurMonProfil(tester);
-      ielVoitLeTexte(Localisation.monProfil);
+      ielVoitLeTexte(Localisation.votreProfil);
       ielVoitLeTexte(Localisation.vosInformations);
       ielVoitLeTexte(Localisation.votreLogement);
       ielVoitLeTexte(Localisation.optionsAvancees);
@@ -51,5 +51,5 @@ Future<void> _allerSurMonProfil(final WidgetTester tester) async {
   ielEstConnecte();
   await ielLanceLapplication(tester);
   await ielAppuieSurAccessibilite(tester, Localisation.menu);
-  await ielAppuieSur(tester, Localisation.monProfil);
+  await ielAppuieSur(tester, Localisation.votreProfil);
 }

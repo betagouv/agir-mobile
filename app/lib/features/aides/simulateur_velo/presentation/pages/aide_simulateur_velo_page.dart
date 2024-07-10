@@ -3,6 +3,7 @@ import 'package:app/features/aides/simulateur_velo/presentation/blocs/aide_velo_
 import 'package:app/features/aides/simulateur_velo/presentation/blocs/aide_velo_event.dart';
 import 'package:app/features/aides/simulateur_velo/presentation/pages/aide_simulateur_velo_disponibles_page.dart';
 import 'package:app/l10n/l10n.dart';
+import 'package:app/shared/number_format.dart';
 import 'package:app/shared/widgets/composants/alert.dart';
 import 'package:app/shared/widgets/composants/app_bar.dart';
 import 'package:app/shared/widgets/composants/bottom_bar.dart';
@@ -362,7 +363,7 @@ class _NombreDePartsFiscales extends StatelessWidget {
       label: Localisation.nombreDePartsFiscales,
       hint: Localisation.nombreDePartsFiscalesDescription,
       onChanged: (final value) => _handleNombreDePartsFiscales(context, value),
-      initialValue: '$nombreDePartsFiscales',
+      initialValue: FnvNumberFormat.formatNumber(nombreDePartsFiscales),
       width: MediaQuery.textScalerOf(context).scale(_inputWidth),
       keyboardType: const TextInputType.numberWithOptions(decimal: true),
       inputFormatters: [FilteringTextInputFormatter.allow(RegExp('[0-9,.]'))],

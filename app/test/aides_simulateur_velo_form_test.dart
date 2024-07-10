@@ -6,6 +6,7 @@ import 'package:app/features/aides/domain/entities/aide.dart';
 import 'package:app/features/aides/simulateur_velo/domain/value_objects/velo_pour_simulateur.dart';
 import 'package:app/features/utilisateur/domain/entities/utilisateur.dart';
 import 'package:app/l10n/l10n.dart';
+import 'package:app/shared/number_format.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'api/aide_velo_api_adapter_test.dart';
@@ -202,7 +203,9 @@ void main() {
         await ielAppuieSurTexteComportant(tester, Localisation.modifier);
         ielVoitLeTexteDansTexteRiche(codePostal);
         ielVoitLeTexteDansTexteRiche(commune);
-        ielVoitLeTexteDansTexteRiche('$nombreDePart');
+        ielVoitLeTexteDansTexteRiche(
+          FnvNumberFormat.formatNumber(nombreDePart),
+        );
         ielVoitLeTexteDansTexteRiche(commune);
         ielVoitLeTexteDansTexteRiche(revenuFiscal.toString());
       },

@@ -1,6 +1,7 @@
 import 'package:app/features/profil/informations/presentation/blocs/mes_informations_bloc.dart';
 import 'package:app/features/profil/informations/presentation/blocs/mes_informations_event.dart';
 import 'package:app/l10n/l10n.dart';
+import 'package:app/shared/number_format.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -36,7 +37,7 @@ class MesInformationsNombreDePartsFiscales extends StatelessWidget {
       label: Localisation.nombreDePartsFiscales,
       hint: Localisation.nombreDePartsFiscalesDescription,
       onChanged: (final value) => _handleNombreDePartsFiscales(context, value),
-      initialValue: nombreDePartsFiscales.toString(),
+      initialValue: FnvNumberFormat.formatNumber(nombreDePartsFiscales),
       keyboardType: const TextInputType.numberWithOptions(decimal: true),
       inputFormatters: [
         FilteringTextInputFormatter.allow(RegExp('[0-9,.]')),
