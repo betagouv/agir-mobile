@@ -4,6 +4,7 @@ import 'package:app/features/aides/presentation/pages/aide_page.dart';
 import 'package:app/features/aides/presentation/pages/aides_page.dart';
 import 'package:app/features/aides/simulateur_velo/presentation/pages/aide_simulateur_velo_disponibles_page.dart';
 import 'package:app/features/aides/simulateur_velo/presentation/pages/aide_simulateur_velo_page.dart';
+import 'package:app/features/articles/presentation/pages/article_page.dart';
 import 'package:app/features/authentification/domain/entities/authentification_statut_manager.dart';
 import 'package:app/features/authentification/domain/value_objects/authentification_statut.dart';
 import 'package:app/features/authentification/presentation/pages/se_connecter_page.dart';
@@ -46,6 +47,7 @@ GoRouter goRouter({
                 AideSimulateurVeloPage.route(
                   routes: [AideSimulateurVeloDisponiblePage.route],
                 ),
+                ArticlePage.route,
                 ProfilPage.route,
                 MesInformationsPage.route,
                 MonLogementPage.route,

@@ -21,7 +21,7 @@ void main() {
 [
   {
     "content_id": "31",
-    "type": "quizz",
+    "type": "article",
     "titre": "Réchauffement et montée des eaux : quel est le lien ?",
     "soustitre": "Ça ne coule pas de source",
     "duree": "⏱️ 3 minutes",
@@ -57,6 +57,7 @@ void main() {
       result.getRight().getOrElse(() => throw Exception()),
       [
         const Recommandation(
+          id: '31',
           titre: 'Réchauffement et montée des eaux : quel est le lien ?',
           imageUrl:
               'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1702068380/jonathan_ford_6_Zg_T_Etv_D16_I_unsplash_00217cb281.jpg',

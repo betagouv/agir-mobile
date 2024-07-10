@@ -1,5 +1,6 @@
 import 'package:app/features/aides/domain/entities/aide.dart';
 import 'package:app/features/aides/simulateur_velo/domain/value_objects/aide_velo_par_type.dart';
+import 'package:app/features/articles/domain/article.dart';
 import 'package:app/features/authentification/domain/value_objects/authentification_statut.dart';
 import 'package:app/features/profil/logement/presentation/blocs/mon_logement_state.dart';
 import 'package:app/features/profil/mieux_vous_connaitre/domain/question.dart';
@@ -41,6 +42,12 @@ class ScenarioContext {
   );
   List<Aide> aides = <Aide>[];
   List<Recommandation> recommandations = <Recommandation>[];
+  Article article = const Article(
+    titre: 'Titre',
+    sousTitre: 'Sous-titre',
+    contenu: '<p>Contenu</p>',
+    partenaire: null,
+  );
   List<String> communes = <String>[];
   List<Question> questions = <Question>[];
 

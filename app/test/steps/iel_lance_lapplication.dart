@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import '../mocks/aide_velo_port_mock.dart';
 import '../mocks/aides_port_mock.dart';
+import '../mocks/articles_port_mock.dart';
 import '../mocks/authentification_port_mock.dart';
 import '../mocks/communes_port_mock.dart';
 import '../mocks/mieux_vous_connaitre_port_mock.dart';
@@ -55,6 +56,7 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
       aidesPort: AidesPortMock(ScenarioContext().aides),
       recommandationsPort:
           RecommandationsPortMock(ScenarioContext().recommandations),
+      articlesPort: ArticlesPortMock(ScenarioContext().article),
       versionPort: const VersionPortMock(),
       communesPort: CommunesPortMock(ScenarioContext().communes),
       aideVeloPort: ScenarioContext().aideVeloPortMock!,

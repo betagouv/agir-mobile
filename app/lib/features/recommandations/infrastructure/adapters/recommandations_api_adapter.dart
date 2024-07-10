@@ -35,10 +35,16 @@ class RecommandationsApiAdapter implements RecommandationsPort {
     final json = jsonDecode(response.body) as List<dynamic>;
 
     return Right(
-      json.map((final e) {
+      json
+          .where(
+        (final e) =>
+            ((e as Map<String, dynamic>)['type'] as String) == 'article',
+      )
+          .map((final e) {
         final f = e as Map<String, dynamic>;
 
         return Recommandation(
+          id: f['content_id'] as String,
           titre: f['titre'] as String,
           imageUrl: f['image_url'] as String,
           points: (f['points'] as num).toInt(),
