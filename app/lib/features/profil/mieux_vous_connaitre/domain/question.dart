@@ -25,6 +25,19 @@ class Question extends Equatable {
     required this.thematique,
   });
 
+  const Question.empty()
+      : this(
+          id: '',
+          question: '',
+          reponses: const [],
+          categorie: '',
+          points: 0,
+          type: ReponseType.libre,
+          reponsesPossibles: const [],
+          deNosGestesClimat: false,
+          thematique: Thematique.loisir,
+        );
+
   final String id;
   final String question;
   final List<String> reponses;

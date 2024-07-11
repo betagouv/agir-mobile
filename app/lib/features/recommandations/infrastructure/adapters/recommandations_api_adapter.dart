@@ -35,16 +35,16 @@ class RecommandationsApiAdapter implements RecommandationsPort {
     final json = jsonDecode(response.body) as List<dynamic>;
 
     return Right(
-      json
-          .where(
-        (final e) =>
-            ((e as Map<String, dynamic>)['type'] as String) == 'article',
-      )
-          .map((final e) {
+      json.where((final e) {
+        final type = (e as Map<String, dynamic>)['type'] as String;
+
+        return type == 'article' || type == 'kyc';
+      }).map((final e) {
         final f = e as Map<String, dynamic>;
 
         return Recommandation(
           id: f['content_id'] as String,
+          type: _mapContentTypeFromJson(f['type'] as String),
           titre: f['titre'] as String,
           imageUrl: f['image_url'] as String,
           points: (f['points'] as num).toInt(),
@@ -54,6 +54,13 @@ class RecommandationsApiAdapter implements RecommandationsPort {
       }).toList(),
     );
   }
+
+  static ContentType _mapContentTypeFromJson(final String? type) =>
+      switch (type) {
+        'article' => ContentType.article,
+        'kyc' => ContentType.kyc,
+        _ => ContentType.article,
+      };
 
   static Thematique _mapThematiqueFromJson(final String? type) =>
       switch (type) {

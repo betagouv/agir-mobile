@@ -15,7 +15,7 @@ import 'steps/iel_voit_le_texte.dart';
 
 void main() {
   testWidgets(
-    "L'utilisateur peut lire un article après avoir cliqué sur une recommandation",
+    'Iel peut lire un article après avoir cliqué sur une recommandation',
     (final tester) async {
       setUpWidgets(tester);
       ielADebloqueCesFonctionnalites([Fonctionnalites.recommandations]);
@@ -24,6 +24,7 @@ void main() {
 
       const recommandation = Recommandation(
         id: '42',
+        type: ContentType.article,
         titre: titre,
         imageUrl:
             'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1702068380/jonathan_ford_6_Zg_T_Etv_D16_I_unsplash_00217cb281.jpg',

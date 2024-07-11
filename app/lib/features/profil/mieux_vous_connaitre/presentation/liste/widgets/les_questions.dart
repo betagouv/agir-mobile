@@ -24,8 +24,10 @@ class LesQuestions extends StatelessWidget {
             final question = questions[index];
 
             return GestureDetector(
-              onTap: () async => GoRouter.of(context)
-                  .pushNamed(MieuxVousConnaitreEditPage.name, extra: question),
+              onTap: () async => GoRouter.of(context).pushNamed(
+                MieuxVousConnaitreEditPage.name,
+                pathParameters: {'id': question.id},
+              ),
               behavior: HitTestBehavior.opaque,
               child: Padding(
                 padding: const EdgeInsets.all(DsfrSpacings.s2w),

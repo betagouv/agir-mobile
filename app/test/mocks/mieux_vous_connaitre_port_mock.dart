@@ -28,4 +28,15 @@ class MieuxVousConnaitrePortMock implements MieuxVousConnaitrePort {
 
     return const Right(null);
   }
+
+  @override
+  Future<Either<Exception, Question>> recupererQuestion({
+    required final String id,
+  }) async {
+    final question = questions.firstWhereOrNull((final e) => e.id == id);
+
+    return question == null
+        ? Left(Exception('Question not found'))
+        : Right(question);
+  }
 }
