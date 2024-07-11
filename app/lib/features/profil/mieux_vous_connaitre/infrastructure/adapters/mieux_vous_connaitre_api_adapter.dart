@@ -58,4 +58,24 @@ class MieuxVousConnaitreApiAdapter implements MieuxVousConnaitrePort {
         ? const Right(null)
         : Left(Exception('Erreur lors de la mise à jour des réponses'));
   }
+
+  @override
+  Future<Either<Exception, Question>> recupererQuestion({
+    required final String id,
+  }) async {
+    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    if (utilisateurId == null) {
+      return const Left(UtilisateurIdNonTrouveException());
+    }
+
+    final response = await _apiClient
+        .get(Uri.parse('/utilisateurs/$utilisateurId/questionsKYC/$id'));
+
+    if (response.statusCode != 200) {
+      return Left(Exception('Erreur lors de la récupération de la question'));
+    }
+    final json = jsonDecode(response.body) as Map<String, dynamic>;
+
+    return Right(QuestionMapper.fromJson(json));
+  }
 }

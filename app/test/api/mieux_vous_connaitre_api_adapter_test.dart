@@ -160,6 +160,75 @@ void main() {
     );
   });
 
+  test('recupererQuestion', () async {
+    const id = 'KYC005';
+    final client = ClientMock()
+      ..getSuccess(
+        path: '/utilisateurs/$utilisateurId/questionsKYC/$id',
+        response: CustomResponse('''
+{
+  "id": "$id",
+  "question": "Quelle est votre situation professionnelle ?",
+  "reponse": [
+    "J’ai un emploi"
+  ],
+  "categorie": "recommandation",
+  "points": 5,
+  "type": "choix_unique",
+  "reponses_possibles": [
+    "J’ai un emploi",
+    "Je suis sans emploi",
+    "Je suis étudiant",
+    "Je suis à la retraite",
+    "Je ne souhaite pas répondre"
+  ],
+  "is_NGC": false,
+  "thematique": "climat"
+}'''),
+      );
+
+    final authentificationTokenStorage = AuthentificationTokenStorage(
+      secureStorage: FlutterSecureStorageMock(),
+      authentificationStatusManager: AuthentificationStatutManager(),
+    );
+    await authentificationTokenStorage.sauvegarderTokenEtUtilisateurId(
+      token,
+      utilisateurId,
+    );
+
+    final adapter = MieuxVousConnaitreApiAdapter(
+      apiClient: AuthentificationApiClient(
+        apiUrl: apiUrl,
+        authentificationTokenStorage: authentificationTokenStorage,
+        inner: client,
+      ),
+    );
+
+    final result = await adapter.recupererQuestion(id: id);
+    expect(
+      result.getRight().getOrElse(() => throw Exception()),
+      equals(
+        const Question(
+          id: id,
+          question: 'Quelle est votre situation professionnelle ?',
+          reponses: ['J’ai un emploi'],
+          categorie: 'recommandation',
+          points: 5,
+          type: ReponseType.choixUnique,
+          reponsesPossibles: [
+            'J’ai un emploi',
+            'Je suis sans emploi',
+            'Je suis étudiant',
+            'Je suis à la retraite',
+            'Je ne souhaite pas répondre',
+          ],
+          deNosGestesClimat: false,
+          thematique: Thematique.climat,
+        ),
+      ),
+    );
+  });
+
   test('mettreAJour', () async {
     const id = 'KYC005';
     final client = ClientMock()

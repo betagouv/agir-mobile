@@ -36,12 +36,13 @@ void main() {
     );
 
     testWidgets(
-      "Iel a débloqué les recommandations alors iel voit les recommndations sur la page d'accueil",
+      "Iel a débloqué les recommandations alors iel voit les recommandations sur la page d'accueil",
       (final tester) async {
         setUpWidgets(tester);
         ielADebloqueCesFonctionnalites([Fonctionnalites.recommandations]);
         const recommandation = Recommandation(
           id: '42',
+          type: ContentType.article,
           titre: 'Réchauffement et montée des eaux : quel est le lien ?',
           imageUrl:
               'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1702068380/jonathan_ford_6_Zg_T_Etv_D16_I_unsplash_00217cb281.jpg',
