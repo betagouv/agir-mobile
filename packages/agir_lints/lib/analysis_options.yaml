@@ -40,60 +40,62 @@ dart_code_metrics:
     - package:dart_code_metrics_presets/bloc.yaml
     - package:dart_code_metrics_presets/equatable.yaml
   rules:
+    - arguments-ordering:
+        last:
+          - child
+          - children
+    - avoid-dynamic: false
+    - avoid-duplicate-collection-elements: false
     - avoid-duplicate-test-assertions: false
     - avoid-ignoring-return-values: false
     - avoid-late-keyword: false
-    - avoid-returning-cascades: false
-    - prefer-moving-to-variable:
+    - avoid-long-functions:
         exclude:
           - test/**
-    - parameters-ordering: false
+    - avoid-missing-image-alt: false # voir pour réactiver
+    - avoid-nested-conditional-expressions: false
+    - avoid-non-ascii-symbols: false
+    - avoid-non-null-assertion: false
+    - avoid-passing-async-when-sync-expected: false
+    - avoid-passing-self-as-argument: false # voir pour réactiver
+    - avoid-positional-record-field-access: false
+    - avoid-redundant-async: false
+    - avoid-returning-cascades: false
     - avoid-shadowing: false
-    - prefer-match-file-name: false
-    - no-magic-number: false
+    - avoid-shrink-wrap-in-lists: false # à réactiver
+    - avoid-similar-names: false
+    - avoid-top-level-members-in-tests: false
+    - check-is-not-closed-after-async-gap: false
+    - enum-constants-ordering: false
     - member-ordering:
         order:
           - constructors
           - public-fields
           - private-fields
-    - avoid-top-level-members-in-tests: false
-    - avoid-dynamic: false
-    - arguments-ordering:
-        last:
-          - child
-          - children
-    - avoid-non-null-assertion: false
-    - avoid-positional-record-field-access: false
     - missing-test-assertion: false
-    - avoid-non-ascii-symbols: false
+    - no-empty-block: false
+    - no-equal-arguments: false
+    - no-magic-number: false
     - no-magic-string: false
+    - parameters-ordering: false
+    - prefer-correct-identifier-length: false
+    - prefer-correct-throws: false
     - prefer-correct-type-name: false
     - prefer-explicit-type-arguments: false
-    - avoid-similar-names: false
-    - prefer-static-class: false
-    - prefer-prefixed-global-constants: false
-    - prefer-widget-private-members:
-        ignore-static: true
+    - prefer-extracting-function-callbacks: false
+    - prefer-for-loop-in-children: false
+    - prefer-match-file-name: false
+    - prefer-moving-to-variable:
+        exclude:
+          - test/**
     - prefer-named-boolean-parameters: false
-    - prefer-correct-identifier-length: false
+    - prefer-named-parameters:
+        max-number: 2
+    - prefer-prefixed-global-constants: false
     - prefer-single-declaration-per-file: false
     - prefer-single-widget-per-file:
         ignore-private-widgets: true
-    - no-equal-arguments: false
+    - prefer-static-class: false
     - prefer-test-matchers: false
-    - enum-constants-ordering: false
-    - avoid-nested-conditional-expressions: false
-    - avoid-duplicate-collection-elements: false
-    - check-is-not-closed-after-async-gap: false
-    - prefer-named-parameters:
-        max-number: 2
-    - prefer-for-loop-in-children: false
-    - no-empty-block: false
-    - avoid-passing-async-when-sync-expected: false
-    - avoid-redundant-async: false
-    - avoid-long-functions:
-        exclude:
-          - test/**
-    - avoid-passing-self-as-argument: false # voir pour réactiver
-    - avoid-missing-image-alt: false # voir pour réactiver
-    - avoid-shrink-wrap-in-lists: false # à réactiver
+    - prefer-widget-private-members:
+        ignore-static: true
