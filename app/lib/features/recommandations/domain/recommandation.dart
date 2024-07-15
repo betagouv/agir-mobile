@@ -1,4 +1,4 @@
-import 'package:app/features/profil/mieux_vous_connaitre/domain/question.dart';
+import 'package:app/features/mieux_vous_connaitre/domain/question.dart';
 import 'package:equatable/equatable.dart';
 
 class Recommandation extends Equatable {
@@ -12,7 +12,7 @@ class Recommandation extends Equatable {
   });
 
   final String id;
-  final ContentType type;
+  final TypeDuContenu type;
   final String titre;
   final String imageUrl;
   final int points;
@@ -22,7 +22,8 @@ class Recommandation extends Equatable {
   List<Object> get props => [id, type, titre, imageUrl, points, thematique];
 }
 
-enum ContentType {
+enum TypeDuContenu {
   article,
   kyc,
+  quiz,
 }

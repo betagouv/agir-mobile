@@ -8,9 +8,10 @@ import 'package:app/features/authentification/domain/entities/authentification_s
 import 'package:app/features/authentification/domain/ports/authentification_port.dart';
 import 'package:app/features/authentification/presentation/blocs/se_connecter_bloc.dart';
 import 'package:app/features/communes/domain/ports/communes_port.dart';
+import 'package:app/features/mieux_vous_connaitre/domain/ports/mieux_vous_connaitre_port.dart';
+import 'package:app/features/mieux_vous_connaitre/presentation/liste/blocs/mieux_vous_connaitre_bloc.dart';
 import 'package:app/features/profil/domain/ports/profil_port.dart';
-import 'package:app/features/profil/mieux_vous_connaitre/domain/ports/mieux_vous_connaitre_port.dart';
-import 'package:app/features/profil/mieux_vous_connaitre/presentation/liste/blocs/mieux_vous_connaitre_bloc.dart';
+import 'package:app/features/quiz/domain/ports/quiz_port.dart';
 import 'package:app/features/recommandations/domain/ports/recommandations_port.dart';
 import 'package:app/features/recommandations/presentation/blocs/recommandations_bloc.dart';
 import 'package:app/features/utilisateur/domain/ports/utilisateur_port.dart';
@@ -32,6 +33,7 @@ class App extends StatefulWidget {
     required this.aidesPort,
     required this.recommandationsPort,
     required this.articlesPort,
+    required this.quizPort,
     required this.versionPort,
     required this.communesPort,
     required this.aideVeloPort,
@@ -46,6 +48,7 @@ class App extends StatefulWidget {
   final AidesPort aidesPort;
   final RecommandationsPort recommandationsPort;
   final ArticlesPort articlesPort;
+  final QuizPort quizPort;
   final VersionPort versionPort;
   final CommunesPort communesPort;
   final AideVeloPort aideVeloPort;
@@ -79,6 +82,7 @@ class _AppState extends State<App> {
           RepositoryProvider.value(value: widget.authentificationPort),
           RepositoryProvider.value(value: widget.aidesPort),
           RepositoryProvider.value(value: widget.articlesPort),
+          RepositoryProvider.value(value: widget.quizPort),
           RepositoryProvider.value(value: widget.profilPort),
           RepositoryProvider.value(value: widget.communesPort),
           RepositoryProvider.value(value: widget.mieuxVousConnaitrePort),

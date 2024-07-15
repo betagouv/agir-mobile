@@ -1,4 +1,4 @@
-import 'package:app/features/profil/mieux_vous_connaitre/domain/question.dart';
+import 'package:app/features/mieux_vous_connaitre/domain/question.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
 import 'package:app/features/utilisateur/domain/entities/utilisateur.dart';
 import 'package:app/l10n/l10n.dart';
@@ -24,7 +24,7 @@ void main() {
       const question = 'Quelle est votre situation professionnelle ?';
       const recommandation = Recommandation(
         id: 'KYC005',
-        type: ContentType.kyc,
+        type: TypeDuContenu.kyc,
         titre: question,
         imageUrl:
             'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1702068380/jonathan_ford_6_Zg_T_Etv_D16_I_unsplash_00217cb281.jpg',

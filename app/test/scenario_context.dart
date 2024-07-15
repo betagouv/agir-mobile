@@ -2,14 +2,16 @@ import 'package:app/features/aides/domain/entities/aide.dart';
 import 'package:app/features/aides/simulateur_velo/domain/value_objects/aide_velo_par_type.dart';
 import 'package:app/features/articles/domain/article.dart';
 import 'package:app/features/authentification/domain/value_objects/authentification_statut.dart';
+import 'package:app/features/mieux_vous_connaitre/domain/question.dart';
 import 'package:app/features/profil/logement/presentation/blocs/mon_logement_state.dart';
-import 'package:app/features/profil/mieux_vous_connaitre/domain/question.dart';
+import 'package:app/features/quiz/domain/quiz.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
 import 'package:app/features/utilisateur/domain/entities/utilisateur.dart';
 
 import 'mocks/aide_velo_port_mock.dart';
 import 'mocks/mieux_vous_connaitre_port_mock.dart';
 import 'mocks/profil_port_mock.dart';
+import 'mocks/quiz_port_mock.dart';
 
 class ScenarioContext {
   factory ScenarioContext() => _instance ??= ScenarioContext._();
@@ -48,11 +50,22 @@ class ScenarioContext {
     contenu: '<p>Contenu</p>',
     partenaire: null,
   );
+  Quiz quiz = const Quiz(
+    id: 0,
+    thematique: '',
+    question: '',
+    reponses: [],
+    points: 0,
+    explicationOk: '',
+    explicationKo: '',
+    article: null,
+  );
   List<String> communes = <String>[];
   List<Question> questions = <Question>[];
 
   AideVeloPortMock? aideVeloPortMock;
   ProfilPortMock? profilPortMock;
+  QuizPortMock? quizPortMock;
   MieuxVousConnaitrePortMock? mieuxVousConnaitrePortMock;
   static ScenarioContext? _instance;
 

@@ -1,4 +1,4 @@
-import 'package:app/features/profil/mieux_vous_connaitre/domain/question.dart';
+import 'package:app/features/mieux_vous_connaitre/domain/question.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
 import 'package:app/features/utilisateur/domain/entities/utilisateur.dart';
 import 'package:app/l10n/l10n.dart';
@@ -42,7 +42,7 @@ void main() {
         ielADebloqueCesFonctionnalites([Fonctionnalites.recommandations]);
         const recommandation = Recommandation(
           id: '42',
-          type: ContentType.article,
+          type: TypeDuContenu.article,
           titre: 'Réchauffement et montée des eaux : quel est le lien ?',
           imageUrl:
               'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1702068380/jonathan_ford_6_Zg_T_Etv_D16_I_unsplash_00217cb281.jpg',

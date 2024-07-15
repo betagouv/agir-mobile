@@ -8,14 +8,16 @@ import 'package:app/features/articles/presentation/pages/article_page.dart';
 import 'package:app/features/authentification/domain/entities/authentification_statut_manager.dart';
 import 'package:app/features/authentification/domain/value_objects/authentification_statut.dart';
 import 'package:app/features/authentification/presentation/pages/se_connecter_page.dart';
+import 'package:app/features/mieux_vous_connaitre/presentation/element/pages/mieux_vous_connaitre_edit_page.dart';
+import 'package:app/features/mieux_vous_connaitre/presentation/liste/pages/mieux_vous_connaitre_page.dart';
 import 'package:app/features/pre_onboarding/presentation/pages/pre_onboarding_carrousel_page.dart';
 import 'package:app/features/pre_onboarding/presentation/pages/pre_onboarding_page.dart';
 import 'package:app/features/profil/informations/presentation/pages/mes_informations_page.dart';
 import 'package:app/features/profil/logement/presentation/pages/mon_logement_page.dart';
-import 'package:app/features/profil/mieux_vous_connaitre/presentation/element/pages/mieux_vous_connaitre_edit_page.dart';
-import 'package:app/features/profil/mieux_vous_connaitre/presentation/liste/pages/mieux_vous_connaitre_page.dart';
 import 'package:app/features/profil/presentation/pages/options_avancees_page.dart';
 import 'package:app/features/profil/presentation/pages/profil_page.dart';
+import 'package:app/features/quiz/presentation/pages/quiz_explication_page.dart';
+import 'package:app/features/quiz/presentation/pages/quiz_page.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
@@ -48,6 +50,8 @@ GoRouter goRouter({
                   routes: [AideSimulateurVeloDisponiblePage.route],
                 ),
                 ArticlePage.route,
+                QuizPage.route,
+                QuizExplicationPage.route,
                 ProfilPage.route,
                 MesInformationsPage.route,
                 MonLogementPage.route,

@@ -3,8 +3,8 @@
 import 'dart:convert';
 
 import 'package:app/features/authentification/infrastructure/adapters/api/authentification_api_client.dart';
+import 'package:app/features/mieux_vous_connaitre/domain/question.dart';
 import 'package:app/features/profil/domain/utilisateur_id_non_trouve_exception.dart';
-import 'package:app/features/profil/mieux_vous_connaitre/domain/question.dart';
 import 'package:app/features/recommandations/domain/ports/recommandations_port.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
 import 'package:fpdart/fpdart.dart';
@@ -35,11 +35,7 @@ class RecommandationsApiAdapter implements RecommandationsPort {
     final json = jsonDecode(response.body) as List<dynamic>;
 
     return Right(
-      json.where((final e) {
-        final type = (e as Map<String, dynamic>)['type'] as String;
-
-        return type == 'article' || type == 'kyc';
-      }).map((final e) {
+      json.map((final e) {
         final f = e as Map<String, dynamic>;
 
         return Recommandation(
@@ -55,11 +51,12 @@ class RecommandationsApiAdapter implements RecommandationsPort {
     );
   }
 
-  static ContentType _mapContentTypeFromJson(final String? type) =>
+  static TypeDuContenu _mapContentTypeFromJson(final String? type) =>
       switch (type) {
-        'article' => ContentType.article,
-        'kyc' => ContentType.kyc,
-        _ => ContentType.article,
+        'article' => TypeDuContenu.article,
+        'kyc' => TypeDuContenu.kyc,
+        'quizz' => TypeDuContenu.quiz,
+        _ => TypeDuContenu.article,
       };
 
   static Thematique _mapThematiqueFromJson(final String? type) =>
