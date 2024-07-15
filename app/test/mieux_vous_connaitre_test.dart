@@ -1,4 +1,4 @@
-import 'package:app/features/profil/mieux_vous_connaitre/domain/question.dart';
+import 'package:app/features/mieux_vous_connaitre/domain/question.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:flutter_test/flutter_test.dart';
 

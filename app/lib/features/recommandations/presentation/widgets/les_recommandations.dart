@@ -1,4 +1,4 @@
-import 'package:app/features/profil/mieux_vous_connaitre/domain/question.dart';
+import 'package:app/features/mieux_vous_connaitre/domain/question.dart';
 import 'package:app/features/recommandations/presentation/blocs/recommandations_bloc.dart';
 import 'package:app/features/recommandations/presentation/widgets/recommendation_widget.dart';
 import 'package:app/l10n/l10n.dart';
@@ -15,7 +15,7 @@ class LesRecommandations extends StatelessWidget {
         context.watch<RecommandationsBloc>().state.recommandations;
 
     return SizedBox(
-      height: MediaQuery.textScalerOf(context).scale(222),
+      height: MediaQuery.textScalerOf(context).scale(250),
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),

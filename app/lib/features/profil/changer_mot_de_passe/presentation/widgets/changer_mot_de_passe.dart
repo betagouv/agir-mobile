@@ -22,14 +22,7 @@ class ChangerMotDePasse extends StatelessWidget {
 class _ChangerMotDePasse extends StatelessWidget {
   const _ChangerMotDePasse();
 
-  void _handleMotPasseEstChange(
-    final ChangerMotDePasseState state,
-    final BuildContext context,
-  ) {
-    if (!state.motPasseEstChange) {
-      return;
-    }
-
+  void _handleMotPasseEstChange(final BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text(Localisation.changerVotreMotDePasseConfirmation),
@@ -42,7 +35,10 @@ class _ChangerMotDePasse extends StatelessWidget {
   Widget build(final BuildContext context) =>
       BlocListener<ChangerMotDePasseBloc, ChangerMotDePasseState>(
         listener: (final context, final state) =>
-            _handleMotPasseEstChange(state, context),
+            _handleMotPasseEstChange(context),
+        listenWhen: (final previous, final current) =>
+            previous.motPasseEstChange != current.motPasseEstChange &&
+            current.motPasseEstChange,
         child: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

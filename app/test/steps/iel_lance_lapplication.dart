@@ -10,6 +10,7 @@ import '../mocks/authentification_port_mock.dart';
 import '../mocks/communes_port_mock.dart';
 import '../mocks/mieux_vous_connaitre_port_mock.dart';
 import '../mocks/profil_port_mock.dart';
+import '../mocks/quiz_port_mock.dart';
 import '../mocks/recommandations_port_mock.dart';
 import '../mocks/utilisateur_port_mock.dart';
 import '../mocks/version_port_mock.dart';
@@ -44,6 +45,8 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
   ScenarioContext().mieuxVousConnaitrePortMock =
       MieuxVousConnaitrePortMock(questions: ScenarioContext().questions);
 
+  ScenarioContext().quizPortMock = QuizPortMock(ScenarioContext().quiz);
+
   await tester.pumpFrames(
     App(
       authentificationStatusManager: authentificationStatusManager,
@@ -57,6 +60,7 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
       recommandationsPort:
           RecommandationsPortMock(ScenarioContext().recommandations),
       articlesPort: ArticlesPortMock(ScenarioContext().article),
+      quizPort: ScenarioContext().quizPortMock!,
       versionPort: const VersionPortMock(),
       communesPort: CommunesPortMock(ScenarioContext().communes),
       aideVeloPort: ScenarioContext().aideVeloPortMock!,

@@ -85,12 +85,14 @@ Le **revenu fiscal de référence** et votre **nombre de parts** se trouvent sur
 Si vous ne disposez pas de votre dernier avis d’impôt, renseignez 1 part pour chaque adulte de votre foyer fiscal, puis 0,5 part par enfant jusqu’à 2 enfants, puis 1 part par enfant à partir du 3ème enfant.
 
 Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme des revenus de toutes les personnes avec lequelles vous partagez vos déclarations d’impôts (pour toute l’année) pour vous faire une première idée.''';
+  static const pourquoi = 'Pourquoi ?';
   static const pourquoiCesQuestions = 'Pourquoi ces questions ?';
   static const pourquoiCesQuestionsReponse =
       'Votre **revenu fiscal de référence** et le **nombre de parts** permettent d’afficher les aides en fonction de vos ressources.';
   static const estimerMesAides = 'Estimer mes aides';
   static const vosAidesDisponibles = 'Vos aides disponibles';
   static const revenirAuSimulateur = 'Revenir au simulateur';
+  static const revenirAccueil = "Revenir à l'accueil";
   static const aucuneAideDisponible = 'Aucune aide\ndisponible';
   static const voirLesDemarches = 'Voir les démarches';
   static const propulsePar = 'Propulsé par ';
@@ -171,4 +173,5 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const lesCategoriesDechet = 'Déchets';
   static const lesCategoriesLoisir = 'Les vacances';
   static const maReponse = 'Ma réponse';
+  static const valider = 'Valider';
 }
