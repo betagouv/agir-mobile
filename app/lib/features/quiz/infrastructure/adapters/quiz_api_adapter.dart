@@ -55,6 +55,6 @@ class QuizApiAdapter implements QuizPort {
 
     return response.statusCode == 200
         ? const Right(null)
-        : Left(Exception("Erreur lors de la récupération de l'article"));
+        : Left(Exception('Erreur lors de la validation du quiz'));
   }
 }

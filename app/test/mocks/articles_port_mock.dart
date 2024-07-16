@@ -6,8 +6,16 @@ class ArticlesPortMock implements ArticlesPort {
   ArticlesPortMock(this.article);
 
   Article article;
+  bool estMarquerCommeLuAppele = false;
 
   @override
   Future<Either<Exception, Article>> recupererArticle(final String id) async =>
       Right(article);
+
+  @override
+  Future<Either<Exception, void>> marquerCommeLu(final String id) async {
+    estMarquerCommeLuAppele = true;
+
+    return const Right(null);
+  }
 }

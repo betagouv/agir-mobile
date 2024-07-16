@@ -4,6 +4,7 @@ import 'package:app/features/recommandations/domain/recommandation.dart';
 import 'package:app/features/utilisateur/domain/entities/utilisateur.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'scenario_context.dart';
 import 'set_up_widgets.dart';
 import 'steps/iel_a_debloque_ces_fonctionnalites.dart';
 import 'steps/iel_a_l_article_suivant.dart';
@@ -49,6 +50,10 @@ void main() {
       await ielLanceLapplication(tester);
       await ielAppuieSur(tester, recommandation.titre);
       ielVoitLeTexte(sousTitre);
+      expect(
+        ScenarioContext().articlesPortMock!.estMarquerCommeLuAppele,
+        isTrue,
+      );
     },
   );
 }
