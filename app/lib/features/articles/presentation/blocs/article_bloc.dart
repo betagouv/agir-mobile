@@ -23,6 +23,7 @@ class ArticleBloc extends Bloc<ArticleEvent, ArticleState> {
     if (result.isRight()) {
       final article = result.getRight().getOrElse(() => throw Exception());
       emit(ArticleState(article: article));
+      await _articlesPort.marquerCommeLu(event.id);
     }
   }
 }

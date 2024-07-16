@@ -75,7 +75,8 @@ Future<void> main() async {
       utilisateurPort: UtilisateurApiAdapter(apiClient: apiClient),
       aidesPort: AidesApiAdapter(apiClient: apiClient),
       recommandationsPort: RecommandationsApiAdapter(apiClient: apiClient),
-      articlesPort: ArticlesApiAdapter(cmsApiClient: cmsClient),
+      articlesPort:
+          ArticlesApiAdapter(apiClient: apiClient, cmsApiClient: cmsClient),
       quizPort: QuizApiAdapter(
         cmsApiClient: cmsClient,
         apiClient: apiClient,
