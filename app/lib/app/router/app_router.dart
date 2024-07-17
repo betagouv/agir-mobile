@@ -17,6 +17,7 @@ import 'package:app/features/profil/logement/presentation/pages/mon_logement_pag
 import 'package:app/features/profil/presentation/pages/options_avancees_page.dart';
 import 'package:app/features/profil/presentation/pages/profil_page.dart';
 import 'package:app/features/quiz/presentation/pages/quiz_page.dart';
+import 'package:app/features/recommandations/presentation/widgets/mes_recommandations.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
@@ -85,4 +86,5 @@ GoRouter goRouter({
       refreshListenable:
           GoRouterRefreshStream(authentificationStatusManager.statutModifie),
       initialLocation: '/unauthenticated/${PreOnboardingPage.path}',
+      observers: [routeObserver],
     );

@@ -6,36 +6,69 @@ import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class MesRecommandations extends StatelessWidget {
+final routeObserver = RouteObserver<ModalRoute<Object?>>();
+
+class MesRecommandations extends StatefulWidget {
   const MesRecommandations({super.key});
 
   @override
-  Widget build(final BuildContext context) {
+  State<MesRecommandations> createState() => _MesRecommandationsState();
+}
+
+class _MesRecommandationsState extends State<MesRecommandations>
+    with RouteAware {
+  void _handleRecommendations() {
     context
         .read<RecommandationsBloc>()
         .add(const RecommandationsRecuperationDemandee());
-
-    return const Column(
-      children: [
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                Localisation.accueilRecommandationsTitre,
-                style: DsfrTextStyle.headline5(),
-              ),
-              Text(
-                Localisation.accueilRecommandationsSousTitre,
-                style: DsfrTextStyle.bodyMd(),
-              ),
-            ],
-          ),
-        ),
-        SizedBox(height: DsfrSpacings.s2w),
-        LesRecommandations(),
-      ],
-    );
   }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    routeObserver.subscribe(this, ModalRoute.of(context)!);
+  }
+
+  @override
+  void didPopNext() => _handleRecommendations();
+
+  @override
+  void didPush() => _handleRecommendations();
+
+  @override
+  void dispose() {
+    routeObserver.unsubscribe(this);
+    super.dispose();
+  }
+
+  @override
+  Widget build(final BuildContext context) => const _View();
+}
+
+class _View extends StatelessWidget {
+  const _View();
+
+  @override
+  Widget build(final BuildContext context) => const Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  Localisation.accueilRecommandationsTitre,
+                  style: DsfrTextStyle.headline5(),
+                ),
+                Text(
+                  Localisation.accueilRecommandationsSousTitre,
+                  style: DsfrTextStyle.bodyMd(),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: DsfrSpacings.s2w),
+          LesRecommandations(),
+        ],
+      );
 }
