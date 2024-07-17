@@ -7,6 +7,13 @@ typedef Callback<T> = void Function(T value);
 
 enum DsfrRadioButtonSetMode { row, column }
 
+class DsfrRadioButtonItem {
+  const DsfrRadioButtonItem(this.value, {this.backgroundColor});
+
+  final String value;
+  final Color? backgroundColor;
+}
+
 class DsfrRadioButtonSetHeadless<T> extends StatefulWidget {
   const DsfrRadioButtonSetHeadless({
     required this.values,
@@ -16,7 +23,7 @@ class DsfrRadioButtonSetHeadless<T> extends StatefulWidget {
     super.key,
   });
 
-  final Map<T, String> values;
+  final Map<T, DsfrRadioButtonItem> values;
   final T? initialValue;
   final Callback<T?> onCallback;
   final DsfrRadioButtonSetMode mode;
@@ -46,10 +53,11 @@ class _DsfrRadioButtonSetHeadlessState<T>
     final children = widget.values.entries
         .map(
           (final e) => DsfrRadioButton<T?>(
-            title: e.value,
+            title: e.value.value,
             value: e.key,
             groupValue: _value,
             onChanged: _handleChange,
+            backgroundColor: e.value.backgroundColor,
           ),
         )
         .toList();

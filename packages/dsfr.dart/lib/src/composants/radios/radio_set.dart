@@ -24,7 +24,10 @@ class DsfrRadioButtonSet<T> extends StatelessWidget {
           Text(title, style: const DsfrTextStyle.bodyMd()),
           const SizedBox(height: DsfrSpacings.s1w),
           DsfrRadioButtonSetHeadless(
-            values: values,
+            values: values.map(
+              (final key, final value) =>
+                  MapEntry(key, DsfrRadioButtonItem(value)),
+            ),
             onCallback: onCallback,
             initialValue: initialValue,
           ),

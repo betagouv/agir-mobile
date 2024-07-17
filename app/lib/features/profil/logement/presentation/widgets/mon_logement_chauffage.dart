@@ -20,11 +20,11 @@ class MonLogementChauffage extends StatelessWidget {
       titre: Localisation.quelleEstVotreModeDeChauffagePrincipal,
       contenu: DsfrRadioButtonSetHeadless(
         values: const {
-          Chauffage.electricite: Localisation.electricite,
-          Chauffage.boisPellets: Localisation.boisPellets,
-          Chauffage.fioul: Localisation.fioul,
-          Chauffage.gaz: Localisation.gaz,
-          Chauffage.autre: Localisation.autreJeNeSaisPas,
+          Chauffage.electricite: DsfrRadioButtonItem(Localisation.electricite),
+          Chauffage.boisPellets: DsfrRadioButtonItem(Localisation.boisPellets),
+          Chauffage.fioul: DsfrRadioButtonItem(Localisation.fioul),
+          Chauffage.gaz: DsfrRadioButtonItem(Localisation.gaz),
+          Chauffage.autre: DsfrRadioButtonItem(Localisation.autreJeNeSaisPas),
         },
         onCallback: (final value) => context
             .read<MonLogementBloc>()

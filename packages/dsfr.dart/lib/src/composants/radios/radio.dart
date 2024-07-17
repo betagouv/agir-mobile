@@ -9,6 +9,7 @@ class DsfrRadioButton<T> extends StatelessWidget {
     required this.value,
     required this.groupValue,
     required this.onChanged,
+    this.backgroundColor,
     super.key,
   });
 
@@ -16,6 +17,7 @@ class DsfrRadioButton<T> extends StatelessWidget {
   final T value;
   final T groupValue;
   final ValueChanged<T?> onChanged;
+  final Color? backgroundColor;
 
   void _handleChange() => onChanged(value);
 
@@ -25,6 +27,7 @@ class DsfrRadioButton<T> extends StatelessWidget {
         behavior: HitTestBehavior.opaque,
         child: DecoratedBox(
           decoration: BoxDecoration(
+            color: backgroundColor,
             border: Border.fromBorderSide(
               BorderSide(
                 color: groupValue == value
