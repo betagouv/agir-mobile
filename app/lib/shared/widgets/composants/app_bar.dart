@@ -1,3 +1,4 @@
+import 'package:app/features/gamification/presentation/widgets/points.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:app/shared/widgets/fondamentaux/colors.dart';
 import 'package:app/shared/widgets/fondamentaux/rounded_rectangle_border.dart';
@@ -28,7 +29,10 @@ class FnvAppBar extends StatelessWidget implements PreferredSizeWidget {
           child: SizedBox(
             height: preferredHeight,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
+              padding: const EdgeInsets.only(
+                left: DsfrSpacings.s1w,
+                right: DsfrSpacings.s3w,
+              ),
               child: Row(
                 children: [
                   leading ??
@@ -53,10 +57,14 @@ class FnvAppBar extends StatelessWidget implements PreferredSizeWidget {
                               : Localisation.menu,
                         ),
                       ),
-                  if (title != null) ...[
+                  if (title == null)
+                    const Spacer()
+                  else ...[
                     const SizedBox(width: DsfrSpacings.s1w),
                     Expanded(child: title!),
                   ],
+                  const SizedBox(width: DsfrSpacings.s1w),
+                  const Points(),
                 ],
               ),
             ),

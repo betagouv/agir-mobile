@@ -3,18 +3,33 @@
 import 'dart:async';
 
 import 'package:app/features/authentification/domain/value_objects/authentification_statut.dart';
+import 'package:rxdart/subjects.dart';
 
-class AuthentificationStatutManager {
-  AuthentificationStatut _statut = AuthentificationStatut.inconnu;
+abstract interface class AuthentificationStatutManagerWriter {
+  void gererAuthentificationStatut(final AuthentificationStatut statut);
+}
 
-  final _controller = StreamController<AuthentificationStatut>();
+abstract interface class AuthentificationStatutManagerReader {
+  AuthentificationStatut get statutActuel;
+  Stream<AuthentificationStatut> get statut;
+}
 
+class AuthentificationStatutManager
+    implements
+        AuthentificationStatutManagerWriter,
+        AuthentificationStatutManagerReader {
+  final _controller = BehaviorSubject<AuthentificationStatut>.seeded(
+    AuthentificationStatut.inconnu,
+  );
+
+  @override
   void gererAuthentificationStatut(final AuthentificationStatut statut) {
-    _statut = statut;
-    _controller.add(_statut);
+    _controller.add(statut);
   }
 
-  AuthentificationStatut get statutActuel => _statut;
+  @override
+  AuthentificationStatut get statutActuel => _controller.value;
 
-  Stream<AuthentificationStatut> get statutModifie => _controller.stream;
+  @override
+  Stream<AuthentificationStatut> get statut => _controller.stream;
 }

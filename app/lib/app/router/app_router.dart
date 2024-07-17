@@ -22,7 +22,8 @@ import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
 GoRouter goRouter({
-  required final AuthentificationStatutManager authentificationStatusManager,
+  required final AuthentificationStatutManagerReader
+      authentificationStatusManagerReader,
 }) =>
     GoRouter(
       routes: [
@@ -65,7 +66,7 @@ GoRouter goRouter({
       redirect: (final context, final state) {
         final path = state.uri.path;
 
-        final statutActuel = authentificationStatusManager.statutActuel;
+        final statutActuel = authentificationStatusManagerReader.statutActuel;
         switch (statutActuel) {
           case AuthentificationStatut.inconnu:
             return '/unauthenticated/${PreOnboardingPage.path}';
@@ -84,7 +85,7 @@ GoRouter goRouter({
         return null;
       },
       refreshListenable:
-          GoRouterRefreshStream(authentificationStatusManager.statutModifie),
+          GoRouterRefreshStream(authentificationStatusManagerReader.statut),
       initialLocation: '/unauthenticated/${PreOnboardingPage.path}',
       observers: [routeObserver],
     );

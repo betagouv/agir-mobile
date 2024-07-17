@@ -83,7 +83,7 @@ void main() {
 
       final authentificationTokenStorage = AuthentificationTokenStorage(
         secureStorage: FlutterSecureStorageMock(),
-        authentificationStatusManager: AuthentificationStatutManager(),
+        authentificationStatusManagerWriter: AuthentificationStatutManager(),
       );
       await authentificationTokenStorage.sauvegarderTokenEtUtilisateurId(
         token,

@@ -42,7 +42,8 @@ void main() {
           apiUrl: apiUrl,
           authentificationTokenStorage: AuthentificationTokenStorage(
             secureStorage: FlutterSecureStorageMock(),
-            authentificationStatusManager: AuthentificationStatutManager(),
+            authentificationStatusManagerWriter:
+                AuthentificationStatutManager(),
           ),
           inner: client,
         ),
