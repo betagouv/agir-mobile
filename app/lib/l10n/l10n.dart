@@ -165,13 +165,13 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const annuler = 'Annuler';
   static const lesCategories = 'Les catégories';
   static const lesCategoriesTout = 'Tout';
-  static const lesCategoriesAlimentation = 'En cuisine';
-  static const lesCategoriesTransport = 'Les transports';
-  static const lesCategoriesLogement = 'À la maison';
-  static const lesCategoriesConsommation = 'En courses';
-  static const lesCategoriesClimat = 'La planète';
+  static const lesCategoriesAlimentation = 'Alimentation';
+  static const lesCategoriesTransport = 'Transports';
+  static const lesCategoriesLogement = 'Logement';
+  static const lesCategoriesConsommation = 'Consommation durable';
+  static const lesCategoriesClimat = 'Environnement';
   static const lesCategoriesDechet = 'Déchets';
-  static const lesCategoriesLoisir = 'Les vacances';
+  static const lesCategoriesLoisir = 'Loisirs';
   static const maReponse = 'Ma réponse';
   static const valider = 'Valider';
 }
