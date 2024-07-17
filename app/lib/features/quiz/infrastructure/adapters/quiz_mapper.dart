@@ -12,13 +12,14 @@ abstract final class QuizMapper {
     final thematique = quiz['thematique_gamification']['data']['attributes']
         as Map<String, dynamic>;
     final question = quiz['questions'][0] as Map<String, dynamic>;
-    final responses = question['reponses'] as List<dynamic>;
+    final reponses = question['reponses'] as List<dynamic>;
+    final articles = quiz['articles']['data'] as List<dynamic>;
 
     return Quiz(
       id: (data['id'] as num).toInt(),
       thematique: thematique['titre'] as String,
       question: question['libelle'] as String,
-      reponses: responses
+      reponses: reponses
           .cast<Map<String, dynamic>>()
           .map(
             (final e) => QuizReponse(
@@ -30,9 +31,9 @@ abstract final class QuizMapper {
       points: quiz['points'] as int,
       explicationOk: question['explicationOk'] as String?,
       explicationKo: question['explicationKO'] as String?,
-      article: quiz['articles']['data'][0] == null
+      article: articles.isEmpty
           ? null
-          : ArticleMapper.fromJson({'data': quiz['articles']['data'][0]}),
+          : ArticleMapper.fromJson({'data': articles.firstOrNull}),
     );
   }
 }
