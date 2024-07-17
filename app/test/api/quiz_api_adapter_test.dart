@@ -7,11 +7,13 @@ import 'package:app/features/quiz/domain/quiz.dart';
 import 'package:app/features/quiz/infrastructure/adapters/quiz_api_adapter.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:mocktail/mocktail.dart';
 
 import 'client_mock.dart';
 import 'constants.dart';
 import 'custom_response.dart';
 import 'flutter_secure_storage_mock.dart';
+import 'request_mathcher.dart';
 
 void main() {
   test('recupererQuiz', () async {
@@ -122,13 +124,13 @@ void main() {
       utilisateurId,
     );
     final adapter = QuizApiAdapter(
-      cmsApiClient:
-          CmsApiClient(apiUrl: cmsApiUrl, token: 'le_token', inner: client),
       apiClient: AuthentificationApiClient(
         apiUrl: apiUrl,
         authentificationTokenStorage: authentificationTokenStorage,
         inner: client,
       ),
+      cmsApiClient:
+          CmsApiClient(apiUrl: cmsApiUrl, token: 'le_token', inner: client),
     );
 
     final result = await adapter.recupererQuiz('14');
@@ -252,13 +254,13 @@ void main() {
       utilisateurId,
     );
     final adapter = QuizApiAdapter(
-      cmsApiClient:
-          CmsApiClient(apiUrl: cmsApiUrl, token: 'le_token', inner: client),
       apiClient: AuthentificationApiClient(
         apiUrl: apiUrl,
         authentificationTokenStorage: authentificationTokenStorage,
         inner: client,
       ),
+      cmsApiClient:
+          CmsApiClient(apiUrl: cmsApiUrl, token: 'le_token', inner: client),
     );
 
     final result = await adapter.recupererQuiz('14');
@@ -290,6 +292,46 @@ void main() {
         explicationKo:
             "<p><span>Au contraire ! Pour rendre notre alimentation plus durable, nous pouvons manger davantage de produits de saison et augmenter la part de repas végétariens dans les menus de la semaine. Diminuer notre consommation de viande permet en effet de réduire les impacts écologiques du secteur de l’élevage, qui génère à lui seul près de 15 % des émissions mondiales de gaz à effet de serre : c'est donc l'action la plus efficace pour limiter l'impact de notre alimentation.<br><br>On peut aussi privilégier les produits locaux et biologiques, limiter l’achat de produits transformés et réduire le gaspillage alimentaire.</span></p>",
         article: null,
+      ),
+    );
+  });
+
+  test('terminerQuiz', () async {
+    final client = ClientMock()
+      ..postSuccess(
+        path: '/utilisateurs/$utilisateurId/events',
+        response: OkResponse(),
+      );
+
+    final authentificationTokenStorage = AuthentificationTokenStorage(
+      secureStorage: FlutterSecureStorageMock(),
+      authentificationStatusManager: AuthentificationStatutManager(),
+    );
+    await authentificationTokenStorage.sauvegarderTokenEtUtilisateurId(
+      token,
+      utilisateurId,
+    );
+
+    final adapter = QuizApiAdapter(
+      apiClient: AuthentificationApiClient(
+        apiUrl: apiUrl,
+        authentificationTokenStorage: authentificationTokenStorage,
+        inner: client,
+      ),
+      cmsApiClient:
+          CmsApiClient(apiUrl: cmsApiUrl, token: 'le_token', inner: client),
+    );
+
+    await adapter.terminerQuiz(id: 1, estExacte: true);
+
+    verify(
+      () => client.send(
+        any(
+          that: const RequestMathcher(
+            '/utilisateurs/$utilisateurId/events',
+            body: '{"content_id":"1","number_value":100,"type":"quizz_score"}',
+          ),
+        ),
       ),
     );
   });

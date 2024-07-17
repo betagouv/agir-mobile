@@ -16,7 +16,6 @@ import 'package:app/features/profil/informations/presentation/pages/mes_informat
 import 'package:app/features/profil/logement/presentation/pages/mon_logement_page.dart';
 import 'package:app/features/profil/presentation/pages/options_avancees_page.dart';
 import 'package:app/features/profil/presentation/pages/profil_page.dart';
-import 'package:app/features/quiz/presentation/pages/quiz_explication_page.dart';
 import 'package:app/features/quiz/presentation/pages/quiz_page.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
@@ -51,7 +50,6 @@ GoRouter goRouter({
                 ),
                 ArticlePage.route,
                 QuizPage.route,
-                QuizExplicationPage.route,
                 ProfilPage.route,
                 MesInformationsPage.route,
                 MonLogementPage.route,

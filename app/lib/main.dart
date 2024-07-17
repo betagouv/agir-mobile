@@ -78,8 +78,8 @@ Future<void> main() async {
       articlesPort:
           ArticlesApiAdapter(apiClient: apiClient, cmsApiClient: cmsClient),
       quizPort: QuizApiAdapter(
-        cmsApiClient: cmsClient,
         apiClient: apiClient,
+        cmsApiClient: cmsClient,
       ),
       versionPort: VersionAdapter(packageInfo: packageInfo),
       communesPort: CommunesApiAdapter(apiClient: apiClient),

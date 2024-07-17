@@ -10,8 +10,8 @@ import 'package:fpdart/fpdart.dart';
 
 class QuizApiAdapter implements QuizPort {
   const QuizApiAdapter({
-    required final CmsApiClient cmsApiClient,
     required final AuthentificationApiClient apiClient,
+    required final CmsApiClient cmsApiClient,
   })  : _apiClient = apiClient,
         _cmsApiClient = cmsApiClient;
 
@@ -47,7 +47,7 @@ class QuizApiAdapter implements QuizPort {
     final response = await _apiClient.post(
       Uri.parse('/utilisateurs/$utilisateurId/events'),
       body: jsonEncode({
-        'content_id': id,
+        'content_id': '$id',
         'number_value': estExacte ? 100 : 0,
         'type': 'quizz_score',
       }),
