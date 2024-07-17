@@ -20,11 +20,11 @@ class MonLogementSuperficie extends StatelessWidget {
       titre: Localisation.quelleEstLaSuperficie,
       contenu: DsfrRadioButtonSetHeadless(
         values: const {
-          Superficie.s35: Localisation.moinsDe35m2,
-          Superficie.s70: Localisation.entre35et70m2,
-          Superficie.s100: Localisation.entre70et100m2,
-          Superficie.s150: Localisation.entre100et150m2,
-          Superficie.s150EtPlus: Localisation.plusDe150m2,
+          Superficie.s35: DsfrRadioButtonItem(Localisation.moinsDe35m2),
+          Superficie.s70: DsfrRadioButtonItem(Localisation.entre35et70m2),
+          Superficie.s100: DsfrRadioButtonItem(Localisation.entre70et100m2),
+          Superficie.s150: DsfrRadioButtonItem(Localisation.entre100et150m2),
+          Superficie.s150EtPlus: DsfrRadioButtonItem(Localisation.plusDe150m2),
         },
         onCallback: (final value) => context
             .read<MonLogementBloc>()

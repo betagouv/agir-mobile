@@ -109,8 +109,9 @@ class _ChoixUnique extends StatelessWidget {
   @override
   Widget build(final BuildContext context) => DsfrRadioButtonSetHeadless(
         values: Map.fromEntries(
-          question.reponsesPossibles
-              .map((final reponse) => MapEntry(reponse, reponse)),
+          question.reponsesPossibles.map(
+            (final reponse) => MapEntry(reponse, DsfrRadioButtonItem(reponse)),
+          ),
         ),
         onCallback: (final value) => context
             .read<MieuxVousConnaitreEditBloc>()

@@ -20,7 +20,10 @@ class MonLogementEstProprietaire extends StatelessWidget {
     return MonLogementTitreEtContenu(
       titre: Localisation.vousEtesProprietaireDeVotreLogement,
       contenu: DsfrRadioButtonSetHeadless(
-        values: const {true: Localisation.oui, false: Localisation.non},
+        values: const {
+          true: DsfrRadioButtonItem(Localisation.oui),
+          false: DsfrRadioButtonItem(Localisation.non),
+        },
         onCallback: (final value) => context
             .read<MonLogementBloc>()
             .add(MonLogementEstProprietaireChange(value)),
