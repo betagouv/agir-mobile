@@ -30,6 +30,14 @@ final class QuizState extends Equatable {
   bool get estSelectionnee => reponse.isSome();
   final Option<bool> estExacte;
 
+  String get explication => estExacte.fold(
+        () => '',
+        (final estExacte) =>
+            (estExacte ? quiz.explicationOk : quiz.explicationKo) ??
+            quiz.article?.contenu ??
+            '',
+      );
+
   QuizState copyWith({
     final Quiz? quiz,
     final Option<String>? reponse,
