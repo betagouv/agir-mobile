@@ -4,7 +4,7 @@
 //
 
 // Do not edit directly
-// Generated on Thu, 20 Jun 2024 14:52:28 GMT
+// Generated on Wed, 17 Jul 2024 13:59:23 GMT
 
 
 
@@ -49,6 +49,39 @@ class DsfrColors {
     static const blueFranceSun113 = Color(0xFF000091);
     static const blueFranceSun113Active = Color(0xFF2323FF);
     static const blueFranceSun113Hover = Color(0xFF1212FF);
+    static const brownCaramel100 = Color(0xFF2C221C);
+    static const brownCaramel100Active = Color(0xFF6C574A);
+    static const brownCaramel100Hover = Color(0xFF554439);
+    static const brownCaramel125 = Color(0xFF332821);
+    static const brownCaramel125Active = Color(0xFF755F51);
+    static const brownCaramel125Hover = Color(0xFF5D4B40);
+    static const brownCaramel200 = Color(0xFF4B3525);
+    static const brownCaramel200Active = Color(0xFF976E51);
+    static const brownCaramel200Hover = Color(0xFF7C5A41);
+    static const brownCaramel75 = Color(0xFF251C16);
+    static const brownCaramel75Active = Color(0xFF624E41);
+    static const brownCaramel75Hover = Color(0xFF4C3C31);
+    static const brownCaramel850 = Color(0xFFEAC7B2);
+    static const brownCaramel850Active = Color(0xFFBC8A66);
+    static const brownCaramel850Hover = Color(0xFFD69E75);
+    static const brownCaramel925 = Color(0xFFF3E2D9);
+    static const brownCaramel925Active = Color(0xFFE1A982);
+    static const brownCaramel925Hover = Color(0xFFE7BEA6);
+    static const brownCaramel950 = Color(0xFFF7EBE5);
+    static const brownCaramel950Active = Color(0xFFE6B79A);
+    static const brownCaramel950Hover = Color(0xFFECCBB9);
+    static const brownCaramel975 = Color(0xFFFBF5F2);
+    static const brownCaramel975Active = Color(0xFFECC9B5);
+    static const brownCaramel975Hover = Color(0xFFF1DBCF);
+    static const brownCaramelMain648 = Color(0xFFC08C65);
+    static const brownCaramelMain648Active = Color(0xFFECCAB6);
+    static const brownCaramelMain648Hover = Color(0xFFE6B594);
+    static const brownCaramelMoon901 = Color(0xFFFBD8AB);
+    static const brownCaramelMoon901Active = Color(0xFFD6A23E);
+    static const brownCaramelMoon901Hover = Color(0xFFEFB547);
+    static const brownCaramelSun425 = Color(0xFF845D48);
+    static const brownCaramelSun425Active = Color(0xFFD69978);
+    static const brownCaramelSun425Hover = Color(0xFFBB8568);
     static const error100 = Color(0xFF3A1D1D);
     static const error100Active = Color(0xFF8A4C4C);
     static const error100Hover = Color(0xFF6D3B3B);
@@ -284,6 +317,39 @@ class DsfrColors {
     static const info950 = Color(0xFFE8EDFF);
     static const info950Active = Color(0xFFA8BEFF);
     static const info950Hover = Color(0xFFC2D1FF);
+    static const pinkTuile100 = Color(0xFF2F211F);
+    static const pinkTuile100Active = Color(0xFF725550);
+    static const pinkTuile100Hover = Color(0xFF5A423E);
+    static const pinkTuile125 = Color(0xFF372624);
+    static const pinkTuile125Active = Color(0xFF7D5B57);
+    static const pinkTuile125Hover = Color(0xFF644845);
+    static const pinkTuile200 = Color(0xFF55302A);
+    static const pinkTuile200Active = Color(0xFFAB665A);
+    static const pinkTuile200Hover = Color(0xFF8D5349);
+    static const pinkTuile75 = Color(0xFF281B19);
+    static const pinkTuile75Active = Color(0xFF694C48);
+    static const pinkTuile75Hover = Color(0xFF513A37);
+    static const pinkTuile850 = Color(0xFFFCBFB7);
+    static const pinkTuile850Active = Color(0xFFFA7659);
+    static const pinkTuile850Hover = Color(0xFFFB907D);
+    static const pinkTuile925 = Color(0xFFFDDFDB);
+    static const pinkTuile925Active = Color(0xFFFAA191);
+    static const pinkTuile925Hover = Color(0xFFFBB8AD);
+    static const pinkTuile950 = Color(0xFFFEE9E7);
+    static const pinkTuile950Active = Color(0xFFFCB0A7);
+    static const pinkTuile950Hover = Color(0xFFFDC6C0);
+    static const pinkTuile975 = Color(0xFFFEF4F3);
+    static const pinkTuile975Active = Color(0xFFFAC4BE);
+    static const pinkTuile975Hover = Color(0xFFFCD7D3);
+    static const pinkTuileMain556 = Color(0xFFCE614A);
+    static const pinkTuileMain556Active = Color(0xFFEBA89F);
+    static const pinkTuileMain556Hover = Color(0xFFE89082);
+    static const pinkTuileMoon750 = Color(0xFFFF9575);
+    static const pinkTuileMoon750Active = Color(0xFFFFD8D0);
+    static const pinkTuileMoon750Hover = Color(0xFFFFC4B7);
+    static const pinkTuileSun425 = Color(0xFFA94645);
+    static const pinkTuileSun425Active = Color(0xFFDA8A89);
+    static const pinkTuileSun425Hover = Color(0xFFD5706F);
     static const purpleGlycine100 = Color(0xFF2C202B);
     static const purpleGlycine100Active = Color(0xFF6C536A);
     static const purpleGlycine100Hover = Color(0xFF554053);

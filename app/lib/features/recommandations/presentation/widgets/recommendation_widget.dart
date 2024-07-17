@@ -2,6 +2,7 @@ import 'package:app/features/articles/presentation/pages/article_page.dart';
 import 'package:app/features/mieux_vous_connaitre/presentation/element/pages/mieux_vous_connaitre_edit_page.dart';
 import 'package:app/features/quiz/presentation/pages/quiz_page.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
+import 'package:app/l10n/l10n.dart';
 import 'package:app/shared/widgets/fondamentaux/colors.dart';
 import 'package:app/shared/widgets/fondamentaux/shadows.dart';
 import 'package:dsfr/dsfr.dart';
@@ -75,12 +76,21 @@ class RecommendationWidget extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
+                        left: DsfrSpacings.s1v5,
                         top: DsfrSpacings.s1v5,
                         right: DsfrSpacings.s1v5,
                       ),
-                      child: _Points(
-                        points: points,
-                        borderRadius: borderRadius,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Flexible(child: _TypeTag(type: type)),
+                          const SizedBox(width: DsfrSpacings.s1v),
+                          _Points(
+                            points: points,
+                            borderRadius: borderRadius,
+                          ),
+                        ],
                       ),
                     ),
                   ],
@@ -96,6 +106,30 @@ class RecommendationWidget extends StatelessWidget {
       ),
     );
   }
+}
+
+class _TypeTag extends StatelessWidget {
+  const _TypeTag({required this.type});
+
+  final TypeDuContenu type;
+
+  @override
+  Widget build(final BuildContext context) => DsfrTag.sm(
+        label: TextSpan(
+          text: switch (type) {
+            TypeDuContenu.article => Localisation.article,
+            TypeDuContenu.kyc => Localisation.mieuxVousConnaitre,
+            TypeDuContenu.quiz => Localisation.quiz,
+          },
+        ),
+        backgroundColor: switch (type) {
+          TypeDuContenu.article => DsfrColors.brownCaramel925,
+          TypeDuContenu.kyc => DsfrColors.pinkTuile925,
+          TypeDuContenu.quiz => DsfrColors.greenBourgeon950,
+        },
+        foregroundColor: DsfrColors.grey50,
+        textStyle: const DsfrTextStyle.bodySm(),
+      );
 }
 
 class _Title extends StatelessWidget {

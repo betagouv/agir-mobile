@@ -1,6 +1,7 @@
 abstract final class Localisation {
   const Localisation._();
 
+  static const article = 'Article';
   static const commencer = 'Commencer';
   static const preOnboardingTitre =
       'Ensemble,\naméliorons\nnos habitudes\nau jour le jour';
@@ -133,6 +134,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const plusDe150m2 = 'Plus de 150 m²';
   static const quelleEstVotreModeDeChauffagePrincipal =
       'Quelle est votre mode de chauffage principal ?';
+  static const quiz = 'Quiz';
   static const electricite = 'Électricité';
   static const boisPellets = 'Bois / Pellets';
   static const fioul = 'Fioul';
