@@ -28,7 +28,7 @@ class RecommendationWidget extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    const width = 162.0;
+    const width = 200.0;
 
     const borderRadius = BorderRadius.all(Radius.circular(DsfrSpacings.s1w));
 
@@ -55,9 +55,9 @@ class RecommendationWidget extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.only(
-            left: DsfrSpacings.s1v5,
-            top: DsfrSpacings.s1v5,
-            right: DsfrSpacings.s1v5,
+            left: DsfrSpacings.s1w,
+            top: DsfrSpacings.s1w,
+            right: DsfrSpacings.s1w,
             bottom: DsfrSpacings.s3v,
           ),
           child: SizedBox(
@@ -134,16 +134,21 @@ class _Image extends StatelessWidget {
   final BorderRadius borderRadius;
 
   @override
-  Widget build(final BuildContext context) => ClipRRect(
-        borderRadius: borderRadius,
-        child: Image.network(
-          imageUrl,
-          width: width,
-          height: 102,
-          cacheWidth: width.toInt(),
-          cacheHeight: 102,
-        ),
-      );
+  Widget build(final BuildContext context) {
+    final height = width * 0.6;
+
+    return ClipRRect(
+      borderRadius: borderRadius,
+      child: Image.network(
+        imageUrl,
+        width: width,
+        height: height,
+        fit: BoxFit.cover,
+        cacheWidth: width.toInt(),
+        cacheHeight: height.toInt(),
+      ),
+    );
+  }
 }
 
 class _Points extends StatelessWidget {
