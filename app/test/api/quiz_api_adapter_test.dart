@@ -170,4 +170,127 @@ void main() {
       ),
     );
   });
+
+  test('recupererQuiz articles vide', () async {
+    final client = ClientMock()
+      ..getSuccess(
+        path:
+            '/api/quizzes/14?populate[0]=questions.reponses,thematique_gamification,articles.partenaire.logo',
+        response: CustomResponse('''
+{
+  "data": {
+    "id": 14,
+    "attributes": {
+      "titre": "Une assiette plus durable",
+      "duree": "⏱️ 2 minutes",
+      "points": 5,
+      "sousTitre": "Comment réduire l'impact de notre alimentation ?",
+      "frequence": null,
+      "difficulty": 1,
+      "createdAt": "2023-11-30T16:25:30.878Z",
+      "updatedAt": "2024-06-21T15:36:44.215Z",
+      "publishedAt": "2023-12-05T20:42:21.203Z",
+      "categorie": null,
+      "mois": null,
+      "questions": [
+        {
+          "id": 12,
+          "libelle": "Quelle action est la plus efficace pour une alimentation plus durable ?",
+          "explicationOk": "<p><span>Le secteur de l’élevage génère à lui seul près de 15 % des émissions mondiales de gaz à effet de serre. Réduire notre consommation de viande permet d’agir sur la production et de diminuer les impacts qui lui sont associés.<br><br>Pour rendre notre alimentation plus durable, on peut aussi privilégier les produits locaux, de saison et biologiques, limiter l’achat de produits transformés et réduire le gaspillage alimentaire.</span></p>",
+          "explicationKO": "<p><span>Au contraire ! Pour rendre notre alimentation plus durable, nous pouvons manger davantage de produits de saison et augmenter la part de repas végétariens dans les menus de la semaine. Diminuer notre consommation de viande permet en effet de réduire les impacts écologiques du secteur de l’élevage, qui génère à lui seul près de 15 % des émissions mondiales de gaz à effet de serre : c'est donc l'action la plus efficace pour limiter l'impact de notre alimentation.<br><br>On peut aussi privilégier les produits locaux et biologiques, limiter l’achat de produits transformés et réduire le gaspillage alimentaire.</span></p>",
+          "reponses": [
+            {
+              "id": 38,
+              "reponse": "Manger moins de produits de saison",
+              "exact": false
+            },
+            {
+              "id": 39,
+              "reponse": "Diminuer la consommation de viande",
+              "exact": true
+            },
+            {
+              "id": 453,
+              "reponse": "Privilégier la volaille et le porc",
+              "exact": false
+            },
+            {
+              "id": 452,
+              "reponse": "Réduire ses déchets",
+              "exact": false
+            }
+          ]
+        }
+      ],
+      "thematique_gamification": {
+        "data": {
+          "id": 1,
+          "attributes": {
+            "titre": "🥦 Alimentation",
+            "createdAt": "2023-09-20T12:16:53.011Z",
+            "updatedAt": "2023-11-29T10:10:12.741Z",
+            "publishedAt": "2023-12-05T20:38:49.216Z",
+            "code": null
+          }
+        }
+      },
+      "articles": {
+        "data": []
+      }
+    }
+  },
+  "meta": {}
+}'''),
+      );
+
+    final authentificationTokenStorage = AuthentificationTokenStorage(
+      secureStorage: FlutterSecureStorageMock(),
+      authentificationStatusManager: AuthentificationStatutManager(),
+    );
+    await authentificationTokenStorage.sauvegarderTokenEtUtilisateurId(
+      token,
+      utilisateurId,
+    );
+    final adapter = QuizApiAdapter(
+      cmsApiClient:
+          CmsApiClient(apiUrl: cmsApiUrl, token: 'le_token', inner: client),
+      apiClient: AuthentificationApiClient(
+        apiUrl: apiUrl,
+        authentificationTokenStorage: authentificationTokenStorage,
+        inner: client,
+      ),
+    );
+
+    final result = await adapter.recupererQuiz('14');
+    expect(
+      result.getRight().getOrElse(() => throw Exception()),
+      const Quiz(
+        id: 14,
+        thematique: '🥦 Alimentation',
+        question:
+            'Quelle action est la plus efficace pour une alimentation plus durable ?',
+        reponses: [
+          QuizReponse(
+            reponse: 'Manger moins de produits de saison',
+            exact: false,
+          ),
+          QuizReponse(
+            reponse: 'Diminuer la consommation de viande',
+            exact: true,
+          ),
+          QuizReponse(
+            reponse: 'Privilégier la volaille et le porc',
+            exact: false,
+          ),
+          QuizReponse(reponse: 'Réduire ses déchets', exact: false),
+        ],
+        points: 5,
+        explicationOk:
+            '<p><span>Le secteur de l’élevage génère à lui seul près de 15 % des émissions mondiales de gaz à effet de serre. Réduire notre consommation de viande permet d’agir sur la production et de diminuer les impacts qui lui sont associés.<br><br>Pour rendre notre alimentation plus durable, on peut aussi privilégier les produits locaux, de saison et biologiques, limiter l’achat de produits transformés et réduire le gaspillage alimentaire.</span></p>',
+        explicationKo:
+            "<p><span>Au contraire ! Pour rendre notre alimentation plus durable, nous pouvons manger davantage de produits de saison et augmenter la part de repas végétariens dans les menus de la semaine. Diminuer notre consommation de viande permet en effet de réduire les impacts écologiques du secteur de l’élevage, qui génère à lui seul près de 15 % des émissions mondiales de gaz à effet de serre : c'est donc l'action la plus efficace pour limiter l'impact de notre alimentation.<br><br>On peut aussi privilégier les produits locaux et biologiques, limiter l’achat de produits transformés et réduire le gaspillage alimentaire.</span></p>",
+        article: null,
+      ),
+    );
+  });
 }
