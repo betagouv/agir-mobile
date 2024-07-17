@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:app/features/gamification/domain/ports/gamification_port.dart';
 import 'package:app/features/quiz/domain/ports/quiz_port.dart';
 import 'package:app/features/quiz/presentation/blocs/quiz_event.dart';
 import 'package:app/features/quiz/presentation/blocs/quiz_state.dart';
@@ -7,8 +8,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fpdart/fpdart.dart';
 
 class QuizBloc extends Bloc<QuizEvent, QuizState> {
-  QuizBloc({required final QuizPort quizPort})
-      : _quizPort = quizPort,
+  QuizBloc({
+    required final QuizPort quizPort,
+    required final GamificationPort gamificationPort,
+  })  : _quizPort = quizPort,
+        _gamificationPort = gamificationPort,
         super(const QuizState.empty()) {
     on<QuizRecuperationDemandee>(_onRecuperationDemandee);
     on<QuizReponseSelectionnee>(_onReponseSelectionnee);
@@ -16,6 +20,7 @@ class QuizBloc extends Bloc<QuizEvent, QuizState> {
   }
 
   final QuizPort _quizPort;
+  final GamificationPort _gamificationPort;
 
   Future<void> _onRecuperationDemandee(
     final QuizRecuperationDemandee event,
@@ -42,6 +47,7 @@ class QuizBloc extends Bloc<QuizEvent, QuizState> {
       (final e) => e.reponse == state.reponse.getOrElse(() => '') && e.exact,
     );
     await _quizPort.terminerQuiz(id: state.quiz.id, estExacte: estExacte);
+    await _gamificationPort.mettreAJourLesPoints();
     emit(state.copyWith(estExacte: Some(estExacte)));
   }
 }

@@ -7,20 +7,23 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 class AuthentificationTokenStorage {
   AuthentificationTokenStorage({
     required final FlutterSecureStorage secureStorage,
-    required final AuthentificationStatutManager authentificationStatusManager,
+    required final AuthentificationStatutManagerWriter
+        authentificationStatusManagerWriter,
   })  : _secureStorage = secureStorage,
-        _authentificationStatusManager = authentificationStatusManager;
+        _authentificationStatusManagerWriter =
+            authentificationStatusManagerWriter;
 
   final FlutterSecureStorage _secureStorage;
-  final AuthentificationStatutManager _authentificationStatusManager;
+  final AuthentificationStatutManagerWriter
+      _authentificationStatusManagerWriter;
 
   Future<bool> initialise() async {
     final token = await recupererToken;
     if (token == null) {
-      _authentificationStatusManager
+      _authentificationStatusManagerWriter
           .gererAuthentificationStatut(AuthentificationStatut.pasConnecte);
     } else {
-      _authentificationStatusManager
+      _authentificationStatusManagerWriter
           .gererAuthentificationStatut(AuthentificationStatut.connecte);
     }
 
@@ -41,12 +44,12 @@ class AuthentificationTokenStorage {
   ) async {
     await _secureStorage.write(key: _tokenKey, value: token);
     await _secureStorage.write(key: _utilisateurIdKey, value: utilisateurId);
-    _authentificationStatusManager
+    _authentificationStatusManagerWriter
         .gererAuthentificationStatut(AuthentificationStatut.connecte);
   }
 
   Future<void> supprimerTokenEtUtilisateurId() async {
-    _authentificationStatusManager
+    _authentificationStatusManagerWriter
         .gererAuthentificationStatut(AuthentificationStatut.pasConnecte);
     await _secureStorage.delete(key: _tokenKey);
     await _secureStorage.delete(key: _utilisateurIdKey);

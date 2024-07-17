@@ -8,6 +8,9 @@ import 'package:app/features/authentification/domain/entities/authentification_s
 import 'package:app/features/authentification/domain/ports/authentification_port.dart';
 import 'package:app/features/authentification/presentation/blocs/se_connecter_bloc.dart';
 import 'package:app/features/communes/domain/ports/communes_port.dart';
+import 'package:app/features/gamification/domain/ports/gamification_port.dart';
+import 'package:app/features/gamification/presentation/blocs/gamification_bloc.dart';
+import 'package:app/features/gamification/presentation/blocs/gamification_event.dart';
 import 'package:app/features/mieux_vous_connaitre/domain/ports/mieux_vous_connaitre_port.dart';
 import 'package:app/features/mieux_vous_connaitre/presentation/liste/blocs/mieux_vous_connaitre_bloc.dart';
 import 'package:app/features/profil/domain/ports/profil_port.dart';
@@ -39,6 +42,7 @@ class App extends StatefulWidget {
     required this.aideVeloPort,
     required this.profilPort,
     required this.mieuxVousConnaitrePort,
+    required this.gamificationPort,
     super.key,
   });
 
@@ -54,6 +58,7 @@ class App extends StatefulWidget {
   final AideVeloPort aideVeloPort;
   final ProfilPort profilPort;
   final MieuxVousConnaitrePort mieuxVousConnaitrePort;
+  final GamificationPort gamificationPort;
 
   @override
   State<App> createState() => _AppState();
@@ -66,7 +71,7 @@ class _AppState extends State<App> {
   void initState() {
     super.initState();
     _goRouter = goRouter(
-      authentificationStatusManager: widget.authentificationStatusManager,
+      authentificationStatusManagerReader: widget.authentificationStatusManager,
     );
   }
 
@@ -86,6 +91,7 @@ class _AppState extends State<App> {
           RepositoryProvider.value(value: widget.profilPort),
           RepositoryProvider.value(value: widget.communesPort),
           RepositoryProvider.value(value: widget.mieuxVousConnaitrePort),
+          RepositoryProvider.value(value: widget.gamificationPort),
         ],
         child: MultiBlocProvider(
           providers: [
@@ -121,6 +127,13 @@ class _AppState extends State<App> {
               create: (final context) => MieuxVousConnaitreBloc(
                 mieuxVousConnaitrePort: widget.mieuxVousConnaitrePort,
               ),
+            ),
+            BlocProvider(
+              create: (final context) => GamificationBloc(
+                gamificationPort: widget.gamificationPort,
+                authentificationStatutManagerReader:
+                    widget.authentificationStatusManager,
+              )..add(const GamificationAbonnementDemande()),
             ),
           ],
           child: MaterialApp.router(

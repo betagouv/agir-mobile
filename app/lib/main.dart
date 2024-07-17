@@ -13,6 +13,7 @@ import 'package:app/features/authentification/infrastructure/adapters/api/authen
 import 'package:app/features/authentification/infrastructure/adapters/api/authentification_token_storage.dart';
 import 'package:app/features/authentification/infrastructure/adapters/api/cms_api_client.dart';
 import 'package:app/features/communes/infrastructure/adapters/communes_api_adapter.dart';
+import 'package:app/features/gamification/infrastructure/adapters/gamification_api_adapter.dart';
 import 'package:app/features/mieux_vous_connaitre/infrastructure/adapters/mieux_vous_connaitre_api_adapter.dart';
 import 'package:app/features/profil/infrastructure/adapters/profil_api_adapter.dart';
 import 'package:app/features/quiz/infrastructure/adapters/quiz_api_adapter.dart';
@@ -53,7 +54,7 @@ Future<void> main() async {
     secureStorage: const FlutterSecureStorage(
       aOptions: AndroidOptions(encryptedSharedPreferences: true),
     ),
-    authentificationStatusManager: authentificationStatusManager,
+    authentificationStatusManagerWriter: authentificationStatusManager,
   );
 
   await authentificationTokenStorage.initialise();
@@ -87,6 +88,7 @@ Future<void> main() async {
       profilPort: ProfilApiAdapter(apiClient: apiClient),
       mieuxVousConnaitrePort:
           MieuxVousConnaitreApiAdapter(apiClient: apiClient),
+      gamificationPort: GamificationApiAdapter(apiClient: apiClient),
     ),
   );
 }

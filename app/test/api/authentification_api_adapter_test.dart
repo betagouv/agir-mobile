@@ -46,7 +46,8 @@ void main() {
             apiUrl: apiUrl,
             authentificationTokenStorage: AuthentificationTokenStorage(
               secureStorage: flutterSecureStorageMock,
-              authentificationStatusManager: authentificationStatutManager,
+              authentificationStatusManagerWriter:
+                  authentificationStatutManager,
             ),
             inner: client,
           ),
@@ -79,7 +80,8 @@ void main() {
             apiUrl: apiUrl,
             authentificationTokenStorage: AuthentificationTokenStorage(
               secureStorage: flutterSecureStorageMock,
-              authentificationStatusManager: authentificationStatutManager,
+              authentificationStatusManagerWriter:
+                  authentificationStatutManager,
             ),
             inner: ClientMock(),
           ),

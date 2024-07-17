@@ -23,8 +23,10 @@ class ArticlePage extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => BlocProvider(
-        create: (final context) => ArticleBloc(articlesPort: context.read())
-          ..add(ArticleRecuperationDemandee(id)),
+        create: (final context) => ArticleBloc(
+          articlesPort: context.read(),
+          gamificationPort: context.read(),
+        )..add(ArticleRecuperationDemandee(id)),
         child: const ArticleView(),
       );
 }
