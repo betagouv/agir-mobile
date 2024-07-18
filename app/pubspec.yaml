@@ -4,8 +4,8 @@ publish_to: 'none'
 version: 0.1.0+1
 
 environment:
-  sdk: 3.4.3
-  flutter: 3.22.2
+  sdk: 3.4.4
+  flutter: 3.22.3
 
 dependencies:
   collection: any # Dépend de flutter_test

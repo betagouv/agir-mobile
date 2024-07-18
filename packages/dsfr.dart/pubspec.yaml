@@ -5,8 +5,8 @@ version: 0.0.1
 homepage:
 
 environment:
-  sdk: 3.4.3
-  flutter: 3.22.2
+  sdk: 3.4.4
+  flutter: 3.22.3
 
 dependencies:
   flutter:
