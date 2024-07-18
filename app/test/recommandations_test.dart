@@ -44,10 +44,12 @@ void main() {
           id: '42',
           type: TypeDuContenu.article,
           titre: 'Réchauffement et montée des eaux : quel est le lien ?',
+          sousTitre: null,
           imageUrl:
               'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1702068380/jonathan_ford_6_Zg_T_Etv_D16_I_unsplash_00217cb281.jpg',
           points: 20,
           thematique: Thematique.climat,
+          thematiqueLabel: '🛒 Consommation durable',
         );
         ielALesRecommandationsSuivantes([recommandation]);
         ielEstConnecte();

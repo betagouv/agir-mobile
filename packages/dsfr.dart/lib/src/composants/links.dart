@@ -41,7 +41,7 @@ class DsfrLink extends StatefulWidget {
     required final String label,
     final IconData? icon,
     final DsfrLinkIconPosition iconPosition = DsfrLinkIconPosition.start,
-    final VoidCallback? onTap,
+    final VoidCallback? onPressed,
     final Key? key,
   }) : this._(
           label: label,
@@ -52,7 +52,7 @@ class DsfrLink extends StatefulWidget {
           iconSize: 16,
           iconPosition: iconPosition,
           icon: icon,
-          onTap: onTap,
+          onTap: onPressed,
           key: key,
         );
 

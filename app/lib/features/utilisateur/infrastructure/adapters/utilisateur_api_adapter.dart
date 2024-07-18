@@ -37,7 +37,8 @@ class UtilisateurApiAdapter implements UtilisateurPort {
                 .where(
                   (final e) =>
                       e == Fonctionnalites.aides.name ||
-                      e == Fonctionnalites.recommandations.name,
+                      e == Fonctionnalites.recommandations.name ||
+                      e == Fonctionnalites.bibliotheque.name,
                 )
                 .map((final e) => Fonctionnalites.values.byName(e as String))
                 .toList(),

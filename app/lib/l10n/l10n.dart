@@ -2,6 +2,7 @@ abstract final class Localisation {
   const Localisation._();
 
   static const article = 'Article';
+  static String nombreArticle(final int value) => '$value articles';
   static const commencer = 'Commencer';
   static const preOnboardingTitre =
       'Ensemble,\naméliorons\nnos habitudes\nau jour le jour';
@@ -28,6 +29,8 @@ abstract final class Localisation {
   static const motDePasse1CaractreSpecialMinimum =
       '1 caractère spécial minimum';
   static const motDePasse1ChiffreMinimum = '1 chiffre minimum';
+  static const baseDeConnaissances = 'Base de connaissances';
+  static const bibliotheque = 'Bibliothèque';
   static const bonjour = 'Bonjour,\n';
   static String prenomExclamation(final String value) => '$value !';
   static const menuAccueil = 'Accueil';

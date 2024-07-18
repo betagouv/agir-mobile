@@ -52,7 +52,8 @@ class MesAides extends StatelessWidget {
           const SizedBox(height: DsfrSpacings.s2w),
           DsfrLink.md(
             label: Localisation.accueilMesAidesLien,
-            onTap: () async => GoRouter.of(context).pushNamed(AidesPage.name),
+            onPressed: () async =>
+                GoRouter.of(context).pushNamed(AidesPage.name),
           ),
         ],
       ),

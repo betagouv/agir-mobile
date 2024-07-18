@@ -14,6 +14,7 @@ class UtilisateurBloc extends Bloc<UtilisateurEvent, UtilisateurState> {
           const UtilisateurState(
             prenom: '',
             aLesAides: false,
+            aLaBibliotheque: false,
             aLesRecommandations: false,
           ),
         ) {
@@ -29,12 +30,14 @@ class UtilisateurBloc extends Bloc<UtilisateurEvent, UtilisateurState> {
     final result = await _utilisateurPort.recupereUtilisateur();
     if (result.isRight()) {
       final utilisateur = result.getRight().getOrElse(() => throw Exception());
+      final fonctionnalitesDebloquees = utilisateur.fonctionnalitesDebloquees;
       emit(
         UtilisateurState(
           prenom: utilisateur.prenom,
-          aLesAides: utilisateur.fonctionnalitesDebloquees
-              .contains(Fonctionnalites.aides),
-          aLesRecommandations: utilisateur.fonctionnalitesDebloquees
+          aLesAides: fonctionnalitesDebloquees.contains(Fonctionnalites.aides),
+          aLaBibliotheque:
+              fonctionnalitesDebloquees.contains(Fonctionnalites.bibliotheque),
+          aLesRecommandations: fonctionnalitesDebloquees
               .contains(Fonctionnalites.recommandations),
         ),
       );

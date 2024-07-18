@@ -134,7 +134,7 @@ class DsfrTextStyle extends TextStyle {
         );
 
   const DsfrTextStyle.bodyMd({final Color color = DsfrColors.grey50})
-      : this(fontSize: 16, lineHeight: 24, color: color);
+      : this(fontSize: 16, lineHeight: 16, color: color);
 
   const DsfrTextStyle.bodyMdMedium({final Color color = DsfrColors.grey50})
       : this(

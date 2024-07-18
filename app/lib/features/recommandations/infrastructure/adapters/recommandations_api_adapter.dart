@@ -3,10 +3,10 @@
 import 'dart:convert';
 
 import 'package:app/features/authentification/infrastructure/adapters/api/authentification_api_client.dart';
-import 'package:app/features/mieux_vous_connaitre/domain/question.dart';
 import 'package:app/features/profil/domain/utilisateur_id_non_trouve_exception.dart';
 import 'package:app/features/recommandations/domain/ports/recommandations_port.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
+import 'package:app/features/recommandations/infrastructure/adapters/recommandation_mapper.dart';
 import 'package:fpdart/fpdart.dart';
 
 class RecommandationsApiAdapter implements RecommandationsPort {
@@ -35,39 +35,12 @@ class RecommandationsApiAdapter implements RecommandationsPort {
     final json = jsonDecode(response.body) as List<dynamic>;
 
     return Right(
-      json.map((final e) {
-        final f = e as Map<String, dynamic>;
-
-        return Recommandation(
-          id: f['content_id'] as String,
-          type: _mapContentTypeFromJson(f['type'] as String),
-          titre: f['titre'] as String,
-          imageUrl: f['image_url'] as String,
-          points: (f['points'] as num).toInt(),
-          thematique:
-              _mapThematiqueFromJson(f['thematique_principale'] as String),
-        );
-      }).toList(),
+      json
+          .map(
+            (final e) =>
+                RecommandationMapper.fromJson(e as Map<String, dynamic>),
+          )
+          .toList(),
     );
   }
-
-  static TypeDuContenu _mapContentTypeFromJson(final String? type) =>
-      switch (type) {
-        'article' => TypeDuContenu.article,
-        'kyc' => TypeDuContenu.kyc,
-        'quizz' => TypeDuContenu.quiz,
-        _ => TypeDuContenu.article,
-      };
-
-  static Thematique _mapThematiqueFromJson(final String? type) =>
-      switch (type) {
-        'alimentation' => Thematique.alimentation,
-        'transport' => Thematique.transport,
-        'logement' => Thematique.logement,
-        'consommation' => Thematique.consommation,
-        'climat' => Thematique.climat,
-        'dechet' => Thematique.dechet,
-        'loisir' => Thematique.loisir,
-        _ => Thematique.loisir,
-      };
 }

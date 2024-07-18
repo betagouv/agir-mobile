@@ -1,6 +1,7 @@
 import 'package:app/features/accueil/presentation/pages/accueil_page.dart';
 import 'package:app/features/aides/presentation/pages/aides_page.dart';
 import 'package:app/features/authentification/domain/ports/authentification_port.dart';
+import 'package:app/features/bibliotheque/presentation/pages/bibliotheque_page.dart';
 import 'package:app/features/profil/presentation/pages/profil_page.dart';
 import 'package:app/features/utilisateur/presentation/blocs/utilisateur_bloc.dart';
 import 'package:app/features/version/presentation/widgets/version_label.dart';
@@ -69,6 +70,9 @@ class _MenuItems extends StatelessWidget {
   Future<void> _handleTapOnAides(final BuildContext context) async =>
       _redirigeSiLaPageCourantEstDifferente(context, AidesPage.name);
 
+  Future<void> _handleTapOnBibliotheque(final BuildContext context) async =>
+      _redirigeSiLaPageCourantEstDifferente(context, BibliothequePage.name);
+
   Future<void> _handleTapOnProfile(final BuildContext context) async =>
       _redirigeSiLaPageCourantEstDifferente(context, ProfilPage.name);
 
@@ -90,6 +94,11 @@ class _MenuItems extends StatelessWidget {
           groupTitle: groupValue,
           onTap: () async => _handleTapOnAides(context),
         ),
+        const SizedBox(height: DsfrSpacings.s2w),
+        _MenuBibliotheque(
+          groupTitle: groupValue,
+          onTap: () async => _handleTapOnBibliotheque(context),
+        ),
         const Spacer(),
         _MenuItem(
           label: Localisation.votreProfil,
@@ -102,7 +111,7 @@ class _MenuItems extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s3w),
           child: DsfrLink.md(
             label: Localisation.seDeconnecter,
-            onTap: () async =>
+            onPressed: () async =>
                 context.read<AuthentificationPort>().deconnectionDemandee(),
           ),
         ),
@@ -131,6 +140,27 @@ class _MenuAides extends StatelessWidget {
         ? _MenuItem(
             label: Localisation.menuAides,
             value: AidesPage.name,
+            groupValue: groupTitle,
+            onTap: onTap,
+          )
+        : const SizedBox.shrink();
+  }
+}
+
+class _MenuBibliotheque extends StatelessWidget {
+  const _MenuBibliotheque({required this.groupTitle, required this.onTap});
+
+  final String groupTitle;
+  final VoidCallback? onTap;
+
+  @override
+  Widget build(final BuildContext context) {
+    final state = context.watch<UtilisateurBloc>().state;
+
+    return state.aLaBibliotheque
+        ? _MenuItem(
+            label: Localisation.bibliotheque,
+            value: BibliothequePage.name,
             groupValue: groupTitle,
             onTap: onTap,
           )

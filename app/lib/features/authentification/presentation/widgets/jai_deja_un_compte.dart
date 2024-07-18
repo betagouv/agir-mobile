@@ -15,7 +15,7 @@ class JaiDejaUnCompteWidget extends StatelessWidget {
   Widget build(final BuildContext context) => Center(
         child: DsfrLink.md(
           label: Localisation.jaiDejaUnCompte,
-          onTap: () async => _handleAllerASeConnecter(context),
+          onPressed: () async => _handleAllerASeConnecter(context),
         ),
       );
 }
