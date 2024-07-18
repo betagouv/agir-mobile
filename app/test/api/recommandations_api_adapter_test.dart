@@ -71,19 +71,23 @@ void main() {
           id: 'KYC008',
           type: TypeDuContenu.kyc,
           titre: 'Votre employeur vous permet-il de télétravailler ?',
+          sousTitre: null,
           imageUrl:
               'https://www.google.com/url?sa=i&url=https%3A%2F%2Fopenclipart.org%2Fdetail%2F321572%2Fi-have-a-small-question&psig=AOvVaw1_ErxUJbZIoqQ8u-1sbgB5&ust=1711202048405000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCLijtMOCiIUDFQAAAAAdAAAAABAS',
           points: 5,
           thematique: Thematique.climat,
+          thematiqueLabel: '☀️ Environnement',
         ),
         const Recommandation(
           id: '31',
           type: TypeDuContenu.article,
           titre: 'Réchauffement et montée des eaux : quel est le lien ?',
+          sousTitre: 'Ça ne coule pas de source',
           imageUrl:
               'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1702068380/jonathan_ford_6_Zg_T_Etv_D16_I_unsplash_00217cb281.jpg',
           points: 20,
           thematique: Thematique.climat,
+          thematiqueLabel: '☀️ Environnement',
         ),
       ],
     );

@@ -8,6 +8,7 @@ import 'package:app/features/articles/presentation/pages/article_page.dart';
 import 'package:app/features/authentification/domain/entities/authentification_statut_manager.dart';
 import 'package:app/features/authentification/domain/value_objects/authentification_statut.dart';
 import 'package:app/features/authentification/presentation/pages/se_connecter_page.dart';
+import 'package:app/features/bibliotheque/presentation/pages/bibliotheque_page.dart';
 import 'package:app/features/mieux_vous_connaitre/presentation/element/pages/mieux_vous_connaitre_edit_page.dart';
 import 'package:app/features/mieux_vous_connaitre/presentation/liste/pages/mieux_vous_connaitre_page.dart';
 import 'package:app/features/pre_onboarding/presentation/pages/pre_onboarding_carrousel_page.dart';
@@ -51,6 +52,7 @@ GoRouter goRouter({
                   routes: [AideSimulateurVeloDisponiblePage.route],
                 ),
                 ArticlePage.route,
+                BibliothequePage.route,
                 QuizPage.route,
                 ProfilPage.route,
                 MesInformationsPage.route,

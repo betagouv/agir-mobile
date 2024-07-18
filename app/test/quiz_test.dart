@@ -27,10 +27,12 @@ void main() {
         id: '42',
         type: TypeDuContenu.quiz,
         titre: titre,
+        sousTitre: null,
         imageUrl:
             'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1702068380/jonathan_ford_6_Zg_T_Etv_D16_I_unsplash_00217cb281.jpg',
         points: 20,
         thematique: Thematique.consommation,
+        thematiqueLabel: '🛒 Consommation durable',
       );
       ielALesRecommandationsSuivantes([recommandation]);
       const question =
@@ -81,10 +83,12 @@ void main() {
         id: '42',
         type: TypeDuContenu.quiz,
         titre: titre,
+        sousTitre: null,
         imageUrl:
             'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1702068380/jonathan_ford_6_Zg_T_Etv_D16_I_unsplash_00217cb281.jpg',
         points: 20,
         thematique: Thematique.consommation,
+        thematiqueLabel: '🛒 Consommation durable',
       );
       ielALesRecommandationsSuivantes([recommandation]);
       const reponse = 'Diminuer la consommation de viande';
@@ -138,10 +142,12 @@ void main() {
         id: '42',
         type: TypeDuContenu.quiz,
         titre: titre,
+        sousTitre: null,
         imageUrl:
             'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1702068380/jonathan_ford_6_Zg_T_Etv_D16_I_unsplash_00217cb281.jpg',
         points: 20,
         thematique: Thematique.consommation,
+        thematiqueLabel: '🛒 Consommation durable',
       );
       ielALesRecommandationsSuivantes([recommandation]);
       const reponse = 'Manger moins de produits de saison';

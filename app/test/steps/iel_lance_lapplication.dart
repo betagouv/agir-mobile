@@ -7,6 +7,7 @@ import '../mocks/aide_velo_port_mock.dart';
 import '../mocks/aides_port_mock.dart';
 import '../mocks/articles_port_mock.dart';
 import '../mocks/authentification_port_mock.dart';
+import '../mocks/bibliotheque_port_mock.dart';
 import '../mocks/communes_port_mock.dart';
 import '../mocks/gamification_port_mock.dart';
 import '../mocks/mieux_vous_connaitre_port_mock.dart';
@@ -60,6 +61,7 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
         fonctionnalitesDebloquees: ScenarioContext().fonctionnalitesDebloquees,
       ),
       aidesPort: AidesPortMock(ScenarioContext().aides),
+      bibliothequePort: BibliothequePortMock(ScenarioContext().bibliotheque),
       recommandationsPort:
           RecommandationsPortMock(ScenarioContext().recommandations),
       articlesPort: ScenarioContext().articlesPortMock!,

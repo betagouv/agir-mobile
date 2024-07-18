@@ -15,5 +15,6 @@ class Utilisateur extends Equatable {
 
 enum Fonctionnalites {
   aides,
+  bibliotheque,
   recommandations,
 }

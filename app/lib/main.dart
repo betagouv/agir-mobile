@@ -12,6 +12,7 @@ import 'package:app/features/authentification/infrastructure/adapters/api/authen
 import 'package:app/features/authentification/infrastructure/adapters/api/authentification_api_client.dart';
 import 'package:app/features/authentification/infrastructure/adapters/api/authentification_token_storage.dart';
 import 'package:app/features/authentification/infrastructure/adapters/api/cms_api_client.dart';
+import 'package:app/features/bibliotheque/infrastructure/adapters/bibliotheque_api_adapter.dart';
 import 'package:app/features/communes/infrastructure/adapters/communes_api_adapter.dart';
 import 'package:app/features/gamification/infrastructure/adapters/gamification_api_adapter.dart';
 import 'package:app/features/mieux_vous_connaitre/infrastructure/adapters/mieux_vous_connaitre_api_adapter.dart';
@@ -75,6 +76,7 @@ Future<void> main() async {
       authentificationPort: AuthentificationApiAdapter(apiClient: apiClient),
       utilisateurPort: UtilisateurApiAdapter(apiClient: apiClient),
       aidesPort: AidesApiAdapter(apiClient: apiClient),
+      bibliothequePort: BibliothequeApiAdapter(apiClient: apiClient),
       recommandationsPort: RecommandationsApiAdapter(apiClient: apiClient),
       articlesPort:
           ArticlesApiAdapter(apiClient: apiClient, cmsApiClient: cmsClient),

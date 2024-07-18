@@ -7,6 +7,8 @@ import 'package:app/features/articles/domain/ports/articles_port.dart';
 import 'package:app/features/authentification/domain/entities/authentification_statut_manager.dart';
 import 'package:app/features/authentification/domain/ports/authentification_port.dart';
 import 'package:app/features/authentification/presentation/blocs/se_connecter_bloc.dart';
+import 'package:app/features/bibliotheque/domain/ports/bibliotheque_port.dart';
+import 'package:app/features/bibliotheque/presentation/blocs/bibliotheque_bloc.dart';
 import 'package:app/features/communes/domain/ports/communes_port.dart';
 import 'package:app/features/gamification/domain/ports/gamification_port.dart';
 import 'package:app/features/gamification/presentation/blocs/gamification_bloc.dart';
@@ -34,6 +36,7 @@ class App extends StatefulWidget {
     required this.authentificationPort,
     required this.utilisateurPort,
     required this.aidesPort,
+    required this.bibliothequePort,
     required this.recommandationsPort,
     required this.articlesPort,
     required this.quizPort,
@@ -50,6 +53,7 @@ class App extends StatefulWidget {
   final AuthentificationPort authentificationPort;
   final UtilisateurPort utilisateurPort;
   final AidesPort aidesPort;
+  final BibliothequePort bibliothequePort;
   final RecommandationsPort recommandationsPort;
   final ArticlesPort articlesPort;
   final QuizPort quizPort;
@@ -134,6 +138,11 @@ class _AppState extends State<App> {
                 authentificationStatutManagerReader:
                     widget.authentificationStatusManager,
               )..add(const GamificationAbonnementDemande()),
+            ),
+            BlocProvider(
+              create: (final context) => BibliothequeBloc(
+                bibliothequePort: widget.bibliothequePort,
+              ),
             ),
           ],
           child: MaterialApp.router(
