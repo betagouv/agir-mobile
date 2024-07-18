@@ -14,36 +14,35 @@ class LesRecommandations extends StatelessWidget {
     final recommandations =
         context.watch<RecommandationsBloc>().state.recommandations;
 
-    return SizedBox(
-      height: MediaQuery.textScalerOf(context).scale(250),
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
-        itemBuilder: (final context, final index) {
-          final element = recommandations[index];
-
-          return RecommendationWidget(
-            id: element.id,
-            type: element.type,
-            points: '${element.points}',
-            imageUrl: element.imageUrl,
-            tagLabel: switch (element.thematique) {
-              Thematique.alimentation => Localisation.lesCategoriesAlimentation,
-              Thematique.transport => Localisation.lesCategoriesTransport,
-              Thematique.logement => Localisation.lesCategoriesLogement,
-              Thematique.consommation => Localisation.lesCategoriesConsommation,
-              Thematique.climat => Localisation.lesCategoriesClimat,
-              Thematique.dechet => Localisation.lesCategoriesDechet,
-              Thematique.loisir => Localisation.lesCategoriesLoisir,
-            },
-            titre: element.titre,
-          );
-        },
-        separatorBuilder: (final context, final index) => const SizedBox(
-          width: DsfrSpacings.s2w,
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      clipBehavior: Clip.none,
+      child: IntrinsicHeight(
+        child: Row(
+          children: recommandations
+              .map(
+                (final e) => RecommendationWidget(
+                  id: e.id,
+                  type: e.type,
+                  points: '${e.points}',
+                  imageUrl: e.imageUrl,
+                  tagLabel: switch (e.thematique) {
+                    Thematique.alimentation =>
+                      Localisation.lesCategoriesAlimentation,
+                    Thematique.transport => Localisation.lesCategoriesTransport,
+                    Thematique.logement => Localisation.lesCategoriesLogement,
+                    Thematique.consommation =>
+                      Localisation.lesCategoriesConsommation,
+                    Thematique.climat => Localisation.lesCategoriesClimat,
+                    Thematique.dechet => Localisation.lesCategoriesDechet,
+                    Thematique.loisir => Localisation.lesCategoriesLoisir,
+                  },
+                  titre: e.titre,
+                ),
+              )
+              .separator(const SizedBox(width: DsfrSpacings.s2w))
+              .toList(),
         ),
-        itemCount: recommandations.length,
-        clipBehavior: Clip.none,
       ),
     );
   }

@@ -98,7 +98,7 @@ class RecommendationWidget extends StatelessWidget {
                 const SizedBox(height: DsfrSpacings.s1v5),
                 _Tag(tagLabel: tagLabel),
                 const SizedBox(height: DsfrSpacings.s1w),
-                Flexible(child: _Title(titre: titre)),
+                _Title(titre: titre),
               ],
             ),
           ),
