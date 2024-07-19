@@ -1,5 +1,6 @@
 import 'package:app/features/articles/presentation/pages/article_page.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
+import 'package:app/l10n/l10n.dart';
 import 'package:app/shared/widgets/fondamentaux/shadows.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +55,7 @@ class Contenu extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: DsfrLink.md(
-                    label: 'Continuer la lecture',
+                    label: Localisation.continuerLaLecture,
                     icon: DsfrIcons.systemArrowRightLine,
                     iconPosition: DsfrLinkIconPosition.end,
                     onPressed: () async => GoRouter.of(context).pushNamed(

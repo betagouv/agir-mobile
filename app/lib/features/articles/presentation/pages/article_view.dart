@@ -1,4 +1,5 @@
 import 'package:app/features/articles/presentation/blocs/article_bloc.dart';
+import 'package:app/l10n/l10n.dart';
 import 'package:app/shared/widgets/composants/app_bar.dart';
 import 'package:app/shared/widgets/composants/html_widget.dart';
 import 'package:app/shared/widgets/fondamentaux/colors.dart';
@@ -27,7 +28,7 @@ class ArticleView extends StatelessWidget {
           FnvHtmlWidget(article.contenu),
           if (article.partenaire != null) ...[
             const SizedBox(height: DsfrSpacings.s4w),
-            const Text('Proposé par', style: DsfrTextStyle.bodySm()),
+            const Text(Localisation.proposePar, style: DsfrTextStyle.bodySm()),
             const SizedBox(height: DsfrSpacings.s1w),
             Image.network(
               article.partenaire!.logo,

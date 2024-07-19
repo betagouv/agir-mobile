@@ -26,8 +26,16 @@ class BibliothequeApiAdapter implements BibliothequePort {
       return const Left(UtilisateurIdNonTrouveException());
     }
 
-    final response = await _apiClient
-        .get(Uri.parse('/utilisateurs/$utilisateurId/bibliotheque'));
+    final map = {
+      if (thematiques != null) 'filtre_thematiques': thematiques.join(','),
+      if (titre != null) 'titre': titre,
+    };
+
+    final uri = Uri.parse('/utilisateurs/$utilisateurId/bibliotheque').replace(
+      queryParameters: map.isNotEmpty ? map : null,
+    );
+
+    final response = await _apiClient.get(uri);
 
     if (response.statusCode != 200) {
       return Left(
