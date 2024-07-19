@@ -1,5 +1,10 @@
+import 'dart:async';
+
+import 'package:app/features/bibliotheque/domain/bibliotheque.dart';
 import 'package:app/features/bibliotheque/presentation/blocs/bibliotheque_bloc.dart';
+import 'package:app/features/bibliotheque/presentation/blocs/bibliotheque_event.dart';
 import 'package:app/features/bibliotheque/presentation/pages/contenu.dart';
+import 'package:app/features/recommandations/domain/recommandation.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
@@ -10,10 +15,6 @@ class BibliothequeView extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    final state = context.watch<BibliothequeBloc>().state;
-
-    final contenus = state.bibliotheque.contenus;
-
     const padding = DsfrSpacings.s3w;
 
     return CustomScrollView(
@@ -23,32 +24,165 @@ class BibliothequeView extends StatelessWidget {
         SliverPadding(
           padding: const EdgeInsets.symmetric(horizontal: padding),
           sliver: SliverList.list(
-            children: [
-              const Text(
+            children: const [
+              Text(
                 Localisation.baseDeConnaissances,
                 style: DsfrTextStyle.headline2(),
               ),
-              const SizedBox(height: DsfrSpacings.s1w),
-              Text(
-                Localisation.nombreArticle(contenus.length),
-                style: const DsfrTextStyle.bodyLgBold(),
-              ),
-              const SizedBox(height: DsfrSpacings.s2w),
+              SizedBox(height: DsfrSpacings.s2w),
+              _ChampRecherche(),
+              SizedBox(height: DsfrSpacings.s1w),
+              _Thematiques(),
+              SizedBox(height: DsfrSpacings.s1w),
+              _Nombre(),
+              SizedBox(height: DsfrSpacings.s2w),
             ],
           ),
         ),
-        SliverPadding(
-          padding: const EdgeInsets.symmetric(horizontal: padding),
-          sliver: SliverList.separated(
-            itemBuilder: (final context, final index) =>
-                Contenu(contenu: contenus[index]),
-            separatorBuilder: (final context, final index) =>
-                const SizedBox(height: DsfrSpacings.s2w),
-            itemCount: contenus.length,
-          ),
-        ),
+        const _SliverListe(),
         const SliverPadding(padding: EdgeInsets.only(bottom: padding)),
       ],
+    );
+  }
+}
+
+class _Thematiques extends StatelessWidget {
+  const _Thematiques();
+
+  @override
+  Widget build(final BuildContext context) {
+    final filtres = context.select<BibliothequeBloc, List<BibliothequeFiltre>>(
+      (final value) => value.state.bibliotheque.filtres,
+    );
+    const s1w = DsfrSpacings.s1w;
+
+    return Wrap(
+      spacing: s1w,
+      runSpacing: s1w,
+      children: filtres
+          .map(
+            (final thematique) => _Tag(
+              label: thematique.titre,
+              thematique: thematique.code,
+              choisi: thematique.choisi,
+            ),
+          )
+          .toList(),
+    );
+  }
+}
+
+class _Tag extends StatelessWidget {
+  const _Tag({
+    required this.label,
+    required this.thematique,
+    required this.choisi,
+  });
+
+  final String label;
+  final String thematique;
+  final bool choisi;
+
+  @override
+  Widget build(final BuildContext context) {
+    const blue = DsfrColors.blueFranceSun113;
+
+    return GestureDetector(
+      onTap: () => context.read<BibliothequeBloc>().add(
+            BibliothequeThematiqueSelectionnee(thematique),
+          ),
+      behavior: HitTestBehavior.opaque,
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: choisi ? blue : null,
+          border: const Border.fromBorderSide(BorderSide(color: blue)),
+          borderRadius:
+              const BorderRadius.all(Radius.circular(DsfrSpacings.s4w)),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(DsfrSpacings.s3v),
+          child: Text(
+            label,
+            style: DsfrTextStyle.bodySmMedium(
+              color: choisi ? Colors.white : blue,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _ChampRecherche extends StatefulWidget {
+  const _ChampRecherche();
+
+  @override
+  State<_ChampRecherche> createState() => _ChampRechercheState();
+}
+
+class _ChampRechercheState extends State<_ChampRecherche> {
+  Timer? _timer;
+
+  void _handleValueChange(final BuildContext context, final String value) {
+    if (_timer?.isActive ?? false) {
+      _timer?.cancel();
+    }
+    _timer = Timer(
+      const Duration(milliseconds: 500),
+      () => context.read<BibliothequeBloc>().add(
+            BibliothequeRechercheSaisie(value),
+          ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(final BuildContext context) => DsfrInput(
+        label: Localisation.rechercherParTitre,
+        onChanged: (final value) => _handleValueChange(context, value),
+        keyboardType: TextInputType.text,
+      );
+}
+
+class _Nombre extends StatelessWidget {
+  const _Nombre();
+
+  @override
+  Widget build(final BuildContext context) {
+    final nombreArticle = context.select<BibliothequeBloc, int>(
+      (final value) => value.state.bibliotheque.contenus.length,
+    );
+
+    return Text(
+      Localisation.nombreArticle(nombreArticle),
+      style: const DsfrTextStyle.bodyLgBold(),
+    );
+  }
+}
+
+class _SliverListe extends StatelessWidget {
+  const _SliverListe();
+
+  @override
+  Widget build(final BuildContext context) {
+    final contenus = context.select<BibliothequeBloc, List<Recommandation>>(
+      (final value) => value.state.bibliotheque.contenus,
+    );
+
+    return SliverPadding(
+      padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s3w),
+      sliver: SliverList.separated(
+        itemBuilder: (final context, final index) =>
+            Contenu(contenu: contenus[index]),
+        separatorBuilder: (final context, final index) =>
+            const SizedBox(height: DsfrSpacings.s2w),
+        itemCount: contenus.length,
+      ),
     );
   }
 }

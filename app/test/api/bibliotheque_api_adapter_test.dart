@@ -5,11 +5,13 @@ import 'package:app/features/bibliotheque/domain/bibliotheque.dart';
 import 'package:app/features/bibliotheque/infrastructure/adapters/bibliotheque_api_adapter.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:mocktail/mocktail.dart';
 
 import 'client_mock.dart';
 import 'constants.dart';
 import 'custom_response.dart';
 import 'flutter_secure_storage_mock.dart';
+import 'request_mathcher.dart';
 
 void main() {
   test('recuperer', () async {
@@ -117,5 +119,132 @@ void main() {
       "Manger de saison : quel impact sur l'environnement ?",
     );
     expect(bibliotheque.filtres, hasLength(7));
+  });
+
+  test('recuperer filtre avec le titre', () async {
+    final client = ClientMock()
+      ..getSuccess(
+        path: '/utilisateurs/$utilisateurId/bibliotheque?titre=quel+impact',
+        response: CustomResponse('''
+{
+  "contenu": [
+    {
+      "content_id": "94",
+      "type": "article",
+      "titre": "Manger de saison : quel impact sur l'environnement ?",
+      "soustitre": "Le cas de la tomate",
+      "thematique_principale": "alimentation",
+      "thematique_principale_label": "🥦 Alimentation",
+      "thematiques": [
+        "alimentation"
+      ],
+      "image_url": "https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1705407336/josephine_baran_g4wzh_Y8qi_Mw_unsplash_f7aaf757df.jpg",
+      "points": 5,
+      "favoris": false,
+      "read_date": "2024-07-16T15:05:05.551Z"
+    }
+  ],
+  "filtres": [
+    {
+      "code": "alimentation",
+      "label": "🥦 Alimentation",
+      "selected": false
+    }
+  ]
+}'''),
+      );
+
+    final authentificationTokenStorage = AuthentificationTokenStorage(
+      secureStorage: FlutterSecureStorageMock(),
+      authentificationStatusManagerWriter: AuthentificationStatutManager(),
+    );
+    await authentificationTokenStorage.sauvegarderTokenEtUtilisateurId(
+      token,
+      utilisateurId,
+    );
+
+    final adapter = BibliothequeApiAdapter(
+      apiClient: AuthentificationApiClient(
+        apiUrl: apiUrl,
+        authentificationTokenStorage: authentificationTokenStorage,
+        inner: client,
+      ),
+    );
+
+    await adapter.recuperer(titre: 'quel impact');
+
+    verify(
+      () => client.send(
+        any(
+          that: const RequestMathcher(
+            '/utilisateurs/$utilisateurId/bibliotheque?titre=quel+impact',
+          ),
+        ),
+      ),
+    );
+  });
+
+  test('recuperer filtre avec les thématiques', () async {
+    final client = ClientMock()
+      ..getSuccess(
+        path:
+            '/utilisateurs/$utilisateurId/bibliotheque?filtre_thematiques=alimentation,loisir',
+        response: CustomResponse('''
+{
+  "contenu": [
+    {
+      "content_id": "94",
+      "type": "article",
+      "titre": "Manger de saison : quel impact sur l'environnement ?",
+      "soustitre": "Le cas de la tomate",
+      "thematique_principale": "alimentation",
+      "thematique_principale_label": "🥦 Alimentation",
+      "thematiques": [
+        "alimentation"
+      ],
+      "image_url": "https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1705407336/josephine_baran_g4wzh_Y8qi_Mw_unsplash_f7aaf757df.jpg",
+      "points": 5,
+      "favoris": false,
+      "read_date": "2024-07-16T15:05:05.551Z"
+    }
+  ],
+  "filtres": [
+    {
+      "code": "alimentation",
+      "label": "🥦 Alimentation",
+      "selected": false
+    }
+  ]
+}'''),
+      );
+
+    final authentificationTokenStorage = AuthentificationTokenStorage(
+      secureStorage: FlutterSecureStorageMock(),
+      authentificationStatusManagerWriter: AuthentificationStatutManager(),
+    );
+    await authentificationTokenStorage.sauvegarderTokenEtUtilisateurId(
+      token,
+      utilisateurId,
+    );
+
+    final adapter = BibliothequeApiAdapter(
+      apiClient: AuthentificationApiClient(
+        apiUrl: apiUrl,
+        authentificationTokenStorage: authentificationTokenStorage,
+        inner: client,
+      ),
+    );
+
+    await adapter.recuperer(thematiques: ['alimentation', 'loisir']);
+
+    verify(
+      () => client.send(
+        any(
+          that: const RequestMathcher(
+            '/utilisateurs/$utilisateurId/bibliotheque?filtre_thematiques=alimentation,loisir',
+          ),
+        ),
+      ),
+    );
   });
 }

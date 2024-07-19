@@ -4,6 +4,7 @@ abstract final class Localisation {
   static const article = 'Article';
   static String nombreArticle(final int value) => '$value articles';
   static const commencer = 'Commencer';
+  static const continuerLaLecture = 'Continuer la lecture';
   static const preOnboardingTitre =
       'Ensemble,\naméliorons\nnos habitudes\nau jour le jour';
   static const preOnboarding1 =
@@ -16,6 +17,7 @@ abstract final class Localisation {
       'Faites un premier pas en estimant rapidement les principaux impacts de vos usages';
   static const preOnboardingFinSousTitre =
       'Les questions suivantes nous aideront à calculer une approximation de votre empreinte carbone et vous proposer des conseils personnalisés';
+  static const proposePar = 'Proposé par';
   static const suivant = 'Suivant';
   static const jaiDejaUnCompte = "J'ai déjà un compte";
   static const seConnecter = 'Se connecter';
@@ -45,6 +47,7 @@ abstract final class Localisation {
       'Accédez à toutes les aides publiques locales ou nationales pour la transition écologique en fonction de votre situation.';
   static const jusqua = "Jusqu'à ";
   static const fermer = 'Fermer';
+  static const rechercherParTitre = 'Rechercher par titre';
   static const retour = 'Retour';
   static const menu = 'Menu';
   static const simulateur = 'Simulateur';
