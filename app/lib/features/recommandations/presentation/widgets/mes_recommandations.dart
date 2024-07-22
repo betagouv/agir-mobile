@@ -60,6 +60,7 @@ class _View extends StatelessWidget {
                   Localisation.accueilRecommandationsTitre,
                   style: DsfrTextStyle.headline5(),
                 ),
+                SizedBox(height: DsfrSpacings.s1v5),
                 Text(
                   Localisation.accueilRecommandationsSousTitre,
                   style: DsfrTextStyle.bodyMd(),
