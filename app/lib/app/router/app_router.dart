@@ -19,7 +19,6 @@ import 'package:app/features/profil/presentation/pages/options_avancees_page.dar
 import 'package:app/features/profil/presentation/pages/profil_page.dart';
 import 'package:app/features/quiz/presentation/pages/quiz_page.dart';
 import 'package:app/features/recommandations/presentation/widgets/mes_recommandations.dart';
-import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
 GoRouter goRouter({
@@ -30,11 +29,16 @@ GoRouter goRouter({
       routes: [
         GoRoute(
           path: '/',
-          builder: (final context, final state) => const SizedBox(),
+          redirect: (final context, final state) => state.uri.path == '/'
+              ? '/unauthenticated/${PreOnboardingPage.path}'
+              : null,
           routes: [
             GoRoute(
               path: 'unauthenticated',
-              builder: (final context, final state) => const SizedBox(),
+              redirect: (final context, final state) =>
+                  state.uri.path == '/unauthenticated'
+                      ? '/unauthenticated/${PreOnboardingPage.path}'
+                      : null,
               routes: [
                 PreOnboardingPage.route,
                 PreOnboardingCarrouselPage.route,
@@ -43,7 +47,10 @@ GoRouter goRouter({
             ),
             GoRoute(
               path: 'authenticated',
-              builder: (final context, final state) => const SizedBox(),
+              redirect: (final context, final state) =>
+                  state.uri.path == '/authenticated'
+                      ? '/authenticated/${AccueilPage.path}'
+                      : null,
               routes: [
                 AccueilPage.route,
                 AidesPage.route,
