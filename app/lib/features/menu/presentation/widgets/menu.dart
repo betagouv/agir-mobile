@@ -56,12 +56,11 @@ class _MenuItems extends StatelessWidget {
     final BuildContext context,
     final String name,
   ) async {
+    Scaffold.of(context).closeDrawer();
     if (GoRouterState.of(context).name == name) {
-      Scaffold.of(context).closeDrawer();
-
       return;
     }
-    await GoRouter.of(context).pushReplacementNamed(name);
+    await GoRouter.of(context).pushNamed(name);
   }
 
   Future<void> _handleTapOnAccueil(final BuildContext context) async =>
