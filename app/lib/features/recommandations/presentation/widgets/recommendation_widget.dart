@@ -178,7 +178,6 @@ class _Image extends StatelessWidget {
         width: width,
         height: height,
         fit: BoxFit.cover,
-        cacheWidth: width.toInt(),
         cacheHeight: height.toInt(),
       ),
     );
