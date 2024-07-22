@@ -1,9 +1,12 @@
+import 'package:app/features/univers/domain/tuile_univers.dart';
 import 'package:app/features/univers/presentation/blocs/accueil_univers_bloc.dart';
+import 'package:app/features/univers/presentation/pages/univers_page.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:app/shared/widgets/fondamentaux/shadows.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class UniversListe extends StatelessWidget {
   const UniversListe({super.key});
@@ -19,14 +22,7 @@ class UniversListe extends StatelessWidget {
       child: IntrinsicHeight(
         child: Row(
           children: univers
-              .map(
-                (final e) => _UniversCarte(
-                  titre: e.titre,
-                  imageUrl: e.imageUrl,
-                  estVerrouille: e.estVerrouille,
-                  estTermine: e.estTerminee,
-                ),
-              )
+              .map((final e) => _UniversCarte(univers: e))
               .separator(const SizedBox(width: DsfrSpacings.s2w))
               .toList(),
         ),
@@ -36,17 +32,9 @@ class UniversListe extends StatelessWidget {
 }
 
 class _UniversCarte extends StatelessWidget {
-  const _UniversCarte({
-    required this.titre,
-    required this.imageUrl,
-    required this.estVerrouille,
-    required this.estTermine,
-  });
+  const _UniversCarte({required this.univers});
 
-  final String titre;
-  final String imageUrl;
-  final bool estVerrouille;
-  final bool estTermine;
+  final TuileUnivers univers;
 
   @override
   Widget build(final BuildContext context) {
@@ -59,39 +47,48 @@ class _UniversCarte extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.only(top: 13),
-          child: DecoratedBox(
-            decoration: const ShapeDecoration(
-              color: Colors.white,
-              shadows: recommandationOmbre,
-              shape: RoundedRectangleBorder(borderRadius: borderRadius),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.only(
-                left: DsfrSpacings.s1w,
-                top: DsfrSpacings.s1w,
-                right: DsfrSpacings.s1w,
-                bottom: DsfrSpacings.s3v,
+          child: GestureDetector(
+            onTap: univers.estVerrouille
+                ? null
+                : () async => GoRouter.of(context)
+                    .pushNamed(UniversPage.name, extra: univers),
+            child: DecoratedBox(
+              decoration: const ShapeDecoration(
+                color: Colors.white,
+                shadows: recommandationOmbre,
+                shape: RoundedRectangleBorder(borderRadius: borderRadius),
               ),
-              child: SizedBox(
-                width: width,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _Image(
-                      imageUrl: imageUrl,
-                      estVerrouille: estVerrouille,
-                      width: width,
-                      borderRadius: borderRadius,
-                    ),
-                    const SizedBox(height: DsfrSpacings.s1w),
-                    Text(titre, style: const DsfrTextStyle.bodyLgMedium()),
-                  ],
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  left: DsfrSpacings.s1w,
+                  top: DsfrSpacings.s1w,
+                  right: DsfrSpacings.s1w,
+                  bottom: DsfrSpacings.s3v,
+                ),
+                child: SizedBox(
+                  width: width,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _Image(
+                        imageUrl: univers.imageUrl,
+                        estVerrouille: univers.estVerrouille,
+                        width: width,
+                        borderRadius: borderRadius,
+                      ),
+                      const SizedBox(height: DsfrSpacings.s1w),
+                      Text(
+                        univers.titre,
+                        style: const DsfrTextStyle.bodyLgMedium(),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
         ),
-        if (estTermine) const _Badge(),
+        if (univers.estTerminee) const _Badge(),
       ],
     );
   }

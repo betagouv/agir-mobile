@@ -80,8 +80,11 @@ class CmsApiClient extends http.BaseClient {
         encoding: encoding,
       );
 
-  Uri _uriParse(final Uri url) => Uri.parse(
-        '${apiUrl.valeur.scheme}://${apiUrl.valeur.host}${apiUrl.valeur.path}${url.path}${url.hasQuery ? '?${url.query}' : ''}',
+  Uri _uriParse(final Uri url) => Uri(
+        scheme: apiUrl.valeur.scheme,
+        host: apiUrl.valeur.host,
+        path: apiUrl.valeur.path + url.path,
+        query: url.hasQuery ? url.query : null,
       );
 
   @override

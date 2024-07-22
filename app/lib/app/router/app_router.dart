@@ -19,6 +19,7 @@ import 'package:app/features/profil/presentation/pages/options_avancees_page.dar
 import 'package:app/features/profil/presentation/pages/profil_page.dart';
 import 'package:app/features/quiz/presentation/pages/quiz_page.dart';
 import 'package:app/features/recommandations/presentation/widgets/mes_recommandations.dart';
+import 'package:app/features/univers/presentation/pages/univers_page.dart';
 import 'package:go_router/go_router.dart';
 
 GoRouter goRouter({
@@ -53,6 +54,7 @@ GoRouter goRouter({
                       : null,
               routes: [
                 AccueilPage.route,
+                UniversPage.route,
                 AidesPage.route,
                 AidePage.route,
                 AideSimulateurVeloPage.route(

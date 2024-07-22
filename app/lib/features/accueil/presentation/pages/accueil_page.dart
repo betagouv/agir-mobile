@@ -29,28 +29,30 @@ class AccueilPage extends StatelessWidget {
         .read<UtilisateurBloc>()
         .add(const UtilisateurRecuperationDemandee());
 
-    return Builder(
-      builder: (final context) {
-        final state = context.watch<UtilisateurBloc>().state;
+    return const RootPage(title: _AppBarTitle(), body: _Body());
+  }
+}
 
-        return RootPage(
-          title: const _AppBarTitle(),
-          body: ListView(
-            padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s2w),
-            children: [
-              if (state.aLesUnivers) ...[
-                const UniversSection(),
-                const SizedBox(height: DsfrSpacings.s4w),
-              ],
-              if (state.aLesAides) ...[
-                const MesAides(),
-                const SizedBox(height: DsfrSpacings.s4w),
-              ],
-              if (state.aLesRecommandations) const MesRecommandations(),
-            ],
-          ),
-        );
-      },
+class _Body extends StatelessWidget {
+  const _Body();
+
+  @override
+  Widget build(final BuildContext context) {
+    final state = context.watch<UtilisateurBloc>().state;
+
+    return ListView(
+      padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s2w),
+      children: [
+        if (state.aLesUnivers) ...[
+          const UniversSection(),
+          const SizedBox(height: DsfrSpacings.s4w),
+        ],
+        if (state.aLesAides) ...[
+          const MesAides(),
+          const SizedBox(height: DsfrSpacings.s4w),
+        ],
+        if (state.aLesRecommandations) const MesRecommandations(),
+      ],
     );
   }
 }

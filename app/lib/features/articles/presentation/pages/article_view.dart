@@ -17,7 +17,7 @@ class ArticleView extends StatelessWidget {
     return Scaffold(
       appBar: const FnvAppBar(),
       body: ListView(
-        padding: const EdgeInsets.all(DsfrSpacings.s3w),
+        padding: const EdgeInsets.all(DsfrSpacings.s2w),
         children: [
           Text(article.titre, style: const DsfrTextStyle.headline2()),
           if (article.sousTitre != null) ...[

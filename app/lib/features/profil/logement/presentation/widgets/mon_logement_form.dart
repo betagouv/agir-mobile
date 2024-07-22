@@ -19,10 +19,7 @@ class MonLogementForm extends StatelessWidget {
     const gap = SizedBox(height: DsfrSpacings.s3w);
 
     return ListView(
-      padding: const EdgeInsets.symmetric(
-        vertical: DsfrSpacings.s3w,
-        horizontal: DsfrSpacings.s2w,
-      ),
+      padding: const EdgeInsets.all(DsfrSpacings.s2w),
       children: const [
         ProfilTitle(title: Localisation.votreLogement),
         MonLogementCodePostalEtCommune(),

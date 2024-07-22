@@ -32,7 +32,7 @@ class AidesPage extends StatelessWidget {
           final aides = state.aides;
 
           return ListView(
-            padding: const EdgeInsets.all(DsfrSpacings.s3w),
+            padding: const EdgeInsets.all(DsfrSpacings.s2w),
             children: [
               const Text(
                 Localisation.vosAidesTitre,

@@ -10,8 +10,8 @@ class MieuxVousConnaitreView extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => ListView(
+        padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s2w),
         children: const [
-          SizedBox(height: DsfrSpacings.s3w),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
             child: ProfilTitle(title: Localisation.mieuxVousConnaitre),
@@ -19,7 +19,6 @@ class MieuxVousConnaitreView extends StatelessWidget {
           LesCategories(),
           SizedBox(height: DsfrSpacings.s3w),
           LesQuestions(),
-          SizedBox(height: DsfrSpacings.s3w),
         ],
       );
 }

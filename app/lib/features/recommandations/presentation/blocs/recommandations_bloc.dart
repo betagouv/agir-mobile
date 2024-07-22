@@ -20,7 +20,7 @@ class RecommandationsBloc
     final RecommandationsRecuperationDemandee event,
     final Emitter<RecommandationsState> emit,
   ) async {
-    final result = await _recommandationsPort.recuperer();
+    final result = await _recommandationsPort.recuperer(event.thematique);
     if (result.isRight()) {
       final recommandations =
           result.getRight().getOrElse(() => throw Exception());

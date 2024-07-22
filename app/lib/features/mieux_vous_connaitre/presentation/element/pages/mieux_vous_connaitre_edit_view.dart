@@ -54,7 +54,7 @@ class _Content extends StatelessWidget {
     return Scaffold(
       appBar: const FnvAppBar(),
       body: ListView(
-        padding: const EdgeInsets.all(DsfrSpacings.s3w),
+        padding: const EdgeInsets.all(DsfrSpacings.s2w),
         children: [
           Text(
             switch (question.thematique) {
