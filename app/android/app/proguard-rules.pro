@@ -1,4 +1,4 @@
--keep class fr.gouv.beta.fnv.app.** { *; }
+-keep class fr.gouv.agir.** { *; }
 # This is generated automatically by the Android Gradle plugin.
 -dontwarn com.google.errorprone.annotations.CanIgnoreReturnValue
 -dontwarn com.google.errorprone.annotations.CheckReturnValue

@@ -24,7 +24,7 @@ if (flutterVersionName == null) {
 }
 
 android {
-    namespace = "fr.gouv.beta.fnv.app"
+    namespace = "fr.gouv.agir"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = "26.1.10909125" // flutter.ndkVersion
 
@@ -39,7 +39,7 @@ android {
 
 
     defaultConfig {
-        applicationId = "fr.gouv.beta.fnv.app"
+        applicationId = "fr.gouv.agir"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutterVersionCode.toInteger()
@@ -55,7 +55,7 @@ android {
         }
         development {
             dimension "default"
-            applicationIdSuffix ".dev"
+            applicationIdSuffix ".dev2"
             manifestPlaceholders = [appName: "[DEV] Agir"]
         }
     }
