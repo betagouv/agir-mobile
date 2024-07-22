@@ -16,20 +16,10 @@
 default_platform(:ios)
 
 platform :ios do
-  desc "Déployer une nouvelle version dans Firebase App Distributiion"
+  desc "Déployer une nouvelle version dans Test Flight"
   lane :development do
-    sh("flutter", "clean")
-    sh("flutter", "pub", "get")
-    sh("flutter", "build", "ipa", "--flavor", "development",
-                                  "--dart-define-from-file", "env.development.json",
-                                  "--build-number", ENV["GITHUB_RUN_NUMBER"])
-
-    # https://firebase.google.com/docs/app-distribution/ios/distribute-fastlane
-    firebase_app_distribution(
-      app: ENV["DEV_APP_ID_IOS"],
-      firebase_cli_token: ENV["FIREBASE_TOKEN"],
-      groups: "agir-team",
-      release_notes_file: "../release-notes.txt",
+    upload_to_testflight(
+      ipa: "../build/ios/ipa/agir.ipa",
     )
   end
 end

@@ -1,4 +1,4 @@
-name: continuous-delivery
+name: Continuous Delivery
 
 on:
     workflow_dispatch
@@ -7,40 +7,11 @@ env:
   FLUTTER_VERSION: 3.22.3
 
 jobs:
-  continuous-delivery-android:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: app/android
-    steps:
-      - name: 📚 Git checkout
-        uses: actions/checkout@v4
-      - name: 🐦 Install flutter
-        uses: subosito/flutter-action@v2
-        with:
-          cache: true
-          channel: stable
-          flutter-version: ${{ env.FLUTTER_VERSION }}
-      - name: 💎 Install ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.3'
-          bundler-cache: true
-      - name: 🔑 Add env secrets
-        run: echo "${{ secrets.DEV_FLUTTER_ENV }}" | base64 --decode > ../env.development.json
-      - name: 📚 Install bundle
-        run: bundle install
-      - name: 🚀 Deploy Android development application
-        run: bundle exec fastlane development
-        env:
-           JAVA_HOME: /usr/lib/jvm/temurin-17-jdk-amd64
-           DEV_APP_ID_ANDROID: ${{ secrets.DEV_APP_ID_ANDROID }}
-           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN_LSA }}
-  # continuous-delivery-ios:
-  #   runs-on: macos-latest
+  # continuous-delivery-android:
+  #   runs-on: ubuntu-latest
   #   defaults:
   #     run:
-  #       working-directory: app/ios
+  #       working-directory: app/android
   #   steps:
   #     - name: 📚 Git checkout
   #       uses: actions/checkout@v4
@@ -55,10 +26,70 @@ jobs:
   #       with:
   #         ruby-version: '3.3'
   #         bundler-cache: true
-  #     - run: echo "${{ secrets.DEV_FLUTTER_ENV }}" | base64 --decode > ../env.development.json
-  #     - run: bundle install
-  #     - name: 🚀 Deploy iOS development application
+  #     - name: 🔑 Add env secrets
+  #       run: echo "${{ secrets.DEV_FLUTTER_ENV }}" | base64 --decode > ../env.development.json
+  #     - name: 📚 Install bundle
+  #       run: bundle install
+  #     - name: 🚀 Deploy Android development application
   #       run: bundle exec fastlane development
   #       env:
-  #          DEV_APP_ID_IOS: ${{ secrets.DEV_APP_ID_IOS }}
+  #          JAVA_HOME: /usr/lib/jvm/temurin-17-jdk-amd64
+  #          DEV_APP_ID_ANDROID: ${{ secrets.DEV_APP_ID_ANDROID }}
   #          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN_LSA }}
+  continuous_delivery_ios:
+    runs-on: macos-latest
+    steps:
+      - name: 📚 Git checkout
+        uses: actions/checkout@v4
+      - name: 🗒️🔏 Ajouter le certificat de signature
+        run: |
+          keychainPassword=$(openssl rand -base64 50)
+          security create-keychain -p "$keychainPassword" temp.keychain
+          security set-keychain-settings -lut 21600 temp.keychain
+          security unlock-keychain -p "$keychainPassword" temp.keychain
+
+          echo "${{ secrets.DEV_IOS_P12_FILE }}" | base64 --decode > certificat.p12
+          security import certificat.p12 -P "${{ secrets.DEV_IOS_P12_PASSWORD }}" -A -t cert -f pkcs12 -k temp.keychain
+          security list-keychain -d user -s temp.keychain
+
+          security set-key-partition-list -S apple-tool:,apple: -s -k "$keychainPassword" temp.keychain
+      - name: 📱🔏 Ajouter le profil de provisionnement et le fichier exportOptions
+        run: |
+          echo ${{ secrets.DEV_IOS_PROFILE }} | base64 --decode > profile.mobileprovision
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          cp profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/profile.mobileprovision
+
+          echo ${{ secrets.DEV_IOS_EXPORT_OPTIONS }} | base64 --decode > exportOptions.plist
+      - name: 🐦 Installer flutter
+        uses: subosito/flutter-action@v2
+        with:
+          cache: true
+          channel: stable
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+      - name: 🔑 Add env secrets
+        working-directory: app
+        run: echo "${{ secrets.DEV_FLUTTER_ENV }}" | base64 --decode > env.development.json
+      - name: 🧱 Construire l'application
+        working-directory: app
+        run: flutter build ipa --flavor development --export-options-plist ../exportOptions.plist --dart-define-from-file env.development.json --build-number  ${GITHUB_RUN_NUMBER}
+      - name: 📦 Télécharger artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: agir_dev_ios
+          path: app/build/ios/ipa/agir.ipa
+      # - name: 💎 Installer ruby
+      #   uses: ruby/setup-ruby@v1
+      #   with:
+      #     ruby-version: '3.3'
+      #     bundler-cache: true
+      # - name: 📚 Installer bundle
+      #   working-directory: app/ios
+      #   run: bundle install
+      # - name: 🚀 Deployer l'application iOS
+      #   working-directory: app/ios
+      #   run: bundle exec fastlane development --verbose
+      - name: 🗑️ Nettoyer les fichiers secrets
+        if: always()
+        run: |
+          rm -f certificat.p12 profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/profile.mobileprovision exportOptions.plist
+          security delete-keychain temp.keychain
