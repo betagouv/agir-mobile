@@ -19,6 +19,8 @@ import 'package:app/features/profil/domain/ports/profil_port.dart';
 import 'package:app/features/quiz/domain/ports/quiz_port.dart';
 import 'package:app/features/recommandations/domain/ports/recommandations_port.dart';
 import 'package:app/features/recommandations/presentation/blocs/recommandations_bloc.dart';
+import 'package:app/features/univers/domain/ports/univers_port.dart';
+import 'package:app/features/univers/presentation/blocs/accueil_univers_bloc.dart';
 import 'package:app/features/utilisateur/domain/ports/utilisateur_port.dart';
 import 'package:app/features/utilisateur/presentation/blocs/utilisateur_bloc.dart';
 import 'package:app/features/version/domain/ports/version_port.dart';
@@ -35,6 +37,7 @@ class App extends StatefulWidget {
     required this.authentificationStatusManager,
     required this.authentificationPort,
     required this.utilisateurPort,
+    required this.universPort,
     required this.aidesPort,
     required this.bibliothequePort,
     required this.recommandationsPort,
@@ -52,6 +55,7 @@ class App extends StatefulWidget {
   final AuthentificationStatutManager authentificationStatusManager;
   final AuthentificationPort authentificationPort;
   final UtilisateurPort utilisateurPort;
+  final UniversPort universPort;
   final AidesPort aidesPort;
   final BibliothequePort bibliothequePort;
   final RecommandationsPort recommandationsPort;
@@ -107,6 +111,11 @@ class _AppState extends State<App> {
             BlocProvider(
               create: (final context) => UtilisateurBloc(
                 utilisateurPort: widget.utilisateurPort,
+              ),
+            ),
+            BlocProvider(
+              create: (final context) => AccueilUniversBloc(
+                universPort: widget.universPort,
               ),
             ),
             BlocProvider(create: (final context) => AideBloc()),

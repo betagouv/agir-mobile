@@ -8,6 +8,7 @@ import 'package:app/features/mieux_vous_connaitre/domain/question.dart';
 import 'package:app/features/profil/logement/presentation/blocs/mon_logement_state.dart';
 import 'package:app/features/quiz/domain/quiz.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
+import 'package:app/features/univers/domain/tuile_univers.dart';
 import 'package:app/features/utilisateur/domain/entities/utilisateur.dart';
 
 import 'mocks/aide_velo_port_mock.dart';
@@ -67,6 +68,7 @@ class ScenarioContext {
   List<Question> questions = <Question>[];
   Bibliotheque bibliotheque = const Bibliotheque(contenus: [], filtres: []);
   Gamification gamification = const Gamification(points: 0);
+  List<TuileUnivers> tuileUnivers = <TuileUnivers>[];
 
   AideVeloPortMock? aideVeloPortMock;
   ProfilPortMock? profilPortMock;

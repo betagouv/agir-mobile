@@ -16,6 +16,7 @@ class UtilisateurBloc extends Bloc<UtilisateurEvent, UtilisateurState> {
             aLesAides: false,
             aLaBibliotheque: false,
             aLesRecommandations: false,
+            aLesUnivers: false,
           ),
         ) {
     on<UtilisateurRecuperationDemandee>(_onRecuperationDemandee);
@@ -39,6 +40,8 @@ class UtilisateurBloc extends Bloc<UtilisateurEvent, UtilisateurState> {
               fonctionnalitesDebloquees.contains(Fonctionnalites.bibliotheque),
           aLesRecommandations: fonctionnalitesDebloquees
               .contains(Fonctionnalites.recommandations),
+          aLesUnivers:
+              fonctionnalitesDebloquees.contains(Fonctionnalites.univers),
         ),
       );
     }

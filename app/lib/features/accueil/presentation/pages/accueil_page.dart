@@ -1,6 +1,7 @@
 import 'package:app/features/aides/presentation/widgets/mes_aides.dart';
 import 'package:app/features/menu/presentation/pages/root_page.dart';
 import 'package:app/features/recommandations/presentation/widgets/mes_recommandations.dart';
+import 'package:app/features/univers/presentation/widgets/univers_section.dart';
 import 'package:app/features/utilisateur/presentation/blocs/utilisateur_bloc.dart';
 import 'package:app/features/utilisateur/presentation/blocs/utilisateur_event.dart';
 import 'package:app/l10n/l10n.dart';
@@ -35,8 +36,12 @@ class AccueilPage extends StatelessWidget {
         return RootPage(
           title: const _AppBarTitle(),
           body: ListView(
-            padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s3w),
+            padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s2w),
             children: [
+              if (state.aLesUnivers) ...[
+                const UniversSection(),
+                const SizedBox(height: DsfrSpacings.s4w),
+              ],
               if (state.aLesAides) ...[
                 const MesAides(),
                 const SizedBox(height: DsfrSpacings.s4w),

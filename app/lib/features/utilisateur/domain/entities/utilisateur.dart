@@ -17,4 +17,5 @@ enum Fonctionnalites {
   aides,
   bibliotheque,
   recommandations,
+  univers,
 }
