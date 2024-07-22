@@ -25,10 +25,7 @@ class ProfilPage extends StatelessWidget {
   @override
   Widget build(final BuildContext context) => RootPage(
         body: ListView(
-          padding: const EdgeInsets.symmetric(
-            vertical: DsfrSpacings.s3w,
-            horizontal: DsfrSpacings.s2w,
-          ),
+          padding: const EdgeInsets.all(DsfrSpacings.s2w),
           children: [
             const ProfilTitle(title: Localisation.votreProfil),
             FnvCard(

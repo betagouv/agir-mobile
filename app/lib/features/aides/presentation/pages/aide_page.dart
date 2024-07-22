@@ -40,7 +40,7 @@ class AidePage extends StatelessWidget {
     return Scaffold(
       appBar: const FnvAppBar(),
       body: ListView(
-        padding: const EdgeInsets.all(DsfrSpacings.s3w),
+        padding: const EdgeInsets.all(DsfrSpacings.s2w),
         children: [
           Text(aide.thematique, style: const DsfrTextStyle.bodySmMedium()),
           const SizedBox(height: DsfrSpacings.s2w),

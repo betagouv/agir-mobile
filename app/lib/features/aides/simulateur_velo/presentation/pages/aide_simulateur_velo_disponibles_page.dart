@@ -33,7 +33,7 @@ class AideSimulateurVeloDisponiblePage extends StatelessWidget {
     return Scaffold(
       appBar: const FnvAppBar(),
       body: ListView(
-        padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s3w),
+        padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s2w),
         children: [
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),

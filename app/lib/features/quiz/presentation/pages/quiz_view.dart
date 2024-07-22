@@ -54,7 +54,7 @@ class _Body extends StatelessWidget {
     final state = context.watch<QuizBloc>().state;
 
     return ListView(
-      padding: const EdgeInsets.all(DsfrSpacings.s3w),
+      padding: const EdgeInsets.all(DsfrSpacings.s2w),
       children: [
         Text(state.quiz.question, style: const DsfrTextStyle.headline2()),
         const SizedBox(height: DsfrSpacings.s2w),

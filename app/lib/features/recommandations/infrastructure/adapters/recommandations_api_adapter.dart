@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:app/features/authentification/infrastructure/adapters/api/authentification_api_client.dart';
+import 'package:app/features/mieux_vous_connaitre/domain/question.dart';
 import 'package:app/features/profil/domain/utilisateur_id_non_trouve_exception.dart';
 import 'package:app/features/recommandations/domain/ports/recommandations_port.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
@@ -17,14 +18,22 @@ class RecommandationsApiAdapter implements RecommandationsPort {
   final AuthentificationApiClient _apiClient;
 
   @override
-  Future<Either<Exception, List<Recommandation>>> recuperer() async {
+  Future<Either<Exception, List<Recommandation>>> recuperer(
+    final Thematique? thematique,
+  ) async {
     final utilisateurId = await _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
       return const Left(UtilisateurIdNonTrouveException());
     }
 
-    final response = await _apiClient
-        .get(Uri.parse('/utilisateurs/$utilisateurId/recommandations_v2'));
+    final map = {if (thematique != null) 'univers': thematique.name};
+
+    final uri =
+        Uri.parse('/utilisateurs/$utilisateurId/recommandations_v2').replace(
+      queryParameters: map.isNotEmpty ? map : null,
+    );
+
+    final response = await _apiClient.get(uri);
 
     if (response.statusCode != 200) {
       return Left(

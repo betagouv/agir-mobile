@@ -24,10 +24,7 @@ class OptionsAvanceesPage extends StatelessWidget {
   Widget build(final BuildContext context) => Scaffold(
         appBar: const FnvAppBar(),
         body: ListView(
-          padding: const EdgeInsets.symmetric(
-            vertical: DsfrSpacings.s3w,
-            horizontal: DsfrSpacings.s2w,
-          ),
+          padding: const EdgeInsets.all(DsfrSpacings.s2w),
           children: const [
             ProfilTitle(title: Localisation.optionsAvancees),
             ChangerMotDePasse(),
