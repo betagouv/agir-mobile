@@ -1,64 +1,46 @@
-name: continuous-delivery
+name: Continuous Delivery
 
 on:
-    workflow_dispatch
-
-env:
-  FLUTTER_VERSION: 3.24.0
+  workflow_dispatch
 
 jobs:
-  continuous-delivery-android:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: app/android
-    steps:
-      - name: 📚 Git checkout
-        uses: actions/checkout@v4
-      - name: 🐦 Install flutter
-        uses: subosito/flutter-action@v2
-        with:
-          cache: true
-          channel: stable
-          flutter-version: ${{ env.FLUTTER_VERSION }}
-      - name: 💎 Install ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.3'
-          bundler-cache: true
-      - name: 🔑 Add env secrets
-        run: echo "${{ secrets.DEV_FLUTTER_ENV }}" | base64 --decode > ../env.development.json
-      - name: 📚 Install bundle
-        run: bundle install
-      - name: 🚀 Deploy Android development application
-        run: bundle exec fastlane development
-        env:
-           JAVA_HOME: /usr/lib/jvm/temurin-17-jdk-amd64
-           DEV_APP_ID_ANDROID: ${{ secrets.DEV_APP_ID_ANDROID }}
-           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN_LSA }}
-  # continuous-delivery-ios:
-  #   runs-on: macos-latest
-  #   defaults:
-  #     run:
-  #       working-directory: app/ios
-  #   steps:
-  #     - name: 📚 Git checkout
-  #       uses: actions/checkout@v4
-  #     - name: 🐦 Install flutter
-  #       uses: subosito/flutter-action@v2
-  #       with:
-  #         cache: true
-  #         channel: stable
-  #         flutter-version: ${{ env.FLUTTER_VERSION }}
-  #     - name: 💎 Install ruby
-  #       uses: ruby/setup-ruby@v1
-  #       with:
-  #         ruby-version: '3.3'
-  #         bundler-cache: true
-  #     - run: echo "${{ secrets.DEV_FLUTTER_ENV }}" | base64 --decode > ../env.development.json
-  #     - run: bundle install
-  #     - name: 🚀 Deploy iOS development application
-  #       run: bundle exec fastlane development
-  #       env:
-  #          DEV_APP_ID_IOS: ${{ secrets.DEV_APP_ID_IOS }}
-  #          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN_LSA }}
+  continuous_delivery_android_dev:
+    uses: ./.github/workflows/cd-android.yml
+    name: Development Android
+    with:
+      FLAVOR: development
+    secrets:
+      ANDROID_KEYSTORE: ${{ secrets.DEV_ANDROID_KEYSTORE }}
+      ANDROID_KEY_PROPERTIES: ${{ secrets.DEV_ANDROID_KEY_PROPERTIES }}
+      FLUTTER_ENV: ${{ secrets.DEV_FLUTTER_ENV }}
+  continuous_delivery_android_prod:
+    uses: ./.github/workflows/cd-android.yml
+    name: Production Android
+    with:
+      FLAVOR: production
+    secrets:
+      ANDROID_KEYSTORE: ${{ secrets.PROD_ANDROID_KEYSTORE }}
+      ANDROID_KEY_PROPERTIES: ${{ secrets.PROD_ANDROID_KEY_PROPERTIES }}
+      FLUTTER_ENV: ${{ secrets.DEV_FLUTTER_ENV }}
+  continuous_delivery_ios_dev:
+    uses: ./.github/workflows/cd-ios.yml
+    name: Development iOS
+    with:
+      FLAVOR: development
+    secrets:
+      IOS_P12_FILE: ${{ secrets.DEV_IOS_P12_FILE }}
+      IOS_P12_PASSWORD: ${{ secrets.DEV_IOS_P12_PASSWORD }}
+      IOS_PROFILE: ${{ secrets.DEV_IOS_PROFILE }}
+      IOS_EXPORT_OPTIONS: ${{ secrets.DEV_IOS_EXPORT_OPTIONS }}
+      FLUTTER_ENV: ${{ secrets.DEV_FLUTTER_ENV }}
+  continuous_delivery_ios_prod:
+    uses: ./.github/workflows/cd-ios.yml
+    name: Production iOS
+    with:
+      FLAVOR: production
+    secrets:
+      IOS_P12_FILE: ${{ secrets.PROD_IOS_P12_FILE }}
+      IOS_P12_PASSWORD: ${{ secrets.PROD_IOS_P12_PASSWORD }}
+      IOS_PROFILE: ${{ secrets.PROD_IOS_PROFILE }}
+      IOS_EXPORT_OPTIONS: ${{ secrets.PROD_IOS_EXPORT_OPTIONS }}
+      FLUTTER_ENV: ${{ secrets.PROD_FLUTTER_ENV }}
