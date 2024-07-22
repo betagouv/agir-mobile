@@ -18,6 +18,7 @@ abstract final class Localisation {
   static const preOnboardingFinSousTitre =
       'Les questions suivantes nous aideront à calculer une approximation de votre empreinte carbone et vous proposer des conseils personnalisés';
   static const proposePar = 'Proposé par';
+  static const termine = 'TERMINÉ !';
   static const suivant = 'Suivant';
   static const jaiDejaUnCompte = "J'ai déjà un compte";
   static const seConnecter = 'Se connecter';
@@ -126,6 +127,9 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const enfants = 'Enfant(s) de moins de 18 ans';
   static const votreResidencePrincipaleEst =
       'Votre résidence principale est ...';
+  static const univers = 'Univers';
+  static const universContenu =
+      'Découvrez des thèmes et débloquez de nouvelles actions';
   static const unAppartement = 'Un appartement';
   static const uneMaison = 'Une maison';
   static const vousEtesProprietaireDeVotreLogement =

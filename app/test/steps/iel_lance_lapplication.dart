@@ -14,6 +14,7 @@ import '../mocks/mieux_vous_connaitre_port_mock.dart';
 import '../mocks/profil_port_mock.dart';
 import '../mocks/quiz_port_mock.dart';
 import '../mocks/recommandations_port_mock.dart';
+import '../mocks/univers_port_mock.dart';
 import '../mocks/utilisateur_port_mock.dart';
 import '../mocks/version_port_mock.dart';
 import '../scenario_context.dart';
@@ -60,6 +61,7 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
         prenom: prenom,
         fonctionnalitesDebloquees: ScenarioContext().fonctionnalitesDebloquees,
       ),
+      universPort: UniversPortMock(ScenarioContext().tuileUnivers),
       aidesPort: AidesPortMock(ScenarioContext().aides),
       bibliothequePort: BibliothequePortMock(ScenarioContext().bibliotheque),
       recommandationsPort:
