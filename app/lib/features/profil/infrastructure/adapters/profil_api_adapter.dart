@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:app/features/authentification/infrastructure/adapters/api/authentification_api_client.dart';
 import 'package:app/features/profil/domain/ports/profil_port.dart';
@@ -25,7 +26,7 @@ class ProfilApiAdapter implements ProfilPort {
     final response =
         await _apiClient.get(Uri.parse('/utilisateurs/$utilisateurId/profile'));
 
-    if (response.statusCode != 200) {
+    if (response.statusCode != HttpStatus.ok) {
       return Left(Exception('Erreur lors de la récupération du profil'));
     }
 
@@ -33,8 +34,8 @@ class ProfilApiAdapter implements ProfilPort {
 
     return Right(
       Informations(
-        prenom: json['prenom'] as String,
-        nom: json['nom'] as String,
+        prenom: json['prenom'] as String? ?? '',
+        nom: json['nom'] as String? ?? '',
         email: json['email'] as String,
         codePostal: json['code_postal'] as String?,
         commune: json['commune'] as String?,
@@ -69,7 +70,7 @@ class ProfilApiAdapter implements ProfilPort {
 
     final response = await _apiClient.patch(uri, body: body);
 
-    return response.statusCode == 200
+    return response.statusCode == HttpStatus.ok
         ? const Right(null)
         : Left(Exception('Erreur lors de la mise à jour du profil'));
   }
@@ -84,7 +85,7 @@ class ProfilApiAdapter implements ProfilPort {
     final response = await _apiClient
         .get(Uri.parse('/utilisateurs/$utilisateurId/logement'));
 
-    if (response.statusCode != 200) {
+    if (response.statusCode != HttpStatus.ok) {
       return Left(Exception('Erreur lors de la récupération du logement'));
     }
 
@@ -107,7 +108,7 @@ class ProfilApiAdapter implements ProfilPort {
 
     final response = await _apiClient.patch(uri, body: body);
 
-    return response.statusCode == 200
+    return response.statusCode == HttpStatus.ok
         ? const Right(null)
         : Left(Exception('Erreur lors de la mise à jour du logement'));
   }
@@ -123,7 +124,7 @@ class ProfilApiAdapter implements ProfilPort {
 
     final response = await _apiClient.delete(uri);
 
-    return response.statusCode == 200
+    return response.statusCode == HttpStatus.ok
         ? const Right(null)
         : Left(Exception('Erreur lors de la suppression du compte'));
   }
@@ -142,7 +143,7 @@ class ProfilApiAdapter implements ProfilPort {
 
     final response = await _apiClient.patch(uri, body: body);
 
-    return response.statusCode == 200
+    return response.statusCode == HttpStatus.ok
         ? const Right(null)
         : Left(Exception('Erreur lors de la mise à jour du mot de passe'));
   }

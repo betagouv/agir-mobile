@@ -10,7 +10,7 @@ import 'package:go_router/go_router.dart';
 class SeConnecterPage extends StatelessWidget {
   const SeConnecterPage({super.key});
 
-  static const name = 'authentification';
+  static const name = 'se-connecter';
   static const path = name;
 
   static GoRoute get route => GoRoute(
@@ -40,20 +40,20 @@ class SeConnecterPage extends StatelessWidget {
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.only(
-              left: DsfrSpacings.s3w,
-              right: DsfrSpacings.s3w,
-              bottom: DsfrSpacings.s3w,
+              left: DsfrSpacings.s2w,
+              right: DsfrSpacings.s2w,
+              bottom: DsfrSpacings.s2w,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const Text(
                   Localisation.seConnecter,
-                  style: DsfrTextStyle.headline1(),
+                  style: DsfrTextStyle.headline2(),
                 ),
                 const SizedBox(height: DsfrSpacings.s3w),
                 DsfrInput(
-                  label: Localisation.adresseElectronique,
+                  label: Localisation.adresseEmail,
                   onChanged: (final value) =>
                       _handleAdresseMail(context, value),
                   keyboardType: TextInputType.emailAddress,

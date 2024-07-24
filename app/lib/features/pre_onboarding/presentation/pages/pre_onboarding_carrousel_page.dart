@@ -1,4 +1,4 @@
-import 'package:app/features/authentification/presentation/pages/se_connecter_page.dart';
+import 'package:app/features/authentification/creer_compte/presentation/pages/creer_compte_page.dart';
 import 'package:app/features/authentification/presentation/widgets/jai_deja_un_compte.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:app/shared/assets/images.dart';
@@ -34,8 +34,8 @@ class _PreOnboardingCarrouselPageState extends State<PreOnboardingCarrouselPage>
     _tabController = TabController(length: 4, vsync: this);
   }
 
-  Future<void> _handleAllerASeConnecter(final BuildContext context) async {
-    await GoRouter.of(context).pushNamed(SeConnecterPage.name);
+  Future<void> _handleSuivant(final BuildContext context) async {
+    await GoRouter.of(context).pushNamed(CreerComptePage.name);
   }
 
   @override
@@ -98,8 +98,7 @@ class _PreOnboardingCarrouselPageState extends State<PreOnboardingCarrouselPage>
                             label: Localisation.suivant,
                             variant: DsfrButtonVariant.primary,
                             size: DsfrButtonSize.lg,
-                            onPressed: () async =>
-                                _handleAllerASeConnecter(context),
+                            onPressed: () async => _handleSuivant(context),
                           ),
                           const SizedBox(height: DsfrSpacings.s3w),
                           const JaiDejaUnCompteWidget(),

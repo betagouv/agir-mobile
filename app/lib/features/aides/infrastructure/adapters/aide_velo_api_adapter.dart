@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:app/features/aides/simulateur_velo/domain/ports/aide_velo_port.dart';
 import 'package:app/features/aides/simulateur_velo/domain/value_objects/aide_velo.dart';
@@ -44,7 +45,7 @@ class AideVeloApiAdapter implements AideVeloPort {
       body: jsonEncode({'prix_du_velo': prix}),
     );
 
-    if (response.statusCode != 200) {
+    if (response.statusCode != HttpStatus.ok) {
       return Left(Exception("Erreur lors de la simulation de l'aide vélo"));
     }
     final json = jsonDecode(response.body) as Map<String, dynamic>;
@@ -89,7 +90,7 @@ class AideVeloApiAdapter implements AideVeloPort {
     ]);
 
     for (final response in responses) {
-      if (response.statusCode != 200) {
+      if (response.statusCode != HttpStatus.ok) {
         return Left(Exception('Erreur lors de la mise à jour du profil'));
       }
     }

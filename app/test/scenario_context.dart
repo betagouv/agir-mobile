@@ -13,6 +13,7 @@ import 'package:app/features/utilisateur/domain/entities/utilisateur.dart';
 
 import 'mocks/aide_velo_port_mock.dart';
 import 'mocks/articles_port_mock.dart';
+import 'mocks/authentification_port_mock.dart';
 import 'mocks/mieux_vous_connaitre_port_mock.dart';
 import 'mocks/profil_port_mock.dart';
 import 'mocks/quiz_port_mock.dart';
@@ -73,6 +74,7 @@ class ScenarioContext {
   AideVeloPortMock? aideVeloPortMock;
   ProfilPortMock? profilPortMock;
   ArticlesPortMock? articlesPortMock;
+  AuthentificationPortMock? authentificationPortMock;
   QuizPortMock? quizPortMock;
   MieuxVousConnaitrePortMock? mieuxVousConnaitrePortMock;
   static ScenarioContext? _instance;
