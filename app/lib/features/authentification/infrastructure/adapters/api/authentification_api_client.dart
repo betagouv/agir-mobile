@@ -28,6 +28,9 @@ class AuthentificationApiClient extends http.BaseClient {
         utilisateurId,
       );
 
+  Future<void> sauvegarderToken(final String token) async =>
+      _authentificationTokenStorage.sauvegarderToken(token);
+
   Future<void> supprimerTokenEtUtilisateurId() async =>
       _authentificationTokenStorage.supprimerTokenEtUtilisateurId();
 

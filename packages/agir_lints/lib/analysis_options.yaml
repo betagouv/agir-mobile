@@ -77,6 +77,8 @@ dart_code_metrics:
     - no-equal-arguments: false
     - no-magic-number: false
     - no-magic-string: false
+    - format-comment:
+        only-doc-comments: true
     - parameters-ordering: false
     - prefer-correct-identifier-length: false
     - prefer-correct-throws: false

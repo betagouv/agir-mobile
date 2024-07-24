@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:app/features/articles/domain/article.dart';
 import 'package:app/features/articles/domain/ports/articles_port.dart';
@@ -25,7 +26,7 @@ class ArticlesApiAdapter implements ArticlesPort {
         '/api/articles/$id?populate[0]=partenaire,partenaire.logo.media&populate[1]=sources&populate[2]=image_url',
       ),
     );
-    if (response.statusCode != 200) {
+    if (response.statusCode != HttpStatus.ok) {
       return Left(Exception("Erreur lors de la récupération de l'article"));
     }
 
@@ -46,7 +47,7 @@ class ArticlesApiAdapter implements ArticlesPort {
       body: jsonEncode({'content_id': id, 'type': 'article_lu'}),
     );
 
-    return response.statusCode == 200
+    return response.statusCode == HttpStatus.ok
         ? const Right(null)
         : Left(Exception('Erreur lors de la validation du quiz'));
   }

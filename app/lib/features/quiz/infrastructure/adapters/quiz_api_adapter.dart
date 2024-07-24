@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:app/features/authentification/infrastructure/adapters/api/authentification_api_client.dart';
 import 'package:app/features/authentification/infrastructure/adapters/api/cms_api_client.dart';
@@ -25,7 +26,7 @@ class QuizApiAdapter implements QuizPort {
         '/api/quizzes/$id?populate[0]=questions.reponses,thematique_gamification,articles.partenaire.logo',
       ),
     );
-    if (response.statusCode != 200) {
+    if (response.statusCode != HttpStatus.ok) {
       return Left(Exception("Erreur lors de la récupération de l'article"));
     }
 
@@ -53,7 +54,7 @@ class QuizApiAdapter implements QuizPort {
       }),
     );
 
-    return response.statusCode == 200
+    return response.statusCode == HttpStatus.ok
         ? const Right(null)
         : Left(Exception('Erreur lors de la validation du quiz'));
   }

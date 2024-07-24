@@ -51,12 +51,13 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
   ScenarioContext().quizPortMock = QuizPortMock(ScenarioContext().quiz);
   ScenarioContext().articlesPortMock =
       ArticlesPortMock(ScenarioContext().article);
+  ScenarioContext().authentificationPortMock =
+      AuthentificationPortMock(authentificationStatusManager);
 
   await tester.pumpFrames(
     App(
       authentificationStatusManager: authentificationStatusManager,
-      authentificationPort:
-          AuthentificationPortMock(authentificationStatusManager),
+      authentificationPort: ScenarioContext().authentificationPortMock!,
       utilisateurPort: UtilisateurPortMock(
         prenom: prenom,
         fonctionnalitesDebloquees: ScenarioContext().fonctionnalitesDebloquees,

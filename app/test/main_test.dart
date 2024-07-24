@@ -52,7 +52,7 @@ void main() {
       ielVoitLeTexte(Localisation.seConnecter, n: 2);
       await ielEcritDansLeChamp(
         tester,
-        label: Localisation.adresseElectronique,
+        label: Localisation.adresseEmail,
         enterText: 'joe@doe.com',
       );
       await ielEcritDansLeChamp(
@@ -82,7 +82,7 @@ void main() {
       ielVoitLeTexte(Localisation.seConnecter, n: 2);
       await ielEcritDansLeChamp(
         tester,
-        label: Localisation.adresseElectronique,
+        label: Localisation.adresseEmail,
         enterText: 'joe@doe.com',
       );
       await ielEcritDansLeChamp(

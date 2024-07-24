@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:app/features/aides/domain/entities/aide.dart';
 import 'package:app/features/aides/domain/ports/aides_port.dart';
@@ -22,7 +23,7 @@ class AidesApiAdapter implements AidesPort {
     final response = await _apiClient.get(
       Uri.parse('/utilisateurs/$utilisateurId/aides'),
     );
-    if (response.statusCode != 200) {
+    if (response.statusCode != HttpStatus.ok) {
       return Left(Exception('Erreur lors de la récupération des aides'));
     }
 

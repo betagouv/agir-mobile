@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:app/features/authentification/infrastructure/adapters/api/authentification_api_client.dart';
 import 'package:app/features/mieux_vous_connaitre/domain/ports/mieux_vous_connaitre_port.dart';
@@ -25,7 +26,7 @@ class MieuxVousConnaitreApiAdapter implements MieuxVousConnaitrePort {
     final response = await _apiClient
         .get(Uri.parse('/utilisateurs/$utilisateurId/questionsKYC'));
 
-    if (response.statusCode != 200) {
+    if (response.statusCode != HttpStatus.ok) {
       return Left(Exception('Erreur lors de la récupération des questions'));
     }
     final json = jsonDecode(response.body) as List<dynamic>;
@@ -54,7 +55,7 @@ class MieuxVousConnaitreApiAdapter implements MieuxVousConnaitrePort {
       body: body,
     );
 
-    return response.statusCode == 200
+    return response.statusCode == HttpStatus.ok
         ? const Right(null)
         : Left(Exception('Erreur lors de la mise à jour des réponses'));
   }
@@ -71,7 +72,7 @@ class MieuxVousConnaitreApiAdapter implements MieuxVousConnaitrePort {
     final response = await _apiClient
         .get(Uri.parse('/utilisateurs/$utilisateurId/questionsKYC/$id'));
 
-    if (response.statusCode != 200) {
+    if (response.statusCode != HttpStatus.ok) {
       return Left(Exception('Erreur lors de la récupération de la question'));
     }
     final json = jsonDecode(response.body) as Map<String, dynamic>;

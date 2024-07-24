@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:app/features/authentification/infrastructure/adapters/api/authentification_api_client.dart';
 import 'package:app/features/bibliotheque/domain/bibliotheque.dart';
@@ -37,7 +38,7 @@ class BibliothequeApiAdapter implements BibliothequePort {
 
     final response = await _apiClient.get(uri);
 
-    if (response.statusCode != 200) {
+    if (response.statusCode != HttpStatus.ok) {
       return Left(
         Exception('Erreur lors de la récupération de la bibliothèque'),
       );

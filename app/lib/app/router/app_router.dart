@@ -5,9 +5,11 @@ import 'package:app/features/aides/presentation/pages/aides_page.dart';
 import 'package:app/features/aides/simulateur_velo/presentation/pages/aide_simulateur_velo_disponibles_page.dart';
 import 'package:app/features/aides/simulateur_velo/presentation/pages/aide_simulateur_velo_page.dart';
 import 'package:app/features/articles/presentation/pages/article_page.dart';
+import 'package:app/features/authentification/creer_compte/presentation/pages/creer_compte_page.dart';
 import 'package:app/features/authentification/domain/entities/authentification_statut_manager.dart';
 import 'package:app/features/authentification/domain/value_objects/authentification_statut.dart';
 import 'package:app/features/authentification/presentation/pages/se_connecter_page.dart';
+import 'package:app/features/authentification/saisie_code/presentation/pages/saisie_code_page.dart';
 import 'package:app/features/bibliotheque/presentation/pages/bibliotheque_page.dart';
 import 'package:app/features/mieux_vous_connaitre/presentation/element/pages/mieux_vous_connaitre_edit_page.dart';
 import 'package:app/features/mieux_vous_connaitre/presentation/liste/pages/mieux_vous_connaitre_page.dart';
@@ -43,7 +45,9 @@ GoRouter goRouter({
               routes: [
                 PreOnboardingPage.route,
                 PreOnboardingCarrouselPage.route,
+                CreerComptePage.route,
                 SeConnecterPage.route,
+                SaisieCodePage.route,
               ],
             ),
             GoRoute(

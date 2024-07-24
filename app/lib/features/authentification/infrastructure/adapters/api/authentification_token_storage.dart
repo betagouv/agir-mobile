@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:app/features/authentification/domain/entities/authentification_statut_manager.dart';
 import 'package:app/features/authentification/domain/value_objects/authentification_statut.dart';
@@ -37,6 +38,24 @@ class AuthentificationTokenStorage {
   final _utilisateurIdKey = 'utilisateurId';
   Future<String?> get recupererUtilisateurId async =>
       _secureStorage.read(key: _utilisateurIdKey);
+
+  Future<void> sauvegarderToken(final String token) async {
+    await _secureStorage.write(key: _tokenKey, value: token);
+
+    final jwtToken = token.split('.').elementAtOrNull(1);
+
+    if (jwtToken == null) {
+      return;
+    }
+
+    final tokenData = jsonDecode(utf8.decode(base64Url.decode(jwtToken)))
+        as Map<String, dynamic>;
+    final utilisateurId = tokenData['utilisateurId'] as String;
+
+    await _secureStorage.write(key: _utilisateurIdKey, value: utilisateurId);
+    _authentificationStatusManagerWriter
+        .gererAuthentificationStatut(AuthentificationStatut.connecte);
+  }
 
   Future<void> sauvegarderTokenEtUtilisateurId(
     final String token,
