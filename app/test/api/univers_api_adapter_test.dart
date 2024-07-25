@@ -44,10 +44,7 @@ void main() {
       secureStorage: FlutterSecureStorageMock(),
       authentificationStatusManagerWriter: AuthentificationStatutManager(),
     );
-    await authentificationTokenStorage.sauvegarderTokenEtUtilisateurId(
-      token,
-      utilisateurId,
-    );
+    await authentificationTokenStorage.sauvegarderToken(token);
 
     final adapter = UniversApiAdapter(
       apiClient: AuthentificationApiClient(

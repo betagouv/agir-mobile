@@ -12,7 +12,7 @@ class UtilisateurBloc extends Bloc<UtilisateurEvent, UtilisateurState> {
       : _utilisateurPort = utilisateurPort,
         super(
           const UtilisateurState(
-            prenom: '',
+            prenom: null,
             aLesAides: false,
             aLaBibliotheque: false,
             aLesRecommandations: false,

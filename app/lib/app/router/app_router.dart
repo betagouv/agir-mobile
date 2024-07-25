@@ -9,6 +9,8 @@ import 'package:app/features/authentification/creer_compte/presentation/pages/cr
 import 'package:app/features/authentification/domain/entities/authentification_statut_manager.dart';
 import 'package:app/features/authentification/domain/value_objects/authentification_statut.dart';
 import 'package:app/features/authentification/presentation/pages/se_connecter_page.dart';
+import 'package:app/features/authentification/questions/presentation/pages/question_code_postal_page.dart';
+import 'package:app/features/authentification/questions/presentation/pages/question_prenom_page.dart';
 import 'package:app/features/authentification/saisie_code/presentation/pages/saisie_code_page.dart';
 import 'package:app/features/bibliotheque/presentation/pages/bibliotheque_page.dart';
 import 'package:app/features/mieux_vous_connaitre/presentation/element/pages/mieux_vous_connaitre_edit_page.dart';
@@ -57,6 +59,8 @@ GoRouter goRouter({
                       ? '/authenticated/${AccueilPage.path}'
                       : null,
               routes: [
+                QuestionPrenomPage.route,
+                QuestionCodePostalPage.route,
                 AccueilPage.route,
                 UniversPage.route,
                 AidesPage.route,

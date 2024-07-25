@@ -11,7 +11,7 @@ class MesInformationsNom extends StatelessWidget {
   @override
   Widget build(final BuildContext context) {
     final nom = context
-        .select<MesInformationsBloc, String>((final bloc) => bloc.state.nom);
+        .select<MesInformationsBloc, String?>((final bloc) => bloc.state.nom);
 
     return DsfrInput(
       label: Localisation.nom,

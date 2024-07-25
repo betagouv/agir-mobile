@@ -22,8 +22,8 @@ final class MesInformationsState extends Equatable {
           statut: MesInformationsStatut.initial,
         );
 
-  final String prenom;
-  final String nom;
+  final String? prenom;
+  final String? nom;
   final String email;
   final double nombreDePartsFiscales;
   final int? revenuFiscal;

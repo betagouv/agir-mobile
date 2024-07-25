@@ -34,8 +34,8 @@ class ProfilApiAdapter implements ProfilPort {
 
     return Right(
       Informations(
-        prenom: json['prenom'] as String? ?? '',
-        nom: json['nom'] as String? ?? '',
+        prenom: json['prenom'] as String?,
+        nom: json['nom'] as String?,
         email: json['email'] as String,
         codePostal: json['code_postal'] as String?,
         commune: json['commune'] as String?,
@@ -48,8 +48,8 @@ class ProfilApiAdapter implements ProfilPort {
 
   @override
   Future<Either<Exception, void>> mettreAJour({
-    required final String prenom,
-    required final String nom,
+    required final String? prenom,
+    required final String? nom,
     required final String email,
     required final double nombreDePartsFiscales,
     required final int? revenuFiscal,
@@ -146,5 +146,41 @@ class ProfilApiAdapter implements ProfilPort {
     return response.statusCode == HttpStatus.ok
         ? const Right(null)
         : Left(Exception('Erreur lors de la mise à jour du mot de passe'));
+  }
+
+  @override
+  Future<Either<Exception, void>> mettreAJourPrenom(final String prenom) async {
+    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    if (utilisateurId == null) {
+      return const Left(UtilisateurIdNonTrouveException());
+    }
+
+    final uri = Uri.parse('/utilisateurs/$utilisateurId/profile');
+    final body = jsonEncode({'prenom': prenom});
+
+    final response = await _apiClient.patch(uri, body: body);
+
+    return response.statusCode == HttpStatus.ok
+        ? const Right(null)
+        : Left(Exception('Erreur lors de la mise à jour du prénom'));
+  }
+
+  @override
+  Future<Either<Exception, void>> mettreAJourCodePostal(
+    final String codePostal,
+  ) async {
+    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    if (utilisateurId == null) {
+      return const Left(UtilisateurIdNonTrouveException());
+    }
+
+    final uri = Uri.parse('/utilisateurs/$utilisateurId/logement');
+    final body = jsonEncode({'code_postal': codePostal});
+
+    final response = await _apiClient.patch(uri, body: body);
+
+    return response.statusCode == HttpStatus.ok
+        ? const Right(null)
+        : Left(Exception('Erreur lors de la mise à jour du code postal'));
   }
 }

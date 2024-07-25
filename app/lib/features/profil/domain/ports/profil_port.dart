@@ -5,9 +5,14 @@ import 'package:fpdart/fpdart.dart';
 abstract interface class ProfilPort {
   Future<Either<Exception, Informations>> recupererProfil();
 
+  Future<Either<Exception, void>> mettreAJourPrenom(final String prenom);
+  Future<Either<Exception, void>> mettreAJourCodePostal(
+    final String codePostal,
+  );
+
   Future<Either<Exception, void>> mettreAJour({
-    required final String prenom,
-    required final String nom,
+    required final String? prenom,
+    required final String? nom,
     required final String email,
     required final double nombreDePartsFiscales,
     required final int? revenuFiscal,

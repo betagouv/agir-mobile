@@ -25,6 +25,9 @@ abstract final class Localisation {
   static const autreJeNeSaisPas = 'Autre / Je ne sais pas';
   static const baseDeConnaissances = 'Base de connaissances';
   static const bibliotheque = 'Bibliothèque';
+  static const bienvenuSurAgir = 'Bienvenue sur Agir ! Faisons connaissance...';
+  static const bienvenuSurAgirDetails =
+      'Nous avons quelques questions à vous poser pour personnaliser votre expérience !';
   static const boisPellets = 'Bois / Pellets';
   static const bonjour = 'Bonjour,\n';
   static const changerVotreMotDePasse = 'Changer votre mot de passe';
@@ -37,6 +40,7 @@ abstract final class Localisation {
   static const commune = 'Commune';
   static const confirmer = 'Confirmer';
   static const consommationsEnergetiques = 'Consommations énergétiques';
+  static const continuer = 'Continuer';
   static const continuerLaLecture = 'Continuer la lecture';
   static const creerMonCompte = 'Créer mon compte';
   static const creezVotreCompte = 'Créez votre compte Agir';
@@ -58,6 +62,9 @@ abstract final class Localisation {
   static const electricite = 'Électricité';
   static const elementsNecessaireAuCalcul = 'Éléments nécessaires au calcul';
   static const emailDeConnexionRenvoye = 'Email de connexion renvoyé';
+  static const enchante = 'Enchanté, Marie-Louise !';
+  static const enchanteDetails =
+      'Pour découvrir des aides, services et contenus disponibles proches de chez vous, indiquez-nous votre lieu de résidence';
   static const enfants = 'Enfant(s) de moins de 18 ans';
   static const entre100et150m2 = 'Entre 100 et 150 m²';
   static const entre35et70m2 = 'Entre 35 et 70 m²';
@@ -171,6 +178,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const vosAidesSousTitre =
       'Accédez à toutes les aides publiques locales ou nationales pour la transition écologique en fonction de votre situation.';
   static const vosAidesTitre = 'Vos aides disponibles';
+  static const votreCodePostal = 'Votre code postal';
   static const vosInformations = 'Vos informations';
   static const votreIdentite = 'Votre identité';
   static const votreLogement = 'Votre logement';
@@ -178,6 +186,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
       'Votre logement a-t-il plus de 15 ans ?';
   static const votreMotDePasseDoitContenir =
       'Votre mot de passe doit contenir :';
+  static const votrePrenom = 'Votre prénom';
   static const votreProfil = 'Votre profil';
   static const votreResidencePrincipaleEst =
       'Votre résidence principale est ...';
@@ -210,5 +219,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static String euro(final int value) => '$value €';
   static String nombreArticle(final int value) => '$value articles';
   static String prenomExclamation(final String value) => '$value !';
+  static String questionCourantSurMax(final int actuel, final int max) =>
+      '**Question $actuel** sur $max';
   static String veloLabel(final String text) => '$text : ';
 }

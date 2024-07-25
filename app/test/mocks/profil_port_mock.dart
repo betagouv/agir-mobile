@@ -23,8 +23,8 @@ class ProfilPortMock implements ProfilPort {
     required this.revenuFiscal,
   });
 
-  String prenom;
-  String nom;
+  String? prenom;
+  String? nom;
   String email;
   String? codePostal;
   String? commune;
@@ -56,8 +56,8 @@ class ProfilPortMock implements ProfilPort {
 
   @override
   Future<Either<Exception, void>> mettreAJour({
-    required final String prenom,
-    required final String nom,
+    required final String? prenom,
+    required final String? nom,
     required final String email,
     required final double nombreDePartsFiscales,
     required final int? revenuFiscal,
@@ -117,6 +117,22 @@ class ProfilPortMock implements ProfilPort {
     required final String motDePasse,
   }) async {
     changerLeMotDePasseAppele = true;
+
+    return const Right(null);
+  }
+
+  @override
+  Future<Either<Exception, void>> mettreAJourPrenom(final String prenom) async {
+    this.prenom = prenom;
+
+    return const Right(null);
+  }
+
+  @override
+  Future<Either<Exception, void>> mettreAJourCodePostal(
+    final String codePostal,
+  ) async {
+    this.codePostal = codePostal;
 
     return const Right(null);
   }

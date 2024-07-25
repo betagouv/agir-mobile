@@ -140,13 +140,16 @@ void main() {
     final client = ClientMock()
       ..postSuccess(
         path: '/utilisateurs/valider',
-        response: CustomResponse('''
+        response: CustomResponse(
+          '''
 {
   "token": "$token",
   "utilisateur": {
     "id": "$utilisateurId"
   }
-}'''),
+}''',
+          statusCode: HttpStatus.created,
+        ),
       );
 
     final flutterSecureStorageMock = FlutterSecureStorageMock();

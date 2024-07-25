@@ -32,9 +32,7 @@ class AuthentificationApiAdapter implements AuthentificationPort {
 
     final json = jsonDecode(response.body) as Map<String, dynamic>;
     final token = json['token'] as String;
-    final utilisateur = json['utilisateur'] as Map<String, dynamic>;
-    final utilisateurId = utilisateur['id'] as String;
-    await _apiClient.sauvegarderTokenEtUtilisateurId(token, utilisateurId);
+    await _apiClient.sauvegarderToken(token);
 
     return const Right(null);
   }
@@ -89,13 +87,15 @@ class AuthentificationApiAdapter implements AuthentificationPort {
       }),
     );
 
+    if (response.statusCode != HttpStatus.created) {
+      return Left(Exception('Erreur lors de la validation du code'));
+    }
+
     final json = jsonDecode(response.body) as Map<String, dynamic>;
     final token = json['token'] as String;
 
     await _apiClient.sauvegarderToken(token);
 
-    return response.statusCode == HttpStatus.ok
-        ? const Right(null)
-        : Left(Exception('Erreur lors de la validation du code'));
+    return const Right(null);
   }
 }

@@ -14,6 +14,6 @@ abstract final class FnvNumberFormat {
   /// 1234.5 -> 1234,5
   /// 1234.0 -> 1234
   /// ```
-  static String formatNumber(final double nombre) =>
+  static String formatNumber(final double? nombre) =>
       NumberFormat('0.##', 'fr').format(nombre);
 }

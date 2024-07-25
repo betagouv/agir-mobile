@@ -39,10 +39,7 @@ void main() {
       secureStorage: FlutterSecureStorageMock(),
       authentificationStatusManagerWriter: AuthentificationStatutManager(),
     );
-    await authentificationTokenStorage.sauvegarderTokenEtUtilisateurId(
-      token,
-      utilisateurId,
-    );
+    await authentificationTokenStorage.sauvegarderToken(token);
 
     final adapter = GamificationApiAdapter(
       apiClient: AuthentificationApiClient(

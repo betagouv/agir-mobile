@@ -57,16 +57,6 @@ class AuthentificationTokenStorage {
         .gererAuthentificationStatut(AuthentificationStatut.connecte);
   }
 
-  Future<void> sauvegarderTokenEtUtilisateurId(
-    final String token,
-    final String utilisateurId,
-  ) async {
-    await _secureStorage.write(key: _tokenKey, value: token);
-    await _secureStorage.write(key: _utilisateurIdKey, value: utilisateurId);
-    _authentificationStatusManagerWriter
-        .gererAuthentificationStatut(AuthentificationStatut.connecte);
-  }
-
   Future<void> supprimerTokenEtUtilisateurId() async {
     _authentificationStatusManagerWriter
         .gererAuthentificationStatut(AuthentificationStatut.pasConnecte);

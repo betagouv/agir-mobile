@@ -9,13 +9,13 @@ final class UtilisateurState extends Equatable {
     required this.aLesUnivers,
   });
 
-  final String prenom;
+  final String? prenom;
   final bool aLesAides;
   final bool aLaBibliotheque;
   final bool aLesRecommandations;
   final bool aLesUnivers;
 
   @override
-  List<Object> get props =>
+  List<Object?> get props =>
       [prenom, aLesAides, aLaBibliotheque, aLesRecommandations, aLesUnivers];
 }
