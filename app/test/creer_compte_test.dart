@@ -7,6 +7,7 @@ import 'steps/iel_appuie_sur.dart';
 import 'steps/iel_ecrit_dans_le_champ.dart';
 import 'steps/iel_glisse_de_la_droite_vers_la_gauche.dart';
 import 'steps/iel_lance_lapplication.dart';
+import 'steps/iel_sappelle.dart';
 import 'steps/iel_voit_le_texte.dart';
 import 'steps/iel_voit_le_texte_dans_texte_riche.dart';
 
@@ -14,6 +15,7 @@ void main() {
   testWidgets(
     "Iel lance l'application pour la première fois et créer un compte",
     (final tester) async {
+      setUpWidgets(tester);
       await _allerSurLaPageCreerCompte(tester);
       ielVoitLeTexte(Localisation.creezVotreCompte);
       const email = 'joe@doe.com';
@@ -39,11 +41,27 @@ void main() {
       );
       expect(authentificationPort.validationAppele, true);
       await tester.pumpAndSettle();
+      await tester.pumpAndSettle();
+      ielVoitLeTexte(Localisation.bienvenuSurAgir);
+      await ielEcritDansLeChamp(
+        tester,
+        label: Localisation.votrePrenom,
+        enterText: 'Lucas',
+      );
+      await ielAppuieSur(tester, Localisation.continuer);
+      ielVoitLeTexte(Localisation.enchanteDetails);
+      await ielEcritDansLeChamp(
+        tester,
+        label: Localisation.votreCodePostal,
+        enterText: '39100',
+      );
+      await ielAppuieSur(tester, Localisation.continuer);
       ielVoitLeTexteDansTexteRiche(Localisation.bonjour);
     },
   );
 
   testWidgets('Iel demande de renvoyer le mail', (final tester) async {
+    setUpWidgets(tester);
     await _allerSurLaPageCreerCompte(tester);
     ielVoitLeTexte(Localisation.creezVotreCompte);
     const email = 'joe@doe.com';
@@ -75,7 +93,7 @@ void main() {
 }
 
 Future<void> _allerSurLaPageCreerCompte(final WidgetTester tester) async {
-  setUpWidgets(tester);
+  ielSappelle('');
   await ielLanceLapplication(tester);
   await ielAppuieSur(tester, Localisation.commencer);
   await ielGlisseDeLaDroiteVersLaGauche(tester);

@@ -119,10 +119,7 @@ void main() {
       secureStorage: FlutterSecureStorageMock(),
       authentificationStatusManagerWriter: AuthentificationStatutManager(),
     );
-    await authentificationTokenStorage.sauvegarderTokenEtUtilisateurId(
-      token,
-      utilisateurId,
-    );
+    await authentificationTokenStorage.sauvegarderToken(token);
     final adapter = QuizApiAdapter(
       apiClient: AuthentificationApiClient(
         apiUrl: apiUrl,
@@ -249,10 +246,7 @@ void main() {
       secureStorage: FlutterSecureStorageMock(),
       authentificationStatusManagerWriter: AuthentificationStatutManager(),
     );
-    await authentificationTokenStorage.sauvegarderTokenEtUtilisateurId(
-      token,
-      utilisateurId,
-    );
+    await authentificationTokenStorage.sauvegarderToken(token);
     final adapter = QuizApiAdapter(
       apiClient: AuthentificationApiClient(
         apiUrl: apiUrl,
@@ -307,10 +301,7 @@ void main() {
       secureStorage: FlutterSecureStorageMock(),
       authentificationStatusManagerWriter: AuthentificationStatutManager(),
     );
-    await authentificationTokenStorage.sauvegarderTokenEtUtilisateurId(
-      token,
-      utilisateurId,
-    );
+    await authentificationTokenStorage.sauvegarderToken(token);
 
     final adapter = QuizApiAdapter(
       apiClient: AuthentificationApiClient(

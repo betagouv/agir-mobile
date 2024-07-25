@@ -19,15 +19,6 @@ class AuthentificationApiClient extends http.BaseClient {
   final http.Client _inner;
   final AuthentificationTokenStorage _authentificationTokenStorage;
 
-  Future<void> sauvegarderTokenEtUtilisateurId(
-    final String token,
-    final String utilisateurId,
-  ) async =>
-      _authentificationTokenStorage.sauvegarderTokenEtUtilisateurId(
-        token,
-        utilisateurId,
-      );
-
   Future<void> sauvegarderToken(final String token) async =>
       _authentificationTokenStorage.sauvegarderToken(token);
 

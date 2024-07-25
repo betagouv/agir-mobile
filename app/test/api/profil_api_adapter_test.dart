@@ -56,10 +56,7 @@ void main() {
         secureStorage: FlutterSecureStorageMock(),
         authentificationStatusManagerWriter: AuthentificationStatutManager(),
       );
-      await authentificationTokenStorage.sauvegarderTokenEtUtilisateurId(
-        token,
-        utilisateurId,
-      );
+      await authentificationTokenStorage.sauvegarderToken(token);
 
       final adapter = ProfilApiAdapter(
         apiClient: AuthentificationApiClient(
@@ -95,10 +92,7 @@ void main() {
         secureStorage: FlutterSecureStorageMock(),
         authentificationStatusManagerWriter: AuthentificationStatutManager(),
       );
-      await authentificationTokenStorage.sauvegarderTokenEtUtilisateurId(
-        token,
-        utilisateurId,
-      );
+      await authentificationTokenStorage.sauvegarderToken(token);
 
       final adapter = ProfilApiAdapter(
         apiClient: AuthentificationApiClient(
@@ -134,6 +128,42 @@ void main() {
       );
     });
 
+    test('mettreAJourPrenom', () async {
+      final client = ClientMock()
+        ..patchSuccess(
+          path: '/utilisateurs/$utilisateurId/profile',
+          response: CustomResponse(''),
+        );
+
+      final authentificationTokenStorage = AuthentificationTokenStorage(
+        secureStorage: FlutterSecureStorageMock(),
+        authentificationStatusManagerWriter: AuthentificationStatutManager(),
+      );
+      await authentificationTokenStorage.sauvegarderToken(token);
+
+      final adapter = ProfilApiAdapter(
+        apiClient: AuthentificationApiClient(
+          apiUrl: apiUrl,
+          authentificationTokenStorage: authentificationTokenStorage,
+          inner: client,
+        ),
+      );
+
+      const prenom = 'Prénom';
+      await adapter.mettreAJourPrenom(prenom);
+
+      verify(
+        () => client.send(
+          any(
+            that: const RequestMathcher(
+              '/utilisateurs/$utilisateurId/profile',
+              body: '{"prenom":"$prenom"}',
+            ),
+          ),
+        ),
+      );
+    });
+
     test('recupererLogement', () async {
       final client = ClientMock()
         ..getSuccess(
@@ -157,10 +187,7 @@ void main() {
         secureStorage: FlutterSecureStorageMock(),
         authentificationStatusManagerWriter: AuthentificationStatutManager(),
       );
-      await authentificationTokenStorage.sauvegarderTokenEtUtilisateurId(
-        token,
-        utilisateurId,
-      );
+      await authentificationTokenStorage.sauvegarderToken(token);
 
       final adapter = ProfilApiAdapter(
         apiClient: AuthentificationApiClient(
@@ -201,10 +228,7 @@ void main() {
         secureStorage: FlutterSecureStorageMock(),
         authentificationStatusManagerWriter: AuthentificationStatutManager(),
       );
-      await authentificationTokenStorage.sauvegarderTokenEtUtilisateurId(
-        token,
-        utilisateurId,
-      );
+      await authentificationTokenStorage.sauvegarderToken(token);
 
       final adapter = ProfilApiAdapter(
         apiClient: AuthentificationApiClient(
@@ -241,10 +265,7 @@ void main() {
         secureStorage: FlutterSecureStorageMock(),
         authentificationStatusManagerWriter: AuthentificationStatutManager(),
       );
-      await authentificationTokenStorage.sauvegarderTokenEtUtilisateurId(
-        token,
-        utilisateurId,
-      );
+      await authentificationTokenStorage.sauvegarderToken(token);
 
       final adapter = ProfilApiAdapter(
         apiClient: AuthentificationApiClient(
@@ -292,6 +313,42 @@ void main() {
       );
     });
 
+    test('mettreAJourCodePostal', () async {
+      final client = ClientMock()
+        ..patchSuccess(
+          path: '/utilisateurs/$utilisateurId/logement',
+          response: CustomResponse(''),
+        );
+
+      final authentificationTokenStorage = AuthentificationTokenStorage(
+        secureStorage: FlutterSecureStorageMock(),
+        authentificationStatusManagerWriter: AuthentificationStatutManager(),
+      );
+      await authentificationTokenStorage.sauvegarderToken(token);
+
+      final adapter = ProfilApiAdapter(
+        apiClient: AuthentificationApiClient(
+          apiUrl: apiUrl,
+          authentificationTokenStorage: authentificationTokenStorage,
+          inner: client,
+        ),
+      );
+
+      const codePostal = '39100';
+      await adapter.mettreAJourCodePostal(codePostal);
+
+      verify(
+        () => client.send(
+          any(
+            that: const RequestMathcher(
+              '/utilisateurs/$utilisateurId/logement',
+              body: '{"code_postal":"$codePostal"}',
+            ),
+          ),
+        ),
+      );
+    });
+
     test('supprimerLeCompte', () async {
       const path = '/utilisateurs/$utilisateurId';
       final client = ClientMock()
@@ -301,10 +358,7 @@ void main() {
         secureStorage: FlutterSecureStorageMock(),
         authentificationStatusManagerWriter: AuthentificationStatutManager(),
       );
-      await authentificationTokenStorage.sauvegarderTokenEtUtilisateurId(
-        token,
-        utilisateurId,
-      );
+      await authentificationTokenStorage.sauvegarderToken(token);
 
       final adapter = ProfilApiAdapter(
         apiClient: AuthentificationApiClient(
@@ -330,10 +384,7 @@ void main() {
         secureStorage: FlutterSecureStorageMock(),
         authentificationStatusManagerWriter: AuthentificationStatutManager(),
       );
-      await authentificationTokenStorage.sauvegarderTokenEtUtilisateurId(
-        token,
-        utilisateurId,
-      );
+      await authentificationTokenStorage.sauvegarderToken(token);
 
       final adapter = ProfilApiAdapter(
         apiClient: AuthentificationApiClient(

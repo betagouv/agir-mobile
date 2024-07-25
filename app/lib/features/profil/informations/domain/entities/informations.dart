@@ -11,8 +11,8 @@ class Informations extends Equatable {
     required this.revenuFiscal,
   });
 
-  final String prenom;
-  final String nom;
+  final String? prenom;
+  final String? nom;
   final String email;
   final String? codePostal;
   final String? commune;
