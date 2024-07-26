@@ -1,3 +1,4 @@
+import 'package:app/shared/helpers/mail_regex.dart';
 import 'package:equatable/equatable.dart';
 
 final class CreerCompteState extends Equatable {
@@ -12,6 +13,9 @@ final class CreerCompteState extends Equatable {
 
   final String adresseMail;
   final String motDePasse;
+  bool get adresseMailEstValide => mailRegex.hasMatch(adresseMail);
+  bool get estValide => adresseMailEstValide && motDePasse.isNotEmpty;
+
   final bool compteCree;
 
   CreerCompteState copyWith({
