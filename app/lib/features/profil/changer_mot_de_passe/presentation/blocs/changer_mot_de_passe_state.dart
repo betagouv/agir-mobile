@@ -10,19 +10,7 @@ final class ChangerMotDePasseState extends Equatable {
       : this(motDePasse: '', motPasseEstChange: false);
 
   final String motDePasse;
-  bool get douzeCaracteresMinimum => motDePasse.length >= 12;
-  bool get auMoinsUneMajusculeEtUneMinuscule =>
-      motDePasse.contains(RegExp('[A-Z]')) &&
-      motDePasse.contains(RegExp('[a-z]'));
-  bool get unCaractereSpecialMinimum => motDePasse.contains(
-        RegExp(r'''[&~»#)‘\-_`{[|`_\\^@)\]=}+%*$£¨!§/:;.?¿\'",§éèêëàâä»]'''),
-      );
-  bool get unChiffreMinimum => motDePasse.contains(RegExp(r'\d'));
-  bool get estValide =>
-      douzeCaracteresMinimum &&
-      auMoinsUneMajusculeEtUneMinuscule &&
-      unCaractereSpecialMinimum &&
-      unChiffreMinimum;
+  bool get estValide => motDePasse.isNotEmpty;
 
   final bool motPasseEstChange;
 
