@@ -116,10 +116,10 @@ packages:
     dependency: "direct dev"
     description:
       name: dart_code_metrics_presets
-      sha256: "44d57d129f6c6533bd636d3dfa0854a1a17d0b172d2bc316f419cf3ddbb7c55f"
+      sha256: f67df47fe3297617e0cf5d632aa257e17517ad9fdd605e152bdc80dd526f0c5b
       url: "https://pub.dev"
     source: hosted
-    version: "2.14.0"
+    version: "2.15.0"
   dsfr:
     dependency: "direct main"
     description:
