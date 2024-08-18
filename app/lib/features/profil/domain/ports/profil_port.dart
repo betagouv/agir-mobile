@@ -6,6 +6,7 @@ abstract interface class ProfilPort {
   Future<Either<Exception, Informations>> recupererProfil();
 
   Future<Either<Exception, void>> mettreAJourPrenom(final String prenom);
+
   Future<Either<Exception, void>> mettreAJourCodePostal(
     final String codePostal,
   );

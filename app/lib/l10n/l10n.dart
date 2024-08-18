@@ -192,6 +192,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
       'Votre résidence principale est ...';
   static const vousEtesProprietaireDeVotreLogement =
       'Vous êtes propriétaire de votre logement ?';
+
   static String cacherEmail(final String email) {
     final indexArobase =
         email.characters.findFirst(Characters('@'))!.stringBeforeLength;
@@ -211,15 +212,23 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
     required final String commune,
   }) =>
       '($codePostal - $commune)';
+
   static String donneesUtiliseesNombreDeParts(final double value) => '($value)';
+
   static String donneesUtiliseesRevenuFiscal(final int? value) =>
       '(${value == null ? '' : euro(value)})';
+
   static String entrezLeCodeRecuParMailDetails(final String value) =>
       'Pour vérifier votre identité et vous permettre d’accéder à votre compte, nous vous avons envoyé un email à l’adresse : ${cacherEmail(value)}';
+
   static String euro(final int value) => '$value €';
+
   static String nombreArticle(final int value) => '$value articles';
+
   static String prenomExclamation(final String value) => '$value !';
+
   static String questionCourantSurMax(final int actuel, final int max) =>
       '**Question $actuel** sur $max';
+
   static String veloLabel(final String text) => '$text : ';
 }

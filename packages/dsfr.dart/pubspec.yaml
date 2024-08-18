@@ -5,8 +5,8 @@ version: 0.0.1
 homepage:
 
 environment:
-  sdk: 3.4.4
-  flutter: 3.22.3
+  sdk: 3.5.0
+  flutter: 3.24.0
 
 dependencies:
   flutter:
@@ -15,7 +15,7 @@ dependencies:
 dev_dependencies:
   agir_lints:
     path: ../agir_lints
-  dart_code_metrics_presets: 2.14.0
+  dart_code_metrics_presets: 2.15.0
   flutter_test:
     sdk: flutter
   icon_font_generator:

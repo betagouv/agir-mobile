@@ -4,6 +4,7 @@ class UtilisateurIdNonTrouveException implements Exception {
   ]);
 
   final String message;
+
   @override
   String toString() => 'UtilisateurIdNonTrouveException: $message';
 }

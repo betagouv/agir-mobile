@@ -18,6 +18,7 @@ class CheckboxPage extends StatefulWidget {
 
 class _CheckboxPageState extends State<CheckboxPage> {
   bool _value = false;
+
   @override
   Widget build(final BuildContext context) => ListView(
         padding: const EdgeInsets.all(24),
