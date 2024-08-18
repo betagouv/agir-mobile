@@ -45,5 +45,6 @@ class GamificationApiAdapter implements GamificationPort {
 
   Future<void> dispose() async {
     await _gamificationSubject.close();
+    _apiClient.close();
   }
 }

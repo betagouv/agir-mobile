@@ -80,6 +80,7 @@ dart_code_metrics:
     - format-comment:
         only-doc-comments: true
     - parameters-ordering: false
+    - prefer-boolean-prefixes: false
     - prefer-correct-identifier-length: false
     - prefer-correct-throws: false
     - prefer-correct-type-name: false
