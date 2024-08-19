@@ -7,7 +7,7 @@ abstract interface class AuthentificationPort {
     final InformationDeConnexion informationDeConnexion,
   );
 
-  Future<Either<Exception, void>> connectionDemandee(
+  Future<Either<Exception, void>> connexionDemandee(
     final InformationDeConnexion informationDeConnexion,
   );
 
@@ -17,5 +17,5 @@ abstract interface class AuthentificationPort {
     final InformationDeCode informationDeConnexion,
   );
 
-  Future<Either<Exception, void>> deconnectionDemandee();
+  Future<Either<Exception, void>> deconnexionDemandee();
 }

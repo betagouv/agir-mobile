@@ -10,7 +10,7 @@ class SeConnecterBloc extends Bloc<SeConnecterEvent, SeConnecterState> {
   SeConnecterBloc({
     required final AuthentificationPort authentificationPort,
   })  : _authentificationPort = authentificationPort,
-        super(const SeConnecterState()) {
+        super(const SeConnecterState.empty()) {
     on<SeConnecterAdresseMailAChange>(_onAdresseMailAChange);
     on<SeConnecterMotDePasseAChange>(_onMotDePasseAChange);
     on<SeConnecterConnexionDemandee>(_onConnexionDemandee);
@@ -36,10 +36,13 @@ class SeConnecterBloc extends Bloc<SeConnecterEvent, SeConnecterState> {
     final SeConnecterConnexionDemandee event,
     final Emitter<SeConnecterState> emit,
   ) async {
-    final informationDeConnexion = InformationDeConnexion(
-      adresseMail: state.adresseMail,
-      motDePasse: state.motDePasse,
+    await _authentificationPort.connexionDemandee(
+      InformationDeConnexion(
+        adresseMail: state.adresseMail,
+        motDePasse: state.motDePasse,
+      ),
     );
-    await _authentificationPort.connectionDemandee(informationDeConnexion);
+
+    emit(state.copyWith(connexionFaite: true));
   }
 }

@@ -23,12 +23,55 @@ void main() {
   );
 
   test(
-    "connectionDemandee ajoute le token et l'utisateurId dans le secure storage et modifie le statut a connecté",
+    "connexionDemandee envoie une requête POST à l'API avec les informations de connexion",
     () async {
       // Arrange.
       final client = ClientMock()
         ..postSuccess(
-          path: '/utilisateurs/login',
+          path: '/utilisateurs/login_v2',
+          response: CustomResponse('', statusCode: HttpStatus.created),
+        );
+
+      final adapter = AuthentificationApiAdapter(
+        apiClient: AuthentificationApiClient(
+          apiUrl: apiUrl,
+          authentificationTokenStorage: AuthentificationTokenStorage(
+            secureStorage: FlutterSecureStorageMock(),
+            authentificationStatusManagerWriter:
+                AuthentificationStatutManager(),
+          ),
+          inner: client,
+        ),
+      );
+
+      // Act.
+      await adapter.connexionDemandee(informationDeConnexion);
+
+      // Assert.
+      verify(
+        () => client.send(
+          any(
+            that: RequestMathcher(
+              '/utilisateurs/login_v2',
+              body:
+                  '{"email":"${informationDeConnexion.adresseMail}","mot_de_passe":"${informationDeConnexion.motDePasse}"}',
+            ),
+          ),
+        ),
+      );
+    },
+  );
+
+  test(
+    "validationCodeConnexionDemandee ajoute le token et l'utisateurId dans le secure storage et modifie le statut a connecté",
+    () async {
+      final client = ClientMock()
+        ..postSuccess(
+          path: '/utilisateurs/login_v2',
+          response: CustomResponse('', statusCode: HttpStatus.created),
+        )
+        ..postSuccess(
+          path: '/utilisateurs/login_v2_code',
           response: CustomResponse(
             '''
 {
@@ -54,9 +97,15 @@ void main() {
           inner: client,
         ),
       );
+      await adapter.connexionDemandee(informationDeConnexion);
 
       // Act.
-      await adapter.connectionDemandee(informationDeConnexion);
+      await adapter.validationDemandee(
+        const InformationDeCode(
+          adresseMail: 'test@example.com',
+          code: '123456',
+        ),
+      );
 
       // Assert.
       expect(
@@ -67,11 +116,22 @@ void main() {
         authentificationStatutManager.statutActuel,
         AuthentificationStatut.connecte,
       );
+
+      verify(
+        () => client.send(
+          any(
+            that: const RequestMathcher(
+              '/utilisateurs/login_v2_code',
+              body: '{"code":"123456","email":"test@example.com"}',
+            ),
+          ),
+        ),
+      );
     },
   );
 
   test(
-    "deconnectionDemandee supprime le token et l'utisateurId dans le secure storage et modifie le statut a pas connecté",
+    "deconnexionDemandee supprime le token et l'utisateurId dans le secure storage et modifie le statut a pas connecté",
     () async {
       // Arrange.
       final flutterSecureStorageMock = FlutterSecureStorageMock();
@@ -89,7 +149,7 @@ void main() {
       );
 
       // Act.
-      await adapter.deconnectionDemandee();
+      await adapter.deconnexionDemandee();
 
       // Assert.
       expect(await flutterSecureStorageMock.readAll(), <String, dynamic>{});

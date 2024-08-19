@@ -48,8 +48,9 @@ class AuthentificationTokenStorage {
       return;
     }
 
-    final tokenData = jsonDecode(utf8.decode(base64Url.decode(jwtToken)))
-        as Map<String, dynamic>;
+    final tokenData =
+        jsonDecode(utf8.decode(base64.decode(base64.normalize(jwtToken))))
+            as Map<String, dynamic>;
     final utilisateurId = tokenData['utilisateurId'] as String;
 
     await _secureStorage.write(key: _utilisateurIdKey, value: utilisateurId);

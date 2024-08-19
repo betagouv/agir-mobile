@@ -9,36 +9,36 @@ import 'package:app/features/authentification/infrastructure/adapters/api/authen
 import 'package:fpdart/fpdart.dart';
 
 class AuthentificationApiAdapter implements AuthentificationPort {
-  const AuthentificationApiAdapter({
+  AuthentificationApiAdapter({
     required final AuthentificationApiClient apiClient,
   }) : _apiClient = apiClient;
 
   final AuthentificationApiClient _apiClient;
+  bool _connexionDemandee = false;
 
   @override
-  Future<Either<Exception, void>> connectionDemandee(
+  Future<Either<Exception, void>> connexionDemandee(
     final InformationDeConnexion informationDeConnexion,
   ) async {
     final response = await _apiClient.post(
-      Uri.parse('/utilisateurs/login'),
+      Uri.parse('/utilisateurs/login_v2'),
       body: jsonEncode({
         'email': informationDeConnexion.adresseMail,
         'mot_de_passe': informationDeConnexion.motDePasse,
       }),
     );
-    if (response.statusCode != 201) {
-      return Left(Exception('Erreur lors de la connexion'));
+
+    if (response.statusCode == HttpStatus.created) {
+      _connexionDemandee = true;
+
+      return const Right(null);
     }
 
-    final json = jsonDecode(response.body) as Map<String, dynamic>;
-    final token = json['token'] as String;
-    await _apiClient.sauvegarderToken(token);
-
-    return const Right(null);
+    return Left(Exception('Erreur lors de la connexion'));
   }
 
   @override
-  Future<Either<Exception, void>> deconnectionDemandee() async {
+  Future<Either<Exception, void>> deconnexionDemandee() async {
     await _apiClient.supprimerTokenEtUtilisateurId();
 
     return const Right(null);
@@ -79,8 +79,12 @@ class AuthentificationApiAdapter implements AuthentificationPort {
   Future<Either<Exception, void>> validationDemandee(
     final InformationDeCode informationDeConnexion,
   ) async {
+    final uri = _connexionDemandee
+        ? '/utilisateurs/login_v2_code'
+        : '/utilisateurs/valider';
+    _connexionDemandee = false;
     final response = await _apiClient.post(
-      Uri.parse('/utilisateurs/valider'),
+      Uri.parse(uri),
       body: jsonEncode({
         'code': informationDeConnexion.code,
         'email': informationDeConnexion.adresseMail,
