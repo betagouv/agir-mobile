@@ -10,22 +10,22 @@ class AuthentificationPortMock implements AuthentificationPort {
 
   final AuthentificationStatutManager authentificationStatusManager;
 
+  bool connexionAppele = false;
   bool creerCompteAppele = false;
   bool validationAppele = false;
   bool renvoyerCodeAppele = false;
 
   @override
-  Future<Either<Exception, void>> connectionDemandee(
+  Future<Either<Exception, void>> connexionDemandee(
     final InformationDeConnexion informationDeConnexion,
   ) async {
-    authentificationStatusManager
-        .gererAuthentificationStatut(AuthentificationStatut.connecte);
+    connexionAppele = true;
 
     return const Right(null);
   }
 
   @override
-  Future<Either<Exception, void>> deconnectionDemandee() async {
+  Future<Either<Exception, void>> deconnexionDemandee() async {
     authentificationStatusManager
         .gererAuthentificationStatut(AuthentificationStatut.pasConnecte);
 

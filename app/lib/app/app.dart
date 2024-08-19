@@ -6,7 +6,6 @@ import 'package:app/features/aides/simulateur_velo/presentation/blocs/aide_velo_
 import 'package:app/features/articles/domain/ports/articles_port.dart';
 import 'package:app/features/authentification/domain/entities/authentification_statut_manager.dart';
 import 'package:app/features/authentification/domain/ports/authentification_port.dart';
-import 'package:app/features/authentification/presentation/blocs/se_connecter_bloc.dart';
 import 'package:app/features/bibliotheque/domain/ports/bibliotheque_port.dart';
 import 'package:app/features/bibliotheque/presentation/blocs/bibliotheque_bloc.dart';
 import 'package:app/features/communes/domain/ports/communes_port.dart';
@@ -103,11 +102,6 @@ class _AppState extends State<App> {
         ],
         child: MultiBlocProvider(
           providers: [
-            BlocProvider(
-              create: (final context) => SeConnecterBloc(
-                authentificationPort: widget.authentificationPort,
-              ),
-            ),
             BlocProvider(
               create: (final context) => UtilisateurBloc(
                 utilisateurPort: widget.utilisateurPort,

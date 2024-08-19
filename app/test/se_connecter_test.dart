@@ -1,6 +1,7 @@
 import 'package:app/l10n/l10n.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'scenario_context.dart';
 import 'set_up_widgets.dart';
 import 'steps/iel_appuie_sur.dart';
 import 'steps/iel_ecrit_dans_le_champ.dart';
@@ -43,25 +44,13 @@ void main() {
   );
 
   testWidgets(
-    "Iel lance l'application pour la première fois skip le preonboarding et se connecte",
+    "Iel lance l'application pour la première fois skip le preonboarding alors il arrive sur la page de connexion",
     (final tester) async {
       setUpWidgets(tester);
       await ielLanceLapplication(tester);
       ielVoitLeTexte(Localisation.preOnboardingTitre);
       await ielAppuieSur(tester, Localisation.jaiDejaUnCompte);
       ielVoitLeTexte(Localisation.seConnecter, n: 2);
-      await ielEcritDansLeChamp(
-        tester,
-        label: Localisation.adresseEmail,
-        enterText: 'joe@doe.com',
-      );
-      await ielEcritDansLeChamp(
-        tester,
-        label: Localisation.motDePasse,
-        enterText: 'M07D3P4553',
-      );
-      await ielAppuieSur(tester, Localisation.seConnecter);
-      ielVoitLeTexteDansTexteRiche(Localisation.bonjour);
     },
   );
 
@@ -88,9 +77,19 @@ void main() {
       await ielEcritDansLeChamp(
         tester,
         label: Localisation.motDePasse,
-        enterText: 'M07D3P4553',
+        enterText: 'ceciEstUnMotDePasseValide!1',
       );
       await ielAppuieSur(tester, Localisation.seConnecter);
+      final authentificationPort = ScenarioContext().authentificationPortMock!;
+      expect(authentificationPort.connexionAppele, true);
+      await ielEcritDansLeChamp(
+        tester,
+        label: 'saisie_code_key',
+        enterText: '123456',
+      );
+      expect(authentificationPort.validationAppele, true);
+      await tester.pumpAndSettle();
+      await tester.pumpAndSettle();
       ielVoitLeTexteDansTexteRiche(Localisation.bonjour);
     },
   );

@@ -24,6 +24,6 @@ class SupprimerCompteBloc
     final Emitter<SupprimerCompteState> emit,
   ) async {
     await _profilPort.supprimerLeCompte();
-    await _authentificationPort.deconnectionDemandee();
+    await _authentificationPort.deconnexionDemandee();
   }
 }

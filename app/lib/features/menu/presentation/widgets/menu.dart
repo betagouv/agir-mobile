@@ -111,7 +111,7 @@ class _MenuItems extends StatelessWidget {
           child: DsfrLink.md(
             label: Localisation.seDeconnecter,
             onPressed: () async =>
-                context.read<AuthentificationPort>().deconnectionDemandee(),
+                context.read<AuthentificationPort>().deconnexionDemandee(),
           ),
         ),
         const SizedBox(height: DsfrSpacings.s2w),
