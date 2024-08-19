@@ -1,4 +1,5 @@
 analyzer:
   errors:
     always_put_control_body_on_new_line: ignore
+    included_file_warning: ignore
 include: package:agir_lints/analysis_options.yaml
