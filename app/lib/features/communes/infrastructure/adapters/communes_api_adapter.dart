@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:app/features/authentification/infrastructure/adapters/api/authentification_api_client.dart';
+import 'package:app/features/authentification/infrastructure/adapters/authentification_api_client.dart';
 import 'package:app/features/communes/domain/ports/communes_port.dart';
 import 'package:fpdart/fpdart.dart';
 

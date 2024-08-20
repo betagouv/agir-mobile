@@ -4,9 +4,9 @@ import 'package:app/features/authentification/domain/entities/authentification_s
 import 'package:app/features/authentification/domain/value_objects/authentification_statut.dart';
 import 'package:app/features/authentification/domain/value_objects/information_de_code.dart';
 import 'package:app/features/authentification/domain/value_objects/information_de_connexion.dart';
-import 'package:app/features/authentification/infrastructure/adapters/api/authentification_api_adapter.dart';
-import 'package:app/features/authentification/infrastructure/adapters/api/authentification_api_client.dart';
-import 'package:app/features/authentification/infrastructure/adapters/api/authentification_token_storage.dart';
+import 'package:app/features/authentification/infrastructure/adapters/authentification_api_adapter.dart';
+import 'package:app/features/authentification/infrastructure/adapters/authentification_api_client.dart';
+import 'package:app/features/authentification/infrastructure/adapters/authentification_token_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 

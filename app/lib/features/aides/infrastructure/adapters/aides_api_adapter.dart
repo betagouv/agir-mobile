@@ -4,7 +4,7 @@ import 'dart:io';
 
 import 'package:app/features/aides/domain/entities/aide.dart';
 import 'package:app/features/aides/domain/ports/aides_port.dart';
-import 'package:app/features/authentification/infrastructure/adapters/api/authentification_api_client.dart';
+import 'package:app/features/authentification/infrastructure/adapters/authentification_api_client.dart';
 import 'package:app/features/profil/domain/utilisateur_id_non_trouve_exception.dart';
 import 'package:fpdart/fpdart.dart';
 

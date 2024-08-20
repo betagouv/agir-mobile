@@ -1,6 +1,6 @@
 import 'package:app/features/authentification/domain/entities/authentification_statut_manager.dart';
-import 'package:app/features/authentification/infrastructure/adapters/api/authentification_api_client.dart';
-import 'package:app/features/authentification/infrastructure/adapters/api/authentification_token_storage.dart';
+import 'package:app/features/authentification/infrastructure/adapters/authentification_api_client.dart';
+import 'package:app/features/authentification/infrastructure/adapters/authentification_token_storage.dart';
 import 'package:app/features/mieux_vous_connaitre/domain/question.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
 import 'package:app/features/recommandations/infrastructure/adapters/recommandations_api_adapter.dart';

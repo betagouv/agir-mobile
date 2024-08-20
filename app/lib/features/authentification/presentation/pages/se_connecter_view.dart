@@ -3,9 +3,11 @@ import 'package:app/features/authentification/presentation/blocs/se_connecter_ev
 import 'package:app/features/authentification/presentation/blocs/se_connecter_state.dart';
 import 'package:app/features/authentification/saisie_code/presentation/pages/saisie_code_page.dart';
 import 'package:app/l10n/l10n.dart';
+import 'package:app/shared/widgets/composants/alert.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:go_router/go_router.dart';
 
 class SeConnecterView extends StatelessWidget {
@@ -60,6 +62,7 @@ class SeConnecterView extends StatelessWidget {
               isPasswordMode: true,
               keyboardType: TextInputType.visiblePassword,
             ),
+            const _MessageErreur(),
             const Spacer(),
             BlocSelector<SeConnecterBloc, SeConnecterState, bool>(
               selector: (final state) => state.estValide,
@@ -70,6 +73,25 @@ class SeConnecterView extends StatelessWidget {
                 onPressed: state ? () => _handleSeConnecter(context) : null,
               ),
             ),
+          ],
+        ),
+      );
+}
+
+class _MessageErreur extends StatelessWidget {
+  const _MessageErreur();
+
+  @override
+  Widget build(final BuildContext context) => context
+      .select<SeConnecterBloc, Option<String>>(
+        (final bloc) => bloc.state.erreur,
+      )
+      .match(
+        () => const SizedBox.shrink(),
+        (final t) => Column(
+          children: [
+            const SizedBox(height: DsfrSpacings.s2w),
+            FnvAlert.error(label: t),
           ],
         ),
       );

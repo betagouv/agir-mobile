@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:app/features/authentification/infrastructure/adapters/api/authentification_api_client.dart';
+import 'package:app/features/authentification/infrastructure/adapters/authentification_api_client.dart';
 import 'package:app/features/mieux_vous_connaitre/domain/ports/mieux_vous_connaitre_port.dart';
 import 'package:app/features/mieux_vous_connaitre/domain/question.dart';
 import 'package:app/features/mieux_vous_connaitre/infrastructure/adapters/question_mapper.dart';

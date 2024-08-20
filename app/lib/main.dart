@@ -7,11 +7,11 @@ import 'package:app/features/aides/infrastructure/adapters/aide_velo_api_adapter
 import 'package:app/features/aides/infrastructure/adapters/aides_api_adapter.dart';
 import 'package:app/features/articles/infrastructure/adapters/articles_api_adapter.dart';
 import 'package:app/features/authentification/domain/entities/authentification_statut_manager.dart';
-import 'package:app/features/authentification/infrastructure/adapters/api/api_url.dart';
-import 'package:app/features/authentification/infrastructure/adapters/api/authentification_api_adapter.dart';
-import 'package:app/features/authentification/infrastructure/adapters/api/authentification_api_client.dart';
-import 'package:app/features/authentification/infrastructure/adapters/api/authentification_token_storage.dart';
-import 'package:app/features/authentification/infrastructure/adapters/api/cms_api_client.dart';
+import 'package:app/features/authentification/infrastructure/adapters/api_url.dart';
+import 'package:app/features/authentification/infrastructure/adapters/authentification_api_adapter.dart';
+import 'package:app/features/authentification/infrastructure/adapters/authentification_api_client.dart';
+import 'package:app/features/authentification/infrastructure/adapters/authentification_token_storage.dart';
+import 'package:app/features/authentification/infrastructure/adapters/cms_api_client.dart';
 import 'package:app/features/bibliotheque/infrastructure/adapters/bibliotheque_api_adapter.dart';
 import 'package:app/features/communes/infrastructure/adapters/communes_api_adapter.dart';
 import 'package:app/features/gamification/infrastructure/adapters/gamification_api_adapter.dart';

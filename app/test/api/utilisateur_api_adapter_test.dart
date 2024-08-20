@@ -1,6 +1,6 @@
 import 'package:app/features/authentification/domain/entities/authentification_statut_manager.dart';
-import 'package:app/features/authentification/infrastructure/adapters/api/authentification_api_client.dart';
-import 'package:app/features/authentification/infrastructure/adapters/api/authentification_token_storage.dart';
+import 'package:app/features/authentification/infrastructure/adapters/authentification_api_client.dart';
+import 'package:app/features/authentification/infrastructure/adapters/authentification_token_storage.dart';
 import 'package:app/features/utilisateur/domain/entities/utilisateur.dart';
 import 'package:app/features/utilisateur/infrastructure/adapters/utilisateur_api_adapter.dart';
 import 'package:flutter_test/flutter_test.dart';
