@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:app/features/authentification/infrastructure/adapters/api/authentification_api_client.dart';
-import 'package:app/features/authentification/infrastructure/adapters/api/cms_api_client.dart';
+import 'package:app/features/authentification/infrastructure/adapters/authentification_api_client.dart';
+import 'package:app/features/authentification/infrastructure/adapters/cms_api_client.dart';
 import 'package:app/features/profil/domain/utilisateur_id_non_trouve_exception.dart';
 import 'package:app/features/quiz/domain/ports/quiz_port.dart';
 import 'package:app/features/quiz/domain/quiz.dart';

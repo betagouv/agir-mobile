@@ -5,7 +5,8 @@ import 'dart:io';
 import 'package:app/features/authentification/domain/ports/authentification_port.dart';
 import 'package:app/features/authentification/domain/value_objects/information_de_code.dart';
 import 'package:app/features/authentification/domain/value_objects/information_de_connexion.dart';
-import 'package:app/features/authentification/infrastructure/adapters/api/authentification_api_client.dart';
+import 'package:app/features/authentification/infrastructure/adapters/authentification_api_client.dart';
+import 'package:app/features/authentification/infrastructure/adapters/error_mapper.dart';
 import 'package:fpdart/fpdart.dart';
 
 class AuthentificationApiAdapter implements AuthentificationPort {
@@ -34,7 +35,14 @@ class AuthentificationApiAdapter implements AuthentificationPort {
       return const Right(null);
     }
 
-    return Left(Exception('Erreur lors de la connexion'));
+    if (response.body.isEmpty) {
+      return Left(Exception('Erreur lors de la connexion'));
+    }
+
+    final json = jsonDecode(response.body) as Map<String, dynamic>;
+    final message = AdapterErreurMapper.fromJson(json);
+
+    return Left(message);
   }
 
   @override

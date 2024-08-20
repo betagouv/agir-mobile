@@ -1,8 +1,8 @@
 import 'package:app/features/articles/domain/article.dart';
 import 'package:app/features/authentification/domain/entities/authentification_statut_manager.dart';
-import 'package:app/features/authentification/infrastructure/adapters/api/authentification_api_client.dart';
-import 'package:app/features/authentification/infrastructure/adapters/api/authentification_token_storage.dart';
-import 'package:app/features/authentification/infrastructure/adapters/api/cms_api_client.dart';
+import 'package:app/features/authentification/infrastructure/adapters/authentification_api_client.dart';
+import 'package:app/features/authentification/infrastructure/adapters/authentification_token_storage.dart';
+import 'package:app/features/authentification/infrastructure/adapters/cms_api_client.dart';
 import 'package:app/features/quiz/domain/quiz.dart';
 import 'package:app/features/quiz/infrastructure/adapters/quiz_api_adapter.dart';
 import 'package:flutter_test/flutter_test.dart';

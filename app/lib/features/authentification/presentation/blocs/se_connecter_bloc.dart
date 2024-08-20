@@ -1,10 +1,12 @@
 import 'dart:async';
 
+import 'package:app/features/authentification/domain/entities/adapter_erreur.dart';
 import 'package:app/features/authentification/domain/ports/authentification_port.dart';
 import 'package:app/features/authentification/domain/value_objects/information_de_connexion.dart';
 import 'package:app/features/authentification/presentation/blocs/se_connecter_event.dart';
 import 'package:app/features/authentification/presentation/blocs/se_connecter_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fpdart/fpdart.dart';
 
 class SeConnecterBloc extends Bloc<SeConnecterEvent, SeConnecterState> {
   SeConnecterBloc({
@@ -36,13 +38,24 @@ class SeConnecterBloc extends Bloc<SeConnecterEvent, SeConnecterState> {
     final SeConnecterConnexionDemandee event,
     final Emitter<SeConnecterState> emit,
   ) async {
-    await _authentificationPort.connexionDemandee(
+    final result = await _authentificationPort.connexionDemandee(
       InformationDeConnexion(
         adresseMail: state.adresseMail,
         motDePasse: state.motDePasse,
       ),
     );
 
-    emit(state.copyWith(connexionFaite: true));
+    if (result.isRight()) {
+      emit(state.copyWith(connexionFaite: true));
+
+      return;
+    }
+
+    final exception = result.getLeft().getOrElse(() => throw Exception());
+    if (exception is AdapterErreur) {
+      emit(state.copyWith(erreur: Some(exception.message)));
+    } else {
+      emit(state.copyWith(erreur: const Some('Erreur lors de la connexion')));
+    }
   }
 }

@@ -3,19 +3,30 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:app/features/authentification/infrastructure/adapters/api/api_url.dart';
+import 'package:app/features/authentification/infrastructure/adapters/api_url.dart';
+import 'package:app/features/authentification/infrastructure/adapters/authentification_token_storage.dart';
 import 'package:http/http.dart' as http;
 
-class CmsApiClient extends http.BaseClient {
-  CmsApiClient({
+class AuthentificationApiClient extends http.BaseClient {
+  AuthentificationApiClient({
     required this.apiUrl,
-    required this.token,
+    required final AuthentificationTokenStorage authentificationTokenStorage,
     final http.Client? inner,
-  }) : _inner = inner ?? http.Client();
+  })  : _inner = inner ?? http.Client(),
+        _authentificationTokenStorage = authentificationTokenStorage;
 
   final ApiUrl apiUrl;
-  final String token;
   final http.Client _inner;
+  final AuthentificationTokenStorage _authentificationTokenStorage;
+
+  Future<void> sauvegarderToken(final String token) async =>
+      _authentificationTokenStorage.sauvegarderToken(token);
+
+  Future<void> supprimerTokenEtUtilisateurId() async =>
+      _authentificationTokenStorage.supprimerTokenEtUtilisateurId();
+
+  Future<String?> get recupererUtilisateurId async =>
+      _authentificationTokenStorage.recupererUtilisateurId;
 
   @override
   Future<http.Response> get(
@@ -89,7 +100,10 @@ class CmsApiClient extends http.BaseClient {
 
   @override
   Future<http.StreamedResponse> send(final http.BaseRequest request) async {
-    request.headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
+    final token = await _authentificationTokenStorage.recupererToken;
+    if (token != null) {
+      request.headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
+    }
     request.headers[HttpHeaders.contentTypeHeader] =
         'application/json; charset=UTF-8';
 
