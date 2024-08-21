@@ -5,6 +5,7 @@ import 'scenario_context.dart';
 import 'set_up_widgets.dart';
 import 'steps/iel_appuie_sur.dart';
 import 'steps/iel_ecrit_dans_le_champ.dart';
+import 'steps/iel_ecrit_le_code.dart';
 import 'steps/iel_est_connecte.dart';
 import 'steps/iel_glisse_de_la_droite_vers_la_gauche.dart';
 import 'steps/iel_lance_lapplication.dart';
@@ -82,11 +83,7 @@ void main() {
       await ielAppuieSur(tester, Localisation.seConnecter);
       final authentificationPort = ScenarioContext().authentificationPortMock!;
       expect(authentificationPort.connexionAppele, true);
-      await ielEcritDansLeChamp(
-        tester,
-        label: 'saisie_code_key',
-        enterText: '123456',
-      );
+      await ielEcritLeCode(tester, enterText: '123456');
       expect(authentificationPort.validationAppele, true);
       await tester.pumpAndSettle();
       await tester.pumpAndSettle();
