@@ -27,9 +27,8 @@ void main() {
   });
 
   testWidgets('Voir un article', (final tester) async {
+    setUpWidgets(tester);
     await mockNetworkImages(() async {
-      setUpWidgets(tester);
-
       const titre = "L'agriculture biologique en France";
       leServeurRetourneLeContenuDeLaBibliotheque(
         const Bibliotheque(
@@ -55,9 +54,8 @@ void main() {
   });
 
   testWidgets("Iel appuie sur l'article", (final tester) async {
+    setUpWidgets(tester);
     await mockNetworkImages(() async {
-      setUpWidgets(tester);
-
       const titre = "L'agriculture biologique en France";
       leServeurRetourneLeContenuDeLaBibliotheque(
         const Bibliotheque(
@@ -91,9 +89,8 @@ void main() {
   });
 
   testWidgets('Iel filtre via le titre', (final tester) async {
+    setUpWidgets(tester);
     await mockNetworkImages(() async {
-      setUpWidgets(tester);
-
       leServeurRetourneLeContenuDeLaBibliotheque(
         const Bibliotheque(
           contenus: [
@@ -135,9 +132,9 @@ void main() {
   });
 
   testWidgets('Iel filtre via les thematiques', (final tester) async {
-    await mockNetworkImages(() async {
-      setUpWidgets(tester);
+    setUpWidgets(tester);
 
+    await mockNetworkImages(() async {
       leServeurRetourneLeContenuDeLaBibliotheque(
         const Bibliotheque(
           contenus: [
