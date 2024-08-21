@@ -2,6 +2,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <application
+        android:allowBackup="false"
         android:enableOnBackInvokedCallback="true"
         android:label="agir"
         android:name="${applicationName}"
