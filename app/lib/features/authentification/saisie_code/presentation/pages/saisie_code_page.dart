@@ -14,7 +14,7 @@ import 'package:go_router/go_router.dart';
 class SaisieCodePage extends StatelessWidget {
   const SaisieCodePage({super.key, required this.email});
 
-  static const name = 'saisie-code';
+  static const name = 'validation-authentification';
   static const path = '$name/:email';
 
   final String email;
