@@ -1,4 +1,3 @@
-import 'package:app/features/authentification/domain/entities/adapter_erreur.dart';
 import 'package:app/features/authentification/domain/ports/authentification_port.dart';
 import 'package:app/features/authentification/domain/value_objects/information_de_code.dart';
 import 'package:app/features/authentification/saisie_code/presentation/blocs/saisie_code_event.dart';
@@ -46,17 +45,8 @@ class SaisieCodeBloc extends Bloc<SaisieCodeEvent, SaisieCodeState> {
     );
 
     result.fold(
-      (final exception) {
-        if (exception is AdapterErreur) {
-          emit(state.copyWith(erreur: Some(exception.message)));
-        } else {
-          emit(
-            state.copyWith(
-              erreur: const Some('Erreur lors de la connexion'),
-            ),
-          );
-        }
-      },
+      (final exception) =>
+          emit(state.copyWith(erreur: Some(exception.message))),
       (final _) {},
     );
   }

@@ -1,8 +1,8 @@
-import 'package:app/features/authentification/domain/entities/adapter_erreur.dart';
+import 'package:app/features/authentification/domain/entities/authentification_erreur.dart';
 
-abstract final class AdapterErreurMapper {
-  const AdapterErreurMapper._();
+abstract final class AuthentificationErreurMapper {
+  const AuthentificationErreurMapper._();
 
-  static AdapterErreur fromJson(final Map<String, dynamic> json) =>
-      AdapterErreur(json['message'] as String);
+  static AuthentificationErreur fromJson(final Map<String, dynamic> json) =>
+      AuthentificationErreur(json['message'] as String);
 }
