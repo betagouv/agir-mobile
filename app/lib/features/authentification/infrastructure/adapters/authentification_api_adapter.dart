@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:app/features/authentification/domain/entities/authentification_erreur.dart';
 import 'package:app/features/authentification/domain/ports/authentification_port.dart';
 import 'package:app/features/authentification/domain/value_objects/information_de_code.dart';
 import 'package:app/features/authentification/domain/value_objects/information_de_connexion.dart';
@@ -18,7 +19,7 @@ class AuthentificationApiAdapter implements AuthentificationPort {
   bool _connexionDemandee = false;
 
   @override
-  Future<Either<Exception, void>> connexionDemandee(
+  Future<Either<AuthentificationErreur, void>> connexionDemandee(
     final InformationDeConnexion informationDeConnexion,
   ) async {
     final response = await _apiClient.post(
@@ -35,14 +36,10 @@ class AuthentificationApiAdapter implements AuthentificationPort {
       return const Right(null);
     }
 
-    if (response.body.isEmpty) {
-      return Left(Exception('Erreur lors de la connexion'));
-    }
-
-    final json = jsonDecode(response.body) as Map<String, dynamic>;
-    final message = AdapterErreurMapper.fromJson(json);
-
-    return Left(message);
+    return _handleError(
+      response.body,
+      defaultMessage: 'Erreur lors de la connexion',
+    );
   }
 
   @override
@@ -53,7 +50,7 @@ class AuthentificationApiAdapter implements AuthentificationPort {
   }
 
   @override
-  Future<Either<Exception, void>> creationDeCompteDemandee(
+  Future<Either<AuthentificationErreur, void>> creationDeCompteDemandee(
     final InformationDeConnexion informationDeConnexion,
   ) async {
     final response = await _apiClient.post(
@@ -64,18 +61,12 @@ class AuthentificationApiAdapter implements AuthentificationPort {
       }),
     );
 
-    if (response.statusCode == HttpStatus.ok) {
-      return const Right(null);
-    }
-
-    if (response.body.isEmpty) {
-      return Left(Exception('Erreur lors de la création du compte'));
-    }
-
-    final json = jsonDecode(response.body) as Map<String, dynamic>;
-    final message = AdapterErreurMapper.fromJson(json);
-
-    return Left(message);
+    return response.statusCode == HttpStatus.ok
+        ? const Right(null)
+        : _handleError(
+            response.body,
+            defaultMessage: 'Erreur lors de la création du compte',
+          );
   }
 
   @override
@@ -93,7 +84,7 @@ class AuthentificationApiAdapter implements AuthentificationPort {
   }
 
   @override
-  Future<Either<Exception, void>> validationDemandee(
+  Future<Either<AuthentificationErreur, void>> validationDemandee(
     final InformationDeCode informationDeConnexion,
   ) async {
     final uri = _connexionDemandee
@@ -117,12 +108,22 @@ class AuthentificationApiAdapter implements AuthentificationPort {
       return const Right(null);
     }
 
-    if (response.body.isEmpty) {
-      return Left(Exception('Erreur lors de la validation du code'));
+    return _handleError(
+      response.body,
+      defaultMessage: 'Erreur lors de la validation du code',
+    );
+  }
+
+  Left<AuthentificationErreur, void> _handleError(
+    final String errorMessage, {
+    required final String defaultMessage,
+  }) {
+    if (errorMessage.isEmpty) {
+      return Left(AuthentificationErreur(defaultMessage));
     }
 
-    final json = jsonDecode(response.body) as Map<String, dynamic>;
-    final message = AdapterErreurMapper.fromJson(json);
+    final json = jsonDecode(errorMessage) as Map<String, dynamic>;
+    final message = AuthentificationErreurMapper.fromJson(json);
 
     return Left(message);
   }

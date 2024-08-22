@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:app/features/authentification/domain/entities/adapter_erreur.dart';
 import 'package:app/features/authentification/domain/ports/authentification_port.dart';
 import 'package:app/features/authentification/domain/value_objects/information_de_connexion.dart';
 import 'package:app/features/authentification/presentation/blocs/se_connecter_event.dart';
@@ -46,17 +45,8 @@ class SeConnecterBloc extends Bloc<SeConnecterEvent, SeConnecterState> {
     );
 
     result.fold(
-      (final exception) {
-        if (exception is AdapterErreur) {
-          emit(state.copyWith(erreur: Some(exception.message)));
-        } else {
-          emit(
-            state.copyWith(
-              erreur: const Some('Erreur lors de la connexion'),
-            ),
-          );
-        }
-      },
+      (final exception) =>
+          emit(state.copyWith(erreur: Some(exception.message))),
       (final _) => emit(state.copyWith(connexionFaite: true)),
     );
   }

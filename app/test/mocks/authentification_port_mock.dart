@@ -1,3 +1,4 @@
+import 'package:app/features/authentification/domain/entities/authentification_erreur.dart';
 import 'package:app/features/authentification/domain/entities/authentification_statut_manager.dart';
 import 'package:app/features/authentification/domain/ports/authentification_port.dart';
 import 'package:app/features/authentification/domain/value_objects/authentification_statut.dart';
@@ -16,7 +17,7 @@ class AuthentificationPortMock implements AuthentificationPort {
   bool renvoyerCodeAppele = false;
 
   @override
-  Future<Either<Exception, void>> connexionDemandee(
+  Future<Either<AuthentificationErreur, void>> connexionDemandee(
     final InformationDeConnexion informationDeConnexion,
   ) async {
     connexionAppele = true;
@@ -33,7 +34,7 @@ class AuthentificationPortMock implements AuthentificationPort {
   }
 
   @override
-  Future<Either<Exception, void>> creationDeCompteDemandee(
+  Future<Either<AuthentificationErreur, void>> creationDeCompteDemandee(
     final InformationDeConnexion informationDeConnexion,
   ) async {
     creerCompteAppele = true;
@@ -51,7 +52,7 @@ class AuthentificationPortMock implements AuthentificationPort {
   }
 
   @override
-  Future<Either<Exception, void>> validationDemandee(
+  Future<Either<AuthentificationErreur, void>> validationDemandee(
     final InformationDeCode informationDeConnexion,
   ) async {
     validationAppele = true;

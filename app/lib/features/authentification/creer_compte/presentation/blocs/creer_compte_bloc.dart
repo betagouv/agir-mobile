@@ -1,6 +1,5 @@
 import 'package:app/features/authentification/creer_compte/presentation/blocs/creer_compte_event.dart';
 import 'package:app/features/authentification/creer_compte/presentation/blocs/creer_compte_state.dart';
-import 'package:app/features/authentification/domain/entities/adapter_erreur.dart';
 import 'package:app/features/authentification/domain/ports/authentification_port.dart';
 import 'package:app/features/authentification/domain/value_objects/information_de_connexion.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -42,17 +41,8 @@ class CreerCompteBloc extends Bloc<CreerCompteEvent, CreerCompteState> {
       ),
     );
     result.fold(
-      (final exception) {
-        if (exception is AdapterErreur) {
-          emit(state.copyWith(erreur: Some(exception.message)));
-        } else {
-          emit(
-            state.copyWith(
-              erreur: const Some('Erreur lors de la création du compte'),
-            ),
-          );
-        }
-      },
+      (final exception) =>
+          emit(state.copyWith(erreur: Some(exception.message))),
       (final _) => emit(state.copyWith(compteCree: true)),
     );
   }
