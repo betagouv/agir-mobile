@@ -45,17 +45,19 @@ class SeConnecterBloc extends Bloc<SeConnecterEvent, SeConnecterState> {
       ),
     );
 
-    if (result.isRight()) {
-      emit(state.copyWith(connexionFaite: true));
-
-      return;
-    }
-
-    final exception = result.getLeft().getOrElse(() => throw Exception());
-    if (exception is AdapterErreur) {
-      emit(state.copyWith(erreur: Some(exception.message)));
-    } else {
-      emit(state.copyWith(erreur: const Some('Erreur lors de la connexion')));
-    }
+    result.fold(
+      (final exception) {
+        if (exception is AdapterErreur) {
+          emit(state.copyWith(erreur: Some(exception.message)));
+        } else {
+          emit(
+            state.copyWith(
+              erreur: const Some('Erreur lors de la connexion'),
+            ),
+          );
+        }
+      },
+      (final _) => emit(state.copyWith(connexionFaite: true)),
+    );
   }
 }
