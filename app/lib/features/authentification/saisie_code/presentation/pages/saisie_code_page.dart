@@ -3,9 +3,11 @@ import 'package:app/features/authentification/saisie_code/presentation/blocs/sai
 import 'package:app/features/authentification/saisie_code/presentation/blocs/saisie_code_state.dart';
 import 'package:app/features/authentification/saisie_code/presentation/widgets/saisie_code_input.dart';
 import 'package:app/l10n/l10n.dart';
+import 'package:app/shared/widgets/composants/alert.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:go_router/go_router.dart';
 
 class SaisieCodePage extends StatelessWidget {
@@ -55,6 +57,7 @@ class SaisieCodePage extends StatelessWidget {
                   ),
                   const SizedBox(height: DsfrSpacings.s3w),
                   const SaisieCodeInput(),
+                  const _MessageErreur(),
                   const SizedBox(height: DsfrSpacings.s3w),
                   const _ButtonRenvoyerCode(),
                 ],
@@ -63,6 +66,25 @@ class SaisieCodePage extends StatelessWidget {
           ),
         ),
         resizeToAvoidBottomInset: false,
+      );
+}
+
+class _MessageErreur extends StatelessWidget {
+  const _MessageErreur();
+
+  @override
+  Widget build(final BuildContext context) => context
+      .select<SaisieCodeBloc, Option<String>>(
+        (final bloc) => bloc.state.erreur,
+      )
+      .match(
+        () => const SizedBox.shrink(),
+        (final t) => Column(
+          children: [
+            const SizedBox(height: DsfrSpacings.s3w),
+            FnvAlert.error(label: t),
+          ],
+        ),
       );
 }
 

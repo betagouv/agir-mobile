@@ -99,15 +99,22 @@ class AuthentificationApiAdapter implements AuthentificationPort {
       }),
     );
 
-    if (response.statusCode != HttpStatus.created) {
+    if (response.statusCode == HttpStatus.created) {
+      final json = jsonDecode(response.body) as Map<String, dynamic>;
+      final token = json['token'] as String;
+
+      await _apiClient.sauvegarderToken(token);
+
+      return const Right(null);
+    }
+
+    if (response.body.isEmpty) {
       return Left(Exception('Erreur lors de la validation du code'));
     }
 
     final json = jsonDecode(response.body) as Map<String, dynamic>;
-    final token = json['token'] as String;
+    final message = AdapterErreurMapper.fromJson(json);
 
-    await _apiClient.sauvegarderToken(token);
-
-    return const Right(null);
+    return Left(message);
   }
 }
