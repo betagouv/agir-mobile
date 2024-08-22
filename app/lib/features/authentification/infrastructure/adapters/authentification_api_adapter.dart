@@ -64,9 +64,18 @@ class AuthentificationApiAdapter implements AuthentificationPort {
       }),
     );
 
-    return response.statusCode == HttpStatus.ok
-        ? const Right(null)
-        : Left(Exception('Erreur lors de la création du compte'));
+    if (response.statusCode == HttpStatus.ok) {
+      return const Right(null);
+    }
+
+    if (response.body.isEmpty) {
+      return Left(Exception('Erreur lors de la création du compte'));
+    }
+
+    final json = jsonDecode(response.body) as Map<String, dynamic>;
+    final message = AdapterErreurMapper.fromJson(json);
+
+    return Left(message);
   }
 
   @override

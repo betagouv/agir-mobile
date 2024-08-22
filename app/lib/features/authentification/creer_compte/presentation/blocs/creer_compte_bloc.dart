@@ -1,8 +1,10 @@
 import 'package:app/features/authentification/creer_compte/presentation/blocs/creer_compte_event.dart';
 import 'package:app/features/authentification/creer_compte/presentation/blocs/creer_compte_state.dart';
+import 'package:app/features/authentification/domain/entities/adapter_erreur.dart';
 import 'package:app/features/authentification/domain/ports/authentification_port.dart';
 import 'package:app/features/authentification/domain/value_objects/information_de_connexion.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fpdart/fpdart.dart';
 
 class CreerCompteBloc extends Bloc<CreerCompteEvent, CreerCompteState> {
   CreerCompteBloc({required final AuthentificationPort authentificationPort})
@@ -33,12 +35,25 @@ class CreerCompteBloc extends Bloc<CreerCompteEvent, CreerCompteState> {
     final CreerCompteCreationDemandee event,
     final Emitter<CreerCompteState> emit,
   ) async {
-    await _authentificationPort.creationDeCompteDemandee(
+    final result = await _authentificationPort.creationDeCompteDemandee(
       InformationDeConnexion(
         adresseMail: state.adresseMail,
         motDePasse: state.motDePasse,
       ),
     );
-    emit(state.copyWith(compteCree: true));
+    result.fold(
+      (final exception) {
+        if (exception is AdapterErreur) {
+          emit(state.copyWith(erreur: Some(exception.message)));
+        } else {
+          emit(
+            state.copyWith(
+              erreur: const Some('Erreur lors de la création du compte'),
+            ),
+          );
+        }
+      },
+      (final _) => emit(state.copyWith(compteCree: true)),
+    );
   }
 }
