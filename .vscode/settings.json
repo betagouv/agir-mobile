@@ -16,4 +16,8 @@
   "dcm.showUnusedCode": true,
   "dcm.showUnusedFiles": true,
   "dcm.showNewVersionUpdate": true,
+  "dart.flutterTestAdditionalArgs": [
+    "--test-randomize-ordering-seed",
+    "random"
+  ],
 }
