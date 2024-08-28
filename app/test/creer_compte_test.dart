@@ -8,6 +8,7 @@ import 'steps/iel_ecrit_dans_le_champ.dart';
 import 'steps/iel_ecrit_le_code.dart';
 import 'steps/iel_glisse_de_la_droite_vers_la_gauche.dart';
 import 'steps/iel_lance_lapplication.dart';
+import 'steps/iel_n_a_pas_terminee_son_integration.dart';
 import 'steps/iel_sappelle.dart';
 import 'steps/iel_voit_le_texte.dart';
 import 'steps/iel_voit_le_texte_dans_texte_riche.dart';
@@ -17,6 +18,7 @@ void main() {
     "Iel lance l'application pour la première fois et créer un compte",
     (final tester) async {
       setUpWidgets(tester);
+      ielNAPasTermineeSonIntegration();
       await _allerSurLaPageCreerCompte(tester);
       ielVoitLeTexte(Localisation.creezVotreCompte);
       const email = 'joe@doe.com';

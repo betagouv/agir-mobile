@@ -29,7 +29,7 @@ class AccueilPage extends StatelessWidget {
     final BuildContext context,
     final UtilisateurState state,
   ) async {
-    if (state.prenom == null || state.prenom == '') {
+    if (!state.estIntegrationTerminee) {
       await GoRouter.of(context).pushNamed(QuestionPrenomPage.name);
     }
   }
@@ -40,7 +40,7 @@ class AccueilPage extends StatelessWidget {
         listener: (final context, final state) async =>
             _handlePasDePrenom(context, state),
         listenWhen: (final previous, final current) =>
-            previous.prenom != current.prenom,
+            previous.estIntegrationTerminee != current.estIntegrationTerminee,
         child: const RootPage(title: _AppBarTitle(), body: _Body()),
       );
 }

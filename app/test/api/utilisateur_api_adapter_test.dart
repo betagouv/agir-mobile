@@ -29,7 +29,9 @@ void main() {
   "email": "ls@mail.com",
   "fonctionnalites_debloquees": [
     "${aides.name}"
-  ]
+  ],
+  "is_onboarding_done": true,
+  "couverture_aides_ok": false
 }''',
           ),
         );
@@ -54,7 +56,11 @@ void main() {
       // Assert.
       expect(
         utilisateur.getRight().getOrElse(() => throw Exception()),
-        const Utilisateur(prenom: prenom, fonctionnalitesDebloquees: [aides]),
+        const Utilisateur(
+          prenom: prenom,
+          fonctionnalitesDebloquees: [aides],
+          estIntegrationTerminee: true,
+        ),
       );
     });
 
@@ -75,7 +81,9 @@ void main() {
   "fonctionnalites_debloquees": [
     "${aides.name}",
     "nouveau"
-  ]
+  ],
+  "is_onboarding_done": true,
+  "couverture_aides_ok": false
 }''',
           ),
         );
