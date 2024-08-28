@@ -129,10 +129,12 @@ class ProfilPortMock implements ProfilPort {
   }
 
   @override
-  Future<Either<Exception, void>> mettreAJourCodePostal(
-    final String codePostal,
-  ) async {
+  Future<Either<Exception, void>> mettreAJourCodePostalEtCommune({
+    required final String codePostal,
+    required final String commune,
+  }) async {
     this.codePostal = codePostal;
+    this.commune = commune;
 
     return const Right(null);
   }

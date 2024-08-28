@@ -164,10 +164,13 @@ void main() {
     final client = ClientMock()
       ..postSuccess(
         path: '/utilisateurs_v2',
-        response: CustomResponse('''
+        response: CustomResponse(
+          '''
 {
   "email": "${informationDeConnexion.adresseMail}",
-}'''),
+}''',
+          statusCode: HttpStatus.created,
+        ),
       );
 
     final adapter = AuthentificationApiAdapter(

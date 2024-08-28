@@ -7,8 +7,21 @@ sealed class QuestionCodePostalEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class QuestionCodePostalAChange extends QuestionCodePostalEvent {
+class QuestionCodePostalPrenomDemande extends QuestionCodePostalEvent {
+  const QuestionCodePostalPrenomDemande();
+}
+
+final class QuestionCodePostalAChange extends QuestionCodePostalEvent {
   const QuestionCodePostalAChange(this.valeur);
+
+  final String valeur;
+
+  @override
+  List<Object> get props => [valeur];
+}
+
+final class QuestionCommuneAChange extends QuestionCodePostalEvent {
+  const QuestionCommuneAChange(this.valeur);
 
   final String valeur;
 

@@ -166,21 +166,26 @@ class ProfilApiAdapter implements ProfilPort {
   }
 
   @override
-  Future<Either<Exception, void>> mettreAJourCodePostal(
-    final String codePostal,
-  ) async {
+  Future<Either<Exception, void>> mettreAJourCodePostalEtCommune({
+    required final String codePostal,
+    required final String commune,
+  }) async {
     final utilisateurId = await _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
       return const Left(UtilisateurIdNonTrouveException());
     }
 
     final uri = Uri.parse('/utilisateurs/$utilisateurId/logement');
-    final body = jsonEncode({'code_postal': codePostal});
+    final body = jsonEncode({'code_postal': codePostal, 'commune': commune});
 
     final response = await _apiClient.patch(uri, body: body);
 
     return response.statusCode == HttpStatus.ok
         ? const Right(null)
-        : Left(Exception('Erreur lors de la mise à jour du code postal'));
+        : Left(
+            Exception(
+              'Erreur lors de la mise à jour du code postal et de la commune',
+            ),
+          );
   }
 }

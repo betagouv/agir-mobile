@@ -1,0 +1,46 @@
+appId: fr.gouv.agir.dev2
+---
+- launchApp
+- tapOn: "Commencer"
+- swipe:
+    direction: "LEFT"
+- swipe:
+    direction: "LEFT"
+- swipe:
+    direction: "LEFT"
+- tapOn: "Suivant"
+- tapOn:
+    point: "50%,36%"
+- inputText: "lucas@agir.dev"
+- tapOn:
+    point: "50%,49%"
+- inputText: "Azertyuiop1&"
+- tapOn:
+    id: "Done"
+- tapOn: "Créer mon compte"
+- tapOn:
+    point: "48%,41%"
+- inputText: 999999
+- tapOn: "Votre prénom"
+- inputText: "Lucas"
+- tapOn:
+    id: "Done"
+- tapOn: "Continuer"
+- tapOn:
+    point: "17%,78%"
+- inputText: 39100
+- tapOn:
+    point: "65%,63%"
+- tapOn: "DOLE"
+- tapOn: "Continuer"
+- tapOn: "J'ai compris"
+- tapOn: "La cuisine et l’alimentation"
+- tapOn: "Continuer"
+- tapOn: "C’est parti !"
+- tapOn: "Menu"
+- tapOn: "Votre profil"
+- tapOn: "Options avancées"
+- scroll
+- tapOn:
+    point: "50%,94%"
+- tapOn: "Confirmer"

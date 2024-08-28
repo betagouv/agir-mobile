@@ -7,7 +7,7 @@ import 'package:app/features/authentification/domain/ports/authentification_port
 import 'package:app/features/authentification/domain/value_objects/information_de_code.dart';
 import 'package:app/features/authentification/domain/value_objects/information_de_connexion.dart';
 import 'package:app/features/authentification/infrastructure/adapters/authentification_api_client.dart';
-import 'package:app/features/authentification/infrastructure/adapters/error_mapper.dart';
+import 'package:app/features/authentification/infrastructure/adapters/erreur_mapper.dart';
 import 'package:fpdart/fpdart.dart';
 
 class AuthentificationApiAdapter implements AuthentificationPort {
@@ -61,7 +61,7 @@ class AuthentificationApiAdapter implements AuthentificationPort {
       }),
     );
 
-    return response.statusCode == HttpStatus.ok
+    return response.statusCode == HttpStatus.created
         ? const Right(null)
         : _handleError(
             response.body,

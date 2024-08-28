@@ -45,6 +45,30 @@ class AccueilPage extends StatelessWidget {
       );
 }
 
+class _AppBarTitle extends StatelessWidget {
+  const _AppBarTitle();
+
+  @override
+  Widget build(final BuildContext context) {
+    final state = context.watch<UtilisateurBloc>().state;
+
+    const font = FnvTextStyles.appBarTitleStyle;
+
+    return Text.rich(
+      TextSpan(
+        text: Localisation.bonjour,
+        children: [
+          TextSpan(
+            text: Localisation.prenomExclamation(state.prenom ?? ''),
+            style: font,
+          ),
+        ],
+      ),
+      style: font.copyWith(fontWeight: FontWeight.bold),
+    );
+  }
+}
+
 class _Body extends StatelessWidget {
   const _Body();
 
@@ -68,30 +92,6 @@ class _Body extends StatelessWidget {
         ],
         if (state.aLesRecommandations) const MesRecommandations(),
       ],
-    );
-  }
-}
-
-class _AppBarTitle extends StatelessWidget {
-  const _AppBarTitle();
-
-  @override
-  Widget build(final BuildContext context) {
-    final state = context.watch<UtilisateurBloc>().state;
-
-    const font = FnvTextStyles.appBarTitleStyle;
-
-    return Text.rich(
-      TextSpan(
-        text: Localisation.bonjour,
-        children: [
-          TextSpan(
-            text: Localisation.prenomExclamation(state.prenom ?? ''),
-            style: font,
-          ),
-        ],
-      ),
-      style: font.copyWith(fontWeight: FontWeight.bold),
     );
   }
 }
