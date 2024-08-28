@@ -15,6 +15,12 @@ abstract final class Localisation {
       'Format attendu : nom@domaine.fr';
   static const adresseEmail = 'Votre adresse email';
   static const adultes = 'Adulte(s)';
+  static const agirEstEncoreEnExperimentation =
+      'Agir est encore en expérimentation !';
+  static const agirEstEncoreEnExperimentationDetails =
+      'Nous ajoutons progressivement les aides et contenus locaux à ';
+  static const agirEstEncoreEnExperimentationDetails2 =
+      '\nRevenez régulièrement pour profiter de nos dernières nouveautés';
   static const aideVeloAvertissement =
       'Veuillez compléter ces informations afin de débuter l’estimation';
   static const annuler = 'Annuler';
@@ -25,11 +31,14 @@ abstract final class Localisation {
   static const autreJeNeSaisPas = 'Autre / Je ne sais pas';
   static const baseDeConnaissances = 'Base de connaissances';
   static const bibliotheque = 'Bibliothèque';
-  static const bienvenuSurAgir = 'Bienvenue sur Agir ! Faisons connaissance...';
-  static const bienvenuSurAgirDetails =
+  static const bienvenueSurAgir =
+      'Bienvenue sur Agir ! Faisons connaissance...';
+  static const bienvenueSurAgirDetails =
       'Nous avons quelques questions à vous poser pour personnaliser votre expérience !';
   static const boisPellets = 'Bois / Pellets';
   static const bonjour = 'Bonjour,\n';
+  static const cestPresqueTermine = 'C’est presque terminé !';
+  static const cestParti = 'C’est parti !';
   static const changerVotreMotDePasse = 'Changer votre mot de passe';
   static const changerVotreMotDePasseConfirmation =
       'Votre mot de passe a été changé.';
@@ -62,9 +71,9 @@ abstract final class Localisation {
   static const electricite = 'Électricité';
   static const elementsNecessaireAuCalcul = 'Éléments nécessaires au calcul';
   static const emailDeConnexionRenvoye = 'Email de connexion renvoyé';
-  static const enchante = 'Enchanté, Marie-Louise !';
+  static const enchante = 'Enchanté, ';
   static const enchanteDetails =
-      'Pour découvrir des aides, services et contenus disponibles proches de chez vous, indiquez-nous votre lieu de résidence';
+      'Pour découvrir des aides, services et contenus disponibles proches de chez vous, indiquez-nous votre lieu de résidence.';
   static const enfants = 'Enfant(s) de moins de 18 ans';
   static const entre100et150m2 = 'Entre 100 et 150 m²';
   static const entre35et70m2 = 'Entre 35 et 70 m²';
@@ -74,6 +83,7 @@ abstract final class Localisation {
   static const fermer = 'Fermer';
   static const fioul = 'Fioul';
   static const gaz = 'Gaz';
+  static const jaiCompris = "J'ai compris";
   static const jaiDejaUnCompte = "J'ai déjà un compte";
   static const jusqua = "Jusqu'à ";
   static const lesCategories = 'Les catégories';
@@ -167,6 +177,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const supprimerVotreCompteContenu =
       'Vous pouvez à tout moment choisir de supprimer votre compte ainsi que l’ensemble des données qui y sont associées. ';
   static const termine = 'TERMINÉ !';
+  static const toutEstPret = 'Tout est prêt !';
   static const unAppartement = 'Un appartement';
   static const uneMaison = 'Une maison';
   static const univers = 'Univers';
@@ -178,7 +189,6 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const vosAidesSousTitre =
       'Accédez à toutes les aides publiques locales ou nationales pour la transition écologique en fonction de votre situation.';
   static const vosAidesTitre = 'Vos aides disponibles';
-  static const votreCodePostal = 'Votre code postal';
   static const vosInformations = 'Vos informations';
   static const votreIdentite = 'Votre identité';
   static const votreLogement = 'Votre logement';
@@ -192,6 +202,9 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
       'Votre résidence principale est ...';
   static const vousEtesProprietaireDeVotreLogement =
       'Vous êtes propriétaire de votre logement ?';
+
+  static String communeEtSaRegion(final String commune) =>
+      '$commune et sa région.';
 
   static String cacherEmail(final String email) {
     final indexArobase =

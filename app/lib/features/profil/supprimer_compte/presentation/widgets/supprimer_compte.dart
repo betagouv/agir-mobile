@@ -13,7 +13,10 @@ class SupprimerCompte extends StatelessWidget {
   const SupprimerCompte({super.key});
 
   Future<void> _handleSupprimerCompte(final BuildContext context) async {
-    final bloc = context.read<SupprimerCompteBloc>();
+    final bloc = SupprimerCompteBloc(
+      authentificationPort: context.read(),
+      profilPort: context.read(),
+    );
     final result = await DsfrModal.showModal<bool>(
       context: context,
       builder: (final context) => const SupprimerCompteModal(),
@@ -27,59 +30,49 @@ class SupprimerCompte extends StatelessWidget {
   Widget build(final BuildContext context) {
     const color = DsfrColors.error425;
 
-    return BlocProvider(
-      create: (final context) => SupprimerCompteBloc(
-        authentificationPort: context.read(),
-        profilPort: context.read(),
-      ),
-      child: Builder(
-        builder: (final context) => Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        const ProfilTitrePartie(titre: Localisation.supprimerVotreCompte),
+        const SizedBox(height: DsfrSpacings.s2w),
+        const Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const ProfilTitrePartie(titre: Localisation.supprimerVotreCompte),
-            const SizedBox(height: DsfrSpacings.s2w),
-            const Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(top: 3),
-                  child: Icon(
-                    DsfrIcons.systemFrInfoFill,
-                    size: 16,
-                    color: color,
-                  ),
-                ),
-                SizedBox(width: DsfrSpacings.s1v),
-                Expanded(
-                  child: Text.rich(
-                    TextSpan(
-                      children: [
-                        TextSpan(
-                          text: Localisation.supprimerVotreCompteContenu,
-                        ),
-                        TextSpan(
-                          text: Localisation
-                              .attentionAucuneDonneeNePourraEtreRecuperee,
-                          style: DsfrTextStyle.bodyXsBold(color: color),
-                        ),
-                      ],
-                    ),
-                    style: DsfrTextStyle.bodyXs(color: color),
-                  ),
-                ),
-              ],
+            Padding(
+              padding: EdgeInsets.only(top: 3),
+              child: Icon(
+                DsfrIcons.systemFrInfoFill,
+                size: 16,
+                color: color,
+              ),
             ),
-            const SizedBox(height: DsfrSpacings.s2w),
-            DsfrButton(
-              label: Localisation.supprimerVotreCompte,
-              icon: DsfrIcons.systemFrWarningLine,
-              variant: DsfrButtonVariant.secondary,
-              size: DsfrButtonSize.lg,
-              onPressed: () async => _handleSupprimerCompte(context),
+            SizedBox(width: DsfrSpacings.s1v),
+            Expanded(
+              child: Text.rich(
+                TextSpan(
+                  children: [
+                    TextSpan(text: Localisation.supprimerVotreCompteContenu),
+                    TextSpan(
+                      text: Localisation
+                          .attentionAucuneDonneeNePourraEtreRecuperee,
+                      style: DsfrTextStyle.bodyXsBold(color: color),
+                    ),
+                  ],
+                ),
+                style: DsfrTextStyle.bodyXs(color: color),
+              ),
             ),
           ],
         ),
-      ),
+        const SizedBox(height: DsfrSpacings.s2w),
+        DsfrButton(
+          label: Localisation.supprimerVotreCompte,
+          icon: DsfrIcons.systemFrWarningLine,
+          variant: DsfrButtonVariant.secondary,
+          size: DsfrButtonSize.lg,
+          onPressed: () async => _handleSupprimerCompte(context),
+        ),
+      ],
     );
   }
 }

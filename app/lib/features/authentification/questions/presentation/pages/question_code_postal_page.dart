@@ -1,11 +1,12 @@
-import 'package:app/features/accueil/presentation/pages/accueil_page.dart';
 import 'package:app/features/authentification/questions/presentation/blocs/question_code_postal_bloc.dart';
 import 'package:app/features/authentification/questions/presentation/blocs/question_code_postal_event.dart';
-import 'package:app/features/authentification/questions/presentation/blocs/question_code_postal_state.dart';
+import 'package:app/features/authentification/questions/presentation/pages/agir_est_encore_en_experimentation_page.dart';
 import 'package:app/l10n/l10n.dart';
+import 'package:app/shared/assets/images.dart';
 import 'package:app/shared/widgets/composants/bottom_bar.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:go_router/go_router.dart';
@@ -24,8 +25,10 @@ class QuestionCodePostalPage extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => BlocProvider(
-        create: (final context) =>
-            QuestionCodePostalBloc(profilPort: context.read()),
+        create: (final context) => QuestionCodePostalBloc(
+          profilPort: context.read(),
+          communesPort: context.read(),
+        )..add(const QuestionCodePostalPrenomDemande()),
         child: const _View(),
       );
 }
@@ -33,71 +36,145 @@ class QuestionCodePostalPage extends StatelessWidget {
 class _View extends StatelessWidget {
   const _View();
 
-  Future<void> _handleCodePostal(
-    final BuildContext context,
-    final QuestionCodePostalState state,
-  ) async {
-    if (state.aEteChange) {
-      await GoRouter.of(context).pushReplacementNamed(AccueilPage.name);
+  @override
+  Widget build(final BuildContext context) => Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          iconTheme: const IconThemeData(color: DsfrColors.blueFranceSun113),
+        ),
+        body: ListView(
+          padding: const EdgeInsets.all(DsfrSpacings.s2w),
+          children: [
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Image.asset(
+                AssetsImages.illustration2,
+                width: 208,
+                height: 141,
+                fit: BoxFit.cover,
+              ),
+            ),
+            const SizedBox(height: DsfrSpacings.s3w),
+            MarkdownBody(
+              data: Localisation.questionCourantSurMax(2, 3),
+              styleSheet: MarkdownStyleSheet(
+                p: const DsfrTextStyle.bodyMd(
+                  color: DsfrColors.blueFranceSun113,
+                ),
+              ),
+            ),
+            const SizedBox(height: DsfrSpacings.s2w),
+            const _Prenom(),
+            const SizedBox(height: DsfrSpacings.s2w),
+            const Text(
+              Localisation.enchanteDetails,
+              style: DsfrTextStyle.bodyLg(lineHeight: 28),
+            ),
+            const SizedBox(height: DsfrSpacings.s4w),
+            const _CodePostalEtCommune(),
+          ],
+        ),
+        bottomNavigationBar: const FnvBottomBar(child: _ButtonContinuer()),
+      );
+}
+
+class _Prenom extends StatelessWidget {
+  const _Prenom();
+
+  @override
+  Widget build(final BuildContext context) {
+    final state = context.watch<QuestionCodePostalBloc>().state;
+
+    const dsfrTextStyle = DsfrTextStyle.headline2();
+
+    return Text.rich(
+      TextSpan(
+        text: Localisation.enchante,
+        children: [
+          TextSpan(
+            text: state.prenom,
+            style: dsfrTextStyle.copyWith(color: DsfrColors.blueFranceSun113),
+          ),
+          const TextSpan(text: ' !'),
+        ],
+      ),
+      style: dsfrTextStyle,
+    );
+  }
+}
+
+class _CodePostalEtCommune extends StatefulWidget {
+  const _CodePostalEtCommune();
+
+  @override
+  State<_CodePostalEtCommune> createState() => _CodePostalEtCommuneState();
+}
+
+class _CodePostalEtCommuneState extends State<_CodePostalEtCommune> {
+  late final _textEditingController = TextEditingController();
+
+  void _handleCodePostal(final BuildContext context, final String value) {
+    context
+        .read<QuestionCodePostalBloc>()
+        .add(QuestionCodePostalAChange(value));
+    _textEditingController.clear();
+  }
+
+  void _handleCommune(final BuildContext context, final String? value) {
+    if (value == null) {
+      return;
     }
+    context.read<QuestionCodePostalBloc>().add(QuestionCommuneAChange(value));
   }
 
   @override
-  Widget build(final BuildContext context) =>
-      BlocListener<QuestionCodePostalBloc, QuestionCodePostalState>(
-        listener: (final context, final state) async =>
-            _handleCodePostal(context, state),
-        child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.white,
-            iconTheme: const IconThemeData(color: DsfrColors.blueFranceSun113),
-          ),
-          body: ListView(
-            padding: const EdgeInsets.all(DsfrSpacings.s2w),
-            children: [
-              MarkdownBody(
-                data: Localisation.questionCourantSurMax(2, 2),
-                styleSheet: MarkdownStyleSheet(
-                  p: const DsfrTextStyle.bodyMd(
-                    color: DsfrColors.blueFranceSun113,
-                  ),
-                ),
-              ),
-              const SizedBox(height: DsfrSpacings.s2w),
-              const Text(
-                Localisation.enchante,
-                style: DsfrTextStyle.headline2(),
-              ),
-              const SizedBox(height: DsfrSpacings.s2w),
-              const Text(
-                Localisation.enchanteDetails,
-                style: DsfrTextStyle.bodyLg(),
-              ),
-              const SizedBox(height: DsfrSpacings.s4w),
-              DsfrInput(
-                label: Localisation.votreCodePostal,
-                onChanged: (final value) =>
-                    context.read<QuestionCodePostalBloc>().add(
-                          QuestionCodePostalAChange(value),
-                        ),
-                keyboardType: TextInputType.name,
-              ),
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(final BuildContext context) {
+    final state = context.watch<QuestionCodePostalBloc>().state;
+
+    if (state.communes.length == 1) {
+      final commune = state.communes.firstOrNull!;
+      _textEditingController.text = commune;
+      _handleCommune(context, commune);
+    } else {
+      _textEditingController.text = state.commune;
+    }
+
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          width: MediaQuery.textScalerOf(context).scale(97),
+          child: DsfrInput(
+            label: Localisation.codePostal,
+            onChanged: (final value) => _handleCodePostal(context, value),
+            initialValue: state.codePostal,
+            keyboardType: TextInputType.number,
+            inputFormatters: [
+              FilteringTextInputFormatter.digitsOnly,
+              LengthLimitingTextInputFormatter(5),
             ],
           ),
-          bottomNavigationBar: FnvBottomBar(
-            child: Row(
-              children: [
-                const Expanded(child: _ButtonContinuer()),
-                const SizedBox(width: DsfrSpacings.s2w),
-                DsfrLink.md(
-                  label: Localisation.retour,
-                  onPressed: () => GoRouter.of(context).pop(),
-                ),
-              ],
-            ),
+        ),
+        const SizedBox(width: DsfrSpacings.s2w),
+        Expanded(
+          child: DsfrSelect<String>(
+            label: Localisation.commune,
+            dropdownMenuEntries: state.communes
+                .map((final e) => DropdownMenuEntry(value: e, label: e))
+                .toList(),
+            onSelected: (final value) => _handleCommune(context, value),
+            controller: _textEditingController,
           ),
         ),
-      );
+      ],
+    );
+  }
 }
 
 class _ButtonContinuer extends StatelessWidget {
@@ -105,18 +182,24 @@ class _ButtonContinuer extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    final codePostal = context.select<QuestionCodePostalBloc, String>(
-      (final bloc) => bloc.state.codePostal,
+    final estRempli = context.select<QuestionCodePostalBloc, bool>(
+      (final bloc) => bloc.state.estRempli,
     );
 
     return DsfrButton(
       label: Localisation.continuer,
       variant: DsfrButtonVariant.primary,
       size: DsfrButtonSize.lg,
-      onPressed: codePostal.isNotEmpty
-          ? () => context.read<QuestionCodePostalBloc>().add(
-                const QuestionCodePostalMiseAJourDemandee(),
-              )
+      onPressed: estRempli
+          ? () async {
+              final bloc = context.read<QuestionCodePostalBloc>()
+                ..add(const QuestionCodePostalMiseAJourDemandee());
+
+              await GoRouter.of(context).pushNamed(
+                AgirEstEncoreEnExperimentationPage.name,
+                pathParameters: {'commune': bloc.state.commune},
+              );
+            }
           : null,
     );
   }

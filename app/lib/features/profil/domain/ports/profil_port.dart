@@ -7,9 +7,10 @@ abstract interface class ProfilPort {
 
   Future<Either<Exception, void>> mettreAJourPrenom(final String prenom);
 
-  Future<Either<Exception, void>> mettreAJourCodePostal(
-    final String codePostal,
-  );
+  Future<Either<Exception, void>> mettreAJourCodePostalEtCommune({
+    required final String codePostal,
+    required final String commune,
+  });
 
   Future<Either<Exception, void>> mettreAJour({
     required final String? prenom,

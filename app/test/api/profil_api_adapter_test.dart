@@ -313,7 +313,7 @@ void main() {
       );
     });
 
-    test('mettreAJourCodePostal', () async {
+    test('mettreAJourCodePostalEtCommune', () async {
       final client = ClientMock()
         ..patchSuccess(
           path: '/utilisateurs/$utilisateurId/logement',
@@ -335,14 +335,18 @@ void main() {
       );
 
       const codePostal = '39100';
-      await adapter.mettreAJourCodePostal(codePostal);
+      const commune = 'DOLE';
+      await adapter.mettreAJourCodePostalEtCommune(
+        codePostal: codePostal,
+        commune: commune,
+      );
 
       verify(
         () => client.send(
           any(
             that: const RequestMathcher(
               '/utilisateurs/$utilisateurId/logement',
-              body: '{"code_postal":"$codePostal"}',
+              body: '{"code_postal":"$codePostal","commune":"$commune"}',
             ),
           ),
         ),

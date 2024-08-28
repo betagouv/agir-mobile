@@ -1,8 +1,8 @@
 import 'package:app/features/authentification/questions/presentation/blocs/question_prenom_bloc.dart';
 import 'package:app/features/authentification/questions/presentation/blocs/question_prenom_event.dart';
-import 'package:app/features/authentification/questions/presentation/blocs/question_prenom_state.dart';
 import 'package:app/features/authentification/questions/presentation/pages/question_code_postal_page.dart';
 import 'package:app/l10n/l10n.dart';
+import 'package:app/shared/assets/images.dart';
 import 'package:app/shared/widgets/composants/bottom_bar.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
@@ -33,59 +33,56 @@ class QuestionPrenomPage extends StatelessWidget {
 class _View extends StatelessWidget {
   const _View();
 
-  Future<void> _handlePrenom(
-    final BuildContext context,
-    final QuestionPrenomState state,
-  ) async {
-    if (state.aEteChange) {
-      await GoRouter.of(context).pushNamed(QuestionCodePostalPage.name);
-    }
-  }
-
   @override
-  Widget build(final BuildContext context) =>
-      BlocListener<QuestionPrenomBloc, QuestionPrenomState>(
-        listener: (final context, final state) async =>
-            _handlePrenom(context, state),
-        child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.white,
-            iconTheme: const IconThemeData(color: DsfrColors.blueFranceSun113),
-          ),
-          body: ListView(
-            padding: const EdgeInsets.all(DsfrSpacings.s2w),
-            children: [
-              MarkdownBody(
-                data: Localisation.questionCourantSurMax(1, 2),
-                styleSheet: MarkdownStyleSheet(
-                  p: const DsfrTextStyle.bodyMd(
-                    color: DsfrColors.blueFranceSun113,
-                  ),
+  Widget build(final BuildContext context) => Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.white,
+          iconTheme: const IconThemeData(color: DsfrColors.blueFranceSun113),
+        ),
+        body: ListView(
+          padding: const EdgeInsets.all(DsfrSpacings.s2w),
+          children: [
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Image.asset(
+                AssetsImages.illustration1,
+                width: 208,
+                height: 141,
+                fit: BoxFit.cover,
+              ),
+            ),
+            const SizedBox(height: DsfrSpacings.s3w),
+            MarkdownBody(
+              data: Localisation.questionCourantSurMax(1, 3),
+              styleSheet: MarkdownStyleSheet(
+                p: const DsfrTextStyle.bodyMd(
+                  color: DsfrColors.blueFranceSun113,
                 ),
               ),
-              const SizedBox(height: DsfrSpacings.s2w),
-              const Text(
-                Localisation.bienvenuSurAgir,
-                style: DsfrTextStyle.headline2(),
-              ),
-              const SizedBox(height: DsfrSpacings.s2w),
-              const Text(
-                Localisation.bienvenuSurAgirDetails,
-                style: DsfrTextStyle.bodyLg(),
-              ),
-              const SizedBox(height: DsfrSpacings.s4w),
-              DsfrInput(
-                label: Localisation.votrePrenom,
-                onChanged: (final value) =>
-                    context.read<QuestionPrenomBloc>().add(
-                          QuestionPrenomAChange(value),
-                        ),
-                keyboardType: TextInputType.name,
-              ),
-            ],
-          ),
-          bottomNavigationBar: const FnvBottomBar(child: _ButtonContinuer()),
+            ),
+            const SizedBox(height: DsfrSpacings.s2w),
+            const Text(
+              Localisation.bienvenueSurAgir,
+              style: DsfrTextStyle.headline2(),
+            ),
+            const SizedBox(height: DsfrSpacings.s2w),
+            const Text(
+              Localisation.bienvenueSurAgirDetails,
+              style: DsfrTextStyle.bodyLg(lineHeight: 28),
+            ),
+            const SizedBox(height: DsfrSpacings.s3w),
+            DsfrInput(
+              label: Localisation.votrePrenom,
+              onChanged: (final value) =>
+                  context.read<QuestionPrenomBloc>().add(
+                        QuestionPrenomAChange(value),
+                      ),
+              keyboardType: TextInputType.name,
+            ),
+          ],
         ),
+        bottomNavigationBar: const FnvBottomBar(child: _ButtonContinuer()),
       );
 }
 
@@ -103,9 +100,12 @@ class _ButtonContinuer extends StatelessWidget {
       variant: DsfrButtonVariant.primary,
       size: DsfrButtonSize.lg,
       onPressed: prenom.isNotEmpty
-          ? () => context.read<QuestionPrenomBloc>().add(
-                const QuestionPrenomMiseAJourDemandee(),
-              )
+          ? () async {
+              context.read<QuestionPrenomBloc>().add(
+                    const QuestionPrenomMiseAJourDemandee(),
+                  );
+              await GoRouter.of(context).pushNamed(QuestionCodePostalPage.name);
+            }
           : null,
     );
   }
