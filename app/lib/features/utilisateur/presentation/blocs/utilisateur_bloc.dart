@@ -13,6 +13,7 @@ class UtilisateurBloc extends Bloc<UtilisateurEvent, UtilisateurState> {
         super(
           const UtilisateurState(
             prenom: null,
+            estIntegrationTerminee: true,
             aLesAides: false,
             aLaBibliotheque: false,
             aLesRecommandations: false,
@@ -35,6 +36,7 @@ class UtilisateurBloc extends Bloc<UtilisateurEvent, UtilisateurState> {
       emit(
         UtilisateurState(
           prenom: utilisateur.prenom,
+          estIntegrationTerminee: utilisateur.estIntegrationTerminee,
           aLesAides: fonctionnalitesDebloquees.contains(Fonctionnalites.aides),
           aLaBibliotheque:
               fonctionnalitesDebloquees.contains(Fonctionnalites.bibliotheque),

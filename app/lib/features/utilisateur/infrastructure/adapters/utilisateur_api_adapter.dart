@@ -44,6 +44,7 @@ class UtilisateurApiAdapter implements UtilisateurPort {
                 )
                 .map((final e) => Fonctionnalites.values.byName(e as String))
                 .toList(),
+        estIntegrationTerminee: json['is_onboarding_done'] as bool,
       ),
     );
   }

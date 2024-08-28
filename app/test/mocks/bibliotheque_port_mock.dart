@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:app/features/bibliotheque/domain/bibliotheque.dart';
 import 'package:app/features/bibliotheque/domain/ports/bibliotheque_port.dart';
 import 'package:fpdart/fpdart.dart';
@@ -17,7 +19,7 @@ class BibliothequePortMock implements BibliothequePort {
       return Right(bibliotheque);
     }
 
-    if (titre != null) {
+    if (titre != null && titre != '') {
       final contenus = bibliotheque.contenus
           .where((final e) => e.titre.contains(titre))
           .toList();
@@ -27,7 +29,7 @@ class BibliothequePortMock implements BibliothequePort {
       );
     }
 
-    if (thematiques != null) {
+    if (thematiques != null && thematiques.isNotEmpty) {
       final contenus = bibliotheque.contenus
           .where((final e) => thematiques.contains(e.thematique.name))
           .toList();
