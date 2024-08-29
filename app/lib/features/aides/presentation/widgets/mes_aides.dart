@@ -37,6 +37,7 @@ class MesAides extends StatelessWidget {
               return ListView.separated(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
+                padding: EdgeInsets.zero,
                 itemBuilder: (final context, final index) {
                   final aide = aides[index];
 

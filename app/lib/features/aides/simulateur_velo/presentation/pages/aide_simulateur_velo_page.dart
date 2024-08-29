@@ -8,6 +8,7 @@ import 'package:app/shared/widgets/composants/alert.dart';
 import 'package:app/shared/widgets/composants/app_bar.dart';
 import 'package:app/shared/widgets/composants/bottom_bar.dart';
 import 'package:app/shared/widgets/fondamentaux/colors.dart';
+import 'package:app/shared/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/shared/widgets/fondamentaux/text_styles.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +47,7 @@ class _AideSimulateurVeloView extends StatelessWidget {
   Widget build(final BuildContext context) => Scaffold(
         appBar: const FnvAppBar(),
         body: ListView(
-          padding: const EdgeInsets.all(DsfrSpacings.s2w),
+          padding: const EdgeInsets.all(paddingVerticalPage),
           children: const [
             Text(Localisation.simulerMonAide, style: DsfrTextStyle.headline2()),
             Text(Localisation.acheterUnVelo, style: DsfrTextStyle.bodyXl()),

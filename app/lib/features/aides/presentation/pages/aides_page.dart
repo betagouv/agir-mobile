@@ -55,6 +55,7 @@ class AidesPage extends StatelessWidget {
               ListView.separated(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
+                padding: EdgeInsets.zero,
                 itemBuilder: (final context, final index) =>
                     switch (aides[index]) {
                   final AideThematiqueModel a => Padding(
@@ -73,6 +74,7 @@ class AidesPage extends StatelessWidget {
                     const SizedBox(height: DsfrSpacings.s1w),
                 itemCount: aides.length,
               ),
+              const SafeArea(child: SizedBox()),
             ],
           );
         },
