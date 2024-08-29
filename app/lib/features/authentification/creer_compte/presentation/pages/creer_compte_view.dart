@@ -102,7 +102,7 @@ class _Charte extends StatelessWidget {
 
     return Jaccepte(
       label: Localisation.laCharteDeParticipation,
-      url: 'https://agir.beta.gouv.fr/charte',
+      url: Localisation.laCharteDeParticipationSite,
       value: valeur,
       onChanged: (final value) =>
           context.read<CreerCompteBloc>().add(CreerCompteCharteAChange(value)),
@@ -121,7 +121,7 @@ class _Cgu extends StatelessWidget {
 
     return Jaccepte(
       label: Localisation.lesCgu,
-      url: 'https://agir.beta.gouv.fr/cgu',
+      url: Localisation.lesCguSite,
       value: valeur,
       onChanged: (final value) =>
           context.read<CreerCompteBloc>().add(CreerCompteCguAChange(value)),
