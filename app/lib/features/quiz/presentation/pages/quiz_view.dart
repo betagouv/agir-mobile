@@ -6,6 +6,7 @@ import 'package:app/shared/widgets/composants/app_bar.dart';
 import 'package:app/shared/widgets/composants/bottom_bar.dart';
 import 'package:app/shared/widgets/composants/html_widget.dart';
 import 'package:app/shared/widgets/fondamentaux/colors.dart';
+import 'package:app/shared/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:collection/collection.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +55,7 @@ class _Body extends StatelessWidget {
     final state = context.watch<QuizBloc>().state;
 
     return ListView(
-      padding: const EdgeInsets.all(DsfrSpacings.s2w),
+      padding: const EdgeInsets.all(paddingVerticalPage),
       children: [
         Text(state.quiz.question, style: const DsfrTextStyle.headline2()),
         const SizedBox(height: DsfrSpacings.s2w),

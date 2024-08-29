@@ -3,6 +3,7 @@ import 'package:app/features/univers/domain/tuile_univers.dart';
 import 'package:app/features/univers/presentation/blocs/univers_bloc.dart';
 import 'package:app/shared/widgets/composants/app_bar.dart';
 import 'package:app/shared/widgets/fondamentaux/colors.dart';
+import 'package:app/shared/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,7 +45,7 @@ class _Title extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => ListView(
-        padding: const EdgeInsets.all(DsfrSpacings.s2w),
+        padding: const EdgeInsets.all(paddingVerticalPage),
         children: const [_ImageEtTitre(), _Recommandations()],
       );
 }

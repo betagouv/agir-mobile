@@ -2,6 +2,7 @@ import 'package:app/features/accueil/presentation/pages/accueil_page.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:app/shared/assets/images.dart';
 import 'package:app/shared/widgets/composants/bottom_bar.dart';
+import 'package:app/shared/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -36,7 +37,7 @@ class ToutEstPretPage extends StatelessWidget {
         iconTheme: const IconThemeData(color: blueFranceSun113),
       ),
       body: ListView(
-        padding: const EdgeInsets.all(DsfrSpacings.s2w),
+        padding: const EdgeInsets.all(paddingVerticalPage),
         children: [
           Align(
             alignment: Alignment.centerLeft,

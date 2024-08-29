@@ -4,6 +4,7 @@ import 'package:app/features/authentification/questions/presentation/pages/agir_
 import 'package:app/l10n/l10n.dart';
 import 'package:app/shared/assets/images.dart';
 import 'package:app/shared/widgets/composants/bottom_bar.dart';
+import 'package:app/shared/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -43,7 +44,7 @@ class _View extends StatelessWidget {
           iconTheme: const IconThemeData(color: DsfrColors.blueFranceSun113),
         ),
         body: ListView(
-          padding: const EdgeInsets.all(DsfrSpacings.s2w),
+          padding: const EdgeInsets.all(paddingVerticalPage),
           children: [
             Align(
               alignment: Alignment.centerLeft,

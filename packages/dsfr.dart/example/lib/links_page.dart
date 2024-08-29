@@ -18,7 +18,7 @@ class LinksPage extends StatelessWidget {
     const gap = SizedBox(height: 16);
 
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(24),
+      padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

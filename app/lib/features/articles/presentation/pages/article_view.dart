@@ -3,6 +3,7 @@ import 'package:app/l10n/l10n.dart';
 import 'package:app/shared/widgets/composants/app_bar.dart';
 import 'package:app/shared/widgets/composants/html_widget.dart';
 import 'package:app/shared/widgets/fondamentaux/colors.dart';
+import 'package:app/shared/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,7 +18,7 @@ class ArticleView extends StatelessWidget {
     return Scaffold(
       appBar: const FnvAppBar(),
       body: ListView(
-        padding: const EdgeInsets.all(DsfrSpacings.s2w),
+        padding: const EdgeInsets.all(paddingVerticalPage),
         children: [
           Text(article.titre, style: const DsfrTextStyle.headline2()),
           if (article.sousTitre != null) ...[

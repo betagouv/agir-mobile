@@ -4,6 +4,7 @@ import 'package:app/features/profil/supprimer_compte/presentation/widgets/suppri
 import 'package:app/l10n/l10n.dart';
 import 'package:app/shared/widgets/composants/app_bar.dart';
 import 'package:app/shared/widgets/fondamentaux/colors.dart';
+import 'package:app/shared/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -24,7 +25,7 @@ class OptionsAvanceesPage extends StatelessWidget {
   Widget build(final BuildContext context) => Scaffold(
         appBar: const FnvAppBar(),
         body: ListView(
-          padding: const EdgeInsets.all(DsfrSpacings.s2w),
+          padding: const EdgeInsets.all(paddingVerticalPage),
           children: const [
             ProfilTitle(title: Localisation.optionsAvancees),
             ChangerMotDePasse(),

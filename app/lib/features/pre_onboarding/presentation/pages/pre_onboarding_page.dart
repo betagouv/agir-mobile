@@ -25,7 +25,7 @@ class PreOnboardingPage extends StatelessWidget {
   Widget build(final BuildContext context) => Scaffold(
         body: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s3w),
+            padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,

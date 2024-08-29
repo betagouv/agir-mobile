@@ -9,6 +9,7 @@ import 'package:app/features/authentification/saisie_code/presentation/pages/sai
 import 'package:app/l10n/l10n.dart';
 import 'package:app/shared/widgets/composants/alert.dart';
 import 'package:app/shared/widgets/composants/mot_de_passe/mot_de_passe.dart';
+import 'package:app/shared/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -48,7 +49,7 @@ class CreerCompteView extends StatelessWidget {
             iconTheme: const IconThemeData(color: DsfrColors.blueFranceSun113),
           ),
           body: ListView(
-            padding: const EdgeInsets.all(DsfrSpacings.s2w),
+            padding: const EdgeInsets.all(paddingVerticalPage),
             children: [
               const Text(
                 Localisation.creezVotreCompte,

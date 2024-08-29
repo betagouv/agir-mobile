@@ -6,6 +6,7 @@ import 'package:app/shared/assets/svgs.dart';
 import 'package:app/shared/widgets/composants/app_bar.dart';
 import 'package:app/shared/widgets/composants/bottom_bar.dart';
 import 'package:app/shared/widgets/fondamentaux/colors.dart';
+import 'package:app/shared/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,7 +34,7 @@ class AideSimulateurVeloDisponiblePage extends StatelessWidget {
     return Scaffold(
       appBar: const FnvAppBar(),
       body: ListView(
-        padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s2w),
+        padding: const EdgeInsets.symmetric(vertical: paddingVerticalPage),
         children: [
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),

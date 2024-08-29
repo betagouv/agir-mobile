@@ -1,5 +1,6 @@
 import 'package:app/features/mieux_vous_connaitre/presentation/element/pages/mieux_vous_connaitre_edit_page.dart';
 import 'package:app/features/mieux_vous_connaitre/presentation/liste/blocs/mieux_vous_connaitre_bloc.dart';
+import 'package:app/shared/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,7 +31,7 @@ class LesQuestions extends StatelessWidget {
               ),
               behavior: HitTestBehavior.opaque,
               child: Padding(
-                padding: const EdgeInsets.all(DsfrSpacings.s2w),
+                padding: const EdgeInsets.all(paddingVerticalPage),
                 child: Row(
                   children: [
                     Expanded(
