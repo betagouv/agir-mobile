@@ -2,13 +2,11 @@ import 'package:app/features/articles/domain/article.dart';
 import 'package:app/features/bibliotheque/domain/bibliotheque.dart';
 import 'package:app/features/mieux_vous_connaitre/domain/question.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
-import 'package:app/features/utilisateur/domain/entities/utilisateur.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail_image_network/mocktail_image_network.dart';
 
 import 'set_up_widgets.dart';
-import 'steps/iel_a_debloque_ces_fonctionnalites.dart';
 import 'steps/iel_a_l_article_suivant.dart';
 import 'steps/iel_appuie_sur.dart';
 import 'steps/iel_appuie_sur_accesibilite.dart';
@@ -184,8 +182,6 @@ void main() {
 
 Future<void> _allerSurBibliotheque(final WidgetTester tester) async {
   ielEstConnecte();
-  ielADebloqueCesFonctionnalites([Fonctionnalites.bibliotheque]);
-
   await ielLanceLapplication(tester);
   await ielAppuieSurAccessibilite(tester, Localisation.menu);
   await ielAppuieSur(tester, Localisation.bibliotheque);

@@ -1,12 +1,10 @@
 import 'package:app/features/articles/domain/article.dart';
 import 'package:app/features/mieux_vous_connaitre/domain/question.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
-import 'package:app/features/utilisateur/domain/entities/utilisateur.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'scenario_context.dart';
 import 'set_up_widgets.dart';
-import 'steps/iel_a_debloque_ces_fonctionnalites.dart';
 import 'steps/iel_a_l_article_suivant.dart';
 import 'steps/iel_a_les_recommandations_suivantes.dart';
 import 'steps/iel_appuie_sur.dart';
@@ -19,7 +17,6 @@ void main() {
     'Iel peut lire un article après avoir cliqué sur une recommandation',
     (final tester) async {
       setUpWidgets(tester);
-      ielADebloqueCesFonctionnalites([Fonctionnalites.recommandations]);
       const titre = 'Recette : velouté crémeux de patates douces';
       const sousTitre = "Une recette cocooning pour l'hiver";
 

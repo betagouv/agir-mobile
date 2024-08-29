@@ -4,7 +4,6 @@ import 'dart:io';
 
 import 'package:app/features/aides/domain/entities/aide.dart';
 import 'package:app/features/aides/simulateur_velo/domain/value_objects/velo_pour_simulateur.dart';
-import 'package:app/features/utilisateur/domain/entities/utilisateur.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:app/shared/number_format.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -13,7 +12,6 @@ import 'api/aide_velo_api_adapter_test.dart';
 import 'scenario_context.dart';
 import 'set_up_widgets.dart';
 import 'steps/iel_a_ces_informations_de_profile.dart';
-import 'steps/iel_a_debloque_ces_fonctionnalites.dart';
 import 'steps/iel_a_les_aides_suivantes.dart';
 import 'steps/iel_appuie_sur.dart';
 import 'steps/iel_appuie_sur_accesibilite.dart';
@@ -260,7 +258,6 @@ Future<void> _allerSurLeSimulateurVelo(
   final WidgetTester tester,
   final Aide aide,
 ) async {
-  ielADebloqueCesFonctionnalites([Fonctionnalites.aides]);
   ielALesAidesSuivantes([aide]);
   ielEstConnecte();
   await ielLanceLapplication(tester);

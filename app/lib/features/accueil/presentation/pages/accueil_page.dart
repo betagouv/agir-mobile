@@ -78,20 +78,15 @@ class _Body extends StatelessWidget {
     context
         .read<UtilisateurBloc>()
         .add(const UtilisateurRecuperationDemandee());
-    final state = context.watch<UtilisateurBloc>().state;
 
     return ListView(
       padding: const EdgeInsets.symmetric(vertical: paddingVerticalPage),
-      children: [
-        if (state.aLesUnivers) ...[
-          const UniversSection(),
-          const SizedBox(height: DsfrSpacings.s4w),
-        ],
-        if (state.aLesAides) ...[
-          const MesAides(),
-          const SizedBox(height: DsfrSpacings.s4w),
-        ],
-        if (state.aLesRecommandations) const MesRecommandations(),
+      children: const [
+        UniversSection(),
+        SizedBox(height: DsfrSpacings.s4w),
+        MesAides(),
+        SizedBox(height: DsfrSpacings.s4w),
+        MesRecommandations(),
       ],
     );
   }

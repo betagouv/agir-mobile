@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:app/features/utilisateur/domain/entities/utilisateur.dart';
 import 'package:app/features/utilisateur/domain/ports/utilisateur_port.dart';
 import 'package:app/features/utilisateur/presentation/blocs/utilisateur_event.dart';
 import 'package:app/features/utilisateur/presentation/blocs/utilisateur_state.dart';
@@ -11,14 +10,7 @@ class UtilisateurBloc extends Bloc<UtilisateurEvent, UtilisateurState> {
   UtilisateurBloc({required final UtilisateurPort utilisateurPort})
       : _utilisateurPort = utilisateurPort,
         super(
-          const UtilisateurState(
-            prenom: null,
-            estIntegrationTerminee: true,
-            aLesAides: false,
-            aLaBibliotheque: false,
-            aLesRecommandations: false,
-            aLesUnivers: false,
-          ),
+          const UtilisateurState(prenom: null, estIntegrationTerminee: true),
         ) {
     on<UtilisateurRecuperationDemandee>(_onRecuperationDemandee);
   }
@@ -32,18 +24,10 @@ class UtilisateurBloc extends Bloc<UtilisateurEvent, UtilisateurState> {
     final result = await _utilisateurPort.recupereUtilisateur();
     if (result.isRight()) {
       final utilisateur = result.getRight().getOrElse(() => throw Exception());
-      final fonctionnalitesDebloquees = utilisateur.fonctionnalitesDebloquees;
       emit(
         UtilisateurState(
           prenom: utilisateur.prenom,
           estIntegrationTerminee: utilisateur.estIntegrationTerminee,
-          aLesAides: fonctionnalitesDebloquees.contains(Fonctionnalites.aides),
-          aLaBibliotheque:
-              fonctionnalitesDebloquees.contains(Fonctionnalites.bibliotheque),
-          aLesRecommandations: fonctionnalitesDebloquees
-              .contains(Fonctionnalites.recommandations),
-          aLesUnivers:
-              fonctionnalitesDebloquees.contains(Fonctionnalites.univers),
         ),
       );
     }

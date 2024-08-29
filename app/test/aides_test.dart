@@ -1,10 +1,8 @@
 import 'package:app/features/aides/domain/entities/aide.dart';
-import 'package:app/features/utilisateur/domain/entities/utilisateur.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'set_up_widgets.dart';
-import 'steps/iel_a_debloque_ces_fonctionnalites.dart';
 import 'steps/iel_a_les_aides_suivantes.dart';
 import 'steps/iel_appuie_sur.dart';
 import 'steps/iel_est_connecte.dart';
@@ -39,20 +37,9 @@ void main() {
 
     group('Accueil', () {
       testWidgets(
-        "Iel n'a pas débloqué les aides alors iel ne les voit pas sur la page d'accueil",
+        "iel voit le titre sur la page d'accueil",
         (final tester) async {
           setUpWidgets(tester);
-          ielEstConnecte();
-          await ielLanceLapplication(tester);
-          ielNeVoitPasLeTexte(Localisation.accueilMesAides);
-        },
-      );
-
-      testWidgets(
-        "Iel a débloqué les aides alors iel voit le titre sur la page d'accueil",
-        (final tester) async {
-          setUpWidgets(tester);
-          ielADebloqueCesFonctionnalites([Fonctionnalites.aides]);
           ielEstConnecte();
           await ielLanceLapplication(tester);
           ielVoitLeTexte(Localisation.accueilMesAides);
@@ -60,10 +47,9 @@ void main() {
       );
 
       testWidgets(
-        "Iel a débloqué les aides alors iel voit les 2 premieres sur la page d'accueil",
+        "iel voit les 2 premieres sur la page d'accueil",
         (final tester) async {
           setUpWidgets(tester);
-          ielADebloqueCesFonctionnalites([Fonctionnalites.aides]);
           ielALesAidesSuivantes([aide1, aide2, aide3]);
           ielEstConnecte();
           await ielLanceLapplication(tester);
@@ -74,10 +60,9 @@ void main() {
       );
 
       testWidgets(
-        'Iel a débloqué les aides et iel clique sur la premiere aide alors iel arrive sur la page de détail',
+        'iel clique sur la premiere aide alors iel arrive sur la page de détail',
         (final tester) async {
           setUpWidgets(tester);
-          ielADebloqueCesFonctionnalites([Fonctionnalites.aides]);
           ielALesAidesSuivantes([aide1, aide2, aide3]);
           ielEstConnecte();
           await ielLanceLapplication(tester);
@@ -91,28 +76,24 @@ void main() {
     });
 
     group('Vos aides', () {
-      testWidgets(
-        'Iel a débloqué les aides alors iel voit toutes les aides',
-        (final tester) async {
-          setUpWidgets(tester);
-          ielADebloqueCesFonctionnalites([Fonctionnalites.aides]);
-          ielALesAidesSuivantes([aide1, aide2, aide3, aide4]);
-          ielEstConnecte();
-          await ielLanceLapplication(tester);
-          await ielAppuieSur(tester, Localisation.accueilMesAidesLien);
-          ielVoitLeTexte(Localisation.vosAidesTitre);
+      testWidgets('iel voit toutes les aides', (final tester) async {
+        setUpWidgets(tester);
+        ielALesAidesSuivantes([aide1, aide2, aide3, aide4]);
+        ielEstConnecte();
+        await ielLanceLapplication(tester);
+        await ielAppuieSur(tester, Localisation.accueilMesAidesLien);
+        ielVoitLeTexte(Localisation.vosAidesTitre);
 
-          ielVoitLeTexte(aide1.thematique);
-          ielVoitLeTexte(aide1.titre);
+        ielVoitLeTexte(aide1.thematique);
+        ielVoitLeTexte(aide1.titre);
 
-          ielVoitLeTexte(aide2.thematique);
-          ielVoitLeTexte(aide2.titre);
+        ielVoitLeTexte(aide2.thematique);
+        ielVoitLeTexte(aide2.titre);
 
-          ielVoitLeTexte(aide3.thematique);
-          ielVoitLeTexte(aide3.titre);
-          ielVoitLeTexte(aide4.titre);
-        },
-      );
+        ielVoitLeTexte(aide3.thematique);
+        ielVoitLeTexte(aide3.titre);
+        ielVoitLeTexte(aide4.titre);
+      });
     });
   });
 }

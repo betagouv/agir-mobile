@@ -16,7 +16,6 @@ void main() {
     test('recupereUtilisateur', () async {
       // Arrange.
       const prenom = 'Lucas';
-      const aides = Fonctionnalites.aides;
       final client = ClientMock()
         ..getSuccess(
           path: '/utilisateurs/$utilisateurId',
@@ -27,9 +26,6 @@ void main() {
   "nom": "Saudon",
   "prenom": "$prenom",
   "email": "ls@mail.com",
-  "fonctionnalites_debloquees": [
-    "${aides.name}"
-  ],
   "is_onboarding_done": true,
   "couverture_aides_ok": false
 }''',
@@ -56,58 +52,8 @@ void main() {
       // Assert.
       expect(
         utilisateur.getRight().getOrElse(() => throw Exception()),
-        const Utilisateur(
-          prenom: prenom,
-          fonctionnalitesDebloquees: [aides],
-          estIntegrationTerminee: true,
-        ),
+        const Utilisateur(prenom: prenom, estIntegrationTerminee: true),
       );
-    });
-
-    test('recupereUtilisateur avec une fonctionnalités non connue', () async {
-      // Arrange.
-      const prenom = 'Lucas';
-      const aides = Fonctionnalites.aides;
-      final client = ClientMock()
-        ..getSuccess(
-          path: '/utilisateurs/$utilisateurId',
-          response: CustomResponse(
-            '''
-{
-  "id": "saudon",
-  "nom": "Saudon",
-  "prenom": "$prenom",
-  "email": "ls@mail.com",
-  "fonctionnalites_debloquees": [
-    "${aides.name}",
-    "nouveau"
-  ],
-  "is_onboarding_done": true,
-  "couverture_aides_ok": false
-}''',
-          ),
-        );
-
-      final authentificationTokenStorage = AuthentificationTokenStorage(
-        secureStorage: FlutterSecureStorageMock(),
-        authentificationStatusManagerWriter: AuthentificationStatutManager(),
-      );
-      await authentificationTokenStorage.sauvegarderToken(token);
-
-      final adapter = UtilisateurApiAdapter(
-        apiClient: AuthentificationApiClient(
-          apiUrl: apiUrl,
-          authentificationTokenStorage: authentificationTokenStorage,
-          inner: client,
-        ),
-      );
-
-      // Act.
-      final result = await adapter.recupereUtilisateur();
-
-      // Assert.
-      final utilisateur = result.getRight().getOrElse(() => throw Exception());
-      expect(utilisateur.fonctionnalitesDebloquees, [aides]);
     });
   });
 }

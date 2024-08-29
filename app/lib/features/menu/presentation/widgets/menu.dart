@@ -3,7 +3,6 @@ import 'package:app/features/aides/presentation/pages/aides_page.dart';
 import 'package:app/features/authentification/domain/ports/authentification_port.dart';
 import 'package:app/features/bibliotheque/presentation/pages/bibliotheque_page.dart';
 import 'package:app/features/profil/presentation/pages/profil_page.dart';
-import 'package:app/features/utilisateur/presentation/blocs/utilisateur_bloc.dart';
 import 'package:app/features/version/presentation/widgets/version_label.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:app/shared/widgets/composants/app_bar.dart';
@@ -135,18 +134,12 @@ class _MenuAides extends StatelessWidget {
   final VoidCallback? onTap;
 
   @override
-  Widget build(final BuildContext context) {
-    final state = context.watch<UtilisateurBloc>().state;
-
-    return state.aLesAides
-        ? _MenuItem(
-            label: Localisation.menuAides,
-            value: AidesPage.name,
-            groupValue: groupTitle,
-            onTap: onTap,
-          )
-        : const SizedBox.shrink();
-  }
+  Widget build(final BuildContext context) => _MenuItem(
+        label: Localisation.menuAides,
+        value: AidesPage.name,
+        groupValue: groupTitle,
+        onTap: onTap,
+      );
 }
 
 class _MenuBibliotheque extends StatelessWidget {
@@ -156,18 +149,12 @@ class _MenuBibliotheque extends StatelessWidget {
   final VoidCallback? onTap;
 
   @override
-  Widget build(final BuildContext context) {
-    final state = context.watch<UtilisateurBloc>().state;
-
-    return state.aLaBibliotheque
-        ? _MenuItem(
-            label: Localisation.bibliotheque,
-            value: BibliothequePage.name,
-            groupValue: groupTitle,
-            onTap: onTap,
-          )
-        : const SizedBox.shrink();
-  }
+  Widget build(final BuildContext context) => _MenuItem(
+        label: Localisation.bibliotheque,
+        value: BibliothequePage.name,
+        groupValue: groupTitle,
+        onTap: onTap,
+      );
 }
 
 class _MenuItem extends StatelessWidget {
