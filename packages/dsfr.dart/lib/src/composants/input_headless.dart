@@ -13,6 +13,7 @@ class DsfrInputHeadless extends StatefulWidget {
     required this.onChanged,
     this.validator,
     this.keyboardType,
+    this.textInputAction,
     this.width,
     this.isPasswordMode = false,
     this.passwordVisibility = false,
@@ -45,6 +46,7 @@ class DsfrInputHeadless extends StatefulWidget {
   final int? maxLines;
   final int? minLines;
   final TextInputType? keyboardType;
+  final TextInputAction? textInputAction;
   final Color inputBorderColor;
   final double inputBorderWidth;
   final BoxConstraints? inputConstraints;
@@ -123,6 +125,7 @@ class _DsfrInputHeadlessState extends State<DsfrInputHeadless> {
               constraints: widget.inputConstraints,
             ),
             keyboardType: widget.keyboardType,
+            textInputAction: widget.textInputAction,
             style: widget.inputStyle,
             textAlign: widget.textAlign,
             obscureText: widget.isPasswordMode && !widget.passwordVisibility,

@@ -33,6 +33,7 @@ class MonLogementNombreAdultes extends StatelessWidget {
             initialValue: nombreAdultes.toString(),
             onChanged: (final value) => _handleNombreAdultes(context, value),
             keyboardType: TextInputType.number,
+            textInputAction: TextInputAction.next,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             key: const ValueKey(adultes),
           ),

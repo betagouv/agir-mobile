@@ -5,6 +5,8 @@ Future<void> ielAppuieSurAccessibilite(
   final WidgetTester tester,
   final String label,
 ) async {
-  await tester.tap(find.bySemanticsLabel(label));
+  final bySemanticsLabel = find.bySemanticsLabel(label);
+  expect(bySemanticsLabel, findsOneWidget);
+  await tester.tap(bySemanticsLabel);
   await tester.pumpAndSettle();
 }

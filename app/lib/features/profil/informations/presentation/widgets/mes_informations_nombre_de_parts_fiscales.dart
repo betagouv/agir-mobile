@@ -39,6 +39,7 @@ class MesInformationsNombreDePartsFiscales extends StatelessWidget {
       onChanged: (final value) => _handleNombreDePartsFiscales(context, value),
       initialValue: FnvNumberFormat.formatNumber(nombreDePartsFiscales),
       keyboardType: const TextInputType.numberWithOptions(decimal: true),
+      textInputAction: TextInputAction.next,
       inputFormatters: [
         FilteringTextInputFormatter.allow(RegExp('[0-9,.]')),
       ],

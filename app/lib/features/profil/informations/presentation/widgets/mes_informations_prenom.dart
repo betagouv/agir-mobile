@@ -20,6 +20,7 @@ class MesInformationsPrenom extends StatelessWidget {
           .read<MesInformationsBloc>()
           .add(MesInformationsPrenomChange(value)),
       initialValue: prenom,
+      textInputAction: TextInputAction.next,
     );
   }
 }

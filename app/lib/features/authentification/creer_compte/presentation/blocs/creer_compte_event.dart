@@ -25,6 +25,24 @@ final class CreerCompteMotDePasseAChange extends CreerCompteEvent {
   List<Object> get props => [valeur];
 }
 
+final class CreerCompteCharteAChange extends CreerCompteEvent {
+  const CreerCompteCharteAChange(this.valeur);
+
+  final bool valeur;
+
+  @override
+  List<Object> get props => [valeur];
+}
+
+final class CreerCompteCguAChange extends CreerCompteEvent {
+  const CreerCompteCguAChange(this.valeur);
+
+  final bool valeur;
+
+  @override
+  List<Object> get props => [valeur];
+}
+
 final class CreerCompteCreationDemandee extends CreerCompteEvent {
   const CreerCompteCreationDemandee();
 }

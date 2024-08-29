@@ -114,6 +114,7 @@ class _PrixState extends State<_Prix> {
                   : null,
               textAlign: TextAlign.end,
               keyboardType: TextInputType.number,
+              textInputAction: TextInputAction.next,
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             ),
           ),
@@ -363,6 +364,7 @@ class _NombreDePartsFiscales extends StatelessWidget {
       initialValue: FnvNumberFormat.formatNumber(nombreDePartsFiscales),
       width: MediaQuery.textScalerOf(context).scale(_inputWidth),
       keyboardType: const TextInputType.numberWithOptions(decimal: true),
+      textInputAction: TextInputAction.next,
       inputFormatters: [FilteringTextInputFormatter.allow(RegExp('[0-9,.]'))],
     );
   }

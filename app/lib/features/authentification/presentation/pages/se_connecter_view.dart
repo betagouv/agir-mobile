@@ -43,51 +43,58 @@ class SeConnecterView extends StatelessWidget {
         listenWhen: (final previous, final current) =>
             previous.connexionFaite != current.connexionFaite &&
             current.connexionFaite,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const Text(
-              Localisation.pageConnexionTitre,
-              style: DsfrTextStyle.headline2(),
-            ),
-            const SizedBox(height: DsfrSpacings.s1w),
-            const Text(
-              Localisation.pageConnexionDetails,
-              style: DsfrTextStyle.bodyLg(),
-            ),
-            const SizedBox(height: DsfrSpacings.s3w),
-            DsfrInput(
-              label: Localisation.adresseEmail,
-              onChanged: (final value) => _handleAdresseMail(context, value),
-              keyboardType: TextInputType.emailAddress,
-            ),
-            const SizedBox(height: DsfrSpacings.s2w),
-            DsfrInput(
-              label: Localisation.motDePasse,
-              onChanged: (final value) => _handleMotDePasse(context, value),
-              isPasswordMode: true,
-              keyboardType: TextInputType.visiblePassword,
-            ),
-            const _MessageErreur(),
-            const Spacer(),
-            BlocSelector<SeConnecterBloc, SeConnecterState, bool>(
-              selector: (final state) => state.estValide,
-              builder: (final context, final state) => DsfrButton(
-                label: Localisation.meConnecter,
-                variant: DsfrButtonVariant.primary,
-                size: DsfrButtonSize.lg,
-                onPressed: state ? () => _handleSeConnecter(context) : null,
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.white,
+            iconTheme: const IconThemeData(color: DsfrColors.blueFranceSun113),
+          ),
+          body: ListView(
+            padding: const EdgeInsets.all(DsfrSpacings.s2w),
+            children: [
+              const Text(
+                Localisation.pageConnexionTitre,
+                style: DsfrTextStyle.headline2(),
               ),
-            ),
-            const SizedBox(height: DsfrSpacings.s2w),
-            Center(
-              child: DsfrLink.md(
-                label: Localisation.premiereFoisSurAgir,
-                onPressed: () async => GoRouter.of(context)
-                    .pushReplacementNamed(CreerComptePage.name),
+              const SizedBox(height: DsfrSpacings.s1w),
+              const Text(
+                Localisation.pageConnexionDetails,
+                style: DsfrTextStyle.bodyLg(),
               ),
-            ),
-          ],
+              const SizedBox(height: DsfrSpacings.s3w),
+              DsfrInput(
+                label: Localisation.adresseEmail,
+                onChanged: (final value) => _handleAdresseMail(context, value),
+                keyboardType: TextInputType.emailAddress,
+                textInputAction: TextInputAction.next,
+              ),
+              const SizedBox(height: DsfrSpacings.s2w),
+              DsfrInput(
+                label: Localisation.motDePasse,
+                onChanged: (final value) => _handleMotDePasse(context, value),
+                isPasswordMode: true,
+                keyboardType: TextInputType.visiblePassword,
+              ),
+              const _MessageErreur(),
+              const SizedBox(height: DsfrSpacings.s2w),
+              BlocSelector<SeConnecterBloc, SeConnecterState, bool>(
+                selector: (final state) => state.estValide,
+                builder: (final context, final state) => DsfrButton(
+                  label: Localisation.meConnecter,
+                  variant: DsfrButtonVariant.primary,
+                  size: DsfrButtonSize.lg,
+                  onPressed: state ? () => _handleSeConnecter(context) : null,
+                ),
+              ),
+              const SizedBox(height: DsfrSpacings.s2w),
+              Center(
+                child: DsfrLink.md(
+                  label: Localisation.premiereFoisSurAgir,
+                  onPressed: () async => GoRouter.of(context)
+                      .pushReplacementNamed(CreerComptePage.name),
+                ),
+              ),
+            ],
+          ),
         ),
       );
 }

@@ -62,8 +62,10 @@ class DsfrButton extends StatelessWidget {
       size: size,
       onTap: onPressed,
       child: Center(
-        child: SizedBox(
-          height: MediaQuery.textScalerOf(context).scale(DsfrSpacings.s3w),
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            minHeight: MediaQuery.textScalerOf(context).scale(DsfrSpacings.s3w),
+          ),
           child: child,
         ),
       ),
