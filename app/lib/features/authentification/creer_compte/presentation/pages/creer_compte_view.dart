@@ -1,6 +1,7 @@
 import 'package:app/features/authentification/creer_compte/presentation/blocs/creer_compte_bloc.dart';
 import 'package:app/features/authentification/creer_compte/presentation/blocs/creer_compte_event.dart';
 import 'package:app/features/authentification/creer_compte/presentation/blocs/creer_compte_state.dart';
+import 'package:app/features/authentification/presentation/pages/se_connecter_page.dart';
 import 'package:app/features/authentification/saisie_code/presentation/pages/saisie_code_page.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:app/shared/widgets/composants/alert.dart';
@@ -48,7 +49,7 @@ class CreerCompteView extends StatelessWidget {
             const SizedBox(height: DsfrSpacings.s1w),
             const Text(
               Localisation.creezVotreCompteDetails,
-              style: DsfrTextStyle.bodyXl(),
+              style: DsfrTextStyle.bodyLg(),
             ),
             const SizedBox(height: DsfrSpacings.s3w),
             DsfrInput(
@@ -61,8 +62,16 @@ class CreerCompteView extends StatelessWidget {
               onChanged: (final value) => _handleMotDePasse(context, value),
             ),
             const _MessageErreur(),
-            const SizedBox(height: DsfrSpacings.s2w),
+            const Spacer(),
             const _BoutonCreerCompte(),
+            const SizedBox(height: DsfrSpacings.s2w),
+            Center(
+              child: DsfrLink.md(
+                label: Localisation.vousAvezDejaUnCompte,
+                onPressed: () async => GoRouter.of(context)
+                    .pushReplacementNamed(SeConnecterPage.name),
+              ),
+            ),
           ],
         ),
       );

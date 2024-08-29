@@ -130,6 +130,9 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez 1 part pour
 
 Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme des revenus de toutes les personnes avec lequelles vous partagez vos déclarations d’impôts (pour toute l’année) pour vous faire une première idée.''';
   static const oui = 'Oui';
+  static const pageConnexionDetails =
+      'Indiquez votre adresse email et nous vous enverrons un code qui vous permettra d’accéder au service.';
+  static const pageConnexionTitre = 'Accédez à votre compte Agir';
   static const plusDe150m2 = 'Plus de 150 m²';
   static const point = '.';
   static const pourquoi = 'Pourquoi ?';
@@ -148,6 +151,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
       'Faites un premier pas en estimant rapidement les principaux impacts de vos usages';
   static const preOnboardingTitre =
       'Ensemble,\naméliorons\nnos habitudes\nau jour le jour';
+  static const premiereFoisSurAgir = 'Première fois sur Agir ?';
   static const prenom = 'Prénom';
   static const prixDuVelo = 'Prix du vélo';
   static const prixDuVeloExplications =
@@ -166,7 +170,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const revenirAuSimulateur = 'Revenir au simulateur';
   static const revenuFiscal = 'Revenu fiscal de référence de votre foyer';
   static const revenuQuestion = 'Quelle est votre tranche de revenus ?';
-  static const seConnecter = 'Se connecter';
+  static const meConnecter = 'Me connecter';
   static const seDeconnecter = 'Se déconnecter';
   static const simulateur = 'Simulateur';
   static const simulerMonAide = 'Simuler mon aide';
@@ -200,6 +204,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const votreProfil = 'Votre profil';
   static const votreResidencePrincipaleEst =
       'Votre résidence principale est ...';
+  static const vousAvezDejaUnCompte = 'Vous avez déjà un compte ?';
   static const vousEtesProprietaireDeVotreLogement =
       'Vous êtes propriétaire de votre logement ?';
 

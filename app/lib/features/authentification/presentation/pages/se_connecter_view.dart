@@ -1,3 +1,4 @@
+import 'package:app/features/authentification/creer_compte/presentation/pages/creer_compte_page.dart';
 import 'package:app/features/authentification/presentation/blocs/se_connecter_bloc.dart';
 import 'package:app/features/authentification/presentation/blocs/se_connecter_event.dart';
 import 'package:app/features/authentification/presentation/blocs/se_connecter_state.dart';
@@ -46,8 +47,13 @@ class SeConnecterView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const Text(
-              Localisation.seConnecter,
+              Localisation.pageConnexionTitre,
               style: DsfrTextStyle.headline2(),
+            ),
+            const SizedBox(height: DsfrSpacings.s1w),
+            const Text(
+              Localisation.pageConnexionDetails,
+              style: DsfrTextStyle.bodyLg(),
             ),
             const SizedBox(height: DsfrSpacings.s3w),
             DsfrInput(
@@ -67,10 +73,18 @@ class SeConnecterView extends StatelessWidget {
             BlocSelector<SeConnecterBloc, SeConnecterState, bool>(
               selector: (final state) => state.estValide,
               builder: (final context, final state) => DsfrButton(
-                label: Localisation.seConnecter,
+                label: Localisation.meConnecter,
                 variant: DsfrButtonVariant.primary,
                 size: DsfrButtonSize.lg,
                 onPressed: state ? () => _handleSeConnecter(context) : null,
+              ),
+            ),
+            const SizedBox(height: DsfrSpacings.s2w),
+            Center(
+              child: DsfrLink.md(
+                label: Localisation.premiereFoisSurAgir,
+                onPressed: () async => GoRouter.of(context)
+                    .pushReplacementNamed(CreerComptePage.name),
               ),
             ),
           ],

@@ -51,7 +51,7 @@ void main() {
       await ielLanceLapplication(tester);
       ielVoitLeTexte(Localisation.preOnboardingTitre);
       await ielAppuieSur(tester, Localisation.jaiDejaUnCompte);
-      ielVoitLeTexte(Localisation.seConnecter, n: 2);
+      ielVoitLeTexte(Localisation.meConnecter);
     },
   );
 
@@ -69,7 +69,7 @@ void main() {
       ielVoitLeTexteMarkdown(tester, Localisation.preOnboarding3);
       await ielGlisseDeLaDroiteVersLaGauche(tester);
       await ielAppuieSur(tester, Localisation.jaiDejaUnCompte);
-      ielVoitLeTexte(Localisation.seConnecter, n: 2);
+      ielVoitLeTexte(Localisation.meConnecter);
       await ielEcritDansLeChamp(
         tester,
         label: Localisation.adresseEmail,
@@ -80,7 +80,7 @@ void main() {
         label: Localisation.motDePasse,
         enterText: 'ceciEstUnMotDePasseValide!1',
       );
-      await ielAppuieSur(tester, Localisation.seConnecter);
+      await ielAppuieSur(tester, Localisation.meConnecter);
       final authentificationPort = ScenarioContext().authentificationPortMock!;
       expect(authentificationPort.connexionAppele, true);
       await ielEcritLeCode(tester, enterText: '123456');
