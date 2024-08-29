@@ -21,6 +21,7 @@ class LesQuestions extends StatelessWidget {
         ListView.separated(
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
+          padding: EdgeInsets.zero,
           itemBuilder: (final context, final index) {
             final question = questions[index];
 
