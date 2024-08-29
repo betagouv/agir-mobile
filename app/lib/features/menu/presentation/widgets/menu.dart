@@ -174,36 +174,40 @@ class _MenuItem extends StatelessWidget {
   Widget build(final BuildContext context) {
     final isCurrentPage = groupValue == value;
 
-    return GestureDetector(
-      onTap: onTap,
-      behavior: HitTestBehavior.opaque,
-      child: Stack(
-        alignment: Alignment.centerLeft,
-        children: [
-          if (isCurrentPage)
-            const DecoratedBox(
-              decoration: ShapeDecoration(
-                color: DsfrColors.blueFranceSun113,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.horizontal(
-                    right: Radius.circular(DsfrSpacings.s0v5),
+    return ConstrainedBox(
+      constraints: const BoxConstraints(minHeight: 24),
+      child: GestureDetector(
+        onTap: onTap,
+        behavior: HitTestBehavior.opaque,
+        child: Stack(
+          alignment: Alignment.centerLeft,
+          children: [
+            if (isCurrentPage)
+              const DecoratedBox(
+                decoration: ShapeDecoration(
+                  color: DsfrColors.blueFranceSun113,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.horizontal(
+                      right: Radius.circular(DsfrSpacings.s0v5),
+                    ),
                   ),
                 ),
+                child: SizedBox(width: 3, height: 24),
               ),
-              child: SizedBox(width: 3, height: 24),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
+              child: Text(
+                label,
+                style: isCurrentPage
+                    ? const DsfrTextStyle.bodyLgBold(
+                        color: DsfrColors.blueFranceSun113,
+                        lineHeight: 18,
+                      )
+                    : const DsfrTextStyle.bodyLg(),
+              ),
             ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
-            child: Text(
-              label,
-              style: isCurrentPage
-                  ? const DsfrTextStyle.bodyLgBold(
-                      color: DsfrColors.blueFranceSun113,
-                    )
-                  : const DsfrTextStyle.bodyLg(),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
