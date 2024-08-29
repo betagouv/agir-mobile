@@ -1,14 +1,12 @@
 import 'package:app/features/mieux_vous_connaitre/domain/question.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
 import 'package:app/features/univers/domain/tuile_univers.dart';
-import 'package:app/features/utilisateur/domain/entities/utilisateur.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail_image_network/mocktail_image_network.dart';
 
 import 'set_up_widgets.dart';
-import 'steps/iel_a_debloque_ces_fonctionnalites.dart';
 import 'steps/iel_a_les_recommandations_suivantes.dart';
 import 'steps/iel_appuie_sur.dart';
 import 'steps/iel_est_connecte.dart';
@@ -22,20 +20,9 @@ import 'steps/le_serveur_retourne_ces_univers.dart';
 void main() {
   group('Accueil', () {
     testWidgets(
-      "Iel n'a pas débloqué les univers alors iel ne les voit pas sur la page d'accueil",
+      "iel voit le titre sur la page d'accueil",
       (final tester) async {
         setUpWidgets(tester);
-        ielEstConnecte();
-        await ielLanceLapplication(tester);
-        ielNeVoitPasLeTexte(Localisation.univers);
-      },
-    );
-
-    testWidgets(
-      "Iel a débloqué les univers alors iel voit le titre sur la page d'accueil",
-      (final tester) async {
-        setUpWidgets(tester);
-        ielADebloqueCesFonctionnalites([Fonctionnalites.univers]);
         ielEstConnecte();
         await ielLanceLapplication(tester);
         ielVoitLeTexte(Localisation.univers);
@@ -47,7 +34,6 @@ void main() {
       (final tester) async {
         await mockNetworkImages(() async {
           setUpWidgets(tester);
-          ielADebloqueCesFonctionnalites([Fonctionnalites.univers]);
           const univers = TuileUnivers(
             type: Thematique.alimentation,
             titre: 'En cuisine',
@@ -69,7 +55,6 @@ void main() {
       (final tester) async {
         await mockNetworkImages(() async {
           setUpWidgets(tester);
-          ielADebloqueCesFonctionnalites([Fonctionnalites.univers]);
           const univers = TuileUnivers(
             type: Thematique.alimentation,
             titre: 'En cuisine',
@@ -91,7 +76,6 @@ void main() {
       (final tester) async {
         await mockNetworkImages(() async {
           setUpWidgets(tester);
-          ielADebloqueCesFonctionnalites([Fonctionnalites.univers]);
           const univers = TuileUnivers(
             type: Thematique.alimentation,
             titre: 'En cuisine',
@@ -113,7 +97,6 @@ void main() {
   testWidgets("On va sur la page d'univers", (final tester) async {
     await mockNetworkImages(() async {
       setUpWidgets(tester);
-      ielADebloqueCesFonctionnalites([Fonctionnalites.univers]);
       const univers = TuileUnivers(
         type: Thematique.alimentation,
         titre: 'En cuisine',
@@ -134,9 +117,6 @@ void main() {
     (final tester) async {
       await mockNetworkImages(() async {
         setUpWidgets(tester);
-        ielADebloqueCesFonctionnalites(
-          [Fonctionnalites.univers, Fonctionnalites.recommandations],
-        );
         const univers = TuileUnivers(
           type: Thematique.alimentation,
           titre: 'En cuisine',

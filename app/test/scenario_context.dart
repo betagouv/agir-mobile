@@ -9,7 +9,6 @@ import 'package:app/features/profil/logement/presentation/blocs/mon_logement_sta
 import 'package:app/features/quiz/domain/quiz.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
 import 'package:app/features/univers/domain/tuile_univers.dart';
-import 'package:app/features/utilisateur/domain/entities/utilisateur.dart';
 
 import 'mocks/aide_velo_port_mock.dart';
 import 'mocks/articles_port_mock.dart';
@@ -38,7 +37,6 @@ class ScenarioContext {
   Dpe? dpe;
   double nombreDePartsFiscales = 0;
   int? revenuFiscal;
-  List<Fonctionnalites> fonctionnalitesDebloquees = <Fonctionnalites>[];
   bool estIntegrationTerminee = true;
   AideVeloParType aideVeloParType = const AideVeloParType(
     mecaniqueSimple: [],

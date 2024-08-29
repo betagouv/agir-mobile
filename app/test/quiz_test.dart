@@ -1,13 +1,11 @@
 import 'package:app/features/mieux_vous_connaitre/domain/question.dart';
 import 'package:app/features/quiz/domain/quiz.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
-import 'package:app/features/utilisateur/domain/entities/utilisateur.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'scenario_context.dart';
 import 'set_up_widgets.dart';
-import 'steps/iel_a_debloque_ces_fonctionnalites.dart';
 import 'steps/iel_a_le_quiz_suivant.dart';
 import 'steps/iel_a_les_recommandations_suivantes.dart';
 import 'steps/iel_appuie_sur.dart';
@@ -20,7 +18,6 @@ void main() {
     'Iel voir un quiz après avoir cliqué sur une recommandation',
     (final tester) async {
       setUpWidgets(tester);
-      ielADebloqueCesFonctionnalites([Fonctionnalites.recommandations]);
       const titre = 'Une assiette plus durable';
 
       const recommandation = Recommandation(
@@ -76,7 +73,6 @@ void main() {
     "La bonne réponse affiche l'explication ok",
     (final tester) async {
       setUpWidgets(tester);
-      ielADebloqueCesFonctionnalites([Fonctionnalites.recommandations]);
       const titre = 'Une assiette plus durable';
 
       const recommandation = Recommandation(
@@ -135,7 +131,6 @@ void main() {
     "Les mauvaises réponses affiche l'explication ko",
     (final tester) async {
       setUpWidgets(tester);
-      ielADebloqueCesFonctionnalites([Fonctionnalites.recommandations]);
       const titre = 'Une assiette plus durable';
 
       const recommandation = Recommandation(

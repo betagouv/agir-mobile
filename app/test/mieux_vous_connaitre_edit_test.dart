@@ -1,11 +1,9 @@
 import 'package:app/features/mieux_vous_connaitre/domain/question.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
-import 'package:app/features/utilisateur/domain/entities/utilisateur.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'set_up_widgets.dart';
-import 'steps/iel_a_debloque_ces_fonctionnalites.dart';
 import 'steps/iel_a_les_recommandations_suivantes.dart';
 import 'steps/iel_appuie_sur.dart';
 import 'steps/iel_appuie_sur_accesibilite.dart';
@@ -20,7 +18,6 @@ void main() {
     "Iel appuie sur une recommandation de type kyc et l'ouvre",
     (final tester) async {
       setUpWidgets(tester);
-      ielADebloqueCesFonctionnalites([Fonctionnalites.recommandations]);
       const question = 'Quelle est votre situation professionnelle ?';
       const recommandation = Recommandation(
         id: 'KYC005',

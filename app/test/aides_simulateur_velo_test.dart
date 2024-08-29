@@ -1,10 +1,8 @@
 import 'package:app/features/aides/domain/entities/aide.dart';
-import 'package:app/features/utilisateur/domain/entities/utilisateur.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'set_up_widgets.dart';
-import 'steps/iel_a_debloque_ces_fonctionnalites.dart';
 import 'steps/iel_a_les_aides_suivantes.dart';
 import 'steps/iel_appuie_sur.dart';
 import 'steps/iel_est_connecte.dart';
@@ -26,7 +24,6 @@ void main() {
       "Iel voit le tag simulateur sur la page d'accueil",
       (final tester) async {
         setUpWidgets(tester);
-        ielADebloqueCesFonctionnalites([Fonctionnalites.aides]);
         ielALesAidesSuivantes([aide2]);
         ielEstConnecte();
         await ielLanceLapplication(tester);
@@ -38,7 +35,6 @@ void main() {
       'Iel voit le tag simulateur sur la page des aides',
       (final tester) async {
         setUpWidgets(tester);
-        ielADebloqueCesFonctionnalites([Fonctionnalites.aides]);
         ielALesAidesSuivantes([aide2]);
         ielEstConnecte();
         await ielLanceLapplication(tester);
@@ -51,7 +47,6 @@ void main() {
       "Iel voit le tag simulateur sur la page de l'aide",
       (final tester) async {
         setUpWidgets(tester);
-        ielADebloqueCesFonctionnalites([Fonctionnalites.aides]);
         ielALesAidesSuivantes([aide2]);
         ielEstConnecte();
         await ielLanceLapplication(tester);
@@ -66,7 +61,6 @@ void main() {
       "Iel voit le bouton simuler mon aide sur la page de l'aide",
       (final tester) async {
         setUpWidgets(tester);
-        ielADebloqueCesFonctionnalites([Fonctionnalites.aides]);
         ielALesAidesSuivantes([aide2]);
         ielEstConnecte();
         await ielLanceLapplication(tester);

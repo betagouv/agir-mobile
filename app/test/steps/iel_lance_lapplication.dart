@@ -60,7 +60,6 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
       authentificationPort: ScenarioContext().authentificationPortMock!,
       utilisateurPort: UtilisateurPortMock(
         prenom: prenom,
-        fonctionnalitesDebloquees: ScenarioContext().fonctionnalitesDebloquees,
         estIntegrationTerminee: ScenarioContext().estIntegrationTerminee,
       ),
       universPort: UniversPortMock(ScenarioContext().tuileUnivers),
