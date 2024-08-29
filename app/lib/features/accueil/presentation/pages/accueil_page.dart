@@ -87,6 +87,7 @@ class _Body extends StatelessWidget {
         MesAides(),
         SizedBox(height: DsfrSpacings.s4w),
         MesRecommandations(),
+        SafeArea(child: SizedBox()),
       ],
     );
   }
