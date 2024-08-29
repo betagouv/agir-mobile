@@ -107,7 +107,7 @@ class _MenuItems extends StatelessWidget {
         ),
         const SizedBox(height: DsfrSpacings.s2w),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s3w),
+          padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
           child: DsfrLink.md(
             label: Localisation.seDeconnecter,
             onPressed: () async =>
@@ -116,7 +116,7 @@ class _MenuItems extends StatelessWidget {
         ),
         const SizedBox(height: DsfrSpacings.s2w),
         const Padding(
-          padding: EdgeInsets.symmetric(horizontal: DsfrSpacings.s3w),
+          padding: EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
           child: VersionLabel(),
         ),
         const SizedBox(height: DsfrSpacings.s3w),
@@ -203,7 +203,7 @@ class _MenuItem extends StatelessWidget {
               child: SizedBox(width: 3, height: 24),
             ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s3w),
+            padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
             child: Text(
               label,
               style: isCurrentPage

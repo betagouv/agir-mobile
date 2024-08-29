@@ -14,7 +14,7 @@ class ModalsPage extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => ListView(
-        padding: const EdgeInsets.all(24),
+        padding: const EdgeInsets.all(16),
         children: [
           DsfrButton(
             label: 'Ouvrir la bottom sheet',

@@ -7,6 +7,7 @@ import 'package:app/features/utilisateur/presentation/blocs/utilisateur_bloc.dar
 import 'package:app/features/utilisateur/presentation/blocs/utilisateur_event.dart';
 import 'package:app/features/utilisateur/presentation/blocs/utilisateur_state.dart';
 import 'package:app/l10n/l10n.dart';
+import 'package:app/shared/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/shared/widgets/fondamentaux/text_styles.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
@@ -80,7 +81,7 @@ class _Body extends StatelessWidget {
     final state = context.watch<UtilisateurBloc>().state;
 
     return ListView(
-      padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s2w),
+      padding: const EdgeInsets.symmetric(vertical: paddingVerticalPage),
       children: [
         if (state.aLesUnivers) ...[
           const UniversSection(),

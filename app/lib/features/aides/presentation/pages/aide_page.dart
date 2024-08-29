@@ -7,6 +7,7 @@ import 'package:app/shared/widgets/composants/app_bar.dart';
 import 'package:app/shared/widgets/composants/bottom_bar.dart';
 import 'package:app/shared/widgets/composants/html_widget.dart';
 import 'package:app/shared/widgets/fondamentaux/colors.dart';
+import 'package:app/shared/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,7 +41,7 @@ class AidePage extends StatelessWidget {
     return Scaffold(
       appBar: const FnvAppBar(),
       body: ListView(
-        padding: const EdgeInsets.all(DsfrSpacings.s2w),
+        padding: const EdgeInsets.all(paddingVerticalPage),
         children: [
           Text(aide.thematique, style: const DsfrTextStyle.bodySmMedium()),
           const SizedBox(height: DsfrSpacings.s2w),

@@ -12,7 +12,7 @@ class SelectPage extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => ListView(
-        padding: const EdgeInsets.all(24),
+        padding: const EdgeInsets.all(16),
         children: [
           DsfrSelect(
             label: 'Label',

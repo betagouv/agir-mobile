@@ -2,6 +2,7 @@ import 'package:app/features/authentification/creer_compte/presentation/pages/cr
 import 'package:app/features/authentification/presentation/widgets/jai_deja_un_compte.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:app/shared/assets/images.dart';
+import 'package:app/shared/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
@@ -69,7 +70,7 @@ class _PreOnboardingCarrouselPageState extends State<PreOnboardingCarrouselPage>
                   child: SafeArea(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                        horizontal: DsfrSpacings.s3w,
+                        horizontal: paddingVerticalPage,
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -112,7 +113,7 @@ class _PreOnboardingCarrouselPageState extends State<PreOnboardingCarrouselPage>
             ),
             SafeArea(
               child: Padding(
-                padding: const EdgeInsets.only(bottom: DsfrSpacings.s3w),
+                padding: const EdgeInsets.only(bottom: paddingVerticalPage),
                 child: TabPageSelector(
                   controller: _tabController,
                   indicatorSize: 8,
@@ -140,7 +141,7 @@ class _Polaroid extends StatelessWidget {
 
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.all(DsfrSpacings.s3w),
+        padding: const EdgeInsets.all(paddingVerticalPage),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

@@ -12,7 +12,7 @@ class TagsPage extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => const SingleChildScrollView(
-        padding: EdgeInsets.all(24),
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

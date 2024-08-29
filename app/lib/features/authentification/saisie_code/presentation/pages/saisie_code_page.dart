@@ -4,6 +4,7 @@ import 'package:app/features/authentification/saisie_code/presentation/blocs/sai
 import 'package:app/features/authentification/saisie_code/presentation/widgets/saisie_code_input.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:app/shared/widgets/composants/alert.dart';
+import 'package:app/shared/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,9 +35,9 @@ class SaisieCodePage extends StatelessWidget {
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.only(
-              left: DsfrSpacings.s2w,
-              right: DsfrSpacings.s2w,
-              bottom: DsfrSpacings.s2w,
+              left: paddingVerticalPage,
+              right: paddingVerticalPage,
+              bottom: paddingVerticalPage,
             ),
             child: BlocProvider(
               create: (final context) => SaisieCodeBloc(

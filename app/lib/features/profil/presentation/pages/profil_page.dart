@@ -8,6 +8,7 @@ import 'package:app/features/profil/presentation/pages/options_avancees_page.dar
 import 'package:app/features/profil/presentation/widgets/profil_title.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:app/shared/widgets/composants/card.dart';
+import 'package:app/shared/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -28,7 +29,7 @@ class ProfilPage extends StatelessWidget {
   @override
   Widget build(final BuildContext context) => RootPage(
         body: ListView(
-          padding: const EdgeInsets.all(DsfrSpacings.s2w),
+          padding: const EdgeInsets.all(paddingVerticalPage),
           children: [
             const ProfilTitle(title: Localisation.votreProfil),
             FnvCard(

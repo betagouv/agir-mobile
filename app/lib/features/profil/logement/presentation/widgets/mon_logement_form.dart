@@ -8,6 +8,7 @@ import 'package:app/features/profil/logement/presentation/widgets/mon_logement_r
 import 'package:app/features/profil/logement/presentation/widgets/mon_logement_superficie.dart';
 import 'package:app/features/profil/presentation/widgets/profil_title.dart';
 import 'package:app/l10n/l10n.dart';
+import 'package:app/shared/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +20,7 @@ class MonLogementForm extends StatelessWidget {
     const gap = SizedBox(height: DsfrSpacings.s3w);
 
     return ListView(
-      padding: const EdgeInsets.all(DsfrSpacings.s2w),
+      padding: const EdgeInsets.all(paddingVerticalPage),
       children: const [
         ProfilTitle(title: Localisation.votreLogement),
         MonLogementCodePostalEtCommune(),

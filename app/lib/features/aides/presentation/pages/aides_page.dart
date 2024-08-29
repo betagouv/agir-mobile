@@ -4,6 +4,7 @@ import 'package:app/features/aides/presentation/blocs/aides/aides_state.dart';
 import 'package:app/features/aides/presentation/widgets/carte_aide.dart';
 import 'package:app/features/menu/presentation/pages/root_page.dart';
 import 'package:app/l10n/l10n.dart';
+import 'package:app/shared/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,7 +33,7 @@ class AidesPage extends StatelessWidget {
           final aides = state.aides;
 
           return ListView(
-            padding: const EdgeInsets.all(DsfrSpacings.s2w),
+            padding: const EdgeInsets.all(paddingVerticalPage),
             children: [
               const Text(
                 Localisation.vosAidesTitre,

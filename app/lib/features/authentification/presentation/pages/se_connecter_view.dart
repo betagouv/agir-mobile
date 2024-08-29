@@ -5,6 +5,7 @@ import 'package:app/features/authentification/presentation/blocs/se_connecter_st
 import 'package:app/features/authentification/saisie_code/presentation/pages/saisie_code_page.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:app/shared/widgets/composants/alert.dart';
+import 'package:app/shared/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -49,7 +50,7 @@ class SeConnecterView extends StatelessWidget {
             iconTheme: const IconThemeData(color: DsfrColors.blueFranceSun113),
           ),
           body: ListView(
-            padding: const EdgeInsets.all(DsfrSpacings.s2w),
+            padding: const EdgeInsets.all(paddingVerticalPage),
             children: [
               const Text(
                 Localisation.pageConnexionTitre,

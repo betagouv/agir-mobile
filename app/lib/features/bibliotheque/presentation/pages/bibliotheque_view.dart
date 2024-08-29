@@ -6,6 +6,7 @@ import 'package:app/features/bibliotheque/presentation/blocs/bibliotheque_event.
 import 'package:app/features/bibliotheque/presentation/pages/contenu.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
 import 'package:app/l10n/l10n.dart';
+import 'package:app/shared/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,7 +16,7 @@ class BibliothequeView extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    const padding = DsfrSpacings.s3w;
+    const padding = paddingVerticalPage;
 
     return CustomScrollView(
       primary: true,
@@ -175,7 +176,7 @@ class _SliverListe extends StatelessWidget {
     );
 
     return SliverPadding(
-      padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s3w),
+      padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
       sliver: SliverList.separated(
         itemBuilder: (final context, final index) =>
             Contenu(contenu: contenus[index]),
