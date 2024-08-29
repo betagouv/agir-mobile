@@ -127,10 +127,12 @@ class DsfrTextStyle extends TextStyle {
           color: color,
         );
 
-  const DsfrTextStyle.bodyLgBold({final Color color = DsfrColors.grey50})
-      : this(
+  const DsfrTextStyle.bodyLgBold({
+    final Color color = DsfrColors.grey50,
+    final double lineHeight = 28,
+  }) : this(
           fontSize: 18,
-          lineHeight: 28,
+          lineHeight: lineHeight,
           fontWeight: FontWeight.bold,
           color: color,
         );
