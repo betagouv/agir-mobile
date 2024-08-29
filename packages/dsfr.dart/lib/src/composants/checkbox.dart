@@ -1,6 +1,5 @@
-import 'package:dsfr/src/fondamentaux/colors.g.dart';
+import 'package:dsfr/src/composants/checkbox_icon.dart';
 import 'package:dsfr/src/fondamentaux/fonts.dart';
-import 'package:dsfr/src/fondamentaux/icons.g.dart';
 import 'package:dsfr/src/fondamentaux/spacing.g.dart';
 import 'package:flutter/material.dart';
 
@@ -45,47 +44,23 @@ class DsfrCheckbox extends StatelessWidget {
   final EdgeInsets padding;
 
   @override
-  Widget build(final BuildContext context) {
-    const dimension = 16.0;
-    const iconColor = DsfrColors.blueFrance975;
-    const backgroundColor = DsfrColors.blueFranceSun113;
-    final labelStyle =
-        value ? const DsfrTextStyle.bodyMdBold() : const DsfrTextStyle.bodyMd();
-    const borderRadius = BorderRadius.all(Radius.circular(4));
-    const gap = DsfrSpacings.s1w;
-
-    return GestureDetector(
-      onTap: onChanged == null ? null : () => onChanged?.call(!value),
-      behavior: HitTestBehavior.opaque,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          DecoratedBox(
-            decoration: BoxDecoration(
-              color: value ? backgroundColor : null,
-              border: const Border.fromBorderSide(
-                BorderSide(color: backgroundColor),
-              ),
-              borderRadius: borderRadius,
-            ),
-            child: Padding(
-              padding: padding,
-              child: SizedBox.square(
-                dimension: dimension,
-                child: value
-                    ? const Icon(
-                        DsfrIcons.systemCheckLine,
-                        size: dimension,
-                        color: iconColor,
-                      )
-                    : null,
+  Widget build(final BuildContext context) => GestureDetector(
+        onTap: onChanged == null ? null : () => onChanged?.call(!value),
+        behavior: HitTestBehavior.opaque,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            DsfrCheckboxIcon(value: value, padding: padding),
+            const SizedBox(width: DsfrSpacings.s1w),
+            Flexible(
+              child: Text(
+                label,
+                style: value
+                    ? const DsfrTextStyle.bodyMdBold()
+                    : const DsfrTextStyle.bodyMd(),
               ),
             ),
-          ),
-          const SizedBox(width: gap),
-          Flexible(child: Text(label, style: labelStyle)),
-        ],
-      ),
-    );
-  }
+          ],
+        ),
+      );
 }

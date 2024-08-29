@@ -11,6 +11,8 @@ class CreerCompteBloc extends Bloc<CreerCompteEvent, CreerCompteState> {
         super(const CreerCompteState.empty()) {
     on<CreerCompteAdresseMailAChangee>(_onAdresseMailAChangee);
     on<CreerCompteMotDePasseAChange>(_onMotDePasseAChange);
+    on<CreerCompteCharteAChange>(_onCharteAChange);
+    on<CreerCompteCguAChange>(_onCguAChange);
     on<CreerCompteCreationDemandee>(_onCreationDemandee);
   }
 
@@ -28,6 +30,20 @@ class CreerCompteBloc extends Bloc<CreerCompteEvent, CreerCompteState> {
     final Emitter<CreerCompteState> emit,
   ) {
     emit(state.copyWith(motDePasse: event.valeur));
+  }
+
+  void _onCharteAChange(
+    final CreerCompteCharteAChange event,
+    final Emitter<CreerCompteState> emit,
+  ) {
+    emit(state.copyWith(aCharteAcceptee: event.valeur));
+  }
+
+  void _onCguAChange(
+    final CreerCompteCguAChange event,
+    final Emitter<CreerCompteState> emit,
+  ) {
+    emit(state.copyWith(aCguAcceptees: event.valeur));
   }
 
   Future<void> _onCreationDemandee(

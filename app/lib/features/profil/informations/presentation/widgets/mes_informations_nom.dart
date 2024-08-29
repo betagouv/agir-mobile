@@ -19,6 +19,7 @@ class MesInformationsNom extends StatelessWidget {
           .read<MesInformationsBloc>()
           .add(MesInformationsNomChange(value)),
       initialValue: nom,
+      textInputAction: TextInputAction.next,
     );
   }
 }

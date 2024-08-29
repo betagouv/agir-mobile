@@ -21,6 +21,7 @@ class MesInformationsEmail extends StatelessWidget {
           .add(MesInformationsEmailChange(value)),
       initialValue: email,
       keyboardType: TextInputType.emailAddress,
+      textInputAction: TextInputAction.next,
     );
   }
 }

@@ -46,20 +46,8 @@ void main() {
         ),
       ]);
       ielNAPasTermineeSonIntegration();
-      await _allerSurLaPageCreerCompte(tester);
-      ielVoitLeTexte(Localisation.creezVotreCompte);
       const email = 'joe@doe.com';
-      await ielEcritDansLeChamp(
-        tester,
-        label: Localisation.adresseEmail,
-        enterText: email,
-      );
-      await ielEcritDansLeChamp(
-        tester,
-        label: Localisation.motDePasse,
-        enterText: 'ceciEstUnMotDePasseValide!1',
-      );
-      await ielAppuieSur(tester, Localisation.creerMonCompte);
+      await _allerSurLaPageSaisieCode(tester, email: email);
       final authentificationPort = ScenarioContext().authentificationPortMock!;
       expect(authentificationPort.creerCompteAppele, true);
       ielVoitLeTexte(Localisation.entrezLeCodeRecuParMail);
@@ -103,20 +91,8 @@ void main() {
 
   testWidgets('Iel demande de renvoyer le mail', (final tester) async {
     setUpWidgets(tester);
-    await _allerSurLaPageCreerCompte(tester);
-    ielVoitLeTexte(Localisation.creezVotreCompte);
     const email = 'joe@doe.com';
-    await ielEcritDansLeChamp(
-      tester,
-      label: Localisation.adresseEmail,
-      enterText: email,
-    );
-    await ielEcritDansLeChamp(
-      tester,
-      label: Localisation.motDePasse,
-      enterText: 'ceciEstUnMotDePasseValide!1',
-    );
-    await ielAppuieSur(tester, Localisation.creerMonCompte);
+    await _allerSurLaPageSaisieCode(tester, email: email);
     await ielAppuieSur(tester, Localisation.renvoyerEmailDeConnexion);
     final authentificationPort = ScenarioContext().authentificationPortMock!;
     expect(authentificationPort.renvoyerCodeAppele, true);
@@ -131,6 +107,35 @@ void main() {
       equals('e***l@mail.com'),
     );
   });
+}
+
+Future<void> _allerSurLaPageSaisieCode(
+  final WidgetTester tester, {
+  required final String email,
+}) async {
+  await _allerSurLaPageCreerCompte(tester);
+  ielVoitLeTexte(Localisation.creezVotreCompte);
+
+  await ielEcritDansLeChamp(
+    tester,
+    label: Localisation.adresseEmail,
+    enterText: email,
+  );
+  await ielEcritDansLeChamp(
+    tester,
+    label: Localisation.motDePasse,
+    enterText: 'ceciEstUnMotDePasseValide!1',
+  );
+
+  await tester
+      .tap(find.bySemanticsLabel("J'accepte la charte de participation"));
+  await tester.pumpAndSettle();
+  await tester.tap(
+    find.bySemanticsLabel("J'accepte les conditions générales d'utilisation"),
+  );
+  await tester.pumpAndSettle();
+
+  await ielAppuieSur(tester, Localisation.creerMonCompte);
 }
 
 Future<void> _allerSurLaPageCreerCompte(final WidgetTester tester) async {

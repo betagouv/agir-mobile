@@ -25,6 +25,7 @@ class DsfrInput extends StatefulWidget {
     this.textAlign = TextAlign.start,
     this.isPasswordMode = false,
     this.keyboardType,
+    this.textInputAction,
     this.inputFormatters,
     super.key,
   });
@@ -45,6 +46,7 @@ class DsfrInput extends StatefulWidget {
   final TextAlign textAlign;
   final bool isPasswordMode;
   final TextInputType? keyboardType;
+  final TextInputAction? textInputAction;
   final List<TextInputFormatter>? inputFormatters;
 
   @override
@@ -98,6 +100,7 @@ class _DsfrInputState extends State<DsfrInput> {
           onChanged: widget.onChanged,
           validator: widget.validator,
           keyboardType: widget.keyboardType,
+          textInputAction: widget.textInputAction,
           width: widget.width,
           isPasswordMode: widget.isPasswordMode,
           passwordVisibility: _passwordVisibility,

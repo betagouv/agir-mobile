@@ -83,9 +83,11 @@ abstract final class Localisation {
   static const fermer = 'Fermer';
   static const fioul = 'Fioul';
   static const gaz = 'Gaz';
+  static const jaccepte = "J'accepte ";
   static const jaiCompris = "J'ai compris";
   static const jaiDejaUnCompte = "J'ai déjà un compte";
   static const jusqua = "Jusqu'à ";
+  static const laCharteDeParticipation = 'la charte de participation';
   static const lesCategories = 'Les catégories';
   static const lesCategoriesAlimentation = 'Alimentation';
   static const lesCategoriesClimat = 'Environnement';
@@ -95,6 +97,7 @@ abstract final class Localisation {
   static const lesCategoriesLoisir = 'Loisirs';
   static const lesCategoriesTout = 'Tout';
   static const lesCategoriesTransport = 'Transports';
+  static const lesCgu = "les conditions générales d'utilisation";
   static const maReponse = 'Ma réponse';
   static const menu = 'Menu';
   static const menuAccueil = 'Accueil';
