@@ -88,6 +88,8 @@ abstract final class Localisation {
   static const jaiDejaUnCompte = "J'ai déjà un compte";
   static const jusqua = "Jusqu'à ";
   static const laCharteDeParticipation = 'la charte de participation';
+  static const laCharteDeParticipationMenu = 'Charte de participation';
+  static const laCharteDeParticipationSite = 'https://agir.beta.gouv.fr/charte';
   static const lesCategories = 'Les catégories';
   static const lesCategoriesAlimentation = 'Alimentation';
   static const lesCategoriesClimat = 'Environnement';
@@ -98,6 +100,8 @@ abstract final class Localisation {
   static const lesCategoriesTout = 'Tout';
   static const lesCategoriesTransport = 'Transports';
   static const lesCgu = "les conditions générales d'utilisation";
+  static const lesCguMenu = 'CGU';
+  static const lesCguSite = 'https://agir.beta.gouv.fr/cgu';
   static const maReponse = 'Ma réponse';
   static const menu = 'Menu';
   static const menuAccueil = 'Accueil';

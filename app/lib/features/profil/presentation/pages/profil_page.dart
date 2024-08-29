@@ -1,3 +1,5 @@
+// ignore_for_file: prefer-correct-handler-name
+
 import 'package:app/features/menu/presentation/pages/root_page.dart';
 import 'package:app/features/mieux_vous_connaitre/presentation/liste/pages/mieux_vous_connaitre_page.dart';
 import 'package:app/features/profil/informations/presentation/pages/mes_informations_page.dart';
@@ -9,6 +11,7 @@ import 'package:app/shared/widgets/composants/card.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class ProfilPage extends StatelessWidget {
   const ProfilPage({super.key});
@@ -53,6 +56,24 @@ class ProfilPage extends StatelessWidget {
                   ),
                   const DsfrDivider(),
                   _MenuElement(
+                    icon: DsfrIcons.documentDraftLine,
+                    label: Localisation.laCharteDeParticipationMenu,
+                    onTap: () async => launchUrlString(
+                      Localisation.laCharteDeParticipationSite,
+                    ),
+                    iconRight: DsfrIcons.systemExternalLinkLine,
+                  ),
+                  const DsfrDivider(),
+                  _MenuElement(
+                    icon: DsfrIcons.documentArticleLine,
+                    label: Localisation.lesCguMenu,
+                    onTap: () async => launchUrlString(
+                      Localisation.lesCguSite,
+                    ),
+                    iconRight: DsfrIcons.systemExternalLinkLine,
+                  ),
+                  const DsfrDivider(),
+                  _MenuElement(
                     icon: DsfrIcons.systemSettings5Line,
                     label: Localisation.optionsAvancees,
                     onTap: () async => GoRouter.of(context)
@@ -67,11 +88,17 @@ class ProfilPage extends StatelessWidget {
 }
 
 class _MenuElement extends StatelessWidget {
-  const _MenuElement({required this.icon, required this.label, this.onTap});
+  const _MenuElement({
+    required this.icon,
+    required this.label,
+    this.onTap,
+    this.iconRight = DsfrIcons.systemArrowRightSLine,
+  });
 
   final IconData icon;
   final String label;
   final GestureTapCallback? onTap;
+  final IconData iconRight;
 
   @override
   Widget build(final BuildContext context) {
@@ -90,7 +117,7 @@ class _MenuElement extends StatelessWidget {
               child: Text(label, style: const DsfrTextStyle.bodyMdMedium()),
             ),
             const SizedBox(width: DsfrSpacings.s1w),
-            const Icon(DsfrIcons.systemArrowRightSLine, color: iconColor),
+            Icon(iconRight, color: iconColor),
           ],
         ),
       ),
