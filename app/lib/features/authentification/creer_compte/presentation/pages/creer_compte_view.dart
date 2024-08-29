@@ -64,6 +64,7 @@ class CreerCompteView extends StatelessWidget {
               DsfrInput(
                 label: Localisation.adresseEmail,
                 onChanged: (final value) => _handleAdresseMail(context, value),
+                autocorrect: false,
                 keyboardType: TextInputType.emailAddress,
                 textInputAction: TextInputAction.next,
               ),

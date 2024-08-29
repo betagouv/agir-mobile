@@ -42,7 +42,10 @@ class Menu extends StatelessWidget {
               ),
             ),
             const Expanded(
-              child: ColoredBox(color: Colors.white, child: _MenuItems()),
+              child: ColoredBox(
+                color: Colors.white,
+                child: SafeArea(top: false, child: _MenuItems()),
+              ),
             ),
           ],
         ),

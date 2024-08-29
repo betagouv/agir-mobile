@@ -24,6 +24,7 @@ class DsfrInput extends StatefulWidget {
     this.hintColor = DsfrColors.grey425,
     this.textAlign = TextAlign.start,
     this.isPasswordMode = false,
+    this.autocorrect,
     this.keyboardType,
     this.textInputAction,
     this.inputFormatters,
@@ -45,6 +46,7 @@ class DsfrInput extends StatefulWidget {
   final Color hintColor;
   final TextAlign textAlign;
   final bool isPasswordMode;
+  final bool? autocorrect;
   final TextInputType? keyboardType;
   final TextInputAction? textInputAction;
   final List<TextInputFormatter>? inputFormatters;
@@ -104,6 +106,7 @@ class _DsfrInputState extends State<DsfrInput> {
           width: widget.width,
           isPasswordMode: widget.isPasswordMode,
           passwordVisibility: _passwordVisibility,
+          autocorrect: widget.autocorrect,
           textAlign: widget.textAlign,
           inputFormatters: widget.inputFormatters,
           key: ValueKey(labelText),

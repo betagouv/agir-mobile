@@ -20,6 +20,7 @@ class MesInformationsEmail extends StatelessWidget {
           .read<MesInformationsBloc>()
           .add(MesInformationsEmailChange(value)),
       initialValue: email,
+      autocorrect: false,
       keyboardType: TextInputType.emailAddress,
       textInputAction: TextInputAction.next,
     );
