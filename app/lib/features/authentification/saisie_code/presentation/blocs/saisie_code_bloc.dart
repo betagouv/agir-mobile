@@ -13,7 +13,7 @@ class SaisieCodeBloc extends Bloc<SaisieCodeEvent, SaisieCodeState> {
         super(
           SaisieCodeState(
             email: email,
-            renvoyerCodeDemandee: false,
+            renvoyerCodeDemande: false,
             erreur: const None(),
           ),
         ) {
@@ -27,9 +27,9 @@ class SaisieCodeBloc extends Bloc<SaisieCodeEvent, SaisieCodeState> {
     final SaiseCodeRenvoyerCodeDemandee event,
     final Emitter<SaisieCodeState> emit,
   ) async {
-    emit(state.copyWith(renvoyerCodeDemandee: false));
-    await _authentificationPort.renvoyerCodeDemandee(state.email);
-    emit(state.copyWith(renvoyerCodeDemandee: true));
+    emit(state.copyWith(renvoyerCodeDemande: false));
+    await _authentificationPort.renvoyerCodeDemande(state.email);
+    emit(state.copyWith(renvoyerCodeDemande: true));
   }
 
   Future<void> _onCodeSaisie(

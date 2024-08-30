@@ -12,11 +12,19 @@ abstract interface class AuthentificationPort {
     final InformationDeConnexion informationDeConnexion,
   );
 
-  Future<Either<Exception, void>> renvoyerCodeDemandee(final String email);
+  Future<Either<Exception, void>> renvoyerCodeDemande(final String email);
 
   Future<Either<AuthentificationErreur, void>> validationDemandee(
     final InformationDeCode informationDeConnexion,
   );
 
   Future<Either<Exception, void>> deconnexionDemandee();
+
+  Future<Either<Exception, void>> oubliMotDePasse(final String email);
+
+  Future<Either<AuthentificationErreur, void>> modifierMotDePasse({
+    required final String email,
+    required final String code,
+    required final String motDePasse,
+  });
 }

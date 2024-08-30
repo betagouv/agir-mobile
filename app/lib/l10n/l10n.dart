@@ -113,6 +113,11 @@ abstract final class Localisation {
   static const modifier = 'Modifier';
   static const moinsDe35m2 = 'Moins de 35 m²';
   static const motDePasse = 'Mot de passe';
+  static const motDePasseOublie = 'Mot de passe oublié ?';
+  static const motDePasseOublieDetails =
+      'Saisissez l’adresse électronique associé à votre compte.';
+  static const motDePasseOublieTitre = 'Mot de passe oublié - 1/2';
+  static const motDePasseOublieTitre2 = 'Mot de passe oublié - 2/2';
   static const motDePasse12CaractresMinimum = '12 caractères minimum';
   static const motDePasse1CaractreSpecialMinimum =
       '1 caractère spécial minimum';
@@ -171,6 +176,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
       'Quelle est votre mode de chauffage principal ?';
   static const quiz = 'Quiz';
   static const rechercherParTitre = 'Rechercher par titre';
+  static const renvoyerCode = 'Renvoyer le code';
   static const renvoyerEmailDeConnexion = "Renvoyer l'email de connexion";
   static const retour = 'Retour';
   static const revenirAccueil = "Revenir à l'accueil";
@@ -245,6 +251,11 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
 
   static String entrezLeCodeRecuParMailDetails(final String value) =>
       'Pour vérifier votre identité et vous permettre d’accéder à votre compte, nous vous avons envoyé un email à l’adresse : ${cacherEmail(value)}';
+
+  static String entrezLeCodeRecuOublieMotDePasseParMailDetails(
+    final String value,
+  ) =>
+      'Pour vérifier votre identité et vous permettre de modifier votre mot de passe, nous vous avons envoyé un email à l’adresse : ${cacherEmail(value)}';
 
   static String euro(final int value) => '$value €';
 

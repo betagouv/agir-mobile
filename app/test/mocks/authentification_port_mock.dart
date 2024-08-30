@@ -15,6 +15,8 @@ class AuthentificationPortMock implements AuthentificationPort {
   bool creerCompteAppele = false;
   bool validationAppele = false;
   bool renvoyerCodeAppele = false;
+  bool oublieMotDePasseAppele = false;
+  bool modifierMotDePasseAppele = false;
 
   @override
   Future<Either<AuthentificationErreur, void>> connexionDemandee(
@@ -43,7 +45,7 @@ class AuthentificationPortMock implements AuthentificationPort {
   }
 
   @override
-  Future<Either<Exception, void>> renvoyerCodeDemandee(
+  Future<Either<Exception, void>> renvoyerCodeDemande(
     final String email,
   ) async {
     renvoyerCodeAppele = true;
@@ -58,6 +60,24 @@ class AuthentificationPortMock implements AuthentificationPort {
     validationAppele = true;
     authentificationStatusManager
         .gererAuthentificationStatut(AuthentificationStatut.connecte);
+
+    return const Right(null);
+  }
+
+  @override
+  Future<Either<Exception, void>> oubliMotDePasse(final String email) async {
+    oublieMotDePasseAppele = true;
+
+    return const Right(null);
+  }
+
+  @override
+  Future<Either<AuthentificationErreur, void>> modifierMotDePasse({
+    required final String email,
+    required final String code,
+    required final String motDePasse,
+  }) async {
+    modifierMotDePasseAppele = true;
 
     return const Right(null);
   }

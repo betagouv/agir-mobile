@@ -70,7 +70,7 @@ class AuthentificationApiAdapter implements AuthentificationPort {
   }
 
   @override
-  Future<Either<Exception, void>> renvoyerCodeDemandee(
+  Future<Either<Exception, void>> renvoyerCodeDemande(
     final String email,
   ) async {
     final response = await _apiClient.post(
@@ -112,6 +112,41 @@ class AuthentificationApiAdapter implements AuthentificationPort {
       response.body,
       defaultMessage: 'Erreur lors de la validation du code',
     );
+  }
+
+  @override
+  Future<Either<Exception, void>> oubliMotDePasse(final String email) async {
+    final response = await _apiClient.post(
+      Uri.parse('/utilisateurs/oubli_mot_de_passe'),
+      body: jsonEncode({'email': email}),
+    );
+
+    return response.statusCode == HttpStatus.created
+        ? const Right(null)
+        : Left(Exception('Erreur lors de la demande de mot de passe oublié'));
+  }
+
+  @override
+  Future<Either<AuthentificationErreur, void>> modifierMotDePasse({
+    required final String email,
+    required final String code,
+    required final String motDePasse,
+  }) async {
+    final response = await _apiClient.post(
+      Uri.parse('/utilisateurs/modifier_mot_de_passe'),
+      body: jsonEncode({
+        'code': code,
+        'email': email,
+        'mot_de_passe': motDePasse,
+      }),
+    );
+
+    return response.statusCode == HttpStatus.created
+        ? const Right(null)
+        : _handleError(
+            response.body,
+            defaultMessage: 'Erreur lors de la modification du mot de passe',
+          );
   }
 
   Left<AuthentificationErreur, void> _handleError(

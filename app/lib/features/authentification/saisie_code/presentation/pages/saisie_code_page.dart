@@ -54,7 +54,7 @@ class SaisieCodePage extends StatelessWidget {
                   const SizedBox(height: DsfrSpacings.s1w),
                   Text(
                     Localisation.entrezLeCodeRecuParMailDetails(email),
-                    style: const DsfrTextStyle.bodyXl(),
+                    style: const DsfrTextStyle.bodyLg(),
                   ),
                   const SizedBox(height: DsfrSpacings.s3w),
                   const SaisieCodeInput(),
@@ -108,8 +108,8 @@ class _ButtonRenvoyerCode extends StatelessWidget {
       BlocListener<SaisieCodeBloc, SaisieCodeState>(
         listener: (final context, final state) => _handleCodeRenvoye(context),
         listenWhen: (final previous, final current) =>
-            previous.renvoyerCodeDemandee != current.renvoyerCodeDemandee &&
-            current.renvoyerCodeDemandee,
+            previous.renvoyerCodeDemande != current.renvoyerCodeDemande &&
+            current.renvoyerCodeDemande,
         child: DsfrLink.md(
           label: Localisation.renvoyerEmailDeConnexion,
           onPressed: () => _handleRenvoyerCode(context),

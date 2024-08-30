@@ -4,25 +4,25 @@ import 'package:fpdart/fpdart.dart';
 final class SaisieCodeState extends Equatable {
   const SaisieCodeState({
     required this.email,
-    required this.renvoyerCodeDemandee,
+    required this.renvoyerCodeDemande,
     required this.erreur,
   });
 
   final String email;
-  final bool renvoyerCodeDemandee;
+  final bool renvoyerCodeDemande;
   final Option<String> erreur;
 
   SaisieCodeState copyWith({
     final String? email,
-    final bool? renvoyerCodeDemandee,
     final Option<String>? erreur,
+    final bool? renvoyerCodeDemande,
   }) =>
       SaisieCodeState(
         email: email ?? this.email,
-        renvoyerCodeDemandee: renvoyerCodeDemandee ?? this.renvoyerCodeDemandee,
+        renvoyerCodeDemande: renvoyerCodeDemande ?? this.renvoyerCodeDemande,
         erreur: erreur ?? this.erreur,
       );
 
   @override
-  List<Object> get props => [email, renvoyerCodeDemandee, erreur];
+  List<Object> get props => [email, renvoyerCodeDemande, erreur];
 }

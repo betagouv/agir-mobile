@@ -1,5 +1,3 @@
-// ignore_for_file: omit_local_variable_types
-
 import 'package:dsfr/src/composants/buttons/button_icon_location.dart';
 import 'package:dsfr/src/composants/buttons/button_size.dart';
 import 'package:dsfr/src/composants/buttons/button_variant.dart';
@@ -45,7 +43,7 @@ class DsfrButton extends StatelessWidget {
     Widget child = Text(label);
     if (icon != null) {
       final buttonIcon = Icon(icon, size: _getSize(size));
-      List<Widget> children = [
+      var children = <Widget>[
         buttonIcon,
         const SizedBox(width: DsfrSpacings.s1w),
         Flexible(child: child),

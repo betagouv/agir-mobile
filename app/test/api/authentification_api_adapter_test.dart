@@ -273,7 +273,7 @@ void main() {
       ),
     );
 
-    await adapter.renvoyerCodeDemandee('test@example.com');
+    await adapter.renvoyerCodeDemande('test@example.com');
 
     verify(
       () => client.send(
@@ -281,6 +281,81 @@ void main() {
           that: const RequestMathcher(
             '/utilisateurs/renvoyer_code',
             body: '{"email":"test@example.com"}',
+          ),
+        ),
+      ),
+    );
+  });
+
+  test('oubliMotDePasse', () async {
+    final client = ClientMock()
+      ..postSuccess(
+        path: '/utilisateurs/oubli_mot_de_passe',
+        response: CustomResponse(
+          '''
+{
+  "email": "test@example.com"
+}''',
+          statusCode: HttpStatus.created,
+        ),
+      );
+
+    final adapter = AuthentificationApiAdapter(
+      apiClient: AuthentificationApiClient(
+        apiUrl: apiUrl,
+        authentificationTokenStorage: AuthentificationTokenStorage(
+          secureStorage: FlutterSecureStorageMock(),
+          authentificationStatusManagerWriter: AuthentificationStatutManager(),
+        ),
+        inner: client,
+      ),
+    );
+
+    await adapter.oubliMotDePasse('test@example.com');
+
+    verify(
+      () => client.send(
+        any(
+          that: const RequestMathcher(
+            '/utilisateurs/oubli_mot_de_passe',
+            body: '{"email":"test@example.com"}',
+          ),
+        ),
+      ),
+    );
+  });
+
+  test('modifierMotDePasse', () async {
+    final client = ClientMock()
+      ..postSuccess(
+        path: '/utilisateurs/modifier_mot_de_passe',
+        response: CustomResponse('', statusCode: HttpStatus.created),
+      );
+
+    final adapter = AuthentificationApiAdapter(
+      apiClient: AuthentificationApiClient(
+        apiUrl: apiUrl,
+        authentificationTokenStorage: AuthentificationTokenStorage(
+          secureStorage: FlutterSecureStorageMock(),
+          authentificationStatusManagerWriter: AuthentificationStatutManager(),
+        ),
+        inner: client,
+      ),
+    );
+
+    await adapter.modifierMotDePasse(
+      email: 'test@example.com',
+      code: '123456',
+      motDePasse: 'password123',
+    );
+
+    verify(
+      () => client.send(
+        any(
+          that: const RequestMathcher(
+            '/utilisateurs/modifier_mot_de_passe',
+            body:
+                '{"code":"123456","email":"test@example.com","mot_de_passe":"password123"}',
           ),
         ),
       ),
