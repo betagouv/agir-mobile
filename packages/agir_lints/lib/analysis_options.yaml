@@ -80,6 +80,7 @@ dart_code_metrics:
     - format-comment:
         only-doc-comments: true
     - parameters-ordering: false
+    - prefer-addition-subtraction-assignments: false
     - prefer-boolean-prefixes: false
     - prefer-correct-identifier-length: false
     - prefer-correct-throws: false
@@ -87,6 +88,7 @@ dart_code_metrics:
     - prefer-explicit-type-arguments: false
     - prefer-extracting-function-callbacks: false
     - prefer-for-loop-in-children: false
+    - prefer-type-over-var: false
     - prefer-match-file-name: false
     - prefer-moving-to-variable:
         exclude:

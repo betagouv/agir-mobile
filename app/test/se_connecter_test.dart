@@ -32,7 +32,6 @@ void main() {
     (final tester) async {
       setUpWidgets(tester);
       await ielLanceLapplication(tester);
-      ielVoitLeTexte(Localisation.preOnboardingTitre);
       await ielAppuieSur(tester, Localisation.commencer);
       ielVoitLeTexteMarkdown(tester, Localisation.preOnboarding1);
       await ielGlisseDeLaDroiteVersLaGauche(tester);
@@ -49,7 +48,6 @@ void main() {
     (final tester) async {
       setUpWidgets(tester);
       await ielLanceLapplication(tester);
-      ielVoitLeTexte(Localisation.preOnboardingTitre);
       await ielAppuieSur(tester, Localisation.jaiDejaUnCompte);
       ielVoitLeTexte(Localisation.meConnecter);
     },
@@ -60,16 +58,7 @@ void main() {
     (final tester) async {
       setUpWidgets(tester);
       await ielLanceLapplication(tester);
-      ielVoitLeTexte(Localisation.preOnboardingTitre);
-      await ielAppuieSur(tester, Localisation.commencer);
-      ielVoitLeTexteMarkdown(tester, Localisation.preOnboarding1);
-      await ielGlisseDeLaDroiteVersLaGauche(tester);
-      ielVoitLeTexteMarkdown(tester, Localisation.preOnboarding2);
-      await ielGlisseDeLaDroiteVersLaGauche(tester);
-      ielVoitLeTexteMarkdown(tester, Localisation.preOnboarding3);
-      await ielGlisseDeLaDroiteVersLaGauche(tester);
       await ielAppuieSur(tester, Localisation.jaiDejaUnCompte);
-      ielVoitLeTexte(Localisation.meConnecter);
       await ielEcritDansLeChamp(
         tester,
         label: Localisation.adresseEmail,

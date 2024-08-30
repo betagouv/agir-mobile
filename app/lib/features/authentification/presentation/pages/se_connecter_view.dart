@@ -1,4 +1,5 @@
 import 'package:app/features/authentification/creer_compte/presentation/pages/creer_compte_page.dart';
+import 'package:app/features/authentification/mot_de_passe_oublie/pages/mot_de_passe_oublie_page.dart';
 import 'package:app/features/authentification/presentation/blocs/se_connecter_bloc.dart';
 import 'package:app/features/authentification/presentation/blocs/se_connecter_event.dart';
 import 'package:app/features/authentification/presentation/blocs/se_connecter_state.dart';
@@ -77,7 +78,16 @@ class SeConnecterView extends StatelessWidget {
                 keyboardType: TextInputType.visiblePassword,
               ),
               const _MessageErreur(),
-              const SizedBox(height: DsfrSpacings.s2w),
+              const SizedBox(height: DsfrSpacings.s1w),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: DsfrLink.md(
+                  label: Localisation.motDePasseOublie,
+                  onPressed: () async =>
+                      GoRouter.of(context).pushNamed(MotDePasseOubliePage.name),
+                ),
+              ),
+              const SizedBox(height: DsfrSpacings.s3w),
               BlocSelector<SeConnecterBloc, SeConnecterState, bool>(
                 selector: (final state) => state.estValide,
                 builder: (final context, final state) => DsfrButton(

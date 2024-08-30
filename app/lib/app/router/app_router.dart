@@ -8,6 +8,8 @@ import 'package:app/features/articles/presentation/pages/article_page.dart';
 import 'package:app/features/authentification/creer_compte/presentation/pages/creer_compte_page.dart';
 import 'package:app/features/authentification/domain/entities/authentification_statut_manager.dart';
 import 'package:app/features/authentification/domain/value_objects/authentification_statut.dart';
+import 'package:app/features/authentification/mot_de_passe_oublie/pages/mot_de_passe_oublie_code_page.dart';
+import 'package:app/features/authentification/mot_de_passe_oublie/pages/mot_de_passe_oublie_page.dart';
 import 'package:app/features/authentification/presentation/pages/se_connecter_page.dart';
 import 'package:app/features/authentification/questions/presentation/pages/agir_est_encore_en_experimentation_page.dart';
 import 'package:app/features/authentification/questions/presentation/pages/question_code_postal_page.dart';
@@ -52,6 +54,8 @@ GoRouter goRouter({
                 PreOnboardingCarrouselPage.route,
                 CreerComptePage.route,
                 SeConnecterPage.route,
+                MotDePasseOubliePage.route,
+                MotDePasseOublieCodePage.route,
                 SaisieCodePage.route,
               ],
             ),
