@@ -2,10 +2,10 @@ import 'package:app/features/authentification/questions/presentation/blocs/quest
 import 'package:app/features/authentification/questions/presentation/blocs/question_themes_event.dart';
 import 'package:app/features/authentification/questions/presentation/pages/tout_est_pret_page.dart';
 import 'package:app/features/mieux_vous_connaitre/domain/question.dart';
-import 'package:app/features/mieux_vous_connaitre/presentation/element/widgets/checkbox_set.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:app/shared/assets/images.dart';
 import 'package:app/shared/widgets/composants/bottom_bar.dart';
+import 'package:app/shared/widgets/composants/checkbox_set.dart';
 import 'package:app/shared/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';

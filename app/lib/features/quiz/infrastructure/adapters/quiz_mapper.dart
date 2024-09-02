@@ -33,7 +33,7 @@ abstract final class QuizMapper {
       explicationKo: question['explicationKO'] as String?,
       article: articles.isEmpty
           ? null
-          : ArticleMapper.fromJson({'data': articles.firstOrNull}),
+          : ArticleMapper.fromJson({'data': articles.first}),
     );
   }
 }

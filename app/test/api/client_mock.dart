@@ -19,11 +19,11 @@ class ClientMock extends Mock implements http.Client {
 
   void patchSuccess({
     required final String path,
-    required final CustomResponse response,
+    final CustomResponse? response,
   }) {
     registerFallbackValue(RequestFake());
     when(() => send(any(that: RequestMathcher(path))))
-        .thenAnswer((final _) async => response);
+        .thenAnswer((final _) async => response ?? OkResponse());
   }
 
   void postSuccess({

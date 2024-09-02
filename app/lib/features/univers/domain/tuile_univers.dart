@@ -1,4 +1,3 @@
-import 'package:app/features/mieux_vous_connaitre/domain/question.dart';
 import 'package:equatable/equatable.dart';
 
 class TuileUnivers extends Equatable {
@@ -10,7 +9,7 @@ class TuileUnivers extends Equatable {
     required this.estTerminee,
   });
 
-  final Thematique type;
+  final String type;
   final String titre;
   final String imageUrl;
   final bool estVerrouille;

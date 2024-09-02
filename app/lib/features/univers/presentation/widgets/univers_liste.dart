@@ -1,8 +1,9 @@
 import 'package:app/features/univers/domain/tuile_univers.dart';
 import 'package:app/features/univers/presentation/blocs/accueil_univers_bloc.dart';
 import 'package:app/features/univers/presentation/pages/univers_page.dart';
+import 'package:app/features/univers/presentation/widgets/univers_card.dart';
 import 'package:app/l10n/l10n.dart';
-import 'package:app/shared/widgets/fondamentaux/shadows.dart';
+import 'package:app/shared/widgets/composants/badge.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,79 +41,36 @@ class _UniversCarte extends StatelessWidget {
   Widget build(final BuildContext context) {
     const width = 140.0;
 
-    const borderRadius = BorderRadius.all(Radius.circular(DsfrSpacings.s1w));
-
-    return Stack(
-      alignment: Alignment.topCenter,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 13),
-          child: GestureDetector(
-            onTap: univers.estVerrouille
-                ? null
-                : () async => GoRouter.of(context)
-                    .pushNamed(UniversPage.name, extra: univers),
-            child: DecoratedBox(
-              decoration: const ShapeDecoration(
-                color: Colors.white,
-                shadows: recommandationOmbre,
-                shape: RoundedRectangleBorder(borderRadius: borderRadius),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  left: DsfrSpacings.s1w,
-                  top: DsfrSpacings.s1w,
-                  right: DsfrSpacings.s1w,
-                  bottom: DsfrSpacings.s3v,
-                ),
-                child: SizedBox(
-                  width: width,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _Image(
-                        imageUrl: univers.imageUrl,
-                        estVerrouille: univers.estVerrouille,
-                        width: width,
-                        borderRadius: borderRadius,
-                      ),
-                      const SizedBox(height: DsfrSpacings.s1w),
-                      Text(
-                        univers.titre,
-                        style: const DsfrTextStyle.bodyLgMedium(),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+    return UniversCard(
+      badge: univers.estTerminee
+          ? const FnvBadge(
+              label: Localisation.termine,
+              backgroundColor: DsfrColors.success425,
+            )
+          : null,
+      onTap: univers.estVerrouille
+          ? null
+          : () async =>
+              GoRouter.of(context).pushNamed(UniversPage.name, extra: univers),
+      child: SizedBox(
+        width: width,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _Image(
+              imageUrl: univers.imageUrl,
+              estVerrouille: univers.estVerrouille,
+              width: width,
+              borderRadius:
+                  const BorderRadius.all(Radius.circular(DsfrSpacings.s1v)),
             ),
-          ),
+            const SizedBox(height: DsfrSpacings.s1w),
+            Text(univers.titre, style: const DsfrTextStyle.bodyLgMedium()),
+          ],
         ),
-        if (univers.estTerminee) const _Badge(),
-      ],
+      ),
     );
   }
-}
-
-class _Badge extends StatelessWidget {
-  const _Badge();
-
-  @override
-  Widget build(final BuildContext context) => const DecoratedBox(
-        decoration: ShapeDecoration(
-          color: DsfrColors.success425,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(DsfrSpacings.s0v5)),
-          ),
-        ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: DsfrSpacings.s1w),
-          child: Text(
-            Localisation.termine,
-            style: DsfrTextStyle.bodySmBold(color: Colors.white),
-          ),
-        ),
-      );
 }
 
 class _Image extends StatelessWidget {

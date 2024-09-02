@@ -1,4 +1,3 @@
-import 'package:app/features/mieux_vous_connaitre/domain/question.dart';
 import 'package:equatable/equatable.dart';
 
 sealed class RecommandationsEvent extends Equatable {
@@ -11,7 +10,7 @@ sealed class RecommandationsEvent extends Equatable {
 final class RecommandationsRecuperationDemandee extends RecommandationsEvent {
   const RecommandationsRecuperationDemandee(this.thematique);
 
-  final Thematique? thematique;
+  final String? thematique;
 
   @override
   List<Object?> get props => [thematique];

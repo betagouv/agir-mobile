@@ -1,7 +1,13 @@
 import 'package:app/features/recommandations/presentation/widgets/mes_recommandations.dart';
+import 'package:app/features/univers/domain/mission_liste.dart';
 import 'package:app/features/univers/domain/tuile_univers.dart';
 import 'package:app/features/univers/presentation/blocs/univers_bloc.dart';
+import 'package:app/features/univers/presentation/blocs/univers_event.dart';
+import 'package:app/features/univers/presentation/pages/mission_page.dart';
+import 'package:app/features/univers/presentation/widgets/univers_card.dart';
+import 'package:app/l10n/l10n.dart';
 import 'package:app/shared/widgets/composants/app_bar.dart';
+import 'package:app/shared/widgets/composants/badge.dart';
 import 'package:app/shared/widgets/fondamentaux/colors.dart';
 import 'package:app/shared/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:dsfr/dsfr.dart';
@@ -10,26 +16,31 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class UniversPage extends StatelessWidget {
-  const UniversPage({super.key});
+  const UniversPage({super.key, required this.univers});
 
   static const name = 'univers';
   static const path = name;
 
+  final TuileUnivers univers;
+
   static GoRoute get route => GoRoute(
         path: path,
         name: name,
-        builder: (final context, final state) => BlocProvider(
-          create: (final context) =>
-              UniversBloc(univers: state.extra! as TuileUnivers),
-          child: const UniversPage(),
-        ),
+        builder: (final context, final state) =>
+            UniversPage(univers: state.extra! as TuileUnivers),
       );
 
   @override
-  Widget build(final BuildContext context) => const Scaffold(
-        appBar: FnvAppBar(),
-        body: _View(),
-        backgroundColor: FnvColors.aidesFond,
+  Widget build(final BuildContext context) => BlocProvider(
+        create: (final context) => UniversBloc(
+          univers: univers,
+          universPort: context.read(),
+        )..add(UniversThematiquesRecuperationDemandee(univers.type)),
+        child: const Scaffold(
+          appBar: FnvAppBar(),
+          body: _View(),
+          backgroundColor: FnvColors.aidesFond,
+        ),
       );
 }
 
@@ -46,7 +57,13 @@ class _Title extends StatelessWidget {
   @override
   Widget build(final BuildContext context) => ListView(
         padding: const EdgeInsets.all(paddingVerticalPage),
-        children: const [_ImageEtTitre(), _Recommandations()],
+        children: const [
+          _ImageEtTitre(),
+          SizedBox(height: DsfrSpacings.s6w),
+          _Thematiques(),
+          SizedBox(height: DsfrSpacings.s5w),
+          _Recommandations(),
+        ],
       );
 }
 
@@ -72,7 +89,6 @@ class _ImageEtTitre extends StatelessWidget {
         ),
         const SizedBox(height: DsfrSpacings.s1w),
         Text(univers.titre, style: const DsfrTextStyle.headline2()),
-        const SizedBox(height: DsfrSpacings.s6w),
       ],
     );
   }
@@ -87,5 +103,102 @@ class _Recommandations extends StatelessWidget {
         .select<UniversBloc, TuileUnivers>((final bloc) => bloc.state.univers);
 
     return MesRecommandations(thematique: univers.type);
+  }
+}
+
+class _Thematiques extends StatelessWidget {
+  const _Thematiques();
+
+  @override
+  Widget build(final BuildContext context) {
+    final thematiques = context.select<UniversBloc, List<MissionListe>>(
+      (final bloc) => bloc.state.thematiques,
+    );
+
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
+      clipBehavior: Clip.none,
+      child: IntrinsicHeight(
+        child: Row(
+          children: thematiques
+              .map((final e) => _Thematique(mission: e))
+              .separator(const SizedBox(width: DsfrSpacings.s2w))
+              .toList(),
+        ),
+      ),
+    );
+  }
+}
+
+class _Thematique extends StatelessWidget {
+  const _Thematique({required this.mission});
+
+  final MissionListe mission;
+
+  @override
+  Widget build(final BuildContext context) {
+    const width = 160.0;
+    const color = DsfrColors.blueFranceSun113;
+    const success = DsfrColors.success425;
+    final progression = mission.progression / mission.progressionCible;
+
+    return UniversCard(
+      badge: mission.estNouvelle
+          ? const FnvBadge(
+              label: Localisation.nouveau,
+              backgroundColor: DsfrColors.info425,
+            )
+          : progression == 1
+              ? const FnvBadge(
+                  label: Localisation.termine,
+                  backgroundColor: success,
+                )
+              : null,
+      onTap: () async => GoRouter.of(context).pushNamed(
+        MissionPage.name,
+        pathParameters: {'id': mission.id},
+      ),
+      child: SizedBox(
+        width: width,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: const BorderRadius.all(
+                Radius.circular(DsfrSpacings.s1v),
+              ),
+              child: Image.network(
+                mission.imageUrl,
+                width: width,
+                fit: BoxFit.cover,
+              ),
+            ),
+            const SizedBox(height: DsfrSpacings.s3v),
+            LinearProgressIndicator(
+              value: progression,
+              backgroundColor: const Color(0xFFDDDDFF),
+              color: progression == 1 ? success : color,
+              minHeight: 7,
+              borderRadius: const BorderRadius.all(
+                Radius.circular(DsfrSpacings.s1v),
+              ),
+            ),
+            const SizedBox(height: DsfrSpacings.s1w),
+            if (mission.niveau != null) ...[
+              Text(
+                Localisation.niveau(mission.niveau!),
+                style: const DsfrTextStyle.bodyXs(color: color),
+              ),
+              const SizedBox(height: DsfrSpacings.s1v),
+            ],
+            Text(
+              mission.titre,
+              style: const DsfrTextStyle.bodyLg(lineHeight: 22),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

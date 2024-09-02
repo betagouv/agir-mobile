@@ -28,6 +28,9 @@ import 'package:app/features/profil/presentation/pages/options_avancees_page.dar
 import 'package:app/features/profil/presentation/pages/profil_page.dart';
 import 'package:app/features/quiz/presentation/pages/quiz_page.dart';
 import 'package:app/features/recommandations/presentation/widgets/mes_recommandations.dart';
+import 'package:app/features/univers/presentation/pages/defi_page.dart';
+import 'package:app/features/univers/presentation/pages/mission_kyc_page.dart';
+import 'package:app/features/univers/presentation/pages/mission_page.dart';
 import 'package:app/features/univers/presentation/pages/univers_page.dart';
 import 'package:go_router/go_router.dart';
 
@@ -73,6 +76,9 @@ GoRouter goRouter({
                 ToutEstPretPage.route,
                 AccueilPage.route,
                 UniversPage.route,
+                MissionPage.route,
+                MissionKycPage.route,
+                DefiPage.route,
                 AidesPage.route,
                 AidePage.route,
                 AideSimulateurVeloPage.route(
@@ -116,5 +122,5 @@ GoRouter goRouter({
       refreshListenable:
           GoRouterRefreshStream(authentificationStatusManagerReader.statut),
       initialLocation: '/unauthenticated/${PreOnboardingPage.path}',
-      observers: [routeObserver],
+      observers: [mesRecommandationsRouteObserver, missionRouteObserver],
     );

@@ -1,4 +1,3 @@
-import 'package:app/features/mieux_vous_connaitre/domain/question.dart';
 import 'package:app/features/recommandations/presentation/blocs/recommandations_bloc.dart';
 import 'package:app/features/recommandations/presentation/widgets/recommendation_widget.dart';
 import 'package:app/l10n/l10n.dart';
@@ -28,15 +27,15 @@ class LesRecommandations extends StatelessWidget {
                   points: '${e.points}',
                   imageUrl: e.imageUrl,
                   tagLabel: switch (e.thematique) {
-                    Thematique.alimentation =>
-                      Localisation.lesCategoriesAlimentation,
-                    Thematique.transport => Localisation.lesCategoriesTransport,
-                    Thematique.logement => Localisation.lesCategoriesLogement,
-                    Thematique.consommation =>
-                      Localisation.lesCategoriesConsommation,
-                    Thematique.climat => Localisation.lesCategoriesClimat,
-                    Thematique.dechet => Localisation.lesCategoriesDechet,
-                    Thematique.loisir => Localisation.lesCategoriesLoisir,
+                    'alimentation' => Localisation.lesCategoriesAlimentation,
+                    'transport' => Localisation.lesCategoriesTransport,
+                    'logement' => Localisation.lesCategoriesLogement,
+                    'consommation' => Localisation.lesCategoriesConsommation,
+                    'climat' => Localisation.lesCategoriesClimat,
+                    'dechet' => Localisation.lesCategoriesDechet,
+                    'loisir' => Localisation.lesCategoriesLoisir,
+                    // ignore: avoid-unnecessary-type-assertions
+                    String() => throw UnimplementedError(),
                   },
                   titre: e.titre,
                 ),

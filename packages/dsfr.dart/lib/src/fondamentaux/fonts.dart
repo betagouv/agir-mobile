@@ -167,10 +167,12 @@ class DsfrTextStyle extends TextStyle {
           color: color,
         );
 
-  const DsfrTextStyle.bodySmBold({final Color color = DsfrColors.grey50})
-      : this(
+  const DsfrTextStyle.bodySmBold({
+    final Color color = DsfrColors.grey50,
+    final double lineHeight = 24,
+  }) : this(
           fontSize: 14,
-          lineHeight: 24,
+          lineHeight: lineHeight,
           fontWeight: FontWeight.bold,
           color: color,
         );

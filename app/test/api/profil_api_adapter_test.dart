@@ -85,7 +85,7 @@ void main() {
       final client = ClientMock()
         ..patchSuccess(
           path: '/utilisateurs/$utilisateurId/profile',
-          response: CustomResponse(''),
+          response: OkResponse(),
         );
 
       final authentificationTokenStorage = AuthentificationTokenStorage(
@@ -132,7 +132,7 @@ void main() {
       final client = ClientMock()
         ..patchSuccess(
           path: '/utilisateurs/$utilisateurId/profile',
-          response: CustomResponse(''),
+          response: OkResponse(),
         );
 
       final authentificationTokenStorage = AuthentificationTokenStorage(
@@ -259,7 +259,7 @@ void main() {
     test('mettreAJourLogement', () async {
       const path = '/utilisateurs/$utilisateurId/logement';
       final client = ClientMock()
-        ..patchSuccess(path: path, response: CustomResponse(''));
+        ..patchSuccess(path: path, response: OkResponse());
 
       final authentificationTokenStorage = AuthentificationTokenStorage(
         secureStorage: FlutterSecureStorageMock(),
@@ -317,7 +317,7 @@ void main() {
       final client = ClientMock()
         ..patchSuccess(
           path: '/utilisateurs/$utilisateurId/logement',
-          response: CustomResponse(''),
+          response: OkResponse(),
         );
 
       final authentificationTokenStorage = AuthentificationTokenStorage(
@@ -356,7 +356,7 @@ void main() {
     test('supprimerLeCompte', () async {
       const path = '/utilisateurs/$utilisateurId';
       final client = ClientMock()
-        ..deleteSuccess(path: path, response: CustomResponse(''));
+        ..deleteSuccess(path: path, response: OkResponse());
 
       final authentificationTokenStorage = AuthentificationTokenStorage(
         secureStorage: FlutterSecureStorageMock(),
@@ -381,7 +381,7 @@ void main() {
       final client = ClientMock()
         ..patchSuccess(
           path: '/utilisateurs/$utilisateurId/profile',
-          response: CustomResponse(''),
+          response: OkResponse(),
         );
 
       final authentificationTokenStorage = AuthentificationTokenStorage(

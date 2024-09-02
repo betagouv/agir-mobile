@@ -1,6 +1,5 @@
 import 'package:app/features/articles/domain/article.dart';
 import 'package:app/features/bibliotheque/domain/bibliotheque.dart';
-import 'package:app/features/mieux_vous_connaitre/domain/question.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -38,7 +37,7 @@ void main() {
               sousTitre: null,
               imageUrl: 'https://example.com/image.jpg',
               points: 20,
-              thematique: Thematique.alimentation,
+              thematique: 'alimentation',
               thematiqueLabel: '🥦 Alimentation',
             ),
           ],
@@ -65,7 +64,7 @@ void main() {
               sousTitre: null,
               imageUrl: 'https://example.com/image.jpg',
               points: 20,
-              thematique: Thematique.alimentation,
+              thematique: 'alimentation',
               thematiqueLabel: '🥦 Alimentation',
             ),
           ],
@@ -99,7 +98,7 @@ void main() {
               sousTitre: null,
               imageUrl: 'https://example.com/image.jpg',
               points: 20,
-              thematique: Thematique.alimentation,
+              thematique: 'alimentation',
               thematiqueLabel: '🥦 Alimentation',
             ),
             Recommandation(
@@ -109,7 +108,7 @@ void main() {
               sousTitre: null,
               imageUrl: 'https://example.com/image.jpg',
               points: 20,
-              thematique: Thematique.dechet,
+              thematique: 'dechet',
               thematiqueLabel: '🗑️ Déchets',
             ),
           ],
@@ -143,7 +142,7 @@ void main() {
               sousTitre: null,
               imageUrl: 'https://example.com/image.jpg',
               points: 20,
-              thematique: Thematique.alimentation,
+              thematique: 'alimentation',
               thematiqueLabel: '🥦 Alimentation',
             ),
             Recommandation(
@@ -153,7 +152,7 @@ void main() {
               sousTitre: null,
               imageUrl: 'https://example.com/image.jpg',
               points: 20,
-              thematique: Thematique.dechet,
+              thematique: 'dechet',
               thematiqueLabel: '🗑️ Déchets',
             ),
           ],

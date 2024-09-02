@@ -228,7 +228,7 @@ void main() {
     final client = ClientMock()
       ..putSuccess(
         path: '/utilisateurs/$utilisateurId/questionsKYC/$id',
-        response: CustomResponse(''),
+        response: OkResponse(),
       );
 
     final authentificationTokenStorage = AuthentificationTokenStorage(

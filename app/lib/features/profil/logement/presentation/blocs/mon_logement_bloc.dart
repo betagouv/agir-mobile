@@ -76,7 +76,7 @@ class MonLogementBloc extends Bloc<MonLogementEvent, MonLogementState> {
         state.copyWith(
           codePostal: event.valeur,
           communes: communes,
-          commune: communes.length == 1 ? communes.firstOrNull : null,
+          commune: communes.length == 1 ? communes.first : null,
         ),
       );
     }

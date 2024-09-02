@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 export 'button_icon_location.dart';
 export 'button_size.dart';
 export 'button_variant.dart';
+export 'raw_button.dart';
 
 class DsfrButton extends StatelessWidget {
   const DsfrButton({

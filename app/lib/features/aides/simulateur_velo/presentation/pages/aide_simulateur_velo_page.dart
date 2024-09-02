@@ -294,7 +294,7 @@ class _CodePostalEtCommuneState extends State<_CodePostalEtCommune> {
   Widget build(final BuildContext context) {
     final state = context.watch<AideVeloBloc>().state;
     if (state.communes.length == 1) {
-      final commune = state.communes.firstOrNull!;
+      final commune = state.communes.first;
       _textEditingController.text = commune;
       _handleCommune(context, commune);
     } else {

@@ -1,5 +1,5 @@
-import 'package:app/features/mieux_vous_connaitre/domain/question.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
+import 'package:app/features/univers/domain/mission_liste.dart';
 import 'package:app/features/univers/domain/tuile_univers.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
@@ -8,6 +8,7 @@ import 'package:mocktail_image_network/mocktail_image_network.dart';
 
 import 'set_up_widgets.dart';
 import 'steps/iel_a_les_recommandations_suivantes.dart';
+import 'steps/iel_a_les_univers_thematiques_suivantes.dart';
 import 'steps/iel_appuie_sur.dart';
 import 'steps/iel_est_connecte.dart';
 import 'steps/iel_lance_lapplication.dart';
@@ -35,7 +36,7 @@ void main() {
         await mockNetworkImages(() async {
           setUpWidgets(tester);
           const univers = TuileUnivers(
-            type: Thematique.alimentation,
+            type: 'alimentation',
             titre: 'En cuisine',
             imageUrl: 'https://example.com/image.jpg',
             estVerrouille: true,
@@ -56,7 +57,7 @@ void main() {
         await mockNetworkImages(() async {
           setUpWidgets(tester);
           const univers = TuileUnivers(
-            type: Thematique.alimentation,
+            type: 'alimentation',
             titre: 'En cuisine',
             imageUrl: 'https://example.com/image.jpg',
             estVerrouille: false,
@@ -77,7 +78,7 @@ void main() {
         await mockNetworkImages(() async {
           setUpWidgets(tester);
           const univers = TuileUnivers(
-            type: Thematique.alimentation,
+            type: 'alimentation',
             titre: 'En cuisine',
             imageUrl: 'https://example.com/image.jpg',
             estVerrouille: false,
@@ -98,7 +99,7 @@ void main() {
     await mockNetworkImages(() async {
       setUpWidgets(tester);
       const univers = TuileUnivers(
-        type: Thematique.alimentation,
+        type: 'alimentation',
         titre: 'En cuisine',
         imageUrl: 'https://example.com/image.jpg',
         estVerrouille: true,
@@ -113,12 +114,44 @@ void main() {
   });
 
   testWidgets(
+    "On voit les thematiques pour l'univers",
+    (final tester) async {
+      await mockNetworkImages(() async {
+        setUpWidgets(tester);
+        const univers = TuileUnivers(
+          type: 'alimentation',
+          titre: 'En cuisine',
+          imageUrl: 'https://example.com/image.jpg',
+          estVerrouille: false,
+          estTerminee: false,
+        );
+        const universThematique = MissionListe(
+          id: 'manger_saison_1',
+          titre: 'Pourquoi manger de saison ?',
+          progression: 2,
+          progressionCible: 8,
+          estNouvelle: false,
+          imageUrl:
+              'https://res.cloudinary.com/dq023imd8/image/upload/v1718631224/fruits_1_dec0e90839.png',
+          niveau: 1,
+        );
+        ielALesMissionsSuivantes([universThematique]);
+        leServeurRetourneCesUnivers([univers]);
+        ielEstConnecte();
+        await ielLanceLapplication(tester);
+        await ielAppuieSur(tester, univers.titre);
+        ielVoitLeTexte(universThematique.titre);
+      });
+    },
+  );
+
+  testWidgets(
     "On voit les recommandations pour l'univers",
     (final tester) async {
       await mockNetworkImages(() async {
         setUpWidgets(tester);
         const univers = TuileUnivers(
-          type: Thematique.alimentation,
+          type: 'alimentation',
           titre: 'En cuisine',
           imageUrl: 'https://example.com/image.jpg',
           estVerrouille: false,
@@ -131,7 +164,7 @@ void main() {
           sousTitre: null,
           imageUrl: 'https://example.com/image.jpg',
           points: 20,
-          thematique: Thematique.alimentation,
+          thematique: 'alimentation',
           thematiqueLabel: '🛒 Consommation durable',
         );
         const recommandation2 = Recommandation(
@@ -141,7 +174,7 @@ void main() {
           sousTitre: null,
           imageUrl: 'https://example.com/image.jpg',
           points: 20,
-          thematique: Thematique.climat,
+          thematique: 'climat',
           thematiqueLabel: '☀️ Environnement',
         );
         ielALesRecommandationsSuivantes([recommandation, recommandation2]);

@@ -259,7 +259,7 @@ void main() {
     final client = ClientMock()
       ..postSuccess(
         path: '/utilisateurs/renvoyer_code',
-        response: CustomResponse(''),
+        response: OkResponse(),
       );
 
     final adapter = AuthentificationApiAdapter(

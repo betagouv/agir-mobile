@@ -73,11 +73,11 @@ void main() {
       final client = ClientMock()
         ..patchSuccess(
           path: '/utilisateurs/$utilisateurId/profile',
-          response: CustomResponse(''),
+          response: OkResponse(),
         )
         ..patchSuccess(
           path: '/utilisateurs/$utilisateurId/logement',
-          response: CustomResponse(''),
+          response: OkResponse(),
         )
         ..postSuccess(
           path: '/utilisateurs/$utilisateurId/simulerAideVelo',

@@ -112,7 +112,7 @@ void main() {
     expect(bibliotheque, isA<Bibliotheque>());
     expect(bibliotheque.contenus, hasLength(2));
     expect(
-      bibliotheque.contenus.firstOrNull?.titre,
+      bibliotheque.contenus.first.titre,
       "Manger de saison : quel impact sur l'environnement ?",
     );
     expect(bibliotheque.filtres, hasLength(7));
