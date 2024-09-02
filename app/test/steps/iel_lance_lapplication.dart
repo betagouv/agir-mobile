@@ -53,6 +53,12 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
       ArticlesPortMock(ScenarioContext().article);
   ScenarioContext().authentificationPortMock =
       AuthentificationPortMock(authentificationStatusManager);
+  ScenarioContext().universPortMock = UniversPortMock(
+    univers: ScenarioContext().tuileUnivers,
+    missionListe: ScenarioContext().missionListe,
+    mission: ScenarioContext().mission,
+    defi: ScenarioContext().defi,
+  );
 
   await tester.pumpFrames(
     App(
@@ -62,7 +68,7 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
         prenom: prenom,
         estIntegrationTerminee: ScenarioContext().estIntegrationTerminee,
       ),
-      universPort: UniversPortMock(ScenarioContext().tuileUnivers),
+      universPort: ScenarioContext().universPortMock!,
       aidesPort: AidesPortMock(ScenarioContext().aides),
       bibliothequePort: BibliothequePortMock(ScenarioContext().bibliotheque),
       recommandationsPort:

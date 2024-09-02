@@ -1,4 +1,3 @@
-import 'package:app/features/mieux_vous_connaitre/domain/question.dart';
 import 'package:app/features/recommandations/presentation/blocs/recommandations_bloc.dart';
 import 'package:app/features/recommandations/presentation/blocs/recommandations_event.dart';
 import 'package:app/features/recommandations/presentation/widgets/les_recommandations.dart';
@@ -7,12 +6,12 @@ import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-final routeObserver = RouteObserver<ModalRoute<Object?>>();
+final mesRecommandationsRouteObserver = RouteObserver<ModalRoute<Object?>>();
 
 class MesRecommandations extends StatefulWidget {
   const MesRecommandations({super.key, this.thematique});
 
-  final Thematique? thematique;
+  final String? thematique;
 
   @override
   State<MesRecommandations> createState() => _MesRecommandationsState();
@@ -29,7 +28,7 @@ class _MesRecommandationsState extends State<MesRecommandations>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    routeObserver.subscribe(this, ModalRoute.of(context)!);
+    mesRecommandationsRouteObserver.subscribe(this, ModalRoute.of(context)!);
   }
 
   @override
@@ -40,7 +39,7 @@ class _MesRecommandationsState extends State<MesRecommandations>
 
   @override
   void dispose() {
-    routeObserver.unsubscribe(this);
+    mesRecommandationsRouteObserver.unsubscribe(this);
     super.dispose();
   }
 

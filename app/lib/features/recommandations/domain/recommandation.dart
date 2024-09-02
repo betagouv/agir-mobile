@@ -1,4 +1,3 @@
-import 'package:app/features/mieux_vous_connaitre/domain/question.dart';
 import 'package:equatable/equatable.dart';
 
 class Recommandation extends Equatable {
@@ -19,7 +18,7 @@ class Recommandation extends Equatable {
   final String? sousTitre;
   final String imageUrl;
   final int points;
-  final Thematique thematique;
+  final String thematique;
   final String thematiqueLabel;
 
   @override

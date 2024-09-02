@@ -1,6 +1,13 @@
-import 'package:app/features/mieux_vous_connaitre/presentation/element/blocs/mieux_vous_connaitre_edit_bloc.dart';
-import 'package:app/features/mieux_vous_connaitre/presentation/element/blocs/mieux_vous_connaitre_edit_event.dart';
-import 'package:app/features/mieux_vous_connaitre/presentation/element/pages/mieux_vous_connaitre_edit_view.dart';
+import 'package:app/features/mieux_vous_connaitre/presentation/element/widgets/form/mieux_vous_connaitre_controller.dart';
+import 'package:app/features/mieux_vous_connaitre/presentation/element/widgets/form/mieux_vous_connaitre_form.dart';
+import 'package:app/features/mieux_vous_connaitre/presentation/liste/blocs/mieux_vous_connaitre_bloc.dart';
+import 'package:app/features/mieux_vous_connaitre/presentation/liste/blocs/mieux_vous_connaitre_event.dart';
+import 'package:app/l10n/l10n.dart';
+import 'package:app/shared/widgets/composants/app_bar.dart';
+import 'package:app/shared/widgets/composants/bottom_bar.dart';
+import 'package:app/shared/widgets/fondamentaux/colors.dart';
+import 'package:app/shared/widgets/fondamentaux/rounded_rectangle_border.dart';
+import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -21,10 +28,34 @@ class MieuxVousConnaitreEditPage extends StatelessWidget {
   final String id;
 
   @override
-  Widget build(final BuildContext context) => BlocProvider(
-        create: (final context) => MieuxVousConnaitreEditBloc(
-          mieuxVousConnaitrePort: context.read(),
-        )..add(MieuxVousConnaitreEditRecuperationDemandee(id)),
-        child: const MieuxVousConnaitreEditView(),
-      );
+  Widget build(final BuildContext context) {
+    final mieuxVousConnaitreController = MieuxVousConnaitreController();
+
+    return Scaffold(
+      appBar: const FnvAppBar(),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(paddingVerticalPage),
+        child: MieuxVousConnaitreForm(
+          id: id,
+          controller: mieuxVousConnaitreController,
+          onSaved: () {
+            context.read<MieuxVousConnaitreBloc>().add(
+                  const MieuxVousConnaitreRecuperationDemandee(),
+                );
+            GoRouter.of(context).pop();
+          },
+        ),
+      ),
+      bottomNavigationBar: FnvBottomBar(
+        child: DsfrButton(
+          label: Localisation.mettreAJour,
+          icon: DsfrIcons.deviceSave3Fill,
+          variant: DsfrButtonVariant.primary,
+          size: DsfrButtonSize.lg,
+          onPressed: mieuxVousConnaitreController.save,
+        ),
+      ),
+      backgroundColor: FnvColors.aidesFond,
+    );
+  }
 }

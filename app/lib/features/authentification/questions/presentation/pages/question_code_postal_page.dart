@@ -139,7 +139,7 @@ class _CodePostalEtCommuneState extends State<_CodePostalEtCommune> {
     final state = context.watch<QuestionCodePostalBloc>().state;
 
     if (state.communes.length == 1) {
-      final commune = state.communes.firstOrNull!;
+      final commune = state.communes.first;
       _textEditingController.text = commune;
       _handleCommune(context, commune);
     } else {

@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 abstract final class Localisation {
   const Localisation._();
 
+  static const aDecouvrir = 'À découvrir';
   static const accederAuSimulateur = 'Accéder au simulateur';
   static const accueilMesAides = 'Mes aides';
   static const accueilMesAidesLien = 'Voir toutes les aides';
@@ -34,11 +35,15 @@ abstract final class Localisation {
   static const bienvenueSurAgir =
       'Bienvenue sur Agir ! Faisons connaissance...';
   static const bienvenueSurAgirDetails =
-      'Nous avons quelques questions à vous poser pour personnaliser votre expérience !';
+      'Nous avons quelques questions à vous poser pour personnaliser votre expérience !';
   static const boisPellets = 'Bois / Pellets';
   static const bonjour = 'Bonjour,\n';
-  static const cestPresqueTermine = 'C’est presque terminé !';
-  static const cestParti = 'C’est parti !';
+  static const cestPresqueTermine = 'C’est presque terminé !';
+  static const cestParti = 'C’est parti !';
+  static const cetteActionNeVousConvientPas =
+      'Cette action ne vous convient pas ?';
+  static const cetteActionNeVousConvientPasDetails =
+      'On ne vise pas toujours juste ! Dites-nous pourquoi en quelques mots et nous affinerons nos recommandations à l’avenir. (facultatif)';
   static const changerVotreMotDePasse = 'Changer votre mot de passe';
   static const changerVotreMotDePasseConfirmation =
       'Votre mot de passe a été changé.';
@@ -86,6 +91,7 @@ abstract final class Localisation {
   static const jaccepte = "J'accepte ";
   static const jaiCompris = "J'ai compris";
   static const jaiDejaUnCompte = "J'ai déjà un compte";
+  static const jeReleveLeDefi = 'Je relève le défi';
   static const jusqua = "Jusqu'à ";
   static const laCharteDeParticipation = 'la charte de participation';
   static const laCharteDeParticipationMenu = 'Charte de participation';
@@ -130,6 +136,7 @@ abstract final class Localisation {
   static const nombreDePartsFiscalesDescription =
       '(Pré-calculé à partir des membres de votre foyer)';
   static const non = 'Non';
+  static const nouveau = 'NOUVEAU !';
   static const optionsAvancees = 'Options avancées';
   static const ouHabitezVous = 'Où habitez-vous ?';
   static const ouTrouverCesInformations = 'Où trouver ces informations ?';
@@ -145,9 +152,15 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const pageConnexionDetails =
       'Indiquez votre adresse email et nous vous enverrons un code qui vous permettra d’accéder au service.';
   static const pageConnexionTitre = 'Accédez à votre compte Agir';
+  static const partieUne = '1. ADAPTER VOTRE EXPÉRIENCE';
+  static const partieDeux = '2. LIRE DES ARTICLES ET RÉPONDRE AUX QUIZ';
+  static const partieTrois = '3. RÉALISER AU MOINS UNE ACTION PROPOSÉE';
+  static const partieQuatre = '4. GAGNER VOTRE CARTE';
+  static const pasPourMoi = 'Pas pour moi';
   static const plusDe150m2 = 'Plus de 150 m²';
   static const point = '.';
   static const pourquoi = 'Pourquoi ?';
+  static const pourquoiCeDefi = 'Pourquoi ce défi ?';
   static const pourquoiCesQuestions = 'Pourquoi ces questions ?';
   static const pourquoiCesQuestionsReponse =
       'Votre **revenu fiscal de référence** et le **nombre de parts** permettent d’afficher les aides en fonction de vos ressources.';
@@ -171,6 +184,8 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const prixDuVeloObligatoire = 'Le prix du vélo ne peux pas être vide';
   static const proposePar = 'Proposé par';
   static const propulsePar = 'Propulsé par ';
+  static const quelquesQuestionPourMieuxVousConnaitre =
+      'Quelques questions pour mieux vous connaître';
   static const quelleEstLaSuperficie = 'Quelle est la superficie ?';
   static const quelleEstVotreModeDeChauffagePrincipal =
       'Quelle est votre mode de chauffage principal ?';
@@ -192,9 +207,10 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const supprimerVotreCompteConfirmation =
       'Veuillez confirmer la suppression du compte';
   static const supprimerVotreCompteContenu =
-      'Vous pouvez à tout moment choisir de supprimer votre compte ainsi que l’ensemble des données qui y sont associées. ';
-  static const termine = 'TERMINÉ !';
-  static const toutEstPret = 'Tout est prêt !';
+      'Vous pouvez à tout moment choisir de supprimer votre compte ainsi que l’ensemble des données qui y sont associées.';
+  static const termine = 'TERMINÉ !';
+  static const termineLaMission = 'Terminer la mission';
+  static const toutEstPret = 'Tout est prêt !';
   static const unAppartement = 'Un appartement';
   static const uneMaison = 'Une maison';
   static const univers = 'Univers';
@@ -212,11 +228,11 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const votreLogementPlusDe15Ans =
       'Votre logement a-t-il plus de 15 ans ?';
   static const votreMotDePasseDoitContenir =
-      'Votre mot de passe doit contenir :';
+      'Votre mot de passe doit contenir :';
   static const votrePrenom = 'Votre prénom';
   static const votreProfil = 'Votre profil';
   static const votreResidencePrincipaleEst =
-      'Votre résidence principale est ...';
+      'Votre résidence principale est ...';
   static const vousAvezDejaUnCompte = 'Vous avez déjà un compte ?';
   static const vousEtesProprietaireDeVotreLogement =
       'Vous êtes propriétaire de votre logement ?';
@@ -250,14 +266,16 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
       '(${value == null ? '' : euro(value)})';
 
   static String entrezLeCodeRecuParMailDetails(final String value) =>
-      'Pour vérifier votre identité et vous permettre d’accéder à votre compte, nous vous avons envoyé un email à l’adresse : ${cacherEmail(value)}';
+      'Pour vérifier votre identité et vous permettre d’accéder à votre compte, nous vous avons envoyé un email à l’adresse : ${cacherEmail(value)}';
 
   static String entrezLeCodeRecuOublieMotDePasseParMailDetails(
     final String value,
   ) =>
-      'Pour vérifier votre identité et vous permettre de modifier votre mot de passe, nous vous avons envoyé un email à l’adresse : ${cacherEmail(value)}';
+      'Pour vérifier votre identité et vous permettre de modifier votre mot de passe, nous vous avons envoyé un email à l’adresse : ${cacherEmail(value)}';
 
   static String euro(final int value) => '$value €';
+
+  static String niveau(final int value) => 'NIVEAU $value';
 
   static String nombreArticle(final int value) => '$value articles';
 
@@ -266,5 +284,5 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static String questionCourantSurMax(final int actuel, final int max) =>
       '**Question $actuel** sur $max';
 
-  static String veloLabel(final String text) => '$text : ';
+  static String veloLabel(final String text) => '$text : ';
 }

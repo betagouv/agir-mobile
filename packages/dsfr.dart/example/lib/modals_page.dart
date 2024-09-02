@@ -1,5 +1,3 @@
-// ignore_for_file: prefer-extracting-callbacks
-
 import 'package:dsfr/dsfr.dart';
 import 'package:dsfr_example/page_item.dart';
 import 'package:flutter/material.dart';

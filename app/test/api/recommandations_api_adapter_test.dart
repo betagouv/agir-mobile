@@ -1,7 +1,6 @@
 import 'package:app/features/authentification/domain/entities/authentification_statut_manager.dart';
 import 'package:app/features/authentification/infrastructure/adapters/authentification_api_client.dart';
 import 'package:app/features/authentification/infrastructure/adapters/authentification_token_storage.dart';
-import 'package:app/features/mieux_vous_connaitre/domain/question.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
 import 'package:app/features/recommandations/infrastructure/adapters/recommandations_api_adapter.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -74,7 +73,7 @@ void main() {
           imageUrl:
               'https://www.google.com/url?sa=i&url=https%3A%2F%2Fopenclipart.org%2Fdetail%2F321572%2Fi-have-a-small-question&psig=AOvVaw1_ErxUJbZIoqQ8u-1sbgB5&ust=1711202048405000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCLijtMOCiIUDFQAAAAAdAAAAABAS',
           points: 5,
-          thematique: Thematique.climat,
+          thematique: 'climat',
           thematiqueLabel: '☀️ Environnement',
         ),
         const Recommandation(
@@ -85,7 +84,7 @@ void main() {
           imageUrl:
               'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1702068380/jonathan_ford_6_Zg_T_Etv_D16_I_unsplash_00217cb281.jpg',
           points: 20,
-          thematique: Thematique.climat,
+          thematique: 'climat',
           thematiqueLabel: '☀️ Environnement',
         ),
       ],
@@ -139,7 +138,7 @@ void main() {
       ),
     );
 
-    await adapter.recuperer(Thematique.climat);
+    await adapter.recuperer('climat');
     verify(
       () => client.send(
         any(

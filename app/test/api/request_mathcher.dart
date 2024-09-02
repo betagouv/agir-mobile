@@ -10,7 +10,7 @@ class RequestMathcher extends Matcher {
   final String? body;
 
   @override
-  Description describe(final Description description) => description.add('Ok');
+  Description describe(final Description description) => description;
 
   @override
   bool matches(final item, final Map<dynamic, dynamic> matchState) =>

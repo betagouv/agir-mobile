@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:app/features/authentification/infrastructure/adapters/authentification_api_client.dart';
-import 'package:app/features/mieux_vous_connaitre/domain/question.dart';
 import 'package:app/features/profil/domain/utilisateur_id_non_trouve_exception.dart';
 import 'package:app/features/recommandations/domain/ports/recommandations_port.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
@@ -20,14 +19,14 @@ class RecommandationsApiAdapter implements RecommandationsPort {
 
   @override
   Future<Either<Exception, List<Recommandation>>> recuperer(
-    final Thematique? thematique,
+    final String? thematique,
   ) async {
     final utilisateurId = await _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
       return const Left(UtilisateurIdNonTrouveException());
     }
 
-    final map = {if (thematique != null) 'univers': thematique.name};
+    final map = {if (thematique != null) 'univers': thematique};
 
     final uri =
         Uri.parse('/utilisateurs/$utilisateurId/recommandations_v2').replace(

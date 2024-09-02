@@ -49,6 +49,7 @@ dart_code_metrics:
     - avoid-duplicate-test-assertions: false
     - avoid-ignoring-return-values: false
     - avoid-late-keyword: false
+    - avoid-long-files: false
     - avoid-long-functions:
         exclude:
           - test/**
@@ -65,6 +66,7 @@ dart_code_metrics:
     - avoid-shrink-wrap-in-lists: false # à réactiver
     - avoid-similar-names: false
     - avoid-top-level-members-in-tests: false
+    - avoid-unsafe-collection-methods: false
     - check-is-not-closed-after-async-gap: false
     - enum-constants-ordering: false
     - member-ordering:
@@ -82,9 +84,11 @@ dart_code_metrics:
     - parameters-ordering: false
     - prefer-addition-subtraction-assignments: false
     - prefer-boolean-prefixes: false
+    - prefer-commenting-analyzer-ignores: false
     - prefer-correct-identifier-length: false
     - prefer-correct-throws: false
     - prefer-correct-type-name: false
+    - prefer-extracting-callbacks: false
     - prefer-explicit-type-arguments: false
     - prefer-extracting-function-callbacks: false
     - prefer-for-loop-in-children: false

@@ -92,6 +92,7 @@ class _AppState extends State<App> {
   Widget build(final BuildContext context) => MultiRepositoryProvider(
         providers: [
           RepositoryProvider.value(value: widget.authentificationPort),
+          RepositoryProvider.value(value: widget.universPort),
           RepositoryProvider.value(value: widget.aidesPort),
           RepositoryProvider.value(value: widget.articlesPort),
           RepositoryProvider.value(value: widget.quizPort),
