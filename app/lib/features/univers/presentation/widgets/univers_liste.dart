@@ -48,10 +48,8 @@ class _UniversCarte extends StatelessWidget {
               backgroundColor: DsfrColors.success425,
             )
           : null,
-      onTap: univers.estVerrouille
-          ? null
-          : () async =>
-              GoRouter.of(context).pushNamed(UniversPage.name, extra: univers),
+      onTap: () async =>
+          GoRouter.of(context).pushNamed(UniversPage.name, extra: univers),
       child: SizedBox(
         width: width,
         child: Column(
@@ -59,7 +57,6 @@ class _UniversCarte extends StatelessWidget {
           children: [
             _Image(
               imageUrl: univers.imageUrl,
-              estVerrouille: univers.estVerrouille,
               width: width,
               borderRadius:
                   const BorderRadius.all(Radius.circular(DsfrSpacings.s1v)),
@@ -76,13 +73,11 @@ class _UniversCarte extends StatelessWidget {
 class _Image extends StatelessWidget {
   const _Image({
     required this.imageUrl,
-    required this.estVerrouille,
     required this.width,
     required this.borderRadius,
   });
 
   final String imageUrl;
-  final bool estVerrouille;
   final double width;
   final BorderRadius borderRadius;
 
@@ -92,33 +87,13 @@ class _Image extends StatelessWidget {
 
     return ClipRRect(
       borderRadius: borderRadius,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          Image.network(
-            imageUrl,
-            width: width,
-            height: height,
-            color: estVerrouille ? Colors.grey : null,
-            colorBlendMode: BlendMode.saturation,
-            fit: BoxFit.cover,
-            cacheHeight: height.toInt(),
-          ),
-          if (estVerrouille)
-            const DecoratedBox(
-              decoration: ShapeDecoration(
-                color: Colors.white,
-                shape: CircleBorder(),
-              ),
-              child: Padding(
-                padding: EdgeInsets.all(DsfrSpacings.s1w),
-                child: Icon(
-                  DsfrIcons.systemLockFill,
-                  color: DsfrColors.blueFranceSun113,
-                ),
-              ),
-            ),
-        ],
+      child: Image.network(
+        imageUrl,
+        width: width,
+        height: height,
+        colorBlendMode: BlendMode.saturation,
+        fit: BoxFit.cover,
+        cacheHeight: height.toInt(),
       ),
     );
   }

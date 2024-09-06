@@ -28,7 +28,6 @@ void main() {
     type: 'alimentation',
     titre: 'En cuisine',
     imageUrl: 'https://example.com/image.jpg',
-    estVerrouille: false,
     estTerminee: false,
   );
   const missionListe = MissionListe(

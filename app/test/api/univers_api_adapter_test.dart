@@ -60,7 +60,6 @@ void main() {
           titre: 'En cuisine',
           imageUrl:
               'https://res.cloudinary.com/dq023imd8/image/upload/v1714635428/univers_cuisine_b903b5fb1c.jpg',
-          estVerrouille: true,
           estTerminee: false,
         ),
         const TuileUnivers(
@@ -68,7 +67,6 @@ void main() {
           titre: 'Les vacances',
           imageUrl:
               'https://res.cloudinary.com/dq023imd8/image/upload/v1714635518/univers_loisirs_596c3b0599.jpg',
-          estVerrouille: false,
           estTerminee: true,
         ),
       ],
