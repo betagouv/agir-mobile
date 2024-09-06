@@ -126,10 +126,6 @@ Future<void> _allerSurLaPageSaisieCode(
     label: Localisation.motDePasse,
     enterText: 'ceciEstUnMotDePasseValide!1',
   );
-
-  await tester
-      .tap(find.bySemanticsLabel("J'accepte la charte de participation"));
-  await tester.pumpAndSettle();
   await tester.tap(
     find.bySemanticsLabel("J'accepte les conditions générales d'utilisation"),
   );
