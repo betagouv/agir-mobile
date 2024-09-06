@@ -1,5 +1,5 @@
-import 'package:app/features/authentification/presentation/widgets/jai_deja_un_compte.dart';
-import 'package:app/features/pre_onboarding/presentation/pages/pre_onboarding_carrousel_page.dart';
+import 'package:app/features/authentification/creer_compte/presentation/pages/creer_compte_page.dart';
+import 'package:app/features/authentification/presentation/pages/se_connecter_page.dart';
 import 'package:app/features/version/presentation/widgets/version_label.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:app/shared/assets/images.dart';
@@ -50,14 +50,20 @@ class PreOnboardingPage extends StatelessWidget {
                 ),
                 const Spacer(),
                 DsfrButton(
-                  label: Localisation.commencer,
+                  label: Localisation.jeCreeMonCompte,
                   variant: DsfrButtonVariant.primary,
                   size: DsfrButtonSize.lg,
-                  onPressed: () async => GoRouter.of(context)
-                      .pushNamed(PreOnboardingCarrouselPage.name),
+                  onPressed: () async =>
+                      GoRouter.of(context).pushNamed(CreerComptePage.name),
                 ),
                 const SizedBox(height: DsfrSpacings.s3w),
-                const JaiDejaUnCompteWidget(),
+                Center(
+                  child: DsfrLink.md(
+                    label: Localisation.jaiDejaUnCompte,
+                    onPressed: () async =>
+                        GoRouter.of(context).pushNamed(SeConnecterPage.name),
+                  ),
+                ),
                 const SizedBox(height: DsfrSpacings.s3w),
                 const Align(child: VersionLabel()),
               ],

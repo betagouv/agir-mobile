@@ -1,13 +1,6 @@
 appId: fr.gouv.agir.dev2
 ---
 - launchApp
-- tapOn: "Commencer"
-- swipe:
-    direction: "LEFT"
-- swipe:
-    direction: "LEFT"
-- swipe:
-    direction: "LEFT"
 - tapOn: "Suivant"
 - tapOn:
     point: "50%,36%"
