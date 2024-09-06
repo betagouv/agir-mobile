@@ -93,9 +93,6 @@ abstract final class Localisation {
   static const jaiDejaUnCompte = "J'ai déjà un compte";
   static const jeReleveLeDefi = 'Je relève le défi';
   static const jusqua = "Jusqu'à ";
-  static const laCharteDeParticipation = 'la charte de participation';
-  static const laCharteDeParticipationMenu = 'Charte de participation';
-  static const laCharteDeParticipationSite = 'https://agir.beta.gouv.fr/charte';
   static const lesCategories = 'Les catégories';
   static const lesCategoriesAlimentation = 'Alimentation';
   static const lesCategoriesClimat = 'Environnement';

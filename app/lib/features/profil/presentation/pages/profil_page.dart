@@ -57,15 +57,6 @@ class ProfilPage extends StatelessWidget {
                   ),
                   const DsfrDivider(),
                   _MenuElement(
-                    icon: DsfrIcons.documentDraftLine,
-                    label: Localisation.laCharteDeParticipationMenu,
-                    onTap: () async => launchUrlString(
-                      Localisation.laCharteDeParticipationSite,
-                    ),
-                    iconRight: DsfrIcons.systemExternalLinkLine,
-                  ),
-                  const DsfrDivider(),
-                  _MenuElement(
                     icon: DsfrIcons.documentArticleLine,
                     label: Localisation.lesCguMenu,
                     onTap: () async => launchUrlString(

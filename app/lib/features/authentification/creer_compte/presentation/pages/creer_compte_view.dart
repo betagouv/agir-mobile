@@ -74,8 +74,6 @@ class CreerCompteView extends StatelessWidget {
               ),
               const _MessageErreur(),
               const SizedBox(height: DsfrSpacings.s2w),
-              const _Charte(),
-              const SizedBox(height: DsfrSpacings.s2w),
               const _Cgu(),
               const SizedBox(height: DsfrSpacings.s2w),
               const _BoutonCreerCompte(),
@@ -91,25 +89,6 @@ class CreerCompteView extends StatelessWidget {
           ),
         ),
       );
-}
-
-class _Charte extends StatelessWidget {
-  const _Charte();
-
-  @override
-  Widget build(final BuildContext context) {
-    final valeur = context.select<CreerCompteBloc, bool>(
-      (final bloc) => bloc.state.aCharteAcceptee,
-    );
-
-    return Jaccepte(
-      label: Localisation.laCharteDeParticipation,
-      url: Localisation.laCharteDeParticipationSite,
-      value: valeur,
-      onChanged: (final value) =>
-          context.read<CreerCompteBloc>().add(CreerCompteCharteAChange(value)),
-    );
-  }
 }
 
 class _Cgu extends StatelessWidget {

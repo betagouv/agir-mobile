@@ -6,7 +6,6 @@ final class CreerCompteState extends Equatable {
   const CreerCompteState({
     required this.adresseMail,
     required this.motDePasse,
-    required this.aCharteAcceptee,
     required this.aCguAcceptees,
     required this.erreur,
     required this.compteCree,
@@ -16,7 +15,6 @@ final class CreerCompteState extends Equatable {
       : this(
           adresseMail: '',
           motDePasse: '',
-          aCharteAcceptee: false,
           aCguAcceptees: false,
           erreur: const None(),
           compteCree: false,
@@ -24,22 +22,17 @@ final class CreerCompteState extends Equatable {
 
   final String adresseMail;
   final String motDePasse;
-  final bool aCharteAcceptee;
   final bool aCguAcceptees;
   final Option<String> erreur;
   bool get adresseMailEstValide => mailRegex.hasMatch(adresseMail);
   bool get estValide =>
-      adresseMailEstValide &&
-      motDePasse.isNotEmpty &&
-      aCharteAcceptee &&
-      aCguAcceptees;
+      adresseMailEstValide && motDePasse.isNotEmpty && aCguAcceptees;
 
   final bool compteCree;
 
   CreerCompteState copyWith({
     final String? adresseMail,
     final String? motDePasse,
-    final bool? aCharteAcceptee,
     final bool? aCguAcceptees,
     final Option<String>? erreur,
     final bool? compteCree,
@@ -47,7 +40,6 @@ final class CreerCompteState extends Equatable {
       CreerCompteState(
         adresseMail: adresseMail ?? this.adresseMail,
         motDePasse: motDePasse ?? this.motDePasse,
-        aCharteAcceptee: aCharteAcceptee ?? this.aCharteAcceptee,
         aCguAcceptees: aCguAcceptees ?? this.aCguAcceptees,
         erreur: erreur ?? this.erreur,
         compteCree: compteCree ?? this.compteCree,
@@ -58,7 +50,6 @@ final class CreerCompteState extends Equatable {
         adresseMail,
         motDePasse,
         erreur,
-        aCharteAcceptee,
         aCguAcceptees,
         compteCree,
       ];
