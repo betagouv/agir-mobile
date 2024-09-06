@@ -20,7 +20,6 @@ import 'package:app/features/authentification/saisie_code/presentation/pages/sai
 import 'package:app/features/bibliotheque/presentation/pages/bibliotheque_page.dart';
 import 'package:app/features/mieux_vous_connaitre/presentation/element/pages/mieux_vous_connaitre_edit_page.dart';
 import 'package:app/features/mieux_vous_connaitre/presentation/liste/pages/mieux_vous_connaitre_page.dart';
-import 'package:app/features/pre_onboarding/presentation/pages/pre_onboarding_carrousel_page.dart';
 import 'package:app/features/pre_onboarding/presentation/pages/pre_onboarding_page.dart';
 import 'package:app/features/profil/informations/presentation/pages/mes_informations_page.dart';
 import 'package:app/features/profil/logement/presentation/pages/mon_logement_page.dart';
@@ -54,7 +53,6 @@ GoRouter goRouter({
                       : null,
               routes: [
                 PreOnboardingPage.route,
-                PreOnboardingCarrouselPage.route,
                 CreerComptePage.route,
                 SeConnecterPage.route,
                 MotDePasseOubliePage.route,

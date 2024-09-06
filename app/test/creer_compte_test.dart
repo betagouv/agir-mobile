@@ -8,7 +8,6 @@ import 'steps/iel_appuie_sur.dart';
 import 'steps/iel_appuie_sur_la_liste_deroulante.dart';
 import 'steps/iel_ecrit_dans_le_champ.dart';
 import 'steps/iel_ecrit_le_code.dart';
-import 'steps/iel_glisse_de_la_droite_vers_la_gauche.dart';
 import 'steps/iel_lance_lapplication.dart';
 import 'steps/iel_n_a_pas_terminee_son_integration.dart';
 import 'steps/iel_sappelle.dart';
@@ -137,9 +136,5 @@ Future<void> _allerSurLaPageSaisieCode(
 Future<void> _allerSurLaPageCreerCompte(final WidgetTester tester) async {
   ielSappelle('');
   await ielLanceLapplication(tester);
-  await ielAppuieSur(tester, Localisation.commencer);
-  await ielGlisseDeLaDroiteVersLaGauche(tester);
-  await ielGlisseDeLaDroiteVersLaGauche(tester);
-  await ielGlisseDeLaDroiteVersLaGauche(tester);
-  await ielAppuieSur(tester, Localisation.suivant);
+  await ielAppuieSur(tester, Localisation.jeCreeMonCompte);
 }

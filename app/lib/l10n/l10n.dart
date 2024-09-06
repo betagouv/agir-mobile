@@ -50,7 +50,6 @@ abstract final class Localisation {
   static const codePostal = 'Code postal';
   static const combienEtesVousDansVotreLogement =
       'Combien êtes-vous dans votre logement (vous inclus) ?';
-  static const commencer = 'Commencer';
   static const commune = 'Commune';
   static const confirmer = 'Confirmer';
   static const consommationsEnergetiques = 'Consommations énergétiques';
@@ -91,6 +90,7 @@ abstract final class Localisation {
   static const jaccepte = "J'accepte ";
   static const jaiCompris = "J'ai compris";
   static const jaiDejaUnCompte = "J'ai déjà un compte";
+  static const jeCreeMonCompte = 'Je crée mon compte';
   static const jeReleveLeDefi = 'Je relève le défi';
   static const jusqua = "Jusqu'à ";
   static const lesCategories = 'Les catégories';
@@ -167,16 +167,6 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const pourquoiCesQuestions = 'Pourquoi ces questions ?';
   static const pourquoiCesQuestionsReponse =
       'Votre **revenu fiscal de référence** et le **nombre de parts** permettent d’afficher les aides en fonction de vos ressources.';
-  static const preOnboarding1 =
-      'L’accompagnement personnalisé qui vous offre des solutions réalisables, **pour vous**';
-  static const preOnboarding2 =
-      'Rejoignez plus de **160 000** utilisateurs engagés';
-  static const preOnboarding3 =
-      'Faites des **économies** en instaurant des habitudes durables';
-  static const preOnboardingFinSousTitre =
-      'Les questions suivantes nous aideront à calculer une approximation de votre empreinte carbone et vous proposer des conseils personnalisés';
-  static const preOnboardingFinTitre =
-      'Faites un premier pas en estimant rapidement les principaux impacts de vos usages';
   static const preOnboardingTitre =
       'Ensemble,\naméliorons\nnos habitudes\nau jour le jour';
   static const premiereFoisSurAgir = 'Première fois sur Agir ?';
@@ -205,7 +195,6 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const seDeconnecter = 'Se déconnecter';
   static const simulateur = 'Simulateur';
   static const simulerMonAide = 'Simuler mon aide';
-  static const suivant = 'Suivant';
   static const supprimerVotreCompte = 'Supprimer votre compte';
   static const supprimerVotreCompteConfirmation =
       'Veuillez confirmer la suppression du compte';
