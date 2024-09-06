@@ -58,9 +58,27 @@ class ProfilPage extends StatelessWidget {
                   const DsfrDivider(),
                   _MenuElement(
                     icon: DsfrIcons.documentArticleLine,
+                    label: Localisation.politiqueDeConfidentialite,
+                    onTap: () async => launchUrlString(
+                      Localisation.politiqueDeConfidentialiteSite,
+                    ),
+                    iconRight: DsfrIcons.systemExternalLinkLine,
+                  ),
+                  const DsfrDivider(),
+                  _MenuElement(
+                    icon: DsfrIcons.documentArticleLine,
                     label: Localisation.lesCguMenu,
                     onTap: () async => launchUrlString(
                       Localisation.lesCguSite,
+                    ),
+                    iconRight: DsfrIcons.systemExternalLinkLine,
+                  ),
+                  const DsfrDivider(),
+                  _MenuElement(
+                    icon: DsfrIcons.documentArticleLine,
+                    label: Localisation.mentionsLegales,
+                    onTap: () async => launchUrlString(
+                      Localisation.mentionsLegalesSite,
                     ),
                     iconRight: DsfrIcons.systemExternalLinkLine,
                   ),
