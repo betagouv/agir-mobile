@@ -106,6 +106,12 @@ abstract final class Localisation {
   static const lesCguMenu = 'CGU';
   static const lesCguSite = 'https://agir.beta.gouv.fr/cgu';
   static const maReponse = 'Ma réponse';
+  static const mentionsLegales = 'Mentions légales';
+  static const mentionsLegalesSite =
+      'https://agir.beta.gouv.fr/mentions-legales';
+  static const politiqueDeConfidentialite = 'Politique de confidentialité';
+  static const politiqueDeConfidentialiteSite =
+      'https://agir.beta.gouv.fr/politique-de-confidentialite';
   static const menu = 'Menu';
   static const menuAccueil = 'Accueil';
   static const menuAides = 'Aides';
