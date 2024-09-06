@@ -7,7 +7,6 @@ abstract final class TuileUniversMapper {
         type: json['type'] as String,
         titre: json['titre'] as String,
         imageUrl: json['image_url'] as String,
-        estVerrouille: json['is_locked'] as bool,
         estTerminee: json['is_done'] as bool,
       );
 }
