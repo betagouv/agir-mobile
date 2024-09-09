@@ -1,4 +1,5 @@
 import 'package:app/app/router/app_router.dart';
+import 'package:app/features/accueil/presentation/cubit/home_disclaimer_cubit.dart';
 import 'package:app/features/aides/domain/ports/aides_port.dart';
 import 'package:app/features/aides/presentation/blocs/aide/aide_bloc.dart';
 import 'package:app/features/aides/simulateur_velo/domain/ports/aide_velo_port.dart';
@@ -103,6 +104,7 @@ class _AppState extends State<App> {
         ],
         child: MultiBlocProvider(
           providers: [
+            BlocProvider(create: (final context) => HomeDisclaimerCubit()),
             BlocProvider(
               create: (final context) => UtilisateurBloc(
                 utilisateurPort: widget.utilisateurPort,

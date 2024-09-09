@@ -18,11 +18,14 @@ abstract final class Localisation {
       'Format attendu : nom@domaine.fr';
   static const adresseEmail = 'Votre adresse email';
   static const adultes = 'Adulte(s)';
-  static const agirEstEncoreEnExperimentation =
-      'Agir est encore en expérimentation !';
-  static const agirEstEncoreEnExperimentationDetails =
+  static const appEstEnConstruction = 'Agir est en construction !';
+  static const appEstEnConstructionDescription =
+      'Cette version est encore très incomplète et de nombreuses évolutions et nouvelles fonctionnalités sont mises en ligne chaque semaine.';
+  static const appEstEncoreEnExperimentation =
+      'Agir est encore en expérimentation !';
+  static const appEstEncoreEnExperimentationDetails =
       'Nous ajoutons progressivement les aides et contenus locaux à ';
-  static const agirEstEncoreEnExperimentationDetails2 =
+  static const appEstEncoreEnExperimentationDetails2 =
       '\nRevenez régulièrement pour profiter de nos dernières nouveautés';
   static const aideVeloAvertissement =
       'Veuillez compléter ces informations afin de débuter l’estimation';
