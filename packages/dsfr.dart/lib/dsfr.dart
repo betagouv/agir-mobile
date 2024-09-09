@@ -9,6 +9,7 @@ export 'src/composants/input_headless.dart';
 export 'src/composants/link_icon_position.dart';
 export 'src/composants/links.dart';
 export 'src/composants/modal.dart';
+export 'src/composants/notice.dart';
 export 'src/composants/radios/radio.dart';
 export 'src/composants/radios/radio_set.dart';
 export 'src/composants/radios/radio_set_headless.dart';
