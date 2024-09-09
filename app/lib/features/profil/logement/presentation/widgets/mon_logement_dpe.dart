@@ -142,7 +142,7 @@ class _FnvDpeState extends State<_FnvDpe> {
               groupValue: _value,
               onCallback: _handleChange,
               color: e.color,
-              width: width * (17 + 10 * (index + 1)),
+              width: width * ((index + 1) * 10 + 17),
             ),
           )
           .separator(const SizedBox(height: DsfrSpacings.s1w))
