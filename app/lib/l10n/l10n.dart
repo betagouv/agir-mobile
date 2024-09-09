@@ -1,3 +1,5 @@
+// ignore_for_file: avoid-duplicate-constant-values
+
 import 'package:flutter/widgets.dart';
 
 abstract final class Localisation {

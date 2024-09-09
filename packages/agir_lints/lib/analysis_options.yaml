@@ -47,6 +47,7 @@ dart_code_metrics:
     - avoid-dynamic: false
     - avoid-duplicate-collection-elements: false
     - avoid-duplicate-test-assertions: false
+    - avoid-getter-prefix: false
     - avoid-ignoring-return-values: false
     - avoid-late-keyword: false
     - avoid-long-files: false
@@ -66,6 +67,7 @@ dart_code_metrics:
     - avoid-shrink-wrap-in-lists: false # à réactiver
     - avoid-similar-names: false
     - avoid-top-level-members-in-tests: false
+    - avoid-type-casts: false
     - avoid-unsafe-collection-methods: false
     - check-is-not-closed-after-async-gap: false
     - enum-constants-ordering: false

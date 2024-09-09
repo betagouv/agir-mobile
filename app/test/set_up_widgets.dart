@@ -4,6 +4,6 @@ import 'device_info.dart';
 import 'scenario_context.dart';
 
 void setUpWidgets(final WidgetTester tester) {
-  ScenarioContext().dispose();
+  ScenarioContext.dispose();
   DeviceInfo.setup(tester);
 }

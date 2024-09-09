@@ -103,5 +103,5 @@ class ScenarioContext {
   UniversPortMock? universPortMock;
   static ScenarioContext? _instance;
 
-  void dispose() => _instance = null;
+  static void dispose() => _instance = null;
 }
