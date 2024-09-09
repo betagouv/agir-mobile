@@ -11,7 +11,7 @@ import 'package:app/features/authentification/domain/value_objects/authentificat
 import 'package:app/features/authentification/mot_de_passe_oublie/pages/mot_de_passe_oublie_code_page.dart';
 import 'package:app/features/authentification/mot_de_passe_oublie/pages/mot_de_passe_oublie_page.dart';
 import 'package:app/features/authentification/presentation/pages/se_connecter_page.dart';
-import 'package:app/features/authentification/questions/presentation/pages/agir_est_encore_en_experimentation_page.dart';
+import 'package:app/features/authentification/questions/presentation/pages/app_est_encore_en_experimentation_page.dart';
 import 'package:app/features/authentification/questions/presentation/pages/question_code_postal_page.dart';
 import 'package:app/features/authentification/questions/presentation/pages/question_prenom_page.dart';
 import 'package:app/features/authentification/questions/presentation/pages/question_themes_page.dart';
@@ -69,7 +69,7 @@ GoRouter goRouter({
               routes: [
                 QuestionPrenomPage.route,
                 QuestionCodePostalPage.route,
-                AgirEstEncoreEnExperimentationPage.route,
+                AppEstEncoreEnExperimentationPage.route,
                 QuestionThemesPage.route,
                 ToutEstPretPage.route,
                 AccueilPage.route,

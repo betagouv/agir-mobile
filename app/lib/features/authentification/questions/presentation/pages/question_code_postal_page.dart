@@ -1,6 +1,6 @@
 import 'package:app/features/authentification/questions/presentation/blocs/question_code_postal_bloc.dart';
 import 'package:app/features/authentification/questions/presentation/blocs/question_code_postal_event.dart';
-import 'package:app/features/authentification/questions/presentation/pages/agir_est_encore_en_experimentation_page.dart';
+import 'package:app/features/authentification/questions/presentation/pages/app_est_encore_en_experimentation_page.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:app/shared/assets/images.dart';
 import 'package:app/shared/widgets/composants/bottom_bar.dart';
@@ -197,7 +197,7 @@ class _ButtonContinuer extends StatelessWidget {
                 ..add(const QuestionCodePostalMiseAJourDemandee());
 
               await GoRouter.of(context).pushNamed(
-                AgirEstEncoreEnExperimentationPage.name,
+                AppEstEncoreEnExperimentationPage.name,
                 pathParameters: {'commune': bloc.state.commune},
               );
             }

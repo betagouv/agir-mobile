@@ -7,10 +7,10 @@ import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class AgirEstEncoreEnExperimentationPage extends StatelessWidget {
-  const AgirEstEncoreEnExperimentationPage({super.key, required this.commune});
+class AppEstEncoreEnExperimentationPage extends StatelessWidget {
+  const AppEstEncoreEnExperimentationPage({super.key, required this.commune});
 
-  static const name = 'agir-est-encore-en-experimentation';
+  static const name = 'app-est-encore-en-experimentation';
   static const path = '$name/:commune';
 
   final String commune;
@@ -19,7 +19,7 @@ class AgirEstEncoreEnExperimentationPage extends StatelessWidget {
         path: path,
         name: name,
         builder: (final context, final state) =>
-            AgirEstEncoreEnExperimentationPage(
+            AppEstEncoreEnExperimentationPage(
           commune: state.pathParameters['commune']!,
         ),
       );
@@ -47,13 +47,13 @@ class AgirEstEncoreEnExperimentationPage extends StatelessWidget {
           ),
           const SizedBox(height: DsfrSpacings.s3w),
           const Text(
-            Localisation.agirEstEncoreEnExperimentation,
+            Localisation.appEstEncoreEnExperimentation,
             style: DsfrTextStyle.headline2(),
           ),
           const SizedBox(height: DsfrSpacings.s2w),
           Text.rich(
             TextSpan(
-              text: Localisation.agirEstEncoreEnExperimentationDetails,
+              text: Localisation.appEstEncoreEnExperimentationDetails,
               children: [
                 TextSpan(
                   text: Localisation.communeEtSaRegion(commune),
@@ -63,7 +63,7 @@ class AgirEstEncoreEnExperimentationPage extends StatelessWidget {
                   ),
                 ),
                 const TextSpan(
-                  text: Localisation.agirEstEncoreEnExperimentationDetails2,
+                  text: Localisation.appEstEncoreEnExperimentationDetails2,
                 ),
               ],
             ),

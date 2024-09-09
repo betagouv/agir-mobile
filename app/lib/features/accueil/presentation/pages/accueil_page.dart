@@ -1,3 +1,5 @@
+import 'package:app/features/accueil/presentation/cubit/home_disclaimer_cubit.dart';
+import 'package:app/features/accueil/presentation/cubit/home_disclaimer_state.dart';
 import 'package:app/features/aides/presentation/widgets/mes_aides.dart';
 import 'package:app/features/authentification/questions/presentation/pages/question_prenom_page.dart';
 import 'package:app/features/menu/presentation/pages/root_page.dart';
@@ -80,15 +82,35 @@ class _Body extends StatelessWidget {
         .add(const UtilisateurRecuperationDemandee());
 
     return ListView(
-      padding: const EdgeInsets.symmetric(vertical: paddingVerticalPage),
       children: const [
+        _Disclaimer(),
+        SizedBox(height: paddingVerticalPage),
         UniversSection(),
         SizedBox(height: DsfrSpacings.s4w),
         MesAides(),
         SizedBox(height: DsfrSpacings.s4w),
         MesRecommandations(),
         SafeArea(child: SizedBox()),
+        SizedBox(height: paddingVerticalPage),
       ],
     );
   }
+}
+
+class _Disclaimer extends StatelessWidget {
+  const _Disclaimer();
+
+  @override
+  Widget build(final BuildContext context) =>
+      BlocBuilder<HomeDisclaimerCubit, HomeDisclaimerState>(
+        builder: (final context, final state) => switch (state) {
+          HomeDisclaimerVisible() => DsfrNotice(
+              titre: Localisation.appEstEnConstruction,
+              description: Localisation.appEstEnConstructionDescription,
+              onClose: () =>
+                  context.read<HomeDisclaimerCubit>().closeDisclaimer(),
+            ),
+          HomeDisclaimerNotVisible() => const SizedBox(),
+        },
+      );
 }

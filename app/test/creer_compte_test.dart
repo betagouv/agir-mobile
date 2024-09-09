@@ -74,7 +74,7 @@ void main() {
       await ielAppuieSur(tester, commune);
       await ielAppuieSur(tester, Localisation.continuer);
 
-      ielVoitLeTexte(Localisation.agirEstEncoreEnExperimentation);
+      ielVoitLeTexte(Localisation.appEstEncoreEnExperimentation);
       await ielAppuieSur(tester, Localisation.jaiCompris);
 
       ielVoitLeTexte(Localisation.cestPresqueTermine);
