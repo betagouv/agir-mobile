@@ -2,6 +2,7 @@ import 'package:app/app/router/app_router.dart';
 import 'package:app/features/accueil/presentation/cubit/home_disclaimer_cubit.dart';
 import 'package:app/features/aides/domain/ports/aides_port.dart';
 import 'package:app/features/aides/presentation/blocs/aide/aide_bloc.dart';
+import 'package:app/features/aides/presentation/blocs/aides_disclaimer/aides_disclaimer_cubit.dart';
 import 'package:app/features/aides/simulateur_velo/domain/ports/aide_velo_port.dart';
 import 'package:app/features/aides/simulateur_velo/presentation/blocs/aide_velo_bloc.dart';
 import 'package:app/features/articles/domain/ports/articles_port.dart';
@@ -21,7 +22,6 @@ import 'package:app/features/recommandations/domain/ports/recommandations_port.d
 import 'package:app/features/recommandations/presentation/blocs/recommandations_bloc.dart';
 import 'package:app/features/univers/domain/ports/univers_port.dart';
 import 'package:app/features/univers/presentation/blocs/accueil_univers_bloc.dart';
-import 'package:app/features/utilisateur/domain/ports/utilisateur_port.dart';
 import 'package:app/features/utilisateur/presentation/blocs/utilisateur_bloc.dart';
 import 'package:app/features/version/domain/ports/version_port.dart';
 import 'package:app/features/version/presentation/blocs/version_bloc.dart';
@@ -36,7 +36,6 @@ class App extends StatefulWidget {
   const App({
     required this.authentificationStatusManager,
     required this.authentificationPort,
-    required this.utilisateurPort,
     required this.universPort,
     required this.aidesPort,
     required this.bibliothequePort,
@@ -54,7 +53,6 @@ class App extends StatefulWidget {
 
   final AuthentificationStatutManager authentificationStatusManager;
   final AuthentificationPort authentificationPort;
-  final UtilisateurPort utilisateurPort;
   final UniversPort universPort;
   final AidesPort aidesPort;
   final BibliothequePort bibliothequePort;
@@ -105,9 +103,10 @@ class _AppState extends State<App> {
         child: MultiBlocProvider(
           providers: [
             BlocProvider(create: (final context) => HomeDisclaimerCubit()),
+            BlocProvider(create: (final context) => AidesDisclaimerCubit()),
             BlocProvider(
               create: (final context) => UtilisateurBloc(
-                utilisateurPort: widget.utilisateurPort,
+                authentificationPort: widget.authentificationPort,
               ),
             ),
             BlocProvider(

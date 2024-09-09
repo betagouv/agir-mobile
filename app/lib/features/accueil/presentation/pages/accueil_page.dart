@@ -32,7 +32,7 @@ class AccueilPage extends StatelessWidget {
     final BuildContext context,
     final UtilisateurState state,
   ) async {
-    if (!state.estIntegrationTerminee) {
+    if (!state.utilisateur.estIntegrationTerminee) {
       await GoRouter.of(context).pushNamed(QuestionPrenomPage.name);
     }
   }
@@ -43,7 +43,8 @@ class AccueilPage extends StatelessWidget {
         listener: (final context, final state) async =>
             _handlePasDePrenom(context, state),
         listenWhen: (final previous, final current) =>
-            previous.estIntegrationTerminee != current.estIntegrationTerminee,
+            previous.utilisateur.estIntegrationTerminee !=
+            current.utilisateur.estIntegrationTerminee,
         child: const RootPage(title: _AppBarTitle(), body: _Body()),
       );
 }
@@ -62,7 +63,7 @@ class _AppBarTitle extends StatelessWidget {
         text: Localisation.bonjour,
         children: [
           TextSpan(
-            text: Localisation.prenomExclamation(state.prenom ?? ''),
+            text: Localisation.prenomExclamation(state.utilisateur.prenom),
             style: font,
           ),
         ],

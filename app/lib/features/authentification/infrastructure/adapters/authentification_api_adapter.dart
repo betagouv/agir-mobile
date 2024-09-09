@@ -8,6 +8,8 @@ import 'package:app/features/authentification/domain/value_objects/information_d
 import 'package:app/features/authentification/domain/value_objects/information_de_connexion.dart';
 import 'package:app/features/authentification/infrastructure/adapters/authentification_api_client.dart';
 import 'package:app/features/authentification/infrastructure/adapters/erreur_mapper.dart';
+import 'package:app/features/profil/domain/utilisateur_id_non_trouve_exception.dart';
+import 'package:app/features/utilisateur/domain/entities/utilisateur.dart';
 import 'package:fpdart/fpdart.dart';
 
 class AuthentificationApiAdapter implements AuthentificationPort {
@@ -161,5 +163,29 @@ class AuthentificationApiAdapter implements AuthentificationPort {
     final message = AuthentificationErreurMapper.fromJson(json);
 
     return Left(message);
+  }
+
+  @override
+  Future<Either<Exception, Utilisateur>> recupereUtilisateur() async {
+    final id = await _apiClient.recupererUtilisateurId;
+    if (id == null) {
+      return const Left(UtilisateurIdNonTrouveException());
+    }
+    final response = await _apiClient.get(Uri.parse('/utilisateurs/$id'));
+    if (response.statusCode != HttpStatus.ok) {
+      return Left(
+        Exception("Erreur lors de la récupération de l'utilisateur"),
+      );
+    }
+
+    final json = jsonDecode(response.body) as Map<String, dynamic>;
+
+    return Right(
+      Utilisateur(
+        prenom: json['prenom'] as String? ?? '',
+        estIntegrationTerminee: json['is_onboarding_done'] as bool,
+        aMaVilleCouverte: json['couverture_aides_ok'] as bool,
+      ),
+    );
   }
 }

@@ -1,14 +1,11 @@
+import 'package:app/features/utilisateur/domain/entities/utilisateur.dart';
 import 'package:equatable/equatable.dart';
 
 final class UtilisateurState extends Equatable {
-  const UtilisateurState({
-    required this.prenom,
-    required this.estIntegrationTerminee,
-  });
+  const UtilisateurState({required this.utilisateur});
 
-  final String? prenom;
-  final bool estIntegrationTerminee;
+  final Utilisateur utilisateur;
 
   @override
-  List<Object?> get props => [prenom, estIntegrationTerminee];
+  List<Object?> get props => [utilisateur];
 }
