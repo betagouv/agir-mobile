@@ -230,6 +230,10 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const votreProfil = 'Votre profil';
   static const votreResidencePrincipaleEst =
       'Votre résidence principale est ...';
+  static const leServiveNeCouvrePasEncoreVotreVille =
+      'Le service ne couvre pas encore votre ville.';
+  static const leServiveNeCouvrePasEncoreVotreVilleDescription =
+      'Nous mettons les informations à jour progressivement.';
   static const vousAvezDejaUnCompte = 'Vous avez déjà un compte ?';
   static const vousEtesProprietaireDeVotreLogement =
       'Vous êtes propriétaire de votre logement ?';

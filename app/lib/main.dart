@@ -20,7 +20,6 @@ import 'package:app/features/profil/infrastructure/adapters/profil_api_adapter.d
 import 'package:app/features/quiz/infrastructure/adapters/quiz_api_adapter.dart';
 import 'package:app/features/recommandations/infrastructure/adapters/recommandations_api_adapter.dart';
 import 'package:app/features/univers/infrastructure/adapters/univers_api_adapter.dart';
-import 'package:app/features/utilisateur/infrastructure/adapters/utilisateur_api_adapter.dart';
 import 'package:app/features/version/infrastructure/adapters/version_adapter.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
@@ -75,7 +74,6 @@ Future<void> main() async {
     App(
       authentificationStatusManager: authentificationStatusManager,
       authentificationPort: AuthentificationApiAdapter(apiClient: apiClient),
-      utilisateurPort: UtilisateurApiAdapter(apiClient: apiClient),
       universPort: UniversApiAdapter(apiClient: apiClient),
       aidesPort: AidesApiAdapter(apiClient: apiClient),
       bibliothequePort: BibliothequeApiAdapter(apiClient: apiClient),

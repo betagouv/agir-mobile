@@ -1,8 +1,12 @@
 import 'package:app/features/aides/presentation/blocs/aides/aides_bloc.dart';
 import 'package:app/features/aides/presentation/blocs/aides/aides_event.dart';
 import 'package:app/features/aides/presentation/blocs/aides/aides_state.dart';
+import 'package:app/features/aides/presentation/blocs/aides_disclaimer/aides_disclaimer_cubit.dart';
+import 'package:app/features/aides/presentation/blocs/aides_disclaimer/aides_disclaimer_state.dart';
 import 'package:app/features/aides/presentation/widgets/carte_aide.dart';
 import 'package:app/features/menu/presentation/pages/root_page.dart';
+import 'package:app/features/utilisateur/presentation/blocs/utilisateur_bloc.dart';
+import 'package:app/features/utilisateur/presentation/blocs/utilisateur_state.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:app/shared/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:dsfr/dsfr.dart';
@@ -33,46 +37,33 @@ class AidesPage extends StatelessWidget {
           final aides = state.aides;
 
           return ListView(
-            padding: const EdgeInsets.all(paddingVerticalPage),
             children: [
-              const Text(
-                Localisation.vosAidesTitre,
-                style: DsfrTextStyle.headline2(),
-              ),
-              const SizedBox(height: DsfrSpacings.s1w),
-              const Text(
-                Localisation.vosAidesSousTitre,
-                style: DsfrTextStyle.bodyMd(),
-              ),
-              const SizedBox(height: DsfrSpacings.s3w),
-              const Align(
-                alignment: Alignment.centerLeft,
-                child: ColoredBox(
-                  color: DsfrColors.blueFranceSun113,
-                  child: SizedBox(width: 30, height: 2),
-                ),
-              ),
-              ListView.separated(
+              const _Disclaimer(),
+              ListView(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                padding: EdgeInsets.zero,
-                itemBuilder: (final context, final index) =>
-                    switch (aides[index]) {
-                  final AideThematiqueModel a => Padding(
-                      padding: const EdgeInsets.only(
-                        top: DsfrSpacings.s4w,
-                        bottom: DsfrSpacings.s2w,
-                      ),
-                      child: Text(
-                        a.thematique,
-                        style: const DsfrTextStyle.headline4(),
-                      ),
+                padding: const EdgeInsets.all(paddingVerticalPage),
+                children: [
+                  const SizedBox(height: DsfrSpacings.s2w),
+                  const Text(
+                    Localisation.vosAidesTitre,
+                    style: DsfrTextStyle.headline2(),
+                  ),
+                  const SizedBox(height: DsfrSpacings.s1w),
+                  const Text(
+                    Localisation.vosAidesSousTitre,
+                    style: DsfrTextStyle.bodyMd(),
+                  ),
+                  const SizedBox(height: DsfrSpacings.s3w),
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: ColoredBox(
+                      color: DsfrColors.blueFranceSun113,
+                      child: SizedBox(width: 30, height: 2),
                     ),
-                  final AideModel a => CarteAide(aide: a.value),
-                },
-                separatorBuilder: (final context, final index) =>
-                    const SizedBox(height: DsfrSpacings.s1w),
-                itemCount: aides.length,
+                  ),
+                  _Aides(aides: aides),
+                ],
               ),
               const SafeArea(child: SizedBox()),
             ],
@@ -82,4 +73,54 @@ class AidesPage extends StatelessWidget {
       ),
     );
   }
+}
+
+class _Aides extends StatelessWidget {
+  const _Aides({required this.aides});
+
+  final List<AidesModel> aides;
+
+  @override
+  Widget build(final BuildContext context) => ListView.separated(
+        physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        itemBuilder: (final context, final index) => switch (aides[index]) {
+          final AideThematiqueModel a => Padding(
+              padding: const EdgeInsets.only(
+                top: DsfrSpacings.s4w,
+                bottom: DsfrSpacings.s2w,
+              ),
+              child: Text(
+                a.thematique,
+                style: const DsfrTextStyle.headline4(),
+              ),
+            ),
+          final AideModel a => CarteAide(aide: a.value),
+        },
+        separatorBuilder: (final context, final index) =>
+            const SizedBox(height: DsfrSpacings.s1w),
+        itemCount: aides.length,
+      );
+}
+
+class _Disclaimer extends StatelessWidget {
+  const _Disclaimer();
+
+  @override
+  Widget build(final BuildContext context) =>
+      BlocSelector<UtilisateurBloc, UtilisateurState, bool>(
+        selector: (final state) => state.utilisateur.aMaVilleCouverte,
+        builder: (final context, final state) =>
+            BlocBuilder<AidesDisclaimerCubit, AidesDisclaimerState>(
+          builder: (final context, final state) => switch (state) {
+            AidesDisclaimerVisible() => DsfrNotice(
+                titre: Localisation.appEstEnConstruction,
+                description: Localisation.appEstEnConstructionDescription,
+                onClose: () =>
+                    context.read<AidesDisclaimerCubit>().closeDisclaimer(),
+              ),
+            AidesDisclaimerNotVisible() => const SizedBox(),
+          },
+        ),
+      );
 }

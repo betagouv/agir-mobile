@@ -4,10 +4,15 @@ import 'package:app/features/authentification/domain/ports/authentification_port
 import 'package:app/features/authentification/domain/value_objects/authentification_statut.dart';
 import 'package:app/features/authentification/domain/value_objects/information_de_code.dart';
 import 'package:app/features/authentification/domain/value_objects/information_de_connexion.dart';
+import 'package:app/features/utilisateur/domain/entities/utilisateur.dart';
 import 'package:fpdart/fpdart.dart';
 
 class AuthentificationPortMock implements AuthentificationPort {
-  AuthentificationPortMock(this.authentificationStatusManager);
+  AuthentificationPortMock(
+    this.authentificationStatusManager, {
+    required this.prenom,
+    required this.estIntegrationTerminee,
+  });
 
   final AuthentificationStatutManager authentificationStatusManager;
 
@@ -81,4 +86,16 @@ class AuthentificationPortMock implements AuthentificationPort {
 
     return const Right(null);
   }
+
+  String prenom;
+  bool estIntegrationTerminee;
+
+  @override
+  Future<Either<Exception, Utilisateur>> recupereUtilisateur() async => Right(
+        Utilisateur(
+          prenom: prenom,
+          estIntegrationTerminee: estIntegrationTerminee,
+          aMaVilleCouverte: false,
+        ),
+      );
 }

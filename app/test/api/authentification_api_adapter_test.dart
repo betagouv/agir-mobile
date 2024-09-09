@@ -7,7 +7,9 @@ import 'package:app/features/authentification/domain/value_objects/information_d
 import 'package:app/features/authentification/infrastructure/adapters/authentification_api_adapter.dart';
 import 'package:app/features/authentification/infrastructure/adapters/authentification_api_client.dart';
 import 'package:app/features/authentification/infrastructure/adapters/authentification_token_storage.dart';
+import 'package:app/features/utilisateur/domain/entities/utilisateur.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
 
 import 'client_mock.dart';
@@ -358,6 +360,53 @@ void main() {
                 '{"code":"123456","email":"test@example.com","mot_de_passe":"password123"}',
           ),
         ),
+      ),
+    );
+  });
+
+  test('recupereUtilisateur', () async {
+    // Arrange.
+    const prenom = 'Lucas';
+    final client = ClientMock()
+      ..getSuccess(
+        path: '/utilisateurs/$utilisateurId',
+        response: CustomResponse(
+          '''
+{
+  "id": "saudon",
+  "nom": "Saudon",
+  "prenom": "$prenom",
+  "email": "ls@mail.com",
+  "is_onboarding_done": true,
+  "couverture_aides_ok": false
+}''',
+        ),
+      );
+
+    final authentificationTokenStorage = AuthentificationTokenStorage(
+      secureStorage: FlutterSecureStorageMock(),
+      authentificationStatusManagerWriter: AuthentificationStatutManager(),
+    );
+    await authentificationTokenStorage.sauvegarderToken(token);
+
+    final adapter = AuthentificationApiAdapter(
+      apiClient: AuthentificationApiClient(
+        apiUrl: apiUrl,
+        authentificationTokenStorage: authentificationTokenStorage,
+        inner: client,
+      ),
+    );
+
+    // Act.
+    final utilisateur = await adapter.recupereUtilisateur();
+
+    // Assert.
+    expect(
+      utilisateur.getRight().getOrElse(() => throw Exception()),
+      const Utilisateur(
+        prenom: prenom,
+        estIntegrationTerminee: true,
+        aMaVilleCouverte: false,
       ),
     );
   });
