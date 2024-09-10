@@ -84,6 +84,15 @@ class ProfilPage extends StatelessWidget {
                   ),
                   const DsfrDivider(),
                   _MenuElement(
+                    icon: DsfrIcons.documentArticleLine,
+                    label: Localisation.declarationAccessibilite,
+                    onTap: () async => launchUrlString(
+                      Localisation.declarationAccessibiliteSite,
+                    ),
+                    iconRight: DsfrIcons.systemExternalLinkLine,
+                  ),
+                  const DsfrDivider(),
+                  _MenuElement(
                     icon: DsfrIcons.systemSettings5Line,
                     label: Localisation.optionsAvancees,
                     onTap: () async => GoRouter.of(context)

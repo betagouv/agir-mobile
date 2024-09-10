@@ -64,6 +64,9 @@ abstract final class Localisation {
   static const creezVotreCompte = 'Créez votre compte Agir';
   static const creezVotreCompteDetails =
       'Indiquez votre adresse email et choississez un mot de passe pour accéder au service.';
+  static const declarationAccessibilite = "Déclaration d'accessibilité";
+  static const declarationAccessibiliteSite =
+      'https://agir.beta.gouv.fr/accessibilite';
   static const donneesPersonnelles = 'Données personnelles';
   static const donneesUtiliseesPart1 = 'Données utilisées : code postal ';
   static const donneesUtiliseesPart2 = ', revenu fiscal de référence ';
