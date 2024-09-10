@@ -114,8 +114,9 @@ class _Disclaimer extends StatelessWidget {
             BlocBuilder<AidesDisclaimerCubit, AidesDisclaimerState>(
           builder: (final context, final state) => switch (state) {
             AidesDisclaimerVisible() => DsfrNotice(
-                titre: Localisation.appEstEnConstruction,
-                description: Localisation.appEstEnConstructionDescription,
+                titre: Localisation.leServiveNeCouvrePasEncoreVotreVille,
+                description: Localisation
+                    .leServiveNeCouvrePasEncoreVotreVilleDescription,
                 onClose: () =>
                     context.read<AidesDisclaimerCubit>().closeDisclaimer(),
               ),
