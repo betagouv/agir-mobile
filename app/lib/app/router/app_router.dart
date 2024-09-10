@@ -120,5 +120,9 @@ GoRouter goRouter({
       refreshListenable:
           GoRouterRefreshStream(authentificationStatusManagerReader.statut),
       initialLocation: '/unauthenticated/${PreOnboardingPage.path}',
-      observers: [mesRecommandationsRouteObserver, missionRouteObserver],
+      observers: [
+        mesRecommandationsRouteObserver,
+        missionRouteObserver,
+        universRouteObserver,
+      ],
     );

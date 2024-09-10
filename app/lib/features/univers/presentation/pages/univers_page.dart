@@ -15,6 +15,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+final universRouteObserver = RouteObserver<ModalRoute<dynamic>>();
+
 class UniversPage extends StatelessWidget {
   const UniversPage({super.key, required this.univers});
 
@@ -35,12 +37,50 @@ class UniversPage extends StatelessWidget {
         create: (final context) => UniversBloc(
           univers: univers,
           universPort: context.read(),
-        )..add(UniversThematiquesRecuperationDemandee(univers.type)),
-        child: const Scaffold(
-          appBar: FnvAppBar(),
-          body: _View(),
-          backgroundColor: FnvColors.aidesFond,
         ),
+        child: _Page(univers),
+      );
+}
+
+class _Page extends StatefulWidget {
+  const _Page(this.univers);
+
+  final TuileUnivers univers;
+
+  @override
+  State<_Page> createState() => _PageState();
+}
+
+class _PageState extends State<_Page> with RouteAware {
+  void _handleMission() {
+    context
+        .read<UniversBloc>()
+        .add(UniversThematiquesRecuperationDemandee(widget.univers.type));
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    universRouteObserver.subscribe(this, ModalRoute.of(context)!);
+  }
+
+  @override
+  void didPopNext() => _handleMission();
+
+  @override
+  void didPush() => _handleMission();
+
+  @override
+  void dispose() {
+    missionRouteObserver.unsubscribe(this);
+    super.dispose();
+  }
+
+  @override
+  Widget build(final BuildContext context) => const Scaffold(
+        appBar: FnvAppBar(),
+        body: _View(),
+        backgroundColor: FnvColors.aidesFond,
       );
 }
 
