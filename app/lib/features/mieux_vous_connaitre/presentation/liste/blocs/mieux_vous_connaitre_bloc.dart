@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:app/features/mieux_vous_connaitre/domain/ports/mieux_vous_connaitre_port.dart';
 import 'package:app/features/mieux_vous_connaitre/presentation/liste/blocs/mieux_vous_connaitre_event.dart';
 import 'package:app/features/mieux_vous_connaitre/presentation/liste/blocs/mieux_vous_connaitre_state.dart';
@@ -10,47 +8,35 @@ class MieuxVousConnaitreBloc
     extends Bloc<MieuxVousConnaitreEvent, MieuxVousConnaitreState> {
   MieuxVousConnaitreBloc({
     required final MieuxVousConnaitrePort mieuxVousConnaitrePort,
-  })  : _mieuxVousConnaitrePort = mieuxVousConnaitrePort,
-        super(const MieuxVousConnaitreState.empty()) {
-    on<MieuxVousConnaitreRecuperationDemandee>(_onRecuperationDemandee);
-    on<MieuxVousConnaitreThematiqueSelectionnee>(_onThematiqueSelectionnee);
-  }
+  }) : super(const MieuxVousConnaitreState.empty()) {
+    on<MieuxVousConnaitreRecuperationDemandee>((final event, final emit) async {
+      emit(state.copyWith(statut: MieuxVousConnaitreStatut.chargement));
+      final result =
+          await mieuxVousConnaitrePort.recupererLesQuestionsDejaRepondue();
+      if (result.isRight()) {
+        final questions = result.getRight().getOrElse(() => throw Exception());
 
-  final MieuxVousConnaitrePort _mieuxVousConnaitrePort;
-
-  Future<void> _onRecuperationDemandee(
-    final MieuxVousConnaitreRecuperationDemandee event,
-    final Emitter<MieuxVousConnaitreState> emit,
-  ) async {
-    emit(state.copyWith(statut: MieuxVousConnaitreStatut.chargement));
-    final result =
-        await _mieuxVousConnaitrePort.recupererLesQuestionsDejaRepondue();
-    if (result.isRight()) {
-      final questions = result.getRight().getOrElse(() => throw Exception());
-
+        emit(
+          state.copyWith(
+            questions: questions,
+            questionsParCategorie: questions,
+            statut: MieuxVousConnaitreStatut.succes,
+          ),
+        );
+      }
+    });
+    on<MieuxVousConnaitreThematiqueSelectionnee>((final event, final emit) {
       emit(
         state.copyWith(
-          questions: questions,
-          questionsParCategorie: questions,
-          statut: MieuxVousConnaitreStatut.succes,
+          questionsParCategorie: state.questions
+              .where(
+                (final e) =>
+                    event.valeur == null || e.thematique == event.valeur,
+              )
+              .toList(),
+          thematiqueSelectionnee: Some(event.valeur),
         ),
       );
-    }
-  }
-
-  void _onThematiqueSelectionnee(
-    final MieuxVousConnaitreThematiqueSelectionnee event,
-    final Emitter<MieuxVousConnaitreState> emit,
-  ) {
-    emit(
-      state.copyWith(
-        questionsParCategorie: state.questions
-            .where(
-              (final e) => event.valeur == null || e.thematique == event.valeur,
-            )
-            .toList(),
-        thematiqueSelectionnee: Some(event.valeur),
-      ),
-    );
+    });
   }
 }

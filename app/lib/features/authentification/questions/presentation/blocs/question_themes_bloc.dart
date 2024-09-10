@@ -9,43 +9,26 @@ class QuestionThemesBloc
     extends Bloc<QuestionThemesEvent, QuestionThemesState> {
   QuestionThemesBloc({
     required final MieuxVousConnaitrePort mieuxVousConnaitrePort,
-  })  : _mieuxVousConnaitrePort = mieuxVousConnaitrePort,
-        super(
+  }) : super(
           const QuestionThemesState(question: Question.empty(), valeur: []),
         ) {
-    on<QuestionThemesRecuperationDemandee>(_onRecuperationDemandee);
-    on<QuestionThemesOntChange>(_onOntChange);
-    on<QuestionThemesMiseAJourDemandee>(_onMiseAJourDemandee);
-  }
-
-  final MieuxVousConnaitrePort _mieuxVousConnaitrePort;
-  final _id = 'KYC_preference';
-
-  Future<void> _onRecuperationDemandee(
-    final QuestionThemesRecuperationDemandee event,
-    final Emitter<QuestionThemesState> emit,
-  ) async {
-    final result = await _mieuxVousConnaitrePort.recupererQuestion(id: _id);
-    if (result.isRight()) {
-      final question = result.getRight().getOrElse(() => throw Exception());
-      emit(state.copyWith(question: question));
-    }
-  }
-
-  void _onOntChange(
-    final QuestionThemesOntChange event,
-    final Emitter<QuestionThemesState> emit,
-  ) {
-    emit(state.copyWith(valeur: event.valeur));
-  }
-
-  Future<void> _onMiseAJourDemandee(
-    final QuestionThemesMiseAJourDemandee event,
-    final Emitter<QuestionThemesState> emit,
-  ) async {
-    await _mieuxVousConnaitrePort.mettreAJour(
-      id: _id,
-      reponses: state.valeur,
+    on<QuestionThemesRecuperationDemandee>((final event, final emit) async {
+      final result = await mieuxVousConnaitrePort.recupererQuestion(id: _id);
+      if (result.isRight()) {
+        final question = result.getRight().getOrElse(() => throw Exception());
+        emit(state.copyWith(question: question));
+      }
+    });
+    on<QuestionThemesOntChange>(
+      (final event, final emit) => emit(state.copyWith(valeur: event.valeur)),
     );
+    on<QuestionThemesMiseAJourDemandee>((final event, final emit) async {
+      await mieuxVousConnaitrePort.mettreAJour(
+        id: _id,
+        reponses: state.valeur,
+      );
+    });
   }
+
+  final _id = 'KYC_preference';
 }

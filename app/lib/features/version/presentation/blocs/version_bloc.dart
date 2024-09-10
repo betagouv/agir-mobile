@@ -6,21 +6,13 @@ import 'package:fpdart/fpdart.dart';
 
 class VersionBloc extends Bloc<VersionEvent, VersionState> {
   VersionBloc({required final VersionPort versionPort})
-      : _versionPort = versionPort,
-        super(const VersionState('')) {
-    on<VersionDemandee>(_onDemandee);
-  }
-
-  final VersionPort _versionPort;
-
-  void _onDemandee(
-    final VersionDemandee event,
-    final Emitter<VersionState> emit,
-  ) {
-    final result = _versionPort.versionDemandee();
-    if (result.isRight()) {
-      final version = result.getRight().getOrElse(() => throw Exception());
-      emit(VersionState(version));
-    }
+      : super(const VersionState('')) {
+    on<VersionDemandee>((final event, final emit) {
+      final result = versionPort.versionDemandee();
+      if (result.isRight()) {
+        final version = result.getRight().getOrElse(() => throw Exception());
+        emit(VersionState(version));
+      }
+    });
   }
 }

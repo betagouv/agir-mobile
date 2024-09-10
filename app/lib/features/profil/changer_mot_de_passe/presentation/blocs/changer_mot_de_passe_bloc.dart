@@ -6,26 +6,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ChangerMotDePasseBloc
     extends Bloc<ChangerMotDePasseEvent, ChangerMotDePasseState> {
   ChangerMotDePasseBloc({required final ProfilPort profilPort})
-      : _profilPort = profilPort,
-        super(const ChangerMotDePasseState.empty()) {
-    on<ChangerMotDePasseAChange>(_onMotPasseChange);
-    on<ChangerMotDePasseChangementDemande>(_onChangementDemande);
+      : super(const ChangerMotDePasseState.empty()) {
+    on<ChangerMotDePasseAChange>((final event, final emit) {
+      emit(state.copyWith(motDePasse: event.valeur));
+    });
+    on<ChangerMotDePasseChangementDemande>((final event, final emit) async {
+      await profilPort.changerMotDePasse(motDePasse: state.motDePasse);
+      emit(state.copyWith(motPasseEstChange: true));
+    });
   }
-
-  void _onMotPasseChange(
-    final ChangerMotDePasseAChange event,
-    final Emitter<ChangerMotDePasseState> emit,
-  ) {
-    emit(state.copyWith(motDePasse: event.valeur));
-  }
-
-  Future<void> _onChangementDemande(
-    final ChangerMotDePasseChangementDemande event,
-    final Emitter<ChangerMotDePasseState> emit,
-  ) async {
-    await _profilPort.changerMotDePasse(motDePasse: state.motDePasse);
-    emit(state.copyWith(motPasseEstChange: true));
-  }
-
-  final ProfilPort _profilPort;
 }

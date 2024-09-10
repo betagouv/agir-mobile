@@ -13,44 +13,30 @@ class GamificationBloc extends Bloc<GamificationEvent, GamificationState> {
     required final GamificationPort gamificationPort,
     required final AuthentificationStatutManagerReader
         authentificationStatutManagerReader,
-  })  : _gamificationPort = gamificationPort,
-        _authentificationStatutManagerReader =
-            authentificationStatutManagerReader,
-        super(const GamificationState.empty()) {
-    on<GamificationAuthentificationAChange>(_onAuthentificationAChange);
-    on<GamificationAbonnementDemande>(_onAbonnementDemande);
-    _subscription = _authentificationStatutManagerReader.statut.listen(
+  }) : super(const GamificationState.empty()) {
+    on<GamificationAuthentificationAChange>(
+      (final event, final emit) async =>
+          gamificationPort.mettreAJourLesPoints(),
+    );
+    on<GamificationAbonnementDemande>((final event, final emit) async {
+      emit(state.copyWith(statut: GamificationStatut.chargement));
+
+      await emit.forEach<Gamification>(
+        gamificationPort.gamification(),
+        onData: (final data) => state.copyWith(
+          statut: GamificationStatut.succes,
+          points: data.points,
+        ),
+        onError: (final _, final __) =>
+            state.copyWith(statut: GamificationStatut.erreur),
+      );
+    });
+    _subscription = authentificationStatutManagerReader.statut.listen(
       (final statut) => add(GamificationAuthentificationAChange(statut)),
     );
   }
 
-  final GamificationPort _gamificationPort;
-  final AuthentificationStatutManagerReader
-      _authentificationStatutManagerReader;
   late final StreamSubscription<AuthentificationStatut> _subscription;
-
-  Future<void> _onAuthentificationAChange(
-    final GamificationAuthentificationAChange event,
-    final Emitter<GamificationState> emit,
-  ) async =>
-      _gamificationPort.mettreAJourLesPoints();
-
-  Future<void> _onAbonnementDemande(
-    final GamificationAbonnementDemande event,
-    final Emitter<GamificationState> emit,
-  ) async {
-    emit(state.copyWith(statut: GamificationStatut.chargement));
-
-    await emit.forEach<Gamification>(
-      _gamificationPort.gamification(),
-      onData: (final data) => state.copyWith(
-        statut: GamificationStatut.succes,
-        points: data.points,
-      ),
-      onError: (final _, final __) =>
-          state.copyWith(statut: GamificationStatut.erreur),
-    );
-  }
 
   @override
   Future<void> close() {
