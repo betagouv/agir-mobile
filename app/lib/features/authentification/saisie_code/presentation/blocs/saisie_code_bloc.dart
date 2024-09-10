@@ -9,45 +9,32 @@ class SaisieCodeBloc extends Bloc<SaisieCodeEvent, SaisieCodeState> {
   SaisieCodeBloc({
     required final AuthentificationPort authentificationPort,
     required final String email,
-  })  : _authentificationPort = authentificationPort,
-        super(
+  }) : super(
           SaisieCodeState(
             email: email,
             renvoyerCodeDemande: false,
             erreur: const None(),
           ),
         ) {
-    on<SaiseCodeRenvoyerCodeDemandee>(_onRenvoyerCodeDemandee);
-    on<SaisieCodeCodeSaisie>(_onCodeSaisie);
-  }
+    on<SaiseCodeRenvoyerCodeDemandee>((final event, final emit) async {
+      emit(state.copyWith(renvoyerCodeDemande: false));
+      await authentificationPort.renvoyerCodeDemande(state.email);
+      emit(state.copyWith(renvoyerCodeDemande: true));
+    });
+    on<SaisieCodeCodeSaisie>((final event, final emit) async {
+      if (event.code.length != 6) {
+        return;
+      }
 
-  final AuthentificationPort _authentificationPort;
+      final result = await authentificationPort.validationDemandee(
+        InformationDeCode(adresseMail: state.email, code: event.code),
+      );
 
-  Future<void> _onRenvoyerCodeDemandee(
-    final SaiseCodeRenvoyerCodeDemandee event,
-    final Emitter<SaisieCodeState> emit,
-  ) async {
-    emit(state.copyWith(renvoyerCodeDemande: false));
-    await _authentificationPort.renvoyerCodeDemande(state.email);
-    emit(state.copyWith(renvoyerCodeDemande: true));
-  }
-
-  Future<void> _onCodeSaisie(
-    final SaisieCodeCodeSaisie event,
-    final Emitter<SaisieCodeState> emit,
-  ) async {
-    if (event.code.length != 6) {
-      return;
-    }
-
-    final result = await _authentificationPort.validationDemandee(
-      InformationDeCode(adresseMail: state.email, code: event.code),
-    );
-
-    result.fold(
-      (final exception) =>
-          emit(state.copyWith(erreur: Some(exception.message))),
-      (final _) {},
-    );
+      result.fold(
+        (final exception) =>
+            emit(state.copyWith(erreur: Some(exception.message))),
+        (final _) {},
+      );
+    });
   }
 }

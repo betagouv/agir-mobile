@@ -7,25 +7,13 @@ class MotDePasseOublieBloc
     extends Bloc<MotDePasseOublieEvent, MotDePasseOublieState> {
   MotDePasseOublieBloc({
     required final AuthentificationPort authentificationPort,
-  })  : _authentificationPort = authentificationPort,
-        super(const MotDePasseOublieState(email: '')) {
-    on<MotDePasseOublieEmailChange>(_onEmailChange);
-    on<MotDePasseOublieValider>(_onValider);
-  }
-
-  final AuthentificationPort _authentificationPort;
-
-  void _onEmailChange(
-    final MotDePasseOublieEmailChange event,
-    final Emitter<MotDePasseOublieState> emit,
-  ) {
-    emit(state.copyWith(email: event.valeur));
-  }
-
-  Future<void> _onValider(
-    final MotDePasseOublieValider event,
-    final Emitter<MotDePasseOublieState> emit,
-  ) async {
-    await _authentificationPort.oubliMotDePasse(state.email);
+  }) : super(const MotDePasseOublieState(email: '')) {
+    on<MotDePasseOublieEmailChange>(
+      (final event, final emit) => emit(state.copyWith(email: event.valeur)),
+    );
+    on<MotDePasseOublieValider>(
+      (final event, final emit) async =>
+          authentificationPort.oubliMotDePasse(state.email),
+    );
   }
 }
