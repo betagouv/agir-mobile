@@ -1,0 +1,39 @@
+import 'package:app/features/first_name/domain/value_objects/first_name.dart';
+import 'package:equatable/equatable.dart';
+
+abstract class FirstNameState extends Equatable {
+  const FirstNameState();
+
+  @override
+  List<Object> get props => [];
+}
+
+final class FirstNameInitial extends FirstNameState {
+  const FirstNameInitial();
+}
+
+final class FirstNameEntered extends FirstNameState {
+  const FirstNameEntered(this.firstName);
+
+  final FirstName firstName;
+
+  @override
+  List<Object> get props => [firstName];
+}
+
+final class FirstNameLoading extends FirstNameState {
+  const FirstNameLoading();
+}
+
+class FirstNameSuccess extends FirstNameState {
+  const FirstNameSuccess();
+}
+
+class FirstNameFailure extends FirstNameState {
+  const FirstNameFailure({required this.errorMessage});
+
+  final String errorMessage;
+
+  @override
+  List<Object> get props => [errorMessage];
+}

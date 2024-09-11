@@ -1,7 +1,7 @@
 import 'package:app/features/accueil/presentation/cubit/home_disclaimer_cubit.dart';
 import 'package:app/features/accueil/presentation/cubit/home_disclaimer_state.dart';
 import 'package:app/features/aides/presentation/widgets/mes_aides.dart';
-import 'package:app/features/authentification/questions/presentation/pages/question_prenom_page.dart';
+import 'package:app/features/first_name/presentation/pages/first_name_page.dart';
 import 'package:app/features/menu/presentation/pages/root_page.dart';
 import 'package:app/features/recommandations/presentation/widgets/mes_recommandations.dart';
 import 'package:app/features/univers/presentation/widgets/univers_section.dart';
@@ -33,7 +33,7 @@ class AccueilPage extends StatelessWidget {
     final UtilisateurState state,
   ) async {
     if (!state.utilisateur.estIntegrationTerminee) {
-      await GoRouter.of(context).pushNamed(QuestionPrenomPage.name);
+      await GoRouter.of(context).pushNamed(FirstNamePage.name);
     }
   }
 

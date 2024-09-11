@@ -44,9 +44,10 @@ dart_code_metrics:
         last:
           - child
           - children
-    - avoid-dynamic: false
+    - avoid-declaring-call-method: false
     - avoid-duplicate-collection-elements: false
     - avoid-duplicate-test-assertions: false
+    - avoid-dynamic: false
     - avoid-getter-prefix: false
     - avoid-ignoring-return-values: false
     - avoid-late-keyword: false

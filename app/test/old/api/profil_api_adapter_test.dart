@@ -128,42 +128,6 @@ void main() {
       );
     });
 
-    test('mettreAJourPrenom', () async {
-      final client = ClientMock()
-        ..patchSuccess(
-          path: '/utilisateurs/$utilisateurId/profile',
-          response: OkResponse(),
-        );
-
-      final authentificationTokenStorage = AuthentificationTokenStorage(
-        secureStorage: FlutterSecureStorageMock(),
-        authentificationStatusManagerWriter: AuthentificationStatutManager(),
-      );
-      await authentificationTokenStorage.sauvegarderToken(token);
-
-      final adapter = ProfilApiAdapter(
-        apiClient: AuthentificationApiClient(
-          apiUrl: apiUrl,
-          authentificationTokenStorage: authentificationTokenStorage,
-          inner: client,
-        ),
-      );
-
-      const prenom = 'Prénom';
-      await adapter.mettreAJourPrenom(prenom);
-
-      verify(
-        () => client.send(
-          any(
-            that: const RequestMathcher(
-              '/utilisateurs/$utilisateurId/profile',
-              body: '{"prenom":"$prenom"}',
-            ),
-          ),
-        ),
-      );
-    });
-
     test('recupererLogement', () async {
       final client = ClientMock()
         ..getSuccess(

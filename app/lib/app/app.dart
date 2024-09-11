@@ -11,6 +11,7 @@ import 'package:app/features/authentification/domain/ports/authentification_port
 import 'package:app/features/bibliotheque/domain/ports/bibliotheque_port.dart';
 import 'package:app/features/bibliotheque/presentation/blocs/bibliotheque_bloc.dart';
 import 'package:app/features/communes/domain/ports/communes_port.dart';
+import 'package:app/features/first_name/domain/ports/first_name_port.dart';
 import 'package:app/features/gamification/domain/ports/gamification_port.dart';
 import 'package:app/features/gamification/presentation/blocs/gamification_bloc.dart';
 import 'package:app/features/gamification/presentation/blocs/gamification_event.dart';
@@ -45,6 +46,7 @@ class App extends StatefulWidget {
     required this.versionPort,
     required this.communesPort,
     required this.aideVeloPort,
+    required this.firstNamePort,
     required this.profilPort,
     required this.mieuxVousConnaitrePort,
     required this.gamificationPort,
@@ -62,6 +64,7 @@ class App extends StatefulWidget {
   final VersionPort versionPort;
   final CommunesPort communesPort;
   final AideVeloPort aideVeloPort;
+  final FirstNamePort firstNamePort;
   final ProfilPort profilPort;
   final MieuxVousConnaitrePort mieuxVousConnaitrePort;
   final GamificationPort gamificationPort;
@@ -99,6 +102,7 @@ class _AppState extends State<App> {
           RepositoryProvider.value(value: widget.communesPort),
           RepositoryProvider.value(value: widget.mieuxVousConnaitrePort),
           RepositoryProvider.value(value: widget.gamificationPort),
+          RepositoryProvider.value(value: widget.firstNamePort),
         ],
         child: MultiBlocProvider(
           providers: [

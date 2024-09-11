@@ -94,6 +94,8 @@ abstract final class Localisation {
   static const estimerMesAides = 'Estimer mes aides';
   static const fermer = 'Fermer';
   static const fioul = 'Fioul';
+  static const firstNameEmpty = 'Le prénom ne peut pas être vide.';
+  static const firstNameInvalid = "Le prénom n'est pas valide.";
   static const gaz = 'Gaz';
   static const jaccepte = "J'accepte ";
   static const jaiCompris = "J'ai compris";

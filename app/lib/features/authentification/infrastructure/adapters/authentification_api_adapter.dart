@@ -2,14 +2,14 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:app/features/authentification/domain/entities/authentification_erreur.dart';
 import 'package:app/features/authentification/domain/ports/authentification_port.dart';
 import 'package:app/features/authentification/domain/value_objects/information_de_code.dart';
 import 'package:app/features/authentification/domain/value_objects/information_de_connexion.dart';
 import 'package:app/features/authentification/infrastructure/adapters/authentification_api_client.dart';
-import 'package:app/features/authentification/infrastructure/adapters/erreur_mapper.dart';
 import 'package:app/features/profil/domain/utilisateur_id_non_trouve_exception.dart';
 import 'package:app/features/utilisateur/domain/entities/utilisateur.dart';
+import 'package:app/shared/domain/entities/api_erreur.dart';
+import 'package:app/shared/infrastructure/adapters/api_erreur_helpers.dart';
 import 'package:fpdart/fpdart.dart';
 
 class AuthentificationApiAdapter implements AuthentificationPort {
@@ -21,7 +21,7 @@ class AuthentificationApiAdapter implements AuthentificationPort {
   bool _connexionDemandee = false;
 
   @override
-  Future<Either<AuthentificationErreur, void>> connexionDemandee(
+  Future<Either<ApiErreur, void>> connexionDemandee(
     final InformationDeConnexion informationDeConnexion,
   ) async {
     final response = await _apiClient.post(
@@ -38,7 +38,7 @@ class AuthentificationApiAdapter implements AuthentificationPort {
       return const Right(null);
     }
 
-    return _handleError(
+    return handleError(
       response.body,
       defaultMessage: 'Erreur lors de la connexion',
     );
@@ -52,7 +52,7 @@ class AuthentificationApiAdapter implements AuthentificationPort {
   }
 
   @override
-  Future<Either<AuthentificationErreur, void>> creationDeCompteDemandee(
+  Future<Either<ApiErreur, void>> creationDeCompteDemandee(
     final InformationDeConnexion informationDeConnexion,
   ) async {
     final response = await _apiClient.post(
@@ -65,7 +65,7 @@ class AuthentificationApiAdapter implements AuthentificationPort {
 
     return response.statusCode == HttpStatus.created
         ? const Right(null)
-        : _handleError(
+        : handleError(
             response.body,
             defaultMessage: 'Erreur lors de la création du compte',
           );
@@ -86,7 +86,7 @@ class AuthentificationApiAdapter implements AuthentificationPort {
   }
 
   @override
-  Future<Either<AuthentificationErreur, void>> validationDemandee(
+  Future<Either<ApiErreur, void>> validationDemandee(
     final InformationDeCode informationDeConnexion,
   ) async {
     final uri = _connexionDemandee
@@ -110,7 +110,7 @@ class AuthentificationApiAdapter implements AuthentificationPort {
       return const Right(null);
     }
 
-    return _handleError(
+    return handleError(
       response.body,
       defaultMessage: 'Erreur lors de la validation du code',
     );
@@ -129,7 +129,7 @@ class AuthentificationApiAdapter implements AuthentificationPort {
   }
 
   @override
-  Future<Either<AuthentificationErreur, void>> modifierMotDePasse({
+  Future<Either<ApiErreur, void>> modifierMotDePasse({
     required final String email,
     required final String code,
     required final String motDePasse,
@@ -145,24 +145,10 @@ class AuthentificationApiAdapter implements AuthentificationPort {
 
     return response.statusCode == HttpStatus.created
         ? const Right(null)
-        : _handleError(
+        : handleError(
             response.body,
             defaultMessage: 'Erreur lors de la modification du mot de passe',
           );
-  }
-
-  Left<AuthentificationErreur, void> _handleError(
-    final String errorMessage, {
-    required final String defaultMessage,
-  }) {
-    if (errorMessage.isEmpty) {
-      return Left(AuthentificationErreur(defaultMessage));
-    }
-
-    final json = jsonDecode(errorMessage) as Map<String, dynamic>;
-    final message = AuthentificationErreurMapper.fromJson(json);
-
-    return Left(message);
   }
 
   @override
