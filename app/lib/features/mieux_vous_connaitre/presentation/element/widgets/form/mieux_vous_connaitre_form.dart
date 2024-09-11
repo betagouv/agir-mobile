@@ -30,6 +30,7 @@ class MieuxVousConnaitreForm extends StatelessWidget {
   Widget build(final BuildContext context) => BlocProvider(
         create: (final context) => MieuxVousConnaitreEditBloc(
           mieuxVousConnaitrePort: context.read(),
+          gamificationPort: context.read(),
         )..add(MieuxVousConnaitreEditRecuperationDemandee(id)),
         child: _Content(controller: controller, onSaved: onSaved),
       );

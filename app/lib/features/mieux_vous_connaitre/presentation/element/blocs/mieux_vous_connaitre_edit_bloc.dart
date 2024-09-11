@@ -1,3 +1,4 @@
+import 'package:app/features/gamification/domain/ports/gamification_port.dart';
 import 'package:app/features/mieux_vous_connaitre/domain/ports/mieux_vous_connaitre_port.dart';
 import 'package:app/features/mieux_vous_connaitre/presentation/element/blocs/mieux_vous_connaitre_edit_event.dart';
 import 'package:app/features/mieux_vous_connaitre/presentation/element/blocs/mieux_vous_connaitre_edit_state.dart';
@@ -8,6 +9,7 @@ class MieuxVousConnaitreEditBloc
     extends Bloc<MieuxVousConnaitreEditEvent, MieuxVousConnaitreEditState> {
   MieuxVousConnaitreEditBloc({
     required final MieuxVousConnaitrePort mieuxVousConnaitrePort,
+    required final GamificationPort gamificationPort,
   }) : super(const MieuxVousConnaitreEditState.empty()) {
     on<MieuxVousConnaitreEditRecuperationDemandee>(
       (final event, final emit) async {
@@ -27,6 +29,7 @@ class MieuxVousConnaitreEditBloc
         id: event.id,
         reponses: state.valeur,
       );
+      await gamificationPort.mettreAJourLesPoints();
       emit(state.copyWith(estMiseAJour: true));
     });
   }
