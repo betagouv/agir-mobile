@@ -62,6 +62,7 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
     defi: ScenarioContext().defi,
   );
 
+  final profilPort = ScenarioContext().profilPortMock!;
   await tester.pumpFrames(
     App(
       authentificationStatusManager: authentificationStatusManager,
@@ -76,7 +77,8 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
       versionPort: const VersionPortMock(),
       communesPort: CommunesPortMock(ScenarioContext().communes),
       aideVeloPort: ScenarioContext().aideVeloPortMock!,
-      profilPort: ScenarioContext().profilPortMock!,
+      firstNamePort: profilPort,
+      profilPort: profilPort,
       mieuxVousConnaitrePort: ScenarioContext().mieuxVousConnaitrePortMock!,
       gamificationPort: GamificationPortMock(ScenarioContext().gamification),
     ),

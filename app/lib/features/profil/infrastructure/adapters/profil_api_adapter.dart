@@ -149,23 +149,6 @@ class ProfilApiAdapter implements ProfilPort {
   }
 
   @override
-  Future<Either<Exception, void>> mettreAJourPrenom(final String prenom) async {
-    final utilisateurId = await _apiClient.recupererUtilisateurId;
-    if (utilisateurId == null) {
-      return const Left(UtilisateurIdNonTrouveException());
-    }
-
-    final uri = Uri.parse('/utilisateurs/$utilisateurId/profile');
-    final body = jsonEncode({'prenom': prenom});
-
-    final response = await _apiClient.patch(uri, body: body);
-
-    return response.statusCode == HttpStatus.ok
-        ? const Right(null)
-        : Left(Exception('Erreur lors de la mise à jour du prénom'));
-  }
-
-  @override
   Future<Either<Exception, void>> mettreAJourCodePostalEtCommune({
     required final String codePostal,
     required final String commune,

@@ -14,6 +14,7 @@ import 'package:app/features/authentification/infrastructure/adapters/authentifi
 import 'package:app/features/authentification/infrastructure/adapters/cms_api_client.dart';
 import 'package:app/features/bibliotheque/infrastructure/adapters/bibliotheque_api_adapter.dart';
 import 'package:app/features/communes/infrastructure/adapters/communes_api_adapter.dart';
+import 'package:app/features/first_name/infrastructure/first_name_adapter.dart';
 import 'package:app/features/gamification/infrastructure/adapters/gamification_api_adapter.dart';
 import 'package:app/features/mieux_vous_connaitre/infrastructure/adapters/mieux_vous_connaitre_api_adapter.dart';
 import 'package:app/features/profil/infrastructure/adapters/profil_api_adapter.dart';
@@ -70,6 +71,7 @@ Future<void> main() async {
 
   final packageInfo = await PackageInfo.fromPlatform();
 
+  final profilApiAdapter = ProfilApiAdapter(apiClient: apiClient);
   runApp(
     App(
       authentificationStatusManager: authentificationStatusManager,
@@ -87,7 +89,8 @@ Future<void> main() async {
       versionPort: VersionAdapter(packageInfo: packageInfo),
       communesPort: CommunesApiAdapter(apiClient: apiClient),
       aideVeloPort: AideVeloApiAdapter(apiClient: apiClient),
-      profilPort: ProfilApiAdapter(apiClient: apiClient),
+      firstNamePort: FirstNameAdapter(apiClient: apiClient),
+      profilPort: profilApiAdapter,
       mieuxVousConnaitrePort:
           MieuxVousConnaitreApiAdapter(apiClient: apiClient),
       gamificationPort: GamificationApiAdapter(apiClient: apiClient),

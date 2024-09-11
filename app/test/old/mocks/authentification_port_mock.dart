@@ -1,10 +1,10 @@
-import 'package:app/features/authentification/domain/entities/authentification_erreur.dart';
 import 'package:app/features/authentification/domain/entities/authentification_statut_manager.dart';
 import 'package:app/features/authentification/domain/ports/authentification_port.dart';
 import 'package:app/features/authentification/domain/value_objects/authentification_statut.dart';
 import 'package:app/features/authentification/domain/value_objects/information_de_code.dart';
 import 'package:app/features/authentification/domain/value_objects/information_de_connexion.dart';
 import 'package:app/features/utilisateur/domain/entities/utilisateur.dart';
+import 'package:app/shared/domain/entities/api_erreur.dart';
 import 'package:fpdart/fpdart.dart';
 
 class AuthentificationPortMock implements AuthentificationPort {
@@ -24,7 +24,7 @@ class AuthentificationPortMock implements AuthentificationPort {
   bool modifierMotDePasseAppele = false;
 
   @override
-  Future<Either<AuthentificationErreur, void>> connexionDemandee(
+  Future<Either<ApiErreur, void>> connexionDemandee(
     final InformationDeConnexion informationDeConnexion,
   ) async {
     connexionAppele = true;
@@ -41,7 +41,7 @@ class AuthentificationPortMock implements AuthentificationPort {
   }
 
   @override
-  Future<Either<AuthentificationErreur, void>> creationDeCompteDemandee(
+  Future<Either<ApiErreur, void>> creationDeCompteDemandee(
     final InformationDeConnexion informationDeConnexion,
   ) async {
     creerCompteAppele = true;
@@ -59,7 +59,7 @@ class AuthentificationPortMock implements AuthentificationPort {
   }
 
   @override
-  Future<Either<AuthentificationErreur, void>> validationDemandee(
+  Future<Either<ApiErreur, void>> validationDemandee(
     final InformationDeCode informationDeConnexion,
   ) async {
     validationAppele = true;
@@ -77,7 +77,7 @@ class AuthentificationPortMock implements AuthentificationPort {
   }
 
   @override
-  Future<Either<AuthentificationErreur, void>> modifierMotDePasse({
+  Future<Either<ApiErreur, void>> modifierMotDePasse({
     required final String email,
     required final String code,
     required final String motDePasse,

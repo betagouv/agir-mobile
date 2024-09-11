@@ -13,11 +13,11 @@ import 'package:app/features/authentification/mot_de_passe_oublie/pages/mot_de_p
 import 'package:app/features/authentification/presentation/pages/se_connecter_page.dart';
 import 'package:app/features/authentification/questions/presentation/pages/app_est_encore_en_experimentation_page.dart';
 import 'package:app/features/authentification/questions/presentation/pages/question_code_postal_page.dart';
-import 'package:app/features/authentification/questions/presentation/pages/question_prenom_page.dart';
 import 'package:app/features/authentification/questions/presentation/pages/question_themes_page.dart';
 import 'package:app/features/authentification/questions/presentation/pages/tout_est_pret_page.dart';
 import 'package:app/features/authentification/saisie_code/presentation/pages/saisie_code_page.dart';
 import 'package:app/features/bibliotheque/presentation/pages/bibliotheque_page.dart';
+import 'package:app/features/first_name/presentation/pages/first_name_page.dart';
 import 'package:app/features/mieux_vous_connaitre/presentation/element/pages/mieux_vous_connaitre_edit_page.dart';
 import 'package:app/features/mieux_vous_connaitre/presentation/liste/pages/mieux_vous_connaitre_page.dart';
 import 'package:app/features/pre_onboarding/presentation/pages/pre_onboarding_page.dart';
@@ -67,7 +67,7 @@ GoRouter goRouter({
                       ? '/authenticated/${AccueilPage.path}'
                       : null,
               routes: [
-                QuestionPrenomPage.route,
+                FirstNamePage.route,
                 QuestionCodePostalPage.route,
                 AppEstEncoreEnExperimentationPage.route,
                 QuestionThemesPage.route,

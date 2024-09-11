@@ -5,8 +5,6 @@ import 'package:fpdart/fpdart.dart';
 abstract interface class ProfilPort {
   Future<Either<Exception, Informations>> recupererProfil();
 
-  Future<Either<Exception, void>> mettreAJourPrenom(final String prenom);
-
   Future<Either<Exception, void>> mettreAJourCodePostalEtCommune({
     required final String codePostal,
     required final String commune,

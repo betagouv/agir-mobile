@@ -1,21 +1,21 @@
-import 'package:app/features/authentification/domain/entities/authentification_erreur.dart';
 import 'package:app/features/authentification/domain/value_objects/information_de_code.dart';
 import 'package:app/features/authentification/domain/value_objects/information_de_connexion.dart';
 import 'package:app/features/utilisateur/domain/entities/utilisateur.dart';
+import 'package:app/shared/domain/entities/api_erreur.dart';
 import 'package:fpdart/fpdart.dart';
 
 abstract interface class AuthentificationPort {
-  Future<Either<AuthentificationErreur, void>> creationDeCompteDemandee(
+  Future<Either<ApiErreur, void>> creationDeCompteDemandee(
     final InformationDeConnexion informationDeConnexion,
   );
 
-  Future<Either<AuthentificationErreur, void>> connexionDemandee(
+  Future<Either<ApiErreur, void>> connexionDemandee(
     final InformationDeConnexion informationDeConnexion,
   );
 
   Future<Either<Exception, void>> renvoyerCodeDemande(final String email);
 
-  Future<Either<AuthentificationErreur, void>> validationDemandee(
+  Future<Either<ApiErreur, void>> validationDemandee(
     final InformationDeCode informationDeConnexion,
   );
 
@@ -23,7 +23,7 @@ abstract interface class AuthentificationPort {
 
   Future<Either<Exception, void>> oubliMotDePasse(final String email);
 
-  Future<Either<AuthentificationErreur, void>> modifierMotDePasse({
+  Future<Either<ApiErreur, void>> modifierMotDePasse({
     required final String email,
     required final String code,
     required final String motDePasse,

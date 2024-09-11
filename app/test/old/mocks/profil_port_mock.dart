@@ -1,10 +1,12 @@
+import 'package:app/features/first_name/domain/ports/first_name_port.dart';
+import 'package:app/features/first_name/domain/value_objects/first_name.dart';
 import 'package:app/features/profil/domain/ports/profil_port.dart';
 import 'package:app/features/profil/informations/domain/entities/informations.dart';
 import 'package:app/features/profil/logement/domain/entities/logement.dart';
 import 'package:app/features/profil/logement/presentation/blocs/mon_logement_state.dart';
 import 'package:fpdart/fpdart.dart';
 
-class ProfilPortMock implements ProfilPort {
+class ProfilPortMock implements ProfilPort, FirstNamePort {
   ProfilPortMock({
     required this.prenom,
     required this.nom,
@@ -122,10 +124,12 @@ class ProfilPortMock implements ProfilPort {
   }
 
   @override
-  Future<Either<Exception, void>> mettreAJourPrenom(final String prenom) async {
-    this.prenom = prenom;
+  Future<Either<Exception, Unit>> addFirstName(
+    final FirstName firstName,
+  ) async {
+    prenom = firstName.value;
 
-    return const Right(null);
+    return const Right(unit);
   }
 
   @override
