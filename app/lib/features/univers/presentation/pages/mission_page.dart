@@ -39,8 +39,11 @@ class MissionPage extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => BlocProvider(
-        create: (final context) =>
-            MissionBloc(universPort: context.read(), missionId: id),
+        create: (final context) => MissionBloc(
+          universPort: context.read(),
+          gamificationPort: context.read(),
+          missionId: id,
+        ),
         child: const _Page(),
       );
 }
