@@ -3,6 +3,7 @@ import 'package:app/features/authentification/questions/presentation/blocs/quest
 import 'package:app/features/authentification/questions/presentation/pages/app_est_encore_en_experimentation_page.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:app/shared/assets/images.dart';
+import 'package:app/shared/helpers/text_scaler.dart';
 import 'package:app/shared/widgets/composants/bottom_bar.dart';
 import 'package:app/shared/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:dsfr/dsfr.dart';
@@ -150,7 +151,7 @@ class _CodePostalEtCommuneState extends State<_CodePostalEtCommune> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
-          width: MediaQuery.textScalerOf(context).scale(97),
+          width: adjustTextSize(context, 97),
           child: DsfrInput(
             label: Localisation.codePostal,
             onChanged: (final value) => _handleCodePostal(context, value),

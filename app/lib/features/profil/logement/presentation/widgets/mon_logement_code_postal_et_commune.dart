@@ -2,6 +2,7 @@ import 'package:app/features/profil/logement/presentation/blocs/mon_logement_blo
 import 'package:app/features/profil/logement/presentation/blocs/mon_logement_event.dart';
 import 'package:app/features/profil/logement/presentation/widgets/mon_logement_titre_et_contenu.dart';
 import 'package:app/l10n/l10n.dart';
+import 'package:app/shared/helpers/text_scaler.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -53,7 +54,7 @@ class _MonLogementCodePostalEtCommuneState
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            width: MediaQuery.textScalerOf(context).scale(97),
+            width: adjustTextSize(context, 97),
             child: DsfrInput(
               label: Localisation.codePostal,
               onChanged: (final value) => _handleCodePostal(context, value),
