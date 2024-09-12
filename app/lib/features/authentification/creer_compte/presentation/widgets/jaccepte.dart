@@ -1,5 +1,3 @@
-// ignore_for_file: prefer-correct-handler-name
-
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/gestures.dart';

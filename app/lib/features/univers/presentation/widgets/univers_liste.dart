@@ -18,7 +18,6 @@ class UniversListe extends StatelessWidget {
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
       clipBehavior: Clip.none,
       child: IntrinsicHeight(
         child: Row(

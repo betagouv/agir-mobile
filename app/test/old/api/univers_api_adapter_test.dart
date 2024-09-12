@@ -110,9 +110,7 @@ void main() {
       );
 
     final adapter = await initializeAdapter(client);
-    final result = await adapter.recupererThematiques(
-      universType: 'alimentation',
-    );
+    final result = await adapter.recupererThematiques('alimentation');
 
     expect(
       result.getRight().getOrElse(() => throw Exception()),

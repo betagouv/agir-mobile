@@ -202,6 +202,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const revenuFiscal = 'Revenu fiscal de référence de votre foyer';
   static const revenuQuestion = 'Quelle est votre tranche de revenus ?';
   static const meConnecter = 'Me connecter';
+  static const mesServices = 'Mes services';
   static const seDeconnecter = 'Se déconnecter';
   static const simulateur = 'Simulateur';
   static const simulerMonAide = 'Simuler mon aide';

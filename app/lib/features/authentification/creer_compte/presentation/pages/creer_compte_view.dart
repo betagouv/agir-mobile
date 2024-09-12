@@ -1,5 +1,3 @@
-// ignore_for_file: prefer-correct-handler-name
-
 import 'package:app/features/authentification/creer_compte/presentation/blocs/creer_compte_bloc.dart';
 import 'package:app/features/authentification/creer_compte/presentation/blocs/creer_compte_event.dart';
 import 'package:app/features/authentification/creer_compte/presentation/blocs/creer_compte_state.dart';
