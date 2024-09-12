@@ -4,6 +4,7 @@ import 'package:app/features/aides/presentation/blocs/aide/aide_event.dart';
 import 'package:app/features/aides/presentation/pages/aide_page.dart';
 import 'package:app/features/aides/presentation/widgets/tag_simulateur.dart';
 import 'package:app/shared/widgets/composants/card.dart';
+import 'package:app/shared/wrappers/tracker.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,6 +17,7 @@ class CarteAide extends StatelessWidget {
 
   Future<void> _handleTap(final BuildContext context) async {
     context.read<AideBloc>().add(AideSelectionnee(aide));
+    context.read<Tracker>().trackClick('Aides', aide.titre);
     await GoRouter.of(context).pushNamed(AidePage.name);
   }
 

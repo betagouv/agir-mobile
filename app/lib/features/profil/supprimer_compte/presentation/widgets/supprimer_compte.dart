@@ -20,6 +20,7 @@ class SupprimerCompte extends StatelessWidget {
     final result = await DsfrModal.showModal<bool>(
       context: context,
       builder: (final context) => const SupprimerCompteModal(),
+      name: 'supprimer-compte',
     );
     if (result != null && result) {
       bloc.add(const SupprimerCompteSuppressionDemandee());

@@ -47,15 +47,6 @@ class _View extends StatelessWidget {
 
   void _handleMotDePasseModifie(final BuildContext context) {
     GoRouter.of(context).popUntilNamed(SeConnecterPage.path);
-    // while (GoRouter.of(context)
-    //         .routerDelegate
-    //         .currentConfiguration
-    //         .last
-    //         .route
-    //         .name !=
-    //     SeConnecterPage.name) {
-    //   GoRouter.of(context).pop();
-    // }
   }
 
   @override

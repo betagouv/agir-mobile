@@ -27,6 +27,7 @@ import 'package:app/features/utilisateur/presentation/blocs/utilisateur_bloc.dar
 import 'package:app/features/version/domain/ports/version_port.dart';
 import 'package:app/features/version/presentation/blocs/version_bloc.dart';
 import 'package:app/features/version/presentation/blocs/version_event.dart';
+import 'package:app/shared/wrappers/tracker.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,6 +36,7 @@ import 'package:go_router/go_router.dart';
 
 class App extends StatefulWidget {
   const App({
+    required this.tracker,
     required this.authentificationStatusManager,
     required this.authentificationPort,
     required this.universPort,
@@ -53,6 +55,7 @@ class App extends StatefulWidget {
     super.key,
   });
 
+  final Tracker tracker;
   final AuthentificationStatutManager authentificationStatusManager;
   final AuthentificationPort authentificationPort;
   final UniversPort universPort;
@@ -81,6 +84,7 @@ class _AppState extends State<App> {
     super.initState();
     _goRouter = goRouter(
       authentificationStatusManagerReader: widget.authentificationStatusManager,
+      tracker: widget.tracker,
     );
   }
 
@@ -93,6 +97,7 @@ class _AppState extends State<App> {
   @override
   Widget build(final BuildContext context) => MultiRepositoryProvider(
         providers: [
+          RepositoryProvider.value(value: widget.tracker),
           RepositoryProvider.value(value: widget.authentificationPort),
           RepositoryProvider.value(value: widget.universPort),
           RepositoryProvider.value(value: widget.aidesPort),
