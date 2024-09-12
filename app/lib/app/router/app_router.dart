@@ -31,6 +31,7 @@ import 'package:app/features/univers/presentation/pages/defi_page.dart';
 import 'package:app/features/univers/presentation/pages/mission_kyc_page.dart';
 import 'package:app/features/univers/presentation/pages/mission_page.dart';
 import 'package:app/features/univers/presentation/pages/univers_page.dart';
+import 'package:app/shared/wrappers/crash_reporting_wrapper.dart';
 import 'package:go_router/go_router.dart';
 
 GoRouter goRouter({
@@ -124,5 +125,6 @@ GoRouter goRouter({
         mesRecommandationsRouteObserver,
         missionRouteObserver,
         universRouteObserver,
+        CrashReportingWrapper.getNavigatorObserver(),
       ],
     );
