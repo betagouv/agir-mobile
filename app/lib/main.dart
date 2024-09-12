@@ -20,7 +20,8 @@ import 'package:app/features/quiz/infrastructure/adapters/quiz_api_adapter.dart'
 import 'package:app/features/recommandations/infrastructure/adapters/recommandations_api_adapter.dart';
 import 'package:app/features/univers/infrastructure/adapters/univers_api_adapter.dart';
 import 'package:app/features/version/infrastructure/adapters/version_adapter.dart';
-import 'package:app/shared/wrappers/crash_reporting_wrapper.dart';
+import 'package:app/shared/wrappers/crash_reporting.dart';
+import 'package:app/shared/wrappers/tracker.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -30,8 +31,22 @@ import 'package:package_info_plus/package_info_plus.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  const matomoSiteIdKey = 'MATOMO_SITE_ID';
+  const matomoSiteId = String.fromEnvironment(matomoSiteIdKey);
+  if (matomoSiteId.isEmpty) {
+    throw Exception(matomoSiteIdKey);
+  }
+
+  const matomoUrlKey = 'MATOMO_URL';
+  const matomoUrl = String.fromEnvironment(matomoUrlKey);
+  if (matomoUrl.isEmpty) {
+    throw Exception(matomoUrlKey);
+  }
+
+  const tracker = Tracker();
   if (kDebugMode) {
-    await CrashReportingWrapper.init();
+    await CrashReporting.init();
+    await tracker.init(siteId: matomoSiteId, url: matomoUrl);
   }
 
   _registerErrorHandlers();
@@ -79,6 +94,7 @@ Future<void> main() async {
 
   runApp(
     App(
+      tracker: tracker,
       authentificationStatusManager: authentificationStatusManager,
       authentificationPort: AuthentificationApiAdapter(apiClient: apiClient),
       universPort: UniversApiAdapter(apiClient: apiClient),

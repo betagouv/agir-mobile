@@ -10,7 +10,8 @@ class DsfrModal extends StatelessWidget {
   static Future<T?> showModal<T>({
     required final BuildContext context,
     required final WidgetBuilder builder,
-  }) =>
+    required final String name,
+  }) async =>
       showModalBottomSheet<T>(
         context: context,
         builder: (final context) => DsfrModal(child: builder(context)),
@@ -19,6 +20,7 @@ class DsfrModal extends StatelessWidget {
         shape: const RoundedRectangleBorder(),
         barrierColor: DsfrColors.grey50.withOpacity(0.64),
         isScrollControlled: true,
+        routeSettings: RouteSettings(name: name),
       );
 
   final Widget child;

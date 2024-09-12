@@ -34,7 +34,9 @@ Vous devez avoir correctement installé [Flutter](https://docs.flutter.dev/get-s
       "API_CMS_URL"       : "X",
       "API_CMS_TOKEN"     : "X",
       "SENTRY_DSN"        : "X",
-      "SENTRY_ENVIRONMENT": "X"
+      "SENTRY_ENVIRONMENT": "X",
+      "MATOMO_URL"        : "X",
+      "MATOMO_SITE_ID"    : "X"
     }
     ```
 

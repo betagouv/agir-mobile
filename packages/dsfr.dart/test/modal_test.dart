@@ -35,6 +35,7 @@ class _Modal extends StatelessWidget {
         onPressed: () async => DsfrModal.showModal(
           context: context,
           builder: (final context) => const SizedBox(),
+          name: 'name',
         ),
       );
 }

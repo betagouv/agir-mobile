@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
-abstract final class CrashReportingWrapper {
+abstract final class CrashReporting {
   static Future<void> init() => SentryFlutter.init((final p0) {});
 
   // ignore: unused-code
@@ -11,7 +10,4 @@ abstract final class CrashReportingWrapper {
   }) async {
     await Sentry.captureException(exception, stackTrace: stackTrace);
   }
-
-  static RouteObserver<PageRoute<dynamic>> getNavigatorObserver() =>
-      SentryNavigatorObserver();
 }

@@ -57,6 +57,7 @@ class ModalsPage extends StatelessWidget {
                     ),
                   ],
                 ),
+                name: 'name',
               );
             },
           ),

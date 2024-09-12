@@ -1,7 +1,9 @@
 import 'package:app/app/app.dart';
 import 'package:app/features/authentification/domain/entities/authentification_statut_manager.dart';
+import 'package:app/shared/wrappers/tracker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 
 import '../mocks/aide_velo_port_mock.dart';
 import '../mocks/aides_port_mock.dart';
@@ -17,6 +19,8 @@ import '../mocks/recommandations_port_mock.dart';
 import '../mocks/univers_port_mock.dart';
 import '../mocks/version_port_mock.dart';
 import '../scenario_context.dart';
+
+class _TrackerMock extends Mock implements Tracker {}
 
 /// Iel lance l'application.
 Future<void> ielLanceLapplication(final WidgetTester tester) async {
@@ -63,8 +67,12 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
   );
 
   final profilPort = ScenarioContext().profilPortMock!;
+  final tracker = _TrackerMock();
+  when(() => tracker.navigatorObserver)
+      .thenAnswer((final _) => RouteObserver<ModalRoute<void>>());
   await tester.pumpFrames(
     App(
+      tracker: tracker,
       authentificationStatusManager: authentificationStatusManager,
       authentificationPort: ScenarioContext().authentificationPortMock!,
       universPort: ScenarioContext().universPortMock!,
