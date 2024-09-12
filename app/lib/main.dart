@@ -1,7 +1,5 @@
 // ignore_for_file: do_not_use_environment, avoid-long-functions
 
-import 'dart:ui';
-
 import 'package:app/app/app.dart';
 import 'package:app/features/aides/infrastructure/adapters/aide_velo_api_adapter.dart';
 import 'package:app/features/aides/infrastructure/adapters/aides_api_adapter.dart';
@@ -22,13 +20,19 @@ import 'package:app/features/quiz/infrastructure/adapters/quiz_api_adapter.dart'
 import 'package:app/features/recommandations/infrastructure/adapters/recommandations_api_adapter.dart';
 import 'package:app/features/univers/infrastructure/adapters/univers_api_adapter.dart';
 import 'package:app/features/version/infrastructure/adapters/version_adapter.dart';
+import 'package:app/shared/wrappers/crash_reporting_wrapper.dart';
 import 'package:dsfr/dsfr.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  if (kDebugMode) {
+    await CrashReportingWrapper.init();
+  }
 
   _registerErrorHandlers();
 
@@ -50,6 +54,8 @@ Future<void> main() async {
     throw Exception(apiCmsTokenKey);
   }
 
+  final packageInfo = await PackageInfo.fromPlatform();
+
   final authentificationStatusManager = AuthentificationStatutManager();
 
   final authentificationTokenStorage = AuthentificationTokenStorage(
@@ -66,12 +72,11 @@ Future<void> main() async {
     authentificationTokenStorage: authentificationTokenStorage,
   );
 
-  final cmsClient =
-      CmsApiClient(apiUrl: ApiUrl(Uri.parse(apiCmsUrl)), token: apiCmsToken);
+  final cmsClient = CmsApiClient(
+    apiUrl: ApiUrl(Uri.parse(apiCmsUrl)),
+    token: apiCmsToken,
+  );
 
-  final packageInfo = await PackageInfo.fromPlatform();
-
-  final profilApiAdapter = ProfilApiAdapter(apiClient: apiClient);
   runApp(
     App(
       authentificationStatusManager: authentificationStatusManager,
@@ -90,7 +95,7 @@ Future<void> main() async {
       communesPort: CommunesApiAdapter(apiClient: apiClient),
       aideVeloPort: AideVeloApiAdapter(apiClient: apiClient),
       firstNamePort: FirstNameAdapter(apiClient: apiClient),
-      profilPort: profilApiAdapter,
+      profilPort: ProfilApiAdapter(apiClient: apiClient),
       mieuxVousConnaitrePort:
           MieuxVousConnaitreApiAdapter(apiClient: apiClient),
       gamificationPort: GamificationApiAdapter(apiClient: apiClient),

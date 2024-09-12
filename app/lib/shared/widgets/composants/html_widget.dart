@@ -38,9 +38,7 @@ class MyUrlLauncherFactory extends WidgetFactory with UrlLauncherFactory {
 
     try {
       return await launchUrl(Uri.parse(url));
-    } on PlatformException catch (error) {
-      debugPrint('Could not launch "$url": $error');
-
+    } on PlatformException {
       return false;
     }
   }
