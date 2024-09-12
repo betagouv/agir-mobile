@@ -17,47 +17,43 @@ class MesAides extends StatelessWidget {
     final bloc = AidesAccueilBloc(aidesPort: context.read())
       ..add(const AidesAccueilRecuperationDemandee());
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            Localisation.accueilMesAides,
-            style: DsfrTextStyle.headline5(),
-          ),
-          const SizedBox(height: DsfrSpacings.s3w),
-          BlocBuilder<AidesAccueilBloc, AidesAccueilState>(
-            builder: (final context, final state) {
-              if (state.aides.isEmpty) {
-                return const SizedBox();
-              }
-              final aides = state.aides;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          Localisation.accueilMesAides,
+          style: DsfrTextStyle.headline5(),
+        ),
+        const SizedBox(height: DsfrSpacings.s3w),
+        BlocBuilder<AidesAccueilBloc, AidesAccueilState>(
+          builder: (final context, final state) {
+            if (state.aides.isEmpty) {
+              return const SizedBox();
+            }
+            final aides = state.aides;
 
-              return ListView.separated(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                padding: EdgeInsets.zero,
-                itemBuilder: (final context, final index) {
-                  final aide = aides[index];
+            return ListView.separated(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              padding: EdgeInsets.zero,
+              itemBuilder: (final context, final index) {
+                final aide = aides[index];
 
-                  return CarteAide(aide: aide);
-                },
-                separatorBuilder: (final context, final index) =>
-                    const SizedBox(height: DsfrSpacings.s1w),
-                itemCount: aides.length,
-              );
-            },
-            bloc: bloc,
-          ),
-          const SizedBox(height: DsfrSpacings.s2w),
-          DsfrLink.md(
-            label: Localisation.accueilMesAidesLien,
-            onPressed: () async =>
-                GoRouter.of(context).pushNamed(AidesPage.name),
-          ),
-        ],
-      ),
+                return CarteAide(aide: aide);
+              },
+              separatorBuilder: (final context, final index) =>
+                  const SizedBox(height: DsfrSpacings.s1w),
+              itemCount: aides.length,
+            );
+          },
+          bloc: bloc,
+        ),
+        const SizedBox(height: DsfrSpacings.s2w),
+        DsfrLink.md(
+          label: Localisation.accueilMesAidesLien,
+          onPressed: () async => GoRouter.of(context).pushNamed(AidesPage.name),
+        ),
+      ],
     );
   }
 }

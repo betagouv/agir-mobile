@@ -1,5 +1,3 @@
-// ignore_for_file: prefer-correct-handler-name
-
 import 'package:app/features/menu/presentation/pages/root_page.dart';
 import 'package:app/features/mieux_vous_connaitre/presentation/liste/pages/mieux_vous_connaitre_page.dart';
 import 'package:app/features/profil/informations/presentation/pages/mes_informations_page.dart';

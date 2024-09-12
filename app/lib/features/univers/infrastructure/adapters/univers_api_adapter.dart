@@ -12,9 +12,11 @@ import 'package:app/features/univers/domain/ports/univers_port.dart';
 import 'package:app/features/univers/domain/tuile_univers.dart';
 import 'package:app/features/univers/domain/value_objects/content_id.dart';
 import 'package:app/features/univers/domain/value_objects/defi_id.dart';
+import 'package:app/features/univers/domain/value_objects/service_item.dart';
 import 'package:app/features/univers/infrastructure/adapters/defi_mapper.dart';
 import 'package:app/features/univers/infrastructure/adapters/mission_liste_mapper.dart';
 import 'package:app/features/univers/infrastructure/adapters/mission_mapper.dart';
+import 'package:app/features/univers/infrastructure/adapters/service_item_mapper.dart';
 import 'package:app/features/univers/infrastructure/adapters/tuile_univers_mapper.dart';
 import 'package:fpdart/fpdart.dart';
 
@@ -51,9 +53,9 @@ class UniversApiAdapter implements UniversPort {
   }
 
   @override
-  Future<Either<Exception, List<MissionListe>>> recupererThematiques({
-    required final String universType,
-  }) async {
+  Future<Either<Exception, List<MissionListe>>> recupererThematiques(
+    final String universType,
+  ) async {
     final utilisateurId = await _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
       return const Left(UtilisateurIdNonTrouveException());
@@ -206,5 +208,29 @@ class UniversApiAdapter implements UniversPort {
     return response.statusCode == HttpStatus.ok
         ? const Right(null)
         : Left(Exception('Erreur lors de la fin de la mission'));
+  }
+
+  @override
+  Future<Either<Exception, List<ServiceItem>>> getServices(
+    final String universType,
+  ) async {
+    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    if (utilisateurId == null) {
+      return const Left(UtilisateurIdNonTrouveException());
+    }
+    final response = await _apiClient.get(
+      Uri.parse(
+        '/utilisateurs/$utilisateurId/recherche_services/$universType',
+      ),
+    );
+
+    return response.statusCode == HttpStatus.ok
+        ? Right(
+            (jsonDecode(response.body) as List<dynamic>)
+                .map((final e) => e as Map<String, dynamic>)
+                .map(ServiceItemMapper.fromJson)
+                .toList(),
+          )
+        : Left(Exception('Erreur lors de la récupération des services'));
   }
 }

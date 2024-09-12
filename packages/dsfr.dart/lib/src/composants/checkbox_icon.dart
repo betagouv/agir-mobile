@@ -1,4 +1,5 @@
-import 'package:dsfr/dsfr.dart';
+import 'package:dsfr/src/fondamentaux/colors.g.dart';
+import 'package:dsfr/src/fondamentaux/icons.g.dart';
 import 'package:flutter/material.dart';
 
 class DsfrCheckboxIcon extends StatelessWidget {

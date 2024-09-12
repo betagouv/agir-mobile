@@ -89,6 +89,7 @@ dart_code_metrics:
     - prefer-boolean-prefixes: false
     - prefer-commenting-analyzer-ignores: false
     - prefer-correct-identifier-length: false
+    - prefer-correct-handler-name: false
     - prefer-correct-throws: false
     - prefer-correct-type-name: false
     - prefer-extracting-callbacks: false

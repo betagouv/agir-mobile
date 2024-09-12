@@ -15,13 +15,13 @@ import '../helpers/pump_page.dart';
 
 class _FirstNamePortMock extends Mock implements FirstNamePort {}
 
-Future<void> pumpFirstNamePage(
+Future<void> _pumpFirstNamePage(
   final WidgetTester tester, {
   final FirstNamePort? firstNamePort,
 }) async {
   await pumpPage(
     tester: tester,
-    providers: [
+    repositoryProviders: [
       RepositoryProvider<FirstNamePort>.value(
         value: firstNamePort ?? _FirstNamePortMock(),
       ),
@@ -45,7 +45,7 @@ void main() {
         final firstNamePort = _FirstNamePortMock();
         when(() => firstNamePort.addFirstName(any()))
             .thenAnswer((final _) async => const Right(unit));
-        await pumpFirstNamePage(tester, firstNamePort: firstNamePort);
+        await _pumpFirstNamePage(tester, firstNamePort: firstNamePort);
 
         final validFirstName = faker.person.firstName();
 
@@ -62,7 +62,7 @@ void main() {
     testWidgets(
       "afficher une erreur lorsqu'un prénom vide est saisi",
       (final tester) async {
-        await pumpFirstNamePage(tester);
+        await _pumpFirstNamePage(tester);
 
         await tester.enterText(find.byType(DsfrInput), 'a');
         await tester.pump();
@@ -77,7 +77,7 @@ void main() {
     testWidgets(
       "afficher une erreur lorsqu'un prénom invalide est saisi",
       (final tester) async {
-        await pumpFirstNamePage(tester);
+        await _pumpFirstNamePage(tester);
 
         const invalidFirstName = '123';
 
@@ -97,7 +97,7 @@ void main() {
           (final _) async => Left(ApiErreur(message)),
         );
 
-        await pumpFirstNamePage(tester, firstNamePort: firstNamePort);
+        await _pumpFirstNamePage(tester, firstNamePort: firstNamePort);
 
         final validFirstName = faker.person.firstName();
 
@@ -112,7 +112,7 @@ void main() {
     );
 
     testWidgets('être accessible', (final tester) async {
-      await pumpFirstNamePage(tester);
+      await _pumpFirstNamePage(tester);
       expect(
         find.bySemanticsLabel(
           Localisation.questionCourantSurMax(1, 3).replaceAll('**', ''),

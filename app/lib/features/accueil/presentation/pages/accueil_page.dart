@@ -86,13 +86,22 @@ class _Body extends StatelessWidget {
       children: const [
         _Disclaimer(),
         SizedBox(height: paddingVerticalPage),
-        UniversSection(),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
+          child: UniversSection(),
+        ),
         SizedBox(height: DsfrSpacings.s4w),
-        MesAides(),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
+          child: MesAides(),
+        ),
         SizedBox(height: DsfrSpacings.s4w),
-        MesRecommandations(),
-        SafeArea(child: SizedBox()),
-        SizedBox(height: paddingVerticalPage),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
+          child: MesRecommandations(),
+        ),
+        SizedBox(),
+        SafeArea(child: SizedBox(height: paddingVerticalPage)),
       ],
     );
   }

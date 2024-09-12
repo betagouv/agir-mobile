@@ -5,6 +5,7 @@ import 'package:app/features/univers/domain/ports/univers_port.dart';
 import 'package:app/features/univers/domain/tuile_univers.dart';
 import 'package:app/features/univers/domain/value_objects/content_id.dart';
 import 'package:app/features/univers/domain/value_objects/defi_id.dart';
+import 'package:app/features/univers/domain/value_objects/service_item.dart';
 import 'package:fpdart/src/either.dart';
 
 class UniversPortMock implements UniversPort {
@@ -28,9 +29,9 @@ class UniversPortMock implements UniversPort {
       Right(univers);
 
   @override
-  Future<Either<Exception, List<MissionListe>>> recupererThematiques({
-    required final String universType,
-  }) async =>
+  Future<Either<Exception, List<MissionListe>>> recupererThematiques(
+    final String universType,
+  ) async =>
       Right(missionListe);
 
   @override
@@ -77,4 +78,16 @@ class UniversPortMock implements UniversPort {
     // TODO(lsaudon): implement terminer
     throw UnimplementedError();
   }
+
+  @override
+  Future<Either<Exception, List<ServiceItem>>> getServices(
+    final String universType,
+  ) async =>
+      const Right([
+        ServiceItem(
+          titre: 'Titre',
+          sousTitre: 'Sous-titre',
+          externalUrl: 'https://example.com/image.jpg',
+        ),
+      ]);
 }

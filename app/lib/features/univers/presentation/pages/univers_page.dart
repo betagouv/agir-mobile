@@ -1,6 +1,7 @@
 import 'package:app/features/recommandations/presentation/widgets/mes_recommandations.dart';
 import 'package:app/features/univers/domain/mission_liste.dart';
 import 'package:app/features/univers/domain/tuile_univers.dart';
+import 'package:app/features/univers/domain/value_objects/service_item.dart';
 import 'package:app/features/univers/presentation/blocs/univers_bloc.dart';
 import 'package:app/features/univers/presentation/blocs/univers_event.dart';
 import 'package:app/features/univers/presentation/pages/mission_page.dart';
@@ -14,6 +15,7 @@ import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 final universRouteObserver = RouteObserver<ModalRoute<dynamic>>();
 
@@ -55,7 +57,7 @@ class _PageState extends State<_Page> with RouteAware {
   void _handleMission() {
     context
         .read<UniversBloc>()
-        .add(UniversThematiquesRecuperationDemandee(widget.univers.type));
+        .add(UniversRecuperationDemandee(widget.univers.type));
   }
 
   @override
@@ -88,19 +90,14 @@ class _View extends StatelessWidget {
   const _View();
 
   @override
-  Widget build(final BuildContext context) => const _Title();
-}
-
-class _Title extends StatelessWidget {
-  const _Title();
-
-  @override
   Widget build(final BuildContext context) => ListView(
         padding: const EdgeInsets.all(paddingVerticalPage),
         children: const [
           _ImageEtTitre(),
-          SizedBox(height: DsfrSpacings.s6w),
+          SizedBox(height: DsfrSpacings.s5w),
           _Thematiques(),
+          SizedBox(height: DsfrSpacings.s5w),
+          _Services(),
           SizedBox(height: DsfrSpacings.s5w),
           _Recommandations(),
         ],
@@ -134,18 +131,6 @@ class _ImageEtTitre extends StatelessWidget {
   }
 }
 
-class _Recommandations extends StatelessWidget {
-  const _Recommandations();
-
-  @override
-  Widget build(final BuildContext context) {
-    final univers = context
-        .select<UniversBloc, TuileUnivers>((final bloc) => bloc.state.univers);
-
-    return MesRecommandations(thematique: univers.type);
-  }
-}
-
 class _Thematiques extends StatelessWidget {
   const _Thematiques();
 
@@ -157,7 +142,6 @@ class _Thematiques extends StatelessWidget {
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
       clipBehavior: Clip.none,
       child: IntrinsicHeight(
         child: Row(
@@ -240,5 +224,119 @@ class _Thematique extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class _Services extends StatelessWidget {
+  const _Services();
+
+  @override
+  Widget build(final BuildContext context) {
+    final services = context.select<UniversBloc, List<ServiceItem>>(
+      (final bloc) => bloc.state.services,
+    );
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          Localisation.mesServices,
+          style: DsfrTextStyle.headline5(),
+        ),
+        const SizedBox(height: DsfrSpacings.s2w),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          clipBehavior: Clip.none,
+          child: IntrinsicHeight(
+            child: Row(
+              children: services
+                  .map(_Service.new)
+                  .separator(const SizedBox(width: DsfrSpacings.s2w))
+                  .toList(),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _Service extends StatelessWidget {
+  const _Service(this.service);
+
+  final ServiceItem service;
+
+  @override
+  Widget build(final BuildContext context) {
+    const borderRadius = BorderRadius.all(Radius.circular(DsfrSpacings.s1w));
+
+    return DecoratedBox(
+      decoration: const ShapeDecoration(
+        color: Color(0xFFEEF2FF),
+        shape: RoundedRectangleBorder(
+          side: BorderSide(color: Color(0xFFB1B1FF)),
+          borderRadius: borderRadius,
+        ),
+      ),
+      child: Material(
+        color: FnvColors.transparent,
+        child: InkWell(
+          onTap: () async => launchUrlString(service.externalUrl),
+          borderRadius: borderRadius,
+          child: SizedBox(
+            width: 156,
+            child: Padding(
+              padding: const EdgeInsets.all(DsfrSpacings.s1w),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    service.titre,
+                    style: const DsfrTextStyle.bodyMdMedium(
+                      color: DsfrColors.blueFranceSun113,
+                    ),
+                  ),
+                  Expanded(
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            service.sousTitre,
+                            style: const DsfrTextStyle.bodySmMedium(
+                              color: DsfrColors.blueFranceSun113,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        const Icon(
+                          DsfrIcons.systemExternalLinkLine,
+                          size: 28,
+                          color: DsfrColors.blueFranceSun113,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _Recommandations extends StatelessWidget {
+  const _Recommandations();
+
+  @override
+  Widget build(final BuildContext context) {
+    final univers = context
+        .select<UniversBloc, TuileUnivers>((final bloc) => bloc.state.univers);
+
+    return MesRecommandations(thematique: univers.type);
   }
 }

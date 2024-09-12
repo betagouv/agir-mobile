@@ -25,19 +25,16 @@ class _View extends StatelessWidget {
   @override
   Widget build(final BuildContext context) => const Column(
         children: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(Localisation.univers, style: DsfrTextStyle.headline5()),
-                SizedBox(height: DsfrSpacings.s1v5),
-                Text(
-                  Localisation.universContenu,
-                  style: DsfrTextStyle.bodyMd(),
-                ),
-              ],
-            ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(Localisation.univers, style: DsfrTextStyle.headline5()),
+              SizedBox(height: DsfrSpacings.s1v5),
+              Text(
+                Localisation.universContenu,
+                style: DsfrTextStyle.bodyMd(),
+              ),
+            ],
           ),
           SizedBox(height: DsfrSpacings.s2w),
           UniversListe(),

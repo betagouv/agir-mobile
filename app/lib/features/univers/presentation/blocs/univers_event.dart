@@ -7,8 +7,8 @@ sealed class UniversEvent extends Equatable {
   List<Object> get props => [];
 }
 
-final class UniversThematiquesRecuperationDemandee extends UniversEvent {
-  const UniversThematiquesRecuperationDemandee(this.universType);
+final class UniversRecuperationDemandee extends UniversEvent {
+  const UniversRecuperationDemandee(this.universType);
 
   final String universType;
 
