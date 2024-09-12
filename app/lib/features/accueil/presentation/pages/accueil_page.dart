@@ -33,7 +33,7 @@ class AccueilPage extends StatelessWidget {
     final UtilisateurState state,
   ) async {
     if (!state.utilisateur.estIntegrationTerminee) {
-      await GoRouter.of(context).pushNamed(FirstNamePage.name);
+      await GoRouter.of(context).pushReplacementNamed(FirstNamePage.name);
     }
   }
 
