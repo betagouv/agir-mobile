@@ -1,6 +1,7 @@
 import 'package:app/features/profil/logement/presentation/blocs/mon_logement_bloc.dart';
 import 'package:app/features/profil/logement/presentation/blocs/mon_logement_event.dart';
 import 'package:app/l10n/l10n.dart';
+import 'package:app/shared/helpers/text_scaler.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -28,7 +29,7 @@ class MonLogementNombreAdultes extends StatelessWidget {
     return Row(
       children: [
         SizedBox(
-          width: MediaQuery.textScalerOf(context).scale(97),
+          width: adjustTextSize(context, 97),
           child: DsfrInputHeadless(
             initialValue: nombreAdultes.toString(),
             onChanged: (final value) => _handleNombreAdultes(context, value),
