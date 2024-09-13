@@ -1,3 +1,5 @@
+import 'package:app/features/articles/domain/partenaire.dart';
+import 'package:app/features/articles/domain/source.dart';
 import 'package:equatable/equatable.dart';
 
 class Article extends Equatable {
@@ -6,22 +8,15 @@ class Article extends Equatable {
     required this.sousTitre,
     required this.contenu,
     required this.partenaire,
+    required this.sources,
   });
 
   final String titre;
   final String? sousTitre;
   final String contenu;
   final Partenaire? partenaire;
-  @override
-  List<Object?> get props => [titre, sousTitre, contenu, partenaire];
-}
-
-class Partenaire extends Equatable {
-  const Partenaire({required this.nom, required this.logo});
-
-  final String nom;
-  final String logo;
+  final List<Source> sources;
 
   @override
-  List<Object?> get props => [nom, logo];
+  List<Object?> get props => [titre, sousTitre, contenu, partenaire, sources];
 }

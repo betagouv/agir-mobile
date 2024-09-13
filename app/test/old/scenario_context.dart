@@ -77,6 +77,7 @@ class ScenarioContext {
     sousTitre: 'Sous-titre',
     contenu: '<p>Contenu</p>',
     partenaire: null,
+    sources: [],
   );
   Quiz quiz = const Quiz(
     id: 0,
