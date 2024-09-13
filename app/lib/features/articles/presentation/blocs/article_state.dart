@@ -11,6 +11,7 @@ final class ArticleState extends Equatable {
             sousTitre: null,
             contenu: '',
             partenaire: null,
+            sources: [],
           ),
         );
 

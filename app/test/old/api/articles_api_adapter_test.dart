@@ -1,4 +1,6 @@
 import 'package:app/features/articles/domain/article.dart';
+import 'package:app/features/articles/domain/partenaire.dart';
+import 'package:app/features/articles/domain/source.dart';
 import 'package:app/features/articles/infrastructure/adapters/articles_api_adapter.dart';
 import 'package:app/features/authentification/domain/entities/authentification_statut_manager.dart';
 import 'package:app/features/authentification/infrastructure/adapters/authentification_api_client.dart';
@@ -141,7 +143,23 @@ void main() {
           }
         }
       },
-      "sources": []
+      "sources": [
+        {
+          "id": 69,
+          "libelle": "CERFRANCE",
+          "lien": "https://www.cerfrance.fr/fiches-conseil/la-filiere-cerealiere"
+        },
+        {
+          "id": 70,
+          "libelle": "France AgriMer",
+          "lien": "https://www.franceagrimer.fr/filiere-grandes-cultures/Cereales"
+        },
+        {
+          "id": 71,
+          "libelle": "Cour des Comptes",
+          "lien": "https://www.ccomptes.fr/sites/default/files/2024-03/20240312-RPA-2024-ENPA-adaptation-cultures-cerealieres.pdf"
+        }
+      ]
     }
   },
   "meta": {}
@@ -177,6 +195,23 @@ void main() {
           logo:
               'https://res.cloudinary.com/dq023imd8/image/upload/v1701947358/Logo_Ademe_2020_c234624ba3.jpg',
         ),
+        sources: [
+          Source(
+            libelle: 'CERFRANCE',
+            lien:
+                'https://www.cerfrance.fr/fiches-conseil/la-filiere-cerealiere',
+          ),
+          Source(
+            libelle: 'France AgriMer',
+            lien:
+                'https://www.franceagrimer.fr/filiere-grandes-cultures/Cereales',
+          ),
+          Source(
+            libelle: 'Cour des Comptes',
+            lien:
+                'https://www.ccomptes.fr/sites/default/files/2024-03/20240312-RPA-2024-ENPA-adaptation-cultures-cerealieres.pdf',
+          ),
+        ],
       ),
     );
   });
@@ -243,6 +278,7 @@ void main() {
         contenu:
             "<p>Que l’on se rende dans un magasin de quartier pour faire ses courses, qu’on allume la lumière ou qu’on chauffe son logement, l’ensemble de nos actions quotidiennes a un impact sur l’environnement. Cet impact, c’est ce que l’on appelle l’<strong>empreinte carbone</strong>, comme une trace invisible que nous laissons derrière nous.</p><p>Elle mesure la quantité totale de gaz à effet de serre (dioxyde de carbone (CO2), protoxyde d'azote, méthane, ...) liés à notre consommation et permet donc de quantifier nos émissions selon notre mode de vie. Elle peut concerner les émissions d’un individu (son mode de vie), d’une entreprise (ses activités) ou d’une population, d'un territoire.</p><ul><li><p>Au niveau des entreprises, la loi Grenelle II impose depuis juillet 2020 le Bilan GES Réglementaire à un nombre de structures publiques et privées. Cela concerne les entreprises publiques de plus de 250 personnes, 500 personnes pour les privées (250 en outre-mer), les collectivités de plus de 50 000 habitants et l’État.</p></li><li><p>A l'échelle du pays, l'empreinte carbone moyenne d'un Français est estimée à <strong>8,9 tonnes d'équivalent CO2</strong> en 2021. Or, pour respecter les objectifs de l’Accord de Paris et maintenir le réchauffement planétaire sous les 2°C, il nous faudrait réduire ce nombre à <strong>deux tonnes</strong>, autrement dit : le diviser presque par cinq !</p></li></ul><p><em>Pour en savoir plus sur l'empreinte carbone de la France, </em><a target=\"_self\" rel=\"\" href=\"/article/L'empreinte carbone de la France/11\"><em>c'est par ici.</em></a></p><h2>Comment connaître votre empreinte carbone ?</h2><p>L’empreinte carbone se calcule aussi au niveau individuel, et elle dépend directement d’un ensemble d’activités que nous effectuons quotidiennement. Calculer son empreinte carbone, c'est prendre conscience de ses activités quotidiennes et de leurs conséquences pour l'environnement.</p><p>On peut ainsi cibler les activités les plus polluantes et ajuster nos usages et nos habitudes de consommation pour diminuer notre impact. Faites le bilan avec le calculateur de l'Ademe : <a target=\"_blank\" rel=\"\" class=\"in-cell-link\" href=\"https://nosgestesclimat.fr/\"><span style=\"color: rgb(17, 85, 204)\">Nos Gestes Climat</span></a>.</p>",
         partenaire: null,
+        sources: [],
       ),
     );
   });

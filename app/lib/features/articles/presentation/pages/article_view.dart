@@ -7,6 +7,7 @@ import 'package:app/shared/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class ArticleView extends StatelessWidget {
   const ArticleView({super.key});
@@ -34,6 +35,39 @@ class ArticleView extends StatelessWidget {
             Image.network(
               article.partenaire!.logo,
               semanticLabel: article.partenaire!.nom,
+            ),
+          ],
+          if (article.sources.isNotEmpty) ...[
+            const SizedBox(height: DsfrSpacings.s2w),
+            const Text(
+              'Sources :',
+              style: DsfrTextStyle.bodySm(lineHeight: 14),
+            ),
+            const SizedBox(height: DsfrSpacings.s1w),
+            ...article.sources.map(
+              (final source) => Padding(
+                padding: const EdgeInsets.only(bottom: DsfrSpacings.s1w),
+                child: InkWell(
+                  onTap: () async => launchUrlString(source.lien),
+                  child: Text.rich(
+                    TextSpan(
+                      text: source.libelle,
+                      children: const [
+                        WidgetSpan(
+                          alignment: PlaceholderAlignment.middle,
+                          child: Icon(
+                            DsfrIcons.systemExternalLinkLine,
+                            size: 14,
+                          ),
+                        ),
+                      ],
+                    ),
+                    style: const DsfrTextStyle.bodySm(lineHeight: 14).copyWith(
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                ),
+              ),
             ),
           ],
           const SizedBox(height: DsfrSpacings.s6w),

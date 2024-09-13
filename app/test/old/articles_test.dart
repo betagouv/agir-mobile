@@ -1,4 +1,5 @@
 import 'package:app/features/articles/domain/article.dart';
+import 'package:app/features/articles/domain/partenaire.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -42,6 +43,7 @@ void main() {
             logo:
                 'https://res.cloudinary.com/dq023imd8/image/upload/v1701947358/Logo_Ademe_2020_c234624ba3.jpg',
           ),
+          sources: [],
         ),
       );
       ielEstConnecte();

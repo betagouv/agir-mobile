@@ -77,6 +77,7 @@ void main() {
           sousTitre: null,
           contenu: '<h2>Ingrédients</h2>',
           partenaire: null,
+          sources: [],
         ),
       );
       await _allerSurBibliotheque(tester);
