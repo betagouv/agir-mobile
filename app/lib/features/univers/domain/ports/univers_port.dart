@@ -35,6 +35,13 @@ abstract interface class UniversPort {
     final String? motif,
   });
 
+  Future<Either<Exception, void>> realiserDefi(final DefiId defiId);
+
+  Future<Either<Exception, void>> abondonnerDefi({
+    required final DefiId defiId,
+    final String? motif,
+  });
+
   Future<Either<Exception, void>> gagnerPoints({
     required final ObjectifId id,
   });

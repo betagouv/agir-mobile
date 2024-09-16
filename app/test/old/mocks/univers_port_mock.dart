@@ -23,6 +23,8 @@ class UniversPortMock implements UniversPort {
 
   bool accepterDefiAppele = false;
   bool refuserDefiAppele = false;
+  bool realiserDefiAppele = false;
+  bool abondonnerDefiAppele = false;
 
   @override
   Future<Either<Exception, List<TuileUnivers>>> recuperer() async =>
@@ -61,6 +63,23 @@ class UniversPortMock implements UniversPort {
     final String? motif,
   }) async {
     refuserDefiAppele = true;
+
+    return const Right(null);
+  }
+
+  @override
+  Future<Either<Exception, void>> realiserDefi(final DefiId defiId) async {
+    realiserDefiAppele = true;
+
+    return const Right(null);
+  }
+
+  @override
+  Future<Either<Exception, void>> abondonnerDefi({
+    required final DefiId defiId,
+    final String? motif,
+  }) async {
+    abondonnerDefiAppele = true;
 
     return const Right(null);
   }

@@ -6,24 +6,26 @@ class FnvBadge extends StatelessWidget {
     super.key,
     required this.label,
     required this.backgroundColor,
+    this.foregroundColor = Colors.white,
   });
 
   final String label;
   final Color backgroundColor;
+  final Color foregroundColor;
 
   @override
   Widget build(final BuildContext context) => DecoratedBox(
         decoration: ShapeDecoration(
           color: backgroundColor,
           shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(DsfrSpacings.s0v5)),
+            borderRadius: BorderRadius.all(Radius.circular(DsfrSpacings.s1v)),
           ),
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s1w),
           child: Text(
             label,
-            style: const DsfrTextStyle.bodySmBold(color: Colors.white),
+            style: DsfrTextStyle.bodySmBold(color: foregroundColor),
           ),
         ),
       );

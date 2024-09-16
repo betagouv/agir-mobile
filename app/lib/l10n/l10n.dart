@@ -19,6 +19,7 @@ abstract final class Localisation {
   static const adresseEmail = 'Votre adresse email';
   static const adultes = 'Adulte(s)';
   static const ajouterEnFavoris = 'Ajouter en favoris';
+  static const allerALAction = "Aller à l'action";
   static const appEstEnConstruction = 'Agir est en construction !';
   static const appEstEnConstructionDescription =
       'Cette version est encore très incomplète et de nombreuses évolutions et nouvelles fonctionnalités sont mises en ligne chaque semaine.';
@@ -87,6 +88,7 @@ abstract final class Localisation {
   static const enchante = 'Enchanté, ';
   static const enchanteDetails =
       'Pour découvrir des aides, services et contenus disponibles proches de chez vous, indiquez-nous votre lieu de résidence.';
+  static const enCours = 'En cours !';
   static const enfants = 'Enfant(s) de moins de 18 ans';
   static const entre100et150m2 = 'Entre 100 et 150 m²';
   static const entre35et70m2 = 'Entre 35 et 70 m²';
@@ -194,7 +196,9 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const quelleEstVotreModeDeChauffagePrincipal =
       'Quelle est votre mode de chauffage principal ?';
   static const quiz = 'Quiz';
+  static const reprendreLaction = "Reprendre l'action";
   static const rechercherParTitre = 'Rechercher par titre';
+  static const recommande = 'Recommandé';
   static const renvoyerCode = 'Renvoyer le code';
   static const renvoyerEmailDeConnexion = "Renvoyer l'email de connexion";
   static const retirerDesFavoris = 'Retirer des favoris';
@@ -214,6 +218,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const supprimerVotreCompteContenu =
       'Vous pouvez à tout moment choisir de supprimer votre compte ainsi que l’ensemble des données qui y sont associées.';
   static const termine = 'TERMINÉ !';
+  static const termine2 = 'Terminé !';
   static const termineLaMission = 'Terminer la mission';
   static const toutEstPret = 'Tout est prêt !';
   static const unAppartement = 'Un appartement';
@@ -246,6 +251,9 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const vousAvezDejaUnCompte = 'Vous avez déjà un compte ?';
   static const vousEtesProprietaireDeVotreLogement =
       'Vous êtes propriétaire de votre logement ?';
+
+  static const defiRealise = 'Défi réalisé';
+  static const finalementPasPourMoi = 'Finalement, pas pour moi';
 
   static String communeEtSaRegion(final String commune) =>
       '$commune et sa région.';
@@ -293,6 +301,8 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
 
   static String questionCourantSurMax(final int actuel, final int max) =>
       '**Question $actuel** sur $max';
+
+  static String recolterVosPoints(final int points) => 'Recolter vos $points';
 
   static String veloLabel(final String text) => '$text : ';
 }

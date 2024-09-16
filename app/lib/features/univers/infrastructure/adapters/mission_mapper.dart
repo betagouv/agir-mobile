@@ -89,5 +89,19 @@ abstract final class MissionMapper {
         estVerrouille: json['is_locked'] as bool,
         points: json['points'] as int,
         aEteRecolte: json['sont_points_en_poche'] as bool,
+        status: _mapStatusFromJson(json['defi_status'] as String),
+        isRecommended: json['is_reco'] as bool,
       );
+
+  static MissionDefiStatus _mapStatusFromJson(final String? type) =>
+      switch (type) {
+        'todo' => MissionDefiStatus.toDo,
+        'en_cours' => MissionDefiStatus.inProgress,
+        'pas_envie' => MissionDefiStatus.refused,
+        'deja_fait' => MissionDefiStatus.alreadyDone,
+        'abondon' => MissionDefiStatus.abandonned,
+        'fait' => MissionDefiStatus.done,
+        // ignore: no-equal-switch-expression-cases
+        _ => MissionDefiStatus.toDo,
+      };
 }

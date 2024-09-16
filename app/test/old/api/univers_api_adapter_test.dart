@@ -315,6 +315,8 @@ void main() {
             estVerrouille: true,
             points: 10,
             aEteRecolte: false,
+            status: MissionDefiStatus.toDo,
+            isRecommended: false,
           ),
           MissionDefi(
             id: ObjectifId('7ce5c001-dd77-406c-9c2e-52216d107003'),
@@ -325,6 +327,8 @@ void main() {
             estVerrouille: true,
             points: 50,
             aEteRecolte: false,
+            status: MissionDefiStatus.toDo,
+            isRecommended: true,
           ),
           MissionDefi(
             id: ObjectifId('92427ef6-5f4a-4684-b260-54cd93152948'),
@@ -335,6 +339,8 @@ void main() {
             estVerrouille: true,
             points: 50,
             aEteRecolte: false,
+            status: MissionDefiStatus.toDo,
+            isRecommended: false,
           ),
         ],
         peutEtreTermine: false,

@@ -3,18 +3,19 @@
 import 'package:app/features/articles/presentation/pages/article_page.dart';
 import 'package:app/features/quiz/presentation/pages/quiz_page.dart';
 import 'package:app/features/univers/domain/aggregates/mission.dart';
-import 'package:app/features/univers/domain/value_objects/content_id.dart';
 import 'package:app/features/univers/presentation/blocs/mission_bloc.dart';
 import 'package:app/features/univers/presentation/blocs/mission_event.dart';
 import 'package:app/features/univers/presentation/blocs/mission_state.dart';
-import 'package:app/features/univers/presentation/pages/defi_page.dart';
 import 'package:app/features/univers/presentation/pages/mission_kyc_page.dart';
+import 'package:app/features/univers/presentation/widgets/defi_widget.dart';
+import 'package:app/features/univers/presentation/widgets/objectif_card.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:app/shared/assets/images.dart';
 import 'package:app/shared/widgets/composants/app_bar.dart';
 import 'package:app/shared/widgets/composants/card.dart';
 import 'package:app/shared/widgets/fondamentaux/colors.dart';
 import 'package:app/shared/widgets/fondamentaux/rounded_rectangle_border.dart';
+import 'package:app/shared/widgets/fondamentaux/vertical_dotted_line.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -86,32 +87,24 @@ class _PageState extends State<_Page> with RouteAware {
             previous != current &&
             current is MissionSucces &&
             current.estTerminee,
-        child: const Scaffold(
-          appBar: FnvAppBar(),
-          body: _View(),
+        child: Scaffold(
+          appBar: const FnvAppBar(),
+          body: BlocBuilder<MissionBloc, MissionState>(
+            builder: (final context, final state) => switch (state) {
+              MissionInitial() => const SizedBox(),
+              MissionChargement() =>
+                const Center(child: CircularProgressIndicator()),
+              MissionSucces() => _Success(state.mission),
+              MissionErreur() => const Center(child: Text('Erreur')),
+            },
+          ),
           backgroundColor: FnvColors.aidesFond,
         ),
       );
 }
 
-class _View extends StatelessWidget {
-  const _View();
-
-  @override
-  Widget build(final BuildContext context) =>
-      BlocBuilder<MissionBloc, MissionState>(
-        builder: (final context, final state) => switch (state) {
-          MissionInitial() => const SizedBox(),
-          MissionChargement() =>
-            const Center(child: CircularProgressIndicator()),
-          MissionSucces() => _Succes(state.mission),
-          MissionErreur() => const Center(child: Text('Erreur')),
-        },
-      );
-}
-
-class _Succes extends StatelessWidget {
-  const _Succes(this.mission);
+class _Success extends StatelessWidget {
+  const _Success(this.mission);
 
   final Mission mission;
 
@@ -123,7 +116,7 @@ class _Succes extends StatelessWidget {
           const SizedBox(height: DsfrSpacings.s4w),
           Stack(
             children: [
-              const Positioned.fill(left: 16, child: _VerticalDottedLine()),
+              const Positioned.fill(left: 16, child: VerticalDottedLine()),
               _Contenu(mission),
             ],
           ),
@@ -132,35 +125,35 @@ class _Succes extends StatelessWidget {
       );
 }
 
-class _VerticalDottedLine extends StatelessWidget {
-  const _VerticalDottedLine();
+class _ImageEtTitre extends StatelessWidget {
+  const _ImageEtTitre(this.mission);
+
+  final Mission mission;
 
   @override
-  Widget build(final BuildContext context) => const CustomPaint(
-        painter: _DottedLinePainter(),
-      );
-}
+  Widget build(final BuildContext context) {
+    const size = 63.0;
 
-class _DottedLinePainter extends CustomPainter {
-  const _DottedLinePainter();
-
-  @override
-  void paint(final Canvas canvas, final Size size) {
-    final paint = Paint()
-      ..color = const Color(0xFFBABABA)
-      ..strokeWidth = 2;
-
-    const dashHeight = 4;
-    const dashSpace = 4;
-    var startY = 0.0;
-    while (startY < size.height) {
-      canvas.drawLine(Offset(0, startY), Offset(0, startY + dashHeight), paint);
-      startY += dashHeight + dashSpace;
-    }
+    return Row(
+      children: [
+        ClipOval(
+          child: Image.network(
+            mission.imageUrl,
+            width: size,
+            height: size,
+            fit: BoxFit.cover,
+          ),
+        ),
+        const SizedBox(width: DsfrSpacings.s1w),
+        Expanded(
+          child: Text(
+            mission.titre,
+            style: const DsfrTextStyle(fontSize: 24, lineHeight: 28),
+          ),
+        ),
+      ],
+    );
   }
-
-  @override
-  bool shouldRepaint(final CustomPainter oldDelegate) => false;
 }
 
 class _Contenu extends StatelessWidget {
@@ -175,7 +168,8 @@ class _Contenu extends StatelessWidget {
           if (mission.kycListe.isNotEmpty) ...[
             const _SousTitre(titre: Localisation.partieUne),
             const SizedBox(height: DsfrSpacings.s1w),
-            _ObjectifRaw(
+            ObjectifCard(
+              id: mission.kycListe.first.id,
               leading: AssetsImages.chat,
               title: Localisation.quelquesQuestionPourMieuxVousConnaitre,
               points: mission.kycListe
@@ -183,7 +177,6 @@ class _Contenu extends StatelessWidget {
                   .fold(0, (final a, final b) => a + b),
               estFait: mission.kycListe.first.estFait,
               estVerrouille: false,
-              id: mission.kycListe.first.id,
               aEteReleve: mission.kycListe.first.aEteRecolte,
               onTap: () async => GoRouter.of(context).pushNamed(
                 MissionKycPage.name,
@@ -198,13 +191,13 @@ class _Contenu extends StatelessWidget {
           const SizedBox(height: DsfrSpacings.s1w),
           ...mission.quizListe
               .map(
-                (final o) => _ObjectifRaw(
+                (final o) => ObjectifCard(
+                  id: o.id,
                   leading: AssetsImages.newspaper,
                   title: o.titre,
                   points: o.points,
                   estFait: o.estFait,
                   estVerrouille: o.estVerrouille,
-                  id: o.id,
                   aEteReleve: o.aEteRecolte,
                   onTap: () async => GoRouter.of(context).pushNamed(
                     QuizPage.name,
@@ -216,13 +209,13 @@ class _Contenu extends StatelessWidget {
           const SizedBox(height: DsfrSpacings.s2w),
           ...mission.articles
               .map(
-                (final o) => _ObjectifRaw(
+                (final o) => ObjectifCard(
+                  id: o.id,
                   leading: AssetsImages.newspaper,
                   title: o.titre,
                   points: o.points,
                   estFait: o.estFait,
                   estVerrouille: o.estVerrouille,
-                  id: o.id,
                   aEteReleve: o.aEteRecolte,
                   onTap: () async => GoRouter.of(context).pushNamed(
                     ArticlePage.name,
@@ -234,25 +227,23 @@ class _Contenu extends StatelessWidget {
           const SizedBox(height: DsfrSpacings.s7w),
           const _SousTitre(titre: Localisation.partieTrois),
           const SizedBox(height: DsfrSpacings.s1w),
-          ...mission.defis
-              .map(
-                (final o) => _ObjectifRaw(
-                  leading: AssetsImages.target,
-                  title: o.titre,
-                  points: o.points,
-                  estFait: o.estFait,
-                  estVerrouille: o.estVerrouille,
-                  id: o.id,
-                  aEteReleve: o.aEteRecolte,
-                  onTap: o.estFait
-                      ? null
-                      : () async => GoRouter.of(context).pushNamed(
-                            DefiPage.name,
-                            pathParameters: {'id': o.contentId.value},
-                          ),
-                ),
-              )
-              .separator(const SizedBox(height: DsfrSpacings.s2w)),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            clipBehavior: Clip.none,
+            child: IntrinsicHeight(
+              child: Row(
+                children: mission.defis
+                    .map(
+                      (final o) => SizedBox(
+                        width: 258,
+                        child: DefiWidget(defi: o),
+                      ),
+                    )
+                    .separator(const SizedBox(width: DsfrSpacings.s3w))
+                    .toList(),
+              ),
+            ),
+          ),
           const SizedBox(height: DsfrSpacings.s7w),
           const _SousTitre(titre: Localisation.partieQuatre),
           const SizedBox(height: DsfrSpacings.s1w),
@@ -315,121 +306,4 @@ class _SousTitre extends StatelessWidget {
           style: const DsfrTextStyle.bodyXs(color: DsfrColors.blueFranceSun113),
         ),
       );
-}
-
-class _ImageEtTitre extends StatelessWidget {
-  const _ImageEtTitre(this.mission);
-
-  final Mission mission;
-
-  @override
-  Widget build(final BuildContext context) {
-    const size = 63.0;
-
-    return Row(
-      children: [
-        ClipOval(
-          child: Image.network(
-            mission.imageUrl,
-            width: size,
-            height: size,
-            fit: BoxFit.cover,
-          ),
-        ),
-        const SizedBox(width: DsfrSpacings.s1w),
-        Expanded(
-          child: Text(
-            mission.titre,
-            style: const DsfrTextStyle(fontSize: 24, lineHeight: 28),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _ObjectifRaw extends StatelessWidget {
-  const _ObjectifRaw({
-    required this.leading,
-    required this.title,
-    required this.points,
-    required this.estFait,
-    required this.estVerrouille,
-    required this.id,
-    required this.aEteReleve,
-    required this.onTap,
-  });
-
-  final String leading;
-  final String title;
-  final int points;
-  final bool estFait;
-  final bool estVerrouille;
-  final ObjectifId id;
-  final bool aEteReleve;
-  final GestureTapCallback? onTap;
-
-  @override
-  Widget build(final BuildContext context) {
-    const success425 = DsfrColors.success425;
-
-    return FnvCard(
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: DsfrSpacings.s2w,
-          horizontal: DsfrSpacings.s3v,
-        ),
-        child: Row(
-          children: [
-            if (estFait)
-              const Icon(
-                DsfrIcons.systemCheckboxCircleLine,
-                color: success425,
-              )
-            else
-              Image.asset(leading, width: 18, height: 18),
-            const SizedBox(width: DsfrSpacings.s1w),
-            Expanded(
-              child: Text(
-                estVerrouille ? Localisation.aDecouvrir : title,
-                style: const DsfrTextStyle.bodySm(),
-              ),
-            ),
-            const SizedBox(width: DsfrSpacings.s1v),
-            if (estFait)
-              DsfrRawButton(
-                variant: DsfrButtonVariant.tertiary,
-                size: DsfrButtonSize.sm,
-                onTap: aEteReleve
-                    ? null
-                    : () => context
-                        .read<MissionBloc>()
-                        .add(MissionGagnerPointsDemande(id)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('$points'),
-                    const SizedBox(width: DsfrSpacings.s1v),
-                    const Icon(
-                      DsfrIcons.othersLeafFill,
-                      size: DsfrSpacings.s2w,
-                      color: Color(0xFF3CD277),
-                    ),
-                  ],
-                ),
-              ),
-            const SizedBox(width: DsfrSpacings.s1v),
-            if (estVerrouille)
-              const Icon(DsfrIcons.systemLockLine)
-            else if (!estFait)
-              const Icon(
-                DsfrIcons.systemArrowRightLine,
-                color: DsfrColors.blueFranceSun113,
-              ),
-          ],
-        ),
-      ),
-    );
-  }
 }
