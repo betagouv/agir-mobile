@@ -98,6 +98,8 @@ void main() {
         estVerrouille: false,
         points: 10,
         aEteRecolte: false,
+        status: MissionDefiStatus.toDo,
+        isRecommended: true,
       ),
       MissionDefi(
         id: ObjectifId('1'),
@@ -108,6 +110,8 @@ void main() {
         estVerrouille: false,
         points: 50,
         aEteRecolte: false,
+        status: MissionDefiStatus.inProgress,
+        isRecommended: false,
       ),
       MissionDefi(
         id: ObjectifId('1'),
@@ -118,6 +122,8 @@ void main() {
         estVerrouille: false,
         points: 50,
         aEteRecolte: false,
+        status: MissionDefiStatus.done,
+        isRecommended: false,
       ),
     ],
     peutEtreTermine: false,
@@ -146,8 +152,8 @@ void main() {
       await ielAppuieSur(tester, univers.titre);
       await ielAppuieSur(tester, missionListe.titre);
       await ielScrolle(tester, defiTitre);
-      await ielAppuieSur(tester, defiTitre);
-      ielVoitLeTexte(defiTitre);
+      await ielAppuieSur(tester, Localisation.allerALAction);
+      ielVoitLeTexte(Localisation.jeReleveLeDefi);
     });
   });
 
@@ -163,8 +169,7 @@ void main() {
       await ielAppuieSur(tester, univers.titre);
       await ielAppuieSur(tester, missionListe.titre);
       await ielScrolle(tester, defiTitre);
-      await ielAppuieSur(tester, defiTitre);
-      ielVoitLeTexte(defiTitre);
+      await ielAppuieSur(tester, Localisation.allerALAction);
       await ielAppuieSur(tester, Localisation.jeReleveLeDefi);
       await ielAppuieSur(tester, Localisation.valider);
       final universPort = ScenarioContext().universPortMock!;
@@ -184,12 +189,79 @@ void main() {
       await ielAppuieSur(tester, univers.titre);
       await ielAppuieSur(tester, missionListe.titre);
       await ielScrolle(tester, defiTitre);
-      await ielAppuieSur(tester, defiTitre);
-      ielVoitLeTexte(defiTitre);
+      await ielAppuieSur(tester, Localisation.allerALAction);
       await ielAppuieSur(tester, Localisation.pasPourMoi);
       await ielAppuieSur(tester, Localisation.valider);
       final universPort = ScenarioContext().universPortMock!;
       expect(universPort.refuserDefiAppele, isTrue);
+    });
+  });
+
+  testWidgets('Défi réalisé', (final tester) async {
+    await mockNetworkImages(() async {
+      setUpWidgets(tester);
+      leServeurRetourneCesUnivers([univers]);
+      ielALesMissionsSuivantes([missionListe]);
+      ielALaMissionSuivante(mission);
+      ielALeDefiSuivant(
+        const Defi(
+          id: DefiId('38'),
+          thematique: '🥦 Alimentation',
+          titre: defiTitre,
+          status: 'en_cours',
+          astuces:
+              '<p><strong>Par exemple :</strong></p><ul><li><p>Pour manger des fraises en hiver, vous pouvez utiliser des fraises surgelées ou choisir des oranges, qui sont de saison.</p></li><li><p>Pour consommer des tomates hors saison, vous pouvez utiliser des conserves de tomates pelées ou tomates séchées</p></li></ul>',
+          pourquoi:
+              "<p>Manger de saison permet de profiter de produits plus savoureux et nutritifs tout en réduisant l'empreinte carbone et les coûts associés au transport et à la culture sous serre. Cela soutient également l'économie locale et encourage une alimentation diversifiée tout au long de l'année.</p>",
+        ),
+      );
+      ielEstConnecte();
+      await ielLanceLapplication(tester);
+      await ielAppuieSur(tester, univers.titre);
+      await ielAppuieSur(tester, missionListe.titre);
+      await ielScrolle(
+        tester,
+        "Remplacer un fruit ou un légume qui n'est pas de saison par la conserve, surgelé ou un autre produit frais",
+      );
+      await ielAppuieSur(tester, Localisation.reprendreLaction);
+      await ielAppuieSur(tester, Localisation.defiRealise);
+      await ielAppuieSur(tester, Localisation.valider);
+      final universPort = ScenarioContext().universPortMock!;
+      expect(universPort.realiserDefiAppele, isTrue);
+    });
+  });
+
+  testWidgets('Finalement, pas pour moi', (final tester) async {
+    await mockNetworkImages(() async {
+      setUpWidgets(tester);
+      leServeurRetourneCesUnivers([univers]);
+      ielALesMissionsSuivantes([missionListe]);
+      ielALaMissionSuivante(mission);
+      ielALeDefiSuivant(
+        const Defi(
+          id: DefiId('38'),
+          thematique: '🥦 Alimentation',
+          titre: defiTitre,
+          status: 'en_cours',
+          astuces:
+              '<p><strong>Par exemple :</strong></p><ul><li><p>Pour manger des fraises en hiver, vous pouvez utiliser des fraises surgelées ou choisir des oranges, qui sont de saison.</p></li><li><p>Pour consommer des tomates hors saison, vous pouvez utiliser des conserves de tomates pelées ou tomates séchées</p></li></ul>',
+          pourquoi:
+              "<p>Manger de saison permet de profiter de produits plus savoureux et nutritifs tout en réduisant l'empreinte carbone et les coûts associés au transport et à la culture sous serre. Cela soutient également l'économie locale et encourage une alimentation diversifiée tout au long de l'année.</p>",
+        ),
+      );
+      ielEstConnecte();
+      await ielLanceLapplication(tester);
+      await ielAppuieSur(tester, univers.titre);
+      await ielAppuieSur(tester, missionListe.titre);
+      await ielScrolle(
+        tester,
+        "Remplacer un fruit ou un légume qui n'est pas de saison par la conserve, surgelé ou un autre produit frais",
+      );
+      await ielAppuieSur(tester, Localisation.reprendreLaction);
+      await ielAppuieSur(tester, Localisation.finalementPasPourMoi);
+      await ielAppuieSur(tester, Localisation.valider);
+      final universPort = ScenarioContext().universPortMock!;
+      expect(universPort.abondonnerDefiAppele, isTrue);
     });
   });
 }

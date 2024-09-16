@@ -1,4 +1,5 @@
 import 'package:app/features/profil/presentation/widgets/profil_title.dart';
+import 'package:app/features/univers/domain/entities/mission_defi.dart';
 import 'package:app/features/univers/domain/value_objects/defi_id.dart';
 import 'package:app/features/univers/presentation/blocs/defi_bloc.dart';
 import 'package:app/features/univers/presentation/blocs/defi_event.dart';
@@ -95,8 +96,8 @@ class _Succes extends StatelessWidget {
         if (defi.status == 'en_cours')
           DsfrRadioButtonSetHeadless(
             values: const {
-              true: DsfrRadioButtonItem('Défi réalisé'),
-              false: DsfrRadioButtonItem('Finalement, pas pour moi'),
+              true: DsfrRadioButtonItem(Localisation.defiRealise),
+              false: DsfrRadioButtonItem(Localisation.finalementPasPourMoi),
             },
             onCallback: (final value) {
               if (value != null) {
@@ -124,49 +125,49 @@ class _Succes extends StatelessWidget {
               }
             },
           ),
-        _TextField(state),
-        const SizedBox(height: DsfrSpacings.s2w),
-        FnvHtmlWidget(defi.astuces),
-        const SizedBox(height: DsfrSpacings.s4w),
-        const Text(
-          Localisation.pourquoiCeDefi,
-          style: DsfrTextStyle.headline4(),
+        state.status.fold(
+          SizedBox.new,
+          // ignore: prefer-switch-with-enums
+          (final value) => value == MissionDefiStatus.refused ||
+                  value == MissionDefiStatus.abandonned
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: DsfrSpacings.s2w),
+                    const Text(
+                      Localisation.cetteActionNeVousConvientPas,
+                      style: DsfrTextStyle.headline3(),
+                    ),
+                    const SizedBox(height: DsfrSpacings.s2w),
+                    DsfrInput(
+                      label: Localisation.cetteActionNeVousConvientPasDetails,
+                      onChanged: (final value) {
+                        context
+                            .read<DefiBloc>()
+                            .add(DefiNeRelevePasMotifChange(value));
+                      },
+                    ),
+                  ],
+                )
+              : const SizedBox.shrink(),
         ),
-        const SizedBox(height: DsfrSpacings.s1w),
-        FnvHtmlWidget(defi.pourquoi),
+        if (state.status.fold(
+          () => true,
+          (final value) =>
+              value != MissionDefiStatus.refused &&
+              value != MissionDefiStatus.abandonned,
+        )) ...[
+          const SizedBox(height: DsfrSpacings.s2w),
+          FnvHtmlWidget(defi.astuces),
+          const SizedBox(height: DsfrSpacings.s4w),
+          const Text(
+            Localisation.pourquoiCeDefi,
+            style: DsfrTextStyle.headline4(),
+          ),
+          const SizedBox(height: DsfrSpacings.s1w),
+          FnvHtmlWidget(defi.pourquoi),
+        ],
       ],
     );
   }
-}
-
-class _TextField extends StatelessWidget {
-  const _TextField(this.state);
-
-  final DefiSucces state;
-
-  @override
-  Widget build(final BuildContext context) => state.veutRelever.fold(
-        SizedBox.new,
-        (final value) => value
-            ? const SizedBox()
-            : Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: DsfrSpacings.s2w),
-                  const Text(
-                    Localisation.cetteActionNeVousConvientPas,
-                    style: DsfrTextStyle.headline3(),
-                  ),
-                  const SizedBox(height: DsfrSpacings.s2w),
-                  DsfrInput(
-                    label: Localisation.cetteActionNeVousConvientPasDetails,
-                    onChanged: (final value) {
-                      context
-                          .read<DefiBloc>()
-                          .add(DefiNeRelevePasMotifChange(value));
-                    },
-                  ),
-                ],
-              ),
-      );
 }

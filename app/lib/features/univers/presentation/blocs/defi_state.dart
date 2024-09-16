@@ -1,4 +1,5 @@
 import 'package:app/features/univers/domain/entities/defi.dart';
+import 'package:app/features/univers/domain/entities/mission_defi.dart';
 import 'package:equatable/equatable.dart';
 import 'package:fpdart/fpdart.dart';
 
@@ -20,18 +21,18 @@ final class DefiChargement extends DefiState {
 final class DefiSucces extends DefiState {
   const DefiSucces({
     required this.defi,
-    required this.veutRelever,
+    required this.status,
     required this.motif,
     required this.estMiseAJour,
   });
 
   final Defi defi;
-  final Option<bool> veutRelever;
+  final Option<MissionDefiStatus> status;
   final String? motif;
   final bool estMiseAJour;
 
   @override
-  List<Object?> get props => [defi, veutRelever, motif, estMiseAJour];
+  List<Object?> get props => [defi, status, motif, estMiseAJour];
 }
 
 final class DefiError extends DefiState {

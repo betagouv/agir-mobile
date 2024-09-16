@@ -96,6 +96,8 @@ void main() {
             estVerrouille: false,
             points: 50,
             aEteRecolte: false,
+            status: MissionDefiStatus.toDo,
+            isRecommended: true,
           ),
           MissionDefi(
             id: ObjectifId('1'),
@@ -106,6 +108,8 @@ void main() {
             estVerrouille: false,
             points: 50,
             aEteRecolte: false,
+            status: MissionDefiStatus.toDo,
+            isRecommended: false,
           ),
           MissionDefi(
             id: ObjectifId('1'),
@@ -116,6 +120,8 @@ void main() {
             estVerrouille: false,
             points: 50,
             aEteRecolte: false,
+            status: MissionDefiStatus.toDo,
+            isRecommended: false,
           ),
         ],
         peutEtreTermine: false,

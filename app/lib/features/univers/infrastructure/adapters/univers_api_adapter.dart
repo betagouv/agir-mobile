@@ -172,6 +172,47 @@ class UniversApiAdapter implements UniversPort {
   }
 
   @override
+  Future<Either<Exception, void>> abondonnerDefi({
+    required final DefiId defiId,
+    final String? motif,
+  }) async {
+    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    if (utilisateurId == null) {
+      return const Left(UtilisateurIdNonTrouveException());
+    }
+
+    final response = await _apiClient.patch(
+      Uri.parse('/utilisateurs/$utilisateurId/defis/${defiId.value}'),
+      body:
+          jsonEncode({if (motif != null) 'motif': motif, 'status': 'abondon'}),
+    );
+
+    return response.statusCode == HttpStatus.ok
+        ? const Right(null)
+        : Left(Exception("Erreur lors de l'abandon du défi"));
+  }
+
+  @override
+  Future<Either<Exception, void>> realiserDefi(final DefiId defiId) async {
+    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    if (utilisateurId == null) {
+      return const Left(UtilisateurIdNonTrouveException());
+    }
+
+    final parse =
+        Uri.parse('/utilisateurs/$utilisateurId/defis/${defiId.value}');
+
+    final response = await _apiClient.patch(
+      parse,
+      body: jsonEncode({'status': 'fait'}),
+    );
+
+    return response.statusCode == HttpStatus.ok
+        ? const Right(null)
+        : Left(Exception('Erreur lors de la réalisation du défi'));
+  }
+
+  @override
   Future<Either<Exception, void>> gagnerPoints({
     required final ObjectifId id,
   }) async {

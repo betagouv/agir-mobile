@@ -1,3 +1,4 @@
+import 'package:app/features/univers/domain/entities/mission_defi.dart';
 import 'package:app/features/univers/domain/ports/univers_port.dart';
 import 'package:app/features/univers/presentation/blocs/defi_event.dart';
 import 'package:app/features/univers/presentation/blocs/defi_state.dart';
@@ -15,7 +16,7 @@ class DefiBloc extends Bloc<DefiEvent, DefiState> {
         (final defi) => emit(
           DefiSucces(
             defi: defi,
-            veutRelever: none(),
+            status: none(),
             motif: null,
             estMiseAJour: false,
           ),
@@ -27,7 +28,7 @@ class DefiBloc extends Bloc<DefiEvent, DefiState> {
         emit(
           DefiSucces(
             defi: (state as DefiSucces).defi,
-            veutRelever: const Some(true),
+            status: some(MissionDefiStatus.inProgress),
             motif: null,
             estMiseAJour: false,
           ),
@@ -39,7 +40,7 @@ class DefiBloc extends Bloc<DefiEvent, DefiState> {
         emit(
           DefiSucces(
             defi: (state as DefiSucces).defi,
-            veutRelever: const Some(false),
+            status: some(MissionDefiStatus.refused),
             motif: null,
             estMiseAJour: false,
           ),
@@ -54,30 +55,70 @@ class DefiBloc extends Bloc<DefiEvent, DefiState> {
       emit(
         DefiSucces(
           defi: succes.defi,
-          veutRelever: succes.veutRelever,
+          status: succes.status,
           motif: succes.motif,
           estMiseAJour: false,
         ),
       );
+    });
+    on<DefiRealiseDemande>((final event, final emit) async {
+      if (state is DefiSucces) {
+        emit(
+          DefiSucces(
+            defi: (state as DefiSucces).defi,
+            status: some(MissionDefiStatus.done),
+            motif: null,
+            estMiseAJour: false,
+          ),
+        );
+      }
+    });
+    on<DefiAbandonDemande>((final event, final emit) async {
+      if (state is DefiSucces) {
+        emit(
+          DefiSucces(
+            defi: (state as DefiSucces).defi,
+            status: some(MissionDefiStatus.abandonned),
+            motif: null,
+            estMiseAJour: false,
+          ),
+        );
+      }
     });
     on<DefiValidationDemande>((final event, final emit) async {
       if (state is! DefiSucces) {
         return;
       }
       final succes = state as DefiSucces;
-      await succes.veutRelever.fold(() => null, (final veutRelever) async {
-        if (veutRelever) {
-          await universPort.accepterDefi(defiId: succes.defi.id);
-        } else {
-          await universPort.refuserDefi(
-            defiId: succes.defi.id,
-            motif: succes.motif,
-          );
+      await succes.status.fold(() => null, (final status) async {
+        switch (status) {
+          case MissionDefiStatus.inProgress:
+            await universPort.accepterDefi(defiId: succes.defi.id);
+
+          case MissionDefiStatus.refused:
+            await universPort.refuserDefi(
+              defiId: succes.defi.id,
+              motif: succes.motif,
+            );
+
+          case MissionDefiStatus.abandonned:
+            await universPort.abondonnerDefi(
+              defiId: succes.defi.id,
+              motif: succes.motif,
+            );
+
+          case MissionDefiStatus.done:
+            await universPort.realiserDefi(succes.defi.id);
+
+          case MissionDefiStatus.toDo:
+          case MissionDefiStatus.alreadyDone:
+            break;
         }
+
         emit(
           DefiSucces(
             defi: succes.defi,
-            veutRelever: succes.veutRelever,
+            status: succes.status,
             motif: succes.motif,
             estMiseAJour: true,
           ),
