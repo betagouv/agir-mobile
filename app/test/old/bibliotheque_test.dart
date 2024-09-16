@@ -73,11 +73,14 @@ void main() {
       );
       ielALArticleSuivant(
         const Article(
+          id: '1',
           titre: titre,
           sousTitre: null,
           contenu: '<h2>Ingrédients</h2>',
           partenaire: null,
           sources: [],
+          isFavorite: false,
+          isRead: false,
         ),
       );
       await _allerSurBibliotheque(tester);

@@ -15,3 +15,11 @@ final class ArticleRecuperationDemandee extends ArticleEvent {
   @override
   List<Object> get props => [id];
 }
+
+final class ArticleAddToFavoritesPressed extends ArticleEvent {
+  const ArticleAddToFavoritesPressed();
+}
+
+final class ArticleRemoveToFavoritesPressed extends ArticleEvent {
+  const ArticleRemoveToFavoritesPressed();
+}

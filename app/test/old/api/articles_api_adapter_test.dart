@@ -20,9 +20,30 @@ void main() {
   test('recupererArticle', () async {
     final client = ClientMock()
       ..getSuccess(
+        path: 'utilisateurs/$utilisateurId/bibliotheque/articles/51',
+        response: OkResponse(
+          value: '''
+{
+    "content_id": "51",
+    "type": "article",
+    "titre": "Recette : velouté crémeux de patates douces",
+    "soustitre": "Une recette cocooning pour l'hiver",
+    "thematique_principale": "alimentation",
+    "thematique_principale_label": "🥦 Alimentation",
+    "thematiques": ["alimentation"],
+    "image_url": "https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1702656988/elena_leya_ves_Mzw6_ADMA_unsplash_974d78eae9.jpg",
+    "points": 5,
+    "favoris": false,
+    "like_level": null,
+    "read_date": null
+}''',
+        ),
+      )
+      ..getSuccess(
         path:
-            '/api/articles/2?populate[0]=partenaire,partenaire.logo.media&populate[1]=sources&populate[2]=image_url',
-        response: CustomResponse('''
+            '/api/articles/51?populate[0]=partenaire,partenaire.logo.media&populate[1]=sources&populate[2]=image_url',
+        response: OkResponse(
+          value: '''
 {
   "data": {
     "id": 51,
@@ -163,7 +184,8 @@ void main() {
     }
   },
   "meta": {}
-}'''),
+}''',
+        ),
       );
 
     final authentificationTokenStorage = AuthentificationTokenStorage(
@@ -182,10 +204,11 @@ void main() {
           CmsApiClient(apiUrl: cmsApiUrl, token: 'le_token', inner: client),
     );
 
-    final result = await adapter.recupererArticle('2');
+    final result = await adapter.recupererArticle('51');
     expect(
       result.getRight().getOrElse(() => throw Exception()),
       const Article(
+        id: '51',
         titre: 'Recette : velouté crémeux de patates douces',
         sousTitre: "Une recette cocooning pour l'hiver",
         contenu:
@@ -212,15 +235,39 @@ void main() {
                 'https://www.ccomptes.fr/sites/default/files/2024-03/20240312-RPA-2024-ENPA-adaptation-cultures-cerealieres.pdf',
           ),
         ],
+        isFavorite: false,
+        isRead: false,
       ),
     );
   });
   test('recupererArticle sans partenaire', () async {
     final client = ClientMock()
       ..getSuccess(
+        path: 'utilisateurs/$utilisateurId/bibliotheque/articles/2',
+        response: OkResponse(
+          value: '''
+{
+    "content_id": "2",
+    "type": "article",
+    "titre": "Comprendre le concept d'empreinte carbone en 2 minutes",
+    "soustitre": "L'empreinte que nous laissons derrière nous",
+    "thematique_principale": "climat",
+    "thematique_principale_label": "☀️ Environnement",
+    "thematiques": [
+        "climat"
+    ],
+    "image_url": "https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1701252573/kit_ishimatsu_6u_CM_Kvsh8_Uk_unsplash_377f747f98.jpg",
+    "points": 10,
+    "favoris": false,
+    "read_date": "2024-09-06T07:58:15.138Z"
+}''',
+        ),
+      )
+      ..getSuccess(
         path:
             '/api/articles/2?populate[0]=partenaire,partenaire.logo.media&populate[1]=sources&populate[2]=image_url',
-        response: CustomResponse(r'''
+        response: OkResponse(
+          value: r'''
 {
   "data": {
     "id": 2,
@@ -250,7 +297,8 @@ void main() {
     }
   },
   "meta": {}
-}'''),
+}''',
+        ),
       );
 
     final authentificationTokenStorage = AuthentificationTokenStorage(
@@ -273,12 +321,15 @@ void main() {
     expect(
       result.getRight().getOrElse(() => throw Exception()),
       const Article(
+        id: '2',
         titre: "Comprendre le concept d'empreinte carbone en 2 minutes",
         sousTitre: "L'empreinte que nous laissons derrière nous",
         contenu:
             "<p>Que l’on se rende dans un magasin de quartier pour faire ses courses, qu’on allume la lumière ou qu’on chauffe son logement, l’ensemble de nos actions quotidiennes a un impact sur l’environnement. Cet impact, c’est ce que l’on appelle l’<strong>empreinte carbone</strong>, comme une trace invisible que nous laissons derrière nous.</p><p>Elle mesure la quantité totale de gaz à effet de serre (dioxyde de carbone (CO2), protoxyde d'azote, méthane, ...) liés à notre consommation et permet donc de quantifier nos émissions selon notre mode de vie. Elle peut concerner les émissions d’un individu (son mode de vie), d’une entreprise (ses activités) ou d’une population, d'un territoire.</p><ul><li><p>Au niveau des entreprises, la loi Grenelle II impose depuis juillet 2020 le Bilan GES Réglementaire à un nombre de structures publiques et privées. Cela concerne les entreprises publiques de plus de 250 personnes, 500 personnes pour les privées (250 en outre-mer), les collectivités de plus de 50 000 habitants et l’État.</p></li><li><p>A l'échelle du pays, l'empreinte carbone moyenne d'un Français est estimée à <strong>8,9 tonnes d'équivalent CO2</strong> en 2021. Or, pour respecter les objectifs de l’Accord de Paris et maintenir le réchauffement planétaire sous les 2°C, il nous faudrait réduire ce nombre à <strong>deux tonnes</strong>, autrement dit : le diviser presque par cinq !</p></li></ul><p><em>Pour en savoir plus sur l'empreinte carbone de la France, </em><a target=\"_self\" rel=\"\" href=\"/article/L'empreinte carbone de la France/11\"><em>c'est par ici.</em></a></p><h2>Comment connaître votre empreinte carbone ?</h2><p>L’empreinte carbone se calcule aussi au niveau individuel, et elle dépend directement d’un ensemble d’activités que nous effectuons quotidiennement. Calculer son empreinte carbone, c'est prendre conscience de ses activités quotidiennes et de leurs conséquences pour l'environnement.</p><p>On peut ainsi cibler les activités les plus polluantes et ajuster nos usages et nos habitudes de consommation pour diminuer notre impact. Faites le bilan avec le calculateur de l'Ademe : <a target=\"_blank\" rel=\"\" class=\"in-cell-link\" href=\"https://nosgestesclimat.fr/\"><span style=\"color: rgb(17, 85, 204)\">Nos Gestes Climat</span></a>.</p>",
         partenaire: null,
         sources: [],
+        isFavorite: false,
+        isRead: true,
       ),
     );
   });
@@ -314,6 +365,43 @@ void main() {
           that: const RequestMathcher(
             '/utilisateurs/$utilisateurId/events',
             body: '{"content_id":"1","type":"article_lu"}',
+          ),
+        ),
+      ),
+    );
+  });
+
+  test('addToFavorites', () async {
+    final client = ClientMock()
+      ..postSuccess(
+        path: '/utilisateurs/$utilisateurId/events',
+        response: OkResponse(),
+      );
+
+    final authentificationTokenStorage = AuthentificationTokenStorage(
+      secureStorage: FlutterSecureStorageMock(),
+      authentificationStatusManagerWriter: AuthentificationStatutManager(),
+    );
+    await authentificationTokenStorage.sauvegarderToken(token);
+
+    final adapter = ArticlesApiAdapter(
+      apiClient: AuthentificationApiClient(
+        apiUrl: apiUrl,
+        authentificationTokenStorage: authentificationTokenStorage,
+        inner: client,
+      ),
+      cmsApiClient:
+          CmsApiClient(apiUrl: cmsApiUrl, token: 'le_token', inner: client),
+    );
+
+    await adapter.addToFavorites('1');
+
+    verify(
+      () => client.send(
+        any(
+          that: const RequestMathcher(
+            '/utilisateurs/$utilisateurId/events',
+            body: '{"content_id":"1","type":"article_favoris"}',
           ),
         ),
       ),

@@ -6,8 +6,11 @@ import 'package:app/features/quiz/domain/quiz.dart';
 abstract final class QuizMapper {
   const QuizMapper._();
 
-  static Quiz fromJson(final Map<String, dynamic> json) {
-    final data = json['data'];
+  static Quiz fromJson({
+    required final Map<String, dynamic> cms,
+    required final Map<String, dynamic>? api,
+  }) {
+    final data = cms['data'];
     final quiz = data['attributes'] as Map<String, dynamic>;
     final thematique = quiz['thematique_gamification']['data']['attributes']
         as Map<String, dynamic>;
@@ -31,9 +34,9 @@ abstract final class QuizMapper {
       points: quiz['points'] as int,
       explicationOk: question['explicationOk'] as String?,
       explicationKo: question['explicationKO'] as String?,
-      article: articles.isEmpty
+      article: articles.isEmpty && api == null
           ? null
-          : ArticleMapper.fromJson({'data': articles.first}),
+          : ArticleMapper.fromJson(cms: {'data': articles.first}, api: api!),
     );
   }
 }

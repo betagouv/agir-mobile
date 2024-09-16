@@ -34,6 +34,7 @@ void main() {
       ielALesRecommandationsSuivantes([recommandation]);
       ielALArticleSuivant(
         const Article(
+          id: '42',
           titre: titre,
           sousTitre: sousTitre,
           contenu:
@@ -44,6 +45,8 @@ void main() {
                 'https://res.cloudinary.com/dq023imd8/image/upload/v1701947358/Logo_Ademe_2020_c234624ba3.jpg',
           ),
           sources: [],
+          isFavorite: false,
+          isRead: false,
         ),
       );
       ielEstConnecte();

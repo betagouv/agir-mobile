@@ -18,6 +18,7 @@ abstract final class Localisation {
       'Format attendu : nom@domaine.fr';
   static const adresseEmail = 'Votre adresse email';
   static const adultes = 'Adulte(s)';
+  static const ajouterEnFavoris = 'Ajouter en favoris';
   static const appEstEnConstruction = 'Agir est en construction !';
   static const appEstEnConstructionDescription =
       'Cette version est encore très incomplète et de nombreuses évolutions et nouvelles fonctionnalités sont mises en ligne chaque semaine.';
@@ -196,6 +197,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const rechercherParTitre = 'Rechercher par titre';
   static const renvoyerCode = 'Renvoyer le code';
   static const renvoyerEmailDeConnexion = "Renvoyer l'email de connexion";
+  static const retirerDesFavoris = 'Retirer des favoris';
   static const retour = 'Retour';
   static const revenirAccueil = "Revenir à l'accueil";
   static const revenirAuSimulateur = 'Revenir au simulateur';
