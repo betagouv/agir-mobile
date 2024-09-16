@@ -12,6 +12,7 @@ import 'package:dsfr_example/modals_page.dart';
 import 'package:dsfr_example/radios_page.dart';
 import 'package:dsfr_example/select_page.dart';
 import 'package:dsfr_example/tags_page.dart';
+import 'package:dsfr_example/toggles_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
             ModalsPage.model,
             RadiosPage.model,
             TagsPage.model,
+            TogglesPage.model,
           ],
         ),
         debugShowCheckedModeBanner: false,
