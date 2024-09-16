@@ -7,15 +7,21 @@ final class ArticleState extends Equatable {
   const ArticleState.empty()
       : this(
           article: const Article(
+            id: '',
             titre: '',
             sousTitre: null,
             contenu: '',
             partenaire: null,
             sources: [],
+            isFavorite: false,
+            isRead: false,
           ),
         );
 
   final Article article;
+
+  ArticleState copyWith({final Article? article}) =>
+      ArticleState(article: article ?? this.article);
 
   @override
   List<Object> get props => [article];

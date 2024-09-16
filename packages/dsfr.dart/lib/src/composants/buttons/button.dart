@@ -1,7 +1,4 @@
-import 'package:dsfr/src/composants/buttons/button_icon_location.dart';
-import 'package:dsfr/src/composants/buttons/button_size.dart';
-import 'package:dsfr/src/composants/buttons/button_variant.dart';
-import 'package:dsfr/src/composants/buttons/raw_button.dart';
+import 'package:dsfr/src/composants/buttons/button.dart';
 import 'package:dsfr/src/fondamentaux/spacing.g.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +12,7 @@ class DsfrButton extends StatelessWidget {
     required this.label,
     this.icon,
     this.iconLocation = DsfrButtonIconLocation.left,
+    this.iconColor,
     required this.variant,
     required this.size,
     this.onPressed,
@@ -24,6 +22,7 @@ class DsfrButton extends StatelessWidget {
   final IconData? icon;
   final String label;
   final DsfrButtonIconLocation iconLocation;
+  final Color? iconColor;
   final DsfrButtonVariant variant;
   final DsfrButtonSize size;
   final VoidCallback? onPressed;
@@ -54,6 +53,10 @@ class DsfrButton extends StatelessWidget {
       }
 
       child = Row(mainAxisSize: MainAxisSize.min, children: children);
+    }
+
+    if (iconColor != null) {
+      child = IconTheme(data: IconThemeData(color: iconColor), child: child);
     }
 
     return DsfrRawButton(

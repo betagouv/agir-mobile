@@ -3,7 +3,6 @@ import 'package:app/features/articles/presentation/blocs/article_event.dart';
 import 'package:app/features/articles/presentation/blocs/article_state.dart';
 import 'package:app/features/gamification/domain/ports/gamification_port.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fpdart/fpdart.dart';
 
 class ArticleBloc extends Bloc<ArticleEvent, ArticleState> {
   ArticleBloc({
@@ -12,12 +11,22 @@ class ArticleBloc extends Bloc<ArticleEvent, ArticleState> {
   }) : super(const ArticleState.empty()) {
     on<ArticleRecuperationDemandee>((final event, final emit) async {
       final result = await articlesPort.recupererArticle(event.id);
-      if (result.isRight()) {
-        final article = result.getRight().getOrElse(() => throw Exception());
-        emit(ArticleState(article: article));
+      await result.fold((final l) {}, (final r) async {
+        emit(ArticleState(article: r));
         await articlesPort.marquerCommeLu(event.id);
         await gamificationPort.mettreAJourLesPoints();
-      }
+      });
+    });
+    on<ArticleAddToFavoritesPressed>((final event, final emit) async {
+      await articlesPort.addToFavorites(state.article.id);
+      final article = state.article.copyWith(isFavorite: true);
+      emit(state.copyWith(article: article));
+    });
+
+    on<ArticleRemoveToFavoritesPressed>((final event, final emit) async {
+      await articlesPort.removeToFavorites(state.article.id);
+      final article = state.article.copyWith(isFavorite: false);
+      emit(state.copyWith(article: article));
     });
   }
 }

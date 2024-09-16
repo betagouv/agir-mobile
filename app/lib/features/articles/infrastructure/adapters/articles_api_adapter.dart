@@ -21,18 +21,39 @@ class ArticlesApiAdapter implements ArticlesPort {
 
   @override
   Future<Either<Exception, Article>> recupererArticle(final String id) async {
-    final response = await _cmsApiClient.get(
-      Uri.parse(
-        '/api/articles/$id?populate[0]=partenaire,partenaire.logo.media&populate[1]=sources&populate[2]=image_url',
+    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    if (utilisateurId == null) {
+      return const Left(UtilisateurIdNonTrouveException());
+    }
+
+    final responses = await Future.wait([
+      _cmsApiClient.get(
+        Uri.parse(
+          '/api/articles/$id?populate[0]=partenaire,partenaire.logo.media&populate[1]=sources&populate[2]=image_url',
+        ),
       ),
-    );
-    if (response.statusCode != HttpStatus.ok) {
+      _apiClient.get(
+        Uri.parse('utilisateurs/$utilisateurId/bibliotheque/articles/$id'),
+      ),
+    ]);
+
+    final cmsResponse = responses.first;
+    final apiResponse = responses[1];
+    if (cmsResponse.statusCode != HttpStatus.ok ||
+        apiResponse.statusCode != HttpStatus.ok) {
       return Left(Exception("Erreur lors de la récupération de l'article"));
     }
 
-    final json = jsonDecode(response.body) as Map<String, dynamic>;
+    final articleData = jsonDecode(cmsResponse.body) as Map<String, dynamic>;
+    final bibliothequeData =
+        jsonDecode(apiResponse.body) as Map<String, dynamic>;
 
-    return Right(ArticleMapper.fromJson(json));
+    final article = ArticleMapper.fromJson(
+      cms: articleData,
+      api: bibliothequeData,
+    );
+
+    return Right(article);
   }
 
   @override
@@ -50,5 +71,39 @@ class ArticlesApiAdapter implements ArticlesPort {
     return response.statusCode == HttpStatus.ok
         ? const Right(null)
         : Left(Exception('Erreur lors de la validation du quiz'));
+  }
+
+  @override
+  Future<Either<Exception, void>> addToFavorites(final String id) async {
+    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    if (utilisateurId == null) {
+      return const Left(UtilisateurIdNonTrouveException());
+    }
+
+    final response = await _apiClient.post(
+      Uri.parse('/utilisateurs/$utilisateurId/events'),
+      body: jsonEncode({'content_id': id, 'type': 'article_favoris'}),
+    );
+
+    return response.statusCode == HttpStatus.ok
+        ? const Right(null)
+        : Left(Exception("Erreur lors de l'ajout de l'article aux favoris"));
+  }
+
+  @override
+  Future<Either<Exception, void>> removeToFavorites(final String id) async {
+    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    if (utilisateurId == null) {
+      return const Left(UtilisateurIdNonTrouveException());
+    }
+
+    final response = await _apiClient.post(
+      Uri.parse('/utilisateurs/$utilisateurId/events'),
+      body: jsonEncode({'content_id': id, 'type': 'article_non_favoris'}),
+    );
+
+    return response.statusCode == HttpStatus.ok
+        ? const Right(null)
+        : Left(Exception("Erreur lors du retrait de l'article aux favoris"));
   }
 }

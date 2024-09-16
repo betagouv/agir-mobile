@@ -19,6 +19,26 @@ void main() {
   test('recupererQuiz', () async {
     final client = ClientMock()
       ..getSuccess(
+        path: 'utilisateurs/$utilisateurId/bibliotheque/articles/14',
+        response: OkResponse(
+          value: '''
+{
+    "content_id": "14",
+    "type": "article",
+    "titre": "Recette : velouté crémeux de patates douces",
+    "soustitre": "Une recette cocooning pour l'hiver",
+    "thematique_principale": "alimentation",
+    "thematique_principale_label": "🥦 Alimentation",
+    "thematiques": ["alimentation"],
+    "image_url": "https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1702656988/elena_leya_ves_Mzw6_ADMA_unsplash_974d78eae9.jpg",
+    "points": 5,
+    "favoris": false,
+    "like_level": null,
+    "read_date": null
+}''',
+        ),
+      )
+      ..getSuccess(
         path:
             '/api/quizzes/14?populate[0]=questions.reponses,thematique_gamification,articles.partenaire.logo',
         response: CustomResponse('''
@@ -159,6 +179,7 @@ void main() {
         explicationKo:
             "<p><span>Au contraire ! Pour rendre notre alimentation plus durable, nous pouvons manger davantage de produits de saison et augmenter la part de repas végétariens dans les menus de la semaine. Diminuer notre consommation de viande permet en effet de réduire les impacts écologiques du secteur de l’élevage, qui génère à lui seul près de 15 % des émissions mondiales de gaz à effet de serre : c'est donc l'action la plus efficace pour limiter l'impact de notre alimentation.<br><br>On peut aussi privilégier les produits locaux et biologiques, limiter l’achat de produits transformés et réduire le gaspillage alimentaire.</span></p>",
         article: Article(
+          id: '168',
           titre:
               "L'impact de la viande sur l'environnement : chiffres et explications",
           sousTitre: null,
@@ -166,6 +187,8 @@ void main() {
               "<h2><span>1. Les émissions de gaz à effet de serre</span></h2><p><span>L'élevage est responsable de 14,5 % des émissions mondiales de gaz à effet de serre (GES), soit environ 7,1 gigatonnes de CO2 par an​. Les principaux gaz émis sont le méthane (CH4), le dioxyde de carbone (CO2) et le protoxyde d'azote (N2O). Le méthane, principalement émis par les rots des bovins, est environ 25 fois plus puissant que le CO2 sur une période de 100 ans. Par ailleurs, 80% des émissions liées à l'agriculture viennent de la production de viande, d’œufs et de produits laitiers.</span></p><h2><span>2. L’utilisation des ressources</span></h2><p><span>L'élevage consomme d'énormes quantités de ressources naturelles. Environ 70% des terres agricoles mondiales sont utilisées pour l'élevage ou la production de cultures fourragères​​. La viande par exemple nécessite environ 3 fois plus d'eau que la production de la même quantité de légumineuses, en prenant en compte l'eau pour l'irrigation des cultures destinées à l'alimentation des animaux, leur boisson, et le traitement.</span></p><h2><span>3. Déforestation et perte de biodiversité</span></h2><p><span>L'expansion des pâturages et des cultures pour l'alimentation animale est un facteur majeur de la déforestation, notamment en Amazonie​​. Environ 80% de la déforestation mondiale est liée à l'agriculture, avec l'élevage jouant un rôle prépondérant. La conversion des forêts en terres agricoles a de lourds impacts sur les habitats naturels, entraînant une perte massive de biodiversité. Par exemple, chaque année, environ 13 millions d'hectares de forêt sont perdus à cause de l'agriculture et de l'élevage.</span></p>",
           partenaire: null,
           sources: [],
+          isFavorite: false,
+          isRead: false,
         ),
       ),
     );

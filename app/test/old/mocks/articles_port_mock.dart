@@ -18,4 +18,14 @@ class ArticlesPortMock implements ArticlesPort {
 
     return const Right(null);
   }
+
+  @override
+  Future<Either<Exception, void>> addToFavorites(final String id) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<Exception, void>> removeToFavorites(final String id) {
+    throw UnimplementedError();
+  }
 }

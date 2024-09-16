@@ -73,11 +73,14 @@ class ScenarioContext {
   );
   List<Recommandation> recommandations = <Recommandation>[];
   Article article = const Article(
+    id: '0',
     titre: 'Titre',
     sousTitre: 'Sous-titre',
     contenu: '<p>Contenu</p>',
     partenaire: null,
     sources: [],
+    isFavorite: false,
+    isRead: false,
   );
   Quiz quiz = const Quiz(
     id: 0,

@@ -7,13 +7,17 @@ import 'package:app/features/articles/domain/source.dart';
 abstract final class ArticleMapper {
   const ArticleMapper._();
 
-  static Article fromJson(final Map<String, dynamic> json) {
-    final article = json['data']['attributes'] as Map<String, dynamic>;
+  static Article fromJson({
+    required final Map<String, dynamic> cms,
+    required final Map<String, dynamic> api,
+  }) {
+    final article = cms['data']['attributes'] as Map<String, dynamic>;
     final partenaire =
         article['partenaire']['data']?['attributes'] as Map<String, dynamic>?;
     final sources = article['sources'] as List<dynamic>?;
 
     return Article(
+      id: (cms['data']['id'] as num).toString(),
       titre: article['titre'] as String,
       sousTitre: article['sousTitre'] as String?,
       contenu: article['contenu'] as String,
@@ -35,6 +39,8 @@ abstract final class ArticleMapper {
                 ),
               )
               .toList(),
+      isFavorite: api['favoris'] as bool,
+      isRead: api['read_date'] != null,
     );
   }
 }

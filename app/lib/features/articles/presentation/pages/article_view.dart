@@ -1,4 +1,6 @@
+import 'package:app/features/articles/domain/article.dart';
 import 'package:app/features/articles/presentation/blocs/article_bloc.dart';
+import 'package:app/features/articles/presentation/blocs/article_event.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:app/shared/widgets/composants/app_bar.dart';
 import 'package:app/shared/widgets/composants/html_widget.dart';
@@ -14,7 +16,9 @@ class ArticleView extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    final article = context.watch<ArticleBloc>().state.article;
+    final article = context.select<ArticleBloc, Article>(
+      (final v) => v.state.article,
+    );
 
     return Scaffold(
       appBar: const FnvAppBar(),
@@ -28,6 +32,27 @@ class ArticleView extends StatelessWidget {
           ],
           const SizedBox(height: DsfrSpacings.s2w),
           FnvHtmlWidget(article.contenu),
+          const SizedBox(height: DsfrSpacings.s2w),
+          DsfrButton(
+            label: article.isFavorite
+                ? Localisation.retirerDesFavoris
+                : Localisation.ajouterEnFavoris,
+            icon: article.isFavorite
+                ? DsfrIcons.healthHeartFill
+                : DsfrIcons.healthHeartLine,
+            iconLocation: DsfrButtonIconLocation.right,
+            iconColor:
+                article.isFavorite ? DsfrColors.redMarianneMain472 : null,
+            variant: DsfrButtonVariant.tertiary,
+            size: DsfrButtonSize.lg,
+            onPressed: () {
+              context.read<ArticleBloc>().add(
+                    article.isFavorite
+                        ? const ArticleRemoveToFavoritesPressed()
+                        : const ArticleAddToFavoritesPressed(),
+                  );
+            },
+          ),
           if (article.partenaire != null) ...[
             const SizedBox(height: DsfrSpacings.s4w),
             const Text(Localisation.proposePar, style: DsfrTextStyle.bodySm()),

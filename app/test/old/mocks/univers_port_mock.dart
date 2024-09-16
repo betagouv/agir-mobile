@@ -69,13 +69,11 @@ class UniversPortMock implements UniversPort {
   Future<Either<Exception, void>> gagnerPoints({
     required final ObjectifId id,
   }) {
-    // TODO(lsaudon): implement gagnerPoints
     throw UnimplementedError();
   }
 
   @override
   Future<Either<Exception, void>> terminer({required final String missionId}) {
-    // TODO(lsaudon): implement terminer
     throw UnimplementedError();
   }
 

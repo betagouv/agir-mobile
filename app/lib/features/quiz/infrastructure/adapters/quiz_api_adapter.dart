@@ -21,18 +21,35 @@ class QuizApiAdapter implements QuizPort {
 
   @override
   Future<Either<Exception, Quiz>> recupererQuiz(final String id) async {
-    final response = await _cmsApiClient.get(
+    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    if (utilisateurId == null) {
+      return const Left(UtilisateurIdNonTrouveException());
+    }
+    final cmsResponse = await _cmsApiClient.get(
       Uri.parse(
         '/api/quizzes/$id?populate[0]=questions.reponses,thematique_gamification,articles.partenaire.logo',
       ),
     );
-    if (response.statusCode != HttpStatus.ok) {
-      return Left(Exception("Erreur lors de la récupération de l'article"));
+
+    if (cmsResponse.statusCode != HttpStatus.ok) {
+      return Left(Exception('Erreur lors de la récupération du quiz'));
     }
 
-    final json = jsonDecode(response.body) as Map<String, dynamic>;
+    final quizData = jsonDecode(cmsResponse.body) as Map<String, dynamic>;
+    Map<String, dynamic>? articleData;
+    // ignore: avoid_dynamic_calls
+    if ((quizData['data']['attributes']['articles']['data'] as List<dynamic>)
+        .isNotEmpty) {
+      final articleResponse = await _apiClient.get(
+        Uri.parse('utilisateurs/$utilisateurId/bibliotheque/articles/$id'),
+      );
+      if (articleResponse.statusCode != HttpStatus.ok) {
+        return Left(Exception("Erreur lors de la récupération de l'article"));
+      }
+      articleData = jsonDecode(articleResponse.body) as Map<String, dynamic>;
+    }
 
-    return Right(QuizMapper.fromJson(json));
+    return Right(QuizMapper.fromJson(cms: quizData, api: articleData));
   }
 
   @override
