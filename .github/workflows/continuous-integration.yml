@@ -15,7 +15,7 @@ on:
       - packages/**
 
 env:
-  FLUTTER_VERSION: 3.24.2
+  FLUTTER_VERSION: 3.24.3
 
 jobs:
   continuous-integration:
