@@ -35,6 +35,8 @@ class BibliothequeView extends StatelessWidget {
               SizedBox(height: DsfrSpacings.s1w),
               _Thematiques(),
               SizedBox(height: DsfrSpacings.s1w),
+              _Favorites(),
+              SizedBox(height: DsfrSpacings.s1w),
               _Nombre(),
               SizedBox(height: DsfrSpacings.s2w),
             ],
@@ -45,6 +47,21 @@ class BibliothequeView extends StatelessWidget {
       ],
     );
   }
+}
+
+class _Favorites extends StatelessWidget {
+  const _Favorites();
+
+  @override
+  Widget build(final BuildContext context) => DsfrToggle(
+        label: Localisation.vosFavoris,
+        value: context.select<BibliothequeBloc, bool>(
+          (final value) => value.state.isFavorites,
+        ),
+        onChanged: (final value) => context.read<BibliothequeBloc>().add(
+              BibliothequeFavorisSelectionnee(value),
+            ),
+      );
 }
 
 class _Thematiques extends StatelessWidget {

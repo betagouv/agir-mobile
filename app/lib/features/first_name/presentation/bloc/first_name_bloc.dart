@@ -8,7 +8,7 @@ class FirstNameBloc extends Bloc<FirstNameEvent, FirstNameState> {
   FirstNameBloc(final AddFirstName addFirstName)
       : super(const FirstNameInitial()) {
     on<FirstNameChanged>((final event, final emit) {
-      event.value.validate.match(
+      event.value.validate.fold(
         () => emit(FirstNameEntered(event.value)),
         (final t) => emit(FirstNameFailure(errorMessage: t)),
       );

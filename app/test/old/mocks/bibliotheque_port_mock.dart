@@ -13,9 +13,9 @@ class BibliothequePortMock implements BibliothequePort {
   Future<Either<Exception, Bibliotheque>> recuperer({
     final List<String>? thematiques,
     final String? titre,
-    final bool? estFavoris,
+    final bool? isFavorite,
   }) async {
-    if (titre == null && thematiques == null && estFavoris == null) {
+    if (titre == null && thematiques == null && isFavorite == null) {
       return Right(bibliotheque);
     }
 

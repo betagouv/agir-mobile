@@ -28,3 +28,12 @@ final class BibliothequeThematiqueSelectionnee extends BibliothequeEvent {
   @override
   List<Object> get props => [valeur];
 }
+
+final class BibliothequeFavorisSelectionnee extends BibliothequeEvent {
+  const BibliothequeFavorisSelectionnee(this.valeur);
+
+  final bool valeur;
+
+  @override
+  List<Object> get props => [valeur];
+}

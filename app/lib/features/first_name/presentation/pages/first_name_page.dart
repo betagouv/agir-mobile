@@ -93,7 +93,7 @@ class FirstNamePage extends StatelessWidget {
                       FirstNameFailure() => Some(state.errorMessage),
                       _ => const None(),
                     },
-                    builder: (final context, final state) => state.match(
+                    builder: (final context, final state) => state.fold(
                       () => const SizedBox.shrink(),
                       (final t) => Column(
                         children: [
