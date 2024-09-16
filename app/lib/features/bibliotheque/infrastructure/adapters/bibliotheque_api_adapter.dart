@@ -20,16 +20,17 @@ class BibliothequeApiAdapter implements BibliothequePort {
   Future<Either<Exception, Bibliotheque>> recuperer({
     final List<String>? thematiques,
     final String? titre,
-    final bool? estFavoris,
+    final bool? isFavorite,
   }) async {
     final utilisateurId = await _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
       return const Left(UtilisateurIdNonTrouveException());
     }
 
-    final map = {
+    final map = <String, String>{
       if (thematiques != null) 'filtre_thematiques': thematiques.join(','),
       if (titre != null) 'titre': titre,
+      if (isFavorite != null && isFavorite) 'favoris': '$isFavorite',
     };
 
     final uri = Uri.parse('/utilisateurs/$utilisateurId/bibliotheque').replace(

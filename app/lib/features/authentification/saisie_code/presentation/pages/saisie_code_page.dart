@@ -78,7 +78,7 @@ class _MessageErreur extends StatelessWidget {
       .select<SaisieCodeBloc, Option<String>>(
         (final bloc) => bloc.state.erreur,
       )
-      .match(
+      .fold(
         () => const SizedBox.shrink(),
         (final t) => Column(
           children: [

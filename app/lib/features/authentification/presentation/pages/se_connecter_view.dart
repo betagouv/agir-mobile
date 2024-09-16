@@ -119,7 +119,7 @@ class _MessageErreur extends StatelessWidget {
       .select<SeConnecterBloc, Option<String>>(
         (final bloc) => bloc.state.erreur,
       )
-      .match(
+      .fold(
         () => const SizedBox.shrink(),
         (final t) => Column(
           children: [

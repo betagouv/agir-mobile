@@ -227,6 +227,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const vosAidesSousTitre =
       'Accédez à toutes les aides publiques locales ou nationales pour la transition écologique en fonction de votre situation.';
   static const vosAidesTitre = 'Vos aides disponibles';
+  static const vosFavoris = 'Vos favoris';
   static const vosInformations = 'Vos informations';
   static const votreIdentite = 'Votre identité';
   static const votreLogement = 'Votre logement';
