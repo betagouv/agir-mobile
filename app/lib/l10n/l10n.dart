@@ -203,7 +203,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const renvoyerEmailDeConnexion = "Renvoyer l'email de connexion";
   static const retirerDesFavoris = 'Retirer des favoris';
   static const retour = 'Retour';
-  static const revenirAccueil = "Revenir à l'accueil";
+  static const revenirEnArriere = 'Revenir en arrière';
   static const revenirAuSimulateur = 'Revenir au simulateur';
   static const revenuFiscal = 'Revenu fiscal de référence de votre foyer';
   static const revenuQuestion = 'Quelle est votre tranche de revenus ?';
