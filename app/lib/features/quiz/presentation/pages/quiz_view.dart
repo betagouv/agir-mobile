@@ -98,7 +98,7 @@ class _BottomButton extends StatelessWidget {
     return FnvBottomBar(
       child: estValidee
           ? DsfrButton(
-              label: Localisation.revenirAccueil,
+              label: Localisation.revenirEnArriere,
               variant: DsfrButtonVariant.primary,
               size: DsfrButtonSize.lg,
               onPressed: () => GoRouter.of(context).pop(),
