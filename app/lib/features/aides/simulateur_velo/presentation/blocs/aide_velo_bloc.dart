@@ -136,19 +136,16 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
       nombreDePartsFiscales: state.nombreDePartsFiscales,
       revenuFiscal: state.revenuFiscal!,
     );
-    if (result.isRight()) {
-      final aidesDisponibles =
-          result.getRight().getOrElse(() => throw Exception());
-      emit(
+    result.fold(
+      (final l) => emit(state.copyWith(aideVeloStatut: AideVeloStatut.erreur)),
+      (final r) => emit(
         state.copyWith(
           aidesDisponibles: {
-            'Acheter un vélo cargo': aidesDisponibles.cargo,
-            'Acheter un vélo mécanique': aidesDisponibles.mecaniqueSimple,
-            '⚡Acheter un vélo cargo électrique':
-                aidesDisponibles.cargoElectrique,
-            '⚡Acheter un vélo électrique': aidesDisponibles.electrique,
-            '⚡️ Transformer un vélo classique en électrique':
-                aidesDisponibles.motorisation,
+            'Acheter un vélo cargo': r.cargo,
+            'Acheter un vélo mécanique': r.mecaniqueSimple,
+            '⚡Acheter un vélo cargo électrique': r.cargoElectrique,
+            '⚡Acheter un vélo électrique': r.electrique,
+            '⚡️ Transformer un vélo classique en électrique': r.motorisation,
           }.entries.map((final e) {
             final value = e.value;
 
@@ -160,7 +157,7 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
           }).toList(),
           aideVeloStatut: AideVeloStatut.succes,
         ),
-      );
-    }
+      ),
+    );
   }
 }

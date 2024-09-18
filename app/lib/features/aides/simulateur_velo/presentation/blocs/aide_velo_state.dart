@@ -1,7 +1,7 @@
 import 'package:app/features/aides/simulateur_velo/domain/value_objects/aide_velo.dart';
 import 'package:equatable/equatable.dart';
 
-enum AideVeloStatut { initial, chargement, succes }
+enum AideVeloStatut { initial, chargement, succes, erreur }
 
 final class AideVeloState extends Equatable {
   const AideVeloState({
