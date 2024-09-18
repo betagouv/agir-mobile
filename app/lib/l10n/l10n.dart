@@ -295,7 +295,8 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
 
   static String niveau(final int value) => 'NIVEAU $value';
 
-  static String nombreArticle(final int value) => '$value articles';
+  static String nombreArticle(final int value) =>
+      value <= 1 ? '$value article' : '$value articles';
 
   static String prenomExclamation(final String value) => '$value !';
 
