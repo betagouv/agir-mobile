@@ -1,5 +1,7 @@
 // ignore_for_file: do_not_use_environment, avoid-long-functions
 
+import 'dart:async';
+
 import 'package:app/app/app.dart';
 import 'package:app/features/aides/infrastructure/adapters/aide_velo_api_adapter.dart';
 import 'package:app/features/aides/infrastructure/adapters/aides_api_adapter.dart';
@@ -122,20 +124,30 @@ Future<void> main() async {
 void _registerErrorHandlers() {
   FlutterError.onError = (final details) {
     FlutterError.presentError(details);
-    debugPrint(details.toString());
+    debugPrint('FlutterError: ${details.exception}\n${details.stack ?? ''}');
+    _captureException(details.exception, details.stack);
   };
 
   PlatformDispatcher.instance.onError = (final error, final stack) {
-    debugPrint(error.toString());
+    debugPrint('PlatformDispatcher: $error\n$stack');
+    _captureException(error, stack);
 
     return true;
   };
 
-  ErrorWidget.builder = (final details) => Scaffold(
-        appBar: AppBar(
-          title: const Text('An error occurred'),
-          backgroundColor: DsfrColors.redMarianneMain472,
-        ),
-        body: Center(child: Text(details.toString())),
-      );
+  ErrorWidget.builder = (final details) {
+    _captureException(details.exception, details.stack);
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('An error occurred'),
+        backgroundColor: DsfrColors.redMarianneMain472,
+      ),
+      body: Center(child: Text(details.toString())),
+    );
+  };
+}
+
+void _captureException(final Object error, final StackTrace? stack) {
+  unawaited(CrashReporting.captureException(error, stackTrace: stack));
 }
