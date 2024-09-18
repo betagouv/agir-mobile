@@ -36,36 +36,35 @@ class AideVeloApiAdapter implements AideVeloPort {
       commune: commune,
     );
 
-    if (result.isLeft()) {
-      return Left(result.getLeft().getOrElse(() => throw Exception()));
-    }
+    return result.fold(Left.new, (final r) async {
+      final response = await _apiClient.post(
+        Uri.parse('/utilisateurs/$utilisateurId/simulerAideVelo'),
+        body: jsonEncode({'prix_du_velo': prix}),
+      );
 
-    final response = await _apiClient.post(
-      Uri.parse('/utilisateurs/$utilisateurId/simulerAideVelo'),
-      body: jsonEncode({'prix_du_velo': prix}),
-    );
+      if (response.statusCode >= HttpStatus.badRequest) {
+        return Left(Exception("Erreur lors de la simulation de l'aide vélo"));
+      }
 
-    if (response.statusCode != HttpStatus.ok) {
-      return Left(Exception("Erreur lors de la simulation de l'aide vélo"));
-    }
-    final json = jsonDecode(response.body) as Map<String, dynamic>;
+      final json = jsonDecode(response.body) as Map<String, dynamic>;
 
-    return Right(
-      AideVeloParType(
-        mecaniqueSimple: (json['mécanique simple'] as List<dynamic>)
-            .map(_toAideVelo)
-            .toList(),
-        electrique:
-            (json['électrique'] as List<dynamic>).map(_toAideVelo).toList(),
-        cargo: (json['cargo'] as List<dynamic>).map(_toAideVelo).toList(),
-        cargoElectrique: (json['cargo électrique'] as List<dynamic>)
-            .map(_toAideVelo)
-            .toList(),
-        pliant: (json['pliant'] as List<dynamic>).map(_toAideVelo).toList(),
-        motorisation:
-            (json['motorisation'] as List<dynamic>).map(_toAideVelo).toList(),
-      ),
-    );
+      return Right(
+        AideVeloParType(
+          mecaniqueSimple: (json['mécanique simple'] as List<dynamic>)
+              .map(_toAideVelo)
+              .toList(),
+          electrique:
+              (json['électrique'] as List<dynamic>).map(_toAideVelo).toList(),
+          cargo: (json['cargo'] as List<dynamic>).map(_toAideVelo).toList(),
+          cargoElectrique: (json['cargo électrique'] as List<dynamic>)
+              .map(_toAideVelo)
+              .toList(),
+          pliant: (json['pliant'] as List<dynamic>).map(_toAideVelo).toList(),
+          motorisation:
+              (json['motorisation'] as List<dynamic>).map(_toAideVelo).toList(),
+        ),
+      );
+    });
   }
 
   Future<Either<Exception, void>> _mettreAJourProfilEtLogement({
