@@ -5,6 +5,7 @@ import 'package:app/features/authentification/creer_compte/presentation/widgets/
 import 'package:app/features/authentification/presentation/pages/se_connecter_page.dart';
 import 'package:app/features/authentification/saisie_code/presentation/pages/saisie_code_page.dart';
 import 'package:app/l10n/l10n.dart';
+import 'package:app/shared/assets/images.dart';
 import 'package:app/shared/widgets/composants/alert.dart';
 import 'package:app/shared/widgets/composants/mot_de_passe/mot_de_passe.dart';
 import 'package:app/shared/widgets/fondamentaux/rounded_rectangle_border.dart';
@@ -49,6 +50,16 @@ class CreerCompteView extends StatelessWidget {
           body: ListView(
             padding: const EdgeInsets.all(paddingVerticalPage),
             children: [
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Image.asset(
+                  AssetsImages.illustration1,
+                  width: 208,
+                  height: 141,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              const SizedBox(height: DsfrSpacings.s3w),
               const Text(
                 Localisation.creezVotreCompte,
                 style: DsfrTextStyle.headline2(),

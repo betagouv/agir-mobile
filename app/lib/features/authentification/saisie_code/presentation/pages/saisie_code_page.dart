@@ -3,6 +3,7 @@ import 'package:app/features/authentification/saisie_code/presentation/blocs/sai
 import 'package:app/features/authentification/saisie_code/presentation/blocs/saisie_code_state.dart';
 import 'package:app/features/authentification/saisie_code/presentation/widgets/saisie_code_input.dart';
 import 'package:app/l10n/l10n.dart';
+import 'package:app/shared/assets/images.dart';
 import 'package:app/shared/widgets/composants/alert.dart';
 import 'package:app/shared/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:dsfr/dsfr.dart';
@@ -47,6 +48,16 @@ class SaisieCodePage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Image.asset(
+                      AssetsImages.illustration1,
+                      width: 208,
+                      height: 141,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  const SizedBox(height: DsfrSpacings.s3w),
                   const Text(
                     Localisation.entrezLeCodeRecuParMail,
                     style: DsfrTextStyle.headline2(),
