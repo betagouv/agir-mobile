@@ -3,6 +3,9 @@ import 'package:matomo_tracker/matomo_tracker.dart';
 
 class TrackerNavigatorObserver extends RouteObserver<PageRoute<dynamic>> {
   void _trackPageView(final Route<dynamic>? route) {
+    if (!MatomoTracker.instance.initialized) {
+      return;
+    }
     MatomoTracker.instance.trackPageViewWithName(
       actionName: route?.settings.name ?? 'inconnu',
     );

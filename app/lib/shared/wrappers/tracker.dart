@@ -14,6 +14,9 @@ class Tracker {
   }
 
   void trackClick(final String page, final String contenu) {
+    if (!MatomoTracker.instance.initialized) {
+      return;
+    }
     MatomoTracker.instance.trackEvent(
       eventInfo: EventInfo(category: 'click', action: page, name: contenu),
     );

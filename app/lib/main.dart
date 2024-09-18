@@ -46,7 +46,7 @@ Future<void> main() async {
   }
 
   const tracker = Tracker();
-  if (kDebugMode) {
+  if (!kDebugMode) {
     await CrashReporting.init();
     await tracker.init(siteId: matomoSiteId, url: matomoUrl);
   }
