@@ -9,6 +9,7 @@ import 'package:app/shared/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class ArticleView extends StatelessWidget {
@@ -57,10 +58,7 @@ class ArticleView extends StatelessWidget {
             const SizedBox(height: DsfrSpacings.s4w),
             const Text(Localisation.proposePar, style: DsfrTextStyle.bodySm()),
             const SizedBox(height: DsfrSpacings.s1w),
-            Image.network(
-              article.partenaire!.logo,
-              semanticLabel: article.partenaire!.nom,
-            ),
+            _LogoWidget(article: article),
           ],
           if (article.sources.isNotEmpty) ...[
             const SizedBox(height: DsfrSpacings.s2w),
@@ -100,5 +98,26 @@ class ArticleView extends StatelessWidget {
       ),
       backgroundColor: FnvColors.aidesFond,
     );
+  }
+}
+
+class _LogoWidget extends StatelessWidget {
+  const _LogoWidget({required this.article});
+
+  final Article article;
+
+  @override
+  Widget build(final BuildContext context) {
+    if (article.partenaire == null) {
+      return const SizedBox.shrink();
+    }
+
+    final partenaire = article.partenaire!;
+    final logoUrl = partenaire.logo;
+    final logoName = partenaire.nom;
+
+    return logoUrl.endsWith('.svg')
+        ? SvgPicture.network(logoUrl, semanticsLabel: logoName)
+        : Image.network(logoUrl, semanticLabel: logoName);
   }
 }
