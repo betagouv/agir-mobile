@@ -41,6 +41,17 @@ class AuthentificationApiAdapter implements AuthentificationPort {
     return handleError(
       response.body,
       defaultMessage: 'Erreur lors de la connexion',
+    ).fold(
+      (final l) async {
+        if (l.message != 'Utilisateur non actif') {
+          return Left(l);
+        }
+
+        await renvoyerCodeDemande(informationDeConnexion.adresseMail);
+
+        return const Right(null);
+      },
+      (final r) => const Right(null),
     );
   }
 

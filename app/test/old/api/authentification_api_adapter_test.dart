@@ -64,6 +64,48 @@ void main() {
     },
   );
 
+  test('connexionDemandee avec un utilisateur non actif', () async {
+    // Arrange.
+    final client = ClientMock()
+      ..postSuccess(
+        path: '/utilisateurs/login_v2',
+        response: CustomResponse(
+          '{"message":"Utilisateur non actif"}',
+          statusCode: HttpStatus.badRequest,
+        ),
+      )
+      ..postSuccess(
+        path: '/utilisateurs/renvoyer_code',
+        response: OkResponse(),
+      );
+
+    final adapter = AuthentificationApiAdapter(
+      apiClient: AuthentificationApiClient(
+        apiUrl: apiUrl,
+        authentificationTokenStorage: AuthentificationTokenStorage(
+          secureStorage: FlutterSecureStorageMock(),
+          authentificationStatusManagerWriter: AuthentificationStatutManager(),
+        ),
+        inner: client,
+      ),
+    );
+
+    // Act.
+    await adapter.connexionDemandee(informationDeConnexion);
+
+    // Assert.
+    verify(
+      () => client.send(
+        any(
+          that: RequestMathcher(
+            '/utilisateurs/renvoyer_code',
+            body: '{"email":"${informationDeConnexion.adresseMail}"}',
+          ),
+        ),
+      ),
+    );
+  });
+
   test(
     "validationCodeConnexionDemandee ajoute le token et l'utisateurId dans le secure storage et modifie le statut a connecté",
     () async {
