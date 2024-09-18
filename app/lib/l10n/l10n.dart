@@ -65,7 +65,7 @@ abstract final class Localisation {
   static const creerMonCompte = 'Créer mon compte';
   static const creezVotreCompte = 'Créez votre compte Agir';
   static const creezVotreCompteDetails =
-      'Indiquez votre adresse email et choississez un mot de passe pour accéder au service.';
+      'Indiquez votre adresse e-mail et choisissez un mot de passe pour accéder au service.';
   static const declarationAccessibilite = "Déclaration d'accessibilité";
   static const declarationAccessibiliteSite =
       'https://agir.beta.gouv.fr/accessibilite';
@@ -93,7 +93,7 @@ abstract final class Localisation {
   static const entre100et150m2 = 'Entre 100 et 150 m²';
   static const entre35et70m2 = 'Entre 35 et 70 m²';
   static const entre70et100m2 = 'Entre 70 et 100 m²';
-  static const entrezLeCodeRecuParMail = 'Entrez le code reçu par email !';
+  static const entrezLeCodeRecuParMail = 'Entrez le code reçu par e-mail !';
   static const estimerMesAides = 'Estimer mes aides';
   static const fermer = 'Fermer';
   static const fioul = 'Fioul';
@@ -166,7 +166,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez 1 part pour
 Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme des revenus de toutes les personnes avec lequelles vous partagez vos déclarations d’impôts (pour toute l’année) pour vous faire une première idée.''';
   static const oui = 'Oui';
   static const pageConnexionDetails =
-      'Indiquez votre adresse email et nous vous enverrons un code qui vous permettra d’accéder au service.';
+      'Indiquez votre adresse e-mail et nous vous enverrons un code qui vous permettra d’accéder au service.';
   static const pageConnexionTitre = 'Accédez à votre compte Agir';
   static const partieUne = '1. ADAPTER VOTRE EXPÉRIENCE';
   static const partieDeux = '2. LIRE DES ARTICLES ET RÉPONDRE AUX QUIZ';
@@ -200,7 +200,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const rechercherParTitre = 'Rechercher par titre';
   static const recommande = 'Recommandé';
   static const renvoyerCode = 'Renvoyer le code';
-  static const renvoyerEmailDeConnexion = "Renvoyer l'email de connexion";
+  static const renvoyerEmailDeConnexion = "Renvoyer l'e-mail de connexion";
   static const retirerDesFavoris = 'Retirer des favoris';
   static const retour = 'Retour';
   static const revenirEnArriere = 'Revenir en arrière';
@@ -284,12 +284,12 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
       '(${value == null ? '' : euro(value)})';
 
   static String entrezLeCodeRecuParMailDetails(final String value) =>
-      'Pour vérifier votre identité et vous permettre d’accéder à votre compte, nous vous avons envoyé un email à l’adresse : ${cacherEmail(value)}';
+      'Pour vérifier votre identité et vous permettre d’accéder à votre compte, nous vous avons envoyé un e-mail à l’adresse : ${cacherEmail(value)}';
 
   static String entrezLeCodeRecuOublieMotDePasseParMailDetails(
     final String value,
   ) =>
-      'Pour vérifier votre identité et vous permettre de modifier votre mot de passe, nous vous avons envoyé un email à l’adresse : ${cacherEmail(value)}';
+      'Pour vérifier votre identité et vous permettre de modifier votre mot de passe, nous vous avons envoyé un e-mail à l’adresse : ${cacherEmail(value)}';
 
   static String euro(final int value) => '$value €';
 
