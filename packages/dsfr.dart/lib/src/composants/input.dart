@@ -26,6 +26,7 @@ class DsfrInput extends StatefulWidget {
     this.isPasswordMode = false,
     this.autocorrect,
     this.keyboardType,
+    this.textCapitalization = TextCapitalization.none,
     this.textInputAction,
     this.inputFormatters,
     super.key,
@@ -48,6 +49,7 @@ class DsfrInput extends StatefulWidget {
   final bool isPasswordMode;
   final bool? autocorrect;
   final TextInputType? keyboardType;
+  final TextCapitalization textCapitalization;
   final TextInputAction? textInputAction;
   final List<TextInputFormatter>? inputFormatters;
 
@@ -64,9 +66,11 @@ class _DsfrInputState extends State<DsfrInput> {
   @override
   Widget build(final BuildContext context) {
     final labelText = widget.label;
-    Widget label = Text(
-      labelText,
-      style: widget.labelStyle.copyWith(color: widget.labelColor),
+    Widget label = ExcludeSemantics(
+      child: Text(
+        labelText,
+        style: widget.labelStyle.copyWith(color: widget.labelColor),
+      ),
     );
 
     if (widget.isPasswordMode) {
@@ -84,34 +88,38 @@ class _DsfrInputState extends State<DsfrInput> {
       );
     }
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        label,
-        if (widget.hint != null) ...[
-          const SizedBox(height: DsfrSpacings.s1v),
-          Text(
-            widget.hint!,
-            style: widget.hintStyle.copyWith(color: widget.hintColor),
+    return Semantics(
+      label: labelText,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          label,
+          if (widget.hint != null) ...[
+            const SizedBox(height: DsfrSpacings.s1v),
+            Text(
+              widget.hint!,
+              style: widget.hintStyle.copyWith(color: widget.hintColor),
+            ),
+          ],
+          DsfrInputHeadless(
+            initialValue: widget.initialValue,
+            controller: widget.controller,
+            suffixText: widget.suffixText,
+            onChanged: widget.onChanged,
+            validator: widget.validator,
+            keyboardType: widget.keyboardType,
+            textCapitalization: widget.textCapitalization,
+            textInputAction: widget.textInputAction,
+            width: widget.width,
+            isPasswordMode: widget.isPasswordMode,
+            passwordVisibility: _passwordVisibility,
+            autocorrect: widget.autocorrect,
+            textAlign: widget.textAlign,
+            inputFormatters: widget.inputFormatters,
+            key: ValueKey(labelText),
           ),
         ],
-        DsfrInputHeadless(
-          initialValue: widget.initialValue,
-          controller: widget.controller,
-          suffixText: widget.suffixText,
-          onChanged: widget.onChanged,
-          validator: widget.validator,
-          keyboardType: widget.keyboardType,
-          textInputAction: widget.textInputAction,
-          width: widget.width,
-          isPasswordMode: widget.isPasswordMode,
-          passwordVisibility: _passwordVisibility,
-          autocorrect: widget.autocorrect,
-          textAlign: widget.textAlign,
-          inputFormatters: widget.inputFormatters,
-          key: ValueKey(labelText),
-        ),
-      ],
+      ),
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:app/features/aides/presentation/blocs/aide/aide_bloc.dart';
 import 'package:app/features/aides/presentation/widgets/tag_simulateur.dart';
 import 'package:app/features/aides/simulateur_velo/presentation/pages/aide_simulateur_velo_page.dart';
 import 'package:app/l10n/l10n.dart';
+import 'package:app/shared/helpers/regex.dart';
 import 'package:app/shared/widgets/composants/app_bar.dart';
 import 'package:app/shared/widgets/composants/bottom_bar.dart';
 import 'package:app/shared/widgets/composants/html_widget.dart';
@@ -43,7 +44,11 @@ class AidePage extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(paddingVerticalPage),
         children: [
-          Text(aide.thematique, style: const DsfrTextStyle.bodySmMedium()),
+          Text(
+            aide.thematique,
+            style: const DsfrTextStyle.bodySmMedium(),
+            semanticsLabel: removeEmoji(aide.thematique),
+          ),
           const SizedBox(height: DsfrSpacings.s2w),
           Text(aide.titre, style: const DsfrTextStyle.headline2()),
           if (aide.aUnSimulateur || aide.montantMax != null) ...[

@@ -298,6 +298,9 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static String nombreArticle(final int value) =>
       value <= 1 ? '$value article' : '$value articles';
 
+  static String nombrePoints(final int value) =>
+      value <= 1 ? '$value point' : '$value points';
+
   static String prenomExclamation(final String value) => '$value !';
 
   static String questionCourantSurMax(final int actuel, final int max) =>

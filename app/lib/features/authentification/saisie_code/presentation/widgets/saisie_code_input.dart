@@ -14,7 +14,13 @@ class SaisieCodeInput extends StatelessWidget {
   }
 
   @override
-  Widget build(final BuildContext context) => FnvCodeInput(
-        onChanged: (final value) => _handleCode(context, value),
+  Widget build(final BuildContext context) => Semantics(
+        textField: true,
+        label: 'Code de vérification',
+        child: ExcludeSemantics(
+          child: FnvCodeInput(
+            onChanged: (final value) => _handleCode(context, value),
+          ),
+        ),
       );
 }
