@@ -258,4 +258,63 @@ void main() {
       ),
     );
   });
+
+  test('ignorer les questions mosaic_boolean', () async {
+    final client = ClientMock()
+      ..getSuccess(
+        path: '/utilisateurs/$utilisateurId/questionsKYC',
+        response: CustomResponse('''
+[
+    {
+        "id": "TEST_MOSAIC_ID",
+        "titre": "Quels modes de chauffage existes chez vous ?",
+        "reponses": [
+            {
+                "code": "KYC_chauffage_bois",
+                "image_url": "https://res.cloudinary.com/dq023imd8/image/upload/v1726497242/Screenshot_2024_09_16_at_16_22_55_4fcb2d1a5b.png",
+                "label": "Bois",
+                "boolean_value": false
+            },
+            {
+                "code": "KYC_chauffage_fioul",
+                "image_url": "https://res.cloudinary.com/dq023imd8/image/upload/v1726497260/Screenshot_2024_09_16_at_16_23_05_4103677680.png",
+                "label": "Fioul",
+                "boolean_value": false
+            },
+            {
+                "code": "KYC_chauffage_gaz",
+                "image_url": "https://res.cloudinary.com/dq023imd8/image/upload/v1726497275/Screenshot_2024_09_16_at_16_23_19_1084c4bd18.png",
+                "label": "Gaz",
+                "boolean_value": false
+            }
+        ],
+        "categorie": "test",
+        "points": 10,
+        "type": "mosaic_boolean",
+        "is_answered": false
+    }
+]'''),
+      );
+
+    final authentificationTokenStorage = AuthentificationTokenStorage(
+      secureStorage: FlutterSecureStorageMock(),
+      authentificationStatusManagerWriter: AuthentificationStatutManager(),
+    );
+    await authentificationTokenStorage.sauvegarderToken(token);
+
+    final adapter = MieuxVousConnaitreApiAdapter(
+      apiClient: AuthentificationApiClient(
+        apiUrl: apiUrl,
+        authentificationTokenStorage: authentificationTokenStorage,
+        inner: client,
+      ),
+    );
+
+    final result = await adapter.recupererLesQuestionsDejaRepondue();
+
+    expect(
+      result.getRight().getOrElse(() => throw Exception()).isEmpty,
+      isTrue,
+    );
+  });
 }

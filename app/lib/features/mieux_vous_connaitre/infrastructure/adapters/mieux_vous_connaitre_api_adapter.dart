@@ -33,7 +33,9 @@ class MieuxVousConnaitreApiAdapter implements MieuxVousConnaitrePort {
 
     return Right(
       json
-          .map((final e) => QuestionMapper.fromJson(e as Map<String, dynamic>))
+          .map((final e) => e as Map<String, dynamic>)
+          .where((final e) => e['type'] != 'mosaic_boolean')
+          .map(QuestionMapper.fromJson)
           .where((final e) => e.reponses.isNotEmpty)
           .toList(),
     );
