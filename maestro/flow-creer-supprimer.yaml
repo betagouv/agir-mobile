@@ -1,13 +1,12 @@
-appId: fr.gouv.agir.dev2
+appId: "fr.gouv.agir.dev2"
 ---
 - launchApp: 
     appId: "fr.gouv.agir.dev2"
     clearState: true
     clearKeychain: true 
 - tapOn: "Je crée mon compte"
-- inputText: 
-    label: "Votre adresse email"
-    text: "lucas9@agir.dev"
+- tapOn: "Votre adresse email"
+- inputText: "lucas9@agir.dev"
 - tapOn: "Suiv."
 - waitForAnimationToEnd:
     timeout: 5000
@@ -17,14 +16,12 @@ appId: fr.gouv.agir.dev2
 - tapOn: "Créer mon compte"
 - tapOn: "Code de vérification"
 - inputText: "999999"
-- inputText:  
-    label: "Votre prénom"
-    text: "Lucas"
+- tapOn: "Votre prénom"
+- inputText: "Lucas"
 - tapOn: "OK"
 - tapOn: "Continuer"
-- inputText:  
-    label: "Code postal"
-    text: "39100"
+- tapOn: "Code postal"
+- inputText: "39100"
 - tapOn: "OK"
 - tapOn: "Commune"
 - tapOn: "DOLE"
