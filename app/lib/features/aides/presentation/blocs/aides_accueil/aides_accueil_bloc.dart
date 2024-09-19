@@ -8,7 +8,7 @@ class AidesAccueilBloc extends Bloc<AidesAccueilEvent, AidesAccueilState> {
   AidesAccueilBloc({required final AidesPort aidesPort})
       : super(const AidesAccueilState([])) {
     on<AidesAccueilRecuperationDemandee>((final event, final emit) async {
-      final result = await aidesPort.recupereLesAides();
+      final result = await aidesPort.fetchAides();
       if (result.isRight()) {
         final aides = result.getRight().getOrElse(() => throw Exception());
         emit(AidesAccueilState(aides.take(2).toList()));

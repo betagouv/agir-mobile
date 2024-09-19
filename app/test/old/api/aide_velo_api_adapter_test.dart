@@ -1,192 +1,86 @@
+import 'dart:convert';
+
 import 'package:app/features/aides/infrastructure/adapters/aide_velo_api_adapter.dart';
-import 'package:app/features/aides/simulateur_velo/domain/value_objects/aide_velo.dart';
-import 'package:app/features/aides/simulateur_velo/domain/value_objects/aide_velo_par_type.dart';
-import 'package:app/features/authentification/domain/entities/authentification_statut_manager.dart';
-import 'package:app/features/authentification/infrastructure/adapters/authentification_api_client.dart';
-import 'package:app/features/authentification/infrastructure/adapters/authentification_token_storage.dart';
+import 'package:app/features/aides/infrastructure/adapters/aide_velo_par_type_mapper.dart';
+import 'package:app/features/authentification/infrastructure/adapters/dio_http_client.dart';
+import 'package:faker/faker.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
 
-import 'client_mock.dart';
+import '../../helpers/dio_mock.dart';
+import '../../helpers/faker.dart';
+import '../../helpers/get_token_storage.dart';
 import 'constants.dart';
-import 'custom_response.dart';
-import 'flutter_secure_storage_mock.dart';
-import 'request_mathcher.dart';
-
-const aideVeloParType = AideVeloParType(
-  mecaniqueSimple: [],
-  electrique: [
-    AideVelo(
-      libelle: 'Bonus vélo',
-      description:
-          'Nouveau bonus vélo électrique applicable à partir du 14 février 2024.',
-      lien: 'https://www.service-public.fr/particuliers/vosdroits/F36828',
-      montant: 300,
-      plafond: 300,
-      logo:
-          'https://res.cloudinary.com/dq023imd8/image/upload/miniatures/logo_etat_francais.webp',
-    ),
-  ],
-  cargo: [
-    AideVelo(
-      libelle: 'Bonus vélo',
-      description:
-          'Nouveau bonus vélo cargo applicable à partir du 14 février 2024.',
-      lien: 'https://www.service-public.fr/particuliers/vosdroits/F36828',
-      montant: 400,
-      plafond: 400,
-      logo:
-          'https://res.cloudinary.com/dq023imd8/image/upload/miniatures/logo_etat_francais.webp',
-    ),
-  ],
-  cargoElectrique: [
-    AideVelo(
-      libelle: 'Bonus vélo',
-      description:
-          'Nouveau bonus vélo cargo électrique applicable à partir du 14 février 2024.',
-      lien: 'https://www.service-public.fr/particuliers/vosdroits/F36828',
-      montant: 400,
-      plafond: 400,
-      logo:
-          'https://res.cloudinary.com/dq023imd8/image/upload/miniatures/logo_etat_francais.webp',
-    ),
-  ],
-  pliant: [
-    AideVelo(
-      libelle: 'Bonus vélo',
-      description:
-          'Nouveau bonus vélo pliant applicable à partir du 14 février 2024.',
-      lien: 'https://www.service-public.fr/particuliers/vosdroits/F36828',
-      montant: 400,
-      plafond: 400,
-      logo:
-          'https://res.cloudinary.com/dq023imd8/image/upload/miniatures/logo_etat_francais.webp',
-    ),
-  ],
-  motorisation: [],
-);
 
 void main() {
-  group('AideVeloApiAdapter', () {
-    test('simuler', () async {
-      final client = ClientMock()
-        ..patchSuccess(
-          path: '/utilisateurs/$utilisateurId/profile',
-          response: OkResponse(),
-        )
-        ..patchSuccess(
-          path: '/utilisateurs/$utilisateurId/logement',
-          response: OkResponse(),
-        )
-        ..postSuccess(
-          path: '/utilisateurs/$utilisateurId/simulerAideVelo',
-          response: CustomResponse(
-            '''
-{
-    "mécanique simple": [],
-    "électrique": [
-        {
-            "libelle": "Bonus vélo",
-            "description": "Nouveau bonus vélo électrique applicable à partir du 14 février 2024.",
-            "lien": "https://www.service-public.fr/particuliers/vosdroits/F36828",
-            "collectivite": {"kind": "pays", "value": "France"},
-            "montant": 300,
-            "plafond": 300,
-            "logo": "https://res.cloudinary.com/dq023imd8/image/upload/miniatures/logo_etat_francais.webp"
-        }
-    ],
-    "cargo": [
-        {
-            "libelle": "Bonus vélo",
-            "description": "Nouveau bonus vélo cargo applicable à partir du 14 février 2024.",
-            "lien": "https://www.service-public.fr/particuliers/vosdroits/F36828",
-            "collectivite": {"kind": "pays", "value": "France"},
-            "montant": 400,
-            "plafond": 400,
-            "logo": "https://res.cloudinary.com/dq023imd8/image/upload/miniatures/logo_etat_francais.webp"
-        }
-    ],
-    "cargo électrique": [
-        {
-            "libelle": "Bonus vélo",
-            "description": "Nouveau bonus vélo cargo électrique applicable à partir du 14 février 2024.",
-            "lien": "https://www.service-public.fr/particuliers/vosdroits/F36828",
-            "collectivite": {"kind": "pays", "value": "France"},
-            "montant": 400,
-            "plafond": 400,
-            "logo": "https://res.cloudinary.com/dq023imd8/image/upload/miniatures/logo_etat_francais.webp"
-        }
-    ],
-    "pliant": [
-        {
-            "libelle": "Bonus vélo",
-            "description": "Nouveau bonus vélo pliant applicable à partir du 14 février 2024.",
-            "lien": "https://www.service-public.fr/particuliers/vosdroits/F36828",
-            "collectivite": {"kind": "pays", "value": "France"},
-            "montant": 400,
-            "plafond": 400,
-            "logo": "https://res.cloudinary.com/dq023imd8/image/upload/miniatures/logo_etat_francais.webp"
-        }
-    ],
-    "motorisation": []
-}
-''',
-          ),
-        );
+  late AideVeloApiAdapter adapter;
+  late DioMock dio;
 
-      final authentificationTokenStorage = AuthentificationTokenStorage(
-        secureStorage: FlutterSecureStorageMock(),
-        authentificationStatusManagerWriter: AuthentificationStatutManager(),
-      );
-      await authentificationTokenStorage.sauvegarderToken(token);
+  setUp(() async {
+    dio = DioMock();
+    adapter = AideVeloApiAdapter(
+      client: DioHttpClient(
+        dio: dio,
+        authentificationTokenStorage: await getTokenStorage(),
+      ),
+    );
+  });
 
-      final adapter = AideVeloApiAdapter(
-        apiClient: AuthentificationApiClient(
-          apiUrl: apiUrl,
-          authentificationTokenStorage: authentificationTokenStorage,
-          inner: client,
-        ),
+  test('simuler returns AideVeloParType when successful', () async {
+    // Mock the API response
+
+    final randomAideVeloParType = aideVeloParTypeFaker();
+    dio
+      ..patchM('/utilisateurs/$utilisateurId/profile')
+      ..patchM('/utilisateurs/$utilisateurId/logement')
+      ..postM(
+        '/utilisateurs/$utilisateurId/simulerAideVelo',
+        responseData: randomAideVeloParType,
       );
 
-      final result = await adapter.simuler(
-        prix: 1000,
-        codePostal: '39100',
-        commune: 'BAVERANS',
-        nombreDePartsFiscales: 2.5,
-        revenuFiscal: 16000,
-      );
-      verify(
-        () => client.send(
-          any(
-            that: const RequestMathcher(
-              '/utilisateurs/$utilisateurId/profile',
-            ),
-          ),
+    final faker = Faker();
+    final prix = faker.randomGenerator.integer(5000);
+    final nombreDePartsFiscales = faker.randomGenerator.decimal();
+    final revenuFiscal = faker.randomGenerator.integer(100000);
+    final codePostal = faker.address.zipCode();
+    final commune = faker.address.city();
+
+    final result = await adapter.simuler(
+      prix: prix,
+      codePostal: codePostal,
+      commune: commune,
+      nombreDePartsFiscales: nombreDePartsFiscales,
+      revenuFiscal: revenuFiscal,
+    );
+
+    // Verify API calls
+    verify(
+      () => dio.patch<void>(
+        any(),
+        data: jsonEncode(
+          {
+            'nombre_de_parts_fiscales': nombreDePartsFiscales,
+            'revenu_fiscal': revenuFiscal,
+          },
         ),
-      );
-      verify(
-        () => client.send(
-          any(
-            that: const RequestMathcher(
-              '/utilisateurs/$utilisateurId/logement',
-            ),
-          ),
-        ),
-      );
-      verify(
-        () => client.send(
-          any(
-            that: const RequestMathcher(
-              '/utilisateurs/$utilisateurId/simulerAideVelo',
-            ),
-          ),
-        ),
-      );
-      expect(
-        result.getRight().getOrElse(() => throw Exception()),
-        aideVeloParType,
-      );
-    });
+      ),
+    );
+    verify(
+      () => dio.patch<void>(
+        any(),
+        data: jsonEncode({'code_postal': codePostal, 'commune': commune}),
+      ),
+    );
+    verify(
+      () => dio.post<dynamic>(any(), data: jsonEncode({'prix_du_velo': prix})),
+    );
+
+    // Assert the result
+    expect(result.isRight(), isTrue);
+    final aideVeloParType = result.getRight().toNullable()!;
+    expect(
+      aideVeloParType,
+      equals(AideVeloParTypeMapper.fromJson(randomAideVeloParType)),
+    );
   });
 }

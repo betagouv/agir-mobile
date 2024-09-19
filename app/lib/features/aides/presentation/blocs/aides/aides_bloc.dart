@@ -8,7 +8,7 @@ class AidesBloc extends Bloc<AidesEvent, AidesState> {
   AidesBloc({required final AidesPort aidesPort})
       : super(const AidesState(aides: [])) {
     on<AidesRecuperationDemandee>((final event, final emit) async {
-      final result = await aidesPort.recupereLesAides();
+      final result = await aidesPort.fetchAides();
       if (result.isRight()) {
         final aides = result.getRight().getOrElse(() => throw Exception());
         final thematiques = aides.map((final e) => e.thematique).toSet();
