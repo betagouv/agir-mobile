@@ -1,39 +1,42 @@
 appId: fr.gouv.agir.dev2
 ---
-- launchApp
-- tapOn: "Suivant"
-- tapOn:
-    point: "50%,36%"
-- inputText: "lucas@agir.dev"
-- tapOn:
-    point: "50%,49%"
+- launchApp: 
+    appId: "fr.gouv.agir.dev2"
+    clearState: true
+    clearKeychain: true 
+- tapOn: "Je crée mon compte"
+- inputText: 
+    label: "Votre adresse email"
+    text: "lucas9@agir.dev"
+- tapOn: "Suiv."
+- waitForAnimationToEnd:
+    timeout: 5000
 - inputText: "Azertyuiop1&"
-- tapOn:
-    id: "Done"
+- tapOn: "OK"
+- tapOn: "J'accepte les conditions générales d'utilisation" 
 - tapOn: "Créer mon compte"
-- tapOn:
-    point: "48%,41%"
-- inputText: 999999
-- tapOn: "Votre prénom"
-- inputText: "Lucas"
-- tapOn:
-    id: "Done"
+- tapOn: "Code de vérification"
+- inputText: "999999"
+- inputText:  
+    label: "Votre prénom"
+    text: "Lucas"
+- tapOn: "OK"
 - tapOn: "Continuer"
-- tapOn:
-    point: "17%,78%"
-- inputText: 39100
-- tapOn:
-    point: "65%,63%"
+- inputText:  
+    label: "Code postal"
+    text: "39100"
+- tapOn: "OK"
+- tapOn: "Commune"
 - tapOn: "DOLE"
 - tapOn: "Continuer"
 - tapOn: "J'ai compris"
 - tapOn: "La cuisine et l’alimentation"
 - tapOn: "Continuer"
-- tapOn: "C’est parti !"
+- tapOn: "C’est parti !"
 - tapOn: "Menu"
 - tapOn: "Votre profil"
 - tapOn: "Options avancées"
-- scroll
-- tapOn:
-    point: "50%,94%"
+- tapOn: "Supprimer votre compte"
 - tapOn: "Confirmer"
+- assertVisible: "J'ai déjà un compte"
+- stopApp: "fr.gouv.agir.dev2"
