@@ -8,6 +8,7 @@ import 'package:app/features/menu/presentation/pages/root_page.dart';
 import 'package:app/features/utilisateur/presentation/blocs/utilisateur_bloc.dart';
 import 'package:app/features/utilisateur/presentation/blocs/utilisateur_state.dart';
 import 'package:app/l10n/l10n.dart';
+import 'package:app/shared/helpers/regex.dart';
 import 'package:app/shared/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
@@ -93,6 +94,7 @@ class _Aides extends StatelessWidget {
               child: Text(
                 a.thematique,
                 style: const DsfrTextStyle.headline4(),
+                semanticsLabel: removeEmoji(a.thematique),
               ),
             ),
           final AideModel a => CarteAide(aide: a.value),

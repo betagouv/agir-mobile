@@ -1,4 +1,4 @@
-import 'package:app/shared/helpers/mail_regex.dart';
+import 'package:app/shared/helpers/regex.dart';
 import 'package:equatable/equatable.dart';
 
 class MotDePasseOublieState extends Equatable {

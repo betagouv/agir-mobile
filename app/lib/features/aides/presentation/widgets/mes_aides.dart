@@ -17,8 +17,10 @@ class MesAides extends StatelessWidget {
     final bloc = AidesAccueilBloc(aidesPort: context.read())
       ..add(const AidesAccueilRecuperationDemandee());
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return ListView(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      padding: EdgeInsets.zero,
       children: [
         const Text(
           Localisation.accueilMesAides,
@@ -49,9 +51,13 @@ class MesAides extends StatelessWidget {
           bloc: bloc,
         ),
         const SizedBox(height: DsfrSpacings.s2w),
-        DsfrLink.md(
-          label: Localisation.accueilMesAidesLien,
-          onPressed: () async => GoRouter.of(context).pushNamed(AidesPage.name),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: DsfrLink.md(
+            label: Localisation.accueilMesAidesLien,
+            onPressed: () async =>
+                GoRouter.of(context).pushNamed(AidesPage.name),
+          ),
         ),
       ],
     );

@@ -162,8 +162,10 @@ class _Contenu extends StatelessWidget {
   final Mission mission;
 
   @override
-  Widget build(final BuildContext context) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+  Widget build(final BuildContext context) => ListView(
+        physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        padding: EdgeInsets.zero,
         children: [
           if (mission.kycListe.isNotEmpty) ...[
             const _SousTitre(titre: Localisation.partieUne),

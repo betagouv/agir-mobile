@@ -204,6 +204,8 @@ class _Thematique extends StatelessWidget {
               backgroundColor: const Color(0xFFDDDDFF),
               color: progression == 1 ? success : color,
               minHeight: 7,
+              semanticsLabel:
+                  '${mission.progression}/${mission.progressionCible} terminée',
               borderRadius: const BorderRadius.all(
                 Radius.circular(DsfrSpacings.s1v),
               ),

@@ -51,8 +51,11 @@ class _View extends StatelessWidget {
   const _View();
 
   @override
-  Widget build(final BuildContext context) => const Column(
-        children: [
+  Widget build(final BuildContext context) => ListView(
+        physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        padding: EdgeInsets.zero,
+        children: const [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

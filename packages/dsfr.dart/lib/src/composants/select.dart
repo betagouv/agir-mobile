@@ -55,38 +55,42 @@ class DsfrSelect<T> extends StatelessWidget {
       borderRadius: BorderRadius.vertical(top: Radius.circular(radius)),
     );
 
-    return _Label(
+    return Semantics(
+      textField: true,
       label: label,
-      hint: hint,
-      labelStyle: labelStyle,
-      labelColor:
-          dropdownMenuEntries.isNotEmpty ? labelColor : labelDisableColor,
-      hintStyle: hintStyle,
-      hintColor: hintColor,
-      child: DropdownMenu(
-        enabled: dropdownMenuEntries.isNotEmpty,
-        trailingIcon: const Icon(
-          DsfrIcons.systemArrowDownSLine,
-          size: DsfrSpacings.s2w,
+      child: _Label(
+        label: label,
+        hint: hint,
+        labelStyle: labelStyle,
+        labelColor:
+            dropdownMenuEntries.isNotEmpty ? labelColor : labelDisableColor,
+        hintStyle: hintStyle,
+        hintColor: hintColor,
+        child: DropdownMenu(
+          enabled: dropdownMenuEntries.isNotEmpty,
+          trailingIcon: const Icon(
+            DsfrIcons.systemArrowDownSLine,
+            size: DsfrSpacings.s2w,
+          ),
+          selectedTrailingIcon: const Icon(
+            DsfrIcons.systemArrowUpSLine,
+            size: DsfrSpacings.s2w,
+          ),
+          textStyle: inputStyle,
+          inputDecorationTheme: InputDecorationTheme(
+            filled: true,
+            fillColor: fillColor,
+            focusedBorder: underlineInputBorder,
+            enabledBorder: underlineInputBorder,
+            border: underlineInputBorder,
+            constraints: inputConstraints,
+          ),
+          controller: controller,
+          initialSelection: initialSelection,
+          onSelected: onSelected,
+          expandedInsets: EdgeInsets.zero,
+          dropdownMenuEntries: dropdownMenuEntries,
         ),
-        selectedTrailingIcon: const Icon(
-          DsfrIcons.systemArrowUpSLine,
-          size: DsfrSpacings.s2w,
-        ),
-        textStyle: inputStyle,
-        inputDecorationTheme: InputDecorationTheme(
-          filled: true,
-          fillColor: fillColor,
-          focusedBorder: underlineInputBorder,
-          enabledBorder: underlineInputBorder,
-          border: underlineInputBorder,
-          constraints: inputConstraints,
-        ),
-        controller: controller,
-        initialSelection: initialSelection,
-        onSelected: onSelected,
-        expandedInsets: EdgeInsets.zero,
-        dropdownMenuEntries: dropdownMenuEntries,
       ),
     );
   }
@@ -116,7 +120,9 @@ class _Label extends StatelessWidget {
   Widget build(final BuildContext context) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(label, style: labelStyle.copyWith(color: labelColor)),
+          ExcludeSemantics(
+            child: Text(label, style: labelStyle.copyWith(color: labelColor)),
+          ),
           if (hint != null) ...[
             const SizedBox(height: DsfrSpacings.s1v),
             Text(hint!, style: hintStyle.copyWith(color: hintColor)),
