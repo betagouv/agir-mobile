@@ -12,6 +12,7 @@ import 'package:app/features/authentification/infrastructure/adapters/authentifi
 import 'package:app/features/authentification/infrastructure/adapters/authentification_api_client.dart';
 import 'package:app/features/authentification/infrastructure/adapters/authentification_token_storage.dart';
 import 'package:app/features/authentification/infrastructure/adapters/cms_api_client.dart';
+import 'package:app/features/authentification/infrastructure/adapters/dio_http_client.dart';
 import 'package:app/features/bibliotheque/infrastructure/adapters/bibliotheque_api_adapter.dart';
 import 'package:app/features/communes/infrastructure/adapters/communes_api_adapter.dart';
 import 'package:app/features/first_name/infrastructure/first_name_adapter.dart';
@@ -24,6 +25,7 @@ import 'package:app/features/univers/infrastructure/adapters/univers_api_adapter
 import 'package:app/features/version/infrastructure/adapters/version_adapter.dart';
 import 'package:app/shared/wrappers/crash_reporting.dart';
 import 'package:app/shared/wrappers/tracker.dart';
+import 'package:dio/dio.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -84,11 +86,15 @@ Future<void> main() async {
 
   await authentificationTokenStorage.initialise();
 
+  final url = Uri.parse(apiUrl);
   final apiClient = AuthentificationApiClient(
-    apiUrl: ApiUrl(Uri.parse(apiUrl)),
+    apiUrl: ApiUrl(url),
     authentificationTokenStorage: authentificationTokenStorage,
   );
-
+  final dioHttpClient = DioHttpClient(
+    dio: Dio(BaseOptions(baseUrl: url.toString())),
+    authentificationTokenStorage: authentificationTokenStorage,
+  );
   final cmsClient = CmsApiClient(
     apiUrl: ApiUrl(Uri.parse(apiCmsUrl)),
     token: apiCmsToken,
@@ -100,7 +106,7 @@ Future<void> main() async {
       authentificationStatusManager: authentificationStatusManager,
       authentificationPort: AuthentificationApiAdapter(apiClient: apiClient),
       universPort: UniversApiAdapter(apiClient: apiClient),
-      aidesPort: AidesApiAdapter(apiClient: apiClient),
+      aidesPort: AidesApiAdapter(client: dioHttpClient),
       bibliothequePort: BibliothequeApiAdapter(apiClient: apiClient),
       recommandationsPort: RecommandationsApiAdapter(apiClient: apiClient),
       articlesPort:
@@ -111,7 +117,7 @@ Future<void> main() async {
       ),
       versionPort: VersionAdapter(packageInfo: packageInfo),
       communesPort: CommunesApiAdapter(apiClient: apiClient),
-      aideVeloPort: AideVeloApiAdapter(apiClient: apiClient),
+      aideVeloPort: AideVeloApiAdapter(client: dioHttpClient),
       firstNamePort: FirstNameAdapter(apiClient: apiClient),
       profilPort: ProfilApiAdapter(apiClient: apiClient),
       mieuxVousConnaitrePort:

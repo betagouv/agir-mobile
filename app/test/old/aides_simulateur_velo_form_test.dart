@@ -3,13 +3,14 @@
 import 'dart:io';
 
 import 'package:app/features/aides/domain/entities/aide.dart';
+import 'package:app/features/aides/infrastructure/adapters/aide_velo_par_type_mapper.dart';
 import 'package:app/features/aides/simulateur_velo/domain/value_objects/velo_pour_simulateur.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:app/shared/helpers/input_formatter.dart';
 import 'package:app/shared/number_format.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'api/aide_velo_api_adapter_test.dart';
+import '../helpers/faker.dart';
 import 'scenario_context.dart';
 import 'set_up_widgets.dart';
 import 'steps/iel_a_ces_informations_de_profile.dart';
@@ -103,7 +104,10 @@ void main() {
         HttpOverrides.global = null;
         setUpWidgets(tester);
 
-        leServeurRetourneLesAidesVeloParType(aideVeloParType);
+        final aideVeloParType = aideVeloParTypeFaker();
+        leServeurRetourneLesAidesVeloParType(
+          AideVeloParTypeMapper.fromJson(aideVeloParType),
+        );
         leServeurRetourneCetteListeDeCommunes(['AUTHUME', commune]);
         await _allerSurLeSimulateurVelo(tester, aide2);
         await ielEcritDansLeChamp(
