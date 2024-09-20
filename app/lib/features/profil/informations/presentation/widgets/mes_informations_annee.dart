@@ -29,11 +29,11 @@ class MesInformationsAnnee extends StatelessWidget {
       },
       initialValue: anneeDeNaissance?.toString(),
       keyboardType: TextInputType.number,
+      textInputAction: TextInputAction.next,
       inputFormatters: [
         FilteringTextInputFormatter.digitsOnly,
         LengthLimitingTextInputFormatter(4),
       ],
-      textInputAction: TextInputAction.next,
     );
   }
 }
