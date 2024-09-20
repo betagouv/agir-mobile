@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:app/features/aides/domain/entities/aide.dart';
 import 'package:app/features/aides/simulateur_velo/domain/value_objects/velo_pour_simulateur.dart';
 import 'package:app/l10n/l10n.dart';
+import 'package:app/shared/helpers/input_formatter.dart';
 import 'package:app/shared/number_format.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -205,7 +206,7 @@ void main() {
           FnvNumberFormat.formatNumber(nombreDePart),
         );
         ielVoitLeTexteDansTexteRiche(commune);
-        ielVoitLeTexteDansTexteRiche(revenuFiscal.toString());
+        ielVoitLeTexteDansTexteRiche(formatCurrency(revenuFiscal));
       },
     );
 
