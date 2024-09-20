@@ -55,6 +55,7 @@ class SupprimerCompte extends StatelessWidget {
                 TextSpan(
                   children: [
                     TextSpan(text: Localisation.supprimerVotreCompteContenu),
+                    TextSpan(text: ' '),
                     TextSpan(
                       text: Localisation
                           .attentionAucuneDonneeNePourraEtreRecuperee,
