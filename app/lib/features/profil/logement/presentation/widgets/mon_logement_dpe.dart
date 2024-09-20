@@ -179,7 +179,7 @@ class _FvnDpeEtiquette extends StatelessWidget {
   @override
   Widget build(final BuildContext context) {
     Widget customPaint = Padding(
-      padding: const EdgeInsets.all(DsfrSpacings.s1w),
+      padding: const EdgeInsets.all(DsfrSpacings.s2w),
       child: Text(label, style: const DsfrTextStyle.bodyMdBold()),
     );
 
@@ -187,7 +187,7 @@ class _FvnDpeEtiquette extends StatelessWidget {
       customPaint = CustomPaint(
         painter: _FlechePainter(color: color!, isSelected: groupValue == value),
         child: Padding(
-          padding: const EdgeInsets.all(DsfrSpacings.s1w),
+          padding: const EdgeInsets.all(DsfrSpacings.s2w),
           child: Text(
             label,
             style: const DsfrTextStyle.bodyMdBold(color: Colors.white),
@@ -203,14 +203,12 @@ class _FvnDpeEtiquette extends StatelessWidget {
         width: width,
         child: Row(
           children: [
-            Radio<Dpe>(
+            RadioIcon(
               key: ValueKey(label),
               value: value,
               groupValue: groupValue,
-              onChanged: null,
-              fillColor:
-                  const WidgetStatePropertyAll(DsfrColors.blueFranceSun113),
             ),
+            const SizedBox(width: DsfrSpacings.s1w),
             Expanded(child: customPaint),
           ],
         ),
