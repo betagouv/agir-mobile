@@ -2,6 +2,7 @@ import 'package:app/features/aides/simulateur_velo/domain/value_objects/velo_pou
 import 'package:app/features/aides/simulateur_velo/presentation/blocs/aide_velo_bloc.dart';
 import 'package:app/features/aides/simulateur_velo/presentation/blocs/aide_velo_event.dart';
 import 'package:app/features/aides/simulateur_velo/presentation/pages/aide_simulateur_velo_disponibles_page.dart';
+import 'package:app/features/profil/informations/presentation/widgets/revenu_fiscal_input.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:app/shared/helpers/text_scaler.dart';
 import 'package:app/shared/number_format.dart';
@@ -375,25 +376,17 @@ class _NombreDePartsFiscales extends StatelessWidget {
 class _RevenuFiscal extends StatelessWidget {
   const _RevenuFiscal();
 
-  void _handleRevenuFiscal(final BuildContext context, final String value) {
-    final parse = int.tryParse(value);
-    if (parse == null) {
-      return;
-    }
-    context.read<AideVeloBloc>().add(AideVeloRevenuFiscalChange(parse));
-  }
-
   @override
-  Widget build(final BuildContext context) => DsfrInput(
-        label: Localisation.revenuFiscal,
-        onChanged: (final value) => _handleRevenuFiscal(context, value),
-        suffixText: '€',
-        initialValue:
-            context.read<AideVeloBloc>().state.revenuFiscal?.toString(),
-        textAlign: TextAlign.end,
-        keyboardType: TextInputType.number,
-        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-      );
+  Widget build(final BuildContext context) {
+    final revenuFiscal = context.read<AideVeloBloc>().state.revenuFiscal;
+
+    return RevenuFiscalInput(
+      initialValue: revenuFiscal,
+      onChanged: (final value) {
+        context.read<AideVeloBloc>().add(AideVeloRevenuFiscalChange(value));
+      },
+    );
+  }
 }
 
 class _EstimerMesAides extends StatelessWidget {
