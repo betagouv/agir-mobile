@@ -6,7 +6,7 @@ import 'package:app/shared/assets/images.dart';
 import 'package:app/shared/assets/svgs.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
 class PreOnboardingPage extends StatelessWidget {
@@ -40,12 +40,12 @@ class PreOnboardingPage extends StatelessWidget {
                   children: [
                     SvgPicture.asset(
                       AssetsSvgs.republiqueFrancaise,
-                      height: 53,
+                      height: 69,
                     ),
                     const SizedBox(width: DsfrSpacings.s3w),
-                    Image.asset(AssetsImages.franceNationVerte, height: 35),
+                    Image.asset(AssetsImages.franceNationVerte, height: 46),
                     const SizedBox(width: DsfrSpacings.s3w),
-                    SvgPicture.asset(AssetsSvgs.ademe, height: 43),
+                    SvgPicture.asset(AssetsSvgs.ademe, height: 55),
                   ],
                 ),
                 const Spacer(),
