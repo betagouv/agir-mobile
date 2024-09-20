@@ -10,6 +10,7 @@ import 'steps/iel_appuie_sur_accesibilite.dart';
 import 'steps/iel_ecrit_dans_le_champ.dart';
 import 'steps/iel_est_connecte.dart';
 import 'steps/iel_lance_lapplication.dart';
+import 'steps/iel_scrolle.dart';
 import 'steps/iel_voit_le_texte.dart';
 import 'steps/le_serveur_retourne_ces_questions.dart';
 
@@ -46,6 +47,7 @@ void main() {
       ]);
       ielEstConnecte();
       await ielLanceLapplication(tester);
+      await ielScrolle(tester, recommandation.titre);
       await ielAppuieSur(tester, recommandation.titre);
       ielVoitLeTexte(Localisation.maReponse);
     },
