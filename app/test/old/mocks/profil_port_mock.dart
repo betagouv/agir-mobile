@@ -8,9 +8,10 @@ import 'package:fpdart/fpdart.dart';
 
 class ProfilPortMock implements ProfilPort, FirstNamePort {
   ProfilPortMock({
+    required this.email,
     required this.prenom,
     required this.nom,
-    required this.email,
+    required this.anneeDeNaissance,
     required this.codePostal,
     required this.commune,
     required this.nombreAdultes,
@@ -25,9 +26,10 @@ class ProfilPortMock implements ProfilPort, FirstNamePort {
     required this.revenuFiscal,
   });
 
+  String email;
   String? prenom;
   String? nom;
-  String email;
+  int? anneeDeNaissance;
   String? codePostal;
   String? commune;
   int? nombreAdultes;
@@ -46,9 +48,10 @@ class ProfilPortMock implements ProfilPort, FirstNamePort {
   @override
   Future<Either<Exception, Informations>> recupererProfil() async => Right(
         Informations(
+          email: email,
           prenom: prenom,
           nom: nom,
-          email: email,
+          anneeDeNaissance: anneeDeNaissance,
           codePostal: codePostal,
           commune: commune,
           nombreDePartsFiscales: nombreDePartsFiscales,
@@ -60,11 +63,13 @@ class ProfilPortMock implements ProfilPort, FirstNamePort {
   Future<Either<Exception, void>> mettreAJour({
     required final String? prenom,
     required final String? nom,
+    required final int? anneeDeNaissance,
     required final double nombreDePartsFiscales,
     required final int? revenuFiscal,
   }) async {
     this.prenom = prenom;
     this.nom = nom;
+    this.anneeDeNaissance = anneeDeNaissance;
     this.nombreDePartsFiscales = nombreDePartsFiscales;
     this.revenuFiscal = revenuFiscal;
 

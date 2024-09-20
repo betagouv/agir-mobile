@@ -34,9 +34,10 @@ class ProfilApiAdapter implements ProfilPort {
 
     return Right(
       Informations(
+        email: json['email'] as String,
         prenom: json['prenom'] as String?,
         nom: json['nom'] as String?,
-        email: json['email'] as String,
+        anneeDeNaissance: json['annee_naissance'] as int?,
         codePostal: json['code_postal'] as String?,
         commune: json['commune'] as String?,
         nombreDePartsFiscales:
@@ -50,6 +51,7 @@ class ProfilApiAdapter implements ProfilPort {
   Future<Either<Exception, void>> mettreAJour({
     required final String? prenom,
     required final String? nom,
+    required final int? anneeDeNaissance,
     required final double nombreDePartsFiscales,
     required final int? revenuFiscal,
   }) async {
@@ -60,6 +62,7 @@ class ProfilApiAdapter implements ProfilPort {
 
     final uri = Uri.parse('/utilisateurs/$utilisateurId/profile');
     final body = jsonEncode({
+      'annee_naissance': anneeDeNaissance,
       'nom': nom,
       'nombre_de_parts_fiscales': nombreDePartsFiscales,
       'prenom': prenom,

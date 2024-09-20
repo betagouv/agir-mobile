@@ -29,6 +29,15 @@ final class MesInformationsNomChange extends MesInformationsEvent {
   List<Object> get props => [valeur];
 }
 
+final class MesInformationsAnneeChange extends MesInformationsEvent {
+  const MesInformationsAnneeChange(this.valeur);
+
+  final int valeur;
+
+  @override
+  List<Object> get props => [valeur];
+}
+
 final class MesInformationsNombreDePartsFiscalesChange
     extends MesInformationsEvent {
   const MesInformationsNombreDePartsFiscalesChange(this.valeur);

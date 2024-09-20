@@ -57,6 +57,7 @@ void main() {
       await _allerSurMesInformations(tester);
       const nom = 'Nouveau nom';
       const prenom = 'Nouveau prenom';
+      const annee = 1992;
       const nombreDePartsFiscales = 2.5;
       const trancheValeur = 35000;
 
@@ -69,6 +70,11 @@ void main() {
         tester,
         label: Localisation.prenom,
         enterText: prenom,
+      );
+      await ielEcritDansLeChamp(
+        tester,
+        label: Localisation.anneeDeNaissance,
+        enterText: annee.toString(),
       );
 
       await ielScrolle(tester, Localisation.revenuFiscal);
@@ -87,6 +93,7 @@ void main() {
       final profilPortMock = ScenarioContext().profilPortMock!;
       expect(profilPortMock.nom, nom);
       expect(profilPortMock.prenom, prenom);
+      expect(profilPortMock.anneeDeNaissance, annee);
       expect(profilPortMock.nombreDePartsFiscales, nombreDePartsFiscales);
       expect(profilPortMock.revenuFiscal, trancheValeur);
     },

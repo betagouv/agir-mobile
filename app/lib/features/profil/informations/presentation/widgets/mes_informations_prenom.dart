@@ -16,6 +16,7 @@ class MesInformationsPrenom extends StatelessWidget {
 
     return DsfrInput(
       label: Localisation.prenom,
+      hint: Localisation.obligatoire,
       onChanged: (final value) => context
           .read<MesInformationsBloc>()
           .add(MesInformationsPrenomChange(value)),
