@@ -13,6 +13,7 @@ import 'steps/iel_lance_lapplication.dart';
 import 'steps/iel_sappelle.dart';
 import 'steps/iel_scrolle.dart';
 import 'steps/iel_voit_le_texte.dart';
+import 'steps/iel_voit_le_texte_dans_texte_riche.dart';
 import 'steps/iel_voit_le_texte_markdown.dart';
 
 void main() {
@@ -23,8 +24,6 @@ void main() {
     ielVoitLeTexte(Localisation.votreIdentite);
     ielVoitLeTexte(Localisation.prenom);
     ielVoitLeTexte(Localisation.nom);
-    ielVoitLeTexte(Localisation.adresseCourrierElectronique);
-    ielVoitLeTexte(Localisation.adresseCourrierElectroniqueDescription);
     ielVoitLeTexte(Localisation.donneesPersonnelles);
     ielVoitLeTexte(Localisation.nombreDePartsFiscales);
     ielVoitLeTexte(Localisation.nombreDePartsFiscalesDescription);
@@ -39,7 +38,7 @@ void main() {
     await _allerSurMesInformations(tester);
     ielVoitLeTexte(ScenarioContext().nom);
     ielVoitLeTexte(ScenarioContext().prenom);
-    ielVoitLeTexte(ScenarioContext().email);
+    ielVoitLeTexteDansTexteRiche(ScenarioContext().email);
     await ielScrolle(tester, Localisation.revenuFiscal);
     ielVoitLeTexte(
       FnvNumberFormat.formatNumber(ScenarioContext().nombreDePartsFiscales),
@@ -58,7 +57,6 @@ void main() {
       await _allerSurMesInformations(tester);
       const nom = 'Nouveau nom';
       const prenom = 'Nouveau prenom';
-      const email = 'nouveau@email.com';
       const nombreDePartsFiscales = 2.5;
       const trancheValeur = 35000;
 
@@ -72,11 +70,7 @@ void main() {
         label: Localisation.prenom,
         enterText: prenom,
       );
-      await ielEcritDansLeChamp(
-        tester,
-        label: Localisation.adresseCourrierElectronique,
-        enterText: email,
-      );
+
       await ielScrolle(tester, Localisation.revenuFiscal);
       await ielEcritDansLeChamp(
         tester,
@@ -93,7 +87,6 @@ void main() {
       final profilPortMock = ScenarioContext().profilPortMock!;
       expect(profilPortMock.nom, nom);
       expect(profilPortMock.prenom, prenom);
-      expect(profilPortMock.email, email);
       expect(profilPortMock.nombreDePartsFiscales, nombreDePartsFiscales);
       expect(profilPortMock.revenuFiscal, trancheValeur);
     },

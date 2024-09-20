@@ -13,9 +13,7 @@ abstract final class Localisation {
       'Une sélection d’articles et de services, pour vous, selon vos préférences !';
   static const accueilRecommandationsTitre = 'Recommandé, pour vous';
   static const acheterUnVelo = 'Acheter un vélo';
-  static const adresseCourrierElectronique = 'Adresse courrier électronique';
-  static const adresseCourrierElectroniqueDescription =
-      'Format attendu : nom@domaine.fr';
+  static const mesInformationsAdresseEmail = 'Adresse e-mail : ';
   static const adresseEmail = 'Votre adresse email';
   static const adultes = 'Adulte(s)';
   static const ajouterEnFavoris = 'Ajouter en favoris';

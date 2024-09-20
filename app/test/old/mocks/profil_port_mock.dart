@@ -60,13 +60,11 @@ class ProfilPortMock implements ProfilPort, FirstNamePort {
   Future<Either<Exception, void>> mettreAJour({
     required final String? prenom,
     required final String? nom,
-    required final String email,
     required final double nombreDePartsFiscales,
     required final int? revenuFiscal,
   }) async {
     this.prenom = prenom;
     this.nom = nom;
-    this.email = email;
     this.nombreDePartsFiscales = nombreDePartsFiscales;
     this.revenuFiscal = revenuFiscal;
 
