@@ -1,3 +1,4 @@
+import 'package:dsfr/src/composants/radios/radio_icon.dart';
 import 'package:dsfr/src/fondamentaux/colors.g.dart';
 import 'package:dsfr/src/fondamentaux/fonts.dart';
 import 'package:dsfr/src/fondamentaux/spacing.g.dart';
@@ -55,56 +56,4 @@ class DsfrRadioButton<T> extends StatelessWidget {
           ),
         ),
       );
-}
-
-class RadioIcon<T> extends StatelessWidget {
-  const RadioIcon({
-    super.key,
-    required this.value,
-    required this.groupValue,
-  });
-
-  final T value;
-  final T? groupValue;
-
-  @override
-  Widget build(final BuildContext context) => Semantics(
-        checked: groupValue == value,
-        selected: groupValue == value,
-        inMutuallyExclusiveGroup: true,
-        child: FittedBox(
-          child: CustomPaint(
-            size: const Size(24, 24),
-            painter: _RadioIconPainter(isSelected: groupValue == value),
-          ),
-        ),
-      );
-}
-
-class _RadioIconPainter extends CustomPainter {
-  _RadioIconPainter({required this.isSelected});
-
-  final bool isSelected;
-  static const double outerRadius = 11;
-  static const double innerRadius = 6;
-
-  @override
-  void paint(final Canvas canvas, final Size size) {
-    final center = size.center(Offset.zero);
-    final paint = Paint()
-      ..color = DsfrColors.blueFranceSun113
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 1;
-
-    canvas.drawCircle(center, outerRadius, paint);
-
-    if (isSelected) {
-      paint.style = PaintingStyle.fill;
-      canvas.drawCircle(center, innerRadius, paint);
-    }
-  }
-
-  @override
-  bool shouldRepaint(final _RadioIconPainter oldDelegate) =>
-      isSelected != oldDelegate.isSelected;
 }

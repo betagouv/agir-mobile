@@ -11,8 +11,8 @@ class FnvBottomBar extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => SafeArea(
-        top: false,
         left: false,
+        top: false,
         right: false,
         child: DecoratedBox(
           decoration: const ShapeDecoration(
