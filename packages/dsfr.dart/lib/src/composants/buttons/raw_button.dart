@@ -10,6 +10,7 @@ class DsfrRawButton extends StatefulWidget {
   const DsfrRawButton({
     required this.child,
     required this.variant,
+    this.foregroundColor,
     required this.size,
     this.onTap,
     super.key,
@@ -17,6 +18,7 @@ class DsfrRawButton extends StatefulWidget {
 
   final Widget child;
   final DsfrButtonVariant variant;
+  final Color? foregroundColor;
   final DsfrButtonSize size;
   final VoidCallback? onTap;
 
@@ -38,12 +40,24 @@ class _DsfrRawButtonState extends State<DsfrRawButton>
   void initState() {
     super.initState();
     _backgroundColor = DsfrButtonBackgroundColor.fromVariant(widget.variant);
-    _foregroundColor = DsfrButtonForegroundColor.fromVariant(widget.variant);
-    _border = DsfrButtonBorder.fromVariant(widget.variant);
-
+    _foregroundColor = widget.foregroundColor == null
+        ? DsfrButtonForegroundColor.fromVariant(widget.variant)
+        : DsfrButtonForegroundColor(
+            $default: widget.foregroundColor!,
+            disabled: DsfrColors.grey625,
+          );
+    _border = widget.foregroundColor == null
+        ? DsfrButtonBorder.fromVariant(widget.variant)
+        : DsfrButtonBorder(
+            $default: Border.fromBorderSide(
+              BorderSide(color: widget.foregroundColor!),
+            ),
+            disabled: const Border.fromBorderSide(
+              BorderSide(color: DsfrColors.grey925),
+            ),
+          );
     _padding = _getPadding(widget.size);
     _textStyle = _getTextStyle(widget.size);
-
     setMaterialState(WidgetState.disabled, widget.onTap == null);
   }
 
