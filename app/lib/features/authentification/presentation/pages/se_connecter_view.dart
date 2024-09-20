@@ -94,7 +94,7 @@ class SeConnecterView extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: DsfrLink.md(
                   label: Localisation.motDePasseOublie,
-                  onPressed: () async =>
+                  onTap: () async =>
                       GoRouter.of(context).pushNamed(MotDePasseOubliePage.name),
                 ),
               ),
@@ -112,7 +112,7 @@ class SeConnecterView extends StatelessWidget {
               Center(
                 child: DsfrLink.md(
                   label: Localisation.premiereFoisSurAgir,
-                  onPressed: () async => GoRouter.of(context)
+                  onTap: () async => GoRouter.of(context)
                       .pushReplacementNamed(CreerComptePage.name),
                 ),
               ),

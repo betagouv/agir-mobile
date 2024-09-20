@@ -16,7 +16,7 @@ void main() {
     const label = 'Label lien';
     final completer = Completer<void>();
     await tester.pumpWidget(
-      App(child: DsfrLink.md(label: label, onPressed: completer.complete)),
+      App(child: DsfrLink.md(label: label, onTap: completer.complete)),
     );
 
     await tester.tap(find.text(label));
@@ -41,7 +41,7 @@ void main() {
       final handle = tester.ensureSemantics();
       const label = 'Label lien';
       await tester.pumpWidget(
-        App(child: DsfrLink.md(label: label, onPressed: () {})),
+        App(child: DsfrLink.md(label: label, onTap: () {})),
       );
       expect(
         tester.getSemantics(find.text(label)),

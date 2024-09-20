@@ -123,7 +123,7 @@ class _ButtonRenvoyerCode extends StatelessWidget {
             current.renvoyerCodeDemande,
         child: DsfrLink.md(
           label: Localisation.renvoyerEmailDeConnexion,
-          onPressed: () => _handleRenvoyerCode(context),
+          onTap: () => _handleRenvoyerCode(context),
         ),
       );
 }

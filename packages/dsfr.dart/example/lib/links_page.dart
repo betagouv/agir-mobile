@@ -24,19 +24,19 @@ class LinksPage extends StatelessWidget {
         children: [
           const DsfrLink.md(label: label),
           gap,
-          DsfrLink.md(label: label, onPressed: _handleTap),
+          DsfrLink.md(label: label, onTap: _handleTap),
           gap,
           DsfrLink.md(
             label: label,
             icon: DsfrIcons.systemArrowLeftLine,
-            onPressed: _handleTap,
+            onTap: _handleTap,
           ),
           gap,
           DsfrLink.md(
             label: label,
             icon: DsfrIcons.systemArrowLeftLine,
             iconPosition: DsfrLinkIconPosition.end,
-            onPressed: _handleTap,
+            onTap: _handleTap,
           ),
         ],
       ),

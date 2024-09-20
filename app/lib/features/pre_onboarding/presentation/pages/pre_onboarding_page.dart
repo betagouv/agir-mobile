@@ -60,7 +60,7 @@ class PreOnboardingPage extends StatelessWidget {
                 Center(
                   child: DsfrLink.md(
                     label: Localisation.jaiDejaUnCompte,
-                    onPressed: () async =>
+                    onTap: () async =>
                         GoRouter.of(context).pushNamed(SeConnecterPage.name),
                   ),
                 ),
