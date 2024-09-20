@@ -73,6 +73,7 @@ class SupprimerCompte extends StatelessWidget {
           label: Localisation.supprimerVotreCompte,
           icon: DsfrIcons.systemFrWarningLine,
           variant: DsfrButtonVariant.secondary,
+          foregroundColor: color,
           size: DsfrButtonSize.lg,
           onPressed: () async => _handleSupprimerCompte(context),
         ),

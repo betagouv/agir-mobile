@@ -14,6 +14,7 @@ class DsfrButton extends StatelessWidget {
     this.iconLocation = DsfrButtonIconLocation.left,
     this.iconColor,
     required this.variant,
+    this.foregroundColor,
     required this.size,
     this.onPressed,
     super.key,
@@ -24,6 +25,7 @@ class DsfrButton extends StatelessWidget {
   final DsfrButtonIconLocation iconLocation;
   final Color? iconColor;
   final DsfrButtonVariant variant;
+  final Color? foregroundColor;
   final DsfrButtonSize size;
   final VoidCallback? onPressed;
 
@@ -61,6 +63,7 @@ class DsfrButton extends StatelessWidget {
 
     return DsfrRawButton(
       variant: variant,
+      foregroundColor: foregroundColor,
       size: size,
       onTap: onPressed,
       child: Center(
