@@ -299,27 +299,27 @@ class _Service extends StatelessWidget {
                       color: DsfrColors.blueFranceSun113,
                     ),
                   ),
-                  Expanded(
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            service.sousTitre,
-                            style: const DsfrTextStyle.bodySmMedium(
-                              color: DsfrColors.blueFranceSun113,
-                            ),
-                            overflow: TextOverflow.ellipsis,
+                  const SizedBox(height: DsfrSpacings.s1w),
+                  const Spacer(),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          service.sousTitre,
+                          style: const DsfrTextStyle.bodySmMedium(
+                            color: DsfrColors.blueFranceSun113,
                           ),
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        const Icon(
-                          DsfrIcons.systemExternalLinkLine,
-                          size: 28,
-                          color: DsfrColors.blueFranceSun113,
-                        ),
-                      ],
-                    ),
+                      ),
+                      const Icon(
+                        DsfrIcons.systemExternalLinkLine,
+                        size: 20,
+                        color: DsfrColors.blueFranceSun113,
+                      ),
+                    ],
                   ),
                 ],
               ),
