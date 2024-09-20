@@ -1,3 +1,4 @@
+import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -6,7 +7,7 @@ void ielVoitLeBoutonRadioAvecCeTexteSelectionne(final String text) {
   expect(
     find.byWidgetPredicate(
       (final w) =>
-          w is Radio && w.key == ValueKey(text) && w.groupValue == w.value,
+          w is RadioIcon && w.key == ValueKey(text) && w.groupValue == w.value,
     ),
     findsOneWidget,
   );
