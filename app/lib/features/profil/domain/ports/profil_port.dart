@@ -13,7 +13,6 @@ abstract interface class ProfilPort {
   Future<Either<Exception, void>> mettreAJour({
     required final String? prenom,
     required final String? nom,
-    required final String email,
     required final double nombreDePartsFiscales,
     required final int? revenuFiscal,
   });

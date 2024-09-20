@@ -14,7 +14,6 @@ class MesInformationsBloc
     on<MesInformationsRecuperationDemandee>(_onRecuperationDemandee);
     on<MesInformationsPrenomChange>(_onPrenomChange);
     on<MesInformationsNomChange>(_onNomChange);
-    on<MesInformationsEmailChange>(_onEmailChange);
     on<MesInformationsNombreDePartsFiscalesChange>(
       _onNombreDePartsFiscalesChange,
     );
@@ -57,12 +56,6 @@ class MesInformationsBloc
   ) =>
       emit(state.copyWith(nom: event.valeur));
 
-  void _onEmailChange(
-    final MesInformationsEmailChange event,
-    final Emitter<MesInformationsState> emit,
-  ) =>
-      emit(state.copyWith(email: event.valeur));
-
   void _onNombreDePartsFiscalesChange(
     final MesInformationsNombreDePartsFiscalesChange event,
     final Emitter<MesInformationsState> emit,
@@ -82,7 +75,6 @@ class MesInformationsBloc
     await _profilPort.mettreAJour(
       prenom: state.prenom,
       nom: state.nom,
-      email: state.email,
       nombreDePartsFiscales: state.nombreDePartsFiscales,
       revenuFiscal: state.revenuFiscal,
     );

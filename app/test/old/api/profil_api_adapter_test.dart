@@ -104,13 +104,11 @@ void main() {
 
       const prenom = 'Prénom';
       const nom = 'Nom';
-      const email = 'nouveau@mail.com';
       const nombreDePartsFiscales = 2.5;
       const revenuFiscal = 16000;
       await adapter.mettreAJour(
         prenom: prenom,
         nom: nom,
-        email: email,
         nombreDePartsFiscales: nombreDePartsFiscales,
         revenuFiscal: revenuFiscal,
       );
@@ -121,7 +119,7 @@ void main() {
             that: const RequestMathcher(
               '/utilisateurs/$utilisateurId/profile',
               body:
-                  '{"email":"$email","nom":"$nom","nombre_de_parts_fiscales":$nombreDePartsFiscales,"prenom":"$prenom","revenu_fiscal":$revenuFiscal}',
+                  '{"nom":"$nom","nombre_de_parts_fiscales":$nombreDePartsFiscales,"prenom":"$prenom","revenu_fiscal":$revenuFiscal}',
             ),
           ),
         ),
