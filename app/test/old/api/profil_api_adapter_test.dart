@@ -23,32 +23,28 @@ void main() {
           path: '/utilisateurs/$utilisateurId/profile',
           response: CustomResponse('''
 {
-  "email": "ww@w.com",
-  "nom": "WWW",
-  "prenom": "Wojtek",
-  "code_postal": "75001",
-  "commune": "PARIS 01",
-  "revenu_fiscal": 16000,
-  "nombre_de_parts_fiscales": 2.5,
-  "abonnement_ter_loire": false,
-  "onboarding_result": {
-    "logement"    : 3,
-    "transports"  : 4,
-    "alimentation": 1,
-    "consommation": 2
-  },
-  "logement": {
-    "nombre_adultes": 2,
-    "nombre_enfants": 1,
-    "code_postal": "75001",
-    "commune": "PARIS 01",
-    "type": "maison",
-    "superficie": "superficie_70",
-    "proprietaire": true,
-    "chauffage": "gaz",
-    "plus_de_15_ans": null,
-    "dpe": null
-  }
+    "email": "lucas@agir.dev",
+    "nom": "",
+    "prenom": "Lucas",
+    "code_postal": "25000",
+    "commune": "BESANCON",
+    "revenu_fiscal": null,
+    "nombre_de_parts_fiscales": 1,
+    "abonnement_ter_loire": false,
+    "logement": {
+        "nombre_adultes": 2,
+        "nombre_enfants": 2,
+        "code_postal": "25000",
+        "commune": "BESANCON",
+        "type": null,
+        "superficie": null,
+        "proprietaire": null,
+        "chauffage": null,
+        "plus_de_15_ans": null,
+        "dpe": null,
+        "commune_label": "Besançon"
+    },
+    "annee_naissance": 1992
 }'''),
         );
 
@@ -70,13 +66,14 @@ void main() {
       expect(
         result.getRight().getOrElse(() => throw Exception()),
         const Informations(
-          prenom: 'Wojtek',
-          nom: 'WWW',
-          email: 'ww@w.com',
-          codePostal: '75001',
-          commune: 'PARIS 01',
-          nombreDePartsFiscales: 2.5,
-          revenuFiscal: 16000,
+          email: 'lucas@agir.dev',
+          prenom: 'Lucas',
+          nom: '',
+          anneeDeNaissance: 1992,
+          codePostal: '25000',
+          commune: 'BESANCON',
+          nombreDePartsFiscales: 1,
+          revenuFiscal: null,
         ),
       );
     });
@@ -104,11 +101,13 @@ void main() {
 
       const prenom = 'Prénom';
       const nom = 'Nom';
+      const anneeDeNaissance = 1990;
       const nombreDePartsFiscales = 2.5;
       const revenuFiscal = 16000;
       await adapter.mettreAJour(
         prenom: prenom,
         nom: nom,
+        anneeDeNaissance: anneeDeNaissance,
         nombreDePartsFiscales: nombreDePartsFiscales,
         revenuFiscal: revenuFiscal,
       );
@@ -119,7 +118,7 @@ void main() {
             that: const RequestMathcher(
               '/utilisateurs/$utilisateurId/profile',
               body:
-                  '{"nom":"$nom","nombre_de_parts_fiscales":$nombreDePartsFiscales,"prenom":"$prenom","revenu_fiscal":$revenuFiscal}',
+                  '{"annee_naissance":$anneeDeNaissance,"nom":"$nom","nombre_de_parts_fiscales":$nombreDePartsFiscales,"prenom":"$prenom","revenu_fiscal":$revenuFiscal}',
             ),
           ),
         ),

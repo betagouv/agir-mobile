@@ -31,9 +31,10 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
   );
   final prenom = ScenarioContext().prenom;
   ScenarioContext().profilPortMock = ProfilPortMock(
+    email: ScenarioContext().email,
     prenom: prenom,
     nom: ScenarioContext().nom,
-    email: ScenarioContext().email,
+    anneeDeNaissance: ScenarioContext().anneeDeNaissance,
     codePostal: ScenarioContext().codePostal,
     commune: ScenarioContext().commune,
     nombreAdultes: ScenarioContext().nombreAdultes,

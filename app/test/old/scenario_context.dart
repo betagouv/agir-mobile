@@ -27,9 +27,10 @@ class ScenarioContext {
   ScenarioContext._();
   AuthentificationStatut authentificationStatut =
       AuthentificationStatut.pasConnecte;
+  String email = 'lucas@saudon.fr';
   String prenom = 'Lucas';
   String nom = 'Saudon';
-  String email = 'lucas@saudon.fr';
+  int anneeDeNaissance = 1990;
   String codePostal = '75018';
   String commune = 'Paris';
   int nombreAdultes = 1;

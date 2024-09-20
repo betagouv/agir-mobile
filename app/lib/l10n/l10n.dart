@@ -29,6 +29,7 @@ abstract final class Localisation {
       '\nRevenez régulièrement pour profiter de nos dernières nouveautés';
   static const aideVeloAvertissement =
       'Veuillez compléter ces informations afin de débuter l’estimation';
+  static const anneeDeNaissance = 'Année de naissance';
   static const annuler = 'Annuler';
   static const article = 'Article';
   static const attentionAucuneDonneeNePourraEtreRecuperee =
@@ -151,6 +152,7 @@ abstract final class Localisation {
       '(Pré-calculé à partir des membres de votre foyer)';
   static const non = 'Non';
   static const nouveau = 'NOUVEAU !';
+  static const obligatoire = 'obligatoire';
   static const optionsAvancees = 'Options avancées';
   static const ouHabitezVous = 'Où habitez-vous ?';
   static const ouTrouverCesInformations = 'Où trouver ces informations ?';
@@ -251,6 +253,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
       'Vous êtes propriétaire de votre logement ?';
 
   static const defiRealise = 'Défi réalisé';
+  static const facultatif = 'facultatif';
   static const finalementPasPourMoi = 'Finalement, pas pour moi';
 
   static String communeEtSaRegion(final String commune) =>
