@@ -58,7 +58,7 @@ class Contenu extends StatelessWidget {
                     label: Localisation.continuerLaLecture,
                     icon: DsfrIcons.systemArrowRightLine,
                     iconPosition: DsfrLinkIconPosition.end,
-                    onPressed: () async => GoRouter.of(context).pushNamed(
+                    onTap: () async => GoRouter.of(context).pushNamed(
                       ArticlePage.name,
                       pathParameters: {'id': contenu.id},
                     ),

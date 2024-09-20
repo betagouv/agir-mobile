@@ -90,7 +90,7 @@ class CreerCompteView extends StatelessWidget {
               Center(
                 child: DsfrLink.md(
                   label: Localisation.vousAvezDejaUnCompte,
-                  onPressed: () async => GoRouter.of(context)
+                  onTap: () async => GoRouter.of(context)
                       .pushReplacementNamed(SeConnecterPage.name),
                 ),
               ),

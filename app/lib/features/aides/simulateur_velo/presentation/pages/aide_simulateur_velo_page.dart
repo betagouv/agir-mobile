@@ -240,7 +240,7 @@ class _ElementsNecessaireAuCalcul extends StatelessWidget {
                 child: DsfrLink.md(
                   label: Localisation.modifier,
                   icon: DsfrIcons.designPencilFill,
-                  onPressed: () => _handleModification(context),
+                  onTap: () => _handleModification(context),
                 ),
               ),
             ],

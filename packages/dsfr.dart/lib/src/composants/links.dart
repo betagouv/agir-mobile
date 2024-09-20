@@ -26,7 +26,7 @@ class DsfrLink extends StatefulWidget {
     final Key? key,
   }) : this._(
           label: label,
-          textStyle: const DsfrTextStyle.bodySm(),
+          textStyle: const DsfrTextStyle(fontSize: 14, lineHeight: 24),
           underlineThickness: 1.75,
           focusBorderWidth: 2,
           focusPadding: const EdgeInsets.all(4),
@@ -41,18 +41,18 @@ class DsfrLink extends StatefulWidget {
     required final String label,
     final IconData? icon,
     final DsfrLinkIconPosition iconPosition = DsfrLinkIconPosition.start,
-    final VoidCallback? onPressed,
+    final VoidCallback? onTap,
     final Key? key,
   }) : this._(
           label: label,
-          textStyle: const DsfrTextStyle.bodyMd(),
+          textStyle: const DsfrTextStyle(fontSize: 16, lineHeight: 24),
           underlineThickness: 2,
           focusBorderWidth: 2,
           focusPadding: const EdgeInsets.all(4),
           iconSize: 16,
           iconPosition: iconPosition,
           icon: icon,
-          onTap: onPressed,
+          onTap: onTap,
           key: key,
         );
 
@@ -99,6 +99,22 @@ class _DsfrLinkState extends State<DsfrLink> with MaterialStateMixin<DsfrLink> {
   @override
   Widget build(final BuildContext context) {
     final resolveForegroundColor = _foregroundColor.resolve(materialStates);
+
+    final list = [
+      if (widget.icon != null) ...[
+        WidgetSpan(
+          alignment: PlaceholderAlignment.middle,
+          child: Icon(
+            widget.icon,
+            size: widget.iconSize,
+            color: resolveForegroundColor,
+          ),
+        ),
+        const WidgetSpan(child: SizedBox(width: DsfrSpacings.s1w)),
+      ],
+      TextSpan(text: widget.label),
+    ];
+
     final link = Semantics(
       enabled: widget.onTap != null,
       link: true,
@@ -126,38 +142,8 @@ class _DsfrLinkState extends State<DsfrLink> with MaterialStateMixin<DsfrLink> {
           child: Text.rich(
             TextSpan(
               children: widget.iconPosition == DsfrLinkIconPosition.start
-                  ? [
-                      if (widget.icon != null) ...[
-                        WidgetSpan(
-                          alignment: PlaceholderAlignment.middle,
-                          child: Icon(
-                            widget.icon,
-                            size: widget.iconSize,
-                            color: resolveForegroundColor,
-                          ),
-                        ),
-                        const WidgetSpan(
-                          child: SizedBox(width: DsfrSpacings.s1w),
-                        ),
-                      ],
-                      TextSpan(text: widget.label),
-                    ]
-                  : [
-                      TextSpan(text: widget.label),
-                      if (widget.icon != null) ...[
-                        const WidgetSpan(
-                          child: SizedBox(width: DsfrSpacings.s1w),
-                        ),
-                        WidgetSpan(
-                          alignment: PlaceholderAlignment.middle,
-                          child: Icon(
-                            widget.icon,
-                            size: widget.iconSize,
-                            color: resolveForegroundColor,
-                          ),
-                        ),
-                      ],
-                    ],
+                  ? list
+                  : list.reversed.toList(),
             ),
             style: widget.textStyle.copyWith(color: resolveForegroundColor),
           ),

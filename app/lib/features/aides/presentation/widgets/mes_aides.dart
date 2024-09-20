@@ -55,8 +55,7 @@ class MesAides extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: DsfrLink.md(
             label: Localisation.accueilMesAidesLien,
-            onPressed: () async =>
-                GoRouter.of(context).pushNamed(AidesPage.name),
+            onTap: () async => GoRouter.of(context).pushNamed(AidesPage.name),
           ),
         ),
       ],
