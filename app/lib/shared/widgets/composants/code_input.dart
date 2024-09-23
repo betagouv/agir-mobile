@@ -40,6 +40,9 @@ class FnvCodeInput extends StatelessWidget {
         FilteringTextInputFormatter.digitsOnly,
         LengthLimitingTextInputFormatter(6),
       ],
+      scrollPadding: EdgeInsets.only(
+        bottom: MediaQuery.viewInsetsOf(context).bottom + 130,
+      ),
     );
   }
 }
