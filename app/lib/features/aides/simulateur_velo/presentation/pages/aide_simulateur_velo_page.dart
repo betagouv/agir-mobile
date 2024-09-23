@@ -148,6 +148,7 @@ class _PrixState extends State<_Prix> {
               ),
               backgroundColor: DsfrColors.info950,
               foregroundColor: foregroundColor,
+              textStyle: const DsfrTextStyle(fontSize: 14, lineHeight: 20),
               onTap: () => _handleTagPrix(context, e.prix),
             ),
           );
