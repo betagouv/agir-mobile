@@ -9,6 +9,7 @@ abstract final class DefiMapper {
         thematique: json['thematique_label'] as String,
         titre: json['titre'] as String,
         status: json['status'] as String? ?? 'todo',
+        motif: json['motif'] as String?,
         astuces: json['astuces'] as String,
         pourquoi: json['pourquoi'] as String,
       );

@@ -366,7 +366,7 @@ void main() {
     "thematique_label": "🥦 Alimentation",
     "titre": "Remplacer un fruit ou un légume qui n'est pas de saison par une conserve, surgelé ou un autre produit frais",
     "universes": ["alimentation"],
-    "motif": null,
+    "motif": "Parce que",
     "nombre_de_fois_realise": 3
 }'''),
       );
@@ -382,6 +382,7 @@ void main() {
         titre:
             "Remplacer un fruit ou un légume qui n'est pas de saison par une conserve, surgelé ou un autre produit frais",
         status: 'todo',
+        motif: 'Parce que',
         astuces:
             '<p><strong>Par exemple :</strong></p><ul><li><p>Pour manger des fraises en hiver, vous pouvez utiliser des fraises surgelées ou choisir des oranges, qui sont de saison.</p></li><li><p>Pour consommer des tomates hors saison, vous pouvez utiliser des conserves de tomates pelées ou tomates séchées</p></li></ul>',
         pourquoi:
