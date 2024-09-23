@@ -3,7 +3,6 @@ import 'package:app/features/authentification/saisie_code/presentation/blocs/sai
 import 'package:app/features/authentification/saisie_code/presentation/blocs/saisie_code_state.dart';
 import 'package:app/features/authentification/saisie_code/presentation/widgets/saisie_code_input.dart';
 import 'package:app/l10n/l10n.dart';
-import 'package:app/shared/assets/images.dart';
 import 'package:app/shared/widgets/composants/alert.dart';
 import 'package:app/shared/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:dsfr/dsfr.dart';
@@ -28,56 +27,39 @@ class SaisieCodePage extends StatelessWidget {
       );
 
   @override
-  Widget build(final BuildContext context) => Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          iconTheme: const IconThemeData(color: DsfrColors.blueFranceSun113),
+  Widget build(final BuildContext context) => BlocProvider(
+        create: (final context) => SaisieCodeBloc(
+          authentificationPort: context.read(),
+          email: email,
         ),
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.only(
-              left: paddingVerticalPage,
-              right: paddingVerticalPage,
-              bottom: paddingVerticalPage,
-            ),
-            child: BlocProvider(
-              create: (final context) => SaisieCodeBloc(
-                authentificationPort: context.read(),
-                email: email,
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.white,
+            iconTheme: const IconThemeData(color: DsfrColors.blueFranceSun113),
+          ),
+          body: ListView(
+            padding: const EdgeInsets.all(paddingVerticalPage),
+            children: [
+              const Text(
+                Localisation.entrezLeCodeRecuParMail,
+                style: DsfrTextStyle.headline2(),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Image.asset(
-                      AssetsImages.illustration1,
-                      width: 208,
-                      height: 141,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  const SizedBox(height: DsfrSpacings.s3w),
-                  const Text(
-                    Localisation.entrezLeCodeRecuParMail,
-                    style: DsfrTextStyle.headline2(),
-                  ),
-                  const SizedBox(height: DsfrSpacings.s1w),
-                  Text(
-                    Localisation.entrezLeCodeRecuParMailDetails(email),
-                    style: const DsfrTextStyle.bodyLg(),
-                  ),
-                  const SizedBox(height: DsfrSpacings.s3w),
-                  const SaisieCodeInput(),
-                  const _MessageErreur(),
-                  const SizedBox(height: DsfrSpacings.s3w),
-                  const _ButtonRenvoyerCode(),
-                ],
+              const SizedBox(height: DsfrSpacings.s1w),
+              Text(
+                Localisation.entrezLeCodeRecuParMailDetails(email),
+                style: const DsfrTextStyle.bodyLg(),
               ),
-            ),
+              const SizedBox(height: DsfrSpacings.s3w),
+              const SaisieCodeInput(),
+              const _MessageErreur(),
+              const SizedBox(height: DsfrSpacings.s3w),
+              const Align(
+                alignment: Alignment.centerLeft,
+                child: _ButtonRenvoyerCode(),
+              ),
+            ],
           ),
         ),
-        resizeToAvoidBottomInset: false,
       );
 }
 

@@ -5,7 +5,6 @@ import 'package:app/features/authentification/presentation/blocs/se_connecter_ev
 import 'package:app/features/authentification/presentation/blocs/se_connecter_state.dart';
 import 'package:app/features/authentification/saisie_code/presentation/pages/saisie_code_page.dart';
 import 'package:app/l10n/l10n.dart';
-import 'package:app/shared/assets/images.dart';
 import 'package:app/shared/widgets/composants/alert.dart';
 import 'package:app/shared/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:dsfr/dsfr.dart';
@@ -54,24 +53,9 @@ class SeConnecterView extends StatelessWidget {
           body: ListView(
             padding: const EdgeInsets.all(paddingVerticalPage),
             children: [
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Image.asset(
-                  AssetsImages.illustration1,
-                  width: 208,
-                  height: 141,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              const SizedBox(height: DsfrSpacings.s3w),
               const Text(
                 Localisation.pageConnexionTitre,
                 style: DsfrTextStyle.headline2(),
-              ),
-              const SizedBox(height: DsfrSpacings.s1w),
-              const Text(
-                Localisation.pageConnexionDetails,
-                style: DsfrTextStyle.bodyLg(),
               ),
               const SizedBox(height: DsfrSpacings.s3w),
               DsfrInput(
@@ -116,6 +100,7 @@ class SeConnecterView extends StatelessWidget {
                       .pushReplacementNamed(CreerComptePage.name),
                 ),
               ),
+              const SafeArea(child: SizedBox.shrink()),
             ],
           ),
         ),
