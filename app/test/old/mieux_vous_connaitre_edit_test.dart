@@ -113,6 +113,30 @@ void main() {
     },
   );
 
+  testWidgets('Valider sans mettre à jour', (final tester) async {
+    setUpWidgets(tester);
+    const question = 'Quelle est votre situation professionnelle ?';
+    const reponse = 'J’ai un emploi';
+    leServeurRetourneCesQuestions([
+      const Question(
+        id: 'KYC005',
+        question: question,
+        reponses: [reponse],
+        categorie: 'recommandation',
+        points: 5,
+        type: ReponseType.libre,
+        reponsesPossibles: [],
+        deNosGestesClimat: false,
+        thematique: Thematique.climat,
+      ),
+    ]);
+    await _allerSurMesInformations(tester);
+    await ielAppuieSur(tester, question);
+    await ielAppuieSur(tester, Localisation.mettreAJour);
+    ielVoitLeTexte(Localisation.mieuxVousConnaitre);
+    ielVoitLeTexte(reponse);
+  });
+
   testWidgets(
     'Modifier la réponse à une question choix unique',
     (final tester) async {
