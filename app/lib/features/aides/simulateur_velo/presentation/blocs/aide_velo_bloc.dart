@@ -48,7 +48,7 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
           nombreDePartsFiscales: informations.nombreDePartsFiscales,
           revenuFiscal: informations.revenuFiscal,
           aidesDisponibles: const [],
-          veutModifierLesInformations: false,
+          veutModifierLesInformations: informations.revenuFiscal == null,
           aideVeloStatut: AideVeloStatut.initial,
         ),
       );

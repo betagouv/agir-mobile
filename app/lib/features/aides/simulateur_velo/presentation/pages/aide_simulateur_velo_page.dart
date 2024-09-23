@@ -160,9 +160,6 @@ class _PrixState extends State<_Prix> {
 class _ElementsNecessaireAuCalcul extends StatelessWidget {
   const _ElementsNecessaireAuCalcul();
 
-  void _handleModification(final BuildContext context) =>
-      context.read<AideVeloBloc>().add(const AideVeloModificationDemandee());
-
   @override
   Widget build(final BuildContext context) {
     final state = context.watch<AideVeloBloc>().state;
@@ -241,7 +238,9 @@ class _ElementsNecessaireAuCalcul extends StatelessWidget {
                 child: DsfrLink.md(
                   label: Localisation.modifier,
                   icon: DsfrIcons.designPencilFill,
-                  onTap: () => _handleModification(context),
+                  onTap: () => context
+                      .read<AideVeloBloc>()
+                      .add(const AideVeloModificationDemandee()),
                 ),
               ),
             ],
