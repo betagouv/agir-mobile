@@ -9,4 +9,5 @@ abstract final class AssetsImages {
   static const illustration4 = 'assets/images/illustration4.png';
   static const illustration5 = 'assets/images/illustration5.png';
   static const newspaper = 'assets/images/newspaper.png';
+  static const target = 'assets/images/target.png';
 }
