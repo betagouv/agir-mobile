@@ -38,6 +38,9 @@ class _MotDePasse extends StatelessWidget {
             onChanged: (final value) => _handlePasswordChange(context, value),
             isPasswordMode: true,
             keyboardType: TextInputType.visiblePassword,
+            scrollPadding: EdgeInsets.only(
+              bottom: MediaQuery.viewInsetsOf(context).bottom + 190,
+            ),
           ),
           const Text(
             Localisation.votreMotDePasseDoitContenir,

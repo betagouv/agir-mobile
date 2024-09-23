@@ -32,6 +32,7 @@ class DsfrInputHeadless extends StatefulWidget {
     this.focusThickness = DsfrSpacings.s0v5,
     this.focusPadding = const EdgeInsets.all(DsfrSpacings.s1v),
     this.inputFormatters,
+    this.scrollPadding = const EdgeInsets.all(20),
     super.key,
   });
 
@@ -60,6 +61,7 @@ class DsfrInputHeadless extends StatefulWidget {
   final double focusThickness;
   final EdgeInsetsGeometry focusPadding;
   final List<TextInputFormatter>? inputFormatters;
+  final EdgeInsets scrollPadding;
 
   @override
   State<DsfrInputHeadless> createState() => _DsfrInputHeadlessState();
@@ -143,6 +145,7 @@ class _DsfrInputHeadlessState extends State<DsfrInputHeadless> {
                 FocusManager.instance.primaryFocus?.unfocus(),
             validator: widget.validator,
             inputFormatters: widget.inputFormatters,
+            scrollPadding: widget.scrollPadding,
           ),
         ),
       ),
