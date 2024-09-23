@@ -109,9 +109,9 @@ class _PrixState extends State<_Prix> {
             width: 114,
             child: DsfrInput(
               label: Localisation.prixDuVelo,
-              onChanged: (final value) => _handlePrix(context, value),
               suffixText: '€',
               controller: _prixVeloControlleur,
+              onChanged: (final value) => _handlePrix(context, value),
               validator: (final value) => value == null || value.isEmpty
                   ? Localisation.prixDuVeloObligatoire
                   : null,
@@ -310,8 +310,8 @@ class _CodePostalEtCommuneState extends State<_CodePostalEtCommune> {
           width: adjustTextSize(context, _inputWidth),
           child: DsfrInput(
             label: Localisation.codePostal,
-            onChanged: (final value) => _handleCodePostal(context, value),
             initialValue: state.codePostal,
+            onChanged: (final value) => _handleCodePostal(context, value),
             keyboardType: TextInputType.number,
             inputFormatters: [
               FilteringTextInputFormatter.digitsOnly,
@@ -363,8 +363,8 @@ class _NombreDePartsFiscales extends StatelessWidget {
     return DsfrInput(
       label: Localisation.nombreDePartsFiscales,
       hint: Localisation.nombreDePartsFiscalesDescription,
-      onChanged: (final value) => _handleNombreDePartsFiscales(context, value),
       initialValue: FnvNumberFormat.formatNumber(nombreDePartsFiscales),
+      onChanged: (final value) => _handleNombreDePartsFiscales(context, value),
       width: adjustTextSize(context, _inputWidth),
       keyboardType: const TextInputType.numberWithOptions(decimal: true),
       textInputAction: TextInputAction.next,

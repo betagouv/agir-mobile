@@ -12,10 +12,10 @@ class DsfrInput extends StatefulWidget {
   const DsfrInput({
     required this.label,
     this.hint,
-    required this.onChanged,
     this.suffixText,
     this.controller,
     this.initialValue,
+    required this.onChanged,
     this.validator,
     this.width,
     this.labelStyle = const DsfrTextStyle(fontSize: 16, lineHeight: 24),
