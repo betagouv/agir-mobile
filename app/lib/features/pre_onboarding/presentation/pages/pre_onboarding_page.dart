@@ -56,7 +56,7 @@ class PreOnboardingPage extends StatelessWidget {
                   onPressed: () async =>
                       GoRouter.of(context).pushNamed(CreerComptePage.name),
                 ),
-                const SizedBox(height: DsfrSpacings.s3w),
+                const SizedBox(height: DsfrSpacings.s2w),
                 Center(
                   child: DsfrLink.md(
                     label: Localisation.jaiDejaUnCompte,

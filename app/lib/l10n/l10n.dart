@@ -13,11 +13,14 @@ abstract final class Localisation {
       'Une sélection d’articles et de services, pour vous, selon vos préférences !';
   static const accueilRecommandationsTitre = 'Recommandé, pour vous';
   static const acheterUnVelo = 'Acheter un vélo';
-  static const mesInformationsAdresseEmail = 'Adresse e-mail : ';
   static const adresseEmail = 'Votre adresse email';
   static const adultes = 'Adulte(s)';
+  static const aideVeloAvertissement =
+      'Veuillez compléter ces informations afin de débuter l’estimation';
   static const ajouterEnFavoris = 'Ajouter en favoris';
   static const allerALAction = "Aller à l'action";
+  static const anneeDeNaissance = 'Année de naissance';
+  static const annuler = 'Annuler';
   static const appEstEnConstruction = 'Agir est en construction !';
   static const appEstEnConstructionDescription =
       'Cette version est encore très incomplète et de nombreuses évolutions et nouvelles fonctionnalités sont mises en ligne chaque semaine.';
@@ -27,10 +30,6 @@ abstract final class Localisation {
       'Nous ajoutons progressivement les aides et contenus locaux à ';
   static const appEstEncoreEnExperimentationDetails2 =
       '\nRevenez régulièrement pour profiter de nos dernières nouveautés';
-  static const aideVeloAvertissement =
-      'Veuillez compléter ces informations afin de débuter l’estimation';
-  static const anneeDeNaissance = 'Année de naissance';
-  static const annuler = 'Annuler';
   static const article = 'Article';
   static const attentionAucuneDonneeNePourraEtreRecuperee =
       'Attention, aucune donnée ne pourra être récupérée.';
@@ -44,8 +43,8 @@ abstract final class Localisation {
       'Nous avons quelques questions à vous poser pour personnaliser votre expérience !';
   static const boisPellets = 'Bois / Pellets';
   static const bonjour = 'Bonjour,\n';
-  static const cestPresqueTermine = 'C’est presque terminé !';
   static const cestParti = 'C’est parti !';
+  static const cestPresqueTermine = 'C’est presque terminé !';
   static const cetteActionNeVousConvientPas =
       'Cette action ne vous convient pas ?';
   static const cetteActionNeVousConvientPasDetails =
@@ -63,11 +62,10 @@ abstract final class Localisation {
   static const continuerLaLecture = 'Continuer la lecture';
   static const creerMonCompte = 'Créer mon compte';
   static const creezVotreCompte = 'Créez votre compte Agir';
-  static const creezVotreCompteDetails =
-      'Indiquez votre adresse e-mail et choisissez un mot de passe pour accéder au service.';
   static const declarationAccessibilite = "Déclaration d'accessibilité";
   static const declarationAccessibiliteSite =
       'https://agir.beta.gouv.fr/accessibilite';
+  static const defiRealise = 'Défi réalisé';
   static const donneesPersonnelles = 'Données personnelles';
   static const donneesUtiliseesPart1 = 'Données utilisées : code postal ';
   static const donneesUtiliseesPart2 = ', revenu fiscal de référence ';
@@ -84,17 +82,20 @@ abstract final class Localisation {
   static const electricite = 'Électricité';
   static const elementsNecessaireAuCalcul = 'Éléments nécessaires au calcul';
   static const emailDeConnexionRenvoye = 'Email de connexion renvoyé';
+  static const enCours = 'En cours !';
   static const enchante = 'Enchanté, ';
   static const enchanteDetails =
       'Pour découvrir des aides, services et contenus disponibles proches de chez vous, indiquez-nous votre lieu de résidence.';
-  static const enCours = 'En cours !';
   static const enfants = 'Enfant(s) de moins de 18 ans';
   static const entre100et150m2 = 'Entre 100 et 150 m²';
   static const entre35et70m2 = 'Entre 35 et 70 m²';
   static const entre70et100m2 = 'Entre 70 et 100 m²';
   static const entrezLeCodeRecuParMail = 'Entrez le code reçu par e-mail !';
   static const estimerMesAides = 'Estimer mes aides';
+  static const facultatif = 'facultatif';
   static const fermer = 'Fermer';
+  static const finalementPasPourMoi = 'Finalement, pas pour moi';
+
   static const fioul = 'Fioul';
   static const firstNameEmpty = 'Le prénom ne peut pas être vide.';
   static const firstNameInvalid = "Le prénom n'est pas valide.";
@@ -105,6 +106,10 @@ abstract final class Localisation {
   static const jeCreeMonCompte = 'Je crée mon compte';
   static const jeReleveLeDefi = 'Je relève le défi';
   static const jusqua = "Jusqu'à ";
+  static const leServiveNeCouvrePasEncoreVotreVille =
+      'Le service ne couvre pas encore votre ville.';
+  static const leServiveNeCouvrePasEncoreVotreVilleDescription =
+      'Nous mettons les informations à jour progressivement.';
   static const lesCategories = 'Les catégories';
   static const lesCategoriesAlimentation = 'Alimentation';
   static const lesCategoriesClimat = 'Environnement';
@@ -118,15 +123,15 @@ abstract final class Localisation {
   static const lesCguMenu = 'CGU';
   static const lesCguSite = 'https://agir.beta.gouv.fr/cgu';
   static const maReponse = 'Ma réponse';
+  static const meConnecter = 'Me connecter';
   static const mentionsLegales = 'Mentions légales';
   static const mentionsLegalesSite =
       'https://agir.beta.gouv.fr/mentions-legales';
-  static const politiqueDeConfidentialite = 'Politique de confidentialité';
-  static const politiqueDeConfidentialiteSite =
-      'https://agir.beta.gouv.fr/politique-de-confidentialite';
   static const menu = 'Menu';
   static const menuAccueil = 'Accueil';
   static const menuAides = 'Aides';
+  static const mesInformationsAdresseEmail = 'Adresse e-mail : ';
+  static const mesServices = 'Mes services';
   static const mettreAJour = 'Mettre à jour';
   static const mettreAJourVosInformations = 'Mettre à jour vos informations';
   static const mieuxVousConnaitre = 'Mieux vous connaître';
@@ -134,17 +139,17 @@ abstract final class Localisation {
   static const modifier = 'Modifier';
   static const moinsDe35m2 = 'Moins de 35 m²';
   static const motDePasse = 'Mot de passe';
-  static const motDePasseOublie = 'Mot de passe oublié ?';
-  static const motDePasseOublieDetails =
-      'Saisissez l’adresse électronique associé à votre compte.';
-  static const motDePasseOublieTitre = 'Mot de passe oublié - 1/2';
-  static const motDePasseOublieTitre2 = 'Mot de passe oublié - 2/2';
   static const motDePasse12CaractresMinimum = '12 caractères minimum';
   static const motDePasse1CaractreSpecialMinimum =
       '1 caractère spécial minimum';
   static const motDePasse1ChiffreMinimum = '1 chiffre minimum';
   static const motDePasse1MajusculeEt1Minuscule =
       'Au moins 1 majuscule et 1 minuscule';
+  static const motDePasseOublie = 'Mot de passe oublié ?';
+  static const motDePasseOublieDetails =
+      'Saisissez l’adresse électronique associé à votre compte.';
+  static const motDePasseOublieTitre = 'Mot de passe oublié - 1/2';
+  static const motDePasseOublieTitre2 = 'Mot de passe oublié - 2/2';
   static const nom = 'Nom';
   static const nombreDePartsFiscales =
       'Nombre de parts fiscales de votre foyer';
@@ -167,16 +172,17 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez 1 part pour
 
 Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme des revenus de toutes les personnes avec lequelles vous partagez vos déclarations d’impôts (pour toute l’année) pour vous faire une première idée.''';
   static const oui = 'Oui';
-  static const pageConnexionDetails =
-      'Indiquez votre adresse e-mail et nous vous enverrons un code qui vous permettra d’accéder au service.';
   static const pageConnexionTitre = 'Accédez à votre compte Agir';
-  static const partieUne = '1. ADAPTER VOTRE EXPÉRIENCE';
   static const partieDeux = '2. LIRE DES ARTICLES ET RÉPONDRE AUX QUIZ';
-  static const partieTrois = '3. RÉALISER AU MOINS UNE ACTION PROPOSÉE';
   static const partieQuatre = '4. GAGNER VOTRE CARTE';
+  static const partieTrois = '3. RÉALISER AU MOINS UNE ACTION PROPOSÉE';
+  static const partieUne = '1. ADAPTER VOTRE EXPÉRIENCE';
   static const pasPourMoi = 'Pas pour moi';
   static const plusDe150m2 = 'Plus de 150 m²';
   static const point = '.';
+  static const politiqueDeConfidentialite = 'Politique de confidentialité';
+  static const politiqueDeConfidentialiteSite =
+      'https://agir.beta.gouv.fr/politique-de-confidentialite';
   static const pourquoi = 'Pourquoi ?';
   static const pourquoiCeDefi = 'Pourquoi ce défi ?';
   static const pourquoiCesQuestions = 'Pourquoi ces questions ?';
@@ -192,25 +198,23 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const prixDuVeloObligatoire = 'Le prix du vélo ne peux pas être vide';
   static const proposePar = 'Proposé par';
   static const propulsePar = 'Propulsé par ';
-  static const quelquesQuestionPourMieuxVousConnaitre =
-      'Quelques questions pour mieux vous connaître';
   static const quelleEstLaSuperficie = 'Quelle est la superficie ?';
   static const quelleEstVotreModeDeChauffagePrincipal =
       'Quelle est votre mode de chauffage principal ?';
+  static const quelquesQuestionPourMieuxVousConnaitre =
+      'Quelques questions pour mieux vous connaître';
   static const quiz = 'Quiz';
-  static const reprendreLaction = "Reprendre l'action";
   static const rechercherParTitre = 'Rechercher par titre';
   static const recommande = 'Recommandé';
   static const renvoyerCode = 'Renvoyer le code';
   static const renvoyerEmailDeConnexion = "Renvoyer l'e-mail de connexion";
+  static const reprendreLaction = "Reprendre l'action";
   static const retirerDesFavoris = 'Retirer des favoris';
   static const retour = 'Retour';
-  static const revenirEnArriere = 'Revenir en arrière';
   static const revenirAuSimulateur = 'Revenir au simulateur';
+  static const revenirEnArriere = 'Revenir en arrière';
   static const revenuFiscal = 'Revenu fiscal de référence de votre foyer';
   static const revenuQuestion = 'Quelle est votre tranche de revenus ?';
-  static const meConnecter = 'Me connecter';
-  static const mesServices = 'Mes services';
   static const seDeconnecter = 'Se déconnecter';
   static const simulateur = 'Simulateur';
   static const simulerMonAide = 'Simuler mon aide';
@@ -246,20 +250,9 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const votreProfil = 'Votre profil';
   static const votreResidencePrincipaleEst =
       'Votre résidence principale est ...';
-  static const leServiveNeCouvrePasEncoreVotreVille =
-      'Le service ne couvre pas encore votre ville.';
-  static const leServiveNeCouvrePasEncoreVotreVilleDescription =
-      'Nous mettons les informations à jour progressivement.';
   static const vousAvezDejaUnCompte = 'Vous avez déjà un compte ?';
   static const vousEtesProprietaireDeVotreLogement =
       'Vous êtes propriétaire de votre logement ?';
-
-  static const defiRealise = 'Défi réalisé';
-  static const facultatif = 'facultatif';
-  static const finalementPasPourMoi = 'Finalement, pas pour moi';
-
-  static String communeEtSaRegion(final String commune) =>
-      '$commune et sa région.';
 
   static String cacherEmail(final String email) {
     final indexArobase =
@@ -275,6 +268,9 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
     return email;
   }
 
+  static String communeEtSaRegion(final String commune) =>
+      '$commune et sa région.';
+
   static String donneesUtiliseesCodePostalEtCommune({
     required final String codePostal,
     required final String commune,
@@ -286,13 +282,13 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static String donneesUtiliseesRevenuFiscal(final int? value) =>
       '(${value == null ? '' : euro(value)})';
 
-  static String entrezLeCodeRecuParMailDetails(final String value) =>
-      'Pour vérifier votre identité et vous permettre d’accéder à votre compte, nous vous avons envoyé un e-mail à l’adresse : ${cacherEmail(value)}';
-
   static String entrezLeCodeRecuOublieMotDePasseParMailDetails(
     final String value,
   ) =>
       'Pour vérifier votre identité et vous permettre de modifier votre mot de passe, nous vous avons envoyé un e-mail à l’adresse : ${cacherEmail(value)}';
+
+  static String entrezLeCodeRecuParMailDetails(final String value) =>
+      'Pour vérifier votre identité et vous permettre d’accéder à votre compte, nous vous avons envoyé un e-mail à l’adresse : ${cacherEmail(value)}';
 
   static String euro(final int value) => '$value €';
 
