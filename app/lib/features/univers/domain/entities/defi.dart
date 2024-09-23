@@ -7,6 +7,7 @@ final class Defi extends Equatable {
     required this.thematique,
     required this.titre,
     required this.status,
+    this.motif,
     required this.astuces,
     required this.pourquoi,
   });
@@ -15,9 +16,11 @@ final class Defi extends Equatable {
   final String thematique;
   final String titre;
   final String status;
+  final String? motif;
   final String astuces;
   final String pourquoi;
 
   @override
-  List<Object> get props => [id, thematique, titre, status, astuces, pourquoi];
+  List<Object?> get props =>
+      [id, thematique, titre, status, motif, astuces, pourquoi];
 }
