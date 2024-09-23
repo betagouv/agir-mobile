@@ -25,7 +25,7 @@ class DefiWidget extends StatelessWidget {
     if (defi.estVerrouille) {
       return ObjectifCard(
         id: const ObjectifId(''),
-        leading: AssetsImages.newspaper,
+        leading: AssetsImages.target,
         title: '',
         points: 0,
         estFait: defi.estFait,
