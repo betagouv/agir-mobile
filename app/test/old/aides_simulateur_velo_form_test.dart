@@ -72,8 +72,6 @@ void main() {
         setUpWidgets(tester);
         leServeurRetourneCetteListeDeCommunes(['AUTHUME', commune]);
         await _allerSurLeSimulateurVelo(tester, aide2);
-        await ielScrolle(tester, Localisation.modifier);
-        await ielAppuieSurTexteComportant(tester, Localisation.modifier);
         await ielEcritDansLeChamp(
           tester,
           label: Localisation.codePostal,
@@ -90,8 +88,6 @@ void main() {
         setUpWidgets(tester);
         leServeurRetourneCetteListeDeCommunes([commune]);
         await _allerSurLeSimulateurVelo(tester, aide2);
-        await ielScrolle(tester, Localisation.modifier);
-        await ielAppuieSurTexteComportant(tester, Localisation.modifier);
         await ielEcritDansLeChamp(
           tester,
           label: Localisation.codePostal,
@@ -110,8 +106,6 @@ void main() {
         leServeurRetourneLesAidesVeloParType(aideVeloParType);
         leServeurRetourneCetteListeDeCommunes(['AUTHUME', commune]);
         await _allerSurLeSimulateurVelo(tester, aide2);
-        await ielScrolle(tester, Localisation.modifier);
-        await ielAppuieSurTexteComportant(tester, Localisation.modifier);
         await ielEcritDansLeChamp(
           tester,
           label: Localisation.codePostal,
@@ -207,6 +201,20 @@ void main() {
         );
         ielVoitLeTexteDansTexteRiche(commune);
         ielVoitLeTexteDansTexteRiche(formatCurrency(revenuFiscal));
+      },
+    );
+
+    testWidgets(
+      "Si le revenu fiscal n'est pas renseigné, le mode saisie est activé",
+      (final tester) async {
+        setUpWidgets(tester);
+        ielACesInformationsDeProfil(
+          codePostal: codePostal,
+          commune: commune,
+          nombreDePartsFiscales: nombreDePart,
+        );
+        await _allerSurLeSimulateurVelo(tester, aide2);
+        ielVoitLeTexteDansTexteRiche(Localisation.aideVeloAvertissement);
       },
     );
 
