@@ -54,9 +54,13 @@ class ObjectifCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: DsfrSpacings.s1w),
-              if (estFait)
-                _PointsButton(id: id, points: points, aEteReleve: aEteReleve),
-              _TrailingIcon(estVerrouille: estVerrouille, estFait: estFait),
+              _TrailingIcon(
+                estVerrouille: estVerrouille,
+                estFait: estFait,
+                id: id,
+                aEteReleve: aEteReleve,
+                points: points,
+              ),
             ],
           ),
         ),
@@ -107,10 +111,19 @@ class _PointsButton extends StatelessWidget {
 }
 
 class _TrailingIcon extends StatelessWidget {
-  const _TrailingIcon({required this.estVerrouille, required this.estFait});
+  const _TrailingIcon({
+    required this.estVerrouille,
+    required this.estFait,
+    required this.id,
+    required this.aEteReleve,
+    required this.points,
+  });
 
   final bool estVerrouille;
   final bool estFait;
+  final ObjectifId id;
+  final bool aEteReleve;
+  final int points;
 
   @override
   Widget build(final BuildContext context) {
@@ -123,6 +136,6 @@ class _TrailingIcon extends StatelessWidget {
       );
     }
 
-    return const SizedBox.shrink();
+    return _PointsButton(id: id, points: points, aEteReleve: aEteReleve);
   }
 }
