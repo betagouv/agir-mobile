@@ -27,7 +27,7 @@ abstract final class QuizMapper {
           .map(
             (final e) => QuizReponse(
               reponse: e['reponse'] as String,
-              exact: e['exact'] as bool,
+              exact: e['exact'] as bool? ?? false,
             ),
           )
           .toList(),
