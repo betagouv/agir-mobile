@@ -17,7 +17,7 @@ class MieuxVousConnaitreEditBloc
             await mieuxVousConnaitrePort.recupererQuestion(id: event.id);
         if (result.isRight()) {
           final question = result.getRight().getOrElse(() => throw Exception());
-          emit(state.copyWith(question: question));
+          emit(state.copyWith(question: question, valeur: question.reponses));
         }
       },
     );
