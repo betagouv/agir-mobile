@@ -82,7 +82,7 @@ void main() {
             {
               "id": 452,
               "reponse": "Réduire ses déchets",
-              "exact": false
+              "exact": null
             }
           ]
         }
