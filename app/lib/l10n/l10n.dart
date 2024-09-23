@@ -157,11 +157,13 @@ abstract final class Localisation {
   static const ouHabitezVous = 'Où habitez-vous ?';
   static const ouTrouverCesInformations = 'Où trouver ces informations ?';
   static const ouTrouverCesInformationsReponse = '''
-Le **revenu fiscal de référence** et votre **nombre de parts** se trouvent sur la 1ère page de votre dernier avis d’impôt.
+Le revenu fiscal de référence et votre nombre de parts se trouvent sur la 1ère page de votre dernier avis d’impôt.
 
-**Nombre de part**
+**Nombre de part :**
 
 Si vous ne disposez pas de votre dernier avis d’impôt, renseignez 1 part pour chaque adulte de votre foyer fiscal, puis 0,5 part par enfant jusqu’à 2 enfants, puis 1 part par enfant à partir du 3ème enfant.
+
+**Revenu fiscal de référence :**
 
 Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme des revenus de toutes les personnes avec lequelles vous partagez vos déclarations d’impôts (pour toute l’année) pour vous faire une première idée.''';
   static const oui = 'Oui';
@@ -179,7 +181,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const pourquoiCeDefi = 'Pourquoi ce défi ?';
   static const pourquoiCesQuestions = 'Pourquoi ces questions ?';
   static const pourquoiCesQuestionsReponse =
-      'Votre **revenu fiscal de référence** et le **nombre de parts** permettent d’afficher les aides en fonction de vos ressources.';
+      'Votre revenu fiscal de référence et le nombre de parts permettent d’afficher les aides en fonction de vos ressources.';
   static const preOnboardingTitre =
       'Ensemble,\naméliorons\nnos habitudes\nau jour le jour';
   static const premiereFoisSurAgir = 'Première fois sur Agir ?';
