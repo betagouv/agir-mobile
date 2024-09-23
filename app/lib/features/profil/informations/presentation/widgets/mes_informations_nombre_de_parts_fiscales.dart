@@ -36,8 +36,8 @@ class MesInformationsNombreDePartsFiscales extends StatelessWidget {
     return DsfrInput(
       label: Localisation.nombreDePartsFiscales,
       hint: Localisation.nombreDePartsFiscalesDescription,
-      onChanged: (final value) => _handleNombreDePartsFiscales(context, value),
       initialValue: FnvNumberFormat.formatNumber(nombreDePartsFiscales),
+      onChanged: (final value) => _handleNombreDePartsFiscales(context, value),
       keyboardType: const TextInputType.numberWithOptions(decimal: true),
       textInputAction: TextInputAction.next,
       inputFormatters: [

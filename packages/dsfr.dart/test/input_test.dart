@@ -36,8 +36,8 @@ void main() {
           child: DsfrInput(
             label: 'Label',
             hint: 'Indice',
-            onChanged: (final value) {},
             controller: controller,
+            onChanged: (final value) {},
           ),
         ),
       );

@@ -16,10 +16,10 @@ class MesInformationsNom extends StatelessWidget {
     return DsfrInput(
       label: Localisation.nom,
       hint: Localisation.facultatif,
+      initialValue: nom,
       onChanged: (final value) => context
           .read<MesInformationsBloc>()
           .add(MesInformationsNomChange(value)),
-      initialValue: nom,
       textInputAction: TextInputAction.next,
     );
   }

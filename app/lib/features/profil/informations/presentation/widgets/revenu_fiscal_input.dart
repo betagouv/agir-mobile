@@ -17,6 +17,9 @@ class RevenuFiscalInput extends StatelessWidget {
   @override
   Widget build(final BuildContext context) => DsfrInput(
         label: Localisation.revenuFiscal,
+        suffixText: '€',
+        initialValue:
+            initialValue == null ? null : formatCurrency(initialValue!),
         onChanged: (final value) {
           final parsedValue = currencyFormat.tryParse(value);
           if (parsedValue == null) {
@@ -24,9 +27,6 @@ class RevenuFiscalInput extends StatelessWidget {
           }
           onChanged(parsedValue.toInt());
         },
-        suffixText: '€',
-        initialValue:
-            initialValue == null ? null : formatCurrency(initialValue!),
         keyboardType: TextInputType.number,
         inputFormatters: [
           FilteringTextInputFormatter.digitsOnly,

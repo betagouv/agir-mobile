@@ -18,6 +18,7 @@ class MesInformationsAnnee extends StatelessWidget {
     return DsfrInput(
       label: Localisation.anneeDeNaissance,
       hint: Localisation.facultatif,
+      initialValue: anneeDeNaissance?.toString(),
       onChanged: (final value) {
         final parsedValue = int.tryParse(value);
         if (parsedValue == null) {
@@ -27,7 +28,6 @@ class MesInformationsAnnee extends StatelessWidget {
             .read<MesInformationsBloc>()
             .add(MesInformationsAnneeChange(parsedValue));
       },
-      initialValue: anneeDeNaissance?.toString(),
       keyboardType: TextInputType.number,
       textInputAction: TextInputAction.next,
       inputFormatters: [

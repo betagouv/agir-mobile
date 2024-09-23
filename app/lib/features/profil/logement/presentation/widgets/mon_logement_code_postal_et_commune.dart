@@ -57,8 +57,8 @@ class _MonLogementCodePostalEtCommuneState
             width: adjustTextSize(context, 97),
             child: DsfrInput(
               label: Localisation.codePostal,
-              onChanged: (final value) => _handleCodePostal(context, value),
               initialValue: state.codePostal,
+              onChanged: (final value) => _handleCodePostal(context, value),
               keyboardType: TextInputType.number,
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,
