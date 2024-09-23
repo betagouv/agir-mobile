@@ -12,6 +12,7 @@ class DsfrRawButton extends StatefulWidget {
     required this.variant,
     this.foregroundColor,
     required this.size,
+    this.borderRadius,
     this.onTap,
     super.key,
   });
@@ -20,6 +21,7 @@ class DsfrRawButton extends StatefulWidget {
   final DsfrButtonVariant variant;
   final Color? foregroundColor;
   final DsfrButtonSize size;
+  final BorderRadius? borderRadius;
   final VoidCallback? onTap;
 
   @override
@@ -107,6 +109,7 @@ class _DsfrRawButtonState extends State<DsfrRawButton>
           decoration: BoxDecoration(
             color: _backgroundColor.resolve(materialStates),
             border: _border.resolve(materialStates),
+            borderRadius: widget.borderRadius,
           ),
           child: Padding(
             padding: _padding,

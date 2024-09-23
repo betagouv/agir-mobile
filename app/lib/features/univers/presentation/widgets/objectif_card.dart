@@ -67,6 +67,36 @@ class ObjectifCard extends StatelessWidget {
       );
 }
 
+class _TrailingIcon extends StatelessWidget {
+  const _TrailingIcon({
+    required this.estVerrouille,
+    required this.estFait,
+    required this.id,
+    required this.aEteReleve,
+    required this.points,
+  });
+
+  final bool estVerrouille;
+  final bool estFait;
+  final ObjectifId id;
+  final bool aEteReleve;
+  final int points;
+
+  @override
+  Widget build(final BuildContext context) {
+    if (estVerrouille) {
+      return const Icon(DsfrIcons.systemLockLine);
+    } else if (!estFait) {
+      return const Icon(
+        DsfrIcons.systemArrowRightLine,
+        color: DsfrColors.blueFranceSun113,
+      );
+    }
+
+    return _PointsButton(id: id, points: points, aEteReleve: aEteReleve);
+  }
+}
+
 class _PointsButton extends StatelessWidget {
   const _PointsButton({
     required this.id,
@@ -100,6 +130,7 @@ class _PointsButton extends StatelessWidget {
         : DsfrRawButton(
             variant: DsfrButtonVariant.tertiary,
             size: DsfrButtonSize.sm,
+            borderRadius: const BorderRadius.all(Radius.circular(8)),
             onTap: () =>
                 context.read<MissionBloc>().add(MissionGagnerPointsDemande(id)),
             child: IconTheme(
@@ -107,35 +138,5 @@ class _PointsButton extends StatelessWidget {
               child: widget,
             ),
           );
-  }
-}
-
-class _TrailingIcon extends StatelessWidget {
-  const _TrailingIcon({
-    required this.estVerrouille,
-    required this.estFait,
-    required this.id,
-    required this.aEteReleve,
-    required this.points,
-  });
-
-  final bool estVerrouille;
-  final bool estFait;
-  final ObjectifId id;
-  final bool aEteReleve;
-  final int points;
-
-  @override
-  Widget build(final BuildContext context) {
-    if (estVerrouille) {
-      return const Icon(DsfrIcons.systemLockLine);
-    } else if (!estFait) {
-      return const Icon(
-        DsfrIcons.systemArrowRightLine,
-        color: DsfrColors.blueFranceSun113,
-      );
-    }
-
-    return _PointsButton(id: id, points: points, aEteReleve: aEteReleve);
   }
 }

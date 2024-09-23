@@ -1,5 +1,8 @@
 export 'src/composants/accordions.dart';
 export 'src/composants/buttons/button.dart';
+export 'src/composants/buttons/button_background_color.dart';
+export 'src/composants/buttons/button_border.dart';
+export 'src/composants/buttons/button_foreground_color.dart';
 export 'src/composants/checkbox.dart';
 export 'src/composants/checkbox_icon.dart';
 export 'src/composants/divider.dart';
