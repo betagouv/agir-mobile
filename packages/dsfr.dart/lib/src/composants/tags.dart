@@ -24,8 +24,7 @@ class DsfrTag extends StatelessWidget {
     final Key? key,
   }) : this._(
           label: label,
-          textStyle:
-              textStyle ?? const DsfrTextStyle(fontSize: 12, lineHeight: 22),
+          textStyle: textStyle ?? const DsfrTextStyle.bodyXs(),
           backgroundColor: backgroundColor,
           foregroundColor: foregroundColor,
           padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 8),

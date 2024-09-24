@@ -201,7 +201,6 @@ class _MenuItem extends StatelessWidget {
                 style: isCurrentPage
                     ? const DsfrTextStyle.bodyLgBold(
                         color: DsfrColors.blueFranceSun113,
-                        lineHeight: 18,
                       )
                     : const DsfrTextStyle.bodyLg(),
               ),

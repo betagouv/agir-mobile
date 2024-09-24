@@ -62,10 +62,7 @@ class ArticleView extends StatelessWidget {
           ],
           if (article.sources.isNotEmpty) ...[
             const SizedBox(height: DsfrSpacings.s2w),
-            const Text(
-              'Sources :',
-              style: DsfrTextStyle.bodySm(lineHeight: 14),
-            ),
+            const Text('Sources :', style: DsfrTextStyle.bodySm()),
             const SizedBox(height: DsfrSpacings.s1w),
             ...article.sources.map(
               (final source) => Padding(
@@ -85,7 +82,7 @@ class ArticleView extends StatelessWidget {
                         ),
                       ],
                     ),
-                    style: const DsfrTextStyle.bodySm(lineHeight: 14).copyWith(
+                    style: const DsfrTextStyle.bodySm().copyWith(
                       decoration: TextDecoration.underline,
                     ),
                   ),

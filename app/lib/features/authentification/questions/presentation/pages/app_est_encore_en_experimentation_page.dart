@@ -26,7 +26,7 @@ class AppEstEncoreEnExperimentationPage extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    const bodyLg = DsfrTextStyle.bodyLg(lineHeight: 28);
+    const bodyLg = DsfrTextStyle.bodyLg();
 
     return Scaffold(
       appBar: AppBar(

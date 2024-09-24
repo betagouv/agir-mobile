@@ -19,7 +19,7 @@ class DsfrNotice extends StatelessWidget {
   @override
   Widget build(final BuildContext context) {
     const color = DsfrColors.info425;
-    const textStyle = DsfrTextStyle(fontSize: 14, color: color);
+    const textStyle = DsfrTextStyle.bodySm(color: color);
 
     return ColoredBox(
       color: DsfrColors.info950,

@@ -83,7 +83,7 @@ class FirstNamePage extends StatelessWidget {
                   const SizedBox(height: DsfrSpacings.s2w),
                   const Text(
                     Localisation.bienvenueSurDetails,
-                    style: DsfrTextStyle.bodyLg(lineHeight: 28),
+                    style: DsfrTextStyle.bodyLg(),
                   ),
                   const SizedBox(height: DsfrSpacings.s3w),
                   DsfrInput(

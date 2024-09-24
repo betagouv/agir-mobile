@@ -2,7 +2,6 @@ import 'package:dsfr_example/accordions_page.dart';
 import 'package:dsfr_example/buttons_page.dart';
 import 'package:dsfr_example/checkbox_page.dart';
 import 'package:dsfr_example/colors_page.dart';
-import 'package:dsfr_example/fonts_page.dart';
 import 'package:dsfr_example/form_messages_page.dart';
 import 'package:dsfr_example/icons_page.dart';
 import 'package:dsfr_example/inputs_page.dart';
@@ -12,6 +11,7 @@ import 'package:dsfr_example/modals_page.dart';
 import 'package:dsfr_example/radios_page.dart';
 import 'package:dsfr_example/select_page.dart';
 import 'package:dsfr_example/tags_page.dart';
+import 'package:dsfr_example/text_page.dart';
 import 'package:dsfr_example/toggles_page.dart';
 import 'package:flutter/material.dart';
 
@@ -26,12 +26,12 @@ class MyApp extends StatelessWidget {
   Widget build(final BuildContext context) => MaterialApp(
         home: MasterPage(
           pageItems: [
+            TextPage.model,
             AccordionsPage.model,
             ButtonsPage.model,
             CheckboxPage.model,
             ColorsPage.model,
             SelectPage.model,
-            FontsPage.model,
             FormMessagesPage.model,
             IconsPage.model,
             InputsPage.model,

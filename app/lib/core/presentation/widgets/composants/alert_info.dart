@@ -21,7 +21,7 @@ class FnvAlertInfo extends StatelessWidget {
           child: MarkdownBody(
             data: label,
             styleSheet: MarkdownStyleSheet(
-              p: const DsfrTextStyle(fontSize: 15, lineHeight: 24),
+              p: const DsfrTextStyle(fontSize: 15),
             ),
           ),
         ),

@@ -23,7 +23,7 @@ class ToutEstPretPage extends StatelessWidget {
   Widget build(final BuildContext context) {
     const blueFranceSun113 = DsfrColors.blueFranceSun113;
 
-    const bodyLg = DsfrTextStyle.bodyLg(lineHeight: 28);
+    const bodyLg = DsfrTextStyle.bodyLg();
     const bodyLgBold = DsfrTextStyle.bodyLgBold();
 
     final arrow = TextSpan(
