@@ -218,10 +218,7 @@ class _Thematique extends StatelessWidget {
               ),
               const SizedBox(height: DsfrSpacings.s1v),
             ],
-            Text(
-              mission.titre,
-              style: const DsfrTextStyle.bodyLg(lineHeight: 22),
-            ),
+            Text(mission.titre, style: const DsfrTextStyle.bodyLg()),
           ],
         ),
       ),

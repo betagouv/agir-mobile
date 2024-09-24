@@ -23,7 +23,7 @@ class FnvHtmlWidget extends StatelessWidget {
         html,
         customStylesBuilder: _handlePDansLi,
         factoryBuilder: MyUrlLauncherFactory.new,
-        textStyle: const DsfrTextStyle(fontSize: 15, lineHeight: 24),
+        textStyle: const DsfrTextStyle(fontSize: 15),
       );
 }
 

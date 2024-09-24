@@ -148,7 +148,7 @@ class _PrixState extends State<_Prix> {
               ),
               backgroundColor: DsfrColors.info950,
               foregroundColor: foregroundColor,
-              textStyle: const DsfrTextStyle(fontSize: 14, lineHeight: 20),
+              textStyle: const DsfrTextStyle.bodySm(),
               onTap: () => _handleTagPrix(context, e.prix),
             ),
           );
@@ -424,7 +424,7 @@ class _Questions extends StatelessWidget {
               child: MarkdownBody(
                 data: Localisation.ouTrouverCesInformationsReponse,
                 styleSheet: MarkdownStyleSheet(
-                  p: const DsfrTextStyle(fontSize: 15, lineHeight: 24),
+                  p: const DsfrTextStyle(fontSize: 15),
                 ),
               ),
             ),
@@ -436,7 +436,7 @@ class _Questions extends StatelessWidget {
               child: MarkdownBody(
                 data: Localisation.pourquoiCesQuestionsReponse,
                 styleSheet: MarkdownStyleSheet(
-                  p: const DsfrTextStyle(fontSize: 15, lineHeight: 24),
+                  p: const DsfrTextStyle(fontSize: 15),
                 ),
               ),
             ),

@@ -16,7 +16,6 @@ class _MosaicButtonStyle {
           borderWidth: 3,
           textStyle: const DsfrTextStyle.bodySmBold(
             color: DsfrColors.blueFranceSun113,
-            lineHeight: 20,
           ),
         );
 

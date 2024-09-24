@@ -70,7 +70,7 @@ class _View extends StatelessWidget {
             const SizedBox(height: DsfrSpacings.s2w),
             const Text(
               Localisation.enchanteDetails,
-              style: DsfrTextStyle.bodyLg(lineHeight: 28),
+              style: DsfrTextStyle.bodyLg(),
             ),
             const SizedBox(height: DsfrSpacings.s4w),
             const _CodePostalEtCommune(),

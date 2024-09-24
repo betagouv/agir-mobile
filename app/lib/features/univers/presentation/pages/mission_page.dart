@@ -148,7 +148,7 @@ class _ImageEtTitre extends StatelessWidget {
         Expanded(
           child: Text(
             mission.titre,
-            style: const DsfrTextStyle(fontSize: 24, lineHeight: 28),
+            style: const DsfrTextStyle(fontSize: 24),
           ),
         ),
       ],

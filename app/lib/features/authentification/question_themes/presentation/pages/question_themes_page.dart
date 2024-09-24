@@ -90,10 +90,7 @@ class _Question extends StatelessWidget {
         ? const SizedBox.shrink()
         : Column(
             children: [
-              Text(
-                question.text.value,
-                style: const DsfrTextStyle.bodyLg(lineHeight: 28),
-              ),
+              Text(question.text.value, style: const DsfrTextStyle.bodyLg()),
               const SizedBox(height: DsfrSpacings.s3w),
               FnvCheckboxSet(
                 options: question.responsesPossibles.value,
