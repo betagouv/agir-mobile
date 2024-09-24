@@ -36,7 +36,7 @@ class QuestionCodePostalBloc
           state.copyWith(
             codePostal: event.valeur,
             communes: communes,
-            commune: communes.length == 1 ? communes.first : null,
+            commune: communes.length == 1 ? communes.first : '',
           ),
         );
       }

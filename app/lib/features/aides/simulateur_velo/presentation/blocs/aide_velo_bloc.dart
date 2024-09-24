@@ -94,7 +94,7 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
         state.copyWith(
           codePostal: event.valeur,
           communes: communes,
-          commune: '',
+          commune: communes.length == 1 ? communes.first : '',
         ),
       );
     }
