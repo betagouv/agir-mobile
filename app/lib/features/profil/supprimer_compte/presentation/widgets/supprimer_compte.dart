@@ -1,8 +1,8 @@
 // ignore_for_file: move-variable-closer-to-its-usage
 
-import 'package:app/features/profil/presentation/widgets/profil_titre_partie.dart';
-import 'package:app/features/profil/supprimer_compte/presentation/blocs/supprimer_compte_bloc.dart';
-import 'package:app/features/profil/supprimer_compte/presentation/blocs/supprimer_compte_event.dart';
+import 'package:app/features/profil/profil/presentation/widgets/profil_titre_partie.dart';
+import 'package:app/features/profil/supprimer_compte/presentation/bloc/supprimer_compte_bloc.dart';
+import 'package:app/features/profil/supprimer_compte/presentation/bloc/supprimer_compte_event.dart';
 import 'package:app/features/profil/supprimer_compte/presentation/widgets/supprimer_compte_modal.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';

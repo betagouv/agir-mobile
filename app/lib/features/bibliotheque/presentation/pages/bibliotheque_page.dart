@@ -1,6 +1,6 @@
-import 'package:app/features/bibliotheque/presentation/blocs/bibliotheque_bloc.dart';
-import 'package:app/features/bibliotheque/presentation/blocs/bibliotheque_event.dart';
-import 'package:app/features/bibliotheque/presentation/blocs/bibliotheque_state.dart';
+import 'package:app/features/bibliotheque/presentation/bloc/bibliotheque_bloc.dart';
+import 'package:app/features/bibliotheque/presentation/bloc/bibliotheque_event.dart';
+import 'package:app/features/bibliotheque/presentation/bloc/bibliotheque_state.dart';
 import 'package:app/features/bibliotheque/presentation/pages/bibliotheque_view.dart';
 import 'package:app/features/menu/presentation/pages/root_page.dart';
 import 'package:flutter/material.dart';

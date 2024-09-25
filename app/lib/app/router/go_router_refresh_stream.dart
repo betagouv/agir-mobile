@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:app/features/authentification/domain/value_objects/authentification_statut.dart';
+import 'package:app/features/authentification/core/domain/authentification_statut.dart';
 import 'package:flutter/material.dart';
 
 class GoRouterRefreshStream extends ChangeNotifier {

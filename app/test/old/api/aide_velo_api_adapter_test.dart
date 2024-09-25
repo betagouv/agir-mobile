@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:app/features/aides/infrastructure/adapters/aide_velo_api_adapter.dart';
-import 'package:app/features/aides/infrastructure/adapters/aide_velo_par_type_mapper.dart';
-import 'package:app/features/authentification/infrastructure/adapters/dio_http_client.dart';
+import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
+import 'package:app/features/simulateur_velo/infrastructure/aide_velo_api_adapter.dart';
+import 'package:app/features/simulateur_velo/infrastructure/aide_velo_par_type_mapper.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';

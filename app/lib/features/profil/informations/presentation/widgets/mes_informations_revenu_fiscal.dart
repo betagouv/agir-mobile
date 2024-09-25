@@ -1,5 +1,5 @@
-import 'package:app/features/profil/informations/presentation/blocs/mes_informations_bloc.dart';
-import 'package:app/features/profil/informations/presentation/blocs/mes_informations_event.dart';
+import 'package:app/features/profil/informations/presentation/bloc/mes_informations_bloc.dart';
+import 'package:app/features/profil/informations/presentation/bloc/mes_informations_event.dart';
 import 'package:app/features/profil/informations/presentation/widgets/revenu_fiscal_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

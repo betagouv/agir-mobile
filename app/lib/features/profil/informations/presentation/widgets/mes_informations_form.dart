@@ -1,14 +1,14 @@
+import 'package:app/core/presentation/widgets/composants/alert_info.dart';
+import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/profil/informations/presentation/widgets/mes_informations_annee.dart';
 import 'package:app/features/profil/informations/presentation/widgets/mes_informations_email.dart';
 import 'package:app/features/profil/informations/presentation/widgets/mes_informations_nom.dart';
 import 'package:app/features/profil/informations/presentation/widgets/mes_informations_nombre_de_parts_fiscales.dart';
 import 'package:app/features/profil/informations/presentation/widgets/mes_informations_prenom.dart';
 import 'package:app/features/profil/informations/presentation/widgets/mes_informations_revenu_fiscal.dart';
-import 'package:app/features/profil/presentation/widgets/profil_title.dart';
-import 'package:app/features/profil/presentation/widgets/profil_titre_partie.dart';
+import 'package:app/features/profil/profil/presentation/widgets/profil_title.dart';
+import 'package:app/features/profil/profil/presentation/widgets/profil_titre_partie.dart';
 import 'package:app/l10n/l10n.dart';
-import 'package:app/shared/widgets/composants/alert_info.dart';
-import 'package:app/shared/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 

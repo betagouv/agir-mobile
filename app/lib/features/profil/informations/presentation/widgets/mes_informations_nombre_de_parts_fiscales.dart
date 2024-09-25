@@ -1,7 +1,7 @@
-import 'package:app/features/profil/informations/presentation/blocs/mes_informations_bloc.dart';
-import 'package:app/features/profil/informations/presentation/blocs/mes_informations_event.dart';
+import 'package:app/core/helpers/number_format.dart';
+import 'package:app/features/profil/informations/presentation/bloc/mes_informations_bloc.dart';
+import 'package:app/features/profil/informations/presentation/bloc/mes_informations_event.dart';
 import 'package:app/l10n/l10n.dart';
-import 'package:app/shared/number_format.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

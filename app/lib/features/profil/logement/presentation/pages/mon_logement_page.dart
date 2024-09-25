@@ -1,11 +1,11 @@
-import 'package:app/features/profil/logement/presentation/blocs/mon_logement_bloc.dart';
-import 'package:app/features/profil/logement/presentation/blocs/mon_logement_event.dart';
-import 'package:app/features/profil/logement/presentation/blocs/mon_logement_state.dart';
+import 'package:app/core/presentation/widgets/composants/app_bar.dart';
+import 'package:app/core/presentation/widgets/composants/bottom_bar.dart';
+import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
+import 'package:app/features/profil/logement/presentation/bloc/mon_logement_bloc.dart';
+import 'package:app/features/profil/logement/presentation/bloc/mon_logement_event.dart';
+import 'package:app/features/profil/logement/presentation/bloc/mon_logement_state.dart';
 import 'package:app/features/profil/logement/presentation/widgets/mon_logement_form.dart';
 import 'package:app/l10n/l10n.dart';
-import 'package:app/shared/widgets/composants/app_bar.dart';
-import 'package:app/shared/widgets/composants/bottom_bar.dart';
-import 'package:app/shared/widgets/fondamentaux/colors.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

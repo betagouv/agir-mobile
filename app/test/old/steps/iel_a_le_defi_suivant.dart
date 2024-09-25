@@ -1,4 +1,4 @@
-import 'package:app/features/univers/domain/entities/defi.dart';
+import 'package:app/features/univers/core/domain/defi.dart';
 
 import '../scenario_context.dart';
 

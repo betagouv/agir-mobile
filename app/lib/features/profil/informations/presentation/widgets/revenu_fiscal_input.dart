@@ -1,5 +1,5 @@
+import 'package:app/core/helpers/input_formatter.dart';
 import 'package:app/l10n/l10n.dart';
-import 'package:app/shared/helpers/input_formatter.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

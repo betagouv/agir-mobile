@@ -1,9 +1,9 @@
-import 'package:app/features/profil/changer_mot_de_passe/presentation/blocs/changer_mot_de_passe_bloc.dart';
-import 'package:app/features/profil/changer_mot_de_passe/presentation/blocs/changer_mot_de_passe_event.dart';
-import 'package:app/features/profil/changer_mot_de_passe/presentation/blocs/changer_mot_de_passe_state.dart';
-import 'package:app/features/profil/presentation/widgets/profil_titre_partie.dart';
+import 'package:app/core/presentation/widgets/composants/mot_de_passe/mot_de_passe.dart';
+import 'package:app/features/profil/changer_mot_de_passe/presentation/bloc/changer_mot_de_passe_bloc.dart';
+import 'package:app/features/profil/changer_mot_de_passe/presentation/bloc/changer_mot_de_passe_event.dart';
+import 'package:app/features/profil/changer_mot_de_passe/presentation/bloc/changer_mot_de_passe_state.dart';
+import 'package:app/features/profil/profil/presentation/widgets/profil_titre_partie.dart';
 import 'package:app/l10n/l10n.dart';
-import 'package:app/shared/widgets/composants/mot_de_passe/mot_de_passe.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

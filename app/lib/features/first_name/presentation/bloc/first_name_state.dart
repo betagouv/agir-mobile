@@ -1,4 +1,4 @@
-import 'package:app/features/first_name/domain/value_objects/first_name.dart';
+import 'package:app/features/first_name/domain/first_name.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class FirstNameState extends Equatable {

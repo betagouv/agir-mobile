@@ -1,10 +1,10 @@
-import 'package:app/features/authentification/domain/entities/authentification_statut_manager.dart';
-import 'package:app/features/authentification/domain/ports/authentification_port.dart';
-import 'package:app/features/authentification/domain/value_objects/authentification_statut.dart';
-import 'package:app/features/authentification/domain/value_objects/information_de_code.dart';
-import 'package:app/features/authentification/domain/value_objects/information_de_connexion.dart';
-import 'package:app/features/utilisateur/domain/entities/utilisateur.dart';
-import 'package:app/shared/domain/entities/api_erreur.dart';
+import 'package:app/core/error/domain/api_erreur.dart';
+import 'package:app/features/authentification/core/domain/authentification_port.dart';
+import 'package:app/features/authentification/core/domain/authentification_statut.dart';
+import 'package:app/features/authentification/core/domain/authentification_statut_manager.dart';
+import 'package:app/features/authentification/core/domain/information_de_code.dart';
+import 'package:app/features/authentification/core/domain/information_de_connexion.dart';
+import 'package:app/features/utilisateur/domain/utilisateur.dart';
 import 'package:fpdart/fpdart.dart';
 
 class AuthentificationPortMock implements AuthentificationPort {

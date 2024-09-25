@@ -1,8 +1,8 @@
 // ignore_for_file: avoid_dynamic_calls, avoid-accessing-collections-by-constant-index
 
-import 'package:app/features/aides/infrastructure/adapters/aide_mapper.dart';
-import 'package:app/features/aides/infrastructure/adapters/aides_api_adapter.dart';
-import 'package:app/features/authentification/infrastructure/adapters/dio_http_client.dart';
+import 'package:app/features/aides/core/infrastructure/aide_mapper.dart';
+import 'package:app/features/aides/core/infrastructure/aides_api_adapter.dart';
+import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../helpers/dio_mock.dart';

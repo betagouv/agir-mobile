@@ -1,4 +1,4 @@
-import 'package:app/features/authentification/creer_compte/presentation/blocs/creer_compte_bloc.dart';
+import 'package:app/features/authentification/creer_compte/presentation/bloc/creer_compte_bloc.dart';
 import 'package:app/features/authentification/creer_compte/presentation/pages/creer_compte_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

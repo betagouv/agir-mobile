@@ -1,7 +1,7 @@
-import 'package:app/features/authentification/domain/entities/authentification_statut_manager.dart';
-import 'package:app/features/authentification/infrastructure/adapters/authentification_api_client.dart';
-import 'package:app/features/authentification/infrastructure/adapters/authentification_token_storage.dart';
-import 'package:app/features/first_name/domain/value_objects/first_name.dart';
+import 'package:app/features/authentification/core/domain/authentification_statut_manager.dart';
+import 'package:app/features/authentification/core/infrastructure/authentification_api_client.dart';
+import 'package:app/features/authentification/core/infrastructure/authentification_token_storage.dart';
+import 'package:app/features/first_name/domain/first_name.dart';
 import 'package:app/features/first_name/infrastructure/first_name_adapter.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter_test/flutter_test.dart';

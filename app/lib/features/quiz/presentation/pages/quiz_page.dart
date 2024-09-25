@@ -1,6 +1,6 @@
-import 'package:app/features/quiz/presentation/blocs/quiz_bloc.dart';
-import 'package:app/features/quiz/presentation/blocs/quiz_event.dart';
-import 'package:app/features/quiz/presentation/blocs/quiz_state.dart';
+import 'package:app/features/quiz/presentation/bloc/quiz_bloc.dart';
+import 'package:app/features/quiz/presentation/bloc/quiz_event.dart';
+import 'package:app/features/quiz/presentation/bloc/quiz_state.dart';
 import 'package:app/features/quiz/presentation/pages/quiz_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

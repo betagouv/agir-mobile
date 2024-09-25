@@ -1,4 +1,4 @@
-import 'package:app/features/authentification/infrastructure/adapters/api_url.dart';
+import 'package:app/features/authentification/core/infrastructure/api_url.dart';
 
 const token =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dGlsaXNhdGV1cklkIjoiOGUwZTEzZDYtMzgyZS00NjZjLThjYjMtN2I4OTNlNjU4YTJiIiwiaWF0IjoxNzIxODE5MzYxLCJleHAiOjE3MjQ0MTEzNjF9.J4QVueKytjGUmm51LzgY95N_YrlFXHj9gSgCdOHertE';

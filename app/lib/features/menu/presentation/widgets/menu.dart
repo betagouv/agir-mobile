@@ -1,12 +1,12 @@
+import 'package:app/core/presentation/widgets/composants/app_bar.dart';
+import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/accueil/presentation/pages/accueil_page.dart';
-import 'package:app/features/aides/presentation/pages/aides_page.dart';
-import 'package:app/features/authentification/domain/ports/authentification_port.dart';
+import 'package:app/features/aides/list/presentation/pages/aides_page.dart';
+import 'package:app/features/authentification/core/domain/authentification_port.dart';
 import 'package:app/features/bibliotheque/presentation/pages/bibliotheque_page.dart';
-import 'package:app/features/profil/presentation/pages/profil_page.dart';
+import 'package:app/features/profil/profil/presentation/pages/profil_page.dart';
 import 'package:app/features/version/presentation/widgets/version_label.dart';
 import 'package:app/l10n/l10n.dart';
-import 'package:app/shared/widgets/composants/app_bar.dart';
-import 'package:app/shared/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

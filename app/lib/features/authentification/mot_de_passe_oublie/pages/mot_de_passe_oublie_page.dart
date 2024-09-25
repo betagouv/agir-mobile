@@ -1,4 +1,4 @@
-import 'package:app/features/authentification/mot_de_passe_oublie/blocs/mot_de_passe_oublie/mot_de_passe_oublie_bloc.dart';
+import 'package:app/features/authentification/mot_de_passe_oublie/bloc/mot_de_passe_oublie_bloc.dart';
 import 'package:app/features/authentification/mot_de_passe_oublie/pages/mot_de_passe_oublie_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

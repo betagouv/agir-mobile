@@ -1,4 +1,4 @@
-import 'package:app/features/aides/domain/entities/aide.dart';
+import 'package:app/features/aides/core/domain/aide.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:flutter_test/flutter_test.dart';
 

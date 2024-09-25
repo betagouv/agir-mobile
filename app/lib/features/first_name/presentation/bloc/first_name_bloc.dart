@@ -1,7 +1,7 @@
-import 'package:app/features/first_name/application/use_cases/add_first_name.dart';
+import 'package:app/core/error/domain/api_erreur.dart';
+import 'package:app/features/first_name/application/add_first_name.dart';
 import 'package:app/features/first_name/presentation/bloc/first_name_event.dart';
 import 'package:app/features/first_name/presentation/bloc/first_name_state.dart';
-import 'package:app/shared/domain/entities/api_erreur.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FirstNameBloc extends Bloc<FirstNameEvent, FirstNameState> {

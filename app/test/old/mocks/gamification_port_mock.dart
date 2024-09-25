@@ -1,5 +1,5 @@
 import 'package:app/features/gamification/domain/gamification.dart';
-import 'package:app/features/gamification/domain/ports/gamification_port.dart';
+import 'package:app/features/gamification/domain/gamification_port.dart';
 import 'package:fpdart/src/either.dart';
 import 'package:rxdart/subjects.dart';
 

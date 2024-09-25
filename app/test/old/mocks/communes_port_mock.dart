@@ -1,4 +1,4 @@
-import 'package:app/features/communes/domain/ports/communes_port.dart';
+import 'package:app/features/communes/domain/communes_port.dart';
 import 'package:fpdart/fpdart.dart';
 
 class CommunesPortMock implements CommunesPort {

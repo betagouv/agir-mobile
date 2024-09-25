@@ -1,4 +1,4 @@
-import 'package:app/features/aides/domain/entities/aide.dart';
+import 'package:app/features/aides/core/domain/aide.dart';
 
 import '../scenario_context.dart';
 

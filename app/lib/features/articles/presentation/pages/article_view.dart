@@ -1,11 +1,11 @@
+import 'package:app/core/presentation/widgets/composants/app_bar.dart';
+import 'package:app/core/presentation/widgets/composants/html_widget.dart';
+import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
+import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/articles/domain/article.dart';
-import 'package:app/features/articles/presentation/blocs/article_bloc.dart';
-import 'package:app/features/articles/presentation/blocs/article_event.dart';
+import 'package:app/features/articles/presentation/bloc/article_bloc.dart';
+import 'package:app/features/articles/presentation/bloc/article_event.dart';
 import 'package:app/l10n/l10n.dart';
-import 'package:app/shared/widgets/composants/app_bar.dart';
-import 'package:app/shared/widgets/composants/html_widget.dart';
-import 'package:app/shared/widgets/fondamentaux/colors.dart';
-import 'package:app/shared/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

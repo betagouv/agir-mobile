@@ -1,7 +1,7 @@
 import 'package:app/app/app.dart';
-import 'package:app/features/actions/domain/actions_port.dart';
-import 'package:app/features/authentification/domain/entities/authentification_statut_manager.dart';
-import 'package:app/shared/wrappers/tracker.dart';
+import 'package:app/core/infrastructure/tracker.dart';
+import 'package:app/features/actions/list/domain/actions_port.dart';
+import 'package:app/features/authentification/core/domain/authentification_statut_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';

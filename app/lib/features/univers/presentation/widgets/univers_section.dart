@@ -1,5 +1,5 @@
-import 'package:app/features/univers/presentation/blocs/accueil_univers_bloc.dart';
-import 'package:app/features/univers/presentation/blocs/accueil_univers_event.dart';
+import 'package:app/features/univers/presentation/bloc/accueil_univers_bloc.dart';
+import 'package:app/features/univers/presentation/bloc/accueil_univers_event.dart';
 import 'package:app/features/univers/presentation/widgets/univers_liste.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';

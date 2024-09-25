@@ -1,9 +1,9 @@
-import 'package:app/features/authentification/questions/presentation/pages/question_code_postal_page.dart';
-import 'package:app/features/first_name/domain/ports/first_name_port.dart';
-import 'package:app/features/first_name/domain/value_objects/first_name.dart';
+import 'package:app/core/error/domain/api_erreur.dart';
+import 'package:app/features/authentification/question_code_postal/presentation/pages/question_code_postal_page.dart';
+import 'package:app/features/first_name/domain/first_name.dart';
+import 'package:app/features/first_name/domain/first_name_port.dart';
 import 'package:app/features/first_name/presentation/pages/first_name_page.dart';
 import 'package:app/l10n/l10n.dart';
-import 'package:app/shared/domain/entities/api_erreur.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

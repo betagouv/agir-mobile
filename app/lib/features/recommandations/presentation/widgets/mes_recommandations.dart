@@ -1,5 +1,5 @@
-import 'package:app/features/recommandations/presentation/blocs/recommandations_bloc.dart';
-import 'package:app/features/recommandations/presentation/blocs/recommandations_event.dart';
+import 'package:app/features/recommandations/presentation/bloc/recommandations_bloc.dart';
+import 'package:app/features/recommandations/presentation/bloc/recommandations_event.dart';
 import 'package:app/features/recommandations/presentation/widgets/les_recommandations.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
