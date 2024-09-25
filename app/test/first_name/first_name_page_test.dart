@@ -27,7 +27,7 @@ Future<void> _pumpFirstNamePage(
       ),
     ],
     page: const FirstNamePage(),
-    routes: [QuestionCodePostalPage.name],
+    routes: {QuestionCodePostalPage.name: QuestionCodePostalPage.path},
   );
 }
 

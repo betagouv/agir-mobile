@@ -54,7 +54,6 @@ class _MesInformationsView extends StatelessWidget {
               case MesInformationsStatut.initial:
               case MesInformationsStatut.chargement:
                 return const Center(child: CircularProgressIndicator());
-
               case MesInformationsStatut.succes:
                 return const MesInformationsForm();
             }

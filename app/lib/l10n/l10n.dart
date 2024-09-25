@@ -43,6 +43,8 @@ abstract final class Localisation {
       'Nous avons quelques questions à vous poser pour personnaliser votre expérience !';
   static const boisPellets = 'Bois / Pellets';
   static const bonjour = 'Bonjour,\n';
+  static const bonnesAstucesPourRealiserCeDefi =
+      'Bonnes astuces pour réaliser ce défi';
   static const cestParti = 'C’est parti !';
   static const cestPresqueTermine = 'C’est presque terminé !';
   static const cetteActionNeVousConvientPas =
@@ -184,7 +186,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const politiqueDeConfidentialiteSite =
       'https://agir.beta.gouv.fr/politique-de-confidentialite';
   static const pourquoi = 'Pourquoi ?';
-  static const pourquoiCeDefi = 'Pourquoi ce défi ?';
+  static const pourquoiCeDefi = 'Pourquoi cette action ?';
   static const pourquoiCesQuestions = 'Pourquoi ces questions ?';
   static const pourquoiCesQuestionsReponse =
       'Votre revenu fiscal de référence et le nombre de parts permettent d’afficher les aides en fonction de vos ressources.';

@@ -33,7 +33,6 @@ class DsfrButton extends StatelessWidget {
     switch (size) {
       case DsfrButtonSize.lg:
         return DsfrSpacings.s3w;
-
       case DsfrButtonSize.md:
       case DsfrButtonSize.sm:
         return DsfrSpacings.s2w;

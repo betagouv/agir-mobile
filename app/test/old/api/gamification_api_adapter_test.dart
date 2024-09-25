@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/features/authentification/core/domain/authentification_statut_manager.dart';
 import 'package:app/features/authentification/core/infrastructure/authentification_api_client.dart';
 import 'package:app/features/authentification/core/infrastructure/authentification_token_storage.dart';
@@ -47,6 +48,7 @@ void main() {
         authentificationTokenStorage: authentificationTokenStorage,
         inner: client,
       ),
+      messageBus: MessageBus(),
     );
 
     unawaited(

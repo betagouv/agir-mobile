@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/features/authentification/core/infrastructure/authentification_api_client.dart';
 import 'package:app/features/gamification/domain/gamification.dart';
 import 'package:app/features/gamification/domain/gamification_port.dart';
@@ -12,9 +13,16 @@ import 'package:rxdart/subjects.dart';
 class GamificationApiAdapter implements GamificationPort {
   GamificationApiAdapter({
     required final AuthentificationApiClient apiClient,
-  }) : _apiClient = apiClient;
+    required final MessageBus messageBus,
+  }) : _apiClient = apiClient {
+    _subscription =
+        messageBus.subscribe(actionCompletedTopic).listen((final event) async {
+      await mettreAJourLesPoints();
+    });
+  }
 
   final AuthentificationApiClient _apiClient;
+  late final StreamSubscription<String> _subscription;
 
   @override
   Future<Either<Exception, void>> mettreAJourLesPoints() async {
@@ -44,6 +52,7 @@ class GamificationApiAdapter implements GamificationPort {
   Stream<Gamification> gamification() => _gamificationSubject.stream;
 
   Future<void> dispose() async {
+    await _subscription.cancel();
     await _gamificationSubject.close();
     _apiClient.close();
   }

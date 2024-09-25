@@ -17,7 +17,6 @@ class DsfrButtonBorder extends WidgetStateProperty<Border> {
           $default: const Border(),
           disabled: const Border(),
         );
-
       case DsfrButtonVariant.secondary:
         return DsfrButtonBorder(
           $default: const Border.fromBorderSide(
@@ -27,7 +26,6 @@ class DsfrButtonBorder extends WidgetStateProperty<Border> {
             BorderSide(color: DsfrColors.grey925),
           ),
         );
-
       case DsfrButtonVariant.tertiary:
         return DsfrButtonBorder(
           $default: const Border.fromBorderSide(

@@ -19,7 +19,6 @@ class DsfrButtonForegroundColor extends WidgetStateColor {
           $default: DsfrColors.blueFrance975,
           disabled: DsfrColors.grey625,
         );
-
       case DsfrButtonVariant.secondary:
       case DsfrButtonVariant.tertiary:
       case DsfrButtonVariant.tertiaryWithouBorder:

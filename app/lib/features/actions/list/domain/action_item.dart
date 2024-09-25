@@ -1,5 +1,5 @@
-import 'package:app/features/actions/list/domain/action_id.dart';
-import 'package:app/features/actions/list/domain/action_status.dart';
+import 'package:app/features/actions/core/domain/action_id.dart';
+import 'package:app/features/actions/core/domain/action_status.dart';
 import 'package:equatable/equatable.dart';
 
 final class ActionItem extends Equatable {

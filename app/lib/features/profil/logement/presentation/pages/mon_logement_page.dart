@@ -53,7 +53,6 @@ class _MonLogementView extends StatelessWidget {
               case MonLogementStatut.initial:
               case MonLogementStatut.chargement:
                 return const Center(child: CircularProgressIndicator());
-
               case MonLogementStatut.succes:
                 return const MonLogementForm();
             }

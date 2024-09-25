@@ -21,13 +21,10 @@ abstract final class MissionMapper {
       switch (type) {
         case 'kyc':
           kycListe.add(_fromJsonMissionKyc(o));
-
         case 'quizz':
           quizListe.add(_fromJsonMissionQuiz(o));
-
         case 'article':
           articles.add(_fromJsonMissionArticle(o));
-
         case 'defi':
           defis.add(_fromJsonMissionDefi(o));
       }

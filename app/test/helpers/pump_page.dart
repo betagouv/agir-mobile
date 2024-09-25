@@ -12,22 +12,29 @@ Future<void> pumpPage({
   required final List<RepositoryProvider<Object>> repositoryProviders,
   final List<SingleChildWidget> blocProviders = const [],
   required final Widget page,
-  final List<String>? routes,
+  final Map<String, String>? routes,
 }) async {
   DeviceInfo.setup(tester);
   Widget widget = MaterialApp.router(
     routerConfig: GoRouter(
       routes: [
-        GoRoute(path: '/', builder: (final context, final state) => page),
-        ...?routes?.map(
-          (final route) => GoRoute(
-            path: '/$route',
-            name: route,
-            builder: (final context, final state) => Text('route: $route'),
-          ),
+        GoRoute(
+          path: '/',
+          builder: (final context, final state) => const Text('pop'),
+          routes: [
+            GoRoute(path: 'a', builder: (final context, final state) => page),
+            ...?routes?.entries.map(
+              (final e) => GoRoute(
+                path: e.value,
+                name: e.key,
+                builder: (final context, final state) =>
+                    Text('route: ${e.key}'),
+              ),
+            ),
+          ],
         ),
       ],
-      redirect: (final context, final state) => null,
+      initialLocation: '/a',
     ),
     localizationsDelegates: const [
       GlobalCupertinoLocalizations.delegate,

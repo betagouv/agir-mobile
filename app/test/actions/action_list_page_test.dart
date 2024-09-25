@@ -1,3 +1,4 @@
+import 'package:app/features/actions/core/domain/action_status.dart';
 import 'package:app/features/actions/detail/presentation/pages/action_detail_page.dart';
 import 'package:app/features/actions/list/domain/actions_port.dart';
 import 'package:app/features/actions/list/infrastructure/action_item_mapper.dart';
@@ -43,7 +44,7 @@ Future<void> _pumpPage(
       ),
     ],
     page: const ActionListPage(),
-    routes: [ActionDetailPage.name],
+    routes: {ActionDetailPage.name: ActionDetailPage.path},
   );
 }
 
@@ -59,7 +60,7 @@ void main() {
         authentificationTokenStorage: await getTokenStorage(),
       ),
     );
-    actions = List.generate(2, (final _) => actionItemFaker());
+    actions = List.generate(4, (final _) => actionItemFaker());
     dio.getM('/utilisateurs/$utilisateurId/defis', responseData: actions);
   });
 
@@ -73,7 +74,12 @@ void main() {
 
         for (final action in actions) {
           final expected = ActionItemMapper.fromJson(action);
-          expect(find.text(expected.titre), findsOneWidget);
+          expect(
+            find.text(expected.titre),
+            expected.status == ActionStatus.toDo
+                ? findsNothing
+                : findsOneWidget,
+          );
         }
       },
     );
@@ -85,7 +91,9 @@ void main() {
 
         await tester.pumpAndSettle();
 
-        final expected = ActionItemMapper.fromJson(actions.first);
+        final expected = ActionItemMapper.fromJson(
+          actions.firstWhere((final e) => e['status'] != 'todo'),
+        );
 
         await tester.tap(find.text(expected.titre));
 
