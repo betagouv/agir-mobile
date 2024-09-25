@@ -1,3 +1,4 @@
+import 'package:app/features/actions/presentation/pages/action_list_page.dart';
 import 'package:app/features/menu/presentation/pages/root_page.dart';
 import 'package:app/features/mieux_vous_connaitre/presentation/liste/pages/mieux_vous_connaitre_page.dart';
 import 'package:app/features/profil/informations/presentation/pages/mes_informations_page.dart';
@@ -52,6 +53,13 @@ class ProfilPage extends StatelessWidget {
                     label: Localisation.mieuxVousConnaitre,
                     onTap: () async => GoRouter.of(context)
                         .pushNamed(MieuxVousConnaitrePage.name),
+                  ),
+                  const DsfrDivider(),
+                  _MenuElement(
+                    icon: DsfrIcons.businessAwardFill,
+                    label: 'Vos actions',
+                    onTap: () async =>
+                        GoRouter.of(context).pushNamed(ActionListPage.name),
                   ),
                   const DsfrDivider(),
                   _MenuElement(

@@ -234,6 +234,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
       'Découvrez des thèmes et débloquez de nouvelles actions';
   static const valider = 'Valider';
   static const voirLesDemarches = 'Voir les démarches';
+  static const vosActions = 'Vos actions';
   static const vosAidesDisponibles = 'Vos aides disponibles';
   static const vosAidesSousTitre =
       'Accédez à toutes les aides publiques locales ou nationales pour la transition écologique en fonction de votre situation.';

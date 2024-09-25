@@ -1,4 +1,5 @@
 import 'package:app/app/app.dart';
+import 'package:app/features/actions/domain/actions_port.dart';
 import 'package:app/features/authentification/domain/entities/authentification_statut_manager.dart';
 import 'package:app/shared/wrappers/tracker.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,8 @@ import '../mocks/version_port_mock.dart';
 import '../scenario_context.dart';
 
 class _TrackerMock extends Mock implements Tracker {}
+
+class _ActionsPortMock extends Mock implements ActionsPort {}
 
 /// Iel lance l'application.
 Future<void> ielLanceLapplication(final WidgetTester tester) async {
@@ -89,6 +92,7 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
       firstNamePort: profilPort,
       profilPort: profilPort,
       mieuxVousConnaitrePort: ScenarioContext().mieuxVousConnaitrePortMock!,
+      actionsPort: _ActionsPortMock(),
       gamificationPort: GamificationPortMock(ScenarioContext().gamification),
     ),
     Durations.short1,

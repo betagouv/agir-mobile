@@ -1,6 +1,6 @@
 import 'package:app/features/mieux_vous_connaitre/presentation/element/pages/mieux_vous_connaitre_edit_page.dart';
 import 'package:app/features/mieux_vous_connaitre/presentation/liste/blocs/mieux_vous_connaitre_bloc.dart';
-import 'package:app/shared/widgets/fondamentaux/rounded_rectangle_border.dart';
+import 'package:app/shared/widgets/composants/list_item.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,41 +23,14 @@ class LesQuestions extends StatelessWidget {
           shrinkWrap: true,
           padding: EdgeInsets.zero,
           itemBuilder: (final context, final index) {
-            final question = questions[index];
+            final item = questions[index];
 
-            return GestureDetector(
+            return ListItem(
+              title: item.question,
+              subTitle: item.reponses.join(' - '),
               onTap: () async => GoRouter.of(context).pushNamed(
                 MieuxVousConnaitreEditPage.name,
-                pathParameters: {'id': question.id},
-              ),
-              behavior: HitTestBehavior.opaque,
-              child: Padding(
-                padding: const EdgeInsets.all(paddingVerticalPage),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            question.question,
-                            style: const DsfrTextStyle.headline6(),
-                          ),
-                          Text(
-                            question.reponses.join(' - '),
-                            style: const DsfrTextStyle.bodyXs(
-                              color: Color(0xFF7E7E7E),
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(width: DsfrSpacings.s1v),
-                    const Icon(DsfrIcons.systemArrowRightSLine),
-                  ],
-                ),
+                pathParameters: {'id': item.id},
               ),
             );
           },

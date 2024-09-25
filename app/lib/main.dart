@@ -3,6 +3,7 @@
 import 'dart:async';
 
 import 'package:app/app/app.dart';
+import 'package:app/features/actions/infrastructure/actions_adapter.dart';
 import 'package:app/features/aides/infrastructure/adapters/aide_velo_api_adapter.dart';
 import 'package:app/features/aides/infrastructure/adapters/aides_api_adapter.dart';
 import 'package:app/features/articles/infrastructure/adapters/articles_api_adapter.dart';
@@ -122,6 +123,7 @@ Future<void> main() async {
       profilPort: ProfilApiAdapter(apiClient: apiClient),
       mieuxVousConnaitrePort:
           MieuxVousConnaitreApiAdapter(apiClient: apiClient),
+      actionsPort: ActionsAdapter(client: dioHttpClient),
       gamificationPort: GamificationApiAdapter(apiClient: apiClient),
     ),
   );
