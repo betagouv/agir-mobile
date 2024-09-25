@@ -57,6 +57,7 @@ dart_code_metrics:
           - test/**
     - avoid-missing-image-alt: false # voir pour réactiver
     - avoid-nested-conditional-expressions: false
+    - avoid-nested-switch-expressions: false
     - avoid-non-ascii-symbols: false
     - avoid-non-null-assertion: false
     - avoid-passing-async-when-sync-expected: false

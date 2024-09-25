@@ -23,10 +23,11 @@ Future<void> pumpPage({
           (final route) => GoRoute(
             path: '/$route',
             name: route,
-            builder: (final context, final state) => Text(route),
+            builder: (final context, final state) => Text('route: $route'),
           ),
         ),
       ],
+      redirect: (final context, final state) => null,
     ),
     localizationsDelegates: const [
       GlobalCupertinoLocalizations.delegate,

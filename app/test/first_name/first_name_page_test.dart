@@ -53,9 +53,13 @@ void main() {
         await tester.pump();
 
         await tester.tap(find.byType(DsfrButton));
+
         await tester.pumpAndSettle();
 
-        expect(find.text(QuestionCodePostalPage.name), findsOneWidget);
+        expect(
+          find.text('route: ${QuestionCodePostalPage.name}'),
+          findsOneWidget,
+        );
       },
     );
 

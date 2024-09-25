@@ -1,5 +1,22 @@
 import 'package:faker/faker.dart';
 
+Map<String, dynamic> actionItemFaker() {
+  final faker = Faker();
+
+  return {
+    'id': faker.guid.guid(),
+    'status': [
+      'todo',
+      'en_cours',
+      'pas_envie',
+      'deja_fait',
+      'abondon',
+      'fait',
+    ].elementAt(faker.randomGenerator.integer(5)),
+    'titre': faker.lorem.sentence(),
+  };
+}
+
 Map<String, dynamic> aideFaker() {
   final faker = Faker();
 

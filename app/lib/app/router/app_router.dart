@@ -1,5 +1,7 @@
 import 'package:app/app/router/go_router_refresh_stream.dart';
 import 'package:app/features/accueil/presentation/pages/accueil_page.dart';
+import 'package:app/features/actions/presentation/pages/action_detail_page.dart';
+import 'package:app/features/actions/presentation/pages/action_list_page.dart';
 import 'package:app/features/aides/presentation/pages/aide_page.dart';
 import 'package:app/features/aides/presentation/pages/aides_page.dart';
 import 'package:app/features/aides/simulateur_velo/presentation/pages/aide_simulateur_velo_disponibles_page.dart';
@@ -92,6 +94,8 @@ GoRouter goRouter({
                 MonLogementPage.route,
                 MieuxVousConnaitrePage.route,
                 MieuxVousConnaitreEditPage.route,
+                ActionListPage.route,
+                ActionDetailPage.route,
                 OptionsAvanceesPage.route,
               ],
             ),

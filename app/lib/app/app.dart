@@ -1,5 +1,6 @@
 import 'package:app/app/router/app_router.dart';
 import 'package:app/features/accueil/presentation/cubit/home_disclaimer_cubit.dart';
+import 'package:app/features/actions/domain/actions_port.dart';
 import 'package:app/features/aides/domain/ports/aides_port.dart';
 import 'package:app/features/aides/presentation/blocs/aide/aide_bloc.dart';
 import 'package:app/features/aides/presentation/blocs/aides_disclaimer/aides_disclaimer_cubit.dart';
@@ -51,6 +52,7 @@ class App extends StatefulWidget {
     required this.firstNamePort,
     required this.profilPort,
     required this.mieuxVousConnaitrePort,
+    required this.actionsPort,
     required this.gamificationPort,
     super.key,
   });
@@ -70,6 +72,7 @@ class App extends StatefulWidget {
   final FirstNamePort firstNamePort;
   final ProfilPort profilPort;
   final MieuxVousConnaitrePort mieuxVousConnaitrePort;
+  final ActionsPort actionsPort;
   final GamificationPort gamificationPort;
 
   @override
@@ -107,6 +110,7 @@ class _AppState extends State<App> {
           RepositoryProvider.value(value: widget.communesPort),
           RepositoryProvider.value(value: widget.mieuxVousConnaitrePort),
           RepositoryProvider.value(value: widget.gamificationPort),
+          RepositoryProvider.value(value: widget.actionsPort),
           RepositoryProvider.value(value: widget.firstNamePort),
         ],
         child: MultiBlocProvider(
