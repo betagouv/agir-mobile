@@ -1,4 +1,4 @@
-import 'package:app/features/version/domain/ports/version_port.dart';
+import 'package:app/features/version/domain/version_port.dart';
 import 'package:fpdart/fpdart.dart';
 
 class VersionPortMock implements VersionPort {

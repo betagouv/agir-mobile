@@ -1,7 +1,7 @@
+import 'package:app/core/presentation/widgets/fondamentaux/shadows.dart';
 import 'package:app/features/articles/presentation/pages/article_page.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
 import 'package:app/l10n/l10n.dart';
-import 'package:app/shared/widgets/fondamentaux/shadows.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

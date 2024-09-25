@@ -1,3 +1,4 @@
+import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/profil/logement/presentation/widgets/mon_logement_chauffage.dart';
 import 'package:app/features/profil/logement/presentation/widgets/mon_logement_code_postal_et_commune.dart';
 import 'package:app/features/profil/logement/presentation/widgets/mon_logement_combien_etes_vous.dart';
@@ -6,9 +7,8 @@ import 'package:app/features/profil/logement/presentation/widgets/mon_logement_e
 import 'package:app/features/profil/logement/presentation/widgets/mon_logement_plus_15_ans.dart';
 import 'package:app/features/profil/logement/presentation/widgets/mon_logement_residence_principale.dart';
 import 'package:app/features/profil/logement/presentation/widgets/mon_logement_superficie.dart';
-import 'package:app/features/profil/presentation/widgets/profil_title.dart';
+import 'package:app/features/profil/profil/presentation/widgets/profil_title.dart';
 import 'package:app/l10n/l10n.dart';
-import 'package:app/shared/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 

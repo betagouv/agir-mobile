@@ -2,12 +2,12 @@
 
 import 'dart:io';
 
-import 'package:app/features/aides/domain/entities/aide.dart';
-import 'package:app/features/aides/infrastructure/adapters/aide_velo_par_type_mapper.dart';
-import 'package:app/features/aides/simulateur_velo/domain/value_objects/velo_pour_simulateur.dart';
+import 'package:app/core/helpers/input_formatter.dart';
+import 'package:app/core/helpers/number_format.dart';
+import 'package:app/features/aides/core/domain/aide.dart';
+import 'package:app/features/simulateur_velo/domain/velo_pour_simulateur.dart';
+import 'package:app/features/simulateur_velo/infrastructure/aide_velo_par_type_mapper.dart';
 import 'package:app/l10n/l10n.dart';
-import 'package:app/shared/helpers/input_formatter.dart';
-import 'package:app/shared/number_format.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../helpers/faker.dart';

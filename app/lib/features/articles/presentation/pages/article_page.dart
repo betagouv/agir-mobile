@@ -1,5 +1,5 @@
-import 'package:app/features/articles/presentation/blocs/article_bloc.dart';
-import 'package:app/features/articles/presentation/blocs/article_event.dart';
+import 'package:app/features/articles/presentation/bloc/article_bloc.dart';
+import 'package:app/features/articles/presentation/bloc/article_event.dart';
 import 'package:app/features/articles/presentation/pages/article_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

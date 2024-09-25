@@ -1,4 +1,4 @@
-import 'package:app/shared/helpers/regex.dart';
+import 'package:app/core/helpers/regex.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

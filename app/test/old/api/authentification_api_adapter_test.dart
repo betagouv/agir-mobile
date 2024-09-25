@@ -1,13 +1,13 @@
 import 'dart:io';
 
-import 'package:app/features/authentification/domain/entities/authentification_statut_manager.dart';
-import 'package:app/features/authentification/domain/value_objects/authentification_statut.dart';
-import 'package:app/features/authentification/domain/value_objects/information_de_code.dart';
-import 'package:app/features/authentification/domain/value_objects/information_de_connexion.dart';
-import 'package:app/features/authentification/infrastructure/adapters/authentification_api_adapter.dart';
-import 'package:app/features/authentification/infrastructure/adapters/authentification_api_client.dart';
-import 'package:app/features/authentification/infrastructure/adapters/authentification_token_storage.dart';
-import 'package:app/features/utilisateur/domain/entities/utilisateur.dart';
+import 'package:app/features/authentification/core/domain/authentification_statut.dart';
+import 'package:app/features/authentification/core/domain/authentification_statut_manager.dart';
+import 'package:app/features/authentification/core/domain/information_de_code.dart';
+import 'package:app/features/authentification/core/domain/information_de_connexion.dart';
+import 'package:app/features/authentification/core/infrastructure/authentification_api_adapter.dart';
+import 'package:app/features/authentification/core/infrastructure/authentification_api_client.dart';
+import 'package:app/features/authentification/core/infrastructure/authentification_token_storage.dart';
+import 'package:app/features/utilisateur/domain/utilisateur.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';

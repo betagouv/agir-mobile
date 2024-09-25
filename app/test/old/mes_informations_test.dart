@@ -1,5 +1,5 @@
+import 'package:app/core/helpers/number_format.dart';
 import 'package:app/l10n/l10n.dart';
-import 'package:app/shared/number_format.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'scenario_context.dart';

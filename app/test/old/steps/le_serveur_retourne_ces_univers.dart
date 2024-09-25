@@ -1,4 +1,4 @@
-import 'package:app/features/univers/domain/tuile_univers.dart';
+import 'package:app/features/univers/core/domain/tuile_univers.dart';
 
 import '../scenario_context.dart';
 

@@ -1,6 +1,6 @@
 import 'package:app/features/recommandations/domain/recommandation.dart';
-import 'package:app/features/univers/domain/mission_liste.dart';
-import 'package:app/features/univers/domain/tuile_univers.dart';
+import 'package:app/features/univers/core/domain/mission_liste.dart';
+import 'package:app/features/univers/core/domain/tuile_univers.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail_image_network/mocktail_image_network.dart';

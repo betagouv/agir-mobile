@@ -1,9 +1,9 @@
+import 'package:app/core/assets/images.dart';
+import 'package:app/core/assets/svgs.dart';
 import 'package:app/features/authentification/creer_compte/presentation/pages/creer_compte_page.dart';
-import 'package:app/features/authentification/presentation/pages/se_connecter_page.dart';
+import 'package:app/features/authentification/se_connecter/presentation/pages/se_connecter_page.dart';
 import 'package:app/features/version/presentation/widgets/version_label.dart';
 import 'package:app/l10n/l10n.dart';
-import 'package:app/shared/assets/images.dart';
-import 'package:app/shared/assets/svgs.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';

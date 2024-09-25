@@ -1,4 +1,4 @@
-import 'package:app/features/univers/domain/mission_liste.dart';
+import 'package:app/features/univers/core/domain/mission_liste.dart';
 
 import '../scenario_context.dart';
 

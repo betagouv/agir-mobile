@@ -1,4 +1,4 @@
-import 'package:app/features/univers/domain/aggregates/mission.dart';
+import 'package:app/features/univers/core/domain/mission.dart';
 
 import '../scenario_context.dart';
 

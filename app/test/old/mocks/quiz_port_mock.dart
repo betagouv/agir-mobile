@@ -1,5 +1,5 @@
-import 'package:app/features/quiz/domain/ports/quiz_port.dart';
 import 'package:app/features/quiz/domain/quiz.dart';
+import 'package:app/features/quiz/domain/quiz_port.dart';
 import 'package:fpdart/src/either.dart';
 
 class QuizPortMock implements QuizPort {

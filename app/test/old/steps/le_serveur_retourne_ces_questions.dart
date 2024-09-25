@@ -1,4 +1,4 @@
-import 'package:app/features/mieux_vous_connaitre/domain/question.dart';
+import 'package:app/features/mieux_vous_connaitre/core/domain/question.dart';
 
 import '../scenario_context.dart';
 

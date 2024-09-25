@@ -1,12 +1,12 @@
 import 'dart:async';
 
+import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/bibliotheque/domain/bibliotheque.dart';
-import 'package:app/features/bibliotheque/presentation/blocs/bibliotheque_bloc.dart';
-import 'package:app/features/bibliotheque/presentation/blocs/bibliotheque_event.dart';
+import 'package:app/features/bibliotheque/presentation/bloc/bibliotheque_bloc.dart';
+import 'package:app/features/bibliotheque/presentation/bloc/bibliotheque_event.dart';
 import 'package:app/features/bibliotheque/presentation/pages/contenu.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
 import 'package:app/l10n/l10n.dart';
-import 'package:app/shared/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

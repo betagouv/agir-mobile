@@ -1,4 +1,4 @@
-import 'package:app/shared/widgets/fondamentaux/shadows.dart';
+import 'package:app/core/presentation/widgets/fondamentaux/shadows.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 

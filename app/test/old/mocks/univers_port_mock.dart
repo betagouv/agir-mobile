@@ -1,11 +1,11 @@
-import 'package:app/features/univers/domain/aggregates/mission.dart';
-import 'package:app/features/univers/domain/entities/defi.dart';
-import 'package:app/features/univers/domain/mission_liste.dart';
-import 'package:app/features/univers/domain/ports/univers_port.dart';
-import 'package:app/features/univers/domain/tuile_univers.dart';
-import 'package:app/features/univers/domain/value_objects/content_id.dart';
-import 'package:app/features/univers/domain/value_objects/defi_id.dart';
-import 'package:app/features/univers/domain/value_objects/service_item.dart';
+import 'package:app/features/univers/core/domain/content_id.dart';
+import 'package:app/features/univers/core/domain/defi.dart';
+import 'package:app/features/univers/core/domain/defi_id.dart';
+import 'package:app/features/univers/core/domain/mission.dart';
+import 'package:app/features/univers/core/domain/mission_liste.dart';
+import 'package:app/features/univers/core/domain/service_item.dart';
+import 'package:app/features/univers/core/domain/tuile_univers.dart';
+import 'package:app/features/univers/core/domain/univers_port.dart';
 import 'package:fpdart/src/either.dart';
 
 class UniversPortMock implements UniversPort {

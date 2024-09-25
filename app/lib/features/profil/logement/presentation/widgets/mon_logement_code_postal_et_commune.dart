@@ -1,8 +1,8 @@
-import 'package:app/features/profil/logement/presentation/blocs/mon_logement_bloc.dart';
-import 'package:app/features/profil/logement/presentation/blocs/mon_logement_event.dart';
+import 'package:app/core/helpers/text_scaler.dart';
+import 'package:app/features/profil/logement/presentation/bloc/mon_logement_bloc.dart';
+import 'package:app/features/profil/logement/presentation/bloc/mon_logement_event.dart';
 import 'package:app/features/profil/logement/presentation/widgets/mon_logement_titre_et_contenu.dart';
 import 'package:app/l10n/l10n.dart';
-import 'package:app/shared/helpers/text_scaler.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

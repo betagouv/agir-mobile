@@ -1,9 +1,9 @@
-import 'package:app/features/univers/domain/tuile_univers.dart';
-import 'package:app/features/univers/presentation/blocs/accueil_univers_bloc.dart';
+import 'package:app/core/presentation/widgets/composants/badge.dart';
+import 'package:app/features/univers/core/domain/tuile_univers.dart';
+import 'package:app/features/univers/presentation/bloc/accueil_univers_bloc.dart';
 import 'package:app/features/univers/presentation/pages/univers_page.dart';
 import 'package:app/features/univers/presentation/widgets/univers_card.dart';
 import 'package:app/l10n/l10n.dart';
-import 'package:app/shared/widgets/composants/badge.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

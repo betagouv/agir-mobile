@@ -1,7 +1,7 @@
+import 'package:app/core/presentation/widgets/composants/app_bar.dart';
+import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/features/menu/presentation/widgets/menu.dart';
 import 'package:app/features/menu/presentation/widgets/menu_button.dart';
-import 'package:app/shared/widgets/composants/app_bar.dart';
-import 'package:app/shared/widgets/fondamentaux/colors.dart';
 import 'package:flutter/material.dart';
 
 class RootPage extends StatelessWidget {

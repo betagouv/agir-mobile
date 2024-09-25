@@ -1,5 +1,5 @@
-import 'package:app/features/aides/simulateur_velo/domain/ports/aide_velo_port.dart';
-import 'package:app/features/aides/simulateur_velo/domain/value_objects/aide_velo_par_type.dart';
+import 'package:app/features/simulateur_velo/domain/aide_velo_par_type.dart';
+import 'package:app/features/simulateur_velo/domain/aide_velo_port.dart';
 import 'package:fpdart/fpdart.dart';
 
 class AideVeloPortMock implements AideVeloPort {
