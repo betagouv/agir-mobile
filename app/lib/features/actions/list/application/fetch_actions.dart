@@ -1,5 +1,5 @@
+import 'package:app/features/actions/core/domain/action_status.dart';
 import 'package:app/features/actions/list/domain/action_item.dart';
-import 'package:app/features/actions/list/domain/action_status.dart';
 import 'package:app/features/actions/list/domain/actions_port.dart';
 import 'package:collection/collection.dart';
 import 'package:fpdart/fpdart.dart';

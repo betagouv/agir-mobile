@@ -51,6 +51,7 @@ dart_code_metrics:
     - avoid-getter-prefix: false
     - avoid-ignoring-return-values: false
     - avoid-late-keyword: false
+    - avoid-local-functions: false
     - avoid-long-files: false
     - avoid-long-functions:
         exclude:
@@ -81,6 +82,7 @@ dart_code_metrics:
           - public-fields
           - private-fields
     - missing-test-assertion: false
+    - newline-before-case: false
     - no-empty-block: false
     - no-equal-arguments: false
     - no-magic-number: false

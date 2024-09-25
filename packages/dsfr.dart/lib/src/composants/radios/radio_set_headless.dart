@@ -52,7 +52,7 @@ class _DsfrRadioButtonSetHeadlessState<T>
   Widget build(final BuildContext context) {
     final children = widget.values.entries
         .map(
-          (final e) => DsfrRadioButton<T?>(
+          (final e) => DsfrRadioButton<T>(
             title: e.value.value,
             value: e.key,
             groupValue: _value,

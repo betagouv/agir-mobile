@@ -2,9 +2,9 @@ import 'package:app/core/presentation/widgets/composants/app_bar.dart';
 import 'package:app/core/presentation/widgets/composants/list_item.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
+import 'package:app/features/actions/core/domain/action_status.dart';
 import 'package:app/features/actions/detail/presentation/pages/action_detail_page.dart';
 import 'package:app/features/actions/list/application/fetch_actions.dart';
-import 'package:app/features/actions/list/domain/action_status.dart';
 import 'package:app/features/actions/list/presentation/bloc/action_list_bloc.dart';
 import 'package:app/features/actions/list/presentation/bloc/action_list_event.dart';
 import 'package:app/features/actions/list/presentation/bloc/action_list_state.dart';
@@ -19,7 +19,7 @@ class ActionListPage extends StatelessWidget {
   const ActionListPage({super.key});
 
   static const name = 'action-list';
-  static const path = name;
+  static const path = 'action';
 
   static GoRoute get route => GoRoute(
         path: path,
@@ -67,8 +67,18 @@ class ActionListPage extends StatelessWidget {
                             title: item.titre,
                             subTitle: subTitle,
                             onTap: () async {
-                              await GoRouter.of(context)
-                                  .pushNamed(ActionDetailPage.name);
+                              final bloc = context.read<ActionListBloc>();
+                              final result =
+                                  await GoRouter.of(context).pushNamed(
+                                ActionDetailPage.name,
+                                pathParameters: {'id': item.id.value},
+                              );
+
+                              if (result != true) {
+                                return;
+                              }
+
+                              bloc.add(const ActionListFetch());
                             },
                           );
                         },

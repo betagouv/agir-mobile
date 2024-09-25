@@ -3,11 +3,11 @@
 import 'package:app/core/assets/images.dart';
 import 'package:app/core/presentation/widgets/composants/badge.dart';
 import 'package:app/core/presentation/widgets/composants/card.dart';
+import 'package:app/features/actions/detail/presentation/pages/action_detail_page.dart';
 import 'package:app/features/univers/core/domain/content_id.dart';
 import 'package:app/features/univers/core/domain/mission_defi.dart';
 import 'package:app/features/univers/presentation/bloc/mission_bloc.dart';
 import 'package:app/features/univers/presentation/bloc/mission_event.dart';
-import 'package:app/features/univers/presentation/pages/defi_page.dart';
 import 'package:app/features/univers/presentation/widgets/objectif_card.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
@@ -35,6 +35,11 @@ class DefiWidget extends StatelessWidget {
       );
     }
 
+    Future<Object?> onPressed() async => GoRouter.of(context).pushNamed(
+          ActionDetailPage.name,
+          pathParameters: {'id': defi.contentId.value},
+        );
+
     switch (defi.status) {
       case MissionDefiStatus.toDo:
       case MissionDefiStatus.refused:
@@ -47,10 +52,7 @@ class DefiWidget extends StatelessWidget {
                 label: Localisation.allerALAction,
                 variant: DsfrButtonVariant.primary,
                 size: DsfrButtonSize.lg,
-                onPressed: () async => GoRouter.of(context).pushNamed(
-                  DefiPage.name,
-                  pathParameters: {'id': defi.contentId.value},
-                ),
+                onPressed: onPressed,
               ),
               borderColor: defi.isRecommended ? DsfrColors.info425 : null,
             ),
@@ -61,7 +63,6 @@ class DefiWidget extends StatelessWidget {
               ),
           ],
         );
-
       case MissionDefiStatus.inProgress:
         const color = Color(0xFFDCEF64);
 
@@ -74,10 +75,7 @@ class DefiWidget extends StatelessWidget {
                 label: Localisation.reprendreLaction,
                 variant: DsfrButtonVariant.secondary,
                 size: DsfrButtonSize.lg,
-                onPressed: () async => GoRouter.of(context).pushNamed(
-                  DefiPage.name,
-                  pathParameters: {'id': defi.contentId.value},
-                ),
+                onPressed: onPressed,
               ),
               borderColor: color,
             ),
@@ -88,7 +86,6 @@ class DefiWidget extends StatelessWidget {
             ),
           ],
         );
-
       case MissionDefiStatus.abandonned:
       case MissionDefiStatus.alreadyDone:
       case MissionDefiStatus.done:

@@ -17,6 +17,45 @@ Map<String, dynamic> actionItemFaker() {
   };
 }
 
+Map<String, dynamic> actionFaker({
+  final String? id,
+  final String? status,
+  final String? reason,
+}) {
+  final faker = Faker();
+
+  final thematique = [
+    '🥦 Alimentation',
+    '☀️ Climat et Environnement',
+    '🛒 Consommation durable',
+    '🗑️ Déchets',
+    '🏡 Logement',
+    '⚽ Loisirs (vacances, sport,...)',
+    '🚗 Transports',
+  ];
+
+  final statusList = [
+    'todo',
+    'en_cours',
+    'pas_envie',
+    'deja_fait',
+    'abondon',
+    'fait',
+  ];
+
+  return {
+    'astuces': '<p>${faker.lorem.sentence()}</p>',
+    'id': id ?? faker.guid.guid(),
+    'motif': reason,
+    'pourquoi': '<p>${faker.lorem.sentence()}</p>',
+    'status': status ??
+        statusList.elementAt(faker.randomGenerator.integer(statusList.length)),
+    'thematique_label':
+        thematique.elementAt(faker.randomGenerator.integer(thematique.length)),
+    'titre': faker.lorem.sentence(),
+  };
+}
+
 Map<String, dynamic> aideFaker() {
   final faker = Faker();
 

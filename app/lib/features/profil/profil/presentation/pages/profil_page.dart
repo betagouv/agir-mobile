@@ -56,7 +56,7 @@ class ProfilPage extends StatelessWidget {
                   ),
                   const DsfrDivider(),
                   _MenuElement(
-                    icon: DsfrIcons.businessAwardFill,
+                    icon: DsfrIcons.businessAwardLine,
                     label: 'Vos actions',
                     onTap: () async =>
                         GoRouter.of(context).pushNamed(ActionListPage.name),

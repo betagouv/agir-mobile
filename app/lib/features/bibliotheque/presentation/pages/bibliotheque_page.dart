@@ -34,7 +34,6 @@ class BibliothequePage extends StatelessWidget {
             case BibliothequeStatut.initial:
             case BibliothequeStatut.chargement:
               return const Center(child: CircularProgressIndicator());
-
             case BibliothequeStatut.succes:
               return const BibliothequeView();
           }

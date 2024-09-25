@@ -4,7 +4,9 @@ import 'dart:async';
 
 import 'package:app/app/app.dart';
 import 'package:app/core/error/infrastructure/crash_reporting.dart';
+import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/core/infrastructure/tracker.dart';
+import 'package:app/features/actions/detail/infrastructure/action_repository.dart';
 import 'package:app/features/actions/list/infrastructure/actions_adapter.dart';
 import 'package:app/features/aides/core/infrastructure/aides_api_adapter.dart';
 import 'package:app/features/articles/infrastructure/articles_api_adapter.dart';
@@ -101,6 +103,7 @@ Future<void> main() async {
     token: apiCmsToken,
   );
 
+  final messageBus = MessageBus();
   runApp(
     App(
       tracker: tracker,
@@ -124,7 +127,12 @@ Future<void> main() async {
       mieuxVousConnaitrePort:
           MieuxVousConnaitreApiAdapter(apiClient: apiClient),
       actionsPort: ActionsAdapter(client: dioHttpClient),
-      gamificationPort: GamificationApiAdapter(apiClient: apiClient),
+      actionRepository:
+          ActionRepository(client: dioHttpClient, messageBus: messageBus),
+      gamificationPort: GamificationApiAdapter(
+        apiClient: apiClient,
+        messageBus: messageBus,
+      ),
     ),
   );
 }

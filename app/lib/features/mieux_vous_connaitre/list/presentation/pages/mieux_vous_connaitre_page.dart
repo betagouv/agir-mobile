@@ -36,7 +36,6 @@ class MieuxVousConnaitrePage extends StatelessWidget {
             case MieuxVousConnaitreStatut.initial:
             case MieuxVousConnaitreStatut.chargement:
               return const Center(child: CircularProgressIndicator());
-
             case MieuxVousConnaitreStatut.succes:
               return const MieuxVousConnaitreView();
           }

@@ -30,7 +30,6 @@ import 'package:app/features/quiz/presentation/pages/quiz_page.dart';
 import 'package:app/features/recommandations/presentation/widgets/mes_recommandations.dart';
 import 'package:app/features/simulateur_velo/presentation/pages/aide_simulateur_velo_disponibles_page.dart';
 import 'package:app/features/simulateur_velo/presentation/pages/aide_simulateur_velo_page.dart';
-import 'package:app/features/univers/presentation/pages/defi_page.dart';
 import 'package:app/features/univers/presentation/pages/mission_kyc_page.dart';
 import 'package:app/features/univers/presentation/pages/mission_page.dart';
 import 'package:app/features/univers/presentation/pages/univers_page.dart';
@@ -80,7 +79,6 @@ GoRouter goRouter({
                 UniversPage.route,
                 MissionPage.route,
                 MissionKycPage.route,
-                DefiPage.route,
                 AidesPage.route,
                 AidePage.route,
                 AideSimulateurVeloPage.route(
@@ -109,12 +107,10 @@ GoRouter goRouter({
         switch (statutActuel) {
           case AuthentificationStatut.inconnu:
             return '/unauthenticated/${PreOnboardingPage.path}';
-
           case AuthentificationStatut.connecte:
             if (path.startsWith('/unauthenticated')) {
               return '/authenticated/${AccueilPage.path}';
             }
-
           case AuthentificationStatut.pasConnecte:
             if (path.startsWith('/authenticated')) {
               return '/unauthenticated/${PreOnboardingPage.path}';

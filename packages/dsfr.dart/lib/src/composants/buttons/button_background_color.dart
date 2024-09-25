@@ -25,7 +25,6 @@ class DsfrButtonBackgroundColor extends WidgetStateColor {
           hover: DsfrColors.blueFranceSun113Hover,
           disabled: DsfrColors.grey925,
         );
-
       case DsfrButtonVariant.secondary:
       case DsfrButtonVariant.tertiary:
       case DsfrButtonVariant.tertiaryWithouBorder:
