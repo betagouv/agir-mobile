@@ -1,15 +1,17 @@
 import 'dart:async';
 
-import 'package:app/features/authentification/core/domain/authentification_statut.dart';
+import 'package:app/features/authentication/domain/authentication_service.dart';
+import 'package:app/features/authentication/domain/authentication_status.dart';
 import 'package:flutter/material.dart';
 
 class GoRouterRefreshStream extends ChangeNotifier {
-  GoRouterRefreshStream(final Stream<AuthentificationStatut> stream) {
+  GoRouterRefreshStream(final AuthenticationService authenticationService) {
     notifyListeners();
-    _subscription = stream.listen((final _) => notifyListeners());
+    _subscription = authenticationService.authenticationStatus
+        .listen((final _) => notifyListeners());
   }
 
-  late final StreamSubscription<AuthentificationStatut> _subscription;
+  late final StreamSubscription<AuthenticationStatus> _subscription;
 
   @override
   Future<void> dispose() async {

@@ -1,4 +1,4 @@
-import 'package:app/features/authentification/core/domain/authentification_statut.dart';
+import 'package:app/features/authentication/domain/authentication_status.dart';
 import 'package:equatable/equatable.dart';
 
 sealed class GamificationEvent extends Equatable {
@@ -9,12 +9,12 @@ sealed class GamificationEvent extends Equatable {
 }
 
 final class GamificationAuthentificationAChange extends GamificationEvent {
-  const GamificationAuthentificationAChange(this.statut);
+  const GamificationAuthentificationAChange(this.status);
 
-  final AuthentificationStatut statut;
+  final AuthenticationStatus status;
 
   @override
-  List<Object> get props => [statut];
+  List<Object> get props => [status];
 }
 
 final class GamificationAbonnementDemande extends GamificationEvent {

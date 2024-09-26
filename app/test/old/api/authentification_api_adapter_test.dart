@@ -1,21 +1,24 @@
 import 'dart:io';
 
-import 'package:app/features/authentification/core/domain/authentification_statut.dart';
-import 'package:app/features/authentification/core/domain/authentification_statut_manager.dart';
+import 'package:app/features/authentication/domain/authentication_service.dart';
+import 'package:app/features/authentication/domain/authentication_status.dart';
+import 'package:app/features/authentication/domain/user_id.dart';
+import 'package:app/features/authentication/infrastructure/authentication_repository.dart';
 import 'package:app/features/authentification/core/domain/information_de_code.dart';
 import 'package:app/features/authentification/core/domain/information_de_connexion.dart';
 import 'package:app/features/authentification/core/infrastructure/authentification_api_adapter.dart';
 import 'package:app/features/authentification/core/infrastructure/authentification_api_client.dart';
-import 'package:app/features/authentification/core/infrastructure/authentification_token_storage.dart';
 import 'package:app/features/utilisateur/domain/utilisateur.dart';
+import 'package:clock/clock.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../mocks/authentication_service_fake.dart';
 import 'client_mock.dart';
 import 'constants.dart';
 import 'custom_response.dart';
-import 'flutter_secure_storage_mock.dart';
+import 'flutter_secure_storage_fake.dart';
 import 'request_mathcher.dart';
 
 void main() {
@@ -34,16 +37,18 @@ void main() {
           response: CustomResponse('', statusCode: HttpStatus.created),
         );
 
+      final authenticationService = AuthenticationService(
+        authenticationRepository:
+            AuthenticationRepository(FlutterSecureStorageFake()),
+        clock: Clock.fixed(DateTime(1992)),
+      );
       final adapter = AuthentificationApiAdapter(
         apiClient: AuthentificationApiClient(
           apiUrl: apiUrl,
-          authentificationTokenStorage: AuthentificationTokenStorage(
-            secureStorage: FlutterSecureStorageMock(),
-            authentificationStatusManagerWriter:
-                AuthentificationStatutManager(),
-          ),
+          authenticationService: authenticationService,
           inner: client,
         ),
+        authenticationService: authenticationService,
       );
 
       // Act.
@@ -79,15 +84,18 @@ void main() {
         response: OkResponse(),
       );
 
+    final authenticationService = AuthenticationService(
+      authenticationRepository:
+          AuthenticationRepository(FlutterSecureStorageFake()),
+      clock: Clock.fixed(DateTime(1992)),
+    );
     final adapter = AuthentificationApiAdapter(
       apiClient: AuthentificationApiClient(
         apiUrl: apiUrl,
-        authentificationTokenStorage: AuthentificationTokenStorage(
-          secureStorage: FlutterSecureStorageMock(),
-          authentificationStatusManagerWriter: AuthentificationStatutManager(),
-        ),
+        authenticationService: authenticationService,
         inner: client,
       ),
+      authenticationService: authenticationService,
     );
 
     // Act.
@@ -121,25 +129,27 @@ void main() {
 {
   "token": "$token",
   "utilisateur": {
-    "id": "$utilisateurId"
+    "id": "user123"
   }
 }''',
             statusCode: HttpStatus.created,
           ),
         );
 
-      final flutterSecureStorageMock = FlutterSecureStorageMock();
-      final authentificationStatutManager = AuthentificationStatutManager();
+      final flutterSecureStorage = FlutterSecureStorageFake();
 
+      final authenticationService = AuthenticationService(
+        authenticationRepository:
+            AuthenticationRepository(flutterSecureStorage),
+        clock: Clock.fixed(DateTime(1992)),
+      );
       final adapter = AuthentificationApiAdapter(
         apiClient: AuthentificationApiClient(
           apiUrl: apiUrl,
-          authentificationTokenStorage: AuthentificationTokenStorage(
-            secureStorage: flutterSecureStorageMock,
-            authentificationStatusManagerWriter: authentificationStatutManager,
-          ),
+          authenticationService: authenticationService,
           inner: client,
         ),
+        authenticationService: authenticationService,
       );
       await adapter.connexionDemandee(informationDeConnexion);
 
@@ -152,13 +162,11 @@ void main() {
       );
 
       // Assert.
+      final actual = await flutterSecureStorage.readAll();
+      expect(actual, {'token': token});
       expect(
-        await flutterSecureStorageMock.readAll(),
-        {'token': token, 'utilisateurId': utilisateurId},
-      );
-      expect(
-        authentificationStatutManager.statutActuel,
-        AuthentificationStatut.connecte,
+        authenticationService.status,
+        const Authenticated(UserId(utilisateurId)),
       );
 
       verify(
@@ -178,18 +186,20 @@ void main() {
     "deconnexionDemandee supprime le token et l'utisateurId dans le secure storage et modifie le statut a pas connecté",
     () async {
       // Arrange.
-      final flutterSecureStorageMock = FlutterSecureStorageMock();
-      final authentificationStatutManager = AuthentificationStatutManager();
+      final flutterSecureStorageMock = FlutterSecureStorageFake();
 
+      final authenticationService = AuthenticationService(
+        authenticationRepository:
+            AuthenticationRepository(FlutterSecureStorageFake()),
+        clock: Clock.fixed(DateTime(1992)),
+      );
       final adapter = AuthentificationApiAdapter(
         apiClient: AuthentificationApiClient(
           apiUrl: apiUrl,
-          authentificationTokenStorage: AuthentificationTokenStorage(
-            secureStorage: flutterSecureStorageMock,
-            authentificationStatusManagerWriter: authentificationStatutManager,
-          ),
+          authenticationService: authenticationService,
           inner: ClientMock(),
         ),
+        authenticationService: authenticationService,
       );
 
       // Act.
@@ -197,10 +207,7 @@ void main() {
 
       // Assert.
       expect(await flutterSecureStorageMock.readAll(), <String, dynamic>{});
-      expect(
-        authentificationStatutManager.statutActuel,
-        AuthentificationStatut.pasConnecte,
-      );
+      expect(authenticationService.status, const Unauthenticated());
     },
   );
 
@@ -217,15 +224,18 @@ void main() {
         ),
       );
 
+    final authenticationService = AuthenticationService(
+      authenticationRepository:
+          AuthenticationRepository(FlutterSecureStorageFake()),
+      clock: Clock.fixed(DateTime(1992)),
+    );
     final adapter = AuthentificationApiAdapter(
       apiClient: AuthentificationApiClient(
         apiUrl: apiUrl,
-        authentificationTokenStorage: AuthentificationTokenStorage(
-          secureStorage: FlutterSecureStorageMock(),
-          authentificationStatusManagerWriter: AuthentificationStatutManager(),
-        ),
+        authenticationService: authenticationService,
         inner: client,
       ),
+      authenticationService: authenticationService,
     );
 
     await adapter.creationDeCompteDemandee(informationDeConnexion);
@@ -259,18 +269,19 @@ void main() {
         ),
       );
 
-    final flutterSecureStorageMock = FlutterSecureStorageMock();
-    final authentificationStatutManager = AuthentificationStatutManager();
-
+    final flutterSecureStorageMock = FlutterSecureStorageFake();
+    final authenticationService = AuthenticationService(
+      authenticationRepository:
+          AuthenticationRepository(flutterSecureStorageMock),
+      clock: Clock.fixed(DateTime(1992)),
+    );
     final adapter = AuthentificationApiAdapter(
       apiClient: AuthentificationApiClient(
         apiUrl: apiUrl,
-        authentificationTokenStorage: AuthentificationTokenStorage(
-          secureStorage: flutterSecureStorageMock,
-          authentificationStatusManagerWriter: authentificationStatutManager,
-        ),
+        authenticationService: authenticationService,
         inner: client,
       ),
+      authenticationService: authenticationService,
     );
 
     await adapter.validationDemandee(
@@ -278,13 +289,10 @@ void main() {
     );
 
     // Assert.
+    expect(await flutterSecureStorageMock.readAll(), {'token': token});
     expect(
-      await flutterSecureStorageMock.readAll(),
-      {'token': token, 'utilisateurId': utilisateurId},
-    );
-    expect(
-      authentificationStatutManager.statutActuel,
-      AuthentificationStatut.connecte,
+      authenticationService.status,
+      const Authenticated(UserId(utilisateurId)),
     );
 
     verify(
@@ -306,15 +314,18 @@ void main() {
         response: OkResponse(),
       );
 
+    final authenticationService = AuthenticationService(
+      authenticationRepository:
+          AuthenticationRepository(FlutterSecureStorageFake()),
+      clock: Clock.fixed(DateTime(1992)),
+    );
     final adapter = AuthentificationApiAdapter(
       apiClient: AuthentificationApiClient(
         apiUrl: apiUrl,
-        authentificationTokenStorage: AuthentificationTokenStorage(
-          secureStorage: FlutterSecureStorageMock(),
-          authentificationStatusManagerWriter: AuthentificationStatutManager(),
-        ),
+        authenticationService: authenticationService,
         inner: client,
       ),
+      authenticationService: authenticationService,
     );
 
     await adapter.renvoyerCodeDemande('test@example.com');
@@ -344,15 +355,18 @@ void main() {
         ),
       );
 
+    final authenticationService = AuthenticationService(
+      authenticationRepository:
+          AuthenticationRepository(FlutterSecureStorageFake()),
+      clock: Clock.fixed(DateTime(1992)),
+    );
     final adapter = AuthentificationApiAdapter(
       apiClient: AuthentificationApiClient(
         apiUrl: apiUrl,
-        authentificationTokenStorage: AuthentificationTokenStorage(
-          secureStorage: FlutterSecureStorageMock(),
-          authentificationStatusManagerWriter: AuthentificationStatutManager(),
-        ),
+        authenticationService: authenticationService,
         inner: client,
       ),
+      authenticationService: authenticationService,
     );
 
     await adapter.oubliMotDePasse('test@example.com');
@@ -376,15 +390,18 @@ void main() {
         response: CustomResponse('', statusCode: HttpStatus.created),
       );
 
+    final authenticationService = AuthenticationService(
+      authenticationRepository:
+          AuthenticationRepository(FlutterSecureStorageFake()),
+      clock: Clock.fixed(DateTime(1992)),
+    );
     final adapter = AuthentificationApiAdapter(
       apiClient: AuthentificationApiClient(
         apiUrl: apiUrl,
-        authentificationTokenStorage: AuthentificationTokenStorage(
-          secureStorage: FlutterSecureStorageMock(),
-          authentificationStatusManagerWriter: AuthentificationStatutManager(),
-        ),
+        authenticationService: authenticationService,
         inner: client,
       ),
+      authenticationService: authenticationService,
     );
 
     await adapter.modifierMotDePasse(
@@ -425,18 +442,15 @@ void main() {
         ),
       );
 
-    final authentificationTokenStorage = AuthentificationTokenStorage(
-      secureStorage: FlutterSecureStorageMock(),
-      authentificationStatusManagerWriter: AuthentificationStatutManager(),
-    );
-    await authentificationTokenStorage.sauvegarderToken(token);
+    const authenticationService = AuthenticationServiceFake();
 
     final adapter = AuthentificationApiAdapter(
       apiClient: AuthentificationApiClient(
         apiUrl: apiUrl,
-        authentificationTokenStorage: authentificationTokenStorage,
+        authenticationService: authenticationService,
         inner: client,
       ),
+      authenticationService: authenticationService,
     );
 
     // Act.

@@ -6,8 +6,8 @@ import 'package:app/features/actions/list/presentation/pages/action_list_page.da
 import 'package:app/features/aides/item/presentation/pages/aide_page.dart';
 import 'package:app/features/aides/list/presentation/pages/aides_page.dart';
 import 'package:app/features/articles/presentation/pages/article_page.dart';
-import 'package:app/features/authentification/core/domain/authentification_statut.dart';
-import 'package:app/features/authentification/core/domain/authentification_statut_manager.dart';
+import 'package:app/features/authentication/domain/authentication_service.dart';
+import 'package:app/features/authentication/domain/authentication_status.dart';
 import 'package:app/features/authentification/creer_compte/presentation/pages/creer_compte_page.dart';
 import 'package:app/features/authentification/mot_de_passe_oublie/pages/mot_de_passe_oublie_page.dart';
 import 'package:app/features/authentification/mot_de_passe_oublie_code/pages/mot_de_passe_oublie_code_page.dart';
@@ -36,8 +36,7 @@ import 'package:app/features/univers/presentation/pages/univers_page.dart';
 import 'package:go_router/go_router.dart';
 
 GoRouter goRouter({
-  required final AuthentificationStatutManagerReader
-      authentificationStatusManagerReader,
+  required final AuthenticationService authenticationService,
   required final Tracker tracker,
 }) =>
     GoRouter(
@@ -103,15 +102,14 @@ GoRouter goRouter({
       redirect: (final context, final state) {
         final path = state.uri.path;
 
-        final statutActuel = authentificationStatusManagerReader.statutActuel;
+        final statutActuel = authenticationService.status;
+
         switch (statutActuel) {
-          case AuthentificationStatut.inconnu:
-            return '/unauthenticated/${PreOnboardingPage.path}';
-          case AuthentificationStatut.connecte:
+          case Authenticated():
             if (path.startsWith('/unauthenticated')) {
               return '/authenticated/${AccueilPage.path}';
             }
-          case AuthentificationStatut.pasConnecte:
+          case Unauthenticated():
             if (path.startsWith('/authenticated')) {
               return '/unauthenticated/${PreOnboardingPage.path}';
             }
@@ -119,8 +117,7 @@ GoRouter goRouter({
 
         return null;
       },
-      refreshListenable:
-          GoRouterRefreshStream(authentificationStatusManagerReader.statut),
+      refreshListenable: GoRouterRefreshStream(authenticationService),
       initialLocation: '/unauthenticated/${PreOnboardingPage.path}',
       observers: [
         mesRecommandationsRouteObserver,

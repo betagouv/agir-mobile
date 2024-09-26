@@ -26,7 +26,7 @@ class UniversApiAdapter implements UniversPort {
 
   @override
   Future<Either<Exception, List<TuileUnivers>>> recuperer() async {
-    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    final utilisateurId = _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
       return const Left(UtilisateurIdNonTrouveException());
     }
@@ -53,7 +53,7 @@ class UniversApiAdapter implements UniversPort {
   Future<Either<Exception, List<MissionListe>>> recupererThematiques(
     final String universType,
   ) async {
-    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    final utilisateurId = _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
       return const Left(UtilisateurIdNonTrouveException());
     }
@@ -83,7 +83,7 @@ class UniversApiAdapter implements UniversPort {
   Future<Either<Exception, Mission>> recupererMission({
     required final String missionId,
   }) async {
-    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    final utilisateurId = _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
       return const Left(UtilisateurIdNonTrouveException());
     }
@@ -107,7 +107,7 @@ class UniversApiAdapter implements UniversPort {
   Future<Either<Exception, void>> gagnerPoints({
     required final ObjectifId id,
   }) async {
-    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    final utilisateurId = _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
       return const Left(UtilisateurIdNonTrouveException());
     }
@@ -127,7 +127,7 @@ class UniversApiAdapter implements UniversPort {
   Future<Either<Exception, void>> terminer({
     required final String missionId,
   }) async {
-    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    final utilisateurId = _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
       return const Left(UtilisateurIdNonTrouveException());
     }
@@ -146,7 +146,7 @@ class UniversApiAdapter implements UniversPort {
   Future<Either<Exception, List<ServiceItem>>> getServices(
     final String universType,
   ) async {
-    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    final utilisateurId = _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
       return const Left(UtilisateurIdNonTrouveException());
     }

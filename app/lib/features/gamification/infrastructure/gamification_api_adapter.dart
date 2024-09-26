@@ -26,7 +26,7 @@ class GamificationApiAdapter implements GamificationPort {
 
   @override
   Future<Either<Exception, void>> mettreAJourLesPoints() async {
-    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    final utilisateurId = _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
       return const Left(UtilisateurIdNonTrouveException());
     }
@@ -54,6 +54,6 @@ class GamificationApiAdapter implements GamificationPort {
   Future<void> dispose() async {
     await _subscription.cancel();
     await _gamificationSubject.close();
-    _apiClient.close();
+    await _apiClient.close();
   }
 }

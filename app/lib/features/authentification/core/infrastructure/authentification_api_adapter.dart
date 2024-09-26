@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:app/core/error/domain/api_erreur.dart';
 import 'package:app/core/error/infrastructure/api_erreur_helpers.dart';
+import 'package:app/features/authentication/domain/authentication_service.dart';
 import 'package:app/features/authentification/core/domain/authentification_port.dart';
 import 'package:app/features/authentification/core/domain/information_de_code.dart';
 import 'package:app/features/authentification/core/domain/information_de_connexion.dart';
@@ -15,9 +16,12 @@ import 'package:fpdart/fpdart.dart';
 class AuthentificationApiAdapter implements AuthentificationPort {
   AuthentificationApiAdapter({
     required final AuthentificationApiClient apiClient,
-  }) : _apiClient = apiClient;
+    required final AuthenticationService authenticationService,
+  })  : _apiClient = apiClient,
+        _authenticationService = authenticationService;
 
   final AuthentificationApiClient _apiClient;
+  final AuthenticationService _authenticationService;
   bool _connexionDemandee = false;
 
   @override
@@ -57,7 +61,7 @@ class AuthentificationApiAdapter implements AuthentificationPort {
 
   @override
   Future<Either<Exception, void>> deconnexionDemandee() async {
-    await _apiClient.supprimerTokenEtUtilisateurId();
+    await _authenticationService.logout();
 
     return const Right(null);
   }
@@ -116,7 +120,7 @@ class AuthentificationApiAdapter implements AuthentificationPort {
       final json = jsonDecode(response.body) as Map<String, dynamic>;
       final token = json['token'] as String;
 
-      await _apiClient.sauvegarderToken(token);
+      await _authenticationService.login(token);
 
       return const Right(null);
     }
@@ -164,11 +168,14 @@ class AuthentificationApiAdapter implements AuthentificationPort {
 
   @override
   Future<Either<Exception, Utilisateur>> recupereUtilisateur() async {
-    final id = await _apiClient.recupererUtilisateurId;
-    if (id == null) {
+    final utilisateurId = _apiClient.recupererUtilisateurId;
+    if (utilisateurId == null) {
       return const Left(UtilisateurIdNonTrouveException());
     }
-    final response = await _apiClient.get(Uri.parse('/utilisateurs/$id'));
+
+    final response =
+        await _apiClient.get(Uri.parse('/utilisateurs/$utilisateurId'));
+
     if (response.statusCode != HttpStatus.ok) {
       return Left(
         Exception("Erreur lors de la récupération de l'utilisateur"),

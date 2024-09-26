@@ -7,19 +7,18 @@ import 'package:flutter_test/flutter_test.dart';
 
 import '../../helpers/dio_mock.dart';
 import '../../helpers/faker.dart';
-import '../../helpers/get_token_storage.dart';
-import 'constants.dart';
+import '../mocks/authentication_service_fake.dart';
 
 void main() {
   late AidesApiAdapter aidesApiAdapter;
   late DioMock dio;
 
-  setUp(() async {
+  setUp(() {
     dio = DioMock();
     aidesApiAdapter = AidesApiAdapter(
       client: DioHttpClient(
         dio: dio,
-        authentificationTokenStorage: await getTokenStorage(),
+        authentificationService: const AuthenticationServiceFake(),
       ),
     );
   });
@@ -27,7 +26,7 @@ void main() {
   test('fetchAides returns a list of Aide when successful', () async {
     // Arrange
     final aides = List.generate(2, (final _) => aideFaker());
-    dio.getM('/utilisateurs/$utilisateurId/aides', responseData: aides);
+    dio.getM('/utilisateurs/{userId}/aides', responseData: aides);
 
     // Act
     final result = await aidesApiAdapter.fetchAides();

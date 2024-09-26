@@ -1,17 +1,15 @@
 import 'dart:async';
 
 import 'package:app/core/infrastructure/message_bus.dart';
-import 'package:app/features/authentification/core/domain/authentification_statut_manager.dart';
 import 'package:app/features/authentification/core/infrastructure/authentification_api_client.dart';
-import 'package:app/features/authentification/core/infrastructure/authentification_token_storage.dart';
 import 'package:app/features/gamification/domain/gamification.dart';
 import 'package:app/features/gamification/infrastructure/gamification_api_adapter.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../mocks/authentication_service_fake.dart';
 import 'client_mock.dart';
 import 'constants.dart';
 import 'custom_response.dart';
-import 'flutter_secure_storage_mock.dart';
 
 void main() {
   test('gamification', () async {
@@ -36,16 +34,10 @@ void main() {
         ),
       );
 
-    final authentificationTokenStorage = AuthentificationTokenStorage(
-      secureStorage: FlutterSecureStorageMock(),
-      authentificationStatusManagerWriter: AuthentificationStatutManager(),
-    );
-    await authentificationTokenStorage.sauvegarderToken(token);
-
     final adapter = GamificationApiAdapter(
       apiClient: AuthentificationApiClient(
         apiUrl: apiUrl,
-        authentificationTokenStorage: authentificationTokenStorage,
+        authenticationService: const AuthenticationServiceFake(),
         inner: client,
       ),
       messageBus: MessageBus(),

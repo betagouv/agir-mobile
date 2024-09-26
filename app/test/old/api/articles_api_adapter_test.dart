@@ -2,18 +2,16 @@ import 'package:app/features/articles/domain/article.dart';
 import 'package:app/features/articles/domain/partenaire.dart';
 import 'package:app/features/articles/domain/source.dart';
 import 'package:app/features/articles/infrastructure/articles_api_adapter.dart';
-import 'package:app/features/authentification/core/domain/authentification_statut_manager.dart';
 import 'package:app/features/authentification/core/infrastructure/authentification_api_client.dart';
-import 'package:app/features/authentification/core/infrastructure/authentification_token_storage.dart';
 import 'package:app/features/authentification/core/infrastructure/cms_api_client.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../mocks/authentication_service_fake.dart';
 import 'client_mock.dart';
 import 'constants.dart';
 import 'custom_response.dart';
-import 'flutter_secure_storage_mock.dart';
 import 'request_mathcher.dart';
 
 void main() {
@@ -188,16 +186,10 @@ void main() {
         ),
       );
 
-    final authentificationTokenStorage = AuthentificationTokenStorage(
-      secureStorage: FlutterSecureStorageMock(),
-      authentificationStatusManagerWriter: AuthentificationStatutManager(),
-    );
-    await authentificationTokenStorage.sauvegarderToken(token);
-
     final adapter = ArticlesApiAdapter(
       apiClient: AuthentificationApiClient(
         apiUrl: apiUrl,
-        authentificationTokenStorage: authentificationTokenStorage,
+        authenticationService: const AuthenticationServiceFake(),
         inner: client,
       ),
       cmsApiClient:
@@ -301,16 +293,10 @@ void main() {
         ),
       );
 
-    final authentificationTokenStorage = AuthentificationTokenStorage(
-      secureStorage: FlutterSecureStorageMock(),
-      authentificationStatusManagerWriter: AuthentificationStatutManager(),
-    );
-    await authentificationTokenStorage.sauvegarderToken(token);
-
     final adapter = ArticlesApiAdapter(
       apiClient: AuthentificationApiClient(
         apiUrl: apiUrl,
-        authentificationTokenStorage: authentificationTokenStorage,
+        authenticationService: const AuthenticationServiceFake(),
         inner: client,
       ),
       cmsApiClient:
@@ -341,16 +327,10 @@ void main() {
         response: OkResponse(),
       );
 
-    final authentificationTokenStorage = AuthentificationTokenStorage(
-      secureStorage: FlutterSecureStorageMock(),
-      authentificationStatusManagerWriter: AuthentificationStatutManager(),
-    );
-    await authentificationTokenStorage.sauvegarderToken(token);
-
     final adapter = ArticlesApiAdapter(
       apiClient: AuthentificationApiClient(
         apiUrl: apiUrl,
-        authentificationTokenStorage: authentificationTokenStorage,
+        authenticationService: const AuthenticationServiceFake(),
         inner: client,
       ),
       cmsApiClient:
@@ -378,16 +358,10 @@ void main() {
         response: OkResponse(),
       );
 
-    final authentificationTokenStorage = AuthentificationTokenStorage(
-      secureStorage: FlutterSecureStorageMock(),
-      authentificationStatusManagerWriter: AuthentificationStatutManager(),
-    );
-    await authentificationTokenStorage.sauvegarderToken(token);
-
     final adapter = ArticlesApiAdapter(
       apiClient: AuthentificationApiClient(
         apiUrl: apiUrl,
-        authentificationTokenStorage: authentificationTokenStorage,
+        authenticationService: const AuthenticationServiceFake(),
         inner: client,
       ),
       cmsApiClient:

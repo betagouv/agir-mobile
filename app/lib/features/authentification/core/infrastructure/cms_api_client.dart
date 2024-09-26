@@ -21,7 +21,7 @@ class CmsApiClient extends http.BaseClient {
   Future<http.Response> get(
     final Uri url, {
     final Map<String, String>? headers,
-  }) =>
+  }) async =>
       super.get(_uriParse(url), headers: headers);
 
   @override
@@ -30,7 +30,7 @@ class CmsApiClient extends http.BaseClient {
     final Map<String, String>? headers,
     final Object? body,
     final Encoding? encoding,
-  }) =>
+  }) async =>
       super.patch(
         _uriParse(url),
         headers: headers,
@@ -44,7 +44,7 @@ class CmsApiClient extends http.BaseClient {
     final Map<String, String>? headers,
     final Object? body,
     final Encoding? encoding,
-  }) =>
+  }) async =>
       super.post(
         _uriParse(url),
         headers: headers,
@@ -58,7 +58,7 @@ class CmsApiClient extends http.BaseClient {
     final Map<String, String>? headers,
     final Object? body,
     final Encoding? encoding,
-  }) =>
+  }) async =>
       super.delete(
         _uriParse(url),
         headers: headers,
@@ -72,7 +72,7 @@ class CmsApiClient extends http.BaseClient {
     final Map<String, String>? headers,
     final Object? body,
     final Encoding? encoding,
-  }) =>
+  }) async =>
       super.put(
         _uriParse(url),
         headers: headers,

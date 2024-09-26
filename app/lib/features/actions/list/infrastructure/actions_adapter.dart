@@ -5,7 +5,6 @@ import 'package:app/features/actions/list/domain/action_item.dart';
 import 'package:app/features/actions/list/domain/actions_port.dart';
 import 'package:app/features/actions/list/infrastructure/action_item_mapper.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
-import 'package:app/features/profil/core/domain/utilisateur_id_non_trouve_exception.dart';
 import 'package:fpdart/fpdart.dart';
 
 class ActionsAdapter implements ActionsPort {
@@ -16,13 +15,8 @@ class ActionsAdapter implements ActionsPort {
 
   @override
   Future<Either<Exception, List<ActionItem>>> fetchActions() async {
-    final utilisateurId = await _client.recupererUtilisateurId;
-    if (utilisateurId == null) {
-      return const Left(UtilisateurIdNonTrouveException());
-    }
-
     final response = await _client.get<List<dynamic>>(
-      '/utilisateurs/$utilisateurId/defis',
+      '/utilisateurs/{userId}/defis',
     );
 
     if (response.statusCode != HttpStatus.ok) {

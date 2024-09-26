@@ -7,8 +7,8 @@ import 'package:app/features/aides/core/domain/aides_port.dart';
 import 'package:app/features/aides/item/presentation/bloc/aide_bloc.dart';
 import 'package:app/features/aides/list/presentation/bloc/aides_disclaimer/aides_disclaimer_cubit.dart';
 import 'package:app/features/articles/domain/articles_port.dart';
+import 'package:app/features/authentication/domain/authentication_service.dart';
 import 'package:app/features/authentification/core/domain/authentification_port.dart';
-import 'package:app/features/authentification/core/domain/authentification_statut_manager.dart';
 import 'package:app/features/bibliotheque/domain/bibliotheque_port.dart';
 import 'package:app/features/bibliotheque/presentation/bloc/bibliotheque_bloc.dart';
 import 'package:app/features/communes/domain/communes_port.dart';
@@ -39,7 +39,7 @@ import 'package:go_router/go_router.dart';
 class App extends StatefulWidget {
   const App({
     required this.tracker,
-    required this.authentificationStatusManager,
+    required this.authenticationService,
     required this.authentificationPort,
     required this.universPort,
     required this.aidesPort,
@@ -60,7 +60,7 @@ class App extends StatefulWidget {
   });
 
   final Tracker tracker;
-  final AuthentificationStatutManager authentificationStatusManager;
+  final AuthenticationService authenticationService;
   final AuthentificationPort authentificationPort;
   final UniversPort universPort;
   final AidesPort aidesPort;
@@ -89,7 +89,7 @@ class _AppState extends State<App> {
   void initState() {
     super.initState();
     _goRouter = goRouter(
-      authentificationStatusManagerReader: widget.authentificationStatusManager,
+      authenticationService: widget.authenticationService,
       tracker: widget.tracker,
     );
   }
@@ -157,8 +157,7 @@ class _AppState extends State<App> {
             BlocProvider(
               create: (final context) => GamificationBloc(
                 gamificationPort: widget.gamificationPort,
-                authentificationStatutManagerReader:
-                    widget.authentificationStatusManager,
+                authenticationService: widget.authenticationService,
               )..add(const GamificationAbonnementDemande()),
             ),
             BlocProvider(

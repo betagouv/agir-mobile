@@ -21,7 +21,7 @@ class RecommandationsApiAdapter implements RecommandationsPort {
   Future<Either<Exception, List<Recommandation>>> recuperer(
     final String? thematique,
   ) async {
-    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    final utilisateurId = _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
       return const Left(UtilisateurIdNonTrouveException());
     }

@@ -1,28 +1,32 @@
-// ignore_for_file: avoid-collection-mutating-methods
+// ignore_for_file: avoid-collection-mutating-methods, prefer-early-return
 
-import 'package:app/features/authentification/core/infrastructure/authentification_token_storage.dart';
+import 'dart:async';
+import 'dart:io';
+
+import 'package:app/features/authentication/domain/authentication_service.dart';
+import 'package:app/features/authentication/domain/authentication_status.dart';
 import 'package:dio/dio.dart';
 
-abstract class HttpClient {
-  Future<Response<T>> patch<T>(final String path, {final Object? data});
-
-  Future<Response<T>> post<T>(final String path, {final Object? data});
-
-  Future<Response<T>> get<T>(final String path);
-}
-
-class DioHttpClient implements HttpClient {
+class DioHttpClient {
   DioHttpClient({
     required final Dio dio,
-    required final AuthentificationTokenStorage authentificationTokenStorage,
+    required final AuthenticationService authentificationService,
   })  : _dio = dio,
-        _authentificationTokenStorage = authentificationTokenStorage {
+        _authentificationService = authentificationService {
     _dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (final options, final handler) async {
-          final token = await _authentificationTokenStorage.recupererToken;
-          if (token == null) return;
-          options.headers['Authorization'] = 'Bearer $token';
+          await _authentificationService.checkAuthenticationStatus();
+          final token = await _authentificationService.token;
+          options.headers[HttpHeaders.authorizationHeader] =
+              'Bearer ${token.value}';
+          final status = _authentificationService.status;
+          if (status is Authenticated) {
+            final updatedUri = options.uri
+                .toString()
+                .replaceFirst('%7BuserId%7D', status.userId.value);
+            options.path = updatedUri;
+          }
           handler.next(options);
         },
       ),
@@ -30,19 +34,11 @@ class DioHttpClient implements HttpClient {
   }
 
   final Dio _dio;
-  final AuthentificationTokenStorage _authentificationTokenStorage;
+  final AuthenticationService _authentificationService;
 
-  Future<String?> get recupererUtilisateurId async =>
-      _authentificationTokenStorage.recupererUtilisateurId;
-
-  @override
-  Future<Response<T>> get<T>(final String path) => _dio.get(path);
-
-  @override
-  Future<Response<T>> patch<T>(final String path, {final Object? data}) =>
+  Future<Response<T>> get<T>(final String path) async => _dio.get(path);
+  Future<Response<T>> patch<T>(final String path, {final Object? data}) async =>
       _dio.patch(path, data: data);
-
-  @override
-  Future<Response<T>> post<T>(final String path, {final Object? data}) =>
+  Future<Response<T>> post<T>(final String path, {final Object? data}) async =>
       _dio.post(path, data: data);
 }
