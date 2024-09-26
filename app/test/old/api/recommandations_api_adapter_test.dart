@@ -1,16 +1,14 @@
-import 'package:app/features/authentification/core/domain/authentification_statut_manager.dart';
 import 'package:app/features/authentification/core/infrastructure/authentification_api_client.dart';
-import 'package:app/features/authentification/core/infrastructure/authentification_token_storage.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
 import 'package:app/features/recommandations/infrastructure/recommandations_api_adapter.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../mocks/authentication_service_fake.dart';
 import 'client_mock.dart';
 import 'constants.dart';
 import 'custom_response.dart';
-import 'flutter_secure_storage_mock.dart';
 import 'request_mathcher.dart';
 
 void main() {
@@ -47,16 +45,10 @@ void main() {
 ]'''),
       );
 
-    final authentificationTokenStorage = AuthentificationTokenStorage(
-      secureStorage: FlutterSecureStorageMock(),
-      authentificationStatusManagerWriter: AuthentificationStatutManager(),
-    );
-    await authentificationTokenStorage.sauvegarderToken(token);
-
     final adapter = RecommandationsApiAdapter(
       apiClient: AuthentificationApiClient(
         apiUrl: apiUrl,
-        authentificationTokenStorage: authentificationTokenStorage,
+        authenticationService: const AuthenticationServiceFake(),
         inner: client,
       ),
     );
@@ -124,16 +116,10 @@ void main() {
 ]'''),
       );
 
-    final authentificationTokenStorage = AuthentificationTokenStorage(
-      secureStorage: FlutterSecureStorageMock(),
-      authentificationStatusManagerWriter: AuthentificationStatutManager(),
-    );
-    await authentificationTokenStorage.sauvegarderToken(token);
-
     final adapter = RecommandationsApiAdapter(
       apiClient: AuthentificationApiClient(
         apiUrl: apiUrl,
-        authentificationTokenStorage: authentificationTokenStorage,
+        authenticationService: const AuthenticationServiceFake(),
         inner: client,
       ),
     );

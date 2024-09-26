@@ -21,7 +21,7 @@ class ArticlesApiAdapter implements ArticlesPort {
 
   @override
   Future<Either<Exception, Article>> recupererArticle(final String id) async {
-    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    final utilisateurId = _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
       return const Left(UtilisateurIdNonTrouveException());
     }
@@ -58,7 +58,7 @@ class ArticlesApiAdapter implements ArticlesPort {
 
   @override
   Future<Either<Exception, void>> marquerCommeLu(final String id) async {
-    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    final utilisateurId = _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
       return const Left(UtilisateurIdNonTrouveException());
     }
@@ -75,7 +75,7 @@ class ArticlesApiAdapter implements ArticlesPort {
 
   @override
   Future<Either<Exception, void>> addToFavorites(final String id) async {
-    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    final utilisateurId = _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
       return const Left(UtilisateurIdNonTrouveException());
     }
@@ -92,7 +92,7 @@ class ArticlesApiAdapter implements ArticlesPort {
 
   @override
   Future<Either<Exception, void>> removeToFavorites(final String id) async {
-    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    final utilisateurId = _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
       return const Left(UtilisateurIdNonTrouveException());
     }

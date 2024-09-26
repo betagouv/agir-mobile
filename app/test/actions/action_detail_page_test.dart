@@ -4,25 +4,20 @@ import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/features/actions/core/domain/action_id.dart';
 import 'package:app/features/actions/detail/infrastructure/action_repository.dart';
 import 'package:app/features/actions/detail/presentation/pages/action_detail_page.dart';
-import 'package:app/features/authentification/core/domain/authentification_statut_manager.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
-import 'package:app/features/gamification/domain/gamification_port.dart';
 import 'package:app/features/gamification/presentation/bloc/gamification_bloc.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../helpers/dio_mock.dart';
 import '../helpers/faker.dart';
-import '../helpers/get_token_storage.dart';
 import '../helpers/pump_page.dart';
-import '../old/api/constants.dart';
-
-class _GamificationPortMock extends Mock implements GamificationPort {}
+import '../old/mocks/authentication_service_fake.dart';
+import '../old/mocks/gamification_bloc_fake.dart';
 
 void main() {
   bool isRadioButtonEnabled<T>(final WidgetTester tester, final String title) {
@@ -43,11 +38,6 @@ void main() {
     required final DioMock dio,
     final MessageBus? messageBus,
   }) async {
-    final gamificationPort = _GamificationPortMock();
-    when(gamificationPort.mettreAJourLesPoints).thenAnswer(
-      (final _) async => const Right(null),
-    );
-
     await pumpPage(
       tester: tester,
       repositoryProviders: [
@@ -55,7 +45,7 @@ void main() {
           value: ActionRepository(
             client: DioHttpClient(
               dio: dio,
-              authentificationTokenStorage: await getTokenStorage(),
+              authentificationService: const AuthenticationServiceFake(),
             ),
             messageBus: messageBus ?? MessageBus(),
           ),
@@ -63,11 +53,7 @@ void main() {
       ],
       blocProviders: [
         BlocProvider<GamificationBloc>(
-          create: (final context) => GamificationBloc(
-            gamificationPort: gamificationPort,
-            authentificationStatutManagerReader:
-                AuthentificationStatutManager(),
-          ),
+          create: (final context) => const GamificationBlocFake(),
         ),
       ],
       page: const ActionDetailPage(actionId: ActionId('73')),
@@ -79,7 +65,7 @@ void main() {
       const id = '73';
       final dio = DioMock()
         ..getM(
-          '/utilisateurs/$utilisateurId/defis/$id',
+          '/utilisateurs/{userId}/defis/$id',
           responseData: actionFaker(status: 'todo'),
         );
 
@@ -104,7 +90,7 @@ void main() {
       const id = '73';
       final dio = DioMock()
         ..getM(
-          '/utilisateurs/$utilisateurId/defis/$id',
+          '/utilisateurs/{userId}/defis/$id',
           responseData: actionFaker(status: 'pas_envie'),
         );
       await pumpActionDetailPage(tester, dio: dio);
@@ -129,7 +115,7 @@ void main() {
       const reason = 'parce que';
       final dio = DioMock()
         ..getM(
-          '/utilisateurs/$utilisateurId/defis/$id',
+          '/utilisateurs/{userId}/defis/$id',
           responseData: actionFaker(status: 'pas_envie', reason: reason),
         );
       await pumpActionDetailPage(tester, dio: dio);
@@ -154,7 +140,7 @@ void main() {
       const id = '73';
       final dio = DioMock()
         ..getM(
-          '/utilisateurs/$utilisateurId/defis/$id',
+          '/utilisateurs/{userId}/defis/$id',
           responseData: actionFaker(status: 'en_cours'),
         );
       await pumpActionDetailPage(tester, dio: dio);
@@ -178,7 +164,7 @@ void main() {
       const id = '73';
       final dio = DioMock()
         ..getM(
-          '/utilisateurs/$utilisateurId/defis/$id',
+          '/utilisateurs/{userId}/defis/$id',
           responseData: actionFaker(status: 'deja_fait'),
         );
       await pumpActionDetailPage(tester, dio: dio);
@@ -202,7 +188,7 @@ void main() {
       const id = '73';
       final dio = DioMock()
         ..getM(
-          '/utilisateurs/$utilisateurId/defis/$id',
+          '/utilisateurs/{userId}/defis/$id',
           responseData: actionFaker(status: 'abondon'),
         );
       await pumpActionDetailPage(tester, dio: dio);
@@ -227,7 +213,7 @@ void main() {
       const reason = 'parce que';
       final dio = DioMock()
         ..getM(
-          '/utilisateurs/$utilisateurId/defis/$id',
+          '/utilisateurs/{userId}/defis/$id',
           responseData: actionFaker(status: 'abondon', reason: reason),
         );
       await pumpActionDetailPage(tester, dio: dio);
@@ -252,7 +238,7 @@ void main() {
       const id = '73';
       final dio = DioMock()
         ..getM(
-          '/utilisateurs/$utilisateurId/defis/$id',
+          '/utilisateurs/{userId}/defis/$id',
           responseData: actionFaker(status: 'fait'),
         );
       await pumpActionDetailPage(tester, dio: dio);
@@ -278,7 +264,7 @@ void main() {
       const id = '73';
       final dio = DioMock()
         ..getM(
-          '/utilisateurs/$utilisateurId/defis/$id',
+          '/utilisateurs/{userId}/defis/$id',
           responseData: actionFaker(status: 'todo'),
         );
 
@@ -309,7 +295,7 @@ void main() {
 
     testWidgets("commencer l'action", (final tester) async {
       const id = '73';
-      const path = '/utilisateurs/$utilisateurId/defis/$id';
+      const path = '/utilisateurs/{userId}/defis/$id';
       final dio = DioMock()
         ..getM(path, responseData: actionFaker(id: id, status: 'todo'))
         ..patchM(path);
@@ -338,7 +324,7 @@ void main() {
 
     testWidgets('choisir "pas pour moi" avec un motif', (final tester) async {
       const id = '73';
-      const path = '/utilisateurs/$utilisateurId/defis/$id';
+      const path = '/utilisateurs/{userId}/defis/$id';
       final dio = DioMock()
         ..getM(path, responseData: actionFaker(id: id, status: 'todo'))
         ..patchM(path);
@@ -384,7 +370,7 @@ void main() {
       'l\'action "pas pour moi" qui devient "en cours" (motif effacé)',
       (final tester) async {
         const id = '73';
-        const path = '/utilisateurs/$utilisateurId/defis/$id';
+        const path = '/utilisateurs/{userId}/defis/$id';
         final dio = DioMock()
           ..getM(
             path,
@@ -420,7 +406,7 @@ void main() {
       'l\'action "pas pour moi" dont seul le motif change',
       (final tester) async {
         const id = '73';
-        const path = '/utilisateurs/$utilisateurId/defis/$id';
+        const path = '/utilisateurs/{userId}/defis/$id';
         final dio = DioMock()
           ..getM(
             path,
@@ -463,7 +449,7 @@ void main() {
       (final tester) async {
         const id = '73';
         const reason = 'parce que';
-        const path = '/utilisateurs/$utilisateurId/defis/$id';
+        const path = '/utilisateurs/{userId}/defis/$id';
 
         final dio = DioMock()
           ..getM(
@@ -502,7 +488,7 @@ void main() {
 
     group("réaliser l'action", () {
       const id = '73';
-      const path = '/utilisateurs/$utilisateurId/defis/$id';
+      const path = '/utilisateurs/{userId}/defis/$id';
       late MessageBus messageBus;
       late DioMock dio;
       setUp(() {

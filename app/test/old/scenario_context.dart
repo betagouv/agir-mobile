@@ -1,6 +1,6 @@
 import 'package:app/features/aides/core/domain/aide.dart';
 import 'package:app/features/articles/domain/article.dart';
-import 'package:app/features/authentification/core/domain/authentification_statut.dart';
+import 'package:app/features/authentication/domain/authentication_status.dart';
 import 'package:app/features/bibliotheque/domain/bibliotheque.dart';
 import 'package:app/features/gamification/domain/gamification.dart';
 import 'package:app/features/mieux_vous_connaitre/core/domain/question.dart';
@@ -23,8 +23,7 @@ import 'mocks/univers_port_mock.dart';
 class ScenarioContext {
   factory ScenarioContext() => _instance ??= ScenarioContext._();
   ScenarioContext._();
-  AuthentificationStatut authentificationStatut =
-      AuthentificationStatut.pasConnecte;
+  AuthenticationStatus authentificationStatut = const Unauthenticated();
   String email = 'lucas@saudon.fr';
   String prenom = 'Lucas';
   String nom = 'Saudon';

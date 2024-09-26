@@ -19,7 +19,7 @@ final class FirstNameAdapter implements FirstNamePort {
   Future<Either<Exception, Unit>> addFirstName(
     final FirstName firstName,
   ) async {
-    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    final utilisateurId = _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
       return const Left(UtilisateurIdNonTrouveException());
     }

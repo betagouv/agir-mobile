@@ -4,10 +4,12 @@ import 'package:app/features/actions/list/domain/actions_port.dart';
 import 'package:app/features/actions/list/infrastructure/action_item_mapper.dart';
 import 'package:app/features/actions/list/infrastructure/actions_adapter.dart';
 import 'package:app/features/actions/list/presentation/pages/action_list_page.dart';
-import 'package:app/features/authentification/core/domain/authentification_statut_manager.dart';
+import 'package:app/features/authentication/domain/authentication_service.dart';
+import 'package:app/features/authentication/infrastructure/authentication_repository.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/gamification/domain/gamification_port.dart';
 import 'package:app/features/gamification/presentation/bloc/gamification_bloc.dart';
+import 'package:clock/clock.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
@@ -15,9 +17,8 @@ import 'package:mocktail/mocktail.dart';
 
 import '../helpers/dio_mock.dart';
 import '../helpers/faker.dart';
-import '../helpers/get_token_storage.dart';
 import '../helpers/pump_page.dart';
-import '../old/api/constants.dart';
+import '../old/api/flutter_secure_storage_fake.dart';
 
 class _GamificationPortMock extends Mock implements GamificationPort {}
 
@@ -39,7 +40,11 @@ Future<void> _pumpPage(
       BlocProvider<GamificationBloc>(
         create: (final context) => GamificationBloc(
           gamificationPort: gamificationPort,
-          authentificationStatutManagerReader: AuthentificationStatutManager(),
+          authenticationService: AuthenticationService(
+            authenticationRepository:
+                AuthenticationRepository(FlutterSecureStorageFake()),
+            clock: Clock.fixed(DateTime(1992)),
+          ),
         ),
       ),
     ],
@@ -52,16 +57,20 @@ void main() {
   late ActionsPort actionsPort;
   late List<Map<String, dynamic>> actions;
 
-  setUp(() async {
+  setUp(() {
     final dio = DioMock();
     actionsPort = ActionsAdapter(
       client: DioHttpClient(
         dio: dio,
-        authentificationTokenStorage: await getTokenStorage(),
+        authentificationService: AuthenticationService(
+          authenticationRepository:
+              AuthenticationRepository(FlutterSecureStorageFake()),
+          clock: Clock.fixed(DateTime(1992)),
+        ),
       ),
     );
     actions = List.generate(4, (final _) => actionItemFaker());
-    dio.getM('/utilisateurs/$utilisateurId/defis', responseData: actions);
+    dio.getM('/utilisateurs/{userId}/defis', responseData: actions);
   });
 
   group('La liste des actions devrait ', () {

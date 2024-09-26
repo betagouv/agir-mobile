@@ -18,7 +18,7 @@ class ProfilApiAdapter implements ProfilPort {
 
   @override
   Future<Either<Exception, Informations>> recupererProfil() async {
-    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    final utilisateurId = _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
       return const Left(UtilisateurIdNonTrouveException());
     }
@@ -55,7 +55,7 @@ class ProfilApiAdapter implements ProfilPort {
     required final double nombreDePartsFiscales,
     required final int? revenuFiscal,
   }) async {
-    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    final utilisateurId = _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
       return const Left(UtilisateurIdNonTrouveException());
     }
@@ -78,7 +78,7 @@ class ProfilApiAdapter implements ProfilPort {
 
   @override
   Future<Either<Exception, Logement>> recupererLogement() async {
-    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    final utilisateurId = _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
       return const Left(UtilisateurIdNonTrouveException());
     }
@@ -99,7 +99,7 @@ class ProfilApiAdapter implements ProfilPort {
   Future<Either<Exception, void>> mettreAJourLogement({
     required final Logement logement,
   }) async {
-    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    final utilisateurId = _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
       return const Left(UtilisateurIdNonTrouveException());
     }
@@ -116,7 +116,7 @@ class ProfilApiAdapter implements ProfilPort {
 
   @override
   Future<Either<Exception, void>> supprimerLeCompte() async {
-    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    final utilisateurId = _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
       return const Left(UtilisateurIdNonTrouveException());
     }
@@ -134,7 +134,7 @@ class ProfilApiAdapter implements ProfilPort {
   Future<Either<Exception, void>> changerMotDePasse({
     required final String motDePasse,
   }) async {
-    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    final utilisateurId = _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
       return const Left(UtilisateurIdNonTrouveException());
     }
@@ -154,7 +154,7 @@ class ProfilApiAdapter implements ProfilPort {
     required final String codePostal,
     required final String commune,
   }) async {
-    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    final utilisateurId = _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
       return const Left(UtilisateurIdNonTrouveException());
     }

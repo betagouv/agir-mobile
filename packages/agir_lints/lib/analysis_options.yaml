@@ -83,6 +83,7 @@ dart_code_metrics:
           - private-fields
     - missing-test-assertion: false
     - newline-before-case: false
+    - newline-before-method: false
     - no-empty-block: false
     - no-equal-arguments: false
     - no-magic-number: false
@@ -93,6 +94,7 @@ dart_code_metrics:
     - prefer-commenting-analyzer-ignores: false
     - prefer-correct-identifier-length: false
     - prefer-correct-handler-name: false
+    - prefer-correct-switch-length: false
     - prefer-correct-throws: false
     - prefer-correct-type-name: false
     - prefer-extracting-callbacks: false

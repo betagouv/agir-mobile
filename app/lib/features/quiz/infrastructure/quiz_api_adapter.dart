@@ -21,7 +21,7 @@ class QuizApiAdapter implements QuizPort {
 
   @override
   Future<Either<Exception, Quiz>> recupererQuiz(final String id) async {
-    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    final utilisateurId = _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
       return const Left(UtilisateurIdNonTrouveException());
     }
@@ -57,7 +57,7 @@ class QuizApiAdapter implements QuizPort {
     required final int id,
     required final bool estExacte,
   }) async {
-    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    final utilisateurId = _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
       return const Left(UtilisateurIdNonTrouveException());
     }

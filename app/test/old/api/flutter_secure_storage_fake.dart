@@ -3,7 +3,7 @@
 import 'package:flutter/src/foundation/basic_types.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-class FlutterSecureStorageMock implements FlutterSecureStorage {
+class FlutterSecureStorageFake implements FlutterSecureStorage {
   final _map = <String, String>{};
 
   @override
@@ -77,11 +77,7 @@ class FlutterSecureStorageMock implements FlutterSecureStorage {
     final MacOsOptions? mOptions,
     final WindowsOptions? wOptions,
   }) async {
-    if (value == null) {
-      _map.remove(key);
-    } else {
-      _map[key] = value;
-    }
+    _map[key] = value ?? '';
   }
 
   @override

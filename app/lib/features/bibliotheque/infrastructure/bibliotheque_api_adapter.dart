@@ -22,7 +22,7 @@ class BibliothequeApiAdapter implements BibliothequePort {
     final String? titre,
     final bool? isFavorite,
   }) async {
-    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    final utilisateurId = _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
       return const Left(UtilisateurIdNonTrouveException());
     }

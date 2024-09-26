@@ -9,19 +9,18 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../helpers/dio_mock.dart';
 import '../../helpers/faker.dart';
-import '../../helpers/get_token_storage.dart';
-import 'constants.dart';
+import '../mocks/authentication_service_fake.dart';
 
 void main() {
   late AideVeloApiAdapter adapter;
   late DioMock dio;
 
-  setUp(() async {
+  setUp(() {
     dio = DioMock();
     adapter = AideVeloApiAdapter(
       client: DioHttpClient(
         dio: dio,
-        authentificationTokenStorage: await getTokenStorage(),
+        authentificationService: const AuthenticationServiceFake(),
       ),
     );
   });
@@ -31,10 +30,10 @@ void main() {
 
     final randomAideVeloParType = aideVeloParTypeFaker();
     dio
-      ..patchM('/utilisateurs/$utilisateurId/profile')
-      ..patchM('/utilisateurs/$utilisateurId/logement')
+      ..patchM('/utilisateurs/{userId}/profile')
+      ..patchM('/utilisateurs/{userId}/logement')
       ..postM(
-        '/utilisateurs/$utilisateurId/simulerAideVelo',
+        '/utilisateurs/{userId}/simulerAideVelo',
         responseData: randomAideVeloParType,
       );
 

@@ -8,6 +8,7 @@ environment:
   flutter: 3.24.3
 
 dependencies:
+  clock: ^1.1.1
   collection: any # Dépend de flutter_test
   cupertino_icons: 1.0.8
   dio: 5.7.0

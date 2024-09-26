@@ -2,11 +2,16 @@ import 'package:app/app/app.dart';
 import 'package:app/core/infrastructure/tracker.dart';
 import 'package:app/features/actions/detail/infrastructure/action_repository.dart';
 import 'package:app/features/actions/list/domain/actions_port.dart';
-import 'package:app/features/authentification/core/domain/authentification_statut_manager.dart';
+import 'package:app/features/authentication/domain/authentication_service.dart';
+import 'package:app/features/authentication/domain/authentication_status.dart';
+import 'package:app/features/authentication/infrastructure/authentication_repository.dart';
+import 'package:clock/clock.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../api/constants.dart';
+import '../api/flutter_secure_storage_fake.dart';
 import '../mocks/aide_velo_port_mock.dart';
 import '../mocks/aides_port_mock.dart';
 import '../mocks/articles_port_mock.dart';
@@ -30,8 +35,14 @@ class _ActionRepositoryMock extends Mock implements ActionRepository {}
 
 /// Iel lance l'application.
 Future<void> ielLanceLapplication(final WidgetTester tester) async {
-  final authentificationStatusManager = AuthentificationStatutManager()
-    ..gererAuthentificationStatut(ScenarioContext().authentificationStatut);
+  final authenticationService = AuthenticationService(
+    authenticationRepository:
+        AuthenticationRepository(FlutterSecureStorageFake()),
+    clock: Clock.fixed(DateTime(1992)),
+  );
+  if (ScenarioContext().authentificationStatut is Authenticated) {
+    await authenticationService.login(token);
+  }
   ScenarioContext().aideVeloPortMock = AideVeloPortMock(
     aideVeloParType: ScenarioContext().aideVeloParType,
   );
@@ -62,7 +73,7 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
   ScenarioContext().articlesPortMock =
       ArticlesPortMock(ScenarioContext().article);
   ScenarioContext().authentificationPortMock = AuthentificationPortMock(
-    authentificationStatusManager,
+    authenticationService,
     prenom: prenom,
     estIntegrationTerminee: ScenarioContext().estIntegrationTerminee,
   );
@@ -79,7 +90,7 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
   await tester.pumpFrames(
     App(
       tracker: tracker,
-      authentificationStatusManager: authentificationStatusManager,
+      authenticationService: authenticationService,
       authentificationPort: ScenarioContext().authentificationPortMock!,
       universPort: ScenarioContext().universPortMock!,
       aidesPort: AidesPortMock(ScenarioContext().aides),

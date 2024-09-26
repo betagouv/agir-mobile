@@ -3,30 +3,27 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:app/features/authentication/domain/authentication_service.dart';
+import 'package:app/features/authentication/domain/authentication_status.dart';
 import 'package:app/features/authentification/core/infrastructure/api_url.dart';
-import 'package:app/features/authentification/core/infrastructure/authentification_token_storage.dart';
 import 'package:http/http.dart' as http;
 
 class AuthentificationApiClient extends http.BaseClient {
   AuthentificationApiClient({
     required this.apiUrl,
-    required final AuthentificationTokenStorage authentificationTokenStorage,
+    required final AuthenticationService authenticationService,
     final http.Client? inner,
   })  : _inner = inner ?? http.Client(),
-        _authentificationTokenStorage = authentificationTokenStorage;
+        _authenticationService = authenticationService;
 
   final ApiUrl apiUrl;
   final http.Client _inner;
-  final AuthentificationTokenStorage _authentificationTokenStorage;
+  final AuthenticationService _authenticationService;
 
-  Future<void> sauvegarderToken(final String token) async =>
-      _authentificationTokenStorage.sauvegarderToken(token);
-
-  Future<void> supprimerTokenEtUtilisateurId() async =>
-      _authentificationTokenStorage.supprimerTokenEtUtilisateurId();
-
-  Future<String?> get recupererUtilisateurId async =>
-      _authentificationTokenStorage.recupererUtilisateurId;
+  String? get recupererUtilisateurId => switch (_authenticationService.status) {
+        Authenticated(:final userId) => userId.value,
+        _ => null,
+      };
 
   @override
   Future<http.Response> get(
@@ -100,10 +97,12 @@ class AuthentificationApiClient extends http.BaseClient {
 
   @override
   Future<http.StreamedResponse> send(final http.BaseRequest request) async {
-    final token = await _authentificationTokenStorage.recupererToken;
-    if (token != null) {
-      request.headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
-    }
+    try {
+      final token = await _authenticationService.token;
+      request.headers[HttpHeaders.authorizationHeader] =
+          'Bearer ${token.value}';
+    } on Exception catch (_) {}
+
     request.headers[HttpHeaders.contentTypeHeader] =
         'application/json; charset=UTF-8';
 
@@ -111,7 +110,8 @@ class AuthentificationApiClient extends http.BaseClient {
   }
 
   @override
-  void close() {
+  Future<void> close() async {
+    await _authenticationService.dispose();
     _inner.close();
   }
 }

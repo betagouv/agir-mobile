@@ -1,20 +1,21 @@
 import 'package:app/core/error/domain/api_erreur.dart';
+import 'package:app/features/authentication/domain/authentication_service.dart';
 import 'package:app/features/authentification/core/domain/authentification_port.dart';
-import 'package:app/features/authentification/core/domain/authentification_statut.dart';
-import 'package:app/features/authentification/core/domain/authentification_statut_manager.dart';
 import 'package:app/features/authentification/core/domain/information_de_code.dart';
 import 'package:app/features/authentification/core/domain/information_de_connexion.dart';
 import 'package:app/features/utilisateur/domain/utilisateur.dart';
 import 'package:fpdart/fpdart.dart';
 
+import '../api/constants.dart';
+
 class AuthentificationPortMock implements AuthentificationPort {
   AuthentificationPortMock(
-    this.authentificationStatusManager, {
+    this.authenticationService, {
     required this.prenom,
     required this.estIntegrationTerminee,
   });
 
-  final AuthentificationStatutManager authentificationStatusManager;
+  final AuthenticationService authenticationService;
 
   bool connexionAppele = false;
   bool creerCompteAppele = false;
@@ -34,8 +35,7 @@ class AuthentificationPortMock implements AuthentificationPort {
 
   @override
   Future<Either<Exception, void>> deconnexionDemandee() async {
-    authentificationStatusManager
-        .gererAuthentificationStatut(AuthentificationStatut.pasConnecte);
+    await authenticationService.logout();
 
     return const Right(null);
   }
@@ -63,8 +63,8 @@ class AuthentificationPortMock implements AuthentificationPort {
     final InformationDeCode informationDeConnexion,
   ) async {
     validationAppele = true;
-    authentificationStatusManager
-        .gererAuthentificationStatut(AuthentificationStatut.connecte);
+
+    await authenticationService.login(token);
 
     return const Right(null);
   }

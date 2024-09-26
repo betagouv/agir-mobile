@@ -1,4 +1,4 @@
-// ignore_for_file: do_not_use_environment, avoid-long-functions
+// ignore_for_file: do_not_use_environment, avoid-long-functions, prefer-async-await
 
 import 'dart:async';
 
@@ -10,11 +10,11 @@ import 'package:app/features/actions/detail/infrastructure/action_repository.dar
 import 'package:app/features/actions/list/infrastructure/actions_adapter.dart';
 import 'package:app/features/aides/core/infrastructure/aides_api_adapter.dart';
 import 'package:app/features/articles/infrastructure/articles_api_adapter.dart';
-import 'package:app/features/authentification/core/domain/authentification_statut_manager.dart';
+import 'package:app/features/authentication/domain/authentication_service.dart';
+import 'package:app/features/authentication/infrastructure/authentication_repository.dart';
 import 'package:app/features/authentification/core/infrastructure/api_url.dart';
 import 'package:app/features/authentification/core/infrastructure/authentification_api_adapter.dart';
 import 'package:app/features/authentification/core/infrastructure/authentification_api_client.dart';
-import 'package:app/features/authentification/core/infrastructure/authentification_token_storage.dart';
 import 'package:app/features/authentification/core/infrastructure/cms_api_client.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/bibliotheque/infrastructure/bibliotheque_api_adapter.dart';
@@ -28,6 +28,7 @@ import 'package:app/features/recommandations/infrastructure/recommandations_api_
 import 'package:app/features/simulateur_velo/infrastructure/aide_velo_api_adapter.dart';
 import 'package:app/features/univers/core/infrastructure/univers_api_adapter.dart';
 import 'package:app/features/version/infrastructure/version_adapter.dart';
+import 'package:clock/clock.dart';
 import 'package:dio/dio.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/foundation.dart';
@@ -78,25 +79,25 @@ Future<void> main() async {
 
   final packageInfo = await PackageInfo.fromPlatform();
 
-  final authentificationStatusManager = AuthentificationStatutManager();
-
-  final authentificationTokenStorage = AuthentificationTokenStorage(
-    secureStorage: const FlutterSecureStorage(
-      aOptions: AndroidOptions(encryptedSharedPreferences: true),
+  final authenticationService = AuthenticationService(
+    authenticationRepository: AuthenticationRepository(
+      const FlutterSecureStorage(
+        aOptions: AndroidOptions(encryptedSharedPreferences: true),
+      ),
     ),
-    authentificationStatusManagerWriter: authentificationStatusManager,
+    clock: const Clock(),
   );
-
-  await authentificationTokenStorage.initialise();
+  await authenticationService.checkAuthenticationStatus();
 
   final url = Uri.parse(apiUrl);
   final apiClient = AuthentificationApiClient(
     apiUrl: ApiUrl(url),
-    authentificationTokenStorage: authentificationTokenStorage,
+    authenticationService: authenticationService,
   );
+
   final dioHttpClient = DioHttpClient(
     dio: Dio(BaseOptions(baseUrl: url.toString())),
-    authentificationTokenStorage: authentificationTokenStorage,
+    authentificationService: authenticationService,
   );
   final cmsClient = CmsApiClient(
     apiUrl: ApiUrl(Uri.parse(apiCmsUrl)),
@@ -107,8 +108,11 @@ Future<void> main() async {
   runApp(
     App(
       tracker: tracker,
-      authentificationStatusManager: authentificationStatusManager,
-      authentificationPort: AuthentificationApiAdapter(apiClient: apiClient),
+      authenticationService: authenticationService,
+      authentificationPort: AuthentificationApiAdapter(
+        apiClient: apiClient,
+        authenticationService: authenticationService,
+      ),
       universPort: UniversApiAdapter(apiClient: apiClient),
       aidesPort: AidesApiAdapter(client: dioHttpClient),
       bibliothequePort: BibliothequeApiAdapter(apiClient: apiClient),

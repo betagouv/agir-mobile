@@ -18,7 +18,7 @@ class MieuxVousConnaitreApiAdapter implements MieuxVousConnaitrePort {
   @override
   Future<Either<Exception, List<Question>>>
       recupererLesQuestionsDejaRepondue() async {
-    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    final utilisateurId = _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
       return const Left(UtilisateurIdNonTrouveException());
     }
@@ -46,7 +46,7 @@ class MieuxVousConnaitreApiAdapter implements MieuxVousConnaitrePort {
     required final String id,
     required final List<String> reponses,
   }) async {
-    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    final utilisateurId = _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
       return const Left(UtilisateurIdNonTrouveException());
     }
@@ -66,7 +66,7 @@ class MieuxVousConnaitreApiAdapter implements MieuxVousConnaitrePort {
   Future<Either<Exception, Question>> recupererQuestion({
     required final String id,
   }) async {
-    final utilisateurId = await _apiClient.recupererUtilisateurId;
+    final utilisateurId = _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
       return const Left(UtilisateurIdNonTrouveException());
     }

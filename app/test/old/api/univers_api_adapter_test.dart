@@ -1,6 +1,4 @@
-import 'package:app/features/authentification/core/domain/authentification_statut_manager.dart';
 import 'package:app/features/authentification/core/infrastructure/authentification_api_client.dart';
-import 'package:app/features/authentification/core/infrastructure/authentification_token_storage.dart';
 import 'package:app/features/univers/core/domain/content_id.dart';
 import 'package:app/features/univers/core/domain/mission.dart';
 import 'package:app/features/univers/core/domain/mission_defi.dart';
@@ -13,10 +11,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../mocks/authentication_service_fake.dart';
 import 'client_mock.dart';
 import 'constants.dart';
 import 'custom_response.dart';
-import 'flutter_secure_storage_mock.dart';
 import 'request_mathcher.dart';
 
 void main() {
@@ -47,7 +45,7 @@ void main() {
 ]'''),
       );
 
-    final adapter = await initializeAdapter(client);
+    final adapter = initializeAdapter(client);
     final result = await adapter.recuperer();
 
     expect(
@@ -107,7 +105,7 @@ void main() {
 '''),
       );
 
-    final adapter = await initializeAdapter(client);
+    final adapter = initializeAdapter(client);
     final result = await adapter.recupererThematiques('alimentation');
 
     expect(
@@ -249,7 +247,7 @@ void main() {
 '''),
       );
 
-    final adapter = await initializeAdapter(client);
+    final adapter = initializeAdapter(client);
     final result = await adapter.recupererMission(
       missionId: 'manger_saison_2',
     );
@@ -355,7 +353,7 @@ void main() {
         response: OkResponse(),
       );
 
-    final adapter = await initializeAdapter(client);
+    final adapter = initializeAdapter(client);
     await adapter.gagnerPoints(id: const ObjectifId(objectifId));
 
     verify(
@@ -379,7 +377,7 @@ void main() {
         response: OkResponse(),
       );
 
-    final adapter = await initializeAdapter(client);
+    final adapter = initializeAdapter(client);
     await adapter.terminer(missionId: missionId);
 
     verify(
@@ -394,18 +392,11 @@ void main() {
   });
 }
 
-Future<UniversApiAdapter> initializeAdapter(final ClientMock client) async {
-  final authentificationTokenStorage = AuthentificationTokenStorage(
-    secureStorage: FlutterSecureStorageMock(),
-    authentificationStatusManagerWriter: AuthentificationStatutManager(),
-  );
-  await authentificationTokenStorage.sauvegarderToken(token);
-
-  return UniversApiAdapter(
-    apiClient: AuthentificationApiClient(
-      apiUrl: apiUrl,
-      authentificationTokenStorage: authentificationTokenStorage,
-      inner: client,
-    ),
-  );
-}
+UniversApiAdapter initializeAdapter(final ClientMock client) =>
+    UniversApiAdapter(
+      apiClient: AuthentificationApiClient(
+        apiUrl: apiUrl,
+        authenticationService: const AuthenticationServiceFake(),
+        inner: client,
+      ),
+    );

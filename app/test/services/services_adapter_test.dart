@@ -1,6 +1,4 @@
-import 'package:app/features/authentification/core/domain/authentification_statut_manager.dart';
 import 'package:app/features/authentification/core/infrastructure/authentification_api_client.dart';
-import 'package:app/features/authentification/core/infrastructure/authentification_token_storage.dart';
 import 'package:app/features/univers/core/domain/service_item.dart';
 import 'package:app/features/univers/core/infrastructure/univers_api_adapter.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -9,7 +7,7 @@ import 'package:fpdart/fpdart.dart';
 import '../old/api/client_mock.dart';
 import '../old/api/constants.dart';
 import '../old/api/custom_response.dart';
-import '../old/api/flutter_secure_storage_mock.dart';
+import '../old/mocks/authentication_service_fake.dart';
 
 void main() {
   test('getServices', () async {
@@ -42,14 +40,9 @@ void main() {
         ),
       );
 
-    final authentificationTokenStorage = AuthentificationTokenStorage(
-      secureStorage: FlutterSecureStorageMock(),
-      authentificationStatusManagerWriter: AuthentificationStatutManager(),
-    );
-    await authentificationTokenStorage.sauvegarderToken(token);
     final apiClient = AuthentificationApiClient(
       apiUrl: apiUrl,
-      authentificationTokenStorage: authentificationTokenStorage,
+      authenticationService: const AuthenticationServiceFake(),
       inner: client,
     );
 
