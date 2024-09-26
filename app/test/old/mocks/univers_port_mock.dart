@@ -1,6 +1,4 @@
 import 'package:app/features/univers/core/domain/content_id.dart';
-import 'package:app/features/univers/core/domain/defi.dart';
-import 'package:app/features/univers/core/domain/defi_id.dart';
 import 'package:app/features/univers/core/domain/mission.dart';
 import 'package:app/features/univers/core/domain/mission_liste.dart';
 import 'package:app/features/univers/core/domain/service_item.dart';
@@ -13,18 +11,11 @@ class UniversPortMock implements UniversPort {
     required this.univers,
     required this.missionListe,
     required this.mission,
-    required this.defi,
   });
 
   List<TuileUnivers> univers;
   List<MissionListe> missionListe = [];
   Mission mission;
-  Defi defi;
-
-  bool accepterDefiAppele = false;
-  bool refuserDefiAppele = false;
-  bool realiserDefiAppele = false;
-  bool abondonnerDefiAppele = false;
 
   @override
   Future<Either<Exception, List<TuileUnivers>>> recuperer() async =>
@@ -41,48 +32,6 @@ class UniversPortMock implements UniversPort {
     required final String missionId,
   }) async =>
       Right(mission);
-
-  @override
-  Future<Either<Exception, Defi>> recupererDefi({
-    required final DefiId defiId,
-  }) async =>
-      Right(defi);
-
-  @override
-  Future<Either<Exception, void>> accepterDefi({
-    required final DefiId defiId,
-  }) async {
-    accepterDefiAppele = true;
-
-    return const Right(null);
-  }
-
-  @override
-  Future<Either<Exception, void>> refuserDefi({
-    required final DefiId defiId,
-    final String? motif,
-  }) async {
-    refuserDefiAppele = true;
-
-    return const Right(null);
-  }
-
-  @override
-  Future<Either<Exception, void>> realiserDefi(final DefiId defiId) async {
-    realiserDefiAppele = true;
-
-    return const Right(null);
-  }
-
-  @override
-  Future<Either<Exception, void>> abondonnerDefi({
-    required final DefiId defiId,
-    final String? motif,
-  }) async {
-    abondonnerDefiAppele = true;
-
-    return const Right(null);
-  }
 
   @override
   Future<Either<Exception, void>> gagnerPoints({

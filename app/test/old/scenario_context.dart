@@ -8,8 +8,6 @@ import 'package:app/features/profil/logement/presentation/bloc/mon_logement_stat
 import 'package:app/features/quiz/domain/quiz.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
 import 'package:app/features/simulateur_velo/domain/aide_velo_par_type.dart';
-import 'package:app/features/univers/core/domain/defi.dart';
-import 'package:app/features/univers/core/domain/defi_id.dart';
 import 'package:app/features/univers/core/domain/mission.dart';
 import 'package:app/features/univers/core/domain/mission_liste.dart';
 import 'package:app/features/univers/core/domain/tuile_univers.dart';
@@ -63,14 +61,6 @@ class ScenarioContext {
     defis: [],
     peutEtreTermine: false,
     estTermine: false,
-  );
-  Defi defi = const Defi(
-    id: DefiId(''),
-    thematique: '',
-    titre: '',
-    status: '',
-    astuces: '',
-    pourquoi: '',
   );
   List<Recommandation> recommandations = <Recommandation>[];
   Article article = const Article(

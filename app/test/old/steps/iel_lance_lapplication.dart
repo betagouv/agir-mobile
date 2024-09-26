@@ -70,7 +70,6 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
     univers: ScenarioContext().tuileUnivers,
     missionListe: ScenarioContext().missionListe,
     mission: ScenarioContext().mission,
-    defi: ScenarioContext().defi,
   );
 
   final profilPort = ScenarioContext().profilPortMock!;

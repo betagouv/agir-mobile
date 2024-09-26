@@ -2,8 +2,6 @@ import 'package:app/features/authentification/core/domain/authentification_statu
 import 'package:app/features/authentification/core/infrastructure/authentification_api_client.dart';
 import 'package:app/features/authentification/core/infrastructure/authentification_token_storage.dart';
 import 'package:app/features/univers/core/domain/content_id.dart';
-import 'package:app/features/univers/core/domain/defi.dart';
-import 'package:app/features/univers/core/domain/defi_id.dart';
 import 'package:app/features/univers/core/domain/mission.dart';
 import 'package:app/features/univers/core/domain/mission_defi.dart';
 import 'package:app/features/univers/core/domain/mission_kyc.dart';
@@ -348,93 +346,6 @@ void main() {
       ),
     );
   });
-
-  test('défi', () async {
-    final client = ClientMock()
-      ..getSuccess(
-        path: '/utilisateurs/$utilisateurId/defis/38',
-        response: CustomResponse('''
-{
-    "id": "38",
-    "astuces": "<p><strong>Par exemple :</strong></p><ul><li><p>Pour manger des fraises en hiver, vous pouvez utiliser des fraises surgelées ou choisir des oranges, qui sont de saison.</p></li><li><p>Pour consommer des tomates hors saison, vous pouvez utiliser des conserves de tomates pelées ou tomates séchées</p></li></ul>",
-    "jours_restants": null,
-    "points": 50,
-    "pourquoi": "<p>Manger de saison permet de profiter de produits plus savoureux et nutritifs tout en réduisant l'empreinte carbone et les coûts associés au transport et à la culture sous serre. Cela soutient également l'économie locale et encourage une alimentation diversifiée tout au long de l'année.</p>",
-    "sous_titre": null,
-    "status": "todo",
-    "thematique": "alimentation",
-    "thematique_label": "🥦 Alimentation",
-    "titre": "Remplacer un fruit ou un légume qui n'est pas de saison par une conserve, surgelé ou un autre produit frais",
-    "universes": ["alimentation"],
-    "motif": "Parce que",
-    "nombre_de_fois_realise": 3
-}'''),
-      );
-
-    final adapter = await initializeAdapter(client);
-    final result = await adapter.recupererDefi(defiId: const DefiId('38'));
-
-    expect(
-      result.getRight().getOrElse(() => throw Exception()),
-      const Defi(
-        id: DefiId('38'),
-        thematique: '🥦 Alimentation',
-        titre:
-            "Remplacer un fruit ou un légume qui n'est pas de saison par une conserve, surgelé ou un autre produit frais",
-        status: 'todo',
-        motif: 'Parce que',
-        astuces:
-            '<p><strong>Par exemple :</strong></p><ul><li><p>Pour manger des fraises en hiver, vous pouvez utiliser des fraises surgelées ou choisir des oranges, qui sont de saison.</p></li><li><p>Pour consommer des tomates hors saison, vous pouvez utiliser des conserves de tomates pelées ou tomates séchées</p></li></ul>',
-        pourquoi:
-            "<p>Manger de saison permet de profiter de produits plus savoureux et nutritifs tout en réduisant l'empreinte carbone et les coûts associés au transport et à la culture sous serre. Cela soutient également l'économie locale et encourage une alimentation diversifiée tout au long de l'année.</p>",
-      ),
-    );
-  });
-
-  test('accepterDefi', () async {
-    final client = ClientMock()
-      ..patchSuccess(
-        path: '/utilisateurs/$utilisateurId/defis/38',
-        response: OkResponse(),
-      );
-
-    final adapter = await initializeAdapter(client);
-    await adapter.accepterDefi(defiId: const DefiId('38'));
-
-    verify(
-      () => client.send(
-        any(
-          that: const RequestMathcher(
-            '/utilisateurs/$utilisateurId/defis/38',
-            body: '{"status":"en_cours"}',
-          ),
-        ),
-      ),
-    );
-  });
-
-  test('refuserDefi', () async {
-    final client = ClientMock()
-      ..patchSuccess(
-        path: '/utilisateurs/$utilisateurId/defis/38',
-        response: OkResponse(),
-      );
-
-    final adapter = await initializeAdapter(client);
-    await adapter.refuserDefi(defiId: const DefiId('38'));
-
-    verify(
-      () => client.send(
-        any(
-          that: const RequestMathcher(
-            '/utilisateurs/$utilisateurId/defis/38',
-            body: '{"status":"pas_envie"}',
-          ),
-        ),
-      ),
-    );
-  });
-
   test('gagnerPoints', () async {
     const objectifId = 'cce0f6fd-7fee-48ff-90a4-17b1f4421c54';
     final client = ClientMock()
