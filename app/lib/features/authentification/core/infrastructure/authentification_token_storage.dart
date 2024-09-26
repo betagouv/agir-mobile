@@ -20,13 +20,12 @@ class AuthentificationTokenStorage {
 
   Future<bool> initialise() async {
     final token = await recupererToken;
-    if (token == null) {
-      _authentificationStatusManagerWriter
-          .gererAuthentificationStatut(AuthentificationStatut.pasConnecte);
-    } else {
-      _authentificationStatusManagerWriter
-          .gererAuthentificationStatut(AuthentificationStatut.connecte);
-    }
+
+    _authentificationStatusManagerWriter.gererAuthentificationStatut(
+      _isTokenValid(token)
+          ? AuthentificationStatut.connecte
+          : AuthentificationStatut.pasConnecte,
+    );
 
     return true;
   }
@@ -36,6 +35,7 @@ class AuthentificationTokenStorage {
       _secureStorage.read(key: _tokenKey);
 
   final _utilisateurIdKey = 'utilisateurId';
+
   Future<String?> get recupererUtilisateurId async =>
       _secureStorage.read(key: _utilisateurIdKey);
 
@@ -48,9 +48,7 @@ class AuthentificationTokenStorage {
       return;
     }
 
-    final tokenData =
-        jsonDecode(utf8.decode(base64.decode(base64.normalize(jwtToken))))
-            as Map<String, dynamic>;
+    final tokenData = _decodeJwtToken(jwtToken);
     final utilisateurId = tokenData['utilisateurId'] as String;
 
     await _secureStorage.write(key: _utilisateurIdKey, value: utilisateurId);
@@ -64,4 +62,26 @@ class AuthentificationTokenStorage {
     await _secureStorage.delete(key: _tokenKey);
     await _secureStorage.delete(key: _utilisateurIdKey);
   }
+
+  bool _isTokenValid(final String? token) {
+    try {
+      if (token == null) {
+        return false;
+      }
+
+      final jwtToken = token.split('.')[1];
+      final tokenData = _decodeJwtToken(jwtToken);
+      final expirationTime = DateTime.fromMillisecondsSinceEpoch(
+        (tokenData['exp'] as int) * 1000,
+      );
+
+      return expirationTime.isAfter(DateTime.now());
+    } on Exception catch (_) {
+      return false;
+    }
+  }
+
+  Map<String, dynamic> _decodeJwtToken(final String jwtToken) =>
+      jsonDecode(utf8.decode(base64.decode(base64.normalize(jwtToken))))
+          as Map<String, dynamic>;
 }
