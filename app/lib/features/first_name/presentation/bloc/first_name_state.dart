@@ -26,7 +26,12 @@ final class FirstNameLoading extends FirstNameState {
 }
 
 class FirstNameSuccess extends FirstNameState {
-  const FirstNameSuccess();
+  const FirstNameSuccess(this.dateTime);
+
+  final DateTime dateTime;
+
+  @override
+  List<Object> get props => [dateTime];
 }
 
 class FirstNameFailure extends FirstNameState {

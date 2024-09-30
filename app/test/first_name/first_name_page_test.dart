@@ -4,6 +4,7 @@ import 'package:app/features/first_name/domain/first_name.dart';
 import 'package:app/features/first_name/domain/first_name_port.dart';
 import 'package:app/features/first_name/presentation/pages/first_name_page.dart';
 import 'package:app/l10n/l10n.dart';
+import 'package:clock/clock.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,6 +26,7 @@ Future<void> _pumpFirstNamePage(
       RepositoryProvider<FirstNamePort>.value(
         value: firstNamePort ?? _FirstNamePortMock(),
       ),
+      RepositoryProvider<Clock>.value(value: const Clock()),
     ],
     page: const FirstNamePage(),
     routes: {QuestionCodePostalPage.name: QuestionCodePostalPage.path},
