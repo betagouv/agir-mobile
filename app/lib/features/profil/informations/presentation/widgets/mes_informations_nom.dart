@@ -20,7 +20,9 @@ class MesInformationsNom extends StatelessWidget {
       onChanged: (final value) => context
           .read<MesInformationsBloc>()
           .add(MesInformationsNomChange(value)),
+      textCapitalization: TextCapitalization.sentences,
       textInputAction: TextInputAction.next,
+      autofillHints: const [AutofillHints.familyName],
     );
   }
 }

@@ -21,7 +21,9 @@ class MesInformationsPrenom extends StatelessWidget {
       onChanged: (final value) => context
           .read<MesInformationsBloc>()
           .add(MesInformationsPrenomChange(value)),
+      textCapitalization: TextCapitalization.sentences,
       textInputAction: TextInputAction.next,
+      autofillHints: const [AutofillHints.givenName],
     );
   }
 }

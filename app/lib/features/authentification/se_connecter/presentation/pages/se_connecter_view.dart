@@ -64,6 +64,7 @@ class SeConnecterView extends StatelessWidget {
                 autocorrect: false,
                 keyboardType: TextInputType.emailAddress,
                 textInputAction: TextInputAction.next,
+                autofillHints: const [AutofillHints.email],
               ),
               const SizedBox(height: DsfrSpacings.s2w),
               DsfrInput(
@@ -71,6 +72,7 @@ class SeConnecterView extends StatelessWidget {
                 onChanged: (final value) => _handleMotDePasse(context, value),
                 isPasswordMode: true,
                 keyboardType: TextInputType.visiblePassword,
+                autofillHints: const [AutofillHints.password],
               ),
               const _MessageErreur(),
               const SizedBox(height: DsfrSpacings.s1w),
