@@ -317,6 +317,7 @@ class _CodePostalEtCommuneState extends State<_CodePostalEtCommune> {
               FilteringTextInputFormatter.digitsOnly,
               LengthLimitingTextInputFormatter(5),
             ],
+            autofillHints: const [AutofillHints.postalCode],
           ),
         ),
         const SizedBox(width: DsfrSpacings.s2w),

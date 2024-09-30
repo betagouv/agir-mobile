@@ -32,11 +32,11 @@ class MonLogementNombreEnfants extends StatelessWidget {
         SizedBox(
           width: adjustTextSize(context, 97),
           child: DsfrInputHeadless(
+            key: const ValueKey(enfants),
             initialValue: nombreEnfants.toString(),
             onChanged: (final value) => _handleNombreEnfants(context, value),
             keyboardType: TextInputType.number,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-            key: const ValueKey(enfants),
           ),
         ),
         const SizedBox(width: DsfrSpacings.s1v),

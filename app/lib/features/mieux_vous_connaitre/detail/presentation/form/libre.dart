@@ -17,6 +17,7 @@ class Libre extends StatelessWidget {
         TextEditingController(text: question.reponses.firstOrNull);
 
     return DsfrInputHeadless(
+      key: const ValueKey(Localisation.maReponse),
       controller: controller,
       onChanged: (final value) =>
           context.read<MieuxVousConnaitreEditBloc>().add(
@@ -25,7 +26,6 @@ class Libre extends StatelessWidget {
       maxLines: 4,
       minLines: 3,
       inputConstraints: null,
-      key: const ValueKey(Localisation.maReponse),
     );
   }
 }

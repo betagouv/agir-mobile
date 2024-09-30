@@ -88,6 +88,7 @@ class FirstNamePage extends StatelessWidget {
                     },
                     keyboardType: TextInputType.name,
                     textCapitalization: TextCapitalization.sentences,
+                    autofillHints: const [AutofillHints.givenName],
                   ),
                   BlocSelector<FirstNameBloc, FirstNameState, Option<String>>(
                     selector: (final state) => switch (state) {

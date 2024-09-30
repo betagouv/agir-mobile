@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 
 class DsfrInputHeadless extends StatefulWidget {
   const DsfrInputHeadless({
+    super.key,
     this.initialValue,
     this.controller,
     this.suffixText,
@@ -33,7 +34,7 @@ class DsfrInputHeadless extends StatefulWidget {
     this.focusPadding = const EdgeInsets.all(DsfrSpacings.s1v),
     this.inputFormatters,
     this.scrollPadding = const EdgeInsets.all(20),
-    super.key,
+    this.autofillHints,
   });
 
   final String? suffixText;
@@ -62,6 +63,7 @@ class DsfrInputHeadless extends StatefulWidget {
   final EdgeInsetsGeometry focusPadding;
   final List<TextInputFormatter>? inputFormatters;
   final EdgeInsets scrollPadding;
+  final Iterable<String>? autofillHints;
 
   @override
   State<DsfrInputHeadless> createState() => _DsfrInputHeadlessState();
@@ -146,6 +148,7 @@ class _DsfrInputHeadlessState extends State<DsfrInputHeadless> {
             validator: widget.validator,
             inputFormatters: widget.inputFormatters,
             scrollPadding: widget.scrollPadding,
+            autofillHints: widget.autofillHints,
           ),
         ),
       ),

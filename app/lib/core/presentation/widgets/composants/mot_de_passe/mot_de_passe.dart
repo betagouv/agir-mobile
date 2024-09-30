@@ -41,6 +41,7 @@ class _MotDePasse extends StatelessWidget {
             scrollPadding: EdgeInsets.only(
               bottom: MediaQuery.viewInsetsOf(context).bottom + 190,
             ),
+            autofillHints: const [AutofillHints.password],
           ),
           const Text(
             Localisation.votreMotDePasseDoitContenir,

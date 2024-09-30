@@ -30,6 +30,7 @@ class DsfrInput extends StatefulWidget {
     this.textInputAction,
     this.inputFormatters,
     this.scrollPadding = const EdgeInsets.all(20),
+    this.autofillHints,
     super.key,
   });
 
@@ -54,6 +55,7 @@ class DsfrInput extends StatefulWidget {
   final TextInputAction? textInputAction;
   final List<TextInputFormatter>? inputFormatters;
   final EdgeInsets scrollPadding;
+  final Iterable<String>? autofillHints;
 
   @override
   State<DsfrInput> createState() => _DsfrInputState();
@@ -104,6 +106,7 @@ class _DsfrInputState extends State<DsfrInput> {
             ),
           ],
           DsfrInputHeadless(
+            key: ValueKey(labelText),
             initialValue: widget.initialValue,
             controller: widget.controller,
             suffixText: widget.suffixText,
@@ -119,7 +122,7 @@ class _DsfrInputState extends State<DsfrInput> {
             textAlign: widget.textAlign,
             inputFormatters: widget.inputFormatters,
             scrollPadding: widget.scrollPadding,
-            key: ValueKey(labelText),
+            autofillHints: widget.autofillHints,
           ),
         ],
       ),

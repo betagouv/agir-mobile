@@ -38,6 +38,7 @@ class MotDePasseOublieView extends StatelessWidget {
                       ),
               autocorrect: false,
               keyboardType: TextInputType.emailAddress,
+              autofillHints: const [AutofillHints.email],
             ),
             const SizedBox(height: DsfrSpacings.s2w),
             const _Valider(),

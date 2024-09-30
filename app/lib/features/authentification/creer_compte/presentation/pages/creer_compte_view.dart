@@ -60,6 +60,7 @@ class CreerCompteView extends StatelessWidget {
                 autocorrect: false,
                 keyboardType: TextInputType.emailAddress,
                 textInputAction: TextInputAction.next,
+                autofillHints: const [AutofillHints.email],
               ),
               const SizedBox(height: DsfrSpacings.s2w),
               FnvMotDePasse(
