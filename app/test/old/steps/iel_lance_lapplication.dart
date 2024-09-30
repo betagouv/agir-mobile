@@ -35,10 +35,11 @@ class _ActionRepositoryMock extends Mock implements ActionRepository {}
 
 /// Iel lance l'application.
 Future<void> ielLanceLapplication(final WidgetTester tester) async {
+  final clock = Clock.fixed(DateTime(1992));
   final authenticationService = AuthenticationService(
     authenticationRepository:
         AuthenticationRepository(FlutterSecureStorageFake()),
-    clock: Clock.fixed(DateTime(1992)),
+    clock: clock,
   );
   if (ScenarioContext().authentificationStatut is Authenticated) {
     await authenticationService.login(token);
@@ -90,6 +91,7 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
   await tester.pumpFrames(
     App(
       tracker: tracker,
+      clock: clock,
       authenticationService: authenticationService,
       authentificationPort: ScenarioContext().authentificationPortMock!,
       universPort: ScenarioContext().universPortMock!,

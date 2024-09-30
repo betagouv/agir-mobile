@@ -30,7 +30,10 @@ class FirstNamePage extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => BlocProvider(
-        create: (final context) => FirstNameBloc(AddFirstName(context.read())),
+        create: (final context) => FirstNameBloc(
+          addFirstName: AddFirstName(context.read()),
+          clock: context.read(),
+        ),
         child: Builder(
           builder: (final context) =>
               BlocListener<FirstNameBloc, FirstNameState>(
@@ -111,6 +114,7 @@ class FirstNamePage extends StatelessWidget {
                   BlocSelector<FirstNameBloc, FirstNameState, bool>(
                 selector: (final state) => switch (state) {
                   FirstNameEntered() => state.firstName.value.isNotEmpty,
+                  FirstNameSuccess() => true,
                   _ => false,
                 },
                 builder: (final context, final state) => FnvBottomBar(

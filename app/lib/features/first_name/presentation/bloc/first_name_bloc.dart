@@ -2,11 +2,14 @@ import 'package:app/core/error/domain/api_erreur.dart';
 import 'package:app/features/first_name/application/add_first_name.dart';
 import 'package:app/features/first_name/presentation/bloc/first_name_event.dart';
 import 'package:app/features/first_name/presentation/bloc/first_name_state.dart';
+import 'package:clock/clock.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FirstNameBloc extends Bloc<FirstNameEvent, FirstNameState> {
-  FirstNameBloc(final AddFirstName addFirstName)
-      : super(const FirstNameInitial()) {
+  FirstNameBloc({
+    required final AddFirstName addFirstName,
+    required final Clock clock,
+  }) : super(const FirstNameInitial()) {
     on<FirstNameChanged>((final event, final emit) {
       event.value.validate.fold(
         () => emit(FirstNameEntered(event.value)),
@@ -24,8 +27,10 @@ class FirstNameBloc extends Bloc<FirstNameEvent, FirstNameState> {
               errorMessage: l is ApiErreur ? l.message : l.toString(),
             ),
           ),
-          (final r) => emit(const FirstNameSuccess()),
+          (final r) => emit(FirstNameSuccess(DateTime.now())),
         );
+      } else if (currentState is FirstNameSuccess) {
+        emit(FirstNameSuccess(clock.now()));
       }
     });
   }

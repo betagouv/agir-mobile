@@ -30,6 +30,7 @@ import 'package:app/features/utilisateur/presentation/bloc/utilisateur_bloc.dart
 import 'package:app/features/version/domain/version_port.dart';
 import 'package:app/features/version/presentation/bloc/version_bloc.dart';
 import 'package:app/features/version/presentation/bloc/version_event.dart';
+import 'package:clock/clock.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,6 +40,7 @@ import 'package:go_router/go_router.dart';
 class App extends StatefulWidget {
   const App({
     required this.tracker,
+    required this.clock,
     required this.authenticationService,
     required this.authentificationPort,
     required this.universPort,
@@ -60,6 +62,7 @@ class App extends StatefulWidget {
   });
 
   final Tracker tracker;
+  final Clock clock;
   final AuthenticationService authenticationService;
   final AuthentificationPort authentificationPort;
   final UniversPort universPort;
@@ -104,6 +107,7 @@ class _AppState extends State<App> {
   Widget build(final BuildContext context) => MultiRepositoryProvider(
         providers: [
           RepositoryProvider.value(value: widget.tracker),
+          RepositoryProvider.value(value: widget.clock),
           RepositoryProvider.value(value: widget.authentificationPort),
           RepositoryProvider.value(value: widget.universPort),
           RepositoryProvider.value(value: widget.aidesPort),

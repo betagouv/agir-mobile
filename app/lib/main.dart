@@ -79,13 +79,14 @@ Future<void> main() async {
 
   final packageInfo = await PackageInfo.fromPlatform();
 
+  const clock = Clock();
   final authenticationService = AuthenticationService(
     authenticationRepository: AuthenticationRepository(
       const FlutterSecureStorage(
         aOptions: AndroidOptions(encryptedSharedPreferences: true),
       ),
     ),
-    clock: const Clock(),
+    clock: clock,
   );
   await authenticationService.checkAuthenticationStatus();
 
@@ -108,6 +109,7 @@ Future<void> main() async {
   runApp(
     App(
       tracker: tracker,
+      clock: clock,
       authenticationService: authenticationService,
       authentificationPort: AuthentificationApiAdapter(
         apiClient: apiClient,
