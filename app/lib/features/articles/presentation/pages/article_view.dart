@@ -27,7 +27,7 @@ class ArticleView extends StatelessWidget {
         padding: const EdgeInsets.all(paddingVerticalPage),
         children: [
           Text(article.titre, style: const DsfrTextStyle.headline2()),
-          if (article.sousTitre != null) ...[
+          if (article.sousTitre != null && article.sousTitre!.isNotEmpty) ...[
             const SizedBox(height: DsfrSpacings.s2w),
             Text(article.sousTitre!, style: const DsfrTextStyle.headline6()),
           ],
