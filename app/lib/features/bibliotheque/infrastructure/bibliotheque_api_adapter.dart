@@ -18,9 +18,9 @@ class BibliothequeApiAdapter implements BibliothequePort {
 
   @override
   Future<Either<Exception, Bibliotheque>> recuperer({
-    final List<String>? thematiques,
-    final String? titre,
-    final bool? isFavorite,
+    required final List<String>? thematiques,
+    required final String? titre,
+    required final bool? isFavorite,
   }) async {
     final utilisateurId = _apiClient.recupererUtilisateurId;
     if (utilisateurId == null) {
@@ -28,8 +28,9 @@ class BibliothequeApiAdapter implements BibliothequePort {
     }
 
     final map = <String, String>{
-      if (thematiques != null) 'filtre_thematiques': thematiques.join(','),
-      if (titre != null) 'titre': titre,
+      if (thematiques != null && thematiques.isNotEmpty)
+        'filtre_thematiques': thematiques.join(','),
+      if (titre != null && titre.isNotEmpty) 'titre': titre,
       if (isFavorite != null && isFavorite) 'favoris': '$isFavorite',
     };
 
