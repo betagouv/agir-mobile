@@ -20,6 +20,7 @@ class DsfrRadioButtonSetHeadless<T> extends StatefulWidget {
     required this.onCallback,
     this.initialValue,
     this.mode = DsfrRadioButtonSetMode.row,
+    this.isEnabled = true,
     super.key,
   });
 
@@ -27,6 +28,7 @@ class DsfrRadioButtonSetHeadless<T> extends StatefulWidget {
   final T? initialValue;
   final Callback<T?> onCallback;
   final DsfrRadioButtonSetMode mode;
+  final bool isEnabled;
 
   @override
   State<DsfrRadioButtonSetHeadless<T>> createState() =>
@@ -56,7 +58,7 @@ class _DsfrRadioButtonSetHeadlessState<T>
             title: e.value.value,
             value: e.key,
             groupValue: _value,
-            onChanged: _handleChange,
+            onChanged: widget.isEnabled ? _handleChange : null,
             backgroundColor: e.value.backgroundColor,
           ),
         )

@@ -75,6 +75,7 @@ class _Body extends StatelessWidget {
               .read<QuizBloc>()
               .add(QuizReponseSelectionnee(value ?? '')),
           mode: DsfrRadioButtonSetMode.column,
+          isEnabled: state.estExacte.isNone(),
         ),
         if (state.estExacte.isSome()) ...[
           const SizedBox(height: DsfrSpacings.s2w),
