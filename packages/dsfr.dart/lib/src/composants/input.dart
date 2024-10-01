@@ -16,6 +16,7 @@ class DsfrInput extends StatefulWidget {
     this.controller,
     this.initialValue,
     required this.onChanged,
+    this.onFieldSubmitted,
     this.validator,
     this.width,
     this.labelStyle = const DsfrTextStyle(fontSize: 16, lineHeight: 24),
@@ -23,6 +24,7 @@ class DsfrInput extends StatefulWidget {
     this.hintStyle = const DsfrTextStyle(fontSize: 12, lineHeight: 20),
     this.hintColor = DsfrColors.grey425,
     this.textAlign = TextAlign.start,
+    this.autofocus = false,
     this.isPasswordMode = false,
     this.autocorrect,
     this.keyboardType,
@@ -40,6 +42,7 @@ class DsfrInput extends StatefulWidget {
   final TextEditingController? controller;
   final String? initialValue;
   final ValueChanged<String> onChanged;
+  final ValueChanged<String>? onFieldSubmitted;
   final FormFieldValidator<String>? validator;
 
   final double? width;
@@ -48,6 +51,7 @@ class DsfrInput extends StatefulWidget {
   final TextStyle hintStyle;
   final Color hintColor;
   final TextAlign textAlign;
+  final bool autofocus;
   final bool isPasswordMode;
   final bool? autocorrect;
   final TextInputType? keyboardType;
@@ -111,6 +115,7 @@ class _DsfrInputState extends State<DsfrInput> {
             controller: widget.controller,
             suffixText: widget.suffixText,
             onChanged: widget.onChanged,
+            onFieldSubmitted: widget.onFieldSubmitted,
             validator: widget.validator,
             keyboardType: widget.keyboardType,
             textCapitalization: widget.textCapitalization,
@@ -120,6 +125,7 @@ class _DsfrInputState extends State<DsfrInput> {
             passwordVisibility: _passwordVisibility,
             autocorrect: widget.autocorrect,
             textAlign: widget.textAlign,
+            autofocus: widget.autofocus,
             inputFormatters: widget.inputFormatters,
             scrollPadding: widget.scrollPadding,
             autofillHints: widget.autofillHints,
