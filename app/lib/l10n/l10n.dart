@@ -181,6 +181,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const partieUne = '1. ADAPTER VOTRE EXPÉRIENCE';
   static const pasPourMoi = 'Pas pour moi';
   static const plusDe150m2 = 'Plus de 150 m²';
+  static const plusieursReponsesPossibles = 'Plusieurs réponses possibles';
   static const point = '.';
   static const politiqueDeConfidentialite = 'Politique de confidentialité';
   static const politiqueDeConfidentialiteSite =

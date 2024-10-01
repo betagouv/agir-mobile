@@ -6,9 +6,9 @@ import 'package:app/features/mieux_vous_connaitre/detail/presentation/form/choix
 import 'package:app/features/mieux_vous_connaitre/detail/presentation/form/choix_unique.dart';
 import 'package:app/features/mieux_vous_connaitre/detail/presentation/form/libre.dart';
 import 'package:app/features/mieux_vous_connaitre/detail/presentation/form/mieux_vous_connaitre_controller.dart';
-import 'package:app/features/profil/profil/presentation/widgets/profil_title.dart';
+import 'package:app/features/mieux_vous_connaitre/detail/presentation/form/mosaic.dart';
+import 'package:app/features/profil/profil/presentation/widgets/fnv_title.dart';
 import 'package:app/l10n/l10n.dart';
-import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -30,7 +30,6 @@ class MieuxVousConnaitreForm extends StatelessWidget {
   Widget build(final BuildContext context) => BlocProvider(
         create: (final context) => MieuxVousConnaitreEditBloc(
           mieuxVousConnaitrePort: context.read(),
-          gamificationPort: context.read(),
         )..add(MieuxVousConnaitreEditRecuperationDemandee(id)),
         child: _Content(controller: controller, onSaved: onSaved),
       );
@@ -43,55 +42,116 @@ class _Content extends StatelessWidget {
   final OnSavedCallback? onSaved;
 
   @override
-  Widget build(final BuildContext context) {
-    final question = context.select<MieuxVousConnaitreEditBloc, Question>(
-      (final bloc) => bloc.state.question,
-    );
-    controller.addListener(
-      () => context.read<MieuxVousConnaitreEditBloc>().add(
-            MieuxVousConnaitreEditMisAJourDemandee(question.id),
-          ),
-    );
-
-    return BlocListener<MieuxVousConnaitreEditBloc,
-        MieuxVousConnaitreEditState>(
-      listener: (final context, final state) {
-        onSaved?.call();
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text(Localisation.miseAJourEffectuee)),
-        );
-      },
-      listenWhen: (final previous, final current) =>
-          previous.estMiseAJour != current.estMiseAJour && current.estMiseAJour,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            switch (question.thematique) {
-              Thematique.alimentation =>
-                '🥦 ${Localisation.lesCategoriesAlimentation}',
-              Thematique.transport =>
-                '🚗 ${Localisation.lesCategoriesTransport}',
-              Thematique.logement => '🏡 ${Localisation.lesCategoriesLogement}',
-              Thematique.consommation =>
-                '🛒 ${Localisation.lesCategoriesConsommation}',
-              Thematique.climat => '🌍 ${Localisation.lesCategoriesClimat}',
-              Thematique.dechet => '🗑️ ${Localisation.lesCategoriesDechet}',
-              Thematique.loisir => '⚽ ${Localisation.lesCategoriesLoisir}',
-            },
-            style: const DsfrTextStyle.bodySm(),
-          ),
-          const SizedBox(height: DsfrSpacings.s1w),
-          ProfilTitle(title: question.question),
-          const Text(Localisation.maReponse, style: DsfrTextStyle.headline4()),
-          const SizedBox(height: DsfrSpacings.s3w),
-          switch (question.type) {
-            ReponseType.choixUnique => ChoixUnique(question: question),
-            ReponseType.choixMultiple => ChoixMultiple(question: question),
-            ReponseType.libre => Libre(question: question),
+  Widget build(final BuildContext context) =>
+      BlocListener<MieuxVousConnaitreEditBloc, MieuxVousConnaitreEditState>(
+        listener: (final context, final state) {
+          final aState = state;
+          if (aState is MieuxVousConnaitreEditMisAJour) {
+            onSaved?.call();
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text(Localisation.miseAJourEffectuee)),
+            );
+          }
+        },
+        child: BlocBuilder<MieuxVousConnaitreEditBloc,
+            MieuxVousConnaitreEditState>(
+          builder: (final context, final state) {
+            switch (state) {
+              case MieuxVousConnaitreEditInitial():
+              case MieuxVousConnaitreEditMisAJour():
+                return const SizedBox();
+              case MieuxVousConnaitreEditLoaded():
+                return _LoadedContent(controller: controller, state: state);
+              case MieuxVousConnaitreEditError():
+                return const Text('Erreur');
+            }
           },
-        ],
-      ),
-    );
+        ),
+      );
+}
+
+class _LoadedContent extends StatelessWidget {
+  const _LoadedContent({required this.controller, required this.state});
+
+  final MieuxVousConnaitreEditLoaded state;
+  final MieuxVousConnaitreController controller;
+  @override
+  Widget build(final BuildContext context) {
+    final question = state.question;
+    void listener() => context.read<MieuxVousConnaitreEditBloc>().add(
+          MieuxVousConnaitreEditMisAJourDemandee(question.id.value),
+        );
+    controller
+      ..removeListener(listener)
+      ..addListener(listener);
+
+    return switch (question) {
+      ChoixMultipleQuestion() => _ChoixMultipleContent(question: question),
+      ChoixUniqueQuestion() => _ChoixUniqueContent(question: question),
+      LibreQuestion() => _LibreContent(question: question),
+      MosaicQuestion() => _MosaicContent(question: question),
+    };
   }
+}
+
+class _ChoixMultipleContent extends StatelessWidget {
+  const _ChoixMultipleContent({required this.question});
+
+  final ChoixMultipleQuestion question;
+
+  @override
+  Widget build(final BuildContext context) => Column(
+        children: [
+          FnvTitle(
+            title: question.text.value,
+            subtitle: Localisation.plusieursReponsesPossibles,
+          ),
+          ChoixMultiple(question: question),
+        ],
+      );
+}
+
+class _ChoixUniqueContent extends StatelessWidget {
+  const _ChoixUniqueContent({required this.question});
+
+  final ChoixUniqueQuestion question;
+
+  @override
+  Widget build(final BuildContext context) => Column(
+        children: [
+          FnvTitle(title: question.text.value),
+          ChoixUnique(question: question),
+        ],
+      );
+}
+
+class _LibreContent extends StatelessWidget {
+  const _LibreContent({required this.question});
+
+  final LibreQuestion question;
+
+  @override
+  Widget build(final BuildContext context) => Column(
+        children: [
+          FnvTitle(title: question.text.value),
+          Libre(question: question),
+        ],
+      );
+}
+
+class _MosaicContent extends StatelessWidget {
+  const _MosaicContent({required this.question});
+
+  final MosaicQuestion question;
+
+  @override
+  Widget build(final BuildContext context) => Column(
+        children: [
+          FnvTitle(
+            title: question.text.value,
+            subtitle: Localisation.plusieursReponsesPossibles,
+          ),
+          Mosaic(question: question),
+        ],
+      );
 }

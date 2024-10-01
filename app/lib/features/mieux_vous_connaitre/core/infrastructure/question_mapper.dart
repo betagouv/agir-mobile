@@ -1,43 +1,102 @@
-// ignore_for_file: no-equal-switch-expression-cases
-
 import 'package:app/features/mieux_vous_connaitre/core/domain/question.dart';
 
 abstract final class QuestionMapper {
   const QuestionMapper._();
 
-  static Question fromJson(final Map<String, dynamic> json) => Question(
-        id: json['id'] as String,
-        question: json['question'] as String,
-        reponses: (json['reponse'] as List<dynamic>)
-            .map((final e) => e as String)
-            .toList(),
-        categorie: json['categorie'] as String,
-        points: (json['points'] as num).toInt(),
-        type: _mapTypeDeQuestionFromJson(json['type'] as String),
-        reponsesPossibles: (json['reponses_possibles'] as List<dynamic>)
-            .map((final e) => e as String)
-            .toList(),
-        deNosGestesClimat: json['is_NGC'] as bool,
-        thematique: _mapThematiqueFromJson(json['thematique'] as String),
+  static Question? fromJson(final Map<String, dynamic> json) {
+    final type = json['type'] as String;
+
+    return switch (type) {
+      'choix_multiple' => _createChoixMultipleQuestion(json),
+      'choix_unique' => _createChoixUniqueQuestion(json),
+      'libre' => _createLibreQuestion(json),
+      'mosaic_boolean' => _createMosaicQuestion(json),
+      _ => null,
+    };
+  }
+
+  static ChoixMultipleQuestion _createChoixMultipleQuestion(
+    final Map<String, dynamic> json,
+  ) =>
+      ChoixMultipleQuestion(
+        id: QuestionId(json['id'] as String),
+        text: QuestionText(json['question'] as String),
+        responses: _createResponses(json['reponse'] as List<dynamic>),
+        points: Points((json['points'] as num).toInt()),
+        responsesPossibles: _createResponsesPossibles(
+          json['reponses_possibles'] as List<dynamic>,
+        ),
+        theme: _mapThematiqueFromJson(json['thematique'] as String),
       );
 
-  static ReponseType _mapTypeDeQuestionFromJson(final String? type) =>
-      switch (type) {
-        'choix_multiple' => ReponseType.choixMultiple,
-        'choix_unique' => ReponseType.choixUnique,
-        'libre' => ReponseType.libre,
-        _ => ReponseType.libre,
-      };
+  static ChoixUniqueQuestion _createChoixUniqueQuestion(
+    final Map<String, dynamic> json,
+  ) =>
+      ChoixUniqueQuestion(
+        id: QuestionId(json['id'] as String),
+        text: QuestionText(json['question'] as String),
+        responses: _createResponses(json['reponse'] as List<dynamic>),
+        points: Points((json['points'] as num).toInt()),
+        responsesPossibles: _createResponsesPossibles(
+          json['reponses_possibles'] as List<dynamic>,
+        ),
+        theme: _mapThematiqueFromJson(json['thematique'] as String),
+      );
 
-  static Thematique _mapThematiqueFromJson(final String? type) =>
+  static LibreQuestion _createLibreQuestion(final Map<String, dynamic> json) =>
+      LibreQuestion(
+        id: QuestionId(json['id'] as String),
+        text: QuestionText(json['question'] as String),
+        responses: _createResponses(json['reponse'] as List<dynamic>),
+        points: Points((json['points'] as num).toInt()),
+        theme: _mapThematiqueFromJson(json['thematique'] as String),
+      );
+
+  static MosaicQuestion _createMosaicQuestion(
+    final Map<String, dynamic> json,
+  ) =>
+      MosaicQuestion(
+        id: QuestionId(json['id'] as String),
+        text: QuestionText(json['titre'] as String),
+        responses: _createMosaicResponses(json['reponses'] as List<dynamic>),
+        points: Points((json['points'] as num).toInt()),
+        answered: json['is_answered'] as bool,
+      );
+
+  static Responses _createResponses(final List<dynamic> jsonResponses) =>
+      Responses(jsonResponses.map((final e) => e as String).toList());
+
+  static ResponsesPossibles _createResponsesPossibles(
+    final List<dynamic> jsonResponsesPossibles,
+  ) =>
+      ResponsesPossibles(
+        jsonResponsesPossibles.map((final e) => e as String).toList(),
+      );
+
+  static List<MosaicResponse> _createMosaicResponses(
+    final List<dynamic> jsonMosaicResponses,
+  ) =>
+      jsonMosaicResponses
+          .map((final e) => e as Map<String, dynamic>)
+          .map(
+            (final e) => MosaicResponse(
+              id: MosaicResponseCode(e['code'] as String),
+              imageUrl: ImageUrl(e['image_url'] as String),
+              label: Label(e['label'] as String),
+              isSelected: e['boolean_value'] as bool,
+            ),
+          )
+          .toList();
+
+  static QuestionTheme _mapThematiqueFromJson(final String type) =>
       switch (type) {
-        'alimentation' => Thematique.alimentation,
-        'transport' => Thematique.transport,
-        'logement' => Thematique.logement,
-        'consommation' => Thematique.consommation,
-        'climat' => Thematique.climat,
-        'dechet' => Thematique.dechet,
-        'loisir' => Thematique.loisir,
-        _ => Thematique.loisir,
+        'alimentation' => QuestionTheme.alimentation,
+        'transport' => QuestionTheme.transport,
+        'logement' => QuestionTheme.logement,
+        'consommation' => QuestionTheme.consommation,
+        'climat' => QuestionTheme.climat,
+        'dechet' => QuestionTheme.dechet,
+        'loisir' => QuestionTheme.loisir,
+        _ => throw UnimplementedError('Thematique non implémentée'),
       };
 }

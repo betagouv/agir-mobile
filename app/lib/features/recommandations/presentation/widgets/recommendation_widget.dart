@@ -1,12 +1,14 @@
 import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/shadows.dart';
 import 'package:app/features/articles/presentation/pages/article_page.dart';
+import 'package:app/features/gamification/domain/gamification_port.dart';
 import 'package:app/features/mieux_vous_connaitre/detail/presentation/pages/mieux_vous_connaitre_edit_page.dart';
 import 'package:app/features/quiz/presentation/pages/quiz_page.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class RecommendationWidget extends StatelessWidget {
@@ -34,19 +36,28 @@ class RecommendationWidget extends StatelessWidget {
     const borderRadius = BorderRadius.all(Radius.circular(DsfrSpacings.s1w));
 
     return GestureDetector(
-      onTap: () async => switch (type) {
-        TypeDuContenu.article => GoRouter.of(context).pushNamed(
-            ArticlePage.name,
-            pathParameters: {'id': id},
-          ),
-        TypeDuContenu.kyc => GoRouter.of(context).pushNamed(
-            MieuxVousConnaitreEditPage.name,
-            pathParameters: {'id': id},
-          ),
-        TypeDuContenu.quiz => GoRouter.of(context).pushNamed(
-            QuizPage.name,
-            pathParameters: {'id': id},
-          ),
+      onTap: () async {
+        switch (type) {
+          case TypeDuContenu.article:
+            await GoRouter.of(context).pushNamed(
+              ArticlePage.name,
+              pathParameters: {'id': id},
+            );
+          case TypeDuContenu.kyc:
+            final result = await GoRouter.of(context).pushNamed(
+              MieuxVousConnaitreEditPage.name,
+              pathParameters: {'id': id},
+            );
+            if (result != true || !context.mounted) {
+              return;
+            }
+            await context.read<GamificationPort>().mettreAJourLesPoints();
+          case TypeDuContenu.quiz:
+            await GoRouter.of(context).pushNamed(
+              QuizPage.name,
+              pathParameters: {'id': id},
+            );
+        }
       },
       child: DecoratedBox(
         decoration: const ShapeDecoration(

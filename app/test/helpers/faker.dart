@@ -95,3 +95,82 @@ Map<String, dynamic> aideVeloParTypeFaker() => {
       'pliant': List.generate(2, (final _) => aideVeloFaker()),
       'électrique': List.generate(2, (final _) => aideVeloFaker()),
     };
+
+final generateThematique = faker.randomGenerator.element([
+  'alimentation',
+  'transport',
+  'logement',
+  'consommation',
+  'climat',
+  'dechet',
+  'loisir',
+]);
+
+Map<String, dynamic> questionFaker() => faker.randomGenerator.element([
+      choixUniqueQuestionFaker(faker.randomGenerator.boolean()),
+      choixMultipleQuestionFaker(),
+      libreQuestionFaker(),
+      mosaicBooleanQuestionFaker(),
+    ]);
+
+Map<String, dynamic> choixUniqueQuestionFaker(final bool withResponse) => {
+      'categorie': 'mission',
+      'id': 'KYC_${faker.lorem.word()}',
+      'is_NGC': faker.randomGenerator.boolean(),
+      'points': faker.randomGenerator.integer(10),
+      'question': faker.lorem.sentence(),
+      'reponse': withResponse ? [faker.lorem.word()] : <String>[],
+      'reponses_possibles': [
+        faker.lorem.word(),
+        faker.lorem.word(),
+        faker.lorem.word(),
+      ],
+      'thematique': generateThematique,
+      'type': 'choix_unique',
+    };
+
+Map<String, dynamic> choixMultipleQuestionFaker() => {
+      'categorie': 'mission',
+      'id': 'KYC_${faker.lorem.word()}',
+      'is_NGC': faker.randomGenerator.boolean(),
+      'points': faker.randomGenerator.integer(10),
+      'question': faker.lorem.sentence(),
+      'reponse': [faker.lorem.word(), faker.lorem.word()],
+      'reponses_possibles': [
+        faker.lorem.word(),
+        faker.lorem.word(),
+        faker.lorem.word(),
+      ],
+      'thematique': generateThematique,
+      'type': 'choix_multiple',
+    };
+
+Map<String, dynamic> libreQuestionFaker() => {
+      'categorie': 'mission',
+      'id': 'KYC_${faker.lorem.word()}',
+      'is_NGC': faker.randomGenerator.boolean(),
+      'points': faker.randomGenerator.integer(10),
+      'question': faker.lorem.sentence(),
+      'reponse': [faker.lorem.sentence()],
+      'reponses_possibles': <String>[],
+      'thematique': generateThematique,
+      'type': 'libre',
+    };
+
+Map<String, dynamic> mosaicBooleanQuestionFaker() => {
+      'categorie': 'mission',
+      'id': 'MOSAIC_${faker.lorem.word().toUpperCase()}',
+      'is_answered': true,
+      'points': faker.randomGenerator.integer(20),
+      'reponses': List.generate(
+        faker.randomGenerator.integer(10),
+        (final index) => {
+          'boolean_value': faker.randomGenerator.boolean(),
+          'code': 'KYC_${faker.lorem.word()}',
+          'image_url': faker.image.loremPicsum(),
+          'label': faker.lorem.word(),
+        },
+      ),
+      'titre': faker.lorem.sentence(),
+      'type': 'mosaic_boolean',
+    };

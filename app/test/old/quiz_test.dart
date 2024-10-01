@@ -32,7 +32,7 @@ void main() {
       );
       ielALesRecommandationsSuivantes([recommandation]);
       const question =
-          'Quelle action est la plus efficace pour une alimentation plus durable ?';
+          'Quelle action est la plus efficace pour une alimentation plus durable ?';
       ielALeQuizSuivant(
         const Quiz(
           id: 42,
@@ -92,7 +92,7 @@ void main() {
           id: 42,
           thematique: '🥦 Alimentation',
           question:
-              'Quelle action est la plus efficace pour une alimentation plus durable ?',
+              'Quelle action est la plus efficace pour une alimentation plus durable ?',
           reponses: [
             QuizReponse(
               reponse: 'Manger moins de produits de saison',
@@ -150,7 +150,7 @@ void main() {
           id: 42,
           thematique: '🥦 Alimentation',
           question:
-              'Quelle action est la plus efficace pour une alimentation plus durable ?',
+              'Quelle action est la plus efficace pour une alimentation plus durable ?',
           reponses: [
             QuizReponse(reponse: reponse, exact: false),
             QuizReponse(

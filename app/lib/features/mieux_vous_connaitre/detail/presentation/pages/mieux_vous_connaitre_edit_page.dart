@@ -4,12 +4,9 @@ import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/mieux_vous_connaitre/detail/presentation/form/mieux_vous_connaitre_controller.dart';
 import 'package:app/features/mieux_vous_connaitre/detail/presentation/form/mieux_vous_connaitre_form.dart';
-import 'package:app/features/mieux_vous_connaitre/list/presentation/bloc/mieux_vous_connaitre_bloc.dart';
-import 'package:app/features/mieux_vous_connaitre/list/presentation/bloc/mieux_vous_connaitre_event.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class MieuxVousConnaitreEditPage extends StatelessWidget {
@@ -39,10 +36,7 @@ class MieuxVousConnaitreEditPage extends StatelessWidget {
           id: id,
           controller: mieuxVousConnaitreController,
           onSaved: () {
-            context.read<MieuxVousConnaitreBloc>().add(
-                  const MieuxVousConnaitreRecuperationDemandee(),
-                );
-            GoRouter.of(context).pop();
+            GoRouter.of(context).pop<bool>(true);
           },
         ),
       ),

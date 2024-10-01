@@ -34,6 +34,9 @@ class AuthenticationService {
       final expirationDate = await _authenticationRepository.expirationDate;
 
       if (expirationDate.value.isAfter(_clock.now())) {
+        if (status is Authenticated) {
+          return; // HACK(lsaudon): Pour ne pas ajouter le même status sinon ça casse GoRouter.of(context).pop(true);
+        }
         final userId = await _authenticationRepository.userId;
         _authenticationStatusController
             .add(AuthenticationStatus.authenticated(userId));

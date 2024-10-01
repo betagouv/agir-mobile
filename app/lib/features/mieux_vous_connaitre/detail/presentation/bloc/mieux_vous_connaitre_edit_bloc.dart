@@ -1,36 +1,127 @@
-import 'package:app/features/gamification/domain/gamification_port.dart';
 import 'package:app/features/mieux_vous_connaitre/core/domain/mieux_vous_connaitre_port.dart';
+import 'package:app/features/mieux_vous_connaitre/core/domain/question.dart';
 import 'package:app/features/mieux_vous_connaitre/detail/presentation/bloc/mieux_vous_connaitre_edit_event.dart';
 import 'package:app/features/mieux_vous_connaitre/detail/presentation/bloc/mieux_vous_connaitre_edit_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fpdart/fpdart.dart';
 
 class MieuxVousConnaitreEditBloc
     extends Bloc<MieuxVousConnaitreEditEvent, MieuxVousConnaitreEditState> {
   MieuxVousConnaitreEditBloc({
     required final MieuxVousConnaitrePort mieuxVousConnaitrePort,
-    required final GamificationPort gamificationPort,
-  }) : super(const MieuxVousConnaitreEditState.empty()) {
+  }) : super(const MieuxVousConnaitreEditInitial()) {
     on<MieuxVousConnaitreEditRecuperationDemandee>(
       (final event, final emit) async {
+        emit(const MieuxVousConnaitreEditInitial());
         final result =
             await mieuxVousConnaitrePort.recupererQuestion(id: event.id);
-        if (result.isRight()) {
-          final question = result.getRight().getOrElse(() => throw Exception());
-          emit(state.copyWith(question: question, valeur: question.reponses));
+        result.fold(
+          (final l) => emit(MieuxVousConnaitreEditError(error: l.toString())),
+          (final r) =>
+              emit(MieuxVousConnaitreEditLoaded(question: r, newQuestion: r)),
+        );
+      },
+    );
+    on<MieuxVousConnaitreEditChoixMultipleChangee>(
+      (final event, final emit) async {
+        final aState = state;
+        if (aState is MieuxVousConnaitreEditLoaded) {
+          final question = aState.question;
+          final newQuestion = aState.newQuestion;
+
+          if (question is ChoixMultipleQuestion &&
+              newQuestion is ChoixMultipleQuestion) {
+            emit(
+              MieuxVousConnaitreEditLoaded(
+                question: question,
+                newQuestion: newQuestion.responsesChanged(
+                  reponses: Responses(event.value),
+                ),
+              ),
+            );
+          }
         }
       },
     );
-    on<MieuxVousConnaitreEditReponsesChangee>(
-      (final event, final emit) => emit(state.copyWith(valeur: event.valeur)),
+    on<MieuxVousConnaitreEditChoixUniqueChangee>(
+      (final event, final emit) async {
+        final aState = state;
+        if (aState is MieuxVousConnaitreEditLoaded) {
+          final question = aState.question;
+          final newQuestion = aState.newQuestion;
+
+          if (question is ChoixUniqueQuestion &&
+              newQuestion is ChoixUniqueQuestion) {
+            emit(
+              MieuxVousConnaitreEditLoaded(
+                question: question,
+                newQuestion: newQuestion.responsesChanged(
+                  reponses: Responses([event.value]),
+                ),
+              ),
+            );
+          }
+        }
+      },
     );
-    on<MieuxVousConnaitreEditMisAJourDemandee>((final event, final emit) async {
-      await mieuxVousConnaitrePort.mettreAJour(
-        id: event.id,
-        reponses: state.valeur,
-      );
-      await gamificationPort.mettreAJourLesPoints();
-      emit(state.copyWith(estMiseAJour: true));
-    });
+    on<MieuxVousConnaitreEditLibreChangee>(
+      (final event, final emit) async {
+        final aState = state;
+        if (aState is MieuxVousConnaitreEditLoaded) {
+          final question = aState.question;
+          final newQuestion = aState.newQuestion;
+
+          if (question is LibreQuestion && newQuestion is LibreQuestion) {
+            emit(
+              MieuxVousConnaitreEditLoaded(
+                question: question,
+                newQuestion: newQuestion.responsesChanged(
+                  reponses: Responses([event.value]),
+                ),
+              ),
+            );
+          }
+        }
+      },
+    );
+    on<MieuxVousConnaitreEditMosaicChangee>(
+      (final event, final emit) async {
+        final aState = state;
+        if (aState is MieuxVousConnaitreEditLoaded) {
+          final question = aState.question;
+          final newQuestion = aState.newQuestion;
+
+          if (question is MosaicQuestion && newQuestion is MosaicQuestion) {
+            emit(
+              MieuxVousConnaitreEditLoaded(
+                question: question,
+                newQuestion:
+                    newQuestion.responsesChanged(responses: event.value),
+              ),
+            );
+          }
+        }
+      },
+    );
+    on<MieuxVousConnaitreEditMisAJourDemandee>(
+      (final event, final emit) async {
+        final aState = state;
+        switch (aState) {
+          case MieuxVousConnaitreEditLoaded():
+            emit(const MieuxVousConnaitreEditMisAJour());
+            final result = await mieuxVousConnaitrePort.mettreAJour(
+              aState.newQuestion,
+            );
+            result.fold(
+              (final l) =>
+                  emit(MieuxVousConnaitreEditError(error: l.toString())),
+              (final r) {
+                emit(const MieuxVousConnaitreEditMisAJour());
+              },
+            );
+          default:
+            return;
+        }
+      },
+    );
   }
 }

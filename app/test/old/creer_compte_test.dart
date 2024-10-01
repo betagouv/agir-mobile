@@ -25,23 +25,21 @@ void main() {
       leServeurRetourneCetteListeDeCommunes(['AUTHUME', commune]);
       const response = "La cuisine et l'alimentation";
       leServeurRetourneCesQuestions([
-        const Question(
-          id: 'KYC_preference',
-          question:
-              'Sur quels thèmes recherchez-vous en priorité des aides et conseils ?',
-          reponses: [],
-          categorie: 'recommandation',
-          points: 5,
-          type: ReponseType.choixMultiple,
-          reponsesPossibles: [
+        const ChoixMultipleQuestion(
+          id: QuestionId('KYC_preference'),
+          text: QuestionText(
+            'Sur quels thèmes recherchez-vous en priorité des aides et conseils ?',
+          ),
+          responses: Responses([]),
+          points: Points(5),
+          responsesPossibles: ResponsesPossibles([
             response,
             'Mes déplacements',
             'Mon logement',
             'Ma consommation',
             'Je ne sais pas encore',
-          ],
-          deNosGestesClimat: false,
-          thematique: Thematique.climat,
+          ]),
+          theme: QuestionTheme.climat,
         ),
       ]);
       ielNAPasTermineeSonIntegration();

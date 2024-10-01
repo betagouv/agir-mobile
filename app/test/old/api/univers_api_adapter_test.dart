@@ -143,7 +143,7 @@ void main() {
         response: CustomResponse('''
 {
     "id": "5",
-    "titre": "Comment bien choisir ses aliments ?",
+    "titre": "Comment bien choisir ses aliments ?",
     "done_at": null,
     "objectifs": [
         {
@@ -235,7 +235,7 @@ void main() {
         }
     ],
     "thematique_univers": "manger_saison_2",
-    "thematique_univers_label": "Comment bien choisir ses aliments ?",
+    "thematique_univers_label": "Comment bien choisir ses aliments ?",
     "univers_label": "En cuisine",
     "univers": "alimentation",
     "progression": {"current": 2, "target": 6},
@@ -255,7 +255,7 @@ void main() {
     expect(
       result.getRight().getOrElse(() => throw Exception()),
       const Mission(
-        titre: 'Comment bien choisir ses aliments ?',
+        titre: 'Comment bien choisir ses aliments ?',
         imageUrl:
             'https://res.cloudinary.com/dq023imd8/image/upload/v1718701364/fruits_2_cfbf4b47b9.png',
         kycListe: [

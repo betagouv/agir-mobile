@@ -82,22 +82,22 @@ class _Question extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    final question = context.select<QuestionThemesBloc, Question>(
+    final question = context.select<QuestionThemesBloc, ChoixMultipleQuestion?>(
       (final bloc) => bloc.state.question,
     );
 
-    return question.id == ''
-        ? const SizedBox()
+    return question == null
+        ? const SizedBox.shrink()
         : Column(
             children: [
               Text(
-                question.question,
+                question.text.value,
                 style: const DsfrTextStyle.bodyLg(lineHeight: 28),
               ),
               const SizedBox(height: DsfrSpacings.s3w),
               FnvCheckboxSet(
-                options: question.reponsesPossibles,
-                selectedOptions: question.reponses,
+                options: question.responsesPossibles.value,
+                selectedOptions: question.responses.value,
                 onChanged: (final value) => context
                     .read<QuestionThemesBloc>()
                     .add(QuestionThemesOntChange(value)),

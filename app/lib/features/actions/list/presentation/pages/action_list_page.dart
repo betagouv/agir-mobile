@@ -8,7 +8,7 @@ import 'package:app/features/actions/list/application/fetch_actions.dart';
 import 'package:app/features/actions/list/presentation/bloc/action_list_bloc.dart';
 import 'package:app/features/actions/list/presentation/bloc/action_list_event.dart';
 import 'package:app/features/actions/list/presentation/bloc/action_list_state.dart';
-import 'package:app/features/profil/profil/presentation/widgets/profil_title.dart';
+import 'package:app/features/profil/profil/presentation/widgets/fnv_title.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +41,7 @@ class ActionListPage extends StatelessWidget {
                 const Padding(
                   padding:
                       EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-                  child: ProfilTitle(title: Localisation.vosActions),
+                  child: FnvTitle(title: Localisation.vosActions),
                 ),
                 BlocBuilder<ActionListBloc, ActionListState>(
                   builder: (final context, final state) => switch (state) {
@@ -67,18 +67,19 @@ class ActionListPage extends StatelessWidget {
                             title: item.titre,
                             subTitle: subTitle,
                             onTap: () async {
-                              final bloc = context.read<ActionListBloc>();
                               final result =
                                   await GoRouter.of(context).pushNamed(
                                 ActionDetailPage.name,
                                 pathParameters: {'id': item.id.value},
                               );
 
-                              if (result != true) {
+                              if (result != true || !context.mounted) {
                                 return;
                               }
 
-                              bloc.add(const ActionListFetch());
+                              context
+                                  .read<ActionListBloc>()
+                                  .add(const ActionListFetch());
                             },
                           );
                         },

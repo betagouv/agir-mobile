@@ -6,7 +6,7 @@ import 'package:app/features/profil/informations/presentation/widgets/mes_inform
 import 'package:app/features/profil/informations/presentation/widgets/mes_informations_nombre_de_parts_fiscales.dart';
 import 'package:app/features/profil/informations/presentation/widgets/mes_informations_prenom.dart';
 import 'package:app/features/profil/informations/presentation/widgets/mes_informations_revenu_fiscal.dart';
-import 'package:app/features/profil/profil/presentation/widgets/profil_title.dart';
+import 'package:app/features/profil/profil/presentation/widgets/fnv_title.dart';
 import 'package:app/features/profil/profil/presentation/widgets/profil_titre_partie.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
@@ -19,7 +19,7 @@ class MesInformationsForm extends StatelessWidget {
   Widget build(final BuildContext context) => ListView(
         padding: const EdgeInsets.all(paddingVerticalPage),
         children: const [
-          ProfilTitle(title: Localisation.vosInformations),
+          FnvTitle(title: Localisation.vosInformations),
           ProfilTitrePartie(titre: Localisation.votreIdentite),
           SizedBox(height: DsfrSpacings.s2w),
           MesInformationsEmail(),

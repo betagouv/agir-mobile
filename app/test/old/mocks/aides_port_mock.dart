@@ -8,5 +8,6 @@ class AidesPortMock implements AidesPort {
   List<Aide> aides;
 
   @override
-  Future<Either<Exception, List<Aide>>> fetchAides() async => Right(aides);
+  Future<Either<Exception, List<Aide>>> fetchAides() async =>
+      Right(List.of(aides));
 }

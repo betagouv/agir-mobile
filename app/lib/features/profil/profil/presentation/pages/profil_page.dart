@@ -1,12 +1,12 @@
 import 'package:app/core/presentation/widgets/composants/card.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/actions/list/presentation/pages/action_list_page.dart';
+import 'package:app/features/know_your_customer/list/presentation/pages/know_your_customers_page.dart';
 import 'package:app/features/menu/presentation/pages/root_page.dart';
-import 'package:app/features/mieux_vous_connaitre/list/presentation/pages/mieux_vous_connaitre_page.dart';
 import 'package:app/features/profil/informations/presentation/pages/mes_informations_page.dart';
 import 'package:app/features/profil/logement/presentation/pages/mon_logement_page.dart';
 import 'package:app/features/profil/options_avancees/presentation/pages/options_avancees_page.dart';
-import 'package:app/features/profil/profil/presentation/widgets/profil_title.dart';
+import 'package:app/features/profil/profil/presentation/widgets/fnv_title.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +30,7 @@ class ProfilPage extends StatelessWidget {
         body: ListView(
           padding: const EdgeInsets.all(paddingVerticalPage),
           children: [
-            const ProfilTitle(title: Localisation.votreProfil),
+            const FnvTitle(title: Localisation.votreProfil),
             FnvCard(
               child: Column(
                 children: [
@@ -52,7 +52,7 @@ class ProfilPage extends StatelessWidget {
                     icon: DsfrIcons.userUserSettingLine,
                     label: Localisation.mieuxVousConnaitre,
                     onTap: () async => GoRouter.of(context)
-                        .pushNamed(MieuxVousConnaitrePage.name),
+                        .pushNamed(KnowYourCustomersPage.name),
                   ),
                   const DsfrDivider(),
                   _MenuElement(

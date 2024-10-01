@@ -47,7 +47,7 @@ void main() {
       "titre": "Une assiette plus durable",
       "duree": "⏱️ 2 minutes",
       "points": 5,
-      "sousTitre": "Comment réduire l'impact de notre alimentation ?",
+      "sousTitre": "Comment réduire l'impact de notre alimentation ?",
       "frequence": null,
       "difficulty": 1,
       "createdAt": "2023-11-30T16:25:30.878Z",
@@ -58,7 +58,7 @@ void main() {
       "questions": [
         {
           "id": 12,
-          "libelle": "Quelle action est la plus efficace pour une alimentation plus durable ?",
+          "libelle": "Quelle action est la plus efficace pour une alimentation plus durable ?",
           "explicationOk": "<p><span>Le secteur de l’élevage génère à lui seul près de 15 % des émissions mondiales de gaz à effet de serre. Réduire notre consommation de viande permet d’agir sur la production et de diminuer les impacts qui lui sont associés.<br><br>Pour rendre notre alimentation plus durable, on peut aussi privilégier les produits locaux, de saison et biologiques, limiter l’achat de produits transformés et réduire le gaspillage alimentaire.</span></p>",
           "explicationKO": "<p><span>Au contraire ! Pour rendre notre alimentation plus durable, nous pouvons manger davantage de produits de saison et augmenter la part de repas végétariens dans les menus de la semaine. Diminuer notre consommation de viande permet en effet de réduire les impacts écologiques du secteur de l’élevage, qui génère à lui seul près de 15 % des émissions mondiales de gaz à effet de serre : c'est donc l'action la plus efficace pour limiter l'impact de notre alimentation.<br><br>On peut aussi privilégier les produits locaux et biologiques, limiter l’achat de produits transformés et réduire le gaspillage alimentaire.</span></p>",
           "reponses": [
@@ -150,7 +150,7 @@ void main() {
         id: 14,
         thematique: '🥦 Alimentation',
         question:
-            'Quelle action est la plus efficace pour une alimentation plus durable ?',
+            'Quelle action est la plus efficace pour une alimentation plus durable ?',
         reponses: [
           QuizReponse(
             reponse: 'Manger moins de produits de saison',
@@ -200,7 +200,7 @@ void main() {
       "titre": "Une assiette plus durable",
       "duree": "⏱️ 2 minutes",
       "points": 5,
-      "sousTitre": "Comment réduire l'impact de notre alimentation ?",
+      "sousTitre": "Comment réduire l'impact de notre alimentation ?",
       "frequence": null,
       "difficulty": 1,
       "createdAt": "2023-11-30T16:25:30.878Z",
@@ -211,7 +211,7 @@ void main() {
       "questions": [
         {
           "id": 12,
-          "libelle": "Quelle action est la plus efficace pour une alimentation plus durable ?",
+          "libelle": "Quelle action est la plus efficace pour une alimentation plus durable ?",
           "explicationOk": "<p><span>Le secteur de l’élevage génère à lui seul près de 15 % des émissions mondiales de gaz à effet de serre. Réduire notre consommation de viande permet d’agir sur la production et de diminuer les impacts qui lui sont associés.<br><br>Pour rendre notre alimentation plus durable, on peut aussi privilégier les produits locaux, de saison et biologiques, limiter l’achat de produits transformés et réduire le gaspillage alimentaire.</span></p>",
           "explicationKO": "<p><span>Au contraire ! Pour rendre notre alimentation plus durable, nous pouvons manger davantage de produits de saison et augmenter la part de repas végétariens dans les menus de la semaine. Diminuer notre consommation de viande permet en effet de réduire les impacts écologiques du secteur de l’élevage, qui génère à lui seul près de 15 % des émissions mondiales de gaz à effet de serre : c'est donc l'action la plus efficace pour limiter l'impact de notre alimentation.<br><br>On peut aussi privilégier les produits locaux et biologiques, limiter l’achat de produits transformés et réduire le gaspillage alimentaire.</span></p>",
           "reponses": [
@@ -276,7 +276,7 @@ void main() {
         id: 14,
         thematique: '🥦 Alimentation',
         question:
-            'Quelle action est la plus efficace pour une alimentation plus durable ?',
+            'Quelle action est la plus efficace pour une alimentation plus durable ?',
         reponses: [
           QuizReponse(
             reponse: 'Manger moins de produits de saison',

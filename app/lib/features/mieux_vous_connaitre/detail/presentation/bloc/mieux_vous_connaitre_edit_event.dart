@@ -1,38 +1,69 @@
+import 'package:app/features/mieux_vous_connaitre/core/domain/question.dart';
 import 'package:equatable/equatable.dart';
 
 sealed class MieuxVousConnaitreEditEvent extends Equatable {
   const MieuxVousConnaitreEditEvent();
 
   @override
-  List<Object?> get props => [];
+  List<Object> get props => [];
 }
 
-class MieuxVousConnaitreEditRecuperationDemandee
+final class MieuxVousConnaitreEditRecuperationDemandee
     extends MieuxVousConnaitreEditEvent {
   const MieuxVousConnaitreEditRecuperationDemandee(this.id);
 
   final String id;
 
   @override
-  List<Object?> get props => [id];
+  List<Object> get props => [id];
 }
 
-class MieuxVousConnaitreEditReponsesChangee
+final class MieuxVousConnaitreEditChoixMultipleChangee
     extends MieuxVousConnaitreEditEvent {
-  const MieuxVousConnaitreEditReponsesChangee(this.valeur);
+  const MieuxVousConnaitreEditChoixMultipleChangee(this.value);
 
-  final List<String> valeur;
+  final List<String> value;
 
   @override
-  List<Object?> get props => [valeur];
+  List<Object> get props => [value];
 }
 
-class MieuxVousConnaitreEditMisAJourDemandee
+final class MieuxVousConnaitreEditChoixUniqueChangee
+    extends MieuxVousConnaitreEditEvent {
+  const MieuxVousConnaitreEditChoixUniqueChangee(this.value);
+
+  final String value;
+
+  @override
+  List<Object> get props => [value];
+}
+
+final class MieuxVousConnaitreEditLibreChangee
+    extends MieuxVousConnaitreEditEvent {
+  const MieuxVousConnaitreEditLibreChangee(this.value);
+
+  final String value;
+
+  @override
+  List<Object> get props => [value];
+}
+
+final class MieuxVousConnaitreEditMosaicChangee
+    extends MieuxVousConnaitreEditEvent {
+  const MieuxVousConnaitreEditMosaicChangee(this.value);
+
+  final List<MosaicResponse> value;
+
+  @override
+  List<Object> get props => [value];
+}
+
+final class MieuxVousConnaitreEditMisAJourDemandee
     extends MieuxVousConnaitreEditEvent {
   const MieuxVousConnaitreEditMisAJourDemandee(this.id);
 
   final String id;
 
   @override
-  List<Object?> get props => [id];
+  List<Object> get props => [id];
 }

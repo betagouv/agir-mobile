@@ -19,13 +19,13 @@ class UniversPortMock implements UniversPort {
 
   @override
   Future<Either<Exception, List<TuileUnivers>>> recuperer() async =>
-      Right(univers);
+      Right(List.of(univers));
 
   @override
   Future<Either<Exception, List<MissionListe>>> recupererThematiques(
     final String universType,
   ) async =>
-      Right(missionListe);
+      Right(List.of(missionListe));
 
   @override
   Future<Either<Exception, Mission>> recupererMission({
