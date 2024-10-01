@@ -8,19 +8,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ChoixUnique extends StatelessWidget {
   const ChoixUnique({super.key, required this.question});
 
-  final Question question;
+  final ChoixUniqueQuestion question;
 
   @override
   Widget build(final BuildContext context) => DsfrRadioButtonSetHeadless(
         values: Map.fromEntries(
-          question.reponsesPossibles.map(
+          question.responsesPossibles.value.map(
             (final reponse) => MapEntry(reponse, DsfrRadioButtonItem(reponse)),
           ),
         ),
-        onCallback: (final value) => context
-            .read<MieuxVousConnaitreEditBloc>()
-            .add(MieuxVousConnaitreEditReponsesChangee([value ?? ''])),
-        initialValue: question.reponses.firstOrNull,
+        onCallback: (final value) {
+          if (value == null) {
+            return;
+          }
+          context
+              .read<MieuxVousConnaitreEditBloc>()
+              .add(MieuxVousConnaitreEditChoixUniqueChangee(value));
+        },
+        initialValue: question.responses.value.firstOrNull,
         mode: DsfrRadioButtonSetMode.column,
       );
 }

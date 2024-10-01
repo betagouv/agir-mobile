@@ -21,6 +21,7 @@ import 'package:app/features/bibliotheque/infrastructure/bibliotheque_api_adapte
 import 'package:app/features/communes/infrastructure/communes_api_adapter.dart';
 import 'package:app/features/first_name/infrastructure/first_name_adapter.dart';
 import 'package:app/features/gamification/infrastructure/gamification_api_adapter.dart';
+import 'package:app/features/know_your_customer/list/infrastructure/know_your_customers_repository.dart';
 import 'package:app/features/mieux_vous_connaitre/core/infrastructure/mieux_vous_connaitre_api_adapter.dart';
 import 'package:app/features/profil/core/infrastructure/profil_api_adapter.dart';
 import 'package:app/features/quiz/infrastructure/quiz_api_adapter.dart';
@@ -135,8 +136,10 @@ Future<void> main() async {
       aideVeloPort: AideVeloApiAdapter(client: dioHttpClient),
       firstNamePort: FirstNameAdapter(apiClient: apiClient),
       profilPort: ProfilApiAdapter(apiClient: apiClient),
+      knowYourCustomersRepository:
+          KnowYourCustomersRepository(client: dioHttpClient),
       mieuxVousConnaitrePort:
-          MieuxVousConnaitreApiAdapter(apiClient: apiClient),
+          MieuxVousConnaitreApiAdapter(client: dioHttpClient),
       actionsPort: ActionsAdapter(client: dioHttpClient),
       actionRepository:
           ActionRepository(client: dioHttpClient, messageBus: messageBus),

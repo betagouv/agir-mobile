@@ -9,19 +9,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class Libre extends StatelessWidget {
   const Libre({super.key, required this.question});
 
-  final Question question;
+  final LibreQuestion question;
 
   @override
   Widget build(final BuildContext context) {
     final controller =
-        TextEditingController(text: question.reponses.firstOrNull);
+        TextEditingController(text: question.responses.value.firstOrNull);
 
     return DsfrInputHeadless(
       key: const ValueKey(Localisation.maReponse),
       controller: controller,
       onChanged: (final value) =>
           context.read<MieuxVousConnaitreEditBloc>().add(
-                MieuxVousConnaitreEditReponsesChangee([value]),
+                MieuxVousConnaitreEditLibreChangee(value),
               ),
       maxLines: 4,
       minLines: 3,

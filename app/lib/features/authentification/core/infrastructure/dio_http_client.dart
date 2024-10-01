@@ -47,4 +47,6 @@ class DioHttpClient {
       _dio.patch(path, data: data);
   Future<Response<T>> post<T>(final String path, {final Object? data}) async =>
       _dio.post(path, data: data);
+  Future<Response<T>> put<T>(final String path, {final Object? data}) async =>
+      _dio.put(path, data: data);
 }

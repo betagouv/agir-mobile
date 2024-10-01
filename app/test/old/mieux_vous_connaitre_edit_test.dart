@@ -19,7 +19,7 @@ void main() {
     "Iel appuie sur une recommandation de type kyc et l'ouvre",
     (final tester) async {
       setUpWidgets(tester);
-      const question = 'Quelle est votre situation professionnelle ?';
+      const question = 'Quelle est votre situation professionnelle ?';
       const recommandation = Recommandation(
         id: 'KYC005',
         type: TypeDuContenu.kyc,
@@ -33,49 +33,39 @@ void main() {
       );
       ielALesRecommandationsSuivantes([recommandation]);
       leServeurRetourneCesQuestions([
-        const Question(
-          id: 'KYC005',
-          question: question,
-          reponses: ['J’ai un emploi'],
-          categorie: 'recommandation',
-          points: 5,
-          type: ReponseType.libre,
-          reponsesPossibles: [],
-          deNosGestesClimat: false,
-          thematique: Thematique.climat,
+        const LibreQuestion(
+          id: QuestionId('KYC005'),
+          text: QuestionText(question),
+          responses: Responses(['J’ai un emploi']),
+          points: Points(5),
+          theme: QuestionTheme.climat,
         ),
       ]);
       ielEstConnecte();
       await ielLanceLapplication(tester);
       await ielScrolle(tester, recommandation.titre);
       await ielAppuieSur(tester, recommandation.titre);
-      ielVoitLeTexte(Localisation.maReponse);
+      ielVoitLeTexte(question);
     },
   );
   testWidgets(
     'Aller sur la page de la question libre',
     (final tester) async {
       setUpWidgets(tester);
-      const question = 'Quelle est votre situation professionnelle ?';
+      const question = 'Quelle est votre situation professionnelle ?';
       const reponse = 'J’ai un emploi';
       leServeurRetourneCesQuestions([
-        const Question(
-          id: 'KYC005',
-          question: question,
-          reponses: [reponse],
-          categorie: 'recommandation',
-          points: 5,
-          type: ReponseType.libre,
-          reponsesPossibles: [],
-          deNosGestesClimat: false,
-          thematique: Thematique.climat,
+        const LibreQuestion(
+          id: QuestionId('KYC005'),
+          text: QuestionText(question),
+          responses: Responses([reponse]),
+          points: Points(5),
+          theme: QuestionTheme.climat,
         ),
       ]);
-      await _allerSurMesInformations(tester);
+      await _allerSurMieuxVousConnaitre(tester);
       await ielAppuieSur(tester, question);
-      ielVoitLeTexte('🌍 ${Localisation.lesCategoriesClimat}');
       ielVoitLeTexte(question);
-      ielVoitLeTexte(Localisation.maReponse);
       ielVoitLeTexte(reponse);
     },
   );
@@ -84,22 +74,18 @@ void main() {
     'Modifier la réponse à une question libre',
     (final tester) async {
       setUpWidgets(tester);
-      const question = 'Quelle est votre situation professionnelle ?';
+      const question = 'Quelle est votre situation professionnelle ?';
       const reponse = 'J’ai un emploi';
       leServeurRetourneCesQuestions([
-        const Question(
-          id: 'KYC005',
-          question: question,
-          reponses: [reponse],
-          categorie: 'recommandation',
-          points: 5,
-          type: ReponseType.libre,
-          reponsesPossibles: [],
-          deNosGestesClimat: false,
-          thematique: Thematique.climat,
+        const LibreQuestion(
+          id: QuestionId('KYC005'),
+          text: QuestionText(question),
+          responses: Responses([reponse]),
+          points: Points(5),
+          theme: QuestionTheme.climat,
         ),
       ]);
-      await _allerSurMesInformations(tester);
+      await _allerSurMieuxVousConnaitre(tester);
       await ielAppuieSur(tester, question);
       const nouvelleReponse = "Je n'ai pas d'emploi";
       await ielEcritDansLeChamp(
@@ -115,22 +101,18 @@ void main() {
 
   testWidgets('Valider sans mettre à jour', (final tester) async {
     setUpWidgets(tester);
-    const question = 'Quelle est votre situation professionnelle ?';
+    const question = 'Quelle est votre situation professionnelle ?';
     const reponse = 'J’ai un emploi';
     leServeurRetourneCesQuestions([
-      const Question(
-        id: 'KYC005',
-        question: question,
-        reponses: [reponse],
-        categorie: 'recommandation',
-        points: 5,
-        type: ReponseType.libre,
-        reponsesPossibles: [],
-        deNosGestesClimat: false,
-        thematique: Thematique.climat,
+      const LibreQuestion(
+        id: QuestionId('KYC005'),
+        text: QuestionText(question),
+        responses: Responses([reponse]),
+        points: Points(5),
+        theme: QuestionTheme.climat,
       ),
     ]);
-    await _allerSurMesInformations(tester);
+    await _allerSurMieuxVousConnaitre(tester);
     await ielAppuieSur(tester, question);
     await ielAppuieSur(tester, Localisation.mettreAJour);
     ielVoitLeTexte(Localisation.mieuxVousConnaitre);
@@ -141,23 +123,20 @@ void main() {
     'Modifier la réponse à une question choix unique',
     (final tester) async {
       setUpWidgets(tester);
-      const question = 'Quelle est votre situation professionnelle ?';
+      const question = 'Quelle est votre situation professionnelle ?';
       const reponse = 'J’ai un emploi';
       const nouvelleReponse = "Je n'ai pas d'emploi";
       leServeurRetourneCesQuestions([
-        const Question(
-          id: 'KYC005',
-          question: question,
-          reponses: [reponse],
-          categorie: 'recommandation',
-          points: 5,
-          type: ReponseType.choixUnique,
-          reponsesPossibles: [reponse, nouvelleReponse],
-          deNosGestesClimat: false,
-          thematique: Thematique.climat,
+        const ChoixUniqueQuestion(
+          id: QuestionId('KYC005'),
+          text: QuestionText(question),
+          responses: Responses([reponse]),
+          points: Points(5),
+          responsesPossibles: ResponsesPossibles([reponse, nouvelleReponse]),
+          theme: QuestionTheme.climat,
         ),
       ]);
-      await _allerSurMesInformations(tester);
+      await _allerSurMieuxVousConnaitre(tester);
       await ielAppuieSur(tester, question);
       await ielAppuieSur(tester, nouvelleReponse);
       await ielAppuieSur(tester, Localisation.mettreAJour);
@@ -171,7 +150,7 @@ void main() {
     (final tester) async {
       setUpWidgets(tester);
       const question =
-          'Qu’est-ce qui vous motive le plus pour adopter des habitudes écologiques ?';
+          'Qu’est-ce qui vous motive le plus pour adopter des habitudes écologiques ?';
       const reponses = [
         'Famille ou génération future',
         'Conscience écologique',
@@ -179,24 +158,21 @@ void main() {
       const reponseEnPlus = 'Économies financières';
 
       leServeurRetourneCesQuestions([
-        const Question(
-          id: 'KYC005',
-          question: question,
-          reponses: reponses,
-          categorie: 'recommandation',
-          points: 5,
-          type: ReponseType.choixMultiple,
-          reponsesPossibles: [
+        const ChoixMultipleQuestion(
+          id: QuestionId('KYC005'),
+          text: QuestionText(question),
+          responses: Responses(reponses),
+          points: Points(5),
+          responsesPossibles: ResponsesPossibles([
             ...reponses,
             reponseEnPlus,
             'Conscience écologique',
             'Autre raison',
-          ],
-          deNosGestesClimat: false,
-          thematique: Thematique.climat,
+          ]),
+          theme: QuestionTheme.climat,
         ),
       ]);
-      await _allerSurMesInformations(tester);
+      await _allerSurMieuxVousConnaitre(tester);
       await ielAppuieSur(tester, question);
       await ielAppuieSur(tester, reponseEnPlus);
       await ielAppuieSur(tester, Localisation.mettreAJour);
@@ -207,38 +183,31 @@ void main() {
 
   testWidgets('Modifier plusieurs questions', (final tester) async {
     setUpWidgets(tester);
-    const question = 'Quelle est votre situation professionnelle ?';
+    const question = 'Quelle est votre situation professionnelle ?';
     const reponse = 'J’ai un emploi';
 
-    const question2 = 'Qui joue en première base ?';
+    const question2 = 'Qui joue en première base ?';
     const reponse2 = 'Personne ne joue en première base';
     const nouvelleReponse2 = "C'est qui qui qui joue en première base";
     leServeurRetourneCesQuestions([
-      const Question(
-        id: 'KYC005',
-        question: question,
-        reponses: [reponse],
-        categorie: 'recommandation',
-        points: 5,
-        type: ReponseType.libre,
-        reponsesPossibles: [],
-        deNosGestesClimat: false,
-        thematique: Thematique.climat,
+      const LibreQuestion(
+        id: QuestionId('KYC005'),
+        text: QuestionText(question),
+        responses: Responses([reponse]),
+        points: Points(5),
+        theme: QuestionTheme.climat,
       ),
-      const Question(
-        id: 'KYC006',
-        question: question2,
-        reponses: [reponse2],
-        categorie: 'recommandation',
-        points: 5,
-        type: ReponseType.choixUnique,
-        reponsesPossibles: [reponse2, nouvelleReponse2],
-        deNosGestesClimat: false,
-        thematique: Thematique.loisir,
+      const ChoixUniqueQuestion(
+        id: QuestionId('KYC006'),
+        text: QuestionText(question2),
+        responses: Responses([reponse2]),
+        points: Points(5),
+        responsesPossibles: ResponsesPossibles([reponse2, nouvelleReponse2]),
+        theme: QuestionTheme.loisir,
       ),
     ]);
 
-    await _allerSurMesInformations(tester);
+    await _allerSurMieuxVousConnaitre(tester);
     await ielAppuieSur(tester, question);
     const nouvelleReponse = "Je n'ai pas d'emploi";
     await ielEcritDansLeChamp(
@@ -257,7 +226,7 @@ void main() {
   });
 }
 
-Future<void> _allerSurMesInformations(final WidgetTester tester) async {
+Future<void> _allerSurMieuxVousConnaitre(final WidgetTester tester) async {
   ielEstConnecte();
 
   await ielLanceLapplication(tester);

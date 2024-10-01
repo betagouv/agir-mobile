@@ -69,6 +69,7 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
 
   ScenarioContext().mieuxVousConnaitrePortMock =
       MieuxVousConnaitrePortMock(questions: ScenarioContext().questions);
+  final mieuxVousConnaitrePort = ScenarioContext().mieuxVousConnaitrePortMock!;
 
   ScenarioContext().quizPortMock = QuizPortMock(ScenarioContext().quiz);
   ScenarioContext().articlesPortMock =
@@ -106,7 +107,8 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
       aideVeloPort: ScenarioContext().aideVeloPortMock!,
       firstNamePort: profilPort,
       profilPort: profilPort,
-      mieuxVousConnaitrePort: ScenarioContext().mieuxVousConnaitrePortMock!,
+      knowYourCustomersRepository: mieuxVousConnaitrePort,
+      mieuxVousConnaitrePort: mieuxVousConnaitrePort,
       actionsPort: _ActionsPortMock(),
       actionRepository: _ActionRepositoryMock(),
       gamificationPort: GamificationPortMock(ScenarioContext().gamification),

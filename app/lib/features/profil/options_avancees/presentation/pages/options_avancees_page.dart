@@ -2,7 +2,7 @@ import 'package:app/core/presentation/widgets/composants/app_bar.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/profil/changer_mot_de_passe/presentation/widgets/changer_mot_de_passe.dart';
-import 'package:app/features/profil/profil/presentation/widgets/profil_title.dart';
+import 'package:app/features/profil/profil/presentation/widgets/fnv_title.dart';
 import 'package:app/features/profil/supprimer_compte/presentation/widgets/supprimer_compte.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
@@ -27,7 +27,7 @@ class OptionsAvanceesPage extends StatelessWidget {
         body: ListView(
           padding: const EdgeInsets.all(paddingVerticalPage),
           children: const [
-            ProfilTitle(title: Localisation.optionsAvancees),
+            FnvTitle(title: Localisation.optionsAvancees),
             ChangerMotDePasse(),
             SizedBox(height: DsfrSpacings.s5w),
             SupprimerCompte(),

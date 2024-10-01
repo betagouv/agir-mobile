@@ -12,7 +12,7 @@ class RecommandationsPortMock implements RecommandationsPort {
     final String? thematique,
   ) async =>
       Right(
-        recommandations
+        List.of(recommandations)
             .where(
               (final e) => thematique == null || e.thematique == thematique,
             )

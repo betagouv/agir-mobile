@@ -10,5 +10,5 @@ class CommunesPortMock implements CommunesPort {
   Future<Either<Exception, List<String>>> recupererLesCommunes(
     final String codePostal,
   ) async =>
-      Right(communes);
+      Right(List.of(communes));
 }

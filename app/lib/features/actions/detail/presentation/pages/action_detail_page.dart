@@ -6,7 +6,7 @@ import 'package:app/features/actions/core/domain/action_id.dart';
 import 'package:app/features/actions/detail/presentation/bloc/action_detail_bloc.dart';
 import 'package:app/features/actions/detail/presentation/bloc/action_detail_event.dart';
 import 'package:app/features/actions/detail/presentation/bloc/action_detail_state.dart';
-import 'package:app/features/profil/profil/presentation/widgets/profil_title.dart';
+import 'package:app/features/profil/profil/presentation/widgets/fnv_title.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
@@ -93,7 +93,7 @@ class _SuccessContent extends StatelessWidget {
         children: [
           Text(state.action.theme, style: const DsfrTextStyle.bodySm()),
           const SizedBox(height: DsfrSpacings.s1w),
-          ProfilTitle(title: state.action.title),
+          FnvTitle(title: state.action.title),
           DsfrRadioButtonSetHeadless(
             values: {
               true: DsfrRadioButtonItem(state.acceptanceText),

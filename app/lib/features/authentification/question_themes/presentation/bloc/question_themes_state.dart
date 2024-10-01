@@ -2,13 +2,13 @@ import 'package:app/features/mieux_vous_connaitre/core/domain/question.dart';
 import 'package:equatable/equatable.dart';
 
 final class QuestionThemesState extends Equatable {
-  const QuestionThemesState({required this.question, required this.valeur});
+  const QuestionThemesState({this.question, required this.valeur});
 
-  final Question question;
+  final ChoixMultipleQuestion? question;
   final List<String> valeur;
 
   QuestionThemesState copyWith({
-    final Question? question,
+    final ChoixMultipleQuestion? question,
     final List<String>? valeur,
   }) =>
       QuestionThemesState(
@@ -17,5 +17,5 @@ final class QuestionThemesState extends Equatable {
       );
 
   @override
-  List<Object> get props => [question, valeur];
+  List<Object?> get props => [question, valeur];
 }

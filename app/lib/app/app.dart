@@ -16,8 +16,8 @@ import 'package:app/features/first_name/domain/first_name_port.dart';
 import 'package:app/features/gamification/domain/gamification_port.dart';
 import 'package:app/features/gamification/presentation/bloc/gamification_bloc.dart';
 import 'package:app/features/gamification/presentation/bloc/gamification_event.dart';
+import 'package:app/features/know_your_customer/list/infrastructure/know_your_customers_repository.dart';
 import 'package:app/features/mieux_vous_connaitre/core/domain/mieux_vous_connaitre_port.dart';
-import 'package:app/features/mieux_vous_connaitre/list/presentation/bloc/mieux_vous_connaitre_bloc.dart';
 import 'package:app/features/profil/core/domain/profil_port.dart';
 import 'package:app/features/quiz/domain/quiz_port.dart';
 import 'package:app/features/recommandations/domain/recommandations_port.dart';
@@ -54,6 +54,7 @@ class App extends StatefulWidget {
     required this.aideVeloPort,
     required this.firstNamePort,
     required this.profilPort,
+    required this.knowYourCustomersRepository,
     required this.mieuxVousConnaitrePort,
     required this.actionsPort,
     required this.actionRepository,
@@ -76,6 +77,7 @@ class App extends StatefulWidget {
   final AideVeloPort aideVeloPort;
   final FirstNamePort firstNamePort;
   final ProfilPort profilPort;
+  final KnowYourCustomersRepository knowYourCustomersRepository;
   final MieuxVousConnaitrePort mieuxVousConnaitrePort;
   final ActionsPort actionsPort;
   final ActionRepository actionRepository;
@@ -115,6 +117,7 @@ class _AppState extends State<App> {
           RepositoryProvider.value(value: widget.quizPort),
           RepositoryProvider.value(value: widget.profilPort),
           RepositoryProvider.value(value: widget.communesPort),
+          RepositoryProvider.value(value: widget.knowYourCustomersRepository),
           RepositoryProvider.value(value: widget.mieuxVousConnaitrePort),
           RepositoryProvider.value(value: widget.gamificationPort),
           RepositoryProvider.value(value: widget.actionsPort),
@@ -151,11 +154,6 @@ class _AppState extends State<App> {
             BlocProvider(
               create: (final context) => RecommandationsBloc(
                 recommandationsPort: widget.recommandationsPort,
-              ),
-            ),
-            BlocProvider(
-              create: (final context) => MieuxVousConnaitreBloc(
-                mieuxVousConnaitrePort: widget.mieuxVousConnaitrePort,
               ),
             ),
             BlocProvider(

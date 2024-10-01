@@ -40,7 +40,7 @@ void main() {
       );
       ielALesMissionsSuivantes([universThematique]);
       const mission = Mission(
-        titre: 'Comment bien choisir ses aliments ?',
+        titre: 'Comment bien choisir ses aliments ?',
         imageUrl:
             'https://res.cloudinary.com/dq023imd8/image/upload/v1718701364/fruits_2_cfbf4b47b9.png',
         kycListe: [

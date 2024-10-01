@@ -120,7 +120,7 @@ void main() {
         const recommandation2 = Recommandation(
           id: '43',
           type: TypeDuContenu.article,
-          titre: 'Réchauffement et montée des eaux : quel est le lien ?',
+          titre: 'Réchauffement et montée des eaux : quel est le lien ?',
           sousTitre: null,
           imageUrl: 'https://example.com/image.jpg',
           points: 20,

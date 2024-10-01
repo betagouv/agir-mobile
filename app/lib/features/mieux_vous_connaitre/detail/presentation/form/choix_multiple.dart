@@ -8,14 +8,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ChoixMultiple extends StatelessWidget {
   const ChoixMultiple({super.key, required this.question});
 
-  final Question question;
+  final ChoixMultipleQuestion question;
 
   @override
   Widget build(final BuildContext context) => FnvCheckboxSet(
-        options: question.reponsesPossibles,
-        selectedOptions: question.reponses,
+        options: question.responsesPossibles.value,
+        selectedOptions: question.responses.value,
         onChanged: (final value) => context
             .read<MieuxVousConnaitreEditBloc>()
-            .add(MieuxVousConnaitreEditReponsesChangee(value)),
+            .add(MieuxVousConnaitreEditChoixMultipleChangee(value)),
       );
 }

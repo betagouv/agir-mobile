@@ -19,8 +19,8 @@ import 'package:app/features/authentification/saisie_code/presentation/pages/sai
 import 'package:app/features/authentification/se_connecter/presentation/pages/se_connecter_page.dart';
 import 'package:app/features/bibliotheque/presentation/pages/bibliotheque_page.dart';
 import 'package:app/features/first_name/presentation/pages/first_name_page.dart';
+import 'package:app/features/know_your_customer/list/presentation/pages/know_your_customers_page.dart';
 import 'package:app/features/mieux_vous_connaitre/detail/presentation/pages/mieux_vous_connaitre_edit_page.dart';
-import 'package:app/features/mieux_vous_connaitre/list/presentation/pages/mieux_vous_connaitre_page.dart';
 import 'package:app/features/pre_onboarding/presentation/pages/pre_onboarding_page.dart';
 import 'package:app/features/profil/informations/presentation/pages/mes_informations_page.dart';
 import 'package:app/features/profil/logement/presentation/pages/mon_logement_page.dart';
@@ -89,7 +89,7 @@ GoRouter goRouter({
                 ProfilPage.route,
                 MesInformationsPage.route,
                 MonLogementPage.route,
-                MieuxVousConnaitrePage.route,
+                KnowYourCustomersPage.route,
                 MieuxVousConnaitreEditPage.route,
                 ActionListPage.route,
                 ActionDetailPage.route,
