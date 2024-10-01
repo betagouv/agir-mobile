@@ -147,11 +147,11 @@ void main() {
         findsOneWidget,
       );
       expect(
-        find.bySemanticsLabel(Localisation.bienvenueSurAgir),
+        find.bySemanticsLabel(Localisation.bienvenueSur),
         findsOneWidget,
       );
       expect(
-        find.bySemanticsLabel(Localisation.bienvenueSurAgirDetails),
+        find.bySemanticsLabel(Localisation.bienvenueSurDetails),
         findsOneWidget,
       );
       expect(find.bySemanticsLabel(Localisation.votrePrenom), findsOneWidget);

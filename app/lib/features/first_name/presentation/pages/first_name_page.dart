@@ -77,12 +77,12 @@ class FirstNamePage extends StatelessWidget {
                   ),
                   const SizedBox(height: DsfrSpacings.s2w),
                   const Text(
-                    Localisation.bienvenueSurAgir,
+                    Localisation.bienvenueSur,
                     style: DsfrTextStyle.headline2(),
                   ),
                   const SizedBox(height: DsfrSpacings.s2w),
                   const Text(
-                    Localisation.bienvenueSurAgirDetails,
+                    Localisation.bienvenueSurDetails,
                     style: DsfrTextStyle.bodyLg(lineHeight: 28),
                   ),
                   const SizedBox(height: DsfrSpacings.s3w),

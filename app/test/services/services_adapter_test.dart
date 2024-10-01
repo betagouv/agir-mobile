@@ -23,7 +23,7 @@ void main() {
         "titre": "Fruits et légumes de saison",
         "sous_titre": "septembre",
         "external_url": "https://impactco2.fr/outils/fruitsetlegumes",
-        "icon_url": "https://agir-front-dev.osc-fr1.scalingo.io/cerise.png",
+        "icon_url": "https://jagis-front-dev.osc-fr1.scalingo.io/cerise.png",
         "univers": "alimentation",
         "is_available_inhouse": true
     },
