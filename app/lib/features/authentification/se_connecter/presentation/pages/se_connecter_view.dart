@@ -97,7 +97,7 @@ class SeConnecterView extends StatelessWidget {
               const SizedBox(height: DsfrSpacings.s2w),
               Center(
                 child: DsfrLink.md(
-                  label: Localisation.premiereFoisSurAgir,
+                  label: Localisation.premiereFoisSur,
                   onTap: () async => GoRouter.of(context)
                       .pushReplacementNamed(CreerComptePage.name),
                 ),

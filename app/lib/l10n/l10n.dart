@@ -21,11 +21,11 @@ abstract final class Localisation {
   static const allerALAction = "Aller à l'action";
   static const anneeDeNaissance = 'Année de naissance';
   static const annuler = 'Annuler';
-  static const appEstEnConstruction = 'Agir est en construction !';
+  static const appEstEnConstruction = 'J’agis est en construction !';
   static const appEstEnConstructionDescription =
       'Cette version est encore très incomplète et de nombreuses évolutions et nouvelles fonctionnalités sont mises en ligne chaque semaine.';
   static const appEstEncoreEnExperimentation =
-      'Agir est encore en expérimentation !';
+      'J’agis est encore en expérimentation !';
   static const appEstEncoreEnExperimentationDetails =
       'Nous ajoutons progressivement les aides et contenus locaux à ';
   static const appEstEncoreEnExperimentationDetails2 =
@@ -38,9 +38,8 @@ abstract final class Localisation {
   static const baseDeConnaissances = 'Base de connaissances';
   static const bibliotheque = 'Bibliothèque';
   static const bibliothequeAucunArticle = 'Aucun article trouvé';
-  static const bienvenueSurAgir =
-      'Bienvenue sur Agir ! Faisons connaissance...';
-  static const bienvenueSurAgirDetails =
+  static const bienvenueSur = 'Bienvenue sur J’agis ! Faisons connaissance...';
+  static const bienvenueSurDetails =
       'Nous avons quelques questions à vous poser pour personnaliser votre expérience !';
   static const boisPellets = 'Bois / Pellets';
   static const bonjour = 'Bonjour,\n';
@@ -64,10 +63,10 @@ abstract final class Localisation {
   static const continuer = 'Continuer';
   static const continuerLaLecture = 'Continuer la lecture';
   static const creerMonCompte = 'Créer mon compte';
-  static const creezVotreCompte = 'Créez votre compte Agir';
+  static const creezVotreCompte = 'Créez votre compte J’agis';
   static const declarationAccessibilite = "Déclaration d'accessibilité";
   static const declarationAccessibiliteSite =
-      'https://agir.beta.gouv.fr/accessibilite';
+      'https://jagis.beta.gouv.fr/accessibilite';
   static const defiRealise = 'Défi réalisé';
   static const donneesPersonnelles = 'Données personnelles';
   static const donneesUtiliseesPart1 = 'Données utilisées : code postal ';
@@ -124,12 +123,12 @@ abstract final class Localisation {
   static const lesCategoriesTransport = 'Transports';
   static const lesCgu = "les conditions générales d'utilisation";
   static const lesCguMenu = 'CGU';
-  static const lesCguSite = 'https://agir.beta.gouv.fr/cgu';
+  static const lesCguSite = 'https://jagis.beta.gouv.fr/cgu';
   static const maReponse = 'Ma réponse';
   static const meConnecter = 'Me connecter';
   static const mentionsLegales = 'Mentions légales';
   static const mentionsLegalesSite =
-      'https://agir.beta.gouv.fr/mentions-legales';
+      'https://jagis.beta.gouv.fr/mentions-legales';
   static const menu = 'Menu';
   static const menuAccueil = 'Accueil';
   static const menuAides = 'Aides';
@@ -175,7 +174,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez 1 part pour
 
 Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme des revenus de toutes les personnes avec lequelles vous partagez vos déclarations d’impôts (pour toute l’année) pour vous faire une première idée.''';
   static const oui = 'Oui';
-  static const pageConnexionTitre = 'Accédez à votre compte Agir';
+  static const pageConnexionTitre = 'Accédez à votre compte J’agis';
   static const partieDeux = '2. LIRE DES ARTICLES ET RÉPONDRE AUX QUIZ';
   static const partieQuatre = '4. GAGNER VOTRE CARTE';
   static const partieTrois = '3. RÉALISER AU MOINS UNE ACTION PROPOSÉE';
@@ -185,7 +184,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const point = '.';
   static const politiqueDeConfidentialite = 'Politique de confidentialité';
   static const politiqueDeConfidentialiteSite =
-      'https://agir.beta.gouv.fr/politique-de-confidentialite';
+      'https://jagis.beta.gouv.fr/politique-de-confidentialite';
   static const pourquoi = 'Pourquoi ?';
   static const pourquoiCeDefi = 'Pourquoi cette action ?';
   static const pourquoiCesQuestions = 'Pourquoi ces questions ?';
@@ -193,7 +192,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
       'Votre revenu fiscal de référence et le nombre de parts permettent d’afficher les aides en fonction de vos ressources.';
   static const preOnboardingTitre =
       'Ensemble,\naméliorons\nnos habitudes\nau jour le jour';
-  static const premiereFoisSurAgir = 'Première fois sur Agir ?';
+  static const premiereFoisSur = 'Première fois sur J’agis ?';
   static const prenom = 'Prénom';
   static const prixDuVelo = 'Prix du vélo';
   static const prixDuVeloExplications =

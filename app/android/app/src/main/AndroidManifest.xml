@@ -4,7 +4,7 @@
     <application
         android:allowBackup="false"
         android:enableOnBackInvokedCallback="true"
-        android:label="agir"
+        android:label="J’agis"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
@@ -38,7 +38,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="agir.beta.gouv.fr"
+                    android:host="jagis.beta.gouv.fr"
                     android:scheme="https" />
             </intent-filter>
         </activity>

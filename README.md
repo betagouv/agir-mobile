@@ -1,4 +1,4 @@
-# AGIR
+# J’agis
 
 [![Intégration Continue](https://github.com/betagouv/agir-mobile/actions/workflows/continuous-integration.yml/badge.svg?branch=main)](https://github.com/betagouv/agir-mobile/actions/workflows/continuous-integration.yml)
 

@@ -1,7 +1,8 @@
+# 'flutter pub run flutter_launcher_icons' to update
 flutter_launcher_icons:
   android: true
   ios: true
   remove_alpha_ios: true # Icons with alpha channel are not allowed in the Apple App Store.
   image_path: "assets/launcher_icons/icon-development.png"
   adaptive_icon_background: "#FFFFFF"
-  adaptive_icon_foreground: "assets/launcher_icons/icon-adaptive-development.png"
+  adaptive_icon_foreground: "assets/launcher_icons/icon-development.png"

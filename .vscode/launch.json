@@ -1,35 +1,35 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-      {
-        "name": "[DEV] Agir",
-        "cwd": "app",
-        "request": "launch",
-        "type": "dart",
-        "args": [
-          "--flavor",
-          "development",
-          "--dart-define-from-file",
-          "env.development.json"
-        ]
-      },
-      {
-        "name": "Agir",
-        "cwd": "app",
-        "request": "launch",
-        "type": "dart",
-        "args": [
-          "--flavor",
-          "production",
-          "--dart-define-from-file",
-          "env.json"
-        ]
-      },
-      {
-        "name": "dsfr",
-        "cwd": "packages/dsfr.dart/example",
-        "request": "launch",
-        "type": "dart"
-      },
-    ]
-  }
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "[DEV] J’agis",
+      "cwd": "app",
+      "request": "launch",
+      "type": "dart",
+      "args": [
+        "--flavor",
+        "development",
+        "--dart-define-from-file",
+        "env.development.json"
+      ]
+    },
+    {
+      "name": "J’agis",
+      "cwd": "app",
+      "request": "launch",
+      "type": "dart",
+      "args": [
+        "--flavor",
+        "production",
+        "--dart-define-from-file",
+        "env.json"
+      ]
+    },
+    {
+      "name": "dsfr",
+      "cwd": "packages/dsfr.dart/example",
+      "request": "launch",
+      "type": "dart"
+    },
+  ]
+}

@@ -56,7 +56,7 @@ void main() {
       await tester.pumpAndSettle();
       await tester.pumpAndSettle();
 
-      ielVoitLeTexte(Localisation.bienvenueSurAgir);
+      ielVoitLeTexte(Localisation.bienvenueSur);
       await ielEcritDansLeChamp(
         tester,
         label: Localisation.votrePrenom,
