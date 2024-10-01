@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:app/core/assets/svgs.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/bibliotheque/domain/bibliotheque.dart';
 import 'package:app/features/bibliotheque/presentation/bloc/bibliotheque_bloc.dart';
@@ -10,6 +11,7 @@ import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 
 class BibliothequeView extends StatelessWidget {
   const BibliothequeView({super.key});
@@ -42,8 +44,13 @@ class BibliothequeView extends StatelessWidget {
             ],
           ),
         ),
-        const _SliverListe(),
-        const SliverPadding(padding: EdgeInsets.only(bottom: padding)),
+        const SliverPadding(
+          padding: EdgeInsets.symmetric(horizontal: padding),
+          sliver: _SliverListe(),
+        ),
+        const SliverSafeArea(
+          sliver: SliverPadding(padding: EdgeInsets.only(bottom: padding)),
+        ),
       ],
     );
   }
@@ -118,7 +125,7 @@ class _Tag extends StatelessWidget {
               const BorderRadius.all(Radius.circular(DsfrSpacings.s4w)),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(DsfrSpacings.s3v),
+          padding: const EdgeInsets.all(paddingVerticalPage),
           child: Text(
             label,
             style: DsfrTextStyle.bodySmMedium(
@@ -192,15 +199,26 @@ class _SliverListe extends StatelessWidget {
       (final value) => value.state.bibliotheque.contenus,
     );
 
-    return SliverPadding(
-      padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
-      sliver: SliverList.separated(
-        itemBuilder: (final context, final index) =>
-            Contenu(contenu: contenus[index]),
-        separatorBuilder: (final context, final index) =>
-            const SizedBox(height: DsfrSpacings.s2w),
-        itemCount: contenus.length,
-      ),
-    );
+    return contenus.isEmpty
+        ? SliverFillRemaining(
+            hasScrollBody: false,
+            child: Column(
+              children: [
+                SvgPicture.asset(AssetsSvgs.bibliothequeEmpty),
+                const SizedBox(height: DsfrSpacings.s2w),
+                const Text(
+                  Localisation.bibliothequeAucunArticle,
+                  style: DsfrTextStyle.headline4(),
+                ),
+              ],
+            ),
+          )
+        : SliverList.separated(
+            itemBuilder: (final context, final index) =>
+                Contenu(contenu: contenus[index]),
+            separatorBuilder: (final context, final index) =>
+                const SizedBox(height: DsfrSpacings.s2w),
+            itemCount: contenus.length,
+          );
   }
 }
