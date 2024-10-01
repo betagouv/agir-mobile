@@ -98,7 +98,11 @@ void main() {
       ),
     );
 
-    final result = await adapter.recuperer();
+    final result = await adapter.recuperer(
+      thematiques: null,
+      titre: null,
+      isFavorite: null,
+    );
 
     final bibliotheque = result.getRight().getOrElse(() => throw Exception());
     expect(bibliotheque, isA<Bibliotheque>());
@@ -151,7 +155,11 @@ void main() {
       ),
     );
 
-    await adapter.recuperer(titre: 'quel impact');
+    await adapter.recuperer(
+      thematiques: null,
+      titre: 'quel impact',
+      isFavorite: null,
+    );
 
     verify(
       () => client.send(
@@ -206,7 +214,11 @@ void main() {
       ),
     );
 
-    await adapter.recuperer(thematiques: ['alimentation', 'loisir']);
+    await adapter.recuperer(
+      thematiques: ['alimentation', 'loisir'],
+      titre: null,
+      isFavorite: null,
+    );
 
     verify(
       () => client.send(
@@ -260,7 +272,11 @@ void main() {
       ),
     );
 
-    await adapter.recuperer(isFavorite: true);
+    await adapter.recuperer(
+      thematiques: null,
+      titre: null,
+      isFavorite: true,
+    );
 
     verify(
       () => client.send(

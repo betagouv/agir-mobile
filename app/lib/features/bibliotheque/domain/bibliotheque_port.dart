@@ -3,8 +3,8 @@ import 'package:fpdart/fpdart.dart';
 
 abstract interface class BibliothequePort {
   Future<Either<Exception, Bibliotheque>> recuperer({
-    final List<String>? thematiques,
-    final String? titre,
-    final bool? isFavorite,
+    required final List<String>? thematiques,
+    required final String? titre,
+    required final bool? isFavorite,
   });
 }

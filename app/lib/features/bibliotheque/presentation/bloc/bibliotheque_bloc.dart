@@ -8,7 +8,11 @@ class BibliothequeBloc extends Bloc<BibliothequeEvent, BibliothequeState> {
       : super(const BibliothequeState.empty()) {
     on<BibliothequeRecuperationDemandee>((final event, final emit) async {
       emit(state.copyWith(statut: BibliothequeStatut.chargement));
-      final result = await bibliothequePort.recuperer();
+      final result = await bibliothequePort.recuperer(
+        thematiques: null,
+        titre: null,
+        isFavorite: null,
+      );
       result.fold(
         (final l) => null,
         (final r) => emit(
@@ -17,14 +21,20 @@ class BibliothequeBloc extends Bloc<BibliothequeEvent, BibliothequeState> {
       );
     });
     on<BibliothequeRechercheSaisie>((final event, final emit) async {
+      final recherche = event.valeur;
       final result = await bibliothequePort.recuperer(
         thematiques: state.thematiques,
-        titre: event.valeur,
+        titre: recherche,
+        isFavorite: state.isFavorites,
       );
       result.fold(
         (final l) => null,
         (final r) => emit(
-          state.copyWith(bibliotheque: r, statut: BibliothequeStatut.succes),
+          state.copyWith(
+            bibliotheque: r,
+            recherche: recherche,
+            statut: BibliothequeStatut.succes,
+          ),
         ),
       );
     });
@@ -36,6 +46,7 @@ class BibliothequeBloc extends Bloc<BibliothequeEvent, BibliothequeState> {
       final result = await bibliothequePort.recuperer(
         thematiques: thematiques,
         titre: state.recherche,
+        isFavorite: state.isFavorites,
       );
       result.fold(
         (final l) => null,
