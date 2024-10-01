@@ -37,6 +37,7 @@ abstract final class Localisation {
   static const autreJeNeSaisPas = 'Autre / Je ne sais pas';
   static const baseDeConnaissances = 'Base de connaissances';
   static const bibliotheque = 'Bibliothèque';
+  static const bibliothequeAucunArticle = 'Aucun article trouvé';
   static const bienvenueSurAgir =
       'Bienvenue sur Agir ! Faisons connaissance...';
   static const bienvenueSurAgirDetails =

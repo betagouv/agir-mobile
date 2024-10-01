@@ -50,6 +50,18 @@ void main() {
     });
   });
 
+  testWidgets("Voir l'illustration quand aucun article", (final tester) async {
+    setUpWidgets(tester);
+    await mockNetworkImages(() async {
+      leServeurRetourneLeContenuDeLaBibliotheque(
+        const Bibliotheque(contenus: [], filtres: []),
+      );
+
+      await _allerSurBibliotheque(tester);
+      ielVoitLeTexte(Localisation.bibliothequeAucunArticle);
+    });
+  });
+
   testWidgets("Iel appuie sur l'article", (final tester) async {
     setUpWidgets(tester);
     await mockNetworkImages(() async {
