@@ -1,4 +1,4 @@
-# 'flutter pub run flutter_launcher_icons' to update
+# 'dart run flutter_launcher_icons' to update
 flutter_launcher_icons:
   android: true
   ios: true
