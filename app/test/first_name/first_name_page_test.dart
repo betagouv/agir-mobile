@@ -66,6 +66,27 @@ void main() {
     );
 
     testWidgets(
+      "aller sur la page suivante lorsqu'il est saisi et appuyer sur le bouton done",
+      (final tester) async {
+        final firstNamePort = _FirstNamePortMock();
+        when(() => firstNamePort.addFirstName(any()))
+            .thenAnswer((final _) async => const Right(unit));
+        await _pumpFirstNamePage(tester, firstNamePort: firstNamePort);
+
+        final validFirstName = faker.person.firstName();
+
+        await tester.enterText(find.byType(DsfrInput), validFirstName);
+        await tester.testTextInput.receiveAction(TextInputAction.done);
+        await tester.pumpAndSettle();
+
+        expect(
+          find.text('route: ${QuestionCodePostalPage.name}'),
+          findsOneWidget,
+        );
+      },
+    );
+
+    testWidgets(
       "afficher une erreur lorsqu'un prénom vide est saisi",
       (final tester) async {
         await _pumpFirstNamePage(tester);

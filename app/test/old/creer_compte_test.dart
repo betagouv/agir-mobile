@@ -62,7 +62,7 @@ void main() {
         label: Localisation.votrePrenom,
         enterText: 'Lucas',
       );
-      await ielAppuieSur(tester, Localisation.continuer);
+      await tester.pumpAndSettle();
 
       ielVoitLeTexte(Localisation.enchanteDetails);
       await ielEcritDansLeChamp(

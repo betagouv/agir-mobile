@@ -12,6 +12,7 @@ class DsfrInputHeadless extends StatefulWidget {
     this.controller,
     this.suffixText,
     required this.onChanged,
+    this.onFieldSubmitted,
     this.validator,
     this.keyboardType,
     this.textCapitalization = TextCapitalization.none,
@@ -25,6 +26,7 @@ class DsfrInputHeadless extends StatefulWidget {
     this.maxLines = 1,
     this.minLines = 1,
     this.textAlign = TextAlign.start,
+    this.autofocus = false,
     this.inputStyle = const DsfrTextStyle.bodyMd(),
     this.inputBorderColor = DsfrColors.grey200,
     this.inputBorderWidth = DsfrSpacings.s0v5,
@@ -41,10 +43,12 @@ class DsfrInputHeadless extends StatefulWidget {
   final TextEditingController? controller;
   final String? initialValue;
   final ValueChanged<String> onChanged;
+  final ValueChanged<String>? onFieldSubmitted;
   final FormFieldValidator<String>? validator;
   final double? width;
   final TextStyle inputStyle;
   final TextAlign textAlign;
+  final bool autofocus;
   final bool isPasswordMode;
   final bool passwordVisibility;
   final bool? autocorrect;
@@ -137,6 +141,7 @@ class _DsfrInputHeadlessState extends State<DsfrInputHeadless> {
             textInputAction: widget.textInputAction,
             style: widget.inputStyle,
             textAlign: widget.textAlign,
+            autofocus: widget.autofocus,
             obscureText: widget.isPasswordMode && !widget.passwordVisibility,
             autocorrect: widget.autocorrect ?? !widget.isPasswordMode,
             enableSuggestions: !widget.isPasswordMode,
@@ -145,6 +150,7 @@ class _DsfrInputHeadlessState extends State<DsfrInputHeadless> {
             onChanged: widget.onChanged,
             onTapOutside: (final event) =>
                 FocusManager.instance.primaryFocus?.unfocus(),
+            onFieldSubmitted: widget.onFieldSubmitted,
             validator: widget.validator,
             inputFormatters: widget.inputFormatters,
             scrollPadding: widget.scrollPadding,

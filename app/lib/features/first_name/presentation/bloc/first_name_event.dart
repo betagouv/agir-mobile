@@ -17,6 +17,6 @@ final class FirstNameChanged extends FirstNameEvent {
   List<Object> get props => [value];
 }
 
-final class FirstNameUpdatePressed extends FirstNameEvent {
-  const FirstNameUpdatePressed();
+final class FirstNameSubmitted extends FirstNameEvent {
+  const FirstNameSubmitted();
 }

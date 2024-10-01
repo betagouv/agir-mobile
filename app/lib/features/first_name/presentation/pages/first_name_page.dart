@@ -28,6 +28,10 @@ class FirstNamePage extends StatelessWidget {
         builder: (final context, final state) => const FirstNamePage(),
       );
 
+  void _handleSubmitted(final BuildContext context) {
+    context.read<FirstNameBloc>().add(const FirstNameSubmitted());
+  }
+
   @override
   Widget build(final BuildContext context) => BlocProvider(
         create: (final context) => FirstNameBloc(
@@ -89,8 +93,13 @@ class FirstNamePage extends StatelessWidget {
                             FirstNameChanged(FirstName.create(value)),
                           );
                     },
+                    onFieldSubmitted: (final value) {
+                      _handleSubmitted(context);
+                    },
+                    autofocus: true,
                     keyboardType: TextInputType.name,
                     textCapitalization: TextCapitalization.sentences,
+                    textInputAction: TextInputAction.done,
                     autofillHints: const [AutofillHints.givenName],
                   ),
                   BlocSelector<FirstNameBloc, FirstNameState, Option<String>>(
@@ -122,11 +131,7 @@ class FirstNamePage extends StatelessWidget {
                     label: Localisation.continuer,
                     variant: DsfrButtonVariant.primary,
                     size: DsfrButtonSize.lg,
-                    onPressed: state
-                        ? () => context.read<FirstNameBloc>().add(
-                              const FirstNameUpdatePressed(),
-                            )
-                        : null,
+                    onPressed: state ? () => _handleSubmitted(context) : null,
                   ),
                 ),
               ),

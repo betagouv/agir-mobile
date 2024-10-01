@@ -156,6 +156,7 @@ class _CodePostalEtCommuneState extends State<_CodePostalEtCommune> {
             label: Localisation.codePostal,
             initialValue: state.codePostal,
             onChanged: (final value) => _handleCodePostal(context, value),
+            autofocus: true,
             keyboardType: TextInputType.number,
             inputFormatters: [
               FilteringTextInputFormatter.digitsOnly,

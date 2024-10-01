@@ -16,7 +16,7 @@ class FirstNameBloc extends Bloc<FirstNameEvent, FirstNameState> {
         (final t) => emit(FirstNameFailure(errorMessage: t)),
       );
     });
-    on<FirstNameUpdatePressed>((final event, final emit) async {
+    on<FirstNameSubmitted>((final event, final emit) async {
       final currentState = state;
       if (currentState is FirstNameEntered) {
         emit(const FirstNameLoading());
