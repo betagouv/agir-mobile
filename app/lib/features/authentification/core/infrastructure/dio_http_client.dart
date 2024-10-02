@@ -29,6 +29,12 @@ class DioHttpClient {
           }
           handler.next(options);
         },
+        onResponse: (final response, final handler) async {
+          if (response.statusCode == HttpStatus.unauthorized) {
+            await _authentificationService.logout();
+          }
+          handler.next(response);
+        },
       ),
     );
   }
