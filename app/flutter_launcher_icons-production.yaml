@@ -4,5 +4,5 @@ flutter_launcher_icons:
   ios: true
   remove_alpha_ios: true # Icons with alpha channel are not allowed in the Apple App Store.
   image_path: "assets/launcher_icons/icon.png"
-  adaptive_icon_background: "#FFFFFF"
-  adaptive_icon_foreground: "assets/launcher_icons/icon.png"
+  adaptive_icon_background: "#EDFEE7"
+  adaptive_icon_foreground: "assets/launcher_icons/icon-adaptive.png"
