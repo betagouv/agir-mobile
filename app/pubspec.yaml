@@ -21,6 +21,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_markdown: 0.7.3+1
+  flutter_native_splash: ^2.4.1
   flutter_secure_storage: 9.2.2
   flutter_svg: 2.0.10+1
   flutter_widget_from_html_core: 0.15.2
@@ -48,6 +49,16 @@ dev_dependencies:
     sdk: flutter
   mocktail: 1.0.4
   nested: 1.0.0
+
+# 'dart run flutter_native_splash:create' to update
+flutter_native_splash:
+  color: "#EDFEE7"
+  color_dark: "#EDFEE7"
+  image: "assets/launcher_icons/icon-splashscreen.png"
+  android_12:
+    image: "assets/launcher_icons/icon-splashscreen.png"
+    icon_background_color: "#EDFEE7"
+    icon_background_color_dark: "#EDFEE7"
 
 flutter:
   uses-material-design: true

@@ -33,11 +33,13 @@ import 'package:dio/dio.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   const matomoSiteIdKey = 'MATOMO_SITE_ID';
   const matomoSiteId = String.fromEnvironment(matomoSiteIdKey);
@@ -106,6 +108,9 @@ Future<void> main() async {
   );
 
   final messageBus = MessageBus();
+
+  FlutterNativeSplash.remove();
+
   runApp(
     App(
       tracker: tracker,
