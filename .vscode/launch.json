@@ -22,7 +22,7 @@
         "--flavor",
         "production",
         "--dart-define-from-file",
-        "env.json"
+        "env.production.json"
       ]
     },
     {
