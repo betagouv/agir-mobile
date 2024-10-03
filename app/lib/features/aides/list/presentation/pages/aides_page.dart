@@ -112,18 +112,20 @@ class _Disclaimer extends StatelessWidget {
   Widget build(final BuildContext context) =>
       BlocSelector<UtilisateurBloc, UtilisateurState, bool>(
         selector: (final state) => state.utilisateur.aMaVilleCouverte,
-        builder: (final context, final state) =>
-            BlocBuilder<AidesDisclaimerCubit, AidesDisclaimerState>(
-          builder: (final context, final state) => switch (state) {
-            AidesDisclaimerVisible() => DsfrNotice(
-                titre: Localisation.leServiveNeCouvrePasEncoreVotreVille,
-                description: Localisation
-                    .leServiveNeCouvrePasEncoreVotreVilleDescription,
-                onClose: () =>
-                    context.read<AidesDisclaimerCubit>().closeDisclaimer(),
+        builder: (final context, final state) => state
+            ? const SizedBox()
+            : BlocBuilder<AidesDisclaimerCubit, AidesDisclaimerState>(
+                builder: (final context, final state) => switch (state) {
+                  AidesDisclaimerVisible() => DsfrNotice(
+                      titre: Localisation.leServiveNeCouvrePasEncoreVotreVille,
+                      description: Localisation
+                          .leServiveNeCouvrePasEncoreVotreVilleDescription,
+                      onClose: () => context
+                          .read<AidesDisclaimerCubit>()
+                          .closeDisclaimer(),
+                    ),
+                  AidesDisclaimerNotVisible() => const SizedBox(),
+                },
               ),
-            AidesDisclaimerNotVisible() => const SizedBox(),
-          },
-        ),
       );
 }
