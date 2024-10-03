@@ -4,7 +4,7 @@
     <application
         android:allowBackup="false"
         android:enableOnBackInvokedCallback="true"
-        android:label="J’agis"
+        android:label="${appName}"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
