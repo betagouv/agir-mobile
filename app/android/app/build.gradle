@@ -66,12 +66,12 @@ android {
     productFlavors {
         production {
             dimension "default"
-            manifestPlaceholders = [appName: "J’agis (bêta)"]
+            manifestPlaceholders = [appName: "J’agis"]
         }
         development {
             dimension "default"
             applicationIdSuffix ".dev2"
-            manifestPlaceholders = [appName: "[DEV] J’agis (bêta)"]
+            manifestPlaceholders = [appName: "[DEV] J’agis"]
         }
     }
 
