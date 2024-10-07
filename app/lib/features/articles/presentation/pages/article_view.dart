@@ -1,4 +1,5 @@
 import 'package:app/core/presentation/widgets/composants/app_bar.dart';
+import 'package:app/core/presentation/widgets/composants/fnv_image.dart';
 import 'package:app/core/presentation/widgets/composants/html_widget.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
@@ -9,7 +10,6 @@ import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class ArticleView extends StatelessWidget {
@@ -113,8 +113,6 @@ class _LogoWidget extends StatelessWidget {
     final logoUrl = partenaire.logo;
     final logoName = partenaire.nom;
 
-    return logoUrl.endsWith('.svg')
-        ? SvgPicture.network(logoUrl, semanticsLabel: logoName)
-        : Image.network(logoUrl, semanticLabel: logoName);
+    return FnvImage.network(logoUrl, semanticLabel: logoName);
   }
 }

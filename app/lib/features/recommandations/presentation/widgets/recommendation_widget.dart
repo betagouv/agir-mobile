@@ -1,3 +1,4 @@
+import 'package:app/core/presentation/widgets/composants/fnv_image.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/shadows.dart';
 import 'package:app/features/articles/presentation/pages/article_page.dart';
@@ -184,12 +185,11 @@ class _Image extends StatelessWidget {
 
     return ClipRRect(
       borderRadius: borderRadius,
-      child: Image.network(
+      child: FnvImage.network(
         imageUrl,
         width: width,
         height: height,
         fit: BoxFit.cover,
-        cacheHeight: height.toInt(),
       ),
     );
   }

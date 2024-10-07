@@ -1,3 +1,4 @@
+import 'package:app/core/presentation/widgets/composants/fnv_image.dart';
 import 'package:app/features/mieux_vous_connaitre/core/domain/question.dart';
 import 'package:app/features/mieux_vous_connaitre/detail/presentation/bloc/mieux_vous_connaitre_edit_bloc.dart';
 import 'package:app/features/mieux_vous_connaitre/detail/presentation/bloc/mieux_vous_connaitre_edit_event.dart';
@@ -38,33 +39,34 @@ class _MosaicSetState extends State<_MosaicSet> {
   Widget build(final BuildContext context) => Wrap(
         spacing: DsfrSpacings.s2w,
         runSpacing: DsfrSpacings.s2w,
-        children: _responses
-            .map(
-              (final e) => MosaicButton(
-                emoji: Image.network(e.imageUrl.value, width: 40, height: 40),
-                title: e.label.value,
-                value: e.isSelected,
-                onChanged: (final value) {
-                  setState(() {
-                    _responses = _responses
-                        .map(
-                          (final r) => r.id == e.id
-                              ? MosaicResponse(
-                                  id: r.id,
-                                  imageUrl: r.imageUrl,
-                                  label: r.label,
-                                  isSelected: value,
-                                )
-                              : r,
-                        )
-                        .toList();
-                    context
-                        .read<MieuxVousConnaitreEditBloc>()
-                        .add(MieuxVousConnaitreEditMosaicChangee(_responses));
-                  });
-                },
-              ),
-            )
-            .toList(),
+        children: _responses.map((final e) {
+          const size = 40.0;
+
+          return MosaicButton(
+            emoji:
+                FnvImage.network(e.imageUrl.value, width: size, height: size),
+            title: e.label.value,
+            value: e.isSelected,
+            onChanged: (final value) {
+              setState(() {
+                _responses = _responses
+                    .map(
+                      (final r) => r.id == e.id
+                          ? MosaicResponse(
+                              id: r.id,
+                              imageUrl: r.imageUrl,
+                              label: r.label,
+                              isSelected: value,
+                            )
+                          : r,
+                    )
+                    .toList();
+                context
+                    .read<MieuxVousConnaitreEditBloc>()
+                    .add(MieuxVousConnaitreEditMosaicChangee(_responses));
+              });
+            },
+          );
+        }).toList(),
       );
 }

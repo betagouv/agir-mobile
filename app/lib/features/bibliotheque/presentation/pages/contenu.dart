@@ -1,3 +1,4 @@
+import 'package:app/core/presentation/widgets/composants/fnv_image.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/shadows.dart';
 import 'package:app/features/articles/presentation/pages/article_page.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
@@ -43,7 +44,7 @@ class Contenu extends StatelessWidget {
                   bottomLeft: Radius.zero,
                   bottomRight: Radius.zero,
                 ),
-                child: Image.network(contenu.imageUrl, fit: BoxFit.cover),
+                child: FnvImage.network(contenu.imageUrl, fit: BoxFit.cover),
               ),
               Padding(
                 padding: const EdgeInsets.all(DsfrSpacings.s2w),
