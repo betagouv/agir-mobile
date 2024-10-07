@@ -21,7 +21,7 @@ jobs:
     secrets:
       ANDROID_KEYSTORE: ${{ secrets.PROD_ANDROID_KEYSTORE }}
       ANDROID_KEY_PROPERTIES: ${{ secrets.PROD_ANDROID_KEY_PROPERTIES }}
-      FLUTTER_ENV: ${{ secrets.DEV_FLUTTER_ENV }}
+      FLUTTER_ENV: ${{ secrets.PROD_FLUTTER_ENV }}
   continuous_delivery_ios_dev:
     uses: ./.github/workflows/cd-ios.yml
     name: Development iOS
