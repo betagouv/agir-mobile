@@ -13,15 +13,7 @@ jobs:
       ANDROID_KEYSTORE: ${{ secrets.DEV_ANDROID_KEYSTORE }}
       ANDROID_KEY_PROPERTIES: ${{ secrets.DEV_ANDROID_KEY_PROPERTIES }}
       FLUTTER_ENV: ${{ secrets.DEV_FLUTTER_ENV }}
-  continuous_delivery_android_prod:
-    uses: ./.github/workflows/cd-android.yml
-    name: Production Android
-    with:
-      FLAVOR: production
-    secrets:
-      ANDROID_KEYSTORE: ${{ secrets.PROD_ANDROID_KEYSTORE }}
-      ANDROID_KEY_PROPERTIES: ${{ secrets.PROD_ANDROID_KEY_PROPERTIES }}
-      FLUTTER_ENV: ${{ secrets.PROD_FLUTTER_ENV }}
+
   continuous_delivery_ios_dev:
     uses: ./.github/workflows/cd-ios.yml
     name: Development iOS
@@ -33,7 +25,28 @@ jobs:
       IOS_PROFILE: ${{ secrets.DEV_IOS_PROFILE }}
       IOS_EXPORT_OPTIONS: ${{ secrets.DEV_IOS_EXPORT_OPTIONS }}
       FLUTTER_ENV: ${{ secrets.DEV_FLUTTER_ENV }}
+
+  wait_for_approval:
+    needs: [continuous_delivery_android_dev, continuous_delivery_ios_dev]
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Wait for manual approval
+        run: echo "Waiting for manual approval to deploy production versions"
+
+  continuous_delivery_android_prod:
+    needs: wait_for_approval
+    uses: ./.github/workflows/cd-android.yml
+    name: Production Android
+    with:
+      FLAVOR: production
+    secrets:
+      ANDROID_KEYSTORE: ${{ secrets.PROD_ANDROID_KEYSTORE }}
+      ANDROID_KEY_PROPERTIES: ${{ secrets.PROD_ANDROID_KEY_PROPERTIES }}
+      FLUTTER_ENV: ${{ secrets.PROD_FLUTTER_ENV }}
+
   continuous_delivery_ios_prod:
+    needs: wait_for_approval
     uses: ./.github/workflows/cd-ios.yml
     name: Production iOS
     with:
