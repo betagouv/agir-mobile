@@ -505,6 +505,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = PR958DC548;
 				ENABLE_BITCODE = NO;
 				FLAVOR_APP_NAME = "J’agis";
+				FLAVOR_IPA_NAME = "app-production-release";
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -695,6 +696,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = PR958DC548;
 				ENABLE_BITCODE = NO;
 				FLAVOR_APP_NAME = "J’agis";
+				FLAVOR_IPA_NAME = "app-production-release";
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -725,6 +727,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = PR958DC548;
 				ENABLE_BITCODE = NO;
 				FLAVOR_APP_NAME = "J’agis";
+				FLAVOR_IPA_NAME = "app-production-release";
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -811,6 +814,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = PR958DC548;
 				ENABLE_BITCODE = NO;
 				FLAVOR_APP_NAME = "[DEV] J’agis";
+				FLAVOR_IPA_NAME = "app-development-release";
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -913,6 +917,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = PR958DC548;
 				ENABLE_BITCODE = NO;
 				FLAVOR_APP_NAME = "[DEV] J’agis";
+				FLAVOR_IPA_NAME = "app-development-release";
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1010,6 +1015,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = PR958DC548;
 				ENABLE_BITCODE = NO;
 				FLAVOR_APP_NAME = "[DEV] J’agis";
+				FLAVOR_IPA_NAME = "app-development-release";
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1112,6 +1118,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = PR958DC548;
 				ENABLE_BITCODE = NO;
 				FLAVOR_APP_NAME = "J’agis";
+				FLAVOR_IPA_NAME = "app-production-release";
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1214,6 +1221,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = PR958DC548;
 				ENABLE_BITCODE = NO;
 				FLAVOR_APP_NAME = "J’agis";
+				FLAVOR_IPA_NAME = "app-production-release";
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1311,6 +1319,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = PR958DC548;
 				ENABLE_BITCODE = NO;
 				FLAVOR_APP_NAME = "J’agis";
+				FLAVOR_IPA_NAME = "app-production-release";
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

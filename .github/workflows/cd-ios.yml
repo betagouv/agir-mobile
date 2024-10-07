@@ -67,8 +67,8 @@ jobs:
       - name: 📦 Télécharger artifact
         uses: actions/upload-artifact@v4
         with:
-          name: agir_${{ inputs.FLAVOR }}_ios
-          path: app/build/ios/ipa/agir.ipa
+          name: app_${{ inputs.FLAVOR }}_ios
+          path: app/build/ios/ipa/app-${{ inputs.FLAVOR }}-release.ipa
       - name: 🗑️ Nettoyer les fichiers secrets
         if: always()
         run: |
