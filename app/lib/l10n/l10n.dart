@@ -166,7 +166,7 @@ abstract final class Localisation {
   static const ouTrouverCesInformationsReponse = '''
 Le revenu fiscal de référence et votre nombre de parts se trouvent sur la 1ère page de votre dernier avis d’impôt.
 
-**Nombre de part :**
+**Nombre de parts :**
 
 Si vous ne disposez pas de votre dernier avis d’impôt, renseignez 1 part pour chaque adulte de votre foyer fiscal, puis 0,5 part par enfant jusqu’à 2 enfants, puis 1 part par enfant à partir du 3ème enfant.
 
