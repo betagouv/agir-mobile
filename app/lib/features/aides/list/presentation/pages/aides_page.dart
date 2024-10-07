@@ -8,6 +8,7 @@ import 'package:app/features/aides/list/presentation/bloc/aides_disclaimer/aides
 import 'package:app/features/aides/list/presentation/bloc/aides_disclaimer/aides_disclaimer_state.dart';
 import 'package:app/features/menu/presentation/pages/root_page.dart';
 import 'package:app/features/utilisateur/presentation/bloc/utilisateur_bloc.dart';
+import 'package:app/features/utilisateur/presentation/bloc/utilisateur_event.dart';
 import 'package:app/features/utilisateur/presentation/bloc/utilisateur_state.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
@@ -31,6 +32,9 @@ class AidesPage extends StatelessWidget {
   Widget build(final BuildContext context) {
     final bloc = AidesBloc(aidesPort: context.read())
       ..add(const AidesRecuperationDemandee());
+    context
+        .read<UtilisateurBloc>()
+        .add(const UtilisateurRecuperationDemandee());
 
     return RootPage(
       body: BlocBuilder<AidesBloc, AidesState>(
