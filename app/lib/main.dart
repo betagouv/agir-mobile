@@ -170,10 +170,10 @@ void _registerErrorHandlers() {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('An error occurred'),
+        title: const Text("Une erreur s'est produite"),
         backgroundColor: DsfrColors.redMarianneMain472,
       ),
-      body: Center(child: Text(details.toString())),
+      body: Center(child: Text(details.exceptionAsString())),
     );
   };
 }
