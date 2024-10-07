@@ -201,10 +201,12 @@ class _Contenu extends StatelessWidget {
                   estFait: o.estFait,
                   estVerrouille: o.estVerrouille,
                   aEteReleve: o.aEteRecolte,
-                  onTap: () async => GoRouter.of(context).pushNamed(
-                    QuizPage.name,
-                    pathParameters: {'id': o.contentId.value},
-                  ),
+                  onTap: o.estFait
+                      ? null
+                      : () async => GoRouter.of(context).pushNamed(
+                            QuizPage.name,
+                            pathParameters: {'id': o.contentId.value},
+                          ),
                 ),
               )
               .separator(const SizedBox(height: DsfrSpacings.s2w)),
