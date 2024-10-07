@@ -1,5 +1,6 @@
 import 'package:app/core/presentation/widgets/composants/app_bar.dart';
 import 'package:app/core/presentation/widgets/composants/badge.dart';
+import 'package:app/core/presentation/widgets/composants/fnv_image.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/recommandations/presentation/widgets/mes_recommandations.dart';
@@ -117,7 +118,7 @@ class _ImageEtTitre extends StatelessWidget {
     return Column(
       children: [
         ClipOval(
-          child: Image.network(
+          child: FnvImage.network(
             univers.imageUrl,
             width: size,
             height: size,
@@ -192,7 +193,7 @@ class _Thematique extends StatelessWidget {
               borderRadius: const BorderRadius.all(
                 Radius.circular(DsfrSpacings.s1v),
               ),
-              child: Image.network(
+              child: FnvImage.network(
                 mission.imageUrl,
                 width: width,
                 fit: BoxFit.cover,

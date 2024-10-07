@@ -3,6 +3,7 @@
 import 'package:app/core/assets/images.dart';
 import 'package:app/core/presentation/widgets/composants/app_bar.dart';
 import 'package:app/core/presentation/widgets/composants/card.dart';
+import 'package:app/core/presentation/widgets/composants/fnv_image.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/vertical_dotted_line.dart';
@@ -137,7 +138,7 @@ class _ImageEtTitre extends StatelessWidget {
     return Row(
       children: [
         ClipOval(
-          child: Image.network(
+          child: FnvImage.network(
             mission.imageUrl,
             width: size,
             height: size,
@@ -262,7 +263,7 @@ class _Contenu extends StatelessWidget {
                         borderRadius: const BorderRadius.all(
                           Radius.circular(DsfrSpacings.s1w),
                         ),
-                        child: Image.network(
+                        child: FnvImage.network(
                           mission.imageUrl,
                           width: 120,
                           height: 100,

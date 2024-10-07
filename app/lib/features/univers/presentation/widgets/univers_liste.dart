@@ -1,4 +1,5 @@
 import 'package:app/core/presentation/widgets/composants/badge.dart';
+import 'package:app/core/presentation/widgets/composants/fnv_image.dart';
 import 'package:app/features/univers/core/domain/tuile_univers.dart';
 import 'package:app/features/univers/presentation/bloc/accueil_univers_bloc.dart';
 import 'package:app/features/univers/presentation/pages/univers_page.dart';
@@ -86,13 +87,12 @@ class _Image extends StatelessWidget {
 
     return ClipRRect(
       borderRadius: borderRadius,
-      child: Image.network(
+      child: FnvImage.network(
         imageUrl,
         width: width,
         height: height,
         colorBlendMode: BlendMode.saturation,
         fit: BoxFit.cover,
-        cacheHeight: height.toInt(),
       ),
     );
   }

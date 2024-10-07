@@ -2,6 +2,7 @@ import 'package:app/features/mieux_vous_connaitre/core/domain/question.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail_image_network/mocktail_image_network.dart';
 
 import 'set_up_widgets.dart';
 import 'steps/iel_a_les_recommandations_suivantes.dart';
@@ -19,33 +20,35 @@ void main() {
     "Iel appuie sur une recommandation de type kyc et l'ouvre",
     (final tester) async {
       setUpWidgets(tester);
-      const question = 'Quelle est votre situation professionnelle ?';
-      const recommandation = Recommandation(
-        id: 'KYC005',
-        type: TypeDuContenu.kyc,
-        titre: question,
-        sousTitre: null,
-        imageUrl:
-            'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1702068380/jonathan_ford_6_Zg_T_Etv_D16_I_unsplash_00217cb281.jpg',
-        points: 20,
-        thematique: 'climat',
-        thematiqueLabel: '☀️ Environnement',
-      );
-      ielALesRecommandationsSuivantes([recommandation]);
-      leServeurRetourneCesQuestions([
-        const LibreQuestion(
-          id: QuestionId('KYC005'),
-          text: QuestionText(question),
-          responses: Responses(['J’ai un emploi']),
-          points: Points(5),
-          theme: QuestionTheme.climat,
-        ),
-      ]);
-      ielEstConnecte();
-      await ielLanceLapplication(tester);
-      await ielScrolle(tester, recommandation.titre);
-      await ielAppuieSur(tester, recommandation.titre);
-      ielVoitLeTexte(question);
+      await mockNetworkImages(() async {
+        const question = 'Quelle est votre situation professionnelle ?';
+        const recommandation = Recommandation(
+          id: 'KYC005',
+          type: TypeDuContenu.kyc,
+          titre: question,
+          sousTitre: null,
+          imageUrl:
+              'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1702068380/jonathan_ford_6_Zg_T_Etv_D16_I_unsplash_00217cb281.jpg',
+          points: 20,
+          thematique: 'climat',
+          thematiqueLabel: '☀️ Environnement',
+        );
+        ielALesRecommandationsSuivantes([recommandation]);
+        leServeurRetourneCesQuestions([
+          const LibreQuestion(
+            id: QuestionId('KYC005'),
+            text: QuestionText(question),
+            responses: Responses(['J’ai un emploi']),
+            points: Points(5),
+            theme: QuestionTheme.climat,
+          ),
+        ]);
+        ielEstConnecte();
+        await ielLanceLapplication(tester);
+        await ielScrolle(tester, recommandation.titre);
+        await ielAppuieSur(tester, recommandation.titre);
+        ielVoitLeTexte(question);
+      });
     },
   );
   testWidgets(
