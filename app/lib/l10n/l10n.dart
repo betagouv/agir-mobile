@@ -41,6 +41,7 @@ abstract final class Localisation {
   static const bienvenueSur = 'Bienvenue sur J’agis ! Faisons connaissance...';
   static const bienvenueSurDetails =
       'Nous avons quelques questions à vous poser pour personnaliser votre expérience !';
+  static const bilanEnvironnemental = 'Bilan environnemental';
   static const boisPellets = 'Bois / Pellets';
   static const bonjour = 'Bonjour,\n';
   static const bonnesAstucesPourRealiserCeDefi =

@@ -10,4 +10,7 @@ abstract final class AssetsImages {
   static const illustration5 = 'assets/images/illustration5.png';
   static const newspaper = 'assets/images/newspaper.png';
   static const target = 'assets/images/target.png';
+  static const nosGestesClimat = 'assets/logos/nos_gestes_climat.png';
+  static const nosGestesClimatIllustration =
+      'assets/images/nos_gestes_climat_illustration.png';
 }

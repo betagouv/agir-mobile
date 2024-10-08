@@ -1,0 +1,17 @@
+import 'package:dsfr_example/page_item.dart';
+import 'package:flutter/material.dart';
+
+class SandboxPage extends StatelessWidget {
+  const SandboxPage({super.key});
+
+  static final model = PageItem(
+    title: 'Bac à sable',
+    pageBuilder: (final context) => const SandboxPage(),
+  );
+
+  @override
+  Widget build(final BuildContext context) => const Padding(
+        padding: EdgeInsets.all(16),
+        child: SizedBox(),
+      );
+}
