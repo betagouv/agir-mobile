@@ -14,6 +14,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../helpers/authentication_service_setup.dart';
 import '../mocks/authentication_service_fake.dart';
 import 'client_mock.dart';
 import 'constants.dart';
@@ -37,11 +38,6 @@ void main() {
           response: CustomResponse('', statusCode: HttpStatus.created),
         );
 
-      final authenticationService = AuthenticationService(
-        authenticationRepository:
-            AuthenticationRepository(FlutterSecureStorageFake()),
-        clock: Clock.fixed(DateTime(1992)),
-      );
       final adapter = AuthentificationApiAdapter(
         apiClient: AuthentificationApiClient(
           apiUrl: apiUrl,
@@ -84,11 +80,6 @@ void main() {
         response: OkResponse(),
       );
 
-    final authenticationService = AuthenticationService(
-      authenticationRepository:
-          AuthenticationRepository(FlutterSecureStorageFake()),
-      clock: Clock.fixed(DateTime(1992)),
-    );
     final adapter = AuthentificationApiAdapter(
       apiClient: AuthentificationApiClient(
         apiUrl: apiUrl,
@@ -188,11 +179,6 @@ void main() {
       // Arrange.
       final flutterSecureStorageMock = FlutterSecureStorageFake();
 
-      final authenticationService = AuthenticationService(
-        authenticationRepository:
-            AuthenticationRepository(FlutterSecureStorageFake()),
-        clock: Clock.fixed(DateTime(1992)),
-      );
       final adapter = AuthentificationApiAdapter(
         apiClient: AuthentificationApiClient(
           apiUrl: apiUrl,
@@ -224,11 +210,6 @@ void main() {
         ),
       );
 
-    final authenticationService = AuthenticationService(
-      authenticationRepository:
-          AuthenticationRepository(FlutterSecureStorageFake()),
-      clock: Clock.fixed(DateTime(1992)),
-    );
     final adapter = AuthentificationApiAdapter(
       apiClient: AuthentificationApiClient(
         apiUrl: apiUrl,
@@ -314,11 +295,6 @@ void main() {
         response: OkResponse(),
       );
 
-    final authenticationService = AuthenticationService(
-      authenticationRepository:
-          AuthenticationRepository(FlutterSecureStorageFake()),
-      clock: Clock.fixed(DateTime(1992)),
-    );
     final adapter = AuthentificationApiAdapter(
       apiClient: AuthentificationApiClient(
         apiUrl: apiUrl,
@@ -355,11 +331,6 @@ void main() {
         ),
       );
 
-    final authenticationService = AuthenticationService(
-      authenticationRepository:
-          AuthenticationRepository(FlutterSecureStorageFake()),
-      clock: Clock.fixed(DateTime(1992)),
-    );
     final adapter = AuthentificationApiAdapter(
       apiClient: AuthentificationApiClient(
         apiUrl: apiUrl,
@@ -390,11 +361,6 @@ void main() {
         response: CustomResponse('', statusCode: HttpStatus.created),
       );
 
-    final authenticationService = AuthenticationService(
-      authenticationRepository:
-          AuthenticationRepository(FlutterSecureStorageFake()),
-      clock: Clock.fixed(DateTime(1992)),
-    );
     final adapter = AuthentificationApiAdapter(
       apiClient: AuthentificationApiClient(
         apiUrl: apiUrl,

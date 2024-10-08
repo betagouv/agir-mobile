@@ -10,9 +10,9 @@ import 'package:dio/dio.dart';
 class DioHttpClient {
   DioHttpClient({
     required final Dio dio,
-    required final AuthenticationService authentificationService,
+    required final AuthenticationService authenticationService,
   })  : _dio = dio,
-        _authentificationService = authentificationService {
+        _authentificationService = authenticationService {
     _dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (final options, final handler) async {

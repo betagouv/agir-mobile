@@ -20,7 +20,7 @@ void main() {
     adapter = AideVeloApiAdapter(
       client: DioHttpClient(
         dio: dio,
-        authentificationService: const AuthenticationServiceFake(),
+        authenticationService: const AuthenticationServiceFake(),
       ),
     );
   });
