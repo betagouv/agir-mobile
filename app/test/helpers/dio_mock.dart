@@ -13,24 +13,13 @@ class DioMock extends Mock implements Dio {
     required final T responseData,
     final int statusCode = 200,
   }) {
-    final requestOptions = RequestOptions(path: path);
-    if (responseData is List) {
-      when(() => get<List<dynamic>>(path)).thenAnswer(
-        (final answer) async => Response(
-          data: responseData,
-          requestOptions: requestOptions,
-          statusCode: statusCode,
-        ),
-      );
-    } else {
-      when(() => get<dynamic>(path)).thenAnswer(
-        (final answer) async => Response(
-          data: responseData,
-          requestOptions: requestOptions,
-          statusCode: statusCode,
-        ),
-      );
-    }
+    when(() => get<dynamic>(path)).thenAnswer(
+      (final answer) async => Response(
+        data: responseData,
+        requestOptions: RequestOptions(path: path),
+        statusCode: statusCode,
+      ),
+    );
   }
 
   void postM<T>(
@@ -39,30 +28,14 @@ class DioMock extends Mock implements Dio {
     required final T responseData,
     final int statusCode = 200,
   }) {
-    final requestOptions = RequestOptions(path: path);
-    if (responseData is List) {
-      when(
-        () => post<List<dynamic>>(
-          path,
-          data: requestData ?? any(named: 'data'),
-        ),
-      ).thenAnswer(
-        (final answer) async => Response(
-          data: responseData,
-          requestOptions: requestOptions,
-          statusCode: statusCode,
-        ),
-      );
-    } else {
-      when(() => post<dynamic>(path, data: requestData ?? any(named: 'data')))
-          .thenAnswer(
-        (final answer) async => Response(
-          data: responseData,
-          requestOptions: requestOptions,
-          statusCode: statusCode,
-        ),
-      );
-    }
+    when(() => post<dynamic>(path, data: requestData ?? any(named: 'data')))
+        .thenAnswer(
+      (final answer) async => Response(
+        data: responseData,
+        requestOptions: RequestOptions(path: path),
+        statusCode: statusCode,
+      ),
+    );
   }
 
   void patchM(
@@ -70,10 +43,10 @@ class DioMock extends Mock implements Dio {
     final dynamic requestData,
     final int statusCode = 200,
   }) {
-    when(() => patch<void>(path, data: requestData ?? any(named: 'data')))
+    when(() => patch<dynamic>(path, data: requestData ?? any(named: 'data')))
         .thenAnswer(
       (final _) async => Response(
-        requestOptions: RequestOptions(),
+        requestOptions: RequestOptions(path: path),
         statusCode: statusCode,
       ),
     );
@@ -84,10 +57,10 @@ class DioMock extends Mock implements Dio {
     final dynamic requestData,
     final int statusCode = 200,
   }) {
-    when(() => put<void>(path, data: requestData ?? any(named: 'data')))
+    when(() => put<dynamic>(path, data: requestData ?? any(named: 'data')))
         .thenAnswer(
       (final _) async => Response(
-        requestOptions: RequestOptions(),
+        requestOptions: RequestOptions(path: path),
         statusCode: statusCode,
       ),
     );

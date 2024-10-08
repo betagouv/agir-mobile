@@ -15,7 +15,9 @@ class MieuxVousConnaitreEditBloc
         final result =
             await mieuxVousConnaitrePort.recupererQuestion(id: event.id);
         result.fold(
-          (final l) => emit(MieuxVousConnaitreEditError(error: l.toString())),
+          (final l) => emit(
+            MieuxVousConnaitreEditError(id: event.id, error: l.toString()),
+          ),
           (final r) =>
               emit(MieuxVousConnaitreEditLoaded(question: r, newQuestion: r)),
         );
@@ -112,8 +114,12 @@ class MieuxVousConnaitreEditBloc
               aState.newQuestion,
             );
             result.fold(
-              (final l) =>
-                  emit(MieuxVousConnaitreEditError(error: l.toString())),
+              (final l) => emit(
+                MieuxVousConnaitreEditError(
+                  id: aState.question.id.value,
+                  error: l.toString(),
+                ),
+              ),
               (final r) {
                 emit(const MieuxVousConnaitreEditMisAJour());
               },

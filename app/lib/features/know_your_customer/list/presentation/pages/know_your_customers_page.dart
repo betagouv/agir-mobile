@@ -1,4 +1,5 @@
 import 'package:app/core/presentation/widgets/composants/app_bar.dart';
+import 'package:app/core/presentation/widgets/composants/failure_widget.dart';
 import 'package:app/core/presentation/widgets/composants/list_item.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
@@ -50,7 +51,12 @@ class KnowYourCustomersPage extends StatelessWidget {
                     KnowYourCustomersLoading() =>
                       const Center(child: CircularProgressIndicator()),
                     KnowYourCustomersSuccess() => _Success(state),
-                    KnowYourCustomersFailure() => const Text('Oups'),
+                    KnowYourCustomersFailure() => FnvFailureWidget(
+                        onPressed: () =>
+                            context.read<KnowYourCustomersBloc>().add(
+                                  const KnowYourCustomersStarted(),
+                                ),
+                      ),
                   },
                 ),
               ],
