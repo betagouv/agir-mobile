@@ -28,7 +28,7 @@ Future<void> _pumpFirstNamePage(
       ),
       RepositoryProvider<Clock>.value(value: const Clock()),
     ],
-    page: const FirstNamePage(),
+    page: FirstNamePage.route,
     routes: {QuestionCodePostalPage.name: QuestionCodePostalPage.path},
   );
 }

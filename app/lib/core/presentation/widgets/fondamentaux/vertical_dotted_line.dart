@@ -7,12 +7,12 @@ class VerticalDottedLine extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => const CustomPaint(
-        painter: _DottedLinePainter(),
+        painter: _Painter(),
       );
 }
 
-class _DottedLinePainter extends CustomPainter {
-  const _DottedLinePainter();
+class _Painter extends CustomPainter {
+  const _Painter();
 
   static const _dashHeight = 4.0;
   static const _dashSpace = 4;

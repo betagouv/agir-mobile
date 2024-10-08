@@ -11,6 +11,7 @@ import 'package:dsfr/dsfr.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../helpers/dio_mock.dart';
@@ -45,7 +46,7 @@ void main() {
           value: ActionRepository(
             client: DioHttpClient(
               dio: dio,
-              authentificationService: const AuthenticationServiceFake(),
+              authenticationService: const AuthenticationServiceFake(),
             ),
             messageBus: messageBus ?? MessageBus(),
           ),
@@ -56,7 +57,13 @@ void main() {
           create: (final context) => const GamificationBlocFake(),
         ),
       ],
-      page: const ActionDetailPage(actionId: ActionId('73')),
+      page: GoRoute(
+        path: 'path',
+        name: 'name',
+        builder: (final context, final state) => const ActionDetailPage(
+          actionId: ActionId('73'),
+        ),
+      ),
     );
   }
 
@@ -83,7 +90,10 @@ void main() {
         find.text(Localisation.bonnesAstucesPourRealiserCeDefi),
         findsOneWidget,
       );
-      expect(find.text(Localisation.pourquoiCeDefi), findsOneWidget);
+      expect(
+        find.text(Localisation.pourquoiCeDefi, skipOffstage: false),
+        findsOneWidget,
+      );
     });
 
     testWidgets("l'action non désirée", (final tester) async {
@@ -157,7 +167,10 @@ void main() {
         find.text(Localisation.bonnesAstucesPourRealiserCeDefi),
         findsOneWidget,
       );
-      expect(find.text(Localisation.pourquoiCeDefi), findsOneWidget);
+      expect(
+        find.text(Localisation.pourquoiCeDefi, skipOffstage: false),
+        findsOneWidget,
+      );
     });
 
     testWidgets("l'action déjà réalisée", (final tester) async {
@@ -181,7 +194,10 @@ void main() {
         find.text(Localisation.bonnesAstucesPourRealiserCeDefi),
         findsOneWidget,
       );
-      expect(find.text(Localisation.pourquoiCeDefi), findsOneWidget);
+      expect(
+        find.text(Localisation.pourquoiCeDefi, skipOffstage: false),
+        findsOneWidget,
+      );
     });
 
     testWidgets("l'action abandonnée", (final tester) async {
@@ -255,7 +271,10 @@ void main() {
         find.text(Localisation.bonnesAstucesPourRealiserCeDefi),
         findsOneWidget,
       );
-      expect(find.text(Localisation.pourquoiCeDefi), findsOneWidget);
+      expect(
+        find.text(Localisation.pourquoiCeDefi, skipOffstage: false),
+        findsOneWidget,
+      );
     });
   });
 
@@ -402,7 +421,6 @@ void main() {
       },
     );
 
-    // TODO(lsaudon): flaky test
     testWidgets(
       'l\'action "pas pour moi" dont seul le motif change',
       (final tester) async {
@@ -430,7 +448,7 @@ void main() {
 
         await tester.pump();
 
-        await tester.tap(find.text(Localisation.valider));
+        await tester.tap(find.text(Localisation.valider, skipOffstage: false));
 
         await tester.pumpAndSettle();
 

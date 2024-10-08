@@ -5,6 +5,8 @@ import 'package:app/features/actions/list/domain/actions_port.dart';
 import 'package:app/features/authentication/domain/authentication_service.dart';
 import 'package:app/features/authentication/domain/authentication_status.dart';
 import 'package:app/features/authentication/infrastructure/authentication_repository.dart';
+import 'package:app/features/environmental_performance/infrastructure/environment_performance_question_repository.dart';
+import 'package:app/features/environmental_performance/summary/infrastructure/environmental_performance_summary_repository.dart';
 import 'package:clock/clock.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -32,6 +34,12 @@ class _TrackerMock extends Mock implements Tracker {}
 class _ActionsPortMock extends Mock implements ActionsPort {}
 
 class _ActionRepositoryMock extends Mock implements ActionRepository {}
+
+class _EnvironmentalPerformanceRepositoryMock extends Mock
+    implements EnvironmentalPerformanceSummaryRepository {}
+
+class _EnvironmentalPerformanceQuestionRepositoryMock extends Mock
+    implements EnvironmentalPerformanceQuestionRepository {}
 
 /// Iel lance l'application.
 Future<void> ielLanceLapplication(final WidgetTester tester) async {
@@ -108,6 +116,10 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
       firstNamePort: profilPort,
       profilPort: profilPort,
       knowYourCustomersRepository: mieuxVousConnaitrePort,
+      environmentalPerformanceSummaryRepository:
+          _EnvironmentalPerformanceRepositoryMock(),
+      environmentalPerformanceQuestionRepository:
+          _EnvironmentalPerformanceQuestionRepositoryMock(),
       mieuxVousConnaitrePort: mieuxVousConnaitrePort,
       actionsPort: _ActionsPortMock(),
       actionRepository: _ActionRepositoryMock(),

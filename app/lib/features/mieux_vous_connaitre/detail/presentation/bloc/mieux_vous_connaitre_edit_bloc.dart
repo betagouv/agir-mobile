@@ -14,6 +14,7 @@ class MieuxVousConnaitreEditBloc
         emit(const MieuxVousConnaitreEditInitial());
         final result =
             await mieuxVousConnaitrePort.recupererQuestion(id: event.id);
+
         result.fold(
           (final l) => emit(
             MieuxVousConnaitreEditError(id: event.id, error: l.toString()),

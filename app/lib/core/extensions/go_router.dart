@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
 
 extension GoRouterExt on GoRouter {
-  void popUntilNamed(final String name) {
+  void popUntilNamed<T>(final String name, {final T? result}) {
     final currentConfiguration = routerDelegate.currentConfiguration;
     final routeStacks = List.of(currentConfiguration.routes);
 
@@ -20,7 +20,7 @@ extension GoRouterExt on GoRouter {
             restore(currentConfiguration.remove(last));
           }
         } else {
-          pop();
+          pop(result);
         }
       }
     }
