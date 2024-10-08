@@ -13,6 +13,7 @@ import 'package:app/features/authentification/core/domain/authentification_port.
 import 'package:app/features/bibliotheque/domain/bibliotheque_port.dart';
 import 'package:app/features/bibliotheque/presentation/bloc/bibliotheque_bloc.dart';
 import 'package:app/features/communes/domain/communes_port.dart';
+import 'package:app/features/environmental_performance/summary/infrastructure/environmental_performance_summary_repository.dart';
 import 'package:app/features/first_name/domain/first_name_port.dart';
 import 'package:app/features/gamification/domain/gamification_port.dart';
 import 'package:app/features/gamification/presentation/bloc/gamification_bloc.dart';
@@ -56,6 +57,7 @@ class App extends StatefulWidget {
     required this.firstNamePort,
     required this.profilPort,
     required this.knowYourCustomersRepository,
+    required this.environmentalPerformanceRepository,
     required this.mieuxVousConnaitrePort,
     required this.actionsPort,
     required this.actionRepository,
@@ -79,6 +81,8 @@ class App extends StatefulWidget {
   final FirstNamePort firstNamePort;
   final ProfilPort profilPort;
   final KnowYourCustomersRepository knowYourCustomersRepository;
+  final EnvironmentalPerformanceSummaryRepository
+      environmentalPerformanceRepository;
   final MieuxVousConnaitrePort mieuxVousConnaitrePort;
   final ActionsPort actionsPort;
   final ActionRepository actionRepository;
@@ -119,6 +123,9 @@ class _AppState extends State<App> {
           RepositoryProvider.value(value: widget.profilPort),
           RepositoryProvider.value(value: widget.communesPort),
           RepositoryProvider.value(value: widget.knowYourCustomersRepository),
+          RepositoryProvider.value(
+            value: widget.environmentalPerformanceRepository,
+          ),
           RepositoryProvider.value(value: widget.mieuxVousConnaitrePort),
           RepositoryProvider.value(value: widget.gamificationPort),
           RepositoryProvider.value(value: widget.actionsPort),

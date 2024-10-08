@@ -185,7 +185,7 @@ class _FvnDpeEtiquette extends StatelessWidget {
 
     if (color != null) {
       customPaint = CustomPaint(
-        painter: _FlechePainter(color: color!, isSelected: groupValue == value),
+        painter: _Painter(color: color!, isSelected: groupValue == value),
         child: Padding(
           padding: const EdgeInsets.all(DsfrSpacings.s2w),
           child: Text(
@@ -217,8 +217,8 @@ class _FvnDpeEtiquette extends StatelessWidget {
   }
 }
 
-class _FlechePainter extends CustomPainter {
-  const _FlechePainter({required this.color, required this.isSelected});
+class _Painter extends CustomPainter {
+  const _Painter({required this.color, required this.isSelected});
 
   final Color color;
   final bool isSelected;

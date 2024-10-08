@@ -4,6 +4,7 @@ import 'package:app/features/accueil/presentation/pages/accueil_page.dart';
 import 'package:app/features/aides/list/presentation/pages/aides_page.dart';
 import 'package:app/features/authentification/core/domain/authentification_port.dart';
 import 'package:app/features/bibliotheque/presentation/pages/bibliotheque_page.dart';
+import 'package:app/features/environmental_performance/summary/presentation/page/environmental_performance_summary_page.dart';
 import 'package:app/features/profil/profil/presentation/pages/profil_page.dart';
 import 'package:app/features/version/presentation/widgets/version_label.dart';
 import 'package:app/l10n/l10n.dart';
@@ -65,18 +66,6 @@ class _MenuItems extends StatelessWidget {
     await GoRouter.of(context).pushNamed(name);
   }
 
-  Future<void> _handleTapOnAccueil(final BuildContext context) async =>
-      _redirigeSiLaPageCourantEstDifferente(context, AccueilPage.name);
-
-  Future<void> _handleTapOnAides(final BuildContext context) async =>
-      _redirigeSiLaPageCourantEstDifferente(context, AidesPage.name);
-
-  Future<void> _handleTapOnBibliotheque(final BuildContext context) async =>
-      _redirigeSiLaPageCourantEstDifferente(context, BibliothequePage.name);
-
-  Future<void> _handleTapOnProfile(final BuildContext context) async =>
-      _redirigeSiLaPageCourantEstDifferente(context, ProfilPage.name);
-
   @override
   Widget build(final BuildContext context) {
     final groupValue = GoRouterState.of(context).name ?? AccueilPage.name;
@@ -88,24 +77,44 @@ class _MenuItems extends StatelessWidget {
           label: Localisation.accueil,
           value: AccueilPage.name,
           groupValue: groupValue,
-          onTap: () async => _handleTapOnAccueil(context),
+          onTap: () async =>
+              _redirigeSiLaPageCourantEstDifferente(context, AccueilPage.name),
         ),
         const SizedBox(height: DsfrSpacings.s2w),
-        _MenuAides(
-          groupTitle: groupValue,
-          onTap: () async => _handleTapOnAides(context),
+        _MenuItem(
+          label: Localisation.bilanEnvironnemental,
+          value: EnvironmentalPerformanceSummaryPage.name,
+          groupValue: groupValue,
+          onTap: () async => _redirigeSiLaPageCourantEstDifferente(
+            context,
+            EnvironmentalPerformanceSummaryPage.name,
+          ),
         ),
         const SizedBox(height: DsfrSpacings.s2w),
-        _MenuBibliotheque(
-          groupTitle: groupValue,
-          onTap: () async => _handleTapOnBibliotheque(context),
+        _MenuItem(
+          label: Localisation.mesAides,
+          value: AidesPage.name,
+          groupValue: groupValue,
+          onTap: () async =>
+              _redirigeSiLaPageCourantEstDifferente(context, AidesPage.name),
+        ),
+        const SizedBox(height: DsfrSpacings.s2w),
+        _MenuItem(
+          label: Localisation.bibliotheque,
+          value: BibliothequePage.name,
+          groupValue: groupValue,
+          onTap: () async => _redirigeSiLaPageCourantEstDifferente(
+            context,
+            BibliothequePage.name,
+          ),
         ),
         const Spacer(),
         _MenuItem(
           label: Localisation.monProfil,
           value: ProfilPage.name,
           groupValue: groupValue,
-          onTap: () async => _handleTapOnProfile(context),
+          onTap: () async =>
+              _redirigeSiLaPageCourantEstDifferente(context, ProfilPage.name),
         ),
         const SizedBox(height: DsfrSpacings.s2w),
         Padding(
@@ -125,36 +134,6 @@ class _MenuItems extends StatelessWidget {
       ],
     );
   }
-}
-
-class _MenuAides extends StatelessWidget {
-  const _MenuAides({required this.groupTitle, required this.onTap});
-
-  final String groupTitle;
-  final VoidCallback? onTap;
-
-  @override
-  Widget build(final BuildContext context) => _MenuItem(
-        label: Localisation.mesAides,
-        value: AidesPage.name,
-        groupValue: groupTitle,
-        onTap: onTap,
-      );
-}
-
-class _MenuBibliotheque extends StatelessWidget {
-  const _MenuBibliotheque({required this.groupTitle, required this.onTap});
-
-  final String groupTitle;
-  final VoidCallback? onTap;
-
-  @override
-  Widget build(final BuildContext context) => _MenuItem(
-        label: Localisation.bibliotheque,
-        value: BibliothequePage.name,
-        groupValue: groupTitle,
-        onTap: onTap,
-      );
 }
 
 class _MenuItem extends StatelessWidget {

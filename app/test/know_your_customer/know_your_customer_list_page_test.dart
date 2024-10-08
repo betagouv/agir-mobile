@@ -1,5 +1,3 @@
-import 'package:app/features/authentication/domain/authentication_service.dart';
-import 'package:app/features/authentication/infrastructure/authentication_repository.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/gamification/domain/gamification_port.dart';
 import 'package:app/features/gamification/presentation/bloc/gamification_bloc.dart';
@@ -8,16 +6,15 @@ import 'package:app/features/know_your_customer/list/presentation/pages/know_you
 import 'package:app/features/mieux_vous_connaitre/core/domain/question.dart';
 import 'package:app/features/mieux_vous_connaitre/core/infrastructure/question_mapper.dart';
 import 'package:app/l10n/l10n.dart';
-import 'package:clock/clock.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../helpers/authentication_service_setup.dart';
 import '../helpers/dio_mock.dart';
 import '../helpers/faker.dart';
 import '../helpers/pump_page.dart';
-import '../old/api/flutter_secure_storage_fake.dart';
 
 class _GamificationPortMock extends Mock implements GamificationPort {}
 
@@ -39,16 +36,11 @@ Future<void> _pumpPage(
       BlocProvider<GamificationBloc>(
         create: (final context) => GamificationBloc(
           gamificationPort: gamificationPort,
-          authenticationService: AuthenticationService(
-            authenticationRepository:
-                AuthenticationRepository(FlutterSecureStorageFake()),
-            clock: Clock.fixed(DateTime(1992)),
-          ),
+          authenticationService: authenticationService,
         ),
       ),
     ],
-    page: const KnowYourCustomersPage(),
-    routes: {KnowYourCustomersPage.name: KnowYourCustomersPage.path},
+    page: KnowYourCustomersPage.route,
   );
 }
 
@@ -61,11 +53,7 @@ void main() {
     repository = KnowYourCustomersRepository(
       client: DioHttpClient(
         dio: dio,
-        authentificationService: AuthenticationService(
-          authenticationRepository:
-              AuthenticationRepository(FlutterSecureStorageFake()),
-          clock: Clock.fixed(DateTime(1992)),
-        ),
+        authenticationService: authenticationService,
       ),
     );
     questions = List.generate(10, (final _) => questionFaker());

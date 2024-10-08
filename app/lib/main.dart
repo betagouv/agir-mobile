@@ -22,6 +22,7 @@ import 'package:app/features/authentification/core/infrastructure/cms_api_client
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/bibliotheque/infrastructure/bibliotheque_api_adapter.dart';
 import 'package:app/features/communes/infrastructure/communes_api_adapter.dart';
+import 'package:app/features/environmental_performance/summary/infrastructure/environmental_performance_summary_repository.dart';
 import 'package:app/features/first_name/infrastructure/first_name_adapter.dart';
 import 'package:app/features/gamification/infrastructure/gamification_api_adapter.dart';
 import 'package:app/features/know_your_customer/list/infrastructure/know_your_customers_repository.dart';
@@ -158,7 +159,7 @@ class _MyAppState extends State<MyApp> {
 
           final dioHttpClient = DioHttpClient(
             dio: dio,
-            authentificationService: _authenticationService,
+            authenticationService: _authenticationService,
           );
           final cmsClient = CmsApiClient(
             apiUrl: ApiUrl(Uri.parse(_apiCmsUrl)),
@@ -198,6 +199,10 @@ class _MyAppState extends State<MyApp> {
             profilPort: ProfilApiAdapter(apiClient: apiClient),
             knowYourCustomersRepository:
                 KnowYourCustomersRepository(client: dioHttpClient),
+            environmentalPerformanceRepository:
+                EnvironmentalPerformanceSummaryRepository(
+              client: dioHttpClient,
+            ),
             mieuxVousConnaitrePort:
                 MieuxVousConnaitreApiAdapter(client: dioHttpClient),
             actionsPort: ActionsAdapter(client: dioHttpClient),

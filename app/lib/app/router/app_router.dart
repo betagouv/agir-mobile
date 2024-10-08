@@ -18,6 +18,8 @@ import 'package:app/features/authentification/questions/presentation/pages/tout_
 import 'package:app/features/authentification/saisie_code/presentation/pages/saisie_code_page.dart';
 import 'package:app/features/authentification/se_connecter/presentation/pages/se_connecter_page.dart';
 import 'package:app/features/bibliotheque/presentation/pages/bibliotheque_page.dart';
+import 'package:app/features/environmental_performance/questions/presentation/page/environmental_performance_question_page.dart';
+import 'package:app/features/environmental_performance/summary/presentation/page/environmental_performance_summary_page.dart';
 import 'package:app/features/first_name/presentation/pages/first_name_page.dart';
 import 'package:app/features/know_your_customer/list/presentation/pages/know_your_customers_page.dart';
 import 'package:app/features/mieux_vous_connaitre/detail/presentation/pages/mieux_vous_connaitre_edit_page.dart';
@@ -75,6 +77,8 @@ GoRouter goRouter({
                 QuestionThemesPage.route,
                 ToutEstPretPage.route,
                 AccueilPage.route,
+                EnvironmentalPerformanceSummaryPage.route,
+                EnvironmentalPerformanceQuestionPage.route,
                 UniversPage.route,
                 MissionPage.route,
                 MissionKycPage.route,

@@ -46,7 +46,7 @@ class _View extends StatelessWidget {
   final String email;
 
   void _handleMotDePasseModifie(final BuildContext context) {
-    GoRouter.of(context).popUntilNamed(SeConnecterPage.path);
+    GoRouter.of(context).popUntilNamed<void>(SeConnecterPage.path);
   }
 
   @override

@@ -49,7 +49,7 @@ class MissionKycPage extends StatelessWidget {
               await GoRouter.of(context)
                   .pushNamed(MissionKycPage.name, extra: newIds);
             } else {
-              GoRouter.of(context).popUntilNamed(MissionPage.name);
+              GoRouter.of(context).popUntilNamed<void>(MissionPage.name);
             }
           },
         ),

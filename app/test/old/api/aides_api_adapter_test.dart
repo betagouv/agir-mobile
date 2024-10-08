@@ -18,7 +18,7 @@ void main() {
     aidesApiAdapter = AidesApiAdapter(
       client: DioHttpClient(
         dio: dio,
-        authentificationService: const AuthenticationServiceFake(),
+        authenticationService: const AuthenticationServiceFake(),
       ),
     );
   });

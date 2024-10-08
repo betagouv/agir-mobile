@@ -25,31 +25,49 @@ class MieuxVousConnaitreEditPage extends StatelessWidget {
   final String id;
 
   @override
-  Widget build(final BuildContext context) {
-    final mieuxVousConnaitreController = MieuxVousConnaitreController();
+  Widget build(final BuildContext context) => _View(id: id);
+}
 
-    return Scaffold(
-      appBar: const FnvAppBar(),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(paddingVerticalPage),
-        child: MieuxVousConnaitreForm(
-          id: id,
-          controller: mieuxVousConnaitreController,
-          onSaved: () {
-            GoRouter.of(context).pop<bool>(true);
-          },
-        ),
-      ),
-      bottomNavigationBar: FnvBottomBar(
-        child: DsfrButton(
-          label: Localisation.mettreAJour,
-          icon: DsfrIcons.deviceSave3Fill,
-          variant: DsfrButtonVariant.primary,
-          size: DsfrButtonSize.lg,
-          onPressed: mieuxVousConnaitreController.save,
-        ),
-      ),
-      backgroundColor: FnvColors.aidesFond,
-    );
+class _View extends StatefulWidget {
+  const _View({required this.id});
+
+  final String id;
+
+  @override
+  State<_View> createState() => _ViewState();
+}
+
+class _ViewState extends State<_View> {
+  final _mieuxVousConnaitreController = MieuxVousConnaitreController();
+
+  @override
+  void dispose() {
+    _mieuxVousConnaitreController.dispose();
+    super.dispose();
   }
+
+  @override
+  Widget build(final BuildContext context) => Scaffold(
+        appBar: const FnvAppBar(),
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.all(paddingVerticalPage),
+          child: MieuxVousConnaitreForm(
+            id: widget.id,
+            controller: _mieuxVousConnaitreController,
+            onSaved: () {
+              GoRouter.of(context).pop<bool>(true);
+            },
+          ),
+        ),
+        bottomNavigationBar: FnvBottomBar(
+          child: DsfrButton(
+            label: Localisation.mettreAJour,
+            icon: DsfrIcons.deviceSave3Fill,
+            variant: DsfrButtonVariant.primary,
+            size: DsfrButtonSize.lg,
+            onPressed: _mieuxVousConnaitreController.save,
+          ),
+        ),
+        backgroundColor: FnvColors.aidesFond,
+      );
 }

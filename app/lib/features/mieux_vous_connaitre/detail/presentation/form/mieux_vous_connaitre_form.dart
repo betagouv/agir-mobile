@@ -173,6 +173,7 @@ class _MosaicContent extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           FnvTitle(
             title: question.text.value,

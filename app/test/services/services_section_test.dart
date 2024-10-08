@@ -1,5 +1,3 @@
-import 'package:app/features/authentication/domain/authentication_service.dart';
-import 'package:app/features/authentication/infrastructure/authentication_repository.dart';
 import 'package:app/features/gamification/domain/gamification_port.dart';
 import 'package:app/features/gamification/presentation/bloc/gamification_bloc.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
@@ -9,16 +7,16 @@ import 'package:app/features/univers/core/domain/tuile_univers.dart';
 import 'package:app/features/univers/core/domain/univers_port.dart';
 import 'package:app/features/univers/presentation/pages/univers_page.dart';
 import 'package:app/l10n/l10n.dart';
-import 'package:clock/clock.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:mocktail_image_network/mocktail_image_network.dart';
 
+import '../helpers/authentication_service_setup.dart';
 import '../helpers/faker.dart';
 import '../helpers/pump_page.dart';
-import '../old/api/flutter_secure_storage_fake.dart';
 
 class _UniversPortMock extends Mock implements UniversPort {}
 
@@ -64,11 +62,7 @@ Future<void> _pumpUniversPage(
       BlocProvider<GamificationBloc>(
         create: (final context) => GamificationBloc(
           gamificationPort: gamificationPort,
-          authenticationService: AuthenticationService(
-            authenticationRepository:
-                AuthenticationRepository(FlutterSecureStorageFake()),
-            clock: Clock.fixed(DateTime(1992)),
-          ),
+          authenticationService: authenticationService,
         ),
       ),
       BlocProvider<RecommandationsBloc>(
@@ -77,12 +71,16 @@ Future<void> _pumpUniversPage(
         ),
       ),
     ],
-    page: const UniversPage(
-      univers: TuileUnivers(
-        type: 'alimentation',
-        titre: 'En cuisine',
-        imageUrl: 'https://example.com/image.jpg',
-        estTerminee: false,
+    page: GoRoute(
+      path: UniversPage.path,
+      name: UniversPage.name,
+      builder: (final context, final state) => const UniversPage(
+        univers: TuileUnivers(
+          type: 'alimentation',
+          titre: 'En cuisine',
+          imageUrl: 'https://example.com/image.jpg',
+          estTerminee: false,
+        ),
       ),
     ),
   );

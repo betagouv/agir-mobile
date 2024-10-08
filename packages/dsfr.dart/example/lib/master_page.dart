@@ -21,7 +21,6 @@ class _MasterPageState extends State<MasterPage> {
             ?.pageBuilder(context),
         drawer: Drawer(
           child: ListView.builder(
-            padding: EdgeInsets.zero,
             itemBuilder: (final context, final index) {
               final pageItem = widget.pageItems[index];
 

@@ -1,19 +1,16 @@
 import 'dart:convert';
 
-import 'package:app/features/authentication/domain/authentication_service.dart';
-import 'package:app/features/authentication/infrastructure/authentication_repository.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/mieux_vous_connaitre/core/domain/question.dart';
 import 'package:app/features/mieux_vous_connaitre/core/infrastructure/mieux_vous_connaitre_api_adapter.dart';
 import 'package:app/features/mieux_vous_connaitre/core/infrastructure/question_mapper.dart';
-import 'package:clock/clock.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../helpers/authentication_service_setup.dart';
 import '../../helpers/dio_mock.dart';
 import '../../helpers/faker.dart';
-import 'flutter_secure_storage_fake.dart';
 
 void main() {
   late MieuxVousConnaitreApiAdapter adapter;
@@ -24,11 +21,7 @@ void main() {
     adapter = MieuxVousConnaitreApiAdapter(
       client: DioHttpClient(
         dio: dioMock,
-        authentificationService: AuthenticationService(
-          authenticationRepository:
-              AuthenticationRepository(FlutterSecureStorageFake()),
-          clock: Clock.fixed(DateTime(1992)),
-        ),
+        authenticationService: authenticationService,
       ),
     );
   });
