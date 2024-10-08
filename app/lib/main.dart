@@ -100,7 +100,12 @@ Future<void> main() async {
   );
 
   final dioHttpClient = DioHttpClient(
-    dio: Dio(BaseOptions(baseUrl: url.toString())),
+    dio: Dio(
+      BaseOptions(
+        baseUrl: url.toString(),
+        validateStatus: (final status) => true,
+      ),
+    ),
     authentificationService: authenticationService,
   );
   final cmsClient = CmsApiClient(

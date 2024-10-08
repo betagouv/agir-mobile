@@ -1,3 +1,4 @@
+import 'package:app/core/presentation/widgets/composants/failure_widget.dart';
 import 'package:app/features/mieux_vous_connaitre/core/domain/question.dart';
 import 'package:app/features/mieux_vous_connaitre/detail/presentation/bloc/mieux_vous_connaitre_edit_bloc.dart';
 import 'package:app/features/mieux_vous_connaitre/detail/presentation/bloc/mieux_vous_connaitre_edit_event.dart';
@@ -55,16 +56,17 @@ class _Content extends StatelessWidget {
         },
         child: BlocBuilder<MieuxVousConnaitreEditBloc,
             MieuxVousConnaitreEditState>(
-          builder: (final context, final state) {
-            switch (state) {
-              case MieuxVousConnaitreEditInitial():
-              case MieuxVousConnaitreEditMisAJour():
-                return const SizedBox();
-              case MieuxVousConnaitreEditLoaded():
-                return _LoadedContent(controller: controller, state: state);
-              case MieuxVousConnaitreEditError():
-                return const Text('Erreur');
-            }
+          builder: (final context, final state) => switch (state) {
+            MieuxVousConnaitreEditInitial() ||
+            MieuxVousConnaitreEditMisAJour() =>
+              const SizedBox(),
+            MieuxVousConnaitreEditLoaded() =>
+              _LoadedContent(controller: controller, state: state),
+            MieuxVousConnaitreEditError() => FnvFailureWidget(
+                onPressed: () => context.read<MieuxVousConnaitreEditBloc>().add(
+                      MieuxVousConnaitreEditRecuperationDemandee(state.id),
+                    ),
+              ),
           },
         ),
       );

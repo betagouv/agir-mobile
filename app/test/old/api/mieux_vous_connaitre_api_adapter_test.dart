@@ -132,7 +132,7 @@ void main() {
       await adapter.mettreAJour(question);
 
       verify(
-        () => dioMock.put<void>(
+        () => dioMock.put<dynamic>(
           '/utilisateurs/{userId}/questionsKYC/$id',
           data: jsonEncode({'reponse': question.responses.value}),
         ),

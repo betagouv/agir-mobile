@@ -30,10 +30,11 @@ final class MieuxVousConnaitreEditMisAJour extends MieuxVousConnaitreEditState {
 }
 
 final class MieuxVousConnaitreEditError extends MieuxVousConnaitreEditState {
-  const MieuxVousConnaitreEditError({required this.error});
+  const MieuxVousConnaitreEditError({required this.id, required this.error});
 
+  final String id;
   final String error;
 
   @override
-  List<Object> get props => [error];
+  List<Object> get props => [id, error];
 }

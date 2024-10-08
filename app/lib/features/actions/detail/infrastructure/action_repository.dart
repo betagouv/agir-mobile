@@ -19,7 +19,7 @@ class ActionRepository {
   final MessageBus _messageBus;
 
   Future<Either<Exception, Action>> fetchAction(final ActionId id) async {
-    final response = await _client.get<dynamic>(
+    final response = await _client.get(
       '/utilisateurs/{userId}/defis/${id.value}',
     );
 
@@ -47,7 +47,7 @@ class ActionRepository {
     if (reason != null) {
       data['motif'] = reason;
     }
-    final response = await _client.patch<void>(path, data: data);
+    final response = await _client.patch(path, data: data);
 
     if (response.statusCode == HttpStatus.ok) {
       _messageBus.publish(actionCompletedTopic);

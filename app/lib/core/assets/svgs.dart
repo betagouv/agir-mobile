@@ -6,4 +6,5 @@ abstract final class AssetsSvgs {
   static const mesAidesVeloLogo = 'assets/logos/mesaidesvelo_logo.svg';
   static const mesAidesVeloTexte = 'assets/logos/mesaidesvelo_texte.svg';
   static const bibliothequeEmpty = 'assets/svgs/bibliotheque_illustration.svg';
+  static const errorIllustration = 'assets/svgs/error_illustration.svg';
 }

@@ -317,7 +317,7 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      verify(() => dio.patch<void>(path, data: {'status': 'en_cours'}));
+      verify(() => dio.patch<dynamic>(path, data: {'status': 'en_cours'}));
 
       expect(find.text('pop'), findsOneWidget);
     });
@@ -357,7 +357,7 @@ void main() {
       await tester.pumpAndSettle();
 
       verify(
-        () => dio.patch<void>(
+        () => dio.patch<dynamic>(
           path,
           data: {'motif': reason, 'status': 'pas_envie'},
         ),
@@ -396,7 +396,7 @@ void main() {
 
         await tester.pumpAndSettle();
 
-        verify(() => dio.patch<void>(path, data: {'status': 'en_cours'}));
+        verify(() => dio.patch<dynamic>(path, data: {'status': 'en_cours'}));
 
         expect(find.text('pop'), findsOneWidget);
       },
@@ -434,7 +434,7 @@ void main() {
         await tester.pumpAndSettle();
 
         verify(
-          () => dio.patch<void>(
+          () => dio.patch<dynamic>(
             path,
             data: {'motif': reason, 'status': 'pas_envie'},
           ),
@@ -476,7 +476,7 @@ void main() {
         await tester.pumpAndSettle();
 
         verify(
-          () => dio.patch<void>(
+          () => dio.patch<dynamic>(
             path,
             data: {'motif': reason, 'status': 'pas_envie'},
           ),
@@ -520,7 +520,7 @@ void main() {
         await tester.tap(find.text(Localisation.valider));
         await tester.pumpAndSettle();
 
-        verify(() => dio.patch<void>(path, data: {'status': 'fait'}));
+        verify(() => dio.patch<dynamic>(path, data: {'status': 'fait'}));
         expect(find.text('pop'), findsOneWidget);
         expect(completer.isCompleted, isTrue);
         unawaited(subscription.cancel());

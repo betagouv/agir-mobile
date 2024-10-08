@@ -14,25 +14,27 @@ class KnowYourCustomersRepository {
   final DioHttpClient _client;
 
   Future<Either<Exception, List<Question>>> fetchQuestions() async {
-    final response =
-        await _client.get<List<dynamic>>('/utilisateurs/{userId}/questionsKYC');
+    final response = await _client.get('/utilisateurs/{userId}/questionsKYC');
+    if (response.statusCode == HttpStatus.ok) {
+      final data = response.data! as List<dynamic>;
 
-    return response.statusCode == HttpStatus.ok
-        ? Right(
-            response.data!
-                .map((final e) => e as Map<String, dynamic>)
-                .map(QuestionMapper.fromJson)
-                .whereType<Question>()
-                .where(
-                  (final e) => switch (e) {
-                    LibreQuestion() => e.responses.value.isNotEmpty,
-                    ChoixUniqueQuestion() => e.responses.value.isNotEmpty,
-                    ChoixMultipleQuestion() => e.responses.value.isNotEmpty,
-                    MosaicQuestion() => e.answered,
-                  },
-                )
-                .toList(),
-          )
-        : Left(Exception('Erreur lors de la récupération des questions'));
+      return Right(
+        data
+            .map((final e) => e as Map<String, dynamic>)
+            .map(QuestionMapper.fromJson)
+            .whereType<Question>()
+            .where(
+              (final e) => switch (e) {
+                LibreQuestion() => e.responses.value.isNotEmpty,
+                ChoixUniqueQuestion() => e.responses.value.isNotEmpty,
+                ChoixMultipleQuestion() => e.responses.value.isNotEmpty,
+                MosaicQuestion() => e.answered,
+              },
+            )
+            .toList(),
+      );
+    }
+
+    return Left(Exception('Erreur lors de la récupération des questions'));
   }
 }

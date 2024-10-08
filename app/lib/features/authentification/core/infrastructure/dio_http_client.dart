@@ -42,11 +42,20 @@ class DioHttpClient {
   final Dio _dio;
   final AuthenticationService _authentificationService;
 
-  Future<Response<T>> get<T>(final String path) async => _dio.get(path);
-  Future<Response<T>> patch<T>(final String path, {final Object? data}) async =>
+  Future<Response<dynamic>> get(final String path) async => _dio.get(path);
+  Future<Response<dynamic>> patch(
+    final String path, {
+    final Object? data,
+  }) async =>
       _dio.patch(path, data: data);
-  Future<Response<T>> post<T>(final String path, {final Object? data}) async =>
+  Future<Response<dynamic>> post(
+    final String path, {
+    final Object? data,
+  }) async =>
       _dio.post(path, data: data);
-  Future<Response<T>> put<T>(final String path, {final Object? data}) async =>
+  Future<Response<dynamic>> put(
+    final String path, {
+    final Object? data,
+  }) async =>
       _dio.put(path, data: data);
 }

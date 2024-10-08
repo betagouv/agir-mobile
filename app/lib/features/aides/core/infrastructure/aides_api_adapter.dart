@@ -15,15 +15,13 @@ class AidesApiAdapter implements AidesPort {
 
   @override
   Future<Either<Exception, List<Aide>>> fetchAides() async {
-    final response = await _client.get<List<dynamic>>(
-      '/utilisateurs/{userId}/aides',
-    );
+    final response = await _client.get('/utilisateurs/{userId}/aides');
 
     if (response.statusCode != HttpStatus.ok) {
       return Left(Exception('Erreur lors de la récupération des aides'));
     }
 
-    final json = response.data!;
+    final json = response.data! as List<dynamic>;
 
     return Right(
       json

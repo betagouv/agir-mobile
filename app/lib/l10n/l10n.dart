@@ -93,6 +93,9 @@ abstract final class Localisation {
   static const entre35et70m2 = 'Entre 35 et 70 m²';
   static const entre70et100m2 = 'Entre 70 et 100 m²';
   static const entrezLeCodeRecuParMail = 'Entrez le code reçu par e-mail !';
+  static const erreurInattendue = 'Erreur inattendue';
+  static const erreurInattendueContent =
+      'Désolé, le service rencontre un problème, nous y travaillons pour le résoudre le plus rapidement possible.';
   static const estimerMesAides = 'Estimer mes aides';
   static const facultatif = 'facultatif';
   static const fermer = 'Fermer';
@@ -207,6 +210,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const quelquesQuestionPourMieuxVousConnaitre =
       'Quelques questions pour mieux vous connaître';
   static const quiz = 'Quiz';
+  static const rafraichir = 'Rafraichir';
   static const rechercherParTitre = 'Rechercher par titre';
   static const recommande = 'Recommandé';
   static const renvoyerCode = 'Renvoyer le code';

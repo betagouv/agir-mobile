@@ -15,15 +15,13 @@ class ActionsAdapter implements ActionsPort {
 
   @override
   Future<Either<Exception, List<ActionItem>>> fetchActions() async {
-    final response = await _client.get<List<dynamic>>(
-      '/utilisateurs/{userId}/defis',
-    );
+    final response = await _client.get('/utilisateurs/{userId}/defis');
 
     if (response.statusCode != HttpStatus.ok) {
       return Left(Exception('Erreur lors de la récupération des actions'));
     }
 
-    final json = response.data!;
+    final json = response.data! as List<dynamic>;
 
     return Right(
       json

@@ -26,8 +26,6 @@ void main() {
   });
 
   test('simuler returns AideVeloParType when successful', () async {
-    // Mock the API response
-
     final randomAideVeloParType = aideVeloParTypeFaker();
     dio
       ..patchM('/utilisateurs/{userId}/profile')
@@ -54,7 +52,7 @@ void main() {
 
     // Verify API calls
     verify(
-      () => dio.patch<void>(
+      () => dio.patch<dynamic>(
         any(),
         data: jsonEncode(
           {
@@ -65,7 +63,7 @@ void main() {
       ),
     );
     verify(
-      () => dio.patch<void>(
+      () => dio.patch<dynamic>(
         any(),
         data: jsonEncode({'code_postal': codePostal, 'commune': commune}),
       ),

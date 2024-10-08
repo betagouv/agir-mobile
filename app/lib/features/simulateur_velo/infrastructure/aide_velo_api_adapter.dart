@@ -29,7 +29,7 @@ class AideVeloApiAdapter implements AideVeloPort {
     );
 
     return result.fold(Left.new, (final r) async {
-      final response = await _client.post<dynamic>(
+      final response = await _client.post(
         '/utilisateurs/{userId}/simulerAideVelo',
         data: jsonEncode({'prix_du_velo': prix}),
       );
@@ -51,14 +51,14 @@ class AideVeloApiAdapter implements AideVeloPort {
     required final String commune,
   }) async {
     final responses = await Future.wait([
-      _client.patch<void>(
+      _client.patch(
         '/utilisateurs/{userId}/profile',
         data: jsonEncode({
           'nombre_de_parts_fiscales': nombreDePartsFiscales,
           'revenu_fiscal': revenuFiscal,
         }),
       ),
-      _client.patch<void>(
+      _client.patch(
         '/utilisateurs/{userId}/logement',
         data: jsonEncode({'code_postal': codePostal, 'commune': commune}),
       ),

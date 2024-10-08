@@ -19,7 +19,7 @@ class MieuxVousConnaitreApiAdapter implements MieuxVousConnaitrePort {
   Future<Either<Exception, Question>> recupererQuestion({
     required final String id,
   }) async {
-    final response = await _client.get<dynamic>(
+    final response = await _client.get(
       '/utilisateurs/{userId}/questionsKYC/$id',
     );
 
@@ -52,7 +52,7 @@ class MieuxVousConnaitreApiAdapter implements MieuxVousConnaitrePort {
         },
     };
 
-    final response = await _client.put<void>(
+    final response = await _client.put(
       '/utilisateurs/{userId}/questionsKYC/${question.id.value}',
       data: jsonEncode(object),
     );
