@@ -1,11 +1,14 @@
-// ignore_for_file: do_not_use_environment, avoid-long-functions, prefer-async-await
+// ignore_for_file: do_not_use_environment, avoid-long-functions
 
 import 'dart:async';
 
 import 'package:app/app/app.dart';
 import 'package:app/core/error/infrastructure/crash_reporting.dart';
+import 'package:app/core/error/infrastructure/missing_environment_key_exception.dart';
 import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/core/infrastructure/tracker.dart';
+import 'package:app/core/presentation/pages/error_page.dart';
+import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/actions/detail/infrastructure/action_repository.dart';
 import 'package:app/features/actions/list/infrastructure/actions_adapter.dart';
 import 'package:app/features/aides/core/infrastructure/aides_api_adapter.dart';
@@ -29,9 +32,9 @@ import 'package:app/features/recommandations/infrastructure/recommandations_api_
 import 'package:app/features/simulateur_velo/infrastructure/aide_velo_api_adapter.dart';
 import 'package:app/features/univers/core/infrastructure/univers_api_adapter.dart';
 import 'package:app/features/version/infrastructure/version_adapter.dart';
+import 'package:app/l10n/l10n.dart';
 import 'package:clock/clock.dart';
 import 'package:dio/dio.dart';
-import 'package:dsfr/dsfr.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -41,130 +44,177 @@ import 'package:package_info_plus/package_info_plus.dart';
 Future<void> main() async {
   final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-
-  const matomoSiteIdKey = 'MATOMO_SITE_ID';
-  const matomoSiteId = String.fromEnvironment(matomoSiteIdKey);
-  if (matomoSiteId.isEmpty) {
-    throw Exception(matomoSiteIdKey);
-  }
-
-  const matomoUrlKey = 'MATOMO_URL';
-  const matomoUrl = String.fromEnvironment(matomoUrlKey);
-  if (matomoUrl.isEmpty) {
-    throw Exception(matomoUrlKey);
-  }
-
-  const tracker = Tracker();
   if (!kDebugMode) {
     await CrashReporting.init();
-    await tracker.init(siteId: matomoSiteId, url: matomoUrl);
   }
-
   _registerErrorHandlers();
 
-  const apiUrlKey = 'API_URL';
-  const apiUrl = String.fromEnvironment(apiUrlKey);
-  if (apiUrl.isEmpty) {
-    throw Exception(apiUrlKey);
+  runApp(const MyApp());
+}
+
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final _clock = const Clock();
+  late final Tracker _tracker;
+  late final AuthenticationService _authenticationService;
+  late final String _apiUrl;
+  late final String _apiCmsUrl;
+  late final String _apiCmsToken;
+  late final PackageInfo _packageInfo;
+  late final Future<void> _initApp;
+
+  @override
+  void initState() {
+    super.initState();
+    // ignore: avoid-async-call-in-sync-function
+    _initApp = _initializeApp();
   }
 
-  const apiCmsUrlKey = 'API_CMS_URL';
-  const apiCmsUrl = String.fromEnvironment(apiCmsUrlKey);
-  if (apiCmsUrl.isEmpty) {
-    throw Exception(apiCmsUrlKey);
+  Future<void> _initializeApp() async {
+    _packageInfo = await PackageInfo.fromPlatform();
+    const matomoSiteIdKey = 'MATOMO_SITE_ID';
+    const matomoSiteId = String.fromEnvironment(matomoSiteIdKey);
+
+    const matomoUrlKey = 'MATOMO_URL';
+    const matomoUrl = String.fromEnvironment(matomoUrlKey);
+
+    _tracker = const Tracker();
+    if (!kDebugMode && matomoSiteId.isNotEmpty && matomoUrl.isNotEmpty) {
+      await _tracker.init(siteId: matomoSiteId, url: matomoUrl);
+    }
+
+    const apiUrlKey = 'API_URL';
+    _apiUrl = const String.fromEnvironment(apiUrlKey);
+    if (_apiUrl.isEmpty) {
+      throw const MissingEnvironmentKeyException(apiUrlKey);
+    }
+
+    const apiCmsUrlKey = 'API_CMS_URL';
+    _apiCmsUrl = const String.fromEnvironment(apiCmsUrlKey);
+    if (_apiCmsUrl.isEmpty) {
+      throw const MissingEnvironmentKeyException(apiCmsUrlKey);
+    }
+
+    const apiCmsTokenKey = 'API_CMS_TOKEN';
+    _apiCmsToken = const String.fromEnvironment(apiCmsTokenKey);
+    if (_apiCmsToken.isEmpty) {
+      throw const MissingEnvironmentKeyException(apiCmsTokenKey);
+    }
+
+    _authenticationService = AuthenticationService(
+      authenticationRepository: AuthenticationRepository(
+        const FlutterSecureStorage(
+          aOptions: AndroidOptions(encryptedSharedPreferences: true),
+        ),
+      ),
+      clock: _clock,
+    );
+    await _authenticationService.checkAuthenticationStatus();
   }
 
-  const apiCmsTokenKey = 'API_CMS_TOKEN';
-  const apiCmsToken = String.fromEnvironment(apiCmsTokenKey);
-  if (apiCmsToken.isEmpty) {
-    throw Exception(apiCmsTokenKey);
+  @override
+  Future<void> dispose() async {
+    _tracker.dispose();
+    await _authenticationService.dispose();
+    super.dispose();
   }
 
-  final packageInfo = await PackageInfo.fromPlatform();
+  @override
+  Widget build(final BuildContext context) => FutureBuilder<void>(
+        future: _initApp,
+        builder: (final context, final snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const SizedBox.shrink();
+          } else if (snapshot.hasError) {
+            FlutterNativeSplash.remove();
+            _captureException(
+              snapshot.error!.toString(),
+              snapshot.stackTrace,
+            );
 
-  const clock = Clock();
-  final authenticationService = AuthenticationService(
-    authenticationRepository: AuthenticationRepository(
-      const FlutterSecureStorage(
-        aOptions: AndroidOptions(encryptedSharedPreferences: true),
-      ),
-    ),
-    clock: clock,
-  );
-  await authenticationService.checkAuthenticationStatus();
+            return ErrorScreen(packageInfo: _packageInfo);
+          }
+          FlutterNativeSplash.remove();
 
-  final url = Uri.parse(apiUrl);
-  final apiClient = AuthentificationApiClient(
-    apiUrl: ApiUrl(url),
-    authenticationService: authenticationService,
-  );
+          final url = Uri.parse(_apiUrl);
+          final apiClient = AuthentificationApiClient(
+            apiUrl: ApiUrl(url),
+            authenticationService: _authenticationService,
+          );
 
-  final dioHttpClient = DioHttpClient(
-    dio: Dio(
-      BaseOptions(
-        baseUrl: url.toString(),
-        validateStatus: (final status) => true,
-      ),
-    ),
-    authentificationService: authenticationService,
-  );
-  final cmsClient = CmsApiClient(
-    apiUrl: ApiUrl(Uri.parse(apiCmsUrl)),
-    token: apiCmsToken,
-  );
+          final dio = Dio(
+            BaseOptions(
+              baseUrl: url.toString(),
+              validateStatus: (final status) => true,
+            ),
+          );
 
-  final messageBus = MessageBus();
+          final dioHttpClient = DioHttpClient(
+            dio: dio,
+            authentificationService: _authenticationService,
+          );
+          final cmsClient = CmsApiClient(
+            apiUrl: ApiUrl(Uri.parse(_apiCmsUrl)),
+            token: _apiCmsToken,
+          );
 
-  FlutterNativeSplash.remove();
+          final messageBus = MessageBus();
 
-  runApp(
-    App(
-      tracker: tracker,
-      clock: clock,
-      authenticationService: authenticationService,
-      authentificationPort: AuthentificationApiAdapter(
-        apiClient: apiClient,
-        authenticationService: authenticationService,
-      ),
-      universPort: UniversApiAdapter(apiClient: apiClient),
-      aidesPort: AidesApiAdapter(client: dioHttpClient),
-      bibliothequePort: BibliothequeApiAdapter(apiClient: apiClient),
-      recommandationsPort: RecommandationsApiAdapter(apiClient: apiClient),
-      articlesPort:
-          ArticlesApiAdapter(apiClient: apiClient, cmsApiClient: cmsClient),
-      quizPort: QuizApiAdapter(
-        apiClient: apiClient,
-        cmsApiClient: cmsClient,
-      ),
-      versionPort: VersionAdapter(packageInfo: packageInfo),
-      communesPort: CommunesApiAdapter(apiClient: apiClient),
-      aideVeloPort: AideVeloApiAdapter(client: dioHttpClient),
-      firstNamePort: FirstNameAdapter(apiClient: apiClient),
-      profilPort: ProfilApiAdapter(apiClient: apiClient),
-      knowYourCustomersRepository:
-          KnowYourCustomersRepository(client: dioHttpClient),
-      mieuxVousConnaitrePort:
-          MieuxVousConnaitreApiAdapter(client: dioHttpClient),
-      actionsPort: ActionsAdapter(client: dioHttpClient),
-      actionRepository:
-          ActionRepository(client: dioHttpClient, messageBus: messageBus),
-      gamificationPort: GamificationApiAdapter(
-        apiClient: apiClient,
-        messageBus: messageBus,
-      ),
-    ),
-  );
+          final gamificationApiAdapter = GamificationApiAdapter(
+            apiClient: apiClient,
+            messageBus: messageBus,
+          );
+
+          return App(
+            tracker: _tracker,
+            clock: _clock,
+            authenticationService: _authenticationService,
+            authentificationPort: AuthentificationApiAdapter(
+              apiClient: apiClient,
+              authenticationService: _authenticationService,
+            ),
+            universPort: UniversApiAdapter(apiClient: apiClient),
+            aidesPort: AidesApiAdapter(client: dioHttpClient),
+            bibliothequePort: BibliothequeApiAdapter(apiClient: apiClient),
+            recommandationsPort:
+                RecommandationsApiAdapter(apiClient: apiClient),
+            articlesPort: ArticlesApiAdapter(
+              apiClient: apiClient,
+              cmsApiClient: cmsClient,
+            ),
+            quizPort:
+                QuizApiAdapter(apiClient: apiClient, cmsApiClient: cmsClient),
+            versionPort: VersionAdapter(packageInfo: _packageInfo),
+            communesPort: CommunesApiAdapter(apiClient: apiClient),
+            aideVeloPort: AideVeloApiAdapter(client: dioHttpClient),
+            firstNamePort: FirstNameAdapter(apiClient: apiClient),
+            profilPort: ProfilApiAdapter(apiClient: apiClient),
+            knowYourCustomersRepository:
+                KnowYourCustomersRepository(client: dioHttpClient),
+            mieuxVousConnaitrePort:
+                MieuxVousConnaitreApiAdapter(client: dioHttpClient),
+            actionsPort: ActionsAdapter(client: dioHttpClient),
+            actionRepository:
+                ActionRepository(client: dioHttpClient, messageBus: messageBus),
+            gamificationPort: gamificationApiAdapter,
+          );
+        },
+      );
 }
 
 void _registerErrorHandlers() {
   FlutterError.onError = (final details) {
     FlutterError.presentError(details);
-    debugPrint('FlutterError: ${details.exception}\n${details.stack ?? ''}');
     _captureException(details.exception, details.stack);
   };
 
   PlatformDispatcher.instance.onError = (final error, final stack) {
-    debugPrint('PlatformDispatcher: $error\n$stack');
     _captureException(error, stack);
 
     return true;
@@ -173,16 +223,19 @@ void _registerErrorHandlers() {
   ErrorWidget.builder = (final details) {
     _captureException(details.exception, details.stack);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Une erreur s'est produite"),
-        backgroundColor: DsfrColors.redMarianneMain472,
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(title: const Text(Localisation.erreurInattendue)),
+        body: Padding(
+          padding: const EdgeInsets.all(paddingVerticalPage),
+          child: Center(child: Text(details.exceptionAsString())),
+        ),
       ),
-      body: Center(child: Text(details.exceptionAsString())),
     );
   };
 }
 
 void _captureException(final Object error, final StackTrace? stack) {
+  debugPrint('Error: $error${stack == null ? '' : '\n$stack'}');
   unawaited(CrashReporting.captureException(error, stackTrace: stack));
 }

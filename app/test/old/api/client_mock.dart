@@ -1,5 +1,3 @@
-// ignore_for_file: discarded_futures
-
 import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';
 

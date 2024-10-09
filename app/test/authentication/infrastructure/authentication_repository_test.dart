@@ -1,4 +1,4 @@
-// ignore_for_file: discarded_futures, avoid-duplicate-initializers
+// ignore_for_file: avoid-duplicate-initializers
 
 import 'dart:convert';
 
