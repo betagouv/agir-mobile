@@ -29,7 +29,7 @@ class DsfrButton extends StatelessWidget {
   final DsfrButtonSize size;
   final VoidCallback? onPressed;
 
-  double _getSize(final DsfrButtonSize size) {
+  double _getIconSize(final DsfrButtonSize size) {
     switch (size) {
       case DsfrButtonSize.lg:
         return DsfrSpacings.s3w;
@@ -43,7 +43,7 @@ class DsfrButton extends StatelessWidget {
   Widget build(final BuildContext context) {
     Widget child = Text(label);
     if (icon != null) {
-      final buttonIcon = Icon(icon, size: _getSize(size));
+      final buttonIcon = Icon(icon, size: _getIconSize(size));
       var children = <Widget>[
         buttonIcon,
         const SizedBox(width: DsfrSpacings.s1w),
@@ -65,14 +65,7 @@ class DsfrButton extends StatelessWidget {
       foregroundColor: foregroundColor,
       size: size,
       onTap: onPressed,
-      child: Center(
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            minHeight: MediaQuery.textScalerOf(context).scale(DsfrSpacings.s3w),
-          ),
-          child: child,
-        ),
-      ),
+      child: Center(child: child),
     );
   }
 }
