@@ -11,6 +11,7 @@ dependencies:
   clock: 1.1.1
   collection: 1.18.0 # Dépend de flutter_test
   cupertino_icons: 1.0.8
+  device_info_plus: 10.1.2 # 11.0.0 is not compatible with matomo_tracker 5.1.0
   dio: 5.7.0
   dsfr:
     path: ../packages/dsfr.dart

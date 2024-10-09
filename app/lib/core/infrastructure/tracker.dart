@@ -22,5 +22,9 @@ class Tracker {
     );
   }
 
+  void dispose() {
+    MatomoTracker.instance.dispose();
+  }
+
   NavigatorObserver get navigatorObserver => TrackerNavigatorObserver();
 }

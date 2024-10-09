@@ -1,5 +1,3 @@
-// ignore_for_file: prefer-getter-over-method
-
 import 'dart:io';
 
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
