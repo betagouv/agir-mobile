@@ -8,7 +8,6 @@ class FnvImage extends StatelessWidget {
     this.width,
     this.height,
     this.semanticLabel,
-    this.colorBlendMode,
     this.fit,
   });
 
@@ -16,7 +15,6 @@ class FnvImage extends StatelessWidget {
   final double? width;
   final double? height;
   final String? semanticLabel;
-  final BlendMode? colorBlendMode;
   final BoxFit? fit;
 
   @override
@@ -29,9 +27,6 @@ class FnvImage extends StatelessWidget {
             width: width,
             height: height,
             fit: fit ?? BoxFit.cover,
-            colorFilter: colorBlendMode == null
-                ? null
-                : ColorFilter.mode(Colors.black, colorBlendMode!),
             semanticsLabel: semanticLabel,
           ),
         )
@@ -40,7 +35,6 @@ class FnvImage extends StatelessWidget {
           semanticLabel: semanticLabel,
           width: width,
           height: height,
-          colorBlendMode: colorBlendMode,
           fit: fit,
         );
 }

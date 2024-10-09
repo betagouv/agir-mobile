@@ -91,7 +91,6 @@ class _Image extends StatelessWidget {
         imageUrl,
         width: width,
         height: height,
-        colorBlendMode: BlendMode.saturation,
         fit: BoxFit.cover,
       ),
     );
