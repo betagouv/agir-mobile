@@ -107,7 +107,7 @@ class AuthentificationApiAdapter implements AuthentificationPort {
     final uri = _connexionDemandee
         ? '/utilisateurs/login_v2_code'
         : '/utilisateurs/valider';
-    _connexionDemandee = false;
+
     final response = await _apiClient.post(
       Uri.parse(uri),
       body: jsonEncode({
@@ -117,6 +117,7 @@ class AuthentificationApiAdapter implements AuthentificationPort {
     );
 
     if (response.statusCode == HttpStatus.created) {
+      _connexionDemandee = false;
       final json = jsonDecode(response.body) as Map<String, dynamic>;
       final token = json['token'] as String;
 
