@@ -38,24 +38,20 @@ class AuthenticationService {
           return; // HACK(lsaudon): Pour ne pas ajouter le même status sinon ça casse GoRouter.of(context).pop(true);
         }
         final userId = await _authenticationRepository.userId;
-        _authenticationStatusController
-            .add(AuthenticationStatus.authenticated(userId));
+        _authenticationStatusController.add(Authenticated(userId));
       } else {
         await _authenticationRepository.deleteToken();
-        _authenticationStatusController
-            .add(const AuthenticationStatus.unauthenticated());
+        _authenticationStatusController.add(const Unauthenticated());
       }
     } on Exception catch (_) {
-      _authenticationStatusController
-          .add(const AuthenticationStatus.unauthenticated());
+      _authenticationStatusController.add(const Unauthenticated());
     }
   }
 
   Future<Token> get token async => _authenticationRepository.token;
 
   Future<void> logout() async {
-    _authenticationStatusController
-        .add(const AuthenticationStatus.unauthenticated());
+    _authenticationStatusController.add(const Unauthenticated());
     await _authenticationRepository.deleteToken();
   }
 
