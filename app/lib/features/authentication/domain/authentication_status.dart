@@ -4,11 +4,6 @@ import 'package:equatable/equatable.dart';
 sealed class AuthenticationStatus extends Equatable {
   const AuthenticationStatus();
 
-  const factory AuthenticationStatus.authenticated(final UserId userId) =
-      Authenticated;
-
-  const factory AuthenticationStatus.unauthenticated() = Unauthenticated;
-
   @override
   List<Object> get props => [];
 }

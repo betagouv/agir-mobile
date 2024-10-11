@@ -7,5 +7,5 @@ import '../scenario_context.dart';
 /// Iel est connecté.
 void ielEstConnecte() {
   ScenarioContext().authentificationStatut =
-      const AuthenticationStatus.authenticated(UserId(utilisateurId));
+      const Authenticated(UserId(utilisateurId));
 }

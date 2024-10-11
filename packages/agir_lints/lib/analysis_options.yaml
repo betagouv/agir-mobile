@@ -50,6 +50,7 @@ dart_code_metrics:
     - avoid-duplicate-collection-elements: false
     - avoid-duplicate-test-assertions: false
     - avoid-dynamic: false
+    - avoid-empty-build-when: false
     - avoid-getter-prefix: false
     - avoid-ignoring-return-values: false
     - avoid-late-keyword: false
