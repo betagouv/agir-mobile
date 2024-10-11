@@ -90,14 +90,17 @@ class _PageState extends State<_Page> with RouteAware {
             current.estTerminee,
         child: Scaffold(
           appBar: const FnvAppBar(),
-          body: BlocBuilder<MissionBloc, MissionState>(
-            builder: (final context, final state) => switch (state) {
-              MissionInitial() => const SizedBox(),
-              MissionChargement() =>
-                const Center(child: CircularProgressIndicator()),
-              MissionSucces() => _Success(state.mission),
-              MissionErreur() => const Center(child: Text('Erreur')),
-            },
+          body: RefreshIndicator(
+            onRefresh: () async => _handleMission(),
+            child: BlocBuilder<MissionBloc, MissionState>(
+              builder: (final context, final state) => switch (state) {
+                MissionInitial() => const SizedBox(),
+                MissionChargement() =>
+                  const Center(child: CircularProgressIndicator()),
+                MissionSucces() => _Success(state.mission),
+                MissionErreur() => const Center(child: Text('Erreur')),
+              },
+            ),
           ),
           backgroundColor: FnvColors.aidesFond,
         ),
