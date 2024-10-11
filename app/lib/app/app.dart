@@ -4,6 +4,7 @@ import 'package:app/features/accueil/presentation/cubit/home_disclaimer_cubit.da
 import 'package:app/features/actions/detail/infrastructure/action_repository.dart';
 import 'package:app/features/actions/list/domain/actions_port.dart';
 import 'package:app/features/aides/core/domain/aides_port.dart';
+import 'package:app/features/aides/core/presentation/bloc/aides_accueil_bloc.dart';
 import 'package:app/features/aides/item/presentation/bloc/aide_bloc.dart';
 import 'package:app/features/aides/list/presentation/bloc/aides_disclaimer/aides_disclaimer_cubit.dart';
 import 'package:app/features/articles/domain/articles_port.dart';
@@ -136,6 +137,11 @@ class _AppState extends State<App> {
             BlocProvider(
               create: (final context) => AccueilUniversBloc(
                 universPort: widget.universPort,
+              ),
+            ),
+            BlocProvider(
+              create: (final context) => AidesAccueilBloc(
+                aidesPort: widget.aidesPort,
               ),
             ),
             BlocProvider(create: (final context) => AideBloc()),

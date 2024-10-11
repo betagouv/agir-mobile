@@ -14,7 +14,7 @@ class MesAides extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    final bloc = AidesAccueilBloc(aidesPort: context.read())
+    final bloc = context.read<AidesAccueilBloc>()
       ..add(const AidesAccueilRecuperationDemandee());
 
     return ListView(
