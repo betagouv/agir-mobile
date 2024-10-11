@@ -12,7 +12,7 @@ import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class BibliothequeView extends StatelessWidget {
   const BibliothequeView({super.key});

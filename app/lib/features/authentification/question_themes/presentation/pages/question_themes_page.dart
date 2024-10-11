@@ -1,10 +1,11 @@
-import 'package:app/core/assets/images.dart';
+import 'package:app/core/assets/svgs.dart';
 import 'package:app/core/presentation/widgets/composants/bottom_bar.dart';
 import 'package:app/core/presentation/widgets/composants/checkbox_set.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/authentification/question_themes/presentation/bloc/question_themes_bloc.dart';
 import 'package:app/features/authentification/question_themes/presentation/bloc/question_themes_event.dart';
 import 'package:app/features/authentification/questions/presentation/pages/tout_est_pret_page.dart';
+import 'package:app/features/authentification/widgets/onboarding_illustration.dart';
 import 'package:app/features/mieux_vous_connaitre/core/domain/question.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
@@ -46,16 +47,6 @@ class _View extends StatelessWidget {
         body: ListView(
           padding: const EdgeInsets.all(paddingVerticalPage),
           children: [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Image.asset(
-                AssetsImages.illustration4,
-                width: 208,
-                height: 141,
-                fit: BoxFit.cover,
-              ),
-            ),
-            const SizedBox(height: DsfrSpacings.s3w),
             MarkdownBody(
               data: Localisation.questionCourantSurMax(3, 3),
               styleSheet: MarkdownStyleSheet(
@@ -64,7 +55,13 @@ class _View extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: DsfrSpacings.s2w),
+            const SizedBox(height: DsfrSpacings.s3v),
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: OnboardingIllustration(
+                assetName: AssetsSvgs.illustration4,
+              ),
+            ),
             const Text(
               Localisation.cestPresqueTermine,
               style: DsfrTextStyle.headline2(),

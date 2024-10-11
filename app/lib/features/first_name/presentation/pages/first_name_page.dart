@@ -1,8 +1,9 @@
-import 'package:app/core/assets/images.dart';
+import 'package:app/core/assets/svgs.dart';
 import 'package:app/core/presentation/widgets/composants/alert.dart';
 import 'package:app/core/presentation/widgets/composants/bottom_bar.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/authentification/question_code_postal/presentation/pages/question_code_postal_page.dart';
+import 'package:app/features/authentification/widgets/onboarding_illustration.dart';
 import 'package:app/features/first_name/application/add_first_name.dart';
 import 'package:app/features/first_name/domain/first_name.dart';
 import 'package:app/features/first_name/presentation/bloc/first_name_bloc.dart';
@@ -57,16 +58,6 @@ class FirstNamePage extends StatelessWidget {
               body: ListView(
                 padding: const EdgeInsets.all(paddingVerticalPage),
                 children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Image.asset(
-                      AssetsImages.illustration1,
-                      width: 208,
-                      height: 141,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  const SizedBox(height: DsfrSpacings.s3w),
                   MarkdownBody(
                     data: Localisation.questionCourantSurMax(1, 3),
                     styleSheet: MarkdownStyleSheet(
@@ -75,7 +66,13 @@ class FirstNamePage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: DsfrSpacings.s2w),
+                  const SizedBox(height: DsfrSpacings.s3v),
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: OnboardingIllustration(
+                      assetName: AssetsSvgs.illustration1,
+                    ),
+                  ),
                   const Text(
                     Localisation.bienvenueSur,
                     style: DsfrTextStyle.headline2(),
