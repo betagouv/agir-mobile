@@ -30,20 +30,21 @@ class ProfilPage extends StatelessWidget {
         body: ListView(
           padding: const EdgeInsets.all(paddingVerticalPage),
           children: [
-            const FnvTitle(title: Localisation.votreProfil),
+            const FnvTitle(title: Localisation.monProfil),
+            const SizedBox(height: DsfrSpacings.s3w),
             FnvCard(
               child: Column(
                 children: [
                   _MenuElement(
                     icon: DsfrIcons.userAccountCircleLine,
-                    label: Localisation.vosInformations,
+                    label: Localisation.mesInformations,
                     onTap: () async => GoRouter.of(context)
                         .pushNamed(MesInformationsPage.name),
                   ),
                   const DsfrDivider(),
                   _MenuElement(
                     icon: DsfrIcons.buildingsHome4Line,
-                    label: Localisation.votreLogement,
+                    label: Localisation.monLogement,
                     onTap: () async =>
                         GoRouter.of(context).pushNamed(MonLogementPage.name),
                   ),
@@ -57,7 +58,7 @@ class ProfilPage extends StatelessWidget {
                   const DsfrDivider(),
                   _MenuElement(
                     icon: DsfrIcons.businessAwardLine,
-                    label: 'Vos actions',
+                    label: Localisation.mesActions,
                     onTap: () async =>
                         GoRouter.of(context).pushNamed(ActionListPage.name),
                   ),

@@ -57,7 +57,7 @@ void main() {
       ielVoitLeTexte(Localisation.bienvenueSur);
       await ielEcritDansLeChamp(
         tester,
-        label: Localisation.votrePrenom,
+        label: Localisation.monPrenom,
         enterText: 'Lucas',
       );
       await tester.pumpAndSettle();
@@ -111,7 +111,7 @@ Future<void> _allerSurLaPageSaisieCode(
   required final String email,
 }) async {
   await _allerSurLaPageCreerCompte(tester);
-  ielVoitLeTexte(Localisation.creezVotreCompte);
+  ielVoitLeTexte(Localisation.creezMonCompteApp);
 
   await ielEcritDansLeChamp(
     tester,

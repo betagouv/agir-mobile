@@ -20,8 +20,8 @@ void main() {
   testWidgets('Voir tous les textes', (final tester) async {
     setUpWidgets(tester);
     await _allerSurMesInformations(tester);
-    ielVoitLeTexte(Localisation.vosInformations);
-    ielVoitLeTexte(Localisation.votreIdentite);
+    ielVoitLeTexte(Localisation.mesInformations);
+    ielVoitLeTexte(Localisation.monIdentite);
     ielVoitLeTexte(Localisation.prenom);
     ielVoitLeTexte(Localisation.nom);
     ielVoitLeTexte(Localisation.donneesPersonnelles);
@@ -30,7 +30,7 @@ void main() {
     await ielScrolle(tester, Localisation.revenuFiscal);
     ielVoitLeTexte(Localisation.revenuFiscal);
     ielVoitLeTexteMarkdown(tester, Localisation.pourquoiCesQuestionsReponse);
-    ielVoitLeTexte(Localisation.mettreAJourVosInformations);
+    ielVoitLeTexte(Localisation.mettreAJourMesInformations);
   });
 
   testWidgets('Iel voit les informations prérempli', (final tester) async {
@@ -88,7 +88,7 @@ void main() {
         label: Localisation.revenuFiscal,
         enterText: trancheValeur.toString(),
       );
-      await ielAppuieSur(tester, Localisation.mettreAJourVosInformations);
+      await ielAppuieSur(tester, Localisation.mettreAJourMesInformations);
 
       final profilPortMock = ScenarioContext().profilPortMock!;
       expect(profilPortMock.nom, nom);
@@ -113,6 +113,6 @@ Future<void> _allerSurMesInformations(final WidgetTester tester) async {
   ielEstConnecte();
   await ielLanceLapplication(tester);
   await ielAppuieSurAccessibilite(tester, Localisation.menu);
-  await ielAppuieSur(tester, Localisation.votreProfil);
-  await ielAppuieSur(tester, Localisation.vosInformations);
+  await ielAppuieSur(tester, Localisation.monProfil);
+  await ielAppuieSur(tester, Localisation.mesInformations);
 }

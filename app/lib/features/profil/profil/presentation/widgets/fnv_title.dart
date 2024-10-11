@@ -23,7 +23,6 @@ class FnvTitle extends StatelessWidget {
             color: DsfrColors.blueFranceSun113,
             alignment: Alignment.centerLeft,
           ),
-          const SizedBox(height: DsfrSpacings.s3w),
         ],
       );
 }

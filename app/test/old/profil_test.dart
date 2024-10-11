@@ -15,9 +15,9 @@ void main() {
     (final tester) async {
       setUpWidgets(tester);
       await _allerSurMonProfil(tester);
-      ielVoitLeTexte(Localisation.votreProfil);
-      ielVoitLeTexte(Localisation.vosInformations);
-      ielVoitLeTexte(Localisation.votreLogement);
+      ielVoitLeTexte(Localisation.monProfil);
+      ielVoitLeTexte(Localisation.mesInformations);
+      ielVoitLeTexte(Localisation.monLogement);
       ielVoitLeTexte(Localisation.optionsAvancees);
     },
   );
@@ -25,15 +25,15 @@ void main() {
   testWidgets('Allez sur la page Mes informations', (final tester) async {
     setUpWidgets(tester);
     await _allerSurMonProfil(tester);
-    await ielAppuieSur(tester, Localisation.vosInformations);
-    ielVoitLeTexte(Localisation.vosInformations);
+    await ielAppuieSur(tester, Localisation.mesInformations);
+    ielVoitLeTexte(Localisation.mesInformations);
   });
 
   testWidgets('Allez sur la page Mon logement', (final tester) async {
     setUpWidgets(tester);
     await _allerSurMonProfil(tester);
-    await ielAppuieSur(tester, Localisation.votreLogement);
-    ielVoitLeTexte(Localisation.votreLogement);
+    await ielAppuieSur(tester, Localisation.monLogement);
+    ielVoitLeTexte(Localisation.monLogement);
   });
 
   testWidgets('Allez sur la page Options avancées', (final tester) async {
@@ -51,5 +51,5 @@ Future<void> _allerSurMonProfil(final WidgetTester tester) async {
   ielEstConnecte();
   await ielLanceLapplication(tester);
   await ielAppuieSurAccessibilite(tester, Localisation.menu);
-  await ielAppuieSur(tester, Localisation.votreProfil);
+  await ielAppuieSur(tester, Localisation.monProfil);
 }

@@ -61,7 +61,7 @@ class _MesInformationsView extends StatelessWidget {
         ),
         bottomNavigationBar: FnvBottomBar(
           child: DsfrButton(
-            label: Localisation.mettreAJourVosInformations,
+            label: Localisation.mettreAJourMesInformations,
             variant: DsfrButtonVariant.primary,
             size: DsfrButtonSize.lg,
             onPressed: () => _handleMettreAJour(context),

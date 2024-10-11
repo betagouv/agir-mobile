@@ -28,6 +28,7 @@ class OptionsAvanceesPage extends StatelessWidget {
           padding: const EdgeInsets.all(paddingVerticalPage),
           children: const [
             FnvTitle(title: Localisation.optionsAvancees),
+            SizedBox(height: DsfrSpacings.s3w),
             ChangerMotDePasse(),
             SizedBox(height: DsfrSpacings.s5w),
             SupprimerCompte(),

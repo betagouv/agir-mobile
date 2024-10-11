@@ -22,10 +22,7 @@ class MesAides extends StatelessWidget {
       shrinkWrap: true,
       padding: EdgeInsets.zero,
       children: [
-        const Text(
-          Localisation.accueilMesAides,
-          style: DsfrTextStyle.headline5(),
-        ),
+        const Text(Localisation.mesAides, style: DsfrTextStyle.headline5()),
         const SizedBox(height: DsfrSpacings.s3w),
         BlocBuilder<AidesAccueilBloc, AidesAccueilState>(
           builder: (final context, final state) {
@@ -54,7 +51,7 @@ class MesAides extends StatelessWidget {
         Align(
           alignment: Alignment.centerLeft,
           child: DsfrLink.md(
-            label: Localisation.accueilMesAidesLien,
+            label: Localisation.mesAidesLien,
             onTap: () async => GoRouter.of(context).pushNamed(AidesPage.name),
           ),
         ),

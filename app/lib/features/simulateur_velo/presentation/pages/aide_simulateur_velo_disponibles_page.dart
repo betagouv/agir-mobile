@@ -40,7 +40,7 @@ class AideSimulateurVeloDisponiblePage extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
             child: Text(
-              Localisation.vosAidesDisponibles,
+              Localisation.mesAidesDisponibles,
               style: DsfrTextStyle.headline2(),
             ),
           ),

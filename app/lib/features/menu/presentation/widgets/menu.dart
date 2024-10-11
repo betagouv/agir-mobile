@@ -85,7 +85,7 @@ class _MenuItems extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _MenuItem(
-          label: Localisation.menuAccueil,
+          label: Localisation.accueil,
           value: AccueilPage.name,
           groupValue: groupValue,
           onTap: () async => _handleTapOnAccueil(context),
@@ -102,7 +102,7 @@ class _MenuItems extends StatelessWidget {
         ),
         const Spacer(),
         _MenuItem(
-          label: Localisation.votreProfil,
+          label: Localisation.monProfil,
           value: ProfilPage.name,
           groupValue: groupValue,
           onTap: () async => _handleTapOnProfile(context),
@@ -135,7 +135,7 @@ class _MenuAides extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => _MenuItem(
-        label: Localisation.menuAides,
+        label: Localisation.mesAides,
         value: AidesPage.name,
         groupValue: groupTitle,
         onTap: onTap,

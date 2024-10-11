@@ -45,6 +45,7 @@ class KnowYourCustomersPage extends StatelessWidget {
                       EdgeInsets.symmetric(horizontal: paddingVerticalPage),
                   child: FnvTitle(title: Localisation.mieuxVousConnaitre),
                 ),
+                const SizedBox(height: DsfrSpacings.s3w),
                 BlocBuilder<KnowYourCustomersBloc, KnowYourCustomersState>(
                   builder: (final context, final state) => switch (state) {
                     KnowYourCustomersInitial() => const SizedBox.shrink(),

@@ -44,7 +44,7 @@ class _MotDePasse extends StatelessWidget {
             autofillHints: const [AutofillHints.password],
           ),
           const Text(
-            Localisation.votreMotDePasseDoitContenir,
+            Localisation.monMotDePasseDoitContenir,
             style: DsfrTextStyle.bodyXs(color: DsfrColors.grey425),
           ),
           const _DouzeCarateresMinimum(),

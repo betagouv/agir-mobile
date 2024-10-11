@@ -42,7 +42,7 @@ void main() {
           setUpWidgets(tester);
           ielEstConnecte();
           await ielLanceLapplication(tester);
-          ielVoitLeTexte(Localisation.accueilMesAides);
+          ielVoitLeTexte(Localisation.mesAides);
         },
       );
 
@@ -81,8 +81,8 @@ void main() {
         ielALesAidesSuivantes([aide1, aide2, aide3, aide4]);
         ielEstConnecte();
         await ielLanceLapplication(tester);
-        await ielAppuieSur(tester, Localisation.accueilMesAidesLien);
-        ielVoitLeTexte(Localisation.vosAidesTitre);
+        await ielAppuieSur(tester, Localisation.mesAidesLien);
+        ielVoitLeTexte(Localisation.mesAidesDisponibles);
 
         ielVoitLeTexte(aide1.thematique);
         ielVoitLeTexte(aide1.titre);

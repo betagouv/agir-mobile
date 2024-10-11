@@ -38,7 +38,7 @@ void main() {
         ielALesAidesSuivantes([aide2]);
         ielEstConnecte();
         await ielLanceLapplication(tester);
-        await ielAppuieSur(tester, Localisation.accueilMesAidesLien);
+        await ielAppuieSur(tester, Localisation.mesAidesLien);
         ielVoitLeTexteDansTexteRiche(Localisation.simulateur);
       },
     );
@@ -50,7 +50,7 @@ void main() {
         ielALesAidesSuivantes([aide2]);
         ielEstConnecte();
         await ielLanceLapplication(tester);
-        await ielAppuieSur(tester, Localisation.accueilMesAidesLien);
+        await ielAppuieSur(tester, Localisation.mesAidesLien);
         await ielAppuieSur(tester, aide2.titre);
         ielVoitLeTexteDansTexteRiche(Localisation.simulateur);
         ielVoitLeTexte(Localisation.accederAuSimulateur);
@@ -64,7 +64,7 @@ void main() {
         ielALesAidesSuivantes([aide2]);
         ielEstConnecte();
         await ielLanceLapplication(tester);
-        await ielAppuieSur(tester, Localisation.accueilMesAidesLien);
+        await ielAppuieSur(tester, Localisation.mesAidesLien);
         await ielAppuieSur(tester, aide2.titre);
         await ielAppuieSur(tester, Localisation.accederAuSimulateur);
         ielVoitLeTexte(Localisation.simulerMonAide);

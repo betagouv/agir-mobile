@@ -17,7 +17,7 @@ void main() {
         setUpWidgets(tester);
         ielEstConnecte();
         await ielLanceLapplication(tester);
-        ielVoitLeTexte(Localisation.accueilRecommandationsTitre);
+        ielVoitLeTexte(Localisation.recommandationsTitre);
       },
     );
 

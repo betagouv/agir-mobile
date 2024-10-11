@@ -16,7 +16,7 @@ class MonLogementPlus15Ans extends StatelessWidget {
     );
 
     return MonLogementTitreEtContenu(
-      titre: Localisation.votreLogementPlusDe15Ans,
+      titre: Localisation.monLogementPlusDe15Ans,
       contenu: DsfrRadioButtonSetHeadless(
         values: const {
           true: DsfrRadioButtonItem(Localisation.oui),

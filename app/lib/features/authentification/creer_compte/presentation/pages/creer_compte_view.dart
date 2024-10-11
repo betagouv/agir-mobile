@@ -50,7 +50,7 @@ class CreerCompteView extends StatelessWidget {
             padding: const EdgeInsets.all(paddingVerticalPage),
             children: [
               const Text(
-                Localisation.creezVotreCompte,
+                Localisation.creezMonCompteApp,
                 style: DsfrTextStyle.headline2(),
               ),
               const SizedBox(height: DsfrSpacings.s3w),
