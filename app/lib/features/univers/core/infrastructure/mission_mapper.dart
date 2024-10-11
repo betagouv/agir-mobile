@@ -17,7 +17,10 @@ abstract final class MissionMapper {
     final objectifsList = json['objectifs'] as List<dynamic>;
     for (final item in objectifsList) {
       final o = item as Map<String, dynamic>;
-      final type = o['type'] as String;
+      final type = o['type'] as String?;
+      if (type == null) {
+        continue; // HACK(lsaudon): pour ignorer les objectifs sans type
+      }
       switch (type) {
         case 'kyc':
           kycListe.add(_fromJsonMissionKyc(o));
