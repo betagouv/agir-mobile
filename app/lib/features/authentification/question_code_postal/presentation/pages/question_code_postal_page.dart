@@ -1,10 +1,11 @@
-import 'package:app/core/assets/images.dart';
+import 'package:app/core/assets/svgs.dart';
 import 'package:app/core/helpers/text_scaler.dart';
 import 'package:app/core/presentation/widgets/composants/bottom_bar.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/authentification/question_code_postal/presentation/bloc/question_code_postal_bloc.dart';
 import 'package:app/features/authentification/question_code_postal/presentation/bloc/question_code_postal_event.dart';
 import 'package:app/features/authentification/questions/presentation/pages/app_est_encore_en_experimentation_page.dart';
+import 'package:app/features/authentification/widgets/onboarding_illustration.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
@@ -47,16 +48,6 @@ class _View extends StatelessWidget {
         body: ListView(
           padding: const EdgeInsets.all(paddingVerticalPage),
           children: [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Image.asset(
-                AssetsImages.illustration2,
-                width: 208,
-                height: 141,
-                fit: BoxFit.cover,
-              ),
-            ),
-            const SizedBox(height: DsfrSpacings.s3w),
             MarkdownBody(
               data: Localisation.questionCourantSurMax(2, 3),
               styleSheet: MarkdownStyleSheet(
@@ -65,7 +56,12 @@ class _View extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: DsfrSpacings.s2w),
+            const SizedBox(height: DsfrSpacings.s3v),
+            const Align(
+              alignment: Alignment.centerLeft,
+              child:
+                  OnboardingIllustration(assetName: AssetsSvgs.illustration2),
+            ),
             const _Prenom(),
             const SizedBox(height: DsfrSpacings.s2w),
             const Text(

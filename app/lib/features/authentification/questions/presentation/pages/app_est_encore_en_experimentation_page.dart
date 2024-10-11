@@ -1,7 +1,8 @@
-import 'package:app/core/assets/images.dart';
+import 'package:app/core/assets/svgs.dart';
 import 'package:app/core/presentation/widgets/composants/bottom_bar.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/authentification/question_themes/presentation/pages/question_themes_page.dart';
+import 'package:app/features/authentification/widgets/onboarding_illustration.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
@@ -36,16 +37,12 @@ class AppEstEncoreEnExperimentationPage extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(paddingVerticalPage),
         children: [
-          Align(
+          const Align(
             alignment: Alignment.centerLeft,
-            child: Image.asset(
-              AssetsImages.illustration3,
-              width: 208,
-              height: 141,
-              fit: BoxFit.cover,
+            child: OnboardingIllustration(
+              assetName: AssetsSvgs.illustration3,
             ),
           ),
-          const SizedBox(height: DsfrSpacings.s3w),
           const Text(
             Localisation.appEstEncoreEnExperimentation,
             style: DsfrTextStyle.headline2(),
