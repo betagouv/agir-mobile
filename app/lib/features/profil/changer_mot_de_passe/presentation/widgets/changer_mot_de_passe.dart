@@ -43,7 +43,7 @@ class _ChangerMotDePasse extends StatelessWidget {
         child: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ProfilTitrePartie(titre: Localisation.changerVotreMotDePasse),
+            ProfilTitrePartie(titre: Localisation.changerMonMotDePasse),
             SizedBox(height: DsfrSpacings.s2w),
             _MotDePasse(),
             SizedBox(height: DsfrSpacings.s3w),
@@ -69,7 +69,7 @@ class _ChangerMotDePasseButton extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => DsfrButton(
-        label: Localisation.changerVotreMotDePasse,
+        label: Localisation.changerMonMotDePasse,
         variant: DsfrButtonVariant.primary,
         size: DsfrButtonSize.lg,
         onPressed: context.select<ChangerMotDePasseBloc, bool>(

@@ -7,6 +7,7 @@ import 'package:app/features/aides/list/presentation/bloc/aides/aides_state.dart
 import 'package:app/features/aides/list/presentation/bloc/aides_disclaimer/aides_disclaimer_cubit.dart';
 import 'package:app/features/aides/list/presentation/bloc/aides_disclaimer/aides_disclaimer_state.dart';
 import 'package:app/features/menu/presentation/pages/root_page.dart';
+import 'package:app/features/profil/profil/presentation/widgets/fnv_title.dart';
 import 'package:app/features/utilisateur/presentation/bloc/utilisateur_bloc.dart';
 import 'package:app/features/utilisateur/presentation/bloc/utilisateur_event.dart';
 import 'package:app/features/utilisateur/presentation/bloc/utilisateur_state.dart';
@@ -49,23 +50,9 @@ class AidesPage extends StatelessWidget {
                 shrinkWrap: true,
                 padding: const EdgeInsets.all(paddingVerticalPage),
                 children: [
-                  const SizedBox(height: DsfrSpacings.s2w),
-                  const Text(
-                    Localisation.vosAidesTitre,
-                    style: DsfrTextStyle.headline2(),
-                  ),
-                  const SizedBox(height: DsfrSpacings.s1w),
-                  const Text(
-                    Localisation.vosAidesSousTitre,
-                    style: DsfrTextStyle.bodyMd(),
-                  ),
-                  const SizedBox(height: DsfrSpacings.s3w),
-                  const Align(
-                    alignment: Alignment.centerLeft,
-                    child: ColoredBox(
-                      color: DsfrColors.blueFranceSun113,
-                      child: SizedBox(width: 30, height: 2),
-                    ),
+                  const FnvTitle(
+                    title: Localisation.mesAidesDisponibles,
+                    subtitle: Localisation.mesAidesSousTitre,
                   ),
                   _Aides(aides: aides),
                 ],
@@ -89,6 +76,7 @@ class _Aides extends StatelessWidget {
   Widget build(final BuildContext context) => ListView.separated(
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
+        padding: EdgeInsets.zero,
         itemBuilder: (final context, final index) => switch (aides[index]) {
           final AideThematiqueModel a => Padding(
               padding: const EdgeInsets.only(

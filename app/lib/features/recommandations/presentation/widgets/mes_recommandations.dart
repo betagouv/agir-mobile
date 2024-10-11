@@ -60,7 +60,7 @@ class _View extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                Localisation.accueilRecommandationsTitre,
+                Localisation.recommandationsTitre,
                 style: DsfrTextStyle.headline5(),
               ),
               SizedBox(height: DsfrSpacings.s1v5),

@@ -41,8 +41,9 @@ class ActionListPage extends StatelessWidget {
                 const Padding(
                   padding:
                       EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-                  child: FnvTitle(title: Localisation.vosActions),
+                  child: FnvTitle(title: Localisation.mesActions),
                 ),
+                const SizedBox(height: DsfrSpacings.s3w),
                 BlocBuilder<ActionListBloc, ActionListState>(
                   builder: (final context, final state) => switch (state) {
                     ActionListInitial() => const SizedBox.shrink(),

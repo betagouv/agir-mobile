@@ -10,6 +10,7 @@ import 'package:app/features/mieux_vous_connaitre/detail/presentation/form/mieux
 import 'package:app/features/mieux_vous_connaitre/detail/presentation/form/mosaic.dart';
 import 'package:app/features/profil/profil/presentation/widgets/fnv_title.dart';
 import 'package:app/l10n/l10n.dart';
+import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -108,6 +109,7 @@ class _ChoixMultipleContent extends StatelessWidget {
             title: question.text.value,
             subtitle: Localisation.plusieursReponsesPossibles,
           ),
+          const SizedBox(height: DsfrSpacings.s3w),
           ChoixMultiple(question: question),
         ],
       );
@@ -122,6 +124,7 @@ class _ChoixUniqueContent extends StatelessWidget {
   Widget build(final BuildContext context) => Column(
         children: [
           FnvTitle(title: question.text.value),
+          const SizedBox(height: DsfrSpacings.s3w),
           ChoixUnique(question: question),
         ],
       );
@@ -136,6 +139,7 @@ class _LibreContent extends StatelessWidget {
   Widget build(final BuildContext context) => Column(
         children: [
           FnvTitle(title: question.text.value),
+          const SizedBox(height: DsfrSpacings.s3w),
           Libre(question: question),
         ],
       );
@@ -153,6 +157,7 @@ class _MosaicContent extends StatelessWidget {
             title: question.text.value,
             subtitle: Localisation.plusieursReponsesPossibles,
           ),
+          const SizedBox(height: DsfrSpacings.s3w),
           Mosaic(question: question),
         ],
       );

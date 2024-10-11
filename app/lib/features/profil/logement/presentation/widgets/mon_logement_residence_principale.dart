@@ -27,7 +27,7 @@ class MonLogementResidencePrincipale extends StatelessWidget {
     );
 
     return MonLogementTitreEtContenu(
-      titre: Localisation.votreResidencePrincipaleEst,
+      titre: Localisation.maResidencePrincipaleEst,
       contenu: DsfrRadioButtonSetHeadless(
         values: const {
           TypeDeLogement.appartement:

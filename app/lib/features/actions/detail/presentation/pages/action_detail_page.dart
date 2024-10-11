@@ -94,6 +94,7 @@ class _SuccessContent extends StatelessWidget {
           Text(state.action.theme, style: const DsfrTextStyle.bodySm()),
           const SizedBox(height: DsfrSpacings.s1w),
           FnvTitle(title: state.action.title),
+          const SizedBox(height: DsfrSpacings.s3w),
           DsfrRadioButtonSetHeadless(
             values: {
               true: DsfrRadioButtonItem(state.acceptanceText),

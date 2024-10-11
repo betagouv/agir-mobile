@@ -22,7 +22,7 @@ void main() {
         label: Localisation.motDePasse,
         enterText: 'ceciEstUnMotDePasseValide!1',
       );
-      await ielAppuieSur(tester, Localisation.changerVotreMotDePasse);
+      await ielAppuieSur(tester, Localisation.changerMonMotDePasse);
       final profilPortMock = ScenarioContext().profilPortMock!;
       expect(profilPortMock.changerLeMotDePasseAppele, true);
     },
@@ -38,7 +38,7 @@ void main() {
         label: Localisation.motDePasse,
         enterText: 'pasvalide',
       );
-      await ielAppuieSur(tester, Localisation.changerVotreMotDePasse);
+      await ielAppuieSur(tester, Localisation.changerMonMotDePasse);
       final profilPortMock = ScenarioContext().profilPortMock!;
       expect(profilPortMock.changerLeMotDePasseAppele, false);
     },
@@ -164,6 +164,6 @@ Future<void> _allerSurOptionsAvancees(final WidgetTester tester) async {
   ielEstConnecte();
   await ielLanceLapplication(tester);
   await ielAppuieSurAccessibilite(tester, Localisation.menu);
-  await ielAppuieSur(tester, Localisation.votreProfil);
+  await ielAppuieSur(tester, Localisation.monProfil);
   await ielAppuieSur(tester, Localisation.optionsAvancees);
 }

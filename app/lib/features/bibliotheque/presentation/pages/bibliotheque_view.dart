@@ -6,6 +6,7 @@ import 'package:app/features/bibliotheque/domain/bibliotheque.dart';
 import 'package:app/features/bibliotheque/presentation/bloc/bibliotheque_bloc.dart';
 import 'package:app/features/bibliotheque/presentation/bloc/bibliotheque_event.dart';
 import 'package:app/features/bibliotheque/presentation/pages/contenu.dart';
+import 'package:app/features/profil/profil/presentation/widgets/fnv_title.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
@@ -28,11 +29,11 @@ class BibliothequeView extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: padding),
           sliver: SliverList.list(
             children: const [
-              Text(
-                Localisation.baseDeConnaissances,
-                style: DsfrTextStyle.headline2(),
+              FnvTitle(
+                title: Localisation.bibliotheque,
+                subtitle: Localisation.bibliothequeSousTitre,
               ),
-              SizedBox(height: DsfrSpacings.s2w),
+              SizedBox(height: DsfrSpacings.s3w),
               _ChampRecherche(),
               SizedBox(height: DsfrSpacings.s1w),
               _Thematiques(),
@@ -61,7 +62,7 @@ class _Favorites extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => DsfrToggle(
-        label: Localisation.vosFavoris,
+        label: Localisation.mesFavoris,
         value: context.select<BibliothequeBloc, bool>(
           (final value) => value.state.isFavorites,
         ),

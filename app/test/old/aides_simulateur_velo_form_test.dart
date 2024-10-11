@@ -137,7 +137,7 @@ void main() {
         expect(aideVeloPortMock.nombreDePartsFiscales, nombreDePart);
         expect(aideVeloPortMock.revenuFiscal, revenuFiscal);
 
-        ielVoitLeTexte(Localisation.vosAidesDisponibles);
+        ielVoitLeTexte(Localisation.mesAidesDisponibles);
         ielVoitLeTexte(Localisation.aucuneAideDisponible, n: 2);
       },
     );
@@ -153,7 +153,7 @@ void main() {
           enterText: '',
         );
         await ielAppuieSur(tester, Localisation.estimerMesAides);
-        ielNeVoitPasLeTexte(Localisation.vosAidesDisponibles);
+        ielNeVoitPasLeTexte(Localisation.mesAidesDisponibles);
       },
     );
 
@@ -274,7 +274,7 @@ Future<void> _allerSurLeSimulateurVelo(
   ielALesAidesSuivantes([aide]);
   ielEstConnecte();
   await ielLanceLapplication(tester);
-  await ielAppuieSur(tester, Localisation.accueilMesAidesLien);
+  await ielAppuieSur(tester, Localisation.mesAidesLien);
   await ielAppuieSur(tester, aide.titre);
   await ielAppuieSur(tester, Localisation.accederAuSimulateur);
 }

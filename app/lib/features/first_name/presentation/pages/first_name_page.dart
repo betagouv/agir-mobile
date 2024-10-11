@@ -87,7 +87,7 @@ class FirstNamePage extends StatelessWidget {
                   ),
                   const SizedBox(height: DsfrSpacings.s3w),
                   DsfrInput(
-                    label: Localisation.votrePrenom,
+                    label: Localisation.monPrenom,
                     onChanged: (final value) {
                       context.read<FirstNameBloc>().add(
                             FirstNameChanged(FirstName.create(value)),

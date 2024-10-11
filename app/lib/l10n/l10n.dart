@@ -7,13 +7,11 @@ abstract final class Localisation {
 
   static const aDecouvrir = 'À découvrir';
   static const accederAuSimulateur = 'Accéder au simulateur';
-  static const accueilMesAides = 'Mes aides';
-  static const accueilMesAidesLien = 'Voir toutes les aides';
   static const accueilRecommandationsSousTitre =
       'Une sélection d’articles et de services, pour vous, selon vos préférences !';
-  static const accueilRecommandationsTitre = 'Recommandé, pour vous';
+  static const recommandationsTitre = 'Recommandé, pour vous';
   static const acheterUnVelo = 'Acheter un vélo';
-  static const adresseEmail = 'Votre adresse email';
+  static const adresseEmail = 'Mon adresse email';
   static const adultes = 'Adulte(s)';
   static const aideVeloAvertissement =
       'Veuillez compléter ces informations afin de débuter l’estimation';
@@ -35,8 +33,9 @@ abstract final class Localisation {
       'Attention, aucune donnée ne pourra être récupérée.';
   static const aucuneAideDisponible = 'Aucune aide\ndisponible';
   static const autreJeNeSaisPas = 'Autre / Je ne sais pas';
-  static const baseDeConnaissances = 'Base de connaissances';
-  static const bibliotheque = 'Bibliothèque';
+  static const bibliotheque = 'Ma bibliothèque';
+  static const bibliothequeSousTitre =
+      'Retrouver ici vos articles déjà consultés ainsi que vos favoris';
   static const bibliothequeAucunArticle = 'Aucun article trouvé';
   static const bienvenueSur = 'Bienvenue sur J’agis ! Faisons connaissance...';
   static const bienvenueSurDetails =
@@ -51,7 +50,7 @@ abstract final class Localisation {
       'Cette action ne vous convient pas ?';
   static const cetteActionNeVousConvientPasDetails =
       'On ne vise pas toujours juste ! Dites-nous pourquoi en quelques mots et nous affinerons nos recommandations à l’avenir. (facultatif)';
-  static const changerVotreMotDePasse = 'Changer votre mot de passe';
+  static const changerMonMotDePasse = 'Changer mon mot de passe';
   static const changerVotreMotDePasseConfirmation =
       'Votre mot de passe a été changé.';
   static const codePostal = 'Code postal';
@@ -63,7 +62,7 @@ abstract final class Localisation {
   static const continuer = 'Continuer';
   static const continuerLaLecture = 'Continuer la lecture';
   static const creerMonCompte = 'Créer mon compte';
-  static const creezVotreCompte = 'Créez votre compte J’agis';
+  static const creezMonCompteApp = 'Créez mon compte J’agis';
   static const declarationAccessibilite = "Déclaration d'accessibilité";
   static const declarationAccessibiliteSite =
       'https://jagis.beta.gouv.fr/accessibilite';
@@ -133,12 +132,11 @@ abstract final class Localisation {
   static const mentionsLegalesSite =
       'https://jagis.beta.gouv.fr/mentions-legales';
   static const menu = 'Menu';
-  static const menuAccueil = 'Accueil';
-  static const menuAides = 'Aides';
+  static const accueil = 'Accueil';
   static const mesInformationsAdresseEmail = 'Adresse e-mail : ';
   static const mesServices = 'Mes services';
   static const mettreAJour = 'Mettre à jour';
-  static const mettreAJourVosInformations = 'Mettre à jour vos informations';
+  static const mettreAJourMesInformations = 'Mettre à jour mes informations';
   static const mieuxVousConnaitre = 'Mieux vous connaître';
   static const miseAJourEffectuee = 'Mise à jour effectuée';
   static const modifier = 'Modifier';
@@ -177,7 +175,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez 1 part pour
 
 Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme des revenus de toutes les personnes avec lequelles vous partagez vos déclarations d’impôts (pour toute l’année) pour vous faire une première idée.''';
   static const oui = 'Oui';
-  static const pageConnexionTitre = 'Accédez à votre compte J’agis';
+  static const pageConnexionTitre = 'Accédez à mon compte J’agis';
   static const partieDeux = '2. LIRE DES ARTICLES ET RÉPONDRE AUX QUIZ';
   static const partieQuatre = '4. GAGNER VOTRE CARTE';
   static const partieTrois = '3. RÉALISER AU MOINS UNE ACTION PROPOSÉE';
@@ -220,12 +218,12 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const retour = 'Retour';
   static const revenirAuSimulateur = 'Revenir au simulateur';
   static const revenirEnArriere = 'Revenir en arrière';
-  static const revenuFiscal = 'Revenu fiscal de référence de votre foyer';
+  static const revenuFiscal = 'Revenu fiscal de référence de mon foyer';
   static const revenuQuestion = 'Quelle est votre tranche de revenus ?';
   static const seDeconnecter = 'Se déconnecter';
   static const simulateur = 'Simulateur';
   static const simulerMonAide = 'Simuler mon aide';
-  static const supprimerVotreCompte = 'Supprimer votre compte';
+  static const supprimerVotreCompte = 'Supprimer mon compte';
   static const supprimerVotreCompteConfirmation =
       'Veuillez confirmer la suppression du compte';
   static const supprimerVotreCompteContenu =
@@ -241,23 +239,21 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
       'Découvrez des thèmes et débloquez de nouvelles actions';
   static const valider = 'Valider';
   static const voirLesDemarches = 'Voir les démarches';
-  static const vosActions = 'Vos actions';
-  static const vosAidesDisponibles = 'Vos aides disponibles';
-  static const vosAidesSousTitre =
+  static const mesActions = 'Mes actions';
+  static const mesAides = 'Mes aides';
+  static const mesAidesDisponibles = 'Mes aides disponibles';
+  static const mesAidesLien = 'Voir toutes les aides';
+  static const mesAidesSousTitre =
       'Accédez à toutes les aides publiques locales ou nationales pour la transition écologique en fonction de votre situation.';
-  static const vosAidesTitre = 'Vos aides disponibles';
-  static const vosFavoris = 'Vos favoris';
-  static const vosInformations = 'Vos informations';
-  static const votreIdentite = 'Votre identité';
-  static const votreLogement = 'Votre logement';
-  static const votreLogementPlusDe15Ans =
-      'Votre logement a-t-il plus de 15 ans ?';
-  static const votreMotDePasseDoitContenir =
-      'Votre mot de passe doit contenir :';
-  static const votrePrenom = 'Votre prénom';
-  static const votreProfil = 'Votre profil';
-  static const votreResidencePrincipaleEst =
-      'Votre résidence principale est ...';
+  static const mesFavoris = 'Mes favoris';
+  static const mesInformations = 'Mes informations';
+  static const monIdentite = 'Mon identité';
+  static const monLogement = 'Mon logement';
+  static const monLogementPlusDe15Ans = 'Mon logement a-t-il plus de 15 ans ?';
+  static const monMotDePasseDoitContenir = 'Mon mot de passe doit contenir :';
+  static const monPrenom = 'Mon prénom';
+  static const monProfil = 'Mon profil';
+  static const maResidencePrincipaleEst = 'Ma résidence principale est ...';
   static const vousAvezDejaUnCompte = 'Vous avez déjà un compte ?';
   static const vousEtesProprietaireDeVotreLogement =
       'Vous êtes propriétaire de votre logement ?';

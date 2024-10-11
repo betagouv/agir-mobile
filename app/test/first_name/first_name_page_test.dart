@@ -154,7 +154,7 @@ void main() {
         find.bySemanticsLabel(Localisation.bienvenueSurDetails),
         findsOneWidget,
       );
-      expect(find.bySemanticsLabel(Localisation.votrePrenom), findsOneWidget);
+      expect(find.bySemanticsLabel(Localisation.monPrenom), findsOneWidget);
       expect(find.bySemanticsLabel(Localisation.continuer), findsOneWidget);
     });
   });

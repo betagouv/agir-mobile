@@ -20,7 +20,7 @@ void main() {
   testWidgets('Allez sur la page Base de connaissances', (final tester) async {
     setUpWidgets(tester);
     await _allerSurBibliotheque(tester);
-    ielVoitLeTexte(Localisation.baseDeConnaissances);
+    ielVoitLeTexte(Localisation.bibliotheque);
   });
 
   testWidgets('Voir un article', (final tester) async {

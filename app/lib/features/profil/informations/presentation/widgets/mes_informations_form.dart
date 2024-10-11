@@ -19,8 +19,9 @@ class MesInformationsForm extends StatelessWidget {
   Widget build(final BuildContext context) => ListView(
         padding: const EdgeInsets.all(paddingVerticalPage),
         children: const [
-          FnvTitle(title: Localisation.vosInformations),
-          ProfilTitrePartie(titre: Localisation.votreIdentite),
+          FnvTitle(title: Localisation.mesInformations),
+          SizedBox(height: DsfrSpacings.s3w),
+          ProfilTitrePartie(titre: Localisation.monIdentite),
           SizedBox(height: DsfrSpacings.s2w),
           MesInformationsEmail(),
           SizedBox(height: DsfrSpacings.s4w),

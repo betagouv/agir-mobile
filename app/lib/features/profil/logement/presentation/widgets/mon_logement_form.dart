@@ -22,7 +22,8 @@ class MonLogementForm extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.all(paddingVerticalPage),
       children: const [
-        FnvTitle(title: Localisation.votreLogement),
+        FnvTitle(title: Localisation.monLogement),
+        SizedBox(height: DsfrSpacings.s3w),
         MonLogementCodePostalEtCommune(),
         gap,
         MonLogementCombienEtesVous(),

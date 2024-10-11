@@ -27,13 +27,13 @@ void main() {
   testWidgets('Voir tous les textes', (final tester) async {
     setUpWidgets(tester);
     await _allerSurMonLogement(tester);
-    ielVoitLeTexte(Localisation.votreLogement);
+    ielVoitLeTexte(Localisation.monLogement);
     ielVoitLeTexte(Localisation.codePostal);
     ielVoitLeTexte(Localisation.commune);
     ielVoitLeTexte(Localisation.combienEtesVousDansVotreLogement);
     ielVoitLeTexte(Localisation.adultes);
     ielVoitLeTexte(Localisation.enfants);
-    ielVoitLeTexte(Localisation.votreResidencePrincipaleEst);
+    ielVoitLeTexte(Localisation.maResidencePrincipaleEst);
     ielVoitLeTexte(Localisation.unAppartement);
     ielVoitLeTexte(Localisation.uneMaison);
     await ielScrolle(tester, Localisation.vousEtesProprietaireDeVotreLogement);
@@ -52,8 +52,8 @@ void main() {
     ielVoitLeTexte(Localisation.fioul);
     ielVoitLeTexte(Localisation.gaz);
     ielVoitLeTexte(Localisation.autreJeNeSaisPas);
-    await ielScrolle(tester, Localisation.votreLogementPlusDe15Ans);
-    ielVoitLeTexte(Localisation.votreLogementPlusDe15Ans);
+    await ielScrolle(tester, Localisation.monLogementPlusDe15Ans);
+    ielVoitLeTexte(Localisation.monLogementPlusDe15Ans);
     ielVoitLeTexte(Localisation.oui);
     ielVoitLeTexte(Localisation.non);
     ielVoitLeTexte(Localisation.consommationsEnergetiques);
@@ -75,7 +75,7 @@ void main() {
     ielVoitLeTexte(_commune);
     ielVoitLeTexte(_nombreAdultes.toString());
     ielVoitLeTexte(_nombreEnfants.toString());
-    await ielScrolle(tester, Localisation.votreResidencePrincipaleEst);
+    await ielScrolle(tester, Localisation.maResidencePrincipaleEst);
     ielVoitLeBoutonRadioAvecCeTexteSelectionne(Localisation.uneMaison);
     ielVoitLeBoutonRadioAvecCeTexteSelectionne(Localisation.non);
     ielVoitLeBoutonRadioAvecCeTexteSelectionne(Localisation.entre70et100m2);
@@ -121,7 +121,7 @@ void main() {
         label: Localisation.enfants,
         enterText: nombreEnfants.toString(),
       );
-      await ielScrolle(tester, Localisation.votreResidencePrincipaleEst);
+      await ielScrolle(tester, Localisation.maResidencePrincipaleEst);
       await ielAppuieSur(tester, Localisation.unAppartement);
       await ielAppuieSur(tester, Localisation.oui);
       await ielAppuieSur(tester, Localisation.moinsDe35m2);
@@ -135,7 +135,7 @@ void main() {
       await ielScrolle(tester, Localisation.consommationsEnergetiques);
       await ielAppuieSur(tester, Localisation.dpeC);
 
-      await ielAppuieSur(tester, Localisation.mettreAJourVosInformations);
+      await ielAppuieSur(tester, Localisation.mettreAJourMesInformations);
 
       final profilPortMock = ScenarioContext().profilPortMock!;
       expect(profilPortMock.codePostal, codePostal);
@@ -168,6 +168,6 @@ Future<void> _allerSurMonLogement(final WidgetTester tester) async {
   ielEstConnecte();
   await ielLanceLapplication(tester);
   await ielAppuieSurAccessibilite(tester, Localisation.menu);
-  await ielAppuieSur(tester, Localisation.votreProfil);
-  await ielAppuieSur(tester, Localisation.votreLogement);
+  await ielAppuieSur(tester, Localisation.monProfil);
+  await ielAppuieSur(tester, Localisation.monLogement);
 }
