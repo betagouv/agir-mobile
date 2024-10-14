@@ -110,6 +110,7 @@ class MieuxVousConnaitreEditBloc
         switch (aState) {
           case MieuxVousConnaitreEditLoaded():
             emit(const MieuxVousConnaitreEditInitial());
+
             final result = await mieuxVousConnaitrePort.mettreAJour(
               aState.newQuestion,
             );
@@ -122,6 +123,7 @@ class MieuxVousConnaitreEditBloc
               ),
               (final r) {
                 emit(const MieuxVousConnaitreEditMisAJour());
+                emit(aState);
               },
             );
           default:
