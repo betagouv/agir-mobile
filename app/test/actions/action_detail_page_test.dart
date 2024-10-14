@@ -402,6 +402,7 @@ void main() {
       },
     );
 
+    // TODO(lsaudon): flaky test
     testWidgets(
       'l\'action "pas pour moi" dont seul le motif change',
       (final tester) async {

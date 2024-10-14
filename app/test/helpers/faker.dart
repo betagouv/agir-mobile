@@ -1,4 +1,73 @@
+import 'package:app/features/univers/core/domain/service_item.dart';
 import 'package:faker/faker.dart';
+
+ServiceItem serviceItemFaker() => ServiceItem(
+      titre: _fakerSentenceBetter(),
+      sousTitre: _fakerSentenceBetter(),
+      externalUrl: faker.internet.httpsUrl(),
+    );
+
+Map<String, dynamic> generateChoixUniqueQuestion(final bool withResponse) => {
+      'categorie': 'mission',
+      'id': 'KYC_${faker.lorem.word()}',
+      'is_NGC': faker.randomGenerator.boolean(),
+      'points': faker.randomGenerator.integer(10),
+      'question': _fakerSentenceBetter(),
+      'reponse': withResponse ? [faker.lorem.word()] : <String>[],
+      'reponses_possibles': [
+        faker.lorem.word(),
+        faker.lorem.word(),
+        faker.lorem.word(),
+      ],
+      'thematique': generateThematique,
+      'type': 'choix_unique',
+    };
+
+// Map<String, dynamic> generateChoixMultipleQuestion() => {
+//       'categorie': 'mission',
+//       'id': 'KYC_${faker.lorem.word()}',
+//       'is_NGC': faker.randomGenerator.boolean(),
+//       'points': faker.randomGenerator.integer(10),
+//       'question': _fakerSentenceBetter(),
+//       'reponse': [faker.lorem.word(), faker.lorem.word()],
+//       'reponses_possibles': [
+//         faker.lorem.word(),
+//         faker.lorem.word(),
+//         faker.lorem.word(),
+//       ],
+//       'thematique': generateThematique,
+//       'type': 'choix_multiple',
+//     };
+
+// Map<String, dynamic> generateLibreQuestion() => {
+//       'categorie': 'mission',
+//       'id': 'KYC_${faker.lorem.word()}',
+//       'is_NGC': faker.randomGenerator.boolean(),
+//       'points': faker.randomGenerator.integer(10),
+//       'question': _fakerSentenceBetter(),
+//       'reponse': [_fakerSentenceBetter()],
+//       'reponses_possibles': <String>[],
+//       'thematique': generateThematique,
+//       'type': 'libre',
+//     };
+
+// Map<String, dynamic> generateMosaicBooleanQuestion() => {
+//       'categorie': 'mission',
+//       'id': 'MOSAIC_${faker.lorem.word().toUpperCase()}',
+//       'is_answered': true,
+//       'points': faker.randomGenerator.integer(20),
+//       'reponses': List.generate(
+//         4,
+//         (final index) => {
+//           'boolean_value': faker.randomGenerator.boolean(),
+//           'code': 'KYC_${faker.lorem.word()}',
+//           'image_url': faker.image.loremPicsum(),
+//           'label': faker.lorem.word(),
+//         },
+//       ),
+//       'titre': _fakerSentenceBetter(),
+//       'type': 'mosaic_boolean',
+//     };
 
 Map<String, dynamic> actionItemFaker() {
   final faker = Faker();
@@ -13,7 +82,7 @@ Map<String, dynamic> actionItemFaker() {
       'abondon',
       'fait',
     ].elementAt(faker.randomGenerator.integer(5)),
-    'titre': faker.lorem.sentence(),
+    'titre': _fakerSentenceBetter(),
   };
 }
 
@@ -44,15 +113,15 @@ Map<String, dynamic> actionFaker({
   ];
 
   return {
-    'astuces': '<p>${faker.lorem.sentence()}</p>',
+    'astuces': '<p>${_fakerSentenceBetter()}</p>',
     'id': id ?? faker.guid.guid(),
     'motif': reason,
-    'pourquoi': '<p>${faker.lorem.sentence()}</p>',
+    'pourquoi': '<p>${_fakerSentenceBetter()}</p>',
     'status': status ??
         statusList.elementAt(faker.randomGenerator.integer(statusList.length)),
     'thematique_label':
         thematique.elementAt(faker.randomGenerator.integer(thematique.length)),
-    'titre': faker.lorem.sentence(),
+    'titre': _fakerSentenceBetter(),
   };
 }
 
@@ -60,7 +129,7 @@ Map<String, dynamic> aideFaker() {
   final faker = Faker();
 
   return {
-    'contenu': faker.lorem.sentence(),
+    'contenu': _fakerSentenceBetter(),
     'montant_max': faker.randomGenerator.boolean()
         ? faker.randomGenerator.integer(10000)
         : null,
@@ -78,7 +147,7 @@ Map<String, dynamic> aideVeloFaker() {
   final faker = Faker();
 
   return {
-    'description': faker.lorem.sentence(),
+    'description': _fakerSentenceBetter(),
     'libelle': faker.company.name(),
     'lien': faker.internet.uri('https'),
     'logo': faker.image.loremPicsum(),
@@ -118,8 +187,9 @@ Map<String, dynamic> choixUniqueQuestionFaker(final bool withResponse) => {
       'id': 'KYC_${faker.lorem.word()}',
       'is_NGC': faker.randomGenerator.boolean(),
       'points': faker.randomGenerator.integer(10),
-      'question': faker.lorem.sentence(),
-      'reponse': withResponse ? [faker.lorem.word()] : <String>[],
+      'question': _fakerSentenceBetter(),
+      'reponse':
+          withResponse ? [faker.lorem.word() + faker.lorem.word()] : <String>[],
       'reponses_possibles': [
         faker.lorem.word(),
         faker.lorem.word(),
@@ -129,13 +199,19 @@ Map<String, dynamic> choixUniqueQuestionFaker(final bool withResponse) => {
       'type': 'choix_unique',
     };
 
+String _fakerSentenceBetter() =>
+    '${faker.lorem.sentence()} ${faker.lorem.word()}';
+
 Map<String, dynamic> choixMultipleQuestionFaker() => {
       'categorie': 'mission',
       'id': 'KYC_${faker.lorem.word()}',
       'is_NGC': faker.randomGenerator.boolean(),
       'points': faker.randomGenerator.integer(10),
-      'question': faker.lorem.sentence(),
-      'reponse': [faker.lorem.word(), faker.lorem.word()],
+      'question': _fakerSentenceBetter(),
+      'reponse': [
+        faker.lorem.word() + faker.lorem.word(),
+        faker.lorem.word() + faker.lorem.word(),
+      ],
       'reponses_possibles': [
         faker.lorem.word(),
         faker.lorem.word(),
@@ -150,8 +226,8 @@ Map<String, dynamic> libreQuestionFaker() => {
       'id': 'KYC_${faker.lorem.word()}',
       'is_NGC': faker.randomGenerator.boolean(),
       'points': faker.randomGenerator.integer(10),
-      'question': faker.lorem.sentence(),
-      'reponse': [faker.lorem.sentence()],
+      'question': _fakerSentenceBetter(),
+      'reponse': [_fakerSentenceBetter()],
       'reponses_possibles': <String>[],
       'thematique': generateThematique,
       'type': 'libre',
@@ -171,6 +247,6 @@ Map<String, dynamic> mosaicBooleanQuestionFaker() => {
           'label': faker.lorem.word(),
         },
       ),
-      'titre': faker.lorem.sentence(),
+      'titre': _fakerSentenceBetter(),
       'type': 'mosaic_boolean',
     };
