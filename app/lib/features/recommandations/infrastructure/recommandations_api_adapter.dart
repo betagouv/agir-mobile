@@ -1,8 +1,8 @@
 // ignore_for_file: no-equal-switch-expression-cases
 
 import 'dart:convert';
-import 'dart:io';
 
+import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/authentification/core/infrastructure/authentification_api_client.dart';
 import 'package:app/features/profil/core/domain/utilisateur_id_non_trouve_exception.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
@@ -35,7 +35,7 @@ class RecommandationsApiAdapter implements RecommandationsPort {
 
     final response = await _apiClient.get(uri);
 
-    if (response.statusCode != HttpStatus.ok) {
+    if (isResponseUnsuccessful(response.statusCode)) {
       return Left(
         Exception('Erreur lors de la récupération des recommandations'),
       );

@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:app/core/error/infrastructure/api_erreur_helpers.dart';
+import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/authentification/core/infrastructure/authentification_api_client.dart';
 import 'package:app/features/first_name/domain/first_name.dart';
 import 'package:app/features/first_name/domain/first_name_port.dart';
@@ -29,7 +29,7 @@ final class FirstNameAdapter implements FirstNamePort {
 
     final response = await _apiClient.patch(uri, body: body);
 
-    return response.statusCode == HttpStatus.ok
+    return isResponseSuccessful(response.statusCode)
         ? const Right(unit)
         : handleError(
             response.body,

@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'dart:io';
 
+import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/aides/core/domain/aide.dart';
 import 'package:app/features/aides/core/domain/aides_port.dart';
 import 'package:app/features/aides/core/infrastructure/aide_mapper.dart';
@@ -17,7 +17,7 @@ class AidesApiAdapter implements AidesPort {
   Future<Either<Exception, List<Aide>>> fetchAides() async {
     final response = await _client.get('/utilisateurs/{userId}/aides');
 
-    if (response.statusCode != HttpStatus.ok) {
+    if (isResponseUnsuccessful(response.statusCode)) {
       return Left(Exception('Erreur lors de la récupération des aides'));
     }
 

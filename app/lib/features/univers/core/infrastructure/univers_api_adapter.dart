@@ -1,8 +1,8 @@
 // ignore_for_file: no-equal-switch-expression-cases
 
 import 'dart:convert';
-import 'dart:io';
 
+import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/authentification/core/infrastructure/authentification_api_client.dart';
 import 'package:app/features/profil/core/domain/utilisateur_id_non_trouve_exception.dart';
 import 'package:app/features/univers/core/domain/content_id.dart';
@@ -34,7 +34,7 @@ class UniversApiAdapter implements UniversPort {
     final response =
         await _apiClient.get(Uri.parse('/utilisateurs/$utilisateurId/univers'));
 
-    if (response.statusCode != HttpStatus.ok) {
+    if (isResponseUnsuccessful(response.statusCode)) {
       return Left(Exception('Erreur lors de la récupération des univers'));
     }
 
@@ -64,7 +64,7 @@ class UniversApiAdapter implements UniversPort {
       ),
     );
 
-    if (response.statusCode != HttpStatus.ok) {
+    if (isResponseUnsuccessful(response.statusCode)) {
       return Left(Exception('Erreur lors de la récupération des missions'));
     }
 
@@ -94,7 +94,7 @@ class UniversApiAdapter implements UniversPort {
       ),
     );
 
-    if (response.statusCode != HttpStatus.ok) {
+    if (isResponseUnsuccessful(response.statusCode)) {
       return Left(Exception('Erreur lors de la récupération de la mission'));
     }
 
@@ -118,7 +118,7 @@ class UniversApiAdapter implements UniversPort {
       body: jsonEncode({'element_id': id.value}),
     );
 
-    return response.statusCode == HttpStatus.ok
+    return isResponseSuccessful(response.statusCode)
         ? const Right(null)
         : Left(Exception('Erreur lors du gain de points'));
   }
@@ -137,7 +137,7 @@ class UniversApiAdapter implements UniversPort {
       ),
     );
 
-    return response.statusCode == HttpStatus.ok
+    return isResponseSuccessful(response.statusCode)
         ? const Right(null)
         : Left(Exception('Erreur lors de la fin de la mission'));
   }
@@ -156,7 +156,7 @@ class UniversApiAdapter implements UniversPort {
       ),
     );
 
-    return response.statusCode == HttpStatus.ok
+    return isResponseSuccessful(response.statusCode)
         ? Right(
             (jsonDecode(response.body) as List<dynamic>)
                 .map((final e) => e as Map<String, dynamic>)

@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:app/core/error/domain/api_erreur.dart';
 import 'package:app/core/error/infrastructure/api_erreur_helpers.dart';
+import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/authentication/domain/authentication_service.dart';
 import 'package:app/features/authentification/core/domain/authentification_port.dart';
 import 'package:app/features/authentification/core/domain/information_de_code.dart';
@@ -36,7 +36,7 @@ class AuthentificationApiAdapter implements AuthentificationPort {
       }),
     );
 
-    if (response.statusCode == HttpStatus.created) {
+    if (isResponseSuccessful(response.statusCode)) {
       _connexionDemandee = true;
 
       return const Right(null);
@@ -78,7 +78,7 @@ class AuthentificationApiAdapter implements AuthentificationPort {
       }),
     );
 
-    return response.statusCode == HttpStatus.created
+    return isResponseSuccessful(response.statusCode)
         ? const Right(null)
         : handleError(
             response.body,
@@ -95,7 +95,7 @@ class AuthentificationApiAdapter implements AuthentificationPort {
       body: jsonEncode({'email': email}),
     );
 
-    return response.statusCode == HttpStatus.ok
+    return isResponseSuccessful(response.statusCode)
         ? const Right(null)
         : Left(Exception('Erreur lors de la validation du code'));
   }
@@ -116,7 +116,7 @@ class AuthentificationApiAdapter implements AuthentificationPort {
       }),
     );
 
-    if (response.statusCode == HttpStatus.created) {
+    if (isResponseSuccessful(response.statusCode)) {
       _connexionDemandee = false;
       final json = jsonDecode(response.body) as Map<String, dynamic>;
       final token = json['token'] as String;
@@ -139,7 +139,7 @@ class AuthentificationApiAdapter implements AuthentificationPort {
       body: jsonEncode({'email': email}),
     );
 
-    return response.statusCode == HttpStatus.created
+    return isResponseSuccessful(response.statusCode)
         ? const Right(null)
         : Left(Exception('Erreur lors de la demande de mot de passe oublié'));
   }
@@ -159,7 +159,7 @@ class AuthentificationApiAdapter implements AuthentificationPort {
       }),
     );
 
-    return response.statusCode == HttpStatus.created
+    return isResponseSuccessful(response.statusCode)
         ? const Right(null)
         : handleError(
             response.body,
@@ -177,7 +177,7 @@ class AuthentificationApiAdapter implements AuthentificationPort {
     final response =
         await _apiClient.get(Uri.parse('/utilisateurs/$utilisateurId'));
 
-    if (response.statusCode != HttpStatus.ok) {
+    if (isResponseUnsuccessful(response.statusCode)) {
       return Left(
         Exception("Erreur lors de la récupération de l'utilisateur"),
       );

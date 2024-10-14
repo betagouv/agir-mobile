@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'dart:io';
 
+import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/authentification/core/infrastructure/authentification_api_client.dart';
 import 'package:app/features/authentification/core/infrastructure/cms_api_client.dart';
 import 'package:app/features/profil/core/domain/utilisateur_id_non_trouve_exception.dart';
@@ -31,7 +31,7 @@ class QuizApiAdapter implements QuizPort {
       ),
     );
 
-    if (cmsResponse.statusCode != HttpStatus.ok) {
+    if (isResponseUnsuccessful(cmsResponse.statusCode)) {
       return Left(Exception('Erreur lors de la récupération du quiz'));
     }
 
@@ -43,7 +43,7 @@ class QuizApiAdapter implements QuizPort {
       final articleResponse = await _apiClient.get(
         Uri.parse('utilisateurs/$utilisateurId/bibliotheque/articles/$id'),
       );
-      if (articleResponse.statusCode != HttpStatus.ok) {
+      if (isResponseUnsuccessful(articleResponse.statusCode)) {
         return Left(Exception("Erreur lors de la récupération de l'article"));
       }
       articleData = jsonDecode(articleResponse.body) as Map<String, dynamic>;
@@ -71,7 +71,7 @@ class QuizApiAdapter implements QuizPort {
       }),
     );
 
-    return response.statusCode == HttpStatus.ok
+    return isResponseSuccessful(response.statusCode)
         ? const Right(null)
         : Left(Exception('Erreur lors de la validation du quiz'));
   }

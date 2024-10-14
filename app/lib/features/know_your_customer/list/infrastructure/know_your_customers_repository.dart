@@ -1,5 +1,4 @@
-import 'dart:io';
-
+import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/mieux_vous_connaitre/core/domain/question.dart';
 import 'package:app/features/mieux_vous_connaitre/core/infrastructure/question_mapper.dart';
@@ -13,7 +12,7 @@ class KnowYourCustomersRepository {
 
   Future<Either<Exception, List<Question>>> fetchQuestions() async {
     final response = await _client.get('/utilisateurs/{userId}/questionsKYC');
-    if (response.statusCode == HttpStatus.ok) {
+    if (isResponseSuccessful(response.statusCode)) {
       final data = response.data! as List<dynamic>;
 
       return Right(

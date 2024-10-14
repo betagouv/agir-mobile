@@ -1,8 +1,8 @@
 // ignore_for_file: avoid-slow-collection-methods
 
 import 'dart:convert';
-import 'dart:io';
 
+import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/mieux_vous_connaitre/core/domain/mieux_vous_connaitre_port.dart';
 import 'package:app/features/mieux_vous_connaitre/core/domain/question.dart';
@@ -23,7 +23,7 @@ class MieuxVousConnaitreApiAdapter implements MieuxVousConnaitrePort {
       '/utilisateurs/{userId}/questionsKYC/$id',
     );
 
-    if (response.statusCode != HttpStatus.ok) {
+    if (isResponseUnsuccessful(response.statusCode)) {
       return Left(Exception('Erreur lors de la récupération de la question'));
     }
 
@@ -57,7 +57,7 @@ class MieuxVousConnaitreApiAdapter implements MieuxVousConnaitrePort {
       data: jsonEncode(object),
     );
 
-    return response.statusCode == HttpStatus.ok
+    return isResponseSuccessful(response.statusCode)
         ? const Right(null)
         : Left(Exception('Erreur lors de la mise à jour des réponses'));
   }

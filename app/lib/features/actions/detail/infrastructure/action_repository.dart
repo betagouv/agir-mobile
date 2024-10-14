@@ -1,5 +1,4 @@
-import 'dart:io';
-
+import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/features/actions/core/domain/action_id.dart';
 import 'package:app/features/actions/core/domain/action_status.dart';
@@ -23,7 +22,7 @@ class ActionRepository {
       '/utilisateurs/{userId}/defis/${id.value}',
     );
 
-    return response.statusCode == HttpStatus.ok
+    return isResponseSuccessful(response.statusCode)
         ? Right(ActionMapper.fromJson(response.data as Map<String, dynamic>))
         : Left(Exception('Erreur lors de la récupération des actions'));
   }
@@ -49,7 +48,7 @@ class ActionRepository {
     }
     final response = await _client.patch(path, data: data);
 
-    if (response.statusCode == HttpStatus.ok) {
+    if (isResponseSuccessful(response.statusCode)) {
       _messageBus.publish(actionCompletedTopic);
 
       return const Right(unit);

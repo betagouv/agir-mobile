@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'dart:io';
 
+import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/authentification/core/infrastructure/authentification_api_client.dart';
 import 'package:app/features/communes/domain/communes_port.dart';
 import 'package:fpdart/fpdart.dart';
@@ -19,7 +19,7 @@ class CommunesApiAdapter implements CommunesPort {
     final response =
         await _apiClient.get(Uri.parse('/communes?code_postal=$codePostal'));
 
-    return response.statusCode == HttpStatus.ok
+    return isResponseSuccessful(response.statusCode)
         ? Right((jsonDecode(response.body) as List<dynamic>).cast())
         : Left(Exception('Erreur lors de la récupération des communes'));
   }
