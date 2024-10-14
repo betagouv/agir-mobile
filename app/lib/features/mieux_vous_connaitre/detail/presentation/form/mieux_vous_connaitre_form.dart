@@ -69,6 +69,10 @@ class _Content extends StatelessWidget {
                     ),
               ),
           },
+          buildWhen: (final oldState, final newState) =>
+              (oldState is! MieuxVousConnaitreEditLoaded ||
+                  newState is! MieuxVousConnaitreEditLoaded) ||
+              oldState.question != newState.question,
         ),
       );
 }
