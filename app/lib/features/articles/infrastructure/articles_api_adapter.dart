@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'dart:io';
 
+import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/articles/domain/article.dart';
 import 'package:app/features/articles/domain/articles_port.dart';
 import 'package:app/features/articles/infrastructure/article_mapper.dart';
@@ -39,8 +39,8 @@ class ArticlesApiAdapter implements ArticlesPort {
 
     final cmsResponse = responses.first;
     final apiResponse = responses[1];
-    if (cmsResponse.statusCode != HttpStatus.ok ||
-        apiResponse.statusCode != HttpStatus.ok) {
+    if (isResponseUnsuccessful(cmsResponse.statusCode) ||
+        isResponseUnsuccessful(apiResponse.statusCode)) {
       return Left(Exception("Erreur lors de la récupération de l'article"));
     }
 
@@ -68,7 +68,7 @@ class ArticlesApiAdapter implements ArticlesPort {
       body: jsonEncode({'content_id': id, 'type': 'article_lu'}),
     );
 
-    return response.statusCode == HttpStatus.ok
+    return isResponseSuccessful(response.statusCode)
         ? const Right(null)
         : Left(Exception('Erreur lors de la validation du quiz'));
   }
@@ -85,7 +85,7 @@ class ArticlesApiAdapter implements ArticlesPort {
       body: jsonEncode({'content_id': id, 'type': 'article_favoris'}),
     );
 
-    return response.statusCode == HttpStatus.ok
+    return isResponseSuccessful(response.statusCode)
         ? const Right(null)
         : Left(Exception("Erreur lors de l'ajout de l'article aux favoris"));
   }
@@ -102,7 +102,7 @@ class ArticlesApiAdapter implements ArticlesPort {
       body: jsonEncode({'content_id': id, 'type': 'article_non_favoris'}),
     );
 
-    return response.statusCode == HttpStatus.ok
+    return isResponseSuccessful(response.statusCode)
         ? const Right(null)
         : Left(Exception("Erreur lors du retrait de l'article aux favoris"));
   }

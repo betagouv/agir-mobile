@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/simulateur_velo/domain/aide_velo_par_type.dart';
 import 'package:app/features/simulateur_velo/domain/aide_velo_port.dart';
@@ -65,7 +66,7 @@ class AideVeloApiAdapter implements AideVeloPort {
     ]);
 
     for (final response in responses) {
-      if (response.statusCode != HttpStatus.ok) {
+      if (isResponseUnsuccessful(response.statusCode)) {
         return Left(Exception('Erreur lors de la mise à jour du profil'));
       }
     }

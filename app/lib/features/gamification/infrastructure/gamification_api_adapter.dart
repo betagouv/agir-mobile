@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 
+import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/features/authentification/core/infrastructure/authentification_api_client.dart';
 import 'package:app/features/gamification/domain/gamification.dart';
@@ -33,7 +33,7 @@ class GamificationApiAdapter implements GamificationPort {
     final response = await _apiClient.get(
       Uri.parse('/utilisateurs/$utilisateurId/gamification'),
     );
-    if (response.statusCode != HttpStatus.ok) {
+    if (isResponseUnsuccessful(response.statusCode)) {
       return Left(Exception('Erreur lors de la récupération des points'));
     }
 

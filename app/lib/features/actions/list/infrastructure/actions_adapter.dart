@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'dart:io';
 
+import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/actions/list/domain/action_item.dart';
 import 'package:app/features/actions/list/domain/actions_port.dart';
 import 'package:app/features/actions/list/infrastructure/action_item_mapper.dart';
@@ -17,7 +17,7 @@ class ActionsAdapter implements ActionsPort {
   Future<Either<Exception, List<ActionItem>>> fetchActions() async {
     final response = await _client.get('/utilisateurs/{userId}/defis');
 
-    if (response.statusCode != HttpStatus.ok) {
+    if (isResponseUnsuccessful(response.statusCode)) {
       return Left(Exception('Erreur lors de la récupération des actions'));
     }
 
