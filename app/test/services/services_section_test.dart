@@ -5,19 +5,18 @@ import 'package:app/features/gamification/presentation/bloc/gamification_bloc.da
 import 'package:app/features/recommandations/domain/recommandation.dart';
 import 'package:app/features/recommandations/domain/recommandations_port.dart';
 import 'package:app/features/recommandations/presentation/bloc/recommandations_bloc.dart';
-import 'package:app/features/univers/core/domain/service_item.dart';
 import 'package:app/features/univers/core/domain/tuile_univers.dart';
 import 'package:app/features/univers/core/domain/univers_port.dart';
 import 'package:app/features/univers/presentation/pages/univers_page.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:clock/clock.dart';
-import 'package:faker/faker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:mocktail_image_network/mocktail_image_network.dart';
 
+import '../helpers/faker.dart';
 import '../helpers/pump_page.dart';
 import '../old/api/flutter_secure_storage_fake.dart';
 
@@ -90,13 +89,11 @@ Future<void> _pumpUniversPage(
 }
 
 void main() {
-  final faker = Faker();
-
   group('Services devrait ', () {
     testWidgets(
       "afficher la liste des services de l'univers",
       (final tester) async {
-        final services = List.generate(5, (final _) => _serviceItem(faker));
+        final services = List.generate(5, (final _) => serviceItemFaker());
         final universPort = _UniversPortMock();
         when(() => universPort.getServices(any())).thenAnswer(
           (final _) async => Right(services),
@@ -116,9 +113,3 @@ void main() {
     );
   });
 }
-
-ServiceItem _serviceItem(final Faker faker) => ServiceItem(
-      titre: faker.lorem.sentence(),
-      sousTitre: faker.lorem.sentence(),
-      externalUrl: faker.internet.httpsUrl(),
-    );
