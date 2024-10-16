@@ -50,6 +50,7 @@ class MieuxVousConnaitreApiAdapter implements MieuxVousConnaitrePort {
               )
               .toList(),
         },
+      EntierQuestion() => {'reponse': question.responses.value},
     };
 
     final response = await _client.put(

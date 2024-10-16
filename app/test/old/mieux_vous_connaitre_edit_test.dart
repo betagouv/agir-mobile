@@ -11,6 +11,7 @@ import 'steps/iel_appuie_sur_accesibilite.dart';
 import 'steps/iel_ecrit_dans_le_champ.dart';
 import 'steps/iel_est_connecte.dart';
 import 'steps/iel_lance_lapplication.dart';
+import 'steps/iel_ne_voit_pas_le_texte.dart';
 import 'steps/iel_scrolle.dart';
 import 'steps/iel_voit_le_texte.dart';
 import 'steps/le_serveur_retourne_ces_questions.dart';
@@ -99,6 +100,65 @@ void main() {
       await ielAppuieSur(tester, Localisation.mettreAJour);
       ielVoitLeTexte(Localisation.mieuxVousConnaitre);
       ielVoitLeTexte(nouvelleReponse);
+    },
+  );
+
+  testWidgets(
+    'Modifier la réponse à une question entier',
+    (final tester) async {
+      setUpWidgets(tester);
+      const question = 'Quelle est votre situation professionnelle ?';
+      const reponse = '10000';
+      leServeurRetourneCesQuestions([
+        const EntierQuestion(
+          id: QuestionId('KYC005'),
+          text: QuestionText(question),
+          responses: Responses([reponse]),
+          points: Points(5),
+          theme: QuestionTheme.climat,
+        ),
+      ]);
+      await _allerSurMieuxVousConnaitre(tester);
+      await ielAppuieSur(tester, question);
+      const nouvelleReponse = '1000';
+      await ielEcritDansLeChamp(
+        tester,
+        label: Localisation.maReponse,
+        enterText: nouvelleReponse,
+      );
+      await ielAppuieSur(tester, Localisation.mettreAJour);
+      ielVoitLeTexte(Localisation.mieuxVousConnaitre);
+      ielVoitLeTexte(nouvelleReponse);
+    },
+  );
+
+  testWidgets(
+    'Ne pas modifier la réponse à une question entier',
+    (final tester) async {
+      setUpWidgets(tester);
+      const question = 'Quelle est votre situation professionnelle ?';
+      const reponse = '10000';
+      leServeurRetourneCesQuestions([
+        const EntierQuestion(
+          id: QuestionId('KYC005'),
+          text: QuestionText(question),
+          responses: Responses([reponse]),
+          points: Points(5),
+          theme: QuestionTheme.climat,
+        ),
+      ]);
+      await _allerSurMieuxVousConnaitre(tester);
+      await ielAppuieSur(tester, question);
+      const nouvelleReponse = 'Michel';
+      await ielEcritDansLeChamp(
+        tester,
+        label: Localisation.maReponse,
+        enterText: nouvelleReponse,
+      );
+      await ielAppuieSur(tester, Localisation.mettreAJour);
+      ielVoitLeTexte(Localisation.mieuxVousConnaitre);
+      ielVoitLeTexte(reponse);
+      ielNeVoitPasLeTexte(nouvelleReponse);
     },
   );
 

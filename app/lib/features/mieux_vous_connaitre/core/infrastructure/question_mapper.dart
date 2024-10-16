@@ -11,6 +11,7 @@ abstract final class QuestionMapper {
       'choix_unique' => _createChoixUniqueQuestion(json),
       'libre' => _createLibreQuestion(json),
       'mosaic_boolean' => _createMosaicQuestion(json),
+      'entier' => _createEntierQuestion(json),
       _ => null,
     };
   }
@@ -45,6 +46,17 @@ abstract final class QuestionMapper {
 
   static LibreQuestion _createLibreQuestion(final Map<String, dynamic> json) =>
       LibreQuestion(
+        id: QuestionId(json['id'] as String),
+        text: QuestionText(json['question'] as String),
+        responses: _createResponses(json['reponse'] as List<dynamic>),
+        points: Points((json['points'] as num).toInt()),
+        theme: _mapThematiqueFromJson(json['thematique'] as String),
+      );
+
+  static EntierQuestion _createEntierQuestion(
+    final Map<String, dynamic> json,
+  ) =>
+      EntierQuestion(
         id: QuestionId(json['id'] as String),
         text: QuestionText(json['question'] as String),
         responses: _createResponses(json['reponse'] as List<dynamic>),

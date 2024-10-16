@@ -85,6 +85,25 @@ class MieuxVousConnaitreEditBloc
         }
       },
     );
+    on<MieuxVousConnaitreEditEntierChangee>(
+      (final event, final emit) async {
+        final aState = state;
+        if (aState is MieuxVousConnaitreEditLoaded) {
+          final question = aState.question;
+          final newQuestion = aState.newQuestion;
+          if (question is EntierQuestion && newQuestion is EntierQuestion) {
+            emit(
+              MieuxVousConnaitreEditLoaded(
+                question: question,
+                newQuestion: newQuestion.responsesChanged(
+                  reponses: Responses([event.value]),
+                ),
+              ),
+            );
+          }
+        }
+      },
+    );
     on<MieuxVousConnaitreEditMosaicChangee>(
       (final event, final emit) async {
         final aState = state;
