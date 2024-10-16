@@ -116,6 +116,26 @@ class LibreQuestion extends StandardQuestion {
       );
 }
 
+class EntierQuestion extends StandardQuestion {
+  const EntierQuestion({
+    required super.id,
+    required super.text,
+    required super.responses,
+    required super.points,
+    required super.theme,
+  });
+
+  @override
+  EntierQuestion responsesChanged({required final Responses reponses}) =>
+      EntierQuestion(
+        id: id,
+        text: text,
+        responses: reponses,
+        points: points,
+        theme: theme,
+      );
+}
+
 class ChoixUniqueQuestion extends ChoixQuestion {
   const ChoixUniqueQuestion({
     required super.id,

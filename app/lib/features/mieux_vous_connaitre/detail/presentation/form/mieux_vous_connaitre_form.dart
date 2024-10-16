@@ -5,6 +5,7 @@ import 'package:app/features/mieux_vous_connaitre/detail/presentation/bloc/mieux
 import 'package:app/features/mieux_vous_connaitre/detail/presentation/bloc/mieux_vous_connaitre_edit_state.dart';
 import 'package:app/features/mieux_vous_connaitre/detail/presentation/form/choix_multiple.dart';
 import 'package:app/features/mieux_vous_connaitre/detail/presentation/form/choix_unique.dart';
+import 'package:app/features/mieux_vous_connaitre/detail/presentation/form/entier.dart';
 import 'package:app/features/mieux_vous_connaitre/detail/presentation/form/libre.dart';
 import 'package:app/features/mieux_vous_connaitre/detail/presentation/form/mieux_vous_connaitre_controller.dart';
 import 'package:app/features/mieux_vous_connaitre/detail/presentation/form/mosaic.dart';
@@ -97,6 +98,7 @@ class _LoadedContent extends StatelessWidget {
       ChoixUniqueQuestion() => _ChoixUniqueContent(question: question),
       LibreQuestion() => _LibreContent(question: question),
       MosaicQuestion() => _MosaicContent(question: question),
+      EntierQuestion() => _EntierContent(question: question),
     };
   }
 }
@@ -145,6 +147,21 @@ class _LibreContent extends StatelessWidget {
           FnvTitle(title: question.text.value),
           const SizedBox(height: DsfrSpacings.s3w),
           Libre(question: question),
+        ],
+      );
+}
+
+class _EntierContent extends StatelessWidget {
+  const _EntierContent({required this.question});
+
+  final EntierQuestion question;
+
+  @override
+  Widget build(final BuildContext context) => Column(
+        children: [
+          FnvTitle(title: question.text.value),
+          const SizedBox(height: DsfrSpacings.s3w),
+          Entier(question: question),
         ],
       );
 }

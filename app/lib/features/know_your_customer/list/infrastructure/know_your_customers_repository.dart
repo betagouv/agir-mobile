@@ -20,14 +20,7 @@ class KnowYourCustomersRepository {
             .map((final e) => e as Map<String, dynamic>)
             .map(QuestionMapper.fromJson)
             .whereType<Question>()
-            .where(
-              (final e) => switch (e) {
-                LibreQuestion() => e.responses.value.isNotEmpty,
-                ChoixUniqueQuestion() => e.responses.value.isNotEmpty,
-                ChoixMultipleQuestion() => e.responses.value.isNotEmpty,
-                MosaicQuestion() => e.answered,
-              },
-            )
+            .where((final e) => e.isAnswered())
             .toList(),
       );
     }

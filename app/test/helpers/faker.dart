@@ -180,6 +180,7 @@ Map<String, dynamic> questionFaker() => faker.randomGenerator.element([
       choixMultipleQuestionFaker(),
       libreQuestionFaker(),
       mosaicBooleanQuestionFaker(),
+      entierQuestionFaker(),
     ]);
 
 Map<String, dynamic> choixUniqueQuestionFaker(final bool withResponse) => {
@@ -198,9 +199,6 @@ Map<String, dynamic> choixUniqueQuestionFaker(final bool withResponse) => {
       'thematique': generateThematique,
       'type': 'choix_unique',
     };
-
-String _fakerSentenceBetter() =>
-    '${faker.lorem.sentence()} ${faker.lorem.word()}';
 
 Map<String, dynamic> choixMultipleQuestionFaker() => {
       'categorie': 'mission',
@@ -250,3 +248,18 @@ Map<String, dynamic> mosaicBooleanQuestionFaker() => {
       'titre': _fakerSentenceBetter(),
       'type': 'mosaic_boolean',
     };
+
+Map<String, dynamic> entierQuestionFaker() => {
+      'categorie': 'mission',
+      'id': 'KYC_${faker.lorem.word()}',
+      'is_NGC': faker.randomGenerator.boolean(),
+      'points': faker.randomGenerator.integer(10),
+      'question': _fakerSentenceBetter(),
+      'reponse': [faker.randomGenerator.integer(1000).toString()],
+      'reponses_possibles': <String>[],
+      'thematique': generateThematique,
+      'type': 'entier',
+    };
+
+String _fakerSentenceBetter() =>
+    '${faker.lorem.sentence()} ${faker.lorem.word()}';

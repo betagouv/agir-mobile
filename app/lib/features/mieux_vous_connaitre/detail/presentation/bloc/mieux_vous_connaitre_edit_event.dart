@@ -58,6 +58,16 @@ final class MieuxVousConnaitreEditMosaicChangee
   List<Object> get props => [value];
 }
 
+final class MieuxVousConnaitreEditEntierChangee
+    extends MieuxVousConnaitreEditEvent {
+  const MieuxVousConnaitreEditEntierChangee(this.value);
+
+  final String value;
+
+  @override
+  List<Object> get props => [value];
+}
+
 final class MieuxVousConnaitreEditMisAJourDemandee
     extends MieuxVousConnaitreEditEvent {
   const MieuxVousConnaitreEditMisAJourDemandee(this.id);
