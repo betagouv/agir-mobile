@@ -17,6 +17,11 @@ class FnvImage extends StatelessWidget {
   final String? semanticLabel;
   final BoxFit? fit;
 
+  int? _cacheSize(final BuildContext context, {final double? value}) =>
+      value == null
+          ? null
+          : (MediaQuery.devicePixelRatioOf(context) * value).round();
+
   @override
   Widget build(final BuildContext context) => imageUrl.endsWith('.svg')
       ? SizedBox(
@@ -27,14 +32,22 @@ class FnvImage extends StatelessWidget {
             width: width,
             height: height,
             fit: fit ?? BoxFit.cover,
+            placeholderBuilder: (final context) =>
+                SizedBox(width: width, height: height),
             semanticsLabel: semanticLabel,
           ),
         )
       : Image.network(
           imageUrl,
+          loadingBuilder: (final context, final child, final loadingProgress) =>
+              loadingProgress == null
+                  ? child
+                  : SizedBox(width: width, height: height),
           semanticLabel: semanticLabel,
           width: width,
           height: height,
           fit: fit,
+          cacheWidth: _cacheSize(context, value: width),
+          cacheHeight: _cacheSize(context, value: height),
         );
 }
