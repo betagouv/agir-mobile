@@ -39,6 +39,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:native_dio_adapter/native_dio_adapter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 Future<void> main() async {
@@ -153,7 +154,7 @@ class _MyAppState extends State<MyApp> {
               baseUrl: url.toString(),
               validateStatus: (final status) => true,
             ),
-          );
+          )..httpClientAdapter = NativeAdapter();
 
           final dioHttpClient = DioHttpClient(
             dio: dio,
