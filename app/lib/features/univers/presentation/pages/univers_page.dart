@@ -196,6 +196,7 @@ class _Thematique extends StatelessWidget {
               child: FnvImage.network(
                 mission.imageUrl,
                 width: width,
+                height: 130,
                 fit: BoxFit.cover,
               ),
             ),
