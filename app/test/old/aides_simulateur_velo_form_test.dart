@@ -36,7 +36,7 @@ void main() {
       thematique: '🚗 Transports',
       contenu: '<p>Contenu</p>',
       montantMax: 3500,
-      urlSimulateur: '/vos-aides/velo',
+      urlSimulateur: '/aides/velo',
     );
     const prixParDefaut = 1000;
     const codePostal = '39100';

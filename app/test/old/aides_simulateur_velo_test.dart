@@ -17,7 +17,7 @@ void main() {
       thematique: '🚗 Transports',
       contenu: '<p>Contenu</p>',
       montantMax: 1500,
-      urlSimulateur: '/vos-aides/velo',
+      urlSimulateur: '/aides/velo',
     );
 
     testWidgets(
