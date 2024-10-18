@@ -76,7 +76,7 @@ class EnvironmentalPerformanceCategory extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: DsfrSpacings.s1w),
-                  Text(label, style: const DsfrTextStyle.bodyLgBold()),
+                  Text(label, style: const DsfrTextStyle.bodyLg()),
                   Text(
                     '$numberOfQuestions questions',
                     style: const DsfrTextStyle.bodySmBold(color: _color),
