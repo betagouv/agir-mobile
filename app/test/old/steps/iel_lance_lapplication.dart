@@ -5,7 +5,7 @@ import 'package:app/features/actions/list/domain/actions_port.dart';
 import 'package:app/features/authentication/domain/authentication_service.dart';
 import 'package:app/features/authentication/domain/authentication_status.dart';
 import 'package:app/features/authentication/infrastructure/authentication_repository.dart';
-import 'package:app/features/environmental_performance/infrastructure/environment_performance_question_repository.dart';
+import 'package:app/features/environmental_performance/questions/infrastructure/environment_performance_question_repository.dart';
 import 'package:app/features/environmental_performance/summary/infrastructure/environmental_performance_summary_repository.dart';
 import 'package:clock/clock.dart';
 import 'package:flutter/material.dart';
