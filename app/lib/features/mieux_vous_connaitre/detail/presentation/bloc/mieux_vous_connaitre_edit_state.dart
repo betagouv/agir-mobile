@@ -16,17 +16,15 @@ final class MieuxVousConnaitreEditLoaded extends MieuxVousConnaitreEditState {
   const MieuxVousConnaitreEditLoaded({
     required this.question,
     required this.newQuestion,
+    required this.updated,
   });
 
   final Question question;
   final Question newQuestion;
+  final bool updated;
 
   @override
-  List<Object> get props => [question, newQuestion];
-}
-
-final class MieuxVousConnaitreEditMisAJour extends MieuxVousConnaitreEditState {
-  const MieuxVousConnaitreEditMisAJour();
+  List<Object> get props => [question, newQuestion, updated];
 }
 
 final class MieuxVousConnaitreEditError extends MieuxVousConnaitreEditState {

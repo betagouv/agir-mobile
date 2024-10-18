@@ -34,6 +34,7 @@ class MieuxVousConnaitreForm extends StatelessWidget {
         create: (final context) => MieuxVousConnaitreEditBloc(
           mieuxVousConnaitrePort: context.read(),
         )..add(MieuxVousConnaitreEditRecuperationDemandee(id)),
+        lazy: false,
         child: _Content(controller: controller, onSaved: onSaved),
       );
 }
@@ -49,7 +50,7 @@ class _Content extends StatelessWidget {
       BlocListener<MieuxVousConnaitreEditBloc, MieuxVousConnaitreEditState>(
         listener: (final context, final state) {
           final aState = state;
-          if (aState is MieuxVousConnaitreEditMisAJour) {
+          if (aState is MieuxVousConnaitreEditLoaded && aState.updated) {
             onSaved?.call();
             ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
@@ -61,9 +62,7 @@ class _Content extends StatelessWidget {
         child: BlocBuilder<MieuxVousConnaitreEditBloc,
             MieuxVousConnaitreEditState>(
           builder: (final context, final state) => switch (state) {
-            MieuxVousConnaitreEditInitial() ||
-            MieuxVousConnaitreEditMisAJour() =>
-              const SizedBox(),
+            MieuxVousConnaitreEditInitial() => const SizedBox.shrink(),
             MieuxVousConnaitreEditLoaded() =>
               _LoadedContent(controller: controller, state: state),
             MieuxVousConnaitreEditError() => FnvFailureWidget(
@@ -80,20 +79,36 @@ class _Content extends StatelessWidget {
       );
 }
 
-class _LoadedContent extends StatelessWidget {
+class _LoadedContent extends StatefulWidget {
   const _LoadedContent({required this.controller, required this.state});
 
   final MieuxVousConnaitreEditLoaded state;
   final MieuxVousConnaitreController controller;
+
+  @override
+  State<_LoadedContent> createState() => _LoadedContentState();
+}
+
+class _LoadedContentState extends State<_LoadedContent> {
+  @override
+  void initState() {
+    super.initState();
+    widget.controller.addListener(_listener);
+  }
+
+  void _listener() => context.read<MieuxVousConnaitreEditBloc>().add(
+        MieuxVousConnaitreEditMisAJourDemandee(widget.state.question.id.value),
+      );
+
+  @override
+  void dispose() {
+    widget.controller.removeListener(_listener);
+    super.dispose();
+  }
+
   @override
   Widget build(final BuildContext context) {
-    final question = state.question;
-    void listener() => context.read<MieuxVousConnaitreEditBloc>().add(
-          MieuxVousConnaitreEditMisAJourDemandee(question.id.value),
-        );
-    controller
-      ..removeListener(listener)
-      ..addListener(listener);
+    final question = widget.state.question;
 
     return switch (question) {
       ChoixMultipleQuestion() => _ChoixMultipleContent(question: question),
