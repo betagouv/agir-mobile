@@ -41,7 +41,7 @@ class _Painter extends CustomPainter {
   }
 
   void _drawProgress(final Canvas canvas, final Size size) {
-    final width = value * size.width;
+    final width = value.clamp(0, 1) * size.width;
     if (width <= 0.0) {
       return;
     }

@@ -7,8 +7,7 @@ class RainbowProgressBar extends StatelessWidget {
   /// Creates a progress bar.
   ///
   /// The [value] must be between 0.0 and 1.0, inclusive.
-  const RainbowProgressBar({super.key, required this.value})
-      : assert(value >= 0 && value <= 1, 'Value must be between 0.0 and 1.0');
+  const RainbowProgressBar({super.key, required this.value});
 
   /// The progress value, from 0.0 to 1.0.
   final double value;
@@ -37,7 +36,7 @@ class _Painter extends CustomPainter {
 
   @override
   void paint(final Canvas canvas, final Size size) {
-    final width = value * size.width;
+    final width = value.clamp(0, 1) * size.width;
     if (width <= 0.0) {
       return;
     }

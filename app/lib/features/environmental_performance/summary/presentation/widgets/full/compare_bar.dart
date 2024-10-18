@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CompareBar extends StatelessWidget {
-  const CompareBar({super.key, required this.value})
-      : assert(value >= 0 && value <= 1, 'Value must be between 0.0 and 1.0');
+  const CompareBar({super.key, required this.value});
 
   final double value;
 
@@ -44,7 +43,7 @@ class _Painter extends CustomPainter {
   }
 
   void _drawProgressBar(final Canvas canvas, final Size size) {
-    final progressWidth = value * size.width;
+    final progressWidth = value.clamp(0, 1) * size.width;
     if (progressWidth <= 0.0) {
       return;
     }
