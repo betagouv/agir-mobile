@@ -69,11 +69,6 @@ class EnvironmentalPerformanceTonnesCard extends StatelessWidget {
                   p: const DsfrTextStyle.bodyMd(),
                 ),
               ),
-              const SizedBox(height: DsfrSpacings.s4w),
-              DsfrLink.sm(
-                label: EnvironmentalPerformanceSummaryL10n.quEstCeQueCest,
-                onTap: () {},
-              ),
             ],
           ),
         ),
