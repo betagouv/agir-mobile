@@ -82,16 +82,6 @@ class _MenuItems extends StatelessWidget {
         ),
         const SizedBox(height: DsfrSpacings.s2w),
         _MenuItem(
-          label: Localisation.bilanEnvironnemental,
-          value: EnvironmentalPerformanceSummaryPage.name,
-          groupValue: groupValue,
-          onTap: () async => _redirigeSiLaPageCourantEstDifferente(
-            context,
-            EnvironmentalPerformanceSummaryPage.name,
-          ),
-        ),
-        const SizedBox(height: DsfrSpacings.s2w),
-        _MenuItem(
           label: Localisation.mesAides,
           value: AidesPage.name,
           groupValue: groupValue,
@@ -106,6 +96,16 @@ class _MenuItems extends StatelessWidget {
           onTap: () async => _redirigeSiLaPageCourantEstDifferente(
             context,
             BibliothequePage.name,
+          ),
+        ),
+        const SizedBox(height: DsfrSpacings.s2w),
+        _MenuItem(
+          label: Localisation.bilanEnvironnemental,
+          value: EnvironmentalPerformanceSummaryPage.name,
+          groupValue: groupValue,
+          onTap: () async => _redirigeSiLaPageCourantEstDifferente(
+            context,
+            EnvironmentalPerformanceSummaryPage.name,
           ),
         ),
         const Spacer(),
