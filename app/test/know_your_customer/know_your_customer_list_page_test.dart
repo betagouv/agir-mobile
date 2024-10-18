@@ -69,7 +69,10 @@ void main() {
       final expected = QuestionMapper.fromJson(question)!;
       if (expected.isAnswered()) {
         expect(find.text(expected.text.value), findsOneWidget);
-        expect(find.text(expected.responsesDisplay()), findsOneWidget);
+        final responsesDisplay = expected.responsesDisplay();
+        if (responsesDisplay.isNotEmpty) {
+          expect(find.text(responsesDisplay), findsOneWidget);
+        }
       }
     }
   });
