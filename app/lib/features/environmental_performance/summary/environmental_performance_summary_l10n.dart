@@ -54,5 +54,4 @@ Calculer son **bilan environnemental** permet de comprendre quels sont nos usage
   static const deCO2eParAn = 'de CO₂e par an';
   static const aTitreDeComparaison =
       'À titre de comparaison, la moyenne française est de **9,2 tonnes**';
-  static const quEstCeQueCest = 'Qu’est-ce que c’est ?';
 }
