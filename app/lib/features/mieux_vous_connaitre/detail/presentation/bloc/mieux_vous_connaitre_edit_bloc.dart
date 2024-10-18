@@ -19,8 +19,13 @@ class MieuxVousConnaitreEditBloc
           (final l) => emit(
             MieuxVousConnaitreEditError(id: event.id, error: l.toString()),
           ),
-          (final r) =>
-              emit(MieuxVousConnaitreEditLoaded(question: r, newQuestion: r)),
+          (final r) => emit(
+            MieuxVousConnaitreEditLoaded(
+              question: r,
+              newQuestion: r,
+              updated: false,
+            ),
+          ),
         );
       },
     );
@@ -39,6 +44,7 @@ class MieuxVousConnaitreEditBloc
                 newQuestion: newQuestion.responsesChanged(
                   reponses: Responses(event.value),
                 ),
+                updated: false,
               ),
             );
           }
@@ -60,6 +66,7 @@ class MieuxVousConnaitreEditBloc
                 newQuestion: newQuestion.responsesChanged(
                   reponses: Responses([event.value]),
                 ),
+                updated: false,
               ),
             );
           }
@@ -80,6 +87,7 @@ class MieuxVousConnaitreEditBloc
                 newQuestion: newQuestion.responsesChanged(
                   reponses: Responses([event.value]),
                 ),
+                updated: false,
               ),
             );
           }
@@ -99,6 +107,7 @@ class MieuxVousConnaitreEditBloc
                 newQuestion: newQuestion.responsesChanged(
                   reponses: Responses([event.value]),
                 ),
+                updated: false,
               ),
             );
           }
@@ -118,6 +127,7 @@ class MieuxVousConnaitreEditBloc
                 question: question,
                 newQuestion:
                     newQuestion.responsesChanged(responses: event.value),
+                updated: false,
               ),
             );
           }
@@ -142,8 +152,20 @@ class MieuxVousConnaitreEditBloc
                 ),
               ),
               (final r) {
-                emit(const MieuxVousConnaitreEditMisAJour());
-                emit(aState);
+                emit(
+                  MieuxVousConnaitreEditLoaded(
+                    question: aState.newQuestion,
+                    newQuestion: aState.newQuestion,
+                    updated: true,
+                  ),
+                );
+                emit(
+                  MieuxVousConnaitreEditLoaded(
+                    question: aState.newQuestion,
+                    newQuestion: aState.newQuestion,
+                    updated: false,
+                  ),
+                );
               },
             );
           default:

@@ -38,7 +38,7 @@ abstract final class _MosaicButtonStyles {
   static const unselected = _MosaicButtonStyle.unselected();
   static const borderRadius =
       BorderRadius.all(Radius.circular(DsfrSpacings.s1w));
-  static const minSize = 100.0;
+  static const minSize = 120.0;
 }
 
 class MosaicButton extends StatelessWidget {
@@ -78,8 +78,8 @@ class MosaicButton extends StatelessWidget {
               minWidth: _MosaicButtonStyles.minSize,
               minHeight: _MosaicButtonStyles.minSize,
             ),
-            child: SizedBox.square(
-              dimension: size,
+            child: SizedBox(
+              width: size,
               child: Material(
                 color: Colors.transparent,
                 child: InkWell(
