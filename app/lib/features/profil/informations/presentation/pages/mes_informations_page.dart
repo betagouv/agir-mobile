@@ -39,9 +39,11 @@ class _MesInformationsView extends StatelessWidget {
     context
         .read<MesInformationsBloc>()
         .add(const MesInformationsMiseAJourDemandee());
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text(Localisation.miseAJourEffectuee)),
-    );
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        const SnackBar(content: Text(Localisation.miseAJourEffectuee)),
+      );
     GoRouter.of(context).pop();
   }
 

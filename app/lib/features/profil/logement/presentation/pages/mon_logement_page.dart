@@ -38,9 +38,11 @@ class _MonLogementView extends StatelessWidget {
 
   void _handleMettreAJour(final BuildContext context) {
     context.read<MonLogementBloc>().add(const MonLogementMiseAJourDemandee());
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text(Localisation.miseAJourEffectuee)),
-    );
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        const SnackBar(content: Text(Localisation.miseAJourEffectuee)),
+      );
     GoRouter.of(context).pop();
   }
 
