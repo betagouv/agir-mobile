@@ -191,7 +191,7 @@ class _Body extends StatelessWidget {
                           ),
                           const SizedBox(height: DsfrSpacings.s1v),
                           Text(
-                            e.description.replaceAll('\n', ''),
+                            e.description.trim(),
                             style: const DsfrTextStyle.bodyXs(),
                           ),
                           const SizedBox(height: DsfrSpacings.s1v),
