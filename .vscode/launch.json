@@ -10,7 +10,8 @@
         "--flavor",
         "development",
         "--dart-define-from-file",
-        "env.development.json"
+        "env.development.json",
+        "--dart-define=cronetHttpNoPlay=true"
       ]
     },
     {
@@ -22,7 +23,8 @@
         "--flavor",
         "production",
         "--dart-define-from-file",
-        "env.production.json"
+        "env.production.json",
+        "--dart-define=cronetHttpNoPlay=true"
       ]
     },
     {
