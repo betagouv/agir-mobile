@@ -75,6 +75,7 @@ class AuthentificationApiAdapter implements AuthentificationPort {
       body: jsonEncode({
         'email': informationDeConnexion.adresseMail,
         'mot_de_passe': informationDeConnexion.motDePasse,
+        'source_inscription': 'mobile',
       }),
     );
 

@@ -227,7 +227,7 @@ void main() {
           that: RequestMathcher(
             '/utilisateurs_v2',
             body:
-                '{"email":"${informationDeConnexion.adresseMail}","mot_de_passe":"${informationDeConnexion.motDePasse}"}',
+                '{"email":"${informationDeConnexion.adresseMail}","mot_de_passe":"${informationDeConnexion.motDePasse}","source_inscription":"mobile"}',
           ),
         ),
       ),
