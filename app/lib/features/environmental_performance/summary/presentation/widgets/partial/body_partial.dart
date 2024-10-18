@@ -45,7 +45,7 @@ class BodyPartial extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: DsfrSpacings.s3w),
+          const SizedBox(height: DsfrSpacings.s4w),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
             child: Text(
@@ -85,7 +85,7 @@ class BodyPartial extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: DsfrSpacings.s3w),
+          const SizedBox(height: DsfrSpacings.s4w),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
             child: Text.rich(
@@ -159,7 +159,7 @@ class BodyPartial extends StatelessWidget {
           ),
           const SizedBox(height: DsfrSpacings.s7w),
           const QuestionSection(),
-          const SizedBox(height: DsfrSpacings.s3w),
+          const SizedBox(height: DsfrSpacings.s4w),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
             child: PartnerCard(),

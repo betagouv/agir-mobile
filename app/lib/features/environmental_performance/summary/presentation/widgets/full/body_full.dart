@@ -40,7 +40,7 @@ class BodyFull extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: DsfrSpacings.s3w),
+          const SizedBox(height: DsfrSpacings.s4w),
           Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: paddingVerticalPage),
@@ -48,7 +48,7 @@ class BodyFull extends StatelessWidget {
               footprint: data.footprintInKgOfCO2ePerYear,
             ),
           ),
-          const SizedBox(height: DsfrSpacings.s3w),
+          const SizedBox(height: DsfrSpacings.s4w),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
             child: Text(
@@ -56,7 +56,7 @@ class BodyFull extends StatelessWidget {
               style: DsfrTextStyle.headline4(),
             ),
           ),
-          const SizedBox(height: DsfrSpacings.s3w),
+          const SizedBox(height: DsfrSpacings.s4w),
           ...data.top
               .mapIndexed(
                 (final i, final e) => Padding(
@@ -72,7 +72,7 @@ class BodyFull extends StatelessWidget {
                 ),
               )
               .separator(const SizedBox(height: DsfrSpacings.s3w)),
-          const SizedBox(height: DsfrSpacings.s3w),
+          const SizedBox(height: DsfrSpacings.s4w),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
             child: Text(
@@ -80,7 +80,7 @@ class BodyFull extends StatelessWidget {
               style: DsfrTextStyle.headline4(),
             ),
           ),
-          const SizedBox(height: DsfrSpacings.s3w),
+          const SizedBox(height: DsfrSpacings.s4w),
           FnvAccordionsGroup(
             values: data.detail
                 .map(
@@ -119,7 +119,7 @@ class BodyFull extends StatelessWidget {
                 )
                 .toList(),
           ),
-          const SizedBox(height: DsfrSpacings.s3w),
+          const SizedBox(height: DsfrSpacings.s4w),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
             child: PartnerCard(),

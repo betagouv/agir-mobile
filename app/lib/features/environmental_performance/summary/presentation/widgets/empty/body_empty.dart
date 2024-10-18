@@ -44,7 +44,7 @@ class BodyEmpty extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: DsfrSpacings.s3w),
+          const SizedBox(height: DsfrSpacings.s4w),
           Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: paddingVerticalPage),
@@ -62,7 +62,7 @@ class BodyEmpty extends StatelessWidget {
               style: DsfrTextStyle.bodyLg(),
             ),
           ),
-          const SizedBox(height: DsfrSpacings.s3v),
+          const SizedBox(height: DsfrSpacings.s3w),
           Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: paddingVerticalPage),
@@ -97,9 +97,9 @@ class BodyEmpty extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: DsfrSpacings.s3w),
+          const SizedBox(height: DsfrSpacings.s4w),
           const QuestionSection(),
-          const SizedBox(height: DsfrSpacings.s3w),
+          const SizedBox(height: DsfrSpacings.s4w),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
             child: PartnerCard(),
