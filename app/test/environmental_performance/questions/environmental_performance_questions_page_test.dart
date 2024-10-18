@@ -1,5 +1,5 @@
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
-import 'package:app/features/environmental_performance/infrastructure/environment_performance_question_repository.dart';
+import 'package:app/features/environmental_performance/questions/infrastructure/environment_performance_question_repository.dart';
 import 'package:app/features/environmental_performance/questions/presentation/bloc/environmental_performance_question_bloc.dart';
 import 'package:app/features/environmental_performance/questions/presentation/page/environmental_performance_question_page.dart';
 import 'package:app/features/environmental_performance/summary/environmental_performance_summary_l10n.dart';

@@ -13,7 +13,7 @@ import 'package:app/features/authentification/core/domain/authentification_port.
 import 'package:app/features/bibliotheque/domain/bibliotheque_port.dart';
 import 'package:app/features/bibliotheque/presentation/bloc/bibliotheque_bloc.dart';
 import 'package:app/features/communes/domain/communes_port.dart';
-import 'package:app/features/environmental_performance/infrastructure/environment_performance_question_repository.dart';
+import 'package:app/features/environmental_performance/questions/infrastructure/environment_performance_question_repository.dart';
 import 'package:app/features/environmental_performance/questions/presentation/bloc/environmental_performance_question_bloc.dart';
 import 'package:app/features/environmental_performance/summary/infrastructure/environmental_performance_summary_repository.dart';
 import 'package:app/features/first_name/domain/first_name_port.dart';
