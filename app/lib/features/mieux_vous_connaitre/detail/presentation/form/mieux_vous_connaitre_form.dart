@@ -52,11 +52,6 @@ class _Content extends StatelessWidget {
           final aState = state;
           if (aState is MieuxVousConnaitreEditLoaded && aState.updated) {
             onSaved?.call();
-            ScaffoldMessenger.of(context)
-              ..hideCurrentSnackBar()
-              ..showSnackBar(
-                const SnackBar(content: Text(Localisation.miseAJourEffectuee)),
-              );
           }
         },
         child: BlocBuilder<MieuxVousConnaitreEditBloc,
