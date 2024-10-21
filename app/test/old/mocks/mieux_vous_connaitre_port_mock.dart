@@ -13,12 +13,12 @@ class MieuxVousConnaitrePortMock
   List<Question> questions;
 
   @override
-  Future<Either<Exception, void>> mettreAJour(final Question question) async {
+  Future<Either<Exception, Unit>> mettreAJour(final Question question) async {
     questions
       ..removeWhere((final e) => e.id.value == question.id.value)
       ..add(question);
 
-    return const Right(null);
+    return const Right(unit);
   }
 
   @override

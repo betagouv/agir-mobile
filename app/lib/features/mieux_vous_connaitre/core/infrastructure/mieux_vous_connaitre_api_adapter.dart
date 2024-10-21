@@ -42,7 +42,7 @@ class MieuxVousConnaitreApiAdapter implements MieuxVousConnaitrePort {
   }
 
   @override
-  Future<Either<Exception, void>> mettreAJour(final Question question) async {
+  Future<Either<Exception, Unit>> mettreAJour(final Question question) async {
     final object = switch (question) {
       ChoixMultipleQuestion() => {'reponse': question.responses.value},
       ChoixUniqueQuestion() => {'reponse': question.responses.value},
@@ -66,7 +66,7 @@ class MieuxVousConnaitreApiAdapter implements MieuxVousConnaitrePort {
     if (isResponseSuccessful(response.statusCode)) {
       _messageBus.publish(kycTopic);
 
-      return const Right(null);
+      return const Right(unit);
     }
 
     return Left(Exception('Erreur lors de la mise à jour des réponses'));
