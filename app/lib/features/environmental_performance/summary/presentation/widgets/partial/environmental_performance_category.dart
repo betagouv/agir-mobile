@@ -1,3 +1,4 @@
+import 'package:app/core/presentation/widgets/composants/badge.dart';
 import 'package:app/core/presentation/widgets/composants/fnv_image.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/shadows.dart';
@@ -16,7 +17,6 @@ class EnvironmentalPerformanceCategory extends StatelessWidget {
 
   static const _imageWidth = 130.0;
   static const _imageHeight = 126.0;
-  static const _color = DsfrColors.blueFranceSun113;
 
   final String imageUrl;
   final int completion;
@@ -28,7 +28,10 @@ class EnvironmentalPerformanceCategory extends StatelessWidget {
   Widget build(final BuildContext context) {
     final progression = completion / 100;
 
-    return DecoratedBox(
+    final color =
+        progression >= 1 ? DsfrColors.success425 : DsfrColors.blueFranceSun113;
+
+    final widget = DecoratedBox(
       decoration: const ShapeDecoration(
         color: Colors.white,
         shadows: recommandationOmbre,
@@ -68,7 +71,7 @@ class EnvironmentalPerformanceCategory extends StatelessWidget {
                   LinearProgressIndicator(
                     value: progression,
                     backgroundColor: const Color(0xFFEEEEFF),
-                    color: _color,
+                    color: color,
                     minHeight: DsfrSpacings.s1v5,
                     semanticsLabel: 'Bilan complété à $completion%',
                     borderRadius: const BorderRadius.all(
@@ -76,10 +79,10 @@ class EnvironmentalPerformanceCategory extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: DsfrSpacings.s1w),
-                  Text(label, style: const DsfrTextStyle.bodyLg()),
+                  Text(label, style: const DsfrTextStyle.bodyLgMedium()),
                   Text(
                     '$numberOfQuestions questions',
-                    style: const DsfrTextStyle.bodySmBold(color: _color),
+                    style: DsfrTextStyle.bodySm(color: color),
                   ),
                 ],
               ),
@@ -87,6 +90,15 @@ class EnvironmentalPerformanceCategory extends StatelessWidget {
           ),
         ),
       ),
+    );
+
+    return Stack(
+      alignment: Alignment.topCenter,
+      children: [
+        Padding(padding: const EdgeInsets.only(top: 10), child: widget),
+        if (progression >= 1)
+          FnvBadge(label: 'TERMINÉ !', backgroundColor: color),
+      ],
     );
   }
 }
