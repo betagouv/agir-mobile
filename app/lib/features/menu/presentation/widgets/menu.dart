@@ -4,6 +4,7 @@ import 'package:app/features/accueil/presentation/pages/accueil_page.dart';
 import 'package:app/features/aides/list/presentation/pages/aides_page.dart';
 import 'package:app/features/authentification/core/domain/authentification_port.dart';
 import 'package:app/features/bibliotheque/presentation/pages/bibliotheque_page.dart';
+import 'package:app/features/environmental_performance/summary/presentation/page/environmental_performance_summary_page.dart';
 import 'package:app/features/profil/profil/presentation/pages/profil_page.dart';
 import 'package:app/features/version/presentation/widgets/version_label.dart';
 import 'package:app/l10n/l10n.dart';
@@ -95,6 +96,16 @@ class _MenuItems extends StatelessWidget {
           onTap: () async => _redirigeSiLaPageCourantEstDifferente(
             context,
             BibliothequePage.name,
+          ),
+        ),
+        const SizedBox(height: DsfrSpacings.s2w),
+        _MenuItem(
+          label: Localisation.bilanEnvironnemental,
+          value: EnvironmentalPerformanceSummaryPage.name,
+          groupValue: groupValue,
+          onTap: () async => _redirigeSiLaPageCourantEstDifferente(
+            context,
+            EnvironmentalPerformanceSummaryPage.name,
           ),
         ),
         const Spacer(),
