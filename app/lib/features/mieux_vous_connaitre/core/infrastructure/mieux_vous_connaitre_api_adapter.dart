@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:app/core/infrastructure/http_client_helpers.dart';
+import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/mieux_vous_connaitre/core/domain/mieux_vous_connaitre_port.dart';
 import 'package:app/features/mieux_vous_connaitre/core/domain/question.dart';
@@ -10,10 +11,14 @@ import 'package:app/features/mieux_vous_connaitre/core/infrastructure/question_m
 import 'package:fpdart/fpdart.dart';
 
 class MieuxVousConnaitreApiAdapter implements MieuxVousConnaitrePort {
-  const MieuxVousConnaitreApiAdapter({required final DioHttpClient client})
-      : _client = client;
+  const MieuxVousConnaitreApiAdapter({
+    required final DioHttpClient client,
+    required final MessageBus messageBus,
+  })  : _client = client,
+        _messageBus = messageBus;
 
   final DioHttpClient _client;
+  final MessageBus _messageBus;
 
   @override
   Future<Either<Exception, Question>> recupererQuestion({
@@ -58,8 +63,12 @@ class MieuxVousConnaitreApiAdapter implements MieuxVousConnaitrePort {
       data: jsonEncode(object),
     );
 
-    return isResponseSuccessful(response.statusCode)
-        ? const Right(null)
-        : Left(Exception('Erreur lors de la mise à jour des réponses'));
+    if (isResponseSuccessful(response.statusCode)) {
+      _messageBus.publish(kycTopic);
+
+      return const Right(null);
+    }
+
+    return Left(Exception('Erreur lors de la mise à jour des réponses'));
   }
 }

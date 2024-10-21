@@ -208,8 +208,10 @@ class _MyAppState extends State<MyApp> {
                 EnvironmentalPerformanceQuestionRepository(
               client: dioHttpClient,
             ),
-            mieuxVousConnaitrePort:
-                MieuxVousConnaitreApiAdapter(client: dioHttpClient),
+            mieuxVousConnaitrePort: MieuxVousConnaitreApiAdapter(
+              client: dioHttpClient,
+              messageBus: messageBus,
+            ),
             actionsPort: ActionsAdapter(client: dioHttpClient),
             actionRepository:
                 ActionRepository(client: dioHttpClient, messageBus: messageBus),

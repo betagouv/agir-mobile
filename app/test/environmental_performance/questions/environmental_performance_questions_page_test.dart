@@ -1,3 +1,4 @@
+import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/environmental_performance/questions/infrastructure/environment_performance_question_repository.dart';
 import 'package:app/features/environmental_performance/questions/presentation/bloc/environmental_performance_question_bloc.dart';
@@ -31,7 +32,8 @@ Future<void> pumpEnvironmentalPerformancePage(
   );
   final environmentalPerformanceRepository =
       EnvironmentalPerformanceSummaryRepository(client: client);
-  final mieuxVousConnaitrePort = MieuxVousConnaitreApiAdapter(client: client);
+  final mieuxVousConnaitrePort =
+      MieuxVousConnaitreApiAdapter(client: client, messageBus: MessageBus());
   await pumpPage(
     tester: tester,
     repositoryProviders: [
