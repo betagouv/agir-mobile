@@ -19,10 +19,14 @@ class GamificationApiAdapter implements GamificationPort {
         messageBus.subscribe(actionCompletedTopic).listen((final event) async {
       await mettreAJourLesPoints();
     });
+    _subscription2 = messageBus.subscribe(kycTopic).listen((final event) async {
+      await mettreAJourLesPoints();
+    });
   }
 
   final AuthentificationApiClient _apiClient;
   late final StreamSubscription<String> _subscription;
+  late final StreamSubscription<String> _subscription2;
 
   @override
   Future<Either<Exception, void>> mettreAJourLesPoints() async {
@@ -53,6 +57,7 @@ class GamificationApiAdapter implements GamificationPort {
 
   Future<void> dispose() async {
     await _subscription.cancel();
+    await _subscription2.cancel();
     await _gamificationSubject.close();
     await _apiClient.close();
   }

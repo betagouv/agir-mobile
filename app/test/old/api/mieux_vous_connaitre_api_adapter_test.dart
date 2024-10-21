@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/mieux_vous_connaitre/core/domain/question.dart';
 import 'package:app/features/mieux_vous_connaitre/core/infrastructure/mieux_vous_connaitre_api_adapter.dart';
@@ -23,6 +24,7 @@ void main() {
         dio: dioMock,
         authenticationService: authenticationService,
       ),
+      messageBus: MessageBus(),
     );
   });
 
