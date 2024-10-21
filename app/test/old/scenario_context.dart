@@ -49,7 +49,7 @@ class ScenarioContext {
     pliant: [],
     motorisation: [],
   );
-  List<Aide> aides = <Aide>[];
+  List<Aid> aides = <Aid>[];
   List<MissionListe> missionListe = <MissionListe>[];
   Mission mission = const Mission(
     titre: '',

@@ -28,7 +28,7 @@ class AidePage extends StatelessWidget {
 
   Future<void> _handleAccederAuSimulateur(
     final BuildContext context,
-    final Aide aide,
+    final Aid aide,
   ) async {
     if (aide.estSimulateurVelo) {
       await GoRouter.of(context).pushNamed(AideSimulateurVeloPage.name);

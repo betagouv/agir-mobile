@@ -11,7 +11,6 @@ class UtilisateurBloc extends Bloc<UtilisateurEvent, UtilisateurState> {
             utilisateur: Utilisateur(
               prenom: '',
               estIntegrationTerminee: true,
-              aMaVilleCouverte: true,
             ),
           ),
         ) {

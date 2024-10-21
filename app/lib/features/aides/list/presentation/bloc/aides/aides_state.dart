@@ -2,12 +2,13 @@ import 'package:app/features/aides/core/domain/aide.dart';
 import 'package:equatable/equatable.dart';
 
 final class AidesState extends Equatable {
-  const AidesState({required this.aides});
+  const AidesState({required this.isCovered, required this.aides});
 
+  final bool isCovered;
   final List<AidesModel> aides;
 
   @override
-  List<Object> get props => [aides];
+  List<Object> get props => [isCovered, aides];
 }
 
 sealed class AidesModel extends Equatable {
@@ -29,7 +30,7 @@ final class AideThematiqueModel extends AidesModel {
 final class AideModel extends AidesModel {
   const AideModel(this.value);
 
-  final Aide value;
+  final Aid value;
 
   @override
   List<Object?> get props => [value];

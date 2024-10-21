@@ -3,7 +3,7 @@ import 'package:app/features/aides/core/domain/aide.dart';
 abstract final class AideMapper {
   const AideMapper._();
 
-  static Aide fromJson(final Map<String, dynamic> json) => Aide(
+  static Aid fromJson(final Map<String, dynamic> json) => Aid(
         titre: json['titre'] as String,
         thematique: (json['thematiques_label'] as List<dynamic>)
                 .cast<String>()

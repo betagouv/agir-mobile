@@ -13,7 +13,7 @@ import 'package:go_router/go_router.dart';
 class CarteAide extends StatelessWidget {
   const CarteAide({required this.aide, super.key});
 
-  final Aide aide;
+  final Aid aide;
 
   Future<void> _handleTap(final BuildContext context) async {
     context.read<AideBloc>().add(AideSelectionnee(aide));

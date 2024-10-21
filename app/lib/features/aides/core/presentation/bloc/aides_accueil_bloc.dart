@@ -11,7 +11,7 @@ class AidesAccueilBloc extends Bloc<AidesAccueilEvent, AidesAccueilState> {
       final result = await aidesPort.fetchAides();
       if (result.isRight()) {
         final aides = result.getRight().getOrElse(() => throw Exception());
-        emit(AidesAccueilState(aides.take(2).toList()));
+        emit(AidesAccueilState(aides.aids.take(2).toList()));
       }
     });
   }

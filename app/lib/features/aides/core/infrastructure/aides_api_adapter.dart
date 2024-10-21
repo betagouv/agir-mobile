@@ -14,19 +14,22 @@ class AidesApiAdapter implements AidesPort {
   final DioHttpClient _client;
 
   @override
-  Future<Either<Exception, List<Aide>>> fetchAides() async {
-    final response = await _client.get('/utilisateurs/{userId}/aides');
+  Future<Either<Exception, Aids>> fetchAides() async {
+    final response = await _client.get('/utilisateurs/{userId}/aides_v2');
 
     if (isResponseUnsuccessful(response.statusCode)) {
       return Left(Exception('Erreur lors de la récupération des aides'));
     }
 
-    final json = response.data! as List<dynamic>;
+    final json = response.data! as Map<String, dynamic>;
 
     return Right(
-      json
-          .map((final e) => AideMapper.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      Aids(
+        isCovered: json['couverture_aides_ok'] as bool,
+        aids: (json['liste_aides'] as List<dynamic>)
+            .map((final e) => AideMapper.fromJson(e as Map<String, dynamic>))
+            .toList(),
+      ),
     );
   }
 }

@@ -1,7 +1,17 @@
 import 'package:equatable/equatable.dart';
 
-class Aide extends Equatable {
-  const Aide({
+class Aids extends Equatable {
+  const Aids({required this.isCovered, required this.aids});
+
+  final bool isCovered;
+  final List<Aid> aids;
+
+  @override
+  List<Object?> get props => [isCovered, aids];
+}
+
+class Aid extends Equatable {
+  const Aid({
     required this.titre,
     required this.thematique,
     required this.contenu,
