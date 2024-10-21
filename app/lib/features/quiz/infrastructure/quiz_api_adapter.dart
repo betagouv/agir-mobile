@@ -37,11 +37,17 @@ class QuizApiAdapter implements QuizPort {
 
     final quizData = jsonDecode(cmsResponse.body) as Map<String, dynamic>;
     Map<String, dynamic>? articleData;
-    // ignore: avoid_dynamic_calls
-    if ((quizData['data']['attributes']['articles']['data'] as List<dynamic>)
-        .isNotEmpty) {
+    final articles =
+        // ignore: avoid_dynamic_calls
+        quizData['data']['attributes']['articles']['data'] as List<dynamic>;
+    if (articles.isNotEmpty) {
+      final firstArticle = articles.first as Map<String, dynamic>;
+      // ignore: avoid-missing-interpolation
+      final articleId = (firstArticle['id'] as num).toInt();
       final articleResponse = await _apiClient.get(
-        Uri.parse('utilisateurs/$utilisateurId/bibliotheque/articles/$id'),
+        Uri.parse(
+          'utilisateurs/$utilisateurId/bibliotheque/articles/$articleId',
+        ),
       );
       if (isResponseUnsuccessful(articleResponse.statusCode)) {
         return Left(Exception("Erreur lors de la récupération de l'article"));
