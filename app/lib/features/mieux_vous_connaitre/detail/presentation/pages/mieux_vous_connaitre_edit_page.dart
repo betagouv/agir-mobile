@@ -55,6 +55,13 @@ class _ViewState extends State<_View> {
             id: widget.id,
             controller: _mieuxVousConnaitreController,
             onSaved: () {
+              ScaffoldMessenger.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(
+                  const SnackBar(
+                    content: Text(Localisation.miseAJourEffectuee),
+                  ),
+                );
               GoRouter.of(context).pop<bool>(true);
             },
           ),

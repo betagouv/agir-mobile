@@ -134,6 +134,7 @@ class _LoadSuccessState extends State<_LoadSuccess> {
                     ),
                   ),
                 ),
+                const SafeArea(child: SizedBox.shrink()),
               ],
             ),
           ),
