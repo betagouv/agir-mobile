@@ -95,7 +95,6 @@ class AuthentificationPortMock implements AuthentificationPort {
         Utilisateur(
           prenom: prenom,
           estIntegrationTerminee: estIntegrationTerminee,
-          aMaVilleCouverte: false,
         ),
       );
 }

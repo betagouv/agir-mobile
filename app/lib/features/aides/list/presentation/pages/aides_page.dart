@@ -8,9 +8,6 @@ import 'package:app/features/aides/list/presentation/bloc/aides_disclaimer/aides
 import 'package:app/features/aides/list/presentation/bloc/aides_disclaimer/aides_disclaimer_state.dart';
 import 'package:app/features/menu/presentation/pages/root_page.dart';
 import 'package:app/features/profil/profil/presentation/widgets/fnv_title.dart';
-import 'package:app/features/utilisateur/presentation/bloc/utilisateur_bloc.dart';
-import 'package:app/features/utilisateur/presentation/bloc/utilisateur_event.dart';
-import 'package:app/features/utilisateur/presentation/bloc/utilisateur_state.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
@@ -30,41 +27,57 @@ class AidesPage extends StatelessWidget {
       );
 
   @override
-  Widget build(final BuildContext context) {
-    final bloc = AidesBloc(aidesPort: context.read())
-      ..add(const AidesRecuperationDemandee());
-    context
-        .read<UtilisateurBloc>()
-        .add(const UtilisateurRecuperationDemandee());
+  Widget build(final BuildContext context) => BlocProvider(
+        create: (final context) => AidesBloc(aidesPort: context.read())
+          ..add(const AidesRecuperationDemandee()),
+        child: const _View(),
+      );
+}
 
-    return RootPage(
-      body: BlocBuilder<AidesBloc, AidesState>(
-        builder: (final context, final state) {
-          final aides = state.aides;
+class _View extends StatelessWidget {
+  const _View();
 
-          return ListView(
-            children: [
-              const _Disclaimer(),
-              ListView(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                padding: const EdgeInsets.all(paddingVerticalPage),
-                children: [
-                  const FnvTitle(
-                    title: Localisation.mesAidesDisponibles,
-                    subtitle: Localisation.mesAidesSousTitre,
+  @override
+  Widget build(final BuildContext context) => RootPage(
+        body: BlocBuilder<AidesBloc, AidesState>(
+          builder: (final context, final state) {
+            final aides = state.aides;
+
+            return ListView(
+              children: [
+                if (!state.isCovered)
+                  BlocBuilder<AidesDisclaimerCubit, AidesDisclaimerState>(
+                    builder: (final context, final state) => switch (state) {
+                      AidesDisclaimerVisible() => DsfrNotice(
+                          titre:
+                              Localisation.leServiveNeCouvrePasEncoreVotreVille,
+                          description: Localisation
+                              .leServiveNeCouvrePasEncoreVotreVilleDescription,
+                          onClose: () => context
+                              .read<AidesDisclaimerCubit>()
+                              .closeDisclaimer(),
+                        ),
+                      AidesDisclaimerNotVisible() => const SizedBox(),
+                    },
                   ),
-                  _Aides(aides: aides),
-                ],
-              ),
-              const SafeArea(child: SizedBox()),
-            ],
-          );
-        },
-        bloc: bloc,
-      ),
-    );
-  }
+                ListView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  padding: const EdgeInsets.all(paddingVerticalPage),
+                  children: [
+                    const FnvTitle(
+                      title: Localisation.mesAidesDisponibles,
+                      subtitle: Localisation.mesAidesSousTitre,
+                    ),
+                    _Aides(aides: aides),
+                  ],
+                ),
+                const SafeArea(child: SizedBox()),
+              ],
+            );
+          },
+        ),
+      );
 }
 
 class _Aides extends StatelessWidget {
@@ -94,30 +107,5 @@ class _Aides extends StatelessWidget {
         separatorBuilder: (final context, final index) =>
             const SizedBox(height: DsfrSpacings.s1w),
         itemCount: aides.length,
-      );
-}
-
-class _Disclaimer extends StatelessWidget {
-  const _Disclaimer();
-
-  @override
-  Widget build(final BuildContext context) =>
-      BlocSelector<UtilisateurBloc, UtilisateurState, bool>(
-        selector: (final state) => state.utilisateur.aMaVilleCouverte,
-        builder: (final context, final state) => state
-            ? const SizedBox()
-            : BlocBuilder<AidesDisclaimerCubit, AidesDisclaimerState>(
-                builder: (final context, final state) => switch (state) {
-                  AidesDisclaimerVisible() => DsfrNotice(
-                      titre: Localisation.leServiveNeCouvrePasEncoreVotreVille,
-                      description: Localisation
-                          .leServiveNeCouvrePasEncoreVotreVilleDescription,
-                      onClose: () => context
-                          .read<AidesDisclaimerCubit>()
-                          .closeDisclaimer(),
-                    ),
-                  AidesDisclaimerNotVisible() => const SizedBox(),
-                },
-              ),
       );
 }

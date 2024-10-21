@@ -402,8 +402,7 @@ void main() {
   "nom": "Saudon",
   "prenom": "$prenom",
   "email": "ls@mail.com",
-  "is_onboarding_done": true,
-  "couverture_aides_ok": false
+  "is_onboarding_done": true
 }''',
         ),
       );
@@ -425,11 +424,7 @@ void main() {
     // Assert.
     expect(
       utilisateur.getRight().getOrElse(() => throw Exception()),
-      const Utilisateur(
-        prenom: prenom,
-        estIntegrationTerminee: true,
-        aMaVilleCouverte: false,
-      ),
+      const Utilisateur(prenom: prenom, estIntegrationTerminee: true),
     );
   });
 }

@@ -12,7 +12,7 @@ import 'steps/iel_voit_le_texte_dans_texte_riche.dart';
 
 void main() {
   group('Aides Simulateur vélo', () {
-    const aide2 = Aide(
+    const aide2 = Aid(
       titre: 'Acheter un vélo',
       thematique: '🚗 Transports',
       contenu: '<p>Contenu</p>',

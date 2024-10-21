@@ -26,7 +26,10 @@ void main() {
   test('fetchAides returns a list of Aide when successful', () async {
     // Arrange
     final aides = List.generate(2, (final _) => aideFaker());
-    dio.getM('/utilisateurs/{userId}/aides', responseData: aides);
+    dio.getM(
+      '/utilisateurs/{userId}/aides_v2',
+      responseData: {'couverture_aides_ok': true, 'liste_aides': aides},
+    );
 
     // Act
     final result = await aidesApiAdapter.fetchAides();
@@ -34,10 +37,12 @@ void main() {
     // Assert
     expect(result.isRight(), isTrue);
     final actual = result.getRight().toNullable()!;
-    expect(actual.length, equals(aides.length));
-    for (var i = 0; i < actual.length; i++) {
+    expect(actual.isCovered, isTrue);
+    final aids = actual.aids;
+    expect(aids.length, equals(aides.length));
+    for (var i = 0; i < aids.length; i++) {
       final expected = AideMapper.fromJson(aides[i]);
-      expect(actual[i], equals(expected));
+      expect(aids[i], equals(expected));
     }
   });
 }

@@ -190,7 +190,6 @@ class AuthentificationApiAdapter implements AuthentificationPort {
       Utilisateur(
         prenom: json['prenom'] as String? ?? '',
         estIntegrationTerminee: json['is_onboarding_done'] as bool,
-        aMaVilleCouverte: json['couverture_aides_ok'] as bool,
       ),
     );
   }

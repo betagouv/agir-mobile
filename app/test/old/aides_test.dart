@@ -13,23 +13,23 @@ import 'steps/iel_voit_le_texte_dans_texte_riche.dart';
 
 void main() {
   group('Aides', () {
-    const aide1 = Aide(
+    const aide1 = Aid(
       titre: 'Rénover son logement',
       thematique: '🏡 Logement',
       contenu: '',
     );
-    const aide2 = Aide(
+    const aide2 = Aid(
       titre: 'Acheter un vélo',
       thematique: '🚗 Transports',
       contenu: '<p>Contenu</p>',
       montantMax: 1500,
     );
-    const aide3 = Aide(
+    const aide3 = Aid(
       titre: 'Composter ses déchets',
       thematique: '🗑️ Déchets',
       contenu: '',
     );
-    const aide4 = Aide(
+    const aide4 = Aid(
       titre: 'Gérer ses déchets verts',
       thematique: '🗑️ Déchets',
       contenu: '',

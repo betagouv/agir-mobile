@@ -31,7 +31,7 @@ import 'steps/le_serveur_retourne_les_aides_velo_par_type.dart';
 
 void main() {
   group('Aides Simulateur vélo formulaire', () {
-    const aide2 = Aide(
+    const aide2 = Aid(
       titre: 'Acheter un vélo',
       thematique: '🚗 Transports',
       contenu: '<p>Contenu</p>',
@@ -269,7 +269,7 @@ void main() {
 
 Future<void> _allerSurLeSimulateurVelo(
   final WidgetTester tester,
-  final Aide aide,
+  final Aid aide,
 ) async {
   ielALesAidesSuivantes([aide]);
   ielEstConnecte();
