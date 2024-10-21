@@ -6,5 +6,5 @@ abstract interface class MieuxVousConnaitrePort {
     required final String id,
   });
 
-  Future<Either<Exception, void>> mettreAJour(final Question question);
+  Future<Either<Exception, Unit>> mettreAJour(final Question question);
 }
