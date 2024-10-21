@@ -137,12 +137,12 @@ class BodyPartial extends StatelessWidget {
                                   e.id,
                                 ),
                               );
-                          final result = await GoRouter.of(context).pushNamed(
+                          await GoRouter.of(context).pushNamed(
                             EnvironmentalPerformanceQuestionPage.name,
                             pathParameters: {'number': '1'},
                           );
 
-                          if (result != true || !context.mounted) {
+                          if (!context.mounted) {
                             return;
                           }
 
