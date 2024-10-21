@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/text_styles.dart';
 import 'package:app/features/accueil/presentation/cubit/home_disclaimer_cubit.dart';
@@ -12,9 +14,12 @@ import 'package:app/features/utilisateur/presentation/bloc/utilisateur_event.dar
 import 'package:app/features/utilisateur/presentation/bloc/utilisateur_state.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class AccueilPage extends StatelessWidget {
   const AccueilPage({super.key});
@@ -83,25 +88,83 @@ class _Body extends StatelessWidget {
         .add(const UtilisateurRecuperationDemandee());
 
     return ListView(
-      children: const [
-        _Disclaimer(),
-        SizedBox(height: paddingVerticalPage),
-        Padding(
+      children: [
+        const _Disclaimer(),
+        const SizedBox(height: paddingVerticalPage),
+        const Padding(
           padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
           child: UniversSection(),
         ),
-        SizedBox(height: DsfrSpacings.s4w),
-        Padding(
+        DsfrButton(
+          label: 'Mettre à jour',
+          variant: DsfrButtonVariant.primary,
+          size: DsfrButtonSize.lg,
+          onPressed: () async {
+            const title = Text("Mise à jour de l'application requise");
+            const content = Text(
+              "Veuillez mettre à jour l'application pour continuer à l'utiliser.",
+            );
+            const button = Text('Mettre à jour maintenant');
+            const routeSettings = RouteSettings(name: 'force-update');
+            if (Platform.isIOS) {
+              await showCupertinoDialog<bool>(
+                context: context,
+                builder: (final context) => CupertinoAlertDialog(
+                  title: title,
+                  content: content,
+                  actions: [
+                    CupertinoDialogAction(
+                      onPressed: () async {
+                        Navigator.of(context).pop(true);
+                        try {
+                          await launchUrlString(
+                            'https://apps.apple.com/fr/app/jagis/id6504984321',
+                          );
+                        } on PlatformException catch (_) {}
+                      },
+                      child: button,
+                    ),
+                  ],
+                ),
+                routeSettings: routeSettings,
+              );
+
+              return;
+            }
+            await showDialog<bool>(
+              context: context,
+              builder: (final context) => AlertDialog(
+                title: title,
+                content: content,
+                actions: [
+                  TextButton(
+                    onPressed: () async {
+                      Navigator.of(context).pop(true);
+                      await launchUrlString(
+                        'https://play.google.com/store/apps/details?id=fr.gouv.agir',
+                      );
+                    },
+                    child: button,
+                  ),
+                ],
+              ),
+              barrierDismissible: false,
+              routeSettings: routeSettings,
+            );
+          },
+        ),
+        const SizedBox(height: DsfrSpacings.s4w),
+        const Padding(
           padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
           child: MesAides(),
         ),
-        SizedBox(height: DsfrSpacings.s4w),
-        Padding(
+        const SizedBox(height: DsfrSpacings.s4w),
+        const Padding(
           padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
           child: MesRecommandations(),
         ),
-        SizedBox(),
-        SafeArea(child: SizedBox(height: paddingVerticalPage)),
+        const SizedBox(),
+        const SafeArea(child: SizedBox(height: paddingVerticalPage)),
       ],
     );
   }
