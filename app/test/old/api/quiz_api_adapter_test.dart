@@ -17,11 +17,11 @@ void main() {
   test('recupererQuiz', () async {
     final client = ClientMock()
       ..getSuccess(
-        path: 'utilisateurs/$utilisateurId/bibliotheque/articles/14',
+        path: 'utilisateurs/$utilisateurId/bibliotheque/articles/168',
         response: OkResponse(
           value: '''
 {
-    "content_id": "14",
+    "content_id": "168",
     "type": "article",
     "titre": "Recette : velouté crémeux de patates douces",
     "soustitre": "Une recette cocooning pour l'hiver",
