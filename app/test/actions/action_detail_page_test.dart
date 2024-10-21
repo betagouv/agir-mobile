@@ -8,7 +8,7 @@ import 'package:app/features/authentification/core/infrastructure/dio_http_clien
 import 'package:app/features/gamification/presentation/bloc/gamification_bloc.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
@@ -448,6 +448,15 @@ void main() {
 
         await tester.pump();
 
+        await tester.scrollUntilVisible(
+          find.text(Localisation.valider),
+          300,
+          scrollable: find.descendant(
+            of: find.byType(ListView),
+            matching: find.byType(Scrollable).first,
+          ),
+        );
+        await tester.pumpAndSettle();
         await tester.tap(find.text(Localisation.valider, skipOffstage: false));
 
         await tester.pumpAndSettle();
