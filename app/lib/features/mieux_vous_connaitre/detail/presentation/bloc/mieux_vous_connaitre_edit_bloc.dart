@@ -139,9 +139,13 @@ class MieuxVousConnaitreEditBloc
         final aState = state;
         switch (aState) {
           case MieuxVousConnaitreEditLoaded():
-            final result = await mieuxVousConnaitrePort.mettreAJour(
-              aState.newQuestion,
-            );
+            final newQuestion = aState.newQuestion;
+            if (newQuestion is! MosaicQuestion && !newQuestion.isAnswered()) {
+              return;
+            }
+
+            final result =
+                await mieuxVousConnaitrePort.mettreAJour(newQuestion);
             result.fold(
               (final l) => emit(
                 MieuxVousConnaitreEditError(
@@ -152,8 +156,8 @@ class MieuxVousConnaitreEditBloc
               (final r) {
                 emit(
                   MieuxVousConnaitreEditLoaded(
-                    question: aState.newQuestion,
-                    newQuestion: aState.newQuestion,
+                    question: newQuestion,
+                    newQuestion: newQuestion,
                     updated: true,
                   ),
                 );
