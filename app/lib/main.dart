@@ -191,7 +191,7 @@ class _MyAppState extends State<MyApp> {
             recommandationsPort:
                 RecommandationsApiAdapter(apiClient: apiClient),
             articlesPort: ArticlesApiAdapter(
-              apiClient: apiClient,
+              apiClient: dioHttpClient,
               cmsApiClient: cmsClient,
             ),
             quizPort:

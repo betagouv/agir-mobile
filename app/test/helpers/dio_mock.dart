@@ -23,7 +23,7 @@ class DioMock extends Mock implements Dio {
   void postM<T>(
     final String path, {
     final dynamic requestData,
-    required final T responseData,
+    final T? responseData,
     final int statusCode = 200,
   }) {
     when(() => post<dynamic>(path, data: requestData ?? any(named: 'data')))
