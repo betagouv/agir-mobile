@@ -1,26 +1,28 @@
+import 'dart:convert';
+
 import 'package:app/features/articles/domain/article.dart';
 import 'package:app/features/articles/domain/partenaire.dart';
 import 'package:app/features/articles/domain/source.dart';
 import 'package:app/features/articles/infrastructure/articles_api_adapter.dart';
-import 'package:app/features/authentification/core/infrastructure/authentification_api_client.dart';
 import 'package:app/features/authentification/core/infrastructure/cms_api_client.dart';
+import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../mocks/authentication_service_fake.dart';
+import '../../helpers/authentication_service_setup.dart';
+import '../../helpers/dio_mock.dart';
 import 'client_mock.dart';
 import 'constants.dart';
 import 'custom_response.dart';
-import 'request_mathcher.dart';
 
 void main() {
   test('recupererArticle', () async {
-    final client = ClientMock()
-      ..getSuccess(
-        path: 'utilisateurs/$utilisateurId/bibliotheque/articles/51',
-        response: OkResponse(
-          value: '''
+    final dio = DioMock()
+      ..getM(
+        '/utilisateurs/{userId}/bibliotheque/articles/51',
+        responseData: jsonDecode(
+          '''
 {
     "content_id": "51",
     "type": "article",
@@ -36,7 +38,8 @@ void main() {
     "read_date": null
 }''',
         ),
-      )
+      );
+    final client = ClientMock()
       ..getSuccess(
         path:
             '/api/articles/51?populate[0]=partenaire,partenaire.logo.media&populate[1]=sources&populate[2]=image_url',
@@ -187,10 +190,9 @@ void main() {
       );
 
     final adapter = ArticlesApiAdapter(
-      apiClient: AuthentificationApiClient(
-        apiUrl: apiUrl,
-        authenticationService: const AuthenticationServiceFake(),
-        inner: client,
+      apiClient: DioHttpClient(
+        dio: dio,
+        authenticationService: authenticationService,
       ),
       cmsApiClient:
           CmsApiClient(apiUrl: cmsApiUrl, token: 'le_token', inner: client),
@@ -232,12 +234,12 @@ void main() {
       ),
     );
   });
+
   test('recupererArticle sans partenaire', () async {
-    final client = ClientMock()
-      ..getSuccess(
-        path: 'utilisateurs/$utilisateurId/bibliotheque/articles/2',
-        response: OkResponse(
-          value: '''
+    final dio = DioMock()
+      ..getM(
+        '/utilisateurs/{userId}/bibliotheque/articles/2',
+        responseData: jsonDecode('''
 {
     "content_id": "2",
     "type": "article",
@@ -252,9 +254,9 @@ void main() {
     "points": 10,
     "favoris": false,
     "read_date": "2024-09-06T07:58:15.138Z"
-}''',
-        ),
-      )
+}'''),
+      );
+    final client = ClientMock()
       ..getSuccess(
         path:
             '/api/articles/2?populate[0]=partenaire,partenaire.logo.media&populate[1]=sources&populate[2]=image_url',
@@ -294,10 +296,9 @@ void main() {
       );
 
     final adapter = ArticlesApiAdapter(
-      apiClient: AuthentificationApiClient(
-        apiUrl: apiUrl,
-        authenticationService: const AuthenticationServiceFake(),
-        inner: client,
+      apiClient: DioHttpClient(
+        dio: dio,
+        authenticationService: authenticationService,
       ),
       cmsApiClient:
           CmsApiClient(apiUrl: cmsApiUrl, token: 'le_token', inner: client),
@@ -321,63 +322,50 @@ void main() {
   });
 
   test('marquerCommeLu', () async {
-    final client = ClientMock()
-      ..postSuccess(
-        path: '/utilisateurs/$utilisateurId/events',
-        response: OkResponse(),
-      );
+    final dio = DioMock()..postM<dynamic>('/utilisateurs/{userId}/events');
 
     final adapter = ArticlesApiAdapter(
-      apiClient: AuthentificationApiClient(
-        apiUrl: apiUrl,
-        authenticationService: const AuthenticationServiceFake(),
-        inner: client,
+      apiClient: DioHttpClient(
+        dio: dio,
+        authenticationService: authenticationService,
       ),
-      cmsApiClient:
-          CmsApiClient(apiUrl: cmsApiUrl, token: 'le_token', inner: client),
+      cmsApiClient: CmsApiClient(
+        apiUrl: cmsApiUrl,
+        token: 'le_token',
+        inner: ClientMock(),
+      ),
     );
 
     await adapter.marquerCommeLu('1');
-
     verify(
-      () => client.send(
-        any(
-          that: const RequestMathcher(
-            '/utilisateurs/$utilisateurId/events',
-            body: '{"content_id":"1","type":"article_lu"}',
-          ),
-        ),
+      () => dio.post<dynamic>(
+        '/utilisateurs/{userId}/events',
+        data: '{"content_id":"1","type":"article_lu"}',
       ),
     );
   });
 
   test('addToFavorites', () async {
-    final client = ClientMock()
-      ..postSuccess(
-        path: '/utilisateurs/$utilisateurId/events',
-        response: OkResponse(),
-      );
+    final dio = DioMock()..postM<dynamic>('/utilisateurs/{userId}/events');
 
     final adapter = ArticlesApiAdapter(
-      apiClient: AuthentificationApiClient(
-        apiUrl: apiUrl,
-        authenticationService: const AuthenticationServiceFake(),
-        inner: client,
+      apiClient: DioHttpClient(
+        dio: dio,
+        authenticationService: authenticationService,
       ),
-      cmsApiClient:
-          CmsApiClient(apiUrl: cmsApiUrl, token: 'le_token', inner: client),
+      cmsApiClient: CmsApiClient(
+        apiUrl: cmsApiUrl,
+        token: 'le_token',
+        inner: ClientMock(),
+      ),
     );
 
     await adapter.addToFavorites('1');
 
     verify(
-      () => client.send(
-        any(
-          that: const RequestMathcher(
-            '/utilisateurs/$utilisateurId/events',
-            body: '{"content_id":"1","type":"article_favoris"}',
-          ),
-        ),
+      () => dio.post<dynamic>(
+        '/utilisateurs/{userId}/events',
+        data: '{"content_id":"1","type":"article_favoris"}',
       ),
     );
   });

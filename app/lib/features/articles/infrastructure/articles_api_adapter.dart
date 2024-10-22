@@ -4,49 +4,39 @@ import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/articles/domain/article.dart';
 import 'package:app/features/articles/domain/articles_port.dart';
 import 'package:app/features/articles/infrastructure/article_mapper.dart';
-import 'package:app/features/authentification/core/infrastructure/authentification_api_client.dart';
 import 'package:app/features/authentification/core/infrastructure/cms_api_client.dart';
-import 'package:app/features/profil/core/domain/utilisateur_id_non_trouve_exception.dart';
+import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:fpdart/fpdart.dart';
 
 class ArticlesApiAdapter implements ArticlesPort {
   const ArticlesApiAdapter({
-    required final AuthentificationApiClient apiClient,
+    required final DioHttpClient apiClient,
     required final CmsApiClient cmsApiClient,
-  })  : _apiClient = apiClient,
+  })  : _client = apiClient,
         _cmsApiClient = cmsApiClient;
 
-  final AuthentificationApiClient _apiClient;
+  final DioHttpClient _client;
   final CmsApiClient _cmsApiClient;
 
   @override
   Future<Either<Exception, Article>> recupererArticle(final String id) async {
-    final utilisateurId = _apiClient.recupererUtilisateurId;
-    if (utilisateurId == null) {
-      return const Left(UtilisateurIdNonTrouveException());
+    final responseApi =
+        await _client.get('/utilisateurs/{userId}/bibliotheque/articles/$id');
+    if (isResponseUnsuccessful(responseApi.statusCode)) {
+      return Left(Exception("Erreur lors de la récupération de l'article"));
     }
-
-    final responses = await Future.wait([
-      _cmsApiClient.get(
-        Uri.parse(
-          '/api/articles/$id?populate[0]=partenaire,partenaire.logo.media&populate[1]=sources&populate[2]=image_url',
-        ),
+    final responseCms = await _cmsApiClient.get(
+      Uri.parse(
+        '/api/articles/$id?populate[0]=partenaire,partenaire.logo.media&populate[1]=sources&populate[2]=image_url',
       ),
-      _apiClient.get(
-        Uri.parse('utilisateurs/$utilisateurId/bibliotheque/articles/$id'),
-      ),
-    ]);
+    );
 
-    final cmsResponse = responses.first;
-    final apiResponse = responses[1];
-    if (isResponseUnsuccessful(cmsResponse.statusCode) ||
-        isResponseUnsuccessful(apiResponse.statusCode)) {
+    if (isResponseUnsuccessful(responseCms.statusCode)) {
       return Left(Exception("Erreur lors de la récupération de l'article"));
     }
 
-    final articleData = jsonDecode(cmsResponse.body) as Map<String, dynamic>;
-    final bibliothequeData =
-        jsonDecode(apiResponse.body) as Map<String, dynamic>;
+    final articleData = jsonDecode(responseCms.body) as Map<String, dynamic>;
+    final bibliothequeData = responseApi.data as Map<String, dynamic>;
 
     final article = ArticleMapper.fromJson(
       cms: articleData,
@@ -58,14 +48,9 @@ class ArticlesApiAdapter implements ArticlesPort {
 
   @override
   Future<Either<Exception, void>> marquerCommeLu(final String id) async {
-    final utilisateurId = _apiClient.recupererUtilisateurId;
-    if (utilisateurId == null) {
-      return const Left(UtilisateurIdNonTrouveException());
-    }
-
-    final response = await _apiClient.post(
-      Uri.parse('/utilisateurs/$utilisateurId/events'),
-      body: jsonEncode({'content_id': id, 'type': 'article_lu'}),
+    final response = await _client.post(
+      '/utilisateurs/{userId}/events',
+      data: jsonEncode({'content_id': id, 'type': 'article_lu'}),
     );
 
     return isResponseSuccessful(response.statusCode)
@@ -75,14 +60,9 @@ class ArticlesApiAdapter implements ArticlesPort {
 
   @override
   Future<Either<Exception, void>> addToFavorites(final String id) async {
-    final utilisateurId = _apiClient.recupererUtilisateurId;
-    if (utilisateurId == null) {
-      return const Left(UtilisateurIdNonTrouveException());
-    }
-
-    final response = await _apiClient.post(
-      Uri.parse('/utilisateurs/$utilisateurId/events'),
-      body: jsonEncode({'content_id': id, 'type': 'article_favoris'}),
+    final response = await _client.post(
+      '/utilisateurs/{userId}/events',
+      data: jsonEncode({'content_id': id, 'type': 'article_favoris'}),
     );
 
     return isResponseSuccessful(response.statusCode)
@@ -92,14 +72,9 @@ class ArticlesApiAdapter implements ArticlesPort {
 
   @override
   Future<Either<Exception, void>> removeToFavorites(final String id) async {
-    final utilisateurId = _apiClient.recupererUtilisateurId;
-    if (utilisateurId == null) {
-      return const Left(UtilisateurIdNonTrouveException());
-    }
-
-    final response = await _apiClient.post(
-      Uri.parse('/utilisateurs/$utilisateurId/events'),
-      body: jsonEncode({'content_id': id, 'type': 'article_non_favoris'}),
+    final response = await _client.post(
+      '/utilisateurs/{userId}/events',
+      data: jsonEncode({'content_id': id, 'type': 'article_non_favoris'}),
     );
 
     return isResponseSuccessful(response.statusCode)
