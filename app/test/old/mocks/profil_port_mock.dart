@@ -19,7 +19,6 @@ class ProfilPortMock implements ProfilPort, FirstNamePort {
     required this.typeDeLogement,
     required this.estProprietaire,
     required this.superficie,
-    required this.chauffage,
     required this.plusDe15Ans,
     required this.dpe,
     required this.nombreDePartsFiscales,
@@ -37,7 +36,6 @@ class ProfilPortMock implements ProfilPort, FirstNamePort {
   TypeDeLogement? typeDeLogement;
   bool? estProprietaire;
   Superficie? superficie;
-  Chauffage? chauffage;
   bool? plusDe15Ans;
   Dpe? dpe;
   double nombreDePartsFiscales;
@@ -86,7 +84,6 @@ class ProfilPortMock implements ProfilPort, FirstNamePort {
           typeDeLogement: typeDeLogement,
           estProprietaire: estProprietaire,
           superficie: superficie,
-          chauffage: chauffage,
           plusDe15Ans: plusDe15Ans,
           dpe: dpe,
         ),
@@ -103,7 +100,6 @@ class ProfilPortMock implements ProfilPort, FirstNamePort {
     typeDeLogement = logement.typeDeLogement;
     estProprietaire = logement.estProprietaire;
     superficie = logement.superficie;
-    chauffage = logement.chauffage;
     plusDe15Ans = logement.plusDe15Ans;
     dpe = logement.dpe;
 

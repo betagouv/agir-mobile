@@ -15,14 +15,6 @@ enum Superficie {
   s150EtPlus, // = 'superficie_150_et_plus',.
 }
 
-enum Chauffage {
-  electricite,
-  boisPellets,
-  fioul,
-  gaz,
-  autre,
-}
-
 enum Dpe { a, b, c, d, e, f, g, jeNeSaisPas }
 
 final class MonLogementState extends Equatable {
@@ -35,7 +27,6 @@ final class MonLogementState extends Equatable {
     required this.typeDeLogement,
     required this.estProprietaire,
     required this.superficie,
-    required this.chauffage,
     required this.plusDe15Ans,
     required this.dpe,
     required this.statut,
@@ -51,7 +42,6 @@ final class MonLogementState extends Equatable {
           typeDeLogement: null,
           estProprietaire: null,
           superficie: null,
-          chauffage: null,
           plusDe15Ans: null,
           dpe: null,
           statut: MonLogementStatut.initial,
@@ -65,7 +55,6 @@ final class MonLogementState extends Equatable {
   final TypeDeLogement? typeDeLogement;
   final bool? estProprietaire;
   final Superficie? superficie;
-  final Chauffage? chauffage;
   final bool? plusDe15Ans;
   final Dpe? dpe;
   final MonLogementStatut statut;
@@ -79,7 +68,6 @@ final class MonLogementState extends Equatable {
     final TypeDeLogement? typeDeLogement,
     final bool? estProprietaire,
     final Superficie? superficie,
-    final Chauffage? chauffage,
     final bool? plusDe15Ans,
     final Dpe? dpe,
     final MonLogementStatut? statut,
@@ -93,7 +81,6 @@ final class MonLogementState extends Equatable {
         typeDeLogement: typeDeLogement ?? this.typeDeLogement,
         estProprietaire: estProprietaire ?? this.estProprietaire,
         superficie: superficie ?? this.superficie,
-        chauffage: chauffage ?? this.chauffage,
         plusDe15Ans: plusDe15Ans ?? this.plusDe15Ans,
         dpe: dpe ?? this.dpe,
         statut: statut ?? this.statut,
@@ -109,7 +96,6 @@ final class MonLogementState extends Equatable {
         typeDeLogement,
         estProprietaire,
         superficie,
-        chauffage,
         plusDe15Ans,
         dpe,
         statut,

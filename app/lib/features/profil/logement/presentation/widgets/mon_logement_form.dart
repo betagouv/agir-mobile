@@ -1,5 +1,4 @@
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
-import 'package:app/features/profil/logement/presentation/widgets/mon_logement_chauffage.dart';
 import 'package:app/features/profil/logement/presentation/widgets/mon_logement_code_postal_et_commune.dart';
 import 'package:app/features/profil/logement/presentation/widgets/mon_logement_combien_etes_vous.dart';
 import 'package:app/features/profil/logement/presentation/widgets/mon_logement_dpe.dart';
@@ -33,8 +32,6 @@ class MonLogementForm extends StatelessWidget {
         MonLogementEstProprietaire(),
         gap,
         MonLogementSuperficie(),
-        gap,
-        MonLogementChauffage(),
         gap,
         MonLogementPlus15Ans(),
         gap,

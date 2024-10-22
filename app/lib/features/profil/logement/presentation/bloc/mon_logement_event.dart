@@ -75,15 +75,6 @@ final class MonLogementSuperficieChange extends MonLogementEvent {
   List<Object?> get props => [valeur];
 }
 
-final class MonLogementChauffageChange extends MonLogementEvent {
-  const MonLogementChauffageChange(this.valeur);
-
-  final Chauffage? valeur;
-
-  @override
-  List<Object?> get props => [valeur];
-}
-
 final class MonLogementPlusDe15AnsChange extends MonLogementEvent {
   const MonLogementPlusDe15AnsChange(this.valeur);
 

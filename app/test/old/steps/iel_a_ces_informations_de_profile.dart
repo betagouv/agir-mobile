@@ -15,7 +15,6 @@ void ielACesInformationsDeProfil({
   final int? revenuFiscal,
   final bool? estProprietaire,
   final Superficie? superficie,
-  final Chauffage? chauffage,
   final bool? plusDe15Ans,
   final Dpe? dpe,
 }) {
@@ -28,7 +27,6 @@ void ielACesInformationsDeProfil({
   ScenarioContext().typeDeLogement = typeDeLogement;
   ScenarioContext().estProprietaire = estProprietaire;
   ScenarioContext().superficie = superficie;
-  ScenarioContext().chauffage = chauffage;
   ScenarioContext().plusDe15Ans = plusDe15Ans;
   ScenarioContext().dpe = dpe;
 }

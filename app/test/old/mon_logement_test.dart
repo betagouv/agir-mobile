@@ -38,24 +38,16 @@ void main() {
     ielVoitLeTexte(Localisation.uneMaison);
     await ielScrolle(tester, Localisation.vousEtesProprietaireDeVotreLogement);
     ielVoitLeTexte(Localisation.vousEtesProprietaireDeVotreLogement);
-    ielVoitLeTexte(Localisation.oui);
-    ielVoitLeTexte(Localisation.non);
+    ielVoitLeTexte(Localisation.oui, n: 2);
+    ielVoitLeTexte(Localisation.non, n: 2);
     ielVoitLeTexte(Localisation.quelleEstLaSuperficie);
     ielVoitLeTexte(Localisation.moinsDe35m2);
     ielVoitLeTexte(Localisation.entre35et70m2);
     ielVoitLeTexte(Localisation.entre70et100m2);
     ielVoitLeTexte(Localisation.entre100et150m2);
     ielVoitLeTexte(Localisation.plusDe150m2);
-    ielVoitLeTexte(Localisation.quelleEstVotreModeDeChauffagePrincipal);
-    ielVoitLeTexte(Localisation.electricite);
-    ielVoitLeTexte(Localisation.boisPellets);
-    ielVoitLeTexte(Localisation.fioul);
-    ielVoitLeTexte(Localisation.gaz);
-    ielVoitLeTexte(Localisation.autreJeNeSaisPas);
     await ielScrolle(tester, Localisation.monLogementPlusDe15Ans);
     ielVoitLeTexte(Localisation.monLogementPlusDe15Ans);
-    ielVoitLeTexte(Localisation.oui);
-    ielVoitLeTexte(Localisation.non);
     ielVoitLeTexte(Localisation.consommationsEnergetiques);
     ielVoitLeTexte(Localisation.dpeA);
     ielVoitLeTexte(Localisation.dpeB);
@@ -79,11 +71,7 @@ void main() {
     ielVoitLeBoutonRadioAvecCeTexteSelectionne(Localisation.uneMaison);
     ielVoitLeBoutonRadioAvecCeTexteSelectionne(Localisation.non);
     ielVoitLeBoutonRadioAvecCeTexteSelectionne(Localisation.entre70et100m2);
-    await ielScrolle(
-      tester,
-      Localisation.quelleEstVotreModeDeChauffagePrincipal,
-    );
-    ielVoitLeBoutonRadioAvecCeTexteSelectionne(Localisation.gaz);
+    await ielScrolle(tester, Localisation.monLogementPlusDe15Ans);
     ielVoitLeBoutonRadioAvecCeTexteSelectionne(Localisation.non);
     ielVoitLeBoutonRadioAvecCeTexteSelectionne(Localisation.dpeG);
   });
@@ -99,7 +87,6 @@ void main() {
       const typeDeLogement = TypeDeLogement.appartement;
       const estProprietaire = true;
       const superficie = Superficie.s35;
-      const chauffage = Chauffage.electricite;
       const plusDe15Ans = true;
       const dpe = Dpe.c;
       leServeurRetourneCetteListeDeCommunes(['AUTHUME', _commune, commune]);
@@ -126,11 +113,7 @@ void main() {
       await ielAppuieSur(tester, Localisation.oui);
       await ielAppuieSur(tester, Localisation.moinsDe35m2);
 
-      await ielScrolle(
-        tester,
-        Localisation.quelleEstVotreModeDeChauffagePrincipal,
-      );
-      await ielAppuieSur(tester, Localisation.electricite);
+      await ielScrolle(tester, Localisation.monLogementPlusDe15Ans);
       await ielAppuieSur(tester, Localisation.oui);
       await ielScrolle(tester, Localisation.consommationsEnergetiques);
       await ielAppuieSur(tester, Localisation.dpeC);
@@ -145,7 +128,6 @@ void main() {
       expect(profilPortMock.typeDeLogement, typeDeLogement);
       expect(profilPortMock.estProprietaire, estProprietaire);
       expect(profilPortMock.superficie, superficie);
-      expect(profilPortMock.chauffage, chauffage);
       expect(profilPortMock.plusDe15Ans, plusDe15Ans);
       expect(profilPortMock.dpe, dpe);
     },
@@ -161,7 +143,6 @@ Future<void> _allerSurMonLogement(final WidgetTester tester) async {
     typeDeLogement: TypeDeLogement.maison,
     estProprietaire: false,
     superficie: Superficie.s100,
-    chauffage: Chauffage.gaz,
     plusDe15Ans: false,
     dpe: Dpe.g,
   );

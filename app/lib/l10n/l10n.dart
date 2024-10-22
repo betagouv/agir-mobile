@@ -32,7 +32,6 @@ abstract final class Localisation {
   static const attentionAucuneDonneeNePourraEtreRecuperee =
       'Attention, aucune donnée ne pourra être récupérée.';
   static const aucuneAideDisponible = 'Aucune aide\ndisponible';
-  static const autreJeNeSaisPas = 'Autre / Je ne sais pas';
   static const bibliotheque = 'Ma bibliothèque';
   static const bibliothequeSousTitre =
       'Retrouver ici vos articles déjà consultés ainsi que vos favoris';
@@ -41,7 +40,6 @@ abstract final class Localisation {
   static const bienvenueSurDetails =
       'Nous avons quelques questions à vous poser pour personnaliser votre expérience !';
   static const bilanEnvironnemental = 'Mon bilan environnemental';
-  static const boisPellets = 'Bois / Pellets';
   static const bonjour = 'Bonjour,\n';
   static const bonnesAstucesPourRealiserCeDefi =
       'Bonnes astuces pour réaliser ce défi';
@@ -81,7 +79,6 @@ abstract final class Localisation {
   static const dpeF = 'F';
   static const dpeG = 'G';
   static const dpeJeNeSaisPas = 'Je ne sais pas';
-  static const electricite = 'Électricité';
   static const elementsNecessaireAuCalcul = 'Éléments nécessaires au calcul';
   static const emailDeConnexionRenvoye = 'Email de connexion renvoyé';
   static const enCours = 'En cours !';
@@ -100,11 +97,8 @@ abstract final class Localisation {
   static const facultatif = 'facultatif';
   static const fermer = 'Fermer';
   static const finalementPasPourMoi = 'Finalement, pas pour moi';
-
-  static const fioul = 'Fioul';
   static const firstNameEmpty = 'Le prénom ne peut pas être vide.';
   static const firstNameInvalid = "Le prénom n'est pas valide.";
-  static const gaz = 'Gaz';
   static const jaccepte = "J'accepte ";
   static const jaiCompris = "J'ai compris";
   static const jaiDejaUnCompte = "J'ai déjà un compte";
@@ -204,8 +198,6 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const proposePar = 'Proposé par';
   static const propulsePar = 'Propulsé par ';
   static const quelleEstLaSuperficie = 'Quelle est la superficie ?';
-  static const quelleEstVotreModeDeChauffagePrincipal =
-      'Quelle est votre mode de chauffage principal ?';
   static const quelquesQuestionPourMieuxVousConnaitre =
       'Quelques questions pour mieux vous connaître';
   static const quiz = 'Quiz';

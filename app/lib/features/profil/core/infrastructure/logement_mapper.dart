@@ -5,7 +5,6 @@ abstract final class LogementMapper {
   const LogementMapper._();
 
   static Map<String, dynamic> mapLogementToJson(final Logement logement) => {
-        'chauffage': _mapChauffageToJson(logement.chauffage),
         'code_postal': logement.codePostal,
         'commune': logement.commune,
         'dpe': _mapDpeToJson(logement.dpe),
@@ -26,30 +25,9 @@ abstract final class LogementMapper {
         typeDeLogement: _mapTypeDeLogementFromJson(json['type'] as String?),
         estProprietaire: json['proprietaire'] as bool?,
         superficie: _mapSuperficieFromJson(json['superficie'] as String?),
-        chauffage: _mapChauffageFromJson(json['chauffage'] as String?),
         plusDe15Ans: json['plus_de_15_ans'] as bool?,
         dpe: _mapDpeFromJson(json['dpe'] as String?),
       );
-
-  static String? _mapChauffageToJson(final Chauffage? chauffage) =>
-      switch (chauffage) {
-        Chauffage.electricite => 'electricite',
-        Chauffage.boisPellets => 'bois',
-        Chauffage.fioul => 'fioul',
-        Chauffage.gaz => 'gaz',
-        Chauffage.autre => 'autre',
-        null => null,
-      };
-
-  static Chauffage? _mapChauffageFromJson(final String? chauffage) =>
-      switch (chauffage) {
-        'electricite' => Chauffage.electricite,
-        'bois' => Chauffage.boisPellets,
-        'fioul' => Chauffage.fioul,
-        'gaz' => Chauffage.gaz,
-        'autre' => Chauffage.autre,
-        _ => null,
-      };
 
   static String? _mapDpeToJson(final Dpe? dpe) => switch (dpe) {
         Dpe.a => 'A',

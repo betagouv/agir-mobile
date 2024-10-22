@@ -68,7 +68,6 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
     typeDeLogement: ScenarioContext().typeDeLogement,
     estProprietaire: ScenarioContext().estProprietaire,
     superficie: ScenarioContext().superficie,
-    chauffage: ScenarioContext().chauffage,
     plusDe15Ans: ScenarioContext().plusDe15Ans,
     dpe: ScenarioContext().dpe,
     nombreDePartsFiscales: ScenarioContext().nombreDePartsFiscales,

@@ -149,7 +149,6 @@ void main() {
           typeDeLogement: TypeDeLogement.maison,
           estProprietaire: true,
           superficie: Superficie.s70,
-          chauffage: Chauffage.gaz,
           plusDe15Ans: null,
           dpe: null,
         ),
@@ -184,7 +183,6 @@ void main() {
           typeDeLogement: null,
           estProprietaire: null,
           superficie: null,
-          chauffage: null,
           plusDe15Ans: null,
           dpe: null,
         ),
@@ -211,7 +209,6 @@ void main() {
       const typeDeLogement = TypeDeLogement.maison;
       const estProprietaire = true;
       const superficie = Superficie.s100;
-      const chauffage = Chauffage.electricite;
       const plusDe15Ans = true;
       const dpe = Dpe.b;
       await adapter.mettreAJourLogement(
@@ -223,7 +220,6 @@ void main() {
           typeDeLogement: typeDeLogement,
           estProprietaire: estProprietaire,
           superficie: superficie,
-          chauffage: chauffage,
           plusDe15Ans: plusDe15Ans,
           dpe: dpe,
         ),
@@ -235,7 +231,7 @@ void main() {
             that: const RequestMathcher(
               path,
               body:
-                  '{"chauffage":"electricite","code_postal":"$codePostal","commune":"$commune","dpe":"B","nombre_adultes":$nombreAdultes,"nombre_enfants":$nombreEnfants,"plus_de_15_ans":$plusDe15Ans,"proprietaire":$estProprietaire,"superficie":"superficie_100","type":"maison"}',
+                  '{"code_postal":"$codePostal","commune":"$commune","dpe":"B","nombre_adultes":$nombreAdultes,"nombre_enfants":$nombreEnfants,"plus_de_15_ans":$plusDe15Ans,"proprietaire":$estProprietaire,"superficie":"superficie_100","type":"maison"}',
             ),
           ),
         ),
