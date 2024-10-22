@@ -1,7 +1,11 @@
+// ignore_for_file: avoid-mutating-parameters
+
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 abstract final class CrashReporting {
-  static Future<void> init() => SentryFlutter.init((final p0) {});
+  static Future<void> init() => SentryFlutter.init((final p0) {
+        p0.considerInAppFramesByDefault = false;
+      });
 
   // ignore: unused-code
   static Future<void> captureException(

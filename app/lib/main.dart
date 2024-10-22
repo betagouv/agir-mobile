@@ -43,6 +43,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:native_dio_adapter/native_dio_adapter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:sentry_dio/sentry_dio.dart';
 
 Future<void> main() async {
   final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -156,7 +157,9 @@ class _MyAppState extends State<MyApp> {
               baseUrl: url.toString(),
               validateStatus: (final status) => true,
             ),
-          )..httpClientAdapter = NativeAdapter();
+          )
+            ..httpClientAdapter = NativeAdapter()
+            ..addSentry();
 
           final dioHttpClient = DioHttpClient(
             dio: dio,
