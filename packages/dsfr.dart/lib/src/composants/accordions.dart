@@ -86,23 +86,27 @@ class _DsfrAccordion extends StatelessWidget {
             child: GestureDetector(
               onTap: item.isEnable ? _handleTap : null,
               behavior: HitTestBehavior.opaque,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s3v),
-                child: Row(
-                  children: [
-                    Expanded(child: item.headerBuilder(isExpanded)),
-                    if (item.isEnable)
-                      AnimatedRotation(
-                        turns: isExpanded ? -0.5 : 0,
-                        duration: Durations.short4,
-                        child: const Icon(
-                          DsfrIcons.systemArrowDownSLine,
-                          size: DsfrSpacings.s2w,
-                          color: DsfrColors.blueFranceSun113,
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(minHeight: 48),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: DsfrSpacings.s3v),
+                  child: Row(
+                    children: [
+                      Expanded(child: item.headerBuilder(isExpanded)),
+                      if (item.isEnable)
+                        AnimatedRotation(
+                          turns: isExpanded ? -0.5 : 0,
+                          duration: Durations.short4,
+                          child: const Icon(
+                            DsfrIcons.systemArrowDownSLine,
+                            size: DsfrSpacings.s2w,
+                            color: DsfrColors.blueFranceSun113,
+                          ),
                         ),
-                      ),
-                    const SizedBox(width: DsfrSpacings.s2w),
-                  ],
+                      const SizedBox(width: DsfrSpacings.s2w),
+                    ],
+                  ),
                 ),
               ),
             ),
