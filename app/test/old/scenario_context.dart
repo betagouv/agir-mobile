@@ -35,7 +35,6 @@ class ScenarioContext {
   TypeDeLogement? typeDeLogement;
   bool? estProprietaire;
   Superficie? superficie;
-  Chauffage? chauffage;
   bool? plusDe15Ans;
   Dpe? dpe;
   double nombreDePartsFiscales = 0;

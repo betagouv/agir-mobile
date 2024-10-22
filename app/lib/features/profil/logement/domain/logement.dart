@@ -10,7 +10,6 @@ class Logement extends Equatable {
     required this.typeDeLogement,
     required this.estProprietaire,
     required this.superficie,
-    required this.chauffage,
     required this.plusDe15Ans,
     required this.dpe,
   });
@@ -22,7 +21,6 @@ class Logement extends Equatable {
   final TypeDeLogement? typeDeLogement;
   final bool? estProprietaire;
   final Superficie? superficie;
-  final Chauffage? chauffage;
   final bool? plusDe15Ans;
   final Dpe? dpe;
 
@@ -35,7 +33,6 @@ class Logement extends Equatable {
         typeDeLogement,
         estProprietaire,
         superficie,
-        chauffage,
         plusDe15Ans,
         dpe,
       ];

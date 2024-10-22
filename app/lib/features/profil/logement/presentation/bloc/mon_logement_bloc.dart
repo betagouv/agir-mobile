@@ -23,7 +23,6 @@ class MonLogementBloc extends Bloc<MonLogementEvent, MonLogementState> {
     on<MonLogementTypeDeLogementChange>(_onNombreTypeDeLogementChange);
     on<MonLogementEstProprietaireChange>(_onEstProprietaireChange);
     on<MonLogementSuperficieChange>(_onSuperficieChange);
-    on<MonLogementChauffageChange>(_onChauffageChange);
     on<MonLogementPlusDe15AnsChange>(_onPlusDe15AnsChange);
     on<MonLogementDpeChange>(_onDpeChange);
     on<MonLogementMiseAJourDemandee>(_onMiseAJourDemandee);
@@ -54,7 +53,6 @@ class MonLogementBloc extends Bloc<MonLogementEvent, MonLogementState> {
           typeDeLogement: logement.typeDeLogement,
           estProprietaire: logement.estProprietaire,
           superficie: logement.superficie,
-          chauffage: logement.chauffage,
           plusDe15Ans: logement.plusDe15Ans,
           dpe: logement.dpe,
           statut: MonLogementStatut.succes,
@@ -118,12 +116,6 @@ class MonLogementBloc extends Bloc<MonLogementEvent, MonLogementState> {
   ) =>
       emit(state.copyWith(superficie: event.valeur));
 
-  void _onChauffageChange(
-    final MonLogementChauffageChange event,
-    final Emitter<MonLogementState> emit,
-  ) =>
-      emit(state.copyWith(chauffage: event.valeur));
-
   void _onPlusDe15AnsChange(
     final MonLogementPlusDe15AnsChange event,
     final Emitter<MonLogementState> emit,
@@ -151,7 +143,6 @@ class MonLogementBloc extends Bloc<MonLogementEvent, MonLogementState> {
         typeDeLogement: state.typeDeLogement,
         estProprietaire: state.estProprietaire,
         superficie: state.superficie,
-        chauffage: state.chauffage,
         plusDe15Ans: state.plusDe15Ans,
         dpe: state.dpe,
       ),
