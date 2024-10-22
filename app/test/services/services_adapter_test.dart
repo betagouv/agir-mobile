@@ -46,7 +46,7 @@ void main() {
       inner: client,
     );
 
-    final adapter = UniversApiAdapter(apiClient: apiClient);
+    final adapter = UniversApiAdapter(client: apiClient);
 
     final services = await adapter.getServices(universType);
 

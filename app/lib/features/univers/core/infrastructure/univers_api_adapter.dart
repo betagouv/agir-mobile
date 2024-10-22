@@ -18,9 +18,8 @@ import 'package:app/features/univers/core/infrastructure/tuile_univers_mapper.da
 import 'package:fpdart/fpdart.dart';
 
 class UniversApiAdapter implements UniversPort {
-  const UniversApiAdapter({
-    required final AuthentificationApiClient apiClient,
-  }) : _apiClient = apiClient;
+  const UniversApiAdapter({required final AuthentificationApiClient client})
+      : _apiClient = client;
 
   final AuthentificationApiClient _apiClient;
 

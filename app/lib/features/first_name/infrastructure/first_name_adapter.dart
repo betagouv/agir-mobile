@@ -9,9 +9,8 @@ import 'package:app/features/profil/core/domain/utilisateur_id_non_trouve_except
 import 'package:fpdart/fpdart.dart';
 
 final class FirstNameAdapter implements FirstNamePort {
-  const FirstNameAdapter({
-    required final AuthentificationApiClient apiClient,
-  }) : _apiClient = apiClient;
+  const FirstNameAdapter({required final AuthentificationApiClient client})
+      : _apiClient = client;
 
   final AuthentificationApiClient _apiClient;
 

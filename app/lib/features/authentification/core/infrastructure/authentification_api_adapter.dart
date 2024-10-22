@@ -15,9 +15,9 @@ import 'package:fpdart/fpdart.dart';
 
 class AuthentificationApiAdapter implements AuthentificationPort {
   AuthentificationApiAdapter({
-    required final AuthentificationApiClient apiClient,
+    required final AuthentificationApiClient client,
     required final AuthenticationService authenticationService,
-  })  : _apiClient = apiClient,
+  })  : _apiClient = client,
         _authenticationService = authenticationService;
 
   final AuthentificationApiClient _apiClient;

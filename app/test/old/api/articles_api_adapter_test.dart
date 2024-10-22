@@ -190,7 +190,7 @@ void main() {
       );
 
     final adapter = ArticlesApiAdapter(
-      apiClient: DioHttpClient(
+      client: DioHttpClient(
         dio: dio,
         authenticationService: authenticationService,
       ),
@@ -296,7 +296,7 @@ void main() {
       );
 
     final adapter = ArticlesApiAdapter(
-      apiClient: DioHttpClient(
+      client: DioHttpClient(
         dio: dio,
         authenticationService: authenticationService,
       ),
@@ -325,7 +325,7 @@ void main() {
     final dio = DioMock()..postM<dynamic>('/utilisateurs/{userId}/events');
 
     final adapter = ArticlesApiAdapter(
-      apiClient: DioHttpClient(
+      client: DioHttpClient(
         dio: dio,
         authenticationService: authenticationService,
       ),
@@ -349,7 +349,7 @@ void main() {
     final dio = DioMock()..postM<dynamic>('/utilisateurs/{userId}/events');
 
     final adapter = ArticlesApiAdapter(
-      apiClient: DioHttpClient(
+      client: DioHttpClient(
         dio: dio,
         authenticationService: authenticationService,
       ),

@@ -25,7 +25,7 @@ void main() {
       inner: client,
     );
 
-    final adapter = FirstNameAdapter(apiClient: apiClient);
+    final adapter = FirstNameAdapter(client: apiClient);
 
     final prenom = Faker().person.firstName();
 

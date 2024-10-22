@@ -36,7 +36,7 @@ void main() {
         );
 
       final adapter = CommunesApiAdapter(
-        apiClient: AuthentificationApiClient(
+        client: AuthentificationApiClient(
           apiUrl: apiUrl,
           authenticationService: authenticationService,
           inner: client,

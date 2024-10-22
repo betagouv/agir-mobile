@@ -46,7 +46,7 @@ void main() {
       );
 
     final adapter = RecommandationsApiAdapter(
-      apiClient: AuthentificationApiClient(
+      client: AuthentificationApiClient(
         apiUrl: apiUrl,
         authenticationService: const AuthenticationServiceFake(),
         inner: client,
@@ -117,7 +117,7 @@ void main() {
       );
 
     final adapter = RecommandationsApiAdapter(
-      apiClient: AuthentificationApiClient(
+      client: AuthentificationApiClient(
         apiUrl: apiUrl,
         authenticationService: const AuthenticationServiceFake(),
         inner: client,

@@ -7,8 +7,8 @@ import 'package:fpdart/fpdart.dart';
 
 class CommunesApiAdapter implements CommunesPort {
   const CommunesApiAdapter({
-    required final AuthentificationApiClient apiClient,
-  }) : _apiClient = apiClient;
+    required final AuthentificationApiClient client,
+  }) : _apiClient = client;
 
   final AuthentificationApiClient _apiClient;
 
