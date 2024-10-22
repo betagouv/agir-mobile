@@ -205,7 +205,11 @@ class _SliverListe extends StatelessWidget {
             hasScrollBody: false,
             child: Column(
               children: [
-                SvgPicture.asset(AssetsSvgs.bibliothequeEmpty),
+                SvgPicture.asset(
+                  AssetsSvgs.bibliothequeEmpty,
+                  semanticsLabel:
+                      "Illustration lorsque aucun article n'est trouvé",
+                ),
                 const SizedBox(height: DsfrSpacings.s2w),
                 const Text(
                   Localisation.bibliothequeAucunArticle,
