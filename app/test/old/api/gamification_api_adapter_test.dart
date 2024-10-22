@@ -35,7 +35,7 @@ void main() {
       );
 
     final adapter = GamificationApiAdapter(
-      apiClient: AuthentificationApiClient(
+      client: AuthentificationApiClient(
         apiUrl: apiUrl,
         authenticationService: const AuthenticationServiceFake(),
         inner: client,

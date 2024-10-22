@@ -91,7 +91,7 @@ void main() {
       );
 
     final adapter = BibliothequeApiAdapter(
-      apiClient: AuthentificationApiClient(
+      client: AuthentificationApiClient(
         apiUrl: apiUrl,
         authenticationService: const AuthenticationServiceFake(),
         inner: client,
@@ -148,7 +148,7 @@ void main() {
       );
 
     final adapter = BibliothequeApiAdapter(
-      apiClient: AuthentificationApiClient(
+      client: AuthentificationApiClient(
         apiUrl: apiUrl,
         authenticationService: const AuthenticationServiceFake(),
         inner: client,
@@ -207,7 +207,7 @@ void main() {
       );
 
     final adapter = BibliothequeApiAdapter(
-      apiClient: AuthentificationApiClient(
+      client: AuthentificationApiClient(
         apiUrl: apiUrl,
         authenticationService: const AuthenticationServiceFake(),
         inner: client,
@@ -265,7 +265,7 @@ void main() {
       );
 
     final adapter = BibliothequeApiAdapter(
-      apiClient: AuthentificationApiClient(
+      client: AuthentificationApiClient(
         apiUrl: apiUrl,
         authenticationService: const AuthenticationServiceFake(),
         inner: client,

@@ -11,9 +11,9 @@ import 'package:fpdart/fpdart.dart';
 
 class QuizApiAdapter implements QuizPort {
   const QuizApiAdapter({
-    required final AuthentificationApiClient apiClient,
+    required final AuthentificationApiClient client,
     required final CmsApiClient cmsApiClient,
-  })  : _apiClient = apiClient,
+  })  : _apiClient = client,
         _cmsApiClient = cmsApiClient;
 
   final AuthentificationApiClient _apiClient;

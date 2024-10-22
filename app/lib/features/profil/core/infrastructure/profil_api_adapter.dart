@@ -10,9 +10,8 @@ import 'package:app/features/profil/logement/domain/logement.dart';
 import 'package:fpdart/fpdart.dart';
 
 class ProfilApiAdapter implements ProfilPort {
-  const ProfilApiAdapter({
-    required final AuthentificationApiClient apiClient,
-  }) : _apiClient = apiClient;
+  const ProfilApiAdapter({required final AuthentificationApiClient client})
+      : _apiClient = client;
 
   final AuthentificationApiClient _apiClient;
 

@@ -11,8 +11,8 @@ import 'package:fpdart/fpdart.dart';
 
 class BibliothequeApiAdapter implements BibliothequePort {
   const BibliothequeApiAdapter({
-    required final AuthentificationApiClient apiClient,
-  }) : _apiClient = apiClient;
+    required final AuthentificationApiClient client,
+  }) : _apiClient = client;
 
   final AuthentificationApiClient _apiClient;
 

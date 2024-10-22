@@ -39,7 +39,7 @@ void main() {
         );
 
       final adapter = AuthentificationApiAdapter(
-        apiClient: AuthentificationApiClient(
+        client: AuthentificationApiClient(
           apiUrl: apiUrl,
           authenticationService: authenticationService,
           inner: client,
@@ -81,7 +81,7 @@ void main() {
       );
 
     final adapter = AuthentificationApiAdapter(
-      apiClient: AuthentificationApiClient(
+      client: AuthentificationApiClient(
         apiUrl: apiUrl,
         authenticationService: authenticationService,
         inner: client,
@@ -135,7 +135,7 @@ void main() {
         clock: Clock.fixed(DateTime(1992)),
       );
       final adapter = AuthentificationApiAdapter(
-        apiClient: AuthentificationApiClient(
+        client: AuthentificationApiClient(
           apiUrl: apiUrl,
           authenticationService: authenticationService,
           inner: client,
@@ -180,7 +180,7 @@ void main() {
       final flutterSecureStorageMock = FlutterSecureStorageFake();
 
       final adapter = AuthentificationApiAdapter(
-        apiClient: AuthentificationApiClient(
+        client: AuthentificationApiClient(
           apiUrl: apiUrl,
           authenticationService: authenticationService,
           inner: ClientMock(),
@@ -211,7 +211,7 @@ void main() {
       );
 
     final adapter = AuthentificationApiAdapter(
-      apiClient: AuthentificationApiClient(
+      client: AuthentificationApiClient(
         apiUrl: apiUrl,
         authenticationService: authenticationService,
         inner: client,
@@ -257,7 +257,7 @@ void main() {
       clock: Clock.fixed(DateTime(1992)),
     );
     final adapter = AuthentificationApiAdapter(
-      apiClient: AuthentificationApiClient(
+      client: AuthentificationApiClient(
         apiUrl: apiUrl,
         authenticationService: authenticationService,
         inner: client,
@@ -296,7 +296,7 @@ void main() {
       );
 
     final adapter = AuthentificationApiAdapter(
-      apiClient: AuthentificationApiClient(
+      client: AuthentificationApiClient(
         apiUrl: apiUrl,
         authenticationService: authenticationService,
         inner: client,
@@ -332,7 +332,7 @@ void main() {
       );
 
     final adapter = AuthentificationApiAdapter(
-      apiClient: AuthentificationApiClient(
+      client: AuthentificationApiClient(
         apiUrl: apiUrl,
         authenticationService: authenticationService,
         inner: client,
@@ -362,7 +362,7 @@ void main() {
       );
 
     final adapter = AuthentificationApiAdapter(
-      apiClient: AuthentificationApiClient(
+      client: AuthentificationApiClient(
         apiUrl: apiUrl,
         authenticationService: authenticationService,
         inner: client,
@@ -410,7 +410,7 @@ void main() {
     const authenticationService = AuthenticationServiceFake();
 
     final adapter = AuthentificationApiAdapter(
-      apiClient: AuthentificationApiClient(
+      client: AuthentificationApiClient(
         apiUrl: apiUrl,
         authenticationService: authenticationService,
         inner: client,

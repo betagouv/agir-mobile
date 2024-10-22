@@ -12,9 +12,9 @@ import 'package:rxdart/subjects.dart';
 
 class GamificationApiAdapter implements GamificationPort {
   GamificationApiAdapter({
-    required final AuthentificationApiClient apiClient,
+    required final AuthentificationApiClient client,
     required final MessageBus messageBus,
-  }) : _apiClient = apiClient {
+  }) : _apiClient = client {
     _subscription =
         messageBus.subscribe(actionCompletedTopic).listen((final event) async {
       await mettreAJourLesPoints();

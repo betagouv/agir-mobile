@@ -173,7 +173,7 @@ class _MyAppState extends State<MyApp> {
           final messageBus = MessageBus();
 
           final gamificationApiAdapter = GamificationApiAdapter(
-            apiClient: apiClient,
+            client: apiClient,
             messageBus: messageBus,
           );
 
@@ -182,25 +182,24 @@ class _MyAppState extends State<MyApp> {
             clock: _clock,
             authenticationService: _authenticationService,
             authentificationPort: AuthentificationApiAdapter(
-              apiClient: apiClient,
+              client: apiClient,
               authenticationService: _authenticationService,
             ),
-            universPort: UniversApiAdapter(apiClient: apiClient),
+            universPort: UniversApiAdapter(client: apiClient),
             aidesPort: AidesApiAdapter(client: dioHttpClient),
-            bibliothequePort: BibliothequeApiAdapter(apiClient: apiClient),
-            recommandationsPort:
-                RecommandationsApiAdapter(apiClient: apiClient),
+            bibliothequePort: BibliothequeApiAdapter(client: apiClient),
+            recommandationsPort: RecommandationsApiAdapter(client: apiClient),
             articlesPort: ArticlesApiAdapter(
-              apiClient: dioHttpClient,
+              client: dioHttpClient,
               cmsApiClient: cmsClient,
             ),
             quizPort:
-                QuizApiAdapter(apiClient: apiClient, cmsApiClient: cmsClient),
+                QuizApiAdapter(client: apiClient, cmsApiClient: cmsClient),
             versionPort: VersionAdapter(packageInfo: _packageInfo),
-            communesPort: CommunesApiAdapter(apiClient: apiClient),
+            communesPort: CommunesApiAdapter(client: apiClient),
             aideVeloPort: AideVeloApiAdapter(client: dioHttpClient),
-            firstNamePort: FirstNameAdapter(apiClient: apiClient),
-            profilPort: ProfilApiAdapter(apiClient: apiClient),
+            firstNamePort: FirstNameAdapter(client: apiClient),
+            profilPort: ProfilApiAdapter(client: apiClient),
             knowYourCustomersRepository:
                 KnowYourCustomersRepository(client: dioHttpClient),
             environmentalPerformanceSummaryRepository:

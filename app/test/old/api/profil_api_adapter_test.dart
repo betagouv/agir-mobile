@@ -47,7 +47,7 @@ void main() {
         );
 
       final adapter = ProfilApiAdapter(
-        apiClient: AuthentificationApiClient(
+        client: AuthentificationApiClient(
           apiUrl: apiUrl,
           authenticationService: const AuthenticationServiceFake(),
           inner: client,
@@ -78,7 +78,7 @@ void main() {
         );
 
       final adapter = ProfilApiAdapter(
-        apiClient: AuthentificationApiClient(
+        client: AuthentificationApiClient(
           apiUrl: apiUrl,
           authenticationService: const AuthenticationServiceFake(),
           inner: client,
@@ -131,7 +131,7 @@ void main() {
         );
 
       final adapter = ProfilApiAdapter(
-        apiClient: AuthentificationApiClient(
+        client: AuthentificationApiClient(
           apiUrl: apiUrl,
           authenticationService: const AuthenticationServiceFake(),
           inner: client,
@@ -165,7 +165,7 @@ void main() {
         );
 
       final adapter = ProfilApiAdapter(
-        apiClient: AuthentificationApiClient(
+        client: AuthentificationApiClient(
           apiUrl: apiUrl,
           authenticationService: const AuthenticationServiceFake(),
           inner: client,
@@ -195,7 +195,7 @@ void main() {
         ..patchSuccess(path: path, response: OkResponse());
 
       final adapter = ProfilApiAdapter(
-        apiClient: AuthentificationApiClient(
+        client: AuthentificationApiClient(
           apiUrl: apiUrl,
           authenticationService: const AuthenticationServiceFake(),
           inner: client,
@@ -246,7 +246,7 @@ void main() {
         );
 
       final adapter = ProfilApiAdapter(
-        apiClient: AuthentificationApiClient(
+        client: AuthentificationApiClient(
           apiUrl: apiUrl,
           authenticationService: const AuthenticationServiceFake(),
           inner: client,
@@ -278,7 +278,7 @@ void main() {
         ..deleteSuccess(path: path, response: OkResponse());
 
       final adapter = ProfilApiAdapter(
-        apiClient: AuthentificationApiClient(
+        client: AuthentificationApiClient(
           apiUrl: apiUrl,
           authenticationService: const AuthenticationServiceFake(),
           inner: client,
@@ -298,7 +298,7 @@ void main() {
         );
 
       final adapter = ProfilApiAdapter(
-        apiClient: AuthentificationApiClient(
+        client: AuthentificationApiClient(
           apiUrl: apiUrl,
           authenticationService: const AuthenticationServiceFake(),
           inner: client,

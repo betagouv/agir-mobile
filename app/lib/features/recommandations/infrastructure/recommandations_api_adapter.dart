@@ -12,8 +12,8 @@ import 'package:fpdart/fpdart.dart';
 
 class RecommandationsApiAdapter implements RecommandationsPort {
   const RecommandationsApiAdapter({
-    required final AuthentificationApiClient apiClient,
-  }) : _apiClient = apiClient;
+    required final AuthentificationApiClient client,
+  }) : _apiClient = client;
 
   final AuthentificationApiClient _apiClient;
 

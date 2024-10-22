@@ -394,7 +394,7 @@ void main() {
 
 UniversApiAdapter initializeAdapter(final ClientMock client) =>
     UniversApiAdapter(
-      apiClient: AuthentificationApiClient(
+      client: AuthentificationApiClient(
         apiUrl: apiUrl,
         authenticationService: const AuthenticationServiceFake(),
         inner: client,

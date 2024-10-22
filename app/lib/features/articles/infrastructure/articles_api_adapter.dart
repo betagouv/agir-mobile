@@ -10,9 +10,9 @@ import 'package:fpdart/fpdart.dart';
 
 class ArticlesApiAdapter implements ArticlesPort {
   const ArticlesApiAdapter({
-    required final DioHttpClient apiClient,
+    required final DioHttpClient client,
     required final CmsApiClient cmsApiClient,
-  })  : _client = apiClient,
+  })  : _client = client,
         _cmsApiClient = cmsApiClient;
 
   final DioHttpClient _client;
