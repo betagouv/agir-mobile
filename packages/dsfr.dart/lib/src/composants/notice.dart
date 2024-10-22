@@ -26,8 +26,6 @@ class DsfrNotice extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(
           left: DsfrSpacings.s2w,
-          top: DsfrSpacings.s3v,
-          right: DsfrSpacings.s2w,
           bottom: DsfrSpacings.s2w,
         ),
         child: Row(
@@ -35,7 +33,7 @@ class DsfrNotice extends StatelessWidget {
           children: [
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.only(top: DsfrSpacings.s1w),
+                padding: const EdgeInsets.only(top: DsfrSpacings.s3v),
                 child: Column(
                   children: [
                     Row(
@@ -45,8 +43,9 @@ class DsfrNotice extends StatelessWidget {
                         Expanded(
                           child: Text(
                             titre,
-                            style:
-                                textStyle.copyWith(fontWeight: FontWeight.bold),
+                            style: textStyle.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ],
@@ -60,7 +59,6 @@ class DsfrNotice extends StatelessWidget {
             IconButton(
               iconSize: DsfrSpacings.s2w,
               onPressed: onClose,
-              style: const ButtonStyle(visualDensity: VisualDensity.compact),
               icon: const Icon(
                 DsfrIcons.systemCloseLine,
                 color: color,
