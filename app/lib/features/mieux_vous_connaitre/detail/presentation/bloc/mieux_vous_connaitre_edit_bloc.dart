@@ -161,6 +161,13 @@ class MieuxVousConnaitreEditBloc
                     updated: true,
                   ),
                 );
+                emit(
+                  MieuxVousConnaitreEditLoaded(
+                    question: newQuestion,
+                    newQuestion: newQuestion,
+                    updated: false,
+                  ),
+                );
               },
             );
           default:
