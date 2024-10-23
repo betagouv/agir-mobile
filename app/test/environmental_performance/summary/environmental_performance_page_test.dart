@@ -98,7 +98,7 @@ void main() {
     }
 
     testWidgets(
-      'Voir le contenu de Estimez mon bilan environnemental avec un bilan vide',
+      'Voir le contenu de Estimer mon bilan environnemental avec un bilan vide',
       (final tester) async {
         final dio = DioMock()
           ..getM(
@@ -111,7 +111,7 @@ void main() {
           );
         await pumpEnvironmentalPerformancePage(tester, dio);
         await tester.pumpAndSettle();
-        expect(find.text('Estimez mon bilan environnemental'), findsOneWidget);
+        expect(find.text('Estimer mon bilan environnemental'), findsOneWidget);
         expect(
           find.text(
             EnvironmentalPerformanceSummaryL10n.commencerMonMiniBilan,
@@ -146,7 +146,7 @@ void main() {
     });
 
     testWidgets(
-      'Voir le contenu de Estimez mon bilan environnemental avec un bilan partiel',
+      'Voir le contenu de Estimer mon bilan environnemental avec un bilan partiel',
       (final tester) async {
         await mockNetworkImages(() async {
           final dio = DioMock()
@@ -156,7 +156,7 @@ void main() {
             );
           await pumpEnvironmentalPerformancePage(tester, dio);
           expect(
-            find.text('Estimez mon bilan environnemental'),
+            find.text('Estimer mon bilan environnemental'),
             findsOneWidget,
           );
           expect(find.text('Faible'), findsOneWidget);

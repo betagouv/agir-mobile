@@ -31,7 +31,7 @@ class BodyPartial extends StatelessWidget {
               title: TextSpan(
                 children: [
                   TextSpan(
-                    text: EnvironmentalPerformanceSummaryL10n.estimezMon,
+                    text: EnvironmentalPerformanceSummaryL10n.estimerMon,
                   ),
                   TextSpan(text: ' '),
                   TextSpan(
@@ -92,7 +92,7 @@ class BodyPartial extends StatelessWidget {
               TextSpan(
                 children: [
                   TextSpan(
-                    text: EnvironmentalPerformanceSummaryL10n.affinez,
+                    text: EnvironmentalPerformanceSummaryL10n.affiner,
                     style: DsfrTextStyle.headline4(),
                   ),
                   TextSpan(text: ' ', style: DsfrTextStyle.headline4()),
@@ -110,7 +110,7 @@ class BodyPartial extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
             child: Text(
-              EnvironmentalPerformanceSummaryL10n.affinezMonEstimationSousTitre,
+              EnvironmentalPerformanceSummaryL10n.affinerMonEstimationSousTitre,
               style: DsfrTextStyle.bodyMd(),
             ),
           ),
