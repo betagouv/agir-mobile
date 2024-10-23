@@ -187,7 +187,7 @@ class _MyAppState extends State<MyApp> {
             ),
             universPort: UniversApiAdapter(client: apiClient),
             aidesPort: AidesApiAdapter(client: dioHttpClient),
-            bibliothequePort: BibliothequeApiAdapter(client: apiClient),
+            bibliothequePort: BibliothequeApiAdapter(client: dioHttpClient),
             recommandationsPort: RecommandationsApiAdapter(client: apiClient),
             articlesPort: ArticlesApiAdapter(
               client: dioHttpClient,
