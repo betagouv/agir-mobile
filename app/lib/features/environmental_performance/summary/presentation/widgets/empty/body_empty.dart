@@ -30,7 +30,7 @@ class BodyEmpty extends StatelessWidget {
               title: TextSpan(
                 children: [
                   TextSpan(
-                    text: EnvironmentalPerformanceSummaryL10n.estimezMon,
+                    text: EnvironmentalPerformanceSummaryL10n.estimerMon,
                   ),
                   TextSpan(text: ' '),
                   TextSpan(
