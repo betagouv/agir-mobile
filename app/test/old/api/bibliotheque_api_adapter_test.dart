@@ -1,22 +1,21 @@
-import 'package:app/features/authentification/core/infrastructure/authentification_api_client.dart';
+import 'dart:convert';
+
+import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/bibliotheque/domain/bibliotheque.dart';
 import 'package:app/features/bibliotheque/infrastructure/bibliotheque_api_adapter.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../helpers/dio_mock.dart';
 import '../mocks/authentication_service_fake.dart';
-import 'client_mock.dart';
-import 'constants.dart';
-import 'custom_response.dart';
-import 'request_mathcher.dart';
 
 void main() {
   test('recuperer', () async {
-    final client = ClientMock()
-      ..getSuccess(
-        path: '/utilisateurs/$utilisateurId/bibliotheque',
-        response: CustomResponse('''
+    final dio = DioMock()
+      ..getM(
+        '/utilisateurs/%7BuserId%7D/bibliotheque',
+        responseData: jsonDecode('''
 {
   "contenu": [
     {
@@ -91,10 +90,9 @@ void main() {
       );
 
     final adapter = BibliothequeApiAdapter(
-      client: AuthentificationApiClient(
-        apiUrl: apiUrl,
+      client: DioHttpClient(
+        dio: dio,
         authenticationService: const AuthenticationServiceFake(),
-        inner: client,
       ),
     );
 
@@ -115,10 +113,10 @@ void main() {
   });
 
   test('recuperer filtre avec le titre', () async {
-    final client = ClientMock()
-      ..getSuccess(
-        path: '/utilisateurs/$utilisateurId/bibliotheque?titre=quel+impact',
-        response: CustomResponse('''
+    final dio = DioMock()
+      ..getM(
+        '/utilisateurs/%7BuserId%7D/bibliotheque?titre=quel+impact',
+        responseData: jsonDecode('''
 {
   "contenu": [
     {
@@ -148,10 +146,9 @@ void main() {
       );
 
     final adapter = BibliothequeApiAdapter(
-      client: AuthentificationApiClient(
-        apiUrl: apiUrl,
+      client: DioHttpClient(
+        dio: dio,
         authenticationService: const AuthenticationServiceFake(),
-        inner: client,
       ),
     );
 
@@ -162,22 +159,17 @@ void main() {
     );
 
     verify(
-      () => client.send(
-        any(
-          that: const RequestMathcher(
-            '/utilisateurs/$utilisateurId/bibliotheque?titre=quel+impact',
-          ),
-        ),
+      () => dio.get<dynamic>(
+        '/utilisateurs/%7BuserId%7D/bibliotheque?titre=quel+impact',
       ),
     );
   });
 
   test('recuperer filtre avec les thématiques', () async {
-    final client = ClientMock()
-      ..getSuccess(
-        path:
-            '/utilisateurs/$utilisateurId/bibliotheque?filtre_thematiques=alimentation,loisir',
-        response: CustomResponse('''
+    final dio = DioMock()
+      ..getM(
+        '/utilisateurs/%7BuserId%7D/bibliotheque?filtre_thematiques=alimentation%2Cloisir',
+        responseData: jsonDecode('''
 {
   "contenu": [
     {
@@ -207,10 +199,9 @@ void main() {
       );
 
     final adapter = BibliothequeApiAdapter(
-      client: AuthentificationApiClient(
-        apiUrl: apiUrl,
+      client: DioHttpClient(
+        dio: dio,
         authenticationService: const AuthenticationServiceFake(),
-        inner: client,
       ),
     );
 
@@ -221,21 +212,17 @@ void main() {
     );
 
     verify(
-      () => client.send(
-        any(
-          that: const RequestMathcher(
-            '/utilisateurs/$utilisateurId/bibliotheque?filtre_thematiques=alimentation,loisir',
-          ),
-        ),
+      () => dio.get<dynamic>(
+        '/utilisateurs/%7BuserId%7D/bibliotheque?filtre_thematiques=alimentation%2Cloisir',
       ),
     );
   });
 
   test('recuperer filtre avec les favoris', () async {
-    final client = ClientMock()
-      ..getSuccess(
-        path: '/utilisateurs/$utilisateurId/bibliotheque?favoris=true',
-        response: CustomResponse('''
+    final dio = DioMock()
+      ..getM(
+        '/utilisateurs/%7BuserId%7D/bibliotheque?favoris=true',
+        responseData: jsonDecode('''
 {
   "contenu": [
     {
@@ -265,10 +252,9 @@ void main() {
       );
 
     final adapter = BibliothequeApiAdapter(
-      client: AuthentificationApiClient(
-        apiUrl: apiUrl,
+      client: DioHttpClient(
+        dio: dio,
         authenticationService: const AuthenticationServiceFake(),
-        inner: client,
       ),
     );
 
@@ -279,12 +265,8 @@ void main() {
     );
 
     verify(
-      () => client.send(
-        any(
-          that: const RequestMathcher(
-            '/utilisateurs/$utilisateurId/bibliotheque?favoris=true',
-          ),
-        ),
+      () => dio.get<dynamic>(
+        '/utilisateurs/%7BuserId%7D/bibliotheque?favoris=true',
       ),
     );
   });
