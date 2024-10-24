@@ -7,6 +7,7 @@ import 'set_up_widgets.dart';
 import 'steps/iel_a_les_recommandations_suivantes.dart';
 import 'steps/iel_est_connecte.dart';
 import 'steps/iel_lance_lapplication.dart';
+import 'steps/iel_scrolle.dart';
 import 'steps/iel_voit_le_texte.dart';
 
 void main() {
@@ -17,6 +18,7 @@ void main() {
         setUpWidgets(tester);
         ielEstConnecte();
         await ielLanceLapplication(tester);
+        await ielScrolle(tester, Localisation.recommandationsTitre);
         ielVoitLeTexte(Localisation.recommandationsTitre);
       },
     );
@@ -40,6 +42,7 @@ void main() {
           ielALesRecommandationsSuivantes([recommandation]);
           ielEstConnecte();
           await ielLanceLapplication(tester);
+          await ielScrolle(tester, recommandation.titre);
           ielVoitLeTexte(recommandation.titre);
         });
       },

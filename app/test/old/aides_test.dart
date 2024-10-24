@@ -1,6 +1,7 @@
 import 'package:app/features/aides/core/domain/aide.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail_image_network/mocktail_image_network.dart';
 
 import 'set_up_widgets.dart';
 import 'steps/iel_a_les_aides_suivantes.dart';
@@ -8,6 +9,7 @@ import 'steps/iel_appuie_sur.dart';
 import 'steps/iel_est_connecte.dart';
 import 'steps/iel_lance_lapplication.dart';
 import 'steps/iel_ne_voit_pas_le_texte.dart';
+import 'steps/iel_scrolle.dart';
 import 'steps/iel_voit_le_texte.dart';
 import 'steps/iel_voit_le_texte_dans_texte_riche.dart';
 
@@ -40,9 +42,13 @@ void main() {
         "iel voit le titre sur la page d'accueil",
         (final tester) async {
           setUpWidgets(tester);
-          ielEstConnecte();
-          await ielLanceLapplication(tester);
-          ielVoitLeTexte(Localisation.mesAides);
+
+          await mockNetworkImages(() async {
+            ielEstConnecte();
+            await ielLanceLapplication(tester);
+            await ielScrolle(tester, Localisation.mesAidesLien);
+            ielVoitLeTexte(Localisation.mesAides);
+          });
         },
       );
 
@@ -50,12 +56,15 @@ void main() {
         "iel voit les 2 premieres sur la page d'accueil",
         (final tester) async {
           setUpWidgets(tester);
-          ielALesAidesSuivantes([aide1, aide2, aide3]);
-          ielEstConnecte();
-          await ielLanceLapplication(tester);
-          ielVoitLeTexte(aide1.titre);
-          ielVoitLeTexte(aide2.titre);
-          ielNeVoitPasLeTexte(aide3.titre);
+          await mockNetworkImages(() async {
+            ielALesAidesSuivantes([aide1, aide2, aide3]);
+            ielEstConnecte();
+            await ielLanceLapplication(tester);
+            await ielScrolle(tester, Localisation.mesAidesLien);
+            ielVoitLeTexte(aide1.titre);
+            ielVoitLeTexte(aide2.titre);
+            ielNeVoitPasLeTexte(aide3.titre);
+          });
         },
       );
 
@@ -63,14 +72,17 @@ void main() {
         'iel clique sur la premiere aide alors iel arrive sur la page de détail',
         (final tester) async {
           setUpWidgets(tester);
-          ielALesAidesSuivantes([aide1, aide2, aide3]);
-          ielEstConnecte();
-          await ielLanceLapplication(tester);
-          await ielAppuieSur(tester, aide2.titre);
-          ielVoitLeTexte(aide2.thematique);
-          ielVoitLeTexte(aide2.titre);
-          ielVoitLeTexteDansTexteRiche(Localisation.euro(aide2.montantMax!));
-          ielVoitLeTexteDansTexteRiche('Contenu');
+          await mockNetworkImages(() async {
+            ielALesAidesSuivantes([aide1, aide2, aide3]);
+            ielEstConnecte();
+            await ielLanceLapplication(tester);
+            await ielScrolle(tester, Localisation.mesAidesLien);
+            await ielAppuieSur(tester, aide2.titre);
+            ielVoitLeTexte(aide2.thematique);
+            ielVoitLeTexte(aide2.titre);
+            ielVoitLeTexteDansTexteRiche(Localisation.euro(aide2.montantMax!));
+            ielVoitLeTexteDansTexteRiche('Contenu');
+          });
         },
       );
     });
@@ -78,21 +90,24 @@ void main() {
     group('Vos aides', () {
       testWidgets('iel voit toutes les aides', (final tester) async {
         setUpWidgets(tester);
-        ielALesAidesSuivantes([aide1, aide2, aide3, aide4]);
-        ielEstConnecte();
-        await ielLanceLapplication(tester);
-        await ielAppuieSur(tester, Localisation.mesAidesLien);
-        ielVoitLeTexte(Localisation.mesAidesDisponibles);
+        await mockNetworkImages(() async {
+          ielALesAidesSuivantes([aide1, aide2, aide3, aide4]);
+          ielEstConnecte();
+          await ielLanceLapplication(tester);
+          await ielScrolle(tester, Localisation.mesAidesLien);
+          await ielAppuieSur(tester, Localisation.mesAidesLien);
+          ielVoitLeTexte(Localisation.mesAidesDisponibles);
 
-        ielVoitLeTexte(aide1.thematique);
-        ielVoitLeTexte(aide1.titre);
+          ielVoitLeTexte(aide1.thematique);
+          ielVoitLeTexte(aide1.titre);
 
-        ielVoitLeTexte(aide2.thematique);
-        ielVoitLeTexte(aide2.titre);
+          ielVoitLeTexte(aide2.thematique);
+          ielVoitLeTexte(aide2.titre);
 
-        ielVoitLeTexte(aide3.thematique);
-        ielVoitLeTexte(aide3.titre);
-        ielVoitLeTexte(aide4.titre);
+          ielVoitLeTexte(aide3.thematique);
+          ielVoitLeTexte(aide3.titre);
+          ielVoitLeTexte(aide4.titre);
+        });
       });
     });
   });

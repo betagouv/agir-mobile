@@ -1,5 +1,6 @@
 import 'package:app/l10n/l10n.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail_image_network/mocktail_image_network.dart';
 
 import 'scenario_context.dart';
 import 'set_up_widgets.dart';
@@ -39,26 +40,29 @@ void main() {
     "Iel lance l'application pour la première fois et se connecte",
     (final tester) async {
       setUpWidgets(tester);
-      await ielLanceLapplication(tester);
-      await ielAppuieSur(tester, Localisation.jaiDejaUnCompte);
-      await ielEcritDansLeChamp(
-        tester,
-        label: Localisation.adresseEmail,
-        enterText: 'joe@doe.com',
-      );
-      await ielEcritDansLeChamp(
-        tester,
-        label: Localisation.motDePasse,
-        enterText: 'ceciEstUnMotDePasseValide!1',
-      );
-      await ielAppuieSur(tester, Localisation.meConnecter);
-      final authentificationPort = ScenarioContext().authentificationPortMock!;
-      expect(authentificationPort.connexionAppele, true);
-      await ielEcritLeCode(tester, enterText: '123456');
-      expect(authentificationPort.validationAppele, true);
-      await tester.pumpAndSettle();
-      await tester.pumpAndSettle();
-      ielVoitLeTexteDansTexteRiche(Localisation.bonjour);
+      await mockNetworkImages(() async {
+        await ielLanceLapplication(tester);
+        await ielAppuieSur(tester, Localisation.jaiDejaUnCompte);
+        await ielEcritDansLeChamp(
+          tester,
+          label: Localisation.adresseEmail,
+          enterText: 'joe@doe.com',
+        );
+        await ielEcritDansLeChamp(
+          tester,
+          label: Localisation.motDePasse,
+          enterText: 'ceciEstUnMotDePasseValide!1',
+        );
+        await ielAppuieSur(tester, Localisation.meConnecter);
+        final authentificationPort =
+            ScenarioContext().authentificationPortMock!;
+        expect(authentificationPort.connexionAppele, true);
+        await ielEcritLeCode(tester, enterText: '123456');
+        expect(authentificationPort.validationAppele, true);
+        await tester.pumpAndSettle();
+        await tester.pumpAndSettle();
+        ielVoitLeTexteDansTexteRiche(Localisation.bonjour);
+      });
     },
   );
 }

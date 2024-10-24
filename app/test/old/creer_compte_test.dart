@@ -1,6 +1,7 @@
 import 'package:app/features/mieux_vous_connaitre/core/domain/question.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail_image_network/mocktail_image_network.dart';
 
 import 'scenario_context.dart';
 import 'set_up_widgets.dart';
@@ -21,79 +22,84 @@ void main() {
     "Iel lance l'application pour la première fois et créer un compte",
     (final tester) async {
       setUpWidgets(tester);
-      const commune = 'DOLE';
-      leServeurRetourneCetteListeDeCommunes(['AUTHUME', commune]);
-      const response = "La cuisine et l'alimentation";
-      leServeurRetourneCesQuestions([
-        const ChoixMultipleQuestion(
-          id: QuestionId('KYC_preference'),
-          text: QuestionText(
-            'Sur quels thèmes recherchez-vous en priorité des aides et conseils ?',
+      await mockNetworkImages(() async {
+        const commune = 'DOLE';
+        leServeurRetourneCetteListeDeCommunes(['AUTHUME', commune]);
+        const response = "La cuisine et l'alimentation";
+        leServeurRetourneCesQuestions([
+          const ChoixMultipleQuestion(
+            id: QuestionId('KYC_preference'),
+            text: QuestionText(
+              'Sur quels thèmes recherchez-vous en priorité des aides et conseils ?',
+            ),
+            responses: Responses([]),
+            points: Points(5),
+            responsesPossibles: ResponsesPossibles([
+              response,
+              'Mes déplacements',
+              'Mon logement',
+              'Ma consommation',
+              'Je ne sais pas encore',
+            ]),
+            theme: QuestionTheme.climat,
           ),
-          responses: Responses([]),
-          points: Points(5),
-          responsesPossibles: ResponsesPossibles([
-            response,
-            'Mes déplacements',
-            'Mon logement',
-            'Ma consommation',
-            'Je ne sais pas encore',
-          ]),
-          theme: QuestionTheme.climat,
-        ),
-      ]);
-      ielNAPasTermineeSonIntegration();
-      const email = 'joe@doe.com';
-      await _allerSurLaPageSaisieCode(tester, email: email);
-      final authentificationPort = ScenarioContext().authentificationPortMock!;
-      expect(authentificationPort.creerCompteAppele, true);
-      ielVoitLeTexte(Localisation.entrezLeCodeRecuParMail);
-      ielVoitLeTexte(Localisation.entrezLeCodeRecuParMailDetails(email));
-      await ielEcritLeCode(tester, enterText: '123456');
-      expect(authentificationPort.validationAppele, true);
-      await tester.pumpAndSettle();
-      await tester.pumpAndSettle();
+        ]);
+        ielNAPasTermineeSonIntegration();
+        const email = 'joe@doe.com';
+        await _allerSurLaPageSaisieCode(tester, email: email);
+        final authentificationPort =
+            ScenarioContext().authentificationPortMock!;
+        expect(authentificationPort.creerCompteAppele, true);
+        ielVoitLeTexte(Localisation.entrezLeCodeRecuParMail);
+        ielVoitLeTexte(Localisation.entrezLeCodeRecuParMailDetails(email));
+        await ielEcritLeCode(tester, enterText: '123456');
+        expect(authentificationPort.validationAppele, true);
+        await tester.pumpAndSettle();
+        await tester.pumpAndSettle();
 
-      ielVoitLeTexte(Localisation.bienvenueSur);
-      await ielEcritDansLeChamp(
-        tester,
-        label: Localisation.monPrenom,
-        enterText: 'Lucas',
-      );
-      await tester.pumpAndSettle();
+        ielVoitLeTexte(Localisation.bienvenueSur);
+        await ielEcritDansLeChamp(
+          tester,
+          label: Localisation.monPrenom,
+          enterText: 'Lucas',
+        );
+        await tester.pumpAndSettle();
 
-      ielVoitLeTexte(Localisation.enchanteDetails);
-      await ielEcritDansLeChamp(
-        tester,
-        label: Localisation.codePostal,
-        enterText: '39100',
-      );
-      await ielAppuieSurLaListeDeroulante(tester);
-      await ielAppuieSur(tester, commune);
-      await ielAppuieSur(tester, Localisation.continuer);
+        ielVoitLeTexte(Localisation.enchanteDetails);
+        await ielEcritDansLeChamp(
+          tester,
+          label: Localisation.codePostal,
+          enterText: '39100',
+        );
+        await ielAppuieSurLaListeDeroulante(tester);
+        await ielAppuieSur(tester, commune);
+        await ielAppuieSur(tester, Localisation.continuer);
 
-      ielVoitLeTexte(Localisation.appEstEncoreEnExperimentation);
-      await ielAppuieSur(tester, Localisation.jaiCompris);
+        ielVoitLeTexte(Localisation.appEstEncoreEnExperimentation);
+        await ielAppuieSur(tester, Localisation.jaiCompris);
 
-      ielVoitLeTexte(Localisation.cestPresqueTermine);
-      await ielAppuieSur(tester, response);
-      await ielAppuieSur(tester, Localisation.continuer);
+        ielVoitLeTexte(Localisation.cestPresqueTermine);
+        await ielAppuieSur(tester, response);
+        await ielAppuieSur(tester, Localisation.continuer);
 
-      ielVoitLeTexte(Localisation.toutEstPret);
-      await ielAppuieSur(tester, Localisation.cestParti);
+        ielVoitLeTexte(Localisation.toutEstPret);
+        await ielAppuieSur(tester, Localisation.cestParti);
 
-      ielVoitLeTexteDansTexteRiche(Localisation.bonjour);
+        ielVoitLeTexteDansTexteRiche(Localisation.bonjour);
+      });
     },
   );
 
   testWidgets('Iel demande de renvoyer le mail', (final tester) async {
     setUpWidgets(tester);
-    const email = 'joe@doe.com';
-    await _allerSurLaPageSaisieCode(tester, email: email);
-    await ielAppuieSur(tester, Localisation.renvoyerEmailDeConnexion);
-    final authentificationPort = ScenarioContext().authentificationPortMock!;
-    expect(authentificationPort.renvoyerCodeAppele, true);
-    ielVoitLeTexte(Localisation.emailDeConnexionRenvoye);
+    await mockNetworkImages(() async {
+      const email = 'joe@doe.com';
+      await _allerSurLaPageSaisieCode(tester, email: email);
+      await ielAppuieSur(tester, Localisation.renvoyerEmailDeConnexion);
+      final authentificationPort = ScenarioContext().authentificationPortMock!;
+      expect(authentificationPort.renvoyerCodeAppele, true);
+      ielVoitLeTexte(Localisation.emailDeConnexionRenvoye);
+    });
   });
 
   test('cacherEmail', () {

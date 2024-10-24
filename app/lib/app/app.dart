@@ -15,7 +15,9 @@ import 'package:app/features/bibliotheque/presentation/bloc/bibliotheque_bloc.da
 import 'package:app/features/communes/domain/communes_port.dart';
 import 'package:app/features/environmental_performance/questions/infrastructure/environment_performance_question_repository.dart';
 import 'package:app/features/environmental_performance/questions/presentation/bloc/environmental_performance_question_bloc.dart';
+import 'package:app/features/environmental_performance/summary/application/fetch_environmental_performance.dart';
 import 'package:app/features/environmental_performance/summary/infrastructure/environmental_performance_summary_repository.dart';
+import 'package:app/features/environmental_performance/summary/presentation/bloc/environmental_performance_bloc.dart';
 import 'package:app/features/first_name/domain/first_name_port.dart';
 import 'package:app/features/gamification/domain/gamification_port.dart';
 import 'package:app/features/gamification/presentation/bloc/gamification_bloc.dart';
@@ -128,9 +130,6 @@ class _AppState extends State<App> {
           RepositoryProvider.value(value: widget.profilPort),
           RepositoryProvider.value(value: widget.communesPort),
           RepositoryProvider.value(value: widget.knowYourCustomersRepository),
-          RepositoryProvider.value(
-            value: widget.environmentalPerformanceSummaryRepository,
-          ),
           RepositoryProvider.value(value: widget.mieuxVousConnaitrePort),
           RepositoryProvider.value(value: widget.gamificationPort),
           RepositoryProvider.value(value: widget.actionsPort),
@@ -188,6 +187,13 @@ class _AppState extends State<App> {
             BlocProvider(
               create: (final context) => EnvironmentalPerformanceQuestionBloc(
                 repository: widget.environmentalPerformanceQuestionRepository,
+              ),
+            ),
+            BlocProvider(
+              create: (final context) => EnvironmentalPerformanceBloc(
+                useCase: FetchEnvironmentalPerformance(
+                  widget.environmentalPerformanceSummaryRepository,
+                ),
               ),
             ),
           ],

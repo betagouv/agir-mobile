@@ -1,4 +1,3 @@
-import 'package:app/features/environmental_performance/summary/application/fetch_environmental_performance.dart';
 import 'package:app/features/environmental_performance/summary/domain/environmental_performance_summary.dart';
 import 'package:app/features/environmental_performance/summary/presentation/bloc/environmental_performance_bloc.dart';
 import 'package:app/features/environmental_performance/summary/presentation/bloc/environmental_performance_event.dart';
@@ -25,12 +24,13 @@ class EnvironmentalPerformanceSummaryPage extends StatelessWidget {
       );
 
   @override
-  Widget build(final BuildContext context) => BlocProvider(
-        create: (final context) => EnvironmentalPerformanceBloc(
-          useCase: FetchEnvironmentalPerformance(context.read()),
-        )..add(const EnvironmentalPerformanceStarted()),
-        child: const _View(),
-      );
+  Widget build(final BuildContext context) {
+    context
+        .read<EnvironmentalPerformanceBloc>()
+        .add(const EnvironmentalPerformanceStarted());
+
+    return const _View();
+  }
 }
 
 class _View extends StatelessWidget {

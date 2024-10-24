@@ -27,8 +27,8 @@ class PartnerCard extends StatelessWidget {
             padding: const EdgeInsets.only(left: 1, top: 1, right: 1),
             child: ClipRRect(
               borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(DsfrSpacings.s1w - 1),
-                topRight: Radius.circular(DsfrSpacings.s1w - 1),
+                topLeft: Radius.circular(DsfrSpacings.s1w),
+                topRight: Radius.circular(DsfrSpacings.s1w),
               ),
               child: ColoredBox(
                 color: Colors.white,

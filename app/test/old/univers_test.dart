@@ -12,6 +12,7 @@ import 'steps/iel_appuie_sur.dart';
 import 'steps/iel_est_connecte.dart';
 import 'steps/iel_lance_lapplication.dart';
 import 'steps/iel_ne_voit_pas_le_texte.dart';
+import 'steps/iel_scrolle.dart';
 import 'steps/iel_voit_le_texte.dart';
 import 'steps/le_serveur_retourne_ces_univers.dart';
 
@@ -41,7 +42,7 @@ void main() {
           leServeurRetourneCesUnivers([univers]);
           ielEstConnecte();
           await ielLanceLapplication(tester);
-          ielVoitLeTexte(univers.titre);
+          ielVoitLeTexte(univers.titre, n: 2);
           ielVoitLeTexte(Localisation.termine);
         });
       },
@@ -53,7 +54,7 @@ void main() {
       setUpWidgets(tester);
       const univers = TuileUnivers(
         type: 'alimentation',
-        titre: 'En cuisine',
+        titre: 'Me nourrir',
         imageUrl: 'https://example.com/image.jpg',
         estTerminee: false,
       );
@@ -72,7 +73,7 @@ void main() {
         setUpWidgets(tester);
         const univers = TuileUnivers(
           type: 'alimentation',
-          titre: 'En cuisine',
+          titre: 'Me nourrir',
           imageUrl: 'https://example.com/image.jpg',
           estTerminee: false,
         );
@@ -90,6 +91,7 @@ void main() {
         leServeurRetourneCesUnivers([univers]);
         ielEstConnecte();
         await ielLanceLapplication(tester);
+        await ielScrolle(tester, univers.titre);
         await ielAppuieSur(tester, univers.titre);
         ielVoitLeTexte(universThematique.titre);
       });
@@ -103,7 +105,7 @@ void main() {
         setUpWidgets(tester);
         const univers = TuileUnivers(
           type: 'alimentation',
-          titre: 'En cuisine',
+          titre: 'Me nourrir',
           imageUrl: 'https://example.com/image.jpg',
           estTerminee: false,
         );
@@ -131,6 +133,7 @@ void main() {
         leServeurRetourneCesUnivers([univers]);
         ielEstConnecte();
         await ielLanceLapplication(tester);
+        await ielScrolle(tester, univers.titre);
         await ielAppuieSur(tester, univers.titre);
         ielVoitLeTexte(recommandation.titre);
         ielNeVoitPasLeTexte(recommandation2.titre);

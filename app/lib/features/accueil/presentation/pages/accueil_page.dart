@@ -3,6 +3,7 @@ import 'package:app/core/presentation/widgets/fondamentaux/text_styles.dart';
 import 'package:app/features/accueil/presentation/cubit/home_disclaimer_cubit.dart';
 import 'package:app/features/accueil/presentation/cubit/home_disclaimer_state.dart';
 import 'package:app/features/aides/core/presentation/widgets/mes_aides.dart';
+import 'package:app/features/environmental_performance/home/presentation/widgets/environmental_performance_section.dart';
 import 'package:app/features/first_name/presentation/pages/first_name_page.dart';
 import 'package:app/features/menu/presentation/pages/root_page.dart';
 import 'package:app/features/recommandations/presentation/widgets/mes_recommandations.dart';
@@ -86,6 +87,11 @@ class _Body extends StatelessWidget {
       children: const [
         _Disclaimer(),
         SizedBox(height: paddingVerticalPage),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
+          child: EnvironmentalPerformanceSection(),
+        ),
+        SizedBox(height: DsfrSpacings.s4w),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
           child: UniversSection(),

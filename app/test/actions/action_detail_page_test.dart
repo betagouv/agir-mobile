@@ -54,7 +54,7 @@ void main() {
       ],
       blocProviders: [
         BlocProvider<GamificationBloc>(
-          create: (final context) => const GamificationBlocFake(),
+          create: (final context) => GamificationBlocFake(),
         ),
       ],
       page: GoRoute(
