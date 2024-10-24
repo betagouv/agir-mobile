@@ -14,16 +14,17 @@ import 'steps/iel_a_les_univers_thematiques_suivantes.dart';
 import 'steps/iel_appuie_sur.dart';
 import 'steps/iel_est_connecte.dart';
 import 'steps/iel_lance_lapplication.dart';
+import 'steps/iel_scrolle.dart';
 import 'steps/iel_voit_le_texte.dart';
 import 'steps/le_serveur_retourne_ces_univers.dart';
 
 void main() {
   testWidgets('On voit la mission', (final tester) async {
+    setUpWidgets(tester);
     await mockNetworkImages(() async {
-      setUpWidgets(tester);
       const univers = TuileUnivers(
         type: 'alimentation',
-        titre: 'En cuisine',
+        titre: 'Me nourrir',
         imageUrl: 'https://example.com/image.jpg',
         estTerminee: false,
       );
@@ -130,6 +131,7 @@ void main() {
       ielALaMissionSuivante(mission);
       ielEstConnecte();
       await ielLanceLapplication(tester);
+      await ielScrolle(tester, univers.titre);
       await ielAppuieSur(tester, univers.titre);
       ielVoitLeTexte(universThematique.titre);
       await ielAppuieSur(tester, universThematique.titre);

@@ -5,8 +5,8 @@ import 'package:app/core/presentation/widgets/fondamentaux/shadows.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 
-class EnvironmentalPerformanceCategory extends StatelessWidget {
-  const EnvironmentalPerformanceCategory({
+class EnvironmentalPerformanceCategoryWidget extends StatelessWidget {
+  const EnvironmentalPerformanceCategoryWidget({
     super.key,
     required this.imageUrl,
     required this.completion,

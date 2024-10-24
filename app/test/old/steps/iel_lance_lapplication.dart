@@ -6,12 +6,17 @@ import 'package:app/features/authentication/domain/authentication_service.dart';
 import 'package:app/features/authentication/domain/authentication_status.dart';
 import 'package:app/features/authentication/infrastructure/authentication_repository.dart';
 import 'package:app/features/environmental_performance/questions/infrastructure/environment_performance_question_repository.dart';
+import 'package:app/features/environmental_performance/summary/domain/environmental_performance_summary.dart';
+import 'package:app/features/environmental_performance/summary/infrastructure/environmental_performance_summary_mapper.dart';
 import 'package:app/features/environmental_performance/summary/infrastructure/environmental_performance_summary_repository.dart';
 import 'package:clock/clock.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:mocktail_image_network/mocktail_image_network.dart';
 
+import '../../environmental_performance/summary/environmental_performance_data.dart';
 import '../api/constants.dart';
 import '../api/flutter_secure_storage_fake.dart';
 import '../mocks/aide_velo_port_mock.dart';
@@ -36,7 +41,15 @@ class _ActionsPortMock extends Mock implements ActionsPort {}
 class _ActionRepositoryMock extends Mock implements ActionRepository {}
 
 class _EnvironmentalPerformanceRepositoryMock extends Mock
-    implements EnvironmentalPerformanceSummaryRepository {}
+    implements EnvironmentalPerformanceSummaryRepository {
+  @override
+  Future<Either<Exception, EnvironmentalPerformanceSummary>> fetch() async =>
+      Right(
+        EnvironmentalPerformanceSummaryMapperyMapper.fromJson(
+          environmentalPerformancePartialData,
+        ),
+      );
+}
 
 class _EnvironmentalPerformanceQuestionRepositoryMock extends Mock
     implements EnvironmentalPerformanceQuestionRepository {}
@@ -96,34 +109,36 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
   final tracker = _TrackerMock();
   when(() => tracker.navigatorObserver)
       .thenAnswer((final _) => RouteObserver<ModalRoute<void>>());
-  await tester.pumpFrames(
-    App(
-      tracker: tracker,
-      clock: clock,
-      authenticationService: authenticationService,
-      authentificationPort: ScenarioContext().authentificationPortMock!,
-      universPort: ScenarioContext().universPortMock!,
-      aidesPort: AidesPortMock(ScenarioContext().aides),
-      bibliothequePort: BibliothequePortMock(ScenarioContext().bibliotheque),
-      recommandationsPort:
-          RecommandationsPortMock(ScenarioContext().recommandations),
-      articlesPort: ScenarioContext().articlesPortMock!,
-      quizPort: ScenarioContext().quizPortMock!,
-      versionPort: const VersionPortMock(),
-      communesPort: CommunesPortMock(ScenarioContext().communes),
-      aideVeloPort: ScenarioContext().aideVeloPortMock!,
-      firstNamePort: profilPort,
-      profilPort: profilPort,
-      knowYourCustomersRepository: mieuxVousConnaitrePort,
-      environmentalPerformanceSummaryRepository:
-          _EnvironmentalPerformanceRepositoryMock(),
-      environmentalPerformanceQuestionRepository:
-          _EnvironmentalPerformanceQuestionRepositoryMock(),
-      mieuxVousConnaitrePort: mieuxVousConnaitrePort,
-      actionsPort: _ActionsPortMock(),
-      actionRepository: _ActionRepositoryMock(),
-      gamificationPort: GamificationPortMock(ScenarioContext().gamification),
-    ),
-    Durations.short1,
-  );
+  await mockNetworkImages(() async {
+    await tester.pumpFrames(
+      App(
+        tracker: tracker,
+        clock: clock,
+        authenticationService: authenticationService,
+        authentificationPort: ScenarioContext().authentificationPortMock!,
+        universPort: ScenarioContext().universPortMock!,
+        aidesPort: AidesPortMock(ScenarioContext().aides),
+        bibliothequePort: BibliothequePortMock(ScenarioContext().bibliotheque),
+        recommandationsPort:
+            RecommandationsPortMock(ScenarioContext().recommandations),
+        articlesPort: ScenarioContext().articlesPortMock!,
+        quizPort: ScenarioContext().quizPortMock!,
+        versionPort: const VersionPortMock(),
+        communesPort: CommunesPortMock(ScenarioContext().communes),
+        aideVeloPort: ScenarioContext().aideVeloPortMock!,
+        firstNamePort: profilPort,
+        profilPort: profilPort,
+        knowYourCustomersRepository: mieuxVousConnaitrePort,
+        environmentalPerformanceSummaryRepository:
+            _EnvironmentalPerformanceRepositoryMock(),
+        environmentalPerformanceQuestionRepository:
+            _EnvironmentalPerformanceQuestionRepositoryMock(),
+        mieuxVousConnaitrePort: mieuxVousConnaitrePort,
+        actionsPort: _ActionsPortMock(),
+        actionRepository: _ActionRepositoryMock(),
+        gamificationPort: GamificationPortMock(ScenarioContext().gamification),
+      ),
+      Durations.short1,
+    );
+  });
 }

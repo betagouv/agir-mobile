@@ -1,7 +1,5 @@
 // ignore_for_file: avoid-missing-interpolation
 
-import 'dart:io';
-
 import 'package:app/core/helpers/input_formatter.dart';
 import 'package:app/core/helpers/number_format.dart';
 import 'package:app/features/aides/core/domain/aide.dart';
@@ -9,6 +7,7 @@ import 'package:app/features/simulateur_velo/domain/velo_pour_simulateur.dart';
 import 'package:app/features/simulateur_velo/infrastructure/aide_velo_par_type_mapper.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail_image_network/mocktail_image_network.dart';
 
 import '../helpers/faker.dart';
 import 'scenario_context.dart';
@@ -48,8 +47,10 @@ void main() {
       'Iel voit le prix de 1000 euros par défaut',
       (final tester) async {
         setUpWidgets(tester);
-        await _allerSurLeSimulateurVelo(tester, aide2);
-        ielVoitLeTexte(prixParDefaut.toString());
+        await mockNetworkImages(() async {
+          await _allerSurLeSimulateurVelo(tester, aide2);
+          ielVoitLeTexte(prixParDefaut.toString());
+        });
       },
     );
 
@@ -57,13 +58,15 @@ void main() {
       'Iel tape sur Vélo pliant standard pour changer le prix du vélo',
       (final tester) async {
         setUpWidgets(tester);
-        await _allerSurLeSimulateurVelo(tester, aide2);
-        ielVoitLeTexte(prixParDefaut.toString());
-        await ielAppuieSurTexteComportant(
-          tester,
-          Localisation.veloLabel(VeloPourSimulateur.pliantStandard.label),
-        );
-        ielVoitLeTexte('500');
+        await mockNetworkImages(() async {
+          await _allerSurLeSimulateurVelo(tester, aide2);
+          ielVoitLeTexte(prixParDefaut.toString());
+          await ielAppuieSurTexteComportant(
+            tester,
+            Localisation.veloLabel(VeloPourSimulateur.pliantStandard.label),
+          );
+          ielVoitLeTexte('500');
+        });
       },
     );
 
@@ -71,15 +74,17 @@ void main() {
       'Taper le code postal met à jour la liste déroulante',
       (final tester) async {
         setUpWidgets(tester);
-        leServeurRetourneCetteListeDeCommunes(['AUTHUME', commune]);
-        await _allerSurLeSimulateurVelo(tester, aide2);
-        await ielEcritDansLeChamp(
-          tester,
-          label: Localisation.codePostal,
-          enterText: codePostal,
-        );
-        await ielAppuieSurLaListeDeroulante(tester);
-        ielVoitLeTexte(commune);
+        await mockNetworkImages(() async {
+          leServeurRetourneCetteListeDeCommunes(['AUTHUME', commune]);
+          await _allerSurLeSimulateurVelo(tester, aide2);
+          await ielEcritDansLeChamp(
+            tester,
+            label: Localisation.codePostal,
+            enterText: codePostal,
+          );
+          await ielAppuieSurLaListeDeroulante(tester);
+          ielVoitLeTexte(commune);
+        });
       },
     );
 
@@ -87,58 +92,61 @@ void main() {
       'Taper le code postal, si une seule commune on la choisi directement',
       (final tester) async {
         setUpWidgets(tester);
-        leServeurRetourneCetteListeDeCommunes([commune]);
-        await _allerSurLeSimulateurVelo(tester, aide2);
-        await ielEcritDansLeChamp(
-          tester,
-          label: Localisation.codePostal,
-          enterText: codePostal,
-        );
-        ielVoitLeTexte(commune);
+        await mockNetworkImages(() async {
+          leServeurRetourneCetteListeDeCommunes([commune]);
+          await _allerSurLeSimulateurVelo(tester, aide2);
+          await ielEcritDansLeChamp(
+            tester,
+            label: Localisation.codePostal,
+            enterText: codePostal,
+          );
+          ielVoitLeTexte(commune);
+        });
       },
     );
 
     testWidgets(
       "Iel rempli le formulaire et iel demande l'estimation de l'aide alors il arrive sur la page des aides disponibles",
       (final tester) async {
-        HttpOverrides.global = null;
         setUpWidgets(tester);
 
-        final aideVeloParType = aideVeloParTypeFaker();
-        leServeurRetourneLesAidesVeloParType(
-          AideVeloParTypeMapper.fromJson(aideVeloParType),
-        );
-        leServeurRetourneCetteListeDeCommunes(['AUTHUME', commune]);
-        await _allerSurLeSimulateurVelo(tester, aide2);
-        await ielEcritDansLeChamp(
-          tester,
-          label: Localisation.codePostal,
-          enterText: codePostal,
-        );
-        await ielAppuieSurLaListeDeroulante(tester);
-        await ielAppuieSur(tester, commune);
-        await ielScrolle(tester, Localisation.nombreDePartsFiscales);
-        await ielEcritDansLeChamp(
-          tester,
-          label: Localisation.nombreDePartsFiscales,
-          enterText: nombreDePart.toString(),
-        );
-        await ielEcritDansLeChamp(
-          tester,
-          label: Localisation.revenuFiscal,
-          enterText: revenuFiscal.toString(),
-        );
-        await ielAppuieSur(tester, Localisation.estimerMesAides);
+        await mockNetworkImages(() async {
+          final aideVeloParType = aideVeloParTypeFaker();
+          leServeurRetourneLesAidesVeloParType(
+            AideVeloParTypeMapper.fromJson(aideVeloParType),
+          );
+          leServeurRetourneCetteListeDeCommunes(['AUTHUME', commune]);
+          await _allerSurLeSimulateurVelo(tester, aide2);
+          await ielEcritDansLeChamp(
+            tester,
+            label: Localisation.codePostal,
+            enterText: codePostal,
+          );
+          await ielAppuieSurLaListeDeroulante(tester);
+          await ielAppuieSur(tester, commune);
+          await ielScrolle(tester, Localisation.nombreDePartsFiscales);
+          await ielEcritDansLeChamp(
+            tester,
+            label: Localisation.nombreDePartsFiscales,
+            enterText: nombreDePart.toString(),
+          );
+          await ielEcritDansLeChamp(
+            tester,
+            label: Localisation.revenuFiscal,
+            enterText: revenuFiscal.toString(),
+          );
+          await ielAppuieSur(tester, Localisation.estimerMesAides);
 
-        final aideVeloPortMock = ScenarioContext().aideVeloPortMock;
-        expect(aideVeloPortMock!.prix, prixParDefaut);
-        expect(aideVeloPortMock.codePostal, codePostal);
-        expect(aideVeloPortMock.commune, commune);
-        expect(aideVeloPortMock.nombreDePartsFiscales, nombreDePart);
-        expect(aideVeloPortMock.revenuFiscal, revenuFiscal);
+          final aideVeloPortMock = ScenarioContext().aideVeloPortMock;
+          expect(aideVeloPortMock!.prix, prixParDefaut);
+          expect(aideVeloPortMock.codePostal, codePostal);
+          expect(aideVeloPortMock.commune, commune);
+          expect(aideVeloPortMock.nombreDePartsFiscales, nombreDePart);
+          expect(aideVeloPortMock.revenuFiscal, revenuFiscal);
 
-        ielVoitLeTexte(Localisation.mesAidesDisponibles);
-        ielVoitLeTexte(Localisation.aucuneAideDisponible, n: 2);
+          ielVoitLeTexte(Localisation.mesAidesDisponibles);
+          ielVoitLeTexte(Localisation.aucuneAideDisponible, n: 2);
+        });
       },
     );
 
@@ -146,14 +154,16 @@ void main() {
       'Iel met le prix à 0 euros alors le bouton estimer mes aides est désactiver',
       (final tester) async {
         setUpWidgets(tester);
-        await _allerSurLeSimulateurVelo(tester, aide2);
-        await ielEcritDansLeChamp(
-          tester,
-          label: Localisation.prixDuVelo,
-          enterText: '',
-        );
-        await ielAppuieSur(tester, Localisation.estimerMesAides);
-        ielNeVoitPasLeTexte(Localisation.mesAidesDisponibles);
+        await mockNetworkImages(() async {
+          await _allerSurLeSimulateurVelo(tester, aide2);
+          await ielEcritDansLeChamp(
+            tester,
+            label: Localisation.prixDuVelo,
+            enterText: '',
+          );
+          await ielAppuieSur(tester, Localisation.estimerMesAides);
+          ielNeVoitPasLeTexte(Localisation.mesAidesDisponibles);
+        });
       },
     );
 
@@ -161,27 +171,29 @@ void main() {
       'Iel arrive sur la page avec les informations déjà renseignées',
       (final tester) async {
         setUpWidgets(tester);
-        ielACesInformationsDeProfil(
-          codePostal: codePostal,
-          commune: commune,
-          nombreDePartsFiscales: nombreDePart,
-          revenuFiscal: revenuFiscal,
-        );
-        await _allerSurLeSimulateurVelo(tester, aide2);
-        await ielScrolle(tester, Localisation.modifier);
-        ielVoitLeTexteDansTexteRiche(Localisation.elementsNecessaireAuCalcul);
-        ielVoitLeTexteDansTexteRiche(
-          Localisation.donneesUtiliseesCodePostalEtCommune(
+        await mockNetworkImages(() async {
+          ielACesInformationsDeProfil(
             codePostal: codePostal,
             commune: commune,
-          ),
-        );
-        ielVoitLeTexteDansTexteRiche(
-          Localisation.donneesUtiliseesNombreDeParts(nombreDePart),
-        );
-        ielVoitLeTexteDansTexteRiche(
-          Localisation.donneesUtiliseesRevenuFiscal(revenuFiscal),
-        );
+            nombreDePartsFiscales: nombreDePart,
+            revenuFiscal: revenuFiscal,
+          );
+          await _allerSurLeSimulateurVelo(tester, aide2);
+          await ielScrolle(tester, Localisation.modifier);
+          ielVoitLeTexteDansTexteRiche(Localisation.elementsNecessaireAuCalcul);
+          ielVoitLeTexteDansTexteRiche(
+            Localisation.donneesUtiliseesCodePostalEtCommune(
+              codePostal: codePostal,
+              commune: commune,
+            ),
+          );
+          ielVoitLeTexteDansTexteRiche(
+            Localisation.donneesUtiliseesNombreDeParts(nombreDePart),
+          );
+          ielVoitLeTexteDansTexteRiche(
+            Localisation.donneesUtiliseesRevenuFiscal(revenuFiscal),
+          );
+        });
       },
     );
 
@@ -189,22 +201,24 @@ void main() {
       'Iel veut modifier ces informations, les données sont préremplis',
       (final tester) async {
         setUpWidgets(tester);
-        ielACesInformationsDeProfil(
-          codePostal: codePostal,
-          commune: commune,
-          nombreDePartsFiscales: nombreDePart,
-          revenuFiscal: revenuFiscal,
-        );
-        await _allerSurLeSimulateurVelo(tester, aide2);
-        await ielScrolle(tester, Localisation.modifier);
-        await ielAppuieSurTexteComportant(tester, Localisation.modifier);
-        ielVoitLeTexteDansTexteRiche(codePostal);
-        ielVoitLeTexteDansTexteRiche(commune);
-        ielVoitLeTexteDansTexteRiche(
-          FnvNumberFormat.formatNumber(nombreDePart),
-        );
-        ielVoitLeTexteDansTexteRiche(commune);
-        ielVoitLeTexteDansTexteRiche(formatCurrency(revenuFiscal));
+        await mockNetworkImages(() async {
+          ielACesInformationsDeProfil(
+            codePostal: codePostal,
+            commune: commune,
+            nombreDePartsFiscales: nombreDePart,
+            revenuFiscal: revenuFiscal,
+          );
+          await _allerSurLeSimulateurVelo(tester, aide2);
+          await ielScrolle(tester, Localisation.modifier);
+          await ielAppuieSurTexteComportant(tester, Localisation.modifier);
+          ielVoitLeTexteDansTexteRiche(codePostal);
+          ielVoitLeTexteDansTexteRiche(commune);
+          ielVoitLeTexteDansTexteRiche(
+            FnvNumberFormat.formatNumber(nombreDePart),
+          );
+          ielVoitLeTexteDansTexteRiche(commune);
+          ielVoitLeTexteDansTexteRiche(formatCurrency(revenuFiscal));
+        });
       },
     );
 
@@ -212,13 +226,15 @@ void main() {
       "Si le revenu fiscal n'est pas renseigné, le mode saisie est activé",
       (final tester) async {
         setUpWidgets(tester);
-        ielACesInformationsDeProfil(
-          codePostal: codePostal,
-          commune: commune,
-          nombreDePartsFiscales: nombreDePart,
-        );
-        await _allerSurLeSimulateurVelo(tester, aide2);
-        ielVoitLeTexteDansTexteRiche(Localisation.aideVeloAvertissement);
+        await mockNetworkImages(() async {
+          ielACesInformationsDeProfil(
+            codePostal: codePostal,
+            commune: commune,
+            nombreDePartsFiscales: nombreDePart,
+          );
+          await _allerSurLeSimulateurVelo(tester, aide2);
+          ielVoitLeTexteDansTexteRiche(Localisation.aideVeloAvertissement);
+        });
       },
     );
 
@@ -226,22 +242,24 @@ void main() {
       'Iel modifie le code postal alors la commune est réinitialisé',
       (final tester) async {
         setUpWidgets(tester);
-        leServeurRetourneCetteListeDeCommunes(['AUTHUME', commune]);
-        ielACesInformationsDeProfil(
-          codePostal: codePostal,
-          commune: commune,
-          nombreDePartsFiscales: nombreDePart,
-          revenuFiscal: revenuFiscal,
-        );
-        await _allerSurLeSimulateurVelo(tester, aide2);
-        await ielScrolle(tester, Localisation.modifier);
-        await ielAppuieSurTexteComportant(tester, Localisation.modifier);
-        await ielEcritDansLeChamp(
-          tester,
-          label: Localisation.codePostal,
-          enterText: '3910',
-        );
-        ielNeVoitPasLeTexte(commune);
+        await mockNetworkImages(() async {
+          leServeurRetourneCetteListeDeCommunes(['AUTHUME', commune]);
+          ielACesInformationsDeProfil(
+            codePostal: codePostal,
+            commune: commune,
+            nombreDePartsFiscales: nombreDePart,
+            revenuFiscal: revenuFiscal,
+          );
+          await _allerSurLeSimulateurVelo(tester, aide2);
+          await ielScrolle(tester, Localisation.modifier);
+          await ielAppuieSurTexteComportant(tester, Localisation.modifier);
+          await ielEcritDansLeChamp(
+            tester,
+            label: Localisation.codePostal,
+            enterText: '3910',
+          );
+          ielNeVoitPasLeTexte(commune);
+        });
       },
     );
 
@@ -249,19 +267,21 @@ void main() {
       "Après avoir clique sur modifier il retourne sur la page de l'aide et reclique sur accéder au simulateur, la page doit être réinitialisée",
       (final tester) async {
         setUpWidgets(tester);
-        ielACesInformationsDeProfil(
-          codePostal: codePostal,
-          commune: commune,
-          nombreDePartsFiscales: nombreDePart,
-          revenuFiscal: revenuFiscal,
-        );
-        await _allerSurLeSimulateurVelo(tester, aide2);
-        await ielScrolle(tester, Localisation.modifier);
-        await ielAppuieSurTexteComportant(tester, Localisation.modifier);
-        await ielAppuieSurAccessibilite(tester, Localisation.retour);
-        await ielAppuieSur(tester, Localisation.accederAuSimulateur);
-        await ielScrolle(tester, Localisation.modifier);
-        ielVoitLeTexteDansTexteRiche(Localisation.modifier);
+        await mockNetworkImages(() async {
+          ielACesInformationsDeProfil(
+            codePostal: codePostal,
+            commune: commune,
+            nombreDePartsFiscales: nombreDePart,
+            revenuFiscal: revenuFiscal,
+          );
+          await _allerSurLeSimulateurVelo(tester, aide2);
+          await ielScrolle(tester, Localisation.modifier);
+          await ielAppuieSurTexteComportant(tester, Localisation.modifier);
+          await ielAppuieSurAccessibilite(tester, Localisation.retour);
+          await ielAppuieSur(tester, Localisation.accederAuSimulateur);
+          await ielScrolle(tester, Localisation.modifier);
+          ielVoitLeTexteDansTexteRiche(Localisation.modifier);
+        });
       },
     );
   });
@@ -274,6 +294,7 @@ Future<void> _allerSurLeSimulateurVelo(
   ielALesAidesSuivantes([aide]);
   ielEstConnecte();
   await ielLanceLapplication(tester);
+  await ielScrolle(tester, Localisation.mesAidesLien);
   await ielAppuieSur(tester, Localisation.mesAidesLien);
   await ielAppuieSur(tester, aide.titre);
   await ielAppuieSur(tester, Localisation.accederAuSimulateur);

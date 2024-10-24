@@ -5,7 +5,6 @@ import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_bor
 import 'package:app/features/environmental_performance/questions/presentation/bloc/environmental_performance_question_bloc.dart';
 import 'package:app/features/environmental_performance/questions/presentation/bloc/environmental_performance_question_state.dart';
 import 'package:app/features/environmental_performance/questions/presentation/widgets/question_progress_bar.dart';
-import 'package:app/features/environmental_performance/summary/presentation/page/environmental_performance_summary_page.dart';
 import 'package:app/features/mieux_vous_connaitre/detail/presentation/form/mieux_vous_connaitre_controller.dart';
 import 'package:app/features/mieux_vous_connaitre/detail/presentation/form/mieux_vous_connaitre_form.dart';
 import 'package:app/l10n/l10n.dart';
@@ -109,8 +108,8 @@ class _LoadSuccessState extends State<_LoadSuccess> {
                   controller: _mieuxVousConnaitreController,
                   onSaved: () async {
                     if (widget.number == widget.state.questionIdList.length) {
-                      GoRouter.of(context).popUntilNamed(
-                        EnvironmentalPerformanceSummaryPage.name,
+                      GoRouter.of(context).popUntilNumber(
+                        widget.state.questionIdList.length + 1,
                         result: true,
                       );
 

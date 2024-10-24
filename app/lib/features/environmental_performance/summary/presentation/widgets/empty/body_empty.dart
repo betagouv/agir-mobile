@@ -49,7 +49,7 @@ class BodyEmpty extends StatelessWidget {
             padding:
                 const EdgeInsets.symmetric(horizontal: paddingVerticalPage),
             child: EstimadedTimedWidget(
-              questionsNumber: data.questionsNumber,
+              questionsNumber: data.questionsNumber.toString(),
               questionsMinutes: '2',
             ),
           ),

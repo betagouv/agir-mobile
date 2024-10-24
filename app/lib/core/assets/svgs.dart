@@ -14,4 +14,5 @@ abstract final class AssetsSvgs {
   static const illustration5 = 'assets/svgs/illustration5.svg';
   static const nosGestesClimatIllustration =
       'assets/svgs/bilan-carbone-ngc-screenshot.svg';
+  static const miniBilan = 'assets/svgs/mini_bilan.svg';
 }

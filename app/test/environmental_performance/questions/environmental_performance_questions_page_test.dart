@@ -3,8 +3,10 @@ import 'package:app/features/authentification/core/infrastructure/dio_http_clien
 import 'package:app/features/environmental_performance/questions/infrastructure/environment_performance_question_repository.dart';
 import 'package:app/features/environmental_performance/questions/presentation/bloc/environmental_performance_question_bloc.dart';
 import 'package:app/features/environmental_performance/questions/presentation/page/environmental_performance_question_page.dart';
+import 'package:app/features/environmental_performance/summary/application/fetch_environmental_performance.dart';
 import 'package:app/features/environmental_performance/summary/environmental_performance_summary_l10n.dart';
 import 'package:app/features/environmental_performance/summary/infrastructure/environmental_performance_summary_repository.dart';
+import 'package:app/features/environmental_performance/summary/presentation/bloc/environmental_performance_bloc.dart';
 import 'package:app/features/environmental_performance/summary/presentation/page/environmental_performance_summary_page.dart';
 import 'package:app/features/gamification/presentation/bloc/gamification_bloc.dart';
 import 'package:app/features/mieux_vous_connaitre/core/domain/mieux_vous_connaitre_port.dart';
@@ -46,7 +48,14 @@ Future<void> pumpEnvironmentalPerformancePage(
     ],
     blocProviders: [
       BlocProvider<GamificationBloc>(
-        create: (final context) => const GamificationBlocFake(),
+        create: (final context) => GamificationBlocFake(),
+      ),
+      BlocProvider(
+        create: (final context) => EnvironmentalPerformanceBloc(
+          useCase: FetchEnvironmentalPerformance(
+            EnvironmentalPerformanceSummaryRepository(client: client),
+          ),
+        ),
       ),
       BlocProvider(
         create: (final context) => EnvironmentalPerformanceQuestionBloc(
