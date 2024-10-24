@@ -1,54 +1,73 @@
 import 'package:app/features/environmental_performance/summary/domain/environmental_performance_category.dart';
+import 'package:app/features/environmental_performance/summary/domain/environmental_performance_data.dart';
 import 'package:app/features/environmental_performance/summary/domain/environmental_performance_detail_item.dart';
 import 'package:app/features/environmental_performance/summary/domain/environmental_performance_detail_sub_item.dart';
-import 'package:app/features/environmental_performance/summary/domain/environmental_performance_empty.dart';
-import 'package:app/features/environmental_performance/summary/domain/environmental_performance_full.dart';
 import 'package:app/features/environmental_performance/summary/domain/environmental_performance_level.dart';
-import 'package:app/features/environmental_performance/summary/domain/environmental_performance_partial.dart';
-import 'package:app/features/environmental_performance/summary/domain/environmental_performance_summary.dart';
 import 'package:app/features/environmental_performance/summary/domain/environmental_performance_top_item.dart';
 import 'package:app/features/environmental_performance/summary/domain/footprint.dart';
 
 abstract final class EnvironmentalPerformanceSummaryMapperyMapper {
   const EnvironmentalPerformanceSummaryMapperyMapper._();
 
-  static EnvironmentalPerformanceSummary fromJson(
+  static EnvironmentalPerformanceData fromJson(
     final Map<String, dynamic> json,
   ) {
-    final partial = json['bilan_synthese'] as Map<String, dynamic>;
-    final full = json['bilan_complet'] as Map<String, dynamic>;
+    if (json.containsKey('bilan_approximatif')) {
+      return _fromPartialJson(json);
+    }
 
-    return EnvironmentalPerformanceSummary(
-      empty: EnvironmentalPerformanceEmpty(questions: const []),
-      partial: EnvironmentalPerformancePartial(
-        performanceOnTransport:
-            _mapLevelFromJson(partial['impact_transport'] as String?),
-        performanceOnFood:
-            _mapLevelFromJson(partial['impact_alimentation'] as String?),
-        performanceOnHousing:
-            _mapLevelFromJson(partial['impact_logement'] as String?),
-        performanceOnConsumption: _mapLevelFromJson(
-          partial['impact_consommation'] as String?,
-        ),
-        percentageCompletion:
-            (partial['pourcentage_completion_totale'] as num).toInt(),
-        categories: (partial['liens_bilans_univers'] as List<dynamic>)
-            .map((final e) => e as Map<String, dynamic>)
-            .map(_categoryFromJson)
-            .toList(),
+    return json.containsKey('bilan_complet')
+        ? _fromFullJson(json)
+        : EnvironmentalPerformanceEmpty(questions: const []);
+  }
+
+  static EnvironmentalPerformancePartial _fromPartialJson(
+    final Map<String, dynamic> json,
+  ) {
+    final partial = json['bilan_approximatif'] as Map<String, dynamic>;
+    final percentageCompletion =
+        (json['pourcentage_completion_totale'] as num).toInt();
+    final categories = (json['liens_bilans_univers'] as List<dynamic>)
+        .map((final e) => e as Map<String, dynamic>)
+        .map(_categoryFromJson)
+        .toList();
+
+    return EnvironmentalPerformancePartial(
+      performanceOnTransport:
+          _mapLevelFromJson(partial['impact_transport'] as String?),
+      performanceOnFood:
+          _mapLevelFromJson(partial['impact_alimentation'] as String?),
+      performanceOnHousing:
+          _mapLevelFromJson(partial['impact_logement'] as String?),
+      performanceOnConsumption: _mapLevelFromJson(
+        partial['impact_consommation'] as String?,
       ),
-      full: EnvironmentalPerformanceFull(
-        footprintInKgOfCO2ePerYear:
-            Footprint((full['impact_kg_annee'] as num).toDouble()),
-        top: (full['top_3'] as List<dynamic>)
-            .map((final e) => e as Map<String, dynamic>)
-            .map(topItemFromJson)
-            .toList(),
-        detail: (full['impact_univers'] as List<dynamic>)
-            .map((final e) => e as Map<String, dynamic>)
-            .map(_detailItemFromJson)
-            .toList(),
-      ),
+      percentageCompletion: percentageCompletion,
+      categories: categories,
+    );
+  }
+
+  static EnvironmentalPerformanceFull _fromFullJson(
+    final Map<String, dynamic> json,
+  ) {
+    final full = json['bilan_complet'] as Map<String, dynamic>;
+    final categories = (json['liens_bilans_univers'] as List<dynamic>)
+        .map((final e) => e as Map<String, dynamic>)
+        .map(_categoryFromJson)
+        .toList();
+
+    return EnvironmentalPerformanceFull(
+      footprintInKgOfCO2ePerYear:
+          Footprint((full['impact_kg_annee'] as num).toDouble()),
+      top: (full['top_3'] as List<dynamic>)
+          .map((final e) => e as Map<String, dynamic>)
+          .map(_topItemFromJson)
+          .toList(),
+      detail: (full['impact_univers'] as List<dynamic>)
+          .map((final e) => e as Map<String, dynamic>)
+          .map(_detailItemFromJson)
+          .toList(),
+      categories: categories,
     );
   }
 
@@ -62,7 +81,7 @@ abstract final class EnvironmentalPerformanceSummaryMapperyMapper {
         _ => throw UnimplementedError('Niveau non implémenté'),
       };
 
-  static EnvironmentalPerformanceTopItem topItemFromJson(
+  static EnvironmentalPerformanceTopItem _topItemFromJson(
     final Map<String, dynamic> json,
   ) =>
       EnvironmentalPerformanceTopItem(

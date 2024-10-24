@@ -1,12 +1,13 @@
 // ignore_for_file: avoid-slow-collection-methods
 
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
-import 'package:app/features/environmental_performance/summary/domain/environmental_performance_full.dart';
+import 'package:app/features/environmental_performance/summary/domain/environmental_performance_data.dart';
 import 'package:app/features/environmental_performance/summary/environmental_performance_summary_l10n.dart';
 import 'package:app/features/environmental_performance/summary/presentation/widgets/full/accordion.dart';
 import 'package:app/features/environmental_performance/summary/presentation/widgets/full/environmental_performance_tonnes_card.dart';
 import 'package:app/features/environmental_performance/summary/presentation/widgets/full/progress_bar.dart';
 import 'package:app/features/environmental_performance/summary/presentation/widgets/full/top_emission_source_item.dart';
+import 'package:app/features/environmental_performance/summary/presentation/widgets/partial/environmental_performance_categories.dart';
 import 'package:app/features/environmental_performance/summary/presentation/widgets/partner_card.dart';
 import 'package:app/features/profil/profil/presentation/widgets/fnv_title.dart';
 import 'package:collection/collection.dart';
@@ -120,6 +121,42 @@ class BodyFull extends StatelessWidget {
                 .toList(),
           ),
           const SizedBox(height: DsfrSpacings.s4w),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
+            child: Text.rich(
+              TextSpan(
+                children: [
+                  TextSpan(
+                    text: EnvironmentalPerformanceSummaryL10n.modifier,
+                    style: DsfrTextStyle.headline4(),
+                  ),
+                  TextSpan(text: ' ', style: DsfrTextStyle.headline4()),
+                  TextSpan(
+                    text: EnvironmentalPerformanceSummaryL10n.vosReponses,
+                    style: DsfrTextStyle.headline4(
+                      color: DsfrColors.blueFranceSun113,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: DsfrSpacings.s1v5),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
+            child: Text(
+              EnvironmentalPerformanceSummaryL10n.affinerMonEstimationSousTitre,
+              style: DsfrTextStyle.bodyMd(),
+            ),
+          ),
+          const SizedBox(height: DsfrSpacings.s3v),
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: paddingVerticalPage),
+            child:
+                EnvironmentalPerformanceCategories(categories: data.categories),
+          ),
+          const SizedBox(height: DsfrSpacings.s7w),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
             child: PartnerCard(),

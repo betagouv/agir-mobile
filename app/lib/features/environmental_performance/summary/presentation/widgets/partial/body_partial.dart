@@ -1,5 +1,5 @@
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
-import 'package:app/features/environmental_performance/summary/domain/environmental_performance_partial.dart';
+import 'package:app/features/environmental_performance/summary/domain/environmental_performance_data.dart';
 import 'package:app/features/environmental_performance/summary/environmental_performance_summary_l10n.dart';
 import 'package:app/features/environmental_performance/summary/presentation/widgets/partial/environmental_performance_card.dart';
 import 'package:app/features/environmental_performance/summary/presentation/widgets/partial/environmental_performance_categories.dart';

@@ -1,4 +1,4 @@
-import 'package:app/features/environmental_performance/summary/domain/environmental_performance_summary.dart';
+import 'package:app/features/environmental_performance/summary/domain/environmental_performance_data.dart';
 import 'package:equatable/equatable.dart';
 
 sealed class EnvironmentalPerformanceState extends Equatable {
@@ -22,7 +22,7 @@ final class EnvironmentalPerformanceSuccess
     extends EnvironmentalPerformanceState {
   const EnvironmentalPerformanceSuccess({required this.data});
 
-  final EnvironmentalPerformanceSummary data;
+  final EnvironmentalPerformanceData data;
 
   @override
   List<Object> get props => [data];

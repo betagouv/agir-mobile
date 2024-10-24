@@ -6,6 +6,8 @@ abstract final class EnvironmentalPerformanceSummaryL10n {
   static const estimerMon = 'Estimer mon';
   static const mon = 'Mon';
   static const affiner = 'Affiner';
+  static const modifier = 'Modifier';
+  static const vosReponses = 'vos réponses';
   static const monEstimation = 'mon estimation';
   static const bilanEnvironnemental = 'bilan environnemental';
   static const estimerUnPremierBilan = 'Estimer un premier bilan';
