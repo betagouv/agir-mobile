@@ -1,6 +1,6 @@
 import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
-import 'package:app/features/environmental_performance/summary/domain/environmental_performance_summary.dart';
+import 'package:app/features/environmental_performance/summary/domain/environmental_performance_data.dart';
 import 'package:app/features/environmental_performance/summary/infrastructure/environmental_performance_summary_mapper.dart';
 import 'package:app/features/mieux_vous_connaitre/core/domain/question.dart';
 import 'package:app/features/mieux_vous_connaitre/core/infrastructure/question_mapper.dart';
@@ -13,8 +13,8 @@ class EnvironmentalPerformanceSummaryRepository {
 
   final DioHttpClient _client;
 
-  Future<Either<Exception, EnvironmentalPerformanceSummary>> fetch() async {
-    final response = await _client.get('/utilisateur/{userId}/bilans/last');
+  Future<Either<Exception, EnvironmentalPerformanceData>> fetch() async {
+    final response = await _client.get('/utilisateur/{userId}/bilans/last_v2');
     if (isResponseUnsuccessful(response.statusCode)) {
       return Left(
         Exception('Erreur lors de la récupération du bilan environnemental'),

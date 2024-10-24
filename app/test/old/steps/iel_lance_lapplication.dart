@@ -6,7 +6,7 @@ import 'package:app/features/authentication/domain/authentication_service.dart';
 import 'package:app/features/authentication/domain/authentication_status.dart';
 import 'package:app/features/authentication/infrastructure/authentication_repository.dart';
 import 'package:app/features/environmental_performance/questions/infrastructure/environment_performance_question_repository.dart';
-import 'package:app/features/environmental_performance/summary/domain/environmental_performance_summary.dart';
+import 'package:app/features/environmental_performance/summary/domain/environmental_performance_data.dart';
 import 'package:app/features/environmental_performance/summary/infrastructure/environmental_performance_summary_mapper.dart';
 import 'package:app/features/environmental_performance/summary/infrastructure/environmental_performance_summary_repository.dart';
 import 'package:clock/clock.dart';
@@ -43,7 +43,7 @@ class _ActionRepositoryMock extends Mock implements ActionRepository {}
 class _EnvironmentalPerformanceRepositoryMock extends Mock
     implements EnvironmentalPerformanceSummaryRepository {
   @override
-  Future<Either<Exception, EnvironmentalPerformanceSummary>> fetch() async =>
+  Future<Either<Exception, EnvironmentalPerformanceData>> fetch() async =>
       Right(
         EnvironmentalPerformanceSummaryMapperyMapper.fromJson(
           environmentalPerformancePartialData,

@@ -4,10 +4,7 @@ import 'package:app/core/presentation/widgets/fondamentaux/shadows.dart';
 import 'package:app/features/environmental_performance/questions/presentation/bloc/environmental_performance_question_bloc.dart';
 import 'package:app/features/environmental_performance/questions/presentation/bloc/environmental_performance_question_event.dart';
 import 'package:app/features/environmental_performance/questions/presentation/page/environmental_performance_question_page.dart';
-import 'package:app/features/environmental_performance/summary/domain/environmental_performance_empty.dart';
-import 'package:app/features/environmental_performance/summary/domain/environmental_performance_full.dart';
-import 'package:app/features/environmental_performance/summary/domain/environmental_performance_partial.dart';
-import 'package:app/features/environmental_performance/summary/domain/environmental_performance_summary.dart';
+import 'package:app/features/environmental_performance/summary/domain/environmental_performance_data.dart';
 import 'package:app/features/environmental_performance/summary/environmental_performance_summary_l10n.dart';
 import 'package:app/features/environmental_performance/summary/presentation/bloc/environmental_performance_bloc.dart';
 import 'package:app/features/environmental_performance/summary/presentation/bloc/environmental_performance_event.dart';
@@ -46,14 +43,10 @@ class _View extends StatelessWidget {
           EnvironmentalPerformanceLoading() ||
           EnvironmentalPerformanceFailure() =>
             const SizedBox.shrink(),
-          EnvironmentalPerformanceSuccess() => switch (state.data.type) {
-              EnvironmentalPerformanceSummaryType.empty => _Empty(
-                  data: state.data.empty,
-                ),
-              EnvironmentalPerformanceSummaryType.partial =>
-                _Partial(data: state.data.partial),
-              EnvironmentalPerformanceSummaryType.full =>
-                _Full(data: state.data.full),
+          EnvironmentalPerformanceSuccess() => switch (state.data) {
+              (final EnvironmentalPerformanceEmpty a) => _Empty(data: a),
+              (final EnvironmentalPerformancePartial a) => _Partial(data: a),
+              (final EnvironmentalPerformanceFull a) => _Full(data: a),
             },
         },
       );

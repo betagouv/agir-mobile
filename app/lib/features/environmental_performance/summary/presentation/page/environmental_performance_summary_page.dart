@@ -1,4 +1,4 @@
-import 'package:app/features/environmental_performance/summary/domain/environmental_performance_summary.dart';
+import 'package:app/features/environmental_performance/summary/domain/environmental_performance_data.dart';
 import 'package:app/features/environmental_performance/summary/presentation/bloc/environmental_performance_bloc.dart';
 import 'package:app/features/environmental_performance/summary/presentation/bloc/environmental_performance_event.dart';
 import 'package:app/features/environmental_performance/summary/presentation/bloc/environmental_performance_state.dart';
@@ -45,13 +45,11 @@ class _View extends StatelessWidget {
             EnvironmentalPerformanceLoading() => const Center(
                 child: CircularProgressIndicator(),
               ),
-            EnvironmentalPerformanceSuccess() => switch (state.data.type) {
-                EnvironmentalPerformanceSummaryType.empty =>
-                  BodyEmpty(data: state.data.empty),
-                EnvironmentalPerformanceSummaryType.partial =>
-                  BodyPartial(data: state.data.partial),
-                EnvironmentalPerformanceSummaryType.full =>
-                  BodyFull(data: state.data.full),
+            EnvironmentalPerformanceSuccess() => switch (state.data) {
+                (final EnvironmentalPerformanceEmpty a) => BodyEmpty(data: a),
+                (final EnvironmentalPerformancePartial a) =>
+                  BodyPartial(data: a),
+                (final EnvironmentalPerformanceFull a) => BodyFull(data: a),
               },
             EnvironmentalPerformanceFailure() => Text(state.errorMessage),
           },

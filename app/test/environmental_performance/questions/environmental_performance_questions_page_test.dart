@@ -76,7 +76,7 @@ void main() {
     testWidgets('Aller sur les questions', (final tester) async {
       final dio = DioMock()
         ..getM(
-          '/utilisateur/{userId}/bilans/last',
+          '/utilisateur/{userId}/bilans/last_v2',
           responseData: environmentalPerformanceEmptyData,
         )
         ..getM(
@@ -113,7 +113,7 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(find.text(Localisation.non));
       dio.getM(
-        '/utilisateur/{userId}/bilans/last',
+        '/utilisateur/{userId}/bilans/last_v2',
         responseData: environmentalPerformanceFullData,
       );
       await tester.tap(find.text(Localisation.continuer));
