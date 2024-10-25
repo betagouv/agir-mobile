@@ -1,23 +1,21 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:app/core/infrastructure/message_bus.dart';
-import 'package:app/features/authentification/core/infrastructure/authentification_api_client.dart';
+import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/gamification/domain/gamification.dart';
 import 'package:app/features/gamification/infrastructure/gamification_api_adapter.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../helpers/dio_mock.dart';
 import '../mocks/authentication_service_fake.dart';
-import 'client_mock.dart';
-import 'constants.dart';
-import 'custom_response.dart';
 
 void main() {
   test('gamification', () async {
-    final client = ClientMock()
-      ..getSuccess(
-        path: '/utilisateurs/$utilisateurId/gamification',
-        response: CustomResponse(
-          '''
+    final dio = DioMock()
+      ..getM(
+        '/utilisateurs/{userId}/gamification',
+        responseData: jsonDecode('''
 {
   "points": 650,
   "niveau": 6,
@@ -30,15 +28,13 @@ void main() {
       "titre": "Toutes les missions sont terminées !!"
     }
   ]
-}''',
-        ),
+}'''),
       );
 
     final adapter = GamificationApiAdapter(
-      client: AuthentificationApiClient(
-        apiUrl: apiUrl,
+      client: DioHttpClient(
+        dio: dio,
         authenticationService: const AuthenticationServiceFake(),
-        inner: client,
       ),
       messageBus: MessageBus(),
     );

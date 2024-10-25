@@ -1,28 +1,20 @@
-import 'package:app/features/authentification/core/infrastructure/authentification_api_client.dart';
+import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/first_name/domain/first_name.dart';
 import 'package:app/features/first_name/infrastructure/first_name_adapter.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../old/api/client_mock.dart';
-import '../old/api/constants.dart';
-import '../old/api/custom_response.dart';
-import '../old/api/request_mathcher.dart';
-import '../old/mocks/authentication_service_fake.dart';
+import '../helpers/authentication_service_setup.dart';
+import '../helpers/dio_mock.dart';
 
 void main() {
   test('updateFirstName', () async {
-    final client = ClientMock()
-      ..patchSuccess(
-        path: '/utilisateurs/$utilisateurId/profile',
-        response: OkResponse(),
-      );
+    final dio = DioMock()..patchM('/utilisateurs/{userId}/profile');
 
-    final apiClient = AuthentificationApiClient(
-      apiUrl: apiUrl,
-      authenticationService: const AuthenticationServiceFake(),
-      inner: client,
+    final apiClient = DioHttpClient(
+      dio: dio,
+      authenticationService: authenticationService,
     );
 
     final adapter = FirstNameAdapter(client: apiClient);
@@ -32,13 +24,9 @@ void main() {
     await adapter.addFirstName(FirstName.create(prenom));
 
     verify(
-      () => client.send(
-        any(
-          that: RequestMathcher(
-            '/utilisateurs/$utilisateurId/profile',
-            body: '{"prenom":"$prenom"}',
-          ),
-        ),
+      () => dio.patch<dynamic>(
+        '/utilisateurs/{userId}/profile',
+        data: '{"prenom":"$prenom"}',
       ),
     );
   });

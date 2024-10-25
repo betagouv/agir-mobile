@@ -8,19 +8,18 @@ import 'package:app/features/authentication/domain/authentication_service.dart';
 import 'package:app/features/authentification/core/domain/authentification_port.dart';
 import 'package:app/features/authentification/core/domain/information_de_code.dart';
 import 'package:app/features/authentification/core/domain/information_de_connexion.dart';
-import 'package:app/features/authentification/core/infrastructure/authentification_api_client.dart';
-import 'package:app/features/profil/core/domain/utilisateur_id_non_trouve_exception.dart';
+import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/utilisateur/domain/utilisateur.dart';
 import 'package:fpdart/fpdart.dart';
 
 class AuthentificationApiAdapter implements AuthentificationPort {
   AuthentificationApiAdapter({
-    required final AuthentificationApiClient client,
+    required final DioHttpClient client,
     required final AuthenticationService authenticationService,
-  })  : _apiClient = client,
+  })  : _client = client,
         _authenticationService = authenticationService;
 
-  final AuthentificationApiClient _apiClient;
+  final DioHttpClient _client;
   final AuthenticationService _authenticationService;
   bool _connexionDemandee = false;
 
@@ -28,9 +27,9 @@ class AuthentificationApiAdapter implements AuthentificationPort {
   Future<Either<ApiErreur, void>> connexionDemandee(
     final InformationDeConnexion informationDeConnexion,
   ) async {
-    final response = await _apiClient.post(
-      Uri.parse('/utilisateurs/login_v2'),
-      body: jsonEncode({
+    final response = await _client.post(
+      '/utilisateurs/login_v2',
+      data: jsonEncode({
         'email': informationDeConnexion.adresseMail,
         'mot_de_passe': informationDeConnexion.motDePasse,
       }),
@@ -43,7 +42,7 @@ class AuthentificationApiAdapter implements AuthentificationPort {
     }
 
     return handleError(
-      response.body,
+      jsonEncode(response.data),
       defaultMessage: 'Erreur lors de la connexion',
     ).fold(
       (final l) async {
@@ -70,9 +69,9 @@ class AuthentificationApiAdapter implements AuthentificationPort {
   Future<Either<ApiErreur, void>> creationDeCompteDemandee(
     final InformationDeConnexion informationDeConnexion,
   ) async {
-    final response = await _apiClient.post(
-      Uri.parse('/utilisateurs_v2'),
-      body: jsonEncode({
+    final response = await _client.post(
+      '/utilisateurs_v2',
+      data: jsonEncode({
         'email': informationDeConnexion.adresseMail,
         'mot_de_passe': informationDeConnexion.motDePasse,
         'source_inscription': 'mobile',
@@ -82,7 +81,7 @@ class AuthentificationApiAdapter implements AuthentificationPort {
     return isResponseSuccessful(response.statusCode)
         ? const Right(null)
         : handleError(
-            response.body,
+            jsonEncode(response.data),
             defaultMessage: 'Erreur lors de la création du compte',
           );
   }
@@ -91,9 +90,9 @@ class AuthentificationApiAdapter implements AuthentificationPort {
   Future<Either<Exception, void>> renvoyerCodeDemande(
     final String email,
   ) async {
-    final response = await _apiClient.post(
-      Uri.parse('/utilisateurs/renvoyer_code'),
-      body: jsonEncode({'email': email}),
+    final response = await _client.post(
+      '/utilisateurs/renvoyer_code',
+      data: jsonEncode({'email': email}),
     );
 
     return isResponseSuccessful(response.statusCode)
@@ -109,9 +108,9 @@ class AuthentificationApiAdapter implements AuthentificationPort {
         ? '/utilisateurs/login_v2_code'
         : '/utilisateurs/valider';
 
-    final response = await _apiClient.post(
-      Uri.parse(uri),
-      body: jsonEncode({
+    final response = await _client.post(
+      uri,
+      data: jsonEncode({
         'code': informationDeConnexion.code,
         'email': informationDeConnexion.adresseMail,
       }),
@@ -119,7 +118,7 @@ class AuthentificationApiAdapter implements AuthentificationPort {
 
     if (isResponseSuccessful(response.statusCode)) {
       _connexionDemandee = false;
-      final json = jsonDecode(response.body) as Map<String, dynamic>;
+      final json = response.data as Map<String, dynamic>;
       final token = json['token'] as String;
 
       await _authenticationService.login(token);
@@ -128,16 +127,16 @@ class AuthentificationApiAdapter implements AuthentificationPort {
     }
 
     return handleError(
-      response.body,
+      jsonEncode(response.data),
       defaultMessage: 'Erreur lors de la validation du code',
     );
   }
 
   @override
   Future<Either<Exception, void>> oubliMotDePasse(final String email) async {
-    final response = await _apiClient.post(
-      Uri.parse('/utilisateurs/oubli_mot_de_passe'),
-      body: jsonEncode({'email': email}),
+    final response = await _client.post(
+      '/utilisateurs/oubli_mot_de_passe',
+      data: jsonEncode({'email': email}),
     );
 
     return isResponseSuccessful(response.statusCode)
@@ -151,9 +150,9 @@ class AuthentificationApiAdapter implements AuthentificationPort {
     required final String code,
     required final String motDePasse,
   }) async {
-    final response = await _apiClient.post(
-      Uri.parse('/utilisateurs/modifier_mot_de_passe'),
-      body: jsonEncode({
+    final response = await _client.post(
+      '/utilisateurs/modifier_mot_de_passe',
+      data: jsonEncode({
         'code': code,
         'email': email,
         'mot_de_passe': motDePasse,
@@ -163,20 +162,14 @@ class AuthentificationApiAdapter implements AuthentificationPort {
     return isResponseSuccessful(response.statusCode)
         ? const Right(null)
         : handleError(
-            response.body,
+            jsonEncode(response.data),
             defaultMessage: 'Erreur lors de la modification du mot de passe',
           );
   }
 
   @override
   Future<Either<Exception, Utilisateur>> recupereUtilisateur() async {
-    final utilisateurId = _apiClient.recupererUtilisateurId;
-    if (utilisateurId == null) {
-      return const Left(UtilisateurIdNonTrouveException());
-    }
-
-    final response =
-        await _apiClient.get(Uri.parse('/utilisateurs/$utilisateurId'));
+    final response = await _client.get('/utilisateurs/{userId}');
 
     if (isResponseUnsuccessful(response.statusCode)) {
       return Left(
@@ -184,7 +177,7 @@ class AuthentificationApiAdapter implements AuthentificationPort {
       );
     }
 
-    final json = jsonDecode(response.body) as Map<String, dynamic>;
+    final json = response.data as Map<String, dynamic>;
 
     return Right(
       Utilisateur(

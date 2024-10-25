@@ -20,10 +20,10 @@ class DioMock extends Mock implements Dio {
     );
   }
 
-  void postM<T>(
+  void postM(
     final String path, {
     final dynamic requestData,
-    final T? responseData,
+    final dynamic responseData,
     final int statusCode = 200,
   }) {
     when(() => post<dynamic>(path, data: requestData ?? any(named: 'data')))
@@ -56,6 +56,20 @@ class DioMock extends Mock implements Dio {
     final int statusCode = 200,
   }) {
     when(() => put<dynamic>(path, data: requestData ?? any(named: 'data')))
+        .thenAnswer(
+      (final _) async => Response(
+        requestOptions: RequestOptions(path: path),
+        statusCode: statusCode,
+      ),
+    );
+  }
+
+  void deleteM(
+    final String path, {
+    final dynamic requestData,
+    final int statusCode = 200,
+  }) {
+    when(() => delete<dynamic>(path, data: requestData ?? any(named: 'data')))
         .thenAnswer(
       (final _) async => Response(
         requestOptions: RequestOptions(path: path),

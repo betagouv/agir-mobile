@@ -61,6 +61,7 @@ void main() {
       leServeurRetourneCesUnivers([univers]);
       ielEstConnecte();
       await ielLanceLapplication(tester);
+      await ielScrolle(tester, univers.titre);
       await ielAppuieSur(tester, univers.titre);
       ielVoitLeTexte(univers.titre);
     });

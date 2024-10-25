@@ -17,7 +17,6 @@ import 'package:app/features/authentication/domain/authentication_service.dart';
 import 'package:app/features/authentication/infrastructure/authentication_repository.dart';
 import 'package:app/features/authentification/core/infrastructure/api_url.dart';
 import 'package:app/features/authentification/core/infrastructure/authentification_api_adapter.dart';
-import 'package:app/features/authentification/core/infrastructure/authentification_api_client.dart';
 import 'package:app/features/authentification/core/infrastructure/cms_api_client.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/bibliotheque/infrastructure/bibliotheque_api_adapter.dart';
@@ -147,11 +146,6 @@ class _MyAppState extends State<MyApp> {
           FlutterNativeSplash.remove();
 
           final url = Uri.parse(_apiUrl);
-          final apiClient = AuthentificationApiClient(
-            apiUrl: ApiUrl(url),
-            authenticationService: _authenticationService,
-          );
-
           final dio = Dio(
             BaseOptions(
               baseUrl: url.toString(),
@@ -161,7 +155,7 @@ class _MyAppState extends State<MyApp> {
             ..httpClientAdapter = NativeAdapter()
             ..addSentry();
 
-          final dioHttpClient = DioHttpClient(
+          final client = DioHttpClient(
             dio: dio,
             authenticationService: _authenticationService,
           );
@@ -173,7 +167,7 @@ class _MyAppState extends State<MyApp> {
           final messageBus = MessageBus();
 
           final gamificationApiAdapter = GamificationApiAdapter(
-            client: apiClient,
+            client: client,
             messageBus: messageBus,
           );
 
@@ -182,41 +176,36 @@ class _MyAppState extends State<MyApp> {
             clock: _clock,
             authenticationService: _authenticationService,
             authentificationPort: AuthentificationApiAdapter(
-              client: apiClient,
+              client: client,
               authenticationService: _authenticationService,
             ),
-            universPort: UniversApiAdapter(client: apiClient),
-            aidesPort: AidesApiAdapter(client: dioHttpClient),
-            bibliothequePort: BibliothequeApiAdapter(client: dioHttpClient),
-            recommandationsPort: RecommandationsApiAdapter(client: apiClient),
+            universPort: UniversApiAdapter(client: client),
+            aidesPort: AidesApiAdapter(client: client),
+            bibliothequePort: BibliothequeApiAdapter(client: client),
+            recommandationsPort: RecommandationsApiAdapter(client: client),
             articlesPort: ArticlesApiAdapter(
-              client: dioHttpClient,
+              client: client,
               cmsApiClient: cmsClient,
             ),
-            quizPort:
-                QuizApiAdapter(client: apiClient, cmsApiClient: cmsClient),
+            quizPort: QuizApiAdapter(client: client, cmsApiClient: cmsClient),
             versionPort: VersionAdapter(packageInfo: _packageInfo),
-            communesPort: CommunesApiAdapter(client: apiClient),
-            aideVeloPort: AideVeloApiAdapter(client: dioHttpClient),
-            firstNamePort: FirstNameAdapter(client: apiClient),
-            profilPort: ProfilApiAdapter(client: apiClient),
+            communesPort: CommunesApiAdapter(client: client),
+            aideVeloPort: AideVeloApiAdapter(client: client),
+            firstNamePort: FirstNameAdapter(client: client),
+            profilPort: ProfilApiAdapter(client: client),
             knowYourCustomersRepository:
-                KnowYourCustomersRepository(client: dioHttpClient),
+                KnowYourCustomersRepository(client: client),
             environmentalPerformanceSummaryRepository:
-                EnvironmentalPerformanceSummaryRepository(
-              client: dioHttpClient,
-            ),
+                EnvironmentalPerformanceSummaryRepository(client: client),
             environmentalPerformanceQuestionRepository:
-                EnvironmentalPerformanceQuestionRepository(
-              client: dioHttpClient,
-            ),
+                EnvironmentalPerformanceQuestionRepository(client: client),
             mieuxVousConnaitrePort: MieuxVousConnaitreApiAdapter(
-              client: dioHttpClient,
+              client: client,
               messageBus: messageBus,
             ),
-            actionsPort: ActionsAdapter(client: dioHttpClient),
+            actionsPort: ActionsAdapter(client: client),
             actionRepository:
-                ActionRepository(client: dioHttpClient, messageBus: messageBus),
+                ActionRepository(client: client, messageBus: messageBus),
             gamificationPort: gamificationApiAdapter,
           );
         },

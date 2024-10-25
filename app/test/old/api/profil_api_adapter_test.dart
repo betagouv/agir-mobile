@@ -1,4 +1,6 @@
-import 'package:app/features/authentification/core/infrastructure/authentification_api_client.dart';
+import 'dart:convert';
+
+import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/profil/core/infrastructure/profil_api_adapter.dart';
 import 'package:app/features/profil/informations/domain/entities/informations.dart';
 import 'package:app/features/profil/logement/domain/logement.dart';
@@ -7,19 +9,16 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../mocks/authentication_service_fake.dart';
-import 'client_mock.dart';
-import 'constants.dart';
-import 'custom_response.dart';
-import 'request_mathcher.dart';
+import '../../helpers/authentication_service_setup.dart';
+import '../../helpers/dio_mock.dart';
 
 void main() {
   group('ProfilApiAdapter', () {
     test('recupererProfil', () async {
-      final client = ClientMock()
-        ..getSuccess(
-          path: '/utilisateurs/$utilisateurId/profile',
-          response: CustomResponse('''
+      final dio = DioMock()
+        ..getM(
+          '/utilisateurs/{userId}/profile',
+          responseData: jsonDecode('''
 {
     "email": "lucas@agir.dev",
     "nom": "",
@@ -47,10 +46,9 @@ void main() {
         );
 
       final adapter = ProfilApiAdapter(
-        client: AuthentificationApiClient(
-          apiUrl: apiUrl,
-          authenticationService: const AuthenticationServiceFake(),
-          inner: client,
+        client: DioHttpClient(
+          dio: dio,
+          authenticationService: authenticationService,
         ),
       );
 
@@ -71,17 +69,12 @@ void main() {
     });
 
     test('mettreAJour', () async {
-      final client = ClientMock()
-        ..patchSuccess(
-          path: '/utilisateurs/$utilisateurId/profile',
-          response: OkResponse(),
-        );
+      final dio = DioMock()..patchM('/utilisateurs/{userId}/profile');
 
       final adapter = ProfilApiAdapter(
-        client: AuthentificationApiClient(
-          apiUrl: apiUrl,
-          authenticationService: const AuthenticationServiceFake(),
-          inner: client,
+        client: DioHttpClient(
+          dio: dio,
+          authenticationService: authenticationService,
         ),
       );
 
@@ -97,25 +90,20 @@ void main() {
         nombreDePartsFiscales: nombreDePartsFiscales,
         revenuFiscal: revenuFiscal,
       );
-
       verify(
-        () => client.send(
-          any(
-            that: const RequestMathcher(
-              '/utilisateurs/$utilisateurId/profile',
-              body:
-                  '{"annee_naissance":$anneeDeNaissance,"nom":"$nom","nombre_de_parts_fiscales":$nombreDePartsFiscales,"prenom":"$prenom","revenu_fiscal":$revenuFiscal}',
-            ),
-          ),
+        () => dio.patch<dynamic>(
+          '/utilisateurs/{userId}/profile',
+          data:
+              '{"annee_naissance":$anneeDeNaissance,"nom":"$nom","nombre_de_parts_fiscales":$nombreDePartsFiscales,"prenom":"$prenom","revenu_fiscal":$revenuFiscal}',
         ),
       );
     });
 
     test('recupererLogement', () async {
-      final client = ClientMock()
-        ..getSuccess(
-          path: '/utilisateurs/$utilisateurId/logement',
-          response: CustomResponse('''
+      final dio = DioMock()
+        ..getM(
+          '/utilisateurs/{userId}/logement',
+          responseData: jsonDecode('''
 {
   "nombre_adultes": 2,
   "nombre_enfants": 1,
@@ -131,10 +119,9 @@ void main() {
         );
 
       final adapter = ProfilApiAdapter(
-        client: AuthentificationApiClient(
-          apiUrl: apiUrl,
-          authenticationService: const AuthenticationServiceFake(),
-          inner: client,
+        client: DioHttpClient(
+          dio: dio,
+          authenticationService: authenticationService,
         ),
       );
 
@@ -156,19 +143,18 @@ void main() {
     });
 
     test('recupererLogement vide', () async {
-      final client = ClientMock()
-        ..getSuccess(
-          path: '/utilisateurs/$utilisateurId/logement',
-          response: CustomResponse('''
+      final dio = DioMock()
+        ..getM(
+          '/utilisateurs/{userId}/logement',
+          responseData: jsonDecode('''
 {
 }'''),
         );
 
       final adapter = ProfilApiAdapter(
-        client: AuthentificationApiClient(
-          apiUrl: apiUrl,
-          authenticationService: const AuthenticationServiceFake(),
-          inner: client,
+        client: DioHttpClient(
+          dio: dio,
+          authenticationService: authenticationService,
         ),
       );
 
@@ -190,15 +176,13 @@ void main() {
     });
 
     test('mettreAJourLogement', () async {
-      const path = '/utilisateurs/$utilisateurId/logement';
-      final client = ClientMock()
-        ..patchSuccess(path: path, response: OkResponse());
+      const path = '/utilisateurs/{userId}/logement';
+      final dio = DioMock()..patchM(path);
 
       final adapter = ProfilApiAdapter(
-        client: AuthentificationApiClient(
-          apiUrl: apiUrl,
-          authenticationService: const AuthenticationServiceFake(),
-          inner: client,
+        client: DioHttpClient(
+          dio: dio,
+          authenticationService: authenticationService,
         ),
       );
 
@@ -226,30 +210,21 @@ void main() {
       );
 
       verify(
-        () => client.send(
-          any(
-            that: const RequestMathcher(
-              path,
-              body:
-                  '{"code_postal":"$codePostal","commune":"$commune","dpe":"B","nombre_adultes":$nombreAdultes,"nombre_enfants":$nombreEnfants,"plus_de_15_ans":$plusDe15Ans,"proprietaire":$estProprietaire,"superficie":"superficie_100","type":"maison"}',
-            ),
-          ),
+        () => dio.patch<dynamic>(
+          path,
+          data:
+              '{"code_postal":"$codePostal","commune":"$commune","dpe":"B","nombre_adultes":$nombreAdultes,"nombre_enfants":$nombreEnfants,"plus_de_15_ans":$plusDe15Ans,"proprietaire":$estProprietaire,"superficie":"superficie_100","type":"maison"}',
         ),
       );
     });
 
     test('mettreAJourCodePostalEtCommune', () async {
-      final client = ClientMock()
-        ..patchSuccess(
-          path: '/utilisateurs/$utilisateurId/logement',
-          response: OkResponse(),
-        );
+      final dio = DioMock()..patchM('/utilisateurs/{userId}/logement');
 
       final adapter = ProfilApiAdapter(
-        client: AuthentificationApiClient(
-          apiUrl: apiUrl,
-          authenticationService: const AuthenticationServiceFake(),
-          inner: client,
+        client: DioHttpClient(
+          dio: dio,
+          authenticationService: authenticationService,
         ),
       );
 
@@ -261,47 +236,36 @@ void main() {
       );
 
       verify(
-        () => client.send(
-          any(
-            that: const RequestMathcher(
-              '/utilisateurs/$utilisateurId/logement',
-              body: '{"code_postal":"$codePostal","commune":"$commune"}',
-            ),
-          ),
+        () => dio.patch<dynamic>(
+          '/utilisateurs/{userId}/logement',
+          data: '{"code_postal":"$codePostal","commune":"$commune"}',
         ),
       );
     });
 
     test('supprimerLeCompte', () async {
-      const path = '/utilisateurs/$utilisateurId';
-      final client = ClientMock()
-        ..deleteSuccess(path: path, response: OkResponse());
+      const path = '/utilisateurs/{userId}';
+      final dio = DioMock()..deleteM(path);
 
       final adapter = ProfilApiAdapter(
-        client: AuthentificationApiClient(
-          apiUrl: apiUrl,
-          authenticationService: const AuthenticationServiceFake(),
-          inner: client,
+        client: DioHttpClient(
+          dio: dio,
+          authenticationService: authenticationService,
         ),
       );
 
       await adapter.supprimerLeCompte();
 
-      verify(() => client.send(any(that: const RequestMathcher(path))));
+      verify(() => dio.delete<dynamic>(path));
     });
 
     test('changerMotDePasse', () async {
-      final client = ClientMock()
-        ..patchSuccess(
-          path: '/utilisateurs/$utilisateurId/profile',
-          response: OkResponse(),
-        );
+      final dio = DioMock()..patchM('/utilisateurs/{userId}/profile');
 
       final adapter = ProfilApiAdapter(
-        client: AuthentificationApiClient(
-          apiUrl: apiUrl,
-          authenticationService: const AuthenticationServiceFake(),
-          inner: client,
+        client: DioHttpClient(
+          dio: dio,
+          authenticationService: authenticationService,
         ),
       );
 
@@ -309,13 +273,9 @@ void main() {
       await adapter.changerMotDePasse(motDePasse: motDePasse);
 
       verify(
-        () => client.send(
-          any(
-            that: const RequestMathcher(
-              '/utilisateurs/$utilisateurId/profile',
-              body: '{"mot_de_passe":"$motDePasse"}',
-            ),
-          ),
+        () => dio.patch<dynamic>(
+          '/utilisateurs/{userId}/profile',
+          data: '{"mot_de_passe":"$motDePasse"}',
         ),
       );
     });

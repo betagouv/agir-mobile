@@ -1,20 +1,18 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/core/infrastructure/message_bus.dart';
-import 'package:app/features/authentification/core/infrastructure/authentification_api_client.dart';
+import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/gamification/domain/gamification.dart';
 import 'package:app/features/gamification/domain/gamification_port.dart';
-import 'package:app/features/profil/core/domain/utilisateur_id_non_trouve_exception.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:rxdart/subjects.dart';
 
 class GamificationApiAdapter implements GamificationPort {
   GamificationApiAdapter({
-    required final AuthentificationApiClient client,
+    required final DioHttpClient client,
     required final MessageBus messageBus,
-  }) : _apiClient = client {
+  }) : _client = client {
     _subscription =
         messageBus.subscribe(actionCompletedTopic).listen((final event) async {
       await mettreAJourLesPoints();
@@ -24,24 +22,20 @@ class GamificationApiAdapter implements GamificationPort {
     });
   }
 
-  final AuthentificationApiClient _apiClient;
+  final DioHttpClient _client;
   late final StreamSubscription<String> _subscription;
   late final StreamSubscription<String> _subscription2;
 
   @override
   Future<Either<Exception, void>> mettreAJourLesPoints() async {
-    final utilisateurId = _apiClient.recupererUtilisateurId;
-    if (utilisateurId == null) {
-      return const Left(UtilisateurIdNonTrouveException());
-    }
-    final response = await _apiClient.get(
-      Uri.parse('/utilisateurs/$utilisateurId/gamification'),
+    final response = await _client.get(
+      '/utilisateurs/{userId}/gamification',
     );
     if (isResponseUnsuccessful(response.statusCode)) {
       return Left(Exception('Erreur lors de la récupération des points'));
     }
 
-    final json = jsonDecode(response.body) as Map<String, dynamic>;
+    final json = response.data as Map<String, dynamic>;
 
     final gamification = Gamification(points: (json['points'] as num).toInt());
 
@@ -59,6 +53,5 @@ class GamificationApiAdapter implements GamificationPort {
     await _subscription.cancel();
     await _subscription2.cancel();
     await _gamificationSubject.close();
-    await _apiClient.close();
   }
 }
