@@ -322,7 +322,7 @@ void main() {
   });
 
   test('marquerCommeLu', () async {
-    final dio = DioMock()..postM<dynamic>('/utilisateurs/{userId}/events');
+    final dio = DioMock()..postM('/utilisateurs/{userId}/events');
 
     final adapter = ArticlesApiAdapter(
       client: DioHttpClient(
@@ -346,7 +346,7 @@ void main() {
   });
 
   test('addToFavorites', () async {
-    final dio = DioMock()..postM<dynamic>('/utilisateurs/{userId}/events');
+    final dio = DioMock()..postM('/utilisateurs/{userId}/events');
 
     final adapter = ArticlesApiAdapter(
       client: DioHttpClient(

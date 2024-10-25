@@ -1,25 +1,27 @@
+import 'dart:convert';
+
 import 'package:app/features/articles/domain/article.dart';
-import 'package:app/features/authentification/core/infrastructure/authentification_api_client.dart';
 import 'package:app/features/authentification/core/infrastructure/cms_api_client.dart';
+import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/quiz/domain/quiz.dart';
 import 'package:app/features/quiz/infrastructure/quiz_api_adapter.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../mocks/authentication_service_fake.dart';
+import '../../helpers/authentication_service_setup.dart';
+import '../../helpers/dio_mock.dart';
 import 'client_mock.dart';
 import 'constants.dart';
 import 'custom_response.dart';
-import 'request_mathcher.dart';
 
 void main() {
   test('recupererQuiz', () async {
-    final client = ClientMock()
-      ..getSuccess(
-        path: 'utilisateurs/$utilisateurId/bibliotheque/articles/168',
-        response: OkResponse(
-          value: '''
+    final dio = DioMock()
+      ..getM(
+        '/utilisateurs/{userId}/bibliotheque/articles/168',
+        responseData: jsonDecode(
+          '''
 {
     "content_id": "168",
     "type": "article",
@@ -35,7 +37,8 @@ void main() {
     "read_date": null
 }''',
         ),
-      )
+      );
+    final client = ClientMock()
       ..getSuccess(
         path:
             '/api/quizzes/14?populate[0]=questions.reponses,thematique_gamification,articles.partenaire.logo',
@@ -134,11 +137,8 @@ void main() {
       );
 
     final adapter = QuizApiAdapter(
-      client: AuthentificationApiClient(
-        apiUrl: apiUrl,
-        authenticationService: const AuthenticationServiceFake(),
-        inner: client,
-      ),
+      client:
+          DioHttpClient(dio: dio, authenticationService: authenticationService),
       cmsApiClient:
           CmsApiClient(apiUrl: cmsApiUrl, token: 'le_token', inner: client),
     );
@@ -260,10 +260,9 @@ void main() {
       );
 
     final adapter = QuizApiAdapter(
-      client: AuthentificationApiClient(
-        apiUrl: apiUrl,
-        authenticationService: const AuthenticationServiceFake(),
-        inner: client,
+      client: DioHttpClient(
+        dio: DioMock(),
+        authenticationService: authenticationService,
       ),
       cmsApiClient:
           CmsApiClient(apiUrl: cmsApiUrl, token: 'le_token', inner: client),
@@ -303,32 +302,26 @@ void main() {
   });
 
   test('terminerQuiz', () async {
-    final client = ClientMock()
-      ..postSuccess(
-        path: '/utilisateurs/$utilisateurId/events',
-        response: OkResponse(),
-      );
+    final dio = DioMock()..postM('/utilisateurs/{userId}/events');
 
     final adapter = QuizApiAdapter(
-      client: AuthentificationApiClient(
-        apiUrl: apiUrl,
-        authenticationService: const AuthenticationServiceFake(),
-        inner: client,
+      client: DioHttpClient(
+        dio: dio,
+        authenticationService: authenticationService,
       ),
-      cmsApiClient:
-          CmsApiClient(apiUrl: cmsApiUrl, token: 'le_token', inner: client),
+      cmsApiClient: CmsApiClient(
+        apiUrl: cmsApiUrl,
+        token: 'le_token',
+        inner: ClientMock(),
+      ),
     );
 
     await adapter.terminerQuiz(id: 1, estExacte: true);
 
     verify(
-      () => client.send(
-        any(
-          that: const RequestMathcher(
-            '/utilisateurs/$utilisateurId/events',
-            body: '{"content_id":"1","number_value":100,"type":"quizz_score"}',
-          ),
-        ),
+      () => dio.post<dynamic>(
+        '/utilisateurs/{userId}/events',
+        data: '{"content_id":"1","number_value":100,"type":"quizz_score"}',
       ),
     );
   });

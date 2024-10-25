@@ -11,16 +11,15 @@ class DioHttpClient {
   DioHttpClient({
     required final Dio dio,
     required final AuthenticationService authenticationService,
-  })  : _dio = dio,
-        _authentificationService = authenticationService {
+  }) : _dio = dio {
     _dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (final options, final handler) async {
-          await _authentificationService.checkAuthenticationStatus();
-          final token = await _authentificationService.token;
+          await authenticationService.checkAuthenticationStatus();
+          final token = await authenticationService.token;
           options.headers[HttpHeaders.authorizationHeader] =
               'Bearer ${token.value}';
-          final status = _authentificationService.status;
+          final status = authenticationService.status;
           if (status is Authenticated) {
             final updatedUri = options.uri
                 .toString()
@@ -31,7 +30,7 @@ class DioHttpClient {
         },
         onResponse: (final response, final handler) async {
           if (response.statusCode == HttpStatus.unauthorized) {
-            await _authentificationService.logout();
+            await authenticationService.logout();
           }
           handler.next(response);
         },
@@ -40,7 +39,6 @@ class DioHttpClient {
   }
 
   final Dio _dio;
-  final AuthenticationService _authentificationService;
 
   Future<Response<dynamic>> get(final String path) async => _dio.get(path);
   Future<Response<dynamic>> patch(
@@ -58,4 +56,6 @@ class DioHttpClient {
     final Object? data,
   }) async =>
       _dio.put(path, data: data);
+  Future<Response<dynamic>> delete(final String path, {final Object? data}) =>
+      _dio.delete(path, data: data);
 }

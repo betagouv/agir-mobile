@@ -1,22 +1,21 @@
-import 'package:app/features/authentification/core/infrastructure/authentification_api_client.dart';
+import 'dart:convert';
+
+import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
 import 'package:app/features/recommandations/infrastructure/recommandations_api_adapter.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../helpers/dio_mock.dart';
 import '../mocks/authentication_service_fake.dart';
-import 'client_mock.dart';
-import 'constants.dart';
-import 'custom_response.dart';
-import 'request_mathcher.dart';
 
 void main() {
   test('recuperer', () async {
-    final client = ClientMock()
-      ..getSuccess(
-        path: '/utilisateurs/$utilisateurId/recommandations_v2',
-        response: CustomResponse('''
+    final dio = DioMock()
+      ..getM(
+        '/utilisateurs/%7BuserId%7D/recommandations_v2',
+        responseData: jsonDecode('''
 [
   {
     "content_id": "KYC008",
@@ -46,10 +45,9 @@ void main() {
       );
 
     final adapter = RecommandationsApiAdapter(
-      client: AuthentificationApiClient(
-        apiUrl: apiUrl,
+      client: DioHttpClient(
+        dio: dio,
         authenticationService: const AuthenticationServiceFake(),
-        inner: client,
       ),
     );
 
@@ -84,10 +82,10 @@ void main() {
   });
 
   test('recuperer filtré par univers', () async {
-    final client = ClientMock()
-      ..getSuccess(
-        path: '/utilisateurs/$utilisateurId/recommandations_v2?univers=climat',
-        response: CustomResponse('''
+    final dio = DioMock()
+      ..getM(
+        '/utilisateurs/%7BuserId%7D/recommandations_v2?univers=climat',
+        responseData: jsonDecode('''
 [
   {
     "content_id": "KYC008",
@@ -117,21 +115,16 @@ void main() {
       );
 
     final adapter = RecommandationsApiAdapter(
-      client: AuthentificationApiClient(
-        apiUrl: apiUrl,
+      client: DioHttpClient(
+        dio: dio,
         authenticationService: const AuthenticationServiceFake(),
-        inner: client,
       ),
     );
 
     await adapter.recuperer('climat');
     verify(
-      () => client.send(
-        any(
-          that: const RequestMathcher(
-            '/utilisateurs/$utilisateurId/recommandations_v2?univers=climat',
-          ),
-        ),
+      () => dio.get<dynamic>(
+        '/utilisateurs/%7BuserId%7D/recommandations_v2?univers=climat',
       ),
     );
   });

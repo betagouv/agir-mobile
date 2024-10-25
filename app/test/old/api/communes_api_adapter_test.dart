@@ -1,20 +1,20 @@
-import 'package:app/features/authentification/core/infrastructure/authentification_api_client.dart';
+import 'dart:convert';
+
+import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/communes/infrastructure/communes_api_adapter.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 
 import '../../helpers/authentication_service_setup.dart';
-import 'client_mock.dart';
-import 'constants.dart';
-import 'custom_response.dart';
+import '../../helpers/dio_mock.dart';
 
 void main() {
   group('CommunesApiAdapter', () {
     test('recupererLesCommunes', () async {
-      final client = ClientMock()
-        ..getSuccess(
-          path: '/communes?code_postal=39100',
-          response: CustomResponse(
+      final dio = DioMock()
+        ..getM(
+          '/communes?code_postal=39100',
+          responseData: jsonDecode(
             '''
 [
   "AUTHUME",
@@ -36,10 +36,9 @@ void main() {
         );
 
       final adapter = CommunesApiAdapter(
-        client: AuthentificationApiClient(
-          apiUrl: apiUrl,
+        client: DioHttpClient(
+          dio: dio,
           authenticationService: authenticationService,
-          inner: client,
         ),
       );
 

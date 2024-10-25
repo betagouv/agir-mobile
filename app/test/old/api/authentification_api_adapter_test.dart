@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:app/features/authentication/domain/authentication_service.dart';
@@ -7,7 +8,7 @@ import 'package:app/features/authentication/infrastructure/authentication_reposi
 import 'package:app/features/authentification/core/domain/information_de_code.dart';
 import 'package:app/features/authentification/core/domain/information_de_connexion.dart';
 import 'package:app/features/authentification/core/infrastructure/authentification_api_adapter.dart';
-import 'package:app/features/authentification/core/infrastructure/authentification_api_client.dart';
+import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/utilisateur/domain/utilisateur.dart';
 import 'package:clock/clock.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -15,12 +16,10 @@ import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../helpers/authentication_service_setup.dart';
-import '../mocks/authentication_service_fake.dart';
-import 'client_mock.dart';
+import '../../helpers/dio_mock.dart';
 import 'constants.dart';
 import 'custom_response.dart';
 import 'flutter_secure_storage_fake.dart';
-import 'request_mathcher.dart';
 
 void main() {
   const informationDeConnexion = InformationDeConnexion(
@@ -32,17 +31,12 @@ void main() {
     "connexionDemandee envoie une requête POST à l'API avec les informations de connexion",
     () async {
       // Arrange.
-      final client = ClientMock()
-        ..postSuccess(
-          path: '/utilisateurs/login_v2',
-          response: CustomResponse('', statusCode: HttpStatus.created),
-        );
+      final dio = DioMock()..postM('/utilisateurs/login_v2');
 
       final adapter = AuthentificationApiAdapter(
-        client: AuthentificationApiClient(
-          apiUrl: apiUrl,
+        client: DioHttpClient(
+          dio: dio,
           authenticationService: authenticationService,
-          inner: client,
         ),
         authenticationService: authenticationService,
       );
@@ -52,14 +46,10 @@ void main() {
 
       // Assert.
       verify(
-        () => client.send(
-          any(
-            that: RequestMathcher(
-              '/utilisateurs/login_v2',
-              body:
-                  '{"email":"${informationDeConnexion.adresseMail}","mot_de_passe":"${informationDeConnexion.motDePasse}"}',
-            ),
-          ),
+        () => dio.post<dynamic>(
+          '/utilisateurs/login_v2',
+          data:
+              '{"email":"${informationDeConnexion.adresseMail}","mot_de_passe":"${informationDeConnexion.motDePasse}"}',
         ),
       );
     },
@@ -67,24 +57,18 @@ void main() {
 
   test('connexionDemandee avec un utilisateur non actif', () async {
     // Arrange.
-    final client = ClientMock()
-      ..postSuccess(
-        path: '/utilisateurs/login_v2',
-        response: CustomResponse(
-          '{"message":"Utilisateur non actif"}',
-          statusCode: HttpStatus.badRequest,
-        ),
+    final dio = DioMock()
+      ..postM(
+        '/utilisateurs/login_v2',
+        responseData: jsonDecode('{"message":"Utilisateur non actif"}'),
+        statusCode: HttpStatus.badRequest,
       )
-      ..postSuccess(
-        path: '/utilisateurs/renvoyer_code',
-        response: OkResponse(),
-      );
+      ..postM('/utilisateurs/renvoyer_code');
 
     final adapter = AuthentificationApiAdapter(
-      client: AuthentificationApiClient(
-        apiUrl: apiUrl,
+      client: DioHttpClient(
+        dio: dio,
         authenticationService: authenticationService,
-        inner: client,
       ),
       authenticationService: authenticationService,
     );
@@ -94,13 +78,9 @@ void main() {
 
     // Assert.
     verify(
-      () => client.send(
-        any(
-          that: RequestMathcher(
-            '/utilisateurs/renvoyer_code',
-            body: '{"email":"${informationDeConnexion.adresseMail}"}',
-          ),
-        ),
+      () => dio.post<dynamic>(
+        '/utilisateurs/renvoyer_code',
+        data: '{"email":"${informationDeConnexion.adresseMail}"}',
       ),
     );
   });
@@ -108,14 +88,11 @@ void main() {
   test(
     "validationCodeConnexionDemandee ajoute le token et l'utisateurId dans le secure storage et modifie le statut a connecté",
     () async {
-      final client = ClientMock()
-        ..postSuccess(
-          path: '/utilisateurs/login_v2',
-          response: CustomResponse('', statusCode: HttpStatus.created),
-        )
-        ..postSuccess(
-          path: '/utilisateurs/login_v2_code',
-          response: CustomResponse(
+      final dio = DioMock()
+        ..postM('/utilisateurs/login_v2', statusCode: HttpStatus.created)
+        ..postM(
+          '/utilisateurs/login_v2_code',
+          responseData: jsonDecode(
             '''
 {
   "token": "$token",
@@ -123,8 +100,8 @@ void main() {
     "id": "user123"
   }
 }''',
-            statusCode: HttpStatus.created,
           ),
+          statusCode: HttpStatus.created,
         );
 
       final flutterSecureStorage = FlutterSecureStorageFake();
@@ -135,10 +112,9 @@ void main() {
         clock: Clock.fixed(DateTime(1992)),
       );
       final adapter = AuthentificationApiAdapter(
-        client: AuthentificationApiClient(
-          apiUrl: apiUrl,
+        client: DioHttpClient(
+          dio: dio,
           authenticationService: authenticationService,
-          inner: client,
         ),
         authenticationService: authenticationService,
       );
@@ -161,13 +137,9 @@ void main() {
       );
 
       verify(
-        () => client.send(
-          any(
-            that: const RequestMathcher(
-              '/utilisateurs/login_v2_code',
-              body: '{"code":"123456","email":"test@example.com"}',
-            ),
-          ),
+        () => dio.post<dynamic>(
+          '/utilisateurs/login_v2_code',
+          data: '{"code":"123456","email":"test@example.com"}',
         ),
       );
     },
@@ -180,10 +152,9 @@ void main() {
       final flutterSecureStorageMock = FlutterSecureStorageFake();
 
       final adapter = AuthentificationApiAdapter(
-        client: AuthentificationApiClient(
-          apiUrl: apiUrl,
+        client: DioHttpClient(
+          dio: DioMock(),
           authenticationService: authenticationService,
-          inner: ClientMock(),
         ),
         authenticationService: authenticationService,
       );
@@ -198,23 +169,22 @@ void main() {
   );
 
   test('creationDeCompteDemandee', () async {
-    final client = ClientMock()
-      ..postSuccess(
-        path: '/utilisateurs_v2',
-        response: CustomResponse(
+    final dio = DioMock()
+      ..postM(
+        '/utilisateurs_v2',
+        responseData: CustomResponse(
           '''
 {
   "email": "${informationDeConnexion.adresseMail}",
 }''',
-          statusCode: HttpStatus.created,
         ),
+        statusCode: HttpStatus.created,
       );
 
     final adapter = AuthentificationApiAdapter(
-      client: AuthentificationApiClient(
-        apiUrl: apiUrl,
+      client: DioHttpClient(
+        dio: dio,
         authenticationService: authenticationService,
-        inner: client,
       ),
       authenticationService: authenticationService,
     );
@@ -222,23 +192,19 @@ void main() {
     await adapter.creationDeCompteDemandee(informationDeConnexion);
 
     verify(
-      () => client.send(
-        any(
-          that: RequestMathcher(
-            '/utilisateurs_v2',
-            body:
-                '{"email":"${informationDeConnexion.adresseMail}","mot_de_passe":"${informationDeConnexion.motDePasse}","source_inscription":"mobile"}',
-          ),
-        ),
+      () => dio.post<dynamic>(
+        '/utilisateurs_v2',
+        data:
+            '{"email":"${informationDeConnexion.adresseMail}","mot_de_passe":"${informationDeConnexion.motDePasse}","source_inscription":"mobile"}',
       ),
     );
   });
 
   test('validationDemandee', () async {
-    final client = ClientMock()
-      ..postSuccess(
-        path: '/utilisateurs/valider',
-        response: CustomResponse(
+    final dio = DioMock()
+      ..postM(
+        '/utilisateurs/valider',
+        responseData: jsonDecode(
           '''
 {
   "token": "$token",
@@ -246,8 +212,8 @@ void main() {
     "id": "$utilisateurId"
   }
 }''',
-          statusCode: HttpStatus.created,
         ),
+        statusCode: HttpStatus.created,
       );
 
     final flutterSecureStorageMock = FlutterSecureStorageFake();
@@ -257,10 +223,9 @@ void main() {
       clock: Clock.fixed(DateTime(1992)),
     );
     final adapter = AuthentificationApiAdapter(
-      client: AuthentificationApiClient(
-        apiUrl: apiUrl,
+      client: DioHttpClient(
+        dio: dio,
         authenticationService: authenticationService,
-        inner: client,
       ),
       authenticationService: authenticationService,
     );
@@ -277,65 +242,48 @@ void main() {
     );
 
     verify(
-      () => client.send(
-        any(
-          that: const RequestMathcher(
-            '/utilisateurs/valider',
-            body: '{"code":"123456","email":"test@example.com"}',
-          ),
-        ),
+      () => dio.post<dynamic>(
+        '/utilisateurs/valider',
+        data: '{"code":"123456","email":"test@example.com"}',
       ),
     );
   });
 
   test('renvoyerCode', () async {
-    final client = ClientMock()
-      ..postSuccess(
-        path: '/utilisateurs/renvoyer_code',
-        response: OkResponse(),
-      );
+    final dio = DioMock()..postM('/utilisateurs/renvoyer_code');
 
     final adapter = AuthentificationApiAdapter(
-      client: AuthentificationApiClient(
-        apiUrl: apiUrl,
+      client: DioHttpClient(
+        dio: dio,
         authenticationService: authenticationService,
-        inner: client,
       ),
       authenticationService: authenticationService,
     );
 
     await adapter.renvoyerCodeDemande('test@example.com');
-
     verify(
-      () => client.send(
-        any(
-          that: const RequestMathcher(
-            '/utilisateurs/renvoyer_code',
-            body: '{"email":"test@example.com"}',
-          ),
-        ),
+      () => dio.post<dynamic>(
+        '/utilisateurs/renvoyer_code',
+        data: '{"email":"test@example.com"}',
       ),
     );
   });
 
   test('oubliMotDePasse', () async {
-    final client = ClientMock()
-      ..postSuccess(
-        path: '/utilisateurs/oubli_mot_de_passe',
-        response: CustomResponse(
-          '''
+    final dio = DioMock()
+      ..postM(
+        '/utilisateurs/oubli_mot_de_passe',
+        responseData: jsonDecode('''
 {
   "email": "test@example.com"
-}''',
-          statusCode: HttpStatus.created,
-        ),
+}'''),
+        statusCode: HttpStatus.created,
       );
 
     final adapter = AuthentificationApiAdapter(
-      client: AuthentificationApiClient(
-        apiUrl: apiUrl,
+      client: DioHttpClient(
+        dio: dio,
         authenticationService: authenticationService,
-        inner: client,
       ),
       authenticationService: authenticationService,
     );
@@ -343,29 +291,24 @@ void main() {
     await adapter.oubliMotDePasse('test@example.com');
 
     verify(
-      () => client.send(
-        any(
-          that: const RequestMathcher(
-            '/utilisateurs/oubli_mot_de_passe',
-            body: '{"email":"test@example.com"}',
-          ),
-        ),
+      () => dio.post<dynamic>(
+        '/utilisateurs/oubli_mot_de_passe',
+        data: '{"email":"test@example.com"}',
       ),
     );
   });
 
   test('modifierMotDePasse', () async {
-    final client = ClientMock()
-      ..postSuccess(
-        path: '/utilisateurs/modifier_mot_de_passe',
-        response: CustomResponse('', statusCode: HttpStatus.created),
+    final dio = DioMock()
+      ..postM(
+        '/utilisateurs/modifier_mot_de_passe',
+        statusCode: HttpStatus.created,
       );
 
     final adapter = AuthentificationApiAdapter(
-      client: AuthentificationApiClient(
-        apiUrl: apiUrl,
+      client: DioHttpClient(
+        dio: dio,
         authenticationService: authenticationService,
-        inner: client,
       ),
       authenticationService: authenticationService,
     );
@@ -377,14 +320,10 @@ void main() {
     );
 
     verify(
-      () => client.send(
-        any(
-          that: const RequestMathcher(
-            '/utilisateurs/modifier_mot_de_passe',
-            body:
-                '{"code":"123456","email":"test@example.com","mot_de_passe":"password123"}',
-          ),
-        ),
+      () => dio.post<dynamic>(
+        '/utilisateurs/modifier_mot_de_passe',
+        data:
+            '{"code":"123456","email":"test@example.com","mot_de_passe":"password123"}',
       ),
     );
   });
@@ -392,10 +331,10 @@ void main() {
   test('recupereUtilisateur', () async {
     // Arrange.
     const prenom = 'Lucas';
-    final client = ClientMock()
-      ..getSuccess(
-        path: '/utilisateurs/$utilisateurId',
-        response: CustomResponse(
+    final dio = DioMock()
+      ..getM(
+        '/utilisateurs/{userId}',
+        responseData: jsonDecode(
           '''
 {
   "id": "saudon",
@@ -407,13 +346,10 @@ void main() {
         ),
       );
 
-    const authenticationService = AuthenticationServiceFake();
-
     final adapter = AuthentificationApiAdapter(
-      client: AuthentificationApiClient(
-        apiUrl: apiUrl,
+      client: DioHttpClient(
+        dio: dio,
         authenticationService: authenticationService,
-        inner: client,
       ),
       authenticationService: authenticationService,
     );

@@ -1,22 +1,22 @@
-import 'package:app/features/authentification/core/infrastructure/authentification_api_client.dart';
+import 'dart:convert';
+
+import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/univers/core/domain/service_item.dart';
 import 'package:app/features/univers/core/infrastructure/univers_api_adapter.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 
-import '../old/api/client_mock.dart';
-import '../old/api/constants.dart';
-import '../old/api/custom_response.dart';
+import '../helpers/dio_mock.dart';
 import '../old/mocks/authentication_service_fake.dart';
 
 void main() {
   test('getServices', () async {
     const universType = 'alimentation';
-    final client = ClientMock()
-      ..patchSuccess(
-        path: '/utilisateurs/$utilisateurId/recherche_services/$universType',
-        response: OkResponse(
-          value: '''
+    final dio = DioMock()
+      ..getM(
+        '/utilisateurs/{userId}/recherche_services/$universType',
+        responseData: jsonDecode(
+          '''
 [
     {
         "id_service": "fruits_legumes",
@@ -40,13 +40,12 @@ void main() {
         ),
       );
 
-    final apiClient = AuthentificationApiClient(
-      apiUrl: apiUrl,
-      authenticationService: const AuthenticationServiceFake(),
-      inner: client,
+    final adapter = UniversApiAdapter(
+      client: DioHttpClient(
+        dio: dio,
+        authenticationService: const AuthenticationServiceFake(),
+      ),
     );
-
-    final adapter = UniversApiAdapter(client: apiClient);
 
     final services = await adapter.getServices(universType);
 

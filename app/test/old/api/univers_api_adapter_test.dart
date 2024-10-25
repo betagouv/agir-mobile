@@ -1,4 +1,6 @@
-import 'package:app/features/authentification/core/infrastructure/authentification_api_client.dart';
+import 'dart:convert';
+
+import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/univers/core/domain/content_id.dart';
 import 'package:app/features/univers/core/domain/mission.dart';
 import 'package:app/features/univers/core/domain/mission_defi.dart';
@@ -11,18 +13,15 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../helpers/dio_mock.dart';
 import '../mocks/authentication_service_fake.dart';
-import 'client_mock.dart';
-import 'constants.dart';
-import 'custom_response.dart';
-import 'request_mathcher.dart';
 
 void main() {
   test('recuperer', () async {
-    final client = ClientMock()
-      ..getSuccess(
-        path: '/utilisateurs/$utilisateurId/univers',
-        response: CustomResponse('''
+    final dio = DioMock()
+      ..getM(
+        '/utilisateurs/{userId}/univers',
+        responseData: jsonDecode('''
 [
   {
     "titre": "En cuisine",
@@ -45,7 +44,7 @@ void main() {
 ]'''),
       );
 
-    final adapter = initializeAdapter(client);
+    final adapter = initializeAdapter(dio);
     final result = await adapter.recuperer();
 
     expect(
@@ -70,10 +69,10 @@ void main() {
   });
 
   test('missions', () async {
-    final client = ClientMock()
-      ..getSuccess(
-        path: '/utilisateurs/$utilisateurId/univers/alimentation/thematiques',
-        response: CustomResponse('''
+    final dio = DioMock()
+      ..getM(
+        '/utilisateurs/{userId}/univers/alimentation/thematiques',
+        responseData: jsonDecode('''
 [
     {
         "titre": "Pourquoi manger de saison ?",
@@ -105,7 +104,7 @@ void main() {
 '''),
       );
 
-    final adapter = initializeAdapter(client);
+    final adapter = initializeAdapter(dio);
     final result = await adapter.recupererThematiques('alimentation');
 
     expect(
@@ -136,11 +135,10 @@ void main() {
   });
 
   test('mission', () async {
-    final client = ClientMock()
-      ..getSuccess(
-        path:
-            '/utilisateurs/$utilisateurId/thematiques/manger_saison_2/mission',
-        response: CustomResponse('''
+    final dio = DioMock()
+      ..getM(
+        '/utilisateurs/{userId}/thematiques/manger_saison_2/mission',
+        responseData: jsonDecode('''
 {
     "id": "5",
     "titre": "Comment bien choisir ses aliments ?",
@@ -247,7 +245,7 @@ void main() {
 '''),
       );
 
-    final adapter = initializeAdapter(client);
+    final adapter = initializeAdapter(dio);
     final result = await adapter.recupererMission(
       missionId: 'manger_saison_2',
     );
@@ -346,57 +344,45 @@ void main() {
   });
   test('gagnerPoints', () async {
     const objectifId = 'cce0f6fd-7fee-48ff-90a4-17b1f4421c54';
-    final client = ClientMock()
-      ..patchSuccess(
-        path:
-            '/utilisateurs/$utilisateurId/objectifs/$objectifId/gagner_points',
-        response: OkResponse(),
+    final dio = DioMock()
+      ..postM(
+        '/utilisateurs/{userId}/objectifs/$objectifId/gagner_points',
+        requestData: jsonEncode({'element_id': objectifId}),
       );
 
-    final adapter = initializeAdapter(client);
+    final adapter = initializeAdapter(dio);
     await adapter.gagnerPoints(id: const ObjectifId(objectifId));
 
     verify(
-      () => client.send(
-        any(
-          that: const RequestMathcher(
-            '/utilisateurs/$utilisateurId/objectifs/$objectifId/gagner_points',
-            body: '{"element_id":"$objectifId"}',
-          ),
-        ),
+      () => dio.post<dynamic>(
+        '/utilisateurs/{userId}/objectifs/$objectifId/gagner_points',
+        data: '{"element_id":"cce0f6fd-7fee-48ff-90a4-17b1f4421c54"}',
       ),
     );
   });
 
   test('terminer', () async {
     const missionId = 'manger_saison_3';
-    final client = ClientMock()
-      ..postSuccess(
-        path:
-            '/utilisateurs/$utilisateurId/thematiques/$missionId/mission/terminer',
-        response: OkResponse(),
+    final dio = DioMock()
+      ..postM(
+        '/utilisateurs/{userId}/thematiques/$missionId/mission/terminer',
+        responseData: '',
       );
 
-    final adapter = initializeAdapter(client);
+    final adapter = initializeAdapter(dio);
     await adapter.terminer(missionId: missionId);
 
     verify(
-      () => client.send(
-        any(
-          that: const RequestMathcher(
-            '/utilisateurs/$utilisateurId/thematiques/$missionId/mission/terminer',
-          ),
-        ),
+      () => dio.post<dynamic>(
+        '/utilisateurs/{userId}/thematiques/$missionId/mission/terminer',
       ),
     );
   });
 }
 
-UniversApiAdapter initializeAdapter(final ClientMock client) =>
-    UniversApiAdapter(
-      client: AuthentificationApiClient(
-        apiUrl: apiUrl,
+UniversApiAdapter initializeAdapter(final DioMock client) => UniversApiAdapter(
+      client: DioHttpClient(
+        dio: client,
         authenticationService: const AuthenticationServiceFake(),
-        inner: client,
       ),
     );
