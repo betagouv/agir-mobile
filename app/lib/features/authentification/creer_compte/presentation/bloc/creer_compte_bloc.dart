@@ -18,6 +18,7 @@ class CreerCompteBloc extends Bloc<CreerCompteEvent, CreerCompteState> {
       emit(state.copyWith(aCguAcceptees: event.valeur));
     });
     on<CreerCompteCreationDemandee>((final event, final emit) async {
+      emit(state.copyWith(compteCree: false));
       final result = await authentificationPort.creationDeCompteDemandee(
         InformationDeConnexion(
           adresseMail: state.adresseMail,

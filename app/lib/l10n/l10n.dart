@@ -61,7 +61,7 @@ abstract final class Localisation {
   static const continuer = 'Continuer';
   static const continuerLaLecture = 'Continuer la lecture';
   static const creerMonCompte = 'Créer mon compte';
-  static const creezMonCompteApp = 'Créez mon compte J’agis';
+  static const creerMonCompteApp = 'Créer mon compte J’agis';
   static const declarationAccessibilite = "Déclaration d'accessibilité";
   static const declarationAccessibiliteSite =
       'https://jagis.beta.gouv.fr/accessibilite';

@@ -17,6 +17,7 @@ class SeConnecterBloc extends Bloc<SeConnecterEvent, SeConnecterState> {
       emit(state.copyWith(motDePasse: event.valeur));
     });
     on<SeConnecterConnexionDemandee>((final event, final emit) async {
+      emit(state.copyWith(connexionFaite: false));
       final result = await authentificationPort.connexionDemandee(
         InformationDeConnexion(
           adresseMail: state.adresseMail,
