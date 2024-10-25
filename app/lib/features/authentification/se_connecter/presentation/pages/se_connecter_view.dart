@@ -16,32 +16,14 @@ import 'package:go_router/go_router.dart';
 class SeConnecterView extends StatelessWidget {
   const SeConnecterView({super.key});
 
-  void _handleAdresseMail(final BuildContext context, final String value) {
-    context.read<SeConnecterBloc>().add(SeConnecterAdresseMailAChange(value));
-  }
-
-  void _handleMotDePasse(final BuildContext context, final String value) {
-    context.read<SeConnecterBloc>().add(SeConnecterMotDePasseAChange(value));
-  }
-
-  void _handleSeConnecter(final BuildContext context) {
-    context.read<SeConnecterBloc>().add(const SeConnecterConnexionDemandee());
-  }
-
-  Future<void> _handleConnexionCree(
-    final BuildContext context,
-    final String email,
-  ) async =>
-      GoRouter.of(context).pushNamed(
-        SaisieCodePage.name,
-        pathParameters: {'email': email},
-      );
-
   @override
   Widget build(final BuildContext context) =>
       BlocListener<SeConnecterBloc, SeConnecterState>(
         listener: (final context, final state) async =>
-            _handleConnexionCree(context, state.adresseMail),
+            GoRouter.of(context).pushNamed(
+          SaisieCodePage.name,
+          pathParameters: {'email': state.adresseMail},
+        ),
         listenWhen: (final previous, final current) =>
             previous.connexionFaite != current.connexionFaite &&
             current.connexionFaite,
@@ -60,7 +42,9 @@ class SeConnecterView extends StatelessWidget {
               const SizedBox(height: DsfrSpacings.s3w),
               DsfrInput(
                 label: Localisation.adresseEmail,
-                onChanged: (final value) => _handleAdresseMail(context, value),
+                onChanged: (final value) => context
+                    .read<SeConnecterBloc>()
+                    .add(SeConnecterAdresseMailAChange(value)),
                 autocorrect: false,
                 keyboardType: TextInputType.emailAddress,
                 textInputAction: TextInputAction.next,
@@ -69,7 +53,9 @@ class SeConnecterView extends StatelessWidget {
               const SizedBox(height: DsfrSpacings.s2w),
               DsfrInput(
                 label: Localisation.motDePasse,
-                onChanged: (final value) => _handleMotDePasse(context, value),
+                onChanged: (final value) => context
+                    .read<SeConnecterBloc>()
+                    .add(SeConnecterMotDePasseAChange(value)),
                 isPasswordMode: true,
                 keyboardType: TextInputType.visiblePassword,
                 autofillHints: const [AutofillHints.password],
@@ -91,7 +77,13 @@ class SeConnecterView extends StatelessWidget {
                   label: Localisation.meConnecter,
                   variant: DsfrButtonVariant.primary,
                   size: DsfrButtonSize.lg,
-                  onPressed: state ? () => _handleSeConnecter(context) : null,
+                  onPressed: state
+                      ? () {
+                          context
+                              .read<SeConnecterBloc>()
+                              .add(const SeConnecterConnexionDemandee());
+                        }
+                      : null,
                 ),
               ),
               const SizedBox(height: DsfrSpacings.s2w),

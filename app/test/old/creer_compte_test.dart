@@ -117,7 +117,7 @@ Future<void> _allerSurLaPageSaisieCode(
   required final String email,
 }) async {
   await _allerSurLaPageCreerCompte(tester);
-  ielVoitLeTexte(Localisation.creezMonCompteApp);
+  ielVoitLeTexte(Localisation.creerMonCompteApp);
 
   await ielEcritDansLeChamp(
     tester,

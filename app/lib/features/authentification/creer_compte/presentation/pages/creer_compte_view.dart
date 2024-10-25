@@ -17,28 +17,14 @@ import 'package:go_router/go_router.dart';
 class CreerCompteView extends StatelessWidget {
   const CreerCompteView({super.key});
 
-  void _handleAdresseMail(final BuildContext context, final String value) {
-    context.read<CreerCompteBloc>().add(CreerCompteAdresseMailAChangee(value));
-  }
-
-  void _handleMotDePasse(final BuildContext context, final String value) {
-    context.read<CreerCompteBloc>().add(CreerCompteMotDePasseAChange(value));
-  }
-
-  Future<void> _handleCompteCree(
-    final BuildContext context,
-    final String email,
-  ) async =>
-      GoRouter.of(context).pushNamed(
-        SaisieCodePage.name,
-        pathParameters: {'email': email},
-      );
-
   @override
   Widget build(final BuildContext context) =>
       BlocListener<CreerCompteBloc, CreerCompteState>(
         listener: (final context, final state) async =>
-            _handleCompteCree(context, state.adresseMail),
+            GoRouter.of(context).pushNamed(
+          SaisieCodePage.name,
+          pathParameters: {'email': state.adresseMail},
+        ),
         listenWhen: (final previous, final current) =>
             previous.compteCree != current.compteCree && current.compteCree,
         child: Scaffold(
@@ -50,13 +36,15 @@ class CreerCompteView extends StatelessWidget {
             padding: const EdgeInsets.all(paddingVerticalPage),
             children: [
               const Text(
-                Localisation.creezMonCompteApp,
+                Localisation.creerMonCompteApp,
                 style: DsfrTextStyle.headline2(),
               ),
               const SizedBox(height: DsfrSpacings.s3w),
               DsfrInput(
                 label: Localisation.adresseEmail,
-                onChanged: (final value) => _handleAdresseMail(context, value),
+                onChanged: (final value) => context
+                    .read<CreerCompteBloc>()
+                    .add(CreerCompteAdresseMailAChangee(value)),
                 autocorrect: false,
                 keyboardType: TextInputType.emailAddress,
                 textInputAction: TextInputAction.next,
@@ -64,7 +52,9 @@ class CreerCompteView extends StatelessWidget {
               ),
               const SizedBox(height: DsfrSpacings.s2w),
               FnvMotDePasse(
-                onChanged: (final value) => _handleMotDePasse(context, value),
+                onChanged: (final value) => context
+                    .read<CreerCompteBloc>()
+                    .add(CreerCompteMotDePasseAChange(value)),
               ),
               const _MessageErreur(),
               const SizedBox(height: DsfrSpacings.s2w),
