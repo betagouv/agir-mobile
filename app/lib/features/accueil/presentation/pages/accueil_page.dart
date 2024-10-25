@@ -4,6 +4,8 @@ import 'package:app/features/accueil/presentation/cubit/home_disclaimer_cubit.da
 import 'package:app/features/accueil/presentation/cubit/home_disclaimer_state.dart';
 import 'package:app/features/aides/core/presentation/widgets/mes_aides.dart';
 import 'package:app/features/environmental_performance/home/presentation/widgets/environmental_performance_section.dart';
+import 'package:app/features/environmental_performance/summary/presentation/bloc/environmental_performance_bloc.dart';
+import 'package:app/features/environmental_performance/summary/presentation/bloc/environmental_performance_event.dart';
 import 'package:app/features/first_name/presentation/pages/first_name_page.dart';
 import 'package:app/features/menu/presentation/pages/root_page.dart';
 import 'package:app/features/recommandations/presentation/widgets/mes_recommandations.dart';
@@ -74,43 +76,53 @@ class _AppBarTitle extends StatelessWidget {
   }
 }
 
-class _Body extends StatelessWidget {
+class _Body extends StatefulWidget {
   const _Body();
 
   @override
-  Widget build(final BuildContext context) {
+  State<_Body> createState() => _BodyState();
+}
+
+class _BodyState extends State<_Body> {
+  @override
+  void initState() {
+    super.initState();
     context
         .read<UtilisateurBloc>()
         .add(const UtilisateurRecuperationDemandee());
-
-    return ListView(
-      children: const [
-        _Disclaimer(),
-        SizedBox(height: paddingVerticalPage),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-          child: EnvironmentalPerformanceSection(),
-        ),
-        SizedBox(height: DsfrSpacings.s4w),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-          child: UniversSection(),
-        ),
-        SizedBox(height: DsfrSpacings.s4w),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-          child: MesAides(),
-        ),
-        SizedBox(height: DsfrSpacings.s4w),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-          child: MesRecommandations(),
-        ),
-        SizedBox(),
-        SafeArea(child: SizedBox(height: paddingVerticalPage)),
-      ],
-    );
+    context
+        .read<EnvironmentalPerformanceBloc>()
+        .add(const EnvironmentalPerformanceStarted());
   }
+
+  @override
+  Widget build(final BuildContext context) => ListView(
+        children: const [
+          _Disclaimer(),
+          SizedBox(height: paddingVerticalPage),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
+            child: EnvironmentalPerformanceSection(),
+          ),
+          SizedBox(height: DsfrSpacings.s4w),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
+            child: UniversSection(),
+          ),
+          SizedBox(height: DsfrSpacings.s4w),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
+            child: MesAides(),
+          ),
+          SizedBox(height: DsfrSpacings.s4w),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
+            child: MesRecommandations(),
+          ),
+          SizedBox(),
+          SafeArea(child: SizedBox(height: paddingVerticalPage)),
+        ],
+      );
 }
 
 class _Disclaimer extends StatelessWidget {

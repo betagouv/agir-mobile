@@ -23,13 +23,7 @@ class EnvironmentalPerformanceSection extends StatelessWidget {
   const EnvironmentalPerformanceSection({super.key});
 
   @override
-  Widget build(final BuildContext context) {
-    context
-        .read<EnvironmentalPerformanceBloc>()
-        .add(const EnvironmentalPerformanceStarted());
-
-    return const _View();
-  }
+  Widget build(final BuildContext context) => const _View();
 }
 
 class _View extends StatelessWidget {
