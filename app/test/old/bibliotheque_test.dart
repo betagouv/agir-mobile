@@ -13,6 +13,7 @@ import 'steps/iel_ecrit_dans_le_champ.dart';
 import 'steps/iel_est_connecte.dart';
 import 'steps/iel_lance_lapplication.dart';
 import 'steps/iel_ne_voit_pas_le_texte.dart';
+import 'steps/iel_scrolle.dart';
 import 'steps/iel_voit_le_texte.dart';
 import 'steps/le_serveur_retourne_le_contenu_de_la_bibliotheque.dart';
 
@@ -96,6 +97,7 @@ void main() {
         ),
       );
       await _allerSurBibliotheque(tester);
+      await ielScrolle(tester, Localisation.continuerLaLecture);
       await ielAppuieSur(tester, Localisation.continuerLaLecture);
       ielVoitLeTexte(titre);
     });

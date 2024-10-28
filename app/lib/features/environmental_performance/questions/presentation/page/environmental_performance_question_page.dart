@@ -57,7 +57,7 @@ class _ViewState extends State<_View> {
 
   @override
   Widget build(final BuildContext context) => Scaffold(
-        appBar: const FnvAppBar(),
+        appBar: FnvAppBar(),
         body: BlocBuilder<EnvironmentalPerformanceQuestionBloc,
             EnvironmentalPerformanceQuestionState>(
           builder: (final context, final state) => switch (state) {

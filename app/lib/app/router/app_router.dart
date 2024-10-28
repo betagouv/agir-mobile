@@ -1,6 +1,6 @@
 import 'package:app/app/router/go_router_refresh_stream.dart';
 import 'package:app/core/infrastructure/tracker.dart';
-import 'package:app/features/accueil/presentation/pages/accueil_page.dart';
+import 'package:app/features/accueil/presentation/pages/home_page.dart';
 import 'package:app/features/actions/detail/presentation/pages/action_detail_page.dart';
 import 'package:app/features/actions/list/presentation/pages/action_list_page.dart';
 import 'package:app/features/aides/item/presentation/pages/aide_page.dart';
@@ -32,9 +32,9 @@ import 'package:app/features/quiz/presentation/pages/quiz_page.dart';
 import 'package:app/features/recommandations/presentation/widgets/mes_recommandations.dart';
 import 'package:app/features/simulateur_velo/presentation/pages/aide_simulateur_velo_disponibles_page.dart';
 import 'package:app/features/simulateur_velo/presentation/pages/aide_simulateur_velo_page.dart';
-import 'package:app/features/univers/presentation/pages/mission_kyc_page.dart';
-import 'package:app/features/univers/presentation/pages/mission_page.dart';
-import 'package:app/features/univers/presentation/pages/univers_page.dart';
+import 'package:app/features/theme/presentation/pages/mission_kyc_page.dart';
+import 'package:app/features/theme/presentation/pages/mission_page.dart';
+import 'package:app/features/theme/presentation/pages/theme_page.dart';
 import 'package:go_router/go_router.dart';
 
 GoRouter goRouter({
@@ -68,7 +68,7 @@ GoRouter goRouter({
               path: 'authenticated',
               redirect: (final context, final state) =>
                   state.uri.path == '/authenticated'
-                      ? '/authenticated/${AccueilPage.path}'
+                      ? '/authenticated/${HomePage.path}'
                       : null,
               routes: [
                 FirstNamePage.route,
@@ -76,10 +76,9 @@ GoRouter goRouter({
                 AppEstEncoreEnExperimentationPage.route,
                 QuestionThemesPage.route,
                 ToutEstPretPage.route,
-                AccueilPage.route,
+                HomePage.route,
                 EnvironmentalPerformanceSummaryPage.route,
                 EnvironmentalPerformanceQuestionPage.route,
-                UniversPage.route,
                 MissionPage.route,
                 MissionKycPage.route,
                 AidesPage.route,
@@ -111,7 +110,7 @@ GoRouter goRouter({
         switch (statutActuel) {
           case Authenticated():
             if (path.startsWith('/unauthenticated')) {
-              return '/authenticated/${AccueilPage.path}';
+              return '/authenticated/${HomePage.path}';
             }
           case Unauthenticated():
             if (path.startsWith('/authenticated')) {
@@ -126,7 +125,7 @@ GoRouter goRouter({
       observers: [
         mesRecommandationsRouteObserver,
         missionRouteObserver,
-        universRouteObserver,
+        themeRouteObserver,
         tracker.navigatorObserver,
       ],
     );

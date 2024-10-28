@@ -33,7 +33,7 @@ class AideSimulateurVeloDisponiblePage extends StatelessWidget {
     final state = context.watch<AideVeloBloc>().state;
 
     return Scaffold(
-      appBar: const FnvAppBar(),
+      appBar: FnvAppBar(),
       body: ListView(
         padding: const EdgeInsets.symmetric(vertical: paddingVerticalPage),
         children: [

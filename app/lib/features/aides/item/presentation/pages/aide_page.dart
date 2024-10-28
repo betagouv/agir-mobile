@@ -40,7 +40,7 @@ class AidePage extends StatelessWidget {
     final aide = context.watch<AideBloc>().state.aide;
 
     return Scaffold(
-      appBar: const FnvAppBar(),
+      appBar: FnvAppBar(),
       body: ListView(
         padding: const EdgeInsets.all(paddingVerticalPage),
         children: [

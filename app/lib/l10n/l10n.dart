@@ -227,9 +227,6 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const toutEstPret = 'Tout est prêt !';
   static const unAppartement = 'Un appartement';
   static const uneMaison = 'Une maison';
-  static const univers = 'Univers';
-  static const universContenu =
-      'Découvrez des thèmes et débloquez de nouvelles actions';
   static const valider = 'Valider';
   static const voirLesDemarches = 'Voir les démarches';
   static const mesActions = 'Mes actions';

@@ -1,4 +1,4 @@
-import 'package:app/features/univers/core/domain/service_item.dart';
+import 'package:app/features/theme/core/domain/service_item.dart';
 import 'package:faker/faker.dart';
 
 ServiceItem serviceItemFaker() => ServiceItem(
