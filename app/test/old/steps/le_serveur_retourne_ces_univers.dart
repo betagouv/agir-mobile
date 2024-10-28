@@ -1,8 +1,8 @@
-import 'package:app/features/univers/core/domain/tuile_univers.dart';
+import 'package:app/features/theme/core/domain/theme_tile.dart';
 
 import '../scenario_context.dart';
 
-/// Le serveur retourne ces univers.
-void leServeurRetourneCesUnivers(final List<TuileUnivers> tuileUnivers) {
-  ScenarioContext().tuileUnivers = tuileUnivers;
+/// Le serveur retourne ces thematiques.
+void leServeurRetourneCesThematiques(final List<ThemeTile> items) {
+  ScenarioContext().themeTile = items;
 }

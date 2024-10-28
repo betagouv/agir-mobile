@@ -47,7 +47,7 @@ class _AideSimulateurVeloView extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => Scaffold(
-        appBar: const FnvAppBar(),
+        appBar: FnvAppBar(),
         body: ListView(
           padding: const EdgeInsets.all(paddingVerticalPage),
           children: const [

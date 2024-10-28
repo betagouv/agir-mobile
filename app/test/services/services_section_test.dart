@@ -3,9 +3,9 @@ import 'package:app/features/gamification/presentation/bloc/gamification_bloc.da
 import 'package:app/features/recommandations/domain/recommandation.dart';
 import 'package:app/features/recommandations/domain/recommandations_port.dart';
 import 'package:app/features/recommandations/presentation/bloc/recommandations_bloc.dart';
-import 'package:app/features/univers/core/domain/tuile_univers.dart';
-import 'package:app/features/univers/core/domain/univers_port.dart';
-import 'package:app/features/univers/presentation/pages/univers_page.dart';
+import 'package:app/features/theme/core/domain/theme_port.dart';
+import 'package:app/features/theme/core/domain/theme_tile.dart';
+import 'package:app/features/theme/presentation/pages/theme_page.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -18,7 +18,7 @@ import '../helpers/authentication_service_setup.dart';
 import '../helpers/faker.dart';
 import '../helpers/pump_page.dart';
 
-class _UniversPortMock extends Mock implements UniversPort {}
+class _ThemePortMock extends Mock implements ThemePort {}
 
 class _GamificationPortMock extends Mock implements GamificationPort {}
 
@@ -26,10 +26,19 @@ class _RecommandationsPortMock extends Mock implements RecommandationsPort {}
 
 Future<void> _pumpUniversPage(
   final WidgetTester tester, {
-  final UniversPort? universPort,
+  final ThemePort? themePort,
 }) async {
-  final universPortMock = universPort ?? _UniversPortMock();
-  when(() => universPortMock.recupererThematiques(any()))
+  final themePortMock = themePort ?? _ThemePortMock();
+  when(() => themePortMock.getTheme(any())).thenAnswer(
+    (final _) async => const Right(
+      ThemeTile(
+        type: 'alimentation',
+        title: 'En cuisine',
+        imageUrl: 'https://example.com/image.jpg',
+      ),
+    ),
+  );
+  when(() => themePortMock.recupererMissions(any()))
       .thenAnswer((final _) async => const Right([]));
 
   final gamificationPort = _GamificationPortMock();
@@ -56,7 +65,7 @@ Future<void> _pumpUniversPage(
   await pumpPage(
     tester: tester,
     repositoryProviders: [
-      RepositoryProvider<UniversPort>.value(value: universPortMock),
+      RepositoryProvider<ThemePort>.value(value: themePortMock),
     ],
     blocProviders: [
       BlocProvider<GamificationBloc>(
@@ -72,15 +81,10 @@ Future<void> _pumpUniversPage(
       ),
     ],
     page: GoRoute(
-      path: UniversPage.path,
-      name: UniversPage.name,
-      builder: (final context, final state) => const UniversPage(
-        univers: TuileUnivers(
-          type: 'alimentation',
-          titre: 'En cuisine',
-          imageUrl: 'https://example.com/image.jpg',
-          estTerminee: false,
-        ),
+      path: 'path',
+      name: ' name',
+      builder: (final context, final state) => const ThemePage(
+        type: 'alimentation',
       ),
     ),
   );
@@ -89,16 +93,17 @@ Future<void> _pumpUniversPage(
 void main() {
   group('Services devrait ', () {
     testWidgets(
-      "afficher la liste des services de l'univers",
+      'afficher la liste des services de la thématique',
       (final tester) async {
         final services = List.generate(5, (final _) => serviceItemFaker());
-        final universPort = _UniversPortMock();
-        when(() => universPort.getServices(any())).thenAnswer(
+        final themePort = _ThemePortMock();
+
+        when(() => themePort.getServices(any())).thenAnswer(
           (final _) async => Right(services),
         );
 
         await mockNetworkImages(() async {
-          await _pumpUniversPage(tester, universPort: universPort);
+          await _pumpUniversPage(tester, themePort: themePort);
           await tester.pumpAndSettle();
         });
 

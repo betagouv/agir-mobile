@@ -1,7 +1,7 @@
 import 'package:app/core/assets/svgs.dart';
 import 'package:app/core/presentation/widgets/composants/bottom_bar.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
-import 'package:app/features/accueil/presentation/pages/accueil_page.dart';
+import 'package:app/features/accueil/presentation/pages/home_page.dart';
 import 'package:app/features/authentification/widgets/onboarding_illustration.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
@@ -91,7 +91,7 @@ class ToutEstPretPage extends StatelessWidget {
           variant: DsfrButtonVariant.primary,
           size: DsfrButtonSize.lg,
           onPressed: () async =>
-              GoRouter.of(context).pushReplacementNamed(AccueilPage.name),
+              GoRouter.of(context).pushReplacementNamed(HomePage.name),
         ),
       ),
     );

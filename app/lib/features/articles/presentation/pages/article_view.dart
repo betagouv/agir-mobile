@@ -22,7 +22,7 @@ class ArticleView extends StatelessWidget {
     );
 
     return Scaffold(
-      appBar: const FnvAppBar(),
+      appBar: FnvAppBar(),
       body: ListView(
         padding: const EdgeInsets.all(paddingVerticalPage),
         children: [

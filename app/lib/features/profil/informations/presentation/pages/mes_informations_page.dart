@@ -49,7 +49,7 @@ class _MesInformationsView extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => Scaffold(
-        appBar: const FnvAppBar(),
+        appBar: FnvAppBar(),
         body: BlocBuilder<MesInformationsBloc, MesInformationsState>(
           builder: (final context, final state) {
             switch (state.statut) {

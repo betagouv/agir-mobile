@@ -1,28 +1,28 @@
-import 'package:app/features/univers/core/domain/content_id.dart';
-import 'package:app/features/univers/core/domain/mission.dart';
-import 'package:app/features/univers/core/domain/mission_liste.dart';
-import 'package:app/features/univers/core/domain/service_item.dart';
-import 'package:app/features/univers/core/domain/tuile_univers.dart';
-import 'package:app/features/univers/core/domain/univers_port.dart';
+import 'package:app/features/theme/core/domain/content_id.dart';
+import 'package:app/features/theme/core/domain/mission.dart';
+import 'package:app/features/theme/core/domain/mission_liste.dart';
+import 'package:app/features/theme/core/domain/service_item.dart';
+import 'package:app/features/theme/core/domain/theme_port.dart';
+import 'package:app/features/theme/core/domain/theme_tile.dart';
 import 'package:fpdart/src/either.dart';
 
-class UniversPortMock implements UniversPort {
+class UniversPortMock implements ThemePort {
   UniversPortMock({
-    required this.univers,
+    required this.themeTile,
     required this.missionListe,
     required this.mission,
   });
 
-  List<TuileUnivers> univers;
+  List<ThemeTile> themeTile;
   List<MissionListe> missionListe = [];
   Mission mission;
 
   @override
-  Future<Either<Exception, List<TuileUnivers>>> recuperer() async =>
-      Right(List.of(univers));
+  Future<Either<Exception, ThemeTile>> getTheme(final String type) async =>
+      Right(themeTile.where((final element) => element.type == type).first);
 
   @override
-  Future<Either<Exception, List<MissionListe>>> recupererThematiques(
+  Future<Either<Exception, List<MissionListe>>> recupererMissions(
     final String universType,
   ) async =>
       Right(List.of(missionListe));

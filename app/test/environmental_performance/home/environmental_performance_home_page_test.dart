@@ -1,5 +1,5 @@
 import 'package:app/features/accueil/presentation/cubit/home_disclaimer_cubit.dart';
-import 'package:app/features/accueil/presentation/pages/accueil_page.dart';
+import 'package:app/features/accueil/presentation/pages/home_page.dart';
 import 'package:app/features/aides/core/presentation/bloc/aides_accueil_bloc.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/environmental_performance/questions/infrastructure/environment_performance_question_repository.dart';
@@ -11,8 +11,6 @@ import 'package:app/features/environmental_performance/summary/infrastructure/en
 import 'package:app/features/environmental_performance/summary/presentation/bloc/environmental_performance_bloc.dart';
 import 'package:app/features/gamification/presentation/bloc/gamification_bloc.dart';
 import 'package:app/features/recommandations/presentation/bloc/recommandations_bloc.dart';
-import 'package:app/features/univers/core/domain/mission.dart';
-import 'package:app/features/univers/presentation/bloc/accueil_univers_bloc.dart';
 import 'package:app/features/utilisateur/presentation/bloc/utilisateur_bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,7 +24,6 @@ import '../../old/mocks/aides_port_mock.dart';
 import '../../old/mocks/authentification_port_mock.dart';
 import '../../old/mocks/gamification_bloc_fake.dart';
 import '../../old/mocks/recommandations_port_mock.dart';
-import '../../old/mocks/univers_port_mock.dart';
 import '../summary/environmental_performance_data.dart';
 
 Future<void> pumpHomePage(final WidgetTester tester, final Dio dio) async {
@@ -42,24 +39,6 @@ Future<void> pumpHomePage(final WidgetTester tester, final Dio dio) async {
       ),
     ],
     blocProviders: [
-      BlocProvider(
-        create: (final context) => AccueilUniversBloc(
-          universPort: UniversPortMock(
-            univers: [],
-            missionListe: [],
-            mission: const Mission(
-              titre: 'Titre',
-              imageUrl: 'https://example.com/image.jpg',
-              kycListe: [],
-              quizListe: [],
-              articles: [],
-              defis: [],
-              peutEtreTermine: false,
-              estTermine: false,
-            ),
-          ),
-        ),
-      ),
       BlocProvider(
         create: (final context) =>
             AidesAccueilBloc(aidesPort: AidesPortMock([])),
@@ -99,7 +78,7 @@ Future<void> pumpHomePage(final WidgetTester tester, final Dio dio) async {
         ),
       ),
     ],
-    page: AccueilPage.route,
+    page: HomePage.route,
     routes: {
       EnvironmentalPerformanceQuestionPage.name:
           EnvironmentalPerformanceQuestionPage.path,

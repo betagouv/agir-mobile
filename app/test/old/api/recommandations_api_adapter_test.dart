@@ -81,7 +81,7 @@ void main() {
     );
   });
 
-  test('recuperer filtré par univers', () async {
+  test('recuperer filtré par thematique', () async {
     final dio = DioMock()
       ..getM(
         '/utilisateurs/%7BuserId%7D/recommandations_v2?univers=climat',

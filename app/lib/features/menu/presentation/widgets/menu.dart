@@ -1,6 +1,6 @@
 import 'package:app/core/presentation/widgets/composants/app_bar.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
-import 'package:app/features/accueil/presentation/pages/accueil_page.dart';
+import 'package:app/features/accueil/presentation/pages/home_page.dart';
 import 'package:app/features/aides/list/presentation/pages/aides_page.dart';
 import 'package:app/features/authentification/core/domain/authentification_port.dart';
 import 'package:app/features/bibliotheque/presentation/pages/bibliotheque_page.dart';
@@ -68,17 +68,17 @@ class _MenuItems extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    final groupValue = GoRouterState.of(context).name ?? AccueilPage.name;
+    final groupValue = GoRouterState.of(context).name ?? HomePage.name;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _MenuItem(
           label: Localisation.accueil,
-          value: AccueilPage.name,
+          value: HomePage.name,
           groupValue: groupValue,
           onTap: () async =>
-              _redirigeSiLaPageCourantEstDifferente(context, AccueilPage.name),
+              _redirigeSiLaPageCourantEstDifferente(context, HomePage.name),
         ),
         const SizedBox(height: DsfrSpacings.s2w),
         _MenuItem(

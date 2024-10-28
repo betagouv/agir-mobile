@@ -18,10 +18,10 @@ class QuizView extends StatelessWidget {
   const QuizView({super.key});
 
   @override
-  Widget build(final BuildContext context) => const Scaffold(
+  Widget build(final BuildContext context) => Scaffold(
         appBar: FnvAppBar(),
-        body: _Body(),
-        bottomNavigationBar: _BottomButton(),
+        body: const _Body(),
+        bottomNavigationBar: const _BottomButton(),
         backgroundColor: FnvColors.aidesFond,
       );
 }

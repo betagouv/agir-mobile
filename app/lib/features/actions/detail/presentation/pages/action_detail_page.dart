@@ -54,10 +54,10 @@ class _View extends StatelessWidget {
               break;
           }
         },
-        child: const Scaffold(
+        child: Scaffold(
           appBar: FnvAppBar(),
-          body: _Body(),
-          bottomNavigationBar: _BottomBar(),
+          body: const _Body(),
+          bottomNavigationBar: const _BottomBar(),
         ),
       );
 }

@@ -30,8 +30,7 @@ import 'package:app/features/recommandations/domain/recommandations_port.dart';
 import 'package:app/features/recommandations/presentation/bloc/recommandations_bloc.dart';
 import 'package:app/features/simulateur_velo/domain/aide_velo_port.dart';
 import 'package:app/features/simulateur_velo/presentation/bloc/aide_velo_bloc.dart';
-import 'package:app/features/univers/core/domain/univers_port.dart';
-import 'package:app/features/univers/presentation/bloc/accueil_univers_bloc.dart';
+import 'package:app/features/theme/core/domain/theme_port.dart';
 import 'package:app/features/utilisateur/presentation/bloc/utilisateur_bloc.dart';
 import 'package:app/features/version/domain/version_port.dart';
 import 'package:app/features/version/presentation/bloc/version_bloc.dart';
@@ -49,7 +48,7 @@ class App extends StatefulWidget {
     required this.clock,
     required this.authenticationService,
     required this.authentificationPort,
-    required this.universPort,
+    required this.themePort,
     required this.aidesPort,
     required this.bibliothequePort,
     required this.recommandationsPort,
@@ -74,7 +73,7 @@ class App extends StatefulWidget {
   final Clock clock;
   final AuthenticationService authenticationService;
   final AuthentificationPort authentificationPort;
-  final UniversPort universPort;
+  final ThemePort themePort;
   final AidesPort aidesPort;
   final BibliothequePort bibliothequePort;
   final RecommandationsPort recommandationsPort;
@@ -123,7 +122,7 @@ class _AppState extends State<App> {
           RepositoryProvider.value(value: widget.tracker),
           RepositoryProvider.value(value: widget.clock),
           RepositoryProvider.value(value: widget.authentificationPort),
-          RepositoryProvider.value(value: widget.universPort),
+          RepositoryProvider.value(value: widget.themePort),
           RepositoryProvider.value(value: widget.aidesPort),
           RepositoryProvider.value(value: widget.articlesPort),
           RepositoryProvider.value(value: widget.quizPort),
@@ -143,11 +142,6 @@ class _AppState extends State<App> {
             BlocProvider(
               create: (final context) => UtilisateurBloc(
                 authentificationPort: widget.authentificationPort,
-              ),
-            ),
-            BlocProvider(
-              create: (final context) => AccueilUniversBloc(
-                universPort: widget.universPort,
               ),
             ),
             BlocProvider(

@@ -35,7 +35,7 @@ class KnowYourCustomersPage extends StatelessWidget {
               ..add(const KnowYourCustomersStarted()),
         child: Builder(
           builder: (final context) => Scaffold(
-            appBar: const FnvAppBar(),
+            appBar: FnvAppBar(),
             body: ListView(
               padding:
                   const EdgeInsets.symmetric(vertical: paddingVerticalPage),

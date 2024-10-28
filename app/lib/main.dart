@@ -31,7 +31,7 @@ import 'package:app/features/profil/core/infrastructure/profil_api_adapter.dart'
 import 'package:app/features/quiz/infrastructure/quiz_api_adapter.dart';
 import 'package:app/features/recommandations/infrastructure/recommandations_api_adapter.dart';
 import 'package:app/features/simulateur_velo/infrastructure/aide_velo_api_adapter.dart';
-import 'package:app/features/univers/core/infrastructure/univers_api_adapter.dart';
+import 'package:app/features/theme/core/infrastructure/univers_api_adapter.dart';
 import 'package:app/features/version/infrastructure/version_adapter.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:clock/clock.dart';
@@ -179,7 +179,7 @@ class _MyAppState extends State<MyApp> {
               client: client,
               authenticationService: _authenticationService,
             ),
-            universPort: UniversApiAdapter(client: client),
+            themePort: UniversApiAdapter(client: client),
             aidesPort: AidesApiAdapter(client: client),
             bibliothequePort: BibliothequeApiAdapter(client: client),
             recommandationsPort: RecommandationsApiAdapter(client: client),

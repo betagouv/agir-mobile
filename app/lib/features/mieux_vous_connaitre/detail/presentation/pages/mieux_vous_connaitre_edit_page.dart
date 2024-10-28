@@ -48,7 +48,7 @@ class _ViewState extends State<_View> {
 
   @override
   Widget build(final BuildContext context) => Scaffold(
-        appBar: const FnvAppBar(),
+        appBar: FnvAppBar(),
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(paddingVerticalPage),
           child: MieuxVousConnaitreForm(

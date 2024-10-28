@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
-import 'package:app/features/univers/core/domain/service_item.dart';
-import 'package:app/features/univers/core/infrastructure/univers_api_adapter.dart';
+import 'package:app/features/theme/core/domain/service_item.dart';
+import 'package:app/features/theme/core/infrastructure/univers_api_adapter.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 
