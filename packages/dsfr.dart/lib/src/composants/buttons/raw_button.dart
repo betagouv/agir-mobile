@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dsfr/src/composants/buttons/button.dart';
 import 'package:dsfr/src/composants/buttons/button_background_color.dart';
 import 'package:dsfr/src/composants/buttons/button_border.dart';
@@ -39,6 +41,7 @@ class _DsfrRawButtonState extends State<DsfrRawButton>
   late final DsfrButtonBackgroundColor _backgroundColor;
   late final DsfrButtonForegroundColor _foregroundColor;
   late final DsfrButtonBorder _border;
+  Timer? _timer;
 
   @override
   void initState() {
@@ -94,6 +97,13 @@ class _DsfrRawButtonState extends State<DsfrRawButton>
   }
 
   @override
+  void dispose() {
+    _timer?.cancel();
+    _timer = null;
+    super.dispose();
+  }
+
+  @override
   Widget build(final BuildContext context) {
     final textColor = _foregroundColor.resolve(materialStates);
     final button = Semantics(
@@ -110,7 +120,18 @@ class _DsfrRawButtonState extends State<DsfrRawButton>
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              onTap: widget.onTap,
+              onTap: widget.onTap == null
+                  ? null
+                  : () {
+                      if (_timer?.isActive ?? false) {
+                        return;
+                      }
+                      widget.onTap!();
+                      _timer = Timer(
+                        const Duration(milliseconds: 500),
+                        () {},
+                      );
+                    },
               onHighlightChanged: updateMaterialState(WidgetState.pressed),
               onHover: updateMaterialState(WidgetState.hovered),
               canRequestFocus: widget.onTap != null,
