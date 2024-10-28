@@ -10,6 +10,7 @@ import 'package:app/features/aides/list/presentation/bloc/aides_disclaimer/aides
 import 'package:app/features/articles/domain/articles_port.dart';
 import 'package:app/features/authentication/domain/authentication_service.dart';
 import 'package:app/features/authentification/core/domain/authentification_port.dart';
+import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/bibliotheque/domain/bibliotheque_port.dart';
 import 'package:app/features/bibliotheque/presentation/bloc/bibliotheque_bloc.dart';
 import 'package:app/features/communes/domain/communes_port.dart';
@@ -33,6 +34,9 @@ import 'package:app/features/recommandations/presentation/bloc/recommandations_b
 import 'package:app/features/simulateur_velo/domain/aide_velo_port.dart';
 import 'package:app/features/simulateur_velo/presentation/bloc/aide_velo_bloc.dart';
 import 'package:app/features/theme/core/domain/theme_port.dart';
+import 'package:app/features/upgrade/infrastructure/upgrade_interceptor.dart';
+import 'package:app/features/upgrade/presentation/bloc/upgrade_bloc.dart';
+import 'package:app/features/upgrade/presentation/widgets/upgrade_widget.dart';
 import 'package:app/features/utilisateur/presentation/bloc/utilisateur_bloc.dart';
 import 'package:app/features/version/domain/version_port.dart';
 import 'package:app/features/version/presentation/bloc/version_bloc.dart';
@@ -49,6 +53,7 @@ class App extends StatefulWidget {
     required this.tracker,
     required this.clock,
     required this.missionHomeRepository,
+    required this.dioHttpClient,
     required this.authenticationService,
     required this.authentificationPort,
     required this.themePort,
@@ -75,6 +80,7 @@ class App extends StatefulWidget {
   final Tracker tracker;
   final Clock clock;
   final MissionHomeRepository missionHomeRepository;
+  final DioHttpClient dioHttpClient;
   final AuthenticationService authenticationService;
   final AuthentificationPort authentificationPort;
   final ThemePort themePort;
@@ -121,100 +127,110 @@ class _AppState extends State<App> {
   }
 
   @override
-  Widget build(final BuildContext context) => MultiRepositoryProvider(
+  Widget build(final BuildContext context) {
+    final upgradeBloc = UpgradeBloc();
+    widget.dioHttpClient.add(UpgradeInterceptor(upgradeBloc));
+
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider.value(value: widget.tracker),
+        RepositoryProvider.value(value: widget.clock),
+        RepositoryProvider.value(value: widget.authentificationPort),
+        RepositoryProvider.value(value: widget.themePort),
+        RepositoryProvider.value(value: widget.aidesPort),
+        RepositoryProvider.value(value: widget.articlesPort),
+        RepositoryProvider.value(value: widget.quizPort),
+        RepositoryProvider.value(value: widget.profilPort),
+        RepositoryProvider.value(value: widget.communesPort),
+        RepositoryProvider.value(value: widget.knowYourCustomersRepository),
+        RepositoryProvider.value(value: widget.mieuxVousConnaitrePort),
+        RepositoryProvider.value(value: widget.gamificationPort),
+        RepositoryProvider.value(value: widget.actionsPort),
+        RepositoryProvider.value(value: widget.actionRepository),
+        RepositoryProvider.value(value: widget.firstNamePort),
+        RepositoryProvider.value(value: widget.missionHomeRepository),
+      ],
+      child: MultiBlocProvider(
         providers: [
-          RepositoryProvider.value(value: widget.tracker),
-          RepositoryProvider.value(value: widget.clock),
-          RepositoryProvider.value(value: widget.authentificationPort),
-          RepositoryProvider.value(value: widget.themePort),
-          RepositoryProvider.value(value: widget.aidesPort),
-          RepositoryProvider.value(value: widget.articlesPort),
-          RepositoryProvider.value(value: widget.quizPort),
-          RepositoryProvider.value(value: widget.profilPort),
-          RepositoryProvider.value(value: widget.communesPort),
-          RepositoryProvider.value(value: widget.knowYourCustomersRepository),
-          RepositoryProvider.value(value: widget.mieuxVousConnaitrePort),
-          RepositoryProvider.value(value: widget.gamificationPort),
-          RepositoryProvider.value(value: widget.actionsPort),
-          RepositoryProvider.value(value: widget.actionRepository),
-          RepositoryProvider.value(value: widget.firstNamePort),
-          RepositoryProvider.value(value: widget.missionHomeRepository),
-        ],
-        child: MultiBlocProvider(
-          providers: [
-            BlocProvider(create: (final context) => HomeDisclaimerCubit()),
-            BlocProvider(create: (final context) => AidesDisclaimerCubit()),
-            BlocProvider(
-              create: (final context) => UtilisateurBloc(
-                authentificationPort: widget.authentificationPort,
-              ),
+          BlocProvider.value(value: upgradeBloc),
+          BlocProvider(create: (final context) => HomeDisclaimerCubit()),
+          BlocProvider(create: (final context) => AidesDisclaimerCubit()),
+          BlocProvider(
+            create: (final context) => UtilisateurBloc(
+              authentificationPort: widget.authentificationPort,
             ),
-            BlocProvider(
-              create: (final context) => AidesAccueilBloc(
-                aidesPort: widget.aidesPort,
-              ),
-            ),
-            BlocProvider(
-              create: (final context) =>
-                  MissionHomeBloc(repository: widget.missionHomeRepository),
-            ),
-            BlocProvider(create: (final context) => AideBloc()),
-            BlocProvider(
-              create: (final context) =>
-                  VersionBloc(versionPort: widget.versionPort)
-                    ..add(const VersionDemandee()),
-            ),
-            BlocProvider(
-              create: (final context) => AideVeloBloc(
-                profilPort: widget.profilPort,
-                communesPort: widget.communesPort,
-                aideVeloPort: widget.aideVeloPort,
-              ),
-            ),
-            BlocProvider(
-              create: (final context) => RecommandationsBloc(
-                recommandationsPort: widget.recommandationsPort,
-              ),
-            ),
-            BlocProvider(
-              create: (final context) => GamificationBloc(
-                gamificationPort: widget.gamificationPort,
-                authenticationService: widget.authenticationService,
-              )..add(const GamificationAbonnementDemande()),
-            ),
-            BlocProvider(
-              create: (final context) => BibliothequeBloc(
-                bibliothequePort: widget.bibliothequePort,
-              ),
-            ),
-            BlocProvider(
-              create: (final context) => EnvironmentalPerformanceQuestionBloc(
-                repository: widget.environmentalPerformanceQuestionRepository,
-              ),
-            ),
-            BlocProvider(
-              create: (final context) => EnvironmentalPerformanceBloc(
-                useCase: FetchEnvironmentalPerformance(
-                  widget.environmentalPerformanceSummaryRepository,
-                ),
-              ),
-            ),
-          ],
-          child: MaterialApp.router(
-            routerConfig: _goRouter,
-            theme: ThemeData(
-              colorSchemeSeed: DsfrColors.blueFranceSun113,
-              scaffoldBackgroundColor: Colors.white,
-              appBarTheme: const AppBarTheme(backgroundColor: Colors.white),
-            ),
-            locale: const Locale('fr', 'FR'),
-            localizationsDelegates: const [
-              GlobalCupertinoLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-            ],
-            supportedLocales: const [Locale('fr', 'FR')],
           ),
+          BlocProvider(
+            create: (final context) => AidesAccueilBloc(
+              aidesPort: widget.aidesPort,
+            ),
+          ),
+          BlocProvider(
+            create: (final context) =>
+                MissionHomeBloc(repository: widget.missionHomeRepository),
+          ),
+          BlocProvider(create: (final context) => AideBloc()),
+          BlocProvider(
+            create: (final context) =>
+                VersionBloc(versionPort: widget.versionPort)
+                  ..add(const VersionDemandee()),
+          ),
+          BlocProvider(
+            create: (final context) => AideVeloBloc(
+              profilPort: widget.profilPort,
+              communesPort: widget.communesPort,
+              aideVeloPort: widget.aideVeloPort,
+            ),
+          ),
+          BlocProvider(
+            create: (final context) => RecommandationsBloc(
+              recommandationsPort: widget.recommandationsPort,
+            ),
+          ),
+          BlocProvider(
+            create: (final context) => GamificationBloc(
+              gamificationPort: widget.gamificationPort,
+              authenticationService: widget.authenticationService,
+            )..add(const GamificationAbonnementDemande()),
+          ),
+          BlocProvider(
+            create: (final context) => BibliothequeBloc(
+              bibliothequePort: widget.bibliothequePort,
+            ),
+          ),
+          BlocProvider(
+            create: (final context) => EnvironmentalPerformanceQuestionBloc(
+              repository: widget.environmentalPerformanceQuestionRepository,
+            ),
+          ),
+          BlocProvider(
+            create: (final context) => EnvironmentalPerformanceBloc(
+              useCase: FetchEnvironmentalPerformance(
+                widget.environmentalPerformanceSummaryRepository,
+              ),
+            ),
+          ),
+        ],
+        child: MaterialApp.router(
+          routerConfig: _goRouter,
+          builder: (final context, final child) => UpgradeWidget(
+            navigatorKey: _goRouter.routerDelegate.navigatorKey,
+            child: child ?? const SizedBox(),
+          ),
+          theme: ThemeData(
+            colorSchemeSeed: DsfrColors.blueFranceSun113,
+            scaffoldBackgroundColor: Colors.white,
+            appBarTheme: const AppBarTheme(backgroundColor: Colors.white),
+          ),
+          locale: const Locale('fr', 'FR'),
+          localizationsDelegates: const [
+            GlobalCupertinoLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+          ],
+          supportedLocales: const [Locale('fr', 'FR')],
         ),
-      );
+      ),
+    );
+  }
 }
