@@ -7,7 +7,6 @@ import 'package:app/features/environmental_performance/questions/presentation/pa
 import 'package:app/features/environmental_performance/summary/domain/environmental_performance_data.dart';
 import 'package:app/features/environmental_performance/summary/environmental_performance_summary_l10n.dart';
 import 'package:app/features/environmental_performance/summary/presentation/bloc/environmental_performance_bloc.dart';
-import 'package:app/features/environmental_performance/summary/presentation/bloc/environmental_performance_event.dart';
 import 'package:app/features/environmental_performance/summary/presentation/bloc/environmental_performance_state.dart';
 import 'package:app/features/environmental_performance/summary/presentation/page/environmental_performance_summary_page.dart';
 import 'package:app/features/environmental_performance/summary/presentation/widgets/full/environmental_performance_tonnes_card.dart';
@@ -83,9 +82,8 @@ class _Empty extends StatelessWidget {
                     return;
                   }
 
-                  context
-                      .read<EnvironmentalPerformanceBloc>()
-                      .add(const EnvironmentalPerformanceStarted());
+                  await GoRouter.of(context)
+                      .pushNamed(EnvironmentalPerformanceSummaryPage.name);
                 },
                 borderRadius:
                     const BorderRadius.all(Radius.circular(DsfrSpacings.s1w)),
