@@ -12,13 +12,13 @@ abstract final class EnvironmentalPerformanceSummaryMapperyMapper {
   static EnvironmentalPerformanceData fromJson(
     final Map<String, dynamic> json,
   ) {
-    if (json.containsKey('bilan_approximatif')) {
+    if (json.containsKey('bilan_complet')) {
+      return _fromFullJson(json);
+    } else if (json.containsKey('bilan_approximatif')) {
       return _fromPartialJson(json);
     }
 
-    return json.containsKey('bilan_complet')
-        ? _fromFullJson(json)
-        : EnvironmentalPerformanceEmpty(questions: const []);
+    return EnvironmentalPerformanceEmpty(questions: const []);
   }
 
   static EnvironmentalPerformancePartial _fromPartialJson(
