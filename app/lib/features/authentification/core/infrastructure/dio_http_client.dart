@@ -16,9 +16,11 @@ class DioHttpClient {
       InterceptorsWrapper(
         onRequest: (final options, final handler) async {
           await authenticationService.checkAuthenticationStatus();
-          final token = await authenticationService.token;
-          options.headers[HttpHeaders.authorizationHeader] =
-              'Bearer ${token.value}';
+          try {
+            final token = await authenticationService.token;
+            options.headers[HttpHeaders.authorizationHeader] =
+                'Bearer ${token.value}';
+          } on Exception catch (_) {}
           final status = authenticationService.status;
           if (status is Authenticated) {
             final updatedUri = options.uri
