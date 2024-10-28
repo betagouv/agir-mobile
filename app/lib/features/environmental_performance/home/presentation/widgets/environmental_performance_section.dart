@@ -170,47 +170,16 @@ class _Partial extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const _TitleAndSubtitle(),
           const SizedBox(height: DsfrSpacings.s2w),
           EnvironmentalPerformanceCategories(categories: data.categories),
           const SizedBox(height: DsfrSpacings.s2w),
-          DecoratedBox(
-            decoration: const BoxDecoration(
-              color: Color(0xffeef1ff),
-              border:
-                  Border.fromBorderSide(BorderSide(color: Color(0xffD6D9F4))),
-              borderRadius: BorderRadius.all(Radius.circular(DsfrSpacings.s1w)),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: DsfrSpacings.s3v,
-                horizontal: DsfrSpacings.s3w,
-              ),
-              child: Text.rich(
-                TextSpan(
-                  children: [
-                    const TextSpan(
-                      text: EnvironmentalPerformanceSummaryL10n.etincelles,
-                      style: DsfrTextStyle.headline4(),
-                    ),
-                    const TextSpan(text: ' ', style: DsfrTextStyle.bodyMd()),
-                    const TextSpan(
-                      text: 'Votre profil est complet à',
-                      style: DsfrTextStyle.bodyMd(),
-                    ),
-                    const TextSpan(text: ' ', style: DsfrTextStyle.bodyMd()),
-                    TextSpan(
-                      text: '${data.percentageCompletion}%',
-                      style: const DsfrTextStyle.bodyMd(
-                        color: DsfrColors.blueFranceSun113,
-                      ),
-                    ),
-                    const TextSpan(text: '.', style: DsfrTextStyle.bodyMd()),
-                  ],
-                ),
-              ),
+          DsfrLink.md(
+            label: EnvironmentalPerformanceSummaryL10n.voirMonBilanDetaille,
+            onTap: () async => GoRouter.of(context).pushNamed(
+              EnvironmentalPerformanceSummaryPage.name,
             ),
           ),
         ],
@@ -281,7 +250,7 @@ class _Full extends StatelessWidget {
           ),
           const SizedBox(height: DsfrSpacings.s2w),
           DsfrLink.md(
-            label: 'Voir le détail de mon empreinte',
+            label: EnvironmentalPerformanceSummaryL10n.voirMonBilanDetaille,
             onTap: () async => GoRouter.of(context).pushNamed(
               EnvironmentalPerformanceSummaryPage.name,
             ),
