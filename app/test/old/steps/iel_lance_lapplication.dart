@@ -5,6 +5,7 @@ import 'package:app/features/actions/list/domain/actions_port.dart';
 import 'package:app/features/authentication/domain/authentication_service.dart';
 import 'package:app/features/authentication/domain/authentication_status.dart';
 import 'package:app/features/authentication/infrastructure/authentication_repository.dart';
+import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/environmental_performance/questions/infrastructure/environment_performance_question_repository.dart';
 import 'package:app/features/environmental_performance/summary/domain/environmental_performance_data.dart';
 import 'package:app/features/environmental_performance/summary/infrastructure/environmental_performance_summary_mapper.dart';
@@ -20,6 +21,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:mocktail_image_network/mocktail_image_network.dart';
 
 import '../../environmental_performance/summary/environmental_performance_data.dart';
+import '../../helpers/dio_mock.dart';
 import '../../mission/mission_home_test.dart';
 import '../api/constants.dart';
 import '../api/flutter_secure_storage_fake.dart';
@@ -131,6 +133,10 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
         tracker: tracker,
         clock: clock,
         missionHomeRepository: _MissionHomeRepositoryMock(),
+        dioHttpClient: DioHttpClient(
+          dio: DioMock(),
+          authenticationService: authenticationService,
+        ),
         authenticationService: authenticationService,
         authentificationPort: ScenarioContext().authentificationPortMock!,
         themePort: ScenarioContext().universPortMock!,

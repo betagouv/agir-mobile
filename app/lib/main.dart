@@ -176,6 +176,7 @@ class _MyAppState extends State<MyApp> {
             tracker: _tracker,
             clock: _clock,
             missionHomeRepository: MissionHomeRepository(client: client),
+            dioHttpClient: client,
             authenticationService: _authenticationService,
             authentificationPort: AuthentificationApiAdapter(
               client: client,
