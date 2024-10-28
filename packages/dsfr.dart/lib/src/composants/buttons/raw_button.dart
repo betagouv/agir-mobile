@@ -99,30 +99,33 @@ class _DsfrRawButtonState extends State<DsfrRawButton>
     final button = Semantics(
       enabled: widget.onTap != null,
       button: true,
-      child: InkWell(
-        onTap: widget.onTap,
-        onHighlightChanged: updateMaterialState(WidgetState.pressed),
-        onHover: updateMaterialState(WidgetState.hovered),
-        canRequestFocus: widget.onTap != null,
-        onFocusChange: updateMaterialState(WidgetState.focused),
-        child: ConstrainedBox(
-          constraints: BoxConstraints(minHeight: _minHeight),
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              color: _backgroundColor.resolve(materialStates),
-              border: _border.resolve(materialStates),
-              borderRadius: widget.borderRadius,
-            ),
-            child: Padding(
-              padding: _padding,
-              child: Align(
-                widthFactor: 1,
-                heightFactor: 1,
-                child: IconTheme(
-                  data: IconThemeData(color: textColor),
-                  child: DefaultTextStyle(
-                    style: _textStyle.copyWith(color: textColor),
-                    child: widget.child,
+      child: ConstrainedBox(
+        constraints: BoxConstraints(minHeight: _minHeight),
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            color: _backgroundColor.resolve(materialStates),
+            border: _border.resolve(materialStates),
+            borderRadius: widget.borderRadius,
+          ),
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: widget.onTap,
+              onHighlightChanged: updateMaterialState(WidgetState.pressed),
+              onHover: updateMaterialState(WidgetState.hovered),
+              canRequestFocus: widget.onTap != null,
+              onFocusChange: updateMaterialState(WidgetState.focused),
+              child: Padding(
+                padding: _padding,
+                child: Align(
+                  widthFactor: 1,
+                  heightFactor: 1,
+                  child: IconTheme(
+                    data: IconThemeData(color: textColor),
+                    child: DefaultTextStyle(
+                      style: _textStyle.copyWith(color: textColor),
+                      child: widget.child,
+                    ),
                   ),
                 ),
               ),
