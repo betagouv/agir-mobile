@@ -8,7 +8,7 @@ import 'package:app/features/environmental_performance/summary/presentation/bloc
 import 'package:app/features/environmental_performance/summary/presentation/bloc/environmental_performance_event.dart';
 import 'package:app/features/first_name/presentation/pages/first_name_page.dart';
 import 'package:app/features/menu/presentation/pages/root_page.dart';
-import 'package:app/features/recommandations/presentation/widgets/mes_recommandations.dart';
+import 'package:app/features/mission/home/presentation/widgets/mission_section.dart';
 import 'package:app/features/theme/presentation/pages/theme_page.dart';
 import 'package:app/features/utilisateur/presentation/bloc/utilisateur_bloc.dart';
 import 'package:app/features/utilisateur/presentation/bloc/utilisateur_event.dart';
@@ -163,12 +163,12 @@ class _HomeState extends State<_Home> {
             SizedBox(height: DsfrSpacings.s4w),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-              child: MesAides(),
+              child: MissionSection(),
             ),
             SizedBox(height: DsfrSpacings.s4w),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-              child: MesRecommandations(),
+              child: MesAides(),
             ),
             SizedBox(),
             SafeArea(child: SizedBox(height: paddingVerticalPage)),

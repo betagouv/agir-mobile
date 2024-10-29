@@ -9,6 +9,9 @@ import 'package:app/features/environmental_performance/questions/infrastructure/
 import 'package:app/features/environmental_performance/summary/domain/environmental_performance_data.dart';
 import 'package:app/features/environmental_performance/summary/infrastructure/environmental_performance_summary_mapper.dart';
 import 'package:app/features/environmental_performance/summary/infrastructure/environmental_performance_summary_repository.dart';
+import 'package:app/features/mission/home/infrastructure/mission_home_repository.dart';
+import 'package:app/features/theme/core/domain/mission_liste.dart';
+import 'package:app/features/theme/core/infrastructure/mission_liste_mapper.dart';
 import 'package:clock/clock.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -17,6 +20,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:mocktail_image_network/mocktail_image_network.dart';
 
 import '../../environmental_performance/summary/environmental_performance_data.dart';
+import '../../mission/mission_home_test.dart';
 import '../api/constants.dart';
 import '../api/flutter_secure_storage_fake.dart';
 import '../mocks/aide_velo_port_mock.dart';
@@ -39,6 +43,18 @@ class _TrackerMock extends Mock implements Tracker {}
 class _ActionsPortMock extends Mock implements ActionsPort {}
 
 class _ActionRepositoryMock extends Mock implements ActionRepository {}
+
+class _MissionHomeRepositoryMock extends Mock implements MissionHomeRepository {
+  @override
+  Future<Either<Exception, List<MissionListe>>> fetch() async => Right(
+        missionThematiques
+            .map(
+              (final e) =>
+                  MissionListeMapper.fromJson(e as Map<String, dynamic>),
+            )
+            .toList(),
+      );
+}
 
 class _EnvironmentalPerformanceRepositoryMock extends Mock
     implements EnvironmentalPerformanceSummaryRepository {
@@ -114,6 +130,7 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
       App(
         tracker: tracker,
         clock: clock,
+        missionHomeRepository: _MissionHomeRepositoryMock(),
         authenticationService: authenticationService,
         authentificationPort: ScenarioContext().authentificationPortMock!,
         themePort: ScenarioContext().universPortMock!,

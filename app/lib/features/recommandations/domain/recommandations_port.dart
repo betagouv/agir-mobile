@@ -3,6 +3,6 @@ import 'package:fpdart/fpdart.dart';
 
 abstract interface class RecommandationsPort {
   Future<Either<Exception, List<Recommandation>>> recuperer(
-    final String? thematique,
+    final String thematique,
   );
 }

@@ -76,7 +76,7 @@ class _View extends StatelessWidget {
         children: const [
           _ImageEtTitre(),
           SizedBox(height: DsfrSpacings.s5w),
-          _Thematiques(),
+          _Missions(),
           SizedBox(height: DsfrSpacings.s5w),
           _Services(),
           SizedBox(height: DsfrSpacings.s5w),
@@ -112,8 +112,8 @@ class _ImageEtTitre extends StatelessWidget {
   }
 }
 
-class _Thematiques extends StatelessWidget {
-  const _Thematiques();
+class _Missions extends StatelessWidget {
+  const _Missions();
 
   @override
   Widget build(final BuildContext context) {
@@ -127,7 +127,7 @@ class _Thematiques extends StatelessWidget {
       child: IntrinsicHeight(
         child: Row(
           children: thematiques
-              .map((final e) => _Thematique(mission: e))
+              .map((final e) => _Mission(mission: e))
               .separator(const SizedBox(width: DsfrSpacings.s2w))
               .toList(),
         ),
@@ -136,8 +136,8 @@ class _Thematiques extends StatelessWidget {
   }
 }
 
-class _Thematique extends StatelessWidget {
-  const _Thematique({required this.mission});
+class _Mission extends StatelessWidget {
+  const _Mission({required this.mission});
 
   final MissionListe mission;
 

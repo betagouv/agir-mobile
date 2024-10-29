@@ -11,15 +11,19 @@ import 'steps/iel_scrolle.dart';
 import 'steps/iel_voit_le_texte.dart';
 
 void main() {
-  group('Accueil', () {
+  group('Thématiques', () {
     testWidgets(
       "Iel voit le titre sur la page d'accueil",
       (final tester) async {
         setUpWidgets(tester);
-        ielEstConnecte();
-        await ielLanceLapplication(tester);
-        await ielScrolle(tester, Localisation.recommandationsTitre);
-        ielVoitLeTexte(Localisation.recommandationsTitre);
+        await mockNetworkImages(() async {
+          ielEstConnecte();
+          await ielLanceLapplication(tester);
+          await tester.tap(find.text('Me nourrir'));
+          await tester.pumpAndSettle();
+          await ielScrolle(tester, Localisation.recommandationsTitre);
+          ielVoitLeTexte(Localisation.recommandationsTitre);
+        });
       },
     );
 
@@ -36,12 +40,14 @@ void main() {
             imageUrl:
                 'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1702068380/jonathan_ford_6_Zg_T_Etv_D16_I_unsplash_00217cb281.jpg',
             points: 20,
-            thematique: 'climat',
+            thematique: 'alimentation',
             thematiqueLabel: '🛒 Consommation durable',
           );
           ielALesRecommandationsSuivantes([recommandation]);
           ielEstConnecte();
           await ielLanceLapplication(tester);
+          await tester.tap(find.text('Me nourrir'));
+          await tester.pumpAndSettle();
           await ielScrolle(tester, recommandation.titre);
           ielVoitLeTexte(recommandation.titre);
         });

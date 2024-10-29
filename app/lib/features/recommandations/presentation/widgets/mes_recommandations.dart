@@ -9,9 +9,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 final mesRecommandationsRouteObserver = RouteObserver<ModalRoute<Object?>>();
 
 class MesRecommandations extends StatefulWidget {
-  const MesRecommandations({super.key, this.thematique});
+  const MesRecommandations({super.key, required this.thematique});
 
-  final String? thematique;
+  final String thematique;
 
   @override
   State<MesRecommandations> createState() => _MesRecommandationsState();

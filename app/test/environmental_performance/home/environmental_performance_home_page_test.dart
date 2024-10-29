@@ -10,9 +10,10 @@ import 'package:app/features/environmental_performance/summary/environmental_per
 import 'package:app/features/environmental_performance/summary/infrastructure/environmental_performance_summary_repository.dart';
 import 'package:app/features/environmental_performance/summary/presentation/bloc/environmental_performance_bloc.dart';
 import 'package:app/features/gamification/presentation/bloc/gamification_bloc.dart';
+import 'package:app/features/mission/home/infrastructure/mission_home_repository.dart';
+import 'package:app/features/mission/home/presentation/bloc/mission_home_bloc.dart';
 import 'package:app/features/recommandations/presentation/bloc/recommandations_bloc.dart';
 import 'package:app/features/utilisateur/presentation/bloc/utilisateur_bloc.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail_image_network/mocktail_image_network.dart';
@@ -20,13 +21,18 @@ import 'package:mocktail_image_network/mocktail_image_network.dart';
 import '../../helpers/authentication_service_setup.dart';
 import '../../helpers/dio_mock.dart';
 import '../../helpers/pump_page.dart';
+import '../../mission/mission_home_test.dart';
 import '../../old/mocks/aides_port_mock.dart';
 import '../../old/mocks/authentification_port_mock.dart';
 import '../../old/mocks/gamification_bloc_fake.dart';
 import '../../old/mocks/recommandations_port_mock.dart';
 import '../summary/environmental_performance_data.dart';
 
-Future<void> pumpHomePage(final WidgetTester tester, final Dio dio) async {
+Future<void> pumpHomePage(final WidgetTester tester, final DioMock dio) async {
+  dio.getM(
+    '/utilisateurs/{userId}/thematiques_recommandees',
+    responseData: missionThematiques,
+  );
   final client = DioHttpClient(
     dio: dio,
     authenticationService: authenticationService,
@@ -64,6 +70,10 @@ Future<void> pumpHomePage(final WidgetTester tester, final Dio dio) async {
         ),
       ),
       BlocProvider(
+        create: (final context) =>
+            MissionHomeBloc(repository: MissionHomeRepository(client: client)),
+      ),
+      BlocProvider(
         create: (final context) => EnvironmentalPerformanceBloc(
           useCase: FetchEnvironmentalPerformance(
             EnvironmentalPerformanceSummaryRepository(client: client),
@@ -88,7 +98,7 @@ Future<void> pumpHomePage(final WidgetTester tester, final Dio dio) async {
 }
 
 void main() {
-  group('Votre bilan environnemental', () {
+  group("Mon bilan environnemental sur la page d'accueil", () {
     testWidgets(
       'Voir le contenu de Estimer mon bilan environnemental avec un bilan vide',
       (final tester) async {
@@ -101,16 +111,21 @@ void main() {
             '/utilisateurs/{userId}/enchainementQuestionsKYC/ENCHAINEMENT_KYC_mini_bilan_carbone',
             responseData: miniBilan,
           );
-        await pumpHomePage(tester, dio);
-        await tester.pumpAndSettle();
-        expect(find.text('Estimer mon bilan environnemental'), findsOneWidget);
-        expect(
-          find.text(
-            EnvironmentalPerformanceSummaryL10n.estimerUnPremierBilan,
-          ),
-          findsOneWidget,
-        );
-        expect(find.text('7 questions'), findsOneWidget);
+        await mockNetworkImages(() async {
+          await pumpHomePage(tester, dio);
+          await tester.pumpAndSettle();
+          expect(
+            find.text('Estimer mon bilan environnemental'),
+            findsOneWidget,
+          );
+          expect(
+            find.text(
+              EnvironmentalPerformanceSummaryL10n.estimerUnPremierBilan,
+            ),
+            findsOneWidget,
+          );
+          expect(find.text('7 questions'), findsOneWidget);
+        });
       },
     );
 
@@ -124,17 +139,19 @@ void main() {
           '/utilisateurs/{userId}/enchainementQuestionsKYC/ENCHAINEMENT_KYC_mini_bilan_carbone',
           responseData: miniBilan,
         );
-      await pumpHomePage(tester, dio);
-      await tester.pumpAndSettle();
-      await tester.tap(
-        find.text(EnvironmentalPerformanceSummaryL10n.estimerUnPremierBilan),
-      );
-      await tester.pumpAndSettle();
+      await mockNetworkImages(() async {
+        await pumpHomePage(tester, dio);
+        await tester.pumpAndSettle();
+        await tester.tap(
+          find.text(EnvironmentalPerformanceSummaryL10n.estimerUnPremierBilan),
+        );
+        await tester.pumpAndSettle();
 
-      expect(
-        find.text('route: ${EnvironmentalPerformanceQuestionPage.name}'),
-        findsOneWidget,
-      );
+        expect(
+          find.text('route: ${EnvironmentalPerformanceQuestionPage.name}'),
+          findsOneWidget,
+        );
+      });
     });
 
     testWidgets(
@@ -171,9 +188,11 @@ void main() {
             '/utilisateur/{userId}/bilans/last_v2',
             responseData: environmentalPerformanceFullData,
           );
-        await pumpHomePage(tester, dio);
-        expect(find.text('Mon bilan environnemental'), findsOneWidget);
-        expect(find.text('2,9'), findsOneWidget);
+        await mockNetworkImages(() async {
+          await pumpHomePage(tester, dio);
+          expect(find.text('Mon bilan environnemental'), findsOneWidget);
+          expect(find.text('2,9'), findsOneWidget);
+        });
       },
     );
 
@@ -185,11 +204,13 @@ void main() {
             '/utilisateur/{userId}/bilans/last_v2',
             responseData: environmentalPerformanceFullData,
           );
-        await pumpHomePage(tester, dio);
-        await expectLater(tester, meetsGuideline(androidTapTargetGuideline));
-        await expectLater(tester, meetsGuideline(iOSTapTargetGuideline));
-        await expectLater(tester, meetsGuideline(textContrastGuideline));
-        await expectLater(tester, meetsGuideline(labeledTapTargetGuideline));
+        await mockNetworkImages(() async {
+          await pumpHomePage(tester, dio);
+          await expectLater(tester, meetsGuideline(androidTapTargetGuideline));
+          await expectLater(tester, meetsGuideline(iOSTapTargetGuideline));
+          await expectLater(tester, meetsGuideline(textContrastGuideline));
+          await expectLater(tester, meetsGuideline(labeledTapTargetGuideline));
+        });
       },
     );
   });

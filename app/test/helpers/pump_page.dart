@@ -47,12 +47,15 @@ Future<void> pumpPage({
       GlobalWidgetsLocalizations.delegate,
     ],
   );
+
+  if (blocProviders.isNotEmpty) {
+    widget = MultiBlocProvider(providers: blocProviders, child: widget);
+  }
+
   if (repositoryProviders.isNotEmpty) {
     widget =
         MultiRepositoryProvider(providers: repositoryProviders, child: widget);
   }
-  if (blocProviders.isNotEmpty) {
-    widget = MultiBlocProvider(providers: blocProviders, child: widget);
-  }
+
   await tester.pumpWidget(widget);
 }

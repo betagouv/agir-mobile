@@ -24,6 +24,8 @@ import 'package:app/features/gamification/presentation/bloc/gamification_bloc.da
 import 'package:app/features/gamification/presentation/bloc/gamification_event.dart';
 import 'package:app/features/know_your_customer/list/infrastructure/know_your_customers_repository.dart';
 import 'package:app/features/mieux_vous_connaitre/core/domain/mieux_vous_connaitre_port.dart';
+import 'package:app/features/mission/home/infrastructure/mission_home_repository.dart';
+import 'package:app/features/mission/home/presentation/bloc/mission_home_bloc.dart';
 import 'package:app/features/profil/core/domain/profil_port.dart';
 import 'package:app/features/quiz/domain/quiz_port.dart';
 import 'package:app/features/recommandations/domain/recommandations_port.dart';
@@ -46,6 +48,7 @@ class App extends StatefulWidget {
   const App({
     required this.tracker,
     required this.clock,
+    required this.missionHomeRepository,
     required this.authenticationService,
     required this.authentificationPort,
     required this.themePort,
@@ -71,6 +74,7 @@ class App extends StatefulWidget {
 
   final Tracker tracker;
   final Clock clock;
+  final MissionHomeRepository missionHomeRepository;
   final AuthenticationService authenticationService;
   final AuthentificationPort authentificationPort;
   final ThemePort themePort;
@@ -134,6 +138,7 @@ class _AppState extends State<App> {
           RepositoryProvider.value(value: widget.actionsPort),
           RepositoryProvider.value(value: widget.actionRepository),
           RepositoryProvider.value(value: widget.firstNamePort),
+          RepositoryProvider.value(value: widget.missionHomeRepository),
         ],
         child: MultiBlocProvider(
           providers: [
@@ -148,6 +153,10 @@ class _AppState extends State<App> {
               create: (final context) => AidesAccueilBloc(
                 aidesPort: widget.aidesPort,
               ),
+            ),
+            BlocProvider(
+              create: (final context) =>
+                  MissionHomeBloc(repository: widget.missionHomeRepository),
             ),
             BlocProvider(create: (final context) => AideBloc()),
             BlocProvider(

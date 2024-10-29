@@ -4,6 +4,7 @@ import 'package:app/features/theme/core/domain/mission_defi.dart';
 import 'package:app/features/theme/core/domain/mission_kyc.dart';
 import 'package:app/features/theme/core/domain/mission_liste.dart';
 import 'package:app/features/theme/core/domain/mission_quiz.dart';
+import 'package:app/features/theme/core/domain/mission_theme_type.dart';
 import 'package:app/features/theme/core/domain/theme_tile.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail_image_network/mocktail_image_network.dart';
@@ -14,7 +15,6 @@ import 'steps/iel_a_les_univers_thematiques_suivantes.dart';
 import 'steps/iel_appuie_sur.dart';
 import 'steps/iel_est_connecte.dart';
 import 'steps/iel_lance_lapplication.dart';
-import 'steps/iel_scrolle.dart';
 import 'steps/iel_voit_le_texte.dart';
 import 'steps/le_serveur_retourne_ces_univers.dart';
 
@@ -37,6 +37,7 @@ void main() {
         imageUrl:
             'https://res.cloudinary.com/dq023imd8/image/upload/v1718631224/fruits_1_dec0e90839.png',
         niveau: 1,
+        themeType: MissionThemeType.alimentation,
       );
       ielALesMissionsSuivantes([universThematique]);
       const mission = Mission(
@@ -130,8 +131,8 @@ void main() {
       ielALaMissionSuivante(mission);
       ielEstConnecte();
       await ielLanceLapplication(tester);
-      await ielScrolle(tester, theme.title);
-      await ielAppuieSur(tester, theme.title);
+      await tester.tap(find.text('Me nourrir'));
+      await tester.pumpAndSettle();
       ielVoitLeTexte(universThematique.titre);
       await ielAppuieSur(tester, universThematique.titre);
       ielVoitLeTexte(mission.titre, n: 2);

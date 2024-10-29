@@ -10,7 +10,7 @@ sealed class RecommandationsEvent extends Equatable {
 final class RecommandationsRecuperationDemandee extends RecommandationsEvent {
   const RecommandationsRecuperationDemandee(this.thematique);
 
-  final String? thematique;
+  final String thematique;
 
   @override
   List<Object?> get props => [thematique];

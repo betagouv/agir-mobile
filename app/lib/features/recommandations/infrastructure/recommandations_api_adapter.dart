@@ -15,9 +15,9 @@ class RecommandationsApiAdapter implements RecommandationsPort {
 
   @override
   Future<Either<Exception, List<Recommandation>>> recuperer(
-    final String? thematique,
+    final String thematique,
   ) async {
-    final map = {if (thematique != null) 'univers': thematique};
+    final map = {'univers': thematique};
 
     final uri = Uri.parse('/utilisateurs/{userId}/recommandations_v2').replace(
       queryParameters: map.isNotEmpty ? map : null,
