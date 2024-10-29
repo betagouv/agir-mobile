@@ -31,7 +31,7 @@ void main() {
           imageUrl:
               'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1702068380/jonathan_ford_6_Zg_T_Etv_D16_I_unsplash_00217cb281.jpg',
           points: 20,
-          thematique: 'climat',
+          thematique: 'alimentation',
           thematiqueLabel: '☀️ Environnement',
         );
         ielALesRecommandationsSuivantes([recommandation]);
@@ -54,6 +54,8 @@ void main() {
         );
         ielEstConnecte();
         await ielLanceLapplication(tester);
+        await tester.tap(find.text('Me nourrir'));
+        await tester.pumpAndSettle();
         await ielScrolle(tester, recommandation.titre);
         await ielAppuieSur(tester, recommandation.titre);
         ielVoitLeTexte(sousTitre);

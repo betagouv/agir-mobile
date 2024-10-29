@@ -32,7 +32,7 @@ void main() {
           imageUrl:
               'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1702068380/jonathan_ford_6_Zg_T_Etv_D16_I_unsplash_00217cb281.jpg',
           points: 20,
-          thematique: 'consommation',
+          thematique: 'alimentation',
           thematiqueLabel: '🛒 Consommation durable',
         );
         ielALesRecommandationsSuivantes([recommandation]);
@@ -68,6 +68,8 @@ void main() {
         );
         ielEstConnecte();
         await ielLanceLapplication(tester);
+        await tester.tap(find.text('Me nourrir'));
+        await tester.pumpAndSettle();
         await ielScrolle(tester, recommandation.titre);
         await ielAppuieSur(tester, recommandation.titre);
         ielVoitLeTexte(question);
@@ -90,7 +92,7 @@ void main() {
           imageUrl:
               'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1702068380/jonathan_ford_6_Zg_T_Etv_D16_I_unsplash_00217cb281.jpg',
           points: 20,
-          thematique: 'consommation',
+          thematique: 'alimentation',
           thematiqueLabel: '🛒 Consommation durable',
         );
         ielALesRecommandationsSuivantes([recommandation]);
@@ -133,6 +135,8 @@ void main() {
         );
         ielEstConnecte();
         await ielLanceLapplication(tester);
+        await tester.tap(find.text('Me nourrir'));
+        await tester.pumpAndSettle();
         await ielScrolle(tester, recommandation.titre);
         await ielAppuieSur(tester, recommandation.titre);
         await ielAppuieSur(tester, reponse);
@@ -163,7 +167,7 @@ void main() {
           imageUrl:
               'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1702068380/jonathan_ford_6_Zg_T_Etv_D16_I_unsplash_00217cb281.jpg',
           points: 20,
-          thematique: 'consommation',
+          thematique: 'alimentation',
           thematiqueLabel: '🛒 Consommation durable',
         );
         ielALesRecommandationsSuivantes([recommandation]);
@@ -196,6 +200,8 @@ void main() {
         );
         ielEstConnecte();
         await ielLanceLapplication(tester);
+        await tester.tap(find.text('Me nourrir'));
+        await tester.pumpAndSettle();
         await ielScrolle(tester, recommandation.titre);
         await ielAppuieSur(tester, recommandation.titre);
         await ielAppuieSur(tester, reponse);
@@ -226,7 +232,7 @@ void main() {
           imageUrl:
               'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1702068380/jonathan_ford_6_Zg_T_Etv_D16_I_unsplash_00217cb281.jpg',
           points: 20,
-          thematique: 'consommation',
+          thematique: 'alimentation',
           thematiqueLabel: '🛒 Consommation durable',
         );
         ielALesRecommandationsSuivantes([recommandation]);
@@ -269,6 +275,8 @@ void main() {
         );
         ielEstConnecte();
         await ielLanceLapplication(tester);
+        await tester.tap(find.text('Me nourrir'));
+        await tester.pumpAndSettle();
         await ielScrolle(tester, recommandation.titre);
         await ielAppuieSur(tester, recommandation.titre);
         await ielAppuieSur(tester, reponse);

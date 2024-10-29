@@ -1,4 +1,5 @@
 import 'package:app/features/theme/core/domain/mission_liste.dart';
+import 'package:app/features/theme/core/domain/mission_theme_type.dart';
 
 abstract final class MissionListeMapper {
   const MissionListeMapper._();
@@ -11,5 +12,14 @@ abstract final class MissionListeMapper {
         estNouvelle: json['is_new'] as bool,
         imageUrl: json['image_url'] as String,
         niveau: (json['niveau'] as num?)?.toInt(),
+        themeType: _mapThemeType(json['univers_parent'] as String),
       );
+
+  static MissionThemeType _mapThemeType(final String type) => switch (type) {
+        'alimentation' => MissionThemeType.alimentation,
+        'transport' => MissionThemeType.transport,
+        'consommation' => MissionThemeType.consommation,
+        'logement' => MissionThemeType.logement,
+        _ => MissionThemeType.decouverte,
+      };
 }
