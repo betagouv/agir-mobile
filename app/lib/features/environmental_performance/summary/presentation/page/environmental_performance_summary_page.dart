@@ -13,7 +13,7 @@ import 'package:go_router/go_router.dart';
 class EnvironmentalPerformanceSummaryPage extends StatelessWidget {
   const EnvironmentalPerformanceSummaryPage({super.key});
 
-  static const name = 'bilan';
+  static const name = 'bilan-environnemental';
   static const path = name;
 
   static GoRoute get route => GoRoute(
