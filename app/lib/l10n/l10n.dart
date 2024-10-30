@@ -65,6 +65,8 @@ abstract final class Localisation {
   static const declarationAccessibilite = "Déclaration d'accessibilité";
   static const declarationAccessibiliteSite =
       'https://jagis.beta.gouv.fr/accessibilite';
+  static const statistiques = 'Statistiques';
+  static const statistiquesSite = 'https://jagis.beta.gouv.fr/statistiques';
   static const defiRealise = 'Défi réalisé';
   static const donneesPersonnelles = 'Données personnelles';
   static const donneesUtiliseesPart1 = 'Données utilisées : code postal ';
