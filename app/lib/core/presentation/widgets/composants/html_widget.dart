@@ -1,8 +1,10 @@
-import 'package:dsfr/dsfr.dart';
+import 'package:app/features/aides/list/presentation/pages/aides_page.dart';
+import 'package:app/features/environmental_performance/summary/presentation/page/environmental_performance_summary_page.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:fwfh_url_launcher/fwfh_url_launcher.dart';
+import 'package:go_router/go_router.dart';
 import 'package:html/dom.dart' as dom;
 import 'package:url_launcher/url_launcher.dart';
 
@@ -23,7 +25,28 @@ class FnvHtmlWidget extends StatelessWidget {
         html,
         customStylesBuilder: _handlePDansLi,
         factoryBuilder: MyUrlLauncherFactory.new,
-        textStyle: const DsfrTextStyle(fontSize: 15),
+        onTapUrl: (final url) async {
+          final uri = Uri.parse(url);
+
+          if (uri.host == 'jagis.beta.gouv.fr') {
+            switch (uri.path) {
+              case '/vos-aides':
+              case '/aides':
+                await GoRouter.of(context).pushNamed(AidesPage.name);
+
+                return true;
+              case '/bilan-environnemental':
+                await GoRouter.of(context)
+                    .pushNamed(EnvironmentalPerformanceSummaryPage.name);
+
+                return true;
+              default:
+                return false;
+            }
+          }
+
+          return false;
+        },
       );
 }
 
