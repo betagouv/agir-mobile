@@ -3,8 +3,8 @@ updates:
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
-      interval: weekly
-      time: "08:00"
+      interval: monthly
+      time: "07:00"
       timezone: "Europe/Paris"
     commit-message:
       prefix: "chore: "
@@ -12,33 +12,23 @@ updates:
     directory: /app
     schedule:
       interval: daily
-      time: "08:00"
+      time: "07:00"
       timezone: "Europe/Paris"
     commit-message:
       prefix: "chore: "
   - package-ecosystem: pub
     directory: "/packages/agir_lints"
     schedule:
-      interval: daily
-      time: "08:00"
+      interval: monthly
+      time: "07:00"
       timezone: "Europe/Paris"
     commit-message:
       prefix: "chore: "
   - package-ecosystem: pub
     directory: "/packages/dsfr.dart"
     schedule:
-      interval: daily
-      time: "08:00"
-      timezone: "Europe/Paris"
-    reviewers:
-      - "lsaudon"
-    commit-message:
-      prefix: "chore: "
-  - package-ecosystem: pub
-    directory: "/packages/dsfr.dart/example"
-    schedule:
-      interval: daily
-      time: "08:00"
+      interval: monthly
+      time: "07:00"
       timezone: "Europe/Paris"
     reviewers:
       - "lsaudon"
@@ -48,59 +38,29 @@ updates:
     directory: /app/android
     schedule:
       interval: weekly
-      time: "08:00"
+      time: "07:00"
       timezone: "Europe/Paris"
     groups:
       app-android-bundler:
-        patterns:
-          - "*"
-  - package-ecosystem: bundler
-    directory: /app/ios
-    schedule:
-      interval: weekly
-      time: "08:00"
-      timezone: "Europe/Paris"
-    groups:
-      app-ios-bundler:
         patterns:
           - "*"
   - package-ecosystem: gradle
     directory: /app/android/app
     schedule:
       interval: weekly
-      time: "08:00"
+      time: "07:00"
       timezone: "Europe/Paris"
     groups:
       app-android-app-gradle:
         patterns:
           - "*"
-  - package-ecosystem: gradle
-    directory: /app/android
+  - package-ecosystem: bundler
+    directory: /app/ios
     schedule:
       interval: weekly
-      time: "08:00"
+      time: "07:00"
       timezone: "Europe/Paris"
     groups:
-      app-android-gradle:
-        patterns:
-          - "*"
-  - package-ecosystem: gradle
-    directory: /packages/dsfr.dart/example/android/app
-    schedule:
-      interval: weekly
-      time: "08:00"
-      timezone: "Europe/Paris"
-    groups:
-      packages-dsfr-dart-example-android-app-gradle:
-        patterns:
-          - "*"
-  - package-ecosystem: gradle
-    directory: /packages/dsfr.dart/example/android
-    schedule:
-      interval: weekly
-      time: "08:00"
-      timezone: "Europe/Paris"
-    groups:
-      packages-dsfr-dart-example-android-gradle:
+      app-ios-bundler:
         patterns:
           - "*"
