@@ -100,6 +100,15 @@ class ProfilPage extends StatelessWidget {
                   ),
                   const DsfrDivider(),
                   _MenuElement(
+                    icon: DsfrIcons.businessLineChartLine,
+                    label: Localisation.statistiques,
+                    onTap: () async => launchUrlString(
+                      Localisation.statistiquesSite,
+                    ),
+                    iconRight: DsfrIcons.systemExternalLinkLine,
+                  ),
+                  const DsfrDivider(),
+                  _MenuElement(
                     icon: DsfrIcons.systemSettings5Line,
                     label: Localisation.optionsAvancees,
                     onTap: () async => GoRouter.of(context)
