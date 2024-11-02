@@ -26,46 +26,55 @@ class PreOnboardingPage extends StatelessWidget {
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+            child: Stack(
+              alignment: AlignmentDirectional.bottomCenter,
               children: [
-                const SizedBox(height: DsfrSpacings.s15w),
-                const Text(
-                  Localisation.preOnboardingTitre,
-                  style: DsfrTextStyle.displayXs(),
-                ),
-                const SizedBox(height: DsfrSpacings.s3w),
-                Row(
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    SvgPicture.asset(
-                      AssetsSvgs.republiqueFrancaise,
-                      height: 69,
+                    const SizedBox(height: DsfrSpacings.s15w),
+                    const Text(
+                      Localisation.preOnboardingTitre,
+                      style: DsfrTextStyle.displayXs(),
+                      textScaler: TextScaler.noScaling,
                     ),
-                    const SizedBox(width: DsfrSpacings.s3w),
-                    Image.asset(AssetsImages.franceNationVerte, height: 46),
-                    const SizedBox(width: DsfrSpacings.s3w),
-                    SvgPicture.asset(AssetsSvgs.ademe, height: 55),
+                    const SizedBox(height: DsfrSpacings.s3w),
+                    Row(
+                      children: [
+                        SvgPicture.asset(
+                          AssetsSvgs.republiqueFrancaise,
+                          height: 69,
+                        ),
+                        const SizedBox(width: DsfrSpacings.s3w),
+                        Image.asset(AssetsImages.franceNationVerte, height: 46),
+                        const SizedBox(width: DsfrSpacings.s3w),
+                        SvgPicture.asset(AssetsSvgs.ademe, height: 55),
+                      ],
+                    ),
                   ],
                 ),
-                const Spacer(),
-                DsfrButton(
-                  label: Localisation.jeCreeMonCompte,
-                  variant: DsfrButtonVariant.primary,
-                  size: DsfrButtonSize.lg,
-                  onPressed: () async =>
-                      GoRouter.of(context).pushNamed(CreerComptePage.name),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    DsfrButton(
+                      label: Localisation.jeCreeMonCompte,
+                      variant: DsfrButtonVariant.primary,
+                      size: DsfrButtonSize.lg,
+                      onPressed: () async =>
+                          GoRouter.of(context).pushNamed(CreerComptePage.name),
+                    ),
+                    const SizedBox(height: DsfrSpacings.s2w),
+                    Center(
+                      child: DsfrLink.md(
+                        label: Localisation.jaiDejaUnCompte,
+                        onTap: () async => GoRouter.of(context)
+                            .pushNamed(SeConnecterPage.name),
+                      ),
+                    ),
+                    const SizedBox(height: DsfrSpacings.s3w),
+                    const Align(child: VersionLabel()),
+                  ],
                 ),
-                const SizedBox(height: DsfrSpacings.s2w),
-                Center(
-                  child: DsfrLink.md(
-                    label: Localisation.jaiDejaUnCompte,
-                    onTap: () async =>
-                        GoRouter.of(context).pushNamed(SeConnecterPage.name),
-                  ),
-                ),
-                const SizedBox(height: DsfrSpacings.s3w),
-                const Align(child: VersionLabel()),
               ],
             ),
           ),
