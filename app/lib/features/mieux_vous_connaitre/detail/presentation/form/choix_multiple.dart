@@ -11,7 +11,7 @@ class ChoixMultiple extends StatelessWidget {
   final ChoixMultipleQuestion question;
 
   @override
-  Widget build(final BuildContext context) => FnvCheckboxSet(
+  Widget build(final context) => FnvCheckboxSet(
         options: question.responsesPossibles.value,
         selectedOptions: question.responses.value,
         onChanged: (final value) => context

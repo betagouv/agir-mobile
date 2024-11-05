@@ -10,7 +10,7 @@ class FnvBottomBar extends StatelessWidget {
   final Widget child;
 
   @override
-  Widget build(final BuildContext context) => SafeArea(
+  Widget build(final context) => SafeArea(
         left: false,
         top: false,
         right: false,

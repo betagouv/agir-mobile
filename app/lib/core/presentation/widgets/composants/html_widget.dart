@@ -21,7 +21,7 @@ class FnvHtmlWidget extends StatelessWidget {
           : null;
 
   @override
-  Widget build(final BuildContext context) => HtmlWidget(
+  Widget build(final context) => HtmlWidget(
         html,
         customStylesBuilder: _handlePDansLi,
         factoryBuilder: MyUrlLauncherFactory.new,

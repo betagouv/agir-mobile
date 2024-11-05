@@ -17,7 +17,7 @@ class DsfrNotice extends StatelessWidget {
   final VoidCallback? onClose;
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     const color = DsfrColors.info425;
     const textStyle = DsfrTextStyle.bodySm(color: color);
 

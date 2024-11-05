@@ -97,7 +97,7 @@ class _DsfrLinkState extends State<DsfrLink> with MaterialStateMixin<DsfrLink> {
   }
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final resolveForegroundColor = _foregroundColor.resolve(materialStates);
 
     final list = [

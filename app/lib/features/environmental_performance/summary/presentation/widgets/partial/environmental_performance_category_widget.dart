@@ -25,7 +25,7 @@ class EnvironmentalPerformanceCategoryWidget extends StatelessWidget {
   final VoidCallback onTap;
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final progression = completion / 100;
 
     final color =

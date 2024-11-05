@@ -39,7 +39,7 @@ class _MonLogementCodePostalEtCommuneState
   }
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final state = context.watch<MonLogementBloc>().state;
     if (state.communes.length == 1) {
       final commune = state.communes.first;

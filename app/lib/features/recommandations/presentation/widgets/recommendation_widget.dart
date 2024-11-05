@@ -31,7 +31,7 @@ class RecommendationWidget extends StatelessWidget {
   final String titre;
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     const width = 200.0;
 
     const borderRadius = BorderRadius.all(Radius.circular(DsfrSpacings.s1w));
@@ -126,7 +126,7 @@ class _TypeTag extends StatelessWidget {
   final TypeDuContenu type;
 
   @override
-  Widget build(final BuildContext context) => DsfrTag.sm(
+  Widget build(final context) => DsfrTag.sm(
         label: TextSpan(
           text: switch (type) {
             TypeDuContenu.article => Localisation.article,
@@ -150,7 +150,7 @@ class _Title extends StatelessWidget {
   final String titre;
 
   @override
-  Widget build(final BuildContext context) =>
+  Widget build(final context) =>
       Text(titre, style: const DsfrTextStyle.bodyMdMedium());
 }
 
@@ -160,7 +160,7 @@ class _Tag extends StatelessWidget {
   final String tagLabel;
 
   @override
-  Widget build(final BuildContext context) => DsfrTag.sm(
+  Widget build(final context) => DsfrTag.sm(
         label: TextSpan(text: tagLabel),
         backgroundColor: FnvColors.accueilFond,
         foregroundColor: DsfrColors.grey50,
@@ -180,7 +180,7 @@ class _Image extends StatelessWidget {
   final BorderRadius borderRadius;
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final height = width * 0.6;
 
     return ClipRRect(
@@ -202,7 +202,7 @@ class _Points extends StatelessWidget {
   final BorderRadius borderRadius;
 
   @override
-  Widget build(final BuildContext context) => DecoratedBox(
+  Widget build(final context) => DecoratedBox(
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: borderRadius,

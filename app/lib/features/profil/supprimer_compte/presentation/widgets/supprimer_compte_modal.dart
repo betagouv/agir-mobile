@@ -7,7 +7,7 @@ class SupprimerCompteModal extends StatelessWidget {
   const SupprimerCompteModal({super.key});
 
   @override
-  Widget build(final BuildContext context) => Column(
+  Widget build(final context) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const Text(

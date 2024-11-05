@@ -20,8 +20,7 @@ class UpgradeWidget extends StatelessWidget {
   final Widget child;
 
   @override
-  Widget build(final BuildContext context) =>
-      BlocListener<UpgradeBloc, UpgradeState>(
+  Widget build(final context) => BlocListener<UpgradeBloc, UpgradeState>(
         listener: (final context, final state) async {
           if (state is! UpgradeRequired ||
               navigatorKey.currentContext == null) {
@@ -43,7 +42,7 @@ class _UpgradeModal extends StatelessWidget {
   const _UpgradeModal();
 
   @override
-  Widget build(final BuildContext context) => Column(
+  Widget build(final context) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const Text(UpgradeL10n.title, style: DsfrTextStyle.headline4()),

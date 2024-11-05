@@ -38,7 +38,7 @@ class _JaccepteState extends State<Jaccepte> {
   }
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     const style = DsfrTextStyle.bodyMd();
     const jaccepte = Localisation.jaccepte;
 

@@ -40,7 +40,7 @@ class MissionPage extends StatelessWidget {
       );
 
   @override
-  Widget build(final BuildContext context) => BlocProvider(
+  Widget build(final context) => BlocProvider(
         create: (final context) => MissionBloc(
           themePort: context.read(),
           gamificationPort: context.read(),
@@ -81,8 +81,7 @@ class _PageState extends State<_Page> with RouteAware {
   }
 
   @override
-  Widget build(final BuildContext context) =>
-      BlocListener<MissionBloc, MissionState>(
+  Widget build(final context) => BlocListener<MissionBloc, MissionState>(
         listener: (final context, final state) => GoRouter.of(context).pop(),
         listenWhen: (final previous, final current) =>
             previous != current &&
@@ -113,7 +112,7 @@ class _Success extends StatelessWidget {
   final Mission mission;
 
   @override
-  Widget build(final BuildContext context) => ListView(
+  Widget build(final context) => ListView(
         padding: const EdgeInsets.all(paddingVerticalPage),
         children: [
           _ImageEtTitre(mission),
@@ -135,7 +134,7 @@ class _ImageEtTitre extends StatelessWidget {
   final Mission mission;
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     const size = 63.0;
 
     return Row(
@@ -166,7 +165,7 @@ class _Contenu extends StatelessWidget {
   final Mission mission;
 
   @override
-  Widget build(final BuildContext context) => ListView(
+  Widget build(final context) => ListView(
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         padding: EdgeInsets.zero,
@@ -307,7 +306,7 @@ class _SousTitre extends StatelessWidget {
   final String titre;
 
   @override
-  Widget build(final BuildContext context) => Padding(
+  Widget build(final context) => Padding(
         padding: const EdgeInsets.only(left: DsfrSpacings.s4w),
         child: Text(
           titre,

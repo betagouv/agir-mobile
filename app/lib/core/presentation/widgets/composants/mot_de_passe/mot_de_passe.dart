@@ -10,7 +10,7 @@ class FnvMotDePasse extends StatelessWidget {
   final ValueChanged<String> onChanged;
 
   @override
-  Widget build(final BuildContext context) => BlocProvider(
+  Widget build(final context) => BlocProvider(
         create: (final context) => MotDePasseCubit(),
         child: _MotDePasse(onChanged: onChanged),
       );
@@ -30,7 +30,7 @@ class _MotDePasse extends StatelessWidget {
   }
 
   @override
-  Widget build(final BuildContext context) => Column(
+  Widget build(final context) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           DsfrInput(
@@ -59,7 +59,7 @@ class _DouzeCarateresMinimum extends StatelessWidget {
   const _DouzeCarateresMinimum();
 
   @override
-  Widget build(final BuildContext context) => _DoitContenir(
+  Widget build(final context) => _DoitContenir(
         valid: context.select<MotDePasseCubit, bool>(
           (final bloc) => bloc.state.douzeCaracteresMinimum,
         ),
@@ -71,7 +71,7 @@ class _AuMoinsUnMajusculeEtUneMinuscule extends StatelessWidget {
   const _AuMoinsUnMajusculeEtUneMinuscule();
 
   @override
-  Widget build(final BuildContext context) => _DoitContenir(
+  Widget build(final context) => _DoitContenir(
         valid: context.select<MotDePasseCubit, bool>(
           (final bloc) => bloc.state.auMoinsUneMajusculeEtUneMinuscule,
         ),
@@ -83,7 +83,7 @@ class _UnCaractereSpecialMinimum extends StatelessWidget {
   const _UnCaractereSpecialMinimum();
 
   @override
-  Widget build(final BuildContext context) => _DoitContenir(
+  Widget build(final context) => _DoitContenir(
         valid: context.select<MotDePasseCubit, bool>(
           (final bloc) => bloc.state.unCaractereSpecialMinimum,
         ),
@@ -95,7 +95,7 @@ class _UnChiffreMinimum extends StatelessWidget {
   const _UnChiffreMinimum();
 
   @override
-  Widget build(final BuildContext context) => _DoitContenir(
+  Widget build(final context) => _DoitContenir(
         valid: context.select<MotDePasseCubit, bool>(
           (final bloc) => bloc.state.unChiffreMinimum,
         ),
@@ -110,7 +110,7 @@ class _DoitContenir extends StatelessWidget {
   final String text;
 
   @override
-  Widget build(final BuildContext context) => DsfrFormMessage(
+  Widget build(final context) => DsfrFormMessage(
         type: valid ? DsfrFormMessageType.valid : DsfrFormMessageType.info,
         text: text,
       );

@@ -16,7 +16,7 @@ class ArticleView extends StatelessWidget {
   const ArticleView({super.key});
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final article = context.select<ArticleBloc, Article>(
       (final v) => v.state.article,
     );
@@ -104,7 +104,7 @@ class _LogoWidget extends StatelessWidget {
   final Article article;
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     if (article.partenaire == null) {
       return const SizedBox.shrink();
     }

@@ -10,7 +10,7 @@ class MesInformationsAnnee extends StatelessWidget {
   const MesInformationsAnnee({super.key});
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final anneeDeNaissance = context.select<MesInformationsBloc, int?>(
       (final bloc) => bloc.state.anneeDeNaissance,
     );

@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(final BuildContext context) => MaterialApp(
+  Widget build(final context) => MaterialApp(
         home: MasterPage(
           pageItems: [
             SandboxPage.model,

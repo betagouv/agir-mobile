@@ -34,7 +34,7 @@ class FirstNamePage extends StatelessWidget {
   }
 
   @override
-  Widget build(final BuildContext context) => BlocProvider(
+  Widget build(final context) => BlocProvider(
         create: (final context) => FirstNameBloc(
           addFirstName: AddFirstName(context.read()),
           clock: context.read(),

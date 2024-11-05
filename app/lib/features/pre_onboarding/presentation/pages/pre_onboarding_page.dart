@@ -22,7 +22,7 @@ class PreOnboardingPage extends StatelessWidget {
       );
 
   @override
-  Widget build(final BuildContext context) => Scaffold(
+  Widget build(final context) => Scaffold(
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),

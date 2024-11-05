@@ -75,7 +75,7 @@ class _FnvAccordion extends StatelessWidget {
   void _handleTap() => onAccordionCallback(index, !isExpanded);
 
   @override
-  Widget build(final BuildContext context) => Column(
+  Widget build(final context) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           GestureDetector(

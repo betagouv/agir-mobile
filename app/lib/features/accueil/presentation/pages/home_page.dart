@@ -32,7 +32,7 @@ class HomePage extends StatelessWidget {
       );
 
   @override
-  Widget build(final BuildContext context) => const _TabPart();
+  Widget build(final context) => const _TabPart();
 }
 
 class _TabPart extends StatefulWidget {
@@ -59,7 +59,7 @@ class _TabPartState extends State<_TabPart>
   }
 
   @override
-  Widget build(final BuildContext context) => RootPage(
+  Widget build(final context) => RootPage(
         title: const _AppBarTitle(),
         appBarBottom: TabBar(
           tabs: const [
@@ -102,7 +102,7 @@ class _AppBarTitle extends StatelessWidget {
   const _AppBarTitle();
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final state = context.watch<UtilisateurBloc>().state;
 
     const font = FnvTextStyles.appBarTitleStyle;
@@ -142,7 +142,7 @@ class _HomeState extends State<_Home> {
   }
 
   @override
-  Widget build(final BuildContext context) =>
+  Widget build(final context) =>
       BlocListener<UtilisateurBloc, UtilisateurState>(
         listener: (final context, final state) async {
           if (!state.utilisateur.estIntegrationTerminee) {
@@ -181,7 +181,7 @@ class _Disclaimer extends StatelessWidget {
   const _Disclaimer();
 
   @override
-  Widget build(final BuildContext context) =>
+  Widget build(final context) =>
       BlocBuilder<HomeDisclaimerCubit, HomeDisclaimerState>(
         builder: (final context, final state) => switch (state) {
           HomeDisclaimerVisible() => DsfrNotice(

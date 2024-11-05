@@ -65,7 +65,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
   }
 
   @override
-  Widget build(final BuildContext context) => MaterialApp(
+  Widget build(final context) => MaterialApp(
         home: Scaffold(
           body: ListView(
             padding: MediaQuery.paddingOf(context).copyWith(

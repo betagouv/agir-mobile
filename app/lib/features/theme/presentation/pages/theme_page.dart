@@ -25,7 +25,7 @@ class ThemePage extends StatelessWidget {
   final String type;
 
   @override
-  Widget build(final BuildContext context) => BlocProvider(
+  Widget build(final context) => BlocProvider(
         create: (final context) => UniversBloc(themePort: context.read()),
         child: _Page(type),
       );
@@ -64,14 +64,14 @@ class _PageState extends State<_Page> with RouteAware {
   }
 
   @override
-  Widget build(final BuildContext context) => const _View();
+  Widget build(final context) => const _View();
 }
 
 class _View extends StatelessWidget {
   const _View();
 
   @override
-  Widget build(final BuildContext context) => ListView(
+  Widget build(final context) => ListView(
         padding: const EdgeInsets.all(paddingVerticalPage),
         children: const [
           _ImageEtTitre(),
@@ -89,7 +89,7 @@ class _ImageEtTitre extends StatelessWidget {
   const _ImageEtTitre();
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final theme = context
         .select<UniversBloc, ThemeTile?>((final bloc) => bloc.state.themeTile);
 
@@ -116,7 +116,7 @@ class _Missions extends StatelessWidget {
   const _Missions();
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final thematiques = context.select<UniversBloc, List<MissionListe>>(
       (final bloc) => bloc.state.missions,
     );
@@ -142,7 +142,7 @@ class _Mission extends StatelessWidget {
   final MissionListe mission;
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     const width = 160.0;
     const color = DsfrColors.blueFranceSun113;
     const success = DsfrColors.success425;
@@ -212,7 +212,7 @@ class _Services extends StatelessWidget {
   const _Services();
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final services = context.select<UniversBloc, List<ServiceItem>>(
       (final bloc) => bloc.state.services,
     );
@@ -248,7 +248,7 @@ class _Service extends StatelessWidget {
   final ServiceItem service;
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     const borderRadius = BorderRadius.all(Radius.circular(DsfrSpacings.s1w));
 
     return DecoratedBox(
@@ -314,7 +314,7 @@ class _Recommandations extends StatelessWidget {
   const _Recommandations();
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final type = context.select<UniversBloc, String?>(
       (final bloc) => bloc.state.themeTile?.type,
     );

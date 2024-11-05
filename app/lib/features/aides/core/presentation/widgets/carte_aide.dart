@@ -22,7 +22,7 @@ class CarteAide extends StatelessWidget {
   }
 
   @override
-  Widget build(final BuildContext context) => FnvCard(
+  Widget build(final context) => FnvCard(
         onTap: () async => _handleTap(context),
         child: Padding(
           padding: const EdgeInsets.all(DsfrSpacings.s2w),

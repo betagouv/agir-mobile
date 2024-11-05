@@ -96,7 +96,7 @@ class _DsfrInputHeadlessState extends State<DsfrInputHeadless> {
   }
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final underlineInputBorder = UnderlineInputBorder(
       borderSide: BorderSide(
         color: widget.inputBorderColor,

@@ -8,7 +8,7 @@ class MesInformationsEmail extends StatelessWidget {
   const MesInformationsEmail({super.key});
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final email = context
         .select<MesInformationsBloc, String>((final bloc) => bloc.state.email);
 

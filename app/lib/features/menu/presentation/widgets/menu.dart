@@ -17,7 +17,7 @@ class Menu extends StatelessWidget {
   const Menu({super.key});
 
   @override
-  Widget build(final BuildContext context) => Drawer(
+  Widget build(final context) => Drawer(
         shape: const RoundedRectangleBorder(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -67,7 +67,7 @@ class _MenuItems extends StatelessWidget {
   }
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final groupValue = GoRouterState.of(context).name ?? HomePage.name;
 
     return Column(
@@ -150,7 +150,7 @@ class _MenuItem extends StatelessWidget {
   final VoidCallback? onTap;
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final isCurrentPage = groupValue == value;
 
     return ConstrainedBox(

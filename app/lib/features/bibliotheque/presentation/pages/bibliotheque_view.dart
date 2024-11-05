@@ -18,7 +18,7 @@ class BibliothequeView extends StatelessWidget {
   const BibliothequeView({super.key});
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     const padding = paddingVerticalPage;
 
     return CustomScrollView(
@@ -61,7 +61,7 @@ class _Favorites extends StatelessWidget {
   const _Favorites();
 
   @override
-  Widget build(final BuildContext context) => DsfrToggle(
+  Widget build(final context) => DsfrToggle(
         label: Localisation.mesFavoris,
         value: context.select<BibliothequeBloc, bool>(
           (final value) => value.state.isFavorites,
@@ -76,7 +76,7 @@ class _Thematiques extends StatelessWidget {
   const _Thematiques();
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final filtres = context.select<BibliothequeBloc, List<BibliothequeFiltre>>(
       (final value) => value.state.bibliotheque.filtres,
     );
@@ -110,7 +110,7 @@ class _Tag extends StatelessWidget {
   final bool choisi;
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     const blue = DsfrColors.blueFranceSun113;
 
     return GestureDetector(
@@ -168,7 +168,7 @@ class _ChampRechercheState extends State<_ChampRecherche> {
   }
 
   @override
-  Widget build(final BuildContext context) => DsfrInput(
+  Widget build(final context) => DsfrInput(
         label: Localisation.rechercherParTitre,
         onChanged: (final value) => _handleValueChange(context, value),
         keyboardType: TextInputType.text,
@@ -179,7 +179,7 @@ class _Nombre extends StatelessWidget {
   const _Nombre();
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final nombreArticle = context.select<BibliothequeBloc, int>(
       (final value) => value.state.bibliotheque.contenus.length,
     );
@@ -195,7 +195,7 @@ class _SliverListe extends StatelessWidget {
   const _SliverListe();
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final contenus = context.select<BibliothequeBloc, List<Recommandation>>(
       (final value) => value.state.bibliotheque.contenus,
     );

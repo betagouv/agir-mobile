@@ -10,5 +10,5 @@ class ColorsPage extends StatelessWidget {
   );
 
   @override
-  Widget build(final BuildContext context) => const Text('Colors');
+  Widget build(final context) => const Text('Colors');
 }

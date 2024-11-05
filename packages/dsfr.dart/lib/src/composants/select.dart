@@ -46,7 +46,7 @@ class DsfrSelect<T> extends StatelessWidget {
   final double radius;
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final underlineInputBorder = UnderlineInputBorder(
       borderSide: BorderSide(
         color: inputBorderColor,
@@ -117,7 +117,7 @@ class _Label extends StatelessWidget {
   final Color hintColor;
 
   @override
-  Widget build(final BuildContext context) => Column(
+  Widget build(final context) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           ExcludeSemantics(

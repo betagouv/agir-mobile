@@ -28,7 +28,7 @@ class MesInformationsNombreDePartsFiscales extends StatelessWidget {
   }
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final nombreDePartsFiscales = context.select<MesInformationsBloc, double>(
       (final bloc) => bloc.state.nombreDePartsFiscales,
     );

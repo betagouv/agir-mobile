@@ -27,7 +27,7 @@ class AidesPage extends StatelessWidget {
       );
 
   @override
-  Widget build(final BuildContext context) => BlocProvider(
+  Widget build(final context) => BlocProvider(
         create: (final context) => AidesBloc(aidesPort: context.read())
           ..add(const AidesRecuperationDemandee()),
         child: const _View(),
@@ -38,7 +38,7 @@ class _View extends StatelessWidget {
   const _View();
 
   @override
-  Widget build(final BuildContext context) => RootPage(
+  Widget build(final context) => RootPage(
         body: BlocBuilder<AidesBloc, AidesState>(
           builder: (final context, final state) {
             final aides = state.aides;
@@ -86,7 +86,7 @@ class _Aides extends StatelessWidget {
   final List<AidesModel> aides;
 
   @override
-  Widget build(final BuildContext context) => ListView.separated(
+  Widget build(final context) => ListView.separated(
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         padding: EdgeInsets.zero,

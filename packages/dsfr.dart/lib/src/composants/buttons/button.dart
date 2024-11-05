@@ -40,7 +40,7 @@ class DsfrButton extends StatelessWidget {
   }
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     Widget child = Text(label);
     if (icon != null) {
       final buttonIcon = Icon(icon, size: _getIconSize(size));

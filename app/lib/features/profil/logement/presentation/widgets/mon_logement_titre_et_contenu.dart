@@ -13,7 +13,7 @@ class MonLogementTitreEtContenu extends StatelessWidget {
   final Widget contenu;
 
   @override
-  Widget build(final BuildContext context) => Column(
+  Widget build(final context) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ProfilTitrePartie(titre: titre),

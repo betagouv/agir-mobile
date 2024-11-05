@@ -14,7 +14,7 @@ class FnvBadge extends StatelessWidget {
   final Color foregroundColor;
 
   @override
-  Widget build(final BuildContext context) => DecoratedBox(
+  Widget build(final context) => DecoratedBox(
         decoration: ShapeDecoration(
           color: backgroundColor,
           shape: const RoundedRectangleBorder(

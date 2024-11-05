@@ -30,7 +30,7 @@ class ObjectifCard extends StatelessWidget {
   final GestureTapCallback? onTap;
 
   @override
-  Widget build(final BuildContext context) => FnvCard(
+  Widget build(final context) => FnvCard(
         onTap: onTap,
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -83,7 +83,7 @@ class _TrailingIcon extends StatelessWidget {
   final int points;
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     if (estVerrouille) {
       return const Icon(DsfrIcons.systemLockLine);
     } else if (!estFait) {
@@ -109,7 +109,7 @@ class _PointsButton extends StatelessWidget {
   final bool aEteReleve;
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final widget = Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [

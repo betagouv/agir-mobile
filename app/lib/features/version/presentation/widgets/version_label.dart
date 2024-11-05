@@ -8,8 +8,7 @@ class VersionLabel extends StatelessWidget {
   const VersionLabel({super.key});
 
   @override
-  Widget build(final BuildContext context) =>
-      BlocBuilder<VersionBloc, VersionState>(
+  Widget build(final context) => BlocBuilder<VersionBloc, VersionState>(
         builder: (final context, final state) => Text(
           state.value,
           style: const DsfrTextStyle.bodyMd(color: Color(0x7F000000)),

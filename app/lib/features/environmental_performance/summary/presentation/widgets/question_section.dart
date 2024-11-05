@@ -9,7 +9,7 @@ class QuestionSection extends StatelessWidget {
   const QuestionSection({super.key});
 
   @override
-  Widget build(final BuildContext context) => ListView(
+  Widget build(final context) => ListView(
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         padding: EdgeInsets.zero,
@@ -74,7 +74,7 @@ class _AccordionHeader extends StatelessWidget {
   final String text;
 
   @override
-  Widget build(final BuildContext context) => Padding(
+  Widget build(final context) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: paddingVerticalPage),
         child: Text(
           text,
@@ -91,7 +91,7 @@ class _AccordionBody extends StatelessWidget {
   final Widget child;
 
   @override
-  Widget build(final BuildContext context) => Padding(
+  Widget build(final context) => Padding(
         padding: const EdgeInsets.all(paddingVerticalPage),
         child: child,
       );

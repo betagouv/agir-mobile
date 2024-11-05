@@ -36,7 +36,7 @@ class AidePage extends StatelessWidget {
   }
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final aide = context.watch<AideBloc>().state.aide;
 
     return Scaffold(

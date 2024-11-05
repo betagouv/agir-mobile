@@ -23,7 +23,7 @@ class FnvImage extends StatelessWidget {
           : (MediaQuery.devicePixelRatioOf(context) * value).round();
 
   @override
-  Widget build(final BuildContext context) => imageUrl.endsWith('.svg')
+  Widget build(final context) => imageUrl.endsWith('.svg')
       ? SizedBox(
           width: width,
           height: height,

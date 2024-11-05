@@ -17,7 +17,7 @@ class DsfrToggle extends StatelessWidget {
   final String label;
 
   @override
-  Widget build(final BuildContext context) => GestureDetector(
+  Widget build(final context) => GestureDetector(
         onTap: () => onChanged(!value),
         behavior: HitTestBehavior.opaque,
         child: Row(
@@ -36,7 +36,7 @@ class _Switch extends StatelessWidget {
   final bool value;
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     const width = 40.0;
     const height = 24.0;
     const offset = width - height;

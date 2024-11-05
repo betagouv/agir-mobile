@@ -14,7 +14,7 @@ class SaisieCodeInput extends StatelessWidget {
   }
 
   @override
-  Widget build(final BuildContext context) => Semantics(
+  Widget build(final context) => Semantics(
         textField: true,
         label: 'Code de vérification',
         child: ExcludeSemantics(

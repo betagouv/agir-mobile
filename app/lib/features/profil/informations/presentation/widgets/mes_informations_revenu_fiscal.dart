@@ -8,7 +8,7 @@ class MesInformationsRevenuFiscal extends StatelessWidget {
   const MesInformationsRevenuFiscal({super.key});
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final revenuFiscal = context.select<MesInformationsBloc, int?>(
       (final bloc) => bloc.state.revenuFiscal,
     );

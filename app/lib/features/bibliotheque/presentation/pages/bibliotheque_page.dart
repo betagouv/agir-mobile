@@ -20,7 +20,7 @@ class BibliothequePage extends StatelessWidget {
       );
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     context.read<BibliothequeBloc>().add(
           const BibliothequeRecuperationDemandee(),
         );

@@ -22,7 +22,7 @@ class OptionsAvanceesPage extends StatelessWidget {
       );
 
   @override
-  Widget build(final BuildContext context) => Scaffold(
+  Widget build(final context) => Scaffold(
         appBar: FnvAppBar(),
         body: ListView(
           padding: const EdgeInsets.all(paddingVerticalPage),

@@ -10,7 +10,7 @@ class FnvCodeInput extends StatelessWidget {
   final ValueChanged<String> onChanged;
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     const width = 48.0;
     const pinTheme = PinTheme(
       width: width,

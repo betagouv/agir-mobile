@@ -17,7 +17,7 @@ class RootPage extends StatelessWidget {
   final Widget body;
 
   @override
-  Widget build(final BuildContext context) => Scaffold(
+  Widget build(final context) => Scaffold(
         appBar: FnvAppBar(
           leading: const MenuButton(),
           title: title,

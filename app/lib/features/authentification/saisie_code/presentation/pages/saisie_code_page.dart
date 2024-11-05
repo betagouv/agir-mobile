@@ -27,7 +27,7 @@ class SaisieCodePage extends StatelessWidget {
       );
 
   @override
-  Widget build(final BuildContext context) => BlocProvider(
+  Widget build(final context) => BlocProvider(
         create: (final context) => SaisieCodeBloc(
           authentificationPort: context.read(),
           email: email,
@@ -67,7 +67,7 @@ class _MessageErreur extends StatelessWidget {
   const _MessageErreur();
 
   @override
-  Widget build(final BuildContext context) => context
+  Widget build(final context) => context
       .select<SaisieCodeBloc, Option<String>>(
         (final bloc) => bloc.state.erreur,
       )
@@ -97,8 +97,7 @@ class _ButtonRenvoyerCode extends StatelessWidget {
   }
 
   @override
-  Widget build(final BuildContext context) =>
-      BlocListener<SaisieCodeBloc, SaisieCodeState>(
+  Widget build(final context) => BlocListener<SaisieCodeBloc, SaisieCodeState>(
         listener: (final context, final state) => _handleCodeRenvoye(context),
         listenWhen: (final previous, final current) =>
             previous.renvoyerCodeDemande != current.renvoyerCodeDemande &&

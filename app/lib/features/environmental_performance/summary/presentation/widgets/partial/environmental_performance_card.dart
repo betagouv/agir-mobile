@@ -12,7 +12,7 @@ class EnvironmentalPerformanceCard extends StatelessWidget {
   final EnvironmentalPerformancePartial partial;
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final items = [
       if (partial.performanceOnTransport != null)
         EnvironmentalPerformanceCardItem(

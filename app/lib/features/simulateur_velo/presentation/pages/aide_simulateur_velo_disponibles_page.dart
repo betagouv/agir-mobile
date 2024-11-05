@@ -29,7 +29,7 @@ class AideSimulateurVeloDisponiblePage extends StatelessWidget {
       );
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final state = context.watch<AideVeloBloc>().state;
 
     return Scaffold(
@@ -121,7 +121,7 @@ class _Header extends StatelessWidget {
   final bool isExpanded;
 
   @override
-  Widget build(final BuildContext context) => Padding(
+  Widget build(final context) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
         child: Row(
           children: [
@@ -167,7 +167,7 @@ class _Body extends StatelessWidget {
       launchUrlString(e.lien);
 
   @override
-  Widget build(final BuildContext context) => Column(
+  Widget build(final context) => Column(
         children: aides
             .map(
               (final e) => Padding(

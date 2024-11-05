@@ -9,7 +9,7 @@ class TitleSection extends StatelessWidget {
   final String subTitle;
 
   @override
-  Widget build(final BuildContext context) => Column(
+  Widget build(final context) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text.rich(title, style: const DsfrTextStyle.headline5()),

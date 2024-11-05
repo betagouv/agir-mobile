@@ -27,7 +27,7 @@ class QuestionThemesPage extends StatelessWidget {
       );
 
   @override
-  Widget build(final BuildContext context) => BlocProvider(
+  Widget build(final context) => BlocProvider(
         create: (final context) =>
             QuestionThemesBloc(mieuxVousConnaitrePort: context.read())
               ..add(const QuestionThemesRecuperationDemandee()),
@@ -39,7 +39,7 @@ class _View extends StatelessWidget {
   const _View();
 
   @override
-  Widget build(final BuildContext context) => Scaffold(
+  Widget build(final context) => Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
           iconTheme: const IconThemeData(color: DsfrColors.blueFranceSun113),
@@ -78,7 +78,7 @@ class _Question extends StatelessWidget {
   const _Question();
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final question = context.select<QuestionThemesBloc, ChoixMultipleQuestion?>(
       (final bloc) => bloc.state.question,
     );
@@ -105,7 +105,7 @@ class _ButtonContinuer extends StatelessWidget {
   const _ButtonContinuer();
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final estRempli = context.select<QuestionThemesBloc, bool>(
       (final bloc) => bloc.state.valeur.isNotEmpty,
     );

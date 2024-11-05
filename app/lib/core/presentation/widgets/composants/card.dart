@@ -12,7 +12,7 @@ class FnvCard extends StatelessWidget {
   final Color? borderColor;
 
   @override
-  Widget build(final BuildContext context) => DecoratedBox(
+  Widget build(final context) => DecoratedBox(
         decoration: ShapeDecoration(
           color: FnvColors.carteFond,
           shadows: carteOmbre,

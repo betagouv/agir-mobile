@@ -19,7 +19,7 @@ class EnvironmentalPerformanceCategories extends StatelessWidget {
   final List<EnvironmentalPerformanceCategory> categories;
 
   @override
-  Widget build(final BuildContext context) => SingleChildScrollView(
+  Widget build(final context) => SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         padding: EdgeInsets.zero,
         clipBehavior: Clip.none,

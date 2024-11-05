@@ -35,7 +35,7 @@ class QuizPage extends StatelessWidget {
   }
 
   @override
-  Widget build(final BuildContext context) => BlocProvider(
+  Widget build(final context) => BlocProvider(
         create: (final context) => QuizBloc(
           quizPort: context.read(),
           gamificationPort: context.read(),

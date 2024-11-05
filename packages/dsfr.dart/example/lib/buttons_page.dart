@@ -13,7 +13,7 @@ class ButtonsPage extends StatelessWidget {
   void _handleTap() {}
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     const label = 'Bouton';
     const gap = SizedBox(height: DsfrSpacings.s2w);
 

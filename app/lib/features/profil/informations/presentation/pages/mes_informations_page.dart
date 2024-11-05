@@ -24,7 +24,7 @@ class MesInformationsPage extends StatelessWidget {
       );
 
   @override
-  Widget build(final BuildContext context) => BlocProvider(
+  Widget build(final context) => BlocProvider(
         create: (final context) =>
             MesInformationsBloc(profilPort: context.read())
               ..add(const MesInformationsRecuperationDemandee()),
@@ -48,7 +48,7 @@ class _MesInformationsView extends StatelessWidget {
   }
 
   @override
-  Widget build(final BuildContext context) => Scaffold(
+  Widget build(final context) => Scaffold(
         appBar: FnvAppBar(),
         body: BlocBuilder<MesInformationsBloc, MesInformationsState>(
           builder: (final context, final state) {

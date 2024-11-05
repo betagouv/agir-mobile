@@ -13,7 +13,7 @@ class EstimadedTimedWidget extends StatelessWidget {
   final String questionsMinutes;
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     const backgroundColor = Color(0xffeef2ff);
     const borderColor = Color(0xffb1b1ff);
 
@@ -64,7 +64,7 @@ class _EstimadedTimedInfo extends StatelessWidget {
   final String text;
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     const color = DsfrColors.blueFranceSun113;
 
     return Row(

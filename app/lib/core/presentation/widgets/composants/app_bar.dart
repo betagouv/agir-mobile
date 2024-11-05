@@ -21,7 +21,7 @@ class FnvAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   final Size preferredSize;
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final canPop = GoRouter.of(context).canPop();
 
     Widget widget = SizedBox(

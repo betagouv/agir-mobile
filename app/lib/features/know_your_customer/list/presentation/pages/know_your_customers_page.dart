@@ -29,7 +29,7 @@ class KnowYourCustomersPage extends StatelessWidget {
       );
 
   @override
-  Widget build(final BuildContext context) => BlocProvider(
+  Widget build(final context) => BlocProvider(
         create: (final context) =>
             KnowYourCustomersBloc(repository: context.read())
               ..add(const KnowYourCustomersStarted()),
@@ -74,7 +74,7 @@ class _Success extends StatelessWidget {
   final KnowYourCustomersSuccess state;
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final questions = state.questionsFiltered;
     final themeSelected = state.themeSelected;
     const padding = EdgeInsets.symmetric(horizontal: paddingVerticalPage);
@@ -132,7 +132,7 @@ class _Tag extends StatelessWidget {
   final bool isSelected;
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     const blue = DsfrColors.blueFranceSun113;
 
     const borderRadius = BorderRadius.all(Radius.circular(DsfrSpacings.s4w));
@@ -176,7 +176,7 @@ class _Item extends StatelessWidget {
   final Question question;
 
   @override
-  Widget build(final BuildContext context) => ListItem(
+  Widget build(final context) => ListItem(
         title: question.text.value,
         subTitle: question.responsesDisplay(),
         onTap: () async {

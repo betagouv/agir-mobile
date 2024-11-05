@@ -21,7 +21,7 @@ class DefiWidget extends StatelessWidget {
   final MissionDefi defi;
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     if (defi.estVerrouille) {
       return ObjectifCard(
         id: const ObjectifId(''),
@@ -150,7 +150,7 @@ class _DefiCard extends StatelessWidget {
   final Color? borderColor;
 
   @override
-  Widget build(final BuildContext context) => Padding(
+  Widget build(final context) => Padding(
         padding: const EdgeInsets.only(top: 14),
         child: FnvCard(
           borderColor: borderColor,

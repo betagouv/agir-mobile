@@ -34,7 +34,7 @@ class EnvironmentalPerformanceQuestionPage extends StatelessWidget {
   final int number;
 
   @override
-  Widget build(final BuildContext context) => _View(number: number);
+  Widget build(final context) => _View(number: number);
 }
 
 class _View extends StatefulWidget {
@@ -56,7 +56,7 @@ class _ViewState extends State<_View> {
   }
 
   @override
-  Widget build(final BuildContext context) => Scaffold(
+  Widget build(final context) => Scaffold(
         appBar: FnvAppBar(),
         body: BlocBuilder<EnvironmentalPerformanceQuestionBloc,
             EnvironmentalPerformanceQuestionState>(
@@ -93,7 +93,7 @@ class _LoadSuccessState extends State<_LoadSuccess> {
   }
 
   @override
-  Widget build(final BuildContext context) => Column(
+  Widget build(final context) => Column(
         children: [
           QuestionsProgressBar(
             current: widget.number,

@@ -51,7 +51,7 @@ class _DsfrRadioButtonSetHeadlessState<T>
       });
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final children = widget.values.entries
         .map(
           (final e) => DsfrRadioButton<T>(
