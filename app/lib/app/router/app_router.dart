@@ -64,41 +64,32 @@ GoRouter goRouter({
                 SaisieCodePage.route,
               ],
             ),
-            GoRoute(
-              path: 'authenticated',
-              redirect: (final context, final state) =>
-                  state.uri.path == '/authenticated'
-                      ? '/authenticated/${HomePage.path}'
-                      : null,
-              routes: [
-                FirstNamePage.route,
-                QuestionCodePostalPage.route,
-                AppEstEncoreEnExperimentationPage.route,
-                QuestionThemesPage.route,
-                ToutEstPretPage.route,
-                HomePage.route,
-                EnvironmentalPerformanceSummaryPage.route,
-                EnvironmentalPerformanceQuestionPage.route,
-                MissionPage.route,
-                MissionKycPage.route,
-                AidesPage.route,
-                AidePage.route,
-                AideSimulateurVeloPage.route(
-                  routes: [AideSimulateurVeloDisponiblePage.route],
-                ),
-                ArticlePage.route,
-                BibliothequePage.route,
-                QuizPage.route,
-                ProfilPage.route,
-                MesInformationsPage.route,
-                MonLogementPage.route,
-                KnowYourCustomersPage.route,
-                MieuxVousConnaitreEditPage.route,
-                ActionListPage.route,
-                ActionDetailPage.route,
-                OptionsAvanceesPage.route,
-              ],
+            FirstNamePage.route,
+            QuestionCodePostalPage.route,
+            AppEstEncoreEnExperimentationPage.route,
+            QuestionThemesPage.route,
+            ToutEstPretPage.route,
+            HomePage.route,
+            EnvironmentalPerformanceSummaryPage.route,
+            EnvironmentalPerformanceQuestionPage.route,
+            MissionPage.route,
+            MissionKycPage.route,
+            AidesPage.route,
+            AidePage.route,
+            AideSimulateurVeloPage.route(
+              routes: [AideSimulateurVeloDisponiblePage.route],
             ),
+            ArticlePage.route,
+            BibliothequePage.route,
+            QuizPage.route,
+            ProfilPage.route,
+            MesInformationsPage.route,
+            MonLogementPage.route,
+            KnowYourCustomersPage.route,
+            MieuxVousConnaitreEditPage.route,
+            ActionListPage.route,
+            ActionDetailPage.route,
+            OptionsAvanceesPage.route,
           ],
         ),
       ],
@@ -110,10 +101,10 @@ GoRouter goRouter({
         switch (statutActuel) {
           case Authenticated():
             if (path.startsWith('/unauthenticated')) {
-              return '/authenticated/${HomePage.path}';
+              return '/${HomePage.path}';
             }
           case Unauthenticated():
-            if (path.startsWith('/authenticated')) {
+            if (!path.startsWith('/unauthenticated')) {
               return '/unauthenticated/${PreOnboardingPage.path}';
             }
         }
