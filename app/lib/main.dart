@@ -130,7 +130,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   @override
-  Widget build(final BuildContext context) => FutureBuilder<void>(
+  Widget build(final context) => FutureBuilder<void>(
         future: _initApp,
         builder: (final context, final snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {

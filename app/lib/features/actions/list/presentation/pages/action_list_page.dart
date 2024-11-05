@@ -28,7 +28,7 @@ class ActionListPage extends StatelessWidget {
       );
 
   @override
-  Widget build(final BuildContext context) => BlocProvider(
+  Widget build(final context) => BlocProvider(
         create: (final context) => ActionListBloc(FetchActions(context.read()))
           ..add(const ActionListFetch()),
         child: Builder(

@@ -21,7 +21,7 @@ class ToutEstPretPage extends StatelessWidget {
       );
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     const blueFranceSun113 = DsfrColors.blueFranceSun113;
 
     const bodyLg = DsfrTextStyle.bodyLg();

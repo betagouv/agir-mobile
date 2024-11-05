@@ -13,7 +13,7 @@ class RainbowProgressBar extends StatelessWidget {
   final double value;
 
   @override
-  Widget build(final BuildContext context) => CustomPaint(
+  Widget build(final context) => CustomPaint(
         painter: _Painter(value: value),
         size: const Size(double.infinity, 6),
       );

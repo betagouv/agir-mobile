@@ -9,7 +9,7 @@ class MesInformationsNom extends StatelessWidget {
   const MesInformationsNom({super.key});
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final nom = context
         .select<MesInformationsBloc, String?>((final bloc) => bloc.state.nom);
 

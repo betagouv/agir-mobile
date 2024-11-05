@@ -13,7 +13,7 @@ class Entier extends StatelessWidget {
   final EntierQuestion question;
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final controller =
         TextEditingController(text: question.responses.value.firstOrNull);
 

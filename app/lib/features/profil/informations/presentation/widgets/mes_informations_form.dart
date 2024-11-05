@@ -16,7 +16,7 @@ class MesInformationsForm extends StatelessWidget {
   const MesInformationsForm({super.key});
 
   @override
-  Widget build(final BuildContext context) => ListView(
+  Widget build(final context) => ListView(
         padding: const EdgeInsets.all(paddingVerticalPage),
         children: const [
           FnvTitle(title: Localisation.mesInformations),

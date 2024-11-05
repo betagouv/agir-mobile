@@ -26,7 +26,7 @@ class ProfilPage extends StatelessWidget {
       );
 
   @override
-  Widget build(final BuildContext context) => RootPage(
+  Widget build(final context) => RootPage(
         body: ListView(
           padding: const EdgeInsets.all(paddingVerticalPage),
           children: [
@@ -136,7 +136,7 @@ class _MenuElement extends StatelessWidget {
   final IconData iconRight;
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     const iconColor = DsfrColors.blueFranceSun113;
 
     return GestureDetector(

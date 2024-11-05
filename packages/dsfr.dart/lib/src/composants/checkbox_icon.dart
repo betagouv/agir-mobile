@@ -13,7 +13,7 @@ class DsfrCheckboxIcon extends StatelessWidget {
   final EdgeInsets padding;
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     const dimension = 16.0;
     const backgroundColor = DsfrColors.blueFranceSun113;
 

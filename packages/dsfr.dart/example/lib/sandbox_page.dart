@@ -12,5 +12,5 @@ class SandboxPage extends StatelessWidget {
   );
 
   @override
-  Widget build(final BuildContext context) => const SizedBox();
+  Widget build(final context) => const SizedBox();
 }

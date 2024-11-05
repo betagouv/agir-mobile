@@ -22,7 +22,7 @@ class ArticlePage extends StatelessWidget {
   final String id;
 
   @override
-  Widget build(final BuildContext context) => BlocProvider(
+  Widget build(final context) => BlocProvider(
         create: (final context) => ArticleBloc(
           articlesPort: context.read(),
           gamificationPort: context.read(),

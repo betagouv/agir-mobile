@@ -9,7 +9,7 @@ class LesRecommandations extends StatelessWidget {
   const LesRecommandations({super.key});
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final recommandations =
         context.watch<RecommandationsBloc>().state.recommandations;
 

@@ -10,7 +10,7 @@ class PartnerCard extends StatelessWidget {
   const PartnerCard({super.key});
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     const backgroundColor = Color(0xffeef2ff);
     const borderColor = Color(0xffb1b1ff);
 

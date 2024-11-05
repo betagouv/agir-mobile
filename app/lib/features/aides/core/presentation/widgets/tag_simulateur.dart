@@ -7,7 +7,7 @@ class TagSimulateur extends StatelessWidget {
   const TagSimulateur({super.key});
 
   @override
-  Widget build(final BuildContext context) => const DsfrTag.sm(
+  Widget build(final context) => const DsfrTag.sm(
         label: TextSpan(text: Localisation.simulateur),
         backgroundColor: FnvColors.aideTagBackground,
         foregroundColor: DsfrColors.grey50,

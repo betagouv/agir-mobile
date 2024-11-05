@@ -6,9 +6,7 @@ class VerticalDottedLine extends StatelessWidget {
   const VerticalDottedLine({super.key});
 
   @override
-  Widget build(final BuildContext context) => const CustomPaint(
-        painter: _Painter(),
-      );
+  Widget build(final context) => const CustomPaint(painter: _Painter());
 }
 
 class _Painter extends CustomPainter {

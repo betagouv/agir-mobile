@@ -21,7 +21,7 @@ class DsfrRadioButton<T> extends StatelessWidget {
   final Color? backgroundColor;
 
   @override
-  Widget build(final BuildContext context) => GestureDetector(
+  Widget build(final context) => GestureDetector(
         onTap: onChanged == null ? null : () => onChanged!(value),
         behavior: HitTestBehavior.opaque,
         child: DecoratedBox(

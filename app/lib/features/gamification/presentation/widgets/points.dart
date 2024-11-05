@@ -8,7 +8,7 @@ class Points extends StatelessWidget {
   const Points({super.key});
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final state = context.watch<GamificationBloc>().state;
 
     return Semantics(

@@ -7,7 +7,7 @@ class MenuButton extends StatelessWidget {
   const MenuButton({super.key});
 
   @override
-  Widget build(final BuildContext context) => IconButton(
+  Widget build(final context) => IconButton(
         iconSize: 24,
         padding: const EdgeInsets.all(DsfrSpacings.s1w),
         onPressed: () => Scaffold.of(context).openDrawer(),

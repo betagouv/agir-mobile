@@ -27,7 +27,7 @@ class QuestionCodePostalPage extends StatelessWidget {
       );
 
   @override
-  Widget build(final BuildContext context) => BlocProvider(
+  Widget build(final context) => BlocProvider(
         create: (final context) => QuestionCodePostalBloc(
           profilPort: context.read(),
           communesPort: context.read(),
@@ -40,7 +40,7 @@ class _View extends StatelessWidget {
   const _View();
 
   @override
-  Widget build(final BuildContext context) => Scaffold(
+  Widget build(final context) => Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
           iconTheme: const IconThemeData(color: DsfrColors.blueFranceSun113),
@@ -80,7 +80,7 @@ class _Prenom extends StatelessWidget {
   const _Prenom();
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final state = context.watch<QuestionCodePostalBloc>().state;
 
     const dsfrTextStyle = DsfrTextStyle.headline2();
@@ -132,7 +132,7 @@ class _CodePostalEtCommuneState extends State<_CodePostalEtCommune> {
   }
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final state = context.watch<QuestionCodePostalBloc>().state;
 
     if (state.communes.length == 1) {
@@ -181,7 +181,7 @@ class _ButtonContinuer extends StatelessWidget {
   const _ButtonContinuer();
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final estRempli = context.select<QuestionCodePostalBloc, bool>(
       (final bloc) => bloc.state.estRempli,
     );

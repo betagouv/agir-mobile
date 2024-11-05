@@ -28,7 +28,7 @@ class _Modal extends StatelessWidget {
   final String buttonLabel;
 
   @override
-  Widget build(final BuildContext context) => DsfrButton(
+  Widget build(final context) => DsfrButton(
         label: buttonLabel,
         variant: DsfrButtonVariant.primary,
         size: DsfrButtonSize.lg,

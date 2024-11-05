@@ -18,7 +18,7 @@ class CreerCompteView extends StatelessWidget {
   const CreerCompteView({super.key});
 
   @override
-  Widget build(final BuildContext context) =>
+  Widget build(final context) =>
       BlocListener<CreerCompteBloc, CreerCompteState>(
         listener: (final context, final state) async =>
             GoRouter.of(context).pushNamed(
@@ -80,7 +80,7 @@ class _Cgu extends StatelessWidget {
   const _Cgu();
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final valeur = context.select<CreerCompteBloc, bool>(
       (final bloc) => bloc.state.aCguAcceptees,
     );
@@ -99,7 +99,7 @@ class _MessageErreur extends StatelessWidget {
   const _MessageErreur();
 
   @override
-  Widget build(final BuildContext context) => context
+  Widget build(final context) => context
       .select<CreerCompteBloc, Option<String>>(
         (final bloc) => bloc.state.erreur,
       )
@@ -118,7 +118,7 @@ class _BoutonCreerCompte extends StatelessWidget {
   const _BoutonCreerCompte();
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final estValide = context.select<CreerCompteBloc, bool>(
       (final bloc) => bloc.state.estValide,
     );

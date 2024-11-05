@@ -21,7 +21,7 @@ class MonLogementResidencePrincipale extends StatelessWidget {
   }
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final typeDeLogement = context.select<MonLogementBloc, TypeDeLogement?>(
       (final bloc) => bloc.state.typeDeLogement,
     );

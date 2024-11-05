@@ -35,7 +35,7 @@ class AideSimulateurVeloPage extends StatelessWidget {
       );
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     context.read<AideVeloBloc>().add(const AideVeloInformationsDemandee());
 
     return const _AideSimulateurVeloView();
@@ -46,7 +46,7 @@ class _AideSimulateurVeloView extends StatelessWidget {
   const _AideSimulateurVeloView();
 
   @override
-  Widget build(final BuildContext context) => Scaffold(
+  Widget build(final context) => Scaffold(
         appBar: FnvAppBar(),
         body: ListView(
           padding: const EdgeInsets.all(paddingVerticalPage),
@@ -96,7 +96,7 @@ class _PrixState extends State<_Prix> {
   }
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     _prixVeloControlleur.text =
         context.read<AideVeloBloc>().state.prix.toString();
 
@@ -162,7 +162,7 @@ class _ElementsNecessaireAuCalcul extends StatelessWidget {
   const _ElementsNecessaireAuCalcul();
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final state = context.watch<AideVeloBloc>().state;
     const bodySmMediumBlue =
         DsfrTextStyle.bodySmMedium(color: DsfrColors.blueFranceSun113);
@@ -253,15 +253,14 @@ class _Avertissement extends StatelessWidget {
   const _Avertissement();
 
   @override
-  Widget build(final BuildContext context) =>
-      context.watch<AideVeloBloc>().state.estValide
-          ? const SizedBox.shrink()
-          : const Column(
-              children: [
-                FnvAlert.error(label: Localisation.aideVeloAvertissement),
-                SizedBox(height: DsfrSpacings.s2w),
-              ],
-            );
+  Widget build(final context) => context.watch<AideVeloBloc>().state.estValide
+      ? const SizedBox.shrink()
+      : const Column(
+          children: [
+            FnvAlert.error(label: Localisation.aideVeloAvertissement),
+            SizedBox(height: DsfrSpacings.s2w),
+          ],
+        );
 }
 
 class _CodePostalEtCommune extends StatefulWidget {
@@ -293,7 +292,7 @@ class _CodePostalEtCommuneState extends State<_CodePostalEtCommune> {
   }
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final state = context.watch<AideVeloBloc>().state;
     if (state.communes.length == 1) {
       final commune = state.communes.first;
@@ -357,7 +356,7 @@ class _NombreDePartsFiscales extends StatelessWidget {
   }
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final nombreDePartsFiscales =
         context.read<AideVeloBloc>().state.nombreDePartsFiscales;
 
@@ -378,7 +377,7 @@ class _RevenuFiscal extends StatelessWidget {
   const _RevenuFiscal();
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final revenuFiscal = context.read<AideVeloBloc>().state.revenuFiscal;
 
     return RevenuFiscalInput(
@@ -394,7 +393,7 @@ class _EstimerMesAides extends StatelessWidget {
   const _EstimerMesAides();
 
   @override
-  Widget build(final BuildContext context) => DsfrButton(
+  Widget build(final context) => DsfrButton(
         label: Localisation.estimerMesAides,
         variant: DsfrButtonVariant.primary,
         size: DsfrButtonSize.lg,
@@ -414,7 +413,7 @@ class _Questions extends StatelessWidget {
   const _Questions();
 
   @override
-  Widget build(final BuildContext context) => DsfrAccordionsGroup(
+  Widget build(final context) => DsfrAccordionsGroup(
         values: [
           DsfrAccordion(
             headerBuilder: (final isExpanded) => const _AccordionHeader(
@@ -451,7 +450,7 @@ class _AccordionBody extends StatelessWidget {
   final Widget child;
 
   @override
-  Widget build(final BuildContext context) => Padding(
+  Widget build(final context) => Padding(
         padding: const EdgeInsets.all(DsfrSpacings.s2w),
         child: child,
       );
@@ -463,7 +462,7 @@ class _AccordionHeader extends StatelessWidget {
   final String text;
 
   @override
-  Widget build(final BuildContext context) => Padding(
+  Widget build(final context) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s1w),
         child: Text.rich(
           TextSpan(

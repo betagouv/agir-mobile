@@ -13,7 +13,7 @@ class LinksPage extends StatelessWidget {
   void _handleTap() {}
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     const label = 'Label lien';
     const gap = SizedBox(height: 16);
 

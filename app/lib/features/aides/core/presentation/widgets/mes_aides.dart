@@ -13,7 +13,7 @@ class MesAides extends StatelessWidget {
   const MesAides({super.key});
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final bloc = context.read<AidesAccueilBloc>()
       ..add(const AidesAccueilRecuperationDemandee());
 

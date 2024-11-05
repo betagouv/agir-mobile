@@ -10,7 +10,7 @@ class UniversCard extends StatelessWidget {
   final GestureTapCallback? onTap;
 
   @override
-  Widget build(final BuildContext context) => Stack(
+  Widget build(final context) => Stack(
         alignment: Alignment.topCenter,
         children: [
           Padding(

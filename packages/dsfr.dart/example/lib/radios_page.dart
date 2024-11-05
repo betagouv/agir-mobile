@@ -18,7 +18,7 @@ class _RadiosPageState extends State<RadiosPage> {
   int _value = 0;
 
   @override
-  Widget build(final BuildContext context) => ListView(
+  Widget build(final context) => ListView(
         padding: const EdgeInsets.all(16),
         children: [
           DsfrRadioButtonSet(

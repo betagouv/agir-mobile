@@ -16,7 +16,7 @@ class DsfrDivider extends StatelessWidget {
   final AlignmentGeometry alignment;
 
   @override
-  Widget build(final BuildContext context) => Align(
+  Widget build(final context) => Align(
         alignment: alignment,
         child: SizedBox(
           width: width,

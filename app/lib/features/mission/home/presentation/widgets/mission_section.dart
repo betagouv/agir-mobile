@@ -15,7 +15,7 @@ class MissionSection extends StatelessWidget {
   const MissionSection({super.key});
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     context.read<MissionHomeBloc>().add(const MissionHomeFetch());
 
     return Builder(
@@ -36,7 +36,7 @@ class _Section extends StatelessWidget {
   final MissionHomeLoadSuccess data;
 
   @override
-  Widget build(final BuildContext context) => Column(
+  Widget build(final context) => Column(
         children: [
           const TitleSection(
             title: TextSpan(
@@ -78,7 +78,7 @@ class _Mission extends StatelessWidget {
   final MissionListe mission;
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     const width = 150.0;
     const color = DsfrColors.blueFranceSun113;
     const success = DsfrColors.success425;

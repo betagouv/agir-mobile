@@ -33,7 +33,7 @@ class MissionKycPage extends StatelessWidget {
   final List<String> ids;
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final mieuxVousConnaitreController = MieuxVousConnaitreController();
 
     return Scaffold(

@@ -11,7 +11,7 @@ class InputsPage extends StatelessWidget {
   );
 
   @override
-  Widget build(final BuildContext context) => ListView(
+  Widget build(final context) => ListView(
         padding: const EdgeInsets.all(16),
         children: [
           Row(

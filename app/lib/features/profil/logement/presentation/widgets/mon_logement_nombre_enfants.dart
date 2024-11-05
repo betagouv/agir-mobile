@@ -21,7 +21,7 @@ class MonLogementNombreEnfants extends StatelessWidget {
   }
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final nombreEnfants = context
         .select<MonLogementBloc, int>((final bloc) => bloc.state.nombreEnfants);
 

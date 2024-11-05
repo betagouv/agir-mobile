@@ -11,7 +11,7 @@ class MonLogementSuperficie extends StatelessWidget {
   const MonLogementSuperficie({super.key});
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final superficie = context.select<MonLogementBloc, Superficie?>(
       (final bloc) => bloc.state.superficie,
     );

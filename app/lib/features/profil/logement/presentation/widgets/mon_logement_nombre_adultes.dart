@@ -21,7 +21,7 @@ class MonLogementNombreAdultes extends StatelessWidget {
   }
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     const adultes = Localisation.adultes;
     final nombreAdultes = context
         .select<MonLogementBloc, int>((final bloc) => bloc.state.nombreAdultes);

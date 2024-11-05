@@ -44,14 +44,14 @@ class _MesRecommandationsState extends State<MesRecommandations>
   }
 
   @override
-  Widget build(final BuildContext context) => const _View();
+  Widget build(final context) => const _View();
 }
 
 class _View extends StatelessWidget {
   const _View();
 
   @override
-  Widget build(final BuildContext context) => ListView(
+  Widget build(final context) => ListView(
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         padding: EdgeInsets.zero,

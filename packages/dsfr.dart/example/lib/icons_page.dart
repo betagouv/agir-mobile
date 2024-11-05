@@ -13,7 +13,7 @@ class IconsPage extends StatelessWidget {
   );
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     const allIcons = DsfrIcons.all;
     final allIconsKeys = allIcons.keys.toList()..sort();
 

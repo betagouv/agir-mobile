@@ -7,6 +7,6 @@ class ProfilTitrePartie extends StatelessWidget {
   final String titre;
 
   @override
-  Widget build(final BuildContext context) =>
+  Widget build(final context) =>
       Text(titre, style: const DsfrTextStyle.headline4());
 }

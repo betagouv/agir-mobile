@@ -34,7 +34,7 @@ class DsfrModal extends StatelessWidget {
   final bool isDismissible;
 
   @override
-  Widget build(final BuildContext context) => ColoredBox(
+  Widget build(final context) => ColoredBox(
         color: DsfrColors.grey1000,
         child: SafeArea(
           child: Padding(

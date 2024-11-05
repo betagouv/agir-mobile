@@ -13,7 +13,7 @@ class FormMessagesPage extends StatelessWidget {
   );
 
   @override
-  Widget build(final BuildContext context) => ListView(
+  Widget build(final context) => ListView(
         children: const [
           DsfrFormMessage(
             type: DsfrFormMessageType.error,

@@ -104,7 +104,7 @@ class _DsfrRawButtonState extends State<DsfrRawButton>
   }
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final textColor = _foregroundColor.resolve(materialStates);
     final button = Semantics(
       enabled: widget.onTap != null,

@@ -11,7 +11,7 @@ class FnvFailureWidget extends StatelessWidget {
   final VoidCallback? onPressed;
 
   @override
-  Widget build(final BuildContext context) => ListView(
+  Widget build(final context) => ListView(
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         padding: const EdgeInsets.symmetric(horizontal: paddingVerticalPage),

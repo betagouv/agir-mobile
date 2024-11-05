@@ -72,7 +72,7 @@ class _DsfrInputState extends State<DsfrInput> {
       setState(() => _passwordVisibility = value);
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final labelText = widget.label;
     Widget label = ExcludeSemantics(
       child: Text(

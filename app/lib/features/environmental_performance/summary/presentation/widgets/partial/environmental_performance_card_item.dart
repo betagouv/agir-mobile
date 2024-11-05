@@ -18,7 +18,7 @@ class EnvironmentalPerformanceCardItem extends StatelessWidget {
   final EnvironmentalPerformanceLevel level;
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final levelRepresentation =
         EnvironmentalPerformanceLevelRepresentation.fromProgress(level);
 

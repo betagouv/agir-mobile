@@ -24,7 +24,7 @@ class MonLogementPage extends StatelessWidget {
       );
 
   @override
-  Widget build(final BuildContext context) => BlocProvider(
+  Widget build(final context) => BlocProvider(
         create: (final context) => MonLogementBloc(
           profilPort: context.read(),
           communesPort: context.read(),
@@ -47,7 +47,7 @@ class _MonLogementView extends StatelessWidget {
   }
 
   @override
-  Widget build(final BuildContext context) => Scaffold(
+  Widget build(final context) => Scaffold(
         appBar: FnvAppBar(),
         body: BlocBuilder<MonLogementBloc, MonLogementState>(
           builder: (final context, final state) {

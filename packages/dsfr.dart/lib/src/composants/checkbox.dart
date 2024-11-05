@@ -44,7 +44,7 @@ class DsfrCheckbox extends StatelessWidget {
   final EdgeInsets padding;
 
   @override
-  Widget build(final BuildContext context) => GestureDetector(
+  Widget build(final context) => GestureDetector(
         onTap: onChanged == null ? null : () => onChanged?.call(!value),
         behavior: HitTestBehavior.opaque,
         child: Row(

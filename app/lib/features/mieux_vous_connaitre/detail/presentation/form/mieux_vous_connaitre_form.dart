@@ -30,7 +30,7 @@ class MieuxVousConnaitreForm extends StatelessWidget {
   final OnSavedCallback? onSaved;
 
   @override
-  Widget build(final BuildContext context) => BlocProvider(
+  Widget build(final context) => BlocProvider(
         create: (final context) => MieuxVousConnaitreEditBloc(
           mieuxVousConnaitrePort: context.read(),
         )..add(MieuxVousConnaitreEditRecuperationDemandee(id)),
@@ -46,7 +46,7 @@ class _Content extends StatelessWidget {
   final OnSavedCallback? onSaved;
 
   @override
-  Widget build(final BuildContext context) =>
+  Widget build(final context) =>
       BlocListener<MieuxVousConnaitreEditBloc, MieuxVousConnaitreEditState>(
         listener: (final context, final state) {
           final aState = state;
@@ -102,7 +102,7 @@ class _LoadedContentState extends State<_LoadedContent> {
   }
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final question = widget.state.question;
 
     return switch (question) {
@@ -121,7 +121,7 @@ class _ChoixMultipleContent extends StatelessWidget {
   final ChoixMultipleQuestion question;
 
   @override
-  Widget build(final BuildContext context) => Column(
+  Widget build(final context) => Column(
         children: [
           FnvTitle(
             title: question.text.value,
@@ -139,7 +139,7 @@ class _ChoixUniqueContent extends StatelessWidget {
   final ChoixUniqueQuestion question;
 
   @override
-  Widget build(final BuildContext context) => Column(
+  Widget build(final context) => Column(
         children: [
           FnvTitle(title: question.text.value),
           const SizedBox(height: DsfrSpacings.s3w),
@@ -154,7 +154,7 @@ class _LibreContent extends StatelessWidget {
   final LibreQuestion question;
 
   @override
-  Widget build(final BuildContext context) => Column(
+  Widget build(final context) => Column(
         children: [
           FnvTitle(title: question.text.value),
           const SizedBox(height: DsfrSpacings.s3w),
@@ -169,7 +169,7 @@ class _EntierContent extends StatelessWidget {
   final EntierQuestion question;
 
   @override
-  Widget build(final BuildContext context) => Column(
+  Widget build(final context) => Column(
         children: [
           FnvTitle(title: question.text.value),
           const SizedBox(height: DsfrSpacings.s3w),
@@ -184,7 +184,7 @@ class _MosaicContent extends StatelessWidget {
   final MosaicQuestion question;
 
   @override
-  Widget build(final BuildContext context) => Column(
+  Widget build(final context) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           FnvTitle(

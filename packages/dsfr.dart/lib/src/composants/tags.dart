@@ -43,7 +43,7 @@ class DsfrTag extends StatelessWidget {
   final EdgeInsets padding;
 
   @override
-  Widget build(final BuildContext context) => DecoratedBox(
+  Widget build(final context) => DecoratedBox(
         decoration: ShapeDecoration(
           color: backgroundColor,
           shape: const StadiumBorder(),

@@ -23,14 +23,14 @@ class EnvironmentalPerformanceSection extends StatelessWidget {
   const EnvironmentalPerformanceSection({super.key});
 
   @override
-  Widget build(final BuildContext context) => const _View();
+  Widget build(final context) => const _View();
 }
 
 class _View extends StatelessWidget {
   const _View();
 
   @override
-  Widget build(final BuildContext context) =>
+  Widget build(final context) =>
       BlocBuilder<EnvironmentalPerformanceBloc, EnvironmentalPerformanceState>(
         builder: (final context, final state) => switch (state) {
           EnvironmentalPerformanceInitial() ||
@@ -52,7 +52,7 @@ class _Empty extends StatelessWidget {
   final EnvironmentalPerformanceEmpty data;
 
   @override
-  Widget build(final BuildContext context) => Column(
+  Widget build(final context) => Column(
         children: [
           const _TitleAndSubtitle(),
           const SizedBox(height: DsfrSpacings.s2w),
@@ -148,7 +148,7 @@ class _Icon extends StatelessWidget {
   const _Icon();
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     const dimension = 64.0;
 
     return SizedBox.square(
@@ -176,7 +176,7 @@ class _Partial extends StatelessWidget {
   final EnvironmentalPerformancePartial data;
 
   @override
-  Widget build(final BuildContext context) => Column(
+  Widget build(final context) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const _TitleAndSubtitle(),
@@ -197,7 +197,7 @@ class _TitleAndSubtitle extends StatelessWidget {
   const _TitleAndSubtitle();
 
   @override
-  Widget build(final BuildContext context) => const TitleSection(
+  Widget build(final context) => const TitleSection(
         title: TextSpan(
           children: [
             TextSpan(text: EnvironmentalPerformanceSummaryL10n.estimerMon),
@@ -221,7 +221,7 @@ class _Full extends StatelessWidget {
   final EnvironmentalPerformanceFull data;
 
   @override
-  Widget build(final BuildContext context) => Column(
+  Widget build(final context) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text.rich(

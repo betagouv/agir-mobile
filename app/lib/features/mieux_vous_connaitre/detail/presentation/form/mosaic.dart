@@ -13,8 +13,7 @@ class Mosaic extends StatelessWidget {
   final MosaicQuestion question;
 
   @override
-  Widget build(final BuildContext context) =>
-      _MosaicSet(responses: question.responses);
+  Widget build(final context) => _MosaicSet(responses: question.responses);
 }
 
 class _MosaicSet extends StatefulWidget {
@@ -36,7 +35,7 @@ class _MosaicSetState extends State<_MosaicSet> {
   }
 
   @override
-  Widget build(final BuildContext context) => Wrap(
+  Widget build(final context) => Wrap(
         spacing: DsfrSpacings.s2w,
         runSpacing: DsfrSpacings.s2w,
         children: _responses.map((final e) {

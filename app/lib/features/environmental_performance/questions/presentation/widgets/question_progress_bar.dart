@@ -12,7 +12,7 @@ class QuestionsProgressBar extends StatelessWidget {
   final int total;
 
   @override
-  Widget build(final BuildContext context) => Semantics(
+  Widget build(final context) => Semantics(
         label: 'Question $current sur $total',
         child: CustomPaint(
           painter: _Painter(value: current / total),

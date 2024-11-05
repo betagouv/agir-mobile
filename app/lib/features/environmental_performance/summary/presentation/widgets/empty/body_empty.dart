@@ -21,7 +21,7 @@ class BodyEmpty extends StatelessWidget {
   final EnvironmentalPerformanceEmpty data;
 
   @override
-  Widget build(final BuildContext context) => ListView(
+  Widget build(final context) => ListView(
         padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s3w),
         children: [
           const Padding(

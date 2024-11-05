@@ -30,7 +30,7 @@ class ActionDetailPage extends StatelessWidget {
   final ActionId actionId;
 
   @override
-  Widget build(final BuildContext context) => BlocProvider(
+  Widget build(final context) => BlocProvider(
         create: (final context) => ActionDetailBloc(
           repository: context.read(),
         )..add(ActionDetailLoadRequested(actionId)),
@@ -42,7 +42,7 @@ class _View extends StatelessWidget {
   const _View();
 
   @override
-  Widget build(final BuildContext context) =>
+  Widget build(final context) =>
       BlocListener<ActionDetailBloc, ActionDetailState>(
         listener: (final context, final state) {
           switch (state) {
@@ -66,7 +66,7 @@ class _Body extends StatelessWidget {
   const _Body();
 
   @override
-  Widget build(final BuildContext context) =>
+  Widget build(final context) =>
       BlocBuilder<ActionDetailBloc, ActionDetailState>(
         builder: (final context, final state) => switch (state) {
           ActionDetailInitial() ||
@@ -88,7 +88,7 @@ class _SuccessContent extends StatelessWidget {
   final ActionDetailLoadSuccess state;
 
   @override
-  Widget build(final BuildContext context) => ListView(
+  Widget build(final context) => ListView(
         padding: const EdgeInsets.all(paddingVerticalPage),
         children: [
           Text(state.action.theme, style: const DsfrTextStyle.bodySm()),
@@ -148,7 +148,7 @@ class _BottomBar extends StatelessWidget {
   const _BottomBar();
 
   @override
-  Widget build(final BuildContext context) => FnvBottomBar(
+  Widget build(final context) => FnvBottomBar(
         child: DsfrButton(
           label: Localisation.valider,
           variant: DsfrButtonVariant.primary,

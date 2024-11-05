@@ -17,7 +17,7 @@ class SeConnecterView extends StatelessWidget {
   const SeConnecterView({super.key});
 
   @override
-  Widget build(final BuildContext context) =>
+  Widget build(final context) =>
       BlocListener<SeConnecterBloc, SeConnecterState>(
         listener: (final context, final state) async =>
             GoRouter.of(context).pushNamed(
@@ -105,7 +105,7 @@ class _MessageErreur extends StatelessWidget {
   const _MessageErreur();
 
   @override
-  Widget build(final BuildContext context) => context
+  Widget build(final context) => context
       .select<SeConnecterBloc, Option<String>>(
         (final bloc) => bloc.state.erreur,
       )

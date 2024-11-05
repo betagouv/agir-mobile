@@ -19,7 +19,7 @@ class Contenu extends StatelessWidget {
       );
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     const borderRadius = BorderRadius.all(Radius.circular(DsfrSpacings.s1w));
 
     const roundedRectangleBorder =

@@ -10,7 +10,7 @@ class FnvTitle extends StatelessWidget {
   final String? subtitle;
 
   @override
-  Widget build(final BuildContext context) => Column(
+  Widget build(final context) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(title, style: const DsfrTextStyle.headline2()),
@@ -36,7 +36,7 @@ class FnvTitleWidget extends StatelessWidget {
   final String? subtitle;
 
   @override
-  Widget build(final BuildContext context) => Column(
+  Widget build(final context) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text.rich(

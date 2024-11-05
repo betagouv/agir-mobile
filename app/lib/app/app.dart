@@ -127,7 +127,7 @@ class _AppState extends State<App> {
   }
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final upgradeBloc = UpgradeBloc();
     widget.dioHttpClient.add(UpgradeInterceptor(upgradeBloc));
 

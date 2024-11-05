@@ -18,7 +18,7 @@ class QuizView extends StatelessWidget {
   const QuizView({super.key});
 
   @override
-  Widget build(final BuildContext context) => Scaffold(
+  Widget build(final context) => Scaffold(
         appBar: FnvAppBar(),
         body: const _Body(),
         bottomNavigationBar: const _BottomButton(),
@@ -51,7 +51,7 @@ class _Body extends StatelessWidget {
   }
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final state = context.watch<QuizBloc>().state;
 
     return ListView(
@@ -92,7 +92,7 @@ class _BottomButton extends StatelessWidget {
   const _BottomButton();
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final estValidee = context
         .select<QuizBloc, bool>((final bloc) => bloc.state.estExacte.isSome());
 
@@ -113,7 +113,7 @@ class _BoutonValider extends StatelessWidget {
   const _BoutonValider();
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final estSelectionnee = context
         .select<QuizBloc, bool>((final bloc) => bloc.state.estSelectionnee);
 

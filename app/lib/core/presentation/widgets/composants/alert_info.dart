@@ -9,7 +9,7 @@ class FnvAlertInfo extends StatelessWidget {
   final Widget? content;
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     Widget child = Row(
       children: [
         const Icon(

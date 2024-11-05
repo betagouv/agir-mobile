@@ -16,7 +16,7 @@ class TopEmissionSourceItem extends StatelessWidget {
   final String emoji;
 
   @override
-  Widget build(final BuildContext context) => Row(
+  Widget build(final context) => Row(
         children: [
           Expanded(
             child: Row(

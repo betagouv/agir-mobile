@@ -31,7 +31,7 @@ class MotDePasseOublieCodePage extends StatelessWidget {
       );
 
   @override
-  Widget build(final BuildContext context) => BlocProvider(
+  Widget build(final context) => BlocProvider(
         create: (final context) => MotDePasseOublieCodeBloc(
           authentificationPort: context.read(),
           email: email,
@@ -50,7 +50,7 @@ class _View extends StatelessWidget {
   }
 
   @override
-  Widget build(final BuildContext context) =>
+  Widget build(final context) =>
       BlocListener<MotDePasseOublieCodeBloc, MotDePasseOublieCodeState>(
         listener: (final context, final state) =>
             _handleMotDePasseModifie(context),
@@ -113,7 +113,7 @@ class _Code extends StatelessWidget {
   }
 
   @override
-  Widget build(final BuildContext context) => FnvCodeInput(
+  Widget build(final context) => FnvCodeInput(
         onChanged: (final value) => _handleCode(context, value),
       );
 }
@@ -127,7 +127,7 @@ class _ButtonRenvoyerCode extends StatelessWidget {
           );
 
   @override
-  Widget build(final BuildContext context) =>
+  Widget build(final context) =>
       BlocListener<MotDePasseOublieCodeBloc, MotDePasseOublieCodeState>(
         listener: (final context, final state) =>
             ScaffoldMessenger.of(context).showSnackBar(
@@ -162,7 +162,7 @@ class _MessageErreur extends StatelessWidget {
   const _MessageErreur();
 
   @override
-  Widget build(final BuildContext context) => context
+  Widget build(final context) => context
       .select<MotDePasseOublieCodeBloc, Option<String>>(
         (final bloc) => bloc.state.erreur,
       )

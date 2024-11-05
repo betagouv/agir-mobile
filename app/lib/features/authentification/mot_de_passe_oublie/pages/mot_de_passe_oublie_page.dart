@@ -17,7 +17,7 @@ class MotDePasseOubliePage extends StatelessWidget {
       );
 
   @override
-  Widget build(final BuildContext context) => BlocProvider(
+  Widget build(final context) => BlocProvider(
         create: (final context) =>
             MotDePasseOublieBloc(authentificationPort: context.read()),
         child: const MotDePasseOublieView(),

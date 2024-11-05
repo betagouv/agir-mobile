@@ -16,7 +16,7 @@ class EnvironmentalPerformanceTonnesCard extends StatelessWidget {
   final Footprint footprint;
 
   @override
-  Widget build(final BuildContext context) => DecoratedBox(
+  Widget build(final context) => DecoratedBox(
         decoration: const ShapeDecoration(
           color: FnvColors.carteFond,
           shadows: recommandationOmbre,

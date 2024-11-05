@@ -10,7 +10,7 @@ class MonLogementPlus15Ans extends StatelessWidget {
   const MonLogementPlus15Ans({super.key});
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final context) {
     final plusDe15ans = context.select<MonLogementBloc, bool?>(
       (final bloc) => bloc.state.plusDe15Ans,
     );

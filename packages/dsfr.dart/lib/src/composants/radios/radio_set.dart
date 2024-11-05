@@ -18,7 +18,7 @@ class DsfrRadioButtonSet<T> extends StatelessWidget {
   final Callback<T?> onCallback;
 
   @override
-  Widget build(final BuildContext context) => Column(
+  Widget build(final context) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(title, style: const DsfrTextStyle.bodyMd()),
