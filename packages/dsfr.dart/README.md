@@ -38,7 +38,9 @@ Fait
 
 ## Icônes
 
-Fait
+```console
+dart run icon_font_generator:generator --config-file icon_font.yaml
+```
 
 ## Espacements
 

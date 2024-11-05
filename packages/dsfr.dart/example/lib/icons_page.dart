@@ -19,22 +19,20 @@ class IconsPage extends StatelessWidget {
 
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 11,
+        crossAxisCount: 10,
       ),
       itemBuilder: (final context, final index) {
         final allIconsKey = allIconsKeys.elementAtOrNull(index);
 
         return allIconsKey == null
             ? const SizedBox()
-            : Column(
-                children: [
-                  Icon(
-                    allIcons[allIconsKey],
-                    size: 32,
-                    color: DsfrColors.blueFranceSun113,
-                  ),
-                  Text(allIconsKey),
-                ],
+            : Tooltip(
+                message: allIconsKey,
+                child: Icon(
+                  allIcons[allIconsKey],
+                  size: 32,
+                  color: DsfrColors.blueFranceSun113,
+                ),
               );
       },
       itemCount: allIcons.length,
