@@ -10,16 +10,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class MonLogementNombreAdultes extends StatelessWidget {
   const MonLogementNombreAdultes({super.key});
 
-  void _handleNombreAdultes(final BuildContext context, final String value) {
-    final nombreAdultes = int.tryParse(value);
-    if (nombreAdultes == null) {
-      return;
-    }
-    context
-        .read<MonLogementBloc>()
-        .add(MonLogementNombreAdultesChange(nombreAdultes));
-  }
-
   @override
   Widget build(final context) {
     const adultes = Localisation.adultes;
@@ -33,7 +23,15 @@ class MonLogementNombreAdultes extends StatelessWidget {
           child: DsfrInputHeadless(
             key: const ValueKey(adultes),
             initialValue: nombreAdultes.toString(),
-            onChanged: (final value) => _handleNombreAdultes(context, value),
+            onChanged: (final value) {
+              final nombreAdultes = int.tryParse(value);
+              if (nombreAdultes == null) {
+                return;
+              }
+              context
+                  .read<MonLogementBloc>()
+                  .add(MonLogementNombreAdultesChange(nombreAdultes));
+            },
             keyboardType: TextInputType.number,
             textInputAction: TextInputAction.next,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],

@@ -76,19 +76,6 @@ class _Prix extends StatefulWidget {
 class _PrixState extends State<_Prix> {
   final _prixVeloControlleur = TextEditingController();
 
-  void _handlePrix(final BuildContext context, final String value) {
-    final parse = int.tryParse(value);
-    if (parse == null) {
-      return;
-    }
-    context.read<AideVeloBloc>().add(AideVeloPrixChange(parse));
-  }
-
-  void _handleTagPrix(final BuildContext context, final int prix) {
-    context.read<AideVeloBloc>().add(AideVeloPrixChange(prix));
-    _prixVeloControlleur.text = '$prix';
-  }
-
   @override
   void dispose() {
     _prixVeloControlleur.dispose();
@@ -111,7 +98,13 @@ class _PrixState extends State<_Prix> {
               label: Localisation.prixDuVelo,
               suffixText: '€',
               controller: _prixVeloControlleur,
-              onChanged: (final value) => _handlePrix(context, value),
+              onChanged: (final value) {
+                final parse = int.tryParse(value);
+                if (parse == null) {
+                  return;
+                }
+                context.read<AideVeloBloc>().add(AideVeloPrixChange(parse));
+              },
               validator: (final value) => value == null || value.isEmpty
                   ? Localisation.prixDuVeloObligatoire
                   : null,
@@ -149,7 +142,11 @@ class _PrixState extends State<_Prix> {
               backgroundColor: DsfrColors.info950,
               foregroundColor: foregroundColor,
               textStyle: const DsfrTextStyle.bodySm(),
-              onTap: () => _handleTagPrix(context, e.prix),
+              onTap: () {
+                final prix = e.prix;
+                context.read<AideVeloBloc>().add(AideVeloPrixChange(prix));
+                _prixVeloControlleur.text = '$prix';
+              },
             ),
           );
         }).separator(const SizedBox(height: 10)),
@@ -273,11 +270,6 @@ class _CodePostalEtCommune extends StatefulWidget {
 class _CodePostalEtCommuneState extends State<_CodePostalEtCommune> {
   late final _textEditingController = TextEditingController();
 
-  void _handleCodePostal(final BuildContext context, final String value) {
-    context.read<AideVeloBloc>().add(AideVeloCodePostalChange(value));
-    _textEditingController.clear();
-  }
-
   void _handleCommune(final BuildContext context, final String? value) {
     if (value == null) {
       return;
@@ -310,7 +302,10 @@ class _CodePostalEtCommuneState extends State<_CodePostalEtCommune> {
           child: DsfrInput(
             label: Localisation.codePostal,
             initialValue: state.codePostal,
-            onChanged: (final value) => _handleCodePostal(context, value),
+            onChanged: (final value) {
+              context.read<AideVeloBloc>().add(AideVeloCodePostalChange(value));
+              _textEditingController.clear();
+            },
             keyboardType: TextInputType.number,
             inputFormatters: [
               FilteringTextInputFormatter.digitsOnly,
@@ -338,23 +333,6 @@ class _CodePostalEtCommuneState extends State<_CodePostalEtCommune> {
 class _NombreDePartsFiscales extends StatelessWidget {
   const _NombreDePartsFiscales();
 
-  void _handleNombreDePartsFiscales(
-    final BuildContext context,
-    final String value,
-  ) {
-    final parse = double.tryParse(value.replaceFirst(',', '.'));
-    if (parse == null) {
-      context
-          .read<AideVeloBloc>()
-          .add(const AideVeloNombreDePartsFiscalesChange(0));
-
-      return;
-    }
-    context
-        .read<AideVeloBloc>()
-        .add(AideVeloNombreDePartsFiscalesChange(parse));
-  }
-
   @override
   Widget build(final context) {
     final nombreDePartsFiscales =
@@ -364,7 +342,19 @@ class _NombreDePartsFiscales extends StatelessWidget {
       label: Localisation.nombreDePartsFiscales,
       hint: Localisation.nombreDePartsFiscalesDescription,
       initialValue: FnvNumberFormat.formatNumber(nombreDePartsFiscales),
-      onChanged: (final value) => _handleNombreDePartsFiscales(context, value),
+      onChanged: (final value) {
+        final parse = double.tryParse(value.replaceFirst(',', '.'));
+        if (parse == null) {
+          context
+              .read<AideVeloBloc>()
+              .add(const AideVeloNombreDePartsFiscalesChange(0));
+
+          return;
+        }
+        context
+            .read<AideVeloBloc>()
+            .add(AideVeloNombreDePartsFiscalesChange(parse));
+      },
       width: adjustTextSize(context, _inputWidth),
       keyboardType: const TextInputType.numberWithOptions(decimal: true),
       textInputAction: TextInputAction.next,

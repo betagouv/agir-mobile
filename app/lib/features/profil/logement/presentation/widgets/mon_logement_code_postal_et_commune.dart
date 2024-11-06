@@ -20,11 +20,6 @@ class _MonLogementCodePostalEtCommuneState
     extends State<MonLogementCodePostalEtCommune> {
   late final _textEditingController = TextEditingController();
 
-  void _handleCodePostal(final BuildContext context, final String value) {
-    context.read<MonLogementBloc>().add(MonLogementCodePostalChange(value));
-    _textEditingController.clear();
-  }
-
   void _handleCommune(final BuildContext context, final String? value) {
     if (value == null) {
       return;
@@ -58,7 +53,12 @@ class _MonLogementCodePostalEtCommuneState
             child: DsfrInput(
               label: Localisation.codePostal,
               initialValue: state.codePostal,
-              onChanged: (final value) => _handleCodePostal(context, value),
+              onChanged: (final value) {
+                context
+                    .read<MonLogementBloc>()
+                    .add(MonLogementCodePostalChange(value));
+                _textEditingController.clear();
+              },
               keyboardType: TextInputType.number,
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,

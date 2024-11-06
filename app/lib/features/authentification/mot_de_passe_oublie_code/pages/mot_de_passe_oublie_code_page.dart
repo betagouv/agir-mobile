@@ -45,15 +45,11 @@ class _View extends StatelessWidget {
 
   final String email;
 
-  void _handleMotDePasseModifie(final BuildContext context) {
-    GoRouter.of(context).popUntilNamed<void>(SeConnecterPage.path);
-  }
-
   @override
   Widget build(final context) =>
       BlocListener<MotDePasseOublieCodeBloc, MotDePasseOublieCodeState>(
         listener: (final context, final state) =>
-            _handleMotDePasseModifie(context),
+            GoRouter.of(context).popUntilNamed<void>(SeConnecterPage.path),
         listenWhen: (final previous, final current) =>
             previous.motDePasseModifie != current.motDePasseModifie &&
             current.motDePasseModifie,
@@ -104,27 +100,20 @@ class _View extends StatelessWidget {
 class _Code extends StatelessWidget {
   const _Code();
 
-  void _handleCode(final BuildContext context, final String value) {
-    if (value.length == 6) {
-      context
-          .read<MotDePasseOublieCodeBloc>()
-          .add(MotDePasseOublieCodeCodeChange(value));
-    }
-  }
-
   @override
   Widget build(final context) => FnvCodeInput(
-        onChanged: (final value) => _handleCode(context, value),
+        onChanged: (final value) {
+          if (value.length == 6) {
+            context
+                .read<MotDePasseOublieCodeBloc>()
+                .add(MotDePasseOublieCodeCodeChange(value));
+          }
+        },
       );
 }
 
 class _ButtonRenvoyerCode extends StatelessWidget {
   const _ButtonRenvoyerCode();
-
-  void _handleRenvoyerCode(final BuildContext context) =>
-      context.read<MotDePasseOublieCodeBloc>().add(
-            const MotDePasseOublieCodeRenvoyerCodeDemande(),
-          );
 
   @override
   Widget build(final context) =>
@@ -138,7 +127,9 @@ class _ButtonRenvoyerCode extends StatelessWidget {
             current.renvoyerCodeDemande,
         child: DsfrLink.md(
           label: Localisation.renvoyerCode,
-          onTap: () => _handleRenvoyerCode(context),
+          onTap: () => context.read<MotDePasseOublieCodeBloc>().add(
+                const MotDePasseOublieCodeRenvoyerCodeDemande(),
+              ),
         ),
       );
 }
@@ -146,15 +137,11 @@ class _ButtonRenvoyerCode extends StatelessWidget {
 class _MotDePasse extends StatelessWidget {
   const _MotDePasse();
 
-  void _handleMotDePasse(final BuildContext context, final String value) {
-    context
-        .read<MotDePasseOublieCodeBloc>()
-        .add(MotDePasseOublieCodeMotDePasseChange(value));
-  }
-
   @override
   Widget build(final context) => FnvMotDePasse(
-        onChanged: (final value) => _handleMotDePasse(context, value),
+        onChanged: (final value) => context
+            .read<MotDePasseOublieCodeBloc>()
+            .add(MotDePasseOublieCodeMotDePasseChange(value)),
       );
 }
 

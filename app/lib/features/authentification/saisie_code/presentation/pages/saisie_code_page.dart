@@ -85,26 +85,20 @@ class _MessageErreur extends StatelessWidget {
 class _ButtonRenvoyerCode extends StatelessWidget {
   const _ButtonRenvoyerCode();
 
-  void _handleRenvoyerCode(final BuildContext context) =>
-      context.read<SaisieCodeBloc>().add(
-            const SaiseCodeRenvoyerCodeDemandee(),
-          );
-
-  void _handleCodeRenvoye(final BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text(Localisation.emailDeConnexionRenvoye)),
-    );
-  }
-
   @override
   Widget build(final context) => BlocListener<SaisieCodeBloc, SaisieCodeState>(
-        listener: (final context, final state) => _handleCodeRenvoye(context),
+        listener: (final context, final state) =>
+            ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text(Localisation.emailDeConnexionRenvoye)),
+        ),
         listenWhen: (final previous, final current) =>
             previous.renvoyerCodeDemande != current.renvoyerCodeDemande &&
             current.renvoyerCodeDemande,
         child: DsfrLink.md(
           label: Localisation.renvoyerEmailDeConnexion,
-          onTap: () => _handleRenvoyerCode(context),
+          onTap: () => context.read<SaisieCodeBloc>().add(
+                const SaiseCodeRenvoyerCodeDemandee(),
+              ),
         ),
       );
 }

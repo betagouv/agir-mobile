@@ -15,15 +15,13 @@ class CarteAide extends StatelessWidget {
 
   final Aid aide;
 
-  Future<void> _handleTap(final BuildContext context) async {
-    context.read<AideBloc>().add(AideSelectionnee(aide));
-    context.read<Tracker>().trackClick('Aides', aide.titre);
-    await GoRouter.of(context).pushNamed(AidePage.name);
-  }
-
   @override
   Widget build(final context) => FnvCard(
-        onTap: () async => _handleTap(context),
+        onTap: () async {
+          context.read<AideBloc>().add(AideSelectionnee(aide));
+          context.read<Tracker>().trackClick('Aides', aide.titre);
+          await GoRouter.of(context).pushNamed(AidePage.name);
+        },
         child: Padding(
           padding: const EdgeInsets.all(DsfrSpacings.s2w),
           child: Row(

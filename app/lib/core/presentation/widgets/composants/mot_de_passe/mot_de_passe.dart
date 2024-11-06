@@ -21,21 +21,19 @@ class _MotDePasse extends StatelessWidget {
 
   final ValueChanged<String> onChanged;
 
-  void _handlePasswordChange(final BuildContext context, final String value) {
-    final cubit = context.read<MotDePasseCubit>()
-      ..changerMotDePasseAChange(value);
-    if (cubit.state.estValide) {
-      onChanged(value);
-    }
-  }
-
   @override
   Widget build(final context) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           DsfrInput(
             label: Localisation.motDePasse,
-            onChanged: (final value) => _handlePasswordChange(context, value),
+            onChanged: (final value) {
+              final cubit = context.read<MotDePasseCubit>()
+                ..changerMotDePasseAChange(value);
+              if (cubit.state.estValide) {
+                onChanged(value);
+              }
+            },
             isPasswordMode: true,
             keyboardType: TextInputType.visiblePassword,
             scrollPadding: EdgeInsets.only(

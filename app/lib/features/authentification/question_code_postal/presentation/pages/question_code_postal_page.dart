@@ -111,13 +111,6 @@ class _CodePostalEtCommune extends StatefulWidget {
 class _CodePostalEtCommuneState extends State<_CodePostalEtCommune> {
   late final _textEditingController = TextEditingController();
 
-  void _handleCodePostal(final BuildContext context, final String value) {
-    context
-        .read<QuestionCodePostalBloc>()
-        .add(QuestionCodePostalAChange(value));
-    _textEditingController.clear();
-  }
-
   void _handleCommune(final BuildContext context, final String? value) {
     if (value == null) {
       return;
@@ -151,7 +144,12 @@ class _CodePostalEtCommuneState extends State<_CodePostalEtCommune> {
           child: DsfrInput(
             label: Localisation.codePostal,
             initialValue: state.codePostal,
-            onChanged: (final value) => _handleCodePostal(context, value),
+            onChanged: (final value) {
+              context
+                  .read<QuestionCodePostalBloc>()
+                  .add(QuestionCodePostalAChange(value));
+              _textEditingController.clear();
+            },
             autofocus: true,
             keyboardType: TextInputType.number,
             inputFormatters: [

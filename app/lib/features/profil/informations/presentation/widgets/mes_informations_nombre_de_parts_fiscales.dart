@@ -10,23 +10,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class MesInformationsNombreDePartsFiscales extends StatelessWidget {
   const MesInformationsNombreDePartsFiscales({super.key});
 
-  void _handleNombreDePartsFiscales(
-    final BuildContext context,
-    final String value,
-  ) {
-    final parse = double.tryParse(value.replaceFirst(',', '.'));
-    if (parse == null) {
-      context
-          .read<MesInformationsBloc>()
-          .add(const MesInformationsNombreDePartsFiscalesChange(0));
-
-      return;
-    }
-    context
-        .read<MesInformationsBloc>()
-        .add(MesInformationsNombreDePartsFiscalesChange(parse));
-  }
-
   @override
   Widget build(final context) {
     final nombreDePartsFiscales = context.select<MesInformationsBloc, double>(
@@ -37,7 +20,19 @@ class MesInformationsNombreDePartsFiscales extends StatelessWidget {
       label: Localisation.nombreDePartsFiscales,
       hint: Localisation.nombreDePartsFiscalesDescription,
       initialValue: FnvNumberFormat.formatNumber(nombreDePartsFiscales),
-      onChanged: (final value) => _handleNombreDePartsFiscales(context, value),
+      onChanged: (final value) {
+        final parse = double.tryParse(value.replaceFirst(',', '.'));
+        if (parse == null) {
+          context
+              .read<MesInformationsBloc>()
+              .add(const MesInformationsNombreDePartsFiscalesChange(0));
+
+          return;
+        }
+        context
+            .read<MesInformationsBloc>()
+            .add(MesInformationsNombreDePartsFiscalesChange(parse));
+      },
       keyboardType: const TextInputType.numberWithOptions(decimal: true),
       textInputAction: TextInputAction.next,
       inputFormatters: [
