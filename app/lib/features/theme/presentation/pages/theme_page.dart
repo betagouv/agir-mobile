@@ -224,7 +224,7 @@ class _Services extends StatelessWidget {
       children: [
         const Text(
           Localisation.mesServices,
-          style: DsfrTextStyle.headline5(),
+          style: DsfrTextStyle.headline4(),
         ),
         const SizedBox(height: DsfrSpacings.s2w),
         SingleChildScrollView(

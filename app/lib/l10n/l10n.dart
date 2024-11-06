@@ -233,14 +233,14 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const voirLesDemarches = 'Voir les démarches';
   static const mesActions = 'Mes actions';
   static const mesAides = 'Mes aides';
+  static const mesAidesDisponibles = 'Mes aides disponibles';
   static const homeAssistanceTitlePart1 = 'Aides financières';
   static const homeAssistanceTitlePart2 = 'et bons plans';
   static const homeAssistanceSubTitle =
       "Toutes les aides **locales** et **nationales** pour vous aider à passer à l'action";
-  static const mesAidesDisponibles = 'Mes aides disponibles';
+  static const assistanceListTitle =
+      '**Aides financières** et bons plans **chez vous**';
   static const mesAidesLien = 'Voir toutes les aides';
-  static const mesAidesSousTitre =
-      'Accédez à toutes les aides publiques locales ou nationales pour la transition écologique en fonction de votre situation.';
   static const mesFavoris = 'Mes favoris';
   static const mesInformations = 'Mes informations';
   static const monIdentite = 'Mon identité';

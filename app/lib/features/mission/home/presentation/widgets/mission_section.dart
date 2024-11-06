@@ -46,7 +46,7 @@ class _Section extends StatelessWidget {
                 TextSpan(text: ' '),
                 TextSpan(
                   text: 'pour vous',
-                  style: DsfrTextStyle.headline5(
+                  style: DsfrTextStyle.headline4(
                     color: DsfrColors.blueFranceSun113,
                   ),
                 ),

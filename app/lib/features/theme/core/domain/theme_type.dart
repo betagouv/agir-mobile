@@ -1,3 +1,4 @@
+import 'package:app/core/helpers/regex.dart';
 import 'package:flutter/material.dart';
 
 enum ThemeType {
@@ -11,15 +12,15 @@ enum ThemeType {
     backgroundColor: Color(0xFFD2E9FF),
     foregroundColor: Color(0xFF021952),
   ),
-  consommation(
-    displayName: '👕 Consommer',
-    backgroundColor: Color(0xFFFFE8D7),
-    foregroundColor: Color(0xFF522E02),
-  ),
   logement(
     displayName: '🏠 Me loger',
     backgroundColor: Color(0xFFFFE2E0),
     foregroundColor: Color(0xFF52022E),
+  ),
+  consommation(
+    displayName: '👕 Consommer',
+    backgroundColor: Color(0xFFFFE8D7),
+    foregroundColor: Color(0xFF522E02),
   ),
   decouverte(
     displayName: 'Découverte',
@@ -34,6 +35,7 @@ enum ThemeType {
   });
 
   final String displayName;
+  String get displayNameWithoutEmoji => removeEmoji(displayName).trim();
   final Color backgroundColor;
   final Color foregroundColor;
 }

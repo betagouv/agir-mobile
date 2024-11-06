@@ -152,15 +152,12 @@ class _Tag extends StatelessWidget {
             border: const Border.fromBorderSide(BorderSide(color: blue)),
             borderRadius: borderRadius,
           ),
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(minHeight: 48),
-            child: Padding(
-              padding: const EdgeInsets.all(DsfrSpacings.s3v),
-              child: Text(
-                thematique?.label ?? Localisation.lesCategoriesTout,
-                style: DsfrTextStyle.bodySmMedium(
-                  color: isSelected ? Colors.white : blue,
-                ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
+            child: Text(
+              thematique?.label ?? Localisation.lesCategoriesTout,
+              style: DsfrTextStyle.bodySmMedium(
+                color: isSelected ? Colors.white : blue,
               ),
             ),
           ),

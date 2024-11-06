@@ -11,8 +11,8 @@ import 'package:app/core/presentation/pages/error_page.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/actions/detail/infrastructure/action_repository.dart';
 import 'package:app/features/actions/list/infrastructure/actions_adapter.dart';
-import 'package:app/features/aides/core/infrastructure/aides_api_adapter.dart';
 import 'package:app/features/articles/infrastructure/articles_api_adapter.dart';
+import 'package:app/features/assistances/list/infrastructure/assistances_repository.dart';
 import 'package:app/features/authentication/domain/authentication_service.dart';
 import 'package:app/features/authentication/infrastructure/authentication_repository.dart';
 import 'package:app/features/authentification/core/infrastructure/api_url.dart';
@@ -183,7 +183,7 @@ class _MyAppState extends State<MyApp> {
               authenticationService: _authenticationService,
             ),
             themePort: UniversApiAdapter(client: client),
-            aidesPort: AidesApiAdapter(client: client),
+            aidesPort: AssistancesRepository(client: client),
             bibliothequePort: BibliothequeApiAdapter(client: client),
             recommandationsPort: RecommandationsApiAdapter(client: client),
             articlesPort: ArticlesApiAdapter(

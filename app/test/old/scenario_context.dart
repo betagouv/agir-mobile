@@ -1,5 +1,5 @@
-import 'package:app/features/aides/core/domain/aide.dart';
 import 'package:app/features/articles/domain/article.dart';
+import 'package:app/features/assistances/core/domain/aide.dart';
 import 'package:app/features/authentication/domain/authentication_status.dart';
 import 'package:app/features/bibliotheque/domain/bibliotheque.dart';
 import 'package:app/features/gamification/domain/gamification.dart';

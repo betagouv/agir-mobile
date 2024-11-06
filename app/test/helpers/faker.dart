@@ -125,7 +125,7 @@ Map<String, dynamic> actionFaker({
   };
 }
 
-Map<String, dynamic> aideFaker() {
+Map<String, dynamic> aideFaker({final String? thematique}) {
   final faker = Faker();
 
   return {
@@ -133,7 +133,7 @@ Map<String, dynamic> aideFaker() {
     'montant_max': faker.randomGenerator.boolean()
         ? faker.randomGenerator.integer(10000)
         : null,
-    'thematiques': [generateThematique],
+    'thematiques': [thematique ?? generateThematique],
     'titre': faker.company.name(),
     'url_simulateur':
         faker.randomGenerator.boolean() ? faker.internet.uri('https') : null,

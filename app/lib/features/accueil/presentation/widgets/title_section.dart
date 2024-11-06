@@ -12,7 +12,7 @@ class TitleSection extends StatelessWidget {
   Widget build(final context) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text.rich(title, style: const DsfrTextStyle.headline5()),
+          Text.rich(title, style: const DsfrTextStyle.headline4()),
           const SizedBox(height: DsfrSpacings.s1v5),
           MarkdownBody(
             data: subTitle,

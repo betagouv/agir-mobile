@@ -3,9 +3,9 @@ import 'package:app/core/infrastructure/tracker.dart';
 import 'package:app/features/accueil/presentation/pages/home_page.dart';
 import 'package:app/features/actions/detail/presentation/pages/action_detail_page.dart';
 import 'package:app/features/actions/list/presentation/pages/action_list_page.dart';
-import 'package:app/features/aides/item/presentation/pages/assistance_detail_page.dart';
-import 'package:app/features/aides/list/presentation/pages/aides_page.dart';
 import 'package:app/features/articles/presentation/pages/article_page.dart';
+import 'package:app/features/assistances/item/presentation/pages/assistance_detail_page.dart';
+import 'package:app/features/assistances/list/presentation/pages/assistance_list_page.dart';
 import 'package:app/features/authentication/domain/authentication_service.dart';
 import 'package:app/features/authentication/domain/authentication_status.dart';
 import 'package:app/features/authentification/creer_compte/presentation/pages/creer_compte_page.dart';
@@ -74,7 +74,7 @@ GoRouter goRouter({
             EnvironmentalPerformanceQuestionPage.route,
             MissionPage.route,
             MissionKycPage.route,
-            AidesPage.route,
+            AssistanceListPage.route,
             AssistanceDetailPage.route,
             AideSimulateurVeloPage.route(
               routes: [AideSimulateurVeloDisponiblePage.route],
