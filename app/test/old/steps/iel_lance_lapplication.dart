@@ -26,8 +26,8 @@ import '../../mission/mission_home_test.dart';
 import '../api/constants.dart';
 import '../api/flutter_secure_storage_fake.dart';
 import '../mocks/aide_velo_port_mock.dart';
-import '../mocks/aides_port_mock.dart';
 import '../mocks/articles_port_mock.dart';
+import '../mocks/assistances_repository_mock.dart';
 import '../mocks/authentification_port_mock.dart';
 import '../mocks/bibliotheque_port_mock.dart';
 import '../mocks/communes_port_mock.dart';
@@ -140,7 +140,7 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
         authenticationService: authenticationService,
         authentificationPort: ScenarioContext().authentificationPortMock!,
         themePort: ScenarioContext().universPortMock!,
-        aidesPort: AidesPortMock(ScenarioContext().aides),
+        aidesPort: AssistancesRepositoryMock(ScenarioContext().aides),
         bibliothequePort: BibliothequePortMock(ScenarioContext().bibliotheque),
         recommandationsPort:
             RecommandationsPortMock(ScenarioContext().recommandations),

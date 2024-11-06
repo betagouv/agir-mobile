@@ -2,7 +2,7 @@ import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_bor
 import 'package:app/core/presentation/widgets/fondamentaux/text_styles.dart';
 import 'package:app/features/accueil/presentation/cubit/home_disclaimer_cubit.dart';
 import 'package:app/features/accueil/presentation/cubit/home_disclaimer_state.dart';
-import 'package:app/features/aides/core/presentation/widgets/assitances_section.dart';
+import 'package:app/features/assistances/core/presentation/widgets/assitances_section.dart';
 import 'package:app/features/environmental_performance/home/presentation/widgets/environmental_performance_section.dart';
 import 'package:app/features/environmental_performance/summary/presentation/bloc/environmental_performance_bloc.dart';
 import 'package:app/features/environmental_performance/summary/presentation/bloc/environmental_performance_event.dart';

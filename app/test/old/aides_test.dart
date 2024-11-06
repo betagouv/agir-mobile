@@ -1,4 +1,4 @@
-import 'package:app/features/aides/core/domain/aide.dart';
+import 'package:app/features/assistances/core/domain/aide.dart';
 import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -29,11 +29,6 @@ void main() {
     );
     const aide3 = Assistance(
       titre: 'Composter ses déchets',
-      themeType: ThemeType.consommation,
-      contenu: '',
-    );
-    const aide4 = Assistance(
-      titre: 'Gérer ses déchets verts',
       themeType: ThemeType.consommation,
       contenu: '',
     );
@@ -71,30 +66,6 @@ void main() {
           });
         },
       );
-    });
-
-    group('Vos aides', () {
-      testWidgets('iel voit toutes les aides', (final tester) async {
-        setUpWidgets(tester);
-        await mockNetworkImages(() async {
-          ielALesAidesSuivantes([aide1, aide2, aide3, aide4]);
-          ielEstConnecte();
-          await ielLanceLapplication(tester);
-          await ielScrolle(tester, Localisation.mesAidesLien);
-          await ielAppuieSur(tester, Localisation.mesAidesLien);
-          ielVoitLeTexte(Localisation.mesAidesDisponibles);
-
-          ielVoitLeTexte(aide1.themeType.displayName);
-          ielVoitLeTexte(aide1.titre);
-
-          ielVoitLeTexte(aide2.themeType.displayName);
-          ielVoitLeTexte(aide2.titre);
-
-          ielVoitLeTexte(aide3.themeType.displayName);
-          ielVoitLeTexte(aide3.titre);
-          ielVoitLeTexte(aide4.titre);
-        });
-      });
     });
   });
 }

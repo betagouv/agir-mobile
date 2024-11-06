@@ -204,7 +204,7 @@ class _TitleAndSubtitle extends StatelessWidget {
             TextSpan(text: ' '),
             TextSpan(
               text: EnvironmentalPerformanceSummaryL10n.bilanEnvironnemental,
-              style: DsfrTextStyle.headline5(
+              style: DsfrTextStyle.headline4(
                 color: DsfrColors.blueFranceSun113,
               ),
             ),
@@ -232,13 +232,13 @@ class _Full extends StatelessWidget {
                 TextSpan(
                   text:
                       EnvironmentalPerformanceSummaryL10n.bilanEnvironnemental,
-                  style: DsfrTextStyle.headline5(
+                  style: DsfrTextStyle.headline4(
                     color: DsfrColors.blueFranceSun113,
                   ),
                 ),
               ],
             ),
-            style: DsfrTextStyle.headline5(),
+            style: DsfrTextStyle.headline4(),
           ),
           const SizedBox(height: DsfrSpacings.s2w),
           EnvironmentalPerformanceTonnesCard(

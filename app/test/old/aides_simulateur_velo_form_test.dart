@@ -2,7 +2,7 @@
 
 import 'package:app/core/helpers/input_formatter.dart';
 import 'package:app/core/helpers/number_format.dart';
-import 'package:app/features/aides/core/domain/aide.dart';
+import 'package:app/features/assistances/core/domain/aide.dart';
 import 'package:app/features/simulateur_velo/domain/velo_pour_simulateur.dart';
 import 'package:app/features/simulateur_velo/infrastructure/aide_velo_par_type_mapper.dart';
 import 'package:app/features/theme/core/domain/theme_type.dart';

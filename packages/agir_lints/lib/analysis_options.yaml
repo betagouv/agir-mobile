@@ -83,6 +83,7 @@ dart_code_metrics:
     - enum-constants-ordering: false
     - format-comment:
         only-doc-comments: true
+    - match-getter-setter-field-names: false
     - member-ordering:
         order:
           - constructors

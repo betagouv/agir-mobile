@@ -115,6 +115,7 @@ class DefiWidget extends StatelessWidget {
                         child: SizedBox(width: DsfrSpacings.s1v),
                       ),
                       WidgetSpan(
+                        alignment: PlaceholderAlignment.middle,
                         child: Icon(
                           DsfrIcons.othersLeafFill,
                           color: isPointsCollected

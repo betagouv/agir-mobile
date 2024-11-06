@@ -126,7 +126,7 @@ class _Tag extends StatelessWidget {
               const BorderRadius.all(Radius.circular(DsfrSpacings.s4w)),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(paddingVerticalPage),
+          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
           child: Text(
             label,
             style: DsfrTextStyle.bodySmMedium(

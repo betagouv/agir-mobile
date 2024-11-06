@@ -68,6 +68,7 @@ class _JaccepteState extends State<Jaccepte> {
                     // semanticsLabel: 'Lien vers ${widget.label}',
                     children: const [
                       WidgetSpan(
+                        alignment: PlaceholderAlignment.middle,
                         child: Icon(
                           DsfrIcons.systemExternalLinkFill,
                           size: 16,

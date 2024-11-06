@@ -1,5 +1,5 @@
 import 'package:app/core/infrastructure/url_launcher.dart';
-import 'package:app/features/aides/list/presentation/pages/aides_page.dart';
+import 'package:app/features/assistances/list/presentation/pages/assistance_list_page.dart';
 import 'package:app/features/environmental_performance/summary/presentation/page/environmental_performance_summary_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -26,12 +26,11 @@ class FnvHtmlWidget extends StatelessWidget {
           customStylesBuilder: _handlePDansLi,
           onTapUrl: (final url) async {
             final uri = Uri.parse(url);
-
             if (uri.host == 'jagis.beta.gouv.fr') {
               switch (uri.path) {
                 case '/vos-aides':
                 case '/aides':
-                  await GoRouter.of(context).pushNamed(AidesPage.name);
+                  await GoRouter.of(context).pushNamed(AssistanceListPage.name);
 
                   return true;
                 case '/bilan-environnemental':

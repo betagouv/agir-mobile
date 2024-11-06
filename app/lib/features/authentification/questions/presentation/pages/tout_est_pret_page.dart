@@ -69,6 +69,7 @@ class ToutEstPretPage extends StatelessWidget {
                 arrow,
                 const TextSpan(text: 'Gagnez des ', style: bodyLgBold),
                 const WidgetSpan(
+                  alignment: PlaceholderAlignment.middle,
                   child: Icon(
                     DsfrIcons.othersLeafFill,
                     size: DsfrSpacings.s2w,

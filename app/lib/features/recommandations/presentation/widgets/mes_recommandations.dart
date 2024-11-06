@@ -63,7 +63,7 @@ class _View extends StatelessWidget {
             children: [
               Text(
                 Localisation.recommandationsTitre,
-                style: DsfrTextStyle.headline5(),
+                style: DsfrTextStyle.headline4(),
               ),
               SizedBox(height: DsfrSpacings.s1v5),
               Text(
