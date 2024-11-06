@@ -12,12 +12,12 @@ enum MissionThemeType {
     foregroundColor: Color(0xFF021952),
   ),
   consommation(
-    displayName: '🏠 Me loger',
+    displayName: '👕 Consommer',
     backgroundColor: Color(0xFFFFE8D7),
     foregroundColor: Color(0xFF522E02),
   ),
   logement(
-    displayName: '👕 Consommer',
+    displayName: '🏠 Me loger',
     backgroundColor: Color(0xFFFFE2E0),
     foregroundColor: Color(0xFF52022E),
   ),
