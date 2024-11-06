@@ -36,16 +36,6 @@ class MonLogementPage extends StatelessWidget {
 class _MonLogementView extends StatelessWidget {
   const _MonLogementView();
 
-  void _handleMettreAJour(final BuildContext context) {
-    context.read<MonLogementBloc>().add(const MonLogementMiseAJourDemandee());
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        const SnackBar(content: Text(Localisation.miseAJourEffectuee)),
-      );
-    GoRouter.of(context).pop();
-  }
-
   @override
   Widget build(final context) => Scaffold(
         appBar: FnvAppBar(),
@@ -65,7 +55,19 @@ class _MonLogementView extends StatelessWidget {
             label: Localisation.mettreAJourMesInformations,
             variant: DsfrButtonVariant.primary,
             size: DsfrButtonSize.lg,
-            onPressed: () => _handleMettreAJour(context),
+            onPressed: () {
+              context
+                  .read<MonLogementBloc>()
+                  .add(const MonLogementMiseAJourDemandee());
+              ScaffoldMessenger.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(
+                  const SnackBar(
+                    content: Text(Localisation.miseAJourEffectuee),
+                  ),
+                );
+              GoRouter.of(context).pop();
+            },
           ),
         ),
         backgroundColor: FnvColors.aidesFond,

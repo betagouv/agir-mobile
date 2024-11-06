@@ -10,16 +10,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class MonLogementResidencePrincipale extends StatelessWidget {
   const MonLogementResidencePrincipale({super.key});
 
-  void _handleTypeDeLogement(
-    final BuildContext context,
-    final TypeDeLogement? value,
-  ) {
-    if (value == null) {
-      return;
-    }
-    context.read<MonLogementBloc>().add(MonLogementTypeDeLogementChange(value));
-  }
-
   @override
   Widget build(final context) {
     final typeDeLogement = context.select<MonLogementBloc, TypeDeLogement?>(
@@ -34,7 +24,14 @@ class MonLogementResidencePrincipale extends StatelessWidget {
               DsfrRadioButtonItem(Localisation.unAppartement),
           TypeDeLogement.maison: DsfrRadioButtonItem(Localisation.uneMaison),
         },
-        onCallback: (final value) => _handleTypeDeLogement(context, value),
+        onCallback: (final value) {
+          if (value == null) {
+            return;
+          }
+          context
+              .read<MonLogementBloc>()
+              .add(MonLogementTypeDeLogementChange(value));
+        },
         initialValue: typeDeLogement,
       ),
     );

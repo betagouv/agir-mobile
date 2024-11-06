@@ -12,21 +12,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class SupprimerCompte extends StatelessWidget {
   const SupprimerCompte({super.key});
 
-  Future<void> _handleSupprimerCompte(final BuildContext context) async {
-    final bloc = SupprimerCompteBloc(
-      authentificationPort: context.read(),
-      profilPort: context.read(),
-    );
-    final result = await DsfrModal.showModal<bool>(
-      context: context,
-      builder: (final context) => const SupprimerCompteModal(),
-      name: 'supprimer-compte',
-    );
-    if (result != null && result) {
-      bloc.add(const SupprimerCompteSuppressionDemandee());
-    }
-  }
-
   @override
   Widget build(final context) {
     const color = DsfrColors.error425;
@@ -75,7 +60,20 @@ class SupprimerCompte extends StatelessWidget {
           variant: DsfrButtonVariant.secondary,
           foregroundColor: color,
           size: DsfrButtonSize.lg,
-          onPressed: () async => _handleSupprimerCompte(context),
+          onPressed: () async {
+            final bloc = SupprimerCompteBloc(
+              authentificationPort: context.read(),
+              profilPort: context.read(),
+            );
+            final result = await DsfrModal.showModal<bool>(
+              context: context,
+              builder: (final context) => const SupprimerCompteModal(),
+              name: 'supprimer-compte',
+            );
+            if (result != null && result) {
+              bloc.add(const SupprimerCompteSuppressionDemandee());
+            }
+          },
         ),
       ],
     );

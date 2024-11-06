@@ -149,18 +149,6 @@ class _ChampRecherche extends StatefulWidget {
 class _ChampRechercheState extends State<_ChampRecherche> {
   Timer? _timer;
 
-  void _handleValueChange(final BuildContext context, final String value) {
-    if (_timer?.isActive ?? false) {
-      _timer?.cancel();
-    }
-    _timer = Timer(
-      const Duration(milliseconds: 500),
-      () => context.read<BibliothequeBloc>().add(
-            BibliothequeRechercheSaisie(value),
-          ),
-    );
-  }
-
   @override
   void dispose() {
     _timer?.cancel();
@@ -170,7 +158,17 @@ class _ChampRechercheState extends State<_ChampRecherche> {
   @override
   Widget build(final context) => DsfrInput(
         label: Localisation.rechercherParTitre,
-        onChanged: (final value) => _handleValueChange(context, value),
+        onChanged: (final value) {
+          if (_timer?.isActive ?? false) {
+            _timer?.cancel();
+          }
+          _timer = Timer(
+            const Duration(milliseconds: 500),
+            () => context.read<BibliothequeBloc>().add(
+                  BibliothequeRechercheSaisie(value),
+                ),
+          );
+        },
         keyboardType: TextInputType.text,
       );
 }

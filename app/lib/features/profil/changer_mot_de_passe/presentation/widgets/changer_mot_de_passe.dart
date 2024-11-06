@@ -23,20 +23,17 @@ class ChangerMotDePasse extends StatelessWidget {
 class _ChangerMotDePasse extends StatelessWidget {
   const _ChangerMotDePasse();
 
-  void _handleMotPasseEstChange(final BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text(Localisation.changerVotreMotDePasseConfirmation),
-      ),
-    );
-    GoRouter.of(context).pop();
-  }
-
   @override
   Widget build(final context) =>
       BlocListener<ChangerMotDePasseBloc, ChangerMotDePasseState>(
-        listener: (final context, final state) =>
-            _handleMotPasseEstChange(context),
+        listener: (final context, final state) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text(Localisation.changerVotreMotDePasseConfirmation),
+            ),
+          );
+          GoRouter.of(context).pop();
+        },
         listenWhen: (final previous, final current) =>
             previous.motPasseEstChange != current.motPasseEstChange &&
             current.motPasseEstChange,

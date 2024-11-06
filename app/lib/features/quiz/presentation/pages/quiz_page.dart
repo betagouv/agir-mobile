@@ -23,17 +23,6 @@ class QuizPage extends StatelessWidget {
 
   final String id;
 
-  void _handleQuizValider(final BuildContext context, final QuizState state) {
-    if (state.estExacte.getOrElse(() => false)) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content:
-              Text('Bien joué ! Vous récoltez ${state.quiz.points} points.'),
-        ),
-      );
-    }
-  }
-
   @override
   Widget build(final context) => BlocProvider(
         create: (final context) => QuizBloc(
@@ -43,7 +32,17 @@ class QuizPage extends StatelessWidget {
         )..add(QuizRecuperationDemandee(id)),
         child: Builder(
           builder: (final context) => BlocListener<QuizBloc, QuizState>(
-            listener: _handleQuizValider,
+            listener: (final context, final state) {
+              if (state.estExacte.getOrElse(() => false)) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      'Bien joué ! Vous récoltez ${state.quiz.points} points.',
+                    ),
+                  ),
+                );
+              }
+            },
             listenWhen: (final previous, final current) =>
                 previous.estExacte != current.estExacte,
             child: const QuizView(),

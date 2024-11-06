@@ -46,13 +46,11 @@ class ArticleView extends StatelessWidget {
                 article.isFavorite ? DsfrColors.redMarianneMain472 : null,
             variant: DsfrButtonVariant.tertiary,
             size: DsfrButtonSize.lg,
-            onPressed: () {
-              context.read<ArticleBloc>().add(
-                    article.isFavorite
-                        ? const ArticleRemoveToFavoritesPressed()
-                        : const ArticleAddToFavoritesPressed(),
-                  );
-            },
+            onPressed: () => context.read<ArticleBloc>().add(
+                  article.isFavorite
+                      ? const ArticleRemoveToFavoritesPressed()
+                      : const ArticleAddToFavoritesPressed(),
+                ),
           ),
           if (article.partenaire != null) ...[
             const SizedBox(height: DsfrSpacings.s4w),
