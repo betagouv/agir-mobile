@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum MissionThemeType {
+enum ThemeType {
   alimentation(
     displayName: '🥗 Me nourrir',
     backgroundColor: Color(0xFFE3FBAF),
@@ -27,11 +27,12 @@ enum MissionThemeType {
     foregroundColor: Color(0xFF024452),
   );
 
-  const MissionThemeType({
+  const ThemeType({
     required this.displayName,
     required this.backgroundColor,
     required this.foregroundColor,
   });
+
   final String displayName;
   final Color backgroundColor;
   final Color foregroundColor;

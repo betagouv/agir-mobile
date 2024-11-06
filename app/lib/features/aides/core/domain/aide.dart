@@ -1,26 +1,27 @@
+import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:equatable/equatable.dart';
 
-class Aids extends Equatable {
-  const Aids({required this.isCovered, required this.aids});
+class AssistanceList extends Equatable {
+  const AssistanceList({required this.isCovered, required this.assistances});
 
   final bool isCovered;
-  final List<Aid> aids;
+  final List<Assistance> assistances;
 
   @override
-  List<Object?> get props => [isCovered, aids];
+  List<Object?> get props => [isCovered, assistances];
 }
 
-class Aid extends Equatable {
-  const Aid({
+class Assistance extends Equatable {
+  const Assistance({
     required this.titre,
-    required this.thematique,
+    required this.themeType,
     required this.contenu,
     this.montantMax,
     this.urlSimulateur,
   });
 
   final String titre;
-  final String thematique;
+  final ThemeType themeType;
   final String contenu;
   final int? montantMax;
   final String? urlSimulateur;
@@ -30,7 +31,7 @@ class Aid extends Equatable {
   @override
   List<Object?> get props => [
         titre,
-        thematique,
+        themeType,
         contenu,
         montantMax,
         urlSimulateur,

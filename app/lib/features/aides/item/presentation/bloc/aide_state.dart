@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 final class AideState extends Equatable {
   const AideState(this.aide);
 
-  final Aid aide;
+  final Assistance aide;
 
   @override
   List<Object> get props => [aide];

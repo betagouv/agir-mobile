@@ -1,7 +1,8 @@
+import 'package:app/features/accueil/presentation/widgets/title_section.dart';
 import 'package:app/features/aides/core/presentation/bloc/aides_accueil_bloc.dart';
 import 'package:app/features/aides/core/presentation/bloc/aides_accueil_event.dart';
 import 'package:app/features/aides/core/presentation/bloc/aides_accueil_state.dart';
-import 'package:app/features/aides/core/presentation/widgets/carte_aide.dart';
+import 'package:app/features/aides/core/presentation/widgets/assitance_card.dart';
 import 'package:app/features/aides/list/presentation/pages/aides_page.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
@@ -9,8 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-class MesAides extends StatelessWidget {
-  const MesAides({super.key});
+class AssitancesSection extends StatelessWidget {
+  const AssitancesSection({super.key});
 
   @override
   Widget build(final context) {
@@ -22,27 +23,41 @@ class MesAides extends StatelessWidget {
       shrinkWrap: true,
       padding: EdgeInsets.zero,
       children: [
-        const Text(Localisation.mesAides, style: DsfrTextStyle.headline5()),
-        const SizedBox(height: DsfrSpacings.s3w),
+        const TitleSection(
+          title: TextSpan(
+            children: [
+              TextSpan(
+                text: Localisation.homeAssistanceTitlePart1,
+                style: DsfrTextStyle.headline5(
+                  color: DsfrColors.blueFranceSun113,
+                ),
+              ),
+              TextSpan(text: ' '),
+              TextSpan(text: Localisation.homeAssistanceTitlePart2),
+            ],
+          ),
+          subTitle: Localisation.homeAssistanceSubTitle,
+        ),
+        const SizedBox(height: DsfrSpacings.s2w),
         BlocBuilder<AidesAccueilBloc, AidesAccueilState>(
           builder: (final context, final state) {
             if (state.aides.isEmpty) {
               return const SizedBox();
             }
-            final aides = state.aides;
+            final assistances = state.aides;
 
             return ListView.separated(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               padding: EdgeInsets.zero,
               itemBuilder: (final context, final index) {
-                final aide = aides[index];
+                final aide = assistances[index];
 
-                return CarteAide(aide: aide);
+                return AssitanceCard(assistance: aide);
               },
               separatorBuilder: (final context, final index) =>
                   const SizedBox(height: DsfrSpacings.s1w),
-              itemCount: aides.length,
+              itemCount: assistances.length,
             );
           },
           bloc: bloc,

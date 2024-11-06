@@ -1,4 +1,3 @@
-import 'package:app/core/helpers/regex.dart';
 import 'package:app/core/presentation/widgets/composants/app_bar.dart';
 import 'package:app/core/presentation/widgets/composants/bottom_bar.dart';
 import 'package:app/core/presentation/widgets/composants/html_widget.dart';
@@ -7,14 +6,15 @@ import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_bor
 import 'package:app/features/aides/core/presentation/widgets/tag_simulateur.dart';
 import 'package:app/features/aides/item/presentation/bloc/aide_bloc.dart';
 import 'package:app/features/simulateur_velo/presentation/pages/aide_simulateur_velo_page.dart';
+import 'package:app/features/theme/presentation/widgets/theme_type_tag.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-class AidePage extends StatelessWidget {
-  const AidePage({super.key});
+class AssistanceDetailPage extends StatelessWidget {
+  const AssistanceDetailPage({super.key});
 
   static const name = 'aide';
   static const path = name;
@@ -22,56 +22,55 @@ class AidePage extends StatelessWidget {
   static GoRoute get route => GoRoute(
         path: path,
         name: name,
-        builder: (final context, final state) => const AidePage(),
+        builder: (final context, final state) => const AssistanceDetailPage(),
       );
 
   @override
   Widget build(final context) {
-    final aide = context.watch<AideBloc>().state.aide;
+    final assistance = context.watch<AideBloc>().state.aide;
 
     return Scaffold(
       appBar: FnvAppBar(),
       body: ListView(
         padding: const EdgeInsets.all(paddingVerticalPage),
         children: [
-          Text(
-            aide.thematique,
-            style: const DsfrTextStyle.bodySmMedium(),
-            semanticsLabel: removeEmoji(aide.thematique),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: ThemeTypeTag(themeType: assistance.themeType),
           ),
           const SizedBox(height: DsfrSpacings.s2w),
-          Text(aide.titre, style: const DsfrTextStyle.headline2()),
-          if (aide.aUnSimulateur || aide.montantMax != null) ...[
+          Text(assistance.titre, style: const DsfrTextStyle.headline2()),
+          if (assistance.aUnSimulateur || assistance.montantMax != null) ...[
             const SizedBox(height: DsfrSpacings.s1w),
             Wrap(
               spacing: DsfrSpacings.s1w,
               children: [
-                if (aide.montantMax != null)
+                if (assistance.montantMax != null)
                   DsfrTag.sm(
                     label: TextSpan(
                       text: Localisation.jusqua +
-                          Localisation.euro(aide.montantMax!),
+                          Localisation.euro(assistance.montantMax!),
                     ),
                     backgroundColor: DsfrColors.purpleGlycine925Hover,
-                    foregroundColor: FnvColors.tagForeground,
+                    foregroundColor: const Color(0xFF432636),
                   ),
-                if (aide.aUnSimulateur) const TagSimulateur(),
+                if (assistance.aUnSimulateur) const TagSimulateur(),
               ],
             ),
           ],
           const SizedBox(height: DsfrSpacings.s3w),
-          FnvHtmlWidget(aide.contenu),
+          FnvHtmlWidget(assistance.contenu),
           const SizedBox(height: DsfrSpacings.s6w),
         ],
       ),
-      bottomNavigationBar: aide.aUnSimulateur
+      bottomNavigationBar: assistance.aUnSimulateur
           ? FnvBottomBar(
               child: DsfrButton(
                 label: Localisation.accederAuSimulateur,
                 variant: DsfrButtonVariant.primary,
                 size: DsfrButtonSize.lg,
                 onPressed: () async {
-                  if (aide.estSimulateurVelo) {
+                  if (assistance.estSimulateurVelo) {
                     await GoRouter.of(context)
                         .pushNamed(AideSimulateurVeloPage.name);
                   }

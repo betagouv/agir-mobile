@@ -30,7 +30,7 @@ final class AideThematiqueModel extends AidesModel {
 final class AideModel extends AidesModel {
   const AideModel(this.value);
 
-  final Aid value;
+  final Assistance value;
 
   @override
   List<Object?> get props => [value];

@@ -6,6 +6,7 @@ import 'package:app/features/mission/home/presentation/bloc/mission_home_event.d
 import 'package:app/features/mission/home/presentation/bloc/mission_home_state.dart';
 import 'package:app/features/theme/core/domain/mission_liste.dart';
 import 'package:app/features/theme/presentation/pages/mission_page.dart';
+import 'package:app/features/theme/presentation/widgets/theme_type_tag.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -123,11 +124,7 @@ class _Mission extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: DsfrSpacings.s2w),
-                  DsfrTag.sm(
-                    label: TextSpan(text: mission.themeType.displayName),
-                    backgroundColor: mission.themeType.backgroundColor,
-                    foregroundColor: mission.themeType.foregroundColor,
-                  ),
+                  ThemeTypeTag(themeType: mission.themeType),
                   const SizedBox(height: DsfrSpacings.s1v),
                   Expanded(
                     child: Text(

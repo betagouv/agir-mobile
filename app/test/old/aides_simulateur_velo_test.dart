@@ -1,4 +1,5 @@
 import 'package:app/features/aides/core/domain/aide.dart';
+import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail_image_network/mocktail_image_network.dart';
@@ -14,9 +15,9 @@ import 'steps/iel_voit_le_texte_dans_texte_riche.dart';
 
 void main() {
   group('Aides Simulateur vélo', () {
-    const aide2 = Aid(
+    const aide2 = Assistance(
       titre: 'Acheter un vélo',
-      thematique: '🚗 Transports',
+      themeType: ThemeType.transport,
       contenu: '<p>Contenu</p>',
       montantMax: 1500,
       urlSimulateur: '/aides/velo',

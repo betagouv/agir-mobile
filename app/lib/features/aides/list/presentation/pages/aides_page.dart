@@ -1,6 +1,6 @@
 import 'package:app/core/helpers/regex.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
-import 'package:app/features/aides/core/presentation/widgets/carte_aide.dart';
+import 'package:app/features/aides/core/presentation/widgets/assitance_card.dart';
 import 'package:app/features/aides/list/presentation/bloc/aides/aides_bloc.dart';
 import 'package:app/features/aides/list/presentation/bloc/aides/aides_event.dart';
 import 'package:app/features/aides/list/presentation/bloc/aides/aides_state.dart';
@@ -102,7 +102,7 @@ class _Aides extends StatelessWidget {
                 semanticsLabel: removeEmoji(a.thematique),
               ),
             ),
-          final AideModel a => CarteAide(aide: a.value),
+          final AideModel a => AssitanceCard(assistance: a.value),
         },
         separatorBuilder: (final context, final index) =>
             const SizedBox(height: DsfrSpacings.s1w),

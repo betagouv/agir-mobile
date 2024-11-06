@@ -5,9 +5,9 @@ import 'package:fpdart/fpdart.dart';
 class AidesPortMock implements AidesPort {
   AidesPortMock(this.aides);
 
-  List<Aid> aides;
+  List<Assistance> aides;
 
   @override
-  Future<Either<Exception, Aids>> fetchAides() async =>
-      Right(Aids(isCovered: true, aids: aides));
+  Future<Either<Exception, AssistanceList>> fetchAides() async =>
+      Right(AssistanceList(isCovered: true, assistances: aides));
 }

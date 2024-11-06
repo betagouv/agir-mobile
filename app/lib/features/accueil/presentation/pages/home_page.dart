@@ -2,7 +2,7 @@ import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_bor
 import 'package:app/core/presentation/widgets/fondamentaux/text_styles.dart';
 import 'package:app/features/accueil/presentation/cubit/home_disclaimer_cubit.dart';
 import 'package:app/features/accueil/presentation/cubit/home_disclaimer_state.dart';
-import 'package:app/features/aides/core/presentation/widgets/mes_aides.dart';
+import 'package:app/features/aides/core/presentation/widgets/assitances_section.dart';
 import 'package:app/features/environmental_performance/home/presentation/widgets/environmental_performance_section.dart';
 import 'package:app/features/environmental_performance/summary/presentation/bloc/environmental_performance_bloc.dart';
 import 'package:app/features/environmental_performance/summary/presentation/bloc/environmental_performance_event.dart';
@@ -170,7 +170,7 @@ class _HomeState extends State<_Home> {
             SizedBox(height: DsfrSpacings.s4w),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-              child: MesAides(),
+              child: AssitancesSection(),
             ),
             SizedBox(height: DsfrSpacings.s4w),
             SurveySection(),
