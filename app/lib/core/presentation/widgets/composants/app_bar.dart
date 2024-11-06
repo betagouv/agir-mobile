@@ -1,3 +1,5 @@
+// ignore_for_file: prefer-moving-to-variable
+
 import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/shadows.dart';
@@ -20,10 +22,9 @@ class FnvAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   final Size preferredSize;
+
   @override
   Widget build(final context) {
-    final canPop = GoRouter.of(context).canPop();
-
     Widget widget = SizedBox(
       height: preferredHeight,
       child: Padding(
@@ -37,19 +38,20 @@ class FnvAppBar extends StatelessWidget implements PreferredSizeWidget {
                 IconButton(
                   iconSize: 24,
                   padding: const EdgeInsets.all(DsfrSpacings.s1w),
-                  onPressed: () => canPop
+                  onPressed: () => GoRouter.of(context).canPop()
                       ? GoRouter.of(context).pop()
                       : Scaffold.of(context).openDrawer(),
                   style: const ButtonStyle(
                     shape: WidgetStatePropertyAll(roundedRectangleBorder),
                   ),
                   icon: Icon(
-                    canPop
+                    GoRouter.of(context).canPop()
                         ? DsfrIcons.systemArrowLeftLine
                         : DsfrIcons.systemMenuFill,
                     color: DsfrColors.blueFranceSun113,
-                    semanticLabel:
-                        canPop ? Localisation.retour : Localisation.menu,
+                    semanticLabel: GoRouter.of(context).canPop()
+                        ? Localisation.retour
+                        : Localisation.menu,
                   ),
                 ),
             if (title == null)
