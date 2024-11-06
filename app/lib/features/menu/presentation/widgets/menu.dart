@@ -55,17 +55,6 @@ class Menu extends StatelessWidget {
 class _MenuItems extends StatelessWidget {
   const _MenuItems();
 
-  Future<void> _redirigeSiLaPageCourantEstDifferente(
-    final BuildContext context,
-    final String name,
-  ) async {
-    Scaffold.of(context).closeDrawer();
-    if (GoRouterState.of(context).name == name) {
-      return;
-    }
-    await GoRouter.of(context).pushNamed(name);
-  }
-
   @override
   Widget build(final context) {
     final groupValue = GoRouterState.of(context).name ?? HomePage.name;
@@ -78,7 +67,7 @@ class _MenuItems extends StatelessWidget {
           value: HomePage.name,
           groupValue: groupValue,
           onTap: () async =>
-              _redirigeSiLaPageCourantEstDifferente(context, HomePage.name),
+              GoRouter.of(context).pushReplacementNamed(HomePage.name),
         ),
         const SizedBox(height: DsfrSpacings.s2w),
         _MenuItem(
@@ -86,27 +75,23 @@ class _MenuItems extends StatelessWidget {
           value: AidesPage.name,
           groupValue: groupValue,
           onTap: () async =>
-              _redirigeSiLaPageCourantEstDifferente(context, AidesPage.name),
+              GoRouter.of(context).pushReplacementNamed(AidesPage.name),
         ),
         const SizedBox(height: DsfrSpacings.s2w),
         _MenuItem(
           label: Localisation.bibliotheque,
           value: BibliothequePage.name,
           groupValue: groupValue,
-          onTap: () async => _redirigeSiLaPageCourantEstDifferente(
-            context,
-            BibliothequePage.name,
-          ),
+          onTap: () async =>
+              GoRouter.of(context).pushReplacementNamed(BibliothequePage.name),
         ),
         const SizedBox(height: DsfrSpacings.s2w),
         _MenuItem(
           label: Localisation.bilanEnvironnemental,
           value: EnvironmentalPerformanceSummaryPage.name,
           groupValue: groupValue,
-          onTap: () async => _redirigeSiLaPageCourantEstDifferente(
-            context,
-            EnvironmentalPerformanceSummaryPage.name,
-          ),
+          onTap: () async => GoRouter.of(context)
+              .pushReplacementNamed(EnvironmentalPerformanceSummaryPage.name),
         ),
         const Spacer(),
         _MenuItem(
@@ -114,7 +99,7 @@ class _MenuItems extends StatelessWidget {
           value: ProfilPage.name,
           groupValue: groupValue,
           onTap: () async =>
-              _redirigeSiLaPageCourantEstDifferente(context, ProfilPage.name),
+              GoRouter.of(context).pushReplacementNamed(ProfilPage.name),
         ),
         const SizedBox(height: DsfrSpacings.s2w),
         Padding(
@@ -156,7 +141,7 @@ class _MenuItem extends StatelessWidget {
     return ConstrainedBox(
       constraints: const BoxConstraints(minHeight: 24),
       child: GestureDetector(
-        onTap: onTap,
+        onTap: isCurrentPage ? null : onTap,
         behavior: HitTestBehavior.opaque,
         child: Stack(
           alignment: Alignment.centerLeft,
