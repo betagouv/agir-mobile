@@ -4,8 +4,8 @@ import 'package:app/features/theme/core/domain/mission_defi.dart';
 import 'package:app/features/theme/core/domain/mission_kyc.dart';
 import 'package:app/features/theme/core/domain/mission_liste.dart';
 import 'package:app/features/theme/core/domain/mission_quiz.dart';
-import 'package:app/features/theme/core/domain/mission_theme_type.dart';
 import 'package:app/features/theme/core/domain/theme_tile.dart';
+import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail_image_network/mocktail_image_network.dart';
 
@@ -37,7 +37,7 @@ void main() {
         imageUrl:
             'https://res.cloudinary.com/dq023imd8/image/upload/v1718631224/fruits_1_dec0e90839.png',
         niveau: 1,
-        themeType: MissionThemeType.alimentation,
+        themeType: ThemeType.alimentation,
       );
       ielALesMissionsSuivantes([universThematique]);
       const mission = Mission(

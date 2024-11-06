@@ -1,4 +1,4 @@
-import 'package:app/features/theme/core/domain/mission_theme_type.dart';
+import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:equatable/equatable.dart';
 
 class MissionListe extends Equatable {
@@ -20,7 +20,7 @@ class MissionListe extends Equatable {
   final bool estNouvelle;
   final String imageUrl;
   final int? niveau;
-  final MissionThemeType themeType;
+  final ThemeType themeType;
 
   @override
   List<Object?> get props => [

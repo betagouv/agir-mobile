@@ -11,12 +11,13 @@ class AidesBloc extends Bloc<AidesEvent, AidesState> {
       final result = await aidesPort.fetchAides();
       if (result.isRight()) {
         final aides = result.getRight().getOrElse(() => throw Exception());
-        final thematiques = aides.aids.map((final e) => e.thematique).toSet();
+        final themeTypes =
+            aides.assistances.map((final e) => e.themeType).toSet();
         final aidesModel = <AidesModel>[];
-        for (final thematique in thematiques) {
-          aidesModel.add(AideThematiqueModel(thematique));
-          aides.aids
-              .where((final e) => e.thematique == thematique)
+        for (final themeType in themeTypes) {
+          aidesModel.add(AideThematiqueModel(themeType.displayName));
+          aides.assistances
+              .where((final e) => e.themeType == themeType)
               .forEach((final e) => aidesModel.add(AideModel(e)));
         }
         emit(AidesState(isCovered: aides.isCovered, aides: aidesModel));

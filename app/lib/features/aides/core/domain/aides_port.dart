@@ -2,5 +2,5 @@ import 'package:app/features/aides/core/domain/aide.dart';
 import 'package:fpdart/fpdart.dart';
 
 abstract interface class AidesPort {
-  Future<Either<Exception, Aids>> fetchAides();
+  Future<Either<Exception, AssistanceList>> fetchAides();
 }

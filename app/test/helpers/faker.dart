@@ -133,10 +133,7 @@ Map<String, dynamic> aideFaker() {
     'montant_max': faker.randomGenerator.boolean()
         ? faker.randomGenerator.integer(10000)
         : null,
-    'thematiques_label': List.generate(
-      faker.randomGenerator.integer(3),
-      (final _) => faker.lorem.word(),
-    ),
+    'thematiques': [generateThematique],
     'titre': faker.company.name(),
     'url_simulateur':
         faker.randomGenerator.boolean() ? faker.internet.uri('https') : null,

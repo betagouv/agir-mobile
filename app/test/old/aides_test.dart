@@ -1,4 +1,5 @@
 import 'package:app/features/aides/core/domain/aide.dart';
+import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail_image_network/mocktail_image_network.dart';
@@ -15,43 +16,29 @@ import 'steps/iel_voit_le_texte_dans_texte_riche.dart';
 
 void main() {
   group('Aides', () {
-    const aide1 = Aid(
+    const aide1 = Assistance(
       titre: 'Rénover son logement',
-      thematique: '🏡 Logement',
+      themeType: ThemeType.logement,
       contenu: '',
     );
-    const aide2 = Aid(
+    const aide2 = Assistance(
       titre: 'Acheter un vélo',
-      thematique: '🚗 Transports',
+      themeType: ThemeType.transport,
       contenu: '<p>Contenu</p>',
       montantMax: 1500,
     );
-    const aide3 = Aid(
+    const aide3 = Assistance(
       titre: 'Composter ses déchets',
-      thematique: '🗑️ Déchets',
+      themeType: ThemeType.consommation,
       contenu: '',
     );
-    const aide4 = Aid(
+    const aide4 = Assistance(
       titre: 'Gérer ses déchets verts',
-      thematique: '🗑️ Déchets',
+      themeType: ThemeType.consommation,
       contenu: '',
     );
 
     group('Accueil', () {
-      testWidgets(
-        "iel voit le titre sur la page d'accueil",
-        (final tester) async {
-          setUpWidgets(tester);
-
-          await mockNetworkImages(() async {
-            ielEstConnecte();
-            await ielLanceLapplication(tester);
-            await ielScrolle(tester, Localisation.mesAidesLien);
-            ielVoitLeTexte(Localisation.mesAides);
-          });
-        },
-      );
-
       testWidgets(
         "iel voit les 2 premieres sur la page d'accueil",
         (final tester) async {
@@ -78,7 +65,6 @@ void main() {
             await ielLanceLapplication(tester);
             await ielScrolle(tester, Localisation.mesAidesLien);
             await ielAppuieSur(tester, aide2.titre);
-            ielVoitLeTexte(aide2.thematique);
             ielVoitLeTexte(aide2.titre);
             ielVoitLeTexteDansTexteRiche(Localisation.euro(aide2.montantMax!));
             ielVoitLeTexteDansTexteRiche('Contenu');
@@ -98,13 +84,13 @@ void main() {
           await ielAppuieSur(tester, Localisation.mesAidesLien);
           ielVoitLeTexte(Localisation.mesAidesDisponibles);
 
-          ielVoitLeTexte(aide1.thematique);
+          ielVoitLeTexte(aide1.themeType.displayName);
           ielVoitLeTexte(aide1.titre);
 
-          ielVoitLeTexte(aide2.thematique);
+          ielVoitLeTexte(aide2.themeType.displayName);
           ielVoitLeTexte(aide2.titre);
 
-          ielVoitLeTexte(aide3.thematique);
+          ielVoitLeTexte(aide3.themeType.displayName);
           ielVoitLeTexte(aide3.titre);
           ielVoitLeTexte(aide4.titre);
         });

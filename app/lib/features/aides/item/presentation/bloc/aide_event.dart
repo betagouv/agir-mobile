@@ -11,7 +11,7 @@ sealed class AideEvent extends Equatable {
 final class AideSelectionnee extends AideEvent {
   const AideSelectionnee(this.value);
 
-  final Aid value;
+  final Assistance value;
   @override
   List<Object> get props => [value];
 }

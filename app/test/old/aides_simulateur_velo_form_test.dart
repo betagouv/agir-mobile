@@ -5,6 +5,7 @@ import 'package:app/core/helpers/number_format.dart';
 import 'package:app/features/aides/core/domain/aide.dart';
 import 'package:app/features/simulateur_velo/domain/velo_pour_simulateur.dart';
 import 'package:app/features/simulateur_velo/infrastructure/aide_velo_par_type_mapper.dart';
+import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail_image_network/mocktail_image_network.dart';
@@ -30,9 +31,9 @@ import 'steps/le_serveur_retourne_les_aides_velo_par_type.dart';
 
 void main() {
   group('Aides Simulateur vélo formulaire', () {
-    const aide2 = Aid(
+    const aide2 = Assistance(
       titre: 'Acheter un vélo',
-      thematique: '🚗 Transports',
+      themeType: ThemeType.transport,
       contenu: '<p>Contenu</p>',
       montantMax: 3500,
       urlSimulateur: '/aides/velo',
@@ -289,7 +290,7 @@ void main() {
 
 Future<void> _allerSurLeSimulateurVelo(
   final WidgetTester tester,
-  final Aid aide,
+  final Assistance aide,
 ) async {
   ielALesAidesSuivantes([aide]);
   ielEstConnecte();

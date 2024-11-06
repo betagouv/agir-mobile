@@ -1,7 +1,7 @@
 // ignore_for_file: avoid_dynamic_calls, avoid-accessing-collections-by-constant-index
 
-import 'package:app/features/aides/core/infrastructure/aide_mapper.dart';
 import 'package:app/features/aides/core/infrastructure/aides_api_adapter.dart';
+import 'package:app/features/aides/core/infrastructure/assistance_mapper.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -38,10 +38,10 @@ void main() {
     expect(result.isRight(), isTrue);
     final actual = result.getRight().toNullable()!;
     expect(actual.isCovered, isTrue);
-    final aids = actual.aids;
+    final aids = actual.assistances;
     expect(aids.length, equals(aides.length));
     for (var i = 0; i < aids.length; i++) {
-      final expected = AideMapper.fromJson(aides[i]);
+      final expected = AssistanceMapper.fromJson(aides[i]);
       expect(aids[i], equals(expected));
     }
   });

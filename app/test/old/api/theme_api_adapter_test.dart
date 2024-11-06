@@ -7,8 +7,8 @@ import 'package:app/features/theme/core/domain/mission_defi.dart';
 import 'package:app/features/theme/core/domain/mission_kyc.dart';
 import 'package:app/features/theme/core/domain/mission_liste.dart';
 import 'package:app/features/theme/core/domain/mission_quiz.dart';
-import 'package:app/features/theme/core/domain/mission_theme_type.dart';
 import 'package:app/features/theme/core/domain/theme_tile.dart';
+import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:app/features/theme/core/infrastructure/univers_api_adapter.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
@@ -110,7 +110,7 @@ void main() {
           imageUrl:
               'https://res.cloudinary.com/dq023imd8/image/upload/v1718631224/fruits_1_dec0e90839.png',
           niveau: 1,
-          themeType: MissionThemeType.alimentation,
+          themeType: ThemeType.alimentation,
         ),
         MissionListe(
           id: 'manger_saison_2',
@@ -121,7 +121,7 @@ void main() {
           imageUrl:
               'https://res.cloudinary.com/dq023imd8/image/upload/v1718701364/fruits_2_cfbf4b47b9.png',
           niveau: 2,
-          themeType: MissionThemeType.alimentation,
+          themeType: ThemeType.alimentation,
         ),
       ],
     );
