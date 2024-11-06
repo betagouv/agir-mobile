@@ -42,7 +42,9 @@ class _Page extends StatefulWidget {
 
 class _PageState extends State<_Page> with RouteAware {
   void _handleMission() {
-    context.read<UniversBloc>().add(UniversRecuperationDemandee(widget.type));
+    if (context.mounted) {
+      context.read<UniversBloc>().add(UniversRecuperationDemandee(widget.type));
+    }
   }
 
   @override
