@@ -27,7 +27,7 @@ dependencies:
   flutter_secure_storage: 9.2.2
   flutter_svg: 2.0.13
   flutter_widget_from_html_core: 0.15.2
-  fpdart: 1.1.0
+  fpdart: 1.1.1
   fwfh_url_launcher: 0.9.1
   go_router: 14.4.1
   html: 0.15.5
