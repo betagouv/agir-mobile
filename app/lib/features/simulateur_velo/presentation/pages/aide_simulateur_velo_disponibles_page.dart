@@ -1,4 +1,5 @@
 import 'package:app/core/assets/svgs.dart';
+import 'package:app/core/infrastructure/url_launcher.dart';
 import 'package:app/core/presentation/widgets/composants/app_bar.dart';
 import 'package:app/core/presentation/widgets/composants/bottom_bar.dart';
 import 'package:app/core/presentation/widgets/composants/fnv_image.dart';
@@ -13,7 +14,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 class AideSimulateurVeloDisponiblePage extends StatelessWidget {
   const AideSimulateurVeloDisponiblePage({super.key});
@@ -163,9 +163,6 @@ class _Body extends StatelessWidget {
 
   final List<AideVelo> aides;
 
-  Future<bool> _handleVoirLesDemarches(final AideVelo e) =>
-      launchUrlString(e.lien);
-
   @override
   Widget build(final context) => Column(
         children: aides
@@ -199,7 +196,7 @@ class _Body extends StatelessWidget {
                             label: Localisation.voirLesDemarches,
                             icon: DsfrIcons.systemExternalLinkFill,
                             iconPosition: DsfrLinkIconPosition.end,
-                            onTap: () async => _handleVoirLesDemarches(e),
+                            onTap: () async => FnvUrlLauncher.launch(e.lien),
                           ),
                         ],
                       ),

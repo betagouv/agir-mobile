@@ -1,3 +1,4 @@
+import 'package:app/core/infrastructure/url_launcher.dart';
 import 'package:app/core/presentation/widgets/composants/badge.dart';
 import 'package:app/core/presentation/widgets/composants/fnv_image.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
@@ -15,7 +16,6 @@ import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 final themeRouteObserver = RouteObserver<ModalRoute<dynamic>>();
 
@@ -264,7 +264,7 @@ class _Service extends StatelessWidget {
       child: Material(
         color: FnvColors.transparent,
         child: InkWell(
-          onTap: () async => launchUrlString(service.externalUrl),
+          onTap: () async => FnvUrlLauncher.launch(service.externalUrl),
           borderRadius: borderRadius,
           child: SizedBox(
             width: 156,

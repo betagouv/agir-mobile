@@ -1,8 +1,8 @@
+import 'package:app/core/infrastructure/url_launcher.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 class Jaccepte extends StatefulWidget {
   const Jaccepte({
@@ -28,7 +28,7 @@ class _JaccepteState extends State<Jaccepte> {
   @override
   void initState() {
     super.initState();
-    _recognizer.onTap = () async => launchUrlString(widget.url);
+    _recognizer.onTap = () async => FnvUrlLauncher.launch(widget.url);
   }
 
   @override

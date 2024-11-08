@@ -1,12 +1,11 @@
+import 'package:app/core/infrastructure/url_launcher.dart';
 import 'package:app/features/aides/list/presentation/pages/aides_page.dart';
 import 'package:app/features/environmental_performance/summary/presentation/page/environmental_performance_summary_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
-import 'package:fwfh_url_launcher/fwfh_url_launcher.dart';
 import 'package:go_router/go_router.dart';
 import 'package:html/dom.dart' as dom;
-import 'package:url_launcher/url_launcher.dart';
 
 class FnvHtmlWidget extends StatelessWidget {
   const FnvHtmlWidget(this.html, {super.key});
@@ -25,7 +24,6 @@ class FnvHtmlWidget extends StatelessWidget {
         child: HtmlWidget(
           html,
           customStylesBuilder: _handlePDansLi,
-          factoryBuilder: MyUrlLauncherFactory.new,
           onTapUrl: (final url) async {
             final uri = Uri.parse(url);
 
@@ -46,25 +44,12 @@ class FnvHtmlWidget extends StatelessWidget {
               }
             }
 
-            return false;
+            try {
+              return await FnvUrlLauncher.launch(url);
+            } on PlatformException {
+              return false;
+            }
           },
         ),
       );
-}
-
-/// Besoin de faire notre propre implementation car les urls web retourne faux à l'appel de canLaunchUrl.
-class MyUrlLauncherFactory extends WidgetFactory with UrlLauncherFactory {
-  @override
-  Future<bool> onTapUrl(final String url) async {
-    final result = await super.onTapUrl(url);
-    if (result) {
-      return result;
-    }
-
-    try {
-      return await launchUrl(Uri.parse(url));
-    } on PlatformException {
-      return false;
-    }
-  }
 }

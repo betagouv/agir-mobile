@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:app/core/infrastructure/url_launcher.dart';
 import 'package:app/features/upgrade/presentation/bloc/upgrade_bloc.dart';
 import 'package:app/features/upgrade/presentation/bloc/upgrade_state.dart';
 import 'package:app/features/upgrade/upgrade_l10n.dart';
@@ -7,7 +8,6 @@ import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class UpgradeWidget extends StatelessWidget {
   const UpgradeWidget({
@@ -54,13 +54,11 @@ class _UpgradeModal extends StatelessWidget {
             variant: DsfrButtonVariant.primary,
             size: DsfrButtonSize.lg,
             onPressed: () async {
-              final url = Uri.parse(
-                Platform.isIOS
-                    ? 'https://apps.apple.com/app/6504984321'
-                    : 'https://play.google.com/store/apps/details?id=fr.gouv.agir',
-              );
+              final url = Platform.isIOS
+                  ? 'https://apps.apple.com/app/6504984321'
+                  : 'https://play.google.com/store/apps/details?id=fr.gouv.agir';
               try {
-                await launchUrl(url);
+                await FnvUrlLauncher.launch(url);
               } on PlatformException catch (_) {}
             },
           ),

@@ -1,8 +1,8 @@
+import 'package:app/core/infrastructure/url_launcher.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/survey/survey_l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 class SurveySection extends StatelessWidget {
   const SurveySection({super.key});
@@ -27,7 +27,7 @@ class SurveySection extends StatelessWidget {
                   foregroundColor: Colors.white,
                   size: DsfrButtonSize.lg,
                   onPressed: () async =>
-                      launchUrlString(SurveySectionL10n.link),
+                      FnvUrlLauncher.launch(SurveySectionL10n.link),
                 ),
               ],
             ),

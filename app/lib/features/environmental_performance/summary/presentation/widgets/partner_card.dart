@@ -1,10 +1,10 @@
 import 'package:app/core/assets/images.dart';
 import 'package:app/core/assets/svgs.dart';
+import 'package:app/core/infrastructure/url_launcher.dart';
 import 'package:app/features/environmental_performance/summary/environmental_performance_summary_l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 class PartnerCard extends StatelessWidget {
   const PartnerCard({super.key});
@@ -70,7 +70,7 @@ class PartnerCard extends StatelessWidget {
                 const SizedBox(height: DsfrSpacings.s1w),
                 DsfrLink.md(
                   label: EnvironmentalPerformanceSummaryL10n.nosGestesClimatUrl,
-                  onTap: () async => launchUrlString(
+                  onTap: () async => FnvUrlLauncher.launch(
                     EnvironmentalPerformanceSummaryL10n.nosGestesClimatUrl,
                   ),
                 ),
