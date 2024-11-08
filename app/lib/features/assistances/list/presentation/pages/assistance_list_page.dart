@@ -1,4 +1,3 @@
-import 'package:app/core/helpers/regex.dart';
 import 'package:app/core/infrastructure/tracker.dart';
 import 'package:app/core/presentation/widgets/composants/card.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
@@ -7,11 +6,11 @@ import 'package:app/features/assistances/core/presentation/widgets/tag_simulateu
 import 'package:app/features/assistances/item/presentation/bloc/aide_bloc.dart';
 import 'package:app/features/assistances/item/presentation/bloc/aide_event.dart';
 import 'package:app/features/assistances/item/presentation/pages/assistance_detail_page.dart';
-import 'package:app/features/assistances/list/presentation/bloc/aides/assistance_list_bloc.dart';
-import 'package:app/features/assistances/list/presentation/bloc/aides/assistance_list_event.dart';
-import 'package:app/features/assistances/list/presentation/bloc/aides/assistance_list_state.dart';
 import 'package:app/features/assistances/list/presentation/bloc/aides_disclaimer/aides_disclaimer_cubit.dart';
 import 'package:app/features/assistances/list/presentation/bloc/aides_disclaimer/aides_disclaimer_state.dart';
+import 'package:app/features/assistances/list/presentation/bloc/assistance_list/assistance_list_bloc.dart';
+import 'package:app/features/assistances/list/presentation/bloc/assistance_list/assistance_list_event.dart';
+import 'package:app/features/assistances/list/presentation/bloc/assistance_list/assistance_list_state.dart';
 import 'package:app/features/menu/presentation/pages/root_page.dart';
 import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:app/l10n/l10n.dart';
@@ -112,15 +111,15 @@ class _List extends StatelessWidget {
             runSpacing: DsfrSpacings.s1w,
             children: [
               _Tag(
-                label: 'Tout',
+                label: Localisation.tout,
                 value: null,
-                isSelected: state.themeSelected == null,
+                groupValue: state.themeSelected,
               ),
               ...ThemeType.values.map(
                 (final e) => _Tag(
                   label: e.displayNameWithoutEmoji,
                   value: e,
-                  isSelected: e == state.themeSelected,
+                  groupValue: state.themeSelected,
                 ),
               ),
             ],
@@ -135,16 +134,17 @@ class _Tag extends StatelessWidget {
   const _Tag({
     required this.label,
     required this.value,
-    required this.isSelected,
+    required this.groupValue,
   });
 
   final String label;
   final ThemeType? value;
-  final bool isSelected;
+  final ThemeType? groupValue;
 
   @override
   Widget build(final context) {
     const selectedColor = DsfrColors.blueFranceSun113;
+    final isSelected = value == groupValue;
 
     return Material(
       color: Colors.transparent,
@@ -190,7 +190,7 @@ class _Elements extends StatelessWidget {
       final a = entries.first;
 
       return _ThemeSection(
-        theme: a.key.displayName,
+        themeType: a.key,
         assistances: a.value,
         scrollDirection: Axis.vertical,
       );
@@ -203,7 +203,11 @@ class _Elements extends StatelessWidget {
       itemBuilder: (final context, final index) {
         final a = entries.elementAt(index);
 
-        return _ThemeSection(theme: a.key.displayName, assistances: a.value);
+        return _ThemeSection(
+          themeType: a.key,
+          assistances: a.value,
+          scrollDirection: Axis.vertical,
+        );
       },
       separatorBuilder: (final context, final index) =>
           const SizedBox(height: DsfrSpacings.s3w),
@@ -214,12 +218,12 @@ class _Elements extends StatelessWidget {
 
 class _ThemeSection extends StatelessWidget {
   const _ThemeSection({
-    required this.theme,
+    required this.themeType,
     required this.assistances,
     this.scrollDirection = Axis.horizontal,
   });
 
-  final String theme;
+  final ThemeType themeType;
   final List<Assistance> assistances;
   final Axis scrollDirection;
 
@@ -228,12 +232,12 @@ class _ThemeSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            theme,
+            themeType.displayName,
             style: const DsfrTextStyle.headline4(),
-            semanticsLabel: removeEmoji(theme).trim(),
+            semanticsLabel: themeType.displayNameWithoutEmoji,
           ),
           const SizedBox(height: DsfrSpacings.s2w),
-          if (scrollDirection == Axis.horizontal)
+          if (scrollDirection == Axis.horizontal) ...[
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               padding: EdgeInsets.zero,
@@ -255,6 +259,16 @@ class _ThemeSection extends StatelessWidget {
                 ),
               ),
             ),
+            const SizedBox(height: DsfrSpacings.s2w),
+            DsfrLink.md(
+              label: 'Voir les 9 aides',
+              onTap: () {
+                context
+                    .read<AssistanceListBloc>()
+                    .add(AssistanceListThemeSelected(themeType));
+              },
+            ),
+          ],
           if (scrollDirection == Axis.vertical)
             ListView.separated(
               physics: const NeverScrollableScrollPhysics(),
