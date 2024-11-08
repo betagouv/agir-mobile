@@ -1,9 +1,9 @@
+import 'package:app/core/infrastructure/url_launcher.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/environmental_performance/summary/environmental_performance_summary_l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 class QuestionSection extends StatelessWidget {
   const QuestionSection({super.key});
@@ -57,7 +57,7 @@ class QuestionSection extends StatelessWidget {
                       if (href == null) {
                         return;
                       }
-                      await launchUrlString(href);
+                      await FnvUrlLauncher.launch(href);
                     },
                   ),
                 ),

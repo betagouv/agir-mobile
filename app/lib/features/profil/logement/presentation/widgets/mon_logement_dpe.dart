@@ -1,5 +1,6 @@
 // ignore_for_file: avoid-slow-collection-methods
 
+import 'package:app/core/infrastructure/url_launcher.dart';
 import 'package:app/core/presentation/widgets/composants/alert_info.dart';
 import 'package:app/features/profil/logement/presentation/bloc/mon_logement_bloc.dart';
 import 'package:app/features/profil/logement/presentation/bloc/mon_logement_event.dart';
@@ -11,20 +12,9 @@ import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 class MonLogementDpe extends StatelessWidget {
   const MonLogementDpe({super.key});
-
-  Future<void> _handleTapLink(
-    final String text,
-    final String? href,
-    final String title,
-  ) async {
-    if (href != null) {
-      await launchUrlString(href);
-    }
-  }
 
   @override
   Widget build(final context) {
@@ -53,7 +43,11 @@ class MonLogementDpe extends StatelessWidget {
                     .copyWith(color: DsfrColors.blueFranceSun113),
                 p: const DsfrTextStyle(fontSize: 15),
               ),
-              onTapLink: _handleTapLink,
+              onTapLink: (final text, final href, final title) async {
+                if (href != null) {
+                  await FnvUrlLauncher.launch(href);
+                }
+              },
             ),
           ),
         ],

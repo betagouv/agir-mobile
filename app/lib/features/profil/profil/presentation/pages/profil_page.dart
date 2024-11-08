@@ -1,3 +1,4 @@
+import 'package:app/core/infrastructure/url_launcher.dart';
 import 'package:app/core/presentation/widgets/composants/card.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/actions/list/presentation/pages/action_list_page.dart';
@@ -11,7 +12,6 @@ import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 class ProfilPage extends StatelessWidget {
   const ProfilPage({super.key});
@@ -66,7 +66,7 @@ class ProfilPage extends StatelessWidget {
                   _MenuElement(
                     icon: DsfrIcons.documentArticleLine,
                     label: Localisation.politiqueDeConfidentialite,
-                    onTap: () async => launchUrlString(
+                    onTap: () async => FnvUrlLauncher.launch(
                       Localisation.politiqueDeConfidentialiteSite,
                     ),
                     iconRight: DsfrIcons.systemExternalLinkLine,
@@ -75,7 +75,7 @@ class ProfilPage extends StatelessWidget {
                   _MenuElement(
                     icon: DsfrIcons.documentArticleLine,
                     label: Localisation.lesCguMenu,
-                    onTap: () async => launchUrlString(
+                    onTap: () async => FnvUrlLauncher.launch(
                       Localisation.lesCguSite,
                     ),
                     iconRight: DsfrIcons.systemExternalLinkLine,
@@ -84,7 +84,7 @@ class ProfilPage extends StatelessWidget {
                   _MenuElement(
                     icon: DsfrIcons.documentArticleLine,
                     label: Localisation.mentionsLegales,
-                    onTap: () async => launchUrlString(
+                    onTap: () async => FnvUrlLauncher.launch(
                       Localisation.mentionsLegalesSite,
                     ),
                     iconRight: DsfrIcons.systemExternalLinkLine,
@@ -93,7 +93,7 @@ class ProfilPage extends StatelessWidget {
                   _MenuElement(
                     icon: DsfrIcons.documentArticleLine,
                     label: Localisation.declarationAccessibilite,
-                    onTap: () async => launchUrlString(
+                    onTap: () async => FnvUrlLauncher.launch(
                       Localisation.declarationAccessibiliteSite,
                     ),
                     iconRight: DsfrIcons.systemExternalLinkLine,
@@ -102,7 +102,7 @@ class ProfilPage extends StatelessWidget {
                   _MenuElement(
                     icon: DsfrIcons.businessLineChartLine,
                     label: Localisation.statistiques,
-                    onTap: () async => launchUrlString(
+                    onTap: () async => FnvUrlLauncher.launch(
                       Localisation.statistiquesSite,
                     ),
                     iconRight: DsfrIcons.systemExternalLinkLine,

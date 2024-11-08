@@ -1,3 +1,4 @@
+import 'package:app/core/infrastructure/url_launcher.dart';
 import 'package:app/core/presentation/widgets/composants/app_bar.dart';
 import 'package:app/core/presentation/widgets/composants/fnv_image.dart';
 import 'package:app/core/presentation/widgets/composants/html_widget.dart';
@@ -10,7 +11,6 @@ import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 class ArticleView extends StatelessWidget {
   const ArticleView({super.key});
@@ -66,7 +66,7 @@ class ArticleView extends StatelessWidget {
               (final source) => Padding(
                 padding: const EdgeInsets.only(bottom: DsfrSpacings.s1w),
                 child: InkWell(
-                  onTap: () async => launchUrlString(source.lien),
+                  onTap: () async => FnvUrlLauncher.launch(source.lien),
                   child: Text.rich(
                     TextSpan(
                       text: source.libelle,
