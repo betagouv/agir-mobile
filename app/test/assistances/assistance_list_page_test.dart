@@ -1,4 +1,7 @@
+import 'package:app/core/infrastructure/tracker.dart';
 import 'package:app/features/assistances/core/infrastructure/assistance_mapper.dart';
+import 'package:app/features/assistances/item/presentation/bloc/aide_bloc.dart';
+import 'package:app/features/assistances/item/presentation/pages/assistance_detail_page.dart';
 import 'package:app/features/assistances/list/infrastructure/assistances_repository.dart';
 import 'package:app/features/assistances/list/infrastructure/assistances_urls.dart';
 import 'package:app/features/assistances/list/presentation/pages/assistance_list_page.dart';
@@ -18,6 +21,8 @@ import '../helpers/pump_page.dart';
 
 class _GamificationPortMock extends Mock implements GamificationPort {}
 
+class _TrackerMock extends Mock implements Tracker {}
+
 Future<void> _pumpPage(
   final WidgetTester tester, {
   required final List<Map<String, dynamic>> assistances,
@@ -35,6 +40,7 @@ Future<void> _pumpPage(
   await pumpPage(
     tester: tester,
     repositoryProviders: [
+      RepositoryProvider<Tracker>(create: (final context) => _TrackerMock()),
       RepositoryProvider<AssistancesRepository>(
         create: (final context) => AssistancesRepository(
           client: DioHttpClient(
@@ -51,8 +57,10 @@ Future<void> _pumpPage(
           authenticationService: authenticationService,
         ),
       ),
+      BlocProvider<AideBloc>(create: (final context) => AideBloc()),
     ],
     page: AssistanceListPage.route,
+    routes: {AssistanceDetailPage.name: AssistanceDetailPage.path},
   );
 }
 
@@ -69,6 +77,31 @@ void main() {
         for (final item in assistances.map(AssistanceMapper.fromJson)) {
           expect(find.text(item.titre), findsOneWidget);
         }
+      },
+    );
+
+    testWidgets(
+      "aller sur l'aide lorsque l'on appuie dessus",
+      (final tester) async {
+        final assistances = [
+          aideFaker(thematique: ThemeType.alimentation.name),
+          aideFaker(thematique: ThemeType.consommation.name),
+        ];
+
+        await _pumpPage(tester, assistances: assistances);
+
+        await tester.pumpAndSettle();
+
+        final visible = AssistanceMapper.fromJson(assistances.first);
+
+        await tester.tap(find.text(visible.titre));
+
+        await tester.pumpAndSettle();
+
+        expect(
+          find.text('route: ${AssistanceDetailPage.name}'),
+          findsOneWidget,
+        );
       },
     );
 
@@ -94,5 +127,31 @@ void main() {
       final notVisible = AssistanceMapper.fromJson(assistances.last);
       expect(find.text(notVisible.titre), findsNothing);
     });
+
+    testWidgets(
+      'afficher les aides filtrés via le texte',
+      (final tester) async {
+        final assistances = [
+          aideFaker(thematique: ThemeType.alimentation.name),
+          aideFaker(thematique: ThemeType.consommation.name),
+        ];
+
+        await _pumpPage(tester, assistances: assistances);
+
+        await tester.pumpAndSettle();
+
+        await tester.tap(find.text('Voir les 9 aides').first);
+
+        await tester.pumpAndSettle();
+
+        final visible = AssistanceMapper.fromJson(assistances.first);
+        expect(find.text(visible.titre), findsOneWidget);
+
+        final notVisible = AssistanceMapper.fromJson(assistances.last);
+        expect(find.text(notVisible.titre), findsNothing);
+      },
+      skip:
+          true, // TODO(lsaudon): Activer le scroll horizontal quand ce sera possible.
+    );
   });
 }

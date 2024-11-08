@@ -1,5 +1,3 @@
-// ignore_for_file: match-getter-setter-field-names
-
 import 'package:app/features/assistances/core/domain/aide.dart';
 import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:equatable/equatable.dart';

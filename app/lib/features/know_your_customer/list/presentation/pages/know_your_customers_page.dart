@@ -155,7 +155,7 @@ class _Tag extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
             child: Text(
-              thematique?.label ?? Localisation.lesCategoriesTout,
+              thematique?.label ?? Localisation.tout,
               style: DsfrTextStyle.bodySmMedium(
                 color: isSelected ? Colors.white : blue,
               ),

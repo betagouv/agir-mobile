@@ -1,8 +1,8 @@
 import 'package:app/core/error/domain/api_erreur.dart';
 import 'package:app/features/assistances/core/domain/aide.dart';
 import 'package:app/features/assistances/list/infrastructure/assistances_repository.dart';
-import 'package:app/features/assistances/list/presentation/bloc/aides/assistance_list_event.dart';
-import 'package:app/features/assistances/list/presentation/bloc/aides/assistance_list_state.dart';
+import 'package:app/features/assistances/list/presentation/bloc/assistance_list/assistance_list_event.dart';
+import 'package:app/features/assistances/list/presentation/bloc/assistance_list/assistance_list_state.dart';
 import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

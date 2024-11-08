@@ -1,3 +1,5 @@
+// ignore_for_file: prefer-overriding-parent-equality
+
 import 'package:app/features/assistances/core/domain/aide.dart';
 import 'package:app/features/assistances/list/infrastructure/assistances_repository.dart';
 import 'package:fpdart/fpdart.dart';

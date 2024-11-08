@@ -118,7 +118,7 @@ abstract final class Localisation {
   static const lesCategoriesDechet = 'Déchets';
   static const lesCategoriesLogement = 'Logement';
   static const lesCategoriesLoisir = 'Loisirs';
-  static const lesCategoriesTout = 'Tout';
+  static const tout = 'Tout';
   static const lesCategoriesTransport = 'Transports';
   static const lesCgu = "les conditions générales d'utilisation";
   static const lesCguMenu = 'CGU';

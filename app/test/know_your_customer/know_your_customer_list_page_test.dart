@@ -85,8 +85,7 @@ void main() {
     const themes = [null, ...QuestionTheme.values];
 
     for (final theme in themes) {
-      await tester
-          .tap(find.text(theme?.label ?? Localisation.lesCategoriesTout));
+      await tester.tap(find.text(theme?.label ?? Localisation.tout));
 
       await tester.pumpAndSettle();
 
