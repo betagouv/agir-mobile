@@ -1,7 +1,7 @@
 import 'package:app/features/aides/list/presentation/pages/aides_page.dart';
 import 'package:app/features/environmental_performance/summary/presentation/page/environmental_performance_summary_page.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:fwfh_url_launcher/fwfh_url_launcher.dart';
 import 'package:go_router/go_router.dart';
@@ -21,32 +21,34 @@ class FnvHtmlWidget extends StatelessWidget {
           : null;
 
   @override
-  Widget build(final context) => HtmlWidget(
-        html,
-        customStylesBuilder: _handlePDansLi,
-        factoryBuilder: MyUrlLauncherFactory.new,
-        onTapUrl: (final url) async {
-          final uri = Uri.parse(url);
+  Widget build(final context) => SelectionArea(
+        child: HtmlWidget(
+          html,
+          customStylesBuilder: _handlePDansLi,
+          factoryBuilder: MyUrlLauncherFactory.new,
+          onTapUrl: (final url) async {
+            final uri = Uri.parse(url);
 
-          if (uri.host == 'jagis.beta.gouv.fr') {
-            switch (uri.path) {
-              case '/vos-aides':
-              case '/aides':
-                await GoRouter.of(context).pushNamed(AidesPage.name);
+            if (uri.host == 'jagis.beta.gouv.fr') {
+              switch (uri.path) {
+                case '/vos-aides':
+                case '/aides':
+                  await GoRouter.of(context).pushNamed(AidesPage.name);
 
-                return true;
-              case '/bilan-environnemental':
-                await GoRouter.of(context)
-                    .pushNamed(EnvironmentalPerformanceSummaryPage.name);
+                  return true;
+                case '/bilan-environnemental':
+                  await GoRouter.of(context)
+                      .pushNamed(EnvironmentalPerformanceSummaryPage.name);
 
-                return true;
-              default:
-                return false;
+                  return true;
+                default:
+                  return false;
+              }
             }
-          }
 
-          return false;
-        },
+            return false;
+          },
+        ),
       );
 }
 
