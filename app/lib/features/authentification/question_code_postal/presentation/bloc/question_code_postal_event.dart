@@ -7,7 +7,7 @@ sealed class QuestionCodePostalEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class QuestionCodePostalPrenomDemande extends QuestionCodePostalEvent {
+final class QuestionCodePostalPrenomDemande extends QuestionCodePostalEvent {
   const QuestionCodePostalPrenomDemande();
 }
 

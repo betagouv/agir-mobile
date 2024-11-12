@@ -18,11 +18,11 @@ class DsfrCheckbox extends StatelessWidget {
     required final ValueChanged<bool>? onChanged,
     final Key? key,
   }) : this._(
+          key: key,
           label: label,
           value: value,
           onChanged: onChanged,
           padding: EdgeInsets.zero,
-          key: key,
         );
 
   const DsfrCheckbox.md({
@@ -31,11 +31,11 @@ class DsfrCheckbox extends StatelessWidget {
     final ValueChanged<bool>? onChanged,
     final Key? key,
   }) : this._(
+          key: key,
           label: label,
           value: value,
           onChanged: onChanged,
           padding: const EdgeInsets.all(DsfrSpacings.s1v),
-          key: key,
         );
 
   final String label;

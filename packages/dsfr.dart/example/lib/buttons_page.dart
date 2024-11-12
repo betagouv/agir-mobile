@@ -20,36 +20,31 @@ class ButtonsPage extends StatelessWidget {
     final children = <Widget>[];
     for (final variant in DsfrButtonVariant.values) {
       for (final size in DsfrButtonSize.values) {
-        children
-          ..add(Text('variant: ${variant.name}, size: ${size.name}'))
-          ..add(DsfrButton(label: label, variant: variant, size: size))
-          ..add(
-            DsfrButton(
-              label: label,
-              variant: variant,
-              size: size,
-              onPressed: _handleTap,
-            ),
-          )
-          ..add(
-            DsfrButton(
-              label: label,
-              icon: DsfrIcons.buildingsAncientGateFill,
-              variant: variant,
-              size: size,
-              onPressed: _handleTap,
-            ),
-          )
-          ..add(
-            DsfrButton(
-              label: label,
-              icon: DsfrIcons.buildingsAncientGateFill,
-              iconLocation: DsfrButtonIconLocation.right,
-              variant: variant,
-              size: size,
-              onPressed: _handleTap,
-            ),
-          );
+        children.addAll([
+          Text('variant: ${variant.name}, size: ${size.name}'),
+          DsfrButton(label: label, variant: variant, size: size),
+          DsfrButton(
+            label: label,
+            variant: variant,
+            size: size,
+            onPressed: _handleTap,
+          ),
+          DsfrButton(
+            label: label,
+            icon: DsfrIcons.buildingsAncientGateFill,
+            variant: variant,
+            size: size,
+            onPressed: _handleTap,
+          ),
+          DsfrButton(
+            label: label,
+            icon: DsfrIcons.buildingsAncientGateFill,
+            iconLocation: DsfrButtonIconLocation.right,
+            variant: variant,
+            size: size,
+            onPressed: _handleTap,
+          ),
+        ]);
       }
     }
 

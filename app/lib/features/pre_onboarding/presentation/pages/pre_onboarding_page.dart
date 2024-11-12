@@ -72,7 +72,7 @@ class PreOnboardingPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: DsfrSpacings.s3w),
-                    const Align(child: VersionLabel()),
+                    const Center(child: VersionLabel()),
                   ],
                 ),
               ],

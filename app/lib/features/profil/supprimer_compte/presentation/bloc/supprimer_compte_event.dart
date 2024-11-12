@@ -7,6 +7,6 @@ sealed class SupprimerCompteEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class SupprimerCompteSuppressionDemandee extends SupprimerCompteEvent {
+final class SupprimerCompteSuppressionDemandee extends SupprimerCompteEvent {
   const SupprimerCompteSuppressionDemandee();
 }

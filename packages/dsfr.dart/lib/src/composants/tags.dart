@@ -23,6 +23,7 @@ class DsfrTag extends StatelessWidget {
     final GestureTapCallback? onTap,
     final Key? key,
   }) : this._(
+          key: key,
           label: label,
           textStyle: textStyle ?? const DsfrTextStyle.bodyXs(),
           backgroundColor: backgroundColor,
@@ -30,7 +31,6 @@ class DsfrTag extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 8),
           icon: icon,
           onTap: onTap,
-          key: key,
         );
 
   final IconData? icon;

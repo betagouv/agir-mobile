@@ -138,7 +138,7 @@ class _DsfrRawButtonState extends State<DsfrRawButton>
               onFocusChange: updateMaterialState(WidgetState.focused),
               child: Padding(
                 padding: _padding,
-                child: Align(
+                child: Center(
                   widthFactor: 1,
                   heightFactor: 1,
                   child: IconTheme(
