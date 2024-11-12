@@ -1,7 +1,7 @@
 import 'package:app/features/first_name/domain/first_name.dart';
 import 'package:equatable/equatable.dart';
 
-abstract class FirstNameState extends Equatable {
+sealed class FirstNameState extends Equatable {
   const FirstNameState();
 
   @override
@@ -25,7 +25,7 @@ final class FirstNameLoading extends FirstNameState {
   const FirstNameLoading();
 }
 
-class FirstNameSuccess extends FirstNameState {
+final class FirstNameSuccess extends FirstNameState {
   const FirstNameSuccess(this.dateTime);
 
   final DateTime dateTime;
@@ -34,7 +34,7 @@ class FirstNameSuccess extends FirstNameState {
   List<Object> get props => [dateTime];
 }
 
-class FirstNameFailure extends FirstNameState {
+final class FirstNameFailure extends FirstNameState {
   const FirstNameFailure({required this.errorMessage});
 
   final String errorMessage;

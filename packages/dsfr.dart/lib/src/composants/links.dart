@@ -25,6 +25,7 @@ class DsfrLink extends StatefulWidget {
     final VoidCallback? onTap,
     final Key? key,
   }) : this._(
+          key: key,
           label: label,
           textStyle: const DsfrTextStyle.bodySm(),
           underlineThickness: 1.75,
@@ -34,7 +35,6 @@ class DsfrLink extends StatefulWidget {
           iconPosition: iconPosition,
           icon: icon,
           onTap: onTap,
-          key: key,
         );
 
   const DsfrLink.md({
@@ -44,6 +44,7 @@ class DsfrLink extends StatefulWidget {
     final VoidCallback? onTap,
     final Key? key,
   }) : this._(
+          key: key,
           label: label,
           textStyle: const DsfrTextStyle.bodyMd(),
           underlineThickness: 2,
@@ -53,7 +54,6 @@ class DsfrLink extends StatefulWidget {
           iconPosition: iconPosition,
           icon: icon,
           onTap: onTap,
-          key: key,
         );
 
   final String label;

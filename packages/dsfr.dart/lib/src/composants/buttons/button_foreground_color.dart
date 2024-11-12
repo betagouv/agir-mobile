@@ -2,6 +2,7 @@ import 'package:dsfr/src/composants/buttons/button_variant.dart';
 import 'package:dsfr/src/fondamentaux/colors.g.dart';
 import 'package:flutter/material.dart';
 
+@immutable
 class DsfrButtonForegroundColor extends WidgetStateColor {
   DsfrButtonForegroundColor({
     required final Color $default,
@@ -35,4 +36,15 @@ class DsfrButtonForegroundColor extends WidgetStateColor {
   @override
   Color resolve(final Set<WidgetState> states) =>
       states.contains(WidgetState.disabled) ? _disabled : _default;
+
+  @override
+  bool operator ==(final Object other) =>
+      identical(this, other) ||
+      other is DsfrButtonForegroundColor &&
+          runtimeType == other.runtimeType &&
+          _default == other._default &&
+          _disabled == other._disabled;
+
+  @override
+  int get hashCode => _default.hashCode ^ _disabled.hashCode;
 }

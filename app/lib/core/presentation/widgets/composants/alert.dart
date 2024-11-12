@@ -11,10 +11,10 @@ class FnvAlert extends StatelessWidget {
 
   const FnvAlert.error({required final String label, final Key? key})
       : this._(
+          key: key,
           icon: DsfrIcons.systemFrWarningFill,
           label: label,
           color: DsfrColors.error425,
-          key: key,
         );
 
   final IconData icon;

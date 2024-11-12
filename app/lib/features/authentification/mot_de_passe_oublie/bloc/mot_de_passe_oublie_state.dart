@@ -1,7 +1,7 @@
 import 'package:app/core/helpers/regex.dart';
 import 'package:equatable/equatable.dart';
 
-class MotDePasseOublieState extends Equatable {
+final class MotDePasseOublieState extends Equatable {
   const MotDePasseOublieState({required this.email});
 
   final String email;

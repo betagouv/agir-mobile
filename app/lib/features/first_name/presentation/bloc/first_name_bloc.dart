@@ -18,19 +18,28 @@ class FirstNameBloc extends Bloc<FirstNameEvent, FirstNameState> {
     });
     on<FirstNameSubmitted>((final event, final emit) async {
       final currentState = state;
-      if (currentState is FirstNameEntered) {
-        emit(const FirstNameLoading());
-        final result = await addFirstName(currentState.firstName);
-        result.fold(
-          (final l) => emit(
-            FirstNameFailure(
-              errorMessage: l is ApiErreur ? l.message : l.toString(),
+      switch (currentState) {
+        case FirstNameEntered():
+          emit(const FirstNameLoading());
+          final result = await addFirstName(currentState.firstName);
+          result.fold(
+            (final l) => emit(
+              FirstNameFailure(
+                errorMessage: l is ApiErreur ? l.message : l.toString(),
+              ),
             ),
-          ),
-          (final r) => emit(FirstNameSuccess(DateTime.now())),
-        );
-      } else if (currentState is FirstNameSuccess) {
-        emit(FirstNameSuccess(clock.now()));
+            (final r) => emit(FirstNameSuccess(DateTime.now())),
+          );
+
+          return;
+        case FirstNameSuccess():
+          emit(FirstNameSuccess(clock.now()));
+
+          return;
+        case FirstNameInitial():
+        case FirstNameLoading():
+        case FirstNameFailure():
+          return;
       }
     });
   }

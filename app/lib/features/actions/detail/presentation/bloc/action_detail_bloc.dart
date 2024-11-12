@@ -61,8 +61,8 @@ class ActionDetailBloc extends Bloc<ActionDetailEvent, ActionDetailState> {
         id: currentState.action.id,
         status: newStatus,
         reason: newStatus == ActionStatus.refused
-            ? currentState.newReason.fold(() => null, (final r) => r) ??
-                currentState.action.reason
+            ? (currentState.newReason.fold(() => null, (final r) => r) ??
+                currentState.action.reason)
             : null,
       );
 

@@ -43,6 +43,10 @@ dart_code_metrics:
     - package:dart_code_metrics_presets/equatable.yaml
   rules:
     - arguments-ordering:
+        alphabetize: false
+        first:
+          - key
+          - context
         last:
           - child
           - children
@@ -103,6 +107,7 @@ dart_code_metrics:
     - prefer-extracting-callbacks: false
     - prefer-explicit-type-arguments: false
     - prefer-extracting-function-callbacks: false
+    - prefer-for-in: false
     - prefer-for-loop-in-children: false
     - prefer-getter-over-method: false
     - prefer-type-over-var: false
