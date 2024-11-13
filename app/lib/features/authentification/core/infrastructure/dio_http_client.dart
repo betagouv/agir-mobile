@@ -17,7 +17,7 @@ class DioHttpClient {
         onRequest: (final options, final handler) async {
           await authenticationService.checkAuthenticationStatus();
           try {
-            final token = await authenticationService.token;
+            final token = authenticationService.token;
             options.headers[HttpHeaders.authorizationHeader] =
                 'Bearer ${token.value}';
           } on Exception catch (_) {}

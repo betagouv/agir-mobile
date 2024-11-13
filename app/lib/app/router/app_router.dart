@@ -1,4 +1,3 @@
-import 'package:app/app/router/go_router_refresh_stream.dart';
 import 'package:app/core/infrastructure/tracker.dart';
 import 'package:app/features/accueil/presentation/pages/home_page.dart';
 import 'package:app/features/actions/detail/presentation/pages/action_detail_page.dart';
@@ -6,8 +5,6 @@ import 'package:app/features/actions/list/presentation/pages/action_list_page.da
 import 'package:app/features/articles/presentation/pages/article_page.dart';
 import 'package:app/features/assistances/item/presentation/pages/assistance_detail_page.dart';
 import 'package:app/features/assistances/list/presentation/pages/assistance_list_page.dart';
-import 'package:app/features/authentication/domain/authentication_service.dart';
-import 'package:app/features/authentication/domain/authentication_status.dart';
 import 'package:app/features/authentification/creer_compte/presentation/pages/creer_compte_page.dart';
 import 'package:app/features/authentification/mot_de_passe_oublie/pages/mot_de_passe_oublie_page.dart';
 import 'package:app/features/authentification/mot_de_passe_oublie_code/pages/mot_de_passe_oublie_code_page.dart';
@@ -37,17 +34,12 @@ import 'package:app/features/theme/presentation/pages/mission_page.dart';
 import 'package:app/features/theme/presentation/pages/theme_page.dart';
 import 'package:go_router/go_router.dart';
 
-GoRouter goRouter({
-  required final AuthenticationService authenticationService,
-  required final Tracker tracker,
-}) =>
-    GoRouter(
+GoRouter goRouter({required final Tracker tracker}) => GoRouter(
       routes: [
         GoRoute(
           path: '/',
-          redirect: (final context, final state) => state.uri.path == '/'
-              ? '/unauthenticated/${PreOnboardingPage.path}'
-              : null,
+          redirect: (final context, final state) =>
+              state.uri.path == '/' ? '/unauthenticated' : null,
           routes: [
             GoRoute(
               path: 'unauthenticated',
@@ -93,26 +85,6 @@ GoRouter goRouter({
           ],
         ),
       ],
-      redirect: (final context, final state) {
-        final path = state.uri.path;
-
-        final statutActuel = authenticationService.status;
-
-        switch (statutActuel) {
-          case Authenticated():
-            if (path.startsWith('/unauthenticated')) {
-              return '/${HomePage.path}';
-            }
-          case Unauthenticated():
-            if (!path.startsWith('/unauthenticated')) {
-              return '/unauthenticated/${PreOnboardingPage.path}';
-            }
-        }
-
-        return null;
-      },
-      refreshListenable: GoRouterRefreshStream(authenticationService),
-      initialLocation: '/unauthenticated/${PreOnboardingPage.path}',
       observers: [
         mesRecommandationsRouteObserver,
         missionRouteObserver,

@@ -1,4 +1,4 @@
-import 'package:app/core/extensions/go_router.dart';
+import 'package:app/core/navigation/extensions/go_router.dart';
 import 'package:app/core/presentation/widgets/composants/app_bar.dart';
 import 'package:app/core/presentation/widgets/composants/bottom_bar.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';

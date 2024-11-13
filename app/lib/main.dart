@@ -14,7 +14,7 @@ import 'package:app/features/actions/list/infrastructure/actions_adapter.dart';
 import 'package:app/features/articles/infrastructure/articles_api_adapter.dart';
 import 'package:app/features/assistances/list/infrastructure/assistances_repository.dart';
 import 'package:app/features/authentication/domain/authentication_service.dart';
-import 'package:app/features/authentication/infrastructure/authentication_repository.dart';
+import 'package:app/features/authentication/infrastructure/authentication_storage.dart';
 import 'package:app/features/authentification/core/infrastructure/api_url.dart';
 import 'package:app/features/authentification/core/infrastructure/authentification_api_adapter.dart';
 import 'package:app/features/authentification/core/infrastructure/cms_api_client.dart';
@@ -111,12 +111,15 @@ class _MyAppState extends State<MyApp> {
       throw const MissingEnvironmentKeyException(apiCmsTokenKey);
     }
 
-    _authenticationService = AuthenticationService(
-      authenticationRepository: AuthenticationRepository(
-        const FlutterSecureStorage(
-          aOptions: AndroidOptions(encryptedSharedPreferences: true),
-        ),
+    final authenticationStorage = AuthenticationStorage(
+      const FlutterSecureStorage(
+        aOptions: AndroidOptions(encryptedSharedPreferences: true),
       ),
+    );
+    await authenticationStorage.init();
+
+    _authenticationService = AuthenticationService(
+      authenticationRepository: authenticationStorage,
       clock: _clock,
     );
     await _authenticationService.checkAuthenticationStatus();
@@ -173,8 +176,8 @@ class _MyAppState extends State<MyApp> {
           );
 
           return App(
-            tracker: _tracker,
             clock: _clock,
+            tracker: _tracker,
             missionHomeRepository: MissionHomeRepository(client: client),
             dioHttpClient: client,
             authenticationService: _authenticationService,

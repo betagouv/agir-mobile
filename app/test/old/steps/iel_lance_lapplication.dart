@@ -4,7 +4,7 @@ import 'package:app/features/actions/detail/infrastructure/action_repository.dar
 import 'package:app/features/actions/list/domain/actions_port.dart';
 import 'package:app/features/authentication/domain/authentication_service.dart';
 import 'package:app/features/authentication/domain/authentication_status.dart';
-import 'package:app/features/authentication/infrastructure/authentication_repository.dart';
+import 'package:app/features/authentication/infrastructure/authentication_storage.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/environmental_performance/questions/infrastructure/environment_performance_question_repository.dart';
 import 'package:app/features/environmental_performance/summary/domain/environmental_performance_data.dart';
@@ -76,8 +76,7 @@ class _EnvironmentalPerformanceQuestionRepositoryMock extends Mock
 Future<void> ielLanceLapplication(final WidgetTester tester) async {
   final clock = Clock.fixed(DateTime(1992));
   final authenticationService = AuthenticationService(
-    authenticationRepository:
-        AuthenticationRepository(FlutterSecureStorageFake()),
+    authenticationRepository: AuthenticationStorage(FlutterSecureStorageFake()),
     clock: clock,
   );
   if (ScenarioContext().authentificationStatut is Authenticated) {
@@ -130,8 +129,8 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
   await mockNetworkImages(() async {
     await tester.pumpFrames(
       App(
-        tracker: tracker,
         clock: clock,
+        tracker: tracker,
         missionHomeRepository: _MissionHomeRepositoryMock(),
         dioHttpClient: DioHttpClient(
           dio: DioMock(),

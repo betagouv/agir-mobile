@@ -4,7 +4,7 @@ import 'dart:convert';
 
 import 'package:app/features/authentication/domain/token.dart';
 import 'package:app/features/authentication/domain/user_id.dart';
-import 'package:app/features/authentication/infrastructure/authentication_repository.dart';
+import 'package:app/features/authentication/infrastructure/authentication_storage.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -12,24 +12,30 @@ import 'package:mocktail/mocktail.dart';
 class MockFlutterSecureStorage extends Mock implements FlutterSecureStorage {}
 
 void main() {
-  late AuthenticationRepository repository;
+  late AuthenticationStorage repository;
   late MockFlutterSecureStorage mockSecureStorage;
 
   setUp(() {
     mockSecureStorage = MockFlutterSecureStorage();
-    repository = AuthenticationRepository(mockSecureStorage);
+    when(() => mockSecureStorage.read(key: 'token'))
+        .thenAnswer((final answer) async => null);
+    when(
+      () => mockSecureStorage.write(
+        key: any(named: 'key'),
+        value: any(named: 'value'),
+      ),
+    ).thenAnswer((final answer) async => Future<void>.value());
+    when(() => mockSecureStorage.delete(key: any(named: 'key')))
+        .thenAnswer((final answer) async => Future<void>.value());
+    repository = AuthenticationStorage(mockSecureStorage);
   });
 
   group('Authentication Repository', () {
     test('Saving a token', () async {
       // Given
-      when(
-        () => mockSecureStorage.write(
-          key: any(named: 'key'),
-          value: any(named: 'value'),
-        ),
-      ).thenAnswer((final answer) async => Future<void>.value());
-      const value = 'valid.jwt.token';
+      final value = 'header.${base64Encode(
+        jsonEncode({'exp': 1727698718, 'utilisateurId': 'user123'}).codeUnits,
+      )}.signature';
 
       // When
       await repository.saveToken(value);
@@ -40,12 +46,6 @@ void main() {
     });
 
     test('Deleting a token', () async {
-      // Given
-      when(() => mockSecureStorage.delete(key: any(named: 'key')))
-          .thenAnswer((final answer) async => Future<void>.value());
-      when(() => mockSecureStorage.read(key: 'token'))
-          .thenAnswer((final answer) async => null);
-
       // When
       await repository.deleteToken();
 
@@ -63,9 +63,10 @@ void main() {
       )}.signature';
       when(() => mockSecureStorage.read(key: 'token'))
           .thenAnswer((final answer) async => validToken);
+      await repository.init();
 
       // When
-      final token = await repository.token;
+      final token = repository.token;
 
       // Then
       expect(token, equals(Token(validToken)));
@@ -78,9 +79,10 @@ void main() {
       )}.signature';
       when(() => mockSecureStorage.read(key: 'token'))
           .thenAnswer((final answer) async => validToken);
+      await repository.init();
 
       // When
-      final userId = await repository.userId;
+      final userId = repository.userId;
 
       // Then
       expect(userId, equals(const UserId('user123')));
@@ -95,9 +97,10 @@ void main() {
       )}.signature';
       when(() => mockSecureStorage.read(key: 'token'))
           .thenAnswer((final answer) async => validToken);
+      await repository.init();
 
       // When
-      final expirationDate = await repository.expirationDate;
+      final expirationDate = repository.expirationDate;
 
       // Then
       expect(
@@ -107,10 +110,6 @@ void main() {
     });
 
     test('Handling missing token', () {
-      // Given
-      when(() => mockSecureStorage.read(key: 'token'))
-          .thenAnswer((final answer) async => null);
-
       // When & Then
       expect(() => repository.userId, throwsException);
       expect(() => repository.expirationDate, throwsException);
@@ -123,10 +122,11 @@ void main() {
       )}.signature';
       when(() => mockSecureStorage.read(key: 'token'))
           .thenAnswer((final answer) async => validToken);
+      await repository.init();
 
       // When
-      final userId1 = await repository.userId;
-      final userId2 = await repository.userId;
+      final userId1 = repository.userId;
+      final userId2 = repository.userId;
 
       // Then
       expect(userId1, equals(const UserId('user123')));
@@ -141,10 +141,11 @@ void main() {
       )}.signature';
       when(() => mockSecureStorage.read(key: 'token'))
           .thenAnswer((final answer) async => validToken);
+      await repository.init();
 
       // When
-      final expirationDate1 = await repository.expirationDate;
-      final expirationDate2 = await repository.expirationDate;
+      final expirationDate1 = repository.expirationDate;
+      final expirationDate2 = repository.expirationDate;
 
       // Then
       expect(expirationDate1, equals(expirationDate2));
