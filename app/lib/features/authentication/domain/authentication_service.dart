@@ -2,18 +2,18 @@ import 'dart:async';
 
 import 'package:app/features/authentication/domain/authentication_status.dart';
 import 'package:app/features/authentication/domain/token.dart';
-import 'package:app/features/authentication/infrastructure/authentication_repository.dart';
+import 'package:app/features/authentication/infrastructure/authentication_storage.dart';
 import 'package:clock/clock.dart';
 import 'package:rxdart/subjects.dart';
 
 class AuthenticationService {
   AuthenticationService({
-    required final AuthenticationRepository authenticationRepository,
+    required final AuthenticationStorage authenticationRepository,
     required final Clock clock,
   })  : _authenticationRepository = authenticationRepository,
         _clock = clock;
 
-  final AuthenticationRepository _authenticationRepository;
+  final AuthenticationStorage _authenticationRepository;
   final Clock _clock;
 
   final _authenticationStatusController =
@@ -31,13 +31,12 @@ class AuthenticationService {
 
   Future<void> checkAuthenticationStatus() async {
     try {
-      final expirationDate = await _authenticationRepository.expirationDate;
-
+      final expirationDate = _authenticationRepository.expirationDate;
       if (expirationDate.value.isAfter(_clock.now())) {
         if (status is Authenticated) {
-          return; // HACK(lsaudon): Pour ne pas ajouter le même status sinon ça casse GoRouter.of(context).pop(true);
+          return;
         }
-        final userId = await _authenticationRepository.userId;
+        final userId = _authenticationRepository.userId;
         _authenticationStatusController.add(Authenticated(userId));
       } else {
         await _authenticationRepository.deleteToken();
@@ -48,7 +47,7 @@ class AuthenticationService {
     }
   }
 
-  Future<Token> get token async => _authenticationRepository.token;
+  Token get token => _authenticationRepository.token;
 
   Future<void> logout() async {
     _authenticationStatusController.add(const Unauthenticated());

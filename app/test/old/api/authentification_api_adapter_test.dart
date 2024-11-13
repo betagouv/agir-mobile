@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:app/features/authentication/domain/authentication_service.dart';
 import 'package:app/features/authentication/domain/authentication_status.dart';
 import 'package:app/features/authentication/domain/user_id.dart';
-import 'package:app/features/authentication/infrastructure/authentication_repository.dart';
+import 'package:app/features/authentication/infrastructure/authentication_storage.dart';
 import 'package:app/features/authentification/core/domain/information_de_code.dart';
 import 'package:app/features/authentification/core/domain/information_de_connexion.dart';
 import 'package:app/features/authentification/core/infrastructure/authentification_api_adapter.dart';
@@ -107,8 +107,7 @@ void main() {
       final flutterSecureStorage = FlutterSecureStorageFake();
 
       final authenticationService = AuthenticationService(
-        authenticationRepository:
-            AuthenticationRepository(flutterSecureStorage),
+        authenticationRepository: AuthenticationStorage(flutterSecureStorage),
         clock: Clock.fixed(DateTime(1992)),
       );
       final adapter = AuthentificationApiAdapter(
@@ -218,8 +217,7 @@ void main() {
 
     final flutterSecureStorageMock = FlutterSecureStorageFake();
     final authenticationService = AuthenticationService(
-      authenticationRepository:
-          AuthenticationRepository(flutterSecureStorageMock),
+      authenticationRepository: AuthenticationStorage(flutterSecureStorageMock),
       clock: Clock.fixed(DateTime(1992)),
     );
     final adapter = AuthentificationApiAdapter(

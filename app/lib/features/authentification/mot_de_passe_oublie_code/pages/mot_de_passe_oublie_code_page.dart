@@ -1,4 +1,4 @@
-import 'package:app/core/extensions/go_router.dart';
+import 'package:app/core/navigation/extensions/go_router.dart';
 import 'package:app/core/presentation/widgets/composants/alert.dart';
 import 'package:app/core/presentation/widgets/composants/code_input.dart';
 import 'package:app/core/presentation/widgets/composants/mot_de_passe/mot_de_passe.dart';

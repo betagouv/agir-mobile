@@ -4,13 +4,13 @@ import 'package:app/features/authentication/domain/authentication_service.dart';
 import 'package:app/features/authentication/domain/authentication_status.dart';
 import 'package:app/features/authentication/domain/expiration_date.dart';
 import 'package:app/features/authentication/domain/user_id.dart';
-import 'package:app/features/authentication/infrastructure/authentication_repository.dart';
+import 'package:app/features/authentication/infrastructure/authentication_storage.dart';
 import 'package:clock/clock.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockAuthenticationRepository extends Mock
-    implements AuthenticationRepository {}
+    implements AuthenticationStorage {}
 
 void main() {
   late AuthenticationService authenticationService;
@@ -29,10 +29,10 @@ void main() {
       'checkAuthenticationStatus should emit authenticated status when token is valid',
       () async {
         when(() => mockRepository.expirationDate).thenAnswer(
-          (final _) async => ExpirationDate(DateTime(1993)),
+          (final _) => ExpirationDate(DateTime(1993)),
         );
         when(() => mockRepository.userId)
-            .thenAnswer((final _) async => const UserId('test_user_id'));
+            .thenAnswer((final _) => const UserId('test_user_id'));
 
         unawaited(
           expectLater(
@@ -56,7 +56,7 @@ void main() {
       'checkAuthenticationStatus should emit unauthenticated status when token is expired',
       () async {
         when(() => mockRepository.expirationDate).thenAnswer(
-          (final _) async => ExpirationDate(DateTime(1991)),
+          (final _) => ExpirationDate(DateTime(1991)),
         );
         when(() => mockRepository.deleteToken()).thenAnswer((final _) async {});
         unawaited(
@@ -96,10 +96,10 @@ void main() {
         when(() => mockRepository.saveToken(any()))
             .thenAnswer((final _) async {});
         when(() => mockRepository.expirationDate).thenAnswer(
-          (final _) async => ExpirationDate(DateTime(1993)),
+          (final _) => ExpirationDate(DateTime(1993)),
         );
         when(() => mockRepository.userId)
-            .thenAnswer((final _) async => const UserId('test_user_id'));
+            .thenAnswer((final _) => const UserId('test_user_id'));
         unawaited(
           expectLater(
             authenticationService.authenticationStatus,
