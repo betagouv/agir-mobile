@@ -115,13 +115,13 @@ class _List extends StatelessWidget {
                 value: null,
                 groupValue: state.themeSelected,
               ),
-              ...ThemeType.values.map(
-                (final e) => _Tag(
-                  label: e.displayNameWithoutEmoji,
-                  value: e,
-                  groupValue: state.themeSelected,
-                ),
-              ),
+              ...ThemeType.values.where(state.themes.containsKey).map(
+                    (final e) => _Tag(
+                      label: e.displayNameWithoutEmoji,
+                      value: e,
+                      groupValue: state.themeSelected,
+                    ),
+                  ),
             ],
           ),
           const SizedBox(height: DsfrSpacings.s4w),
