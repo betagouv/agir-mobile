@@ -91,8 +91,7 @@ class ToutEstPretPage extends StatelessWidget {
           label: Localisation.cestParti,
           variant: DsfrButtonVariant.primary,
           size: DsfrButtonSize.lg,
-          onPressed: () async =>
-              GoRouter.of(context).pushReplacementNamed(HomePage.name),
+          onPressed: () => GoRouter.of(context).goNamed(HomePage.name),
         ),
       ),
     );
