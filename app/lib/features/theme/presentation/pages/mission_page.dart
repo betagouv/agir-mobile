@@ -59,7 +59,7 @@ class _Page extends StatefulWidget {
 
 class _PageState extends State<_Page> with RouteAware {
   void _handleMission() {
-    if (context.mounted) {
+    if (mounted) {
       context.read<MissionBloc>().add(const MissionRecuperationDemandee());
     }
   }

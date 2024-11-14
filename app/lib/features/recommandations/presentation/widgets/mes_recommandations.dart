@@ -20,7 +20,7 @@ class MesRecommandations extends StatefulWidget {
 class _MesRecommandationsState extends State<MesRecommandations>
     with RouteAware {
   void _handleRecommendations() {
-    if (context.mounted) {
+    if (mounted) {
       context
           .read<RecommandationsBloc>()
           .add(RecommandationsRecuperationDemandee(widget.thematique));
