@@ -8,10 +8,10 @@ environment:
   flutter: 3.24.5
 
 dependencies:
-  clock: 1.1.1
-  collection: 1.18.0 # Dépend de flutter_test
+  clock: 1.1.1 #  Bloqué en 1.1.1 par flutter_test
+  collection: 1.18.0 # Bloqué en 1.18.0 par flutter_test
   cupertino_icons: 1.0.8
-  device_info_plus: 10.1.2 # 11.0.0 is not compatible with matomo_tracker 5.1.0
+  device_info_plus: 10.1.2 # Bloqué en 10.1.2 par matomo_tracker
   dio: 5.7.0
   dsfr:
     path: ../packages/dsfr.dart
@@ -22,7 +22,7 @@ dependencies:
   flutter_inset_shadow: 2.0.3
   flutter_localizations:
     sdk: flutter
-  flutter_markdown: 0.7.4
+  flutter_markdown: 0.7.4+1
   flutter_native_splash: 2.4.3
   flutter_secure_storage: 9.2.2
   flutter_svg: 2.0.14
@@ -32,7 +32,7 @@ dependencies:
   go_router: 14.6.0
   html: 0.15.5
   http: 1.2.2
-  intl: 0.19.0
+  intl: 0.19.0 # Bloqué en 0.19.0 par flutter_localizations
   matomo_tracker: 5.1.0
   mocktail_image_network: 1.2.0
   native_dio_adapter: 1.3.0
