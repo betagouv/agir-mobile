@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:app/core/presentation/widgets/composants/scaffold.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dsfr/dsfr.dart';
@@ -66,7 +67,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
 
   @override
   Widget build(final context) => MaterialApp(
-        home: Scaffold(
+        home: FnvScaffold(
           body: ListView(
             padding: MediaQuery.paddingOf(context).copyWith(
               left: DsfrSpacings.s2w,

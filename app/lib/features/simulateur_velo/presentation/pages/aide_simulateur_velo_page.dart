@@ -3,6 +3,7 @@ import 'package:app/core/helpers/text_scaler.dart';
 import 'package:app/core/presentation/widgets/composants/alert.dart';
 import 'package:app/core/presentation/widgets/composants/app_bar.dart';
 import 'package:app/core/presentation/widgets/composants/bottom_bar.dart';
+import 'package:app/core/presentation/widgets/composants/scaffold.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/text_styles.dart';
@@ -46,7 +47,7 @@ class _AideSimulateurVeloView extends StatelessWidget {
   const _AideSimulateurVeloView();
 
   @override
-  Widget build(final context) => Scaffold(
+  Widget build(final context) => FnvScaffold(
         appBar: FnvAppBar(),
         body: ListView(
           padding: const EdgeInsets.all(paddingVerticalPage),
@@ -62,7 +63,6 @@ class _AideSimulateurVeloView extends StatelessWidget {
           ],
         ),
         bottomNavigationBar: const FnvBottomBar(child: _EstimerMesAides()),
-        backgroundColor: FnvColors.aidesFond,
       );
 }
 

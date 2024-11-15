@@ -1,6 +1,6 @@
 import 'package:app/core/presentation/widgets/composants/app_bar.dart';
 import 'package:app/core/presentation/widgets/composants/list_item.dart';
-import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
+import 'package:app/core/presentation/widgets/composants/scaffold.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/actions/core/domain/action_status.dart';
 import 'package:app/features/actions/detail/presentation/pages/action_detail_page.dart';
@@ -32,7 +32,7 @@ class ActionListPage extends StatelessWidget {
         create: (final context) => ActionListBloc(FetchActions(context.read()))
           ..add(const ActionListFetch()),
         child: Builder(
-          builder: (final context) => Scaffold(
+          builder: (final context) => FnvScaffold(
             appBar: FnvAppBar(),
             body: ListView(
               padding:
@@ -93,7 +93,6 @@ class ActionListPage extends StatelessWidget {
                 ),
               ],
             ),
-            backgroundColor: FnvColors.aidesFond,
           ),
         ),
       );

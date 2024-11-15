@@ -1,7 +1,7 @@
 import 'package:app/core/presentation/widgets/composants/app_bar.dart';
 import 'package:app/core/presentation/widgets/composants/failure_widget.dart';
 import 'package:app/core/presentation/widgets/composants/list_item.dart';
-import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
+import 'package:app/core/presentation/widgets/composants/scaffold.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/know_your_customer/list/presentation/bloc/know_your_customers_bloc.dart';
 import 'package:app/features/know_your_customer/list/presentation/bloc/know_your_customers_event.dart';
@@ -34,7 +34,7 @@ class KnowYourCustomersPage extends StatelessWidget {
             KnowYourCustomersBloc(repository: context.read())
               ..add(const KnowYourCustomersStarted()),
         child: Builder(
-          builder: (final context) => Scaffold(
+          builder: (final context) => FnvScaffold(
             appBar: FnvAppBar(),
             body: ListView(
               padding:
@@ -62,7 +62,6 @@ class KnowYourCustomersPage extends StatelessWidget {
                 ),
               ],
             ),
-            backgroundColor: FnvColors.aidesFond,
           ),
         ),
       );

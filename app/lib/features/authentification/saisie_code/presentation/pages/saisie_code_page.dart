@@ -1,4 +1,6 @@
 import 'package:app/core/presentation/widgets/composants/alert.dart';
+import 'package:app/core/presentation/widgets/composants/scaffold.dart';
+import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/authentification/saisie_code/presentation/bloc/saisie_code_bloc.dart';
 import 'package:app/features/authentification/saisie_code/presentation/bloc/saisie_code_event.dart';
@@ -32,9 +34,9 @@ class SaisieCodePage extends StatelessWidget {
           authentificationPort: context.read(),
           email: email,
         ),
-        child: Scaffold(
+        child: FnvScaffold(
           appBar: AppBar(
-            backgroundColor: Colors.white,
+            backgroundColor: FnvColors.accueilFond,
             iconTheme: const IconThemeData(color: DsfrColors.blueFranceSun113),
           ),
           body: ListView(

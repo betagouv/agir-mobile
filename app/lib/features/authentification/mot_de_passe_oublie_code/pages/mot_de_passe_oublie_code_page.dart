@@ -2,6 +2,8 @@ import 'package:app/core/navigation/extensions/go_router.dart';
 import 'package:app/core/presentation/widgets/composants/alert.dart';
 import 'package:app/core/presentation/widgets/composants/code_input.dart';
 import 'package:app/core/presentation/widgets/composants/mot_de_passe/mot_de_passe.dart';
+import 'package:app/core/presentation/widgets/composants/scaffold.dart';
+import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/authentification/mot_de_passe_oublie_code/bloc/mot_de_passe_oublie_code_bloc.dart';
 import 'package:app/features/authentification/mot_de_passe_oublie_code/bloc/mot_de_passe_oublie_code_event.dart';
@@ -53,9 +55,9 @@ class _View extends StatelessWidget {
         listenWhen: (final previous, final current) =>
             previous.motDePasseModifie != current.motDePasseModifie &&
             current.motDePasseModifie,
-        child: Scaffold(
+        child: FnvScaffold(
           appBar: AppBar(
-            backgroundColor: Colors.white,
+            backgroundColor: FnvColors.accueilFond,
             iconTheme: const IconThemeData(color: DsfrColors.blueFranceSun113),
           ),
           body: ListView(

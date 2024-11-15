@@ -1,6 +1,6 @@
 import 'package:app/core/presentation/widgets/composants/app_bar.dart';
 import 'package:app/core/presentation/widgets/composants/bottom_bar.dart';
-import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
+import 'package:app/core/presentation/widgets/composants/scaffold.dart';
 import 'package:app/features/profil/informations/presentation/bloc/mes_informations_bloc.dart';
 import 'package:app/features/profil/informations/presentation/bloc/mes_informations_event.dart';
 import 'package:app/features/profil/informations/presentation/bloc/mes_informations_state.dart';
@@ -36,7 +36,7 @@ class _MesInformationsView extends StatelessWidget {
   const _MesInformationsView();
 
   @override
-  Widget build(final context) => Scaffold(
+  Widget build(final context) => FnvScaffold(
         appBar: FnvAppBar(),
         body: BlocBuilder<MesInformationsBloc, MesInformationsState>(
           builder: (final context, final state) {
@@ -69,6 +69,5 @@ class _MesInformationsView extends StatelessWidget {
             },
           ),
         ),
-        backgroundColor: FnvColors.aidesFond,
       );
 }

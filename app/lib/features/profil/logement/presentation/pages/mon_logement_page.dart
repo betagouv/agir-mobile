@@ -1,6 +1,6 @@
 import 'package:app/core/presentation/widgets/composants/app_bar.dart';
 import 'package:app/core/presentation/widgets/composants/bottom_bar.dart';
-import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
+import 'package:app/core/presentation/widgets/composants/scaffold.dart';
 import 'package:app/features/profil/logement/presentation/bloc/mon_logement_bloc.dart';
 import 'package:app/features/profil/logement/presentation/bloc/mon_logement_event.dart';
 import 'package:app/features/profil/logement/presentation/bloc/mon_logement_state.dart';
@@ -37,7 +37,7 @@ class _MonLogementView extends StatelessWidget {
   const _MonLogementView();
 
   @override
-  Widget build(final context) => Scaffold(
+  Widget build(final context) => FnvScaffold(
         appBar: FnvAppBar(),
         body: BlocBuilder<MonLogementBloc, MonLogementState>(
           builder: (final context, final state) {
@@ -70,6 +70,5 @@ class _MonLogementView extends StatelessWidget {
             },
           ),
         ),
-        backgroundColor: FnvColors.aidesFond,
       );
 }

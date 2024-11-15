@@ -8,6 +8,8 @@ import 'package:app/core/error/infrastructure/missing_environment_key_exception.
 import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/core/infrastructure/tracker.dart';
 import 'package:app/core/presentation/pages/error_page.dart';
+import 'package:app/core/presentation/widgets/composants/scaffold.dart';
+import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/actions/detail/infrastructure/action_repository.dart';
 import 'package:app/features/actions/list/infrastructure/actions_adapter.dart';
@@ -234,8 +236,11 @@ void _registerErrorHandlers() {
     _captureException(details.exception, details.stack);
 
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: const Text(Localisation.erreurInattendue)),
+      home: FnvScaffold(
+        appBar: AppBar(
+          title: const Text(Localisation.erreurInattendue),
+          backgroundColor: FnvColors.appBarFond,
+        ),
         body: Padding(
           padding: const EdgeInsets.all(paddingVerticalPage),
           child: Center(child: Text(details.exceptionAsString())),

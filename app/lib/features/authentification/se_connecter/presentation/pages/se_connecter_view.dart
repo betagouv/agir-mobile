@@ -1,4 +1,6 @@
 import 'package:app/core/presentation/widgets/composants/alert.dart';
+import 'package:app/core/presentation/widgets/composants/scaffold.dart';
+import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/authentification/creer_compte/presentation/pages/creer_compte_page.dart';
 import 'package:app/features/authentification/mot_de_passe_oublie/pages/mot_de_passe_oublie_page.dart';
@@ -27,9 +29,9 @@ class SeConnecterView extends StatelessWidget {
         listenWhen: (final previous, final current) =>
             previous.connexionFaite != current.connexionFaite &&
             current.connexionFaite,
-        child: Scaffold(
+        child: FnvScaffold(
           appBar: AppBar(
-            backgroundColor: Colors.white,
+            backgroundColor: FnvColors.accueilFond,
             iconTheme: const IconThemeData(color: DsfrColors.blueFranceSun113),
           ),
           body: ListView(
