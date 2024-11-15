@@ -1,11 +1,11 @@
-import 'package:app/core/presentation/widgets/composants/fnv_image.dart';
+import 'package:app/core/presentation/widgets/composants/image.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/shadows.dart';
 import 'package:app/features/accueil/presentation/widgets/title_section.dart';
 import 'package:app/features/mission/home/presentation/bloc/mission_home_bloc.dart';
 import 'package:app/features/mission/home/presentation/bloc/mission_home_event.dart';
 import 'package:app/features/mission/home/presentation/bloc/mission_home_state.dart';
+import 'package:app/features/mission/mission/presentation/pages/mission_page.dart';
 import 'package:app/features/theme/core/domain/mission_liste.dart';
-import 'package:app/features/theme/presentation/pages/mission_page.dart';
 import 'package:app/features/theme/presentation/widgets/theme_type_tag.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
@@ -39,6 +39,7 @@ class _Section extends StatelessWidget {
 
   @override
   Widget build(final context) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const TitleSection(
             title: Localisation.missionTitle,
@@ -80,7 +81,10 @@ class _Mission extends StatelessWidget {
         onTap: () async {
           await GoRouter.of(context).pushNamed(
             MissionPage.name,
-            pathParameters: {'id': mission.id},
+            pathParameters: {
+              'mission': mission.code,
+              'thematique': mission.themeType.name,
+            },
           );
           if (context.mounted) {
             context.read<MissionHomeBloc>().add(const MissionHomeFetch());

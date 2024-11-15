@@ -1,4 +1,4 @@
-import 'package:app/core/presentation/widgets/composants/fnv_image.dart';
+import 'package:app/core/presentation/widgets/composants/image.dart';
 import 'package:app/features/mieux_vous_connaitre/core/domain/question.dart';
 import 'package:app/features/mieux_vous_connaitre/detail/presentation/bloc/mieux_vous_connaitre_edit_bloc.dart';
 import 'package:app/features/mieux_vous_connaitre/detail/presentation/bloc/mieux_vous_connaitre_edit_event.dart';

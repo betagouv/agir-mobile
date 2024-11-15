@@ -1,11 +1,9 @@
-// ignore_for_file: prefer-single-widget-per-file
-
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 
 class FnvTitle extends StatelessWidget {
-  const FnvTitle({required this.title, this.subtitle, super.key});
+  const FnvTitle({super.key, required this.title, this.subtitle});
 
   final String title;
   final String? subtitle;

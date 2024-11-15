@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 enum DsfrFormMessageType { error, valid, warning, info }
 
 class DsfrFormMessage extends StatelessWidget {
-  const DsfrFormMessage({required this.type, required this.text, super.key});
+  const DsfrFormMessage({super.key, required this.type, required this.text});
 
   final DsfrFormMessageType type;
   final String text;

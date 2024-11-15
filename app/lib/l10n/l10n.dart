@@ -1,11 +1,8 @@
-// ignore_for_file: avoid-duplicate-constant-values
-
 import 'package:flutter/widgets.dart';
 
 abstract final class Localisation {
   const Localisation._();
 
-  static const aDecouvrir = 'À découvrir';
   static const accederAuSimulateur = 'Accéder au simulateur';
   static const accueilRecommandationsSousTitre =
       'Une sélection d’articles et de services, pour vous, selon vos préférences !';
@@ -41,8 +38,9 @@ abstract final class Localisation {
       'Nous avons quelques questions à vous poser pour personnaliser votre expérience !';
   static const bilanEnvironnemental = 'Mon bilan environnemental';
   static const bonjour = 'Bonjour,\n';
-  static const bonnesAstucesPourRealiserCeDefi =
-      'Bonnes astuces pour réaliser ce défi';
+  static const bonnesAstucesPourRealiserCetteAction =
+      'Bonnes astuces pour réaliser cette action';
+  static const bravo = 'BRAVO !';
   static const cestParti = 'C’est parti !';
   static const cestPresqueTermine = 'C’est presque terminé !';
   static const cetteActionNeVousConvientPas =
@@ -67,7 +65,7 @@ abstract final class Localisation {
       'https://jagis.beta.gouv.fr/accessibilite';
   static const statistiques = 'Statistiques';
   static const statistiquesSite = 'https://jagis.beta.gouv.fr/statistiques';
-  static const defiRealise = 'Défi réalisé';
+  static const actionRealisee = 'Action réalisée';
   static const donneesPersonnelles = 'Données personnelles';
   static const donneesUtiliseesPart1 = 'Données utilisées : code postal ';
   static const donneesUtiliseesPart2 = ', revenu fiscal de référence ';
@@ -105,7 +103,7 @@ abstract final class Localisation {
   static const jaiCompris = "J'ai compris";
   static const jaiDejaUnCompte = "J'ai déjà un compte";
   static const jeCreeMonCompte = 'Je crée mon compte';
-  static const jeReleveLeDefi = 'Je relève le défi';
+  static const jeReleveLAction = "Je relève l'action";
   static const jusqua = "Jusqu'à ";
   static const leServiveNeCouvrePasEncoreVotreVille =
       'Le service ne couvre pas encore votre ville.';
@@ -139,6 +137,9 @@ abstract final class Localisation {
   static const missionTitle = 'Recommandés **pour vous**';
   static const missionSubTitle =
       'Des solutions **adaptées à votre situation** et les clés pour comprendre';
+  static const missionActionsTitle = "Quelques **idées** d'action";
+  static const missionActionsSubTitle =
+      "Pour réduire votre impact, voici une liste d'actions recommandés **pour vous !**";
   static const modifier = 'Modifier';
   static const moinsDe35m2 = 'Moins de 35 m²';
   static const motDePasse = 'Mot de passe';
@@ -176,10 +177,6 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez 1 part pour
 Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme des revenus de toutes les personnes avec lequelles vous partagez vos déclarations d’impôts (pour toute l’année) pour vous faire une première idée.''';
   static const oui = 'Oui';
   static const pageConnexionTitre = 'Accédez à mon compte J’agis';
-  static const partieDeux = '2. LIRE DES ARTICLES ET RÉPONDRE AUX QUIZ';
-  static const partieQuatre = '4. GAGNER VOTRE CARTE';
-  static const partieTrois = '3. RÉALISER AU MOINS UNE ACTION PROPOSÉE';
-  static const partieUne = '1. ADAPTER VOTRE EXPÉRIENCE';
   static const pasPourMoi = 'Pas pour moi';
   static const plusDe150m2 = 'Plus de 150 m²';
   static const plusieursReponsesPossibles = 'Plusieurs réponses possibles';
@@ -188,7 +185,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const politiqueDeConfidentialiteSite =
       'https://jagis.beta.gouv.fr/politique-de-confidentialite';
   static const pourquoi = 'Pourquoi ?';
-  static const pourquoiCeDefi = 'Pourquoi cette action ?';
+  static const pourquoiCetteAction = 'Pourquoi cette action ?';
   static const pourquoiCesQuestions = 'Pourquoi ces questions ?';
   static const pourquoiCesQuestionsReponse =
       'Votre revenu fiscal de référence et le nombre de parts permettent d’afficher les aides en fonction de vos ressources.';
@@ -203,8 +200,6 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const proposePar = 'Proposé par';
   static const propulsePar = 'Propulsé par ';
   static const quelleEstLaSuperficie = 'Quelle est la superficie ?';
-  static const quelquesQuestionPourMieuxVousConnaitre =
-      'Quelques questions pour mieux vous connaître';
   static const quiz = 'Quiz';
   static const rafraichir = 'Rafraichir';
   static const rechercherParTitre = 'Rechercher par titre';
@@ -228,7 +223,6 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
       'Vous pouvez à tout moment choisir de supprimer votre compte ainsi que l’ensemble des données qui y sont associées.';
   static const termine = 'TERMINÉ !';
   static const termine2 = 'Terminé !';
-  static const termineLaMission = 'Terminer la mission';
   static const toutEstPret = 'Tout est prêt !';
   static const unAppartement = 'Un appartement';
   static const uneMaison = 'Une maison';
@@ -305,7 +299,8 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static String questionCourantSurMax(final int actuel, final int max) =>
       '**Question $actuel** sur $max';
 
-  static String recolterVosPoints(final int points) => 'Recolter vos $points';
-
   static String veloLabel(final String text) => '$text : ';
+
+  static String vousAvezTermineLaMission(final String text) =>
+      'Vous avez terminé la mission “$text”';
 }

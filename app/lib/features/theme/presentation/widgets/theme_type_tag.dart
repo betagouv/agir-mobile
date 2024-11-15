@@ -9,7 +9,7 @@ class ThemeTypeTag extends StatelessWidget {
   final ThemeType themeType;
 
   @override
-  Widget build(final BuildContext context) => DsfrTag.sm(
+  Widget build(final context) => DsfrTag.sm(
         label: TextSpan(
           text: themeType.displayName,
           semanticsLabel: removeEmoji(themeType.displayName),

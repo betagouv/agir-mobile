@@ -1,4 +1,4 @@
-// ignore_for_file: avoid-collection-mutating-methods, prefer-early-return
+// ignore_for_file: avoid-collection-mutating-methods
 
 import 'dart:async';
 import 'dart:io';

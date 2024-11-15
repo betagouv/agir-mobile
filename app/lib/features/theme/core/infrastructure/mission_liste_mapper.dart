@@ -5,7 +5,7 @@ abstract final class MissionListeMapper {
   const MissionListeMapper._();
 
   static MissionListe fromJson(final Map<String, dynamic> json) => MissionListe(
-        id: json['code'] as String,
+        code: json['code'] as String,
         titre: json['titre'] as String,
         progression: (json['progression'] as num).toInt(),
         progressionCible: (json['cible_progression'] as num).toInt(),

@@ -1,5 +1,3 @@
-// ignore_for_file: avoid-duplicate-constant-values
-
 abstract final class UpgradeL10n {
   const UpgradeL10n._();
 

@@ -31,8 +31,8 @@ final class ActionDetailLoadSuccess extends ActionDetailState {
   final Option<String?> newReason;
 
   String get acceptanceText => _getRadioButtonText(
-        initialStatus: Localisation.jeReleveLeDefi,
-        progressStatus: Localisation.defiRealise,
+        initialStatus: Localisation.jeReleveLAction,
+        progressStatus: Localisation.actionRealisee,
       );
 
   String get refusalText => _getRadioButtonText(

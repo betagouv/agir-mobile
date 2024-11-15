@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class MieuxVousConnaitreEditPage extends StatelessWidget {
-  const MieuxVousConnaitreEditPage({required this.id, super.key});
+  const MieuxVousConnaitreEditPage({super.key, required this.id});
 
   static const name = 'mieux-vous-connaitre-edit';
   static const path = '$name/:id';

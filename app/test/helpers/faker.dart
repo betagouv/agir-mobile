@@ -23,52 +23,6 @@ Map<String, dynamic> generateChoixUniqueQuestion(final bool withResponse) => {
       'type': 'choix_unique',
     };
 
-// Map<String, dynamic> generateChoixMultipleQuestion() => {
-//       'categorie': 'mission',
-//       'id': 'KYC_${faker.lorem.word()}',
-//       'is_NGC': faker.randomGenerator.boolean(),
-//       'points': faker.randomGenerator.integer(10),
-//       'question': _fakerSentenceBetter(),
-//       'reponse': [faker.lorem.word(), faker.lorem.word()],
-//       'reponses_possibles': [
-//         faker.lorem.word(),
-//         faker.lorem.word(),
-//         faker.lorem.word(),
-//       ],
-//       'thematique': generateThematique,
-//       'type': 'choix_multiple',
-//     };
-
-// Map<String, dynamic> generateLibreQuestion() => {
-//       'categorie': 'mission',
-//       'id': 'KYC_${faker.lorem.word()}',
-//       'is_NGC': faker.randomGenerator.boolean(),
-//       'points': faker.randomGenerator.integer(10),
-//       'question': _fakerSentenceBetter(),
-//       'reponse': [_fakerSentenceBetter()],
-//       'reponses_possibles': <String>[],
-//       'thematique': generateThematique,
-//       'type': 'libre',
-//     };
-
-// Map<String, dynamic> generateMosaicBooleanQuestion() => {
-//       'categorie': 'mission',
-//       'id': 'MOSAIC_${faker.lorem.word().toUpperCase()}',
-//       'is_answered': true,
-//       'points': faker.randomGenerator.integer(20),
-//       'reponses': List.generate(
-//         4,
-//         (final index) => {
-//           'boolean_value': faker.randomGenerator.boolean(),
-//           'code': 'KYC_${faker.lorem.word()}',
-//           'image_url': faker.image.loremPicsum(),
-//           'label': faker.lorem.word(),
-//         },
-//       ),
-//       'titre': _fakerSentenceBetter(),
-//       'type': 'mosaic_boolean',
-//     };
-
 Map<String, dynamic> actionItemFaker() {
   final faker = Faker();
 
@@ -93,16 +47,6 @@ Map<String, dynamic> actionFaker({
 }) {
   final faker = Faker();
 
-  final thematique = [
-    '🥦 Alimentation',
-    '☀️ Climat et Environnement',
-    '🛒 Consommation durable',
-    '🗑️ Déchets',
-    '🏡 Logement',
-    '⚽ Loisirs (vacances, sport,...)',
-    '🚗 Transports',
-  ];
-
   final statusList = [
     'todo',
     'en_cours',
@@ -119,8 +63,7 @@ Map<String, dynamic> actionFaker({
     'pourquoi': '<p>${_fakerSentenceBetter()}</p>',
     'status': status ??
         statusList.elementAt(faker.randomGenerator.integer(statusList.length)),
-    'thematique_label':
-        thematique.elementAt(faker.randomGenerator.integer(thematique.length)),
+    'thematique': generateThematique,
     'titre': _fakerSentenceBetter(),
   };
 }

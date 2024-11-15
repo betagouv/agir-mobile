@@ -1,5 +1,3 @@
-// ignore_for_file: prefer-single-widget-per-file
-
 import 'package:dsfr_example/page_item.dart';
 import 'package:flutter/material.dart';
 

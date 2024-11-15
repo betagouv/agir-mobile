@@ -7,7 +7,6 @@ abstract final class CrashReporting {
         p0.considerInAppFramesByDefault = false;
       });
 
-  // ignore: unused-code
   static Future<void> captureException(
     final dynamic exception, {
     final dynamic stackTrace,

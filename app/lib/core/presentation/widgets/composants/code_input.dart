@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:pinput/pinput.dart';
 
 class FnvCodeInput extends StatelessWidget {
-  const FnvCodeInput({required this.onChanged, super.key});
+  const FnvCodeInput({super.key, required this.onChanged});
 
   final ValueChanged<String> onChanged;
 

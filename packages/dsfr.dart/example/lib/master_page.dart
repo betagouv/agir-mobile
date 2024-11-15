@@ -2,7 +2,7 @@ import 'package:dsfr_example/page_item.dart';
 import 'package:flutter/material.dart';
 
 class MasterPage extends StatefulWidget {
-  const MasterPage({required this.pageItems, super.key});
+  const MasterPage({super.key, required this.pageItems});
 
   final List<PageItem> pageItems;
 

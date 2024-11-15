@@ -5,7 +5,6 @@ import 'package:app/features/actions/detail/presentation/bloc/action_detail_stat
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fpdart/fpdart.dart';
 
-// Bloc
 class ActionDetailBloc extends Bloc<ActionDetailEvent, ActionDetailState> {
   ActionDetailBloc({required final ActionRepository repository})
       : super(const ActionDetailInitial()) {

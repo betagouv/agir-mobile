@@ -65,7 +65,6 @@ class _JaccepteState extends State<Jaccepte> {
                       decoration: TextDecoration.underline,
                     ),
                     recognizer: _recognizer,
-                    // semanticsLabel: 'Lien vers ${widget.label}',
                     children: const [
                       WidgetSpan(
                         alignment: PlaceholderAlignment.middle,

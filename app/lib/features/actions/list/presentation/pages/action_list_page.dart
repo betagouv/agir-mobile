@@ -57,11 +57,11 @@ class ActionListPage extends StatelessWidget {
                           final item = state.actions[index];
                           final subTitle = switch (item.status) {
                             ActionStatus.toDo => '📝 À faire',
-                            ActionStatus.inProgress => '⏳ Défi en cours',
+                            ActionStatus.inProgress => '⏳ Action en cours',
                             ActionStatus.refused => '👎 Pas envie',
                             ActionStatus.alreadyDone => '✅ Déjà fait',
-                            ActionStatus.abandonned => '❌ Abandonné',
-                            ActionStatus.done => '🏆 Défi réalisé',
+                            ActionStatus.abandonned => '❌ Abandonnée',
+                            ActionStatus.done => '🏆 Action réalisée',
                           };
 
                           return ListItem(

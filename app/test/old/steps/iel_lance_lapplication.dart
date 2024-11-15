@@ -22,7 +22,7 @@ import 'package:mocktail_image_network/mocktail_image_network.dart';
 
 import '../../environmental_performance/summary/environmental_performance_data.dart';
 import '../../helpers/dio_mock.dart';
-import '../../mission/mission_home_test.dart';
+import '../../mission/mission_test.dart';
 import '../api/constants.dart';
 import '../api/flutter_secure_storage_fake.dart';
 import '../mocks/aide_velo_port_mock.dart';
@@ -118,7 +118,6 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
   );
   ScenarioContext().universPortMock = ThemePortMock(
     missionListe: ScenarioContext().missionListe,
-    mission: ScenarioContext().mission,
   );
 
   final profilPort = ScenarioContext().profilPortMock!;

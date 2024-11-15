@@ -1,4 +1,4 @@
-import 'package:app/core/presentation/widgets/composants/fnv_image.dart';
+import 'package:app/core/presentation/widgets/composants/image.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/shadows.dart';
 import 'package:app/features/articles/presentation/pages/article_page.dart';

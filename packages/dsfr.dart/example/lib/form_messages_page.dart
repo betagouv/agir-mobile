@@ -1,5 +1,3 @@
-// ignore_for_file: avoid-collection-mutating-methods
-
 import 'package:dsfr/dsfr.dart';
 import 'package:dsfr_example/page_item.dart';
 import 'package:flutter/material.dart';

@@ -65,7 +65,7 @@ class _Success extends StatelessWidget {
   final AssistanceListLoadSuccess state;
 
   @override
-  Widget build(final BuildContext context) => ListView(
+  Widget build(final context) => ListView(
         children: [
           if (!state.isCovered)
             BlocBuilder<AidesDisclaimerCubit, AidesDisclaimerState>(
@@ -91,7 +91,7 @@ class _List extends StatelessWidget {
   final AssistanceListLoadSuccess state;
 
   @override
-  Widget build(final BuildContext context) => ListView(
+  Widget build(final context) => ListView(
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         padding: const EdgeInsets.all(paddingVerticalPage),
@@ -228,7 +228,7 @@ class _ThemeSection extends StatelessWidget {
   final Axis scrollDirection;
 
   @override
-  Widget build(final BuildContext context) => Column(
+  Widget build(final context) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
@@ -341,7 +341,7 @@ class _AmountMax extends StatelessWidget {
   final int value;
 
   @override
-  Widget build(final BuildContext context) => Text.rich(
+  Widget build(final context) => Text.rich(
         TextSpan(
           children: [
             const WidgetSpan(

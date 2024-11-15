@@ -19,4 +19,6 @@ abstract final class AssetsSvgs {
   static const consommation = 'assets/svgs/consommation.svg';
   static const logement = 'assets/svgs/logement.svg';
   static const transport = 'assets/svgs/transport.svg';
+  static const fireworks = 'assets/svgs/fireworks.svg';
+  static const flags = 'assets/svgs/flags.svg';
 }

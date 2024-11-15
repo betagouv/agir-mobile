@@ -21,7 +21,7 @@ class DsfrAccordion {
 }
 
 class DsfrAccordionsGroup extends StatefulWidget {
-  const DsfrAccordionsGroup({required this.values, super.key});
+  const DsfrAccordionsGroup({super.key, required this.values});
 
   final List<DsfrAccordion> values;
 

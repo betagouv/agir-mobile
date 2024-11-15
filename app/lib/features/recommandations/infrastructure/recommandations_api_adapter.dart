@@ -1,5 +1,3 @@
-// ignore_for_file: no-equal-switch-expression-cases
-
 import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';

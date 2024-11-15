@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:app/features/accueil/presentation/pages/home_page.dart';
 import 'package:app/features/authentication/presentation/bloc/authentication_bloc.dart';
 import 'package:app/features/authentication/presentation/bloc/authentication_state.dart';
@@ -14,7 +12,7 @@ class AuthenticationRedirection extends StatelessWidget {
   final Widget child;
 
   @override
-  Widget build(final BuildContext context) =>
+  Widget build(final context) =>
       BlocListener<AuthenticationBloc, AuthenticationState>(
         listener: (final context, final state) => switch (state) {
           AuthenticationUnauthenticated() =>

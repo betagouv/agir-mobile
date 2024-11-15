@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class OnboardingIllustration extends StatelessWidget {
-  const OnboardingIllustration({required this.assetName, super.key});
+  const OnboardingIllustration({super.key, required this.assetName});
 
   final String assetName;
 

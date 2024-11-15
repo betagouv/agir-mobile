@@ -1,5 +1,3 @@
-// ignore_for_file: avoid-duplicate-constant-values
-
 abstract final class EnvironmentalPerformanceSummaryL10n {
   const EnvironmentalPerformanceSummaryL10n._();
 

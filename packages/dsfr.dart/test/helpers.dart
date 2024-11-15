@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
-  const App({required this.child, super.key});
+  const App({super.key, required this.child});
 
   final Widget child;
 
