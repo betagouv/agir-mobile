@@ -19,7 +19,7 @@ on:
         description: "Fichier de configuration de l'application"
 
 env:
-  FLUTTER_VERSION: 3.24.4
+  FLUTTER_VERSION: 3.24.5
 
 jobs:
   continuous_delivery_android:
