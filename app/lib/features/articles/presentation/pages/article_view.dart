@@ -2,7 +2,7 @@ import 'package:app/core/infrastructure/url_launcher.dart';
 import 'package:app/core/presentation/widgets/composants/app_bar.dart';
 import 'package:app/core/presentation/widgets/composants/fnv_image.dart';
 import 'package:app/core/presentation/widgets/composants/html_widget.dart';
-import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
+import 'package:app/core/presentation/widgets/composants/scaffold.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/articles/domain/article.dart';
 import 'package:app/features/articles/presentation/bloc/article_bloc.dart';
@@ -21,7 +21,7 @@ class ArticleView extends StatelessWidget {
       (final v) => v.state.article,
     );
 
-    return Scaffold(
+    return FnvScaffold(
       appBar: FnvAppBar(),
       body: ListView(
         padding: const EdgeInsets.all(paddingVerticalPage),
@@ -91,7 +91,6 @@ class ArticleView extends StatelessWidget {
           const SizedBox(height: DsfrSpacings.s6w),
         ],
       ),
-      backgroundColor: FnvColors.aidesFond,
     );
   }
 }

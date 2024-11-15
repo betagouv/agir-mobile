@@ -1,6 +1,6 @@
 import 'package:app/core/presentation/widgets/composants/app_bar.dart';
 import 'package:app/core/presentation/widgets/composants/bottom_bar.dart';
-import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
+import 'package:app/core/presentation/widgets/composants/scaffold.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/mieux_vous_connaitre/detail/presentation/form/mieux_vous_connaitre_controller.dart';
 import 'package:app/features/mieux_vous_connaitre/detail/presentation/form/mieux_vous_connaitre_form.dart';
@@ -47,7 +47,7 @@ class _ViewState extends State<_View> {
   }
 
   @override
-  Widget build(final context) => Scaffold(
+  Widget build(final context) => FnvScaffold(
         appBar: FnvAppBar(),
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(paddingVerticalPage),
@@ -75,6 +75,5 @@ class _ViewState extends State<_View> {
             onPressed: _mieuxVousConnaitreController.save,
           ),
         ),
-        backgroundColor: FnvColors.aidesFond,
       );
 }

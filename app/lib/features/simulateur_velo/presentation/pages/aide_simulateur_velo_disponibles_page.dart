@@ -3,7 +3,7 @@ import 'package:app/core/infrastructure/url_launcher.dart';
 import 'package:app/core/presentation/widgets/composants/app_bar.dart';
 import 'package:app/core/presentation/widgets/composants/bottom_bar.dart';
 import 'package:app/core/presentation/widgets/composants/fnv_image.dart';
-import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
+import 'package:app/core/presentation/widgets/composants/scaffold.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/simulateur_velo/domain/aide_velo.dart';
 import 'package:app/features/simulateur_velo/presentation/bloc/aide_velo_bloc.dart';
@@ -32,7 +32,7 @@ class AideSimulateurVeloDisponiblePage extends StatelessWidget {
   Widget build(final context) {
     final state = context.watch<AideVeloBloc>().state;
 
-    return Scaffold(
+    return FnvScaffold(
       appBar: FnvAppBar(),
       body: ListView(
         padding: const EdgeInsets.symmetric(vertical: paddingVerticalPage),
@@ -104,7 +104,6 @@ class AideSimulateurVeloDisponiblePage extends StatelessWidget {
           onPressed: () => GoRouter.of(context).pop(),
         ),
       ),
-      backgroundColor: FnvColors.aidesFond,
     );
   }
 }

@@ -1,5 +1,7 @@
 import 'package:app/core/presentation/widgets/composants/alert.dart';
 import 'package:app/core/presentation/widgets/composants/mot_de_passe/mot_de_passe.dart';
+import 'package:app/core/presentation/widgets/composants/scaffold.dart';
+import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/authentification/creer_compte/presentation/bloc/creer_compte_bloc.dart';
 import 'package:app/features/authentification/creer_compte/presentation/bloc/creer_compte_event.dart';
@@ -27,9 +29,9 @@ class CreerCompteView extends StatelessWidget {
         ),
         listenWhen: (final previous, final current) =>
             previous.compteCree != current.compteCree && current.compteCree,
-        child: Scaffold(
+        child: FnvScaffold(
           appBar: AppBar(
-            backgroundColor: Colors.white,
+            backgroundColor: FnvColors.accueilFond,
             iconTheme: const IconThemeData(color: DsfrColors.blueFranceSun113),
           ),
           body: ListView(

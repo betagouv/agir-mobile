@@ -1,3 +1,5 @@
+import 'package:app/core/presentation/widgets/composants/scaffold.dart';
+import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/authentification/mot_de_passe_oublie/bloc/mot_de_passe_oublie_bloc.dart';
 import 'package:app/features/authentification/mot_de_passe_oublie/bloc/mot_de_passe_oublie_event.dart';
@@ -12,9 +14,9 @@ class MotDePasseOublieView extends StatelessWidget {
   const MotDePasseOublieView({super.key});
 
   @override
-  Widget build(final context) => Scaffold(
+  Widget build(final context) => FnvScaffold(
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: FnvColors.accueilFond,
           iconTheme: const IconThemeData(color: DsfrColors.blueFranceSun113),
         ),
         body: ListView(

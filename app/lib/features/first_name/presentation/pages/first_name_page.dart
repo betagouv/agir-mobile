@@ -1,6 +1,8 @@
 import 'package:app/core/assets/svgs.dart';
 import 'package:app/core/presentation/widgets/composants/alert.dart';
 import 'package:app/core/presentation/widgets/composants/bottom_bar.dart';
+import 'package:app/core/presentation/widgets/composants/scaffold.dart';
+import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/authentification/question_code_postal/presentation/pages/question_code_postal_page.dart';
 import 'package:app/features/authentification/widgets/onboarding_illustration.dart';
@@ -48,10 +50,10 @@ class FirstNamePage extends StatelessWidget {
                     .pushNamed(QuestionCodePostalPage.name);
               }
             },
-            child: Scaffold(
+            child: FnvScaffold(
               appBar: AppBar(
                 automaticallyImplyLeading: false,
-                backgroundColor: Colors.white,
+                backgroundColor: FnvColors.accueilFond,
                 iconTheme:
                     const IconThemeData(color: DsfrColors.blueFranceSun113),
               ),

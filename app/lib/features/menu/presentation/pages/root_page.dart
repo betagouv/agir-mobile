@@ -1,5 +1,5 @@
 import 'package:app/core/presentation/widgets/composants/app_bar.dart';
-import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
+import 'package:app/core/presentation/widgets/composants/scaffold.dart';
 import 'package:app/features/menu/presentation/widgets/menu.dart';
 import 'package:flutter/material.dart';
 
@@ -16,10 +16,9 @@ class RootPage extends StatelessWidget {
   final Widget body;
 
   @override
-  Widget build(final context) => Scaffold(
+  Widget build(final context) => FnvScaffold(
         appBar: FnvAppBar(title: title, bottom: appBarBottom),
         body: body,
         drawer: const Menu(),
-        backgroundColor: FnvColors.accueilFond,
       );
 }

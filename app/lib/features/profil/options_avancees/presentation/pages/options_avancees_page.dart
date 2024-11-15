@@ -1,5 +1,5 @@
 import 'package:app/core/presentation/widgets/composants/app_bar.dart';
-import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
+import 'package:app/core/presentation/widgets/composants/scaffold.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/profil/changer_mot_de_passe/presentation/widgets/changer_mot_de_passe.dart';
 import 'package:app/features/profil/profil/presentation/widgets/fnv_title.dart';
@@ -22,7 +22,7 @@ class OptionsAvanceesPage extends StatelessWidget {
       );
 
   @override
-  Widget build(final context) => Scaffold(
+  Widget build(final context) => FnvScaffold(
         appBar: FnvAppBar(),
         body: ListView(
           padding: const EdgeInsets.all(paddingVerticalPage),
@@ -34,6 +34,5 @@ class OptionsAvanceesPage extends StatelessWidget {
             SupprimerCompte(),
           ],
         ),
-        backgroundColor: FnvColors.aidesFond,
       );
 }

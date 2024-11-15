@@ -1,5 +1,7 @@
 import 'package:app/core/assets/svgs.dart';
 import 'package:app/core/presentation/widgets/composants/bottom_bar.dart';
+import 'package:app/core/presentation/widgets/composants/scaffold.dart';
+import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/authentification/question_themes/presentation/pages/question_themes_page.dart';
 import 'package:app/features/authentification/widgets/onboarding_illustration.dart';
@@ -29,9 +31,9 @@ class AppEstEncoreEnExperimentationPage extends StatelessWidget {
   Widget build(final context) {
     const bodyLg = DsfrTextStyle.bodyLg();
 
-    return Scaffold(
+    return FnvScaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: FnvColors.accueilFond,
         iconTheme: const IconThemeData(color: DsfrColors.blueFranceSun113),
       ),
       body: ListView(

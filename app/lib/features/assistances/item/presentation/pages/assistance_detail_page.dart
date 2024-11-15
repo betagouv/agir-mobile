@@ -1,7 +1,7 @@
 import 'package:app/core/presentation/widgets/composants/app_bar.dart';
 import 'package:app/core/presentation/widgets/composants/bottom_bar.dart';
 import 'package:app/core/presentation/widgets/composants/html_widget.dart';
-import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
+import 'package:app/core/presentation/widgets/composants/scaffold.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/assistances/core/presentation/widgets/tag_simulateur.dart';
 import 'package:app/features/assistances/item/presentation/bloc/aide_bloc.dart';
@@ -29,7 +29,7 @@ class AssistanceDetailPage extends StatelessWidget {
   Widget build(final context) {
     final assistance = context.watch<AideBloc>().state.aide;
 
-    return Scaffold(
+    return FnvScaffold(
       appBar: FnvAppBar(),
       body: ListView(
         padding: const EdgeInsets.all(paddingVerticalPage),
@@ -78,7 +78,6 @@ class AssistanceDetailPage extends StatelessWidget {
               ),
             )
           : null,
-      backgroundColor: FnvColors.aidesFond,
     );
   }
 }

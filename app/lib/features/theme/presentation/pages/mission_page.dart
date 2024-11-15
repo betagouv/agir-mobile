@@ -4,7 +4,7 @@ import 'package:app/core/assets/images.dart';
 import 'package:app/core/presentation/widgets/composants/app_bar.dart';
 import 'package:app/core/presentation/widgets/composants/card.dart';
 import 'package:app/core/presentation/widgets/composants/fnv_image.dart';
-import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
+import 'package:app/core/presentation/widgets/composants/scaffold.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/vertical_dotted_line.dart';
 import 'package:app/features/articles/presentation/pages/article_page.dart';
@@ -89,7 +89,7 @@ class _PageState extends State<_Page> with RouteAware {
             previous != current &&
             current is MissionSucces &&
             current.estTerminee,
-        child: Scaffold(
+        child: FnvScaffold(
           appBar: FnvAppBar(),
           body: RefreshIndicator(
             onRefresh: () async => _handleMission(),
@@ -103,7 +103,6 @@ class _PageState extends State<_Page> with RouteAware {
               },
             ),
           ),
-          backgroundColor: FnvColors.aidesFond,
         ),
       );
 }

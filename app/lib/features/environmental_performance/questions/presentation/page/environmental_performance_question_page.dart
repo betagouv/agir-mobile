@@ -1,6 +1,6 @@
 import 'package:app/core/navigation/extensions/go_router.dart';
 import 'package:app/core/presentation/widgets/composants/app_bar.dart';
-import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
+import 'package:app/core/presentation/widgets/composants/scaffold.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/environmental_performance/questions/presentation/bloc/environmental_performance_question_bloc.dart';
 import 'package:app/features/environmental_performance/questions/presentation/bloc/environmental_performance_question_state.dart';
@@ -56,7 +56,7 @@ class _ViewState extends State<_View> {
   }
 
   @override
-  Widget build(final context) => Scaffold(
+  Widget build(final context) => FnvScaffold(
         appBar: FnvAppBar(),
         body: BlocBuilder<EnvironmentalPerformanceQuestionBloc,
             EnvironmentalPerformanceQuestionState>(
@@ -69,7 +69,6 @@ class _ViewState extends State<_View> {
               const Text('Erreur'),
           },
         ),
-        backgroundColor: FnvColors.aidesFond,
       );
 }
 

@@ -1,6 +1,7 @@
 import 'package:app/core/presentation/widgets/composants/app_bar.dart';
 import 'package:app/core/presentation/widgets/composants/bottom_bar.dart';
 import 'package:app/core/presentation/widgets/composants/html_widget.dart';
+import 'package:app/core/presentation/widgets/composants/scaffold.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/actions/core/domain/action_id.dart';
 import 'package:app/features/actions/detail/presentation/bloc/action_detail_bloc.dart';
@@ -54,7 +55,7 @@ class _View extends StatelessWidget {
               break;
           }
         },
-        child: Scaffold(
+        child: FnvScaffold(
           appBar: FnvAppBar(),
           body: const _Body(),
           bottomNavigationBar: const _BottomBar(),
