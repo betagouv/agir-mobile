@@ -27,8 +27,10 @@ import 'package:app/features/gamification/presentation/bloc/gamification_bloc.da
 import 'package:app/features/gamification/presentation/bloc/gamification_event.dart';
 import 'package:app/features/know_your_customer/list/infrastructure/know_your_customers_repository.dart';
 import 'package:app/features/mieux_vous_connaitre/core/domain/mieux_vous_connaitre_port.dart';
+import 'package:app/features/mission/actions/infrastructure/mission_actions_repository.dart';
 import 'package:app/features/mission/home/infrastructure/mission_home_repository.dart';
 import 'package:app/features/mission/home/presentation/bloc/mission_home_bloc.dart';
+import 'package:app/features/mission/mission/infrastructure/mission_repository.dart';
 import 'package:app/features/profil/core/domain/profil_port.dart';
 import 'package:app/features/quiz/domain/quiz_port.dart';
 import 'package:app/features/recommandations/domain/recommandations_port.dart';
@@ -155,6 +157,14 @@ class _AppState extends State<App> {
               RepositoryProvider.value(value: widget.actionRepository),
               RepositoryProvider.value(value: widget.firstNamePort),
               RepositoryProvider.value(value: widget.missionHomeRepository),
+              RepositoryProvider(
+                create: (final context) =>
+                    MissionRepository(client: widget.dioHttpClient),
+              ),
+              RepositoryProvider(
+                create: (final context) =>
+                    MissionActionsRepository(client: widget.dioHttpClient),
+              ),
             ],
             child: MultiBlocProvider(
               providers: [

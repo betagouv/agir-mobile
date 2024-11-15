@@ -1,5 +1,3 @@
-// ignore_for_file: no-equal-switch-expression-cases
-
 import 'package:app/features/bibliotheque/domain/bibliotheque.dart';
 import 'package:app/features/recommandations/infrastructure/recommandation_mapper.dart';
 

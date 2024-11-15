@@ -1,12 +1,11 @@
-import 'package:app/features/articles/presentation/bloc/article_bloc.dart';
-import 'package:app/features/articles/presentation/bloc/article_event.dart';
+import 'package:app/core/presentation/widgets/composants/app_bar.dart';
+import 'package:app/core/presentation/widgets/composants/scaffold.dart';
 import 'package:app/features/articles/presentation/pages/article_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class ArticlePage extends StatelessWidget {
-  const ArticlePage({required this.id, super.key});
+  const ArticlePage({super.key, required this.id});
 
   static const name = 'article';
   static const path = '$name/:id';
@@ -22,11 +21,8 @@ class ArticlePage extends StatelessWidget {
   final String id;
 
   @override
-  Widget build(final context) => BlocProvider(
-        create: (final context) => ArticleBloc(
-          articlesPort: context.read(),
-          gamificationPort: context.read(),
-        )..add(ArticleRecuperationDemandee(id)),
-        child: const ArticleView(),
+  Widget build(final context) => FnvScaffold(
+        appBar: FnvAppBar(),
+        body: ArticleView(id: id),
       );
 }

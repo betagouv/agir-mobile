@@ -1,5 +1,3 @@
-// ignore_for_file: avoid-slow-collection-methods
-
 import 'dart:convert';
 
 import 'package:app/core/infrastructure/http_client_helpers.dart';

@@ -1,5 +1,3 @@
-// ignore_for_file: avoid-duplicate-constant-values
-
 abstract final class SurveySectionL10n {
   const SurveySectionL10n._();
 

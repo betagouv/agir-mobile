@@ -1,5 +1,3 @@
-// ignore_for_file: format-comment
-
 import 'package:app/features/profil/logement/presentation/bloc/mon_logement_state.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:flutter_test/flutter_test.dart';

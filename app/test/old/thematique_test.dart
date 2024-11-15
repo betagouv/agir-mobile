@@ -30,7 +30,7 @@ void main() {
       await mockNetworkImages(() async {
         setUpWidgets(tester);
         const universThematique = MissionListe(
-          id: 'manger_saison_1',
+          code: 'manger_saison_1',
           titre: 'Pourquoi manger de saison ?',
           progression: 2,
           progressionCible: 8,

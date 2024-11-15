@@ -8,7 +8,6 @@ import 'package:app/features/profil/logement/presentation/bloc/mon_logement_stat
 import 'package:app/features/quiz/domain/quiz.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
 import 'package:app/features/simulateur_velo/domain/aide_velo_par_type.dart';
-import 'package:app/features/theme/core/domain/mission.dart';
 import 'package:app/features/theme/core/domain/mission_liste.dart';
 
 import 'mocks/aide_velo_port_mock.dart';
@@ -49,16 +48,6 @@ class ScenarioContext {
   );
   List<Assistance> aides = <Assistance>[];
   List<MissionListe> missionListe = <MissionListe>[];
-  Mission mission = const Mission(
-    titre: '',
-    imageUrl: '',
-    kycListe: [],
-    quizListe: [],
-    articles: [],
-    defis: [],
-    peutEtreTermine: false,
-    estTermine: false,
-  );
   List<Recommandation> recommandations = <Recommandation>[];
   Article article = const Article(
     id: '0',

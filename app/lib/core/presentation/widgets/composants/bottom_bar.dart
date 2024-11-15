@@ -5,7 +5,7 @@ import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 
 class FnvBottomBar extends StatelessWidget {
-  const FnvBottomBar({required this.child, super.key});
+  const FnvBottomBar({super.key, required this.child});
 
   final Widget child;
 

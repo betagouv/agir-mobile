@@ -1,17 +1,17 @@
 import 'package:app/core/assets/svgs.dart';
 import 'package:app/core/infrastructure/url_launcher.dart';
 import 'package:app/core/presentation/widgets/composants/badge.dart';
-import 'package:app/core/presentation/widgets/composants/fnv_image.dart';
+import 'package:app/core/presentation/widgets/composants/image.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
+import 'package:app/features/mission/mission/presentation/pages/mission_page.dart';
 import 'package:app/features/recommandations/presentation/widgets/mes_recommandations.dart';
 import 'package:app/features/theme/core/domain/mission_liste.dart';
 import 'package:app/features/theme/core/domain/service_item.dart';
 import 'package:app/features/theme/core/domain/theme_type.dart';
-import 'package:app/features/theme/presentation/bloc/univers_bloc.dart';
-import 'package:app/features/theme/presentation/bloc/univers_event.dart';
-import 'package:app/features/theme/presentation/pages/mission_page.dart';
-import 'package:app/features/theme/presentation/widgets/univers_card.dart';
+import 'package:app/features/theme/presentation/bloc/theme_bloc.dart';
+import 'package:app/features/theme/presentation/bloc/theme_event.dart';
+import 'package:app/features/theme/presentation/widgets/theme_card.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +28,7 @@ class ThemePage extends StatelessWidget {
 
   @override
   Widget build(final context) => BlocProvider(
-        create: (final context) => UniversBloc(themePort: context.read()),
+        create: (final context) => ThemeBloc(themePort: context.read()),
         child: _Page(type),
       );
 }
@@ -45,7 +45,7 @@ class _Page extends StatefulWidget {
 class _PageState extends State<_Page> with RouteAware {
   void _handleMission() {
     if (mounted) {
-      context.read<UniversBloc>().add(UniversRecuperationDemandee(widget.type));
+      context.read<ThemeBloc>().add(UniversRecuperationDemandee(widget.type));
     }
   }
 
@@ -95,7 +95,7 @@ class _ImageEtTitre extends StatelessWidget {
   @override
   Widget build(final context) {
     final themeType = context
-        .select<UniversBloc, ThemeType>((final bloc) => bloc.state.themeType);
+        .select<ThemeBloc, ThemeType>((final bloc) => bloc.state.themeType);
 
     return Column(
       children: [
@@ -133,7 +133,7 @@ class _Missions extends StatelessWidget {
 
   @override
   Widget build(final context) {
-    final thematiques = context.select<UniversBloc, List<MissionListe>>(
+    final thematiques = context.select<ThemeBloc, List<MissionListe>>(
       (final bloc) => bloc.state.missions,
     );
 
@@ -164,7 +164,7 @@ class _Mission extends StatelessWidget {
     const success = DsfrColors.success425;
     final progression = mission.progression / mission.progressionCible;
 
-    return UniversCard(
+    return ThemeCard(
       badge: mission.estNouvelle
           ? const FnvBadge(
               label: Localisation.nouveau,
@@ -178,7 +178,10 @@ class _Mission extends StatelessWidget {
               : null,
       onTap: () async => GoRouter.of(context).pushNamed(
         MissionPage.name,
-        pathParameters: {'id': mission.id},
+        pathParameters: {
+          'mission': mission.code,
+          'thematique': mission.themeType.name,
+        },
       ),
       child: SizedBox(
         width: width,
@@ -222,7 +225,7 @@ class _Services extends StatelessWidget {
 
   @override
   Widget build(final context) {
-    final services = context.select<UniversBloc, List<ServiceItem>>(
+    final services = context.select<ThemeBloc, List<ServiceItem>>(
       (final bloc) => bloc.state.services,
     );
 
@@ -324,7 +327,7 @@ class _Recommandations extends StatelessWidget {
 
   @override
   Widget build(final context) {
-    final type = context.select<UniversBloc, ThemeType>(
+    final type = context.select<ThemeBloc, ThemeType>(
       (final bloc) => bloc.state.themeType,
     );
 

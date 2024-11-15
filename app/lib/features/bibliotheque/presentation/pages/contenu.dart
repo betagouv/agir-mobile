@@ -1,4 +1,4 @@
-import 'package:app/core/presentation/widgets/composants/fnv_image.dart';
+import 'package:app/core/presentation/widgets/composants/image.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/shadows.dart';
 import 'package:app/features/articles/presentation/pages/article_page.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class Contenu extends StatelessWidget {
-  const Contenu({required this.contenu, super.key});
+  const Contenu({super.key, required this.contenu});
 
   final Recommandation contenu;
 

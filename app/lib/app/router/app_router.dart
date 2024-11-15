@@ -20,6 +20,7 @@ import 'package:app/features/environmental_performance/summary/presentation/page
 import 'package:app/features/first_name/presentation/pages/first_name_page.dart';
 import 'package:app/features/know_your_customer/list/presentation/pages/know_your_customers_page.dart';
 import 'package:app/features/mieux_vous_connaitre/detail/presentation/pages/mieux_vous_connaitre_edit_page.dart';
+import 'package:app/features/mission/mission/presentation/pages/mission_page.dart';
 import 'package:app/features/pre_onboarding/presentation/pages/pre_onboarding_page.dart';
 import 'package:app/features/profil/informations/presentation/pages/mes_informations_page.dart';
 import 'package:app/features/profil/logement/presentation/pages/mon_logement_page.dart';
@@ -29,8 +30,6 @@ import 'package:app/features/quiz/presentation/pages/quiz_page.dart';
 import 'package:app/features/recommandations/presentation/widgets/mes_recommandations.dart';
 import 'package:app/features/simulateur_velo/presentation/pages/aide_simulateur_velo_disponibles_page.dart';
 import 'package:app/features/simulateur_velo/presentation/pages/aide_simulateur_velo_page.dart';
-import 'package:app/features/theme/presentation/pages/mission_kyc_page.dart';
-import 'package:app/features/theme/presentation/pages/mission_page.dart';
 import 'package:app/features/theme/presentation/pages/theme_page.dart';
 import 'package:go_router/go_router.dart';
 
@@ -65,7 +64,6 @@ GoRouter goRouter({required final Tracker tracker}) => GoRouter(
             EnvironmentalPerformanceSummaryPage.route,
             EnvironmentalPerformanceQuestionPage.route,
             MissionPage.route,
-            MissionKycPage.route,
             AssistanceListPage.route,
             AssistanceDetailPage.route,
             AideSimulateurVeloPage.route(
@@ -87,7 +85,6 @@ GoRouter goRouter({required final Tracker tracker}) => GoRouter(
       ],
       observers: [
         mesRecommandationsRouteObserver,
-        missionRouteObserver,
         themeRouteObserver,
         tracker.navigatorObserver,
       ],

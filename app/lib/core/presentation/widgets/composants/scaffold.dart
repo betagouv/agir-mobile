@@ -16,7 +16,7 @@ class FnvScaffold extends StatelessWidget {
   final Widget? bottomNavigationBar;
 
   @override
-  Widget build(final BuildContext context) => Scaffold(
+  Widget build(final context) => Scaffold(
         appBar: appBar,
         body: body,
         drawer: drawer,

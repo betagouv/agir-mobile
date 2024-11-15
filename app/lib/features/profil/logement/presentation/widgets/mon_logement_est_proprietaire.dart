@@ -1,5 +1,3 @@
-// ignore_for_file: avoid-missing-enum-constant-in-map
-
 import 'package:app/features/profil/logement/presentation/bloc/mon_logement_bloc.dart';
 import 'package:app/features/profil/logement/presentation/bloc/mon_logement_event.dart';
 import 'package:app/features/profil/logement/presentation/widgets/mon_logement_titre_et_contenu.dart';

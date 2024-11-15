@@ -18,9 +18,8 @@ class ActionRepository {
   final MessageBus _messageBus;
 
   Future<Either<Exception, Action>> fetchAction(final ActionId id) async {
-    final response = await _client.get(
-      '/utilisateurs/{userId}/defis/${id.value}',
-    );
+    final response =
+        await _client.get('/utilisateurs/{userId}/defis/${id.value}');
 
     return isResponseSuccessful(response.statusCode)
         ? Right(ActionMapper.fromJson(response.data as Map<String, dynamic>))

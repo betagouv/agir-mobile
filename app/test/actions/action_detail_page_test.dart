@@ -79,7 +79,7 @@ void main() {
       await pumpActionDetailPage(tester, dio: dio);
       await tester.pumpAndSettle();
       expect(
-        isRadioButtonEnabled<bool>(tester, Localisation.jeReleveLeDefi),
+        isRadioButtonEnabled<bool>(tester, Localisation.jeReleveLAction),
         false,
       );
       expect(
@@ -87,11 +87,11 @@ void main() {
         false,
       );
       expect(
-        find.text(Localisation.bonnesAstucesPourRealiserCeDefi),
+        find.text(Localisation.bonnesAstucesPourRealiserCetteAction),
         findsOneWidget,
       );
       expect(
-        find.text(Localisation.pourquoiCeDefi, skipOffstage: false),
+        find.text(Localisation.pourquoiCetteAction, skipOffstage: false),
         findsOneWidget,
       );
     });
@@ -106,7 +106,7 @@ void main() {
       await pumpActionDetailPage(tester, dio: dio);
       await tester.pumpAndSettle();
       expect(
-        isRadioButtonEnabled<bool>(tester, Localisation.jeReleveLeDefi),
+        isRadioButtonEnabled<bool>(tester, Localisation.jeReleveLAction),
         false,
       );
       expect(
@@ -114,10 +114,10 @@ void main() {
         true,
       );
       expect(
-        find.text(Localisation.bonnesAstucesPourRealiserCeDefi),
+        find.text(Localisation.bonnesAstucesPourRealiserCetteAction),
         findsNothing,
       );
-      expect(find.text(Localisation.pourquoiCeDefi), findsNothing);
+      expect(find.text(Localisation.pourquoiCetteAction), findsNothing);
     });
 
     testWidgets("l'action non désirée avec motif", (final tester) async {
@@ -131,7 +131,7 @@ void main() {
       await pumpActionDetailPage(tester, dio: dio);
       await tester.pumpAndSettle();
       expect(
-        isRadioButtonEnabled<bool>(tester, Localisation.jeReleveLeDefi),
+        isRadioButtonEnabled<bool>(tester, Localisation.jeReleveLAction),
         false,
       );
       expect(
@@ -139,10 +139,10 @@ void main() {
         true,
       );
       expect(
-        find.text(Localisation.bonnesAstucesPourRealiserCeDefi),
+        find.text(Localisation.bonnesAstucesPourRealiserCetteAction),
         findsNothing,
       );
-      expect(find.text(Localisation.pourquoiCeDefi), findsNothing);
+      expect(find.text(Localisation.pourquoiCetteAction), findsNothing);
       expect(find.text(reason), findsOneWidget);
     });
 
@@ -156,7 +156,7 @@ void main() {
       await pumpActionDetailPage(tester, dio: dio);
       await tester.pumpAndSettle();
       expect(
-        isRadioButtonEnabled<bool>(tester, Localisation.defiRealise),
+        isRadioButtonEnabled<bool>(tester, Localisation.actionRealisee),
         false,
       );
       expect(
@@ -164,11 +164,11 @@ void main() {
         false,
       );
       expect(
-        find.text(Localisation.bonnesAstucesPourRealiserCeDefi),
+        find.text(Localisation.bonnesAstucesPourRealiserCetteAction),
         findsOneWidget,
       );
       expect(
-        find.text(Localisation.pourquoiCeDefi, skipOffstage: false),
+        find.text(Localisation.pourquoiCetteAction, skipOffstage: false),
         findsOneWidget,
       );
     });
@@ -183,7 +183,7 @@ void main() {
       await pumpActionDetailPage(tester, dio: dio);
       await tester.pumpAndSettle();
       expect(
-        isRadioButtonEnabled<bool>(tester, Localisation.defiRealise),
+        isRadioButtonEnabled<bool>(tester, Localisation.actionRealisee),
         true,
       );
       expect(
@@ -191,11 +191,11 @@ void main() {
         false,
       );
       expect(
-        find.text(Localisation.bonnesAstucesPourRealiserCeDefi),
+        find.text(Localisation.bonnesAstucesPourRealiserCetteAction),
         findsOneWidget,
       );
       expect(
-        find.text(Localisation.pourquoiCeDefi, skipOffstage: false),
+        find.text(Localisation.pourquoiCetteAction, skipOffstage: false),
         findsOneWidget,
       );
     });
@@ -210,7 +210,7 @@ void main() {
       await pumpActionDetailPage(tester, dio: dio);
       await tester.pumpAndSettle();
       expect(
-        isRadioButtonEnabled<bool>(tester, Localisation.defiRealise),
+        isRadioButtonEnabled<bool>(tester, Localisation.actionRealisee),
         false,
       );
       expect(
@@ -218,10 +218,10 @@ void main() {
         true,
       );
       expect(
-        find.text(Localisation.bonnesAstucesPourRealiserCeDefi),
+        find.text(Localisation.bonnesAstucesPourRealiserCetteAction),
         findsNothing,
       );
-      expect(find.text(Localisation.pourquoiCeDefi), findsNothing);
+      expect(find.text(Localisation.pourquoiCetteAction), findsNothing);
     });
 
     testWidgets("l'action abandonnée avec motif", (final tester) async {
@@ -235,7 +235,7 @@ void main() {
       await pumpActionDetailPage(tester, dio: dio);
       await tester.pumpAndSettle();
       expect(
-        isRadioButtonEnabled<bool>(tester, Localisation.defiRealise),
+        isRadioButtonEnabled<bool>(tester, Localisation.actionRealisee),
         false,
       );
       expect(
@@ -243,10 +243,10 @@ void main() {
         true,
       );
       expect(
-        find.text(Localisation.bonnesAstucesPourRealiserCeDefi),
+        find.text(Localisation.bonnesAstucesPourRealiserCetteAction),
         findsNothing,
       );
-      expect(find.text(Localisation.pourquoiCeDefi), findsNothing);
+      expect(find.text(Localisation.pourquoiCetteAction), findsNothing);
       expect(find.text(reason), findsOneWidget);
     });
 
@@ -260,7 +260,7 @@ void main() {
       await pumpActionDetailPage(tester, dio: dio);
       await tester.pumpAndSettle();
       expect(
-        isRadioButtonEnabled<bool>(tester, Localisation.defiRealise),
+        isRadioButtonEnabled<bool>(tester, Localisation.actionRealisee),
         true,
       );
       expect(
@@ -268,11 +268,11 @@ void main() {
         false,
       );
       expect(
-        find.text(Localisation.bonnesAstucesPourRealiserCeDefi),
+        find.text(Localisation.bonnesAstucesPourRealiserCetteAction),
         findsOneWidget,
       );
       expect(
-        find.text(Localisation.pourquoiCeDefi, skipOffstage: false),
+        find.text(Localisation.pourquoiCetteAction, skipOffstage: false),
         findsOneWidget,
       );
     });
@@ -295,7 +295,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(
-        isRadioButtonEnabled<bool>(tester, Localisation.jeReleveLeDefi),
+        isRadioButtonEnabled<bool>(tester, Localisation.jeReleveLAction),
         false,
       );
 
@@ -305,11 +305,11 @@ void main() {
       );
 
       expect(
-        find.text(Localisation.bonnesAstucesPourRealiserCeDefi),
+        find.text(Localisation.bonnesAstucesPourRealiserCetteAction),
         findsNothing,
       );
 
-      expect(find.text(Localisation.pourquoiCeDefi), findsNothing);
+      expect(find.text(Localisation.pourquoiCetteAction), findsNothing);
     });
 
     testWidgets("commencer l'action", (final tester) async {
@@ -323,12 +323,12 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      await tester.tap(find.text(Localisation.jeReleveLeDefi));
+      await tester.tap(find.text(Localisation.jeReleveLAction));
 
       await tester.pumpAndSettle();
 
       expect(
-        isRadioButtonEnabled<bool>(tester, Localisation.jeReleveLeDefi),
+        isRadioButtonEnabled<bool>(tester, Localisation.jeReleveLAction),
         true,
       );
 
@@ -402,12 +402,12 @@ void main() {
 
         await tester.pumpAndSettle();
 
-        await tester.tap(find.text(Localisation.jeReleveLeDefi));
+        await tester.tap(find.text(Localisation.jeReleveLAction));
 
         await tester.pumpAndSettle();
 
         expect(
-          isRadioButtonEnabled<bool>(tester, Localisation.jeReleveLeDefi),
+          isRadioButtonEnabled<bool>(tester, Localisation.jeReleveLAction),
           true,
         );
 
@@ -491,7 +491,7 @@ void main() {
 
         await tester.pumpAndSettle();
 
-        await tester.tap(find.text(Localisation.jeReleveLeDefi));
+        await tester.tap(find.text(Localisation.jeReleveLAction));
 
         await tester.pumpAndSettle();
 
@@ -539,10 +539,10 @@ void main() {
 
         await pumpActionDetailPage(tester, dio: dio, messageBus: messageBus);
         await tester.pumpAndSettle();
-        await tester.tap(find.text(Localisation.defiRealise));
+        await tester.tap(find.text(Localisation.actionRealisee));
         await tester.pumpAndSettle();
         expect(
-          isRadioButtonEnabled<bool>(tester, Localisation.defiRealise),
+          isRadioButtonEnabled<bool>(tester, Localisation.actionRealisee),
           true,
         );
         await tester.tap(find.text(Localisation.valider));

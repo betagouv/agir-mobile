@@ -5,7 +5,7 @@ import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 
 class FnvCard extends StatelessWidget {
-  const FnvCard({required this.child, this.onTap, super.key, this.borderColor});
+  const FnvCard({super.key, required this.child, this.onTap, this.borderColor});
 
   final Widget child;
   final GestureTapCallback? onTap;
@@ -19,7 +19,7 @@ class FnvCard extends StatelessWidget {
           shape: RoundedRectangleBorder(
             side: borderColor == null
                 ? BorderSide.none
-                : BorderSide(color: borderColor!),
+                : BorderSide(color: borderColor!, width: DsfrSpacings.s0v5),
             borderRadius:
                 const BorderRadius.all(Radius.circular(DsfrSpacings.s1w)),
           ),

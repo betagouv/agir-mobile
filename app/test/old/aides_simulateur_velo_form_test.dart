@@ -1,5 +1,3 @@
-// ignore_for_file: avoid-missing-interpolation
-
 import 'package:app/core/helpers/input_formatter.dart';
 import 'package:app/core/helpers/number_format.dart';
 import 'package:app/features/assistances/core/domain/aide.dart';

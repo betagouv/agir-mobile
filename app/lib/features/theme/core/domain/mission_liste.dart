@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 
 class MissionListe extends Equatable {
   const MissionListe({
-    required this.id,
+    required this.code,
     required this.titre,
     required this.progression,
     required this.progressionCible,
@@ -12,7 +12,7 @@ class MissionListe extends Equatable {
     required this.themeType,
   });
 
-  final String id;
+  final String code;
   final String titre;
   final int progression;
   final int progressionCible;
@@ -22,7 +22,7 @@ class MissionListe extends Equatable {
 
   @override
   List<Object?> get props => [
-        id,
+        code,
         titre,
         progression,
         progressionCible,

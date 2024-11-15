@@ -17,12 +17,13 @@ class FnvBadge extends StatelessWidget {
   Widget build(final context) => DecoratedBox(
         decoration: ShapeDecoration(
           color: backgroundColor,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(DsfrSpacings.s1v)),
-          ),
+          shape: const StadiumBorder(),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s1w),
+          padding: const EdgeInsets.symmetric(
+            vertical: DsfrSpacings.s0v5,
+            horizontal: DsfrSpacings.s1w,
+          ),
           child: Text(
             label,
             style: DsfrTextStyle.bodySmBold(color: foregroundColor),

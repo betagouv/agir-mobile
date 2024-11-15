@@ -8,6 +8,7 @@ import 'package:app/features/actions/detail/presentation/bloc/action_detail_bloc
 import 'package:app/features/actions/detail/presentation/bloc/action_detail_event.dart';
 import 'package:app/features/actions/detail/presentation/bloc/action_detail_state.dart';
 import 'package:app/features/profil/profil/presentation/widgets/fnv_title.dart';
+import 'package:app/features/theme/presentation/widgets/theme_type_tag.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
@@ -92,7 +93,10 @@ class _SuccessContent extends StatelessWidget {
   Widget build(final context) => ListView(
         padding: const EdgeInsets.all(paddingVerticalPage),
         children: [
-          Text(state.action.theme, style: const DsfrTextStyle.bodySm()),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: ThemeTypeTag(themeType: state.action.themeType),
+          ),
           const SizedBox(height: DsfrSpacings.s1w),
           FnvTitle(title: state.action.title),
           const SizedBox(height: DsfrSpacings.s3w),
@@ -114,14 +118,14 @@ class _SuccessContent extends StatelessWidget {
           if (state.isAccepted ?? true) ...[
             const SizedBox(height: DsfrSpacings.s4w),
             const Text(
-              Localisation.bonnesAstucesPourRealiserCeDefi,
+              Localisation.bonnesAstucesPourRealiserCetteAction,
               style: DsfrTextStyle.headline4(),
             ),
             const SizedBox(height: DsfrSpacings.s1w),
             FnvHtmlWidget(state.action.tips),
             const SizedBox(height: DsfrSpacings.s4w),
             const Text(
-              Localisation.pourquoiCeDefi,
+              Localisation.pourquoiCetteAction,
               style: DsfrTextStyle.headline4(),
             ),
             const SizedBox(height: DsfrSpacings.s1w),
