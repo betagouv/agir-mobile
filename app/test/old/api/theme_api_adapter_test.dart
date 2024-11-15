@@ -7,7 +7,6 @@ import 'package:app/features/theme/core/domain/mission_defi.dart';
 import 'package:app/features/theme/core/domain/mission_kyc.dart';
 import 'package:app/features/theme/core/domain/mission_liste.dart';
 import 'package:app/features/theme/core/domain/mission_quiz.dart';
-import 'package:app/features/theme/core/domain/theme_tile.dart';
 import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:app/features/theme/core/infrastructure/theme_api_adapter.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -18,47 +17,6 @@ import '../../helpers/dio_mock.dart';
 import '../mocks/authentication_service_fake.dart';
 
 void main() {
-  test('recuperer', () async {
-    final dio = DioMock()
-      ..getM(
-        '/utilisateurs/{userId}/univers',
-        responseData: jsonDecode('''
-[
-  {
-    "titre": "En cuisine",
-    "etoiles": 0,
-    "type": "alimentation",
-    "is_locked": true,
-    "reason_locked": null,
-    "image_url": "https://res.cloudinary.com/dq023imd8/image/upload/v1714635428/univers_cuisine_b903b5fb1c.jpg",
-    "is_done": false
-  },
-  {
-    "titre": "Les vacances",
-    "etoiles": 0,
-    "type": "loisir",
-    "is_locked": false,
-    "reason_locked": null,
-    "image_url": "https://res.cloudinary.com/dq023imd8/image/upload/v1714635518/univers_loisirs_596c3b0599.jpg",
-    "is_done": true
-  }
-]'''),
-      );
-
-    final adapter = initializeAdapter(dio);
-    final result = await adapter.getTheme('alimentation');
-
-    expect(
-      result.getRight().getOrElse(() => throw Exception()),
-      const ThemeTile(
-        type: 'alimentation',
-        title: 'En cuisine',
-        imageUrl:
-            'https://res.cloudinary.com/dq023imd8/image/upload/v1714635428/univers_cuisine_b903b5fb1c.jpg',
-      ),
-    );
-  });
-
   test('missions', () async {
     final dio = DioMock()
       ..getM(

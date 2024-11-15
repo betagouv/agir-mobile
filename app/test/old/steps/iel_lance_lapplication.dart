@@ -117,7 +117,6 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
     estIntegrationTerminee: ScenarioContext().estIntegrationTerminee,
   );
   ScenarioContext().universPortMock = ThemePortMock(
-    themeTile: ScenarioContext().themeTile,
     missionListe: ScenarioContext().missionListe,
     mission: ScenarioContext().mission,
   );

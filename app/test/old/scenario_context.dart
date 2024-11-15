@@ -10,7 +10,6 @@ import 'package:app/features/recommandations/domain/recommandation.dart';
 import 'package:app/features/simulateur_velo/domain/aide_velo_par_type.dart';
 import 'package:app/features/theme/core/domain/mission.dart';
 import 'package:app/features/theme/core/domain/mission_liste.dart';
-import 'package:app/features/theme/core/domain/theme_tile.dart';
 
 import 'mocks/aide_velo_port_mock.dart';
 import 'mocks/articles_port_mock.dart';
@@ -85,28 +84,6 @@ class ScenarioContext {
   List<Question> questions = <Question>[];
   Bibliotheque bibliotheque = const Bibliotheque(contenus: [], filtres: []);
   Gamification gamification = const Gamification(points: 0);
-  List<ThemeTile> themeTile = [
-    const ThemeTile(
-      type: 'alimentation',
-      title: 'En cuisine',
-      imageUrl: 'https://example.com/image.jpg',
-    ),
-    const ThemeTile(
-      type: 'logmement',
-      title: 'À la maison',
-      imageUrl: 'https://example.com/image.jpg',
-    ),
-    const ThemeTile(
-      type: 'consommation',
-      title: 'Mes achats',
-      imageUrl: 'https://example.com/image.jpg',
-    ),
-    const ThemeTile(
-      type: 'transport',
-      title: 'Mes déplacements',
-      imageUrl: 'https://example.com/image.jpg',
-    ),
-  ];
 
   AideVeloPortMock? aideVeloPortMock;
   ProfilPortMock? profilPortMock;

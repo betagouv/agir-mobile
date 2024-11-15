@@ -3,23 +3,13 @@ import 'package:app/features/theme/core/domain/mission.dart';
 import 'package:app/features/theme/core/domain/mission_liste.dart';
 import 'package:app/features/theme/core/domain/service_item.dart';
 import 'package:app/features/theme/core/domain/theme_port.dart';
-import 'package:app/features/theme/core/domain/theme_tile.dart';
 import 'package:fpdart/src/either.dart';
 
 class ThemePortMock implements ThemePort {
-  ThemePortMock({
-    required this.themeTile,
-    required this.missionListe,
-    required this.mission,
-  });
+  ThemePortMock({required this.missionListe, required this.mission});
 
-  List<ThemeTile> themeTile;
   List<MissionListe> missionListe = [];
   Mission mission;
-
-  @override
-  Future<Either<Exception, ThemeTile>> getTheme(final String type) async =>
-      Right(themeTile.where((final element) => element.type == type).first);
 
   @override
   Future<Either<Exception, List<MissionListe>>> recupererMissions(

@@ -1,3 +1,4 @@
+import 'package:app/core/assets/svgs.dart';
 import 'package:app/core/infrastructure/url_launcher.dart';
 import 'package:app/core/presentation/widgets/composants/badge.dart';
 import 'package:app/core/presentation/widgets/composants/fnv_image.dart';
@@ -6,7 +7,7 @@ import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_bor
 import 'package:app/features/recommandations/presentation/widgets/mes_recommandations.dart';
 import 'package:app/features/theme/core/domain/mission_liste.dart';
 import 'package:app/features/theme/core/domain/service_item.dart';
-import 'package:app/features/theme/core/domain/theme_tile.dart';
+import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:app/features/theme/presentation/bloc/univers_bloc.dart';
 import 'package:app/features/theme/presentation/bloc/univers_event.dart';
 import 'package:app/features/theme/presentation/pages/mission_page.dart';
@@ -15,6 +16,7 @@ import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
 final themeRouteObserver = RouteObserver<ModalRoute<dynamic>>();
@@ -92,25 +94,37 @@ class _ImageEtTitre extends StatelessWidget {
 
   @override
   Widget build(final context) {
-    final theme = context
-        .select<UniversBloc, ThemeTile?>((final bloc) => bloc.state.themeTile);
+    final themeType = context
+        .select<UniversBloc, ThemeType>((final bloc) => bloc.state.themeType);
 
-    return theme == null
-        ? const SizedBox.shrink()
-        : Column(
-            children: [
-              ClipOval(
-                child: FnvImage.network(
-                  theme.imageUrl,
-                  width: 80,
-                  height: 80,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              const SizedBox(height: DsfrSpacings.s1w),
-              Text(theme.title, style: const DsfrTextStyle.headline2()),
-            ],
-          );
+    return Column(
+      children: [
+        ClipOval(
+          child: SizedBox.square(
+            dimension: 80,
+            child: SvgPicture.asset(
+              switch (themeType) {
+                ThemeType.alimentation => AssetsSvgs.alimentation,
+                ThemeType.transport => AssetsSvgs.transport,
+                ThemeType.logement => AssetsSvgs.logement,
+                ThemeType.consommation => AssetsSvgs.consommation,
+                ThemeType.decouverte => throw UnimplementedError(),
+              },
+              width: 80,
+              height: 80,
+              fit: BoxFit.cover,
+              placeholderBuilder: (final context) =>
+                  const SizedBox.square(dimension: 80),
+            ),
+          ),
+        ),
+        const SizedBox(height: DsfrSpacings.s1w),
+        Text(
+          themeType.displayNameWithoutEmoji,
+          style: const DsfrTextStyle.headline2(),
+        ),
+      ],
+    );
   }
 }
 
@@ -310,12 +324,10 @@ class _Recommandations extends StatelessWidget {
 
   @override
   Widget build(final context) {
-    final type = context.select<UniversBloc, String?>(
-      (final bloc) => bloc.state.themeTile?.type,
+    final type = context.select<UniversBloc, ThemeType>(
+      (final bloc) => bloc.state.themeType,
     );
 
-    return type == null
-        ? const SizedBox.shrink()
-        : MesRecommandations(thematique: type);
+    return MesRecommandations(thematique: type.name);
   }
 }

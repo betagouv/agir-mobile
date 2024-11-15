@@ -4,7 +4,6 @@ import 'package:app/features/theme/core/domain/mission_defi.dart';
 import 'package:app/features/theme/core/domain/mission_kyc.dart';
 import 'package:app/features/theme/core/domain/mission_liste.dart';
 import 'package:app/features/theme/core/domain/mission_quiz.dart';
-import 'package:app/features/theme/core/domain/theme_tile.dart';
 import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail_image_network/mocktail_image_network.dart';
@@ -16,18 +15,11 @@ import 'steps/iel_appuie_sur.dart';
 import 'steps/iel_est_connecte.dart';
 import 'steps/iel_lance_lapplication.dart';
 import 'steps/iel_voit_le_texte.dart';
-import 'steps/le_serveur_retourne_ces_univers.dart';
 
 void main() {
   testWidgets('On voit la mission', (final tester) async {
     setUpWidgets(tester);
     await mockNetworkImages(() async {
-      const theme = ThemeTile(
-        type: 'alimentation',
-        title: 'Me nourrir',
-        imageUrl: 'https://example.com/image.jpg',
-      );
-      leServeurRetourneCesThematiques([theme]);
       const universThematique = MissionListe(
         id: 'manger_saison_1',
         titre: 'Pourquoi manger de saison ?',
