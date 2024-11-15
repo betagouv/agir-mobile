@@ -1,6 +1,5 @@
 import 'package:app/features/recommandations/domain/recommandation.dart';
 import 'package:app/features/theme/core/domain/mission_liste.dart';
-import 'package:app/features/theme/core/domain/theme_tile.dart';
 import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail_image_network/mocktail_image_network.dart';
@@ -12,23 +11,16 @@ import 'steps/iel_est_connecte.dart';
 import 'steps/iel_lance_lapplication.dart';
 import 'steps/iel_ne_voit_pas_le_texte.dart';
 import 'steps/iel_voit_le_texte.dart';
-import 'steps/le_serveur_retourne_ces_univers.dart';
 
 void main() {
   testWidgets('On va sur la page thématique', (final tester) async {
     await mockNetworkImages(() async {
       setUpWidgets(tester);
-      const theme = ThemeTile(
-        type: 'alimentation',
-        title: 'En cuisine',
-        imageUrl: 'https://example.com/image.jpg',
-      );
-      leServeurRetourneCesThematiques([theme]);
       ielEstConnecte();
       await ielLanceLapplication(tester);
       await tester.tap(find.text('Me nourrir'));
       await tester.pumpAndSettle();
-      ielVoitLeTexte(theme.title);
+      ielVoitLeTexte('Me nourrir', n: 2);
     });
   });
 
@@ -37,11 +29,6 @@ void main() {
     (final tester) async {
       await mockNetworkImages(() async {
         setUpWidgets(tester);
-        const theme = ThemeTile(
-          type: 'alimentation',
-          title: 'Me nourrir',
-          imageUrl: 'https://example.com/image.jpg',
-        );
         const universThematique = MissionListe(
           id: 'manger_saison_1',
           titre: 'Pourquoi manger de saison ?',
@@ -53,10 +40,9 @@ void main() {
           themeType: ThemeType.alimentation,
         );
         ielALesMissionsSuivantes([universThematique]);
-        leServeurRetourneCesThematiques([theme]);
         ielEstConnecte();
         await ielLanceLapplication(tester);
-        await tester.tap(find.text(theme.title));
+        await tester.tap(find.text('Me nourrir'));
         await tester.pumpAndSettle();
         ielVoitLeTexte(universThematique.titre);
       });
@@ -68,11 +54,6 @@ void main() {
     (final tester) async {
       await mockNetworkImages(() async {
         setUpWidgets(tester);
-        const theme = ThemeTile(
-          type: 'alimentation',
-          title: 'Me nourrir',
-          imageUrl: 'https://example.com/image.jpg',
-        );
         const recommandation = Recommandation(
           id: '42',
           type: TypeDuContenu.article,
@@ -94,10 +75,9 @@ void main() {
           thematiqueLabel: '☀️ Environnement',
         );
         ielALesRecommandationsSuivantes([recommandation, recommandation2]);
-        leServeurRetourneCesThematiques([theme]);
         ielEstConnecte();
         await ielLanceLapplication(tester);
-        await tester.tap(find.text(theme.title));
+        await tester.tap(find.text('Me nourrir'));
         await tester.pumpAndSettle();
         ielVoitLeTexte(recommandation.titre);
         ielNeVoitPasLeTexte(recommandation2.titre);

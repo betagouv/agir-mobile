@@ -15,4 +15,8 @@ abstract final class AssetsSvgs {
   static const nosGestesClimatIllustration =
       'assets/svgs/bilan-carbone-ngc-screenshot.svg';
   static const miniBilan = 'assets/svgs/mini_bilan.svg';
+  static const alimentation = 'assets/svgs/alimentation.svg';
+  static const consommation = 'assets/svgs/consommation.svg';
+  static const logement = 'assets/svgs/logement.svg';
+  static const transport = 'assets/svgs/transport.svg';
 }

@@ -4,7 +4,6 @@ import 'package:app/features/recommandations/domain/recommandation.dart';
 import 'package:app/features/recommandations/domain/recommandations_port.dart';
 import 'package:app/features/recommandations/presentation/bloc/recommandations_bloc.dart';
 import 'package:app/features/theme/core/domain/theme_port.dart';
-import 'package:app/features/theme/core/domain/theme_tile.dart';
 import 'package:app/features/theme/presentation/pages/theme_page.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,15 +28,6 @@ Future<void> _pumpUniversPage(
   final ThemePort? themePort,
 }) async {
   final themePortMock = themePort ?? _ThemePortMock();
-  when(() => themePortMock.getTheme(any())).thenAnswer(
-    (final _) async => const Right(
-      ThemeTile(
-        type: 'alimentation',
-        title: 'En cuisine',
-        imageUrl: 'https://example.com/image.jpg',
-      ),
-    ),
-  );
   when(() => themePortMock.recupererMissions(any()))
       .thenAnswer((final _) async => const Right([]));
 

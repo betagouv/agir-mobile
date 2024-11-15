@@ -9,11 +9,9 @@ import 'package:app/features/theme/core/domain/mission.dart';
 import 'package:app/features/theme/core/domain/mission_liste.dart';
 import 'package:app/features/theme/core/domain/service_item.dart';
 import 'package:app/features/theme/core/domain/theme_port.dart';
-import 'package:app/features/theme/core/domain/theme_tile.dart';
 import 'package:app/features/theme/core/infrastructure/mission_liste_mapper.dart';
 import 'package:app/features/theme/core/infrastructure/mission_mapper.dart';
 import 'package:app/features/theme/core/infrastructure/service_item_mapper.dart';
-import 'package:app/features/theme/core/infrastructure/tuile_univers_mapper.dart';
 import 'package:fpdart/fpdart.dart';
 
 class ThemeApiAdapter implements ThemePort {
@@ -21,25 +19,6 @@ class ThemeApiAdapter implements ThemePort {
       : _client = client;
 
   final DioHttpClient _client;
-
-  @override
-  Future<Either<Exception, ThemeTile>> getTheme(final String type) async {
-    final response = await _client.get('/utilisateurs/{userId}/univers');
-
-    if (isResponseUnsuccessful(response.statusCode)) {
-      return Left(Exception('Erreur lors de la récupération des thématiques'));
-    }
-
-    final json = response.data as List<dynamic>;
-
-    return Right(
-      json
-          .map((final e) => e as Map<String, dynamic>)
-          .map(TuileUniversMapper.fromJson)
-          .where((final e) => e.type == type)
-          .first,
-    );
-  }
 
   @override
   Future<Either<Exception, List<MissionListe>>> recupererMissions(

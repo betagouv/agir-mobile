@@ -2,12 +2,9 @@ import 'package:app/features/theme/core/domain/content_id.dart';
 import 'package:app/features/theme/core/domain/mission.dart';
 import 'package:app/features/theme/core/domain/mission_liste.dart';
 import 'package:app/features/theme/core/domain/service_item.dart';
-import 'package:app/features/theme/core/domain/theme_tile.dart';
 import 'package:fpdart/fpdart.dart';
 
 abstract interface class ThemePort {
-  Future<Either<Exception, ThemeTile>> getTheme(final String type);
-
   Future<Either<Exception, List<MissionListe>>> recupererMissions(
     final String themeType,
   );
