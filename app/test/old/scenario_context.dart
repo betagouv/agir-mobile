@@ -18,7 +18,7 @@ import 'mocks/authentification_port_mock.dart';
 import 'mocks/mieux_vous_connaitre_port_mock.dart';
 import 'mocks/profil_port_mock.dart';
 import 'mocks/quiz_port_mock.dart';
-import 'mocks/univers_port_mock.dart';
+import 'mocks/theme_port_mock.dart';
 
 class ScenarioContext {
   factory ScenarioContext() => _instance ??= ScenarioContext._();
@@ -114,7 +114,7 @@ class ScenarioContext {
   AuthentificationPortMock? authentificationPortMock;
   QuizPortMock? quizPortMock;
   MieuxVousConnaitrePortMock? mieuxVousConnaitrePortMock;
-  UniversPortMock? universPortMock;
+  ThemePortMock? universPortMock;
   static ScenarioContext? _instance;
 
   static void dispose() => _instance = null;

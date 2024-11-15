@@ -16,8 +16,8 @@ import 'package:app/features/theme/core/infrastructure/service_item_mapper.dart'
 import 'package:app/features/theme/core/infrastructure/tuile_univers_mapper.dart';
 import 'package:fpdart/fpdart.dart';
 
-class UniversApiAdapter implements ThemePort {
-  const UniversApiAdapter({required final DioHttpClient client})
+class ThemeApiAdapter implements ThemePort {
+  const ThemeApiAdapter({required final DioHttpClient client})
       : _client = client;
 
   final DioHttpClient _client;
@@ -43,16 +43,15 @@ class UniversApiAdapter implements ThemePort {
 
   @override
   Future<Either<Exception, List<MissionListe>>> recupererMissions(
-    final String universType,
+    final String themeType,
   ) async {
     final response = await _client.get(
-      '/utilisateurs/{userId}/univers/$universType/thematiques',
+      '/utilisateurs/{userId}/thematiques/$themeType/tuiles_missions',
     );
 
     if (isResponseUnsuccessful(response.statusCode)) {
       return Left(Exception('Erreur lors de la récupération des missions'));
     }
-
     final json = response.data as List<dynamic>;
 
     return Right(
@@ -69,7 +68,7 @@ class UniversApiAdapter implements ThemePort {
     required final String missionId,
   }) async {
     final response = await _client.get(
-      '/utilisateurs/{userId}/thematiques/$missionId/mission',
+      '/utilisateurs/{userId}/missions/$missionId',
     );
 
     if (isResponseUnsuccessful(response.statusCode)) {
@@ -100,7 +99,7 @@ class UniversApiAdapter implements ThemePort {
     required final String missionId,
   }) async {
     final response = await _client.post(
-      '/utilisateurs/{userId}/thematiques/$missionId/mission/terminer',
+      '/utilisateurs/{userId}/missions/$missionId/terminer',
     );
 
     return isResponseSuccessful(response.statusCode)
@@ -110,10 +109,10 @@ class UniversApiAdapter implements ThemePort {
 
   @override
   Future<Either<Exception, List<ServiceItem>>> getServices(
-    final String universType,
+    final String themeType,
   ) async {
     final response = await _client.get(
-      '/utilisateurs/{userId}/recherche_services/$universType',
+      '/utilisateurs/{userId}/thematiques/$themeType/recherche_services',
     );
 
     return isResponseSuccessful(response.statusCode)

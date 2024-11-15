@@ -30,7 +30,7 @@ import '../summary/environmental_performance_data.dart';
 
 Future<void> pumpHomePage(final WidgetTester tester, final DioMock dio) async {
   dio.getM(
-    '/utilisateurs/{userId}/thematiques_recommandees',
+    '/utilisateurs/{userId}/tuiles_missions',
     responseData: missionThematiques,
   );
   final client = DioHttpClient(

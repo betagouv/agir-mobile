@@ -195,13 +195,6 @@ class _Mission extends StatelessWidget {
               ),
             ),
             const SizedBox(height: DsfrSpacings.s1w),
-            if (mission.niveau != null) ...[
-              Text(
-                Localisation.niveau(mission.niveau!),
-                style: const DsfrTextStyle.bodyXs(color: color),
-              ),
-              const SizedBox(height: DsfrSpacings.s1v),
-            ],
             Text(mission.titre, style: const DsfrTextStyle.bodyLg()),
           ],
         ),
