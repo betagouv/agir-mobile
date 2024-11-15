@@ -9,7 +9,7 @@ class UniversBloc extends Bloc<UniversEvent, UniversState> {
           const UniversState(themeTile: null, missions: [], services: []),
         ) {
     on<UniversRecuperationDemandee>((final event, final emit) async {
-      final type = event.universType;
+      final type = event.themeType;
       (await themePort.getTheme(type)).fold(
         (final l) {},
         (final r) => emit(state.copyWith(themeTile: r)),

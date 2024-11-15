@@ -8,10 +8,10 @@ sealed class UniversEvent extends Equatable {
 }
 
 final class UniversRecuperationDemandee extends UniversEvent {
-  const UniversRecuperationDemandee(this.universType);
+  const UniversRecuperationDemandee(this.themeType);
 
-  final String universType;
+  final String themeType;
 
   @override
-  List<Object> get props => [universType];
+  List<Object> get props => [themeType];
 }

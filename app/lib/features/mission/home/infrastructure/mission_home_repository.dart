@@ -12,7 +12,7 @@ class MissionHomeRepository {
 
   Future<Either<Exception, List<MissionListe>>> fetch() async {
     final response =
-        await _client.get('/utilisateurs/{userId}/thematiques_recommandees');
+        await _client.get('/utilisateurs/{userId}/tuiles_missions');
 
     if (isResponseUnsuccessful(response.statusCode)) {
       return Left(Exception('Erreur lors de la récupération des missions'));

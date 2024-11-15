@@ -9,7 +9,7 @@ import 'package:app/features/theme/core/domain/mission_liste.dart';
 import 'package:app/features/theme/core/domain/mission_quiz.dart';
 import 'package:app/features/theme/core/domain/theme_tile.dart';
 import 'package:app/features/theme/core/domain/theme_type.dart';
-import 'package:app/features/theme/core/infrastructure/univers_api_adapter.dart';
+import 'package:app/features/theme/core/infrastructure/theme_api_adapter.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
@@ -62,34 +62,28 @@ void main() {
   test('missions', () async {
     final dio = DioMock()
       ..getM(
-        '/utilisateurs/{userId}/univers/alimentation/thematiques',
+        '/utilisateurs/{userId}/thematiques/alimentation/tuiles_missions',
         responseData: jsonDecode('''
 [
     {
-        "titre": "Pourquoi manger de saison ?",
-        "progression": 2,
+        "titre": "Me loger : premiers pas",
+        "progression": 0,
         "cible_progression": 8,
-        "type": "manger_saison_1",
-        "is_locked": false,
-        "reason_locked": null,
+        "code": "intro_logement",
         "is_new": false,
-        "niveau": 1,
-        "image_url": "https://res.cloudinary.com/dq023imd8/image/upload/v1718631224/fruits_1_dec0e90839.png",
-        "univers_parent": "alimentation",
-        "univers_parent_label": "En cuisine"
+        "image_url": "https://example.com/image.png",
+        "thematique": "logement",
+        "thematique_label": "Me loger"
     },
     {
-        "titre": "Comment bien choisir ses aliments ?",
+        "titre": "Gérer sa consommation d'eau",
         "progression": 0,
-        "cible_progression": 6,
-        "type": "manger_saison_2",
-        "is_locked": false,
-        "reason_locked": null,
+        "cible_progression": 8,
+        "code": "conso_eau",
         "is_new": true,
-        "niveau": 2,
-        "image_url": "https://res.cloudinary.com/dq023imd8/image/upload/v1718701364/fruits_2_cfbf4b47b9.png",
-        "univers_parent": "alimentation",
-        "univers_parent_label": "En cuisine"
+        "image_url": "https://example.com/image.png",
+        "thematique": "logement",
+        "thematique_label": "Me loger"
     }
 ]
 '''),
@@ -102,26 +96,22 @@ void main() {
       result.getRight().getOrElse(() => throw Exception()),
       const [
         MissionListe(
-          id: 'manger_saison_1',
-          titre: 'Pourquoi manger de saison ?',
-          progression: 2,
+          id: 'intro_logement',
+          titre: 'Me loger : premiers pas',
+          progression: 0,
           progressionCible: 8,
           estNouvelle: false,
-          imageUrl:
-              'https://res.cloudinary.com/dq023imd8/image/upload/v1718631224/fruits_1_dec0e90839.png',
-          niveau: 1,
-          themeType: ThemeType.alimentation,
+          imageUrl: 'https://example.com/image.png',
+          themeType: ThemeType.logement,
         ),
         MissionListe(
-          id: 'manger_saison_2',
-          titre: 'Comment bien choisir ses aliments ?',
+          id: 'conso_eau',
+          titre: "Gérer sa consommation d'eau",
           progression: 0,
-          progressionCible: 6,
+          progressionCible: 8,
           estNouvelle: true,
-          imageUrl:
-              'https://res.cloudinary.com/dq023imd8/image/upload/v1718701364/fruits_2_cfbf4b47b9.png',
-          niveau: 2,
-          themeType: ThemeType.alimentation,
+          imageUrl: 'https://example.com/image.png',
+          themeType: ThemeType.logement,
         ),
       ],
     );
@@ -130,7 +120,7 @@ void main() {
   test('mission', () async {
     final dio = DioMock()
       ..getM(
-        '/utilisateurs/{userId}/thematiques/manger_saison_2/mission',
+        '/utilisateurs/{userId}/missions/manger_saison_2',
         responseData: jsonDecode('''
 {
     "id": "5",
@@ -358,7 +348,7 @@ void main() {
     const missionId = 'manger_saison_3';
     final dio = DioMock()
       ..postM(
-        '/utilisateurs/{userId}/thematiques/$missionId/mission/terminer',
+        '/utilisateurs/{userId}/missions/$missionId/terminer',
         responseData: '',
       );
 
@@ -367,13 +357,13 @@ void main() {
 
     verify(
       () => dio.post<dynamic>(
-        '/utilisateurs/{userId}/thematiques/$missionId/mission/terminer',
+        '/utilisateurs/{userId}/missions/$missionId/terminer',
       ),
     );
   });
 }
 
-UniversApiAdapter initializeAdapter(final DioMock client) => UniversApiAdapter(
+ThemeApiAdapter initializeAdapter(final DioMock client) => ThemeApiAdapter(
       client: DioHttpClient(
         dio: client,
         authenticationService: const AuthenticationServiceFake(),

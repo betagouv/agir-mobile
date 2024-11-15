@@ -6,8 +6,8 @@ import 'package:app/features/theme/core/domain/theme_port.dart';
 import 'package:app/features/theme/core/domain/theme_tile.dart';
 import 'package:fpdart/src/either.dart';
 
-class UniversPortMock implements ThemePort {
-  UniversPortMock({
+class ThemePortMock implements ThemePort {
+  ThemePortMock({
     required this.themeTile,
     required this.missionListe,
     required this.mission,
@@ -23,7 +23,7 @@ class UniversPortMock implements ThemePort {
 
   @override
   Future<Either<Exception, List<MissionListe>>> recupererMissions(
-    final String universType,
+    final String themeType,
   ) async =>
       Right(List.of(missionListe));
 
@@ -47,7 +47,7 @@ class UniversPortMock implements ThemePort {
 
   @override
   Future<Either<Exception, List<ServiceItem>>> getServices(
-    final String universType,
+    final String themeType,
   ) async =>
       const Right([
         ServiceItem(

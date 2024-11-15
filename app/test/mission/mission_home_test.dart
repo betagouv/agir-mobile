@@ -104,14 +104,14 @@ void main() {
       (final tester) async {
         final dio = DioMock()
           ..getM(
-            '/utilisateurs/{userId}/thematiques_recommandees',
+            '/utilisateurs/{userId}/tuiles_missions',
             responseData: missionThematiques,
           );
         await mockNetworkImages(() async {
           await pumpHomePage(tester, dio);
           await tester.pumpAndSettle();
           expect(find.text('Recommandés pour vous'), findsOneWidget);
-          expect(find.text('En cuisine : premiers pas'), findsOneWidget);
+          expect(find.text('Me nourrir : premiers pas'), findsOneWidget);
         });
       },
     );
@@ -121,58 +121,79 @@ void main() {
 const missionThematiques = [
   {
     'cible_progression': 8,
+    'code': 'intro_alimentation',
     'image_url':
         'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1728053226/cuisine_8039156c92.svg',
-    'is_locked': false,
+    'is_new': false,
+    'progression': 8,
+    'thematique': 'alimentation',
+    'thematique_label': 'Me nourrir',
+    'titre': 'Me nourrir : premiers pas',
+  },
+  {
+    'cible_progression': 9,
+    'code': 'compost',
+    'image_url':
+        'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1724937236/compost_6868eb1743.svg',
     'is_new': true,
-    'niveau': null,
     'progression': 0,
-    'reason_locked': null,
-    'titre': 'En cuisine : premiers pas',
-    'type': 'intro_alimentation',
-    'univers_parent': 'alimentation',
-    'univers_parent_label': 'En cuisine',
+    'thematique': 'alimentation',
+    'thematique_label': 'Me nourrir',
+    'titre': 'Valoriser ses restes avec un compost',
   },
   {
     'cible_progression': 8,
+    'code': 'saison',
     'image_url':
-        'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1728045012/conso_eau_2a9ffd49a2.svg',
-    'is_locked': false,
+        'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1724937259/saison_cb78c5f2aa.svg',
     'is_new': true,
-    'niveau': null,
     'progression': 0,
-    'reason_locked': null,
-    'titre': "Gérer sa consommation d'eau",
-    'type': 'conso_eau',
-    'univers_parent': 'logement',
-    'univers_parent_label': 'À la maison',
+    'thematique': 'alimentation',
+    'thematique_label': 'Me nourrir',
+    'titre': 'Manger de saison',
+  },
+  {
+    'cible_progression': 8,
+    'code': 'gaspi',
+    'image_url':
+        'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1724937236/gaspi_f071cc0cbb.svg',
+    'is_new': true,
+    'progression': 0,
+    'thematique': 'alimentation',
+    'thematique_label': 'Me nourrir',
+    'titre': 'Réduire le gaspillage alimentaire',
+  },
+  {
+    'cible_progression': 10,
+    'code': 'local',
+    'image_url':
+        'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1724937236/local_aa18745357.svg',
+    'is_new': true,
+    'progression': 0,
+    'thematique': 'alimentation',
+    'thematique_label': 'Me nourrir',
+    'titre': 'Manger local',
+  },
+  {
+    'cible_progression': 10,
+    'code': 'viande',
+    'image_url':
+        'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1724937236/viande_74c32bae22.svg',
+    'is_new': true,
+    'progression': 0,
+    'thematique': 'alimentation',
+    'thematique_label': 'Me nourrir',
+    'titre': 'La viande',
   },
   {
     'cible_progression': 9,
+    'code': 'legumineuses',
     'image_url':
-        'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1728053226/conso_86660ec1cf.svg',
-    'is_locked': false,
+        'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1724937236/legumineuse_3724544daf.svg',
     'is_new': true,
-    'niveau': null,
     'progression': 0,
-    'reason_locked': null,
-    'titre': 'Mes achats : premiers pas',
-    'type': 'intro_conso',
-    'univers_parent': 'consommation',
-    'univers_parent_label': 'Mes achats',
-  },
-  {
-    'cible_progression': 9,
-    'image_url':
-        'https://res.cloudinary.com/dq023imd8/image/upload/v1718887355/fruits_8_67cc78f4d8.png',
-    'is_locked': false,
-    'is_new': true,
-    'niveau': null,
-    'progression': 0,
-    'reason_locked': null,
-    'titre': 'Passer à la voiture électrique ?',
-    'type': 'changer_voiture',
-    'univers_parent': 'transport',
-    'univers_parent_label': 'Mes déplacements',
+    'thematique': 'alimentation',
+    'thematique_label': 'Me nourrir',
+    'titre': 'Les céréales et légumineuses',
   },
 ];

@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/theme/core/domain/service_item.dart';
-import 'package:app/features/theme/core/infrastructure/univers_api_adapter.dart';
+import 'package:app/features/theme/core/infrastructure/theme_api_adapter.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 
@@ -11,10 +11,10 @@ import '../old/mocks/authentication_service_fake.dart';
 
 void main() {
   test('getServices', () async {
-    const universType = 'alimentation';
+    const themeType = 'alimentation';
     final dio = DioMock()
       ..getM(
-        '/utilisateurs/{userId}/recherche_services/$universType',
+        '/utilisateurs/{userId}/thematiques/$themeType/recherche_services',
         responseData: jsonDecode(
           '''
 [
@@ -40,14 +40,14 @@ void main() {
         ),
       );
 
-    final adapter = UniversApiAdapter(
+    final adapter = ThemeApiAdapter(
       client: DioHttpClient(
         dio: dio,
         authenticationService: const AuthenticationServiceFake(),
       ),
     );
 
-    final services = await adapter.getServices(universType);
+    final services = await adapter.getServices(themeType);
 
     expect(services.getRight().getOrElse(() => throw Exception()), [
       const ServiceItem(

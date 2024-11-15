@@ -9,7 +9,6 @@ class MissionListe extends Equatable {
     required this.progressionCible,
     required this.estNouvelle,
     required this.imageUrl,
-    required this.niveau,
     required this.themeType,
   });
 
@@ -19,7 +18,6 @@ class MissionListe extends Equatable {
   final int progressionCible;
   final bool estNouvelle;
   final String imageUrl;
-  final int? niveau;
   final ThemeType themeType;
 
   @override
@@ -30,7 +28,6 @@ class MissionListe extends Equatable {
         progressionCible,
         estNouvelle,
         imageUrl,
-        niveau,
         themeType,
       ];
 }

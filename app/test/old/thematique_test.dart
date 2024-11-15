@@ -50,7 +50,6 @@ void main() {
           estNouvelle: false,
           imageUrl:
               'https://res.cloudinary.com/dq023imd8/image/upload/v1718631224/fruits_1_dec0e90839.png',
-          niveau: 1,
           themeType: ThemeType.alimentation,
         );
         ielALesMissionsSuivantes([universThematique]);

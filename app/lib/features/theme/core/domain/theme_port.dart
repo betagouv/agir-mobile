@@ -9,11 +9,11 @@ abstract interface class ThemePort {
   Future<Either<Exception, ThemeTile>> getTheme(final String type);
 
   Future<Either<Exception, List<MissionListe>>> recupererMissions(
-    final String universType,
+    final String themeType,
   );
 
   Future<Either<Exception, List<ServiceItem>>> getServices(
-    final String universType,
+    final String themeType,
   );
 
   Future<Either<Exception, Mission>> recupererMission({
