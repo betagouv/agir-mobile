@@ -24,18 +24,7 @@ class AssitancesSection extends StatelessWidget {
       padding: EdgeInsets.zero,
       children: [
         const TitleSection(
-          title: TextSpan(
-            children: [
-              TextSpan(
-                text: Localisation.homeAssistanceTitlePart1,
-                style: DsfrTextStyle.headline4(
-                  color: DsfrColors.blueFranceSun113,
-                ),
-              ),
-              TextSpan(text: ' '),
-              TextSpan(text: Localisation.homeAssistanceTitlePart2),
-            ],
-          ),
+          title: Localisation.homeAssistanceTitle,
           subTitle: Localisation.homeAssistanceSubTitle,
         ),
         const SizedBox(height: DsfrSpacings.s2w),

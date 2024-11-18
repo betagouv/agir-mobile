@@ -136,6 +136,9 @@ abstract final class Localisation {
   static const mettreAJourMesInformations = 'Mettre à jour mes informations';
   static const mieuxVousConnaitre = 'Mieux vous connaître';
   static const miseAJourEffectuee = 'Mise à jour effectuée';
+  static const missionTitle = 'Recommandés **pour vous**';
+  static const missionSubTitle =
+      'Des solutions **adaptées à votre situation** et les clés pour comprendre';
   static const modifier = 'Modifier';
   static const moinsDe35m2 = 'Moins de 35 m²';
   static const motDePasse = 'Mot de passe';
@@ -234,8 +237,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const mesActions = 'Mes actions';
   static const mesAides = 'Mes aides';
   static const mesAidesDisponibles = 'Mes aides disponibles';
-  static const homeAssistanceTitlePart1 = 'Aides financières';
-  static const homeAssistanceTitlePart2 = 'et bons plans';
+  static const homeAssistanceTitle = '**Aides financières** et bons plans';
   static const homeAssistanceSubTitle =
       "Toutes les aides **locales** et **nationales** pour vous aider à passer à l'action";
   static const assistanceListTitle =

@@ -26,22 +26,9 @@ class BodyEmpty extends StatelessWidget {
         children: [
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-            child: FnvTitleWidget(
-              title: TextSpan(
-                children: [
-                  TextSpan(
-                    text: EnvironmentalPerformanceSummaryL10n.estimerMon,
-                  ),
-                  TextSpan(text: ' '),
-                  TextSpan(
-                    text: EnvironmentalPerformanceSummaryL10n
-                        .bilanEnvironnemental,
-                    style: DsfrTextStyle.headline2(
-                      color: DsfrColors.blueFranceSun113,
-                    ),
-                  ),
-                ],
-              ),
+            child: FnvTitle(
+              title: EnvironmentalPerformanceSummaryL10n
+                  .estimerMonBilanEnvironnemental,
             ),
           ),
           const SizedBox(height: DsfrSpacings.s4w),
