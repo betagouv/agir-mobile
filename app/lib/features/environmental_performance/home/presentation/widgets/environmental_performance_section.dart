@@ -16,6 +16,7 @@ import 'package:app/features/environmental_performance/summary/presentation/widg
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
@@ -198,18 +199,8 @@ class _TitleAndSubtitle extends StatelessWidget {
 
   @override
   Widget build(final context) => const TitleSection(
-        title: TextSpan(
-          children: [
-            TextSpan(text: EnvironmentalPerformanceSummaryL10n.estimerMon),
-            TextSpan(text: ' '),
-            TextSpan(
-              text: EnvironmentalPerformanceSummaryL10n.bilanEnvironnemental,
-              style: DsfrTextStyle.headline4(
-                color: DsfrColors.blueFranceSun113,
-              ),
-            ),
-          ],
-        ),
+        title:
+            EnvironmentalPerformanceSummaryL10n.estimerMonBilanEnvironnemental,
         subTitle:
             EnvironmentalPerformanceSummaryL10n.estimerMonEstimationSousTitre,
       );
@@ -224,21 +215,14 @@ class _Full extends StatelessWidget {
   Widget build(final context) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text.rich(
-            TextSpan(
-              children: [
-                TextSpan(text: EnvironmentalPerformanceSummaryL10n.mon),
-                TextSpan(text: ' '),
-                TextSpan(
-                  text:
-                      EnvironmentalPerformanceSummaryL10n.bilanEnvironnemental,
-                  style: DsfrTextStyle.headline4(
-                    color: DsfrColors.blueFranceSun113,
-                  ),
-                ),
-              ],
+          MarkdownBody(
+            data: EnvironmentalPerformanceSummaryL10n.monBilanEnvironnemental,
+            styleSheet: MarkdownStyleSheet(
+              p: const DsfrTextStyle.headline4(),
+              strong: const DsfrTextStyle.headline4(
+                color: DsfrColors.blueFranceSun113,
+              ),
             ),
-            style: DsfrTextStyle.headline4(),
           ),
           const SizedBox(height: DsfrSpacings.s2w),
           EnvironmentalPerformanceTonnesCard(

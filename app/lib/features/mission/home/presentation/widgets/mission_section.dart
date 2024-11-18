@@ -7,6 +7,7 @@ import 'package:app/features/mission/home/presentation/bloc/mission_home_state.d
 import 'package:app/features/theme/core/domain/mission_liste.dart';
 import 'package:app/features/theme/presentation/pages/mission_page.dart';
 import 'package:app/features/theme/presentation/widgets/theme_type_tag.dart';
+import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,20 +41,8 @@ class _Section extends StatelessWidget {
   Widget build(final context) => Column(
         children: [
           const TitleSection(
-            title: TextSpan(
-              children: [
-                TextSpan(text: 'Recommandés'),
-                TextSpan(text: ' '),
-                TextSpan(
-                  text: 'pour vous',
-                  style: DsfrTextStyle.headline4(
-                    color: DsfrColors.blueFranceSun113,
-                  ),
-                ),
-              ],
-            ),
-            subTitle:
-                'Des solutions **adaptées à votre situation** et les clés pour comprendre',
+            title: Localisation.missionTitle,
+            subTitle: Localisation.missionSubTitle,
           ),
           const SizedBox(height: DsfrSpacings.s2w),
           SingleChildScrollView(

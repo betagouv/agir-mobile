@@ -3,13 +3,13 @@
 abstract final class EnvironmentalPerformanceSummaryL10n {
   const EnvironmentalPerformanceSummaryL10n._();
 
-  static const estimerMon = 'Estimer mon';
-  static const mon = 'Mon';
+  static const estimerMonBilanEnvironnemental =
+      'Estimer mon **bilan environnemental**';
+  static const monBilanEnvironnemental = 'Mon **bilan environnemental**';
   static const affiner = 'Affiner';
   static const modifier = 'Modifier';
   static const vosReponses = 'vos réponses';
   static const monEstimation = 'mon estimation';
-  static const bilanEnvironnemental = 'bilan environnemental';
   static const estimerUnPremierBilan = 'Estimer un premier bilan';
   static const estimerMonEstimationSousTitre =
       'Et obtenez des **recommandations** et **aides** personnalisées';
