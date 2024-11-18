@@ -1,4 +1,3 @@
-import 'package:app/features/actions/core/domain/action_status.dart';
 import 'package:app/features/actions/detail/presentation/pages/action_detail_page.dart';
 import 'package:app/features/actions/list/domain/actions_port.dart';
 import 'package:app/features/actions/list/infrastructure/action_item_mapper.dart';
@@ -59,7 +58,7 @@ void main() {
       ),
     );
     actions = List.generate(4, (final _) => actionItemFaker());
-    dio.getM('/utilisateurs/{userId}/defis', responseData: actions);
+    dio.getM('/utilisateurs/{userId}/defis_v2', responseData: actions);
   });
 
   group('La liste des actions devrait ', () {
@@ -72,12 +71,7 @@ void main() {
 
         for (final action in actions) {
           final expected = ActionItemMapper.fromJson(action);
-          expect(
-            find.text(expected.titre),
-            expected.status == ActionStatus.toDo
-                ? findsNothing
-                : findsOneWidget,
-          );
+          expect(find.text(expected.titre), findsOneWidget);
         }
       },
     );
@@ -89,9 +83,7 @@ void main() {
 
         await tester.pumpAndSettle();
 
-        final expected = ActionItemMapper.fromJson(
-          actions.firstWhere((final e) => e['status'] != 'todo'),
-        );
+        final expected = ActionItemMapper.fromJson(actions.first);
 
         await tester.tap(find.text(expected.titre));
 

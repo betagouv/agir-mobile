@@ -74,14 +74,7 @@ Map<String, dynamic> actionItemFaker() {
 
   return {
     'id': faker.guid.guid(),
-    'status': [
-      'todo',
-      'en_cours',
-      'pas_envie',
-      'deja_fait',
-      'abondon',
-      'fait',
-    ].elementAt(faker.randomGenerator.integer(5)),
+    'status': 'en_cours',
     'titre': _fakerSentenceBetter(),
   };
 }

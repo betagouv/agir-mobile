@@ -2,7 +2,6 @@ import 'package:app/core/presentation/widgets/composants/app_bar.dart';
 import 'package:app/core/presentation/widgets/composants/list_item.dart';
 import 'package:app/core/presentation/widgets/composants/scaffold.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
-import 'package:app/features/actions/core/domain/action_status.dart';
 import 'package:app/features/actions/detail/presentation/pages/action_detail_page.dart';
 import 'package:app/features/actions/list/application/fetch_actions.dart';
 import 'package:app/features/actions/list/presentation/bloc/action_list_bloc.dart';
@@ -55,18 +54,10 @@ class ActionListPage extends StatelessWidget {
                         padding: EdgeInsets.zero,
                         itemBuilder: (final context, final index) {
                           final item = state.actions[index];
-                          final subTitle = switch (item.status) {
-                            ActionStatus.toDo => '📝 À faire',
-                            ActionStatus.inProgress => '⏳ Défi en cours',
-                            ActionStatus.refused => '👎 Pas envie',
-                            ActionStatus.alreadyDone => '✅ Déjà fait',
-                            ActionStatus.abandonned => '❌ Abandonné',
-                            ActionStatus.done => '🏆 Défi réalisé',
-                          };
 
                           return ListItem(
                             title: item.titre,
-                            subTitle: subTitle,
+                            subTitle: Localisation.actionEnCours,
                             onTap: () async {
                               final result =
                                   await GoRouter.of(context).pushNamed(

@@ -235,6 +235,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const valider = 'Valider';
   static const voirLesDemarches = 'Voir les démarches';
   static const mesActions = 'Mes actions';
+  static const actionEnCours = '⏳ Action en cours';
   static const mesAides = 'Mes aides';
   static const mesAidesDisponibles = 'Mes aides disponibles';
   static const homeAssistanceTitle = '**Aides financières** et bons plans';

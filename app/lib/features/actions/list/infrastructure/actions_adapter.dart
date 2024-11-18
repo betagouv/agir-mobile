@@ -15,7 +15,7 @@ class ActionsAdapter implements ActionsPort {
 
   @override
   Future<Either<Exception, List<ActionItem>>> fetchActions() async {
-    final response = await _client.get('/utilisateurs/{userId}/defis');
+    final response = await _client.get('/utilisateurs/{userId}/defis_v2');
 
     if (isResponseUnsuccessful(response.statusCode)) {
       return Left(Exception('Erreur lors de la récupération des actions'));
