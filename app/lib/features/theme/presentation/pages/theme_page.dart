@@ -63,7 +63,7 @@ class _PageState extends State<_Page> with RouteAware {
 
   @override
   void dispose() {
-    missionRouteObserver.unsubscribe(this);
+    themeRouteObserver.unsubscribe(this);
     super.dispose();
   }
 
