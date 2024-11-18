@@ -77,10 +77,15 @@ class _Mission extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 13),
       child: GestureDetector(
-        onTap: () async => GoRouter.of(context).pushNamed(
-          MissionPage.name,
-          pathParameters: {'id': mission.id},
-        ),
+        onTap: () async {
+          await GoRouter.of(context).pushNamed(
+            MissionPage.name,
+            pathParameters: {'id': mission.id},
+          );
+          if (context.mounted) {
+            context.read<MissionHomeBloc>().add(const MissionHomeFetch());
+          }
+        },
         child: DecoratedBox(
           decoration: const ShapeDecoration(
             color: Colors.white,
