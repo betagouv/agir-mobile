@@ -59,7 +59,7 @@ void main() {
       ),
     );
     actions = List.generate(4, (final _) => actionItemFaker());
-    dio.getM('/utilisateurs/{userId}/defis', responseData: actions);
+    dio.getM('/utilisateurs/{userId}/defis_v2', responseData: actions);
   });
 
   group('La liste des actions devrait ', () {
