@@ -6,23 +6,21 @@ on:
       FLAVOR:
         type: string
         required: true
-        description: "Flavor de l'application (production ou development)"
     secrets:
       IOS_P12_FILE:
         required: true
-        description: "Certificat de signature"
       IOS_P12_PASSWORD:
         required: true
-        description: "Mot de passe du certificat"
       IOS_PROFILE:
         required: true
-        description: "Fichier de provisionnement"
       IOS_EXPORT_OPTIONS:
         required: true
-        description: "Fichier de configuration de l'exportation"
+      IOS_USERNAME:
+        required: true
+      IOS_PASSWORD:
+        required: true
       FLUTTER_ENV:
         required: true
-        description: "Fichier de configuration de l'application"
 
 env:
   FLUTTER_VERSION: 3.24.5
@@ -69,6 +67,8 @@ jobs:
         with:
           name: app_${{ inputs.FLAVOR }}_ios
           path: app/build/ios/ipa/app-${{ inputs.FLAVOR }}-release.ipa
+      - name: 🚀 Publier sur TestFlight
+        run: xcrun altool --upload-app -t ios -f app/build/ios/ipa/app-${{ inputs.FLAVOR }}-release.ipa -u ${{ secrets.IOS_USERNAME }} -p ${{ secrets.IOS_PASSWORD }}
       - name: 🗑️ Nettoyer les fichiers secrets
         if: always()
         run: |
