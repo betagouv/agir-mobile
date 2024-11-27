@@ -24,6 +24,8 @@ jobs:
       IOS_P12_PASSWORD: ${{ secrets.DEV_IOS_P12_PASSWORD }}
       IOS_PROFILE: ${{ secrets.DEV_IOS_PROFILE }}
       IOS_EXPORT_OPTIONS: ${{ secrets.DEV_IOS_EXPORT_OPTIONS }}
+      IOS_USERNAME: ${{ secrets.DEV_IOS_USERNAME }}
+      IOS_PASSWORD: ${{ secrets.DEV_IOS_PASSWORD }}
       FLUTTER_ENV: ${{ secrets.DEV_FLUTTER_ENV }}
 
   wait_for_approval:
@@ -56,4 +58,6 @@ jobs:
       IOS_P12_PASSWORD: ${{ secrets.PROD_IOS_P12_PASSWORD }}
       IOS_PROFILE: ${{ secrets.PROD_IOS_PROFILE }}
       IOS_EXPORT_OPTIONS: ${{ secrets.PROD_IOS_EXPORT_OPTIONS }}
+      IOS_USERNAME: ${{ secrets.PROD_IOS_USERNAME }}
+      IOS_PASSWORD: ${{ secrets.PROD_IOS_PASSWORD }}
       FLUTTER_ENV: ${{ secrets.PROD_FLUTTER_ENV }}
