@@ -68,7 +68,7 @@ abstract final class Localisation {
   static const statistiquesSite = 'https://jagis.beta.gouv.fr/statistiques';
   static const actionRealisee = 'Action réalisée';
   static const donneesPersonnelles = 'Données personnelles';
-  static const donneesUtiliseesPart1 = 'Données utilisées : code postal ';
+  static const donneesUtiliseesPart1 = 'Données utilisées : code postal ';
   static const donneesUtiliseesPart2 = ', revenu fiscal de référence ';
   static const donneesUtiliseesPart3 = ', nombre de parts ';
   static const dpeA = 'A';
@@ -129,7 +129,7 @@ abstract final class Localisation {
       'https://jagis.beta.gouv.fr/mentions-legales';
   static const menu = 'Menu';
   static const accueil = 'Accueil';
-  static const mesInformationsAdresseEmail = 'Adresse e-mail : ';
+  static const mesInformationsAdresseEmail = 'Adresse e-mail : ';
   static const mesServices = 'Mes services';
   static const mettreAJour = 'Mettre à jour';
   static const mettreAJourMesInformations = 'Mettre à jour mes informations';
@@ -138,9 +138,10 @@ abstract final class Localisation {
   static const missionTitle = 'Recommandés **pour vous**';
   static const missionSubTitle =
       'Des solutions **adaptées à votre situation** et les clés pour comprendre';
-  static const missionActionsTitle = "Quelques **idées** d'action";
+  static const missionActionsTitle =
+      'Choisir au moins **une action** que vous pourriez réaliser';
   static const missionActionsSubTitle =
-      "Pour réduire votre impact, voici une liste d'actions recommandés **pour vous !**";
+      "Pour réduire votre impact, voici une liste d'actions recommandés **pour vous !**";
   static const modifier = 'Modifier';
   static const moinsDe35m2 = 'Moins de 35 m²';
   static const motDePasse = 'Mot de passe';
@@ -169,11 +170,11 @@ abstract final class Localisation {
   static const ouTrouverCesInformationsReponse = '''
 Le revenu fiscal de référence et votre nombre de parts se trouvent sur la 1ère page de votre dernier avis d’impôt.
 
-**Nombre de parts :**
+**Nombre de parts :**
 
 Si vous ne disposez pas de votre dernier avis d’impôt, renseignez 1 part pour chaque adulte de votre foyer fiscal, puis 0,5 part par enfant jusqu’à 2 enfants, puis 1 part par enfant à partir du 3ème enfant.
 
-**Revenu fiscal de référence :**
+**Revenu fiscal de référence :**
 
 Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme des revenus de toutes les personnes avec lequelles vous partagez vos déclarations d’impôts (pour toute l’année) pour vous faire une première idée.''';
   static const oui = 'Oui';
@@ -295,7 +296,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static String nombrePoints(final int value) =>
       value <= 1 ? '$value point' : '$value points';
 
-  static String prenomExclamation(final String value) => '$value !';
+  static String prenomExclamation(final String value) => '$value !';
 
   static String questionCourantSurMax(final int actuel, final int max) =>
       '**Question $actuel** sur $max';
