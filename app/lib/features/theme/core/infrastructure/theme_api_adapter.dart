@@ -4,6 +4,7 @@ import 'package:app/features/authentification/core/infrastructure/dio_http_clien
 import 'package:app/features/theme/core/domain/mission_liste.dart';
 import 'package:app/features/theme/core/domain/service_item.dart';
 import 'package:app/features/theme/core/domain/theme_port.dart';
+import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:app/features/theme/core/infrastructure/mission_liste_mapper.dart';
 import 'package:app/features/theme/core/infrastructure/service_item_mapper.dart';
 import 'package:fpdart/fpdart.dart';
@@ -16,10 +17,10 @@ class ThemeApiAdapter implements ThemePort {
 
   @override
   Future<Either<Exception, List<MissionListe>>> recupererMissions(
-    final String themeType,
+    final ThemeType themeType,
   ) async {
     final response = await _client.get(
-      Endpoints.missionsRecommandeesParThematique(themeType),
+      Endpoints.missionsRecommandeesParThematique(themeType.name),
     );
 
     if (isResponseUnsuccessful(response.statusCode)) {
@@ -38,10 +39,10 @@ class ThemeApiAdapter implements ThemePort {
 
   @override
   Future<Either<Exception, List<ServiceItem>>> getServices(
-    final String themeType,
+    final ThemeType themeType,
   ) async {
     final response = await _client.get(
-      Endpoints.servicesParThematique(themeType),
+      Endpoints.servicesParThematique(themeType.name),
     );
 
     return isResponseSuccessful(response.statusCode)

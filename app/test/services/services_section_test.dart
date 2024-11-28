@@ -74,7 +74,7 @@ Future<void> _pumpThemePage(
       path: 'path',
       name: ' name',
       builder: (final context, final state) => const ThemePage(
-        type: 'alimentation',
+        themeType: ThemeType.alimentation,
       ),
     ),
   );
