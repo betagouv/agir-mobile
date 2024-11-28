@@ -1,7 +1,6 @@
 import 'package:app/core/infrastructure/url_launcher.dart';
 import 'package:app/core/presentation/widgets/composants/card.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
-import 'package:app/features/actions/list/presentation/pages/action_list_page.dart';
 import 'package:app/features/know_your_customer/list/presentation/pages/know_your_customers_page.dart';
 import 'package:app/features/menu/presentation/pages/root_page.dart';
 import 'package:app/features/profil/informations/presentation/pages/mes_informations_page.dart';
@@ -54,13 +53,6 @@ class ProfilPage extends StatelessWidget {
                     label: Localisation.mieuxVousConnaitre,
                     onTap: () async => GoRouter.of(context)
                         .pushNamed(KnowYourCustomersPage.name),
-                  ),
-                  const DsfrDivider(),
-                  _MenuElement(
-                    icon: DsfrIcons.businessAwardLine,
-                    label: Localisation.mesActions,
-                    onTap: () async =>
-                        GoRouter.of(context).pushNamed(ActionListPage.name),
                   ),
                   const DsfrDivider(),
                   _MenuElement(
