@@ -33,13 +33,11 @@ class AssistanceListPage extends StatelessWidget {
       );
 
   @override
-  Widget build(final context) => RootPage(
-        body: BlocProvider(
-          create: (final context) =>
-              AssistanceListBloc(assistancesRepository: context.read())
-                ..add(const AssistanceListFetch()),
-          child: const _View(),
-        ),
+  Widget build(final context) => BlocProvider(
+        create: (final context) =>
+            AssistanceListBloc(assistancesRepository: context.read())
+              ..add(const AssistanceListFetch()),
+        child: const RootPage(body: _View()),
       );
 }
 
