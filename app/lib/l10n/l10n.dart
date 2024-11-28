@@ -304,5 +304,5 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static String veloLabel(final String text) => '$text : ';
 
   static String vousAvezTermineLaMission(final String text) =>
-      'Vous avez terminé la mission “$text”';
+      'Vous avez terminé la mission\n“$text”';
 }
