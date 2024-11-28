@@ -136,13 +136,17 @@ abstract final class Localisation {
   static const mettreAJourMesInformations = 'Mettre à jour mes informations';
   static const mieuxVousConnaitre = 'Mieux vous connaître';
   static const miseAJourEffectuee = 'Mise à jour effectuée';
-  static const missionActionsSubTitle =
-      "Pour réduire votre impact, voici une liste d'actions recommandés **pour vous !**";
-  static const missionActionsTitle =
-      'Choisir au moins **une action** que vous pourriez réaliser';
+  static const missionTitle = 'Recommandés **pour vous**';
   static const missionSubTitle =
       'Des solutions **adaptées à votre situation** et les clés pour comprendre';
-  static const missionTitle = 'Recommandés **pour vous**';
+  static const homeActionsTitle =
+      "Des **idées d'action** adaptées à votre situation";
+  static const homeActionsSubTitle =
+      'Gagner des feuilles chaque semaine avec de nouvelles actions';
+  static const missionActionsTitle =
+      'Choisir au moins **une action** que vous pourriez réaliser';
+  static const missionActionsSubTitle =
+      "Pour réduire votre impact, voici une liste d'actions recommandés **pour vous !**";
   static const modifier = 'Modifier';
   static const moinsDe35m2 = 'Moins de 35 m²';
   static const monIdentite = 'Mon identité';
@@ -241,6 +245,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const uneMaison = 'Une maison';
   static const valider = 'Valider';
   static const voirLesDemarches = 'Voir les démarches';
+  static const homeActionsLink = 'Voir toutes les actions';
   static const vousAvezDejaUnCompte = 'Vous avez déjà un compte ?';
   static const vousEtesProprietaireDeVotreLogement =
       'Vous êtes propriétaire de votre logement ?';

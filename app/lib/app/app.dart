@@ -2,6 +2,8 @@ import 'package:app/app/router/app_router.dart';
 import 'package:app/core/infrastructure/tracker.dart';
 import 'package:app/features/accueil/presentation/cubit/home_disclaimer_cubit.dart';
 import 'package:app/features/actions/detail/infrastructure/action_repository.dart';
+import 'package:app/features/actions/home/infrastructure/home_actions_repository.dart';
+import 'package:app/features/actions/home/presentation/bloc/home_actions_bloc.dart';
 import 'package:app/features/actions/list/domain/actions_port.dart';
 import 'package:app/features/articles/domain/articles_port.dart';
 import 'package:app/features/assistances/core/presentation/bloc/aides_accueil_bloc.dart';
@@ -179,6 +181,13 @@ class _AppState extends State<App> {
                 BlocProvider(
                   create: (final context) => AidesAccueilBloc(
                     aidesPort: widget.aidesPort,
+                  ),
+                ),
+                BlocProvider(
+                  create: (final context) => HomeActionsBloc(
+                    repository: HomeActionsRepository(
+                      client: widget.dioHttpClient,
+                    ),
                   ),
                 ),
                 BlocProvider(

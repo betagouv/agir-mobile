@@ -1,6 +1,7 @@
 import 'package:app/features/theme/core/domain/mission_liste.dart';
 import 'package:app/features/theme/core/domain/service_item.dart';
 import 'package:app/features/theme/core/domain/theme_port.dart';
+import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:fpdart/src/either.dart';
 
 class ThemePortMock implements ThemePort {
@@ -10,13 +11,13 @@ class ThemePortMock implements ThemePort {
 
   @override
   Future<Either<Exception, List<MissionListe>>> recupererMissions(
-    final String themeType,
+    final ThemeType themeType,
   ) async =>
       Right(List.of(missionListe));
 
   @override
   Future<Either<Exception, List<ServiceItem>>> getServices(
-    final String themeType,
+    final ThemeType themeType,
   ) async =>
       const Right([
         ServiceItem(
