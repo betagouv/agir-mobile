@@ -6,5 +6,5 @@ abstract final class Endpoints {
 
   /// https://agir-back-dev.osc-fr1.scalingo.io/api#/Defis/DefisController_getById
   static String action(final String defiId) =>
-      '/utilisateurs/{userId}/defis/{$defiId}';
+      '/utilisateurs/{userId}/defis/$defiId';
 }
