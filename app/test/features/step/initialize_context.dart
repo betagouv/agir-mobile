@@ -25,6 +25,7 @@ Future<void> initializeContext(final WidgetTester tester) async {
   setMissionRecommanded();
   setAssistances();
   setPoints();
+  setActions();
 }
 
 void setCommunes() => FeatureContext.instance.dioMock.getM(
@@ -138,3 +139,9 @@ void setDeleteAccount() =>
 void setForgotPassword() => FeatureContext.instance.dioMock
   ..postM(Endpoints.oubliMotDePasse)
   ..postM(Endpoints.modifierMotDePasse);
+
+void setActions() => FeatureContext.instance.dioMock
+  ..getM(
+    '/utilisateurs/%7BuserId%7D/defis_v2?status=en_cours',
+    responseData: <dynamic>[],
+  );

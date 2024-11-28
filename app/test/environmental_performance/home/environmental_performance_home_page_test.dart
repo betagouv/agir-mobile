@@ -1,6 +1,8 @@
 import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/features/accueil/presentation/cubit/home_disclaimer_cubit.dart';
 import 'package:app/features/accueil/presentation/pages/home_page.dart';
+import 'package:app/features/actions/home/infrastructure/home_actions_repository.dart';
+import 'package:app/features/actions/home/presentation/bloc/home_actions_bloc.dart';
 import 'package:app/features/assistances/core/presentation/bloc/aides_accueil_bloc.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/environmental_performance/questions/infrastructure/environment_performance_question_repository.dart';
@@ -32,11 +34,17 @@ import '../../old/mocks/recommandations_port_mock.dart';
 import '../summary/environmental_performance_data.dart';
 
 Future<void> pumpHomePage(final WidgetTester tester, final DioMock dio) async {
-  dio.getM(Endpoints.missionsRecommandees, responseData: missionThematiques);
+  dio
+    ..getM(Endpoints.missionsRecommandees, responseData: missionThematiques)
+    ..getM(
+      '/utilisateurs/%7BuserId%7D/defis_v2?status=en_cours',
+      responseData: <dynamic>[],
+    );
   final client = DioHttpClient(
     dio: dio,
     authenticationService: authenticationService,
   );
+
   await pumpPage(
     tester: tester,
     repositoryProviders: [
@@ -60,6 +68,11 @@ Future<void> pumpHomePage(final WidgetTester tester, final DioMock dio) async {
       ),
       BlocProvider<GamificationBloc>(
         create: (final context) => GamificationBlocFake(),
+      ),
+      BlocProvider<HomeActionsBloc>(
+        create: (final context) => HomeActionsBloc(
+          repository: HomeActionsRepository(client: client),
+        ),
       ),
       BlocProvider(
         create: (final context) => UtilisateurBloc(

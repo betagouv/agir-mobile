@@ -13,9 +13,7 @@ class FetchActions {
     final result = await _port.fetchActions();
 
     return result.map(
-      (final actions) => actions
-          .where((final action) => action.status != ActionStatus.toDo)
-          .sorted((final a, final b) {
+      (final actions) => actions.sorted((final a, final b) {
         final order = [
           ActionStatus.inProgress,
           ActionStatus.done,

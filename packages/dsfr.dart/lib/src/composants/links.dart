@@ -118,34 +118,37 @@ class _DsfrLinkState extends State<DsfrLink> with MaterialStateMixin<DsfrLink> {
     final link = Semantics(
       enabled: widget.onTap != null,
       link: true,
-      child: InkWell(
-        onTap: widget.onTap,
-        onHighlightChanged: updateMaterialState(WidgetState.pressed),
-        onHover: updateMaterialState(WidgetState.hovered),
-        highlightColor: const Color(0x21000000),
-        splashFactory: NoSplash.splashFactory,
-        canRequestFocus: widget.onTap != null,
-        onFocusChange: updateMaterialState(WidgetState.focused),
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            border: !isFocused && !isDisabled
-                ? Border(
-                    bottom: BorderSide(
-                      color: resolveForegroundColor,
-                      width: isPressed || isHovered
-                          ? widget.underlineThickness
-                          : 1,
-                    ),
-                  )
-                : null,
-          ),
-          child: Text.rich(
-            TextSpan(
-              children: widget.iconPosition == DsfrLinkIconPosition.start
-                  ? list
-                  : list.reversed.toList(),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: widget.onTap,
+          onHighlightChanged: updateMaterialState(WidgetState.pressed),
+          onHover: updateMaterialState(WidgetState.hovered),
+          highlightColor: const Color(0x21000000),
+          splashFactory: NoSplash.splashFactory,
+          canRequestFocus: widget.onTap != null,
+          onFocusChange: updateMaterialState(WidgetState.focused),
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              border: !isFocused && !isDisabled
+                  ? Border(
+                      bottom: BorderSide(
+                        color: resolveForegroundColor,
+                        width: isPressed || isHovered
+                            ? widget.underlineThickness
+                            : 1,
+                      ),
+                    )
+                  : null,
             ),
-            style: widget.textStyle.copyWith(color: resolveForegroundColor),
+            child: Text.rich(
+              TextSpan(
+                children: widget.iconPosition == DsfrLinkIconPosition.start
+                    ? list
+                    : list.reversed.toList(),
+              ),
+              style: widget.textStyle.copyWith(color: resolveForegroundColor),
+            ),
           ),
         ),
       ),
