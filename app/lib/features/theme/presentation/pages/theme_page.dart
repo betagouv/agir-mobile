@@ -4,6 +4,7 @@ import 'package:app/core/presentation/widgets/composants/badge.dart';
 import 'package:app/core/presentation/widgets/composants/image.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
+import 'package:app/features/actions/home/presentation/widgets/actions_section.dart';
 import 'package:app/features/mission/mission/presentation/pages/mission_page.dart';
 import 'package:app/features/recommandations/presentation/widgets/mes_recommandations.dart';
 import 'package:app/features/theme/core/domain/mission_liste.dart';
@@ -22,21 +23,21 @@ import 'package:go_router/go_router.dart';
 final themeRouteObserver = RouteObserver<ModalRoute<dynamic>>();
 
 class ThemePage extends StatelessWidget {
-  const ThemePage({super.key, required this.type});
+  const ThemePage({super.key, required this.themeType});
 
-  final String type;
+  final ThemeType themeType;
 
   @override
   Widget build(final context) => BlocProvider(
         create: (final context) => ThemeBloc(themePort: context.read()),
-        child: _Page(type),
+        child: _Page(themeType),
       );
 }
 
 class _Page extends StatefulWidget {
-  const _Page(this.type);
+  const _Page(this.themeType);
 
-  final String type;
+  final ThemeType themeType;
 
   @override
   State<_Page> createState() => _PageState();
@@ -45,7 +46,9 @@ class _Page extends StatefulWidget {
 class _PageState extends State<_Page> with RouteAware {
   void _handleMission() {
     if (mounted) {
-      context.read<ThemeBloc>().add(ThemeRecuperationDemandee(widget.type));
+      context
+          .read<ThemeBloc>()
+          .add(ThemeRecuperationDemandee(widget.themeType));
     }
   }
 
@@ -68,23 +71,27 @@ class _PageState extends State<_Page> with RouteAware {
   }
 
   @override
-  Widget build(final context) => const _View();
+  Widget build(final context) => _View(widget.themeType);
 }
 
 class _View extends StatelessWidget {
-  const _View();
+  const _View(this.themeType);
+
+  final ThemeType themeType;
 
   @override
   Widget build(final context) => ListView(
         padding: const EdgeInsets.all(paddingVerticalPage),
-        children: const [
-          _ImageEtTitre(),
-          SizedBox(height: DsfrSpacings.s5w),
-          _Missions(),
-          SizedBox(height: DsfrSpacings.s5w),
-          _Services(),
-          SizedBox(height: DsfrSpacings.s5w),
-          SafeArea(child: _Recommandations()),
+        children: [
+          const _ImageEtTitre(),
+          const SizedBox(height: DsfrSpacings.s5w),
+          const _Missions(),
+          const SizedBox(height: DsfrSpacings.s5w),
+          ActionsSection(themeType: themeType),
+          const SizedBox(height: DsfrSpacings.s5w),
+          const _Services(),
+          const SizedBox(height: DsfrSpacings.s5w),
+          const SafeArea(child: _Recommandations()),
         ],
       );
 }

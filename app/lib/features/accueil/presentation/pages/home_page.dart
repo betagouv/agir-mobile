@@ -2,6 +2,7 @@ import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_bor
 import 'package:app/core/presentation/widgets/fondamentaux/text_styles.dart';
 import 'package:app/features/accueil/presentation/cubit/home_disclaimer_cubit.dart';
 import 'package:app/features/accueil/presentation/cubit/home_disclaimer_state.dart';
+import 'package:app/features/actions/home/presentation/widgets/actions_section.dart';
 import 'package:app/features/assistances/core/presentation/widgets/assitances_section.dart';
 import 'package:app/features/environmental_performance/home/presentation/widgets/environmental_performance_section.dart';
 import 'package:app/features/environmental_performance/summary/presentation/bloc/environmental_performance_bloc.dart';
@@ -10,6 +11,7 @@ import 'package:app/features/first_name/presentation/pages/first_name_page.dart'
 import 'package:app/features/menu/presentation/pages/root_page.dart';
 import 'package:app/features/mission/home/presentation/widgets/mission_section.dart';
 import 'package:app/features/survey/survey_section.dart';
+import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:app/features/theme/presentation/pages/theme_page.dart';
 import 'package:app/features/utilisateur/presentation/bloc/utilisateur_bloc.dart';
 import 'package:app/features/utilisateur/presentation/bloc/utilisateur_event.dart';
@@ -74,10 +76,10 @@ class _TabPart extends StatelessWidget {
             physics: NeverScrollableScrollPhysics(),
             children: [
               _Home(),
-              ThemePage(type: 'alimentation'),
-              ThemePage(type: 'logement'),
-              ThemePage(type: 'transport'),
-              ThemePage(type: 'consommation'),
+              ThemePage(themeType: ThemeType.alimentation),
+              ThemePage(themeType: ThemeType.logement),
+              ThemePage(themeType: ThemeType.transport),
+              ThemePage(themeType: ThemeType.consommation),
             ],
           ),
         ),
@@ -156,6 +158,11 @@ class _HomeState extends State<_Home> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
               child: AssitancesSection(),
+            ),
+            SizedBox(height: DsfrSpacings.s4w),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
+              child: ActionsSection(),
             ),
             SizedBox(height: DsfrSpacings.s4w),
             SurveySection(),

@@ -41,7 +41,7 @@ void main() {
       );
 
     final adapter = initializeAdapter(dio);
-    final result = await adapter.recupererMissions('alimentation');
+    final result = await adapter.recupererMissions(ThemeType.alimentation);
 
     expect(
       result.getRight().getOrElse(() => throw Exception()),

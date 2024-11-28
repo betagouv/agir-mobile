@@ -1,3 +1,6 @@
+import 'package:app/features/actions/home/infrastructure/home_actions_repository.dart';
+import 'package:app/features/actions/home/presentation/bloc/home_actions_bloc.dart';
+import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/gamification/domain/gamification_port.dart';
 import 'package:app/features/gamification/presentation/bloc/gamification_bloc.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
@@ -15,6 +18,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:mocktail_image_network/mocktail_image_network.dart';
 
 import '../helpers/authentication_service_setup.dart';
+import '../helpers/dio_mock.dart';
 import '../helpers/faker.dart';
 import '../helpers/pump_page.dart';
 
@@ -69,18 +73,38 @@ Future<void> _pumpThemePage(
           recommandationsPort: recommandationsPort,
         ),
       ),
+      BlocProvider<HomeActionsBloc>(
+        create: (final context) {
+          final dioMock = DioMock()
+            ..getM(
+              '/utilisateurs/%7BuserId%7D/defis_v2?status=en_cours&thematique=alimentation',
+              responseData: <dynamic>[],
+            );
+
+          return HomeActionsBloc(
+            repository: HomeActionsRepository(
+              client: DioHttpClient(
+                dio: dioMock,
+                authenticationService: authenticationService,
+              ),
+            ),
+          );
+        },
+      ),
     ],
     page: GoRoute(
       path: 'path',
       name: ' name',
       builder: (final context, final state) => const ThemePage(
-        type: 'alimentation',
+        themeType: ThemeType.alimentation,
       ),
     ),
   );
 }
 
 void main() {
+  registerFallbackValue(ThemeType.alimentation);
+
   group('Services devrait ', () {
     testWidgets(
       'afficher la liste des services de la thématique',

@@ -3,6 +3,9 @@ import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/core/infrastructure/tracker.dart';
 import 'package:app/features/accueil/presentation/cubit/home_disclaimer_cubit.dart';
 import 'package:app/features/actions/detail/infrastructure/action_repository.dart';
+import 'package:app/features/actions/home/infrastructure/home_actions_repository.dart';
+import 'package:app/features/actions/home/presentation/bloc/home_actions_bloc.dart';
+import 'package:app/features/actions/list/domain/actions_port.dart';
 import 'package:app/features/actions/list/infrastructure/actions_adapter.dart';
 import 'package:app/features/articles/domain/articles_port.dart';
 import 'package:app/features/articles/infrastructure/articles_api_adapter.dart';
@@ -147,7 +150,7 @@ class _AppState extends State<App> {
                 create: (final context) =>
                     ArticlesApiAdapter(client: widget.dioHttpClient),
               ),
-              RepositoryProvider(
+              RepositoryProvider<ActionsPort>(
                 create: (final context) =>
                     ActionsAdapter(client: widget.dioHttpClient),
               ),
@@ -185,6 +188,13 @@ class _AppState extends State<App> {
                   create: (final context) => MissionHomeBloc(
                     repository:
                         MissionHomeRepository(client: widget.dioHttpClient),
+                  ),
+                ),
+                BlocProvider(
+                  create: (final context) => HomeActionsBloc(
+                    repository: HomeActionsRepository(
+                      client: widget.dioHttpClient,
+                    ),
                   ),
                 ),
                 BlocProvider(create: (final context) => AideBloc()),

@@ -20,14 +20,11 @@ class MissionSection extends StatelessWidget {
   Widget build(final context) {
     context.read<MissionHomeBloc>().add(const MissionHomeFetch());
 
-    return Builder(
-      builder: (final context) =>
-          BlocBuilder<MissionHomeBloc, MissionHomeState>(
-        builder: (final context, final state) => switch (state) {
-          MissionHomeInitial() => const SizedBox.shrink(),
-          MissionHomeLoadSuccess() => _Section(state),
-        },
-      ),
+    return BlocBuilder<MissionHomeBloc, MissionHomeState>(
+      builder: (final context, final state) => switch (state) {
+        MissionHomeInitial() => const SizedBox.shrink(),
+        MissionHomeLoadSuccess() => _Section(state),
+      },
     );
   }
 }

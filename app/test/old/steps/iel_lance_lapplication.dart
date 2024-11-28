@@ -88,6 +88,14 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
       Endpoints.bilan,
       responseData: environmentalPerformancePartialData,
     )
+    ..getM(
+      '/utilisateurs/%7BuserId%7D/defis_v2?status=en_cours',
+      responseData: <dynamic>[],
+    )
+    ..getM(
+      '/utilisateurs/%7BuserId%7D/defis_v2?status=en_cours&thematique=alimentation',
+      responseData: <dynamic>[],
+    )
     ..getM(Endpoints.missionsRecommandees, responseData: missionThematiques);
 
   await mockNetworkImages(() async {
