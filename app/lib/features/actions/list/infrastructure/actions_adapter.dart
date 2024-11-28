@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/actions/list/domain/action_item.dart';
 import 'package:app/features/actions/list/domain/actions_port.dart';
@@ -15,7 +16,7 @@ class ActionsAdapter implements ActionsPort {
 
   @override
   Future<Either<Exception, List<ActionItem>>> fetchActions() async {
-    final response = await _client.get('/utilisateurs/{userId}/defis_v2');
+    final response = await _client.get(Endpoints.actions);
 
     if (isResponseUnsuccessful(response.statusCode)) {
       return Left(Exception('Erreur lors de la récupération des actions'));

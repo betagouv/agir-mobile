@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/features/actions/core/domain/action_id.dart';
 import 'package:app/features/actions/detail/infrastructure/action_repository.dart';
@@ -36,16 +37,23 @@ void main() {
 
   Future<void> pumpActionDetailPage(
     final WidgetTester tester, {
-    required final DioMock dio,
+    final DioMock? dio,
+    final Map<String, dynamic>? responseData,
     final MessageBus? messageBus,
   }) async {
+    const actionId = ActionId('73');
+    final endpoint = Endpoints.action(actionId.value);
+    final dioMock = dio ??
+        (DioMock()
+          ..getM(endpoint, responseData: responseData)
+          ..patchM(endpoint));
     await pumpPage(
       tester: tester,
       repositoryProviders: [
         RepositoryProvider<ActionRepository>.value(
           value: ActionRepository(
             client: DioHttpClient(
-              dio: dio,
+              dio: dioMock,
               authenticationService: const AuthenticationServiceFake(),
             ),
             messageBus: messageBus ?? MessageBus(),
@@ -60,23 +68,18 @@ void main() {
       page: GoRoute(
         path: 'path',
         name: 'name',
-        builder: (final context, final state) => const ActionDetailPage(
-          actionId: ActionId('73'),
-        ),
+        builder: (final context, final state) =>
+            const ActionDetailPage(actionId: actionId),
       ),
     );
   }
 
   group("L'affichage de l'action devrait être correct pour ", () {
     testWidgets("l'action à faire", (final tester) async {
-      const id = '73';
-      final dio = DioMock()
-        ..getM(
-          '/utilisateurs/{userId}/defis/$id',
-          responseData: actionFaker(status: 'todo'),
-        );
-
-      await pumpActionDetailPage(tester, dio: dio);
+      await pumpActionDetailPage(
+        tester,
+        responseData: actionFaker(status: 'todo'),
+      );
       await tester.pumpAndSettle();
       expect(
         isRadioButtonEnabled<bool>(tester, Localisation.jeReleveLAction),
@@ -97,13 +100,10 @@ void main() {
     });
 
     testWidgets("l'action non désirée", (final tester) async {
-      const id = '73';
-      final dio = DioMock()
-        ..getM(
-          '/utilisateurs/{userId}/defis/$id',
-          responseData: actionFaker(status: 'pas_envie'),
-        );
-      await pumpActionDetailPage(tester, dio: dio);
+      await pumpActionDetailPage(
+        tester,
+        responseData: actionFaker(status: 'pas_envie'),
+      );
       await tester.pumpAndSettle();
       expect(
         isRadioButtonEnabled<bool>(tester, Localisation.jeReleveLAction),
@@ -121,14 +121,11 @@ void main() {
     });
 
     testWidgets("l'action non désirée avec motif", (final tester) async {
-      const id = '73';
       const reason = 'parce que';
-      final dio = DioMock()
-        ..getM(
-          '/utilisateurs/{userId}/defis/$id',
-          responseData: actionFaker(status: 'pas_envie', reason: reason),
-        );
-      await pumpActionDetailPage(tester, dio: dio);
+      await pumpActionDetailPage(
+        tester,
+        responseData: actionFaker(status: 'pas_envie', reason: reason),
+      );
       await tester.pumpAndSettle();
       expect(
         isRadioButtonEnabled<bool>(tester, Localisation.jeReleveLAction),
@@ -147,13 +144,10 @@ void main() {
     });
 
     testWidgets("l'action en cours", (final tester) async {
-      const id = '73';
-      final dio = DioMock()
-        ..getM(
-          '/utilisateurs/{userId}/defis/$id',
-          responseData: actionFaker(status: 'en_cours'),
-        );
-      await pumpActionDetailPage(tester, dio: dio);
+      await pumpActionDetailPage(
+        tester,
+        responseData: actionFaker(status: 'en_cours'),
+      );
       await tester.pumpAndSettle();
       expect(
         isRadioButtonEnabled<bool>(tester, Localisation.actionRealisee),
@@ -174,13 +168,10 @@ void main() {
     });
 
     testWidgets("l'action déjà réalisée", (final tester) async {
-      const id = '73';
-      final dio = DioMock()
-        ..getM(
-          '/utilisateurs/{userId}/defis/$id',
-          responseData: actionFaker(status: 'deja_fait'),
-        );
-      await pumpActionDetailPage(tester, dio: dio);
+      await pumpActionDetailPage(
+        tester,
+        responseData: actionFaker(status: 'deja_fait'),
+      );
       await tester.pumpAndSettle();
       expect(
         isRadioButtonEnabled<bool>(tester, Localisation.actionRealisee),
@@ -201,13 +192,10 @@ void main() {
     });
 
     testWidgets("l'action abandonnée", (final tester) async {
-      const id = '73';
-      final dio = DioMock()
-        ..getM(
-          '/utilisateurs/{userId}/defis/$id',
-          responseData: actionFaker(status: 'abondon'),
-        );
-      await pumpActionDetailPage(tester, dio: dio);
+      await pumpActionDetailPage(
+        tester,
+        responseData: actionFaker(status: 'abondon'),
+      );
       await tester.pumpAndSettle();
       expect(
         isRadioButtonEnabled<bool>(tester, Localisation.actionRealisee),
@@ -225,14 +213,11 @@ void main() {
     });
 
     testWidgets("l'action abandonnée avec motif", (final tester) async {
-      const id = '73';
       const reason = 'parce que';
-      final dio = DioMock()
-        ..getM(
-          '/utilisateurs/{userId}/defis/$id',
-          responseData: actionFaker(status: 'abondon', reason: reason),
-        );
-      await pumpActionDetailPage(tester, dio: dio);
+      await pumpActionDetailPage(
+        tester,
+        responseData: actionFaker(status: 'abondon', reason: reason),
+      );
       await tester.pumpAndSettle();
       expect(
         isRadioButtonEnabled<bool>(tester, Localisation.actionRealisee),
@@ -251,13 +236,10 @@ void main() {
     });
 
     testWidgets("l'action terminée", (final tester) async {
-      const id = '73';
-      final dio = DioMock()
-        ..getM(
-          '/utilisateurs/{userId}/defis/$id',
-          responseData: actionFaker(status: 'fait'),
-        );
-      await pumpActionDetailPage(tester, dio: dio);
+      await pumpActionDetailPage(
+        tester,
+        responseData: actionFaker(status: 'fait'),
+      );
       await tester.pumpAndSettle();
       expect(
         isRadioButtonEnabled<bool>(tester, Localisation.actionRealisee),
@@ -280,14 +262,10 @@ void main() {
 
   group("La modification de l'action devrait fonctionner pour ", () {
     testWidgets('choisir "pas pour moi" sans valider', (final tester) async {
-      const id = '73';
-      final dio = DioMock()
-        ..getM(
-          '/utilisateurs/{userId}/defis/$id',
-          responseData: actionFaker(status: 'todo'),
-        );
-
-      await pumpActionDetailPage(tester, dio: dio);
+      await pumpActionDetailPage(
+        tester,
+        responseData: actionFaker(status: 'todo'),
+      );
       await tester.pumpAndSettle();
 
       await tester.tap(find.text(Localisation.pasPourMoi));
@@ -314,7 +292,7 @@ void main() {
 
     testWidgets("commencer l'action", (final tester) async {
       const id = '73';
-      const path = '/utilisateurs/{userId}/defis/$id';
+      final path = Endpoints.action(id);
       final dio = DioMock()
         ..getM(path, responseData: actionFaker(id: id, status: 'todo'))
         ..patchM(path);
@@ -343,7 +321,7 @@ void main() {
 
     testWidgets('choisir "pas pour moi" avec un motif', (final tester) async {
       const id = '73';
-      const path = '/utilisateurs/{userId}/defis/$id';
+      final path = Endpoints.action(id);
       final dio = DioMock()
         ..getM(path, responseData: actionFaker(id: id, status: 'todo'))
         ..patchM(path);
@@ -389,7 +367,7 @@ void main() {
       'l\'action "pas pour moi" qui devient "en cours" (motif effacé)',
       (final tester) async {
         const id = '73';
-        const path = '/utilisateurs/{userId}/defis/$id';
+        final path = Endpoints.action(id);
         final dio = DioMock()
           ..getM(
             path,
@@ -425,7 +403,7 @@ void main() {
       'l\'action "pas pour moi" dont seul le motif change',
       (final tester) async {
         const id = '73';
-        const path = '/utilisateurs/{userId}/defis/$id';
+        final path = Endpoints.action(id);
         final dio = DioMock()
           ..getM(
             path,
@@ -477,8 +455,7 @@ void main() {
       (final tester) async {
         const id = '73';
         const reason = 'parce que';
-        const path = '/utilisateurs/{userId}/defis/$id';
-
+        final path = Endpoints.action(id);
         final dio = DioMock()
           ..getM(
             path,
@@ -516,7 +493,7 @@ void main() {
 
     group("réaliser l'action", () {
       const id = '73';
-      const path = '/utilisateurs/{userId}/defis/$id';
+      final path = Endpoints.action(id);
       late MessageBus messageBus;
       late DioMock dio;
       setUp(() {

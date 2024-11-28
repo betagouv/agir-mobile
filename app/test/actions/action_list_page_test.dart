@@ -1,3 +1,4 @@
+import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/features/actions/core/domain/action_status.dart';
 import 'package:app/features/actions/detail/presentation/pages/action_detail_page.dart';
 import 'package:app/features/actions/list/domain/actions_port.dart';
@@ -59,7 +60,7 @@ void main() {
       ),
     );
     actions = List.generate(4, (final _) => actionItemFaker());
-    dio.getM('/utilisateurs/{userId}/defis_v2', responseData: actions);
+    dio.getM(Endpoints.actions, responseData: actions);
   });
 
   group('La liste des actions devrait ', () {

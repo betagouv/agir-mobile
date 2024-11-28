@@ -1,3 +1,4 @@
+import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/features/actions/core/domain/action_id.dart';
@@ -18,8 +19,7 @@ class ActionRepository {
   final MessageBus _messageBus;
 
   Future<Either<Exception, Action>> fetchAction(final ActionId id) async {
-    final response =
-        await _client.get('/utilisateurs/{userId}/defis/${id.value}');
+    final response = await _client.get(Endpoints.action(id.value));
 
     return isResponseSuccessful(response.statusCode)
         ? Right(ActionMapper.fromJson(response.data as Map<String, dynamic>))
@@ -40,12 +40,12 @@ class ActionRepository {
           ActionStatus.done => 'fait',
         };
 
-    final path = '/utilisateurs/{userId}/defis/${id.value}';
     final data = {'status': actionStatusToJson(status)};
     if (reason != null) {
       data['motif'] = reason;
     }
-    final response = await _client.patch(path, data: data);
+    final response =
+        await _client.patch(Endpoints.action(id.value), data: data);
 
     if (isResponseSuccessful(response.statusCode)) {
       _messageBus.publish(actionCompletedTopic);
