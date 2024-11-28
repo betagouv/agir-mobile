@@ -1,5 +1,6 @@
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/accueil/presentation/pages/home_page.dart';
+import 'package:app/features/actions/list/presentation/pages/action_list_page.dart';
 import 'package:app/features/assistances/list/presentation/pages/assistance_list_page.dart';
 import 'package:app/features/authentification/core/domain/authentification_port.dart';
 import 'package:app/features/bibliotheque/presentation/pages/bibliotheque_page.dart';
@@ -78,6 +79,7 @@ class _MenuItems extends StatelessWidget {
         ...{
           HomePage.name: Localisation.accueil,
           AssistanceListPage.name: Localisation.mesAides,
+          ActionListPage.name: Localisation.mesActions,
           BibliothequePage.name: Localisation.bibliotheque,
           EnvironmentalPerformanceSummaryPage.name:
               Localisation.bilanEnvironnemental,
