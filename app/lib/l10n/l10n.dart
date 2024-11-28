@@ -54,6 +54,7 @@ abstract final class Localisation {
   static const combienEtesVousDansVotreLogement =
       'Combien êtes-vous dans votre logement (vous inclus) ?';
   static const commune = 'Commune';
+  static const commencer = 'Commencer';
   static const confirmer = 'Confirmer';
   static const consommationsEnergetiques = 'Consommations énergétiques';
   static const continuer = 'Continuer';

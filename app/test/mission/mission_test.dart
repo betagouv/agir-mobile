@@ -17,6 +17,7 @@ import 'package:app/features/mission/mission/infrastructure/mission_repository.d
 import 'package:app/features/mission/mission/presentation/pages/mission_page.dart';
 import 'package:app/features/recommandations/presentation/bloc/recommandations_bloc.dart';
 import 'package:app/features/utilisateur/presentation/bloc/utilisateur_bloc.dart';
+import 'package:app/l10n/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail_image_network/mocktail_image_network.dart';
@@ -154,7 +155,7 @@ void main() {
             find.text('Valoriser ses restes avec un compost'),
             findsOneWidget,
           );
-          expect(find.text('Continuer'), findsOneWidget);
+          expect(find.text(Localisation.commencer), findsOneWidget);
         });
       },
     );
@@ -173,7 +174,7 @@ void main() {
         await pumpForMissionPage(tester, dio: dio);
         await tester.tap(find.text('Valoriser ses restes avec un compost'));
         await tester.pumpAndSettle();
-        await tester.tap(find.text('Continuer'));
+        await tester.tap(find.text(Localisation.commencer));
         await tester.pumpAndSettle();
         expect(
           find.text('Comment valorisez-vous vos déchets alimentaires ?'),
@@ -196,7 +197,7 @@ void main() {
         await pumpForMissionPage(tester, dio: dio);
         await tester.tap(find.text('Valoriser ses restes avec un compost'));
         await tester.pumpAndSettle();
-        await tester.tap(find.text('Continuer'));
+        await tester.tap(find.text(Localisation.commencer));
         await tester.pumpAndSettle();
         expect(
           find.text('Quelles sont vos motivations au sujet du compostage ?'),
