@@ -35,7 +35,7 @@ class MissionIntroductionPage extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: FittedBox(
                 child: DsfrButton(
-                  label: Localisation.continuer,
+                  label: Localisation.commencer,
                   variant: DsfrButtonVariant.primary,
                   size: DsfrButtonSize.lg,
                   onPressed: () => context
