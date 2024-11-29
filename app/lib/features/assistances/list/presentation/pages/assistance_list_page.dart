@@ -189,11 +189,7 @@ class _Elements extends StatelessWidget {
     if (entries.length == 1) {
       final a = entries.first;
 
-      return _ThemeSection(
-        themeType: a.key,
-        assistances: a.value,
-        scrollDirection: Axis.vertical,
-      );
+      return _ThemeSection(themeType: a.key, assistances: a.value);
     }
 
     return ListView.separated(
@@ -203,11 +199,7 @@ class _Elements extends StatelessWidget {
       itemBuilder: (final context, final index) {
         final a = entries.elementAt(index);
 
-        return _ThemeSection(
-          themeType: a.key,
-          assistances: a.value,
-          scrollDirection: Axis.vertical,
-        );
+        return _ThemeSection(themeType: a.key, assistances: a.value);
       },
       separatorBuilder: (final context, final index) =>
           const SizedBox(height: DsfrSpacings.s3w),
@@ -217,15 +209,10 @@ class _Elements extends StatelessWidget {
 }
 
 class _ThemeSection extends StatelessWidget {
-  const _ThemeSection({
-    required this.themeType,
-    required this.assistances,
-    this.scrollDirection = Axis.horizontal,
-  });
+  const _ThemeSection({required this.themeType, required this.assistances});
 
   final ThemeType themeType;
   final List<Assistance> assistances;
-  final Axis scrollDirection;
 
   @override
   Widget build(final context) => Column(
@@ -237,63 +224,25 @@ class _ThemeSection extends StatelessWidget {
             semanticsLabel: themeType.displayNameWithoutEmoji,
           ),
           const SizedBox(height: DsfrSpacings.s2w),
-          if (scrollDirection == Axis.horizontal) ...[
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              padding: EdgeInsets.zero,
-              clipBehavior: Clip.none,
-              child: IntrinsicHeight(
-                child: Row(
-                  children: assistances
-                      .map(
-                        (final e) => SizedBox(
-                          width: 220,
-                          child: _AssitanceCard(
-                            assistance: e,
-                            scrollDirection: scrollDirection,
-                          ),
-                        ),
-                      )
-                      .separator(const SizedBox(width: DsfrSpacings.s2w))
-                      .toList(),
-                ),
-              ),
+          ListView.separated(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            padding: EdgeInsets.zero,
+            itemBuilder: (final context, final index) => _AssitanceCard(
+              assistance: assistances[index],
             ),
-            const SizedBox(height: DsfrSpacings.s2w),
-            DsfrLink.md(
-              label: 'Voir les 9 aides',
-              onTap: () {
-                context
-                    .read<AssistanceListBloc>()
-                    .add(AssistanceListThemeSelected(themeType));
-              },
-            ),
-          ],
-          if (scrollDirection == Axis.vertical)
-            ListView.separated(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              padding: EdgeInsets.zero,
-              itemBuilder: (final context, final index) => _AssitanceCard(
-                assistance: assistances[index],
-                scrollDirection: scrollDirection,
-              ),
-              separatorBuilder: (final context, final index) =>
-                  const SizedBox(height: DsfrSpacings.s1w),
-              itemCount: assistances.length,
-            ),
+            separatorBuilder: (final context, final index) =>
+                const SizedBox(height: DsfrSpacings.s1w),
+            itemCount: assistances.length,
+          ),
         ],
       );
 }
 
 class _AssitanceCard extends StatelessWidget {
-  const _AssitanceCard({
-    required this.assistance,
-    required this.scrollDirection,
-  });
+  const _AssitanceCard({required this.assistance});
 
   final Assistance assistance;
-  final Axis scrollDirection;
 
   @override
   Widget build(final context) => FnvCard(
@@ -322,13 +271,11 @@ class _AssitanceCard extends StatelessWidget {
                   ],
                 ),
               ),
-              if (scrollDirection == Axis.vertical) ...[
-                const SizedBox(width: DsfrSpacings.s2w),
-                const Icon(
-                  DsfrIcons.systemArrowRightSLine,
-                  color: DsfrColors.blueFranceSun113,
-                ),
-              ],
+              const SizedBox(width: DsfrSpacings.s2w),
+              const Icon(
+                DsfrIcons.systemArrowRightSLine,
+                color: DsfrColors.blueFranceSun113,
+              ),
             ],
           ),
         ),
