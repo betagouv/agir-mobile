@@ -1,5 +1,3 @@
-// ignore_for_file: map-keys-ordering
-
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/accueil/presentation/pages/home_page.dart';
 import 'package:app/features/assistances/list/presentation/pages/assistance_list_page.dart';

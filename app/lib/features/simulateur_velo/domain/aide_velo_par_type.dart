@@ -8,7 +8,9 @@ class AideVeloParType extends Equatable {
     required this.cargo,
     required this.cargoElectrique,
     required this.pliant,
+    required this.pliantElectrique,
     required this.motorisation,
+    required this.adapte,
   });
 
   final List<AideVelo> mecaniqueSimple;
@@ -16,7 +18,9 @@ class AideVeloParType extends Equatable {
   final List<AideVelo> cargo;
   final List<AideVelo> cargoElectrique;
   final List<AideVelo> pliant;
+  final List<AideVelo> pliantElectrique;
   final List<AideVelo> motorisation;
+  final List<AideVelo> adapte;
 
   @override
   List<Object?> get props => [
@@ -25,6 +29,8 @@ class AideVeloParType extends Equatable {
         cargo,
         cargoElectrique,
         pliant,
+        pliantElectrique,
         motorisation,
+        adapte,
       ];
 }
