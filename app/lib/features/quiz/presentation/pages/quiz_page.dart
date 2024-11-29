@@ -1,6 +1,7 @@
 import 'package:app/core/presentation/widgets/composants/app_bar.dart';
 import 'package:app/core/presentation/widgets/composants/bottom_bar.dart';
 import 'package:app/core/presentation/widgets/composants/scaffold.dart';
+import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/quiz/presentation/bloc/quiz_bloc.dart';
 import 'package:app/features/quiz/presentation/bloc/quiz_event.dart';
 import 'package:app/features/quiz/presentation/bloc/quiz_state.dart';
@@ -52,7 +53,10 @@ class QuizPage extends StatelessWidget {
                 previous.estExacte != current.estExacte,
             child: FnvScaffold(
               appBar: FnvAppBar(),
-              body: const SingleChildScrollView(child: QuizContent()),
+              body: const SingleChildScrollView(
+                padding: EdgeInsets.all(paddingVerticalPage),
+                child: QuizContent(),
+              ),
               bottomNavigationBar: const _BottomButton(),
             ),
           ),
