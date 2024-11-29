@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/articles/domain/article.dart';
 import 'package:app/features/articles/domain/articles_port.dart';
@@ -20,8 +21,7 @@ class ArticlesApiAdapter implements ArticlesPort {
 
   @override
   Future<Either<Exception, Article>> recupererArticle(final String id) async {
-    final responseApi =
-        await _client.get('/utilisateurs/{userId}/bibliotheque/articles/$id');
+    final responseApi = await _client.get(Endpoints.article(id));
     if (isResponseUnsuccessful(responseApi.statusCode)) {
       return Left(Exception("Erreur lors de la récupération de l'article"));
     }
