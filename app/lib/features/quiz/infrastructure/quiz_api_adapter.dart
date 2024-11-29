@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/authentification/core/infrastructure/cms_api_client.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
@@ -37,11 +38,8 @@ class QuizApiAdapter implements QuizPort {
         quizData['data']['attributes']['articles']['data'] as List<dynamic>;
     if (articles.isNotEmpty) {
       final firstArticle = articles.first as Map<String, dynamic>;
-      // ignore: avoid-missing-interpolation
-      final articleId = (firstArticle['id'] as num).toInt();
-      final articleResponse = await _client.get(
-        '/utilisateurs/{userId}/bibliotheque/articles/$articleId',
-      );
+      final id = (firstArticle['id'] as num).toString();
+      final articleResponse = await _client.get(Endpoints.article(id));
       if (isResponseUnsuccessful(articleResponse.statusCode)) {
         return Left(Exception("Erreur lors de la récupération de l'article"));
       }

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/features/articles/domain/article.dart';
 import 'package:app/features/articles/domain/partenaire.dart';
 import 'package:app/features/articles/domain/source.dart';
@@ -20,7 +21,7 @@ void main() {
   test('recupererArticle', () async {
     final dio = DioMock()
       ..getM(
-        '/utilisateurs/{userId}/bibliotheque/articles/51',
+        Endpoints.article('51'),
         responseData: jsonDecode(
           '''
 {
@@ -238,7 +239,7 @@ void main() {
   test('recupererArticle sans partenaire', () async {
     final dio = DioMock()
       ..getM(
-        '/utilisateurs/{userId}/bibliotheque/articles/2',
+        Endpoints.article('2'),
         responseData: jsonDecode('''
 {
     "content_id": "2",

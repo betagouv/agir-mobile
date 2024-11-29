@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/features/articles/domain/article.dart';
 import 'package:app/features/authentification/core/infrastructure/cms_api_client.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
@@ -19,7 +20,7 @@ void main() {
   test('recupererQuiz', () async {
     final dio = DioMock()
       ..getM(
-        '/utilisateurs/{userId}/bibliotheque/articles/168',
+        Endpoints.article('168'),
         responseData: jsonDecode(
           '''
 {
