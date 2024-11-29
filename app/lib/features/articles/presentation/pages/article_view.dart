@@ -34,7 +34,7 @@ class _Content extends StatelessWidget {
     );
 
     return ListView(
-      physics: const NeverScrollableScrollPhysics(),
+      primary: false,
       shrinkWrap: true,
       padding: EdgeInsets.zero,
       children: [

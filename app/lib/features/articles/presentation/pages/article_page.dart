@@ -1,5 +1,6 @@
 import 'package:app/core/presentation/widgets/composants/app_bar.dart';
 import 'package:app/core/presentation/widgets/composants/scaffold.dart';
+import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/articles/presentation/pages/article_view.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -23,6 +24,9 @@ class ArticlePage extends StatelessWidget {
   @override
   Widget build(final context) => FnvScaffold(
         appBar: FnvAppBar(),
-        body: ArticleView(id: id),
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.all(paddingVerticalPage),
+          child: SafeArea(child: ArticleView(id: id)),
+        ),
       );
 }
