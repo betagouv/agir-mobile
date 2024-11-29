@@ -14,8 +14,10 @@ import 'package:app/features/mission/home/infrastructure/mission_home_repository
 import 'package:app/features/mission/home/presentation/bloc/mission_home_bloc.dart';
 import 'package:app/features/recommandations/presentation/bloc/recommandations_bloc.dart';
 import 'package:app/features/utilisateur/presentation/bloc/utilisateur_bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mocktail_image_network/mocktail_image_network.dart';
 
 import '../../helpers/authentication_service_setup.dart';
@@ -88,11 +90,21 @@ Future<void> pumpHomePage(final WidgetTester tester, final DioMock dio) async {
         ),
       ),
     ],
-    page: HomePage.route,
-    routes: {
-      EnvironmentalPerformanceQuestionPage.name:
-          EnvironmentalPerformanceQuestionPage.path,
-    },
+    router: GoRouter(
+      routes: [
+        HomePage.route(
+          routes: [
+            GoRoute(
+              path: EnvironmentalPerformanceQuestionPage.path,
+              name: EnvironmentalPerformanceQuestionPage.name,
+              builder: (final context, final state) => const Text(
+                'route: ${EnvironmentalPerformanceQuestionPage.name}',
+              ),
+            ),
+          ],
+        ),
+      ],
+    ),
   );
   await tester.pumpAndSettle();
 }

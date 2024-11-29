@@ -20,6 +20,7 @@ import 'package:app/features/utilisateur/presentation/bloc/utilisateur_bloc.dart
 import 'package:app/l10n/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mocktail_image_network/mocktail_image_network.dart';
 
 import '../environmental_performance/summary/environmental_performance_data.dart';
@@ -115,8 +116,11 @@ Future<void> pumpForMissionPage(
             MissionHomeBloc(repository: MissionHomeRepository(client: client)),
       ),
     ],
-    page: HomePage.route,
-    realRoutes: MissionPage.route,
+    router: GoRouter(
+      routes: [
+        HomePage.route(routes: [MissionPage.route]),
+      ],
+    ),
   );
   await tester.pumpAndSettle();
 }

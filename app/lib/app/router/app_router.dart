@@ -31,36 +31,38 @@ import 'package:app/features/recommandations/presentation/widgets/mes_recommanda
 import 'package:app/features/simulateur_velo/presentation/pages/aide_simulateur_velo_disponibles_page.dart';
 import 'package:app/features/simulateur_velo/presentation/pages/aide_simulateur_velo_page.dart';
 import 'package:app/features/theme/presentation/pages/theme_page.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 GoRouter goRouter({required final Tracker tracker}) => GoRouter(
       routes: [
         GoRoute(
-          path: '/',
+          path: '/loading',
+          builder: (final context, final state) =>
+              const ColoredBox(color: Color(0xFFEDFEE7)),
+        ),
+        GoRoute(
+          path: '/unauthenticated',
           redirect: (final context, final state) =>
-              state.uri.path == '/' ? '/unauthenticated' : null,
+              state.uri.path == '/unauthenticated'
+                  ? '/unauthenticated/${PreOnboardingPage.path}'
+                  : null,
           routes: [
-            GoRoute(
-              path: 'unauthenticated',
-              redirect: (final context, final state) =>
-                  state.uri.path == '/unauthenticated'
-                      ? '/unauthenticated/${PreOnboardingPage.path}'
-                      : null,
-              routes: [
-                PreOnboardingPage.route,
-                CreerComptePage.route,
-                SeConnecterPage.route,
-                MotDePasseOubliePage.route,
-                MotDePasseOublieCodePage.route,
-                SaisieCodePage.route,
-              ],
-            ),
+            PreOnboardingPage.route,
+            CreerComptePage.route,
+            SeConnecterPage.route,
+            MotDePasseOubliePage.route,
+            MotDePasseOublieCodePage.route,
+            SaisieCodePage.route,
+          ],
+        ),
+        HomePage.route(
+          routes: [
             FirstNamePage.route,
             QuestionCodePostalPage.route,
             AppEstEncoreEnExperimentationPage.route,
             QuestionThemesPage.route,
             ToutEstPretPage.route,
-            HomePage.route,
             EnvironmentalPerformanceSummaryPage.route,
             EnvironmentalPerformanceQuestionPage.route,
             MissionPage.route,
@@ -83,9 +85,11 @@ GoRouter goRouter({required final Tracker tracker}) => GoRouter(
           ],
         ),
       ],
+      initialLocation: '/loading',
       observers: [
         mesRecommandationsRouteObserver,
         themeRouteObserver,
         tracker.navigatorObserver,
       ],
+      debugLogDiagnostics: true,
     );
