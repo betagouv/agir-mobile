@@ -27,6 +27,7 @@ final class MissionSuccess extends MissionState {
             themeType: mission.themeType,
             title: mission.title,
             imageUrl: mission.imageUrl,
+            description: mission.description,
           ),
           ...mission.objectifs.map(MissionStepObjectif.new),
           const MissionStepActions(),
@@ -94,14 +95,16 @@ final class MissionStepIntroduction extends MissionStep {
     required this.themeType,
     required this.title,
     required this.imageUrl,
+    required this.description,
   });
 
   final ThemeType themeType;
   final String title;
   final String imageUrl;
+  final String? description;
 
   @override
-  List<Object?> get props => [themeType, title, imageUrl];
+  List<Object?> get props => [themeType, title, imageUrl, description];
 }
 
 final class MissionStepObjectif extends MissionStep {
