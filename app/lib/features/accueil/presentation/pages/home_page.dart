@@ -24,12 +24,13 @@ class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   static const name = 'home';
-  static const path = name;
+  static const path = '/';
 
-  static GoRoute get route => GoRoute(
+  static GoRoute route({required final List<RouteBase> routes}) => GoRoute(
         path: path,
         name: name,
         builder: (final context, final state) => const HomePage(),
+        routes: routes,
       );
 
   @override
