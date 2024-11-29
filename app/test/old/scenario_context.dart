@@ -44,7 +44,9 @@ class ScenarioContext {
     cargo: [],
     cargoElectrique: [],
     pliant: [],
+    pliantElectrique: [],
     motorisation: [],
+    adapte: [],
   );
   List<Assistance> aides = <Assistance>[];
   List<MissionListe> missionListe = <MissionListe>[];

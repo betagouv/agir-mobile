@@ -175,6 +175,7 @@ class _Body extends StatelessWidget {
                       e.logo,
                       width: DsfrSpacings.s7w,
                       height: DsfrSpacings.s7w,
+                      fit: BoxFit.contain,
                     ),
                     const SizedBox(width: DsfrSpacings.s1w),
                     Expanded(

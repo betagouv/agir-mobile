@@ -97,12 +97,14 @@ Map<String, dynamic> aideVeloFaker() {
 }
 
 Map<String, dynamic> aideVeloParTypeFaker() => {
+      'mécanique simple': <Map<String, dynamic>>[],
+      'électrique': List.generate(2, (final _) => aideVeloFaker()),
       'cargo': List.generate(2, (final _) => aideVeloFaker()),
       'cargo électrique': List.generate(2, (final _) => aideVeloFaker()),
-      'motorisation': <Map<String, dynamic>>[],
-      'mécanique simple': <Map<String, dynamic>>[],
       'pliant': List.generate(2, (final _) => aideVeloFaker()),
-      'électrique': List.generate(2, (final _) => aideVeloFaker()),
+      'pliant électrique': List.generate(2, (final _) => aideVeloFaker()),
+      'motorisation': <Map<String, dynamic>>[],
+      'adapté': List.generate(2, (final _) => aideVeloFaker()),
     };
 
 final generateThematique = faker.randomGenerator.element([

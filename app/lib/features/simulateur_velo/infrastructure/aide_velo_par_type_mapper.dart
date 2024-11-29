@@ -11,7 +11,10 @@ abstract final class AideVeloParTypeMapper {
         cargoElectrique:
             _mapAideVeloList(json['cargo électrique'] as List<dynamic>),
         pliant: _mapAideVeloList(json['pliant'] as List<dynamic>),
+        pliantElectrique:
+            _mapAideVeloList(json['pliant électrique'] as List<dynamic>),
         motorisation: _mapAideVeloList(json['motorisation'] as List<dynamic>),
+        adapte: _mapAideVeloList(json['adapté'] as List<dynamic>),
       );
 
   static List<AideVelo> _mapAideVeloList(final List<dynamic> jsonList) =>

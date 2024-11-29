@@ -141,11 +141,14 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
       (final r) => emit(
         state.copyWith(
           aidesDisponibles: {
-            'Acheter un vélo cargo': r.cargo,
             'Acheter un vélo mécanique': r.mecaniqueSimple,
-            '⚡Acheter un vélo cargo électrique': r.cargoElectrique,
             '⚡Acheter un vélo électrique': r.electrique,
-            '⚡️ Transformer un vélo classique en électrique': r.motorisation,
+            'Acheter un vélo cargo': r.cargo,
+            '⚡Acheter un vélo cargo électrique': r.cargoElectrique,
+            'Acheter un vélo pliant': r.pliant,
+            '⚡Acheter un vélo pliant électrique': r.pliantElectrique,
+            '⚡️Transformer un vélo classique en électrique': r.motorisation,
+            '🦽Acheter un vélo adapté': r.adapte,
           }.entries.map((final e) {
             final value = e.value;
 
