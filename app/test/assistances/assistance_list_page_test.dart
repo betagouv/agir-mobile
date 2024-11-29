@@ -127,31 +127,5 @@ void main() {
       final notVisible = AssistanceMapper.fromJson(assistances.last);
       expect(find.text(notVisible.titre), findsNothing);
     });
-
-    testWidgets(
-      'afficher les aides filtrés via le texte',
-      (final tester) async {
-        final assistances = [
-          aideFaker(thematique: ThemeType.alimentation.name),
-          aideFaker(thematique: ThemeType.consommation.name),
-        ];
-
-        await _pumpPage(tester, assistances: assistances);
-
-        await tester.pumpAndSettle();
-
-        await tester.tap(find.text('Voir les 9 aides').first);
-
-        await tester.pumpAndSettle();
-
-        final visible = AssistanceMapper.fromJson(assistances.first);
-        expect(find.text(visible.titre), findsOneWidget);
-
-        final notVisible = AssistanceMapper.fromJson(assistances.last);
-        expect(find.text(notVisible.titre), findsNothing);
-      },
-      skip:
-          true, // TODO(lsaudon): Activer le scroll horizontal quand ce sera possible.
-    );
   });
 }
