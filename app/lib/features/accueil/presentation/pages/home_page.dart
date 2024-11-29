@@ -88,6 +88,7 @@ class _TabPartState extends State<_TabPart>
         ),
         body: TabBarView(
           controller: _tabController,
+          physics: const NeverScrollableScrollPhysics(),
           children: const [
             _Home(),
             ThemePage(type: 'alimentation'),
