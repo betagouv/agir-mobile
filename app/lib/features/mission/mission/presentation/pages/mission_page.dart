@@ -2,6 +2,7 @@ import 'package:app/core/presentation/widgets/composants/app_bar.dart';
 import 'package:app/core/presentation/widgets/composants/progress_bar.dart';
 import 'package:app/core/presentation/widgets/composants/scaffold.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
+import 'package:app/features/accueil/presentation/pages/home_page.dart';
 import 'package:app/features/mission/actions/presentation/pages/mission_actions_page.dart';
 import 'package:app/features/mission/mission/domain/mission_article.dart';
 import 'package:app/features/mission/mission/domain/mission_code.dart';
@@ -62,7 +63,12 @@ class _BackButton extends StatelessWidget {
           if (state is MissionSuccess && state.index > 0) {
             bloc.add(const MissionPreviousRequested());
           } else {
-            GoRouter.of(context).pop();
+            final goRouter = GoRouter.of(context);
+            if (goRouter.canPop()) {
+              goRouter.pop();
+            } else {
+              goRouter.goNamed(HomePage.name);
+            }
           }
         },
         style: const ButtonStyle(
