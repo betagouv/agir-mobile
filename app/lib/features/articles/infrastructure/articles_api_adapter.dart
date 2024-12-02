@@ -49,7 +49,7 @@ class ArticlesApiAdapter implements ArticlesPort {
   @override
   Future<Either<Exception, void>> marquerCommeLu(final String id) async {
     final response = await _client.post(
-      '/utilisateurs/{userId}/events',
+      Endpoints.events,
       data: jsonEncode({'content_id': id, 'type': 'article_lu'}),
     );
 
@@ -61,7 +61,7 @@ class ArticlesApiAdapter implements ArticlesPort {
   @override
   Future<Either<Exception, void>> addToFavorites(final String id) async {
     final response = await _client.post(
-      '/utilisateurs/{userId}/events',
+      Endpoints.events,
       data: jsonEncode({'content_id': id, 'type': 'article_favoris'}),
     );
 
@@ -73,7 +73,7 @@ class ArticlesApiAdapter implements ArticlesPort {
   @override
   Future<Either<Exception, void>> removeToFavorites(final String id) async {
     final response = await _client.post(
-      '/utilisateurs/{userId}/events',
+      Endpoints.events,
       data: jsonEncode({'content_id': id, 'type': 'article_non_favoris'}),
     );
 

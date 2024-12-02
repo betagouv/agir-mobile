@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
@@ -28,9 +29,7 @@ class GamificationApiAdapter implements GamificationPort {
 
   @override
   Future<Either<Exception, void>> mettreAJourLesPoints() async {
-    final response = await _client.get(
-      '/utilisateurs/{userId}/gamification',
-    );
+    final response = await _client.get(Endpoints.gamification);
     if (isResponseUnsuccessful(response.statusCode)) {
       return Left(Exception('Erreur lors de la récupération des points'));
     }

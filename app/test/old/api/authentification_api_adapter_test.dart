@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/features/authentication/domain/authentication_service.dart';
 import 'package:app/features/authentication/domain/authentication_status.dart';
 import 'package:app/features/authentication/domain/user_id.dart';
@@ -31,7 +32,7 @@ void main() {
     "connexionDemandee envoie une requête POST à l'API avec les informations de connexion",
     () async {
       // Arrange.
-      final dio = DioMock()..postM('/utilisateurs/login_v2');
+      final dio = DioMock()..postM(Endpoints.login);
 
       final adapter = AuthentificationApiAdapter(
         client: DioHttpClient(
@@ -47,7 +48,7 @@ void main() {
       // Assert.
       verify(
         () => dio.post<dynamic>(
-          '/utilisateurs/login_v2',
+          Endpoints.login,
           data:
               '{"email":"${informationDeConnexion.adresseMail}","mot_de_passe":"${informationDeConnexion.motDePasse}"}',
         ),
@@ -59,11 +60,11 @@ void main() {
     // Arrange.
     final dio = DioMock()
       ..postM(
-        '/utilisateurs/login_v2',
+        Endpoints.login,
         responseData: jsonDecode('{"message":"Utilisateur non actif"}'),
         statusCode: HttpStatus.badRequest,
       )
-      ..postM('/utilisateurs/renvoyer_code');
+      ..postM(Endpoints.renvoyerCode);
 
     final adapter = AuthentificationApiAdapter(
       client: DioHttpClient(
@@ -79,7 +80,7 @@ void main() {
     // Assert.
     verify(
       () => dio.post<dynamic>(
-        '/utilisateurs/renvoyer_code',
+        Endpoints.renvoyerCode,
         data: '{"email":"${informationDeConnexion.adresseMail}"}',
       ),
     );
@@ -89,9 +90,9 @@ void main() {
     "validationCodeConnexionDemandee ajoute le token et l'utisateurId dans le secure storage et modifie le statut a connecté",
     () async {
       final dio = DioMock()
-        ..postM('/utilisateurs/login_v2', statusCode: HttpStatus.created)
+        ..postM(Endpoints.login, statusCode: HttpStatus.created)
         ..postM(
-          '/utilisateurs/login_v2_code',
+          Endpoints.loginCode,
           responseData: jsonDecode(
             '''
 {
@@ -137,7 +138,7 @@ void main() {
 
       verify(
         () => dio.post<dynamic>(
-          '/utilisateurs/login_v2_code',
+          Endpoints.loginCode,
           data: '{"code":"123456","email":"test@example.com"}',
         ),
       );
@@ -202,7 +203,7 @@ void main() {
   test('validationDemandee', () async {
     final dio = DioMock()
       ..postM(
-        '/utilisateurs/valider',
+        Endpoints.validerCode,
         responseData: jsonDecode(
           '''
 {
@@ -241,14 +242,14 @@ void main() {
 
     verify(
       () => dio.post<dynamic>(
-        '/utilisateurs/valider',
+        Endpoints.validerCode,
         data: '{"code":"123456","email":"test@example.com"}',
       ),
     );
   });
 
   test('renvoyerCode', () async {
-    final dio = DioMock()..postM('/utilisateurs/renvoyer_code');
+    final dio = DioMock()..postM(Endpoints.renvoyerCode);
 
     final adapter = AuthentificationApiAdapter(
       client: DioHttpClient(
@@ -261,7 +262,7 @@ void main() {
     await adapter.renvoyerCodeDemande('test@example.com');
     verify(
       () => dio.post<dynamic>(
-        '/utilisateurs/renvoyer_code',
+        Endpoints.renvoyerCode,
         data: '{"email":"test@example.com"}',
       ),
     );
@@ -270,7 +271,7 @@ void main() {
   test('oubliMotDePasse', () async {
     final dio = DioMock()
       ..postM(
-        '/utilisateurs/oubli_mot_de_passe',
+        Endpoints.oubliMotDePasse,
         responseData: jsonDecode('''
 {
   "email": "test@example.com"
@@ -290,7 +291,7 @@ void main() {
 
     verify(
       () => dio.post<dynamic>(
-        '/utilisateurs/oubli_mot_de_passe',
+        Endpoints.oubliMotDePasse,
         data: '{"email":"test@example.com"}',
       ),
     );
@@ -298,10 +299,7 @@ void main() {
 
   test('modifierMotDePasse', () async {
     final dio = DioMock()
-      ..postM(
-        '/utilisateurs/modifier_mot_de_passe',
-        statusCode: HttpStatus.created,
-      );
+      ..postM(Endpoints.modifierMotDePasse, statusCode: HttpStatus.created);
 
     final adapter = AuthentificationApiAdapter(
       client: DioHttpClient(
@@ -319,7 +317,7 @@ void main() {
 
     verify(
       () => dio.post<dynamic>(
-        '/utilisateurs/modifier_mot_de_passe',
+        Endpoints.modifierMotDePasse,
         data:
             '{"code":"123456","email":"test@example.com","mot_de_passe":"password123"}',
       ),
@@ -331,7 +329,7 @@ void main() {
     const prenom = 'Lucas';
     final dio = DioMock()
       ..getM(
-        '/utilisateurs/{userId}',
+        Endpoints.utilisateur,
         responseData: jsonDecode(
           '''
 {

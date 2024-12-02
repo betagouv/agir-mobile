@@ -1,9 +1,9 @@
 import 'dart:async';
 
+import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/assistances/core/domain/aide.dart';
 import 'package:app/features/assistances/core/infrastructure/assistance_mapper.dart';
-import 'package:app/features/assistances/list/infrastructure/assistances_urls.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:fpdart/fpdart.dart';
 
@@ -14,7 +14,7 @@ class AssistancesRepository {
   final DioHttpClient _client;
 
   Future<Either<Exception, AssistanceList>> fetch() async {
-    final response = await _client.get(assistancesUrl);
+    final response = await _client.get(Endpoints.assistances);
 
     if (isResponseUnsuccessful(response.statusCode)) {
       return Left(Exception('Erreur lors de la récupération des aides'));

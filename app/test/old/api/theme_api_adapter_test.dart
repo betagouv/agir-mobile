@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/theme/core/domain/mission_liste.dart';
 import 'package:app/features/theme/core/domain/theme_type.dart';
@@ -14,7 +15,7 @@ void main() {
   test('missions', () async {
     final dio = DioMock()
       ..getM(
-        '/utilisateurs/{userId}/thematiques/alimentation/tuiles_missions',
+        Endpoints.missionsRecommandeesParThematique('alimentation'),
         responseData: jsonDecode('''
 [
     {

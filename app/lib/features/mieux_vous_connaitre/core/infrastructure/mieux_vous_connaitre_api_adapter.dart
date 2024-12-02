@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
@@ -22,9 +23,7 @@ class MieuxVousConnaitreApiAdapter implements MieuxVousConnaitrePort {
   Future<Either<Exception, Question>> recupererQuestion({
     required final String id,
   }) async {
-    final response = await _client.get(
-      '/utilisateurs/{userId}/questionsKYC/$id',
-    );
+    final response = await _client.get(Endpoints.questionKyc(id));
 
     if (isResponseUnsuccessful(response.statusCode)) {
       return Left(Exception('Erreur lors de la récupération de la question'));
@@ -57,7 +56,7 @@ class MieuxVousConnaitreApiAdapter implements MieuxVousConnaitrePort {
     };
 
     final response = await _client.put(
-      '/utilisateurs/{userId}/questionsKYC/${question.id.value}',
+      Endpoints.questionKyc(question.id.value),
       data: jsonEncode(object),
     );
 

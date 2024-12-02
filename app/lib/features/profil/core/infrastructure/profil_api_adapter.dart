@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/profil/core/domain/profil_port.dart';
@@ -16,7 +17,7 @@ class ProfilApiAdapter implements ProfilPort {
 
   @override
   Future<Either<Exception, Informations>> recupererProfil() async {
-    final response = await _client.get('/utilisateurs/{userId}/profile');
+    final response = await _client.get(Endpoints.profile);
 
     if (isResponseUnsuccessful(response.statusCode)) {
       return Left(Exception('Erreur lors de la récupération du profil'));
@@ -48,7 +49,7 @@ class ProfilApiAdapter implements ProfilPort {
     required final int? revenuFiscal,
   }) async {
     final response = await _client.patch(
-      '/utilisateurs/{userId}/profile',
+      Endpoints.profile,
       data: jsonEncode({
         'annee_naissance': anneeDeNaissance,
         'nom': nom,
@@ -65,7 +66,7 @@ class ProfilApiAdapter implements ProfilPort {
 
   @override
   Future<Either<Exception, Logement>> recupererLogement() async {
-    final response = await _client.get('/utilisateurs/{userId}/logement');
+    final response = await _client.get(Endpoints.logement);
 
     if (isResponseUnsuccessful(response.statusCode)) {
       return Left(Exception('Erreur lors de la récupération du logement'));
@@ -82,8 +83,7 @@ class ProfilApiAdapter implements ProfilPort {
   }) async {
     final body = jsonEncode(LogementMapper.mapLogementToJson(logement));
 
-    final response =
-        await _client.patch('/utilisateurs/{userId}/logement', data: body);
+    final response = await _client.patch(Endpoints.logement, data: body);
 
     return isResponseSuccessful(response.statusCode)
         ? const Right(null)
@@ -92,7 +92,7 @@ class ProfilApiAdapter implements ProfilPort {
 
   @override
   Future<Either<Exception, void>> supprimerLeCompte() async {
-    final response = await _client.delete('/utilisateurs/{userId}');
+    final response = await _client.delete(Endpoints.utilisateur);
 
     return isResponseSuccessful(response.statusCode)
         ? const Right(null)
@@ -104,7 +104,7 @@ class ProfilApiAdapter implements ProfilPort {
     required final String motDePasse,
   }) async {
     final response = await _client.patch(
-      '/utilisateurs/{userId}/profile',
+      Endpoints.profile,
       data: jsonEncode({'mot_de_passe': motDePasse}),
     );
 
@@ -119,7 +119,7 @@ class ProfilApiAdapter implements ProfilPort {
     required final String commune,
   }) async {
     final response = await _client.patch(
-      '/utilisateurs/{userId}/logement',
+      Endpoints.logement,
       data: jsonEncode({'code_postal': codePostal, 'commune': commune}),
     );
 

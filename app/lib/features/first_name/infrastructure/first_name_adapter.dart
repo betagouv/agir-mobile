@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:app/core/error/infrastructure/api_erreur_helpers.dart';
+import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/first_name/domain/first_name.dart';
@@ -18,7 +19,7 @@ final class FirstNameAdapter implements FirstNamePort {
     final FirstName firstName,
   ) async {
     final response = await _client.patch(
-      '/utilisateurs/{userId}/profile',
+      Endpoints.profile,
       data: jsonEncode({'prenom': firstName.value}),
     );
 

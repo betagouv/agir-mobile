@@ -1,3 +1,4 @@
+import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/environmental_performance/questions/infrastructure/environment_performance_question_repository.dart';
 import 'package:app/features/environmental_performance/questions/presentation/bloc/environmental_performance_question_bloc.dart';
@@ -115,7 +116,7 @@ void main() {
             responseData: environmentalPerformanceEmptyData,
           )
           ..getM(
-            '/utilisateurs/{userId}/enchainementQuestionsKYC/ENCHAINEMENT_KYC_mini_bilan_carbone',
+            Endpoints.questions('ENCHAINEMENT_KYC_mini_bilan_carbone'),
             responseData: miniBilan,
           );
         await pumpEnvironmentalPerformancePage(tester, dio);
@@ -138,7 +139,7 @@ void main() {
           responseData: environmentalPerformanceEmptyData,
         )
         ..getM(
-          '/utilisateurs/{userId}/enchainementQuestionsKYC/ENCHAINEMENT_KYC_mini_bilan_carbone',
+          Endpoints.questions('ENCHAINEMENT_KYC_mini_bilan_carbone'),
           responseData: miniBilan,
         );
       await pumpEnvironmentalPerformancePage(tester, dio);
@@ -188,7 +189,7 @@ void main() {
               responseData: environmentalPerformancePartialData,
             )
             ..getM(
-              '/utilisateurs/{userId}/enchainementQuestionsKYC/ENCHAINEMENT_KYC_bilan_transport',
+              Endpoints.questions('ENCHAINEMENT_KYC_bilan_transport'),
               responseData: miniBilan,
             );
           await pumpEnvironmentalPerformancePage(tester, dio);
@@ -253,7 +254,7 @@ void main() {
               responseData: environmentalPerformanceFullData,
             )
             ..getM(
-              '/utilisateurs/{userId}/enchainementQuestionsKYC/ENCHAINEMENT_KYC_bilan_transport',
+              Endpoints.questions('ENCHAINEMENT_KYC_bilan_transport'),
               responseData: miniBilan,
             );
           await pumpEnvironmentalPerformancePage(tester, dio);

@@ -4,10 +4,11 @@ abstract final class Localisation {
   const Localisation._();
 
   static const accederAuSimulateur = 'Accéder au simulateur';
+  static const accueil = 'Accueil';
   static const accueilRecommandationsSousTitre =
       'Une sélection d’articles et de services, pour vous, selon vos préférences !';
-  static const recommandationsTitre = 'Recommandé, pour vous';
   static const acheterUnVelo = 'Acheter un vélo';
+  static const actionRealisee = 'Action réalisée';
   static const adresseEmail = 'Mon adresse email';
   static const adultes = 'Adulte(s)';
   static const aideVeloAvertissement =
@@ -26,13 +27,15 @@ abstract final class Localisation {
   static const appEstEncoreEnExperimentationDetails2 =
       '\nRevenez régulièrement pour profiter de nos dernières nouveautés';
   static const article = 'Article';
+  static const assistanceListTitle =
+      '**Aides financières** et bons plans **chez vous**';
   static const attentionAucuneDonneeNePourraEtreRecuperee =
       'Attention, aucune donnée ne pourra être récupérée.';
   static const aucuneAideDisponible = 'Aucune aide\ndisponible';
   static const bibliotheque = 'Ma bibliothèque';
+  static const bibliothequeAucunArticle = 'Aucun article trouvé';
   static const bibliothequeSousTitre =
       'Retrouver ici vos articles déjà consultés ainsi que vos favoris';
-  static const bibliothequeAucunArticle = 'Aucun article trouvé';
   static const bienvenueSur = 'Bienvenue sur J’agis ! Faisons connaissance...';
   static const bienvenueSurDetails =
       'Nous avons quelques questions à vous poser pour personnaliser votre expérience !';
@@ -53,8 +56,8 @@ abstract final class Localisation {
   static const codePostal = 'Code postal';
   static const combienEtesVousDansVotreLogement =
       'Combien êtes-vous dans votre logement (vous inclus) ?';
-  static const commune = 'Commune';
   static const commencer = 'Commencer';
+  static const commune = 'Commune';
   static const confirmer = 'Confirmer';
   static const consommationsEnergetiques = 'Consommations énergétiques';
   static const continuer = 'Continuer';
@@ -64,9 +67,6 @@ abstract final class Localisation {
   static const declarationAccessibilite = "Déclaration d'accessibilité";
   static const declarationAccessibiliteSite =
       'https://jagis.beta.gouv.fr/accessibilite';
-  static const statistiques = 'Statistiques';
-  static const statistiquesSite = 'https://jagis.beta.gouv.fr/statistiques';
-  static const actionRealisee = 'Action réalisée';
   static const donneesPersonnelles = 'Données personnelles';
   static const donneesUtiliseesPart1 = 'Données utilisées : code postal ';
   static const donneesUtiliseesPart2 = ', revenu fiscal de référence ';
@@ -100,6 +100,9 @@ abstract final class Localisation {
   static const finalementPasPourMoi = 'Finalement, pas pour moi';
   static const firstNameEmpty = 'Le prénom ne peut pas être vide.';
   static const firstNameInvalid = "Le prénom n'est pas valide.";
+  static const homeAssistanceSubTitle =
+      "Toutes les aides **locales** et **nationales** pour vous aider à passer à l'action";
+  static const homeAssistanceTitle = '**Aides financières** et bons plans';
   static const jaccepte = "J'accepte ";
   static const jaiCompris = "J'ai compris";
   static const jaiDejaUnCompte = "J'ai déjà un compte";
@@ -117,33 +120,44 @@ abstract final class Localisation {
   static const lesCategoriesDechet = 'Déchets';
   static const lesCategoriesLogement = 'Logement';
   static const lesCategoriesLoisir = 'Loisirs';
-  static const tout = 'Tout';
   static const lesCategoriesTransport = 'Transports';
   static const lesCgu = "les conditions générales d'utilisation";
   static const lesCguMenu = 'CGU';
   static const lesCguSite = 'https://jagis.beta.gouv.fr/cgu';
   static const maReponse = 'Ma réponse';
+  static const maResidencePrincipaleEst = 'Ma résidence principale est ...';
   static const meConnecter = 'Me connecter';
   static const mentionsLegales = 'Mentions légales';
   static const mentionsLegalesSite =
       'https://jagis.beta.gouv.fr/mentions-legales';
   static const menu = 'Menu';
-  static const accueil = 'Accueil';
+  static const mesActions = 'Mes actions';
+  static const mesAides = 'Mes aides';
+  static const mesAidesDisponibles = 'Mes aides disponibles';
+  static const mesAidesLien = 'Voir toutes les aides';
+  static const mesFavoris = 'Mes favoris';
+  static const mesInformations = 'Mes informations';
   static const mesInformationsAdresseEmail = 'Adresse e-mail : ';
   static const mesServices = 'Mes services';
   static const mettreAJour = 'Mettre à jour';
   static const mettreAJourMesInformations = 'Mettre à jour mes informations';
   static const mieuxVousConnaitre = 'Mieux vous connaître';
   static const miseAJourEffectuee = 'Mise à jour effectuée';
-  static const missionTitle = 'Recommandés **pour vous**';
-  static const missionSubTitle =
-      'Des solutions **adaptées à votre situation** et les clés pour comprendre';
-  static const missionActionsTitle =
-      'Choisir au moins **une action** que vous pourriez réaliser';
   static const missionActionsSubTitle =
       "Pour réduire votre impact, voici une liste d'actions recommandés **pour vous !**";
+  static const missionActionsTitle =
+      'Choisir au moins **une action** que vous pourriez réaliser';
+  static const missionSubTitle =
+      'Des solutions **adaptées à votre situation** et les clés pour comprendre';
+  static const missionTitle = 'Recommandés **pour vous**';
   static const modifier = 'Modifier';
   static const moinsDe35m2 = 'Moins de 35 m²';
+  static const monIdentite = 'Mon identité';
+  static const monLogement = 'Mon logement';
+  static const monLogementPlusDe15Ans = 'Mon logement a-t-il plus de 15 ans ?';
+  static const monMotDePasseDoitContenir = 'Mon mot de passe doit contenir :';
+  static const monPrenom = 'Mon prénom';
+  static const monProfil = 'Mon profil';
   static const motDePasse = 'Mot de passe';
   static const motDePasse12CaractresMinimum = '12 caractères minimum';
   static const motDePasse1CaractreSpecialMinimum =
@@ -187,10 +201,10 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const politiqueDeConfidentialiteSite =
       'https://jagis.beta.gouv.fr/politique-de-confidentialite';
   static const pourquoi = 'Pourquoi ?';
-  static const pourquoiCetteAction = 'Pourquoi cette action ?';
   static const pourquoiCesQuestions = 'Pourquoi ces questions ?';
   static const pourquoiCesQuestionsReponse =
       'Votre revenu fiscal de référence et le nombre de parts permettent d’afficher les aides en fonction de vos ressources.';
+  static const pourquoiCetteAction = 'Pourquoi cette action ?';
   static const preOnboardingTitre =
       'Ensemble,\naméliorons\nnos habitudes\nau jour le jour';
   static const premiereFoisSur = 'Première fois sur J’agis ?';
@@ -205,6 +219,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const quiz = 'Quiz';
   static const rafraichir = 'Rafraichir';
   static const rechercherParTitre = 'Rechercher par titre';
+  static const recommandationsTitre = 'Recommandé, pour vous';
   static const recommande = 'Recommandé';
   static const renvoyerCode = 'Renvoyer le code';
   static const renvoyerEmailDeConnexion = "Renvoyer l'e-mail de connexion";
@@ -218,6 +233,8 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const seDeconnecter = 'Se déconnecter';
   static const simulateur = 'Simulateur';
   static const simulerMonAide = 'Simuler mon aide';
+  static const statistiques = 'Statistiques';
+  static const statistiquesSite = 'https://jagis.beta.gouv.fr/statistiques';
   static const supprimerVotreCompte = 'Supprimer mon compte';
   static const supprimerVotreCompteConfirmation =
       'Veuillez confirmer la suppression du compte';
@@ -225,29 +242,12 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
       'Vous pouvez à tout moment choisir de supprimer votre compte ainsi que l’ensemble des données qui y sont associées.';
   static const termine = 'TERMINÉ !';
   static const termine2 = 'Terminé !';
+  static const tout = 'Tout';
   static const toutEstPret = 'Tout est prêt !';
   static const unAppartement = 'Un appartement';
   static const uneMaison = 'Une maison';
   static const valider = 'Valider';
   static const voirLesDemarches = 'Voir les démarches';
-  static const mesActions = 'Mes actions';
-  static const mesAides = 'Mes aides';
-  static const mesAidesDisponibles = 'Mes aides disponibles';
-  static const homeAssistanceTitle = '**Aides financières** et bons plans';
-  static const homeAssistanceSubTitle =
-      "Toutes les aides **locales** et **nationales** pour vous aider à passer à l'action";
-  static const assistanceListTitle =
-      '**Aides financières** et bons plans **chez vous**';
-  static const mesAidesLien = 'Voir toutes les aides';
-  static const mesFavoris = 'Mes favoris';
-  static const mesInformations = 'Mes informations';
-  static const monIdentite = 'Mon identité';
-  static const monLogement = 'Mon logement';
-  static const monLogementPlusDe15Ans = 'Mon logement a-t-il plus de 15 ans ?';
-  static const monMotDePasseDoitContenir = 'Mon mot de passe doit contenir :';
-  static const monPrenom = 'Mon prénom';
-  static const monProfil = 'Mon profil';
-  static const maResidencePrincipaleEst = 'Ma résidence principale est ...';
   static const vousAvezDejaUnCompte = 'Vous avez déjà un compte ?';
   static const vousEtesProprietaireDeVotreLogement =
       'Vous êtes propriétaire de votre logement ?';

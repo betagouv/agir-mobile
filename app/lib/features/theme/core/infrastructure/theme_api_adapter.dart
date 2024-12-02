@@ -1,3 +1,4 @@
+import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/theme/core/domain/mission_liste.dart';
@@ -18,7 +19,7 @@ class ThemeApiAdapter implements ThemePort {
     final String themeType,
   ) async {
     final response = await _client.get(
-      '/utilisateurs/{userId}/thematiques/$themeType/tuiles_missions',
+      Endpoints.missionsRecommandeesParThematique(themeType),
     );
 
     if (isResponseUnsuccessful(response.statusCode)) {
@@ -40,7 +41,7 @@ class ThemeApiAdapter implements ThemePort {
     final String themeType,
   ) async {
     final response = await _client.get(
-      '/utilisateurs/{userId}/thematiques/$themeType/recherche_services',
+      Endpoints.servicesParThematique(themeType),
     );
 
     return isResponseSuccessful(response.statusCode)

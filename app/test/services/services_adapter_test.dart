@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/theme/core/domain/service_item.dart';
 import 'package:app/features/theme/core/infrastructure/theme_api_adapter.dart';
@@ -14,7 +15,7 @@ void main() {
     const themeType = 'alimentation';
     final dio = DioMock()
       ..getM(
-        '/utilisateurs/{userId}/thematiques/$themeType/recherche_services',
+        Endpoints.servicesParThematique(themeType),
         responseData: jsonDecode(
           '''
 [

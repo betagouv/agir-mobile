@@ -43,7 +43,6 @@ dart_code_metrics:
     - package:dart_code_metrics_presets/equatable.yaml
   rules:
     - arguments-ordering:
-        alphabetize: false
         first:
           - key
           - context

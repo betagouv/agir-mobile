@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/mission/actions/domain/mission_actions.dart';
@@ -16,9 +17,7 @@ class MissionActionsRepository {
   Future<Either<Exception, MissionActions>> fetch(
     final MissionCode code,
   ) async {
-    final response = await _client.get(
-      '/utilisateurs/{userId}/missions/${code.value}',
-    );
+    final response = await _client.get(Endpoints.mission(code.value));
 
     if (isResponseUnsuccessful(response.statusCode)) {
       return Left(

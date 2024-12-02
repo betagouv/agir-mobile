@@ -1,3 +1,4 @@
+import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/environmental_performance/summary/domain/environmental_performance_data.dart';
@@ -30,7 +31,7 @@ class EnvironmentalPerformanceSummaryRepository {
 
   Future<Either<Exception, List<Question>>> fetchMiniBilan() async {
     final response = await _client.get(
-      '/utilisateurs/{userId}/enchainementQuestionsKYC/ENCHAINEMENT_KYC_mini_bilan_carbone',
+      Endpoints.questions('ENCHAINEMENT_KYC_mini_bilan_carbone'),
     );
     if (isResponseUnsuccessful(response.statusCode)) {
       return Left(Exception('Erreur lors de la récupération du mini bilan'));

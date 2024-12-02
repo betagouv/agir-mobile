@@ -1,3 +1,4 @@
+import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
@@ -17,7 +18,7 @@ class RecommandationsApiAdapter implements RecommandationsPort {
   ) async {
     final map = {'univers': thematique};
 
-    final uri = Uri.parse('/utilisateurs/{userId}/recommandations_v2').replace(
+    final uri = Uri.parse(Endpoints.recommandations).replace(
       queryParameters: map.isNotEmpty ? map : null,
     );
 
