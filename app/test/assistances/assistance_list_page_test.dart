@@ -1,9 +1,9 @@
+import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/tracker.dart';
 import 'package:app/features/assistances/core/infrastructure/assistance_mapper.dart';
 import 'package:app/features/assistances/item/presentation/bloc/aide_bloc.dart';
 import 'package:app/features/assistances/item/presentation/pages/assistance_detail_page.dart';
 import 'package:app/features/assistances/list/infrastructure/assistances_repository.dart';
-import 'package:app/features/assistances/list/infrastructure/assistances_urls.dart';
 import 'package:app/features/assistances/list/presentation/pages/assistance_list_page.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/gamification/domain/gamification_port.dart';
@@ -33,7 +33,7 @@ Future<void> _pumpPage(
   );
   final dio = DioMock()
     ..getM(
-      assistancesUrl,
+      Endpoints.assistances,
       responseData: {'couverture_aides_ok': true, 'liste_aides': assistances},
     );
 

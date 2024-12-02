@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/bibliotheque/domain/bibliotheque.dart';
@@ -27,7 +28,7 @@ class BibliothequeApiAdapter implements BibliothequePort {
     };
 
     final uri = Uri(
-      path: '/utilisateurs/{userId}/bibliotheque',
+      path: Endpoints.bibliotheque,
       queryParameters: map.isNotEmpty ? map : null,
     );
 

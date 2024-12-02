@@ -1,3 +1,4 @@
+import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/mission/mission/domain/mission.dart';
@@ -12,9 +13,7 @@ class MissionRepository {
   final DioHttpClient _client;
 
   Future<Either<Exception, Mission>> fetch(final MissionCode code) async {
-    final response = await _client.get(
-      '/utilisateurs/{userId}/missions/${code.value}',
-    );
+    final response = await _client.get(Endpoints.mission(code.value));
 
     if (isResponseUnsuccessful(response.statusCode)) {
       return Left(Exception('Erreur lors de la récupération de la mission'));
@@ -27,7 +26,7 @@ class MissionRepository {
 
   Future<Either<Exception, void>> complete(final MissionCode code) async {
     final response = await _client.post(
-      '/utilisateurs/{userId}/missions/${code.value}/terminer',
+      Endpoints.missionTerminer(code.value),
     );
 
     return isResponseSuccessful(response.statusCode)

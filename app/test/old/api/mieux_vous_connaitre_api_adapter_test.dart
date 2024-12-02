@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/mieux_vous_connaitre/core/domain/question.dart';
@@ -34,7 +35,7 @@ void main() {
       final id = expectedQuestion['id'] as String;
 
       dioMock.getM(
-        '/utilisateurs/{userId}/questionsKYC/$id',
+        Endpoints.questionKyc(id),
         responseData: expectedQuestion,
       );
 
@@ -48,7 +49,7 @@ void main() {
     test('mettreAJour sends correct data', () async {
       final expectedQuestion = generateChoixUniqueQuestion(true);
       final id = expectedQuestion['id'] as String;
-      dioMock.putM('/utilisateurs/{userId}/questionsKYC/$id');
+      dioMock.putM(Endpoints.questionKyc(id));
 
       final question =
           QuestionMapper.fromJson(expectedQuestion)! as ChoixUniqueQuestion;
@@ -56,7 +57,7 @@ void main() {
 
       verify(
         () => dioMock.put<dynamic>(
-          '/utilisateurs/{userId}/questionsKYC/$id',
+          Endpoints.questionKyc(id),
           data: jsonEncode({'reponse': question.responses.value}),
         ),
       );

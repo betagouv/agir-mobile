@@ -1,3 +1,4 @@
+import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/mieux_vous_connaitre/core/domain/question.dart';
@@ -11,7 +12,7 @@ class KnowYourCustomersRepository {
   final DioHttpClient _client;
 
   Future<Either<Exception, List<Question>>> fetchQuestions() async {
-    final response = await _client.get('/utilisateurs/{userId}/questionsKYC');
+    final response = await _client.get(Endpoints.questionsKyc);
     if (isResponseSuccessful(response.statusCode)) {
       final data = response.data! as List<dynamic>;
 

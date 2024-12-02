@@ -55,7 +55,7 @@ class QuizApiAdapter implements QuizPort {
     required final bool estExacte,
   }) async {
     final response = await _client.post(
-      '/utilisateurs/{userId}/events',
+      Endpoints.events,
       data: jsonEncode({
         'content_id': '$id',
         'number_value': estExacte ? 100 : 0,

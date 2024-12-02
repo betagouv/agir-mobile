@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/gamification/domain/gamification.dart';
@@ -14,7 +15,7 @@ void main() {
   test('gamification', () async {
     final dio = DioMock()
       ..getM(
-        '/utilisateurs/{userId}/gamification',
+        Endpoints.gamification,
         responseData: jsonDecode('''
 {
   "points": 650,

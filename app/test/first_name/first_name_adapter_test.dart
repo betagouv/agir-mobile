@@ -1,3 +1,4 @@
+import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/first_name/domain/first_name.dart';
 import 'package:app/features/first_name/infrastructure/first_name_adapter.dart';
@@ -10,7 +11,7 @@ import '../helpers/dio_mock.dart';
 
 void main() {
   test('updateFirstName', () async {
-    final dio = DioMock()..patchM('/utilisateurs/{userId}/profile');
+    final dio = DioMock()..patchM(Endpoints.profile);
 
     final apiClient = DioHttpClient(
       dio: dio,
@@ -25,7 +26,7 @@ void main() {
 
     verify(
       () => dio.patch<dynamic>(
-        '/utilisateurs/{userId}/profile',
+        Endpoints.profile,
         data: '{"prenom":"$prenom"}',
       ),
     );

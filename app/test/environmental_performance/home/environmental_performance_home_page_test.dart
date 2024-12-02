@@ -1,3 +1,4 @@
+import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/features/accueil/presentation/cubit/home_disclaimer_cubit.dart';
 import 'package:app/features/accueil/presentation/pages/home_page.dart';
 import 'package:app/features/assistances/core/presentation/bloc/aides_accueil_bloc.dart';
@@ -31,10 +32,7 @@ import '../../old/mocks/recommandations_port_mock.dart';
 import '../summary/environmental_performance_data.dart';
 
 Future<void> pumpHomePage(final WidgetTester tester, final DioMock dio) async {
-  dio.getM(
-    '/utilisateurs/{userId}/tuiles_missions',
-    responseData: missionThematiques,
-  );
+  dio.getM(Endpoints.missionsRecommandees, responseData: missionThematiques);
   final client = DioHttpClient(
     dio: dio,
     authenticationService: authenticationService,
@@ -120,7 +118,7 @@ void main() {
             responseData: environmentalPerformanceEmptyData,
           )
           ..getM(
-            '/utilisateurs/{userId}/enchainementQuestionsKYC/ENCHAINEMENT_KYC_mini_bilan_carbone',
+            Endpoints.questions('ENCHAINEMENT_KYC_mini_bilan_carbone'),
             responseData: miniBilan,
           );
         await mockNetworkImages(() async {
@@ -148,7 +146,7 @@ void main() {
           responseData: environmentalPerformanceEmptyData,
         )
         ..getM(
-          '/utilisateurs/{userId}/enchainementQuestionsKYC/ENCHAINEMENT_KYC_mini_bilan_carbone',
+          Endpoints.questions('ENCHAINEMENT_KYC_mini_bilan_carbone'),
           responseData: miniBilan,
         );
       await mockNetworkImages(() async {
@@ -175,7 +173,7 @@ void main() {
             responseData: environmentalPerformancePartialData,
           )
           ..getM(
-            '/utilisateurs/{userId}/enchainementQuestionsKYC/ENCHAINEMENT_KYC_bilan_transport',
+            Endpoints.questions('ENCHAINEMENT_KYC_bilan_transport'),
             responseData: miniBilan,
           );
         await mockNetworkImages(() async {

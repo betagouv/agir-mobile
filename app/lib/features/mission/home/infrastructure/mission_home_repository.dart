@@ -1,3 +1,4 @@
+import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/theme/core/domain/mission_liste.dart';
@@ -11,8 +12,7 @@ class MissionHomeRepository {
   final DioHttpClient _client;
 
   Future<Either<Exception, List<MissionListe>>> fetch() async {
-    final response =
-        await _client.get('/utilisateurs/{userId}/tuiles_missions');
+    final response = await _client.get(Endpoints.missionsRecommandees);
 
     if (isResponseUnsuccessful(response.statusCode)) {
       return Left(Exception('Erreur lors de la récupération des missions'));

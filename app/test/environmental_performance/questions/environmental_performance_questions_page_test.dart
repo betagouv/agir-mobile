@@ -1,3 +1,4 @@
+import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/environmental_performance/questions/infrastructure/environment_performance_question_repository.dart';
@@ -80,21 +81,19 @@ void main() {
           responseData: environmentalPerformanceEmptyData,
         )
         ..getM(
-          '/utilisateurs/{userId}/enchainementQuestionsKYC/ENCHAINEMENT_KYC_mini_bilan_carbone',
+          Endpoints.questions('ENCHAINEMENT_KYC_mini_bilan_carbone'),
           responseData: miniBilanQuestions,
         )
         ..getM(
-          '/utilisateurs/{userId}/questionsKYC/KYC_transport_voiture_km',
+          Endpoints.questionKyc('KYC_transport_voiture_km'),
           responseData: miniBilanQuestions.first,
         )
-        ..putM('/utilisateurs/{userId}/questionsKYC/KYC_transport_voiture_km')
+        ..putM(Endpoints.questionKyc('KYC_transport_voiture_km'))
         ..getM(
-          '/utilisateurs/{userId}/questionsKYC/KYC_transport_avion_3_annees',
+          Endpoints.questionKyc('KYC_transport_avion_3_annees'),
           responseData: miniBilanQuestions[1],
         )
-        ..putM(
-          '/utilisateurs/{userId}/questionsKYC/KYC_transport_avion_3_annees',
-        );
+        ..putM(Endpoints.questionKyc('KYC_transport_avion_3_annees'));
       await pumpEnvironmentalPerformancePage(tester, dio: dio);
       await tester.pumpAndSettle();
       await tester.tap(

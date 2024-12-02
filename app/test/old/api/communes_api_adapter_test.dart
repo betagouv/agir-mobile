@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/communes/infrastructure/communes_api_adapter.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -13,7 +14,10 @@ void main() {
     test('recupererLesCommunes', () async {
       final dio = DioMock()
         ..getM(
-          '/communes?code_postal=39100',
+          Uri(
+            path: Endpoints.communes,
+            queryParameters: {'code_postal': '39100'},
+          ).toString(),
           responseData: jsonDecode(
             '''
 [

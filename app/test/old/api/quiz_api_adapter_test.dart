@@ -303,7 +303,7 @@ void main() {
   });
 
   test('terminerQuiz', () async {
-    final dio = DioMock()..postM('/utilisateurs/{userId}/events');
+    final dio = DioMock()..postM(Endpoints.events);
 
     final adapter = QuizApiAdapter(
       client: DioHttpClient(
@@ -321,7 +321,7 @@ void main() {
 
     verify(
       () => dio.post<dynamic>(
-        '/utilisateurs/{userId}/events',
+        Endpoints.events,
         data: '{"content_id":"1","number_value":100,"type":"quizz_score"}',
       ),
     );

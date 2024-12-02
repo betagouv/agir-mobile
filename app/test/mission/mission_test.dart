@@ -1,3 +1,4 @@
+import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/features/accueil/presentation/cubit/home_disclaimer_cubit.dart';
 import 'package:app/features/accueil/presentation/pages/home_page.dart';
@@ -42,13 +43,10 @@ Future<void> pumpForMissionPage(
       responseData: environmentalPerformanceEmptyData,
     )
     ..getM(
-      '/utilisateurs/{userId}/enchainementQuestionsKYC/ENCHAINEMENT_KYC_mini_bilan_carbone',
+      Endpoints.questions('ENCHAINEMENT_KYC_mini_bilan_carbone'),
       responseData: miniBilan,
     )
-    ..getM(
-      '/utilisateurs/{userId}/tuiles_missions',
-      responseData: missionThematiques,
-    );
+    ..getM(Endpoints.missionsRecommandees, responseData: missionThematiques);
 
   final client = DioHttpClient(
     dio: dio,
@@ -146,10 +144,7 @@ void main() {
       (final tester) async {
         await mockNetworkImages(() async {
           final dio = DioMock()
-            ..getM(
-              '/utilisateurs/{userId}/missions/compost',
-              responseData: missionMap,
-            );
+            ..getM(Endpoints.mission('compost'), responseData: missionMap);
           await pumpForMissionPage(tester, dio: dio);
           await tester.tap(find.text('Valoriser ses restes avec un compost'));
           await tester.pumpAndSettle();
@@ -167,12 +162,9 @@ void main() {
     testWidgets('Afficher la question KYC', (final tester) async {
       await mockNetworkImages(() async {
         final dio = DioMock()
+          ..getM(Endpoints.mission('compost'), responseData: missionMap)
           ..getM(
-            '/utilisateurs/{userId}/missions/compost',
-            responseData: missionMap,
-          )
-          ..getM(
-            '/utilisateurs/{userId}/questionsKYC/KYC_compost_pratique',
+            Endpoints.questionKyc('KYC_compost_pratique'),
             responseData: kyc,
           );
         await pumpForMissionPage(tester, dio: dio);
@@ -191,11 +183,11 @@ void main() {
       await mockNetworkImages(() async {
         final dio = DioMock()
           ..getM(
-            '/utilisateurs/{userId}/missions/compost',
+            Endpoints.mission('compost'),
             responseData: missionPartiallyAnswered,
           )
           ..getM(
-            '/utilisateurs/{userId}/questionsKYC/KYC_compost_motivation',
+            Endpoints.questionKyc('KYC_compost_motivation'),
             responseData: kyc2,
           );
         await pumpForMissionPage(tester, dio: dio);

@@ -1,14 +1,43 @@
 abstract final class Endpoints {
   Endpoints._();
 
-  /// https://agir-back-dev.osc-fr1.scalingo.io/api#/Defis/DefisController_getAllUserDefi_2
   static const actions = '/utilisateurs/{userId}/defis_v2';
-
-  /// https://agir-back-dev.osc-fr1.scalingo.io/api#/Defis/DefisController_getById
+  static const assistances = '/utilisateurs/{userId}/aides_v2';
+  static const bibliotheque = '/utilisateurs/{userId}/bibliotheque';
+  static const communes = '/communes';
+  static const events = '/utilisateurs/{userId}/events';
+  static const gamification = '/utilisateurs/{userId}/gamification';
+  static const logement = '/utilisateurs/{userId}/logement';
+  static const login = '/utilisateurs/login_v2';
+  static const loginCode = '/utilisateurs/login_v2_code';
+  static const missionsRecommandees = '/utilisateurs/{userId}/tuiles_missions';
+  static const modifierMotDePasse = '/utilisateurs/modifier_mot_de_passe';
+  static const oubliMotDePasse = '/utilisateurs/oubli_mot_de_passe';
+  static const profile = '/utilisateurs/{userId}/profile';
+  static const questionsKyc =
+      '/utilisateurs/{userId}/questionsKYC'; // TODO(lsaudon): v2
+  static const recommandations =
+      '/utilisateurs/{userId}/recommandations_v2'; // TODO(lsaudon): v3
+  static const renvoyerCode = '/utilisateurs/renvoyer_code';
+  static const simulerAideVelo = '/utilisateurs/{userId}/simulerAideVelo';
+  static const utilisateur = '/utilisateurs/{userId}';
+  static const validerCode = '/utilisateurs/valider';
   static String action(final String defiId) =>
       '/utilisateurs/{userId}/defis/$defiId';
-
-  /// https://agir-back-dev.osc-fr1.scalingo.io/api#/Bibliotheque/BibliothequeController_getArticleBiblio
   static String article(final String contentId) =>
       '/utilisateurs/{userId}/bibliotheque/articles/$contentId';
+  static String mission(final String codeMission) =>
+      '/utilisateurs/{userId}/missions/$codeMission';
+  static String missionTerminer(final String codeMission) =>
+      '/utilisateurs/{userId}/missions/$codeMission/terminer';
+  static String missionsRecommandeesParThematique(
+    final String codeThematique,
+  ) =>
+      '/utilisateurs/{userId}/thematiques/$codeThematique/tuiles_missions';
+  static String questionKyc(final String questionId) =>
+      '/utilisateurs/{userId}/questionsKYC/$questionId'; // TODO(lsaudon): v2
+  static String questions(final String enchainementId) =>
+      '/utilisateurs/{userId}/enchainementQuestionsKYC/$enchainementId'; // TODO(lsaudon): v2
+  static String servicesParThematique(final String codeThematique) =>
+      '/utilisateurs/{userId}/thematiques/$codeThematique/recherche_services';
 }

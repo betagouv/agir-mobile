@@ -323,7 +323,7 @@ void main() {
   });
 
   test('marquerCommeLu', () async {
-    final dio = DioMock()..postM('/utilisateurs/{userId}/events');
+    final dio = DioMock()..postM(Endpoints.events);
 
     final adapter = ArticlesApiAdapter(
       client: DioHttpClient(
@@ -340,14 +340,14 @@ void main() {
     await adapter.marquerCommeLu('1');
     verify(
       () => dio.post<dynamic>(
-        '/utilisateurs/{userId}/events',
+        Endpoints.events,
         data: '{"content_id":"1","type":"article_lu"}',
       ),
     );
   });
 
   test('addToFavorites', () async {
-    final dio = DioMock()..postM('/utilisateurs/{userId}/events');
+    final dio = DioMock()..postM(Endpoints.events);
 
     final adapter = ArticlesApiAdapter(
       client: DioHttpClient(
@@ -365,7 +365,7 @@ void main() {
 
     verify(
       () => dio.post<dynamic>(
-        '/utilisateurs/{userId}/events',
+        Endpoints.events,
         data: '{"content_id":"1","type":"article_favoris"}',
       ),
     );

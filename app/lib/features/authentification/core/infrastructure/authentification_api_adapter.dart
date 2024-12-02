@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:app/core/error/domain/api_erreur.dart';
 import 'package:app/core/error/infrastructure/api_erreur_helpers.dart';
+import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/authentication/domain/authentication_service.dart';
 import 'package:app/features/authentification/core/domain/authentification_port.dart';
@@ -28,7 +29,7 @@ class AuthentificationApiAdapter implements AuthentificationPort {
     final InformationDeConnexion informationDeConnexion,
   ) async {
     final response = await _client.post(
-      '/utilisateurs/login_v2',
+      Endpoints.login,
       data: jsonEncode({
         'email': informationDeConnexion.adresseMail,
         'mot_de_passe': informationDeConnexion.motDePasse,
@@ -91,7 +92,7 @@ class AuthentificationApiAdapter implements AuthentificationPort {
     final String email,
   ) async {
     final response = await _client.post(
-      '/utilisateurs/renvoyer_code',
+      Endpoints.renvoyerCode,
       data: jsonEncode({'email': email}),
     );
 
@@ -104,9 +105,8 @@ class AuthentificationApiAdapter implements AuthentificationPort {
   Future<Either<ApiErreur, void>> validationDemandee(
     final InformationDeCode informationDeConnexion,
   ) async {
-    final uri = _connexionDemandee
-        ? '/utilisateurs/login_v2_code'
-        : '/utilisateurs/valider';
+    final uri =
+        _connexionDemandee ? Endpoints.loginCode : Endpoints.validerCode;
 
     final response = await _client.post(
       uri,
@@ -135,7 +135,7 @@ class AuthentificationApiAdapter implements AuthentificationPort {
   @override
   Future<Either<Exception, void>> oubliMotDePasse(final String email) async {
     final response = await _client.post(
-      '/utilisateurs/oubli_mot_de_passe',
+      Endpoints.oubliMotDePasse,
       data: jsonEncode({'email': email}),
     );
 
@@ -151,7 +151,7 @@ class AuthentificationApiAdapter implements AuthentificationPort {
     required final String motDePasse,
   }) async {
     final response = await _client.post(
-      '/utilisateurs/modifier_mot_de_passe',
+      Endpoints.modifierMotDePasse,
       data: jsonEncode({
         'code': code,
         'email': email,
@@ -169,7 +169,7 @@ class AuthentificationApiAdapter implements AuthentificationPort {
 
   @override
   Future<Either<Exception, Utilisateur>> recupereUtilisateur() async {
-    final response = await _client.get('/utilisateurs/{userId}');
+    final response = await _client.get(Endpoints.utilisateur);
 
     if (isResponseUnsuccessful(response.statusCode)) {
       return Left(

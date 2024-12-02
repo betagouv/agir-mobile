@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/profil/core/infrastructure/profil_api_adapter.dart';
 import 'package:app/features/profil/informations/domain/entities/informations.dart';
@@ -17,7 +18,7 @@ void main() {
     test('recupererProfil', () async {
       final dio = DioMock()
         ..getM(
-          '/utilisateurs/{userId}/profile',
+          Endpoints.profile,
           responseData: jsonDecode('''
 {
     "email": "lucas@agir.dev",
@@ -69,7 +70,7 @@ void main() {
     });
 
     test('mettreAJour', () async {
-      final dio = DioMock()..patchM('/utilisateurs/{userId}/profile');
+      final dio = DioMock()..patchM(Endpoints.profile);
 
       final adapter = ProfilApiAdapter(
         client: DioHttpClient(
@@ -92,7 +93,7 @@ void main() {
       );
       verify(
         () => dio.patch<dynamic>(
-          '/utilisateurs/{userId}/profile',
+          Endpoints.profile,
           data:
               '{"annee_naissance":$anneeDeNaissance,"nom":"$nom","nombre_de_parts_fiscales":$nombreDePartsFiscales,"prenom":"$prenom","revenu_fiscal":$revenuFiscal}',
         ),
@@ -102,7 +103,7 @@ void main() {
     test('recupererLogement', () async {
       final dio = DioMock()
         ..getM(
-          '/utilisateurs/{userId}/logement',
+          Endpoints.logement,
           responseData: jsonDecode('''
 {
   "nombre_adultes": 2,
@@ -144,12 +145,7 @@ void main() {
 
     test('recupererLogement vide', () async {
       final dio = DioMock()
-        ..getM(
-          '/utilisateurs/{userId}/logement',
-          responseData: jsonDecode('''
-{
-}'''),
-        );
+        ..getM(Endpoints.logement, responseData: jsonDecode('{}'));
 
       final adapter = ProfilApiAdapter(
         client: DioHttpClient(
@@ -176,7 +172,7 @@ void main() {
     });
 
     test('mettreAJourLogement', () async {
-      const path = '/utilisateurs/{userId}/logement';
+      const path = Endpoints.logement;
       final dio = DioMock()..patchM(path);
 
       final adapter = ProfilApiAdapter(
@@ -219,7 +215,7 @@ void main() {
     });
 
     test('mettreAJourCodePostalEtCommune', () async {
-      final dio = DioMock()..patchM('/utilisateurs/{userId}/logement');
+      final dio = DioMock()..patchM(Endpoints.logement);
 
       final adapter = ProfilApiAdapter(
         client: DioHttpClient(
@@ -237,14 +233,14 @@ void main() {
 
       verify(
         () => dio.patch<dynamic>(
-          '/utilisateurs/{userId}/logement',
+          Endpoints.logement,
           data: '{"code_postal":"$codePostal","commune":"$commune"}',
         ),
       );
     });
 
     test('supprimerLeCompte', () async {
-      const path = '/utilisateurs/{userId}';
+      const path = Endpoints.utilisateur;
       final dio = DioMock()..deleteM(path);
 
       final adapter = ProfilApiAdapter(
@@ -260,7 +256,7 @@ void main() {
     });
 
     test('changerMotDePasse', () async {
-      final dio = DioMock()..patchM('/utilisateurs/{userId}/profile');
+      final dio = DioMock()..patchM(Endpoints.profile);
 
       final adapter = ProfilApiAdapter(
         client: DioHttpClient(
@@ -274,7 +270,7 @@ void main() {
 
       verify(
         () => dio.patch<dynamic>(
-          '/utilisateurs/{userId}/profile',
+          Endpoints.profile,
           data: '{"mot_de_passe":"$motDePasse"}',
         ),
       );

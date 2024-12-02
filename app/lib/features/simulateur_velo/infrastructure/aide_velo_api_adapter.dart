@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/simulateur_velo/domain/aide_velo_par_type.dart';
@@ -31,7 +32,7 @@ class AideVeloApiAdapter implements AideVeloPort {
 
     return result.fold(Left.new, (final r) async {
       final response = await _client.post(
-        '/utilisateurs/{userId}/simulerAideVelo',
+        Endpoints.simulerAideVelo,
         data: jsonEncode({'prix_du_velo': prix}),
       );
 
@@ -53,14 +54,14 @@ class AideVeloApiAdapter implements AideVeloPort {
   }) async {
     final responses = await Future.wait([
       _client.patch(
-        '/utilisateurs/{userId}/profile',
+        Endpoints.profile,
         data: jsonEncode({
           'nombre_de_parts_fiscales': nombreDePartsFiscales,
           'revenu_fiscal': revenuFiscal,
         }),
       ),
       _client.patch(
-        '/utilisateurs/{userId}/logement',
+        Endpoints.logement,
         data: jsonEncode({'code_postal': codePostal, 'commune': commune}),
       ),
     ]);

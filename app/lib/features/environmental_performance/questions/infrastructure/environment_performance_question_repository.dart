@@ -1,3 +1,4 @@
+import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/mieux_vous_connaitre/core/domain/question.dart';
@@ -14,9 +15,7 @@ class EnvironmentalPerformanceQuestionRepository {
   Future<Either<Exception, List<Question>>> fetchBilanByCategory(
     final String categoryId,
   ) async {
-    final response = await _client.get(
-      '/utilisateurs/{userId}/enchainementQuestionsKYC/$categoryId',
-    );
+    final response = await _client.get(Endpoints.questions(categoryId));
     if (isResponseUnsuccessful(response.statusCode)) {
       return Left(
         Exception('Erreur lors de la récupération les questions du bilan'),
