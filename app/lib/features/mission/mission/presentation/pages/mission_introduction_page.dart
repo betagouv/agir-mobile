@@ -36,16 +36,18 @@ class MissionIntroductionPage extends StatelessWidget {
             Text(step.description!, style: const DsfrTextStyle.bodyMdBold()),
             const SizedBox(height: DsfrSpacings.s3w),
           ],
-          Align(
-            alignment: Alignment.centerLeft,
-            child: FittedBox(
-              child: DsfrButton(
-                label: Localisation.commencer,
-                variant: DsfrButtonVariant.primary,
-                size: DsfrButtonSize.lg,
-                onPressed: () => context
-                    .read<MissionBloc>()
-                    .add(const MissionNextRequested()),
+          SafeArea(
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: FittedBox(
+                child: DsfrButton(
+                  label: Localisation.commencer,
+                  variant: DsfrButtonVariant.primary,
+                  size: DsfrButtonSize.lg,
+                  onPressed: () => context
+                      .read<MissionBloc>()
+                      .add(const MissionNextRequested()),
+                ),
               ),
             ),
           ),
