@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 class DsfrTag extends StatelessWidget {
   const DsfrTag._({
+    super.key,
     required this.label,
     required this.textStyle,
     required this.backgroundColor,
@@ -11,7 +12,6 @@ class DsfrTag extends StatelessWidget {
     required this.padding,
     this.icon,
     this.onTap,
-    super.key,
   });
 
   const DsfrTag.sm({

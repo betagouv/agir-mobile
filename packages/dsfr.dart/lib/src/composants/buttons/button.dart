@@ -9,6 +9,7 @@ export 'raw_button.dart';
 
 class DsfrButton extends StatelessWidget {
   const DsfrButton({
+    super.key,
     required this.label,
     this.icon,
     this.iconLocation = DsfrButtonIconLocation.left,
@@ -17,7 +18,6 @@ class DsfrButton extends StatelessWidget {
     this.foregroundColor,
     required this.size,
     this.onPressed,
-    super.key,
   });
 
   final IconData? icon;

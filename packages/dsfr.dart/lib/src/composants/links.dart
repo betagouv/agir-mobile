@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 class DsfrLink extends StatefulWidget {
   const DsfrLink._({
+    super.key,
     required this.label,
     required this.textStyle,
     required this.underlineThickness,
@@ -15,7 +16,6 @@ class DsfrLink extends StatefulWidget {
     required this.iconPosition,
     this.icon,
     this.onTap,
-    super.key,
   });
 
   const DsfrLink.sm({

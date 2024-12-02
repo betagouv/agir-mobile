@@ -16,12 +16,12 @@ class DsfrRadioButtonItem {
 
 class DsfrRadioButtonSetHeadless<T> extends StatefulWidget {
   const DsfrRadioButtonSetHeadless({
+    super.key,
     required this.values,
     required this.onCallback,
     this.initialValue,
     this.mode = DsfrRadioButtonSetMode.row,
     this.isEnabled = true,
-    super.key,
   });
 
   final Map<T, DsfrRadioButtonItem> values;

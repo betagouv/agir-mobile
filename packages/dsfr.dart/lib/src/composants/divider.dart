@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 
 class DsfrDivider extends StatelessWidget {
   const DsfrDivider({
+    super.key,
     this.width,
     this.height = 1,
     this.color = DsfrColors.grey900,
     this.alignment = Alignment.center,
-    super.key,
   });
 
   final double? width;

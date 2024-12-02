@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 
 class DsfrRadioButtonSet<T> extends StatelessWidget {
   const DsfrRadioButtonSet({
+    super.key,
     required this.title,
     required this.values,
     required this.onCallback,
     this.initialValue,
-    super.key,
   });
 
   final String title;
