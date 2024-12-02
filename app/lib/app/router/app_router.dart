@@ -5,6 +5,8 @@ import 'package:app/features/actions/list/presentation/pages/action_list_page.da
 import 'package:app/features/articles/presentation/pages/article_page.dart';
 import 'package:app/features/assistances/item/presentation/pages/assistance_detail_page.dart';
 import 'package:app/features/assistances/list/presentation/pages/assistance_list_page.dart';
+import 'package:app/features/authentication/presentation/bloc/authentication_bloc.dart';
+import 'package:app/features/authentication/presentation/bloc/authentication_state.dart';
 import 'package:app/features/authentification/creer_compte/presentation/pages/creer_compte_page.dart';
 import 'package:app/features/authentification/mot_de_passe_oublie/pages/mot_de_passe_oublie_page.dart';
 import 'package:app/features/authentification/mot_de_passe_oublie_code/pages/mot_de_passe_oublie_code_page.dart';
@@ -32,6 +34,7 @@ import 'package:app/features/simulateur_velo/presentation/pages/aide_simulateur_
 import 'package:app/features/simulateur_velo/presentation/pages/aide_simulateur_velo_page.dart';
 import 'package:app/features/theme/presentation/pages/theme_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 GoRouter goRouter({required final Tracker tracker}) => GoRouter(
@@ -85,6 +88,16 @@ GoRouter goRouter({required final Tracker tracker}) => GoRouter(
           ],
         ),
       ],
+      redirect: (final context, final state) =>
+          switch (context.read<AuthenticationBloc>().state) {
+        AuthenticationInitial() => null,
+        AuthenticationUnauthenticated() =>
+          state.uri.path.startsWith('/unauthenticated')
+              ? null
+              : '/unauthenticated/${PreOnboardingPage.path}',
+        AuthenticationAuthenticated() =>
+          state.uri.path.startsWith('/unauthenticated') ? HomePage.path : null,
+      },
       initialLocation: '/loading',
       observers: [
         mesRecommandationsRouteObserver,
