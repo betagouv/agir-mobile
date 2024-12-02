@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 
 class FnvAlert extends StatelessWidget {
   const FnvAlert._({
+    super.key,
     required this.icon,
     required this.label,
     required this.color,
-    super.key,
   });
 
   const FnvAlert.error({required final String label, final Key? key})

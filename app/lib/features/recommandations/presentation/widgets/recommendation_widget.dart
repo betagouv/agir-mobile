@@ -14,13 +14,13 @@ import 'package:go_router/go_router.dart';
 
 class RecommendationWidget extends StatelessWidget {
   const RecommendationWidget({
+    super.key,
     required this.id,
     required this.type,
     required this.points,
     required this.imageUrl,
     required this.tagLabel,
     required this.titre,
-    super.key,
   });
 
   final String id;

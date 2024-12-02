@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 
 class DsfrCheckbox extends StatelessWidget {
   const DsfrCheckbox._({
+    super.key,
     required this.label,
     required this.value,
     required this.onChanged,
     required this.padding,
-    super.key,
   });
 
   const DsfrCheckbox.sm({

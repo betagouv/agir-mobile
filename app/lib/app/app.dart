@@ -54,6 +54,7 @@ import 'package:go_router/go_router.dart';
 
 class App extends StatefulWidget {
   const App({
+    super.key,
     required this.clock,
     required this.tracker,
     required this.missionHomeRepository,
@@ -78,7 +79,6 @@ class App extends StatefulWidget {
     required this.actionsPort,
     required this.actionRepository,
     required this.gamificationPort,
-    super.key,
   });
 
   final Clock clock;

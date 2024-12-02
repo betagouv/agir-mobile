@@ -11,13 +11,13 @@ import 'package:flutter/material.dart';
 
 class DsfrRawButton extends StatefulWidget {
   const DsfrRawButton({
+    super.key,
     required this.child,
     required this.variant,
     this.foregroundColor,
     required this.size,
     this.borderRadius,
     this.onTap,
-    super.key,
   });
 
   final Widget child;

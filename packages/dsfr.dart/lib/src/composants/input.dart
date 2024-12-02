@@ -10,6 +10,7 @@ import 'package:flutter/services.dart';
 
 class DsfrInput extends StatefulWidget {
   const DsfrInput({
+    super.key,
     required this.label,
     this.hint,
     this.suffixText,
@@ -33,7 +34,6 @@ class DsfrInput extends StatefulWidget {
     this.inputFormatters,
     this.scrollPadding = const EdgeInsets.all(20),
     this.autofillHints,
-    super.key,
   });
 
   final String label;

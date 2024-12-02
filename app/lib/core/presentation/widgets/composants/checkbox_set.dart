@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 
 class FnvCheckboxSet extends StatefulWidget {
   const FnvCheckboxSet({
+    super.key,
     required this.options,
     required this.selectedOptions,
     required this.onChanged,
-    super.key,
   });
 
   final List<String> options;

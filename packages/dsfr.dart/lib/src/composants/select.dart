@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 class DsfrSelect<T> extends StatelessWidget {
   const DsfrSelect({
+    super.key,
     required this.label,
     this.hint,
     required this.dropdownMenuEntries,
@@ -23,7 +24,6 @@ class DsfrSelect<T> extends StatelessWidget {
     this.inputConstraints = const BoxConstraints(maxHeight: 48),
     this.fillColor = DsfrColors.grey950,
     this.radius = 4,
-    super.key,
   });
 
   final String label;
