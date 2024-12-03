@@ -12,13 +12,19 @@ import 'package:go_router/go_router.dart';
 const preferredHeight = 59.0;
 
 class FnvAppBar extends StatelessWidget implements PreferredSizeWidget {
-  FnvAppBar({super.key, this.leading, this.title, this.bottom})
-      : preferredSize =
+  FnvAppBar({
+    super.key,
+    this.leading,
+    this.title,
+    this.bottom,
+    this.isRoot = false,
+  }) : preferredSize =
             Size.fromHeight(preferredHeight + (bottom == null ? 0 : 48));
 
   final Widget? leading;
   final Widget? title;
   final Widget? bottom;
+  final bool isRoot;
 
   @override
   final Size preferredSize;
@@ -38,20 +44,26 @@ class FnvAppBar extends StatelessWidget implements PreferredSizeWidget {
                 IconButton(
                   iconSize: 24,
                   padding: const EdgeInsets.all(DsfrSpacings.s1w),
-                  onPressed: () => GoRouter.of(context).canPop()
-                      ? GoRouter.of(context).pop()
-                      : Scaffold.of(context).openDrawer(),
+                  onPressed: () {
+                    if (isRoot) {
+                      Scaffold.of(context).openDrawer();
+
+                      return;
+                    }
+                    if (GoRouter.of(context).canPop()) {
+                      GoRouter.of(context).pop();
+                    }
+                  },
                   style: const ButtonStyle(
                     shape: WidgetStatePropertyAll(roundedRectangleBorder),
                   ),
                   icon: Icon(
-                    GoRouter.of(context).canPop()
-                        ? DsfrIcons.systemArrowLeftLine
-                        : DsfrIcons.systemMenuFill,
+                    isRoot
+                        ? DsfrIcons.systemMenuFill
+                        : DsfrIcons.systemArrowLeftLine,
                     color: DsfrColors.blueFranceSun113,
-                    semanticLabel: GoRouter.of(context).canPop()
-                        ? Localisation.retour
-                        : Localisation.menu,
+                    semanticLabel:
+                        isRoot ? Localisation.menu : Localisation.retour,
                   ),
                 ),
             if (title == null)
