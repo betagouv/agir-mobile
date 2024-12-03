@@ -14,9 +14,6 @@ on:
       - app/**
       - packages/**
 
-env:
-  FLUTTER_VERSION: 3.24.5
-
 jobs:
   continuous-integration:
     runs-on: ubuntu-latest
@@ -34,7 +31,7 @@ jobs:
         with:
           cache: true
           channel: stable
-          flutter-version: ${{ env.FLUTTER_VERSION }}
+          flutter-version-file: app/pubspec.yaml
       - name: ✅ Check app (format, lint, tests)
         run: |
           cd app
