@@ -18,9 +18,6 @@ on:
         required: true
         description: "Fichier de configuration de l'application"
 
-env:
-  FLUTTER_VERSION: 3.24.5
-
 jobs:
   continuous_delivery_android:
     runs-on: ubuntu-latest
@@ -41,7 +38,7 @@ jobs:
         with:
           cache: true
           channel: stable
-          flutter-version: ${{ env.FLUTTER_VERSION }}
+          flutter-version-file: app/pubspec.yaml
       - name: 🧱 Construire l'application
         working-directory: app
         # Support the Cronet embedding dependency use `--dart-define=cronetHttpNoPlay=true` https://pub.dev/packages/cronet_http

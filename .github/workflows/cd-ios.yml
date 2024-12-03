@@ -22,9 +22,6 @@ on:
       FLUTTER_ENV:
         required: true
 
-env:
-  FLUTTER_VERSION: 3.24.5
-
 jobs:
   continuous_delivery_ios:
     runs-on: macos-latest
@@ -55,7 +52,7 @@ jobs:
         with:
           cache: true
           channel: stable
-          flutter-version: ${{ env.FLUTTER_VERSION }}
+          flutter-version-file: app/pubspec.yaml
       - name: 🔑 Ajouter les variables d'environnements
         working-directory: app
         run: echo "${{ secrets.FLUTTER_ENV }}" | base64 --decode > env.json
