@@ -1,8 +1,8 @@
 // ignore_for_file: avoid-collection-mutating-methods
 
+import 'package:app/features/know_your_customer/core/domain/mieux_vous_connaitre_port.dart';
+import 'package:app/features/know_your_customer/core/domain/question.dart';
 import 'package:app/features/know_your_customer/list/infrastructure/know_your_customers_repository.dart';
-import 'package:app/features/mieux_vous_connaitre/core/domain/mieux_vous_connaitre_port.dart';
-import 'package:app/features/mieux_vous_connaitre/core/domain/question.dart';
 import 'package:collection/collection.dart';
 import 'package:fpdart/fpdart.dart';
 

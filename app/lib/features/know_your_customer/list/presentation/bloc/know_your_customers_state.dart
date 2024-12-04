@@ -1,4 +1,5 @@
-import 'package:app/features/mieux_vous_connaitre/core/domain/question.dart';
+import 'package:app/features/know_your_customer/core/domain/question.dart';
+import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:equatable/equatable.dart';
 import 'package:fpdart/fpdart.dart';
 
@@ -24,18 +25,18 @@ final class KnowYourCustomersSuccess extends KnowYourCustomersState {
   });
 
   final List<Question> allQuestions;
-  final Option<QuestionTheme> themeSelected;
+  final Option<ThemeType> themeSelected;
 
   List<Question> get questionsFiltered => themeSelected.fold(
         () => allQuestions,
         (final s) => allQuestions
-            .where((final question) => question.isPartOfTheme(s))
+            .where((final question) => question.theme == s)
             .toList(),
       );
 
   KnowYourCustomersSuccess copyWith({
     final List<Question>? allQuestions,
-    final Option<QuestionTheme>? themeSelected,
+    final Option<ThemeType>? themeSelected,
   }) =>
       KnowYourCustomersSuccess(
         allQuestions: allQuestions ?? this.allQuestions,

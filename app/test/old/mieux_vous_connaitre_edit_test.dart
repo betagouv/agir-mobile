@@ -1,4 +1,5 @@
-import 'package:app/features/mieux_vous_connaitre/core/domain/question.dart';
+import 'package:app/features/know_your_customer/core/domain/question.dart';
+import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -20,12 +21,13 @@ void main() {
       const question = 'Quelle est votre situation professionnelle ?';
       const reponse = 'J’ai un emploi';
       leServeurRetourneCesQuestions([
-        const LibreQuestion(
-          id: QuestionId('KYC005'),
-          text: QuestionText(question),
-          responses: Responses([reponse]),
-          points: Points(5),
-          theme: QuestionTheme.climat,
+        const QuestionOpen(
+          id: QuestionCode('KYC005'),
+          theme: ThemeType.decouverte,
+          label: question,
+          isAnswered: true,
+          response: Response(value: reponse),
+          points: 5,
         ),
       ]);
       await _allerSurMieuxVousConnaitre(tester);
@@ -42,12 +44,13 @@ void main() {
       const question = 'Quelle est votre situation professionnelle ?';
       const reponse = 'J’ai un emploi';
       leServeurRetourneCesQuestions([
-        const LibreQuestion(
-          id: QuestionId('KYC005'),
-          text: QuestionText(question),
-          responses: Responses([reponse]),
-          points: Points(5),
-          theme: QuestionTheme.climat,
+        const QuestionOpen(
+          id: QuestionCode('KYC005'),
+          theme: ThemeType.decouverte,
+          label: question,
+          isAnswered: true,
+          response: Response(value: reponse),
+          points: 5,
         ),
       ]);
       await _allerSurMieuxVousConnaitre(tester);
@@ -71,12 +74,13 @@ void main() {
       const question = 'Quelle est votre situation professionnelle ?';
       const reponse = '10000';
       leServeurRetourneCesQuestions([
-        const EntierQuestion(
-          id: QuestionId('KYC005'),
-          text: QuestionText(question),
-          responses: Responses([reponse]),
-          points: Points(5),
-          theme: QuestionTheme.climat,
+        const QuestionInteger(
+          id: QuestionCode('KYC005'),
+          theme: ThemeType.decouverte,
+          label: question,
+          isAnswered: true,
+          response: Response(value: reponse),
+          points: 5,
         ),
       ]);
       await _allerSurMieuxVousConnaitre(tester);
@@ -100,12 +104,13 @@ void main() {
       const question = 'Quelle est votre situation professionnelle ?';
       const reponse = '10000';
       leServeurRetourneCesQuestions([
-        const EntierQuestion(
-          id: QuestionId('KYC005'),
-          text: QuestionText(question),
-          responses: Responses([reponse]),
-          points: Points(5),
-          theme: QuestionTheme.climat,
+        const QuestionInteger(
+          id: QuestionCode('KYC005'),
+          theme: ThemeType.decouverte,
+          label: question,
+          isAnswered: true,
+          response: Response(value: reponse),
+          points: 5,
         ),
       ]);
       await _allerSurMieuxVousConnaitre(tester);
@@ -128,12 +133,13 @@ void main() {
     const question = 'Quelle est votre situation professionnelle ?';
     const reponse = 'J’ai un emploi';
     leServeurRetourneCesQuestions([
-      const LibreQuestion(
-        id: QuestionId('KYC005'),
-        text: QuestionText(question),
-        responses: Responses([reponse]),
-        points: Points(5),
-        theme: QuestionTheme.climat,
+      const QuestionOpen(
+        id: QuestionCode('KYC005'),
+        theme: ThemeType.decouverte,
+        label: question,
+        isAnswered: true,
+        response: Response(value: reponse),
+        points: 5,
       ),
     ]);
     await _allerSurMieuxVousConnaitre(tester);
@@ -151,13 +157,16 @@ void main() {
       const reponse = 'J’ai un emploi';
       const nouvelleReponse = "Je n'ai pas d'emploi";
       leServeurRetourneCesQuestions([
-        const ChoixUniqueQuestion(
-          id: QuestionId('KYC005'),
-          text: QuestionText(question),
-          responses: Responses([reponse]),
-          points: Points(5),
-          responsesPossibles: ResponsesPossibles([reponse, nouvelleReponse]),
-          theme: QuestionTheme.climat,
+        const QuestionSingleChoice(
+          id: QuestionCode('KYC005'),
+          theme: ThemeType.decouverte,
+          label: question,
+          isAnswered: true,
+          responses: [
+            ResponseChoice(code: '', label: reponse, isSelected: true),
+            ResponseChoice(code: '', label: nouvelleReponse, isSelected: false),
+          ],
+          points: 5,
         ),
       ]);
       await _allerSurMieuxVousConnaitre(tester);
@@ -182,18 +191,26 @@ void main() {
       const reponseEnPlus = 'Économies financières';
 
       leServeurRetourneCesQuestions([
-        const ChoixMultipleQuestion(
-          id: QuestionId('KYC005'),
-          text: QuestionText(question),
-          responses: Responses(reponses),
-          points: Points(5),
-          responsesPossibles: ResponsesPossibles([
-            ...reponses,
-            reponseEnPlus,
-            'Conscience écologique',
-            'Autre raison',
-          ]),
-          theme: QuestionTheme.climat,
+        QuestionMultipleChoice(
+          id: const QuestionCode('KYC005'),
+          theme: ThemeType.decouverte,
+          label: question,
+          isAnswered: true,
+          responses: [
+            ResponseChoice(code: '', label: reponses.first, isSelected: true),
+            ResponseChoice(code: '', label: reponses[1], isSelected: true),
+            const ResponseChoice(
+              code: '',
+              label: reponseEnPlus,
+              isSelected: false,
+            ),
+            const ResponseChoice(
+              code: '',
+              label: 'Autre raison',
+              isSelected: false,
+            ),
+          ],
+          points: 5,
         ),
       ]);
       await _allerSurMieuxVousConnaitre(tester);
@@ -214,20 +231,24 @@ void main() {
     const reponse2 = 'Personne ne joue en première base';
     const nouvelleReponse2 = "C'est qui qui qui joue en première base";
     leServeurRetourneCesQuestions([
-      const LibreQuestion(
-        id: QuestionId('KYC005'),
-        text: QuestionText(question),
-        responses: Responses([reponse]),
-        points: Points(5),
-        theme: QuestionTheme.climat,
+      const QuestionOpen(
+        id: QuestionCode('KYC005'),
+        theme: ThemeType.decouverte,
+        label: question,
+        isAnswered: true,
+        response: Response(value: reponse),
+        points: 5,
       ),
-      const ChoixUniqueQuestion(
-        id: QuestionId('KYC006'),
-        text: QuestionText(question2),
-        responses: Responses([reponse2]),
-        points: Points(5),
-        responsesPossibles: ResponsesPossibles([reponse2, nouvelleReponse2]),
-        theme: QuestionTheme.loisir,
+      const QuestionSingleChoice(
+        id: QuestionCode('KYC006'),
+        theme: ThemeType.decouverte,
+        label: question2,
+        isAnswered: true,
+        responses: [
+          ResponseChoice(code: '', label: reponse2, isSelected: true),
+          ResponseChoice(code: '', label: nouvelleReponse2, isSelected: false),
+        ],
+        points: 5,
       ),
     ]);
 

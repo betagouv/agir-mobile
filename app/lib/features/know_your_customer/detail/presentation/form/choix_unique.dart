@@ -1,6 +1,6 @@
-import 'package:app/features/mieux_vous_connaitre/core/domain/question.dart';
-import 'package:app/features/mieux_vous_connaitre/detail/presentation/bloc/mieux_vous_connaitre_edit_bloc.dart';
-import 'package:app/features/mieux_vous_connaitre/detail/presentation/bloc/mieux_vous_connaitre_edit_event.dart';
+import 'package:app/features/know_your_customer/core/domain/question.dart';
+import 'package:app/features/know_your_customer/detail/presentation/bloc/mieux_vous_connaitre_edit_bloc.dart';
+import 'package:app/features/know_your_customer/detail/presentation/bloc/mieux_vous_connaitre_edit_event.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,13 +8,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ChoixUnique extends StatelessWidget {
   const ChoixUnique({super.key, required this.question});
 
-  final ChoixUniqueQuestion question;
+  final QuestionSingleChoice question;
 
   @override
   Widget build(final context) => DsfrRadioButtonSetHeadless(
         values: Map.fromEntries(
-          question.responsesPossibles.value.map(
-            (final reponse) => MapEntry(reponse, DsfrRadioButtonItem(reponse)),
+          question.responses.map(
+            (final r) => MapEntry(r.label, DsfrRadioButtonItem(r.label)),
           ),
         ),
         onCallback: (final value) {
@@ -25,7 +25,10 @@ class ChoixUnique extends StatelessWidget {
               .read<MieuxVousConnaitreEditBloc>()
               .add(MieuxVousConnaitreEditChoixUniqueChangee(value));
         },
-        initialValue: question.responses.value.firstOrNull,
+        initialValue: question.responses
+            .where((final r) => r.isSelected)
+            .firstOrNull
+            ?.label,
         mode: DsfrRadioButtonSetMode.column,
       );
 }

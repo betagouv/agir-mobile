@@ -1,4 +1,4 @@
-import 'package:app/features/mieux_vous_connaitre/core/domain/question.dart';
+import 'package:app/features/know_your_customer/core/domain/question.dart';
 import 'package:equatable/equatable.dart';
 
 sealed class MieuxVousConnaitreEditState extends Equatable {

@@ -3,12 +3,13 @@ import 'package:app/core/presentation/widgets/composants/failure_widget.dart';
 import 'package:app/core/presentation/widgets/composants/list_item.dart';
 import 'package:app/core/presentation/widgets/composants/scaffold.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
+import 'package:app/features/know_your_customer/core/domain/question.dart';
+import 'package:app/features/know_your_customer/detail/presentation/pages/mieux_vous_connaitre_edit_page.dart';
 import 'package:app/features/know_your_customer/list/presentation/bloc/know_your_customers_bloc.dart';
 import 'package:app/features/know_your_customer/list/presentation/bloc/know_your_customers_event.dart';
 import 'package:app/features/know_your_customer/list/presentation/bloc/know_your_customers_state.dart';
-import 'package:app/features/mieux_vous_connaitre/core/domain/question.dart';
-import 'package:app/features/mieux_vous_connaitre/detail/presentation/pages/mieux_vous_connaitre_edit_page.dart';
 import 'package:app/features/profil/profil/presentation/widgets/fnv_title.dart';
+import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
@@ -96,7 +97,7 @@ class _Success extends StatelessWidget {
           child: Wrap(
             spacing: DsfrSpacings.s1w,
             runSpacing: DsfrSpacings.s1w,
-            children: [null, ...QuestionTheme.values]
+            children: [null, ...ThemeType.values]
                 .map(
                   (final e) => _Tag(
                     thematique: e,
@@ -127,7 +128,7 @@ class _Success extends StatelessWidget {
 class _Tag extends StatelessWidget {
   const _Tag({required this.thematique, required this.isSelected});
 
-  final QuestionTheme? thematique;
+  final ThemeType? thematique;
   final bool isSelected;
 
   @override
@@ -154,10 +155,11 @@ class _Tag extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
             child: Text(
-              thematique?.label ?? Localisation.tout,
+              thematique?.displayName ?? Localisation.tout,
               style: DsfrTextStyle.bodySmMedium(
                 color: isSelected ? Colors.white : blue,
               ),
+              semanticsLabel: thematique?.displayNameWithoutEmoji,
             ),
           ),
         ),
@@ -173,7 +175,7 @@ class _Item extends StatelessWidget {
 
   @override
   Widget build(final context) => ListItem(
-        title: question.text.value,
+        title: question.label,
         subTitle: question.responsesDisplay(),
         onTap: () async {
           final result = await GoRouter.of(context).pushNamed<bool>(

@@ -1,6 +1,6 @@
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
-import 'package:app/features/mieux_vous_connaitre/detail/presentation/form/mieux_vous_connaitre_controller.dart';
-import 'package:app/features/mieux_vous_connaitre/detail/presentation/form/mieux_vous_connaitre_form.dart';
+import 'package:app/features/know_your_customer/detail/presentation/form/mieux_vous_connaitre_controller.dart';
+import 'package:app/features/know_your_customer/detail/presentation/form/mieux_vous_connaitre_form.dart';
 import 'package:app/features/mission/mission/domain/mission_kyc.dart';
 import 'package:app/features/mission/mission/presentation/bloc/mission_bloc.dart';
 import 'package:app/features/mission/mission/presentation/bloc/mission_event.dart';

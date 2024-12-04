@@ -10,8 +10,8 @@ import 'package:app/features/environmental_performance/summary/application/fetch
 import 'package:app/features/environmental_performance/summary/infrastructure/environmental_performance_summary_repository.dart';
 import 'package:app/features/environmental_performance/summary/presentation/bloc/environmental_performance_bloc.dart';
 import 'package:app/features/gamification/presentation/bloc/gamification_bloc.dart';
-import 'package:app/features/mieux_vous_connaitre/core/domain/mieux_vous_connaitre_port.dart';
-import 'package:app/features/mieux_vous_connaitre/core/infrastructure/mieux_vous_connaitre_api_adapter.dart';
+import 'package:app/features/know_your_customer/core/domain/mieux_vous_connaitre_port.dart';
+import 'package:app/features/know_your_customer/core/infrastructure/mieux_vous_connaitre_api_adapter.dart';
 import 'package:app/features/mission/home/infrastructure/mission_home_repository.dart';
 import 'package:app/features/mission/home/presentation/bloc/mission_home_bloc.dart';
 import 'package:app/features/mission/mission/infrastructure/mission_repository.dart';
@@ -670,36 +670,64 @@ const missionPartiallyAnswered = {
 };
 
 const kyc = {
-  'categorie': 'mission',
-  'id': 'KYC_compost_pratique',
-  'is_NGC': false,
-  'points': 5,
+  'code': 'KYC_compost_pratique',
   'question': 'Comment valorisez-vous vos déchets alimentaires ?',
-  'reponse': ['Avec un composteur collectif'],
-  'reponses_possibles': [
-    'Avec un composteur individuel',
-    'Avec un composteur collectif',
-    'Pas de valorisation',
+  'reponse_multiple': [
+    {
+      'code': 'compost_indiv',
+      'label': 'Avec un composteur individuel',
+      'selected': false,
+    },
+    {
+      'code': 'compost_collectif',
+      'label': 'Avec un composteur collectif',
+      'selected': true,
+    },
+    {'code': 'aucun', 'label': 'Pas de valorisation', 'selected': false},
   ],
-  'thematique': 'alimentation',
+  'is_answered': true,
+  'categorie': 'mission',
+  'points': 5,
   'type': 'choix_multiple',
+  'is_NGC': false,
+  'thematique': 'alimentation',
 };
 
 const kyc2 = {
-  'categorie': 'mission',
-  'id': 'KYC_compost_motivation',
-  'is_NGC': false,
-  'points': 5,
+  'code': 'KYC_compost_motivation',
   'question': 'Quelles sont vos motivations au sujet du compostage ?',
-  'reponse': ['En apprendre davantage'],
-  'reponses_possibles': [
-    'En apprendre davantage',
-    "Se lancer sans faire d'erreurs",
-    'Améliorer mes pratiques',
-    'Partager ma connaissance et expérience',
-    'Connaître la réglementation et les aides',
-    'Aucun',
+  'reponse_multiple': [
+    {
+      'code': 'apprendre',
+      'label': 'En apprendre davantage',
+      'selected': true,
+    },
+    {
+      'code': 'se_lancer',
+      'label': "Se lancer sans faire d'erreurs",
+      'selected': false,
+    },
+    {
+      'code': 'pratique',
+      'label': 'Améliorer mes pratiques',
+      'selected': false,
+    },
+    {
+      'code': 'partager',
+      'label': 'Partager ma connaissance et expérience',
+      'selected': false,
+    },
+    {
+      'code': 'aide',
+      'label': 'Connaître la réglementation et les aides',
+      'selected': false,
+    },
+    {'code': 'aucun', 'label': 'Aucun', 'selected': false},
   ],
-  'thematique': 'alimentation',
+  'is_answered': true,
+  'categorie': 'mission',
+  'points': 5,
   'type': 'choix_multiple',
+  'is_NGC': false,
+  'thematique': 'alimentation',
 };

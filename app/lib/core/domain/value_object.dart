@@ -6,5 +6,5 @@ abstract class ValueObject<T extends Object> extends Equatable {
   final T value;
 
   @override
-  List<Object?> get props => [value];
+  List<Object> get props => [value];
 }

@@ -2,10 +2,11 @@ import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/gamification/domain/gamification_port.dart';
 import 'package:app/features/gamification/presentation/bloc/gamification_bloc.dart';
+import 'package:app/features/know_your_customer/core/domain/question.dart';
+import 'package:app/features/know_your_customer/core/infrastructure/question_mapper.dart';
 import 'package:app/features/know_your_customer/list/infrastructure/know_your_customers_repository.dart';
 import 'package:app/features/know_your_customer/list/presentation/pages/know_your_customers_page.dart';
-import 'package:app/features/mieux_vous_connaitre/core/domain/question.dart';
-import 'package:app/features/mieux_vous_connaitre/core/infrastructure/question_mapper.dart';
+import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -57,7 +58,7 @@ void main() {
         authenticationService: authenticationService,
       ),
     );
-    questions = List.generate(10, (final _) => questionFaker());
+    questions = fakerQuestions();
     dio.getM(Endpoints.questionsKyc, responseData: questions);
   });
 
@@ -68,8 +69,8 @@ void main() {
 
     for (final question in questions) {
       final expected = QuestionMapper.fromJson(question)!;
-      if (expected.isAnswered()) {
-        expect(find.text(expected.text.value), findsOneWidget);
+      if (expected.isAnswered) {
+        expect(find.text(expected.label), findsOneWidget);
         final responsesDisplay = expected.responsesDisplay();
         if (responsesDisplay.isNotEmpty) {
           expect(find.text(responsesDisplay), findsOneWidget);
@@ -83,10 +84,10 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    const themes = [null, ...QuestionTheme.values];
+    const themes = [null, ...ThemeType.values];
 
     for (final theme in themes) {
-      await tester.tap(find.text(theme?.label ?? Localisation.tout));
+      await tester.tap(find.text(theme?.displayName ?? Localisation.tout));
 
       await tester.pumpAndSettle();
 
@@ -95,9 +96,9 @@ void main() {
 
         Matcher findsWhenAnsweredAndPartOfTheme(
           final Question expected,
-          final QuestionTheme? theme,
+          final ThemeType? theme,
         ) {
-          if (!expected.isAnswered()) {
+          if (!expected.isAnswered) {
             return findsNothing;
           }
 
@@ -105,11 +106,11 @@ void main() {
             return findsOneWidget;
           }
 
-          return expected.isPartOfTheme(theme) ? findsOneWidget : findsNothing;
+          return expected.theme == theme ? findsOneWidget : findsNothing;
         }
 
         expect(
-          find.text(expected.text.value),
+          find.text(expected.label),
           findsWhenAnsweredAndPartOfTheme(expected, theme),
         );
       }

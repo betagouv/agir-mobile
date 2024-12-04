@@ -14,8 +14,7 @@ abstract final class Endpoints {
   static const modifierMotDePasse = '/utilisateurs/modifier_mot_de_passe';
   static const oubliMotDePasse = '/utilisateurs/oubli_mot_de_passe';
   static const profile = '/utilisateurs/{userId}/profile';
-  static const questionsKyc =
-      '/utilisateurs/{userId}/questionsKYC'; // TODO(lsaudon): v2
+  static const questionsKyc = '/utilisateurs/{userId}/questionsKYC_v2';
   static const recommandations =
       '/utilisateurs/{userId}/recommandations_v2'; // TODO(lsaudon): v3
   static const renvoyerCode = '/utilisateurs/renvoyer_code';
@@ -35,9 +34,9 @@ abstract final class Endpoints {
   ) =>
       '/utilisateurs/{userId}/thematiques/$codeThematique/tuiles_missions';
   static String questionKyc(final String questionId) =>
-      '/utilisateurs/{userId}/questionsKYC/$questionId'; // TODO(lsaudon): v2
+      '/utilisateurs/{userId}/questionsKYC_v2/$questionId';
   static String questions(final String enchainementId) =>
-      '/utilisateurs/{userId}/enchainementQuestionsKYC/$enchainementId'; // TODO(lsaudon): v2
+      '/utilisateurs/{userId}/enchainementQuestionsKYC_v2/$enchainementId';
   static String servicesParThematique(final String codeThematique) =>
       '/utilisateurs/{userId}/thematiques/$codeThematique/recherche_services';
 }

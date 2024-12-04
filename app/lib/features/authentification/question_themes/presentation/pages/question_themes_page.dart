@@ -8,7 +8,7 @@ import 'package:app/features/authentification/question_themes/presentation/bloc/
 import 'package:app/features/authentification/question_themes/presentation/bloc/question_themes_event.dart';
 import 'package:app/features/authentification/questions/presentation/pages/tout_est_pret_page.dart';
 import 'package:app/features/authentification/widgets/onboarding_illustration.dart';
-import 'package:app/features/mieux_vous_connaitre/core/domain/question.dart';
+import 'package:app/features/know_your_customer/core/domain/question.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
@@ -81,7 +81,8 @@ class _Question extends StatelessWidget {
 
   @override
   Widget build(final context) {
-    final question = context.select<QuestionThemesBloc, ChoixMultipleQuestion?>(
+    final question =
+        context.select<QuestionThemesBloc, QuestionMultipleChoice?>(
       (final bloc) => bloc.state.question,
     );
 
@@ -89,11 +90,14 @@ class _Question extends StatelessWidget {
         ? const SizedBox.shrink()
         : Column(
             children: [
-              Text(question.text.value, style: const DsfrTextStyle.bodyLg()),
+              Text(question.label, style: const DsfrTextStyle.bodyLg()),
               const SizedBox(height: DsfrSpacings.s3w),
               FnvCheckboxSet(
-                options: question.responsesPossibles.value,
-                selectedOptions: question.responses.value,
+                options: question.responses.map((final e) => e.label).toList(),
+                selectedOptions: question.responses
+                    .where((final e) => e.isSelected)
+                    .map((final e) => e.label)
+                    .toList(),
                 onChanged: (final value) => context
                     .read<QuestionThemesBloc>()
                     .add(QuestionThemesOntChange(value)),

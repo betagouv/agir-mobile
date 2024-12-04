@@ -10,8 +10,8 @@ import 'package:app/features/environmental_performance/summary/infrastructure/en
 import 'package:app/features/environmental_performance/summary/presentation/bloc/environmental_performance_bloc.dart';
 import 'package:app/features/environmental_performance/summary/presentation/page/environmental_performance_summary_page.dart';
 import 'package:app/features/gamification/presentation/bloc/gamification_bloc.dart';
-import 'package:app/features/mieux_vous_connaitre/core/domain/mieux_vous_connaitre_port.dart';
-import 'package:app/features/mieux_vous_connaitre/core/infrastructure/mieux_vous_connaitre_api_adapter.dart';
+import 'package:app/features/know_your_customer/core/domain/mieux_vous_connaitre_port.dart';
+import 'package:app/features/know_your_customer/core/infrastructure/mieux_vous_connaitre_api_adapter.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

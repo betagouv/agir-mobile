@@ -1,4 +1,4 @@
-import 'package:app/features/mieux_vous_connaitre/core/domain/question.dart';
+import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:equatable/equatable.dart';
 import 'package:fpdart/fpdart.dart';
 
@@ -26,7 +26,7 @@ final class KnowYourCustomersRefreshNeed extends KnowYourCustomersEvent {
 final class KnowYourCustomersThemePressed extends KnowYourCustomersEvent {
   const KnowYourCustomersThemePressed(this.theme);
 
-  final Option<QuestionTheme> theme;
+  final Option<ThemeType> theme;
 
   @override
   List<Object?> get props => [theme];
