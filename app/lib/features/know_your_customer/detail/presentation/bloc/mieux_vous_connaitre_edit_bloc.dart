@@ -1,7 +1,7 @@
-import 'package:app/features/mieux_vous_connaitre/core/domain/mieux_vous_connaitre_port.dart';
-import 'package:app/features/mieux_vous_connaitre/core/domain/question.dart';
-import 'package:app/features/mieux_vous_connaitre/detail/presentation/bloc/mieux_vous_connaitre_edit_event.dart';
-import 'package:app/features/mieux_vous_connaitre/detail/presentation/bloc/mieux_vous_connaitre_edit_state.dart';
+import 'package:app/features/know_your_customer/core/domain/mieux_vous_connaitre_port.dart';
+import 'package:app/features/know_your_customer/core/domain/question.dart';
+import 'package:app/features/know_your_customer/detail/presentation/bloc/mieux_vous_connaitre_edit_event.dart';
+import 'package:app/features/know_your_customer/detail/presentation/bloc/mieux_vous_connaitre_edit_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MieuxVousConnaitreEditBloc
@@ -36,14 +36,12 @@ class MieuxVousConnaitreEditBloc
           final question = aState.question;
           final newQuestion = aState.newQuestion;
 
-          if (question is ChoixMultipleQuestion &&
-              newQuestion is ChoixMultipleQuestion) {
+          if (question is QuestionMultipleChoice &&
+              newQuestion is QuestionMultipleChoice) {
             emit(
               MieuxVousConnaitreEditLoaded(
                 question: question,
-                newQuestion: newQuestion.responsesChanged(
-                  reponses: Responses(event.value),
-                ),
+                newQuestion: newQuestion.changeResponses(event.value),
                 updated: false,
               ),
             );
@@ -58,14 +56,12 @@ class MieuxVousConnaitreEditBloc
           final question = aState.question;
           final newQuestion = aState.newQuestion;
 
-          if (question is ChoixUniqueQuestion &&
-              newQuestion is ChoixUniqueQuestion) {
+          if (question is QuestionSingleChoice &&
+              newQuestion is QuestionSingleChoice) {
             emit(
               MieuxVousConnaitreEditLoaded(
                 question: question,
-                newQuestion: newQuestion.responsesChanged(
-                  reponses: Responses([event.value]),
-                ),
+                newQuestion: newQuestion.changeResponses([event.value]),
                 updated: false,
               ),
             );
@@ -80,13 +76,11 @@ class MieuxVousConnaitreEditBloc
           final question = aState.question;
           final newQuestion = aState.newQuestion;
 
-          if (question is LibreQuestion && newQuestion is LibreQuestion) {
+          if (question is QuestionOpen && newQuestion is QuestionOpen) {
             emit(
               MieuxVousConnaitreEditLoaded(
                 question: question,
-                newQuestion: newQuestion.responsesChanged(
-                  reponses: Responses([event.value]),
-                ),
+                newQuestion: newQuestion.changeResponse(event.value),
                 updated: false,
               ),
             );
@@ -100,13 +94,11 @@ class MieuxVousConnaitreEditBloc
         if (aState is MieuxVousConnaitreEditLoaded) {
           final question = aState.question;
           final newQuestion = aState.newQuestion;
-          if (question is EntierQuestion && newQuestion is EntierQuestion) {
+          if (question is QuestionInteger && newQuestion is QuestionInteger) {
             emit(
               MieuxVousConnaitreEditLoaded(
                 question: question,
-                newQuestion: newQuestion.responsesChanged(
-                  reponses: Responses([event.value]),
-                ),
+                newQuestion: newQuestion.changeResponse(event.value),
                 updated: false,
               ),
             );
@@ -121,12 +113,17 @@ class MieuxVousConnaitreEditBloc
           final question = aState.question;
           final newQuestion = aState.newQuestion;
 
-          if (question is MosaicQuestion && newQuestion is MosaicQuestion) {
+          if (question is QuestionMosaicBoolean &&
+              newQuestion is QuestionMosaicBoolean) {
             emit(
               MieuxVousConnaitreEditLoaded(
                 question: question,
-                newQuestion:
-                    newQuestion.responsesChanged(responses: event.value),
+                newQuestion: newQuestion.changeResponses(
+                  event.value
+                      .where((final e) => e.isSelected)
+                      .map((final e) => e.label)
+                      .toList(),
+                ),
                 updated: false,
               ),
             );
@@ -140,10 +137,6 @@ class MieuxVousConnaitreEditBloc
         switch (aState) {
           case MieuxVousConnaitreEditLoaded():
             final newQuestion = aState.newQuestion;
-            if (newQuestion is! MosaicQuestion && !newQuestion.isAnswered()) {
-              return;
-            }
-
             final result =
                 await mieuxVousConnaitrePort.mettreAJour(newQuestion);
             result.fold(

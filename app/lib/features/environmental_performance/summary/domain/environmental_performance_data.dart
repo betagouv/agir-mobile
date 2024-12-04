@@ -3,7 +3,7 @@ import 'package:app/features/environmental_performance/summary/domain/environmen
 import 'package:app/features/environmental_performance/summary/domain/environmental_performance_level.dart';
 import 'package:app/features/environmental_performance/summary/domain/environmental_performance_top_item.dart';
 import 'package:app/features/environmental_performance/summary/domain/footprint.dart';
-import 'package:app/features/mieux_vous_connaitre/core/domain/question.dart';
+import 'package:app/features/know_your_customer/core/domain/question.dart';
 import 'package:equatable/equatable.dart';
 
 sealed class EnvironmentalPerformanceData extends Equatable {
@@ -17,7 +17,7 @@ final class EnvironmentalPerformanceEmpty extends EnvironmentalPerformanceData {
   EnvironmentalPerformanceEmpty({required this.questions})
       : questionsNumber = questions.length,
         questionsNumberAnswered =
-            questions.where((final question) => question.isAnswered()).length;
+            questions.where((final question) => question.isAnswered).length;
 
   final List<Question> questions;
   final int questionsNumber;

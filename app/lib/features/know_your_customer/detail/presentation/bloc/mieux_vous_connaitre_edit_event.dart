@@ -1,4 +1,4 @@
-import 'package:app/features/mieux_vous_connaitre/core/domain/question.dart';
+import 'package:app/features/know_your_customer/core/domain/question.dart';
 import 'package:equatable/equatable.dart';
 
 sealed class MieuxVousConnaitreEditEvent extends Equatable {
@@ -52,7 +52,7 @@ final class MieuxVousConnaitreEditMosaicChangee
     extends MieuxVousConnaitreEditEvent {
   const MieuxVousConnaitreEditMosaicChangee(this.value);
 
-  final List<MosaicResponse> value;
+  final List<ResponseMosaic> value;
 
   @override
   List<Object> get props => [value];

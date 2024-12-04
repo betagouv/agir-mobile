@@ -27,8 +27,8 @@ import 'package:app/features/environmental_performance/questions/infrastructure/
 import 'package:app/features/environmental_performance/summary/infrastructure/environmental_performance_summary_repository.dart';
 import 'package:app/features/first_name/infrastructure/first_name_adapter.dart';
 import 'package:app/features/gamification/infrastructure/gamification_api_adapter.dart';
+import 'package:app/features/know_your_customer/core/infrastructure/mieux_vous_connaitre_api_adapter.dart';
 import 'package:app/features/know_your_customer/list/infrastructure/know_your_customers_repository.dart';
-import 'package:app/features/mieux_vous_connaitre/core/infrastructure/mieux_vous_connaitre_api_adapter.dart';
 import 'package:app/features/mission/home/infrastructure/mission_home_repository.dart';
 import 'package:app/features/profil/core/infrastructure/profil_api_adapter.dart';
 import 'package:app/features/quiz/infrastructure/quiz_api_adapter.dart';

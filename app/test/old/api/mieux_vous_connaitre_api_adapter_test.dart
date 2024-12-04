@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
-import 'package:app/features/mieux_vous_connaitre/core/domain/question.dart';
-import 'package:app/features/mieux_vous_connaitre/core/infrastructure/mieux_vous_connaitre_api_adapter.dart';
-import 'package:app/features/mieux_vous_connaitre/core/infrastructure/question_mapper.dart';
+import 'package:app/features/know_your_customer/core/domain/question.dart';
+import 'package:app/features/know_your_customer/core/infrastructure/mieux_vous_connaitre_api_adapter.dart';
+import 'package:app/features/know_your_customer/core/infrastructure/question_mapper.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
@@ -32,7 +32,7 @@ void main() {
   group('MieuxVousConnaitreApiAdapter', () {
     test('recupererQuestion returns the correct question', () async {
       final expectedQuestion = generateChoixUniqueQuestion(true);
-      final id = expectedQuestion['id'] as String;
+      final id = expectedQuestion['code'] as String;
 
       dioMock.getM(
         Endpoints.questionKyc(id),
@@ -48,17 +48,21 @@ void main() {
 
     test('mettreAJour sends correct data', () async {
       final expectedQuestion = generateChoixUniqueQuestion(true);
-      final id = expectedQuestion['id'] as String;
+      final id = expectedQuestion['code'] as String;
       dioMock.putM(Endpoints.questionKyc(id));
 
       final question =
-          QuestionMapper.fromJson(expectedQuestion)! as ChoixUniqueQuestion;
+          QuestionMapper.fromJson(expectedQuestion)! as QuestionSingleChoice;
       await adapter.mettreAJour(question);
 
       verify(
         () => dioMock.put<dynamic>(
           Endpoints.questionKyc(id),
-          data: jsonEncode({'reponse': question.responses.value}),
+          data: jsonEncode(
+            question.responses
+                .map((final e) => {'code': e.code, 'selected': e.isSelected})
+                .toList(),
+          ),
         ),
       );
     });

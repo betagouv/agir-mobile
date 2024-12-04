@@ -1,4 +1,4 @@
-import 'package:app/features/mieux_vous_connaitre/core/domain/question.dart';
+import 'package:app/features/know_your_customer/core/domain/question.dart';
 import 'package:equatable/equatable.dart';
 
 sealed class EnvironmentalPerformanceQuestionEvent extends Equatable {
@@ -12,7 +12,7 @@ final class EnvironmentalPerformanceQuestionIdListGiven
     extends EnvironmentalPerformanceQuestionEvent {
   const EnvironmentalPerformanceQuestionIdListGiven(this.questionIdList);
 
-  final List<QuestionId> questionIdList;
+  final List<QuestionCode> questionIdList;
 
   @override
   List<Object> get props => [questionIdList];

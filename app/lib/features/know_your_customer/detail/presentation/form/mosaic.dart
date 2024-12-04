@@ -1,8 +1,8 @@
 import 'package:app/core/presentation/widgets/composants/image.dart';
-import 'package:app/features/mieux_vous_connaitre/core/domain/question.dart';
-import 'package:app/features/mieux_vous_connaitre/detail/presentation/bloc/mieux_vous_connaitre_edit_bloc.dart';
-import 'package:app/features/mieux_vous_connaitre/detail/presentation/bloc/mieux_vous_connaitre_edit_event.dart';
-import 'package:app/features/mieux_vous_connaitre/detail/presentation/widgets/mosaic_button.dart';
+import 'package:app/features/know_your_customer/core/domain/question.dart';
+import 'package:app/features/know_your_customer/detail/presentation/bloc/mieux_vous_connaitre_edit_bloc.dart';
+import 'package:app/features/know_your_customer/detail/presentation/bloc/mieux_vous_connaitre_edit_event.dart';
+import 'package:app/features/know_your_customer/detail/presentation/widgets/mosaic_button.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,7 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class Mosaic extends StatelessWidget {
   const Mosaic({super.key, required this.question});
 
-  final MosaicQuestion question;
+  final QuestionMosaicBoolean question;
 
   @override
   Widget build(final context) => _MosaicSet(responses: question.responses);
@@ -19,14 +19,14 @@ class Mosaic extends StatelessWidget {
 class _MosaicSet extends StatefulWidget {
   const _MosaicSet({required this.responses});
 
-  final List<MosaicResponse> responses;
+  final List<ResponseMosaic> responses;
 
   @override
   State<_MosaicSet> createState() => _MosaicSetState();
 }
 
 class _MosaicSetState extends State<_MosaicSet> {
-  List<MosaicResponse> _responses = [];
+  List<ResponseMosaic> _responses = [];
 
   @override
   void initState() {
@@ -42,19 +42,19 @@ class _MosaicSetState extends State<_MosaicSet> {
           const size = 40.0;
 
           return MosaicButton(
-            emoji:
-                FnvImage.network(e.imageUrl.value, width: size, height: size),
-            title: e.label.value,
+            emoji: FnvImage.network(e.imageUrl, width: size, height: size),
+            title: e.label,
             value: e.isSelected,
             onChanged: (final value) {
               setState(() {
                 _responses = _responses
                     .map(
-                      (final r) => r.id == e.id
-                          ? MosaicResponse(
-                              id: r.id,
-                              imageUrl: r.imageUrl,
+                      (final r) => r.code == e.code
+                          ? ResponseMosaic(
+                              code: r.code,
                               label: r.label,
+                              emoji: r.emoji,
+                              imageUrl: r.imageUrl,
                               isSelected: value,
                             )
                           : r,

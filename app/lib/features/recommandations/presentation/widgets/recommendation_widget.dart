@@ -3,7 +3,7 @@ import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/shadows.dart';
 import 'package:app/features/articles/presentation/pages/article_page.dart';
 import 'package:app/features/gamification/domain/gamification_port.dart';
-import 'package:app/features/mieux_vous_connaitre/detail/presentation/pages/mieux_vous_connaitre_edit_page.dart';
+import 'package:app/features/know_your_customer/detail/presentation/pages/mieux_vous_connaitre_edit_page.dart';
 import 'package:app/features/quiz/presentation/pages/quiz_page.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
 import 'package:app/l10n/l10n.dart';

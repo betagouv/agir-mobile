@@ -20,8 +20,8 @@ import 'package:app/features/bibliotheque/presentation/pages/bibliotheque_page.d
 import 'package:app/features/environmental_performance/questions/presentation/page/environmental_performance_question_page.dart';
 import 'package:app/features/environmental_performance/summary/presentation/page/environmental_performance_summary_page.dart';
 import 'package:app/features/first_name/presentation/pages/first_name_page.dart';
+import 'package:app/features/know_your_customer/detail/presentation/pages/mieux_vous_connaitre_edit_page.dart';
 import 'package:app/features/know_your_customer/list/presentation/pages/know_your_customers_page.dart';
-import 'package:app/features/mieux_vous_connaitre/detail/presentation/pages/mieux_vous_connaitre_edit_page.dart';
 import 'package:app/features/mission/mission/presentation/pages/mission_page.dart';
 import 'package:app/features/pre_onboarding/presentation/pages/pre_onboarding_page.dart';
 import 'package:app/features/profil/informations/presentation/pages/mes_informations_page.dart';

@@ -8,19 +8,22 @@ ServiceItem serviceItemFaker() => ServiceItem(
     );
 
 Map<String, dynamic> generateChoixUniqueQuestion(final bool withResponse) => {
-      'categorie': 'mission',
-      'id': 'KYC_${faker.lorem.word()}',
-      'is_NGC': faker.randomGenerator.boolean(),
-      'points': faker.randomGenerator.integer(10),
-      'question': _fakerSentenceBetter(),
-      'reponse': withResponse ? [faker.lorem.word()] : <String>[],
-      'reponses_possibles': [
-        faker.lorem.word(),
-        faker.lorem.word(),
-        faker.lorem.word(),
+      'code': 'KYC_type_logement',
+      'question': 'Dans quel type de logement vivez-vous ?',
+      'reponse_multiple': [
+        {'code': 'type_maison', 'label': 'Maison', 'selected': withResponse},
+        {
+          'code': 'type_appartement',
+          'label': 'Appartement',
+          'selected': false,
+        },
       ],
-      'thematique': generateThematique,
+      'is_answered': withResponse,
+      'categorie': 'recommandation',
+      'points': 5,
       'type': 'choix_unique',
+      'is_NGC': true,
+      'thematique': 'logement',
     };
 
 Map<String, dynamic> actionItemFaker() {
@@ -116,91 +119,163 @@ final generateThematique = faker.randomGenerator.element([
   'loisir',
 ]);
 
-Map<String, dynamic> questionFaker() => faker.randomGenerator.element([
-      choixUniqueQuestionFaker(faker.randomGenerator.boolean()),
-      choixMultipleQuestionFaker(),
-      libreQuestionFaker(),
-      mosaicBooleanQuestionFaker(),
-      entierQuestionFaker(),
-    ]);
-
-Map<String, dynamic> choixUniqueQuestionFaker(final bool withResponse) => {
-      'categorie': 'mission',
-      'id': 'KYC_${faker.lorem.word()}',
-      'is_NGC': faker.randomGenerator.boolean(),
-      'points': faker.randomGenerator.integer(10),
-      'question': _fakerSentenceBetter(),
-      'reponse':
-          withResponse ? [faker.lorem.word() + faker.lorem.word()] : <String>[],
-      'reponses_possibles': [
-        faker.lorem.word(),
-        faker.lorem.word(),
-        faker.lorem.word(),
-      ],
-      'thematique': generateThematique,
-      'type': 'choix_unique',
-    };
-
-Map<String, dynamic> choixMultipleQuestionFaker() => {
-      'categorie': 'mission',
-      'id': 'KYC_${faker.lorem.word()}',
-      'is_NGC': faker.randomGenerator.boolean(),
-      'points': faker.randomGenerator.integer(10),
-      'question': _fakerSentenceBetter(),
-      'reponse': [
-        faker.lorem.word() + faker.lorem.word(),
-        faker.lorem.word() + faker.lorem.word(),
-      ],
-      'reponses_possibles': [
-        faker.lorem.word(),
-        faker.lorem.word(),
-        faker.lorem.word(),
-      ],
-      'thematique': generateThematique,
-      'type': 'choix_multiple',
-    };
-
-Map<String, dynamic> libreQuestionFaker() => {
-      'categorie': 'mission',
-      'id': 'KYC_${faker.lorem.word()}',
-      'is_NGC': faker.randomGenerator.boolean(),
-      'points': faker.randomGenerator.integer(10),
-      'question': _fakerSentenceBetter(),
-      'reponse': [_fakerSentenceBetter()],
-      'reponses_possibles': <String>[],
-      'thematique': generateThematique,
-      'type': 'libre',
-    };
-
-Map<String, dynamic> mosaicBooleanQuestionFaker() => {
-      'categorie': 'mission',
-      'id': 'MOSAIC_${faker.lorem.word().toUpperCase()}',
-      'is_answered': true,
-      'points': faker.randomGenerator.integer(20),
-      'reponses': List.generate(
-        faker.randomGenerator.integer(10),
-        (final index) => {
-          'boolean_value': faker.randomGenerator.boolean(),
-          'code': 'KYC_${faker.lorem.word()}',
-          'image_url': faker.image.loremPicsum(),
-          'label': faker.lorem.word(),
-        },
-      ),
-      'titre': _fakerSentenceBetter(),
-      'type': 'mosaic_boolean',
-    };
-
-Map<String, dynamic> entierQuestionFaker() => {
-      'categorie': 'mission',
-      'id': 'KYC_${faker.lorem.word()}',
-      'is_NGC': faker.randomGenerator.boolean(),
-      'points': faker.randomGenerator.integer(10),
-      'question': _fakerSentenceBetter(),
-      'reponse': [faker.randomGenerator.integer(1000).toString()],
-      'reponses_possibles': <String>[],
-      'thematique': generateThematique,
-      'type': 'entier',
-    };
-
 String _fakerSentenceBetter() =>
     '${faker.lorem.sentence()} ${faker.lorem.word()}';
+
+List<Map<String, dynamic>> fakerQuestions() => [
+      {
+        'code': 'KYC_preference',
+        'question':
+            'Sur quels thèmes recherchez-vous en priorité des aides et conseils ?',
+        'reponse_multiple': [
+          {
+            'code': 'alimentation',
+            'label': 'La cuisine et l’alimentation',
+            'selected': false,
+          },
+          {'code': 'transport', 'label': 'Mes déplacements', 'selected': false},
+          {'code': 'logement', 'label': 'Mon logement', 'selected': false},
+          {
+            'code': 'consommation',
+            'label': 'Ma consommation',
+            'selected': false,
+          },
+          {
+            'code': 'ne_sais_pas',
+            'label': 'Je ne sais pas encore',
+            'selected': false,
+          },
+        ],
+        'is_answered': true,
+        'categorie': 'recommandation',
+        'points': 0,
+        'type': 'choix_multiple',
+        'is_NGC': false,
+        'thematique': 'climat',
+      },
+      {
+        'code': 'KYC_type_logement',
+        'question': 'Dans quel type de logement vivez-vous ?',
+        'reponse_multiple': [
+          {'code': 'type_maison', 'label': 'Maison', 'selected': false},
+          {
+            'code': 'type_appartement',
+            'label': 'Appartement',
+            'selected': false,
+          },
+        ],
+        'is_answered': false,
+        'categorie': 'recommandation',
+        'points': 5,
+        'type': 'choix_unique',
+        'is_NGC': true,
+        'thematique': 'logement',
+      },
+      {
+        'code': 'KYC_menage',
+        'question': 'Combien êtes-vous dans votre logement (vous inclus) ?',
+        'reponse_unique': {'value': '3'},
+        'is_answered': true,
+        'categorie': 'mission',
+        'points': 5,
+        'type': 'entier',
+        'is_NGC': true,
+        'thematique': 'logement',
+      },
+      {
+        'code': 'KYC_compost_idee',
+        'question':
+            'Quelles sont vos idées reçues ou freins concernant le compost ?',
+        'reponse_unique': {'value': 'Aucun'},
+        'is_answered': true,
+        'categorie': 'mission',
+        'points': 5,
+        'type': 'libre',
+        'is_NGC': false,
+        'thematique': 'alimentation',
+      },
+      {
+        'code': 'MOSAIC_APPAREIL_NUM',
+        'question': 'Quels appareils numériques possédez-vous ?',
+        'reponse_multiple': [
+          {
+            'code': 'KYC_appareil_telephone',
+            'label': 'Téléphone',
+            'emoji': null,
+            'image_url':
+                'https://res.cloudinary.com/dq023imd8/image/upload/v1728749522/482602_8af4f622d9.png',
+            'selected': false,
+          },
+          {
+            'code': 'KYC_appareil_television',
+            'label': 'Télévision',
+            'emoji': null,
+            'image_url':
+                'https://res.cloudinary.com/dq023imd8/image/upload/v1728749522/482602_8af4f622d9.png',
+            'selected': false,
+          },
+          {
+            'code': 'KYC_appareil_ordi_portable',
+            'label': 'Ordinateur portable',
+            'emoji': null,
+            'image_url':
+                'https://res.cloudinary.com/dq023imd8/image/upload/v1728749522/482602_8af4f622d9.png',
+            'selected': false,
+          },
+          {
+            'code': 'KYC_appareil_ordi_fixe',
+            'label': 'Ordinateur fixe',
+            'emoji': null,
+            'image_url':
+                'https://res.cloudinary.com/dq023imd8/image/upload/v1728749522/482602_8af4f622d9.png',
+            'selected': false,
+          },
+          {
+            'code': 'KYC_appareil_tablette',
+            'label': 'Tablette',
+            'emoji': null,
+            'image_url':
+                'https://res.cloudinary.com/dq023imd8/image/upload/v1728749522/482602_8af4f622d9.png',
+            'selected': false,
+          },
+          {
+            'code': 'KYC_appareil_enceinte_bluetooth',
+            'label': 'Enceinte bluetooth',
+            'emoji': null,
+            'image_url':
+                'https://res.cloudinary.com/dq023imd8/image/upload/v1728749522/482602_8af4f622d9.png',
+            'selected': false,
+          },
+          {
+            'code': 'KYC_appareil_console_salon',
+            'label': 'Console salon',
+            'emoji': null,
+            'image_url':
+                'https://res.cloudinary.com/dq023imd8/image/upload/v1728749522/482602_8af4f622d9.png',
+            'selected': false,
+          },
+          {
+            'code': 'KYC_appareil_console_portable',
+            'label': 'Console portable',
+            'emoji': null,
+            'image_url':
+                'https://res.cloudinary.com/dq023imd8/image/upload/v1728749522/482602_8af4f622d9.png',
+            'selected': false,
+          },
+          {
+            'code': 'KYC_appareil_imprimante_nbr',
+            'label': 'Imprimante',
+            'emoji': null,
+            'image_url':
+                'https://res.cloudinary.com/dq023imd8/image/upload/v1728749522/482602_8af4f622d9.png',
+            'selected': false,
+          },
+        ],
+        'is_answered': false,
+        'categorie': 'mission',
+        'points': 5,
+        'type': 'mosaic_boolean',
+        'is_NGC': false,
+        'thematique': 'consommation',
+      },
+    ];

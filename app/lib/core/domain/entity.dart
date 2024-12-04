@@ -6,5 +6,5 @@ abstract class Entity<T extends Object> extends Equatable {
   final T id;
 
   @override
-  List<Object?> get props => [id];
+  List<Object> get props => [id];
 }

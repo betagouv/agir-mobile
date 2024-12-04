@@ -4,9 +4,9 @@ import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
-import 'package:app/features/mieux_vous_connaitre/core/domain/mieux_vous_connaitre_port.dart';
-import 'package:app/features/mieux_vous_connaitre/core/domain/question.dart';
-import 'package:app/features/mieux_vous_connaitre/core/infrastructure/question_mapper.dart';
+import 'package:app/features/know_your_customer/core/domain/mieux_vous_connaitre_port.dart';
+import 'package:app/features/know_your_customer/core/domain/question.dart';
+import 'package:app/features/know_your_customer/core/infrastructure/question_mapper.dart';
 import 'package:fpdart/fpdart.dart';
 
 class MieuxVousConnaitreApiAdapter implements MieuxVousConnaitrePort {
@@ -41,18 +41,15 @@ class MieuxVousConnaitreApiAdapter implements MieuxVousConnaitrePort {
   @override
   Future<Either<Exception, Unit>> mettreAJour(final Question question) async {
     final object = switch (question) {
-      ChoixMultipleQuestion() => {'reponse': question.responses.value},
-      ChoixUniqueQuestion() => {'reponse': question.responses.value},
-      LibreQuestion() => {'reponse': question.responses.value},
-      MosaicQuestion() => {
-          'reponse_mosaic': question.responses
-              .map(
-                (final e) =>
-                    {'boolean_value': e.isSelected, 'code': e.id.value},
-              )
-              .toList(),
-        },
-      EntierQuestion() => {'reponse': question.responses.value},
+      QuestionMultiple() => question.responses
+          .map((final e) => {'code': e.code, 'selected': e.isSelected})
+          .toList(),
+      QuestionUnique() => [
+          {'value': question.response.value},
+        ],
+      QuestionMosaicBoolean() => question.responses
+          .map((final e) => {'code': e.code, 'selected': e.isSelected})
+          .toList(),
     };
 
     final response = await _client.put(

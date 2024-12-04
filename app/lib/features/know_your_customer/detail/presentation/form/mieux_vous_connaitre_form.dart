@@ -1,14 +1,14 @@
 import 'package:app/core/presentation/widgets/composants/failure_widget.dart';
-import 'package:app/features/mieux_vous_connaitre/core/domain/question.dart';
-import 'package:app/features/mieux_vous_connaitre/detail/presentation/bloc/mieux_vous_connaitre_edit_bloc.dart';
-import 'package:app/features/mieux_vous_connaitre/detail/presentation/bloc/mieux_vous_connaitre_edit_event.dart';
-import 'package:app/features/mieux_vous_connaitre/detail/presentation/bloc/mieux_vous_connaitre_edit_state.dart';
-import 'package:app/features/mieux_vous_connaitre/detail/presentation/form/choix_multiple.dart';
-import 'package:app/features/mieux_vous_connaitre/detail/presentation/form/choix_unique.dart';
-import 'package:app/features/mieux_vous_connaitre/detail/presentation/form/entier.dart';
-import 'package:app/features/mieux_vous_connaitre/detail/presentation/form/libre.dart';
-import 'package:app/features/mieux_vous_connaitre/detail/presentation/form/mieux_vous_connaitre_controller.dart';
-import 'package:app/features/mieux_vous_connaitre/detail/presentation/form/mosaic.dart';
+import 'package:app/features/know_your_customer/core/domain/question.dart';
+import 'package:app/features/know_your_customer/detail/presentation/bloc/mieux_vous_connaitre_edit_bloc.dart';
+import 'package:app/features/know_your_customer/detail/presentation/bloc/mieux_vous_connaitre_edit_event.dart';
+import 'package:app/features/know_your_customer/detail/presentation/bloc/mieux_vous_connaitre_edit_state.dart';
+import 'package:app/features/know_your_customer/detail/presentation/form/choix_multiple.dart';
+import 'package:app/features/know_your_customer/detail/presentation/form/choix_unique.dart';
+import 'package:app/features/know_your_customer/detail/presentation/form/entier.dart';
+import 'package:app/features/know_your_customer/detail/presentation/form/libre.dart';
+import 'package:app/features/know_your_customer/detail/presentation/form/mieux_vous_connaitre_controller.dart';
+import 'package:app/features/know_your_customer/detail/presentation/form/mosaic.dart';
 import 'package:app/features/profil/profil/presentation/widgets/fnv_title.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
@@ -106,11 +106,11 @@ class _LoadedContentState extends State<_LoadedContent> {
     final question = widget.state.question;
 
     return switch (question) {
-      ChoixMultipleQuestion() => _ChoixMultipleContent(question: question),
-      ChoixUniqueQuestion() => _ChoixUniqueContent(question: question),
-      LibreQuestion() => _LibreContent(question: question),
-      MosaicQuestion() => _MosaicContent(question: question),
-      EntierQuestion() => _EntierContent(question: question),
+      QuestionSingleChoice() => _ChoixUniqueContent(question: question),
+      QuestionMultipleChoice() => _ChoixMultipleContent(question: question),
+      QuestionInteger() => _EntierContent(question: question),
+      QuestionOpen() => _LibreContent(question: question),
+      QuestionMosaicBoolean() => _MosaicContent(question: question),
     };
   }
 }
@@ -118,13 +118,13 @@ class _LoadedContentState extends State<_LoadedContent> {
 class _ChoixMultipleContent extends StatelessWidget {
   const _ChoixMultipleContent({required this.question});
 
-  final ChoixMultipleQuestion question;
+  final QuestionMultipleChoice question;
 
   @override
   Widget build(final context) => Column(
         children: [
           FnvTitle(
-            title: question.text.value,
+            title: question.label,
             subtitle: Localisation.plusieursReponsesPossibles,
           ),
           const SizedBox(height: DsfrSpacings.s3w),
@@ -136,12 +136,12 @@ class _ChoixMultipleContent extends StatelessWidget {
 class _ChoixUniqueContent extends StatelessWidget {
   const _ChoixUniqueContent({required this.question});
 
-  final ChoixUniqueQuestion question;
+  final QuestionSingleChoice question;
 
   @override
   Widget build(final context) => Column(
         children: [
-          FnvTitle(title: question.text.value),
+          FnvTitle(title: question.label),
           const SizedBox(height: DsfrSpacings.s3w),
           ChoixUnique(question: question),
         ],
@@ -151,12 +151,12 @@ class _ChoixUniqueContent extends StatelessWidget {
 class _LibreContent extends StatelessWidget {
   const _LibreContent({required this.question});
 
-  final LibreQuestion question;
+  final QuestionOpen question;
 
   @override
   Widget build(final context) => Column(
         children: [
-          FnvTitle(title: question.text.value),
+          FnvTitle(title: question.label),
           const SizedBox(height: DsfrSpacings.s3w),
           Libre(question: question),
         ],
@@ -166,12 +166,12 @@ class _LibreContent extends StatelessWidget {
 class _EntierContent extends StatelessWidget {
   const _EntierContent({required this.question});
 
-  final EntierQuestion question;
+  final QuestionInteger question;
 
   @override
   Widget build(final context) => Column(
         children: [
-          FnvTitle(title: question.text.value),
+          FnvTitle(title: question.label),
           const SizedBox(height: DsfrSpacings.s3w),
           Entier(question: question),
         ],
@@ -181,14 +181,14 @@ class _EntierContent extends StatelessWidget {
 class _MosaicContent extends StatelessWidget {
   const _MosaicContent({required this.question});
 
-  final MosaicQuestion question;
+  final QuestionMosaicBoolean question;
 
   @override
   Widget build(final context) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           FnvTitle(
-            title: question.text.value,
+            title: question.label,
             subtitle: Localisation.plusieursReponsesPossibles,
           ),
           const SizedBox(height: DsfrSpacings.s3w),

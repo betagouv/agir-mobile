@@ -1,4 +1,5 @@
-import 'package:app/features/mieux_vous_connaitre/core/domain/question.dart';
+import 'package:app/features/know_your_customer/core/domain/question.dart';
+import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail_image_network/mocktail_image_network.dart';
@@ -27,21 +28,36 @@ void main() {
         leServeurRetourneCetteListeDeCommunes(['AUTHUME', commune]);
         const response = "La cuisine et l'alimentation";
         leServeurRetourneCesQuestions([
-          const ChoixMultipleQuestion(
-            id: QuestionId('KYC_preference'),
-            text: QuestionText(
-              'Sur quels thèmes recherchez-vous en priorité des aides et conseils ?',
-            ),
-            responses: Responses([]),
-            points: Points(5),
-            responsesPossibles: ResponsesPossibles([
-              response,
-              'Mes déplacements',
-              'Mon logement',
-              'Ma consommation',
-              'Je ne sais pas encore',
-            ]),
-            theme: QuestionTheme.climat,
+          const QuestionMultipleChoice(
+            id: QuestionCode('KYC_preference'),
+            theme: ThemeType.decouverte,
+            label:
+                'Sur quels thèmes recherchez-vous en priorité des aides et conseils ?',
+            isAnswered: false,
+            responses: [
+              ResponseChoice(code: '', label: response, isSelected: false),
+              ResponseChoice(
+                code: '',
+                label: 'Mes déplacements',
+                isSelected: false,
+              ),
+              ResponseChoice(
+                code: '',
+                label: 'Mon logement',
+                isSelected: false,
+              ),
+              ResponseChoice(
+                code: '',
+                label: 'Ma consommation',
+                isSelected: false,
+              ),
+              ResponseChoice(
+                code: '',
+                label: 'Je ne sais pas encore',
+                isSelected: false,
+              ),
+            ],
+            points: 5,
           ),
         ]);
         ielNAPasTermineeSonIntegration();
