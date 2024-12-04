@@ -92,7 +92,6 @@ Map<String, dynamic> aideVeloFaker() {
     'lien': faker.internet.uri('https'),
     'logo': faker.image.loremPicsum(),
     'montant': faker.randomGenerator.integer(1000),
-    'plafond': faker.randomGenerator.integer(1000),
   };
 }
 

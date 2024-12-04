@@ -30,7 +30,6 @@ abstract final class AideVeloMapper {
         description: json['description'] as String,
         lien: json['lien'] as String,
         montant: (json['montant'] as num).toInt(),
-        plafond: (json['plafond'] as num).toInt(),
         logo: json['logo'] as String,
       );
 }

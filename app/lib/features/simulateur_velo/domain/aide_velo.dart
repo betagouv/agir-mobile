@@ -6,7 +6,6 @@ class AideVelo extends Equatable {
     required this.description,
     required this.lien,
     required this.montant,
-    required this.plafond,
     required this.logo,
   });
 
@@ -14,16 +13,8 @@ class AideVelo extends Equatable {
   final String description;
   final String lien;
   final int montant;
-  final int plafond;
   final String logo;
 
   @override
-  List<Object?> get props => [
-        libelle,
-        description,
-        lien,
-        montant,
-        plafond,
-        logo,
-      ];
+  List<Object?> get props => [libelle, description, lien, montant, logo];
 }
