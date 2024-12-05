@@ -82,7 +82,7 @@ class ScenarioContext {
   AuthentificationPortMock? authentificationPortMock;
   QuizPortMock? quizPortMock;
   MieuxVousConnaitrePortMock? mieuxVousConnaitrePortMock;
-  ThemePortMock? universPortMock;
+  ThemePortMock? themePortMock;
   static ScenarioContext? _instance;
 
   static void dispose() => _instance = null;

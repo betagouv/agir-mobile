@@ -5,8 +5,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail_image_network/mocktail_image_network.dart';
 
 import 'set_up_widgets.dart';
+import 'steps/iel_a_les_mission_suivantes.dart';
 import 'steps/iel_a_les_recommandations_suivantes.dart';
-import 'steps/iel_a_les_univers_thematiques_suivantes.dart';
 import 'steps/iel_est_connecte.dart';
 import 'steps/iel_lance_lapplication.dart';
 import 'steps/iel_ne_voit_pas_le_texte.dart';
@@ -18,7 +18,7 @@ void main() {
       setUpWidgets(tester);
       ielEstConnecte();
       await ielLanceLapplication(tester);
-      await tester.tap(find.text('Me nourrir'));
+      await tester.tap(find.text('Me nourrir').last);
       await tester.pumpAndSettle();
       ielVoitLeTexte('Me nourrir', n: 2);
     });
@@ -29,7 +29,7 @@ void main() {
     (final tester) async {
       await mockNetworkImages(() async {
         setUpWidgets(tester);
-        const universThematique = MissionListe(
+        const mission = MissionListe(
           code: 'manger_saison_1',
           titre: 'Pourquoi manger de saison ?',
           progression: 2,
@@ -39,12 +39,12 @@ void main() {
               'https://res.cloudinary.com/dq023imd8/image/upload/v1718631224/fruits_1_dec0e90839.png',
           themeType: ThemeType.alimentation,
         );
-        ielALesMissionsSuivantes([universThematique]);
+        ielALesMissionsSuivantes([mission]);
         ielEstConnecte();
         await ielLanceLapplication(tester);
-        await tester.tap(find.text('Me nourrir'));
+        await tester.tap(find.text('Me nourrir').last);
         await tester.pumpAndSettle();
-        ielVoitLeTexte(universThematique.titre);
+        ielVoitLeTexte(mission.titre);
       });
     },
   );
@@ -75,7 +75,7 @@ void main() {
         ielALesRecommandationsSuivantes([recommandation, recommandation2]);
         ielEstConnecte();
         await ielLanceLapplication(tester);
-        await tester.tap(find.text('Me nourrir'));
+        await tester.tap(find.text('Me nourrir').last);
         await tester.pumpAndSettle();
         ielVoitLeTexte(recommandation.titre);
         ielNeVoitPasLeTexte(recommandation2.titre);

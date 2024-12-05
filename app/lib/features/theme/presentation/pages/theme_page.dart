@@ -45,7 +45,7 @@ class _Page extends StatefulWidget {
 class _PageState extends State<_Page> with RouteAware {
   void _handleMission() {
     if (mounted) {
-      context.read<ThemeBloc>().add(UniversRecuperationDemandee(widget.type));
+      context.read<ThemeBloc>().add(ThemeRecuperationDemandee(widget.type));
     }
   }
 

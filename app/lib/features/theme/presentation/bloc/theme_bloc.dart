@@ -13,7 +13,7 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
             services: [],
           ),
         ) {
-    on<UniversRecuperationDemandee>((final event, final emit) async {
+    on<ThemeRecuperationDemandee>((final event, final emit) async {
       final type = event.themeType;
       final missionsResult = await themePort.recupererMissions(type);
       final servicesResult = await themePort.getServices(type);
