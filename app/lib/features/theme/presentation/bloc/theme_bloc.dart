@@ -14,22 +14,16 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
           ),
         ) {
     on<ThemeRecuperationDemandee>((final event, final emit) async {
-      final type = event.themeType;
-      final missionsResult = await themePort.recupererMissions(type);
-      final servicesResult = await themePort.getServices(type);
+      final themeType = event.themeType;
+      final missionsResult = await themePort.recupererMissions(themeType);
+      final servicesResult = await themePort.getServices(themeType);
       missionsResult.fold(
         (final l) {},
         (final missions) => servicesResult.fold(
           (final l) {},
           (final services) => emit(
             state.copyWith(
-              themeType: switch (type) {
-                'alimentation' => ThemeType.alimentation,
-                'transport' => ThemeType.transport,
-                'consommation' => ThemeType.consommation,
-                'logement' => ThemeType.logement,
-                _ => ThemeType.decouverte,
-              },
+              themeType: themeType,
               missions: missions,
               services: services,
             ),

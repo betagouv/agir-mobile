@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/theme/core/domain/service_item.dart';
+import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:app/features/theme/core/infrastructure/theme_api_adapter.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
@@ -12,10 +13,10 @@ import '../old/mocks/authentication_service_fake.dart';
 
 void main() {
   test('getServices', () async {
-    const themeType = 'alimentation';
+    const themeType = ThemeType.alimentation;
     final dio = DioMock()
       ..getM(
-        Endpoints.servicesParThematique(themeType),
+        Endpoints.servicesParThematique(themeType.name),
         responseData: jsonDecode(
           '''
 [
