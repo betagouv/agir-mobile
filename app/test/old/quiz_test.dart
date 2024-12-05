@@ -68,7 +68,7 @@ void main() {
         );
         ielEstConnecte();
         await ielLanceLapplication(tester);
-        await tester.tap(find.text('Me nourrir'));
+        await tester.tap(find.text('Me nourrir').last);
         await tester.pumpAndSettle();
         await ielScrolle(tester, recommandation.titre);
         await ielAppuieSur(tester, recommandation.titre);
@@ -134,7 +134,7 @@ void main() {
         );
         ielEstConnecte();
         await ielLanceLapplication(tester);
-        await tester.tap(find.text('Me nourrir'));
+        await tester.tap(find.text('Me nourrir').last);
         await tester.pumpAndSettle();
         await ielScrolle(tester, recommandation.titre);
         await ielAppuieSur(tester, recommandation.titre);
@@ -198,7 +198,7 @@ void main() {
         );
         ielEstConnecte();
         await ielLanceLapplication(tester);
-        await tester.tap(find.text('Me nourrir'));
+        await tester.tap(find.text('Me nourrir').last);
         await tester.pumpAndSettle();
         await ielScrolle(tester, recommandation.titre);
         await ielAppuieSur(tester, recommandation.titre);
@@ -272,7 +272,7 @@ void main() {
         );
         ielEstConnecte();
         await ielLanceLapplication(tester);
-        await tester.tap(find.text('Me nourrir'));
+        await tester.tap(find.text('Me nourrir').last);
         await tester.pumpAndSettle();
         await ielScrolle(tester, recommandation.titre);
         await ielAppuieSur(tester, recommandation.titre);

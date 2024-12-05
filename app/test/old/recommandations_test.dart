@@ -20,7 +20,7 @@ void main() {
         await mockNetworkImages(() async {
           ielEstConnecte();
           await ielLanceLapplication(tester);
-          await tester.tap(find.text('Me nourrir'));
+          await tester.tap(find.text('Me nourrir').last);
           await tester.pumpAndSettle();
           await ielScrolle(tester, Localisation.recommandationsTitre);
           ielVoitLeTexte(Localisation.recommandationsTitre);
@@ -46,7 +46,7 @@ void main() {
           ielALesRecommandationsSuivantes([recommandation]);
           ielEstConnecte();
           await ielLanceLapplication(tester);
-          await tester.tap(find.text('Me nourrir'));
+          await tester.tap(find.text('Me nourrir').last);
           await tester.pumpAndSettle();
           await ielScrolle(tester, recommandation.titre);
           ielVoitLeTexte(recommandation.titre);

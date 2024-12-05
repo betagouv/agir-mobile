@@ -1,5 +1,5 @@
 const environmentalPerformanceEmptyData = {
-  'liens_bilans_univers': [
+  'liens_bilans_thematique': [
     {
       'id_enchainement_kyc': 'ENCHAINEMENT_KYC_bilan_transport',
       'image_url':
@@ -7,8 +7,7 @@ const environmentalPerformanceEmptyData = {
       'nombre_total_question': 9,
       'pourcentage_progression': 0,
       'temps_minutes': 5,
-      'univers': 'transport',
-      'univers_label': 'Mes déplacements',
+      'thematique': 'transport',
     },
     {
       'id_enchainement_kyc': 'ENCHAINEMENT_KYC_bilan_alimentation',
@@ -17,8 +16,7 @@ const environmentalPerformanceEmptyData = {
       'nombre_total_question': 6,
       'pourcentage_progression': 0,
       'temps_minutes': 3,
-      'univers': 'alimentation',
-      'univers_label': 'En cuisine',
+      'thematique': 'alimentation',
     },
     {
       'id_enchainement_kyc': 'ENCHAINEMENT_KYC_bilan_consommation',
@@ -27,8 +25,7 @@ const environmentalPerformanceEmptyData = {
       'nombre_total_question': 8,
       'pourcentage_progression': 0,
       'temps_minutes': 10,
-      'univers': 'consommation',
-      'univers_label': 'Mes achats',
+      'thematique': 'consommation',
     },
     {
       'id_enchainement_kyc': 'ENCHAINEMENT_KYC_bilan_logement',
@@ -37,8 +34,7 @@ const environmentalPerformanceEmptyData = {
       'nombre_total_question': 8,
       'pourcentage_progression': 0,
       'temps_minutes': 9,
-      'univers': 'logement',
-      'univers_label': 'À la maison',
+      'thematique': 'logement',
     },
   ],
   'pourcentage_completion_totale': 0,
@@ -51,7 +47,7 @@ const environmentalPerformancePartialData = {
     'impact_logement': null,
     'impact_transport': 'faible',
   },
-  'liens_bilans_univers': [
+  'liens_bilans_thematique': [
     {
       'id_enchainement_kyc': 'ENCHAINEMENT_KYC_bilan_transport',
       'image_url':
@@ -59,8 +55,7 @@ const environmentalPerformancePartialData = {
       'nombre_total_question': 7,
       'pourcentage_progression': 0,
       'temps_minutes': 5,
-      'univers': 'transport',
-      'univers_label': 'Mes déplacements',
+      'thematique': 'transport',
     },
     {
       'id_enchainement_kyc': 'ENCHAINEMENT_KYC_bilan_alimentation',
@@ -69,8 +64,7 @@ const environmentalPerformancePartialData = {
       'nombre_total_question': 5,
       'pourcentage_progression': 20,
       'temps_minutes': 3,
-      'univers': 'alimentation',
-      'univers_label': 'En cuisine',
+      'thematique': 'alimentation',
     },
     {
       'id_enchainement_kyc': 'ENCHAINEMENT_KYC_bilan_consommation',
@@ -79,8 +73,7 @@ const environmentalPerformancePartialData = {
       'nombre_total_question': 8,
       'pourcentage_progression': 0,
       'temps_minutes': 10,
-      'univers': 'consommation',
-      'univers_label': 'Mes achats',
+      'thematique': 'consommation',
     },
     {
       'id_enchainement_kyc': 'ENCHAINEMENT_KYC_bilan_logement',
@@ -89,8 +82,7 @@ const environmentalPerformancePartialData = {
       'nombre_total_question': 6,
       'pourcentage_progression': 0,
       'temps_minutes': 9,
-      'univers': 'logement',
-      'univers_label': 'À la maison',
+      'thematique': 'logement',
     },
   ],
   'pourcentage_completion_totale': 23,
@@ -99,7 +91,7 @@ const environmentalPerformancePartialData = {
 const environmentalPerformanceFullData = {
   'bilan_complet': {
     'impact_kg_annee': 2930.02701019,
-    'impact_univers': [
+    'impact_thematique': [
       {
         'details': [
           {
@@ -120,8 +112,7 @@ const environmentalPerformanceFullData = {
         'emoji': '🏛️',
         'impact_kg_annee': 1450.9052263863641,
         'pourcentage': null,
-        'univers': 'services_societaux',
-        'univers_label': 'Services sociétaux',
+        'thematique': 'services_societaux',
       },
       {
         'details': [
@@ -185,8 +176,7 @@ const environmentalPerformanceFullData = {
         'emoji': '📦',
         'impact_kg_annee': 1125.4872619054079,
         'pourcentage': null,
-        'univers': 'consommation',
-        'univers_label': 'Mes achats',
+        'thematique': 'consommation',
       },
       {
         'details': [
@@ -250,8 +240,7 @@ const environmentalPerformanceFullData = {
         'emoji': '🚦',
         'impact_kg_annee': 405.9709121611947,
         'pourcentage': null,
-        'univers': 'transport',
-        'univers_label': 'Mes déplacements',
+        'thematique': 'transport',
       },
       {
         'details': [
@@ -308,8 +297,7 @@ const environmentalPerformanceFullData = {
         'emoji': '🏠',
         'impact_kg_annee': 273.0815742219873,
         'pourcentage': null,
-        'univers': 'logement',
-        'univers_label': 'À la maison',
+        'thematique': 'logement',
       },
       {
         'details': [
@@ -352,8 +340,7 @@ const environmentalPerformanceFullData = {
         'emoji': '🍴',
         'impact_kg_annee': 0,
         'pourcentage': null,
-        'univers': 'alimentation',
-        'univers_label': 'En cuisine',
+        'thematique': 'alimentation',
       },
     ],
     'top_3': [
@@ -380,7 +367,7 @@ const environmentalPerformanceFullData = {
       },
     ],
   },
-  'liens_bilans_univers': [
+  'liens_bilans_thematique': [
     {
       'id_enchainement_kyc': 'ENCHAINEMENT_KYC_bilan_transport',
       'image_url':
@@ -388,8 +375,7 @@ const environmentalPerformanceFullData = {
       'nombre_total_question': 7,
       'pourcentage_progression': 0,
       'temps_minutes': 5,
-      'univers': 'transport',
-      'univers_label': 'Mes déplacements',
+      'thematique': 'transport',
     },
     {
       'id_enchainement_kyc': 'ENCHAINEMENT_KYC_bilan_alimentation',
@@ -398,8 +384,7 @@ const environmentalPerformanceFullData = {
       'nombre_total_question': 5,
       'pourcentage_progression': 20,
       'temps_minutes': 3,
-      'univers': 'alimentation',
-      'univers_label': 'En cuisine',
+      'thematique': 'alimentation',
     },
     {
       'id_enchainement_kyc': 'ENCHAINEMENT_KYC_bilan_consommation',
@@ -408,8 +393,7 @@ const environmentalPerformanceFullData = {
       'nombre_total_question': 8,
       'pourcentage_progression': 0,
       'temps_minutes': 10,
-      'univers': 'consommation',
-      'univers_label': 'Mes achats',
+      'thematique': 'consommation',
     },
     {
       'id_enchainement_kyc': 'ENCHAINEMENT_KYC_bilan_logement',
@@ -418,8 +402,7 @@ const environmentalPerformanceFullData = {
       'nombre_total_question': 6,
       'pourcentage_progression': 0,
       'temps_minutes': 9,
-      'univers': 'logement',
-      'univers_label': 'À la maison',
+      'thematique': 'logement',
     },
   ],
   'pourcentage_completion_totale': 100,

@@ -25,7 +25,7 @@ void main() {
         "sous_titre": "septembre",
         "external_url": "https://impactco2.fr/outils/fruitsetlegumes",
         "icon_url": "https://jagis-front-dev.osc-fr1.scalingo.io/cerise.png",
-        "univers": "alimentation",
+        "thematique": "alimentation",
         "is_available_inhouse": true
     },
     {
@@ -34,7 +34,7 @@ void main() {
         "sous_titre": "Réseau Compost Citoyen",
         "external_url": "https://reseaucompost.org/annuaire/geocompost-la-carte",
         "icon_url": "https://reseaucompost.org/themes/custom/rcc/logo.svg",
-        "univers": "alimentation",
+        "thematique": "alimentation",
         "is_available_inhouse": false
     }
 ]''',

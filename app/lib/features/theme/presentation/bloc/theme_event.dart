@@ -7,8 +7,8 @@ sealed class ThemeEvent extends Equatable {
   List<Object> get props => [];
 }
 
-final class UniversRecuperationDemandee extends ThemeEvent {
-  const UniversRecuperationDemandee(this.themeType);
+final class ThemeRecuperationDemandee extends ThemeEvent {
+  const ThemeRecuperationDemandee(this.themeType);
 
   final String themeType;
 

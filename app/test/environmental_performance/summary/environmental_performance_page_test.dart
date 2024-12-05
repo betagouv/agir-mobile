@@ -174,7 +174,7 @@ void main() {
           expect(find.text('Fort'), findsOneWidget);
           expect(find.text('Très fort'), findsNothing);
           expect(find.text('✨ Estimation complète à 23%'), findsOneWidget);
-          expect(find.text('Mes déplacements'), findsOneWidget);
+          expect(find.text('Me déplacer'), findsOneWidget);
         });
       },
     );

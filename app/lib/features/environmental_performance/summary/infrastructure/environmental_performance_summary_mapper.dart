@@ -5,6 +5,7 @@ import 'package:app/features/environmental_performance/summary/domain/environmen
 import 'package:app/features/environmental_performance/summary/domain/environmental_performance_level.dart';
 import 'package:app/features/environmental_performance/summary/domain/environmental_performance_top_item.dart';
 import 'package:app/features/environmental_performance/summary/domain/footprint.dart';
+import 'package:app/features/theme/core/domain/theme_type.dart';
 
 abstract final class EnvironmentalPerformanceSummaryMapperyMapper {
   const EnvironmentalPerformanceSummaryMapperyMapper._();
@@ -27,7 +28,7 @@ abstract final class EnvironmentalPerformanceSummaryMapperyMapper {
     final partial = json['bilan_approximatif'] as Map<String, dynamic>;
     final percentageCompletion =
         (json['pourcentage_completion_totale'] as num).toInt();
-    final categories = (json['liens_bilans_univers'] as List<dynamic>)
+    final categories = (json['liens_bilans_thematique'] as List<dynamic>)
         .map((final e) => e as Map<String, dynamic>)
         .map(_categoryFromJson)
         .toList();
@@ -51,7 +52,7 @@ abstract final class EnvironmentalPerformanceSummaryMapperyMapper {
     final Map<String, dynamic> json,
   ) {
     final full = json['bilan_complet'] as Map<String, dynamic>;
-    final categories = (json['liens_bilans_univers'] as List<dynamic>)
+    final categories = (json['liens_bilans_thematique'] as List<dynamic>)
         .map((final e) => e as Map<String, dynamic>)
         .map(_categoryFromJson)
         .toList();
@@ -63,7 +64,7 @@ abstract final class EnvironmentalPerformanceSummaryMapperyMapper {
           .map((final e) => e as Map<String, dynamic>)
           .map(_topItemFromJson)
           .toList(),
-      detail: (full['impact_univers'] as List<dynamic>)
+      detail: (full['impact_thematique'] as List<dynamic>)
           .map((final e) => e as Map<String, dynamic>)
           .map(_detailItemFromJson)
           .toList(),
@@ -95,7 +96,7 @@ abstract final class EnvironmentalPerformanceSummaryMapperyMapper {
   ) =>
       EnvironmentalPerformanceDetailItem(
         emoji: json['emoji'] as String,
-        label: json['univers_label'] as String,
+        label: _mapThematique(json['thematique'] as String),
         footprintInKgOfCO2ePerYear:
             Footprint((json['impact_kg_annee'] as num).toDouble()),
         subItems: (json['details'] as List<dynamic>)
@@ -122,7 +123,19 @@ abstract final class EnvironmentalPerformanceSummaryMapperyMapper {
         id: json['id_enchainement_kyc'] as String,
         imageUrl: json['image_url'] as String,
         percentageCompletion: (json['pourcentage_progression'] as num).toInt(),
-        label: json['univers_label'] as String,
+        label: _mapThematique(json['thematique'] as String),
         totalNumberQuestions: (json['nombre_total_question'] as num).toInt(),
       );
+
+  static String _mapThematique(final String? type) => switch (type) {
+        'alimentation' => ThemeType.alimentation.displayNameWithoutEmoji,
+        'transport' => ThemeType.transport.displayNameWithoutEmoji,
+        'consommation' => ThemeType.consommation.displayNameWithoutEmoji,
+        'logement' => ThemeType.logement.displayNameWithoutEmoji,
+        'climat' => 'Environnement',
+        'dechet' => 'Déchets',
+        'loisir' => 'Loisir',
+        'services_societaux' => 'Services sociétaux',
+        _ => 'Découverte',
+      };
 }

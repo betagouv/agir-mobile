@@ -116,7 +116,7 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
     prenom: prenom,
     estIntegrationTerminee: ScenarioContext().estIntegrationTerminee,
   );
-  ScenarioContext().universPortMock = ThemePortMock(
+  ScenarioContext().themePortMock = ThemePortMock(
     missionListe: ScenarioContext().missionListe,
   );
 
@@ -136,7 +136,7 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
         ),
         authenticationService: authenticationService,
         authentificationPort: ScenarioContext().authentificationPortMock!,
-        themePort: ScenarioContext().universPortMock!,
+        themePort: ScenarioContext().themePortMock!,
         aidesPort: AssistancesRepositoryMock(ScenarioContext().aides),
         bibliothequePort: BibliothequePortMock(ScenarioContext().bibliotheque),
         recommandationsPort:

@@ -24,7 +24,7 @@ class _GamificationPortMock extends Mock implements GamificationPort {}
 
 class _RecommandationsPortMock extends Mock implements RecommandationsPort {}
 
-Future<void> _pumpUniversPage(
+Future<void> _pumpThemePage(
   final WidgetTester tester, {
   final ThemePort? themePort,
 }) async {
@@ -93,7 +93,7 @@ void main() {
         );
 
         await mockNetworkImages(() async {
-          await _pumpUniversPage(tester, themePort: themePort);
+          await _pumpThemePage(tester, themePort: themePort);
           await tester.pumpAndSettle();
         });
 
