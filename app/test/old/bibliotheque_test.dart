@@ -1,6 +1,7 @@
 import 'package:app/features/articles/domain/article.dart';
 import 'package:app/features/bibliotheque/domain/bibliotheque.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
+import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail_image_network/mocktail_image_network.dart';
@@ -38,8 +39,7 @@ void main() {
               sousTitre: null,
               imageUrl: 'https://example.com/image.jpg',
               points: 20,
-              thematique: 'alimentation',
-              thematiqueLabel: '🥦 Alimentation',
+              thematique: ThemeType.alimentation,
             ),
           ],
           filtres: [],
@@ -77,8 +77,7 @@ void main() {
               sousTitre: null,
               imageUrl: 'https://example.com/image.jpg',
               points: 20,
-              thematique: 'alimentation',
-              thematiqueLabel: '🥦 Alimentation',
+              thematique: ThemeType.alimentation,
             ),
           ],
           filtres: [],
@@ -116,8 +115,7 @@ void main() {
               sousTitre: null,
               imageUrl: 'https://example.com/image.jpg',
               points: 20,
-              thematique: 'alimentation',
-              thematiqueLabel: '🥦 Alimentation',
+              thematique: ThemeType.alimentation,
             ),
             Recommandation(
               id: '2',
@@ -126,8 +124,7 @@ void main() {
               sousTitre: null,
               imageUrl: 'https://example.com/image.jpg',
               points: 20,
-              thematique: 'dechet',
-              thematiqueLabel: '🗑️ Déchets',
+              thematique: ThemeType.decouverte,
             ),
           ],
           filtres: [],
@@ -160,8 +157,7 @@ void main() {
               sousTitre: null,
               imageUrl: 'https://example.com/image.jpg',
               points: 20,
-              thematique: 'alimentation',
-              thematiqueLabel: '🥦 Alimentation',
+              thematique: ThemeType.alimentation,
             ),
             Recommandation(
               id: '2',
@@ -170,8 +166,7 @@ void main() {
               sousTitre: null,
               imageUrl: 'https://example.com/image.jpg',
               points: 20,
-              thematique: 'dechet',
-              thematiqueLabel: '🗑️ Déchets',
+              thematique: ThemeType.decouverte,
             ),
           ],
           filtres: [

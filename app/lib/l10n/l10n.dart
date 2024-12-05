@@ -114,13 +114,6 @@ abstract final class Localisation {
   static const leServiveNeCouvrePasEncoreVotreVilleDescription =
       'Nous mettons les informations à jour progressivement.';
   static const lesCategories = 'Les catégories';
-  static const lesCategoriesAlimentation = 'Alimentation';
-  static const lesCategoriesClimat = 'Environnement';
-  static const lesCategoriesConsommation = 'Consommation durable';
-  static const lesCategoriesDechet = 'Déchets';
-  static const lesCategoriesLogement = 'Logement';
-  static const lesCategoriesLoisir = 'Loisirs';
-  static const lesCategoriesTransport = 'Transports';
   static const lesCgu = "les conditions générales d'utilisation";
   static const lesCguMenu = 'CGU';
   static const lesCguSite = 'https://jagis.beta.gouv.fr/cgu';

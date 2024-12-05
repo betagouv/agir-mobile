@@ -213,7 +213,6 @@ const missionThematiques = [
     'is_new': true,
     'progression': 0,
     'thematique': 'alimentation',
-    'thematique_label': 'Me nourrir',
     'titre': 'Valoriser ses restes avec un compost',
   },
   {
@@ -224,7 +223,6 @@ const missionThematiques = [
     'is_new': true,
     'progression': 0,
     'thematique': 'alimentation',
-    'thematique_label': 'Me nourrir',
     'titre': 'Manger de saison',
   },
   {
@@ -235,7 +233,6 @@ const missionThematiques = [
     'is_new': true,
     'progression': 0,
     'thematique': 'alimentation',
-    'thematique_label': 'Me nourrir',
     'titre': 'Réduire le gaspillage alimentaire',
   },
   {
@@ -246,7 +243,6 @@ const missionThematiques = [
     'is_new': true,
     'progression': 0,
     'thematique': 'alimentation',
-    'thematique_label': 'Me nourrir',
     'titre': 'Manger local',
   },
   {
@@ -257,7 +253,6 @@ const missionThematiques = [
     'is_new': true,
     'progression': 0,
     'thematique': 'alimentation',
-    'thematique_label': 'Me nourrir',
     'titre': 'La viande',
   },
   {
@@ -268,7 +263,6 @@ const missionThematiques = [
     'is_new': true,
     'progression': 0,
     'thematique': 'alimentation',
-    'thematique_label': 'Me nourrir',
     'titre': 'Les céréales et légumineuses',
   },
 ];

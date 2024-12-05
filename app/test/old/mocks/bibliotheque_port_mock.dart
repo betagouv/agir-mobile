@@ -31,7 +31,7 @@ class BibliothequePortMock implements BibliothequePort {
 
     if (thematiques != null && thematiques.isNotEmpty) {
       final contenus = bibliotheque.contenus
-          .where((final e) => thematiques.contains(e.thematique))
+          .where((final e) => thematiques.contains(e.thematique.name))
           .toList();
       final filtres = bibliotheque.filtres
           .map(

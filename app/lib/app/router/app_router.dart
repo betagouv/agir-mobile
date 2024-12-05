@@ -29,7 +29,6 @@ import 'package:app/features/profil/logement/presentation/pages/mon_logement_pag
 import 'package:app/features/profil/options_avancees/presentation/pages/options_avancees_page.dart';
 import 'package:app/features/profil/profil/presentation/pages/profil_page.dart';
 import 'package:app/features/quiz/presentation/pages/quiz_page.dart';
-import 'package:app/features/recommandations/presentation/widgets/mes_recommandations.dart';
 import 'package:app/features/simulateur_velo/presentation/pages/aide_simulateur_velo_disponibles_page.dart';
 import 'package:app/features/simulateur_velo/presentation/pages/aide_simulateur_velo_page.dart';
 import 'package:app/features/theme/presentation/pages/theme_page.dart';
@@ -99,10 +98,6 @@ GoRouter goRouter({required final Tracker tracker}) => GoRouter(
           state.uri.path.startsWith('/unauthenticated') ? HomePage.path : null,
       },
       initialLocation: '/loading',
-      observers: [
-        mesRecommandationsRouteObserver,
-        themeRouteObserver,
-        tracker.navigatorObserver,
-      ],
+      observers: [themeRouteObserver, tracker.navigatorObserver],
       debugLogDiagnostics: true,
     );

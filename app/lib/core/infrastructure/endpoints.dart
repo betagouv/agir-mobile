@@ -15,8 +15,6 @@ abstract final class Endpoints {
   static const oubliMotDePasse = '/utilisateurs/oubli_mot_de_passe';
   static const profile = '/utilisateurs/{userId}/profile';
   static const questionsKyc = '/utilisateurs/{userId}/questionsKYC_v2';
-  static const recommandations =
-      '/utilisateurs/{userId}/recommandations_v2'; // TODO(lsaudon): v3
   static const renvoyerCode = '/utilisateurs/renvoyer_code';
   static const simulerAideVelo = '/utilisateurs/{userId}/simulerAideVelo';
   static const utilisateur = '/utilisateurs/{userId}';
@@ -29,6 +27,8 @@ abstract final class Endpoints {
       '/utilisateurs/{userId}/missions/$codeMission';
   static String missionTerminer(final String codeMission) =>
       '/utilisateurs/{userId}/missions/$codeMission/terminer';
+  static String recommandationsParThematique(final String thematique) =>
+      '/utilisateurs/{userId}/thematiques/$thematique/recommandations';
   static String missionsRecommandeesParThematique(
     final String codeThematique,
   ) =>

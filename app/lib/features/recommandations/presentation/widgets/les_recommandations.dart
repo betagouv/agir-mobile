@@ -1,6 +1,6 @@
 import 'package:app/features/recommandations/presentation/bloc/recommandations_bloc.dart';
 import 'package:app/features/recommandations/presentation/widgets/recommendation_widget.dart';
-import 'package:app/l10n/l10n.dart';
+import 'package:app/features/theme/presentation/widgets/theme_type_tag.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,17 +25,7 @@ class LesRecommandations extends StatelessWidget {
                   type: e.type,
                   points: '${e.points}',
                   imageUrl: e.imageUrl,
-                  tagLabel: switch (e.thematique) {
-                    'alimentation' => Localisation.lesCategoriesAlimentation,
-                    'transport' => Localisation.lesCategoriesTransport,
-                    'logement' => Localisation.lesCategoriesLogement,
-                    'consommation' => Localisation.lesCategoriesConsommation,
-                    'climat' => Localisation.lesCategoriesClimat,
-                    'dechet' => Localisation.lesCategoriesDechet,
-                    'loisir' => Localisation.lesCategoriesLoisir,
-                    // ignore: avoid-unnecessary-type-assertions
-                    String() => throw UnimplementedError(),
-                  },
+                  themeTag: ThemeTypeTag(themeType: e.thematique),
                   titre: e.titre,
                 ),
               )

@@ -4,6 +4,7 @@ import 'package:app/features/authentification/core/infrastructure/dio_http_clien
 import 'package:app/features/recommandations/domain/recommandation.dart';
 import 'package:app/features/recommandations/domain/recommandations_port.dart';
 import 'package:app/features/recommandations/infrastructure/recommandation_mapper.dart';
+import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:fpdart/fpdart.dart';
 
 class RecommandationsApiAdapter implements RecommandationsPort {
@@ -14,15 +15,12 @@ class RecommandationsApiAdapter implements RecommandationsPort {
 
   @override
   Future<Either<Exception, List<Recommandation>>> recuperer(
-    final String thematique,
+    final ThemeType thematique,
   ) async {
-    final map = {'univers': thematique};
+    final recommandationsParThematique =
+        Endpoints.recommandationsParThematique(thematique.name);
 
-    final uri = Uri.parse(Endpoints.recommandations).replace(
-      queryParameters: map.isNotEmpty ? map : null,
-    );
-
-    final response = await _client.get(uri.toString());
+    final response = await _client.get(recommandationsParThematique);
 
     if (isResponseUnsuccessful(response.statusCode)) {
       return Left(

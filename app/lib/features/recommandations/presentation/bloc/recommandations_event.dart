@@ -1,3 +1,4 @@
+import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:equatable/equatable.dart';
 
 sealed class RecommandationsEvent extends Equatable {
@@ -10,7 +11,7 @@ sealed class RecommandationsEvent extends Equatable {
 final class RecommandationsRecuperationDemandee extends RecommandationsEvent {
   const RecommandationsRecuperationDemandee(this.thematique);
 
-  final String thematique;
+  final ThemeType thematique;
 
   @override
   List<Object?> get props => [thematique];

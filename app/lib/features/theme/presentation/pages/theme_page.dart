@@ -331,6 +331,6 @@ class _Recommandations extends StatelessWidget {
       (final bloc) => bloc.state.themeType,
     );
 
-    return MesRecommandations(thematique: type.name);
+    return MesRecommandations(theme: type);
   }
 }

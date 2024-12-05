@@ -1,5 +1,4 @@
 import 'package:app/core/presentation/widgets/composants/image.dart';
-import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/shadows.dart';
 import 'package:app/features/articles/presentation/pages/article_page.dart';
 import 'package:app/features/gamification/domain/gamification_port.dart';
@@ -19,7 +18,7 @@ class RecommendationWidget extends StatelessWidget {
     required this.type,
     required this.points,
     required this.imageUrl,
-    required this.tagLabel,
+    required this.themeTag,
     required this.titre,
   });
 
@@ -27,7 +26,7 @@ class RecommendationWidget extends StatelessWidget {
   final TypeDuContenu type;
   final String points;
   final String imageUrl;
-  final String tagLabel;
+  final Widget themeTag;
   final String titre;
 
   @override
@@ -108,7 +107,7 @@ class RecommendationWidget extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: DsfrSpacings.s1v5),
-                _Tag(tagLabel: tagLabel),
+                themeTag,
                 const SizedBox(height: DsfrSpacings.s1w),
                 _Title(titre: titre),
               ],
@@ -152,20 +151,6 @@ class _Title extends StatelessWidget {
   @override
   Widget build(final context) =>
       Text(titre, style: const DsfrTextStyle.bodyMdMedium());
-}
-
-class _Tag extends StatelessWidget {
-  const _Tag({required this.tagLabel});
-
-  final String tagLabel;
-
-  @override
-  Widget build(final context) => DsfrTag.sm(
-        label: TextSpan(text: tagLabel),
-        backgroundColor: FnvColors.accueilFond,
-        foregroundColor: DsfrColors.grey50,
-        textStyle: const DsfrTextStyle.bodySmBold(),
-      );
 }
 
 class _Image extends StatelessWidget {
