@@ -71,7 +71,7 @@ class AuthentificationApiAdapter implements AuthentificationPort {
     final InformationDeConnexion informationDeConnexion,
   ) async {
     final response = await _client.post(
-      '/utilisateurs_v2',
+      Endpoints.creationCompte,
       data: jsonEncode({
         'email': informationDeConnexion.adresseMail,
         'mot_de_passe': informationDeConnexion.motDePasse,

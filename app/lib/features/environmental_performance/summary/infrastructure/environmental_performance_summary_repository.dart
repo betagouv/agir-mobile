@@ -15,7 +15,7 @@ class EnvironmentalPerformanceSummaryRepository {
   final DioHttpClient _client;
 
   Future<Either<Exception, EnvironmentalPerformanceData>> fetch() async {
-    final response = await _client.get('/utilisateur/{userId}/bilans/last_v2');
+    final response = await _client.get(Endpoints.bilan);
     if (isResponseUnsuccessful(response.statusCode)) {
       return Left(
         Exception('Erreur lors de la récupération du bilan environnemental'),
