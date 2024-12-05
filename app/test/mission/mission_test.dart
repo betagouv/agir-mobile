@@ -38,10 +38,7 @@ Future<void> pumpForMissionPage(
   required final DioMock dio,
 }) async {
   dio
-    ..getM(
-      '/utilisateur/{userId}/bilans/last_v2',
-      responseData: environmentalPerformanceEmptyData,
-    )
+    ..getM(Endpoints.bilan, responseData: environmentalPerformanceEmptyData)
     ..getM(
       Endpoints.questions('ENCHAINEMENT_KYC_mini_bilan_carbone'),
       responseData: miniBilan,

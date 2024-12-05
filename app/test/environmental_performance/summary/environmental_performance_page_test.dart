@@ -85,7 +85,7 @@ void main() {
           await mockNetworkImages(() async {
             final dio = DioMock()
               ..getM(
-                '/utilisateur/{userId}/bilans/last_v2',
+                Endpoints.bilan,
                 responseData: environmentalPerformancePartialData,
               );
 
@@ -112,7 +112,7 @@ void main() {
       (final tester) async {
         final dio = DioMock()
           ..getM(
-            '/utilisateur/{userId}/bilans/last_v2',
+            Endpoints.bilan,
             responseData: environmentalPerformanceEmptyData,
           )
           ..getM(
@@ -135,7 +135,7 @@ void main() {
     testWidgets('Aller sur les questions du mini bilan', (final tester) async {
       final dio = DioMock()
         ..getM(
-          '/utilisateur/{userId}/bilans/last_v2',
+          Endpoints.bilan,
           responseData: environmentalPerformanceEmptyData,
         )
         ..getM(
@@ -161,7 +161,7 @@ void main() {
         await mockNetworkImages(() async {
           final dio = DioMock()
             ..getM(
-              '/utilisateur/{userId}/bilans/last_v2',
+              Endpoints.bilan,
               responseData: environmentalPerformancePartialData,
             );
           await pumpEnvironmentalPerformancePage(tester, dio);
@@ -185,7 +185,7 @@ void main() {
         await mockNetworkImages(() async {
           final dio = DioMock()
             ..getM(
-              '/utilisateur/{userId}/bilans/last_v2',
+              Endpoints.bilan,
               responseData: environmentalPerformancePartialData,
             )
             ..getM(
@@ -219,7 +219,7 @@ void main() {
       (final tester) async {
         final dio = DioMock()
           ..getM(
-            '/utilisateur/{userId}/bilans/last_v2',
+            Endpoints.bilan,
             responseData: environmentalPerformanceFullData,
           );
         await mockNetworkImages(() async {
@@ -250,7 +250,7 @@ void main() {
         await mockNetworkImages(() async {
           final dio = DioMock()
             ..getM(
-              '/utilisateur/{userId}/bilans/last_v2',
+              Endpoints.bilan,
               responseData: environmentalPerformanceFullData,
             )
             ..getM(
@@ -284,7 +284,7 @@ void main() {
       (final tester) async {
         final dio = DioMock()
           ..getM(
-            '/utilisateur/{userId}/bilans/last_v2',
+            Endpoints.bilan,
             responseData: environmentalPerformanceFullData,
           );
         await pumpEnvironmentalPerformancePage(tester, dio);

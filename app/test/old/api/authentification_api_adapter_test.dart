@@ -171,7 +171,7 @@ void main() {
   test('creationDeCompteDemandee', () async {
     final dio = DioMock()
       ..postM(
-        '/utilisateurs_v2',
+        Endpoints.creationCompte,
         responseData: CustomResponse(
           '''
 {
@@ -193,7 +193,7 @@ void main() {
 
     verify(
       () => dio.post<dynamic>(
-        '/utilisateurs_v2',
+        Endpoints.creationCompte,
         data:
             '{"email":"${informationDeConnexion.adresseMail}","mot_de_passe":"${informationDeConnexion.motDePasse}","source_inscription":"mobile"}',
       ),

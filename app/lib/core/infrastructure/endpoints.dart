@@ -4,6 +4,8 @@ abstract final class Endpoints {
   static const actions = '/utilisateurs/{userId}/defis_v2';
   static const assistances = '/utilisateurs/{userId}/aides_v2';
   static const bibliotheque = '/utilisateurs/{userId}/bibliotheque';
+  static const bilan = '/utilisateurs/{userId}/bilans/last_v2';
+  static const creationCompte = '/utilisateurs_v2';
   static const communes = '/communes';
   static const events = '/utilisateurs/{userId}/events';
   static const gamification = '/utilisateurs/{userId}/gamification';

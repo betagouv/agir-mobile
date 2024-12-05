@@ -114,7 +114,7 @@ void main() {
       (final tester) async {
         final dio = DioMock()
           ..getM(
-            '/utilisateur/{userId}/bilans/last_v2',
+            Endpoints.bilan,
             responseData: environmentalPerformanceEmptyData,
           )
           ..getM(
@@ -142,7 +142,7 @@ void main() {
     testWidgets('Aller sur les questions du mini bilan', (final tester) async {
       final dio = DioMock()
         ..getM(
-          '/utilisateur/{userId}/bilans/last_v2',
+          Endpoints.bilan,
           responseData: environmentalPerformanceEmptyData,
         )
         ..getM(
@@ -169,7 +169,7 @@ void main() {
       (final tester) async {
         final dio = DioMock()
           ..getM(
-            '/utilisateur/{userId}/bilans/last_v2',
+            Endpoints.bilan,
             responseData: environmentalPerformancePartialData,
           )
           ..getM(
@@ -195,7 +195,7 @@ void main() {
       (final tester) async {
         final dio = DioMock()
           ..getM(
-            '/utilisateur/{userId}/bilans/last_v2',
+            Endpoints.bilan,
             responseData: environmentalPerformanceFullData,
           );
         await mockNetworkImages(() async {
@@ -211,7 +211,7 @@ void main() {
       (final tester) async {
         final dio = DioMock()
           ..getM(
-            '/utilisateur/{userId}/bilans/last_v2',
+            Endpoints.bilan,
             responseData: environmentalPerformanceFullData,
           );
         await mockNetworkImages(() async {
