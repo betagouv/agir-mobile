@@ -52,7 +52,7 @@ class Contenu extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      contenu.thematiqueLabel,
+                      contenu.thematique.displayName,
                       style: const DsfrTextStyle.bodyXsBold(),
                     ),
                     const SizedBox(height: DsfrSpacings.s1w),

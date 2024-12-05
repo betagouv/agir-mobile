@@ -1,6 +1,7 @@
 import 'package:app/features/articles/domain/article.dart';
 import 'package:app/features/articles/domain/partenaire.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
+import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail_image_network/mocktail_image_network.dart';
 
@@ -31,8 +32,7 @@ void main() {
           imageUrl:
               'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1702068380/jonathan_ford_6_Zg_T_Etv_D16_I_unsplash_00217cb281.jpg',
           points: 20,
-          thematique: 'alimentation',
-          thematiqueLabel: '☀️ Environnement',
+          thematique: ThemeType.alimentation,
         );
         ielALesRecommandationsSuivantes([recommandation]);
         ielALArticleSuivant(

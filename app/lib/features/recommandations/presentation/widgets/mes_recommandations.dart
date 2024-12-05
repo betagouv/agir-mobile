@@ -1,52 +1,25 @@
 import 'package:app/features/recommandations/presentation/bloc/recommandations_bloc.dart';
 import 'package:app/features/recommandations/presentation/bloc/recommandations_event.dart';
 import 'package:app/features/recommandations/presentation/widgets/les_recommandations.dart';
+import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-final mesRecommandationsRouteObserver = RouteObserver<ModalRoute<Object?>>();
+class MesRecommandations extends StatelessWidget {
+  const MesRecommandations({super.key, required this.theme});
 
-class MesRecommandations extends StatefulWidget {
-  const MesRecommandations({super.key, required this.thematique});
-
-  final String thematique;
+  final ThemeType theme;
 
   @override
-  State<MesRecommandations> createState() => _MesRecommandationsState();
-}
+  Widget build(final context) {
+    context
+        .read<RecommandationsBloc>()
+        .add(RecommandationsRecuperationDemandee(theme));
 
-class _MesRecommandationsState extends State<MesRecommandations>
-    with RouteAware {
-  void _handleRecommendations() {
-    if (mounted) {
-      context
-          .read<RecommandationsBloc>()
-          .add(RecommandationsRecuperationDemandee(widget.thematique));
-    }
+    return const _View();
   }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    mesRecommandationsRouteObserver.subscribe(this, ModalRoute.of(context)!);
-  }
-
-  @override
-  void didPopNext() => _handleRecommendations();
-
-  @override
-  void didPush() => _handleRecommendations();
-
-  @override
-  void dispose() {
-    mesRecommandationsRouteObserver.unsubscribe(this);
-    super.dispose();
-  }
-
-  @override
-  Widget build(final context) => const _View();
 }
 
 class _View extends StatelessWidget {

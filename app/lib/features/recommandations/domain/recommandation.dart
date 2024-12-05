@@ -1,3 +1,4 @@
+import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:equatable/equatable.dart';
 
 class Recommandation extends Equatable {
@@ -9,7 +10,6 @@ class Recommandation extends Equatable {
     required this.imageUrl,
     required this.points,
     required this.thematique,
-    required this.thematiqueLabel,
   });
 
   final String id;
@@ -18,8 +18,7 @@ class Recommandation extends Equatable {
   final String? sousTitre;
   final String imageUrl;
   final int points;
-  final String thematique;
-  final String thematiqueLabel;
+  final ThemeType thematique;
 
   @override
   List<Object?> get props => [
@@ -30,7 +29,6 @@ class Recommandation extends Equatable {
         imageUrl,
         points,
         thematique,
-        thematiqueLabel,
       ];
 }
 

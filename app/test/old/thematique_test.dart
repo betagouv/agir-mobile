@@ -61,8 +61,7 @@ void main() {
           sousTitre: null,
           imageUrl: 'https://example.com/image.jpg',
           points: 20,
-          thematique: 'alimentation',
-          thematiqueLabel: '🛒 Consommation durable',
+          thematique: ThemeType.alimentation,
         );
         const recommandation2 = Recommandation(
           id: '43',
@@ -71,8 +70,7 @@ void main() {
           sousTitre: null,
           imageUrl: 'https://example.com/image.jpg',
           points: 20,
-          thematique: 'climat',
-          thematiqueLabel: '☀️ Environnement',
+          thematique: ThemeType.decouverte,
         );
         ielALesRecommandationsSuivantes([recommandation, recommandation2]);
         ielEstConnecte();

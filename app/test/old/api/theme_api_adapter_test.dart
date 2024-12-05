@@ -25,8 +25,7 @@ void main() {
         "code": "intro_logement",
         "is_new": false,
         "image_url": "https://example.com/image.png",
-        "thematique": "logement",
-        "thematique_label": "Me loger"
+        "thematique": "logement"
     },
     {
         "titre": "Gérer sa consommation d'eau",
@@ -35,8 +34,7 @@ void main() {
         "code": "conso_eau",
         "is_new": true,
         "image_url": "https://example.com/image.png",
-        "thematique": "logement",
-        "thematique_label": "Me loger"
+        "thematique": "logement"
     }
 ]
 '''),

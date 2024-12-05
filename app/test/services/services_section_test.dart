@@ -4,6 +4,7 @@ import 'package:app/features/recommandations/domain/recommandation.dart';
 import 'package:app/features/recommandations/domain/recommandations_port.dart';
 import 'package:app/features/recommandations/presentation/bloc/recommandations_bloc.dart';
 import 'package:app/features/theme/core/domain/theme_port.dart';
+import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:app/features/theme/presentation/pages/theme_page.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,7 +38,7 @@ Future<void> _pumpUniversPage(
   );
 
   final recommandationsPort = _RecommandationsPortMock();
-  when(() => recommandationsPort.recuperer('alimentation')).thenAnswer(
+  when(() => recommandationsPort.recuperer(ThemeType.alimentation)).thenAnswer(
     (final _) async => const Right([
       Recommandation(
         id: '1',
@@ -46,8 +47,7 @@ Future<void> _pumpUniversPage(
         sousTitre: null,
         imageUrl: 'https://example.com/image.jpg',
         points: 20,
-        thematique: 'alimentation',
-        thematiqueLabel: '🥦 Alimentation',
+        thematique: ThemeType.alimentation,
       ),
     ]),
   );

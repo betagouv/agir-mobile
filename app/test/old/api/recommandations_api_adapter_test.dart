@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/recommandations/infrastructure/recommandations_api_adapter.dart';
+import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -10,34 +12,37 @@ import '../mocks/authentication_service_fake.dart';
 
 void main() {
   test('recuperer filtré par thematique', () async {
+    const themeType = ThemeType.alimentation;
     final dio = DioMock()
       ..getM(
-        '/utilisateurs/%7BuserId%7D/recommandations_v2?univers=climat',
+        Endpoints.recommandationsParThematique(themeType.name),
         responseData: jsonDecode('''
 [
   {
-    "content_id": "KYC008",
-    "type": "kyc",
-    "titre": "Votre employeur vous permet-il de télétravailler ?",
-    "thematique_gamification": "☀️ Environnement",
-    "thematique_principale": "climat",
-    "thematique_principale_label": "☀️ Environnement",
-    "image_url": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fopenclipart.org%2Fdetail%2F321572%2Fi-have-a-small-question&psig=AOvVaw1_ErxUJbZIoqQ8u-1sbgB5&ust=1711202048405000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCLijtMOCiIUDFQAAAAAdAAAAABAS",
+    "content_id": "128",
+    "type": "quizz",
+    "titre": "Quelle céréale est idéale au petit-déjeuner ?",
+    "soustitre": null,
+    "duree": "⏱️ 2 minutes",
+    "thematique_gamification": "Me nourrir",
+    "thematique_principale": "alimentation",
+    "thematique_principale_label": "Me nourrir",
+    "image_url": "https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1718659831/pexels_jeshoots_216951_9d22d98896.jpg",
     "points": 5,
-    "score": 100.04227464872
+    "score": 50.0313119001
   },
   {
-    "content_id": "31",
-    "type": "article",
-    "titre": "Réchauffement et montée des eaux : quel est le lien ?",
-    "soustitre": "Ça ne coule pas de source",
-    "duree": "⏱️ 3 minutes",
-    "thematique_gamification": "☀️ Environnement",
-    "thematique_principale": "climat",
-    "thematique_principale_label": "☀️ Environnement",
-    "image_url": "https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1702068380/jonathan_ford_6_Zg_T_Etv_D16_I_unsplash_00217cb281.jpg",
+    "content_id": "76",
+    "type": "quizz",
+    "titre": "Saisonnalité et localité",
+    "soustitre": "Comment sont-elles liées ?",
+    "duree": "⏱️ 2 minutes",
+    "thematique_gamification": "Me nourrir",
+    "thematique_principale": "alimentation",
+    "thematique_principale_label": "Me nourrir",
+    "image_url": "https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1705408190/erwan_hesry_1q75_B_Re_Kpms_unsplash_41caf1f20b.jpg",
     "points": 20,
-    "score": 50.04187220652
+    "score": 50.02927918237
   }
 ]'''),
       );
@@ -48,11 +53,10 @@ void main() {
         authenticationService: const AuthenticationServiceFake(),
       ),
     );
-
-    await adapter.recuperer('climat');
+    await adapter.recuperer(themeType);
     verify(
       () => dio.get<dynamic>(
-        '/utilisateurs/%7BuserId%7D/recommandations_v2?univers=climat',
+        Endpoints.recommandationsParThematique(themeType.name),
       ),
     );
   });
