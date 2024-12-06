@@ -5,7 +5,9 @@ abstract final class InputFormatter {
   static final currency =
       TextInputFormatter.withFunction((final oldValue, final newValue) {
     final text = newValue.text.replaceAll(' ', '');
-    if (text.isEmpty) return newValue;
+    if (text.isEmpty) {
+      return newValue;
+    }
     final number = int.parse(text);
     final newString = formatCurrency(number);
 

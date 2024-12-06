@@ -14,7 +14,7 @@ abstract final class Localisation {
   static const aideVeloAvertissement =
       'Veuillez compléter ces informations afin de débuter l’estimation';
   static const ajouterEnFavoris = 'Ajouter en favoris';
-  static const allerALAction = "Aller à l'action";
+  static const allerALAction = 'Aller à l’action';
   static const anneeDeNaissance = 'Année de naissance';
   static const annuler = 'Annuler';
   static const appEstEnConstruction = 'J’agis est en construction !';
@@ -64,7 +64,7 @@ abstract final class Localisation {
   static const continuerLaLecture = 'Continuer la lecture';
   static const creerMonCompte = 'Créer mon compte';
   static const creerMonCompteApp = 'Créer mon compte J’agis';
-  static const declarationAccessibilite = "Déclaration d'accessibilité";
+  static const declarationAccessibilite = 'Déclaration d’accessibilité';
   static const declarationAccessibiliteSite =
       'https://jagis.beta.gouv.fr/accessibilite';
   static const donneesPersonnelles = 'Données personnelles';
@@ -76,7 +76,7 @@ abstract final class Localisation {
   static const dpeC = 'C';
   static const dpeD = 'D';
   static const dpeE = 'E';
-  static const dpeExplication = "**Qu'est-ce qu'un DPE ?**";
+  static const dpeExplication = '**Qu’est-ce qu’un DPE ?**';
   static const dpeF = 'F';
   static const dpeG = 'G';
   static const dpeJeNeSaisPas = 'Je ne sais pas';
@@ -91,6 +91,7 @@ abstract final class Localisation {
   static const entre35et70m2 = 'Entre 35 et 70 m²';
   static const entre70et100m2 = 'Entre 70 et 100 m²';
   static const entrezLeCodeRecuParMail = 'Entrez le code reçu par e-mail !';
+  static const codeDeVerification = 'Code de vérification';
   static const erreurInattendue = 'Erreur inattendue';
   static const erreurInattendueContent =
       'Désolé, le service rencontre un problème, nous y travaillons pour le résoudre le plus rapidement possible.';
@@ -99,22 +100,22 @@ abstract final class Localisation {
   static const fermer = 'Fermer';
   static const finalementPasPourMoi = 'Finalement, pas pour moi';
   static const firstNameEmpty = 'Le prénom ne peut pas être vide.';
-  static const firstNameInvalid = "Le prénom n'est pas valide.";
+  static const firstNameInvalid = 'Le prénom n’est pas valide.';
   static const homeAssistanceSubTitle =
-      "Toutes les aides **locales** et **nationales** pour vous aider à passer à l'action";
+      'Toutes les aides **locales** et **nationales** pour vous aider à passer à l’action';
   static const homeAssistanceTitle = '**Aides financières** et bons plans';
-  static const jaccepte = "J'accepte ";
-  static const jaiCompris = "J'ai compris";
-  static const jaiDejaUnCompte = "J'ai déjà un compte";
+  static const jaccepte = 'J’accepte ';
+  static const jaiCompris = 'J’ai compris';
+  static const jaiDejaUnCompte = 'J’ai déjà un compte';
   static const jeCreeMonCompte = 'Je crée mon compte';
-  static const jeReleveLAction = "Je relève l'action";
-  static const jusqua = "Jusqu'à ";
+  static const jeReleveLAction = 'Je relève l’action';
+  static const jusqua = 'Jusqu’à ';
   static const leServiveNeCouvrePasEncoreVotreVille =
       'Le service ne couvre pas encore votre ville.';
   static const leServiveNeCouvrePasEncoreVotreVilleDescription =
       'Nous mettons les informations à jour progressivement.';
   static const lesCategories = 'Les catégories';
-  static const lesCgu = "les conditions générales d'utilisation";
+  static const lesCgu = 'les conditions générales d’utilisation';
   static const lesCguMenu = 'CGU';
   static const lesCguSite = 'https://jagis.beta.gouv.fr/cgu';
   static const maReponse = 'Ma réponse';
@@ -137,7 +138,7 @@ abstract final class Localisation {
   static const mieuxVousConnaitre = 'Mieux vous connaître';
   static const miseAJourEffectuee = 'Mise à jour effectuée';
   static const missionActionsSubTitle =
-      "Pour réduire votre impact, voici une liste d'actions recommandés **pour vous !**";
+      'Pour réduire votre impact, voici une liste d’actions recommandés **pour vous !**';
   static const missionActionsTitle =
       'Choisir au moins **une action** que vous pourriez réaliser';
   static const missionSubTitle =
@@ -215,8 +216,8 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const recommandationsTitre = 'Recommandé, pour vous';
   static const recommande = 'Recommandé';
   static const renvoyerCode = 'Renvoyer le code';
-  static const renvoyerEmailDeConnexion = "Renvoyer l'e-mail de connexion";
-  static const reprendreLaction = "Reprendre l'action";
+  static const renvoyerEmailDeConnexion = 'Renvoyer l’e-mail de connexion';
+  static const reprendreLaction = 'Reprendre l’action';
   static const retirerDesFavoris = 'Retirer des favoris';
   static const retour = 'Retour';
   static const revenirAuSimulateur = 'Revenir au simulateur';
