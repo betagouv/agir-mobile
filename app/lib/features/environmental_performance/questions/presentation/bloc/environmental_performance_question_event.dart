@@ -1,6 +1,8 @@
 import 'package:app/features/know_your_customer/core/domain/question.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
+@immutable
 sealed class EnvironmentalPerformanceQuestionEvent extends Equatable {
   const EnvironmentalPerformanceQuestionEvent();
 
@@ -8,6 +10,7 @@ sealed class EnvironmentalPerformanceQuestionEvent extends Equatable {
   List<Object> get props => [];
 }
 
+@immutable
 final class EnvironmentalPerformanceQuestionIdListGiven
     extends EnvironmentalPerformanceQuestionEvent {
   const EnvironmentalPerformanceQuestionIdListGiven(this.questionIdList);
@@ -18,6 +21,7 @@ final class EnvironmentalPerformanceQuestionIdListGiven
   List<Object> get props => [questionIdList];
 }
 
+@immutable
 final class EnvironmentalPerformanceQuestionIdListRequested
     extends EnvironmentalPerformanceQuestionEvent {
   const EnvironmentalPerformanceQuestionIdListRequested(this.categoryId);

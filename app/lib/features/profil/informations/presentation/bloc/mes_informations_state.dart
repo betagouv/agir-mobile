@@ -1,7 +1,9 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
 enum MesInformationsStatut { initial, chargement, succes }
 
+@immutable
 final class MesInformationsState extends Equatable {
   const MesInformationsState({
     required this.email,

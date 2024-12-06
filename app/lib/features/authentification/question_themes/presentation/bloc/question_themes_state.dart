@@ -1,6 +1,8 @@
 import 'package:app/features/know_your_customer/core/domain/question.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
+@immutable
 final class QuestionThemesState extends Equatable {
   const QuestionThemesState({this.question, required this.valeur});
 

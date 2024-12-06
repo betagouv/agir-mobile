@@ -1,6 +1,8 @@
 import 'package:app/features/first_name/domain/first_name.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
+@immutable
 sealed class FirstNameState extends Equatable {
   const FirstNameState();
 
@@ -8,10 +10,12 @@ sealed class FirstNameState extends Equatable {
   List<Object> get props => [];
 }
 
+@immutable
 final class FirstNameInitial extends FirstNameState {
   const FirstNameInitial();
 }
 
+@immutable
 final class FirstNameEntered extends FirstNameState {
   const FirstNameEntered(this.firstName);
 
@@ -21,10 +25,12 @@ final class FirstNameEntered extends FirstNameState {
   List<Object> get props => [firstName];
 }
 
+@immutable
 final class FirstNameLoading extends FirstNameState {
   const FirstNameLoading();
 }
 
+@immutable
 final class FirstNameSuccess extends FirstNameState {
   const FirstNameSuccess(this.dateTime);
 
@@ -34,6 +40,7 @@ final class FirstNameSuccess extends FirstNameState {
   List<Object> get props => [dateTime];
 }
 
+@immutable
 final class FirstNameFailure extends FirstNameState {
   const FirstNameFailure({required this.errorMessage});
 

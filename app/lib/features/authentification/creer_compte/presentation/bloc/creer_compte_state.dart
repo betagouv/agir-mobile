@@ -1,7 +1,9 @@
 import 'package:app/core/helpers/regex.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:fpdart/fpdart.dart';
 
+@immutable
 final class CreerCompteState extends Equatable {
   const CreerCompteState({
     required this.adresseMail,

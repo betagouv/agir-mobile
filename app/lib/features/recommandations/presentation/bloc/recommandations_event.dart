@@ -1,6 +1,8 @@
 import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
+@immutable
 sealed class RecommandationsEvent extends Equatable {
   const RecommandationsEvent();
 
@@ -8,6 +10,7 @@ sealed class RecommandationsEvent extends Equatable {
   List<Object?> get props => [];
 }
 
+@immutable
 final class RecommandationsRecuperationDemandee extends RecommandationsEvent {
   const RecommandationsRecuperationDemandee(this.thematique);
 

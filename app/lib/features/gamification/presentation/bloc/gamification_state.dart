@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
 enum GamificationStatut {
   initial,
@@ -7,6 +8,7 @@ enum GamificationStatut {
   erreur,
 }
 
+@immutable
 final class GamificationState extends Equatable {
   const GamificationState({required this.statut, required this.points});
 

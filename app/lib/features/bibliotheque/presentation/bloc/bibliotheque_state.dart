@@ -1,8 +1,10 @@
 import 'package:app/features/bibliotheque/domain/bibliotheque.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
 enum BibliothequeStatut { initial, chargement, succes }
 
+@immutable
 final class BibliothequeState extends Equatable {
   const BibliothequeState({
     required this.bibliotheque,

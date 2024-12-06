@@ -1,8 +1,10 @@
 import 'package:app/features/simulateur_velo/domain/aide_velo.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
 enum AideVeloStatut { initial, chargement, succes, erreur }
 
+@immutable
 final class AideVeloState extends Equatable {
   const AideVeloState({
     required this.prix,

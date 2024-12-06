@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
+@immutable
 sealed class QuizEvent extends Equatable {
   const QuizEvent();
 
@@ -7,6 +9,7 @@ sealed class QuizEvent extends Equatable {
   List<Object> get props => [];
 }
 
+@immutable
 final class QuizRecuperationDemandee extends QuizEvent {
   const QuizRecuperationDemandee(this.id);
 
@@ -16,6 +19,7 @@ final class QuizRecuperationDemandee extends QuizEvent {
   List<Object> get props => [id];
 }
 
+@immutable
 final class QuizReponseSelectionnee extends QuizEvent {
   const QuizReponseSelectionnee(this.valeur);
 
@@ -25,6 +29,7 @@ final class QuizReponseSelectionnee extends QuizEvent {
   List<Object> get props => [valeur];
 }
 
+@immutable
 final class QuizValidationDemandee extends QuizEvent {
   const QuizValidationDemandee();
 }

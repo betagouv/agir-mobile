@@ -2,7 +2,9 @@ import 'package:app/features/theme/core/domain/mission_liste.dart';
 import 'package:app/features/theme/core/domain/service_item.dart';
 import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
+@immutable
 final class ThemeState extends Equatable {
   const ThemeState({
     required this.themeType,

@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
+@immutable
 sealed class EnvironmentalPerformanceEvent extends Equatable {
   const EnvironmentalPerformanceEvent();
 
@@ -7,6 +9,7 @@ sealed class EnvironmentalPerformanceEvent extends Equatable {
   List<Object> get props => [];
 }
 
+@immutable
 final class EnvironmentalPerformanceStarted
     extends EnvironmentalPerformanceEvent {
   const EnvironmentalPerformanceStarted();

@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
+@immutable
 final class QuestionCodePostalState extends Equatable {
   const QuestionCodePostalState({
     required this.prenom,

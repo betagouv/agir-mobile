@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
+@immutable
 sealed class SaisieCodeEvent extends Equatable {
   const SaisieCodeEvent();
 
@@ -7,6 +9,7 @@ sealed class SaisieCodeEvent extends Equatable {
   List<Object> get props => [];
 }
 
+@immutable
 final class SaisieCodeCodeSaisie extends SaisieCodeEvent {
   const SaisieCodeCodeSaisie(this.code);
 
@@ -16,6 +19,7 @@ final class SaisieCodeCodeSaisie extends SaisieCodeEvent {
   List<Object> get props => [code];
 }
 
+@immutable
 final class SaiseCodeRenvoyerCodeDemandee extends SaisieCodeEvent {
   const SaiseCodeRenvoyerCodeDemandee();
 }

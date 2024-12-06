@@ -3,7 +3,9 @@ import 'package:app/features/mission/mission/domain/mission_code.dart';
 import 'package:app/features/mission/mission/domain/mission_objectif.dart';
 import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
+@immutable
 sealed class MissionState extends Equatable {
   const MissionState();
 
@@ -11,14 +13,17 @@ sealed class MissionState extends Equatable {
   List<Object> get props => [];
 }
 
+@immutable
 final class MissionInitial extends MissionState {
   const MissionInitial();
 }
 
+@immutable
 final class MissionLoading extends MissionState {
   const MissionLoading();
 }
 
+@immutable
 final class MissionSuccess extends MissionState {
   MissionSuccess({required final Mission mission, required this.index})
       : code = mission.code,
@@ -74,6 +79,7 @@ final class MissionSuccess extends MissionState {
   List<Object> get props => [index, steps, code];
 }
 
+@immutable
 final class MissionFailure extends MissionState {
   const MissionFailure({required this.errorMessage});
 

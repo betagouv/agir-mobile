@@ -1,6 +1,8 @@
 import 'package:app/features/know_your_customer/core/domain/question.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
+@immutable
 sealed class MieuxVousConnaitreEditEvent extends Equatable {
   const MieuxVousConnaitreEditEvent();
 
@@ -8,6 +10,7 @@ sealed class MieuxVousConnaitreEditEvent extends Equatable {
   List<Object> get props => [];
 }
 
+@immutable
 final class MieuxVousConnaitreEditRecuperationDemandee
     extends MieuxVousConnaitreEditEvent {
   const MieuxVousConnaitreEditRecuperationDemandee(this.id);
@@ -18,6 +21,7 @@ final class MieuxVousConnaitreEditRecuperationDemandee
   List<Object> get props => [id];
 }
 
+@immutable
 final class MieuxVousConnaitreEditChoixMultipleChangee
     extends MieuxVousConnaitreEditEvent {
   const MieuxVousConnaitreEditChoixMultipleChangee(this.value);
@@ -28,6 +32,7 @@ final class MieuxVousConnaitreEditChoixMultipleChangee
   List<Object> get props => [value];
 }
 
+@immutable
 final class MieuxVousConnaitreEditChoixUniqueChangee
     extends MieuxVousConnaitreEditEvent {
   const MieuxVousConnaitreEditChoixUniqueChangee(this.value);
@@ -38,6 +43,7 @@ final class MieuxVousConnaitreEditChoixUniqueChangee
   List<Object> get props => [value];
 }
 
+@immutable
 final class MieuxVousConnaitreEditLibreChangee
     extends MieuxVousConnaitreEditEvent {
   const MieuxVousConnaitreEditLibreChangee(this.value);
@@ -48,6 +54,7 @@ final class MieuxVousConnaitreEditLibreChangee
   List<Object> get props => [value];
 }
 
+@immutable
 final class MieuxVousConnaitreEditMosaicChangee
     extends MieuxVousConnaitreEditEvent {
   const MieuxVousConnaitreEditMosaicChangee(this.value);
@@ -58,6 +65,7 @@ final class MieuxVousConnaitreEditMosaicChangee
   List<Object> get props => [value];
 }
 
+@immutable
 final class MieuxVousConnaitreEditEntierChangee
     extends MieuxVousConnaitreEditEvent {
   const MieuxVousConnaitreEditEntierChangee(this.value);
@@ -68,6 +76,7 @@ final class MieuxVousConnaitreEditEntierChangee
   List<Object> get props => [value];
 }
 
+@immutable
 final class MieuxVousConnaitreEditMisAJourDemandee
     extends MieuxVousConnaitreEditEvent {
   const MieuxVousConnaitreEditMisAJourDemandee(this.id);

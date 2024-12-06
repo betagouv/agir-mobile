@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
+@immutable
 sealed class ActionListEvent extends Equatable {
   const ActionListEvent();
 
@@ -7,6 +9,7 @@ sealed class ActionListEvent extends Equatable {
   List<Object> get props => [];
 }
 
+@immutable
 final class ActionListFetch extends ActionListEvent {
   const ActionListFetch();
 }

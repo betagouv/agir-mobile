@@ -1,6 +1,8 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:fpdart/fpdart.dart';
 
+@immutable
 final class SaisieCodeState extends Equatable {
   const SaisieCodeState({
     required this.email,

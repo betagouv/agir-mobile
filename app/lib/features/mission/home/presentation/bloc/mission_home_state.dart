@@ -1,6 +1,8 @@
 import 'package:app/features/theme/core/domain/mission_liste.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
+@immutable
 sealed class MissionHomeState extends Equatable {
   const MissionHomeState();
 
@@ -8,10 +10,12 @@ sealed class MissionHomeState extends Equatable {
   List<Object> get props => [];
 }
 
+@immutable
 final class MissionHomeInitial extends MissionHomeState {
   const MissionHomeInitial();
 }
 
+@immutable
 final class MissionHomeLoadSuccess extends MissionHomeState {
   const MissionHomeLoadSuccess(this.missions);
 
