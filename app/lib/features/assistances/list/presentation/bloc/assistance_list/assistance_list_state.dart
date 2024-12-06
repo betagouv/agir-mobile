@@ -1,7 +1,9 @@
 import 'package:app/features/assistances/core/domain/aide.dart';
 import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
+@immutable
 sealed class AssistanceListState extends Equatable {
   const AssistanceListState();
 
@@ -9,14 +11,17 @@ sealed class AssistanceListState extends Equatable {
   List<Object?> get props => [];
 }
 
+@immutable
 final class AssistanceListInitial extends AssistanceListState {
   const AssistanceListInitial();
 }
 
+@immutable
 final class AssistanceListLoadInProgress extends AssistanceListState {
   const AssistanceListLoadInProgress();
 }
 
+@immutable
 final class AssistanceListLoadSuccess extends AssistanceListState {
   const AssistanceListLoadSuccess({
     required this.isCovered,
@@ -41,6 +46,7 @@ final class AssistanceListLoadSuccess extends AssistanceListState {
   List<Object?> get props => [isCovered, themes, themeSelected];
 }
 
+@immutable
 final class AssistanceListLoadFailure extends AssistanceListState {
   const AssistanceListLoadFailure(this.error);
 

@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
+@immutable
 sealed class CreerCompteEvent extends Equatable {
   const CreerCompteEvent();
 
@@ -7,6 +9,7 @@ sealed class CreerCompteEvent extends Equatable {
   List<Object> get props => [];
 }
 
+@immutable
 final class CreerCompteAdresseMailAChangee extends CreerCompteEvent {
   const CreerCompteAdresseMailAChangee(this.valeur);
 
@@ -16,6 +19,7 @@ final class CreerCompteAdresseMailAChangee extends CreerCompteEvent {
   List<Object> get props => [valeur];
 }
 
+@immutable
 final class CreerCompteMotDePasseAChange extends CreerCompteEvent {
   const CreerCompteMotDePasseAChange(this.valeur);
 
@@ -25,6 +29,7 @@ final class CreerCompteMotDePasseAChange extends CreerCompteEvent {
   List<Object> get props => [valeur];
 }
 
+@immutable
 final class CreerCompteCguAChange extends CreerCompteEvent {
   const CreerCompteCguAChange(this.valeur);
 
@@ -34,6 +39,7 @@ final class CreerCompteCguAChange extends CreerCompteEvent {
   List<Object> get props => [valeur];
 }
 
+@immutable
 final class CreerCompteCreationDemandee extends CreerCompteEvent {
   const CreerCompteCreationDemandee();
 }

@@ -1,6 +1,8 @@
 import 'package:app/features/mission/mission/domain/mission_code.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
+@immutable
 sealed class MissionEvent extends Equatable {
   const MissionEvent();
 
@@ -8,6 +10,7 @@ sealed class MissionEvent extends Equatable {
   List<Object> get props => [];
 }
 
+@immutable
 final class MissionLoadRequested extends MissionEvent {
   const MissionLoadRequested(this.code);
 
@@ -17,14 +20,17 @@ final class MissionLoadRequested extends MissionEvent {
   List<Object> get props => [code];
 }
 
+@immutable
 final class MissionPreviousRequested extends MissionEvent {
   const MissionPreviousRequested();
 }
 
+@immutable
 final class MissionNextRequested extends MissionEvent {
   const MissionNextRequested();
 }
 
+@immutable
 final class MissionCompleteRequested extends MissionEvent {
   const MissionCompleteRequested();
 }

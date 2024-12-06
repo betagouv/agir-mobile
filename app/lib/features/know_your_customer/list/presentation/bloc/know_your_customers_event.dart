@@ -1,7 +1,9 @@
 import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:fpdart/fpdart.dart';
 
+@immutable
 sealed class KnowYourCustomersEvent extends Equatable {
   const KnowYourCustomersEvent();
 
@@ -9,6 +11,7 @@ sealed class KnowYourCustomersEvent extends Equatable {
   List<Object?> get props => [];
 }
 
+@immutable
 final class KnowYourCustomersStarted extends KnowYourCustomersEvent {
   const KnowYourCustomersStarted();
 
@@ -16,6 +19,7 @@ final class KnowYourCustomersStarted extends KnowYourCustomersEvent {
   List<Object> get props => [];
 }
 
+@immutable
 final class KnowYourCustomersRefreshNeed extends KnowYourCustomersEvent {
   const KnowYourCustomersRefreshNeed();
 
@@ -23,6 +27,7 @@ final class KnowYourCustomersRefreshNeed extends KnowYourCustomersEvent {
   List<Object> get props => [];
 }
 
+@immutable
 final class KnowYourCustomersThemePressed extends KnowYourCustomersEvent {
   const KnowYourCustomersThemePressed(this.theme);
 

@@ -1,6 +1,8 @@
 import 'package:app/features/environmental_performance/summary/domain/environmental_performance_data.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
+@immutable
 sealed class EnvironmentalPerformanceState extends Equatable {
   const EnvironmentalPerformanceState();
 
@@ -8,16 +10,19 @@ sealed class EnvironmentalPerformanceState extends Equatable {
   List<Object> get props => [];
 }
 
+@immutable
 final class EnvironmentalPerformanceInitial
     extends EnvironmentalPerformanceState {
   const EnvironmentalPerformanceInitial();
 }
 
+@immutable
 final class EnvironmentalPerformanceLoading
     extends EnvironmentalPerformanceState {
   const EnvironmentalPerformanceLoading();
 }
 
+@immutable
 final class EnvironmentalPerformanceSuccess
     extends EnvironmentalPerformanceState {
   const EnvironmentalPerformanceSuccess({required this.data});
@@ -28,6 +33,7 @@ final class EnvironmentalPerformanceSuccess
   List<Object> get props => [data];
 }
 
+@immutable
 final class EnvironmentalPerformanceFailure
     extends EnvironmentalPerformanceState {
   const EnvironmentalPerformanceFailure({required this.errorMessage});

@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
 enum MonLogementStatut { initial, chargement, succes }
 
@@ -17,6 +18,7 @@ enum Superficie {
 
 enum Dpe { a, b, c, d, e, f, g, jeNeSaisPas }
 
+@immutable
 final class MonLogementState extends Equatable {
   const MonLogementState({
     required this.codePostal,

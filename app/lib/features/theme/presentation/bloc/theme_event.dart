@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
+@immutable
 sealed class ThemeEvent extends Equatable {
   const ThemeEvent();
 
@@ -7,6 +9,7 @@ sealed class ThemeEvent extends Equatable {
   List<Object> get props => [];
 }
 
+@immutable
 final class ThemeRecuperationDemandee extends ThemeEvent {
   const ThemeRecuperationDemandee(this.themeType);
 

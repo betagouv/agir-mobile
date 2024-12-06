@@ -1,6 +1,8 @@
 import 'package:app/features/authentication/domain/authentication_status.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
+@immutable
 sealed class GamificationEvent extends Equatable {
   const GamificationEvent();
 
@@ -8,6 +10,7 @@ sealed class GamificationEvent extends Equatable {
   List<Object> get props => [];
 }
 
+@immutable
 final class GamificationAuthentificationAChange extends GamificationEvent {
   const GamificationAuthentificationAChange(this.status);
 
@@ -17,6 +20,7 @@ final class GamificationAuthentificationAChange extends GamificationEvent {
   List<Object> get props => [status];
 }
 
+@immutable
 final class GamificationAbonnementDemande extends GamificationEvent {
   const GamificationAbonnementDemande();
 }

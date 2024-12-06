@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
+@immutable
 sealed class SeConnecterEvent extends Equatable {
   const SeConnecterEvent();
 
@@ -7,6 +9,7 @@ sealed class SeConnecterEvent extends Equatable {
   List<Object?> get props => [];
 }
 
+@immutable
 final class SeConnecterAdresseMailAChange extends SeConnecterEvent {
   const SeConnecterAdresseMailAChange(this.valeur);
 
@@ -16,6 +19,7 @@ final class SeConnecterAdresseMailAChange extends SeConnecterEvent {
   List<Object?> get props => [valeur];
 }
 
+@immutable
 final class SeConnecterMotDePasseAChange extends SeConnecterEvent {
   const SeConnecterMotDePasseAChange(this.valeur);
 
@@ -25,6 +29,7 @@ final class SeConnecterMotDePasseAChange extends SeConnecterEvent {
   List<Object?> get props => [valeur];
 }
 
+@immutable
 final class SeConnecterConnexionDemandee extends SeConnecterEvent {
   const SeConnecterConnexionDemandee();
 }

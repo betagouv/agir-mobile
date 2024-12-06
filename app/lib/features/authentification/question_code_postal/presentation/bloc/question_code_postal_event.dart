@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
+@immutable
 sealed class QuestionCodePostalEvent extends Equatable {
   const QuestionCodePostalEvent();
 
@@ -7,10 +9,12 @@ sealed class QuestionCodePostalEvent extends Equatable {
   List<Object> get props => [];
 }
 
+@immutable
 final class QuestionCodePostalPrenomDemande extends QuestionCodePostalEvent {
   const QuestionCodePostalPrenomDemande();
 }
 
+@immutable
 final class QuestionCodePostalAChange extends QuestionCodePostalEvent {
   const QuestionCodePostalAChange(this.valeur);
 
@@ -20,6 +24,7 @@ final class QuestionCodePostalAChange extends QuestionCodePostalEvent {
   List<Object> get props => [valeur];
 }
 
+@immutable
 final class QuestionCommuneAChange extends QuestionCodePostalEvent {
   const QuestionCommuneAChange(this.valeur);
 
@@ -29,6 +34,7 @@ final class QuestionCommuneAChange extends QuestionCodePostalEvent {
   List<Object> get props => [valeur];
 }
 
+@immutable
 final class QuestionCodePostalMiseAJourDemandee
     extends QuestionCodePostalEvent {
   const QuestionCodePostalMiseAJourDemandee();

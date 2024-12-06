@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
+@immutable
 sealed class MesInformationsEvent extends Equatable {
   const MesInformationsEvent();
 
@@ -7,10 +9,12 @@ sealed class MesInformationsEvent extends Equatable {
   List<Object> get props => [];
 }
 
+@immutable
 final class MesInformationsRecuperationDemandee extends MesInformationsEvent {
   const MesInformationsRecuperationDemandee();
 }
 
+@immutable
 final class MesInformationsPrenomChange extends MesInformationsEvent {
   const MesInformationsPrenomChange(this.valeur);
 
@@ -20,6 +24,7 @@ final class MesInformationsPrenomChange extends MesInformationsEvent {
   List<Object> get props => [valeur];
 }
 
+@immutable
 final class MesInformationsNomChange extends MesInformationsEvent {
   const MesInformationsNomChange(this.valeur);
 
@@ -29,6 +34,7 @@ final class MesInformationsNomChange extends MesInformationsEvent {
   List<Object> get props => [valeur];
 }
 
+@immutable
 final class MesInformationsAnneeChange extends MesInformationsEvent {
   const MesInformationsAnneeChange(this.valeur);
 
@@ -38,6 +44,7 @@ final class MesInformationsAnneeChange extends MesInformationsEvent {
   List<Object> get props => [valeur];
 }
 
+@immutable
 final class MesInformationsNombreDePartsFiscalesChange
     extends MesInformationsEvent {
   const MesInformationsNombreDePartsFiscalesChange(this.valeur);
@@ -48,6 +55,7 @@ final class MesInformationsNombreDePartsFiscalesChange
   List<Object> get props => [valeur];
 }
 
+@immutable
 final class MesInformationsRevenuFiscalChange extends MesInformationsEvent {
   const MesInformationsRevenuFiscalChange(this.valeur);
 
@@ -57,6 +65,7 @@ final class MesInformationsRevenuFiscalChange extends MesInformationsEvent {
   List<Object> get props => [valeur];
 }
 
+@immutable
 final class MesInformationsMiseAJourDemandee extends MesInformationsEvent {
   const MesInformationsMiseAJourDemandee();
 }

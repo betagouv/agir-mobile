@@ -2,8 +2,10 @@ import 'package:app/features/actions/core/domain/action_status.dart';
 import 'package:app/features/actions/detail/domain/action.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:fpdart/fpdart.dart';
 
+@immutable
 sealed class ActionDetailState extends Equatable {
   const ActionDetailState();
 
@@ -11,14 +13,17 @@ sealed class ActionDetailState extends Equatable {
   List<Object?> get props => [];
 }
 
+@immutable
 final class ActionDetailInitial extends ActionDetailState {
   const ActionDetailInitial();
 }
 
+@immutable
 final class ActionDetailLoadInProgress extends ActionDetailState {
   const ActionDetailLoadInProgress();
 }
 
+@immutable
 final class ActionDetailLoadSuccess extends ActionDetailState {
   const ActionDetailLoadSuccess({
     required this.action,
@@ -74,6 +79,7 @@ final class ActionDetailLoadSuccess extends ActionDetailState {
   List<Object?> get props => [action, newStatus, newReason];
 }
 
+@immutable
 final class ActionDetailLoadFailure extends ActionDetailState {
   const ActionDetailLoadFailure(this.error);
 
@@ -83,10 +89,12 @@ final class ActionDetailLoadFailure extends ActionDetailState {
   List<Object> get props => [error];
 }
 
+@immutable
 final class ActionDetailUpdateSuccess extends ActionDetailState {
   const ActionDetailUpdateSuccess();
 }
 
+@immutable
 final class ActionDetailUpdateIgnored extends ActionDetailState {
   const ActionDetailUpdateIgnored();
 }

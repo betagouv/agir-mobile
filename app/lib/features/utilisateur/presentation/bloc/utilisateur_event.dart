@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
+@immutable
 sealed class UtilisateurEvent extends Equatable {
   const UtilisateurEvent();
 
@@ -7,6 +9,7 @@ sealed class UtilisateurEvent extends Equatable {
   List<Object> get props => [];
 }
 
+@immutable
 final class UtilisateurRecuperationDemandee extends UtilisateurEvent {
   const UtilisateurRecuperationDemandee();
 }

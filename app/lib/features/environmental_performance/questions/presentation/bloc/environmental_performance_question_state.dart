@@ -1,6 +1,8 @@
 import 'package:app/features/know_your_customer/core/domain/question.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
+@immutable
 sealed class EnvironmentalPerformanceQuestionState extends Equatable {
   const EnvironmentalPerformanceQuestionState();
 
@@ -8,11 +10,13 @@ sealed class EnvironmentalPerformanceQuestionState extends Equatable {
   List<Object> get props => [];
 }
 
+@immutable
 final class EnvironmentalPerformanceQuestionInitial
     extends EnvironmentalPerformanceQuestionState {
   const EnvironmentalPerformanceQuestionInitial();
 }
 
+@immutable
 final class EnvironmentalPerformanceQuestionLoadSuccess
     extends EnvironmentalPerformanceQuestionState {
   const EnvironmentalPerformanceQuestionLoadSuccess({
@@ -25,6 +29,7 @@ final class EnvironmentalPerformanceQuestionLoadSuccess
   List<Object> get props => [questionIdList];
 }
 
+@immutable
 final class EnvironmentalPerformanceQuestionLoadFailure
     extends EnvironmentalPerformanceQuestionState {
   const EnvironmentalPerformanceQuestionLoadFailure({required this.message});

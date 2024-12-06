@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
+@immutable
 final class ChangerMotDePasseState extends Equatable {
   const ChangerMotDePasseState({
     required this.motDePasse,

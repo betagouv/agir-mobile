@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
+@immutable
 sealed class MotDePasseOublieCodeEvent extends Equatable {
   const MotDePasseOublieCodeEvent();
 
@@ -7,6 +9,7 @@ sealed class MotDePasseOublieCodeEvent extends Equatable {
   List<Object> get props => [];
 }
 
+@immutable
 final class MotDePasseOublieCodeCodeChange extends MotDePasseOublieCodeEvent {
   const MotDePasseOublieCodeCodeChange(this.valeur);
 
@@ -16,11 +19,13 @@ final class MotDePasseOublieCodeCodeChange extends MotDePasseOublieCodeEvent {
   List<Object> get props => [valeur];
 }
 
+@immutable
 final class MotDePasseOublieCodeRenvoyerCodeDemande
     extends MotDePasseOublieCodeEvent {
   const MotDePasseOublieCodeRenvoyerCodeDemande();
 }
 
+@immutable
 final class MotDePasseOublieCodeMotDePasseChange
     extends MotDePasseOublieCodeEvent {
   const MotDePasseOublieCodeMotDePasseChange(this.valeur);
@@ -31,6 +36,7 @@ final class MotDePasseOublieCodeMotDePasseChange
   List<Object> get props => [valeur];
 }
 
+@immutable
 final class MotDePasseOublieCodeValidationDemande
     extends MotDePasseOublieCodeEvent {
   const MotDePasseOublieCodeValidationDemande();
