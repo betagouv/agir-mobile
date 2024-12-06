@@ -14,7 +14,7 @@ dependencies:
 dev_dependencies:
   agir_lints:
     path: ../agir_lints
-  dart_code_metrics_presets: 2.18.0
+  dart_code_metrics_presets: 2.19.0
   flutter_test:
     sdk: flutter
   icon_font_generator:
