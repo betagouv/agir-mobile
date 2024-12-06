@@ -91,6 +91,7 @@ abstract final class Localisation {
   static const entre35et70m2 = 'Entre 35 et 70 m²';
   static const entre70et100m2 = 'Entre 70 et 100 m²';
   static const entrezLeCodeRecuParMail = 'Entrez le code reçu par e-mail !';
+  static const codeDeVerification = 'Code de vérification';
   static const erreurInattendue = 'Erreur inattendue';
   static const erreurInattendueContent =
       'Désolé, le service rencontre un problème, nous y travaillons pour le résoudre le plus rapidement possible.';

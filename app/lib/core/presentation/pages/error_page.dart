@@ -32,12 +32,16 @@ class _ErrorScreenState extends State<ErrorScreen> {
   Future<void> _setDeviceData() async {
     try {
       final deviceData = await _getDeviceData();
-      if (!mounted) return;
+      if (!mounted) {
+        return;
+      }
       setState(() {
         _deviceData = deviceData;
       });
     } on PlatformException {
-      if (!mounted) return;
+      if (!mounted) {
+        return;
+      }
       setState(() {
         _deviceData = (model: 'inconnu', version: 'inconnu');
       });

@@ -90,8 +90,7 @@ dart_code_metrics:
     - avoid-unsafe-collection-methods: false
     - check-is-not-closed-after-async-gap: false
     - enum-constants-ordering: false
-    - format-comment:
-        only-doc-comments: true
+    - format-comment: false
     - map-keys-ordering: false
     - match-getter-setter-field-names: false
     - member-ordering:
@@ -127,8 +126,7 @@ dart_code_metrics:
         exclude:
           - test/**
     - prefer-named-boolean-parameters: false
-    - prefer-named-parameters:
-        max-number: 2
+    - prefer-named-parameters: false
     - prefer-prefixed-global-constants: false
     - prefer-single-declaration-per-file: false
     - prefer-single-widget-per-file:
