@@ -1,5 +1,17 @@
-analyzer:
-  errors:
-    always_put_control_body_on_new_line: ignore
-    included_file_warning: ignore
 include: package:agir_lints/analysis_options.yaml
+analyzer:
+  exclude: 
+    - 'test/features/*_test.dart'
+dart_code_metrics:
+  exclude:
+    unused-files:
+      - test/features/step/*.dart
+    unused-code:
+      - test/features/step/*.dart
+  rules:
+    - avoid-unnecessary-futures:
+        exclude:
+          - test/features/step/*.dart
+    - avoid-unused-parameters:
+        exclude:
+          - test/features/step/*.dart

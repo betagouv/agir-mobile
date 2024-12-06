@@ -46,8 +46,9 @@ Future<void> pumpHomePage(final WidgetTester tester, final DioMock dio) async {
     ],
     blocProviders: [
       BlocProvider(
-        create: (final context) =>
-            AidesAccueilBloc(aidesPort: AssistancesRepositoryMock([])),
+        create: (final context) => AidesAccueilBloc(
+          assistancesRepository: AssistancesRepositoryMock([]),
+        ),
       ),
       BlocProvider(
         create: (final context) => HomeDisclaimerCubit()..closeDisclaimer(),

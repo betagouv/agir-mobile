@@ -1,22 +1,14 @@
 import 'package:app/app/app.dart';
+import 'package:app/core/infrastructure/endpoints.dart';
+import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/core/infrastructure/tracker.dart';
-import 'package:app/features/actions/detail/infrastructure/action_repository.dart';
-import 'package:app/features/actions/list/domain/actions_port.dart';
 import 'package:app/features/authentication/domain/authentication_service.dart';
 import 'package:app/features/authentication/domain/authentication_status.dart';
 import 'package:app/features/authentication/infrastructure/authentication_storage.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
-import 'package:app/features/environmental_performance/questions/infrastructure/environment_performance_question_repository.dart';
-import 'package:app/features/environmental_performance/summary/domain/environmental_performance_data.dart';
-import 'package:app/features/environmental_performance/summary/infrastructure/environmental_performance_summary_mapper.dart';
-import 'package:app/features/environmental_performance/summary/infrastructure/environmental_performance_summary_repository.dart';
-import 'package:app/features/mission/home/infrastructure/mission_home_repository.dart';
-import 'package:app/features/theme/core/domain/mission_liste.dart';
-import 'package:app/features/theme/core/infrastructure/mission_liste_mapper.dart';
 import 'package:clock/clock.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:mocktail_image_network/mocktail_image_network.dart';
 
@@ -41,36 +33,6 @@ import '../mocks/version_port_mock.dart';
 import '../scenario_context.dart';
 
 class _TrackerMock extends Mock implements Tracker {}
-
-class _ActionsPortMock extends Mock implements ActionsPort {}
-
-class _ActionRepositoryMock extends Mock implements ActionRepository {}
-
-class _MissionHomeRepositoryMock extends Mock implements MissionHomeRepository {
-  @override
-  Future<Either<Exception, List<MissionListe>>> fetch() async => Right(
-        missionThematiques
-            .map(
-              (final e) =>
-                  MissionListeMapper.fromJson(e as Map<String, dynamic>),
-            )
-            .toList(),
-      );
-}
-
-class _EnvironmentalPerformanceRepositoryMock extends Mock
-    implements EnvironmentalPerformanceSummaryRepository {
-  @override
-  Future<Either<Exception, EnvironmentalPerformanceData>> fetch() async =>
-      Right(
-        EnvironmentalPerformanceSummaryMapperyMapper.fromJson(
-          environmentalPerformancePartialData,
-        ),
-      );
-}
-
-class _EnvironmentalPerformanceQuestionRepositoryMock extends Mock
-    implements EnvironmentalPerformanceQuestionRepository {}
 
 /// Iel lance l'application.
 Future<void> ielLanceLapplication(final WidgetTester tester) async {
@@ -124,20 +86,28 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
   final tracker = _TrackerMock();
   when(() => tracker.navigatorObserver)
       .thenAnswer((final _) => RouteObserver<ModalRoute<void>>());
+  final dioMock = DioMock()
+    ..getM(
+      Endpoints.bilan,
+      responseData: environmentalPerformancePartialData,
+    )
+    ..getM(Endpoints.missionsRecommandees, responseData: missionThematiques);
+
   await mockNetworkImages(() async {
     await tester.pumpFrames(
       App(
         clock: clock,
         tracker: tracker,
-        missionHomeRepository: _MissionHomeRepositoryMock(),
+        messageBus: MessageBus(),
         dioHttpClient: DioHttpClient(
-          dio: DioMock(),
+          dio: dioMock,
           authenticationService: authenticationService,
         ),
         authenticationService: authenticationService,
         authentificationPort: ScenarioContext().authentificationPortMock!,
         themePort: ScenarioContext().themePortMock!,
-        aidesPort: AssistancesRepositoryMock(ScenarioContext().aides),
+        assistancesRepository:
+            AssistancesRepositoryMock(ScenarioContext().aides),
         bibliothequePort: BibliothequePortMock(ScenarioContext().bibliotheque),
         recommandationsPort:
             RecommandationsPortMock(ScenarioContext().recommandations),
@@ -149,13 +119,7 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
         firstNamePort: profilPort,
         profilPort: profilPort,
         knowYourCustomersRepository: mieuxVousConnaitrePort,
-        environmentalPerformanceSummaryRepository:
-            _EnvironmentalPerformanceRepositoryMock(),
-        environmentalPerformanceQuestionRepository:
-            _EnvironmentalPerformanceQuestionRepositoryMock(),
         mieuxVousConnaitrePort: mieuxVousConnaitrePort,
-        actionsPort: _ActionsPortMock(),
-        actionRepository: _ActionRepositoryMock(),
         gamificationPort: GamificationPortMock(ScenarioContext().gamification),
       ),
       Durations.short1,

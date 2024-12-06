@@ -1,6 +1,7 @@
 import 'package:app/core/presentation/widgets/composants/code_input.dart';
 import 'package:app/features/authentification/saisie_code/presentation/bloc/saisie_code_bloc.dart';
 import 'package:app/features/authentification/saisie_code/presentation/bloc/saisie_code_event.dart';
+import 'package:app/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,7 +11,7 @@ class SaisieCodeInput extends StatelessWidget {
   @override
   Widget build(final context) => Semantics(
         textField: true,
-        label: 'Code de vérification',
+        label: Localisation.codeDeVerification,
         child: ExcludeSemantics(
           child: FnvCodeInput(
             onChanged: (final value) {

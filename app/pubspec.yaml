@@ -46,6 +46,8 @@ dependencies:
 dev_dependencies:
   agir_lints:
     path: ../packages/agir_lints
+  bdd_widget_test: 1.7.4
+  build_runner: 2.4.13
   dart_code_metrics_presets: 2.19.0
   faker: 2.2.0
   flutter_launcher_icons: 0.14.2
@@ -66,6 +68,7 @@ flutter_native_splash:
 
 flutter:
   uses-material-design: true
+  generate: true
   assets:
     - assets/logos/
     - assets/svgs/
