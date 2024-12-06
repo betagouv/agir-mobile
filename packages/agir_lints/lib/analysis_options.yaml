@@ -41,6 +41,16 @@ dart_code_metrics:
     - package:dart_code_metrics_presets/all.yaml
     - package:dart_code_metrics_presets/bloc.yaml
     - package:dart_code_metrics_presets/equatable.yaml
+  pubspec-rules:
+    - avoid-any-version
+    - avoid-dependency-overrides
+    # - banned-dependencies 
+    # - prefer-caret-version-syntax # incompatible with `prefer-pinned-version-syntax`.
+    # - prefer-correct-package-name
+    - prefer-correct-screenshots
+    - prefer-pinned-version-syntax
+    - prefer-publish-to-none
+    - prefer-semver-version
   rules:
     - arguments-ordering:
         first:
