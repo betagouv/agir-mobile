@@ -1,8 +1,9 @@
 import 'package:app/app/router/app_router.dart';
+import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/core/infrastructure/tracker.dart';
 import 'package:app/features/accueil/presentation/cubit/home_disclaimer_cubit.dart';
 import 'package:app/features/actions/detail/infrastructure/action_repository.dart';
-import 'package:app/features/actions/list/domain/actions_port.dart';
+import 'package:app/features/actions/list/infrastructure/actions_adapter.dart';
 import 'package:app/features/articles/domain/articles_port.dart';
 import 'package:app/features/assistances/core/presentation/bloc/aides_accueil_bloc.dart';
 import 'package:app/features/assistances/item/presentation/bloc/aide_bloc.dart';
@@ -57,12 +58,12 @@ class App extends StatefulWidget {
     super.key,
     required this.clock,
     required this.tracker,
-    required this.missionHomeRepository,
+    required this.messageBus,
     required this.dioHttpClient,
     required this.authenticationService,
     required this.authentificationPort,
     required this.themePort,
-    required this.aidesPort,
+    required this.assistancesRepository,
     required this.bibliothequePort,
     required this.recommandationsPort,
     required this.articlesPort,
@@ -73,22 +74,18 @@ class App extends StatefulWidget {
     required this.firstNamePort,
     required this.profilPort,
     required this.knowYourCustomersRepository,
-    required this.environmentalPerformanceSummaryRepository,
-    required this.environmentalPerformanceQuestionRepository,
     required this.mieuxVousConnaitrePort,
-    required this.actionsPort,
-    required this.actionRepository,
     required this.gamificationPort,
   });
 
   final Clock clock;
   final Tracker tracker;
-  final MissionHomeRepository missionHomeRepository;
+  final MessageBus messageBus;
   final DioHttpClient dioHttpClient;
   final AuthenticationService authenticationService;
   final AuthentificationPort authentificationPort;
   final ThemePort themePort;
-  final AssistancesRepository aidesPort;
+  final AssistancesRepository assistancesRepository;
   final BibliothequePort bibliothequePort;
   final RecommandationsPort recommandationsPort;
   final ArticlesPort articlesPort;
@@ -99,13 +96,7 @@ class App extends StatefulWidget {
   final FirstNamePort firstNamePort;
   final ProfilPort profilPort;
   final KnowYourCustomersRepository knowYourCustomersRepository;
-  final EnvironmentalPerformanceSummaryRepository
-      environmentalPerformanceSummaryRepository;
-  final EnvironmentalPerformanceQuestionRepository
-      environmentalPerformanceQuestionRepository;
   final MieuxVousConnaitrePort mieuxVousConnaitrePort;
-  final ActionsPort actionsPort;
-  final ActionRepository actionRepository;
   final GamificationPort gamificationPort;
 
   @override
@@ -143,7 +134,7 @@ class _AppState extends State<App> {
               RepositoryProvider.value(value: widget.clock),
               RepositoryProvider.value(value: widget.authentificationPort),
               RepositoryProvider.value(value: widget.themePort),
-              RepositoryProvider.value(value: widget.aidesPort),
+              RepositoryProvider.value(value: widget.assistancesRepository),
               RepositoryProvider.value(value: widget.articlesPort),
               RepositoryProvider.value(value: widget.quizPort),
               RepositoryProvider.value(value: widget.profilPort),
@@ -153,10 +144,17 @@ class _AppState extends State<App> {
               ),
               RepositoryProvider.value(value: widget.mieuxVousConnaitrePort),
               RepositoryProvider.value(value: widget.gamificationPort),
-              RepositoryProvider.value(value: widget.actionsPort),
-              RepositoryProvider.value(value: widget.actionRepository),
               RepositoryProvider.value(value: widget.firstNamePort),
-              RepositoryProvider.value(value: widget.missionHomeRepository),
+              RepositoryProvider(
+                create: (final context) =>
+                    ActionsAdapter(client: widget.dioHttpClient),
+              ),
+              RepositoryProvider(
+                create: (final context) => ActionRepository(
+                  client: widget.dioHttpClient,
+                  messageBus: widget.messageBus,
+                ),
+              ),
               RepositoryProvider(
                 create: (final context) =>
                     MissionRepository(client: widget.dioHttpClient),
@@ -178,12 +176,14 @@ class _AppState extends State<App> {
                 ),
                 BlocProvider(
                   create: (final context) => AidesAccueilBloc(
-                    aidesPort: widget.aidesPort,
+                    assistancesRepository: widget.assistancesRepository,
                   ),
                 ),
                 BlocProvider(
-                  create: (final context) =>
-                      MissionHomeBloc(repository: widget.missionHomeRepository),
+                  create: (final context) => MissionHomeBloc(
+                    repository:
+                        MissionHomeRepository(client: widget.dioHttpClient),
+                  ),
                 ),
                 BlocProvider(create: (final context) => AideBloc()),
                 BlocProvider(
@@ -217,14 +217,17 @@ class _AppState extends State<App> {
                 BlocProvider(
                   create: (final context) =>
                       EnvironmentalPerformanceQuestionBloc(
-                    repository:
-                        widget.environmentalPerformanceQuestionRepository,
+                    repository: EnvironmentalPerformanceQuestionRepository(
+                      client: widget.dioHttpClient,
+                    ),
                   ),
                 ),
                 BlocProvider(
                   create: (final context) => EnvironmentalPerformanceBloc(
                     useCase: FetchEnvironmentalPerformance(
-                      widget.environmentalPerformanceSummaryRepository,
+                      EnvironmentalPerformanceSummaryRepository(
+                        client: widget.dioHttpClient,
+                      ),
                     ),
                   ),
                 ),

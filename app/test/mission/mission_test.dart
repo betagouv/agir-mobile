@@ -69,8 +69,9 @@ Future<void> pumpForMissionPage(
     ],
     blocProviders: [
       BlocProvider(
-        create: (final context) =>
-            AidesAccueilBloc(aidesPort: AssistancesRepositoryMock([])),
+        create: (final context) => AidesAccueilBloc(
+          assistancesRepository: AssistancesRepositoryMock([]),
+        ),
       ),
       BlocProvider(
         create: (final context) => HomeDisclaimerCubit()..closeDisclaimer(),
