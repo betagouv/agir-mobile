@@ -48,7 +48,7 @@ dev_dependencies:
     path: ../packages/agir_lints
   dart_code_metrics_presets: 2.18.0
   faker: 2.2.0
-  flutter_launcher_icons: 0.14.1
+  flutter_launcher_icons: 0.14.2
   flutter_test:
     sdk: flutter
   mocktail: 1.0.4
