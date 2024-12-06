@@ -11,8 +11,6 @@ import 'package:app/core/presentation/pages/error_page.dart';
 import 'package:app/core/presentation/widgets/composants/scaffold.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
-import 'package:app/features/actions/detail/infrastructure/action_repository.dart';
-import 'package:app/features/actions/list/infrastructure/actions_adapter.dart';
 import 'package:app/features/articles/infrastructure/articles_api_adapter.dart';
 import 'package:app/features/assistances/list/infrastructure/assistances_repository.dart';
 import 'package:app/features/authentication/domain/authentication_service.dart';
@@ -23,13 +21,10 @@ import 'package:app/features/authentification/core/infrastructure/cms_api_client
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/bibliotheque/infrastructure/bibliotheque_api_adapter.dart';
 import 'package:app/features/communes/infrastructure/communes_api_adapter.dart';
-import 'package:app/features/environmental_performance/questions/infrastructure/environment_performance_question_repository.dart';
-import 'package:app/features/environmental_performance/summary/infrastructure/environmental_performance_summary_repository.dart';
 import 'package:app/features/first_name/infrastructure/first_name_adapter.dart';
 import 'package:app/features/gamification/infrastructure/gamification_api_adapter.dart';
 import 'package:app/features/know_your_customer/core/infrastructure/mieux_vous_connaitre_api_adapter.dart';
 import 'package:app/features/know_your_customer/list/infrastructure/know_your_customers_repository.dart';
-import 'package:app/features/mission/home/infrastructure/mission_home_repository.dart';
 import 'package:app/features/profil/core/infrastructure/profil_api_adapter.dart';
 import 'package:app/features/quiz/infrastructure/quiz_api_adapter.dart';
 import 'package:app/features/recommandations/infrastructure/recommandations_api_adapter.dart';
@@ -180,7 +175,7 @@ class _MyAppState extends State<MyApp> {
           return App(
             clock: _clock,
             tracker: _tracker,
-            missionHomeRepository: MissionHomeRepository(client: client),
+            messageBus: messageBus,
             dioHttpClient: client,
             authenticationService: _authenticationService,
             authentificationPort: AuthentificationApiAdapter(
@@ -188,7 +183,7 @@ class _MyAppState extends State<MyApp> {
               authenticationService: _authenticationService,
             ),
             themePort: ThemeApiAdapter(client: client),
-            aidesPort: AssistancesRepository(client: client),
+            assistancesRepository: AssistancesRepository(client: client),
             bibliothequePort: BibliothequeApiAdapter(client: client),
             recommandationsPort: RecommandationsApiAdapter(client: client),
             articlesPort: ArticlesApiAdapter(
@@ -203,17 +198,10 @@ class _MyAppState extends State<MyApp> {
             profilPort: ProfilApiAdapter(client: client),
             knowYourCustomersRepository:
                 KnowYourCustomersRepository(client: client),
-            environmentalPerformanceSummaryRepository:
-                EnvironmentalPerformanceSummaryRepository(client: client),
-            environmentalPerformanceQuestionRepository:
-                EnvironmentalPerformanceQuestionRepository(client: client),
             mieuxVousConnaitrePort: MieuxVousConnaitreApiAdapter(
               client: client,
               messageBus: messageBus,
             ),
-            actionsPort: ActionsAdapter(client: client),
-            actionRepository:
-                ActionRepository(client: client, messageBus: messageBus),
             gamificationPort: gamificationApiAdapter,
           );
         },
