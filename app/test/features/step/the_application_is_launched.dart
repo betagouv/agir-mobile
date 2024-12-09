@@ -26,19 +26,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../old/api/flutter_secure_storage_fake.dart';
-import '../../old/api/package_info_fake.dart';
 import '../helper/feature_context.dart';
+import '../helper/package_info_fake.dart';
 
 class _TrackerMock extends Mock implements Tracker {}
 
 /// Usage: the application is launched
 Future<void> theApplicationIsLaunched(final WidgetTester tester) async {
   final clock = Clock.fixed(DateTime(1992, 9));
+  final authenticationStorage =
+      AuthenticationStorage(FeatureContext.instance.secureStorage);
+  await authenticationStorage.init();
   final authenticationService = AuthenticationService(
-    authenticationRepository: AuthenticationStorage(FlutterSecureStorageFake()),
+    authenticationRepository: authenticationStorage,
     clock: clock,
   );
+  await authenticationService.checkAuthenticationStatus();
   final dioHttpClient = DioHttpClient(
     dio: FeatureContext.instance.dioMock,
     authenticationService: authenticationService,

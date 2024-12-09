@@ -5,11 +5,13 @@ import 'package:flutter_test/flutter_test.dart';
 
 import '../../environmental_performance/summary/environmental_performance_data.dart';
 import '../../helpers/dio_mock.dart';
+import '../../old/api/flutter_secure_storage_fake.dart';
 import '../helper/feature_context.dart';
 
 /// Usage: initialize context
 Future<void> initializeContext(final WidgetTester tester) async {
   FeatureContext.reset();
+  FeatureContext.instance.secureStorage = FlutterSecureStorageFake();
   FeatureContext.instance.dioMock = DioMock();
   setFirstName();
   setProfile();
