@@ -17,9 +17,6 @@ class AuthentificationPortMock implements AuthentificationPort {
 
   final AuthenticationService authenticationService;
 
-  bool oublieMotDePasseAppele = false;
-  bool modifierMotDePasseAppele = false;
-
   @override
   Future<Either<ApiErreur, void>> connexionDemandee(
     final InformationDeConnexion informationDeConnexion,
@@ -55,22 +52,16 @@ class AuthentificationPortMock implements AuthentificationPort {
   }
 
   @override
-  Future<Either<Exception, void>> oubliMotDePasse(final String email) async {
-    oublieMotDePasseAppele = true;
-
-    return const Right(null);
-  }
+  Future<Either<Exception, void>> oubliMotDePasse(final String email) async =>
+      const Right(null);
 
   @override
   Future<Either<ApiErreur, void>> modifierMotDePasse({
     required final String email,
     required final String code,
     required final String motDePasse,
-  }) async {
-    modifierMotDePasseAppele = true;
-
-    return const Right(null);
-  }
+  }) async =>
+      const Right(null);
 
   String prenom;
   bool estIntegrationTerminee;
