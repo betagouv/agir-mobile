@@ -13,6 +13,7 @@ import './step/i_tap_on_login_button.dart';
 import './step/i_enter_in_the_pin_field.dart';
 import './step/i_am_logged_in.dart';
 import './step/i_see_the_home_page.dart';
+import './step/i_tap_on_the_menu_button.dart';
 
 void main() {
   group('''Login to my account''', () {
@@ -37,6 +38,15 @@ void main() {
       await iAmLoggedIn(tester);
       await theApplicationIsLaunched(tester);
       await iSeeTheHomePage(tester);
+    });
+    testWidgets('''Logout''', (tester) async {
+      await bddSetUp(tester);
+      await iAmLoggedIn(tester);
+      await theApplicationIsLaunched(tester);
+      await iTapOnTheMenuButton(tester);
+      await iTapOn(tester, 'Se déconnecter');
+      await iSee(
+          tester, 'Ensemble,\naméliorons\nnos habitudes\nau jour le jour');
     });
   });
 }

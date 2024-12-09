@@ -15,6 +15,7 @@ Future<void> initializeContext(final WidgetTester tester) async {
   FeatureContext.instance.dioMock = DioMock();
   setFirstName();
   setProfile();
+  setDeleteAccount();
   setCommunes();
   setLogement();
   setPreferences();
@@ -129,3 +130,6 @@ void setPreferences() => FeatureContext.instance.dioMock
     },
   )
   ..putM(Endpoints.questionKyc('KYC_preference'));
+
+void setDeleteAccount() =>
+    FeatureContext.instance.dioMock..deleteM(Endpoints.utilisateur);

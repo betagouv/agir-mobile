@@ -19,3 +19,10 @@ Feature: Login to my account
     Given I am logged in
     Given the application is launched
     Then I see the home page
+
+  Scenario: Logout
+    Given I am logged in
+    Given the application is launched
+    When I tap on the menu button
+    When I tap on {'Se déconnecter'}
+    Then I see {'Ensemble,\naméliorons\nnos habitudes\nau jour le jour'}
