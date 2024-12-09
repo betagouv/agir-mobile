@@ -14,6 +14,7 @@ import './step/i_tap_on_create_my_account_button.dart';
 import './step/i_enter_in_the_pin_field.dart';
 import './step/i_see.dart';
 import './step/i_select_in_the_field.dart';
+import './step/i_see_the_home_page.dart';
 
 void main() {
   group('''First questions''', () {
@@ -44,7 +45,7 @@ void main() {
       await iTapOn(tester, 'Continuer');
       await iSee(tester, 'Tout est prêt !');
       await iTapOn(tester, 'C’est parti !');
-      await iSee(tester, 'Me nourrir');
+      await iSeeTheHomePage(tester);
     });
   });
 }

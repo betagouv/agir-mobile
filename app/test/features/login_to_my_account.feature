@@ -1,10 +1,10 @@
 Feature: Login to my account
   Background:
     Given initialize context
-    Given the application is launched
-    When I tap on {"J’ai déjà un compte"}
 
   Scenario: Login to my account is successful
+    Given the application is launched
+    When I tap on {"J’ai déjà un compte"}
     Then I see {'Accédez à mon compte J’agis'}
 
     When I enter {'joe@doe.fr'} in the {'Mon adresse email'} field
@@ -14,3 +14,8 @@ Feature: Login to my account
 
     When I enter {'999999'} in the pin field
     Then I see {'Bienvenue sur J’agis ! Faisons connaissance...'}
+
+  Scenario: Already logged in
+    Given I am logged in
+    Given the application is launched
+    Then I see the home page

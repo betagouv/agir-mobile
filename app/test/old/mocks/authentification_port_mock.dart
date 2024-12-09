@@ -17,19 +17,14 @@ class AuthentificationPortMock implements AuthentificationPort {
 
   final AuthenticationService authenticationService;
 
-  bool connexionAppele = false;
-  bool validationAppele = false;
   bool oublieMotDePasseAppele = false;
   bool modifierMotDePasseAppele = false;
 
   @override
   Future<Either<ApiErreur, void>> connexionDemandee(
     final InformationDeConnexion informationDeConnexion,
-  ) async {
-    connexionAppele = true;
-
-    return const Right(null);
-  }
+  ) async =>
+      const Right(null);
 
   @override
   Future<Either<Exception, void>> deconnexionDemandee() async {
@@ -54,8 +49,6 @@ class AuthentificationPortMock implements AuthentificationPort {
   Future<Either<ApiErreur, void>> validationDemandee(
     final InformationDeCode informationDeConnexion,
   ) async {
-    validationAppele = true;
-
     await authenticationService.login(token);
 
     return const Right(null);
