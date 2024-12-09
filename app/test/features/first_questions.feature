@@ -27,4 +27,4 @@ Feature: First questions
     Then I see {'Tout est prêt !'}
 
     When I tap on {'C’est parti !'}
-    Then I see {'Me nourrir'}
+    Then I see the home page

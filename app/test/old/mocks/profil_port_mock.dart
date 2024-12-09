@@ -40,8 +40,6 @@ class ProfilPortMock implements ProfilPort, FirstNamePort {
   Dpe? dpe;
   double nombreDePartsFiscales;
   int? revenuFiscal;
-  bool supprimerLeCompteAppele = false;
-  bool changerLeMotDePasseAppele = false;
 
   @override
   Future<Either<Exception, Informations>> recupererProfil() async => Right(
@@ -107,20 +105,14 @@ class ProfilPortMock implements ProfilPort, FirstNamePort {
   }
 
   @override
-  Future<Either<Exception, void>> supprimerLeCompte() async {
-    supprimerLeCompteAppele = true;
-
-    return const Right(null);
-  }
+  Future<Either<Exception, void>> supprimerLeCompte() async =>
+      const Right(null);
 
   @override
   Future<Either<Exception, void>> changerMotDePasse({
     required final String motDePasse,
-  }) async {
-    changerLeMotDePasseAppele = true;
-
-    return const Right(null);
-  }
+  }) async =>
+      const Right(null);
 
   @override
   Future<Either<Exception, Unit>> addFirstName(
