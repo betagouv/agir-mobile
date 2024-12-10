@@ -24,19 +24,24 @@ void main() {
         responseData: jsonDecode(
           '''
 {
-    "content_id": "168",
-    "type": "article",
-    "titre": "Recette : velouté crémeux de patates douces",
-    "soustitre": "Une recette cocooning pour l'hiver",
-    "thematique_principale": "alimentation",
-    "thematique_principale_label": "🥦 Alimentation",
-    "thematiques": ["alimentation"],
-    "image_url": "https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1702656988/elena_leya_ves_Mzw6_ADMA_unsplash_974d78eae9.jpg",
-    "points": 5,
-    "favoris": false,
-    "like_level": null,
-    "read_date": null
-}''',
+  "content_id": "168",
+  "titre": "L'impact de la viande sur l'environnement : chiffres et explications",
+  "soustitre": null,
+  "thematique_principale": "alimentation",
+  "thematique_principale_label": "Me nourrir",
+  "thematiques": [
+    "alimentation"
+  ],
+  "image_url": "https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1718635565/pexels_matthiaszomer_325257_2655b228d0.jpg",
+  "points": 5,
+  "favoris": false,
+  "read_date": "2024-11-21T10:25:25.723Z",
+  "contenu": "<h2><span>1. Les émissions de gaz à effet de serre</span></h2><p><span>L'élevage est responsable de 14,5 % des émissions mondiales de gaz à effet de serre (GES), soit environ 7,1 gigatonnes de CO2 par an​. Les principaux gaz émis sont le méthane (CH4), le dioxyde de carbone (CO2) et le protoxyde d'azote (N2O). Le méthane, principalement émis par les rots des bovins, est environ 25 fois plus puissant que le CO2 sur une période de 100 ans. Par ailleurs, 80% des émissions liées à l'agriculture viennent de la production de viande, d’œufs et de produits laitiers.</span></p><h2><span>2. L’utilisation des ressources</span></h2><p><span>L'élevage consomme d'énormes quantités de ressources naturelles. Environ 70% des terres agricoles mondiales sont utilisées pour l'élevage ou la production de cultures fourragères​​. La viande par exemple nécessite environ 3 fois plus d'eau que la production de la même quantité de légumineuses, en prenant en compte l'eau pour l'irrigation des cultures destinées à l'alimentation des animaux, leur boisson, et le traitement.</span></p><h2><span>3. Déforestation et perte de biodiversité</span></h2><p><span>L'expansion des pâturages et des cultures pour l'alimentation animale est un facteur majeur de la déforestation, notamment en Amazonie​​. Environ 80% de la déforestation mondiale est liée à l'agriculture, avec l'élevage jouant un rôle prépondérant. La conversion des forêts en terres agricoles a de lourds impacts sur les habitats naturels, entraînant une perte massive de biodiversité. Par exemple, chaque année, environ 13 millions d'hectares de forêt sont perdus à cause de l'agriculture et de l'élevage.</span></p>",
+  "partenaire_nom": null,
+  "partenaire_url": null,
+  "partenaire_logo_url": null
+}
+''',
         ),
       );
     final client = ClientMock()
@@ -126,7 +131,14 @@ void main() {
               "codes_region": null,
               "partenaire": {
                 "data": null
-              }
+              },
+              "sources": [
+                {
+                  "id": 86,
+                  "libelle": "Réseau Action Climat",
+                  "lien": "https://reseauactionclimat.org/manger-local-permet-il-de-reduire-les-impacts-environnementaux-de-son-alimentation/"
+                }
+              ]
             }
           }
         ]
@@ -182,7 +194,7 @@ void main() {
           partenaire: null,
           sources: [],
           isFavorite: false,
-          isRead: false,
+          isRead: true,
         ),
       ),
     );

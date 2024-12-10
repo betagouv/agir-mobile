@@ -1,4 +1,3 @@
-import 'package:app/features/articles/domain/article.dart';
 import 'package:app/features/assistances/core/domain/aide.dart';
 import 'package:app/features/authentication/domain/authentication_status.dart';
 import 'package:app/features/bibliotheque/domain/bibliotheque.dart';
@@ -11,7 +10,6 @@ import 'package:app/features/simulateur_velo/domain/aide_velo_par_type.dart';
 import 'package:app/features/theme/core/domain/mission_liste.dart';
 
 import 'mocks/aide_velo_port_mock.dart';
-import 'mocks/articles_port_mock.dart';
 import 'mocks/authentification_port_mock.dart';
 import 'mocks/mieux_vous_connaitre_port_mock.dart';
 import 'mocks/profil_port_mock.dart';
@@ -51,16 +49,6 @@ class ScenarioContext {
   List<Assistance> aides = <Assistance>[];
   List<MissionListe> missionListe = <MissionListe>[];
   List<Recommandation> recommandations = <Recommandation>[];
-  Article article = const Article(
-    id: '0',
-    titre: 'Titre',
-    sousTitre: 'Sous-titre',
-    contenu: '<p>Contenu</p>',
-    partenaire: null,
-    sources: [],
-    isFavorite: false,
-    isRead: false,
-  );
   Quiz quiz = const Quiz(
     id: 0,
     thematique: '',
@@ -78,7 +66,6 @@ class ScenarioContext {
 
   AideVeloPortMock? aideVeloPortMock;
   ProfilPortMock? profilPortMock;
-  ArticlesPortMock? articlesPortMock;
   AuthentificationPortMock? authentificationPortMock;
   QuizPortMock? quizPortMock;
   MieuxVousConnaitrePortMock? mieuxVousConnaitrePortMock;

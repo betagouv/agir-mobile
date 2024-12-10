@@ -13,7 +13,6 @@ class ArticleBloc extends Bloc<ArticleEvent, ArticleState> {
       final result = await articlesPort.recupererArticle(event.id);
       await result.fold((final l) {}, (final r) async {
         emit(ArticleState(article: r));
-        await articlesPort.marquerCommeLu(event.id);
         await gamificationPort.mettreAJourLesPoints();
       });
     });

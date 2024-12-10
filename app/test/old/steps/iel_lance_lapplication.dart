@@ -18,7 +18,6 @@ import '../../mission/mission_test.dart';
 import '../api/constants.dart';
 import '../api/flutter_secure_storage_fake.dart';
 import '../mocks/aide_velo_port_mock.dart';
-import '../mocks/articles_port_mock.dart';
 import '../mocks/assistances_repository_mock.dart';
 import '../mocks/authentification_port_mock.dart';
 import '../mocks/bibliotheque_port_mock.dart';
@@ -71,8 +70,6 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
   final mieuxVousConnaitrePort = ScenarioContext().mieuxVousConnaitrePortMock!;
 
   ScenarioContext().quizPortMock = QuizPortMock(ScenarioContext().quiz);
-  ScenarioContext().articlesPortMock =
-      ArticlesPortMock(ScenarioContext().article);
   ScenarioContext().authentificationPortMock = AuthentificationPortMock(
     authenticationService,
     prenom: prenom,
@@ -111,7 +108,6 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
         bibliothequePort: BibliothequePortMock(ScenarioContext().bibliotheque),
         recommandationsPort:
             RecommandationsPortMock(ScenarioContext().recommandations),
-        articlesPort: ScenarioContext().articlesPortMock!,
         quizPort: ScenarioContext().quizPortMock!,
         versionPort: const VersionPortMock(),
         communesPort: CommunesPortMock(ScenarioContext().communes),

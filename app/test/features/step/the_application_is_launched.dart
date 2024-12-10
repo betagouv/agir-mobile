@@ -1,7 +1,6 @@
 import 'package:app/app/app.dart';
 import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/core/infrastructure/tracker.dart';
-import 'package:app/features/articles/infrastructure/articles_api_adapter.dart';
 import 'package:app/features/assistances/list/infrastructure/assistances_repository.dart';
 import 'package:app/features/authentication/domain/authentication_service.dart';
 import 'package:app/features/authentication/infrastructure/authentication_storage.dart';
@@ -54,6 +53,7 @@ Future<void> theApplicationIsLaunched(final WidgetTester tester) async {
   when(() => tracker.navigatorObserver)
       .thenAnswer((final _) => RouteObserver<ModalRoute<void>>());
   final messageBus = MessageBus();
+
   await tester.pumpFrames(
     App(
       clock: clock,
@@ -69,10 +69,6 @@ Future<void> theApplicationIsLaunched(final WidgetTester tester) async {
       assistancesRepository: AssistancesRepository(client: dioHttpClient),
       bibliothequePort: BibliothequeApiAdapter(client: dioHttpClient),
       recommandationsPort: RecommandationsApiAdapter(client: dioHttpClient),
-      articlesPort: ArticlesApiAdapter(
-        client: dioHttpClient,
-        cmsApiClient: cmsHttpClient,
-      ),
       quizPort:
           QuizApiAdapter(client: dioHttpClient, cmsApiClient: cmsHttpClient),
       versionPort: const VersionAdapter(packageInfo: PackageInfoFake()),

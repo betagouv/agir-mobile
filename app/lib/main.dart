@@ -11,7 +11,6 @@ import 'package:app/core/presentation/pages/error_page.dart';
 import 'package:app/core/presentation/widgets/composants/scaffold.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
-import 'package:app/features/articles/infrastructure/articles_api_adapter.dart';
 import 'package:app/features/assistances/list/infrastructure/assistances_repository.dart';
 import 'package:app/features/authentication/domain/authentication_service.dart';
 import 'package:app/features/authentication/infrastructure/authentication_storage.dart';
@@ -186,10 +185,6 @@ class _MyAppState extends State<MyApp> {
             assistancesRepository: AssistancesRepository(client: client),
             bibliothequePort: BibliothequeApiAdapter(client: client),
             recommandationsPort: RecommandationsApiAdapter(client: client),
-            articlesPort: ArticlesApiAdapter(
-              client: client,
-              cmsApiClient: cmsClient,
-            ),
             quizPort: QuizApiAdapter(client: client, cmsApiClient: cmsClient),
             versionPort: VersionAdapter(packageInfo: _packageInfo),
             communesPort: CommunesApiAdapter(client: client),

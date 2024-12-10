@@ -13,7 +13,3 @@ class CustomResponse extends http.StreamedResponse {
           },
         );
 }
-
-class OkResponse extends CustomResponse {
-  OkResponse({final String value = ''}) : super(value);
-}
