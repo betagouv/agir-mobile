@@ -1,3 +1,4 @@
+import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
@@ -13,7 +14,7 @@ sealed class ThemeEvent extends Equatable {
 final class ThemeRecuperationDemandee extends ThemeEvent {
   const ThemeRecuperationDemandee(this.themeType);
 
-  final String themeType;
+  final ThemeType themeType;
 
   @override
   List<Object> get props => [themeType];
