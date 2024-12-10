@@ -5,6 +5,7 @@ import 'package:app/features/accueil/presentation/cubit/home_disclaimer_cubit.da
 import 'package:app/features/actions/detail/infrastructure/action_repository.dart';
 import 'package:app/features/actions/list/infrastructure/actions_adapter.dart';
 import 'package:app/features/articles/domain/articles_port.dart';
+import 'package:app/features/articles/infrastructure/articles_api_adapter.dart';
 import 'package:app/features/assistances/core/presentation/bloc/aides_accueil_bloc.dart';
 import 'package:app/features/assistances/item/presentation/bloc/aide_bloc.dart';
 import 'package:app/features/assistances/list/infrastructure/assistances_repository.dart';
@@ -66,7 +67,6 @@ class App extends StatefulWidget {
     required this.assistancesRepository,
     required this.bibliothequePort,
     required this.recommandationsPort,
-    required this.articlesPort,
     required this.quizPort,
     required this.versionPort,
     required this.communesPort,
@@ -88,7 +88,6 @@ class App extends StatefulWidget {
   final AssistancesRepository assistancesRepository;
   final BibliothequePort bibliothequePort;
   final RecommandationsPort recommandationsPort;
-  final ArticlesPort articlesPort;
   final QuizPort quizPort;
   final VersionPort versionPort;
   final CommunesPort communesPort;
@@ -135,7 +134,6 @@ class _AppState extends State<App> {
               RepositoryProvider.value(value: widget.authentificationPort),
               RepositoryProvider.value(value: widget.themePort),
               RepositoryProvider.value(value: widget.assistancesRepository),
-              RepositoryProvider.value(value: widget.articlesPort),
               RepositoryProvider.value(value: widget.quizPort),
               RepositoryProvider.value(value: widget.profilPort),
               RepositoryProvider.value(value: widget.communesPort),
@@ -145,6 +143,10 @@ class _AppState extends State<App> {
               RepositoryProvider.value(value: widget.mieuxVousConnaitrePort),
               RepositoryProvider.value(value: widget.gamificationPort),
               RepositoryProvider.value(value: widget.firstNamePort),
+              RepositoryProvider<ArticlesPort>(
+                create: (final context) =>
+                    ArticlesApiAdapter(client: widget.dioHttpClient),
+              ),
               RepositoryProvider(
                 create: (final context) =>
                     ActionsAdapter(client: widget.dioHttpClient),

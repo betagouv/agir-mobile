@@ -145,8 +145,6 @@ void main() {
         final quizPort = ScenarioContext().quizPortMock;
         expect(quizPort!.isTerminerQuizCalled, isTrue);
         expect(quizPort.isExact, isTrue);
-        final articlesPort = ScenarioContext().articlesPortMock;
-        expect(articlesPort!.estMarquerCommeLuAppele, isTrue);
       });
     },
   );
@@ -209,8 +207,6 @@ void main() {
         final quizPort = ScenarioContext().quizPortMock;
         expect(quizPort!.isTerminerQuizCalled, isTrue);
         expect(quizPort.isExact, isTrue);
-        final articlesPort = ScenarioContext().articlesPortMock;
-        expect(articlesPort!.estMarquerCommeLuAppele, isFalse);
       });
     },
   );
@@ -283,8 +279,6 @@ void main() {
         final quizPort = ScenarioContext().quizPortMock;
         expect(quizPort!.isTerminerQuizCalled, isTrue);
         expect(quizPort.isExact, isFalse);
-        final articlesPort = ScenarioContext().articlesPortMock;
-        expect(articlesPort!.estMarquerCommeLuAppele, isTrue);
       });
     },
   );

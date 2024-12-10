@@ -34,7 +34,6 @@ class QuizPage extends StatelessWidget {
         create: (final context) => QuizBloc(
           quizPort: context.read(),
           gamificationPort: context.read(),
-          articlesPort: context.read(),
         )..add(QuizRecuperationDemandee(id)),
         child: Builder(
           builder: (final context) => BlocListener<QuizBloc, QuizState>(

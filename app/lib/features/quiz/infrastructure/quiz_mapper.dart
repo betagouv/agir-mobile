@@ -36,7 +36,7 @@ abstract final class QuizMapper {
       explicationKo: question['explicationKO'] as String?,
       article: articles.isEmpty && api == null
           ? null
-          : ArticleMapper.fromJson(cms: {'data': articles.first}, api: api!),
+          : ArticleMapper.fromJson(json: api!),
     );
   }
 }

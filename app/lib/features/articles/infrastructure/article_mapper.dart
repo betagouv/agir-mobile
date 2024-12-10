@@ -7,28 +7,22 @@ import 'package:app/features/articles/domain/source.dart';
 abstract final class ArticleMapper {
   const ArticleMapper._();
 
-  static Article fromJson({
-    required final Map<String, dynamic> cms,
-    required final Map<String, dynamic> api,
-  }) {
-    final article = cms['data']['attributes'] as Map<String, dynamic>;
-    final partenaire =
-        article['partenaire']['data']?['attributes'] as Map<String, dynamic>?;
-    final sources = article['sources'] as List<dynamic>?;
+  static Article fromJson({required final Map<String, dynamic> json}) {
+    final sources = json['sources'] as List<dynamic>?;
 
     return Article(
-      id: (cms['data']['id'] as num).toString(),
-      titre: article['titre'] as String,
-      sousTitre: article['sousTitre'] as String?,
-      contenu: article['contenu'] as String,
-      partenaire: partenaire == null
+      id: json['content_id'] as String,
+      titre: json['titre'] as String,
+      sousTitre: json['soustitre'] as String?,
+      contenu: json['contenu'] as String,
+      partenaire: json['partenaire_nom'] == null
           ? null
           : Partenaire(
-              nom: partenaire['nom'] as String,
-              logo: (partenaire['logo']['data'][0]['attributes']
-                  as Map<String, dynamic>)['url'] as String,
+              nom: json['partenaire_nom'] as String,
+              url: json['partenaire_url'] as String,
+              logo: json['partenaire_logo_url'] as String,
             ),
-      sources: sources == null
+      sources: sources == null // TODO(lsaudon): manque les sources
           ? List.empty()
           : sources
               .map((final e) => e as Map<String, dynamic>)
@@ -39,8 +33,8 @@ abstract final class ArticleMapper {
                 ),
               )
               .toList(),
-      isFavorite: api['favoris'] as bool,
-      isRead: api['read_date'] != null,
+      isFavorite: json['favoris'] as bool,
+      isRead: json['read_date'] != null,
     );
   }
 }
