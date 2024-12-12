@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/features/articles/domain/article.dart';
+import 'package:app/features/articles/domain/source.dart';
 import 'package:app/features/authentification/core/infrastructure/cms_api_client.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/quiz/domain/quiz.dart';
@@ -39,7 +40,13 @@ void main() {
   "contenu": "<h2><span>1. Les émissions de gaz à effet de serre</span></h2><p><span>L'élevage est responsable de 14,5 % des émissions mondiales de gaz à effet de serre (GES), soit environ 7,1 gigatonnes de CO2 par an​. Les principaux gaz émis sont le méthane (CH4), le dioxyde de carbone (CO2) et le protoxyde d'azote (N2O). Le méthane, principalement émis par les rots des bovins, est environ 25 fois plus puissant que le CO2 sur une période de 100 ans. Par ailleurs, 80% des émissions liées à l'agriculture viennent de la production de viande, d’œufs et de produits laitiers.</span></p><h2><span>2. L’utilisation des ressources</span></h2><p><span>L'élevage consomme d'énormes quantités de ressources naturelles. Environ 70% des terres agricoles mondiales sont utilisées pour l'élevage ou la production de cultures fourragères​​. La viande par exemple nécessite environ 3 fois plus d'eau que la production de la même quantité de légumineuses, en prenant en compte l'eau pour l'irrigation des cultures destinées à l'alimentation des animaux, leur boisson, et le traitement.</span></p><h2><span>3. Déforestation et perte de biodiversité</span></h2><p><span>L'expansion des pâturages et des cultures pour l'alimentation animale est un facteur majeur de la déforestation, notamment en Amazonie​​. Environ 80% de la déforestation mondiale est liée à l'agriculture, avec l'élevage jouant un rôle prépondérant. La conversion des forêts en terres agricoles a de lourds impacts sur les habitats naturels, entraînant une perte massive de biodiversité. Par exemple, chaque année, environ 13 millions d'hectares de forêt sont perdus à cause de l'agriculture et de l'élevage.</span></p>",
   "partenaire_nom": null,
   "partenaire_url": null,
-  "partenaire_logo_url": null
+  "partenaire_logo_url": null,
+  "sources": [
+    {
+      "label": "Réseau Action Climat",
+      "url": "https://reseauactionclimat.org/manger-local-permet-il-de-reduire-les-impacts-environnementaux-de-son-alimentation/"
+    }
+  ]
 }
 ''',
         ),
@@ -47,7 +54,7 @@ void main() {
     final client = ClientMock()
       ..getSuccess(
         path:
-            '/api/quizzes/14?populate[0]=questions.reponses,thematique_gamification,articles.partenaire.logo',
+            '/api/quizzes/14?populate[0]=questions.reponses,thematique_gamification,articles',
         response: CustomResponse('''
 {
   "data": {
@@ -129,9 +136,6 @@ void main() {
               "exclude_codes_commune": null,
               "codes_departement": null,
               "codes_region": null,
-              "partenaire": {
-                "data": null
-              },
               "sources": [
                 {
                   "id": 86,
@@ -192,7 +196,13 @@ void main() {
           contenu:
               "<h2><span>1. Les émissions de gaz à effet de serre</span></h2><p><span>L'élevage est responsable de 14,5 % des émissions mondiales de gaz à effet de serre (GES), soit environ 7,1 gigatonnes de CO2 par an​. Les principaux gaz émis sont le méthane (CH4), le dioxyde de carbone (CO2) et le protoxyde d'azote (N2O). Le méthane, principalement émis par les rots des bovins, est environ 25 fois plus puissant que le CO2 sur une période de 100 ans. Par ailleurs, 80% des émissions liées à l'agriculture viennent de la production de viande, d’œufs et de produits laitiers.</span></p><h2><span>2. L’utilisation des ressources</span></h2><p><span>L'élevage consomme d'énormes quantités de ressources naturelles. Environ 70% des terres agricoles mondiales sont utilisées pour l'élevage ou la production de cultures fourragères​​. La viande par exemple nécessite environ 3 fois plus d'eau que la production de la même quantité de légumineuses, en prenant en compte l'eau pour l'irrigation des cultures destinées à l'alimentation des animaux, leur boisson, et le traitement.</span></p><h2><span>3. Déforestation et perte de biodiversité</span></h2><p><span>L'expansion des pâturages et des cultures pour l'alimentation animale est un facteur majeur de la déforestation, notamment en Amazonie​​. Environ 80% de la déforestation mondiale est liée à l'agriculture, avec l'élevage jouant un rôle prépondérant. La conversion des forêts en terres agricoles a de lourds impacts sur les habitats naturels, entraînant une perte massive de biodiversité. Par exemple, chaque année, environ 13 millions d'hectares de forêt sont perdus à cause de l'agriculture et de l'élevage.</span></p>",
           partenaire: null,
-          sources: [],
+          sources: [
+            Source(
+              label: 'Réseau Action Climat',
+              url:
+                  'https://reseauactionclimat.org/manger-local-permet-il-de-reduire-les-impacts-environnementaux-de-son-alimentation/',
+            ),
+          ],
           isFavorite: false,
           isRead: true,
         ),
@@ -204,7 +214,7 @@ void main() {
     final client = ClientMock()
       ..getSuccess(
         path:
-            '/api/quizzes/14?populate[0]=questions.reponses,thematique_gamification,articles.partenaire.logo',
+            '/api/quizzes/14?populate[0]=questions.reponses,thematique_gamification,articles',
         response: CustomResponse('''
 {
   "data": {

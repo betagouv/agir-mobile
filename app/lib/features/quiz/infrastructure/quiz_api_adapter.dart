@@ -23,7 +23,7 @@ class QuizApiAdapter implements QuizPort {
   Future<Either<Exception, Quiz>> recupererQuiz(final String id) async {
     final cmsResponse = await _cmsApiClient.get(
       Uri.parse(
-        '/api/quizzes/$id?populate[0]=questions.reponses,thematique_gamification,articles.partenaire.logo',
+        '/api/quizzes/$id?populate[0]=questions.reponses,thematique_gamification,articles',
       ),
     );
 
