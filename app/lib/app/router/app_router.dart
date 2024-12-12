@@ -99,5 +99,4 @@ GoRouter goRouter({required final Tracker tracker}) => GoRouter(
       },
       initialLocation: '/loading',
       observers: [themeRouteObserver, tracker.navigatorObserver],
-      debugLogDiagnostics: true,
     );
