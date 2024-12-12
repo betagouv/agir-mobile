@@ -12,7 +12,7 @@ class RootPage extends StatelessWidget {
   });
 
   final Widget? title;
-  final Widget? appBarBottom;
+  final PreferredSizeWidget? appBarBottom;
   final Widget body;
 
   @override

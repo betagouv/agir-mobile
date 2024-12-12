@@ -37,66 +37,49 @@ class HomePage extends StatelessWidget {
   Widget build(final context) => const _TabPart();
 }
 
-class _TabPart extends StatefulWidget {
+class _TabPart extends StatelessWidget {
   const _TabPart();
 
   @override
-  State<_TabPart> createState() => _TabPartState();
-}
-
-class _TabPartState extends State<_TabPart>
-    with SingleTickerProviderStateMixin {
-  late final TabController _tabController;
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 5, vsync: this);
-  }
-
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(final context) => RootPage(
-        title: const _AppBarTitle(),
-        appBarBottom: TabBar(
-          tabs: const [
-            Tab(icon: Icon(DsfrIcons.buildingsHome4Line)),
-            Tab(text: 'Me nourrir'),
-            Tab(text: 'Me loger'),
-            Tab(text: 'Me déplacer'),
-            Tab(text: 'Consommer'),
-          ],
-          controller: _tabController,
-          isScrollable: true,
-          padding: const EdgeInsets.symmetric(horizontal: 12),
-          indicator: const UnderlineTabIndicator(
-            borderSide: BorderSide(
-              color: DsfrColors.blueFranceSun113,
-              width: 3,
+  Widget build(final context) => DefaultTabController(
+        length: 5,
+        child: RootPage(
+          title: const _AppBarTitle(),
+          appBarBottom: TabBar(
+            tabs: const [
+              Tab(icon: Icon(DsfrIcons.buildingsHome4Line)),
+              Tab(text: 'Me nourrir'),
+              Tab(text: 'Me loger'),
+              Tab(text: 'Me déplacer'),
+              Tab(text: 'Consommer'),
+            ],
+            isScrollable: true,
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            indicator: const UnderlineTabIndicator(
+              borderSide: BorderSide(
+                color: DsfrColors.blueFranceSun113,
+                width: 3,
+              ),
             ),
+            dividerHeight: 0,
+            labelStyle: const DsfrTextStyle.bodyMd(),
+            labelPadding:
+                const EdgeInsets.symmetric(horizontal: DsfrSpacings.s1w),
+            unselectedLabelStyle: const DsfrTextStyle.bodyMd(),
+            tabAlignment: TabAlignment.start,
+            textScaler:
+                MediaQuery.textScalerOf(context).clamp(maxScaleFactor: 2),
           ),
-          dividerHeight: 0,
-          labelStyle: const DsfrTextStyle.bodyMd(),
-          labelPadding:
-              const EdgeInsets.symmetric(horizontal: DsfrSpacings.s1w),
-          unselectedLabelStyle: const DsfrTextStyle.bodyMd(),
-          tabAlignment: TabAlignment.start,
-        ),
-        body: TabBarView(
-          controller: _tabController,
-          physics: const NeverScrollableScrollPhysics(),
-          children: const [
-            _Home(),
-            ThemePage(type: 'alimentation'),
-            ThemePage(type: 'logement'),
-            ThemePage(type: 'transport'),
-            ThemePage(type: 'consommation'),
-          ],
+          body: const TabBarView(
+            physics: NeverScrollableScrollPhysics(),
+            children: [
+              _Home(),
+              ThemePage(type: 'alimentation'),
+              ThemePage(type: 'logement'),
+              ThemePage(type: 'transport'),
+              ThemePage(type: 'consommation'),
+            ],
+          ),
         ),
       );
 }

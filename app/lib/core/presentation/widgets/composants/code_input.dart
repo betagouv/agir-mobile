@@ -27,21 +27,24 @@ class FnvCodeInput extends StatelessWidget {
       ),
     );
 
-    return Pinput(
-      length: 6,
-      defaultPinTheme: pinTheme,
-      focusedPinTheme: pinTheme.copyBorderWith(
-        border: const Border.fromBorderSide(
-          BorderSide(color: DsfrColors.focus525),
+    return MediaQuery(
+      data: MediaQuery.of(context).copyWith(textScaler: TextScaler.noScaling),
+      child: Pinput(
+        length: 6,
+        defaultPinTheme: pinTheme,
+        focusedPinTheme: pinTheme.copyBorderWith(
+          border: const Border.fromBorderSide(
+            BorderSide(color: DsfrColors.focus525),
+          ),
         ),
-      ),
-      onChanged: onChanged,
-      inputFormatters: [
-        FilteringTextInputFormatter.digitsOnly,
-        LengthLimitingTextInputFormatter(6),
-      ],
-      scrollPadding: EdgeInsets.only(
-        bottom: MediaQuery.viewInsetsOf(context).bottom + 130,
+        onChanged: onChanged,
+        inputFormatters: [
+          FilteringTextInputFormatter.digitsOnly,
+          LengthLimitingTextInputFormatter(6),
+        ],
+        scrollPadding: EdgeInsets.only(
+          bottom: MediaQuery.viewInsetsOf(context).bottom + 130,
+        ),
       ),
     );
   }

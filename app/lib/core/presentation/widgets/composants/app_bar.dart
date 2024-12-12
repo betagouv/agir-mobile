@@ -23,7 +23,7 @@ class FnvAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   final Widget? leading;
   final Widget? title;
-  final Widget? bottom;
+  final PreferredSizeWidget? bottom;
   final bool isRoot;
 
   @override
@@ -83,13 +83,12 @@ class FnvAppBar extends StatelessWidget implements PreferredSizeWidget {
       widget = Column(children: [widget, bottom!]);
     }
 
-    return DecoratedBox(
-      decoration: const ShapeDecoration(
-        color: FnvColors.appBarFond,
-        shadows: appBarOmbre,
-        shape: RoundedRectangleBorder(),
+    return Material(
+      color: FnvColors.appBarFond,
+      child: DecoratedBox(
+        decoration: const BoxDecoration(boxShadow: appBarOmbre),
+        child: SafeArea(child: widget),
       ),
-      child: SafeArea(child: widget),
     );
   }
 }

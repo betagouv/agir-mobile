@@ -15,9 +15,8 @@ class FnvBottomBar extends StatelessWidget {
         top: false,
         right: false,
         child: DecoratedBox(
-          decoration: const ShapeDecoration(
-            shadows: bottomNavigationBarOmbre,
-            shape: RoundedRectangleBorder(),
+          decoration: const BoxDecoration(
+            boxShadow: bottomNavigationBarOmbre,
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
