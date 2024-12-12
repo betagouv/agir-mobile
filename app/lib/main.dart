@@ -40,9 +40,10 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:native_dio_adapter/native_dio_adapter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:sentry_dio/sentry_dio.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 Future<void> main() async {
-  final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  final widgetsBinding = SentryWidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   if (!kDebugMode) {
     await CrashReporting.init();
