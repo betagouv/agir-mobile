@@ -1,11 +1,11 @@
 import 'package:equatable/equatable.dart';
 
 class Source extends Equatable {
-  const Source({required this.libelle, required this.lien});
+  const Source({required this.label, required this.url});
 
-  final String libelle;
-  final String lien;
+  final String label;
+  final String url;
 
   @override
-  List<Object> get props => [libelle, lien];
+  List<Object> get props => [label, url];
 }

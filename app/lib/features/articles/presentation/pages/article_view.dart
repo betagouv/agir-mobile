@@ -77,10 +77,10 @@ class _Content extends StatelessWidget {
             (final source) => Padding(
               padding: const EdgeInsets.only(bottom: DsfrSpacings.s1w),
               child: InkWell(
-                onTap: () async => FnvUrlLauncher.launch(source.lien),
+                onTap: () async => FnvUrlLauncher.launch(source.url),
                 child: Text.rich(
                   TextSpan(
-                    text: source.libelle,
+                    text: source.label,
                     children: const [
                       WidgetSpan(
                         alignment: PlaceholderAlignment.middle,
