@@ -28,11 +28,7 @@ class _CheckboxPageState extends State<CheckboxPage> {
               _value = value;
             }),
           ),
-          DsfrCheckbox.sm(
-            label: 'Label',
-            value: false,
-            onChanged: (final value) {},
-          ),
+          const DsfrCheckbox.sm(label: 'Label', value: false, onChanged: null),
           DsfrCheckbox.sm(
             label: 'Label',
             value: true,

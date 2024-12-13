@@ -1,3 +1,4 @@
+import 'package:accessibility_tools/accessibility_tools.dart';
 import 'package:dsfr_example/accordions_page.dart';
 import 'package:dsfr_example/buttons_page.dart';
 import 'package:dsfr_example/checkbox_page.dart';
@@ -44,6 +45,8 @@ class MyApp extends StatelessWidget {
             TogglesPage.model,
           ],
         ),
+        builder: (final context, final child) =>
+            AccessibilityTools(child: child),
         debugShowCheckedModeBanner: false,
       );
 }

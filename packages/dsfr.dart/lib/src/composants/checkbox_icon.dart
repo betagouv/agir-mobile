@@ -27,15 +27,15 @@ class DsfrCheckboxIcon extends StatelessWidget {
       ),
       child: Padding(
         padding: padding,
-        child: SizedBox.square(
-          dimension: dimension,
-          child: value
-              ? const Icon(
-                  DsfrIcons.systemCheckLine,
-                  size: dimension,
-                  color: DsfrColors.blueFrance975,
-                )
-              : null,
+        child: AnimatedOpacity(
+          opacity: value ? 1 : 0,
+          curve: Easing.emphasizedAccelerate,
+          duration: Durations.short3,
+          child: const Icon(
+            DsfrIcons.systemCheckLine,
+            size: dimension,
+            color: DsfrColors.blueFrance975,
+          ),
         ),
       ),
     );
