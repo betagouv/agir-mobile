@@ -5,7 +5,7 @@ abstract interface class QuizPort {
   Future<Either<Exception, Quiz>> recupererQuiz(final String id);
 
   Future<Either<Exception, void>> terminerQuiz({
-    required final int id,
+    required final String id,
     required final bool estExacte,
   });
 }

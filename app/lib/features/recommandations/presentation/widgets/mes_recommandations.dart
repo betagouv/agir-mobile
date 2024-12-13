@@ -1,7 +1,8 @@
 import 'package:app/features/recommandations/presentation/bloc/recommandations_bloc.dart';
 import 'package:app/features/recommandations/presentation/bloc/recommandations_event.dart';
-import 'package:app/features/recommandations/presentation/widgets/les_recommandations.dart';
+import 'package:app/features/recommandations/presentation/widgets/recommendation_widget.dart';
 import 'package:app/features/theme/core/domain/theme_type.dart';
+import 'package:app/features/theme/presentation/widgets/theme_type_tag.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +47,44 @@ class _View extends StatelessWidget {
             ],
           ),
           SizedBox(height: DsfrSpacings.s2w),
-          LesRecommandations(),
+          _List(),
         ],
       );
+}
+
+class _List extends StatelessWidget {
+  const _List();
+
+  @override
+  Widget build(final BuildContext context) {
+    final recommandations =
+        context.watch<RecommandationsBloc>().state.recommandations;
+
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      clipBehavior: Clip.none,
+      child: IntrinsicHeight(
+        child: Row(
+          children: recommandations
+              .map(
+                (final e) => RecommendationWidget(
+                  id: e.id,
+                  type: e.type,
+                  points: '${e.points}',
+                  imageUrl: e.imageUrl,
+                  themeTag: ThemeTypeTag(themeType: e.thematique),
+                  titre: e.titre,
+                  onPop: () {
+                    context
+                        .read<RecommandationsBloc>()
+                        .add(RecommandationsRecuperationDemandee(e.thematique));
+                  },
+                ),
+              )
+              .separator(const SizedBox(width: DsfrSpacings.s2w))
+              .toList(),
+        ),
+      ),
+    );
+  }
 }

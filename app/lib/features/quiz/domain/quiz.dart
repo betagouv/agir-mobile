@@ -1,4 +1,3 @@
-import 'package:app/features/articles/domain/article.dart';
 import 'package:equatable/equatable.dart';
 
 final class Quiz extends Equatable {
@@ -13,14 +12,14 @@ final class Quiz extends Equatable {
     required this.article,
   });
 
-  final int id;
+  final String id;
   final String thematique;
   final String question;
   final List<QuizReponse> reponses;
   final int points;
   final String? explicationOk;
   final String? explicationKo;
-  final Article? article;
+  final String? article;
 
   @override
   List<Object?> get props => [

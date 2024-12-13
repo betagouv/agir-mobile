@@ -50,7 +50,7 @@ class ScenarioContext {
   List<MissionListe> missionListe = <MissionListe>[];
   List<Recommandation> recommandations = <Recommandation>[];
   Quiz quiz = const Quiz(
-    id: 0,
+    id: '',
     thematique: '',
     question: '',
     reponses: [],

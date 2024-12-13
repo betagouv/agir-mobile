@@ -20,6 +20,7 @@ class RecommendationWidget extends StatelessWidget {
     required this.imageUrl,
     required this.themeTag,
     required this.titre,
+    required this.onPop,
   });
 
   final String id;
@@ -28,6 +29,7 @@ class RecommendationWidget extends StatelessWidget {
   final String imageUrl;
   final Widget themeTag;
   final String titre;
+  final VoidCallback onPop;
 
   @override
   Widget build(final context) {
@@ -58,6 +60,7 @@ class RecommendationWidget extends StatelessWidget {
               pathParameters: {'id': id},
             );
         }
+        onPop();
       },
       child: DecoratedBox(
         decoration: const ShapeDecoration(
