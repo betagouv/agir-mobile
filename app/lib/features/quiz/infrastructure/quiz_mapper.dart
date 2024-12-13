@@ -1,28 +1,19 @@
 // ignore_for_file: avoid_dynamic_calls
 
-import 'package:app/features/articles/infrastructure/article_mapper.dart';
 import 'package:app/features/quiz/domain/quiz.dart';
 
 abstract final class QuizMapper {
   const QuizMapper._();
 
-  static Quiz fromJson({
-    required final Map<String, dynamic> cms,
-    required final Map<String, dynamic>? api,
-  }) {
-    final data = cms['data'];
-    final quiz = data['attributes'] as Map<String, dynamic>;
-    final thematique = quiz['thematique_gamification']['data']['attributes']
-        as Map<String, dynamic>;
-    final question = quiz['questions'][0] as Map<String, dynamic>;
-    final reponses = question['reponses'] as List<dynamic>;
-    final articles = quiz['articles']['data'] as List<dynamic>;
+  static Quiz fromJson({required final Map<String, dynamic> json}) {
+    final question = json['questions'][0] as Map<String, dynamic>;
+    final responses = question['reponses'] as List<dynamic>;
 
     return Quiz(
-      id: (data['id'] as num).toInt(),
-      thematique: thematique['titre'] as String,
+      id: json['content_id'] as String,
+      thematique: json['thematique_principale'] as String,
       question: question['libelle'] as String,
-      reponses: reponses
+      reponses: responses
           .cast<Map<String, dynamic>>()
           .map(
             (final e) => QuizReponse(
@@ -31,12 +22,10 @@ abstract final class QuizMapper {
             ),
           )
           .toList(),
-      points: quiz['points'] as int,
+      points: json['points'] as int,
       explicationOk: question['explicationOk'] as String?,
       explicationKo: question['explicationKO'] as String?,
-      article: articles.isEmpty && api == null
-          ? null
-          : ArticleMapper.fromJson(json: api!),
+      article: json['article_contenu'] as String?,
     );
   }
 }

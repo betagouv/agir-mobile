@@ -4,9 +4,7 @@ import 'package:app/core/infrastructure/tracker.dart';
 import 'package:app/features/assistances/list/infrastructure/assistances_repository.dart';
 import 'package:app/features/authentication/domain/authentication_service.dart';
 import 'package:app/features/authentication/infrastructure/authentication_storage.dart';
-import 'package:app/features/authentification/core/infrastructure/api_url.dart';
 import 'package:app/features/authentification/core/infrastructure/authentification_api_adapter.dart';
-import 'package:app/features/authentification/core/infrastructure/cms_api_client.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/bibliotheque/infrastructure/bibliotheque_api_adapter.dart';
 import 'package:app/features/communes/infrastructure/communes_api_adapter.dart';
@@ -45,10 +43,6 @@ Future<void> theApplicationIsLaunched(final WidgetTester tester) async {
     dio: FeatureContext.instance.dioMock,
     authenticationService: authenticationService,
   );
-  final cmsHttpClient = CmsApiClient(
-    apiUrl: ApiUrl(Uri.parse('_apiCmsUrl')),
-    token: '_apiCmsToken',
-  );
   final tracker = _TrackerMock();
   when(() => tracker.navigatorObserver)
       .thenAnswer((final _) => RouteObserver<ModalRoute<void>>());
@@ -69,8 +63,7 @@ Future<void> theApplicationIsLaunched(final WidgetTester tester) async {
       assistancesRepository: AssistancesRepository(client: dioHttpClient),
       bibliothequePort: BibliothequeApiAdapter(client: dioHttpClient),
       recommandationsPort: RecommandationsApiAdapter(client: dioHttpClient),
-      quizPort:
-          QuizApiAdapter(client: dioHttpClient, cmsApiClient: cmsHttpClient),
+      quizPort: QuizApiAdapter(client: dioHttpClient),
       versionPort: const VersionAdapter(packageInfo: PackageInfoFake()),
       communesPort: CommunesApiAdapter(client: dioHttpClient),
       aideVeloPort: AideVeloApiAdapter(client: dioHttpClient),

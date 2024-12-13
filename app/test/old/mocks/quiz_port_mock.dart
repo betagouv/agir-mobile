@@ -15,7 +15,7 @@ class QuizPortMock implements QuizPort {
 
   @override
   Future<Either<Exception, void>> terminerQuiz({
-    required final int id,
+    required final String id,
     required final bool estExacte,
   }) async {
     isExact = estExacte;

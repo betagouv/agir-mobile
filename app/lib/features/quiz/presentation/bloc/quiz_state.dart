@@ -14,7 +14,7 @@ final class QuizState extends Equatable {
   const QuizState.empty()
       : this(
           quiz: const Quiz(
-            id: 0,
+            id: '',
             thematique: '',
             question: '',
             reponses: [],
@@ -36,7 +36,7 @@ final class QuizState extends Equatable {
         () => '',
         (final estExacte) =>
             (estExacte ? quiz.explicationOk : quiz.explicationKo) ??
-            quiz.article?.contenu ??
+            quiz.article ??
             '',
       );
 

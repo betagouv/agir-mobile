@@ -8,6 +8,8 @@ abstract final class Endpoints {
   static const bibliotheque = '/utilisateurs/{userId}/bibliotheque';
   static String article(final String contentId) =>
       '/utilisateurs/{userId}/bibliotheque/articles/$contentId';
+  static String quiz(final String contentId) =>
+      '/utilisateurs/{userId}/bibliotheque/quizz/$contentId';
   static const bilan = '/utilisateurs/{userId}/bilans/last_v3';
   static const creationCompte = '/utilisateurs_v2';
   static const communes = '/communes';

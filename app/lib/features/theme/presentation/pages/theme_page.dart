@@ -84,7 +84,7 @@ class _View extends StatelessWidget {
           SizedBox(height: DsfrSpacings.s5w),
           _Services(),
           SizedBox(height: DsfrSpacings.s5w),
-          _Recommandations(),
+          SafeArea(child: _Recommandations()),
         ],
       );
 }

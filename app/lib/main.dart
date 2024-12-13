@@ -14,9 +14,7 @@ import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_bor
 import 'package:app/features/assistances/list/infrastructure/assistances_repository.dart';
 import 'package:app/features/authentication/domain/authentication_service.dart';
 import 'package:app/features/authentication/infrastructure/authentication_storage.dart';
-import 'package:app/features/authentification/core/infrastructure/api_url.dart';
 import 'package:app/features/authentification/core/infrastructure/authentification_api_adapter.dart';
-import 'package:app/features/authentification/core/infrastructure/cms_api_client.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/bibliotheque/infrastructure/bibliotheque_api_adapter.dart';
 import 'package:app/features/communes/infrastructure/communes_api_adapter.dart';
@@ -65,8 +63,6 @@ class _MyAppState extends State<MyApp> {
   late final Tracker _tracker;
   late final AuthenticationService _authenticationService;
   late final String _apiUrl;
-  late final String _apiCmsUrl;
-  late final String _apiCmsToken;
   late final PackageInfo _packageInfo;
   late final Future<void> _initApp;
 
@@ -94,18 +90,6 @@ class _MyAppState extends State<MyApp> {
     _apiUrl = const String.fromEnvironment(apiUrlKey);
     if (_apiUrl.isEmpty) {
       throw const MissingEnvironmentKeyException(apiUrlKey);
-    }
-
-    const apiCmsUrlKey = 'API_CMS_URL';
-    _apiCmsUrl = const String.fromEnvironment(apiCmsUrlKey);
-    if (_apiCmsUrl.isEmpty) {
-      throw const MissingEnvironmentKeyException(apiCmsUrlKey);
-    }
-
-    const apiCmsTokenKey = 'API_CMS_TOKEN';
-    _apiCmsToken = const String.fromEnvironment(apiCmsTokenKey);
-    if (_apiCmsToken.isEmpty) {
-      throw const MissingEnvironmentKeyException(apiCmsTokenKey);
     }
 
     final authenticationStorage = AuthenticationStorage(
@@ -160,10 +144,6 @@ class _MyAppState extends State<MyApp> {
             dio: dio,
             authenticationService: _authenticationService,
           );
-          final cmsClient = CmsApiClient(
-            apiUrl: ApiUrl(Uri.parse(_apiCmsUrl)),
-            token: _apiCmsToken,
-          );
 
           final messageBus = MessageBus();
 
@@ -186,7 +166,7 @@ class _MyAppState extends State<MyApp> {
             assistancesRepository: AssistancesRepository(client: client),
             bibliothequePort: BibliothequeApiAdapter(client: client),
             recommandationsPort: RecommandationsApiAdapter(client: client),
-            quizPort: QuizApiAdapter(client: client, cmsApiClient: cmsClient),
+            quizPort: QuizApiAdapter(client: client),
             versionPort: VersionAdapter(packageInfo: _packageInfo),
             communesPort: CommunesApiAdapter(client: client),
             aideVeloPort: AideVeloApiAdapter(client: client),
