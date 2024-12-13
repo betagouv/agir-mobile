@@ -87,50 +87,59 @@ class _DsfrInputState extends State<DsfrInput> {
         children: [
           Flexible(child: label),
           if (widget.isPasswordMode)
-            DsfrCheckbox.sm(
-              label: 'Afficher',
-              value: _passwordVisibility,
-              onChanged: _handlePasswordVisibility,
+            FocusTraversalOrder(
+              order: const NumericFocusOrder(2),
+              child: DsfrCheckbox.sm(
+                label: 'Afficher',
+                value: _passwordVisibility,
+                onChanged: _handlePasswordVisibility,
+              ),
             ),
         ],
       );
     }
 
-    return Semantics(
-      label: labelText,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          label,
-          if (widget.hint != null) ...[
-            const SizedBox(height: DsfrSpacings.s1v),
-            Text(
-              widget.hint!,
-              style: widget.hintStyle.copyWith(color: widget.hintColor),
+    return FocusTraversalGroup(
+      policy: OrderedTraversalPolicy(),
+      child: Semantics(
+        label: labelText,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            label,
+            if (widget.hint != null) ...[
+              const SizedBox(height: DsfrSpacings.s1v),
+              Text(
+                widget.hint!,
+                style: widget.hintStyle.copyWith(color: widget.hintColor),
+              ),
+            ],
+            FocusTraversalOrder(
+              order: const NumericFocusOrder(1),
+              child: DsfrInputHeadless(
+                key: ValueKey(labelText),
+                initialValue: widget.initialValue,
+                controller: widget.controller,
+                suffixText: widget.suffixText,
+                onChanged: widget.onChanged,
+                onFieldSubmitted: widget.onFieldSubmitted,
+                validator: widget.validator,
+                keyboardType: widget.keyboardType,
+                textCapitalization: widget.textCapitalization,
+                textInputAction: widget.textInputAction,
+                width: widget.width,
+                isPasswordMode: widget.isPasswordMode,
+                passwordVisibility: _passwordVisibility,
+                autocorrect: widget.autocorrect,
+                textAlign: widget.textAlign,
+                autofocus: widget.autofocus,
+                inputFormatters: widget.inputFormatters,
+                scrollPadding: widget.scrollPadding,
+                autofillHints: widget.autofillHints,
+              ),
             ),
           ],
-          DsfrInputHeadless(
-            key: ValueKey(labelText),
-            initialValue: widget.initialValue,
-            controller: widget.controller,
-            suffixText: widget.suffixText,
-            onChanged: widget.onChanged,
-            onFieldSubmitted: widget.onFieldSubmitted,
-            validator: widget.validator,
-            keyboardType: widget.keyboardType,
-            textCapitalization: widget.textCapitalization,
-            textInputAction: widget.textInputAction,
-            width: widget.width,
-            isPasswordMode: widget.isPasswordMode,
-            passwordVisibility: _passwordVisibility,
-            autocorrect: widget.autocorrect,
-            textAlign: widget.textAlign,
-            autofocus: widget.autofocus,
-            inputFormatters: widget.inputFormatters,
-            scrollPadding: widget.scrollPadding,
-            autofillHints: widget.autofillHints,
-          ),
-        ],
+        ),
       ),
     );
   }

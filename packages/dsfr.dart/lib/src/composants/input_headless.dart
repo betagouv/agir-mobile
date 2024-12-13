@@ -33,7 +33,7 @@ class DsfrInputHeadless extends StatefulWidget {
     this.inputConstraints = const BoxConstraints(maxHeight: DsfrSpacings.s6w),
     this.focusColor = DsfrColors.focus525,
     this.focusThickness = DsfrSpacings.s0v5,
-    this.focusPadding = const EdgeInsets.all(DsfrSpacings.s1v),
+    this.focusPadding = const EdgeInsets.all(DsfrSpacings.s0v5),
     this.inputFormatters,
     this.scrollPadding = const EdgeInsets.all(20),
     this.autofillHints,
@@ -101,6 +101,7 @@ class _DsfrInputHeadlessState extends State<DsfrInputHeadless> {
       borderSide: BorderSide(
         color: widget.inputBorderColor,
         width: widget.inputBorderWidth,
+        strokeAlign: 1,
       ),
       borderRadius: BorderRadius.vertical(top: Radius.circular(widget.radius)),
     );
@@ -111,10 +112,11 @@ class _DsfrInputHeadlessState extends State<DsfrInputHeadless> {
           BorderSide(
             color: _isFocused ? widget.focusColor : Colors.transparent,
             width: widget.focusThickness,
+            strokeAlign: 1,
           ),
         ),
         borderRadius: BorderRadius.vertical(
-          top: Radius.circular(widget.radius),
+          top: Radius.circular(widget.radius + 2),
         ),
       ),
       child: Padding(
