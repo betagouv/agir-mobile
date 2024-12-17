@@ -97,7 +97,7 @@ abstract final class Localisation {
   static const erreurRoutePageTitre = 'Page non trouvée';
   static const erreurRoutePageDescription =
       'La page est introuvable. Excusez-nous pour la gêne occasionnée.';
-  static const erreurRoutePageAction = "Page d'accueil";
+  static const erreurRoutePageAction = 'Page d’accueil';
   static const erreurInattendue = 'Erreur inattendue';
   static const erreurInattendueContent =
       'Désolé, le service rencontre un problème, nous y travaillons pour le résoudre le plus rapidement possible.';
