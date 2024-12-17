@@ -1,4 +1,5 @@
 import 'package:app/core/infrastructure/tracker.dart';
+import 'package:app/core/presentation/pages/error_route_page.dart';
 import 'package:app/features/accueil/presentation/pages/home_page.dart';
 import 'package:app/features/actions/detail/presentation/pages/action_detail_page.dart';
 import 'package:app/features/actions/list/presentation/pages/action_list_page.dart';
@@ -87,6 +88,9 @@ GoRouter goRouter({required final Tracker tracker}) => GoRouter(
           ],
         ),
       ],
+      errorPageBuilder: (final context, final state) => const NoTransitionPage(
+        child: FnvErrorRoutePage(),
+      ),
       redirect: (final context, final state) =>
           switch (context.read<AuthenticationBloc>().state) {
         AuthenticationInitial() => null,

@@ -187,7 +187,7 @@ class _Mission extends StatelessWidget {
         MissionPage.name,
         pathParameters: {
           'mission': mission.code,
-          'thematique': mission.themeType.name,
+          'thematique': mission.themeType.routeCode,
         },
       ),
       child: SizedBox(
