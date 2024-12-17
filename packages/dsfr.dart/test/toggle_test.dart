@@ -11,7 +11,7 @@ void main() {
       const label = 'Label';
       await tester.pumpWidget(
         App(
-          child: DsfrToggle(
+          child: DsfrToggleSwitch(
             label: label,
             value: false,
             onChanged: (final value) {},
@@ -26,7 +26,7 @@ void main() {
       final completer = Completer<void>();
       await tester.pumpWidget(
         App(
-          child: DsfrToggle(
+          child: DsfrToggleSwitch(
             label: label,
             value: false,
             onChanged: completer.complete,

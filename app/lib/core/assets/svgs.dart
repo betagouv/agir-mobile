@@ -2,7 +2,11 @@ abstract final class AssetsSvgs {
   const AssetsSvgs._();
 
   static const republiqueFrancaise = 'assets/logos/logo_rf.svg';
+  static const republiqueFrancaiseSemantic =
+      'Logo officiel de la République Française';
   static const ademe = 'assets/logos/logo_ademe.svg';
+  static const ademeSemantic =
+      'Logo de l’ADEME: Agence de la transition écologique';
   static const mesAidesVeloLogo = 'assets/logos/mesaidesvelo_logo.svg';
   static const mesAidesVeloTexte = 'assets/logos/mesaidesvelo_texte.svg';
   static const bibliothequeEmpty = 'assets/svgs/bibliotheque_illustration.svg';

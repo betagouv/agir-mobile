@@ -45,42 +45,41 @@ class _JaccepteState extends State<Jaccepte> {
     return GestureDetector(
       onTap: () => widget.onChanged(!widget.value),
       behavior: HitTestBehavior.opaque,
-      child: Row(
-        children: [
-          Semantics(
-            checked: widget.value,
-            label: '$jaccepte${widget.label}',
-            onTap: () => widget.onChanged(!widget.value),
-            child: DsfrCheckboxIcon(value: widget.value),
-          ),
-          const SizedBox(width: DsfrSpacings.s1w),
-          Expanded(
-            child: Text.rich(
-              TextSpan(
-                text: jaccepte,
-                children: [
-                  TextSpan(
-                    text: '${widget.label} ',
-                    style: style.copyWith(
-                      decoration: TextDecoration.underline,
-                    ),
-                    recognizer: _recognizer,
-                    children: const [
-                      WidgetSpan(
-                        alignment: PlaceholderAlignment.middle,
-                        child: Icon(
-                          DsfrIcons.systemExternalLinkFill,
-                          size: 16,
-                        ),
+      child: Semantics(
+        checked: widget.value,
+        label: '$jaccepte${widget.label}',
+        child: Row(
+          children: [
+            DsfrCheckboxIcon(value: widget.value),
+            const SizedBox(width: DsfrSpacings.s1w),
+            Expanded(
+              child: Text.rich(
+                TextSpan(
+                  text: jaccepte,
+                  children: [
+                    TextSpan(
+                      text: '${widget.label} ',
+                      style: style.copyWith(
+                        decoration: TextDecoration.underline,
                       ),
-                    ],
-                  ),
-                ],
+                      recognizer: _recognizer,
+                      children: const [
+                        WidgetSpan(
+                          alignment: PlaceholderAlignment.middle,
+                          child: Icon(
+                            DsfrIcons.systemExternalLinkFill,
+                            size: 16,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                style: style,
               ),
-              style: style,
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -18,7 +18,7 @@ class MesInformationsNombreDePartsFiscales extends StatelessWidget {
 
     return DsfrInput(
       label: Localisation.nombreDePartsFiscales,
-      hint: Localisation.nombreDePartsFiscalesDescription,
+      hintText: Localisation.nombreDePartsFiscalesDescription,
       initialValue: FnvNumberFormat.formatNumber(nombreDePartsFiscales),
       onChanged: (final value) {
         final parse = double.tryParse(value.replaceFirst(',', '.'));

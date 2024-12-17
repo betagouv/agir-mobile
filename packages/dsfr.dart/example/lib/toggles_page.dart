@@ -23,7 +23,7 @@ class _TogglesPageState extends State<TogglesPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            DsfrToggle(
+            DsfrToggleSwitch(
               label: 'Vos favoris',
               value: _toggle,
               onChanged: (final value) {
@@ -33,7 +33,7 @@ class _TogglesPageState extends State<TogglesPage> {
               },
             ),
             const SizedBox(height: 16),
-            DsfrToggle(
+            DsfrToggleSwitch(
               label: 'Vos favoris',
               value: !_toggle,
               onChanged: (final value) {

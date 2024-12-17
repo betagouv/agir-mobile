@@ -12,6 +12,7 @@ abstract final class Localisation {
   static const acheterUnVelo = 'Acheter un vélo';
   static const actionRealisee = 'Action réalisée';
   static const adresseEmail = 'Mon adresse email';
+  static const adresseEmailHint = 'Format attendu : nom@domaine.fr';
   static const adultes = 'Adulte(s)';
   static const aideVeloAvertissement =
       'Veuillez compléter ces informations afin de débuter l’estimation';

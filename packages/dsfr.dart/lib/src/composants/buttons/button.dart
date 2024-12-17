@@ -62,9 +62,9 @@ class DsfrButton extends StatelessWidget {
 
     return DsfrRawButton(
       variant: variant,
-      foregroundColor: foregroundColor,
       size: size,
-      onTap: onPressed,
+      foregroundColor: foregroundColor,
+      onPressed: onPressed,
       child: Center(child: child),
     );
   }

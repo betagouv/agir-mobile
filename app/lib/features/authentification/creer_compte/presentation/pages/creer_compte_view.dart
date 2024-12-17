@@ -44,6 +44,7 @@ class CreerCompteView extends StatelessWidget {
               const SizedBox(height: DsfrSpacings.s3w),
               DsfrInput(
                 label: Localisation.adresseEmail,
+                hintText: Localisation.adresseEmailHint,
                 onChanged: (final value) => context
                     .read<CreerCompteBloc>()
                     .add(CreerCompteAdresseMailAChangee(value)),

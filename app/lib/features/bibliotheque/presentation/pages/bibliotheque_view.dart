@@ -61,7 +61,7 @@ class _Favorites extends StatelessWidget {
   const _Favorites();
 
   @override
-  Widget build(final context) => DsfrToggle(
+  Widget build(final context) => DsfrToggleSwitch(
         label: Localisation.mesFavoris,
         value: context.select<BibliothequeBloc, bool>(
           (final value) => value.state.isFavorites,

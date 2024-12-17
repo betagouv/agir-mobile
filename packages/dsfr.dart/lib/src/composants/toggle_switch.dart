@@ -1,11 +1,12 @@
+import 'package:dsfr/src/atoms/focus_widget.dart';
 import 'package:dsfr/src/fondamentaux/colors.g.dart';
 import 'package:dsfr/src/fondamentaux/fonts.dart';
 import 'package:dsfr/src/fondamentaux/icons.g.dart';
 import 'package:dsfr/src/fondamentaux/spacing.g.dart';
 import 'package:flutter/material.dart';
 
-class DsfrToggle extends StatelessWidget {
-  const DsfrToggle({
+class DsfrToggleSwitch extends StatefulWidget {
+  const DsfrToggleSwitch({
     super.key,
     required this.label,
     required this.value,
@@ -17,15 +18,36 @@ class DsfrToggle extends StatelessWidget {
   final String label;
 
   @override
-  Widget build(final context) => GestureDetector(
-        onTap: () => onChanged(!value),
-        behavior: HitTestBehavior.opaque,
-        child: Row(
-          children: [
-            _Switch(value: value),
-            const SizedBox(width: DsfrSpacings.s2w),
-            Flexible(child: Text(label, style: const DsfrTextStyle.bodyMd())),
-          ],
+  State<DsfrToggleSwitch> createState() => _DsfrToggleSwitchState();
+}
+
+class _DsfrToggleSwitchState extends State<DsfrToggleSwitch>
+    with MaterialStateMixin<DsfrToggleSwitch> {
+  @override
+  Widget build(final context) => Semantics(
+        toggled: widget.value,
+        child: InkWell(
+          onTap: () => widget.onChanged(!widget.value),
+          onHighlightChanged: updateMaterialState(WidgetState.pressed),
+          onHover: updateMaterialState(WidgetState.hovered),
+          focusColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          splashFactory: NoSplash.splashFactory,
+          excludeFromSemantics: true,
+          onFocusChange: updateMaterialState(WidgetState.focused),
+          child: Row(
+            children: [
+              DsfrFocusWidget(
+                isFocused: isFocused,
+                borderRadius: const BorderRadius.all(Radius.circular(24 + 2)),
+                child: _Switch(value: widget.value),
+              ),
+              const SizedBox(width: DsfrSpacings.s2w),
+              Flexible(
+                child: Text(widget.label, style: const DsfrTextStyle.bodyMd()),
+              ),
+            ],
+          ),
         ),
       );
 }
@@ -42,7 +64,7 @@ class _Switch extends StatelessWidget {
     const offset = width - height;
     const primary = DsfrColors.blueFranceSun113;
     const border = Border.fromBorderSide(BorderSide(color: primary));
-    const borderRadius = BorderRadius.all(Radius.circular(width));
+    const borderRadius = BorderRadius.all(Radius.circular(height));
 
     return SizedBox(
       width: width,

@@ -39,9 +39,9 @@ class DsfrInputHeadless extends StatefulWidget {
     this.autofillHints,
   });
 
-  final String? suffixText;
-  final TextEditingController? controller;
   final String? initialValue;
+  final TextEditingController? controller;
+  final String? suffixText;
   final ValueChanged<String> onChanged;
   final ValueChanged<String>? onFieldSubmitted;
   final FormFieldValidator<String>? validator;
@@ -101,7 +101,7 @@ class _DsfrInputHeadlessState extends State<DsfrInputHeadless> {
       borderSide: BorderSide(
         color: widget.inputBorderColor,
         width: widget.inputBorderWidth,
-        strokeAlign: 1,
+        strokeAlign: BorderSide.strokeAlignOutside,
       ),
       borderRadius: BorderRadius.vertical(top: Radius.circular(widget.radius)),
     );
@@ -112,7 +112,7 @@ class _DsfrInputHeadlessState extends State<DsfrInputHeadless> {
           BorderSide(
             color: _isFocused ? widget.focusColor : Colors.transparent,
             width: widget.focusThickness,
-            strokeAlign: 1,
+            strokeAlign: BorderSide.strokeAlignOutside,
           ),
         ),
         borderRadius: BorderRadius.vertical(

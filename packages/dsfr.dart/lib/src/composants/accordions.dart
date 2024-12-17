@@ -1,3 +1,4 @@
+import 'package:dsfr/src/atoms/focus_widget.dart';
 import 'package:dsfr/src/composants/divider.dart';
 import 'package:dsfr/src/fondamentaux/colors.g.dart';
 import 'package:dsfr/src/fondamentaux/icons.g.dart';
@@ -62,7 +63,7 @@ class _DsfrAccordionsGroupState extends State<DsfrAccordionsGroup> {
   }
 }
 
-class _DsfrAccordion extends StatelessWidget {
+class _DsfrAccordion extends StatefulWidget {
   const _DsfrAccordion({
     required this.index,
     required this.item,
@@ -75,37 +76,54 @@ class _DsfrAccordion extends StatelessWidget {
   final bool isExpanded;
   final DsfrAccordionCallback onAccordionCallback;
 
-  void _handleTap() => onAccordionCallback(index, !isExpanded);
+  @override
+  State<_DsfrAccordion> createState() => _DsfrAccordionState();
+}
+
+class _DsfrAccordionState extends State<_DsfrAccordion>
+    with MaterialStateMixin<_DsfrAccordion> {
+  void _handleTap() =>
+      widget.onAccordionCallback(widget.index, !widget.isExpanded);
 
   @override
   Widget build(final context) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          ColoredBox(
-            color: isExpanded ? DsfrColors.blueFrance925 : Colors.transparent,
-            child: GestureDetector(
-              onTap: item.isEnable ? _handleTap : null,
-              behavior: HitTestBehavior.opaque,
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(minHeight: 48),
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: DsfrSpacings.s3v),
-                  child: Row(
-                    children: [
-                      Expanded(child: item.headerBuilder(isExpanded)),
-                      if (item.isEnable)
-                        AnimatedRotation(
-                          turns: isExpanded ? -0.5 : 0,
-                          duration: Durations.short4,
-                          child: const Icon(
-                            DsfrIcons.systemArrowDownSLine,
-                            size: DsfrSpacings.s2w,
-                            color: DsfrColors.blueFranceSun113,
-                          ),
+          InkWell(
+            onTap: widget.item.isEnable ? _handleTap : null,
+            onHighlightChanged: updateMaterialState(WidgetState.pressed),
+            onHover: updateMaterialState(WidgetState.hovered),
+            focusColor: Colors.transparent,
+            onFocusChange: updateMaterialState(WidgetState.focused),
+            child: DsfrFocusWidget(
+              isFocused: isFocused,
+              child: ColoredBox(
+                color: widget.isExpanded
+                    ? DsfrColors.blueFrance925
+                    : Colors.transparent,
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(minHeight: 48),
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: DsfrSpacings.s3v),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: widget.item.headerBuilder(widget.isExpanded),
                         ),
-                      const SizedBox(width: DsfrSpacings.s2w),
-                    ],
+                        if (widget.item.isEnable)
+                          AnimatedRotation(
+                            turns: widget.isExpanded ? -0.5 : 0,
+                            duration: Durations.short4,
+                            child: const Icon(
+                              DsfrIcons.systemArrowDownSLine,
+                              size: DsfrSpacings.s2w,
+                              color: DsfrColors.blueFranceSun113,
+                            ),
+                          ),
+                        const SizedBox(width: DsfrSpacings.s2w),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -118,9 +136,9 @@ class _DsfrAccordion extends StatelessWidget {
                 top: DsfrSpacings.s2w,
                 bottom: DsfrSpacings.s3w,
               ),
-              child: item.body,
+              child: widget.item.body,
             ),
-            crossFadeState: isExpanded
+            crossFadeState: widget.isExpanded
                 ? CrossFadeState.showSecond
                 : CrossFadeState.showFirst,
             duration: Durations.short4,
