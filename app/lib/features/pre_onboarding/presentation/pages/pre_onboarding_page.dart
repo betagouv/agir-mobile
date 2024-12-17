@@ -45,11 +45,21 @@ class PreOnboardingPage extends StatelessWidget {
                         SvgPicture.asset(
                           AssetsSvgs.republiqueFrancaise,
                           height: 69,
+                          semanticsLabel:
+                              AssetsSvgs.republiqueFrancaiseSemantic,
                         ),
                         const SizedBox(width: DsfrSpacings.s3w),
-                        Image.asset(AssetsImages.franceNationVerte, height: 46),
+                        Image.asset(
+                          AssetsImages.franceNationVerte,
+                          semanticLabel: AssetsImages.franceNationVerteSemantic,
+                          height: 46,
+                        ),
                         const SizedBox(width: DsfrSpacings.s3w),
-                        SvgPicture.asset(AssetsSvgs.ademe, height: 55),
+                        SvgPicture.asset(
+                          AssetsSvgs.ademe,
+                          height: 55,
+                          semanticsLabel: AssetsSvgs.ademeSemantic,
+                        ),
                       ],
                     ),
                   ],

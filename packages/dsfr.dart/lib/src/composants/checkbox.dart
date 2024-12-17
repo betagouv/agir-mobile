@@ -1,5 +1,5 @@
+import 'package:dsfr/src/atoms/focus_widget.dart';
 import 'package:dsfr/src/composants/checkbox_icon.dart';
-import 'package:dsfr/src/fondamentaux/colors.g.dart';
 import 'package:dsfr/src/fondamentaux/fonts.dart';
 import 'package:dsfr/src/fondamentaux/spacing.g.dart';
 import 'package:flutter/material.dart';
@@ -81,28 +81,11 @@ class DsfrCheckbox extends StatelessWidget {
                     builder: (final context) {
                       final hasFocus = Focus.of(context).hasFocus;
 
-                      return DecoratedBox(
-                        decoration: BoxDecoration(
-                          border: hasFocus
-                              ? Border.fromBorderSide(
-                                  BorderSide(
-                                    color: hasFocus
-                                        ? DsfrColors.focus525
-                                        : Colors.transparent,
-                                    width: 2,
-                                    strokeAlign: 1,
-                                  ),
-                                )
-                              : null,
-                          borderRadius: hasFocus
-                              ? const BorderRadius.all(Radius.circular(2 + 2))
-                              : null,
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(2),
-                          child:
-                              DsfrCheckboxIcon(value: value, padding: padding),
-                        ),
+                      return DsfrFocusWidget(
+                        isFocused: hasFocus,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(4)),
+                        child: DsfrCheckboxIcon(value: value, padding: padding),
                       );
                     },
                   ),

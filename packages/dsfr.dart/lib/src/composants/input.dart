@@ -12,7 +12,7 @@ class DsfrInput extends StatefulWidget {
   const DsfrInput({
     super.key,
     required this.label,
-    this.hint,
+    this.hintText,
     this.suffixText,
     this.controller,
     this.initialValue,
@@ -37,7 +37,7 @@ class DsfrInput extends StatefulWidget {
   });
 
   final String label;
-  final String? hint;
+  final String? hintText;
   final String? suffixText;
   final TextEditingController? controller;
   final String? initialValue;
@@ -107,13 +107,14 @@ class _DsfrInputState extends State<DsfrInput> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             label,
-            if (widget.hint != null) ...[
+            if (widget.hintText != null) ...[
               const SizedBox(height: DsfrSpacings.s1v),
               Text(
-                widget.hint!,
+                widget.hintText!,
                 style: widget.hintStyle.copyWith(color: widget.hintColor),
               ),
             ],
+            const SizedBox(height: DsfrSpacings.s1w),
             FocusTraversalOrder(
               order: const NumericFocusOrder(1),
               child: DsfrInputHeadless(

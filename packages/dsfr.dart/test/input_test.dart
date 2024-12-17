@@ -15,17 +15,17 @@ void main() {
     });
 
     testWidgets('Voir la description', (final tester) async {
-      const hint = 'Indice';
+      const hintText = 'Indice';
       await tester.pumpWidget(
         App(
           child: DsfrInput(
             label: 'Label',
-            hint: hint,
+            hintText: hintText,
             onChanged: (final value) {},
           ),
         ),
       );
-      expect(find.text(hint), findsOneWidget);
+      expect(find.text(hintText), findsOneWidget);
     });
 
     testWidgets('Voir la valeur par défaut', (final tester) async {
@@ -35,7 +35,7 @@ void main() {
         App(
           child: DsfrInput(
             label: 'Label',
-            hint: 'Indice',
+            hintText: 'Indice',
             controller: controller,
             onChanged: (final value) {},
           ),

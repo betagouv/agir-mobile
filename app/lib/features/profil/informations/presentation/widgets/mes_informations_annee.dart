@@ -17,7 +17,7 @@ class MesInformationsAnnee extends StatelessWidget {
 
     return DsfrInput(
       label: Localisation.anneeDeNaissance,
-      hint: Localisation.facultatif,
+      hintText: Localisation.facultatif,
       initialValue: anneeDeNaissance?.toString(),
       onChanged: (final value) {
         final parsedValue = int.tryParse(value);

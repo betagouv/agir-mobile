@@ -1,3 +1,4 @@
+import 'package:dsfr/src/atoms/focus_widget.dart';
 import 'package:dsfr/src/composants/link_icon_position.dart';
 import 'package:dsfr/src/fondamentaux/colors.g.dart';
 import 'package:dsfr/src/fondamentaux/fonts.dart';
@@ -10,8 +11,6 @@ class DsfrLink extends StatefulWidget {
     required this.label,
     required this.textStyle,
     required this.underlineThickness,
-    required this.focusBorderWidth,
-    required this.focusPadding,
     required this.iconSize,
     required this.iconPosition,
     this.icon,
@@ -29,8 +28,6 @@ class DsfrLink extends StatefulWidget {
           label: label,
           textStyle: const DsfrTextStyle.bodySm(),
           underlineThickness: 1.75,
-          focusBorderWidth: 2,
-          focusPadding: const EdgeInsets.all(4),
           iconSize: 16,
           iconPosition: iconPosition,
           icon: icon,
@@ -48,8 +45,6 @@ class DsfrLink extends StatefulWidget {
           label: label,
           textStyle: const DsfrTextStyle.bodyMd(),
           underlineThickness: 2,
-          focusBorderWidth: 2,
-          focusPadding: const EdgeInsets.all(4),
           iconSize: 16,
           iconPosition: iconPosition,
           icon: icon,
@@ -63,8 +58,6 @@ class DsfrLink extends StatefulWidget {
   final VoidCallback? onTap;
   final TextStyle textStyle;
   final double underlineThickness;
-  final double focusBorderWidth;
-  final EdgeInsetsGeometry focusPadding;
 
   @override
   State<DsfrLink> createState() => _DsfrLinkState();
@@ -115,7 +108,7 @@ class _DsfrLinkState extends State<DsfrLink> with MaterialStateMixin<DsfrLink> {
       TextSpan(text: widget.label),
     ];
 
-    final link = Semantics(
+    return Semantics(
       enabled: widget.onTap != null,
       link: true,
       child: Material(
@@ -124,8 +117,8 @@ class _DsfrLinkState extends State<DsfrLink> with MaterialStateMixin<DsfrLink> {
           onTap: widget.onTap,
           onHighlightChanged: updateMaterialState(WidgetState.pressed),
           onHover: updateMaterialState(WidgetState.hovered),
+          focusColor: Colors.transparent,
           highlightColor: const Color(0x21000000),
-          splashFactory: NoSplash.splashFactory,
           canRequestFocus: widget.onTap != null,
           onFocusChange: updateMaterialState(WidgetState.focused),
           child: DecoratedBox(
@@ -141,31 +134,20 @@ class _DsfrLinkState extends State<DsfrLink> with MaterialStateMixin<DsfrLink> {
                     )
                   : null,
             ),
-            child: Text.rich(
-              TextSpan(
-                children: widget.iconPosition == DsfrLinkIconPosition.start
-                    ? list
-                    : list.reversed.toList(),
+            child: DsfrFocusWidget(
+              isFocused: isFocused,
+              child: Text.rich(
+                TextSpan(
+                  children: widget.iconPosition == DsfrLinkIconPosition.start
+                      ? list
+                      : list.reversed.toList(),
+                ),
+                style: widget.textStyle.copyWith(color: resolveForegroundColor),
               ),
-              style: widget.textStyle.copyWith(color: resolveForegroundColor),
             ),
           ),
         ),
       ),
     );
-
-    return isFocused
-        ? DecoratedBox(
-            decoration: BoxDecoration(
-              border: Border.fromBorderSide(
-                BorderSide(
-                  color: DsfrColors.focus525,
-                  width: widget.focusBorderWidth,
-                ),
-              ),
-            ),
-            child: Padding(padding: widget.focusPadding, child: link),
-          )
-        : link;
   }
 }

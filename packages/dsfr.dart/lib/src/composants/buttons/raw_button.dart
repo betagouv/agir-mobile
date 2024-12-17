@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:dsfr/src/atoms/focus_widget.dart';
 import 'package:dsfr/src/composants/buttons/button.dart';
 import 'package:dsfr/src/composants/buttons/button_background_color.dart';
 import 'package:dsfr/src/composants/buttons/button_border.dart';
@@ -12,12 +13,12 @@ import 'package:flutter/material.dart';
 class DsfrRawButton extends StatefulWidget {
   const DsfrRawButton({
     super.key,
-    required this.child,
     required this.variant,
-    this.foregroundColor,
     required this.size,
+    this.foregroundColor,
     this.borderRadius,
-    this.onTap,
+    this.onPressed,
+    required this.child,
   });
 
   final Widget child;
@@ -25,7 +26,7 @@ class DsfrRawButton extends StatefulWidget {
   final Color? foregroundColor;
   final DsfrButtonSize size;
   final BorderRadius? borderRadius;
-  final VoidCallback? onTap;
+  final VoidCallback? onPressed;
 
   @override
   State<DsfrRawButton> createState() => _DsfrRawButtonState();
@@ -33,8 +34,6 @@ class DsfrRawButton extends StatefulWidget {
 
 class _DsfrRawButtonState extends State<DsfrRawButton>
     with MaterialStateMixin<DsfrRawButton> {
-  static const _focusBorderWidth = 2.0;
-  static const _focusPadding = EdgeInsets.all(4);
   late final double _minHeight;
   late final EdgeInsetsGeometry _padding;
   late final TextStyle _textStyle;
@@ -66,7 +65,7 @@ class _DsfrRawButtonState extends State<DsfrRawButton>
     _padding = _getPadding(widget.size);
     _textStyle = _getTextStyle(widget.size);
     _minHeight = _getMinHeight(widget.size);
-    setMaterialState(WidgetState.disabled, widget.onTap == null);
+    setMaterialState(WidgetState.disabled, widget.onPressed == null);
   }
 
   EdgeInsetsGeometry _getPadding(final DsfrButtonSize size) => switch (size) {
@@ -93,7 +92,7 @@ class _DsfrRawButtonState extends State<DsfrRawButton>
   @override
   void didUpdateWidget(final DsfrRawButton oldWidget) {
     super.didUpdateWidget(oldWidget);
-    setMaterialState(WidgetState.disabled, widget.onTap == null);
+    setMaterialState(WidgetState.disabled, widget.onPressed == null);
   }
 
   @override
@@ -106,46 +105,49 @@ class _DsfrRawButtonState extends State<DsfrRawButton>
   @override
   Widget build(final context) {
     final textColor = _foregroundColor.resolve(materialStates);
-    final button = Semantics(
-      enabled: widget.onTap != null,
-      button: true,
-      child: ConstrainedBox(
-        constraints: BoxConstraints(minHeight: _minHeight),
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            color: _backgroundColor.resolve(materialStates),
-            border: _border.resolve(materialStates),
-            borderRadius: widget.borderRadius,
-          ),
-          child: Material(
-            color: Colors.transparent,
-            child: InkWell(
-              onTap: widget.onTap == null
-                  ? null
-                  : () {
-                      if (_timer?.isActive ?? false) {
-                        return;
-                      }
-                      widget.onTap!();
-                      _timer = Timer(
-                        const Duration(milliseconds: 500),
-                        () {},
-                      );
-                    },
-              onHighlightChanged: updateMaterialState(WidgetState.pressed),
-              onHover: updateMaterialState(WidgetState.hovered),
-              canRequestFocus: widget.onTap != null,
-              onFocusChange: updateMaterialState(WidgetState.focused),
-              child: Padding(
-                padding: _padding,
-                child: Center(
-                  widthFactor: 1,
-                  heightFactor: 1,
-                  child: IconTheme(
-                    data: IconThemeData(color: textColor),
-                    child: DefaultTextStyle(
-                      style: _textStyle.copyWith(color: textColor),
-                      child: widget.child,
+
+    return DsfrFocusWidget(
+      isFocused: isFocused,
+      child: Semantics(
+        enabled: widget.onPressed != null,
+        button: true,
+        child: ConstrainedBox(
+          constraints: BoxConstraints(minHeight: _minHeight),
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              color: _backgroundColor.resolve(materialStates),
+              border: _border.resolve(materialStates),
+              borderRadius: widget.borderRadius,
+            ),
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: widget.onPressed == null
+                    ? null
+                    : () {
+                        if (_timer?.isActive ?? false) {
+                          return;
+                        }
+                        widget.onPressed!();
+                        _timer =
+                            Timer(const Duration(milliseconds: 500), () {});
+                      },
+                onHighlightChanged: updateMaterialState(WidgetState.pressed),
+                onHover: updateMaterialState(WidgetState.hovered),
+                focusColor: Colors.transparent,
+                canRequestFocus: widget.onPressed != null,
+                onFocusChange: updateMaterialState(WidgetState.focused),
+                child: Padding(
+                  padding: _padding,
+                  child: Center(
+                    widthFactor: 1,
+                    heightFactor: 1,
+                    child: IconTheme(
+                      data: IconThemeData(color: textColor),
+                      child: DefaultTextStyle(
+                        style: _textStyle.copyWith(color: textColor),
+                        child: widget.child,
+                      ),
                     ),
                   ),
                 ),
@@ -155,19 +157,5 @@ class _DsfrRawButtonState extends State<DsfrRawButton>
         ),
       ),
     );
-
-    return isFocused
-        ? DecoratedBox(
-            decoration: const BoxDecoration(
-              border: Border.fromBorderSide(
-                BorderSide(
-                  color: DsfrColors.focus525,
-                  width: _focusBorderWidth,
-                ),
-              ),
-            ),
-            child: Padding(padding: _focusPadding, child: button),
-          )
-        : button;
   }
 }
