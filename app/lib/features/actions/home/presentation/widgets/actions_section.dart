@@ -103,9 +103,11 @@ class _Action extends StatelessWidget {
         );
 
         if (result != true || !context.mounted) {}
-        // if (context.mounted) {
-        //   context.read<MissionHomeBloc>().add(const MissionHomeFetch());
-        // }
+        if (context.mounted) {
+          context
+              .read<HomeActionsBloc>()
+              .add(const HomeActionsRefreshRequested());
+        }
       },
       child: DecoratedBox(
         decoration: const ShapeDecoration(
