@@ -19,3 +19,11 @@ final class HomeActionsLoadRequested extends HomeActionsEvent {
   @override
   List<Object?> get props => [themeType];
 }
+
+@immutable
+final class HomeActionsRefreshRequested extends HomeActionsEvent {
+  const HomeActionsRefreshRequested();
+
+  @override
+  List<Object?> get props => [];
+}
