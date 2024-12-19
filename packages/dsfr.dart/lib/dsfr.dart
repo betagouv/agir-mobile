@@ -1,3 +1,4 @@
+export 'src/atoms/focus_widget.dart';
 export 'src/composants/accordions.dart';
 export 'src/composants/buttons/button.dart';
 export 'src/composants/buttons/button_background_color.dart';

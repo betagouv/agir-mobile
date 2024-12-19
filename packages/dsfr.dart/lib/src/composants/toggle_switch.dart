@@ -39,7 +39,7 @@ class _DsfrToggleSwitchState extends State<DsfrToggleSwitch>
             children: [
               DsfrFocusWidget(
                 isFocused: isFocused,
-                borderRadius: const BorderRadius.all(Radius.circular(24 + 2)),
+                borderRadius: const BorderRadius.all(Radius.circular(24)),
                 child: _Switch(value: widget.value),
               ),
               const SizedBox(width: DsfrSpacings.s2w),
