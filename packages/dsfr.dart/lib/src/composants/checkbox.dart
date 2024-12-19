@@ -79,10 +79,10 @@ class DsfrCheckbox extends StatelessWidget {
                   canRequestFocus: isEnabled,
                   child: Builder(
                     builder: (final context) {
-                      final hasFocus = Focus.of(context).hasFocus;
+                      final isFocused = Focus.of(context).hasFocus;
 
                       return DsfrFocusWidget(
-                        isFocused: hasFocus,
+                        isFocused: isFocused,
                         borderRadius:
                             const BorderRadius.all(Radius.circular(4)),
                         child: DsfrCheckboxIcon(value: value, padding: padding),
