@@ -35,7 +35,7 @@ dependencies:
   intl: 0.19.0 # Bloqué en 0.19.0 par flutter_localizations
   matomo_tracker: 5.1.0
   mocktail_image_network: 1.2.0
-  native_dio_adapter: 1.3.0
+  native_dio_adapter: 1.4.0
   package_info_plus: 8.1.2
   pinput: 5.0.0
   rxdart: 0.28.0
