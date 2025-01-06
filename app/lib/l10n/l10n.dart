@@ -7,7 +7,7 @@ abstract final class Localisation {
 
   static const accederAuSimulateur = 'Accéder au simulateur';
   static const accueil = 'Accueil';
-  static const accueilRecommandationsSousTitre =
+  static const themeRecommandationsSousTitre =
       'Une sélection d’articles et de services, pour vous, selon vos préférences !';
   static const acheterUnVelo = 'Acheter un vélo';
   static const actionRealisee = 'Action réalisée';
@@ -64,7 +64,6 @@ abstract final class Localisation {
   static const confirmer = 'Confirmer';
   static const consommationsEnergetiques = 'Consommations énergétiques';
   static const continuer = 'Continuer';
-  static const continuerLaLecture = 'Continuer la lecture';
   static const creerMonCompte = 'Créer mon compte';
   static const creerMonCompteApp = 'Créer mon compte J’agis';
   static const declarationAccessibilite = 'Déclaration d’accessibilité';

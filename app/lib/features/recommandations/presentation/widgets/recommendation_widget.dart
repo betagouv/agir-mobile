@@ -1,4 +1,5 @@
 import 'package:app/core/presentation/widgets/composants/image.dart';
+import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/shadows.dart';
 import 'package:app/features/articles/presentation/pages/article_page.dart';
 import 'package:app/features/gamification/domain/gamification_port.dart';
@@ -11,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-class RecommendationWidget extends StatelessWidget {
+class RecommendationWidget extends StatefulWidget {
   const RecommendationWidget({
     super.key,
     required this.id,
@@ -32,88 +33,106 @@ class RecommendationWidget extends StatelessWidget {
   final VoidCallback onPop;
 
   @override
+  State<RecommendationWidget> createState() => _RecommendationWidgetState();
+}
+
+class _RecommendationWidgetState extends State<RecommendationWidget>
+    with MaterialStateMixin<RecommendationWidget> {
+  @override
   Widget build(final context) {
     const width = 200.0;
 
     const borderRadius = BorderRadius.all(Radius.circular(DsfrSpacings.s1w));
 
-    return GestureDetector(
-      onTap: () async {
-        switch (type) {
-          case TypeDuContenu.article:
-            await GoRouter.of(context).pushNamed(
-              ArticlePage.name,
-              pathParameters: {'id': id},
-            );
-          case TypeDuContenu.kyc:
-            final result = await GoRouter.of(context).pushNamed(
-              MieuxVousConnaitreEditPage.name,
-              pathParameters: {'id': id},
-            );
-            if (result != true || !context.mounted) {
-              return;
-            }
-            await context.read<GamificationPort>().mettreAJourLesPoints();
-          case TypeDuContenu.quiz:
-            await GoRouter.of(context).pushNamed(
-              QuizPage.name,
-              pathParameters: {'id': id},
-            );
-        }
-        onPop();
-      },
+    return DsfrFocusWidget(
+      isFocused: isFocused,
+      borderRadius: borderRadius,
       child: DecoratedBox(
         decoration: const ShapeDecoration(
           color: Colors.white,
           shadows: recommandationOmbre,
           shape: RoundedRectangleBorder(borderRadius: borderRadius),
         ),
-        child: Padding(
-          padding: const EdgeInsets.only(
-            left: DsfrSpacings.s1w,
-            top: DsfrSpacings.s1w,
-            right: DsfrSpacings.s1w,
-            bottom: DsfrSpacings.s3v,
-          ),
-          child: SizedBox(
-            width: width,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Stack(
-                  alignment: Alignment.topRight,
+        child: Material(
+          color: FnvColors.transparent,
+          child: InkWell(
+            onTap: () async {
+              switch (widget.type) {
+                case TypeDuContenu.article:
+                  await GoRouter.of(context).pushNamed(
+                    ArticlePage.name,
+                    pathParameters: {'id': widget.id},
+                  );
+                case TypeDuContenu.kyc:
+                  final result = await GoRouter.of(context).pushNamed(
+                    MieuxVousConnaitreEditPage.name,
+                    pathParameters: {'id': widget.id},
+                  );
+                  if (result != true || !context.mounted) {
+                    return;
+                  }
+                  await context.read<GamificationPort>().mettreAJourLesPoints();
+                case TypeDuContenu.quiz:
+                  await GoRouter.of(context).pushNamed(
+                    QuizPage.name,
+                    pathParameters: {'id': widget.id},
+                  );
+              }
+              widget.onPop();
+            },
+            onHighlightChanged: updateMaterialState(WidgetState.pressed),
+            onHover: updateMaterialState(WidgetState.hovered),
+            focusColor: FnvColors.transparent,
+            borderRadius: borderRadius,
+            onFocusChange: updateMaterialState(WidgetState.focused),
+            child: Padding(
+              padding: const EdgeInsets.only(
+                left: DsfrSpacings.s1w,
+                top: DsfrSpacings.s1w,
+                right: DsfrSpacings.s1w,
+                bottom: DsfrSpacings.s3v,
+              ),
+              child: SizedBox(
+                width: width,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _Image(
-                      imageUrl: imageUrl,
-                      width: width,
-                      borderRadius: borderRadius,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: DsfrSpacings.s1v5,
-                        top: DsfrSpacings.s1v5,
-                        right: DsfrSpacings.s1v5,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Flexible(child: _TypeTag(type: type)),
-                          const SizedBox(width: DsfrSpacings.s1v),
-                          _Points(
-                            points: points,
-                            borderRadius: borderRadius,
+                    Stack(
+                      alignment: Alignment.topRight,
+                      children: [
+                        _Image(
+                          imageUrl: widget.imageUrl,
+                          width: width,
+                          borderRadius: borderRadius,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            left: DsfrSpacings.s1v5,
+                            top: DsfrSpacings.s1v5,
+                            right: DsfrSpacings.s1v5,
                           ),
-                        ],
-                      ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Flexible(child: _TypeTag(type: widget.type)),
+                              const SizedBox(width: DsfrSpacings.s1v),
+                              _Points(
+                                points: widget.points,
+                                borderRadius: borderRadius,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
+                    const SizedBox(height: DsfrSpacings.s1v5),
+                    widget.themeTag,
+                    const SizedBox(height: DsfrSpacings.s1w),
+                    _Title(titre: widget.titre),
                   ],
                 ),
-                const SizedBox(height: DsfrSpacings.s1v5),
-                themeTag,
-                const SizedBox(height: DsfrSpacings.s1w),
-                _Title(titre: titre),
-              ],
+              ),
             ),
           ),
         ),

@@ -1,5 +1,6 @@
 import 'package:app/core/infrastructure/tracker.dart';
 import 'package:app/core/presentation/widgets/composants/card.dart';
+import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/assistances/core/domain/aide.dart';
 import 'package:app/features/assistances/core/presentation/widgets/tag_simulateur.dart';
@@ -145,7 +146,7 @@ class _Tag extends StatelessWidget {
     final isSelected = value == groupValue;
 
     return Material(
-      color: Colors.transparent,
+      color: FnvColors.transparent,
       child: InkWell(
         onTap: () {
           context

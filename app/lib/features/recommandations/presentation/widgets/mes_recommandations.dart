@@ -41,7 +41,7 @@ class _View extends StatelessWidget {
               ),
               SizedBox(height: DsfrSpacings.s1v5),
               Text(
-                Localisation.accueilRecommandationsSousTitre,
+                Localisation.themeRecommandationsSousTitre,
                 style: DsfrTextStyle.bodyMd(),
               ),
             ],

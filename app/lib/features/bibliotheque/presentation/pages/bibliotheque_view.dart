@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:app/core/assets/svgs.dart';
+import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/bibliotheque/domain/bibliotheque.dart';
 import 'package:app/features/bibliotheque/presentation/bloc/bibliotheque_bloc.dart';
@@ -98,7 +99,7 @@ class _Thematiques extends StatelessWidget {
   }
 }
 
-class _Tag extends StatelessWidget {
+class _Tag extends StatefulWidget {
   const _Tag({
     required this.label,
     required this.thematique,
@@ -110,27 +111,40 @@ class _Tag extends StatelessWidget {
   final bool choisi;
 
   @override
+  State<_Tag> createState() => _TagState();
+}
+
+class _TagState extends State<_Tag> with MaterialStateMixin<_Tag> {
+  @override
   Widget build(final context) {
     const blue = DsfrColors.blueFranceSun113;
+    const borderRadius = BorderRadius.all(Radius.circular(DsfrSpacings.s4w));
 
-    return GestureDetector(
-      onTap: () => context.read<BibliothequeBloc>().add(
-            BibliothequeThematiqueSelectionnee(thematique),
-          ),
-      behavior: HitTestBehavior.opaque,
+    return DsfrFocusWidget(
+      isFocused: isFocused,
+      borderRadius: borderRadius,
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: choisi ? blue : null,
+          color: widget.choisi ? blue : null,
           border: const Border.fromBorderSide(BorderSide(color: blue)),
-          borderRadius:
-              const BorderRadius.all(Radius.circular(DsfrSpacings.s4w)),
+          borderRadius: borderRadius,
         ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
-          child: Text(
-            label,
-            style: DsfrTextStyle.bodySmMedium(
-              color: choisi ? Colors.white : blue,
+        child: InkWell(
+          onTap: () => context.read<BibliothequeBloc>().add(
+                BibliothequeThematiqueSelectionnee(widget.thematique),
+              ),
+          onHighlightChanged: updateMaterialState(WidgetState.pressed),
+          onHover: updateMaterialState(WidgetState.hovered),
+          focusColor: FnvColors.transparent,
+          borderRadius: borderRadius,
+          onFocusChange: updateMaterialState(WidgetState.focused),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
+            child: Text(
+              widget.label,
+              style: DsfrTextStyle.bodySmMedium(
+                color: widget.choisi ? Colors.white : blue,
+              ),
             ),
           ),
         ),
@@ -203,11 +217,7 @@ class _SliverListe extends StatelessWidget {
             hasScrollBody: false,
             child: Column(
               children: [
-                SvgPicture.asset(
-                  AssetsSvgs.bibliothequeEmpty,
-                  semanticsLabel:
-                      "Illustration lorsque aucun article n'est trouvé",
-                ),
+                SvgPicture.asset(AssetsSvgs.bibliothequeEmpty),
                 const SizedBox(height: DsfrSpacings.s2w),
                 const Text(
                   Localisation.bibliothequeAucunArticle,

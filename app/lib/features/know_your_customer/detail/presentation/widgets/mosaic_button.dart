@@ -1,3 +1,4 @@
+import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 
@@ -81,7 +82,7 @@ class MosaicButton extends StatelessWidget {
             child: SizedBox(
               width: size,
               child: Material(
-                color: Colors.transparent,
+                color: FnvColors.transparent,
                 child: InkWell(
                   onTap: () => onChanged(!value),
                   borderRadius: _MosaicButtonStyles.borderRadius,

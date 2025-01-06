@@ -30,12 +30,6 @@ class _FnvAccordionsGroupState extends State<FnvAccordionsGroup> {
   int? _panelIndex;
   bool _isExpanded = false;
 
-  void _handleCallback(final int? panelIndex, final bool isExpanded) =>
-      setState(() {
-        _panelIndex = panelIndex;
-        _isExpanded = isExpanded;
-      });
-
   @override
   Widget build(final context) {
     const divider = DsfrDivider();
@@ -50,7 +44,11 @@ class _FnvAccordionsGroupState extends State<FnvAccordionsGroup> {
             index: index,
             item: e.$2,
             isExpanded: _panelIndex == index && _isExpanded,
-            onAccordionCallback: _handleCallback,
+            onAccordionCallback: (final panelIndex, final isExpanded) =>
+                setState(() {
+              _panelIndex = panelIndex;
+              _isExpanded = isExpanded;
+            }),
           );
         }).separator(divider),
         divider,
@@ -78,9 +76,8 @@ class _FnvAccordion extends StatelessWidget {
   Widget build(final context) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          GestureDetector(
+          InkWell(
             onTap: item.isEnable ? _handleTap : null,
-            behavior: HitTestBehavior.opaque,
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s3v),
               child: Row(
