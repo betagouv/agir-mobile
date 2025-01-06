@@ -55,3 +55,7 @@ app.*.map.json
 # Firebase Google Services
 **/google-services.json
 app/devtools_options.yaml
+
+# FVM Version Cache
+.fvm/
+.fvmrc
