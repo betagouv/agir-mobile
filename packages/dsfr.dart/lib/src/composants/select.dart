@@ -71,10 +71,12 @@ class DsfrSelect<T> extends StatelessWidget {
           trailingIcon: const Icon(
             DsfrIcons.systemArrowDownSLine,
             size: DsfrSpacings.s2w,
+            semanticLabel: 'Cacher les options',
           ),
           selectedTrailingIcon: const Icon(
             DsfrIcons.systemArrowUpSLine,
             size: DsfrSpacings.s2w,
+            semanticLabel: 'Afficher les options',
           ),
           textStyle: inputStyle,
           inputDecorationTheme: InputDecorationTheme(
@@ -127,7 +129,7 @@ class _Label extends StatelessWidget {
             const SizedBox(height: DsfrSpacings.s1v),
             Text(hint!, style: hintStyle.copyWith(color: hintColor)),
           ],
-          const SizedBox(height: DsfrSpacings.s1v),
+          const SizedBox(height: 10),
           child,
         ],
       );
