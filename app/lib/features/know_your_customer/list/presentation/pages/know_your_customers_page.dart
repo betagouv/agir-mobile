@@ -2,6 +2,7 @@ import 'package:app/core/presentation/widgets/composants/app_bar.dart';
 import 'package:app/core/presentation/widgets/composants/failure_widget.dart';
 import 'package:app/core/presentation/widgets/composants/list_item.dart';
 import 'package:app/core/presentation/widgets/composants/scaffold.dart';
+import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/know_your_customer/core/domain/question.dart';
 import 'package:app/features/know_your_customer/detail/presentation/pages/mieux_vous_connaitre_edit_page.dart';
@@ -138,7 +139,7 @@ class _Tag extends StatelessWidget {
     const borderRadius = BorderRadius.all(Radius.circular(DsfrSpacings.s4w));
 
     return Material(
-      color: Colors.transparent,
+      color: FnvColors.transparent,
       child: InkWell(
         onTap: () => context.read<KnowYourCustomersBloc>().add(
               KnowYourCustomersThemePressed(

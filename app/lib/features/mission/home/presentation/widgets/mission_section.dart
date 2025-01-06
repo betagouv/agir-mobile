@@ -1,4 +1,5 @@
 import 'package:app/core/presentation/widgets/composants/image.dart';
+import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/shadows.dart';
 import 'package:app/features/accueil/presentation/widgets/title_section.dart';
 import 'package:app/features/mission/home/presentation/bloc/mission_home_bloc.dart';
@@ -93,7 +94,7 @@ class _MissionState extends State<_Mission> with MaterialStateMixin<_Mission> {
             shape: RoundedRectangleBorder(borderRadius: borderRadius),
           ),
           child: Material(
-            color: Colors.transparent,
+            color: FnvColors.transparent,
             child: InkWell(
               onTap: () async {
                 await GoRouter.of(context).pushNamed(
@@ -109,7 +110,7 @@ class _MissionState extends State<_Mission> with MaterialStateMixin<_Mission> {
               },
               onHighlightChanged: updateMaterialState(WidgetState.pressed),
               onHover: updateMaterialState(WidgetState.hovered),
-              focusColor: Colors.transparent,
+              focusColor: FnvColors.transparent,
               borderRadius: borderRadius,
               onFocusChange: updateMaterialState(WidgetState.focused),
               child: Padding(

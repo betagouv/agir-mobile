@@ -1,3 +1,4 @@
+import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/accueil/presentation/pages/home_page.dart';
 import 'package:app/features/actions/list/presentation/pages/action_list_page.dart';
@@ -136,7 +137,7 @@ class _MenuItem extends StatelessWidget {
     return ConstrainedBox(
       constraints: const BoxConstraints(minHeight: 48),
       child: Material(
-        color: Colors.transparent,
+        color: FnvColors.transparent,
         child: InkWell(
           onTap: isCurrentPage
               ? null

@@ -1,3 +1,4 @@
+import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/shadows.dart';
 import 'package:app/features/accueil/presentation/widgets/title_section.dart';
 import 'package:app/features/actions/detail/presentation/pages/action_detail_page.dart';
@@ -86,50 +87,69 @@ class _Actions extends StatelessWidget {
         );
 }
 
-class _Action extends StatelessWidget {
+class _Action extends StatefulWidget {
   const _Action(this.item);
 
   final ActionItem item;
 
   @override
+  State<_Action> createState() => _ActionState();
+}
+
+class _ActionState extends State<_Action> with MaterialStateMixin<_Action> {
+  @override
   Widget build(final context) {
     const width = 250.0;
+    const borderRadius = BorderRadius.all(Radius.circular(DsfrSpacings.s1w));
 
-    return GestureDetector(
-      onTap: () async {
-        final result = await GoRouter.of(context).pushNamed(
-          ActionDetailPage.name,
-          pathParameters: {'id': item.id.value},
-        );
-
-        if (result != true || !context.mounted) {}
-        if (context.mounted) {
-          context
-              .read<HomeActionsBloc>()
-              .add(const HomeActionsRefreshRequested());
-        }
-      },
+    return DsfrFocusWidget(
+      isFocused: isFocused,
+      borderRadius: borderRadius,
       child: DecoratedBox(
         decoration: const ShapeDecoration(
           color: Colors.white,
           shadows: recommandationOmbre,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(DsfrSpacings.s1w)),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: borderRadius),
         ),
-        child: SizedBox(
-          width: width,
-          child: Padding(
-            padding: const EdgeInsets.all(DsfrSpacings.s2w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ThemeTypeTag(themeType: item.themeType),
-                const SizedBox(height: DsfrSpacings.s1w),
-                Expanded(
-                  child: Text(item.titre, style: const DsfrTextStyle.bodyLg()),
+        child: Material(
+          color: FnvColors.transparent,
+          child: InkWell(
+            onTap: () async {
+              final result = await GoRouter.of(context).pushNamed(
+                ActionDetailPage.name,
+                pathParameters: {'id': widget.item.id.value},
+              );
+
+              if (result != true || !context.mounted) {}
+              if (context.mounted) {
+                context
+                    .read<HomeActionsBloc>()
+                    .add(const HomeActionsRefreshRequested());
+              }
+            },
+            onHighlightChanged: updateMaterialState(WidgetState.pressed),
+            onHover: updateMaterialState(WidgetState.hovered),
+            focusColor: FnvColors.transparent,
+            borderRadius: borderRadius,
+            onFocusChange: updateMaterialState(WidgetState.focused),
+            child: SizedBox(
+              width: width,
+              child: Padding(
+                padding: const EdgeInsets.all(DsfrSpacings.s2w),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ThemeTypeTag(themeType: widget.item.themeType),
+                    const SizedBox(height: DsfrSpacings.s1w),
+                    Expanded(
+                      child: Text(
+                        widget.item.titre,
+                        style: const DsfrTextStyle.bodyLg(),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         ),

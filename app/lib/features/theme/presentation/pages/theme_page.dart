@@ -261,65 +261,79 @@ class _Services extends StatelessWidget {
   }
 }
 
-class _Service extends StatelessWidget {
+class _Service extends StatefulWidget {
   const _Service(this.service);
 
   final ServiceItem service;
 
   @override
+  State<_Service> createState() => _ServiceState();
+}
+
+class _ServiceState extends State<_Service> with MaterialStateMixin<_Service> {
+  @override
   Widget build(final context) {
     const borderRadius = BorderRadius.all(Radius.circular(DsfrSpacings.s1w));
 
-    return DecoratedBox(
-      decoration: const ShapeDecoration(
-        color: Color(0xFFEEF2FF),
-        shape: RoundedRectangleBorder(
-          side: BorderSide(color: Color(0xFFB1B1FF)),
-          borderRadius: borderRadius,
+    return DsfrFocusWidget(
+      isFocused: isFocused,
+      borderRadius: borderRadius,
+      child: DecoratedBox(
+        decoration: const ShapeDecoration(
+          color: Color(0xFFEEF2FF),
+          shape: RoundedRectangleBorder(
+            side: BorderSide(color: Color(0xFFB1B1FF)),
+            borderRadius: borderRadius,
+          ),
         ),
-      ),
-      child: Material(
-        color: FnvColors.transparent,
-        child: InkWell(
-          onTap: () async => FnvUrlLauncher.launch(service.externalUrl),
-          borderRadius: borderRadius,
-          child: SizedBox(
-            width: 156,
-            child: Padding(
-              padding: const EdgeInsets.all(DsfrSpacings.s1w),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    service.titre,
-                    style: const DsfrTextStyle.bodyMdMedium(
-                      color: DsfrColors.blueFranceSun113,
-                    ),
-                  ),
-                  const SizedBox(height: DsfrSpacings.s1w),
-                  const Spacer(),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          service.sousTitre,
-                          style: const DsfrTextStyle.bodySmMedium(
-                            color: DsfrColors.blueFranceSun113,
-                          ),
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                      const Icon(
-                        DsfrIcons.systemExternalLinkLine,
-                        size: 20,
+        child: Material(
+          color: FnvColors.transparent,
+          child: InkWell(
+            onTap: () async =>
+                FnvUrlLauncher.launch(widget.service.externalUrl),
+            onHighlightChanged: updateMaterialState(WidgetState.pressed),
+            onHover: updateMaterialState(WidgetState.hovered),
+            focusColor: FnvColors.transparent,
+            borderRadius: borderRadius,
+            onFocusChange: updateMaterialState(WidgetState.focused),
+            child: SizedBox(
+              width: 156,
+              child: Padding(
+                padding: const EdgeInsets.all(DsfrSpacings.s1w),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.service.titre,
+                      style: const DsfrTextStyle.bodyMdMedium(
                         color: DsfrColors.blueFranceSun113,
                       ),
-                    ],
-                  ),
-                ],
+                    ),
+                    const SizedBox(height: DsfrSpacings.s1w),
+                    const Spacer(),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            widget.service.sousTitre,
+                            style: const DsfrTextStyle.bodySmMedium(
+                              color: DsfrColors.blueFranceSun113,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        const Icon(
+                          DsfrIcons.systemExternalLinkLine,
+                          size: 20,
+                          color: DsfrColors.blueFranceSun113,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
