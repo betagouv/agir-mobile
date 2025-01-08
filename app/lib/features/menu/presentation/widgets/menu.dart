@@ -6,6 +6,7 @@ import 'package:app/features/assistances/list/presentation/pages/assistance_list
 import 'package:app/features/authentification/core/domain/authentification_port.dart';
 import 'package:app/features/bibliotheque/presentation/pages/bibliotheque_page.dart';
 import 'package:app/features/environmental_performance/summary/presentation/page/environmental_performance_summary_page.dart';
+import 'package:app/features/notifications/infrastructure/notification_repository.dart';
 import 'package:app/features/profil/profil/presentation/pages/profil_page.dart';
 import 'package:app/features/version/presentation/widgets/version_label.dart';
 import 'package:app/l10n/l10n.dart';
@@ -103,8 +104,14 @@ class _MenuItems extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
             child: DsfrLink.md(
               label: Localisation.seDeconnecter,
-              onTap: () async =>
-                  context.read<AuthentificationPort>().deconnexionDemandee(),
+              onTap: () async {
+                await context.read<NotificationRepository>().deleteToken();
+                if (context.mounted) {
+                  await context
+                      .read<AuthentificationPort>()
+                      .deconnexionDemandee();
+                }
+              },
             ),
           ),
         ),

@@ -21,6 +21,7 @@ import 'package:app/features/communes/infrastructure/communes_api_adapter.dart';
 import 'package:app/features/gamification/infrastructure/gamification_api_adapter.dart';
 import 'package:app/features/know_your_customer/core/infrastructure/mieux_vous_connaitre_api_adapter.dart';
 import 'package:app/features/know_your_customer/list/infrastructure/know_your_customers_repository.dart';
+import 'package:app/features/notifications/infrastructure/notification_service.dart';
 import 'package:app/features/profil/core/infrastructure/profil_api_adapter.dart';
 import 'package:app/features/questions/first_name/infrastructure/first_name_adapter.dart';
 import 'package:app/features/quiz/infrastructure/quiz_api_adapter.dart';
@@ -43,6 +44,7 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 Future<void> main() async {
   final widgetsBinding = SentryWidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
   if (!kDebugMode) {
     await CrashReporting.init();
   }
@@ -61,6 +63,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   final _clock = const Clock();
   late final Tracker _tracker;
+  late final NotificationService _notificationService;
   late final AuthenticationService _authenticationService;
   late final String _apiUrl;
   late final PackageInfo _packageInfo;
@@ -91,7 +94,6 @@ class _MyAppState extends State<MyApp> {
     if (_apiUrl.isEmpty) {
       throw const MissingEnvironmentKeyException(apiUrlKey);
     }
-
     final authenticationStorage = AuthenticationStorage(
       const FlutterSecureStorage(
         aOptions: AndroidOptions(encryptedSharedPreferences: true),
@@ -104,12 +106,16 @@ class _MyAppState extends State<MyApp> {
       clock: _clock,
     );
     await _authenticationService.checkAuthenticationStatus();
+
+    _notificationService = const NotificationService();
+    await _notificationService.initializeApp();
   }
 
   @override
   Future<void> dispose() async {
     _tracker.dispose();
     await _authenticationService.dispose();
+    await CrashReporting.dispose();
     super.dispose();
   }
 
@@ -157,6 +163,7 @@ class _MyAppState extends State<MyApp> {
             tracker: _tracker,
             messageBus: messageBus,
             dioHttpClient: client,
+            notificationService: _notificationService,
             authenticationService: _authenticationService,
             authentificationPort: AuthentificationApiAdapter(
               client: client,

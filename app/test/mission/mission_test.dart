@@ -18,15 +18,18 @@ import 'package:app/features/mission/home/infrastructure/mission_home_repository
 import 'package:app/features/mission/home/presentation/bloc/mission_home_bloc.dart';
 import 'package:app/features/mission/mission/infrastructure/mission_repository.dart';
 import 'package:app/features/mission/mission/presentation/pages/mission_page.dart';
+import 'package:app/features/notifications/infrastructure/notification_service.dart';
 import 'package:app/features/recommandations/presentation/bloc/recommandations_bloc.dart';
 import 'package:app/features/utilisateur/presentation/bloc/utilisateur_bloc.dart';
 import 'package:app/l10n/l10n.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mocktail_image_network/mocktail_image_network.dart';
 
 import '../environmental_performance/summary/environmental_performance_data.dart';
+import '../features/helper/notification_service_fake.dart';
 import '../helpers/authentication_service_setup.dart';
 import '../helpers/dio_mock.dart';
 import '../helpers/pump_page.dart';
@@ -71,6 +74,10 @@ Future<void> pumpForMissionPage(
           client: client,
           messageBus: MessageBus(),
         ),
+      ),
+      RepositoryProvider<NotificationService>(
+        create: (final context) =>
+            const NotificationServiceFake(AuthorizationStatus.denied),
       ),
     ],
     blocProviders: [

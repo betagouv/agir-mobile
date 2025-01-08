@@ -26,15 +26,28 @@ Vous devez avoir correctement installé [Flutter](https://docs.flutter.dev/get-s
     git clone git@github.com:betagouv/agir-mobile.git && cd agir-mobile
     ```
 
+1. Ajouter les fichiers de configuration Firebase :
+
+    - `android/app/google-services.json`
+    - `ios/Runner/GoogleService-Info.plist`
+
 1. Configurer les variables d'environnement dans le fichier `app/env.developement.json` :
 
     ```json
     {
-      "API_URL"           : "X",
-      "SENTRY_DSN"        : "X",
-      "SENTRY_ENVIRONMENT": "X",
-      "MATOMO_URL"        : "X",
-      "MATOMO_SITE_ID"    : "X"
+      "API_URL"                      : "X",
+      "SENTRY_DSN"                   : "X",
+      "SENTRY_ENVIRONMENT"           : "X",
+      "MATOMO_URL"                   : "X",
+      "MATOMO_SITE_ID"               : "X",
+      "FIREBASE_PROJECT_ID"          : "X",
+      "FIREBASE_STORAGE_BUCKET"      : "X",
+      "FIREBASE_MESSAGING_SENDER_ID" : "X",
+      "FIREBASE_ANDROID_API_KEY"     : "X",
+      "FIREBASE_ANDROID_APP_ID"      : "X",
+      "FIREBASE_IOS_API_KEY"         : "X",
+      "FIREBASE_IOS_APP_ID"          : "X",
+      "BUNDLE_ID"                    : "X"
     }
     ```
 

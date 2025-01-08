@@ -10,7 +10,7 @@ class UtilisateurBloc extends Bloc<UtilisateurEvent, UtilisateurState> {
           const UtilisateurState(
             utilisateur: Utilisateur(
               prenom: '',
-              estIntegrationTerminee: true,
+              estIntegrationTerminee: null,
             ),
           ),
         ) {
@@ -18,7 +18,7 @@ class UtilisateurBloc extends Bloc<UtilisateurEvent, UtilisateurState> {
       final result = await authentificationPort.recupereUtilisateur();
       result.fold(
         (final l) {},
-        (final utilisateur) => emit(UtilisateurState(utilisateur: utilisateur)),
+        (final user) => emit(UtilisateurState(utilisateur: user)),
       );
     });
   }

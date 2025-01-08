@@ -6,17 +6,15 @@ on:
       FLAVOR:
         type: string
         required: true
-        description: "Flavor de l'application (production ou development)"
     secrets:
-      ANDROID_KEYSTORE:
+      KEYSTORE:
         required: true
-        description: "Fichier de clé de signature de l'application"
-      ANDROID_KEY_PROPERTIES:
+      KEY_PROPERTIES:
         required: true
-        description: "Fichier de configuration de la clé de signature de l'application"
+      GOOGLE_SERVICES_JSON:
+        required: true
       FLUTTER_ENV:
         required: true
-        description: "Fichier de configuration de l'application"
 
 jobs:
   continuous_delivery_android:
@@ -26,10 +24,13 @@ jobs:
         uses: actions/checkout@v4
       - name: 🔑 Ajouter le fichier keystore
         working-directory: app/android/app
-        run: echo "${{ secrets.ANDROID_KEYSTORE }}" | base64 --decode > agir.keystore
+        run: echo "${{ secrets.KEYSTORE }}" | base64 --decode > agir.keystore
       - name: 🔑 Ajouter le fichier key properties
         working-directory: app/android
-        run: echo "${{ secrets.ANDROID_KEY_PROPERTIES }}" | base64 --decode > key.properties
+        run: echo "${{ secrets.KEY_PROPERTIES }}" | base64 --decode > key.properties
+      - name: 🔑 Ajouter le fichier de configuration de Firebase
+        working-directory: app/android/app
+        run: echo "${{ secrets.GOOGLE_SERVICES_JSON }}" | base64 --decode > google-services.json
       - name: 🔑 Ajouter les variables d'environnements
         working-directory: app
         run: echo "${{ secrets.FLUTTER_ENV }}" | base64 --decode > env.json
@@ -52,4 +53,4 @@ jobs:
           path: app/build/app/outputs/bundle/${{ inputs.FLAVOR }}Release/app-${{ inputs.FLAVOR }}-release.aab
       - name: 🗑️ Nettoyer les fichiers secrets
         if: always()
-        run: rm -f app/android/app/agir.keystore app/android/key.properties app/env.json
+        run: rm -f app/android/app/agir.keystore app/android/key.properties app/android/app/google-services.json app/env.json

@@ -7,12 +7,14 @@ import 'package:app/features/authentication/domain/authentication_status.dart';
 import 'package:app/features/authentication/infrastructure/authentication_storage.dart';
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:clock/clock.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:mocktail_image_network/mocktail_image_network.dart';
 
 import '../../environmental_performance/summary/environmental_performance_data.dart';
+import '../../features/helper/notification_service_fake.dart';
 import '../../helpers/dio_mock.dart';
 import '../../mission/mission_test.dart';
 import '../api/constants.dart';
@@ -108,6 +110,8 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
           dio: dioMock,
           authenticationService: authenticationService,
         ),
+        notificationService:
+            const NotificationServiceFake(AuthorizationStatus.denied),
         authenticationService: authenticationService,
         authentificationPort: ScenarioContext().authentificationPortMock!,
         themePort: ScenarioContext().themePortMock!,

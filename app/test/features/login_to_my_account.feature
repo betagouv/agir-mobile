@@ -3,7 +3,7 @@ Feature: Login to my account
     Given initialize context
 
   Scenario: Login to my account is successful
-    Given the application is launched
+    Given The application is launched
     When I tap on {"J’ai déjà un compte"}
     Then I see {'Accédez à mon compte J’agis'}
 
@@ -17,12 +17,12 @@ Feature: Login to my account
 
   Scenario: Already logged in
     Given I am logged in
-    Given the application is launched
+    Given The application is launched
     Then I see the home page
 
   Scenario: Logout
     Given I am logged in
-    Given the application is launched
+    Given The application is launched
     When I tap on the menu button
     When I tap on {'Se déconnecter'}
     Then I see {'Ensemble,\naméliorons\nnos habitudes\nau jour le jour'}

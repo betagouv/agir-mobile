@@ -2,7 +2,7 @@ Feature: Article library
   Background:
     Given initialize context
     Given I am logged in
-    Given the application is launched
+    Given The application is launched
     When I tap on the menu button
 
   Scenario: See 1 article

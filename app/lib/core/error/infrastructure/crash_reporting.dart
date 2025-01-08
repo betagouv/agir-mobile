@@ -13,4 +13,8 @@ abstract final class CrashReporting {
   }) async {
     await Sentry.captureException(exception, stackTrace: stackTrace);
   }
+
+  static Future<void> dispose() async {
+    await Sentry.close();
+  }
 }

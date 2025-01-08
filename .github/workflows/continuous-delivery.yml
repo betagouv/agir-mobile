@@ -10,8 +10,9 @@ jobs:
     with:
       FLAVOR: development
     secrets:
-      ANDROID_KEYSTORE: ${{ secrets.DEV_ANDROID_KEYSTORE }}
-      ANDROID_KEY_PROPERTIES: ${{ secrets.DEV_ANDROID_KEY_PROPERTIES }}
+      KEYSTORE: ${{ secrets.DEV_ANDROID_KEYSTORE }}
+      KEY_PROPERTIES: ${{ secrets.DEV_ANDROID_KEY_PROPERTIES }}
+      GOOGLE_SERVICES_JSON: ${{ secrets.DEV_ANDROID_GOOGLE_SERVICES_JSON }}
       FLUTTER_ENV: ${{ secrets.DEV_FLUTTER_ENV }}
 
   continuous_delivery_ios_dev:
@@ -20,12 +21,13 @@ jobs:
     with:
       FLAVOR: development
     secrets:
-      IOS_P12_FILE: ${{ secrets.DEV_IOS_P12_FILE }}
-      IOS_P12_PASSWORD: ${{ secrets.DEV_IOS_P12_PASSWORD }}
-      IOS_PROFILE: ${{ secrets.DEV_IOS_PROFILE }}
-      IOS_EXPORT_OPTIONS: ${{ secrets.DEV_IOS_EXPORT_OPTIONS }}
-      IOS_USERNAME: ${{ secrets.DEV_IOS_USERNAME }}
-      IOS_PASSWORD: ${{ secrets.DEV_IOS_PASSWORD }}
+      P12_FILE: ${{ secrets.DEV_IOS_P12_FILE }}
+      P12_PASSWORD: ${{ secrets.DEV_IOS_P12_PASSWORD }}
+      PROFILE: ${{ secrets.DEV_IOS_PROFILE }}
+      EXPORT_OPTIONS: ${{ secrets.DEV_IOS_EXPORT_OPTIONS }}
+      USERNAME: ${{ secrets.DEV_IOS_USERNAME }}
+      PASSWORD: ${{ secrets.DEV_IOS_PASSWORD }}
+      GOOGLE_SERVICES_INFO_PLIST: ${{ secrets.DEV_IOS_GOOGLE_SERVICES_INFO_PLIST }}
       FLUTTER_ENV: ${{ secrets.DEV_FLUTTER_ENV }}
 
   wait_for_approval:
@@ -43,8 +45,9 @@ jobs:
     with:
       FLAVOR: production
     secrets:
-      ANDROID_KEYSTORE: ${{ secrets.PROD_ANDROID_KEYSTORE }}
-      ANDROID_KEY_PROPERTIES: ${{ secrets.PROD_ANDROID_KEY_PROPERTIES }}
+      KEYSTORE: ${{ secrets.PROD_ANDROID_KEYSTORE }}
+      KEY_PROPERTIES: ${{ secrets.PROD_ANDROID_KEY_PROPERTIES }}
+      GOOGLE_SERVICES_JSON: ${{ secrets.PROD_ANDROID_GOOGLE_SERVICES_JSON }}
       FLUTTER_ENV: ${{ secrets.PROD_FLUTTER_ENV }}
 
   continuous_delivery_ios_prod:
@@ -54,10 +57,11 @@ jobs:
     with:
       FLAVOR: production
     secrets:
-      IOS_P12_FILE: ${{ secrets.PROD_IOS_P12_FILE }}
-      IOS_P12_PASSWORD: ${{ secrets.PROD_IOS_P12_PASSWORD }}
-      IOS_PROFILE: ${{ secrets.PROD_IOS_PROFILE }}
-      IOS_EXPORT_OPTIONS: ${{ secrets.PROD_IOS_EXPORT_OPTIONS }}
-      IOS_USERNAME: ${{ secrets.PROD_IOS_USERNAME }}
-      IOS_PASSWORD: ${{ secrets.PROD_IOS_PASSWORD }}
+      P12_FILE: ${{ secrets.PROD_IOS_P12_FILE }}
+      P12_PASSWORD: ${{ secrets.PROD_IOS_P12_PASSWORD }}
+      PROFILE: ${{ secrets.PROD_IOS_PROFILE }}
+      EXPORT_OPTIONS: ${{ secrets.PROD_IOS_EXPORT_OPTIONS }}
+      USERNAME: ${{ secrets.PROD_IOS_USERNAME }}
+      PASSWORD: ${{ secrets.PROD_IOS_PASSWORD }}
+      GOOGLE_SERVICES_INFO_PLIST: ${{ secrets.PROD_IOS_GOOGLE_SERVICES_INFO_PLIST }}
       FLUTTER_ENV: ${{ secrets.PROD_FLUTTER_ENV }}
