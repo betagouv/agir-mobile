@@ -1,7 +1,7 @@
 Feature: Forgot password
   Background:
     Given initialize context
-    Given the application is launched
+    Given The application is launched
     When I tap on {"J’ai déjà un compte"}
     When I tap on {'Mot de passe oublié ?'}
 

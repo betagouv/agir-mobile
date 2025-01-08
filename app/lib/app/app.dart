@@ -35,6 +35,8 @@ import 'package:app/features/mission/actions/infrastructure/mission_actions_repo
 import 'package:app/features/mission/home/infrastructure/mission_home_repository.dart';
 import 'package:app/features/mission/home/presentation/bloc/mission_home_bloc.dart';
 import 'package:app/features/mission/mission/infrastructure/mission_repository.dart';
+import 'package:app/features/notifications/infrastructure/notification_repository.dart';
+import 'package:app/features/notifications/infrastructure/notification_service.dart';
 import 'package:app/features/profil/core/domain/profil_port.dart';
 import 'package:app/features/questions/first_name/domain/first_name_port.dart';
 import 'package:app/features/quiz/domain/quiz_port.dart';
@@ -64,6 +66,7 @@ class App extends StatefulWidget {
     required this.tracker,
     required this.messageBus,
     required this.dioHttpClient,
+    required this.notificationService,
     required this.authenticationService,
     required this.authentificationPort,
     required this.themePort,
@@ -85,6 +88,7 @@ class App extends StatefulWidget {
   final Tracker tracker;
   final MessageBus messageBus;
   final DioHttpClient dioHttpClient;
+  final NotificationService notificationService;
   final AuthenticationService authenticationService;
   final AuthentificationPort authentificationPort;
   final ThemePort themePort;
@@ -132,6 +136,7 @@ class _AppState extends State<App> {
         child: AuthenticationRedirection(
           child: MultiRepositoryProvider(
             providers: [
+              RepositoryProvider.value(value: widget.notificationService),
               RepositoryProvider.value(value: widget.tracker),
               RepositoryProvider.value(value: widget.clock),
               RepositoryProvider.value(value: widget.authentificationPort),
@@ -167,6 +172,12 @@ class _AppState extends State<App> {
               RepositoryProvider(
                 create: (final context) =>
                     MissionActionsRepository(client: widget.dioHttpClient),
+              ),
+              RepositoryProvider(
+                create: (final context) => NotificationRepository(
+                  client: widget.dioHttpClient,
+                  notificationService: widget.notificationService,
+                ),
               ),
             ],
             child: MultiBlocProvider(

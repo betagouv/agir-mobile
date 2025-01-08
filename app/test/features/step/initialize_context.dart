@@ -13,6 +13,7 @@ Future<void> initializeContext(final WidgetTester tester) async {
   FeatureContext.reset();
   FeatureContext.instance.secureStorage = FlutterSecureStorageFake();
   FeatureContext.instance.dioMock = DioMock();
+  setNotification();
   setFirstName();
   setProfile();
   setDeleteAccount();
@@ -28,27 +29,10 @@ Future<void> initializeContext(final WidgetTester tester) async {
   setActions();
 }
 
-void setCommunes() => FeatureContext.instance.dioMock.getM(
-      Uri(path: Endpoints.communes, queryParameters: {'code_postal': '39100'})
-          .toString(),
-      responseData: jsonDecode('''
-[
-  "AUTHUME",
-  "BAVERANS",
-  "BREVANS",
-  "CHAMPVANS",
-  "CHOISEY",
-  "CRISSEY",
-  "DOLE",
-  "FOUCHERANS",
-  "GEVRY",
-  "JOUHE",
-  "MONNIERES",
-  "PARCEY",
-  "SAMPANS",
-  "VILLETTE LES DOLE"
-]'''),
-    );
+void setNotification() {
+  FeatureContext.instance.dioMock.deleteM(Endpoints.notificationToken);
+  FeatureContext.instance.dioMock.putM(Endpoints.notificationToken);
+}
 
 void setFirstName() => FeatureContext.instance.dioMock.patchM(
       Endpoints.profile,
@@ -139,6 +123,28 @@ void setDeleteAccount() =>
 void setForgotPassword() => FeatureContext.instance.dioMock
   ..postM(Endpoints.oubliMotDePasse)
   ..postM(Endpoints.modifierMotDePasse);
+
+void setCommunes() => FeatureContext.instance.dioMock.getM(
+      Uri(path: Endpoints.communes, queryParameters: {'code_postal': '39100'})
+          .toString(),
+      responseData: jsonDecode('''
+[
+  "AUTHUME",
+  "BAVERANS",
+  "BREVANS",
+  "CHAMPVANS",
+  "CHOISEY",
+  "CRISSEY",
+  "DOLE",
+  "FOUCHERANS",
+  "GEVRY",
+  "JOUHE",
+  "MONNIERES",
+  "PARCEY",
+  "SAMPANS",
+  "VILLETTE LES DOLE"
+]'''),
+    );
 
 void setActions() => FeatureContext.instance.dioMock
   ..getM(

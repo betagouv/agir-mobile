@@ -1,7 +1,7 @@
 Feature: First questions
   Background:
     Given initialize context
-    Given the application is launched
+    Given The application is launched
     Given the email don't exists
     When I tap on {'Je crée mon compte'}
     When I enter {'joe@doe.fr'} in the {'Mon adresse email'} field

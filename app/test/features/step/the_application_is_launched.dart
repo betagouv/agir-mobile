@@ -19,16 +19,18 @@ import 'package:app/features/simulateur_velo/infrastructure/aide_velo_api_adapte
 import 'package:app/features/theme/core/infrastructure/theme_api_adapter.dart';
 import 'package:app/features/version/infrastructure/version_adapter.dart';
 import 'package:clock/clock.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../helper/feature_context.dart';
+import '../helper/notification_service_fake.dart';
 import '../helper/package_info_fake.dart';
 
 class _TrackerMock extends Mock implements Tracker {}
 
-/// Usage: the application is launched
+/// Usage: The application is launched
 Future<void> theApplicationIsLaunched(final WidgetTester tester) async {
   final clock = Clock.fixed(DateTime(1992, 9));
   final authenticationStorage =
@@ -54,6 +56,8 @@ Future<void> theApplicationIsLaunched(final WidgetTester tester) async {
       tracker: tracker,
       messageBus: messageBus,
       dioHttpClient: dioHttpClient,
+      notificationService:
+          const NotificationServiceFake(AuthorizationStatus.authorized),
       authenticationService: authenticationService,
       authentificationPort: AuthentificationApiAdapter(
         client: dioHttpClient,

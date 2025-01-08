@@ -15,14 +15,17 @@ import 'package:app/features/environmental_performance/summary/presentation/bloc
 import 'package:app/features/gamification/presentation/bloc/gamification_bloc.dart';
 import 'package:app/features/mission/home/infrastructure/mission_home_repository.dart';
 import 'package:app/features/mission/home/presentation/bloc/mission_home_bloc.dart';
+import 'package:app/features/notifications/infrastructure/notification_service.dart';
 import 'package:app/features/recommandations/presentation/bloc/recommandations_bloc.dart';
 import 'package:app/features/utilisateur/presentation/bloc/utilisateur_bloc.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mocktail_image_network/mocktail_image_network.dart';
 
+import '../../features/helper/notification_service_fake.dart';
 import '../../helpers/authentication_service_setup.dart';
 import '../../helpers/dio_mock.dart';
 import '../../helpers/pump_page.dart';
@@ -50,6 +53,10 @@ Future<void> pumpHomePage(final WidgetTester tester, final DioMock dio) async {
     repositoryProviders: [
       RepositoryProvider<EnvironmentalPerformanceSummaryRepository>.value(
         value: EnvironmentalPerformanceSummaryRepository(client: client),
+      ),
+      RepositoryProvider<NotificationService>(
+        create: (final context) =>
+            const NotificationServiceFake(AuthorizationStatus.denied),
       ),
     ],
     blocProviders: [

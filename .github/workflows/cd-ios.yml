@@ -7,17 +7,19 @@ on:
         type: string
         required: true
     secrets:
-      IOS_P12_FILE:
+      P12_FILE:
         required: true
-      IOS_P12_PASSWORD:
+      P12_PASSWORD:
         required: true
-      IOS_PROFILE:
+      PROFILE:
         required: true
-      IOS_EXPORT_OPTIONS:
+      EXPORT_OPTIONS:
         required: true
-      IOS_USERNAME:
+      USERNAME:
         required: true
-      IOS_PASSWORD:
+      PASSWORD:
+        required: true
+      GOOGLE_SERVICES_INFO_PLIST:
         required: true
       FLUTTER_ENV:
         required: true
@@ -35,24 +37,27 @@ jobs:
           security set-keychain-settings -lut 21600 temp.keychain
           security unlock-keychain -p "$keychainPassword" temp.keychain
 
-          echo "${{ secrets.IOS_P12_FILE }}" | base64 --decode > certificat.p12
-          security import certificat.p12 -P "${{ secrets.IOS_P12_PASSWORD }}" -A -t cert -f pkcs12 -k temp.keychain
+          echo "${{ secrets.P12_FILE }}" | base64 --decode > certificat.p12
+          security import certificat.p12 -P "${{ secrets.P12_PASSWORD }}" -A -t cert -f pkcs12 -k temp.keychain
           security list-keychain -d user -s temp.keychain
 
           security set-key-partition-list -S apple-tool:,apple: -s -k "$keychainPassword" temp.keychain
       - name: 📱🔏 Ajouter le profil de provisionnement et le fichier exportOptions
         run: |
-          echo ${{ secrets.IOS_PROFILE }} | base64 --decode > profile.mobileprovision
+          echo ${{ secrets.PROFILE }} | base64 --decode > profile.mobileprovision
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/profile.mobileprovision
 
-          echo ${{ secrets.IOS_EXPORT_OPTIONS }} | base64 --decode > exportOptions.plist
+          echo ${{ secrets.EXPORT_OPTIONS }} | base64 --decode > exportOptions.plist
       - name: 🐦 Installer flutter
         uses: subosito/flutter-action@v2
         with:
           cache: true
           channel: stable
           flutter-version-file: app/pubspec.yaml
+      - name: 🔑 Ajouter le fichier de configuration de Firebase
+        working-directory: app/ios/Runner
+        run: echo "${{ secrets.GOOGLE_SERVICES_INFO_PLIST }}" | base64 --decode > GoogleService-Info.plist
       - name: 🔑 Ajouter les variables d'environnements
         working-directory: app
         run: echo "${{ secrets.FLUTTER_ENV }}" | base64 --decode > env.json
@@ -65,9 +70,9 @@ jobs:
           name: app_${{ inputs.FLAVOR }}_ios
           path: app/build/ios/ipa/app-${{ inputs.FLAVOR }}-release.ipa
       - name: 🚀 Publier sur TestFlight
-        run: xcrun altool --upload-app -t ios -f app/build/ios/ipa/app-${{ inputs.FLAVOR }}-release.ipa -u ${{ secrets.IOS_USERNAME }} -p ${{ secrets.IOS_PASSWORD }}
+        run: xcrun altool --upload-app -t ios -f app/build/ios/ipa/app-${{ inputs.FLAVOR }}-release.ipa -u ${{ secrets.USERNAME }} -p ${{ secrets.PASSWORD }}
       - name: 🗑️ Nettoyer les fichiers secrets
         if: always()
         run: |
-          rm -f certificat.p12 profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/profile.mobileprovision exportOptions.plist app/env.json
+          rm -f certificat.p12 profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/profile.mobileprovision exportOptions.plist app/ios/Runner/GoogleService-Info.plist app/env.json
           security delete-keychain temp.keychain

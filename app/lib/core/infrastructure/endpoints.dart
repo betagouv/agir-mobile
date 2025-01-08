@@ -28,6 +28,7 @@ abstract final class Endpoints {
   static String missionTerminer(final String codeMission) =>
       '/utilisateurs/{userId}/missions/$codeMission/terminer';
   static const modifierMotDePasse = '/utilisateurs/modifier_mot_de_passe';
+  static const notificationToken = '/utilisateurs/{userId}/mobile_token';
   static const oubliMotDePasse = '/utilisateurs/oubli_mot_de_passe';
   static const profile = '/utilisateurs/{userId}/profile';
   static const questionsKyc = '/utilisateurs/{userId}/questionsKYC_v2';

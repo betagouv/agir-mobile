@@ -7,7 +7,7 @@ class Utilisateur extends Equatable {
   });
 
   final String prenom;
-  final bool estIntegrationTerminee;
+  final bool? estIntegrationTerminee;
 
   @override
   List<Object?> get props => [prenom, estIntegrationTerminee];

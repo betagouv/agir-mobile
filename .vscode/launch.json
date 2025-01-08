@@ -3,9 +3,9 @@
   "configurations": [
     {
       "name": "[DEV] J’agis",
-      "cwd": "app",
-      "request": "launch",
       "type": "dart",
+      "request": "launch",
+      "cwd": "app",
       "args": [
         "--flavor",
         "development",
@@ -16,9 +16,9 @@
     },
     {
       "name": "[DEV] J’agis mode profile",
-      "cwd": "app",
-      "request": "launch",
       "type": "dart",
+      "request": "launch",
+      "cwd": "app",
       "args": [
         "--profile",
         "--flavor",
@@ -30,9 +30,9 @@
     },
     {
       "name": "J’agis",
-      "cwd": "app",
-      "request": "launch",
       "type": "dart",
+      "request": "launch",
+      "cwd": "app",
       "args": [
         "--flavor",
         "production",
@@ -43,9 +43,9 @@
     },
     {
       "name": "dsfr",
+      "type": "dart",
       "cwd": "packages/dsfr.dart/example",
-      "request": "launch",
-      "type": "dart"
+      "request": "launch"
     },
   ]
 }

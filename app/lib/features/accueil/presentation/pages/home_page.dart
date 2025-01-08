@@ -9,6 +9,8 @@ import 'package:app/features/environmental_performance/summary/presentation/bloc
 import 'package:app/features/environmental_performance/summary/presentation/bloc/environmental_performance_event.dart';
 import 'package:app/features/menu/presentation/pages/root_page.dart';
 import 'package:app/features/mission/home/presentation/widgets/mission_section.dart';
+import 'package:app/features/notifications/infrastructure/notification_repository.dart';
+import 'package:app/features/notifications/infrastructure/notification_service.dart';
 import 'package:app/features/questions/first_name/presentation/pages/first_name_page.dart';
 import 'package:app/features/survey/survey_section.dart';
 import 'package:app/features/theme/core/domain/theme_type.dart';
@@ -18,6 +20,7 @@ import 'package:app/features/utilisateur/presentation/bloc/utilisateur_event.dar
 import 'package:app/features/utilisateur/presentation/bloc/utilisateur_state.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -133,8 +136,24 @@ class _HomeState extends State<_Home> {
   Widget build(final context) =>
       BlocListener<UtilisateurBloc, UtilisateurState>(
         listener: (final context, final state) async {
-          if (!state.utilisateur.estIntegrationTerminee) {
+          final estIntegrationTerminee =
+              state.utilisateur.estIntegrationTerminee;
+          if (estIntegrationTerminee == null) {
+            return;
+          }
+
+          if (!estIntegrationTerminee) {
             await GoRouter.of(context).pushReplacementNamed(FirstNamePage.name);
+
+            return;
+          }
+
+          final notificationService = context.read<NotificationService>();
+          final authorizationStatus =
+              await notificationService.requestPermission();
+          if (authorizationStatus == AuthorizationStatus.authorized &&
+              context.mounted) {
+            await context.read<NotificationRepository>().saveToken();
           }
         },
         listenWhen: (final previous, final current) =>
