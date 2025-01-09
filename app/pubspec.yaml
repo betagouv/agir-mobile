@@ -48,7 +48,7 @@ dev_dependencies:
     path: ../packages/agir_lints
   bdd_widget_test: 1.7.6
   build_runner: 2.4.13 #  Bloqué en 2.4.13 par sdk
-  dart_code_metrics_presets: 2.19.0
+  dart_code_metrics_presets: 2.20.0
   faker: 2.2.0
   flutter_launcher_icons: 0.14.2
   flutter_test:
