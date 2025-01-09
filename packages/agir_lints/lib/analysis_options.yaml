@@ -102,12 +102,14 @@ dart_code_metrics:
     - newline-before-case: false
     - newline-before-method: false
     - no-empty-block: false
+    - no-empty-string: false
     - no-equal-arguments: false
     - no-magic-number: false
     - no-magic-string: false
     - parameters-ordering: false
     - prefer-addition-subtraction-assignments: false
     - prefer-boolean-prefixes: false
+    - prefer-class-destructuring: false # à voir pour réactiver
     - prefer-commenting-analyzer-ignores: false
     - prefer-container: false
     - prefer-correct-identifier-length: false
@@ -132,7 +134,9 @@ dart_code_metrics:
     - prefer-single-declaration-per-file: false
     - prefer-single-widget-per-file:
         ignore-private-widgets: true
+    - prefer-spacing: false # TODO(lsaudon): à réactiver après être passer sur flutter 3.27 ou plus
     - prefer-static-class: false
+    - prefer-static-method: false
     - prefer-test-matchers: false
     - prefer-widget-private-members:
         ignore-static: true

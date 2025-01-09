@@ -17,9 +17,6 @@ abstract final class MissionMapper {
     for (final item in objectifsList) {
       final o = item as Map<String, dynamic>;
       final type = o['type'] as String?;
-      if (type == null) {
-        continue;
-      }
       switch (type) {
         case 'kyc':
           objectifs.add(_fromJsonMissionKyc(o));

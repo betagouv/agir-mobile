@@ -12,9 +12,6 @@ abstract final class MissionActionsMapper {
     for (final item in objectifsList) {
       final o = item as Map<String, dynamic>;
       final type = o['type'] as String?;
-      if (type == null) {
-        continue;
-      }
       switch (type) {
         case 'defi':
           actions.add(_fromJsonMissionAction(o));
