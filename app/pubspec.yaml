@@ -25,7 +25,7 @@ dependencies:
   flutter_markdown: 0.7.5
   flutter_native_splash: 2.4.4
   flutter_secure_storage: 9.2.4
-  flutter_svg: 2.0.16
+  flutter_svg: 2.0.17
   flutter_widget_from_html_core: 0.15.2
   fpdart: 1.1.1
   fwfh_url_launcher: 0.9.1
