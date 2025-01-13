@@ -10,7 +10,7 @@ class ThemePortMock implements ThemePort {
   List<MissionListe> missionListe = [];
 
   @override
-  Future<Either<Exception, List<MissionListe>>> recupererMissions(
+  Future<Either<Exception, List<MissionListe>>> getMissions(
     final ThemeType themeType,
   ) async =>
       Right(List.of(missionListe));

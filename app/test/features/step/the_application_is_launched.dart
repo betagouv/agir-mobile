@@ -8,11 +8,11 @@ import 'package:app/features/authentification/core/infrastructure/authentificati
 import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/bibliotheque/infrastructure/bibliotheque_api_adapter.dart';
 import 'package:app/features/communes/infrastructure/communes_api_adapter.dart';
-import 'package:app/features/first_name/infrastructure/first_name_adapter.dart';
 import 'package:app/features/gamification/infrastructure/gamification_api_adapter.dart';
 import 'package:app/features/know_your_customer/core/infrastructure/mieux_vous_connaitre_api_adapter.dart';
 import 'package:app/features/know_your_customer/list/infrastructure/know_your_customers_repository.dart';
 import 'package:app/features/profil/core/infrastructure/profil_api_adapter.dart';
+import 'package:app/features/questions/first_name/infrastructure/first_name_adapter.dart';
 import 'package:app/features/quiz/infrastructure/quiz_api_adapter.dart';
 import 'package:app/features/recommandations/infrastructure/recommandations_api_adapter.dart';
 import 'package:app/features/simulateur_velo/infrastructure/aide_velo_api_adapter.dart';

@@ -26,7 +26,6 @@ import 'package:app/features/environmental_performance/questions/presentation/bl
 import 'package:app/features/environmental_performance/summary/application/fetch_environmental_performance.dart';
 import 'package:app/features/environmental_performance/summary/infrastructure/environmental_performance_summary_repository.dart';
 import 'package:app/features/environmental_performance/summary/presentation/bloc/environmental_performance_bloc.dart';
-import 'package:app/features/first_name/domain/first_name_port.dart';
 import 'package:app/features/gamification/domain/gamification_port.dart';
 import 'package:app/features/gamification/presentation/bloc/gamification_bloc.dart';
 import 'package:app/features/gamification/presentation/bloc/gamification_event.dart';
@@ -37,6 +36,7 @@ import 'package:app/features/mission/home/infrastructure/mission_home_repository
 import 'package:app/features/mission/home/presentation/bloc/mission_home_bloc.dart';
 import 'package:app/features/mission/mission/infrastructure/mission_repository.dart';
 import 'package:app/features/profil/core/domain/profil_port.dart';
+import 'package:app/features/questions/first_name/domain/first_name_port.dart';
 import 'package:app/features/quiz/domain/quiz_port.dart';
 import 'package:app/features/recommandations/domain/recommandations_port.dart';
 import 'package:app/features/recommandations/presentation/bloc/recommandations_bloc.dart';
@@ -201,7 +201,7 @@ class _AppState extends State<App> {
                 BlocProvider(
                   create: (final context) =>
                       VersionBloc(versionPort: widget.versionPort)
-                        ..add(const VersionDemandee()),
+                        ..add(const VersionFetched()),
                 ),
                 BlocProvider(
                   create: (final context) => AideVeloBloc(

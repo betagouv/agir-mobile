@@ -16,7 +16,7 @@ class ThemeApiAdapter implements ThemePort {
   final DioHttpClient _client;
 
   @override
-  Future<Either<Exception, List<MissionListe>>> recupererMissions(
+  Future<Either<Exception, List<MissionListe>>> getMissions(
     final ThemeType themeType,
   ) async {
     final response = await _client.get(

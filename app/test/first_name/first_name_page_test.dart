@@ -1,8 +1,8 @@
 import 'package:app/core/error/domain/api_erreur.dart';
-import 'package:app/features/authentification/question_code_postal/presentation/pages/question_code_postal_page.dart';
-import 'package:app/features/first_name/domain/first_name.dart';
-import 'package:app/features/first_name/domain/first_name_port.dart';
-import 'package:app/features/first_name/presentation/pages/first_name_page.dart';
+import 'package:app/features/questions/first_name/domain/first_name.dart';
+import 'package:app/features/questions/first_name/domain/first_name_port.dart';
+import 'package:app/features/questions/first_name/presentation/pages/first_name_page.dart';
+import 'package:app/features/questions/question_code_postal/presentation/pages/question_code_postal_page.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:clock/clock.dart';
 import 'package:dsfr/dsfr.dart';

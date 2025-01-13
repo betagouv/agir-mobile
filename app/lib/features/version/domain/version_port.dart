@@ -1,5 +1,5 @@
 import 'package:fpdart/fpdart.dart';
 
 abstract interface class VersionPort {
-  Either<Exception, String> versionDemandee();
+  Either<Exception, String> current();
 }
