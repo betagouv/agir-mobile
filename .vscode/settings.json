@@ -7,7 +7,7 @@
     "editor.suggest.snippetsPreventQuickSuggestions": false,
     "editor.suggestSelection": "first",
     "editor.tabCompletion": "onlySnippets",
-    "editor.wordBasedSuggestions": "off",
+    "editor.wordBasedSuggestions": "off"
   },
   "editor.codeActionsOnSave": {
     "source.organizeImports": "always",
@@ -20,4 +20,5 @@
     "--test-randomize-ordering-seed",
     "random"
   ],
+  "dart.flutterSdkPath": ".fvm/versions/3.24.5"
 }
