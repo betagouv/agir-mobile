@@ -1,4 +1,4 @@
-include: package:agir_lints/analysis_options.yaml
+include: package:jagis_lints/analysis_options.yaml
 analyzer:
   exclude: 
     - 'test/features/*_test.dart'

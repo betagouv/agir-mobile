@@ -1,4 +1,4 @@
 analyzer:
   errors:
     included_file_warning: ignore
-include: package:agir_lints/analysis_options.yaml
+include: package:jagis_lints/analysis_options.yaml

@@ -46,8 +46,6 @@ dependencies:
   url_launcher: 6.3.1
 
 dev_dependencies:
-  agir_lints:
-    path: ../packages/agir_lints
   bdd_widget_test: 1.7.6
   build_runner: 2.4.13 #  Bloqué en 2.4.13 par sdk
   dart_code_metrics_presets: 2.20.0
@@ -55,6 +53,8 @@ dev_dependencies:
   flutter_launcher_icons: 0.14.2
   flutter_test:
     sdk: flutter
+  jagis_lints:
+    path: ../packages/jagis_lints
   mocktail: 1.0.4
   nested: 1.0.0
 

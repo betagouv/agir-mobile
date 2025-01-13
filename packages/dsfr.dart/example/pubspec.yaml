@@ -14,8 +14,8 @@ dependencies:
   flutter:
     sdk: flutter
 dev_dependencies:
-  agir_lints:
-    path: ../../agir_lints
   dart_code_metrics_presets: 2.20.0
+  jagis_lints:
+    path: ../../jagis_lints
 flutter:
   uses-material-design: true
