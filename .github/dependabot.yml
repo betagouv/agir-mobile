@@ -17,7 +17,7 @@ updates:
     commit-message:
       prefix: "chore: "
   - package-ecosystem: pub
-    directory: "/packages/agir_lints"
+    directory: "/packages/jagis_lints"
     schedule:
       interval: monthly
       time: "07:00"

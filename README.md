@@ -1,6 +1,6 @@
 # J’agis
 
-[![Intégration Continue](https://github.com/betagouv/agir-mobile/actions/workflows/continuous-integration.yml/badge.svg?branch=main)](https://github.com/betagouv/agir-mobile/actions/workflows/continuous-integration.yml)
+[![Intégration Continue](https://github.com/betagouv/jagis-mobile/actions/workflows/continuous-integration.yml/badge.svg?branch=main)](https://github.com/betagouv/jagis-mobile/actions/workflows/continuous-integration.yml)
 
 ## Introduction
 
@@ -23,7 +23,7 @@ Vous devez avoir correctement installé [Flutter](https://docs.flutter.dev/get-s
 1. Récupérer le code source :
 
     ```sh
-    git clone git@github.com:betagouv/agir-mobile.git && cd agir-mobile
+    git clone git@github.com:betagouv/jagis-mobile.git && cd jagis-mobile
     ```
 
 1. Ajouter les fichiers de configuration Firebase :
