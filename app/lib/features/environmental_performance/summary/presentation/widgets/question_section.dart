@@ -9,10 +9,8 @@ class QuestionSection extends StatelessWidget {
   const QuestionSection({super.key});
 
   @override
-  Widget build(final context) => ListView(
-        physics: const NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        padding: EdgeInsets.zero,
+  Widget build(final context) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),

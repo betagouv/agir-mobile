@@ -27,11 +27,9 @@ class _View extends StatelessWidget {
   const _View();
 
   @override
-  Widget build(final context) => ListView(
-        physics: const NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        padding: EdgeInsets.zero,
-        children: const [
+  Widget build(final context) => const Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

@@ -11,27 +11,28 @@ class FnvFailureWidget extends StatelessWidget {
   final VoidCallback? onPressed;
 
   @override
-  Widget build(final context) => ListView(
-        physics: const NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
+  Widget build(final context) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-        children: [
-          const Text(
-            Localisation.erreurInattendue,
-            style: DsfrTextStyle.headline3(),
-          ),
-          SvgPicture.asset(AssetsSvgs.errorIllustration),
-          const Text(
-            Localisation.erreurInattendueContent,
-            style: DsfrTextStyle.bodyXl(),
-          ),
-          const SizedBox(height: DsfrSpacings.s4w),
-          DsfrButton(
-            label: Localisation.rafraichir,
-            variant: DsfrButtonVariant.secondary,
-            size: DsfrButtonSize.lg,
-            onPressed: onPressed,
-          ),
-        ],
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              Localisation.erreurInattendue,
+              style: DsfrTextStyle.headline3(),
+            ),
+            SvgPicture.asset(AssetsSvgs.errorIllustration),
+            const Text(
+              Localisation.erreurInattendueContent,
+              style: DsfrTextStyle.bodyXl(),
+            ),
+            const SizedBox(height: DsfrSpacings.s4w),
+            DsfrButton(
+              label: Localisation.rafraichir,
+              variant: DsfrButtonVariant.secondary,
+              size: DsfrButtonSize.lg,
+              onPressed: onPressed,
+            ),
+          ],
+        ),
       );
 }

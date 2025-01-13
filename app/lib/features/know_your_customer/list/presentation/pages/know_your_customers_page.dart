@@ -80,10 +80,8 @@ class _Success extends StatelessWidget {
     final themeSelected = state.themeSelected;
     const padding = EdgeInsets.symmetric(horizontal: paddingVerticalPage);
 
-    return ListView(
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      padding: EdgeInsets.zero,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Padding(
           padding: padding,

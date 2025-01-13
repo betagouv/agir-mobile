@@ -18,10 +18,8 @@ class AssitancesSection extends StatelessWidget {
     final bloc = context.read<AidesAccueilBloc>()
       ..add(const AidesAccueilRecuperationDemandee());
 
-    return ListView(
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      padding: EdgeInsets.zero,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const TitleSection(
           title: Localisation.homeAssistanceTitle,

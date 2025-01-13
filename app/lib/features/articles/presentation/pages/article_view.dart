@@ -33,10 +33,8 @@ class _Content extends StatelessWidget {
       (final v) => v.state.article,
     );
 
-    return ListView(
-      primary: false,
-      shrinkWrap: true,
-      padding: EdgeInsets.zero,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(article.titre, style: const DsfrTextStyle.headline2()),
         if (article.sousTitre != null && article.sousTitre!.isNotEmpty) ...[
