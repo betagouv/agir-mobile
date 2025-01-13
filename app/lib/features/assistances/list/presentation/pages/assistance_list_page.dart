@@ -90,42 +90,43 @@ class _List extends StatelessWidget {
   final AssistanceListLoadSuccess state;
 
   @override
-  Widget build(final context) => ListView(
-        physics: const NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
+  Widget build(final context) => Padding(
         padding: const EdgeInsets.all(paddingVerticalPage),
-        children: [
-          MarkdownBody(
-            data: Localisation.assistanceListTitle,
-            styleSheet: MarkdownStyleSheet(
-              p: const DsfrTextStyle.headline2(),
-              strong: const DsfrTextStyle.headline2(
-                color: DsfrColors.blueFranceSun113,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            MarkdownBody(
+              data: Localisation.assistanceListTitle,
+              styleSheet: MarkdownStyleSheet(
+                p: const DsfrTextStyle.headline2(),
+                strong: const DsfrTextStyle.headline2(
+                  color: DsfrColors.blueFranceSun113,
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: DsfrSpacings.s3w),
-          Wrap(
-            spacing: DsfrSpacings.s1w,
-            runSpacing: DsfrSpacings.s1w,
-            children: [
-              _Tag(
-                label: Localisation.tout,
-                value: null,
-                groupValue: state.themeSelected,
-              ),
-              ...ThemeType.values.where(state.themes.containsKey).map(
-                    (final e) => _Tag(
-                      label: e.displayNameWithoutEmoji,
-                      value: e,
-                      groupValue: state.themeSelected,
+            const SizedBox(height: DsfrSpacings.s3w),
+            Wrap(
+              spacing: DsfrSpacings.s1w,
+              runSpacing: DsfrSpacings.s1w,
+              children: [
+                _Tag(
+                  label: Localisation.tout,
+                  value: null,
+                  groupValue: state.themeSelected,
+                ),
+                ...ThemeType.values.where(state.themes.containsKey).map(
+                      (final e) => _Tag(
+                        label: e.displayNameWithoutEmoji,
+                        value: e,
+                        groupValue: state.themeSelected,
+                      ),
                     ),
-                  ),
-            ],
-          ),
-          const SizedBox(height: DsfrSpacings.s4w),
-          _Elements(themes: state.currentTheme),
-        ],
+              ],
+            ),
+            const SizedBox(height: DsfrSpacings.s4w),
+            _Elements(themes: state.currentTheme),
+          ],
+        ),
       );
 }
 

@@ -16,10 +16,8 @@ class SupprimerCompte extends StatelessWidget {
   Widget build(final context) {
     const color = DsfrColors.error425;
 
-    return ListView(
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      padding: EdgeInsets.zero,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const ProfilTitrePartie(titre: Localisation.supprimerVotreCompte),
         const SizedBox(height: DsfrSpacings.s2w),

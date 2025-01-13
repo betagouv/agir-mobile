@@ -16,10 +16,8 @@ class QuizContent extends StatelessWidget {
   Widget build(final context) {
     final state = context.watch<QuizBloc>().state;
 
-    return ListView(
-      primary: false,
-      shrinkWrap: true,
-      padding: EdgeInsets.zero,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(state.quiz.question, style: const DsfrTextStyle.headline2()),
         const SizedBox(height: DsfrSpacings.s2w),
