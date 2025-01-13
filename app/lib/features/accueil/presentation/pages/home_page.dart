@@ -7,9 +7,9 @@ import 'package:app/features/assistances/core/presentation/widgets/assitances_se
 import 'package:app/features/environmental_performance/home/presentation/widgets/environmental_performance_section.dart';
 import 'package:app/features/environmental_performance/summary/presentation/bloc/environmental_performance_bloc.dart';
 import 'package:app/features/environmental_performance/summary/presentation/bloc/environmental_performance_event.dart';
-import 'package:app/features/first_name/presentation/pages/first_name_page.dart';
 import 'package:app/features/menu/presentation/pages/root_page.dart';
 import 'package:app/features/mission/home/presentation/widgets/mission_section.dart';
+import 'package:app/features/questions/first_name/presentation/pages/first_name_page.dart';
 import 'package:app/features/survey/survey_section.dart';
 import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:app/features/theme/presentation/pages/theme_page.dart';

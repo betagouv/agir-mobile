@@ -1,9 +1,9 @@
-import 'package:app/features/first_name/domain/first_name.dart';
-import 'package:app/features/first_name/domain/first_name_port.dart';
 import 'package:app/features/profil/core/domain/profil_port.dart';
 import 'package:app/features/profil/informations/domain/entities/informations.dart';
 import 'package:app/features/profil/logement/domain/logement.dart';
 import 'package:app/features/profil/logement/presentation/bloc/mon_logement_state.dart';
+import 'package:app/features/questions/first_name/domain/first_name.dart';
+import 'package:app/features/questions/first_name/domain/first_name_port.dart';
 import 'package:fpdart/fpdart.dart';
 
 class ProfilPortMock implements ProfilPort, FirstNamePort {

@@ -10,6 +10,6 @@ sealed class VersionEvent extends Equatable {
 }
 
 @immutable
-final class VersionDemandee extends VersionEvent {
-  const VersionDemandee();
+final class VersionFetched extends VersionEvent {
+  const VersionFetched();
 }

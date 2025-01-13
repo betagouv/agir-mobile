@@ -4,7 +4,7 @@ import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:fpdart/fpdart.dart';
 
 abstract interface class ThemePort {
-  Future<Either<Exception, List<MissionListe>>> recupererMissions(
+  Future<Either<Exception, List<MissionListe>>> getMissions(
     final ThemeType themeType,
   );
 

@@ -33,7 +33,7 @@ Future<void> _pumpThemePage(
   final ThemePort? themePort,
 }) async {
   final themePortMock = themePort ?? _ThemePortMock();
-  when(() => themePortMock.recupererMissions(any()))
+  when(() => themePortMock.getMissions(any()))
       .thenAnswer((final _) async => const Right([]));
 
   final gamificationPort = _GamificationPortMock();
