@@ -16,7 +16,6 @@ class NotificationRepository {
 
   Future<Either<Exception, void>> saveToken() async {
     final token = await _notificationService.getToken();
-
     final response =
         await _client.put(Endpoints.notificationToken, data: {'token': token});
 

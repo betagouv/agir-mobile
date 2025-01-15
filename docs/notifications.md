@@ -1,9 +1,5 @@
 # Notifications
 
-Se connecter avec `firebase login`.
-
-
-
 https://firebase.google.com/docs/flutter/setup?platform=android
 https://firebase.google.com/docs/flutter/setup?platform=ios
 
@@ -14,3 +10,7 @@ secrets:
     ios/Runner/GoogleService-Info.plist
 
   mettre le p8 apns dans firebase
+
+## Android
+
+Si l'application est complètement fermée, les notifications ne sont pas affichées.

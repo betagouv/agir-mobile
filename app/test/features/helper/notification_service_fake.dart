@@ -16,5 +16,8 @@ class NotificationServiceFake implements NotificationService {
   Future<AuthorizationStatus> requestPermission() async => _authorizationStatus;
 
   @override
+  Stream<RemoteMessage> get onMessageOpenedApp => const Stream.empty();
+
+  @override
   Future<void> deleteToken() async {}
 }
