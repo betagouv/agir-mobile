@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:app/app/router/app_router.dart';
 import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/core/infrastructure/tracker.dart';
@@ -54,6 +56,7 @@ import 'package:app/features/version/presentation/bloc/version_bloc.dart';
 import 'package:app/features/version/presentation/bloc/version_event.dart';
 import 'package:clock/clock.dart';
 import 'package:dsfr/dsfr.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -111,21 +114,32 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   late final GoRouter _goRouter;
+  late final StreamSubscription<RemoteMessage> _messageOpenedSubscription;
 
   @override
   void initState() {
     super.initState();
     _goRouter = goRouter(tracker: widget.tracker);
+    _messageOpenedSubscription = widget.notificationService.onMessageOpenedApp
+        .listen((final message) async => _openPage());
+  }
+
+  Future<void> _openPage() async {
+    // TODO(lsaudon): open page
+    await Future<void>.value();
   }
 
   @override
   void dispose() {
+    unawaited(_messageOpenedSubscription.cancel());
     _goRouter.dispose();
     super.dispose();
   }
 
   @override
   Widget build(final context) {
+    const locale = Locale('fr', 'FR');
+
     final upgradeBloc = UpgradeBloc();
     widget.dioHttpClient.add(UpgradeInterceptor(upgradeBloc));
 
@@ -266,13 +280,13 @@ class _AppState extends State<App> {
                   scaffoldBackgroundColor: Colors.white,
                   appBarTheme: const AppBarTheme(backgroundColor: Colors.white),
                 ),
-                locale: const Locale('fr', 'FR'),
+                locale: locale,
                 localizationsDelegates: const [
                   GlobalCupertinoLocalizations.delegate,
                   GlobalMaterialLocalizations.delegate,
                   GlobalWidgetsLocalizations.delegate,
                 ],
-                supportedLocales: const [Locale('fr', 'FR')],
+                supportedLocales: const [locale],
               ),
             ),
           ),
