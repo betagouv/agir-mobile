@@ -4,6 +4,7 @@ import 'dart:async';
 
 import 'package:app/app/app.dart';
 import 'package:app/core/error/infrastructure/crash_reporting.dart';
+import 'package:app/core/error/infrastructure/error_handler.dart';
 import 'package:app/core/error/infrastructure/missing_environment_key_exception.dart';
 import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/core/infrastructure/tracker.dart';
@@ -45,30 +46,47 @@ class AppSetup extends StatefulWidget {
 
 class _AppSetupState extends State<AppSetup> {
   final _clock = const Clock();
+  late final PackageInfo _packageInfo;
   late final Tracker _tracker;
   late final NotificationService _notificationService;
   late final AuthenticationService _authenticationService;
-  late final String _apiUrl;
-  late final PackageInfo _packageInfo;
 
   Future<void> _initializeApp() async {
     _packageInfo = await PackageInfo.fromPlatform();
+    _tracker = await _initializeTracker();
+    _notificationService = await _initializeNotificationService();
+    _authenticationService = await _initializeAuthenticationService();
+  }
+
+  Future<Tracker> _initializeTracker() async {
     const matomoSiteIdKey = 'MATOMO_SITE_ID';
+    if (matomoSiteIdKey.isEmpty) {
+      throw const MissingEnvironmentKeyException(matomoSiteIdKey);
+    }
     const matomoSiteId = String.fromEnvironment(matomoSiteIdKey);
 
     const matomoUrlKey = 'MATOMO_URL';
+    if (matomoUrlKey.isEmpty) {
+      throw const MissingEnvironmentKeyException(matomoUrlKey);
+    }
     const matomoUrl = String.fromEnvironment(matomoUrlKey);
 
-    _tracker = const Tracker();
+    const tracker = Tracker();
     if (!kDebugMode && matomoSiteId.isNotEmpty && matomoUrl.isNotEmpty) {
-      await _tracker.init(siteId: matomoSiteId, url: matomoUrl);
+      await tracker.init(siteId: matomoSiteId, url: matomoUrl);
     }
 
-    const apiUrlKey = 'API_URL';
-    _apiUrl = const String.fromEnvironment(apiUrlKey);
-    if (_apiUrl.isEmpty) {
-      throw const MissingEnvironmentKeyException(apiUrlKey);
-    }
+    return tracker;
+  }
+
+  Future<NotificationService> _initializeNotificationService() async {
+    final notificationService = NotificationService();
+    await notificationService.initializeApp();
+
+    return notificationService;
+  }
+
+  Future<AuthenticationService> _initializeAuthenticationService() async {
     final authenticationStorage = AuthenticationStorage(
       const FlutterSecureStorage(
         aOptions: AndroidOptions(encryptedSharedPreferences: true),
@@ -76,14 +94,13 @@ class _AppSetupState extends State<AppSetup> {
     );
     await authenticationStorage.init();
 
-    _authenticationService = AuthenticationService(
+    final authenticationService = AuthenticationService(
       authenticationRepository: authenticationStorage,
       clock: _clock,
     );
     await _authenticationService.checkAuthenticationStatus();
 
-    _notificationService = NotificationService();
-    await _notificationService.initializeApp();
+    return authenticationService;
   }
 
   @override
@@ -102,7 +119,7 @@ class _AppSetupState extends State<AppSetup> {
             return const SizedBox.shrink();
           } else if (snapshot.hasError) {
             FlutterNativeSplash.remove();
-            _captureException(
+            ErrorHandler.captureException(
               snapshot.error!.toString(),
               snapshot.stackTrace,
             );
@@ -111,10 +128,15 @@ class _AppSetupState extends State<AppSetup> {
           }
           FlutterNativeSplash.remove();
 
-          final url = Uri.parse(_apiUrl);
+          const apiUrlKey = 'API_URL';
+          const apiUrl = String.fromEnvironment(apiUrlKey);
+          if (apiUrl.isEmpty) {
+            throw const MissingEnvironmentKeyException(apiUrlKey);
+          }
+
           final dio = Dio(
             BaseOptions(
-              baseUrl: url.toString(),
+              baseUrl: Uri.parse(apiUrl).toString(),
               validateStatus: (final status) => true,
             ),
           )
@@ -164,9 +186,4 @@ class _AppSetupState extends State<AppSetup> {
           );
         },
       );
-}
-
-void _captureException(final Object error, final StackTrace? stack) {
-  debugPrint('Error: $error${stack == null ? '' : '\n$stack'}');
-  unawaited(CrashReporting.captureException(error, stackTrace: stack));
 }
