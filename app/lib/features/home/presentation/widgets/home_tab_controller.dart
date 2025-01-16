@@ -1,6 +1,6 @@
-import 'package:app/features/accueil/presentation/widgets/home_app_bar_title.dart';
-import 'package:app/features/accueil/presentation/widgets/home_tab_bar.dart';
-import 'package:app/features/accueil/presentation/widgets/home_tab_bar_view.dart';
+import 'package:app/features/home/presentation/widgets/home_app_bar_title.dart';
+import 'package:app/features/home/presentation/widgets/home_tab_bar.dart';
+import 'package:app/features/home/presentation/widgets/home_tab_bar_view.dart';
 import 'package:app/features/menu/presentation/pages/root_page.dart';
 import 'package:flutter/material.dart';
 

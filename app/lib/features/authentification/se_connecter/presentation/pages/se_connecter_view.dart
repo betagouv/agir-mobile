@@ -31,7 +31,7 @@ class SeConnecterView extends StatelessWidget {
             current.connexionFaite,
         child: FnvScaffold(
           appBar: AppBar(
-            backgroundColor: FnvColors.accueilFond,
+            backgroundColor: FnvColors.homeBackground,
             iconTheme: const IconThemeData(color: DsfrColors.blueFranceSun113),
           ),
           body: ListView(

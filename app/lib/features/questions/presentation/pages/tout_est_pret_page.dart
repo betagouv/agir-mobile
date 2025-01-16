@@ -3,8 +3,8 @@ import 'package:app/core/presentation/widgets/composants/bottom_bar.dart';
 import 'package:app/core/presentation/widgets/composants/scaffold.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
-import 'package:app/features/accueil/presentation/pages/home_page.dart';
 import 'package:app/features/authentification/widgets/onboarding_illustration.dart';
+import 'package:app/features/home/presentation/pages/home_page.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +36,7 @@ class ToutEstPretPage extends StatelessWidget {
 
     return FnvScaffold(
       appBar: AppBar(
-        backgroundColor: FnvColors.accueilFond,
+        backgroundColor: FnvColors.homeBackground,
         iconTheme: const IconThemeData(color: blueFranceSun113),
       ),
       body: ListView(

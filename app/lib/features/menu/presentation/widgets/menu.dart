@@ -1,11 +1,11 @@
 import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
-import 'package:app/features/accueil/presentation/pages/home_page.dart';
 import 'package:app/features/actions/list/presentation/pages/action_list_page.dart';
 import 'package:app/features/assistances/list/presentation/pages/assistance_list_page.dart';
 import 'package:app/features/authentification/core/domain/authentification_port.dart';
 import 'package:app/features/bibliotheque/presentation/pages/bibliotheque_page.dart';
 import 'package:app/features/environmental_performance/summary/presentation/page/environmental_performance_summary_page.dart';
+import 'package:app/features/home/presentation/pages/home_page.dart';
 import 'package:app/features/notifications/infrastructure/notification_repository.dart';
 import 'package:app/features/profil/profil/presentation/pages/profil_page.dart';
 import 'package:app/features/version/presentation/widgets/version_label.dart';
@@ -79,7 +79,7 @@ class _MenuItems extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         ...{
-          HomePage.name: Localisation.accueil,
+          HomePage.name: Localisation.home,
           AssistanceListPage.name: Localisation.mesAides,
           ActionListPage.name: Localisation.mesActions,
           BibliothequePage.name: Localisation.bibliotheque,

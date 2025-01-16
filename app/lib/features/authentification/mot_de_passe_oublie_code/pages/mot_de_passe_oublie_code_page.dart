@@ -57,7 +57,7 @@ class _View extends StatelessWidget {
             current.motDePasseModifie,
         child: FnvScaffold(
           appBar: AppBar(
-            backgroundColor: FnvColors.accueilFond,
+            backgroundColor: FnvColors.homeBackground,
             iconTheme: const IconThemeData(color: DsfrColors.blueFranceSun113),
           ),
           body: ListView(

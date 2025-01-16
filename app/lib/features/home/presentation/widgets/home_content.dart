@@ -1,6 +1,6 @@
-import 'package:app/features/accueil/presentation/widgets/home_content_layout.dart';
 import 'package:app/features/environmental_performance/summary/presentation/bloc/environmental_performance_bloc.dart';
 import 'package:app/features/environmental_performance/summary/presentation/bloc/environmental_performance_event.dart';
+import 'package:app/features/home/presentation/widgets/home_content_layout.dart';
 import 'package:app/features/notifications/infrastructure/notification_repository.dart';
 import 'package:app/features/notifications/infrastructure/notification_service.dart';
 import 'package:app/features/questions/first_name/presentation/pages/first_name_page.dart';

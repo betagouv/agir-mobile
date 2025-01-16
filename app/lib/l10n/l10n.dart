@@ -6,7 +6,7 @@ abstract final class Localisation {
   const Localisation._();
 
   static const accederAuSimulateur = 'Accéder au simulateur';
-  static const accueil = 'Accueil';
+  static const home = 'Accueil';
   static const themeRecommandationsSousTitre =
       'Une sélection d’articles et de services, pour vous, selon vos préférences !';
   static const acheterUnVelo = 'Acheter un vélo';

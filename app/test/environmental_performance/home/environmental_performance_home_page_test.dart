@@ -1,6 +1,4 @@
 import 'package:app/core/infrastructure/endpoints.dart';
-import 'package:app/features/accueil/presentation/cubit/home_disclaimer_cubit.dart';
-import 'package:app/features/accueil/presentation/pages/home_page.dart';
 import 'package:app/features/actions/home/infrastructure/home_actions_repository.dart';
 import 'package:app/features/actions/home/presentation/bloc/home_actions_bloc.dart';
 import 'package:app/features/assistances/core/presentation/bloc/aides_accueil_bloc.dart';
@@ -13,6 +11,8 @@ import 'package:app/features/environmental_performance/summary/environmental_per
 import 'package:app/features/environmental_performance/summary/infrastructure/environmental_performance_summary_repository.dart';
 import 'package:app/features/environmental_performance/summary/presentation/bloc/environmental_performance_bloc.dart';
 import 'package:app/features/gamification/presentation/bloc/gamification_bloc.dart';
+import 'package:app/features/home/presentation/cubit/home_disclaimer_cubit.dart';
+import 'package:app/features/home/presentation/pages/home_page.dart';
 import 'package:app/features/mission/home/infrastructure/mission_home_repository.dart';
 import 'package:app/features/mission/home/presentation/bloc/mission_home_bloc.dart';
 import 'package:app/features/notifications/infrastructure/notification_service.dart';

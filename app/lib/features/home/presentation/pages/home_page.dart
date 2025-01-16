@@ -1,4 +1,4 @@
-import 'package:app/features/accueil/presentation/widgets/home_tab_controller.dart';
+import 'package:app/features/home/presentation/widgets/home_tab_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

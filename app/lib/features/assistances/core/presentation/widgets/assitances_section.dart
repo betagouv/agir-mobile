@@ -1,9 +1,9 @@
-import 'package:app/features/accueil/presentation/widgets/title_section.dart';
 import 'package:app/features/assistances/core/presentation/bloc/aides_accueil_bloc.dart';
 import 'package:app/features/assistances/core/presentation/bloc/aides_accueil_event.dart';
 import 'package:app/features/assistances/core/presentation/bloc/aides_accueil_state.dart';
 import 'package:app/features/assistances/core/presentation/widgets/assitance_card.dart';
 import 'package:app/features/assistances/list/presentation/pages/assistance_list_page.dart';
+import 'package:app/features/home/presentation/widgets/title_section.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';

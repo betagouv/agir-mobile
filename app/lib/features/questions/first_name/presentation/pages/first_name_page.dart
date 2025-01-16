@@ -53,7 +53,7 @@ class FirstNamePage extends StatelessWidget {
             child: FnvScaffold(
               appBar: AppBar(
                 automaticallyImplyLeading: false,
-                backgroundColor: FnvColors.accueilFond,
+                backgroundColor: FnvColors.homeBackground,
                 iconTheme:
                     const IconThemeData(color: DsfrColors.blueFranceSun113),
               ),

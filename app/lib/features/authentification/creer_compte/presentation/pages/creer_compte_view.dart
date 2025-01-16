@@ -31,7 +31,7 @@ class CreerCompteView extends StatelessWidget {
             previous.compteCree != current.compteCree && current.compteCree,
         child: FnvScaffold(
           appBar: AppBar(
-            backgroundColor: FnvColors.accueilFond,
+            backgroundColor: FnvColors.homeBackground,
             iconTheme: const IconThemeData(color: DsfrColors.blueFranceSun113),
           ),
           body: ListView(

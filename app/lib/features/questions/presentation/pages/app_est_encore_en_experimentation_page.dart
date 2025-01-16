@@ -33,7 +33,7 @@ class AppEstEncoreEnExperimentationPage extends StatelessWidget {
 
     return FnvScaffold(
       appBar: AppBar(
-        backgroundColor: FnvColors.accueilFond,
+        backgroundColor: FnvColors.homeBackground,
         iconTheme: const IconThemeData(color: DsfrColors.blueFranceSun113),
       ),
       body: ListView(
