@@ -51,6 +51,9 @@ class _AppSetupState extends State<AppSetup> {
   late final NotificationService _notificationService;
   late final AuthenticationService _authenticationService;
 
+  // HACK(lsaudon): Pour que la FutureBuilder soit appelée une seule fois
+  late final _initializeDependenciesFuture = _initializeApp();
+
   Future<void> _initializeApp() async {
     _packageInfo = await PackageInfo.fromPlatform();
     _tracker = await _initializeTracker();
@@ -98,7 +101,7 @@ class _AppSetupState extends State<AppSetup> {
       authenticationRepository: authenticationStorage,
       clock: _clock,
     );
-    await _authenticationService.checkAuthenticationStatus();
+    await authenticationService.checkAuthenticationStatus();
 
     return authenticationService;
   }
@@ -113,7 +116,7 @@ class _AppSetupState extends State<AppSetup> {
 
   @override
   Widget build(final context) => FutureBuilder<void>(
-        future: _initializeApp(),
+        future: _initializeDependenciesFuture,
         builder: (final context, final snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const SizedBox.shrink();
@@ -142,7 +145,6 @@ class _AppSetupState extends State<AppSetup> {
           )
             ..httpClientAdapter = NativeAdapter()
             ..addSentry();
-
           final client = DioHttpClient(
             dio: dio,
             authenticationService: _authenticationService,
