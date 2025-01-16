@@ -234,10 +234,10 @@ packages:
     dependency: transitive
     description:
       name: cupertino_http
-      sha256: "3de09415040ad1def7a1b1d52cde3b07d6b29837bf0e4f7b822ca5c805e2d872"
+      sha256: "6fcf79586ad872ddcd6004d55c8c2aab3cdf0337436e8f99837b1b6c30665d0c"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.1"
+    version: "2.0.2"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -796,10 +796,10 @@ packages:
     dependency: transitive
     description:
       name: objective_c
-      sha256: c8467f3b067a3867c4876210b2fa65a57d117b5667ac158df5991804b0912673
+      sha256: "62e79ab8c3ed6f6a340ea50dd48d65898f5d70425d404f0d99411f6e56e04584"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.0"
+    version: "4.1.0"
   package_config:
     dependency: transitive
     description:
