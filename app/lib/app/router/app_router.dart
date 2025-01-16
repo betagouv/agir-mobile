@@ -1,6 +1,5 @@
 import 'package:app/core/infrastructure/tracker.dart';
 import 'package:app/core/presentation/pages/error_route_page.dart';
-import 'package:app/features/accueil/presentation/pages/home_page.dart';
 import 'package:app/features/actions/detail/presentation/pages/action_detail_page.dart';
 import 'package:app/features/actions/list/presentation/pages/action_list_page.dart';
 import 'package:app/features/articles/presentation/pages/article_page.dart';
@@ -16,6 +15,7 @@ import 'package:app/features/authentification/se_connecter/presentation/pages/se
 import 'package:app/features/bibliotheque/presentation/pages/bibliotheque_page.dart';
 import 'package:app/features/environmental_performance/questions/presentation/page/environmental_performance_question_page.dart';
 import 'package:app/features/environmental_performance/summary/presentation/page/environmental_performance_summary_page.dart';
+import 'package:app/features/home/presentation/pages/home_page.dart';
 import 'package:app/features/know_your_customer/detail/presentation/pages/mieux_vous_connaitre_edit_page.dart';
 import 'package:app/features/know_your_customer/list/presentation/pages/know_your_customers_page.dart';
 import 'package:app/features/mission/mission/presentation/pages/mission_page.dart';

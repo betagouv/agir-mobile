@@ -1,7 +1,7 @@
 import 'package:app/core/presentation/widgets/composants/image.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/shadows.dart';
-import 'package:app/features/accueil/presentation/widgets/title_section.dart';
+import 'package:app/features/home/presentation/widgets/title_section.dart';
 import 'package:app/features/mission/home/presentation/bloc/mission_home_bloc.dart';
 import 'package:app/features/mission/home/presentation/bloc/mission_home_event.dart';
 import 'package:app/features/mission/home/presentation/bloc/mission_home_state.dart';

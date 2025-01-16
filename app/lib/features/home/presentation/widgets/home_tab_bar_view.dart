@@ -1,4 +1,4 @@
-import 'package:app/features/accueil/presentation/widgets/home_content.dart';
+import 'package:app/features/home/presentation/widgets/home_content.dart';
 import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:app/features/theme/presentation/pages/theme_page.dart';
 import 'package:flutter/material.dart';

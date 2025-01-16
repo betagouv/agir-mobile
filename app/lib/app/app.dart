@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:app/app/router/app_router.dart';
 import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/core/infrastructure/tracker.dart';
-import 'package:app/features/accueil/presentation/cubit/home_disclaimer_cubit.dart';
 import 'package:app/features/actions/detail/infrastructure/action_repository.dart';
 import 'package:app/features/actions/home/infrastructure/home_actions_repository.dart';
 import 'package:app/features/actions/home/presentation/bloc/home_actions_bloc.dart';
@@ -31,6 +30,7 @@ import 'package:app/features/environmental_performance/summary/presentation/bloc
 import 'package:app/features/gamification/domain/gamification_port.dart';
 import 'package:app/features/gamification/presentation/bloc/gamification_bloc.dart';
 import 'package:app/features/gamification/presentation/bloc/gamification_event.dart';
+import 'package:app/features/home/presentation/cubit/home_disclaimer_cubit.dart';
 import 'package:app/features/know_your_customer/core/domain/mieux_vous_connaitre_port.dart';
 import 'package:app/features/know_your_customer/list/infrastructure/know_your_customers_repository.dart';
 import 'package:app/features/mission/actions/infrastructure/mission_actions_repository.dart';

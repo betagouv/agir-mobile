@@ -43,7 +43,7 @@ class _View extends StatelessWidget {
   @override
   Widget build(final context) => FnvScaffold(
         appBar: AppBar(
-          backgroundColor: FnvColors.accueilFond,
+          backgroundColor: FnvColors.homeBackground,
           iconTheme: const IconThemeData(color: DsfrColors.blueFranceSun113),
         ),
         body: ListView(

@@ -1,12 +1,12 @@
 import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/shadows.dart';
-import 'package:app/features/accueil/presentation/widgets/title_section.dart';
 import 'package:app/features/actions/detail/presentation/pages/action_detail_page.dart';
 import 'package:app/features/actions/home/presentation/bloc/home_actions_bloc.dart';
 import 'package:app/features/actions/home/presentation/bloc/home_actions_event.dart';
 import 'package:app/features/actions/home/presentation/bloc/home_actions_state.dart';
 import 'package:app/features/actions/list/domain/action_item.dart';
 import 'package:app/features/actions/list/presentation/pages/action_list_page.dart';
+import 'package:app/features/home/presentation/widgets/title_section.dart';
 import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:app/features/theme/presentation/widgets/theme_type_tag.dart';
 import 'package:app/l10n/l10n.dart';

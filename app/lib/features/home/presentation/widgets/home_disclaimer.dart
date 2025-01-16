@@ -1,5 +1,5 @@
-import 'package:app/features/accueil/presentation/cubit/home_disclaimer_cubit.dart';
-import 'package:app/features/accueil/presentation/cubit/home_disclaimer_state.dart';
+import 'package:app/features/home/presentation/cubit/home_disclaimer_cubit.dart';
+import 'package:app/features/home/presentation/cubit/home_disclaimer_state.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
