@@ -10,6 +10,7 @@ import 'package:app/features/actions/list/domain/actions_port.dart';
 import 'package:app/features/actions/list/infrastructure/actions_adapter.dart';
 import 'package:app/features/articles/domain/articles_port.dart';
 import 'package:app/features/articles/infrastructure/articles_api_adapter.dart';
+import 'package:app/features/articles/presentation/pages/article_page.dart';
 import 'package:app/features/assistances/core/presentation/bloc/aides_accueil_bloc.dart';
 import 'package:app/features/assistances/item/presentation/bloc/aide_bloc.dart';
 import 'package:app/features/assistances/list/infrastructure/assistances_repository.dart';
@@ -37,11 +38,15 @@ import 'package:app/features/mission/actions/infrastructure/mission_actions_repo
 import 'package:app/features/mission/home/infrastructure/mission_home_repository.dart';
 import 'package:app/features/mission/home/presentation/bloc/mission_home_bloc.dart';
 import 'package:app/features/mission/mission/infrastructure/mission_repository.dart';
+import 'package:app/features/mission/mission/presentation/pages/mission_page.dart';
+import 'package:app/features/notifications/domain/notification_data.dart';
+import 'package:app/features/notifications/domain/notification_page_type.dart';
 import 'package:app/features/notifications/infrastructure/notification_repository.dart';
 import 'package:app/features/notifications/infrastructure/notification_service.dart';
 import 'package:app/features/profil/core/domain/profil_port.dart';
 import 'package:app/features/questions/first_name/domain/first_name_port.dart';
 import 'package:app/features/quiz/domain/quiz_port.dart';
+import 'package:app/features/quiz/presentation/pages/quiz_page.dart';
 import 'package:app/features/recommandations/domain/recommandations_port.dart';
 import 'package:app/features/recommandations/presentation/bloc/recommandations_bloc.dart';
 import 'package:app/features/simulateur_velo/domain/aide_velo_port.dart';
@@ -56,7 +61,6 @@ import 'package:app/features/version/presentation/bloc/version_bloc.dart';
 import 'package:app/features/version/presentation/bloc/version_event.dart';
 import 'package:clock/clock.dart';
 import 'package:dsfr/dsfr.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -114,19 +118,64 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   late final GoRouter _goRouter;
-  late final StreamSubscription<RemoteMessage> _messageOpenedSubscription;
+  late final StreamSubscription<NotificationData> _messageOpenedSubscription;
 
   @override
   void initState() {
     super.initState();
     _goRouter = goRouter(tracker: widget.tracker);
-    _messageOpenedSubscription = widget.notificationService.onMessageOpenedApp
-        .listen((final message) async => _openPage());
+    _messageOpenedSubscription =
+        widget.notificationService.onMessageOpenedApp.listen(
+      (final event) async =>
+          _handleNotification(goRouter: _goRouter, data: event),
+    );
   }
 
-  Future<void> _openPage() async {
-    // TODO(lsaudon): open page
-    await Future<void>.value();
+  Future<void> _handleNotification({
+    required final GoRouter goRouter,
+    required final NotificationData data,
+  }) async {
+    switch (data.pageType) {
+      case NotificationPageType.quiz:
+        await _handleQuizNotification(goRouter: goRouter, pageId: data.pageId);
+      case NotificationPageType.article:
+        await _handleArticleNotification(
+          goRouter: goRouter,
+          pageId: data.pageId,
+        );
+      case NotificationPageType.mission:
+        await _handleMissionNotification(
+          goRouter: goRouter,
+          pageId: data.pageId,
+        );
+    }
+  }
+
+  Future<void> _handleQuizNotification({
+    required final GoRouter goRouter,
+    required final String pageId,
+  }) async {
+    await goRouter.pushNamed(QuizPage.name, pathParameters: {'id': pageId});
+  }
+
+  Future<void> _handleArticleNotification({
+    required final GoRouter goRouter,
+    required final String pageId,
+  }) async {
+    await goRouter.pushNamed(
+      ArticlePage.name,
+      pathParameters: {'id': pageId},
+    );
+  }
+
+  Future<void> _handleMissionNotification({
+    required final GoRouter goRouter,
+    required final String pageId,
+  }) async {
+    await goRouter.pushNamed(
+      MissionPage.name,
+      pathParameters: {'mission': pageId, 'thematique': 'thematique'},
+    );
   }
 
   @override
