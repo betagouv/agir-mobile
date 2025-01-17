@@ -1,4 +1,3 @@
-import 'package:app/core/infrastructure/tracker_navigator_observer.dart';
 import 'package:flutter/widgets.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
 
@@ -22,9 +21,22 @@ class Tracker {
     );
   }
 
+  void trackNotificationOpened(final String name) {
+    if (!MatomoTracker.instance.initialized) {
+      return;
+    }
+    MatomoTracker.instance.trackEvent(
+      eventInfo: EventInfo(
+        category: 'notification',
+        action: 'opened',
+        name: name,
+      ),
+    );
+  }
+
   void dispose() {
     MatomoTracker.instance.dispose();
   }
 
-  NavigatorObserver get navigatorObserver => TrackerNavigatorObserver();
+  NavigatorObserver get navigatorObserver => MatomoGlobalObserver();
 }

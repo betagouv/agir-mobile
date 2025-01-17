@@ -126,8 +126,13 @@ class _AppState extends State<App> {
     _goRouter = goRouter(tracker: widget.tracker);
     _messageOpenedSubscription =
         widget.notificationService.onMessageOpenedApp.listen(
-      (final event) async =>
-          _handleNotification(goRouter: _goRouter, data: event),
+      (final event) async {
+        widget.tracker.trackNotificationOpened(
+          '${event.pageType} - ${event.pageId}',
+        );
+
+        return _handleNotification(goRouter: _goRouter, data: event);
+      },
     );
   }
 
