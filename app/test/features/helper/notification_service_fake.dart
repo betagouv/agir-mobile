@@ -1,3 +1,4 @@
+import 'package:app/features/notifications/domain/notification_data.dart';
 import 'package:app/features/notifications/infrastructure/notification_service.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
@@ -16,7 +17,7 @@ class NotificationServiceFake implements NotificationService {
   Future<AuthorizationStatus> requestPermission() async => _authorizationStatus;
 
   @override
-  Stream<RemoteMessage> get onMessageOpenedApp => const Stream.empty();
+  Stream<NotificationData> get onMessageOpenedApp => const Stream.empty();
 
   @override
   Future<void> deleteToken() async {}
