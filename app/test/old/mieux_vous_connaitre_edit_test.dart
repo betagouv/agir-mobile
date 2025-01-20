@@ -1,4 +1,7 @@
 import 'package:app/features/know_your_customer/core/domain/question.dart';
+import 'package:app/features/know_your_customer/core/domain/question_code.dart';
+import 'package:app/features/know_your_customer/core/domain/response.dart';
+import 'package:app/features/know_your_customer/core/domain/response_choice.dart';
 import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:flutter_test/flutter_test.dart';

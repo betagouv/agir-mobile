@@ -6,8 +6,8 @@ import 'package:app/features/actions/list/infrastructure/action_item_mapper.dart
 import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:fpdart/fpdart.dart';
 
-class HomeActionsRepository {
-  const HomeActionsRepository({required final DioHttpClient client})
+class ActionsRepository {
+  const ActionsRepository({required final DioHttpClient client})
       : _client = client;
 
   final DioHttpClient _client;

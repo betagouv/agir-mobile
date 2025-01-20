@@ -1,4 +1,4 @@
-import 'package:app/core/assets/svgs.dart';
+import 'package:app/core/assets/images.dart';
 import 'package:app/core/helpers/text_scaler.dart';
 import 'package:app/core/presentation/widgets/composants/bottom_bar.dart';
 import 'package:app/core/presentation/widgets/composants/scaffold.dart';
@@ -62,7 +62,7 @@ class _View extends StatelessWidget {
             const Align(
               alignment: Alignment.centerLeft,
               child:
-                  OnboardingIllustration(assetName: AssetsSvgs.illustration2),
+                  OnboardingIllustration(assetName: AssetsImages.illustration2),
             ),
             const _Prenom(),
             const SizedBox(height: DsfrSpacings.s2w),

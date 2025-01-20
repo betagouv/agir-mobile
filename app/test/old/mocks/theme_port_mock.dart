@@ -21,9 +21,11 @@ class ThemePortMock implements ThemePort {
   ) async =>
       const Right([
         ServiceItem(
+          idService: 'id_service',
           titre: 'Titre',
           sousTitre: 'Sous-titre',
-          externalUrl: 'https://example.com/image.jpg',
+          externalUrl: 'https://example.com',
+          iconUrl: 'https://example.com/image.jpg',
         ),
       ]);
 }

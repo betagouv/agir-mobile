@@ -150,7 +150,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   cupertino_http: 94ac07f5ff090b8effa6c5e2c47871d48ab7c86c
-  device_info_plus: 71ffc6ab7634ade6267c7a93088ed7e4f74e5896
+  device_info_plus: 21fcca2080fbcd348be798aa36c3e5ed849eefbe
   Firebase: 374a441a91ead896215703a674d58cdb3e9d772b
   firebase_core: 2337982fb78ee4d8d91e608b0a3d4f44346a93c8
   firebase_messaging: f3bddfa28c2cad70b3341bf461e987a24efd28d6

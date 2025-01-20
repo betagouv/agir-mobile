@@ -1,10 +1,10 @@
-import 'package:app/core/assets/svgs.dart';
+import 'package:app/core/assets/images.dart';
+import 'package:app/core/infrastructure/svg.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/mission/mission/presentation/bloc/mission_state.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
 class MissionFinPage extends StatelessWidget {
@@ -17,17 +17,14 @@ class MissionFinPage extends StatelessWidget {
         alignment: Alignment.topCenter,
         fit: StackFit.expand,
         children: [
-          SvgPicture.asset(
-            AssetsSvgs.fireworks,
-            alignment: Alignment.topCenter,
-          ),
+          FnvSvg.asset(AssetsImages.fireworks, alignment: Alignment.topCenter),
           Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: paddingVerticalPage),
             child: Column(
               children: [
                 const SizedBox(height: DsfrSpacings.s6w),
-                SvgPicture.asset(AssetsSvgs.flags),
+                FnvSvg.asset(AssetsImages.flags),
                 const SizedBox(height: DsfrSpacings.s1w),
                 const Text(
                   Localisation.bravo,

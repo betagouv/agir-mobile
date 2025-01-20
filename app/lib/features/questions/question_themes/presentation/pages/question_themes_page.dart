@@ -1,4 +1,4 @@
-import 'package:app/core/assets/svgs.dart';
+import 'package:app/core/assets/images.dart';
 import 'package:app/core/presentation/widgets/composants/bottom_bar.dart';
 import 'package:app/core/presentation/widgets/composants/checkbox_set.dart';
 import 'package:app/core/presentation/widgets/composants/scaffold.dart';
@@ -61,7 +61,7 @@ class _View extends StatelessWidget {
             const Align(
               alignment: Alignment.centerLeft,
               child: OnboardingIllustration(
-                assetName: AssetsSvgs.illustration4,
+                assetName: AssetsImages.illustration4,
               ),
             ),
             const Text(

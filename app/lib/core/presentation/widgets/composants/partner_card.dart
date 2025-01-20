@@ -1,22 +1,32 @@
-import 'package:app/core/assets/images.dart';
-import 'package:app/core/assets/svgs.dart';
 import 'package:app/core/infrastructure/url_launcher.dart';
+import 'package:app/core/presentation/widgets/composants/image.dart';
 import 'package:app/features/environmental_performance/summary/environmental_performance_summary_l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class PartnerCard extends StatelessWidget {
-  const PartnerCard({super.key});
+  const PartnerCard({
+    super.key,
+    required this.image,
+    required this.name,
+    required this.description,
+    required this.url,
+    required this.logo,
+  });
+
+  final String image;
+  final String name;
+  final String description;
+  final String url;
+  final String logo;
 
   @override
   Widget build(final context) {
-    const backgroundColor = Color(0xffeef2ff);
     const borderColor = Color(0xffb1b1ff);
 
     return DecoratedBox(
       decoration: const BoxDecoration(
-        color: backgroundColor,
+        color: Color(0xffeef2ff),
         border: Border.fromBorderSide(BorderSide(color: borderColor)),
         borderRadius: BorderRadius.all(Radius.circular(DsfrSpacings.s1w)),
       ),
@@ -32,12 +42,11 @@ class PartnerCard extends StatelessWidget {
               ),
               child: ColoredBox(
                 color: Colors.white,
-                child: SvgPicture.asset(
-                  AssetsSvgs.nosGestesClimatIllustration,
+                child: FnvImage.asset(
+                  image,
+                  alignment: Alignment.topCenter,
                   height: 170,
                   fit: BoxFit.cover,
-                  alignment: Alignment.topCenter,
-                  semanticsLabel: 'Illustration de Nos Gestes Climat',
                 ),
               ),
             ),
@@ -57,28 +66,19 @@ class PartnerCard extends StatelessWidget {
                     color: DsfrColors.blueFranceSun113,
                   ),
                 ),
-                const Text(
-                  EnvironmentalPerformanceSummaryL10n.nosGestesClimat,
-                  style: DsfrTextStyle.headline5(),
-                ),
+                Text(name, style: const DsfrTextStyle.headline5()),
                 const SizedBox(height: DsfrSpacings.s1w),
-                const Text(
-                  EnvironmentalPerformanceSummaryL10n
-                      .nosGestesClimatDescription,
-                  style: DsfrTextStyle(fontSize: 15),
-                ),
+                Text(description, style: const DsfrTextStyle(fontSize: 15)),
                 const SizedBox(height: DsfrSpacings.s1w),
                 DsfrLink.md(
-                  label: EnvironmentalPerformanceSummaryL10n.nosGestesClimatUrl,
-                  onTap: () async => FnvUrlLauncher.launch(
-                    EnvironmentalPerformanceSummaryL10n.nosGestesClimatUrl,
-                  ),
+                  label: url,
+                  onTap: () async => FnvUrlLauncher.launch(url),
                 ),
                 const SizedBox(height: DsfrSpacings.s4w),
-                Image.asset(
-                  AssetsImages.nosGestesClimat,
-                  semanticLabel: 'Logo de Nos Gestes Climat',
+                FnvImage.asset(
+                  logo,
                   height: 40,
+                  semanticLabel: 'Logo de $name',
                 ),
               ],
             ),

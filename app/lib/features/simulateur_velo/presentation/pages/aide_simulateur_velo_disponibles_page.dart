@@ -1,4 +1,5 @@
-import 'package:app/core/assets/svgs.dart';
+import 'package:app/core/assets/images.dart';
+import 'package:app/core/infrastructure/svg.dart';
 import 'package:app/core/infrastructure/url_launcher.dart';
 import 'package:app/core/presentation/widgets/composants/app_bar.dart';
 import 'package:app/core/presentation/widgets/composants/bottom_bar.dart';
@@ -12,7 +13,6 @@ import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
 class AideSimulateurVeloDisponiblePage extends StatelessWidget {
@@ -76,8 +76,8 @@ class AideSimulateurVeloDisponiblePage extends StatelessWidget {
                   WidgetSpan(
                     alignment: PlaceholderAlignment.baseline,
                     baseline: TextBaseline.alphabetic,
-                    child: SvgPicture.asset(
-                      AssetsSvgs.mesAidesVeloTexte,
+                    child: FnvSvg.asset(
+                      AssetsImages.mesAidesVeloTexte,
                       height: 9,
                     ),
                   ),
@@ -85,8 +85,8 @@ class AideSimulateurVeloDisponiblePage extends StatelessWidget {
                   WidgetSpan(
                     alignment: PlaceholderAlignment.baseline,
                     baseline: TextBaseline.alphabetic,
-                    child: SvgPicture.asset(
-                      AssetsSvgs.mesAidesVeloLogo,
+                    child: FnvSvg.asset(
+                      AssetsImages.mesAidesVeloLogo,
                       height: 9,
                     ),
                   ),
@@ -175,7 +175,6 @@ class _Body extends StatelessWidget {
                       e.logo,
                       width: DsfrSpacings.s7w,
                       height: DsfrSpacings.s7w,
-                      fit: BoxFit.contain,
                     ),
                     const SizedBox(width: DsfrSpacings.s1w),
                     Expanded(

@@ -1,5 +1,5 @@
 import 'package:app/core/assets/images.dart';
-import 'package:app/core/assets/svgs.dart';
+import 'package:app/core/infrastructure/svg.dart';
 import 'package:app/core/presentation/widgets/composants/scaffold.dart';
 import 'package:app/features/authentification/creer_compte/presentation/pages/creer_compte_page.dart';
 import 'package:app/features/authentification/se_connecter/presentation/pages/se_connecter_page.dart';
@@ -7,7 +7,6 @@ import 'package:app/features/version/presentation/widgets/version_label.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
 class PreOnboardingPage extends StatelessWidget {
@@ -42,11 +41,11 @@ class PreOnboardingPage extends StatelessWidget {
                     const SizedBox(height: DsfrSpacings.s3w),
                     Row(
                       children: [
-                        SvgPicture.asset(
-                          AssetsSvgs.republiqueFrancaise,
+                        FnvSvg.asset(
+                          AssetsImages.republiqueFrancaise,
                           height: 69,
                           semanticsLabel:
-                              AssetsSvgs.republiqueFrancaiseSemantic,
+                              AssetsImages.republiqueFrancaiseSemantic,
                         ),
                         const SizedBox(width: DsfrSpacings.s3w),
                         Image.asset(
@@ -55,10 +54,10 @@ class PreOnboardingPage extends StatelessWidget {
                           height: 46,
                         ),
                         const SizedBox(width: DsfrSpacings.s3w),
-                        SvgPicture.asset(
-                          AssetsSvgs.ademe,
+                        FnvSvg.asset(
+                          AssetsImages.ademe,
                           height: 55,
-                          semanticsLabel: AssetsSvgs.ademeSemantic,
+                          semanticsLabel: AssetsImages.ademeSemantic,
                         ),
                       ],
                     ),

@@ -1,4 +1,4 @@
-import 'package:app/features/know_your_customer/core/domain/question.dart';
+import 'package:app/features/know_your_customer/core/domain/response_mosaic.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 

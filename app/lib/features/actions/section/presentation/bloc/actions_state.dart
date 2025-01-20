@@ -4,24 +4,21 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
 @immutable
-sealed class HomeActionsState extends Equatable {
-  const HomeActionsState();
+sealed class ActionsState extends Equatable {
+  const ActionsState();
 
   @override
   List<Object?> get props => [];
 }
 
 @immutable
-final class HomeActionsInitial extends HomeActionsState {
-  const HomeActionsInitial();
+final class ActionsInitial extends ActionsState {
+  const ActionsInitial();
 }
 
 @immutable
-final class HomeActionsLoadSuccess extends HomeActionsState {
-  const HomeActionsLoadSuccess({
-    required this.themeType,
-    required this.actions,
-  });
+final class ActionsLoadSuccess extends ActionsState {
+  const ActionsLoadSuccess({required this.themeType, required this.actions});
 
   final ThemeType? themeType;
   final List<ActionItem> actions;

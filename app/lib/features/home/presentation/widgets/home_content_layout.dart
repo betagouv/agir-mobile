@@ -1,5 +1,5 @@
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
-import 'package:app/features/actions/home/presentation/widgets/actions_section.dart';
+import 'package:app/features/actions/section/presentation/widgets/actions_section.dart';
 import 'package:app/features/assistances/core/presentation/widgets/assitances_section.dart';
 import 'package:app/features/environmental_performance/home/presentation/widgets/environmental_performance_section.dart';
 import 'package:app/features/home/presentation/widgets/home_disclaimer.dart';

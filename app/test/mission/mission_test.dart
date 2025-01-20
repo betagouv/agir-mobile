@@ -1,8 +1,8 @@
 import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/message_bus.dart';
-import 'package:app/features/actions/home/infrastructure/home_actions_repository.dart';
-import 'package:app/features/actions/home/presentation/bloc/home_actions_bloc.dart';
+import 'package:app/features/actions/section/infrastructure/actions_repository.dart';
+import 'package:app/features/actions/section/presentation/bloc/actions_bloc.dart';
 import 'package:app/features/assistances/core/presentation/bloc/aides_accueil_bloc.dart';
 import 'package:app/features/environmental_performance/questions/infrastructure/environment_performance_question_repository.dart';
 import 'package:app/features/environmental_performance/questions/presentation/bloc/environmental_performance_question_bloc.dart';
@@ -126,7 +126,7 @@ Future<void> pumpForMissionPage(
       ),
       BlocProvider(
         create: (final context) =>
-            HomeActionsBloc(repository: HomeActionsRepository(client: client)),
+            ActionsBloc(repository: ActionsRepository(client: client)),
       ),
     ],
     router: GoRouter(

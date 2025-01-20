@@ -3,16 +3,16 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
 @immutable
-sealed class HomeActionsEvent extends Equatable {
-  const HomeActionsEvent();
+sealed class ActionsEvent extends Equatable {
+  const ActionsEvent();
 
   @override
   List<Object?> get props => [];
 }
 
 @immutable
-final class HomeActionsLoadRequested extends HomeActionsEvent {
-  const HomeActionsLoadRequested(this.themeType);
+final class ActionsLoadRequested extends ActionsEvent {
+  const ActionsLoadRequested(this.themeType);
 
   final ThemeType? themeType;
 
@@ -21,8 +21,8 @@ final class HomeActionsLoadRequested extends HomeActionsEvent {
 }
 
 @immutable
-final class HomeActionsRefreshRequested extends HomeActionsEvent {
-  const HomeActionsRefreshRequested();
+final class ActionsRefreshRequested extends ActionsEvent {
+  const ActionsRefreshRequested();
 
   @override
   List<Object?> get props => [];

@@ -1,5 +1,5 @@
+import 'package:app/core/infrastructure/svg.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class OnboardingIllustration extends StatelessWidget {
   const OnboardingIllustration({super.key, required this.assetName});
@@ -9,6 +9,6 @@ class OnboardingIllustration extends StatelessWidget {
   @override
   Widget build(final context) => SizedBox.square(
         dimension: 165,
-        child: SvgPicture.asset(assetName),
+        child: FnvSvg.asset(assetName),
       );
 }

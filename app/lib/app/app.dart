@@ -8,10 +8,10 @@ import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/core/infrastructure/tracker.dart';
 import 'package:app/features/actions/detail/infrastructure/action_repository.dart';
-import 'package:app/features/actions/home/infrastructure/home_actions_repository.dart';
-import 'package:app/features/actions/home/presentation/bloc/home_actions_bloc.dart';
 import 'package:app/features/actions/list/domain/actions_port.dart';
 import 'package:app/features/actions/list/infrastructure/actions_adapter.dart';
+import 'package:app/features/actions/section/infrastructure/actions_repository.dart';
+import 'package:app/features/actions/section/presentation/bloc/actions_bloc.dart';
 import 'package:app/features/articles/domain/articles_port.dart';
 import 'package:app/features/articles/infrastructure/articles_api_adapter.dart';
 import 'package:app/features/articles/presentation/pages/article_page.dart';
@@ -49,6 +49,7 @@ import 'package:app/features/quiz/domain/quiz_port.dart';
 import 'package:app/features/quiz/presentation/pages/quiz_page.dart';
 import 'package:app/features/recommandations/domain/recommandations_port.dart';
 import 'package:app/features/recommandations/presentation/bloc/recommandations_bloc.dart';
+import 'package:app/features/seasonal_fruits_and_vegetables/infrastructure/seasonal_fruits_and_vegetables_repository.dart';
 import 'package:app/features/simulateur_velo/domain/aide_velo_port.dart';
 import 'package:app/features/simulateur_velo/presentation/bloc/aide_velo_bloc.dart';
 import 'package:app/features/theme/core/domain/theme_port.dart';
@@ -247,6 +248,12 @@ class _AppState extends State<App> {
                   notificationService: widget.notificationService,
                 ),
               ),
+              RepositoryProvider(
+                create: (final context) =>
+                    SeasonalFruitsAndVegetablesRepository(
+                  client: widget.dioHttpClient,
+                ),
+              ),
             ],
             child: MultiBlocProvider(
               providers: [
@@ -270,8 +277,8 @@ class _AppState extends State<App> {
                   ),
                 ),
                 BlocProvider(
-                  create: (final context) => HomeActionsBloc(
-                    repository: HomeActionsRepository(
+                  create: (final context) => ActionsBloc(
+                    repository: ActionsRepository(
                       client: widget.dioHttpClient,
                     ),
                   ),

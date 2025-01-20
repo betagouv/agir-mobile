@@ -1,5 +1,6 @@
 import 'package:app/core/presentation/widgets/composants/image.dart';
 import 'package:app/features/know_your_customer/core/domain/question.dart';
+import 'package:app/features/know_your_customer/core/domain/response_mosaic.dart';
 import 'package:app/features/know_your_customer/detail/presentation/bloc/mieux_vous_connaitre_edit_bloc.dart';
 import 'package:app/features/know_your_customer/detail/presentation/bloc/mieux_vous_connaitre_edit_event.dart';
 import 'package:app/features/know_your_customer/detail/presentation/widgets/mosaic_button.dart';
