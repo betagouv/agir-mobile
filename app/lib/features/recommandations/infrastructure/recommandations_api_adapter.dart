@@ -1,6 +1,6 @@
+import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
-import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
 import 'package:app/features/recommandations/domain/recommandations_port.dart';
 import 'package:app/features/recommandations/infrastructure/recommandation_mapper.dart';

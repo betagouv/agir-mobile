@@ -1,6 +1,6 @@
+import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/features/articles/infrastructure/articles_api_adapter.dart';
-import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 

@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:app/features/authentication/domain/authentication_service.dart';
-import 'package:app/features/authentication/domain/authentication_status.dart';
-import 'package:app/features/authentication/presentation/bloc/authentication_event.dart';
-import 'package:app/features/authentication/presentation/bloc/authentication_state.dart';
+import 'package:app/core/authentication/domain/authentication_service.dart';
+import 'package:app/core/authentication/domain/authentication_status.dart';
+import 'package:app/core/authentication/presentation/bloc/authentication_event.dart';
+import 'package:app/core/authentication/presentation/bloc/authentication_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AuthenticationBloc

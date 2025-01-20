@@ -1,3 +1,5 @@
+import 'package:app/core/authentication/presentation/bloc/authentication_bloc.dart';
+import 'package:app/core/authentication/presentation/bloc/authentication_state.dart';
 import 'package:app/core/infrastructure/tracker.dart';
 import 'package:app/core/presentation/pages/error_route_page.dart';
 import 'package:app/features/actions/detail/presentation/pages/action_detail_page.dart';
@@ -5,8 +7,6 @@ import 'package:app/features/actions/list/presentation/pages/action_list_page.da
 import 'package:app/features/articles/presentation/pages/article_page.dart';
 import 'package:app/features/assistances/item/presentation/pages/assistance_detail_page.dart';
 import 'package:app/features/assistances/list/presentation/pages/assistance_list_page.dart';
-import 'package:app/features/authentication/presentation/bloc/authentication_bloc.dart';
-import 'package:app/features/authentication/presentation/bloc/authentication_state.dart';
 import 'package:app/features/authentification/creer_compte/presentation/pages/creer_compte_page.dart';
 import 'package:app/features/authentification/mot_de_passe_oublie/pages/mot_de_passe_oublie_page.dart';
 import 'package:app/features/authentification/mot_de_passe_oublie_code/pages/mot_de_passe_oublie_code_page.dart';

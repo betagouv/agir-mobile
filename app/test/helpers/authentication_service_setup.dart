@@ -1,5 +1,5 @@
-import 'package:app/features/authentication/domain/authentication_service.dart';
-import 'package:app/features/authentication/infrastructure/authentication_storage.dart';
+import 'package:app/core/authentication/domain/authentication_service.dart';
+import 'package:app/core/authentication/infrastructure/authentication_storage.dart';
 import 'package:clock/clock.dart';
 
 import '../old/api/flutter_secure_storage_fake.dart';

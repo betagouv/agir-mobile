@@ -1,7 +1,7 @@
 import 'dart:convert';
 
+import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/endpoints.dart';
-import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/profil/core/infrastructure/profil_api_adapter.dart';
 import 'package:app/features/profil/informations/domain/entities/informations.dart';
 import 'package:app/features/profil/logement/domain/logement.dart';

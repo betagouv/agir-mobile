@@ -1,6 +1,6 @@
+import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/actions/home/infrastructure/home_actions_repository.dart';
 import 'package:app/features/actions/home/presentation/bloc/home_actions_bloc.dart';
-import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/gamification/domain/gamification_port.dart';
 import 'package:app/features/gamification/presentation/bloc/gamification_bloc.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';

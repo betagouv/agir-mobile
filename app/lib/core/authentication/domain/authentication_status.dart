@@ -1,4 +1,4 @@
-import 'package:app/features/authentication/domain/user_id.dart';
+import 'package:app/core/authentication/domain/user_id.dart';
 import 'package:equatable/equatable.dart';
 
 sealed class AuthenticationStatus extends Equatable {

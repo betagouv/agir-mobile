@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:app/features/authentication/domain/expiration_date.dart';
-import 'package:app/features/authentication/domain/token.dart';
-import 'package:app/features/authentication/domain/user_id.dart';
+import 'package:app/core/authentication/domain/expiration_date.dart';
+import 'package:app/core/authentication/domain/token.dart';
+import 'package:app/core/authentication/domain/user_id.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class AuthenticationStorage {

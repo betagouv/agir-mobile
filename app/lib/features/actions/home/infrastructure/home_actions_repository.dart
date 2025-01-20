@@ -1,8 +1,8 @@
+import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/actions/list/domain/action_item.dart';
 import 'package:app/features/actions/list/infrastructure/action_item_mapper.dart';
-import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:fpdart/fpdart.dart';
 

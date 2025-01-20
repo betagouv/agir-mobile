@@ -1,6 +1,6 @@
+import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
-import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/mission/mission/domain/mission.dart';
 import 'package:app/features/mission/mission/domain/mission_code.dart';
 import 'package:app/features/mission/mission/infrastructure/mission_mapper.dart';

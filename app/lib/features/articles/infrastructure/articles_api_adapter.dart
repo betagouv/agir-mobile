@@ -1,11 +1,11 @@
 import 'dart:convert';
 
+import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/articles/domain/article.dart';
 import 'package:app/features/articles/domain/articles_port.dart';
 import 'package:app/features/articles/infrastructure/article_mapper.dart';
-import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:fpdart/fpdart.dart';
 
 class ArticlesApiAdapter implements ArticlesPort {

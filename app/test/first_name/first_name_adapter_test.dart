@@ -1,5 +1,5 @@
+import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/endpoints.dart';
-import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/questions/first_name/domain/first_name.dart';
 import 'package:app/features/questions/first_name/infrastructure/first_name_adapter.dart';
 import 'package:faker/faker.dart';

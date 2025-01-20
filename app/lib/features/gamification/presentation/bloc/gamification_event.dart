@@ -1,4 +1,4 @@
-import 'package:app/features/authentication/domain/authentication_status.dart';
+import 'package:app/core/authentication/domain/authentication_status.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 

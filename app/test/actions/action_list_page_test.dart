@@ -1,9 +1,9 @@
+import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/actions/detail/presentation/pages/action_detail_page.dart';
 import 'package:app/features/actions/list/domain/actions_port.dart';
 import 'package:app/features/actions/list/infrastructure/action_item_mapper.dart';
 import 'package:app/features/actions/list/infrastructure/actions_adapter.dart';
 import 'package:app/features/actions/list/presentation/pages/action_list_page.dart';
-import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/gamification/domain/gamification_port.dart';
 import 'package:app/features/gamification/presentation/bloc/gamification_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

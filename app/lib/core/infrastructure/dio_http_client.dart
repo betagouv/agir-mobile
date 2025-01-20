@@ -3,8 +3,8 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:app/features/authentication/domain/authentication_service.dart';
-import 'package:app/features/authentication/domain/authentication_status.dart';
+import 'package:app/core/authentication/domain/authentication_service.dart';
+import 'package:app/core/authentication/domain/authentication_status.dart';
 import 'package:dio/dio.dart';
 
 class DioHttpClient {

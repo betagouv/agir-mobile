@@ -1,6 +1,10 @@
 import 'dart:async';
 
 import 'package:app/app/router/app_router.dart';
+import 'package:app/core/authentication/domain/authentication_service.dart';
+import 'package:app/core/authentication/infrastructure/authentication_injection.dart';
+import 'package:app/core/authentication/infrastructure/authentication_redirection.dart';
+import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/core/infrastructure/tracker.dart';
 import 'package:app/features/actions/detail/infrastructure/action_repository.dart';
@@ -15,11 +19,7 @@ import 'package:app/features/assistances/core/presentation/bloc/aides_accueil_bl
 import 'package:app/features/assistances/item/presentation/bloc/aide_bloc.dart';
 import 'package:app/features/assistances/list/infrastructure/assistances_repository.dart';
 import 'package:app/features/assistances/list/presentation/bloc/aides_disclaimer/aides_disclaimer_cubit.dart';
-import 'package:app/features/authentication/domain/authentication_service.dart';
-import 'package:app/features/authentication/infrastructure/authentication_injection.dart';
-import 'package:app/features/authentication/infrastructure/authentication_redirection.dart';
 import 'package:app/features/authentification/core/domain/authentification_port.dart';
-import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/bibliotheque/domain/bibliotheque_port.dart';
 import 'package:app/features/bibliotheque/presentation/bloc/bibliotheque_bloc.dart';
 import 'package:app/features/communes/domain/communes_port.dart';
