@@ -1,5 +1,5 @@
+import 'package:app/core/authentication/domain/authentication_service.dart';
 import 'package:app/core/error/domain/api_erreur.dart';
-import 'package:app/features/authentication/domain/authentication_service.dart';
 import 'package:app/features/authentification/core/domain/authentification_port.dart';
 import 'package:app/features/authentification/core/domain/information_de_code.dart';
 import 'package:app/features/authentification/core/domain/information_de_connexion.dart';

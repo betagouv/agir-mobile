@@ -1,15 +1,15 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:app/core/authentication/domain/authentication_service.dart';
+import 'package:app/core/authentication/domain/authentication_status.dart';
+import 'package:app/core/authentication/domain/user_id.dart';
+import 'package:app/core/authentication/infrastructure/authentication_storage.dart';
+import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/endpoints.dart';
-import 'package:app/features/authentication/domain/authentication_service.dart';
-import 'package:app/features/authentication/domain/authentication_status.dart';
-import 'package:app/features/authentication/domain/user_id.dart';
-import 'package:app/features/authentication/infrastructure/authentication_storage.dart';
 import 'package:app/features/authentification/core/domain/information_de_code.dart';
 import 'package:app/features/authentification/core/domain/information_de_connexion.dart';
 import 'package:app/features/authentification/core/infrastructure/authentification_api_adapter.dart';
-import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/utilisateur/domain/utilisateur.dart';
 import 'package:clock/clock.dart';
 import 'package:flutter_test/flutter_test.dart';

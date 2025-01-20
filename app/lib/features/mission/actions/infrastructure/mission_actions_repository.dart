@@ -1,8 +1,8 @@
 import 'dart:async';
 
+import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
-import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/mission/actions/domain/mission_actions.dart';
 import 'package:app/features/mission/actions/infrastructure/mission_actions_mapper.dart';
 import 'package:app/features/mission/mission/domain/mission_code.dart';

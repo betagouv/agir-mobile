@@ -1,11 +1,11 @@
 import 'dart:async';
 
+import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/features/actions/core/domain/action_id.dart';
 import 'package:app/features/actions/detail/infrastructure/action_repository.dart';
 import 'package:app/features/actions/detail/presentation/pages/action_detail_page.dart';
-import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/gamification/presentation/bloc/gamification_bloc.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';

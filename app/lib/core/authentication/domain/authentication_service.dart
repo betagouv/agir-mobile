@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:app/features/authentication/domain/authentication_status.dart';
-import 'package:app/features/authentication/domain/token.dart';
-import 'package:app/features/authentication/infrastructure/authentication_storage.dart';
+import 'package:app/core/authentication/domain/authentication_status.dart';
+import 'package:app/core/authentication/domain/token.dart';
+import 'package:app/core/authentication/infrastructure/authentication_storage.dart';
 import 'package:clock/clock.dart';
 import 'package:rxdart/subjects.dart';
 

@@ -1,9 +1,9 @@
 import 'dart:async';
 
+import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/core/infrastructure/message_bus.dart';
-import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/gamification/domain/gamification.dart';
 import 'package:app/features/gamification/domain/gamification_port.dart';
 import 'package:fpdart/fpdart.dart';

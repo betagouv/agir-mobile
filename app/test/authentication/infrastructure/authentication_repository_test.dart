@@ -2,9 +2,9 @@
 
 import 'dart:convert';
 
-import 'package:app/features/authentication/domain/token.dart';
-import 'package:app/features/authentication/domain/user_id.dart';
-import 'package:app/features/authentication/infrastructure/authentication_storage.dart';
+import 'package:app/core/authentication/domain/token.dart';
+import 'package:app/core/authentication/domain/user_id.dart';
+import 'package:app/core/authentication/infrastructure/authentication_storage.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';

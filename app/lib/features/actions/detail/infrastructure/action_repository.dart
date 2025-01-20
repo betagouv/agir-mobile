@@ -1,3 +1,4 @@
+import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/core/infrastructure/message_bus.dart';
@@ -5,7 +6,6 @@ import 'package:app/features/actions/core/domain/action_id.dart';
 import 'package:app/features/actions/core/domain/action_status.dart';
 import 'package:app/features/actions/detail/domain/action.dart';
 import 'package:app/features/actions/detail/infrastructure/action_mapper.dart';
-import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:fpdart/fpdart.dart';
 
 class ActionRepository {

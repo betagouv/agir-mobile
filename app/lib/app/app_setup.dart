@@ -3,17 +3,17 @@
 import 'dart:async';
 
 import 'package:app/app/app.dart';
+import 'package:app/core/authentication/domain/authentication_service.dart';
+import 'package:app/core/authentication/infrastructure/authentication_storage.dart';
 import 'package:app/core/error/infrastructure/crash_reporting.dart';
 import 'package:app/core/error/infrastructure/error_handler.dart';
 import 'package:app/core/error/infrastructure/missing_environment_key_exception.dart';
+import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/core/infrastructure/tracker.dart';
 import 'package:app/core/presentation/pages/error_page.dart';
 import 'package:app/features/assistances/list/infrastructure/assistances_repository.dart';
-import 'package:app/features/authentication/domain/authentication_service.dart';
-import 'package:app/features/authentication/infrastructure/authentication_storage.dart';
 import 'package:app/features/authentification/core/infrastructure/authentification_api_adapter.dart';
-import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:app/features/bibliotheque/infrastructure/bibliotheque_api_adapter.dart';
 import 'package:app/features/communes/infrastructure/communes_api_adapter.dart';
 import 'package:app/features/gamification/infrastructure/gamification_api_adapter.dart';

@@ -1,11 +1,11 @@
 import 'package:app/app/app.dart';
+import 'package:app/core/authentication/domain/authentication_service.dart';
+import 'package:app/core/authentication/domain/authentication_status.dart';
+import 'package:app/core/authentication/infrastructure/authentication_storage.dart';
+import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/core/infrastructure/tracker.dart';
-import 'package:app/features/authentication/domain/authentication_service.dart';
-import 'package:app/features/authentication/domain/authentication_status.dart';
-import 'package:app/features/authentication/infrastructure/authentication_storage.dart';
-import 'package:app/features/authentification/core/infrastructure/dio_http_client.dart';
 import 'package:clock/clock.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';

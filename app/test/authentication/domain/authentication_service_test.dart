@@ -1,10 +1,10 @@
 import 'dart:async';
 
-import 'package:app/features/authentication/domain/authentication_service.dart';
-import 'package:app/features/authentication/domain/authentication_status.dart';
-import 'package:app/features/authentication/domain/expiration_date.dart';
-import 'package:app/features/authentication/domain/user_id.dart';
-import 'package:app/features/authentication/infrastructure/authentication_storage.dart';
+import 'package:app/core/authentication/domain/authentication_service.dart';
+import 'package:app/core/authentication/domain/authentication_status.dart';
+import 'package:app/core/authentication/domain/expiration_date.dart';
+import 'package:app/core/authentication/domain/user_id.dart';
+import 'package:app/core/authentication/infrastructure/authentication_storage.dart';
 import 'package:clock/clock.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
