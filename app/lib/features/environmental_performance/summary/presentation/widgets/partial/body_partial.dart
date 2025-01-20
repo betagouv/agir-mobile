@@ -1,9 +1,9 @@
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/environmental_performance/summary/domain/environmental_performance_data.dart';
 import 'package:app/features/environmental_performance/summary/environmental_performance_summary_l10n.dart';
+import 'package:app/features/environmental_performance/summary/presentation/widgets/environmental_performance_partner_card.dart';
 import 'package:app/features/environmental_performance/summary/presentation/widgets/partial/environmental_performance_card.dart';
 import 'package:app/features/environmental_performance/summary/presentation/widgets/partial/environmental_performance_categories.dart';
-import 'package:app/features/environmental_performance/summary/presentation/widgets/partner_card.dart';
 import 'package:app/features/environmental_performance/summary/presentation/widgets/question_section.dart';
 import 'package:app/features/profil/profil/presentation/widgets/fnv_title.dart';
 import 'package:dsfr/dsfr.dart';
@@ -106,7 +106,7 @@ class BodyPartial extends StatelessWidget {
           const SizedBox(height: DsfrSpacings.s4w),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-            child: PartnerCard(),
+            child: EnvironmentalPerformancePartnerCard(),
           ),
           const SafeArea(child: SizedBox.shrink()),
         ],

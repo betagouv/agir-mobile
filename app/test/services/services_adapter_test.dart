@@ -20,12 +20,12 @@ void main() {
         responseData: jsonDecode(
           '''
 [
-    {
+   {
         "id_service": "fruits_legumes",
         "titre": "Fruits et légumes de saison",
-        "sous_titre": "septembre",
+        "sous_titre": "janvier",
         "external_url": "https://impactco2.fr/outils/fruitsetlegumes",
-        "icon_url": "https://jagis-front-dev.osc-fr1.scalingo.io/cerise.png",
+        "icon_url": "https://agir-front-dev.osc-fr1.scalingo.io/cerise.webp",
         "thematique": "alimentation",
         "is_available_inhouse": true
     },
@@ -53,14 +53,18 @@ void main() {
 
     expect(services.getRight().getOrElse(() => throw Exception()), [
       const ServiceItem(
+        idService: 'fruits_legumes',
         titre: 'Fruits et légumes de saison',
-        sousTitre: 'septembre',
+        sousTitre: 'janvier',
         externalUrl: 'https://impactco2.fr/outils/fruitsetlegumes',
+        iconUrl: 'https://agir-front-dev.osc-fr1.scalingo.io/cerise.webp',
       ),
       const ServiceItem(
+        idService: 'compost_local',
         titre: 'Où composter proche de chez moi ?',
         sousTitre: 'Réseau Compost Citoyen',
         externalUrl: 'https://reseaucompost.org/annuaire/geocompost-la-carte',
+        iconUrl: 'https://reseaucompost.org/themes/custom/rcc/logo.svg',
       ),
     ]);
   });

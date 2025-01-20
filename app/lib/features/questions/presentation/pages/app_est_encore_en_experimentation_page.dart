@@ -1,4 +1,4 @@
-import 'package:app/core/assets/svgs.dart';
+import 'package:app/core/assets/images.dart';
 import 'package:app/core/presentation/widgets/composants/bottom_bar.dart';
 import 'package:app/core/presentation/widgets/composants/scaffold.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
@@ -42,7 +42,7 @@ class AppEstEncoreEnExperimentationPage extends StatelessWidget {
           const Align(
             alignment: Alignment.centerLeft,
             child: OnboardingIllustration(
-              assetName: AssetsSvgs.illustration3,
+              assetName: AssetsImages.illustration3,
             ),
           ),
           const Text(

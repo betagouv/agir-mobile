@@ -1,6 +1,7 @@
 import 'dart:async';
 
-import 'package:app/core/assets/svgs.dart';
+import 'package:app/core/assets/images.dart';
+import 'package:app/core/infrastructure/svg.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/bibliotheque/domain/bibliotheque.dart';
@@ -13,7 +14,6 @@ import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class BibliothequeView extends StatelessWidget {
   const BibliothequeView({super.key});
@@ -217,7 +217,7 @@ class _SliverListe extends StatelessWidget {
             hasScrollBody: false,
             child: Column(
               children: [
-                SvgPicture.asset(AssetsSvgs.bibliothequeEmpty),
+                FnvSvg.asset(AssetsImages.bibliothequeEmpty),
                 const SizedBox(height: DsfrSpacings.s2w),
                 const Text(
                   Localisation.bibliothequeAucunArticle,

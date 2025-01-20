@@ -69,6 +69,23 @@ abstract final class Localisation {
   static const declarationAccessibilite = 'Déclaration d’accessibilité';
   static const declarationAccessibiliteSite =
       'https://jagis.beta.gouv.fr/accessibilite';
+  static const fruits = 'Fruits';
+  static const legumes = 'Légumes';
+  static const fruitsEtLegumesTitre = 'Les fruits et légumes pour le mois de ';
+  static const fruitsEtLegumesPeuConsommateurs = 'Peu consommateurs';
+  static const fruitsEtLegumesPeuConsommateursDescription =
+      'Moins de 1 kg CO₂e par kg';
+  static const fruitsEtLegumesMoyennementConsommateurs =
+      'Moyennement consommateurs';
+  static const fruitsEtLegumesMoyennementConsommateursDescription =
+      'Entre 1 et 5 kg CO₂e par kg';
+  static const fruitsEtLegumesConsommateurs = 'Consommateurs';
+  static const fruitsEtLegumesConsommateursDescription =
+      'Plus de 5 kg CO₂e par kg';
+  static const impactCo2 = 'Impact CO₂';
+  static const impactCo2Description =
+      'Des informations fiables et sourcées issues des données environnementales de l’ADEME';
+  static const impactCo2Url = 'https://impactco2.fr/';
   static const donneesPersonnelles = 'Données personnelles';
   static const donneesUtiliseesPart1 = 'Données utilisées : code postal ';
   static const donneesUtiliseesPart2 = ', revenu fiscal de référence ';
@@ -150,10 +167,10 @@ abstract final class Localisation {
   static const missionTitle = 'Recommandés **pour vous**';
   static const missionSubTitle =
       'Des solutions **adaptées à votre situation** et les clés pour comprendre';
-  static const homeActionsTitle = 'Mes actions';
-  static const homeActionsSubTitle =
+  static const actionsSectionTitle = 'Mes actions';
+  static const actionsSectionSubTitle =
       'Gagner des feuilles chaque semaine avec de nouvelles actions';
-  static const homeActionsListEmpty =
+  static const actionsSectionListEmpty =
       'Vous n’avez aucune action à réaliser en ce moment. Débloquez-en de nouvelles dans les missions.';
   static const modifier = 'Modifier';
   static const moinsDe35m2 = 'Moins de 35 m²';

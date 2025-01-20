@@ -38,5 +38,7 @@ class Tracker {
     MatomoTracker.instance.dispose();
   }
 
-  NavigatorObserver get navigatorObserver => MatomoGlobalObserver();
+  NavigatorObserver get navigatorObserver => MatomoTracker.instance.initialized
+      ? MatomoGlobalObserver(tracker: MatomoTracker.instance)
+      : NavigatorObserver();
 }

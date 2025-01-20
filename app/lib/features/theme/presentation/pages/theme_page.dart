@@ -1,10 +1,9 @@
-import 'package:app/core/assets/svgs.dart';
-import 'package:app/core/infrastructure/url_launcher.dart';
+import 'package:app/core/assets/images.dart';
+import 'package:app/core/infrastructure/svg.dart';
 import 'package:app/core/presentation/widgets/composants/badge.dart';
 import 'package:app/core/presentation/widgets/composants/image.dart';
-import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
-import 'package:app/features/actions/home/presentation/widgets/actions_section.dart';
+import 'package:app/features/actions/section/presentation/widgets/actions_section.dart';
 import 'package:app/features/mission/mission/presentation/pages/mission_page.dart';
 import 'package:app/features/recommandations/presentation/widgets/mes_recommandations.dart';
 import 'package:app/features/theme/core/domain/mission_liste.dart';
@@ -12,12 +11,12 @@ import 'package:app/features/theme/core/domain/service_item.dart';
 import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:app/features/theme/presentation/bloc/theme_bloc.dart';
 import 'package:app/features/theme/presentation/bloc/theme_event.dart';
+import 'package:app/features/theme/presentation/widgets/service_card.dart';
 import 'package:app/features/theme/presentation/widgets/theme_card.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
 final themeRouteObserver = RouteObserver<ModalRoute<dynamic>>();
@@ -109,19 +108,17 @@ class _ImageEtTitre extends StatelessWidget {
         ClipOval(
           child: SizedBox.square(
             dimension: 80,
-            child: SvgPicture.asset(
+            child: FnvSvg.asset(
               switch (themeType) {
-                ThemeType.alimentation => AssetsSvgs.alimentation,
-                ThemeType.transport => AssetsSvgs.transport,
-                ThemeType.logement => AssetsSvgs.logement,
-                ThemeType.consommation => AssetsSvgs.consommation,
+                ThemeType.alimentation => AssetsImages.alimentation,
+                ThemeType.transport => AssetsImages.transport,
+                ThemeType.logement => AssetsImages.logement,
+                ThemeType.consommation => AssetsImages.consommation,
                 ThemeType.decouverte => throw UnimplementedError(),
               },
               width: 80,
               height: 80,
               fit: BoxFit.cover,
-              placeholderBuilder: (final context) =>
-                  const SizedBox.square(dimension: 80),
             ),
           ),
         ),
@@ -250,95 +247,13 @@ class _Services extends StatelessWidget {
           child: IntrinsicHeight(
             child: Row(
               children: services
-                  .map(_Service.new)
+                  .map((final e) => ServiceCard(service: e))
                   .separator(const SizedBox(width: DsfrSpacings.s2w))
                   .toList(),
             ),
           ),
         ),
       ],
-    );
-  }
-}
-
-class _Service extends StatefulWidget {
-  const _Service(this.service);
-
-  final ServiceItem service;
-
-  @override
-  State<_Service> createState() => _ServiceState();
-}
-
-class _ServiceState extends State<_Service> with MaterialStateMixin<_Service> {
-  @override
-  Widget build(final context) {
-    const borderRadius = BorderRadius.all(Radius.circular(DsfrSpacings.s1w));
-
-    return DsfrFocusWidget(
-      isFocused: isFocused,
-      borderRadius: borderRadius,
-      child: DecoratedBox(
-        decoration: const ShapeDecoration(
-          color: Color(0xFFEEF2FF),
-          shape: RoundedRectangleBorder(
-            side: BorderSide(color: Color(0xFFB1B1FF)),
-            borderRadius: borderRadius,
-          ),
-        ),
-        child: Material(
-          color: FnvColors.transparent,
-          child: InkWell(
-            onTap: () async =>
-                FnvUrlLauncher.launch(widget.service.externalUrl),
-            onHighlightChanged: updateMaterialState(WidgetState.pressed),
-            onHover: updateMaterialState(WidgetState.hovered),
-            focusColor: FnvColors.transparent,
-            borderRadius: borderRadius,
-            onFocusChange: updateMaterialState(WidgetState.focused),
-            child: SizedBox(
-              width: 156,
-              child: Padding(
-                padding: const EdgeInsets.all(DsfrSpacings.s1w),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      widget.service.titre,
-                      style: const DsfrTextStyle.bodyMdMedium(
-                        color: DsfrColors.blueFranceSun113,
-                      ),
-                    ),
-                    const SizedBox(height: DsfrSpacings.s1w),
-                    const Spacer(),
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            widget.service.sousTitre,
-                            style: const DsfrTextStyle.bodySmMedium(
-                              color: DsfrColors.blueFranceSun113,
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                        const Icon(
-                          DsfrIcons.systemExternalLinkLine,
-                          size: 20,
-                          color: DsfrColors.blueFranceSun113,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
     );
   }
 }

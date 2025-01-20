@@ -19,7 +19,6 @@ import 'package:mocktail/mocktail.dart';
 import '../../helpers/authentication_service_setup.dart';
 import '../../helpers/dio_mock.dart';
 import 'constants.dart';
-import 'custom_response.dart';
 import 'flutter_secure_storage_fake.dart';
 
 void main() {
@@ -172,12 +171,10 @@ void main() {
     final dio = DioMock()
       ..postM(
         Endpoints.creationCompte,
-        responseData: CustomResponse(
-          '''
+        responseData: '''
 {
   "email": "${informationDeConnexion.adresseMail}",
 }''',
-        ),
         statusCode: HttpStatus.created,
       );
 

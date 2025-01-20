@@ -1,21 +1,34 @@
+import 'package:app/core/infrastructure/svg.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class FnvImage extends StatelessWidget {
-  const FnvImage.network(
-    this.imageUrl, {
+  const FnvImage.asset(
+    this.assetName, {
     super.key,
+    this.alignment = Alignment.center,
     this.width,
     this.height,
     this.semanticLabel,
-    this.fit,
-  });
+    this.fit = BoxFit.contain,
+  }) : imageUrl = null;
 
-  final String imageUrl;
+  const FnvImage.network(
+    this.imageUrl, {
+    super.key,
+    this.alignment = Alignment.center,
+    this.width,
+    this.height,
+    this.semanticLabel,
+    this.fit = BoxFit.contain,
+  }) : assetName = null;
+
+  final String? assetName;
+  final String? imageUrl;
+  final Alignment alignment;
   final double? width;
   final double? height;
   final String? semanticLabel;
-  final BoxFit? fit;
+  final BoxFit fit;
 
   int? _cacheSize(final BuildContext context, {final double? value}) =>
       value == null
@@ -23,31 +36,51 @@ class FnvImage extends StatelessWidget {
           : (MediaQuery.devicePixelRatioOf(context) * value).round();
 
   @override
-  Widget build(final context) => imageUrl.endsWith('.svg')
-      ? SizedBox(
-          width: width,
-          height: height,
-          child: SvgPicture.network(
-            imageUrl,
-            width: width,
-            height: height,
-            fit: fit ?? BoxFit.cover,
-            placeholderBuilder: (final context) =>
-                SizedBox(width: width, height: height),
-            semanticsLabel: semanticLabel,
-          ),
-        )
-      : Image.network(
-          imageUrl,
-          loadingBuilder: (final context, final child, final loadingProgress) =>
-              loadingProgress == null
-                  ? child
-                  : SizedBox(width: width, height: height),
-          semanticLabel: semanticLabel,
-          width: width,
-          height: height,
-          fit: fit ?? BoxFit.cover,
-          cacheWidth: _cacheSize(context, value: width),
-          cacheHeight: _cacheSize(context, value: height),
-        );
+  Widget build(final context) => imageUrl == null
+      ? assetName!.endsWith('.svg')
+          ? FnvSvg.asset(
+              assetName!,
+              width: width,
+              height: height,
+              fit: fit,
+              alignment: alignment,
+              semanticsLabel: semanticLabel,
+            )
+          : Image.asset(
+              assetName!,
+              semanticLabel: semanticLabel,
+              width: width,
+              height: height,
+              fit: fit,
+              alignment: alignment,
+              cacheWidth: _cacheSize(context, value: width),
+              cacheHeight: _cacheSize(context, value: height),
+            )
+      : imageUrl!.endsWith('.svg')
+          ? FnvSvg.network(
+              imageUrl!,
+              width: width,
+              height: height,
+              fit: fit,
+              alignment: alignment,
+              semanticsLabel: semanticLabel,
+            )
+          : Image.network(
+              imageUrl!,
+              loadingBuilder: (
+                final context,
+                final child,
+                final loadingProgress,
+              ) =>
+                  loadingProgress == null
+                      ? child
+                      : SizedBox(width: width, height: height),
+              semanticLabel: semanticLabel,
+              width: width,
+              height: height,
+              fit: fit,
+              alignment: alignment,
+              cacheWidth: _cacheSize(context, value: width),
+              cacheHeight: _cacheSize(context, value: height),
+            );
 }

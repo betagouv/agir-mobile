@@ -1,6 +1,6 @@
 import 'package:app/core/infrastructure/dio_http_client.dart';
-import 'package:app/features/actions/home/infrastructure/home_actions_repository.dart';
-import 'package:app/features/actions/home/presentation/bloc/home_actions_bloc.dart';
+import 'package:app/features/actions/section/infrastructure/actions_repository.dart';
+import 'package:app/features/actions/section/presentation/bloc/actions_bloc.dart';
 import 'package:app/features/gamification/domain/gamification_port.dart';
 import 'package:app/features/gamification/presentation/bloc/gamification_bloc.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
@@ -73,7 +73,7 @@ Future<void> _pumpThemePage(
           recommandationsPort: recommandationsPort,
         ),
       ),
-      BlocProvider<HomeActionsBloc>(
+      BlocProvider<ActionsBloc>(
         create: (final context) {
           final dioMock = DioMock()
             ..getM(
@@ -81,8 +81,8 @@ Future<void> _pumpThemePage(
               responseData: <dynamic>[],
             );
 
-          return HomeActionsBloc(
-            repository: HomeActionsRepository(
+          return ActionsBloc(
+            repository: ActionsRepository(
               client: DioHttpClient(
                 dio: dioMock,
                 authenticationService: authenticationService,

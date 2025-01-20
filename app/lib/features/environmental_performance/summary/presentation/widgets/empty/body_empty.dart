@@ -7,7 +7,7 @@ import 'package:app/features/environmental_performance/summary/environmental_per
 import 'package:app/features/environmental_performance/summary/presentation/bloc/environmental_performance_bloc.dart';
 import 'package:app/features/environmental_performance/summary/presentation/bloc/environmental_performance_event.dart';
 import 'package:app/features/environmental_performance/summary/presentation/widgets/empty/estimaded_timed_widget.dart';
-import 'package:app/features/environmental_performance/summary/presentation/widgets/partner_card.dart';
+import 'package:app/features/environmental_performance/summary/presentation/widgets/environmental_performance_partner_card.dart';
 import 'package:app/features/environmental_performance/summary/presentation/widgets/question_section.dart';
 import 'package:app/features/profil/profil/presentation/widgets/fnv_title.dart';
 import 'package:dsfr/dsfr.dart';
@@ -89,7 +89,7 @@ class BodyEmpty extends StatelessWidget {
           const SizedBox(height: DsfrSpacings.s4w),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-            child: PartnerCard(),
+            child: EnvironmentalPerformancePartnerCard(),
           ),
           const SafeArea(child: SizedBox.shrink()),
         ],

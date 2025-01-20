@@ -1,83 +1,10 @@
 import 'package:app/core/domain/entity.dart';
-import 'package:app/core/domain/value_object.dart';
+import 'package:app/features/know_your_customer/core/domain/question_code.dart';
+import 'package:app/features/know_your_customer/core/domain/response.dart';
+import 'package:app/features/know_your_customer/core/domain/response_choice.dart';
+import 'package:app/features/know_your_customer/core/domain/response_mosaic.dart';
 import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:collection/collection.dart';
-import 'package:equatable/equatable.dart';
-
-class QuestionCode extends ValueObject<String> {
-  const QuestionCode(super.value);
-}
-
-class Response extends Equatable {
-  const Response({required this.value, this.unit});
-
-  final String value;
-  final String? unit;
-
-  Response copyWith({final String? value, final String? unit}) =>
-      Response(value: value ?? this.value, unit: unit ?? this.unit);
-
-  @override
-  List<Object?> get props => [value, unit];
-}
-
-class ResponseChoice extends Equatable {
-  const ResponseChoice({
-    required this.code,
-    required this.label,
-    required this.isSelected,
-  });
-
-  final String code;
-  final String label;
-  final bool isSelected;
-
-  ResponseChoice copyWith({
-    final String? code,
-    final String? label,
-    final bool? isSelected,
-  }) =>
-      ResponseChoice(
-        code: code ?? this.code,
-        label: label ?? this.label,
-        isSelected: isSelected ?? this.isSelected,
-      );
-
-  @override
-  List<Object?> get props => [code, label, isSelected];
-}
-
-class ResponseMosaic extends ResponseChoice {
-  const ResponseMosaic({
-    required super.code,
-    required super.label,
-    required this.emoji,
-    required this.imageUrl,
-    required super.isSelected,
-  });
-
-  final String? emoji;
-  final String imageUrl;
-
-  @override
-  ResponseMosaic copyWith({
-    final String? code,
-    final String? label,
-    final String? emoji,
-    final String? imageUrl,
-    final bool? isSelected,
-  }) =>
-      ResponseMosaic(
-        code: code ?? this.code,
-        label: label ?? this.label,
-        emoji: emoji ?? this.emoji,
-        imageUrl: imageUrl ?? this.imageUrl,
-        isSelected: isSelected ?? this.isSelected,
-      );
-
-  @override
-  List<Object?> get props => [...super.props, emoji, imageUrl];
-}
 
 sealed class Question extends Entity<QuestionCode> {
   const Question({

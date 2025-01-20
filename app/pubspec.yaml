@@ -27,14 +27,13 @@ dependencies:
   flutter_markdown: 0.7.5
   flutter_native_splash: 2.4.4
   flutter_secure_storage: 9.2.4
-  flutter_svg: 2.0.17
   flutter_widget_from_html_core: 0.15.2
   fpdart: 1.1.1
   fwfh_url_launcher: 0.9.1
   go_router: 14.6.3
   html: 0.15.5
-  http: 1.2.2
   intl: 0.19.0 # Bloqué en 0.19.0 par flutter_localizations
+  jovial_svg: 1.1.24
   matomo_tracker: 6.0.0-dev.1
   mocktail_image_network: 1.2.0
   native_dio_adapter: 1.4.0
@@ -62,8 +61,7 @@ flutter:
   uses-material-design: true
   generate: true
   assets:
-    - assets/logos/
-    - assets/svgs/
+    - assets/images/
 
 # 'dart run flutter_native_splash:create' to update
 flutter_native_splash:

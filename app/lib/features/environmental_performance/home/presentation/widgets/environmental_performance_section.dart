@@ -1,4 +1,5 @@
-import 'package:app/core/assets/svgs.dart';
+import 'package:app/core/assets/images.dart';
+import 'package:app/core/infrastructure/svg.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/shadows.dart';
 import 'package:app/features/environmental_performance/questions/presentation/bloc/environmental_performance_question_bloc.dart';
@@ -17,7 +18,6 @@ import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
 class EnvironmentalPerformanceSection extends StatelessWidget {
@@ -155,16 +155,12 @@ class _Icon extends StatelessWidget {
     return SizedBox.square(
       dimension: dimension,
       child: ClipRRect(
-        borderRadius: const BorderRadius.all(
-          Radius.circular(DsfrSpacings.s1w),
-        ),
-        child: SvgPicture.asset(
-          AssetsSvgs.miniBilan,
+        borderRadius: const BorderRadius.all(Radius.circular(DsfrSpacings.s1w)),
+        child: FnvSvg.asset(
+          AssetsImages.miniBilan,
           width: dimension,
           height: dimension,
           fit: BoxFit.cover,
-          placeholderBuilder: (final context) =>
-              const SizedBox.square(dimension: dimension),
         ),
       ),
     );

@@ -1,4 +1,4 @@
-import 'package:app/core/assets/svgs.dart';
+import 'package:app/core/assets/images.dart';
 import 'package:app/core/presentation/widgets/composants/alert.dart';
 import 'package:app/core/presentation/widgets/composants/bottom_bar.dart';
 import 'package:app/core/presentation/widgets/composants/scaffold.dart';
@@ -72,7 +72,7 @@ class FirstNamePage extends StatelessWidget {
                   const Align(
                     alignment: Alignment.centerLeft,
                     child: OnboardingIllustration(
-                      assetName: AssetsSvgs.illustration1,
+                      assetName: AssetsImages.illustration1,
                     ),
                   ),
                   const Text(

@@ -1,4 +1,4 @@
-import 'package:app/core/assets/svgs.dart';
+import 'package:app/core/assets/images.dart';
 import 'package:app/core/presentation/widgets/composants/bottom_bar.dart';
 import 'package:app/core/presentation/widgets/composants/scaffold.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
@@ -44,7 +44,8 @@ class ToutEstPretPage extends StatelessWidget {
         children: [
           const Align(
             alignment: Alignment.centerLeft,
-            child: OnboardingIllustration(assetName: AssetsSvgs.illustration5),
+            child:
+                OnboardingIllustration(assetName: AssetsImages.illustration5),
           ),
           const Text(
             Localisation.toutEstPret,

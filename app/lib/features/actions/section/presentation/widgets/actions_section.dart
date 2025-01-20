@@ -1,11 +1,11 @@
 import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/shadows.dart';
 import 'package:app/features/actions/detail/presentation/pages/action_detail_page.dart';
-import 'package:app/features/actions/home/presentation/bloc/home_actions_bloc.dart';
-import 'package:app/features/actions/home/presentation/bloc/home_actions_event.dart';
-import 'package:app/features/actions/home/presentation/bloc/home_actions_state.dart';
 import 'package:app/features/actions/list/domain/action_item.dart';
 import 'package:app/features/actions/list/presentation/pages/action_list_page.dart';
+import 'package:app/features/actions/section/presentation/bloc/actions_bloc.dart';
+import 'package:app/features/actions/section/presentation/bloc/actions_event.dart';
+import 'package:app/features/actions/section/presentation/bloc/actions_state.dart';
 import 'package:app/features/home/presentation/widgets/title_section.dart';
 import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:app/features/theme/presentation/widgets/theme_type_tag.dart';
@@ -22,12 +22,12 @@ class ActionsSection extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    context.read<HomeActionsBloc>().add(HomeActionsLoadRequested(themeType));
+    context.read<ActionsBloc>().add(ActionsLoadRequested(themeType));
 
-    return BlocBuilder<HomeActionsBloc, HomeActionsState>(
+    return BlocBuilder<ActionsBloc, ActionsState>(
       builder: (final context, final state) => switch (state) {
-        HomeActionsInitial() => const SizedBox.shrink(),
-        HomeActionsLoadSuccess() => _Section(state),
+        ActionsInitial() => const SizedBox.shrink(),
+        ActionsLoadSuccess() => _Section(state),
       },
     );
   }
@@ -36,15 +36,15 @@ class ActionsSection extends StatelessWidget {
 class _Section extends StatelessWidget {
   const _Section(this.state);
 
-  final HomeActionsLoadSuccess state;
+  final ActionsLoadSuccess state;
 
   @override
   Widget build(final context) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const TitleSection(
-            title: Localisation.homeActionsTitle,
-            subTitle: Localisation.homeActionsSubTitle,
+            title: Localisation.actionsSectionTitle,
+            subTitle: Localisation.actionsSectionSubTitle,
           ),
           const SizedBox(height: DsfrSpacings.s2w),
           _Actions(actions: state.actions),
@@ -69,7 +69,7 @@ class _Actions extends StatelessWidget {
   @override
   Widget build(final BuildContext context) => actions.isEmpty
       ? const Text(
-          Localisation.homeActionsListEmpty,
+          Localisation.actionsSectionListEmpty,
           style: DsfrTextStyle.bodySm(),
         )
       : SingleChildScrollView(
@@ -123,8 +123,8 @@ class _ActionState extends State<_Action> with MaterialStateMixin<_Action> {
               if (result != true || !context.mounted) {}
               if (context.mounted) {
                 context
-                    .read<HomeActionsBloc>()
-                    .add(const HomeActionsRefreshRequested());
+                    .read<ActionsBloc>()
+                    .add(const ActionsRefreshRequested());
               }
             },
             onHighlightChanged: updateMaterialState(WidgetState.pressed),

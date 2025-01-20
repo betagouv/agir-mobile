@@ -30,6 +30,7 @@ linter:
     document_ignores: false
     lines_longer_than_80_chars: false
     one_member_abstracts: false
+    prefer_asserts_with_message: false
     prefer_double_quotes: false # incompatible with `prefer_single_quotes`.
     prefer_relative_imports: false # incompatible with `always_use_package_imports`.
     public_member_api_docs: false
