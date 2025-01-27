@@ -6,13 +6,13 @@ import 'package:package_info_plus/package_info_plus.dart';
 @immutable
 // ignore: avoid_implementing_value_types
 class PackageInfoFake implements PackageInfo {
-  const PackageInfoFake();
+  const PackageInfoFake({required this.version, required this.buildNumber});
 
   @override
   String get appName => 'appName';
 
   @override
-  String get buildNumber => 'buildNumber';
+  final String buildNumber;
 
   @override
   String get buildSignature => 'buildSignature';
@@ -27,5 +27,5 @@ class PackageInfoFake implements PackageInfo {
   String get packageName => 'packageName';
 
   @override
-  String get version => 'version';
+  final String version;
 }

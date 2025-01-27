@@ -26,7 +26,6 @@ import 'package:app/features/quiz/infrastructure/quiz_api_adapter.dart';
 import 'package:app/features/recommandations/infrastructure/recommandations_api_adapter.dart';
 import 'package:app/features/simulateur_velo/infrastructure/aide_velo_api_adapter.dart';
 import 'package:app/features/theme/core/infrastructure/theme_api_adapter.dart';
-import 'package:app/features/version/infrastructure/version_adapter.dart';
 import 'package:clock/clock.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
@@ -162,6 +161,7 @@ class _AppSetupState extends State<AppSetup> {
             tracker: _tracker,
             messageBus: messageBus,
             dioHttpClient: client,
+            packageInfo: _packageInfo,
             notificationService: _notificationService,
             authenticationService: _authenticationService,
             authentificationPort: AuthentificationApiAdapter(
@@ -173,7 +173,6 @@ class _AppSetupState extends State<AppSetup> {
             bibliothequePort: BibliothequeApiAdapter(client: client),
             recommandationsPort: RecommandationsApiAdapter(client: client),
             quizPort: QuizApiAdapter(client: client),
-            versionPort: VersionAdapter(packageInfo: _packageInfo),
             communesPort: CommunesApiAdapter(client: client),
             aideVeloPort: AideVeloApiAdapter(client: client),
             firstNamePort: FirstNameAdapter(client: client),
