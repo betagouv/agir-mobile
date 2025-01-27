@@ -25,7 +25,6 @@ import '../mocks/assistances_repository_mock.dart';
 import '../mocks/authentification_port_mock.dart';
 import '../mocks/bibliotheque_port_mock.dart';
 import '../mocks/communes_port_mock.dart';
-import '../mocks/gamification_port_mock.dart';
 import '../mocks/mieux_vous_connaitre_port_mock.dart';
 import '../mocks/profil_port_mock.dart';
 import '../mocks/quiz_port_mock.dart';
@@ -100,6 +99,7 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
       '/utilisateurs/%7BuserId%7D/defis_v2?status=en_cours&thematique=alimentation',
       responseData: <dynamic>[],
     )
+    ..getM(Endpoints.gamification, responseData: {'points': 650})
     ..getM(Endpoints.missionsRecommandees, responseData: missionThematiques);
 
   await mockNetworkImages(() async {
@@ -133,7 +133,6 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
         profilPort: profilPort,
         knowYourCustomersRepository: mieuxVousConnaitrePort,
         mieuxVousConnaitrePort: mieuxVousConnaitrePort,
-        gamificationPort: GamificationPortMock(ScenarioContext().gamification),
       ),
       Durations.short1,
     );

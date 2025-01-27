@@ -19,7 +19,7 @@ class MissionQuizPage extends StatelessWidget {
   Widget build(final context) => BlocProvider(
         create: (final context) => QuizBloc(
           quizPort: context.read(),
-          gamificationPort: context.read(),
+          gamificationRepository: context.read(),
         )..add(QuizRecuperationDemandee(value.contentId.value)),
         child: Builder(
           builder: (final context) => ListView(

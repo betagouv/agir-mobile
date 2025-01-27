@@ -1,17 +1,17 @@
 import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/endpoints.dart';
+import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/core/infrastructure/tracker.dart';
 import 'package:app/features/assistances/core/infrastructure/assistance_mapper.dart';
 import 'package:app/features/assistances/item/presentation/bloc/aide_bloc.dart';
 import 'package:app/features/assistances/item/presentation/pages/assistance_detail_page.dart';
 import 'package:app/features/assistances/list/infrastructure/assistances_repository.dart';
 import 'package:app/features/assistances/list/presentation/pages/assistance_list_page.dart';
-import 'package:app/features/gamification/domain/gamification_port.dart';
+import 'package:app/features/gamification/infrastructure/gamification_api_adapter.dart';
 import 'package:app/features/gamification/presentation/bloc/gamification_bloc.dart';
 import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../helpers/authentication_service_setup.dart';
@@ -19,45 +19,40 @@ import '../helpers/dio_mock.dart';
 import '../helpers/faker.dart';
 import '../helpers/pump_page.dart';
 
-class _GamificationPortMock extends Mock implements GamificationPort {}
-
 class _TrackerMock extends Mock implements Tracker {}
 
 Future<void> _pumpPage(
   final WidgetTester tester, {
   required final List<Map<String, dynamic>> assistances,
 }) async {
-  final gamificationPort = _GamificationPortMock();
-  when(gamificationPort.mettreAJourLesPoints).thenAnswer(
-    (final _) async => const Right(null),
-  );
   final dio = DioMock()
     ..getM(
       Endpoints.assistances,
       responseData: {'couverture_aides_ok': true, 'liste_aides': assistances},
     );
-
+  final client = DioHttpClient(
+    dio: dio,
+    authenticationService: authenticationService,
+  );
   await pumpPage(
     tester: tester,
     repositoryProviders: [
       RepositoryProvider<Tracker>(create: (final context) => _TrackerMock()),
       RepositoryProvider<AssistancesRepository>(
-        create: (final context) => AssistancesRepository(
-          client: DioHttpClient(
-            dio: dio,
-            authenticationService: authenticationService,
-          ),
-        ),
+        create: (final context) => AssistancesRepository(client: client),
       ),
     ],
     blocProviders: [
-      BlocProvider<GamificationBloc>(
+      BlocProvider(
         create: (final context) => GamificationBloc(
-          gamificationPort: gamificationPort,
+          repository: GamificationApiAdapter(
+            client: client,
+            messageBus: MessageBus(),
+          ),
           authenticationService: authenticationService,
         ),
       ),
-      BlocProvider<AideBloc>(create: (final context) => AideBloc()),
+      BlocProvider(create: (final context) => AideBloc()),
     ],
     page: AssistanceListPage.route,
     routes: {AssistanceDetailPage.name: AssistanceDetailPage.path},

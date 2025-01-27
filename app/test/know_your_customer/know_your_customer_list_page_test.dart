@@ -1,6 +1,7 @@
 import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/endpoints.dart';
-import 'package:app/features/gamification/domain/gamification_port.dart';
+import 'package:app/core/infrastructure/message_bus.dart';
+import 'package:app/features/gamification/infrastructure/gamification_api_adapter.dart';
 import 'package:app/features/gamification/presentation/bloc/gamification_bloc.dart';
 import 'package:app/features/know_your_customer/core/domain/question.dart';
 import 'package:app/features/know_your_customer/core/infrastructure/question_mapper.dart';
@@ -10,34 +11,34 @@ import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:fpdart/fpdart.dart';
-import 'package:mocktail/mocktail.dart';
 
 import '../helpers/authentication_service_setup.dart';
 import '../helpers/dio_mock.dart';
 import '../helpers/faker.dart';
 import '../helpers/pump_page.dart';
 
-class _GamificationPortMock extends Mock implements GamificationPort {}
-
 Future<void> _pumpPage(
   final WidgetTester tester, {
-  required final KnowYourCustomersRepository repository,
+  required final DioMock dio,
 }) async {
-  final gamificationPort = _GamificationPortMock();
-  when(gamificationPort.mettreAJourLesPoints).thenAnswer(
-    (final _) async => const Right(null),
+  final client = DioHttpClient(
+    dio: dio,
+    authenticationService: authenticationService,
   );
-
   await pumpPage(
     tester: tester,
     repositoryProviders: [
-      RepositoryProvider<KnowYourCustomersRepository>.value(value: repository),
+      RepositoryProvider<KnowYourCustomersRepository>(
+        create: (final context) => KnowYourCustomersRepository(client: client),
+      ),
     ],
     blocProviders: [
-      BlocProvider<GamificationBloc>(
+      BlocProvider(
         create: (final context) => GamificationBloc(
-          gamificationPort: gamificationPort,
+          repository: GamificationApiAdapter(
+            client: client,
+            messageBus: MessageBus(),
+          ),
           authenticationService: authenticationService,
         ),
       ),
@@ -47,23 +48,16 @@ Future<void> _pumpPage(
 }
 
 void main() {
-  late KnowYourCustomersRepository repository;
   late List<Map<String, dynamic>> questions;
-
+  late DioMock dio;
   setUp(() {
-    final dio = DioMock();
-    repository = KnowYourCustomersRepository(
-      client: DioHttpClient(
-        dio: dio,
-        authenticationService: authenticationService,
-      ),
-    );
+    dio = DioMock();
     questions = fakerQuestions();
     dio.getM(Endpoints.questionsKyc, responseData: questions);
   });
 
   testWidgets('Voir la liste des questions KYC', (final tester) async {
-    await _pumpPage(tester, repository: repository);
+    await _pumpPage(tester, dio: dio);
 
     await tester.pumpAndSettle();
 
@@ -80,7 +74,7 @@ void main() {
   });
 
   testWidgets('Filtrer par thématique', (final tester) async {
-    await _pumpPage(tester, repository: repository);
+    await _pumpPage(tester, dio: dio);
 
     await tester.pumpAndSettle();
 

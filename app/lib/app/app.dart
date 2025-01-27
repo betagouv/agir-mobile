@@ -28,7 +28,7 @@ import 'package:app/features/environmental_performance/questions/presentation/bl
 import 'package:app/features/environmental_performance/summary/application/fetch_environmental_performance.dart';
 import 'package:app/features/environmental_performance/summary/infrastructure/environmental_performance_summary_repository.dart';
 import 'package:app/features/environmental_performance/summary/presentation/bloc/environmental_performance_bloc.dart';
-import 'package:app/features/gamification/domain/gamification_port.dart';
+import 'package:app/features/gamification/infrastructure/gamification_api_adapter.dart';
 import 'package:app/features/gamification/presentation/bloc/gamification_bloc.dart';
 import 'package:app/features/gamification/presentation/bloc/gamification_event.dart';
 import 'package:app/features/home/presentation/cubit/home_disclaimer_cubit.dart';
@@ -91,7 +91,6 @@ class App extends StatefulWidget {
     required this.profilPort,
     required this.knowYourCustomersRepository,
     required this.mieuxVousConnaitrePort,
-    required this.gamificationPort,
   });
 
   final Clock clock;
@@ -113,7 +112,6 @@ class App extends StatefulWidget {
   final ProfilPort profilPort;
   final KnowYourCustomersRepository knowYourCustomersRepository;
   final MieuxVousConnaitrePort mieuxVousConnaitrePort;
-  final GamificationPort gamificationPort;
 
   @override
   State<App> createState() => _AppState();
@@ -200,6 +198,11 @@ class _AppState extends State<App> {
     final upgradeBloc = UpgradeBloc();
     widget.dioHttpClient.add(UpgradeInterceptor(upgradeBloc));
 
+    final gamificationRepository = GamificationApiAdapter(
+      client: widget.dioHttpClient,
+      messageBus: widget.messageBus,
+    );
+
     return InheritedGoRouter(
       goRouter: _goRouter,
       child: AuthenticationInjection(
@@ -220,7 +223,6 @@ class _AppState extends State<App> {
                 value: widget.knowYourCustomersRepository,
               ),
               RepositoryProvider.value(value: widget.mieuxVousConnaitrePort),
-              RepositoryProvider.value(value: widget.gamificationPort),
               RepositoryProvider.value(value: widget.firstNamePort),
               RepositoryProvider<ArticlesPort>(
                 create: (final context) =>
@@ -230,6 +232,7 @@ class _AppState extends State<App> {
                 create: (final context) =>
                     ActionsAdapter(client: widget.dioHttpClient),
               ),
+              RepositoryProvider.value(value: gamificationRepository),
               RepositoryProvider(
                 create: (final context) => ActionRepository(
                   client: widget.dioHttpClient,
@@ -306,7 +309,7 @@ class _AppState extends State<App> {
                 ),
                 BlocProvider(
                   create: (final context) => GamificationBloc(
-                    gamificationPort: widget.gamificationPort,
+                    repository: gamificationRepository,
                     authenticationService: widget.authenticationService,
                   )..add(const GamificationAbonnementDemande()),
                 ),
