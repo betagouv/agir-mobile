@@ -17,7 +17,8 @@ import 'package:app/features/mission/home/infrastructure/mission_home_repository
 import 'package:app/features/mission/home/presentation/bloc/mission_home_bloc.dart';
 import 'package:app/features/notifications/infrastructure/notification_service.dart';
 import 'package:app/features/recommandations/presentation/bloc/recommandations_bloc.dart';
-import 'package:app/features/utilisateur/presentation/bloc/utilisateur_bloc.dart';
+import 'package:app/features/utilisateur/infrastructure/user_repository.dart';
+import 'package:app/features/utilisateur/presentation/bloc/user_bloc.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,13 +32,16 @@ import '../../helpers/dio_mock.dart';
 import '../../helpers/pump_page.dart';
 import '../../mission/mission_test.dart';
 import '../../old/mocks/assistances_repository_mock.dart';
-import '../../old/mocks/authentification_port_mock.dart';
 import '../../old/mocks/gamification_bloc_fake.dart';
 import '../../old/mocks/recommandations_port_mock.dart';
 import '../summary/environmental_performance_data.dart';
 
 Future<void> pumpHomePage(final WidgetTester tester, final DioMock dio) async {
   dio
+    ..getM(
+      Endpoints.utilisateur,
+      responseData: {'prenom': 'Lucas', 'is_onboarding_done': true},
+    )
     ..getM(Endpoints.missionsRecommandees, responseData: missionThematiques)
     ..getM(
       '/utilisateurs/%7BuserId%7D/defis_v2?status=en_cours',
@@ -82,12 +86,8 @@ Future<void> pumpHomePage(final WidgetTester tester, final DioMock dio) async {
         ),
       ),
       BlocProvider(
-        create: (final context) => UtilisateurBloc(
-          authentificationPort: AuthentificationPortMock(
-            authenticationService,
-            prenom: 'Lucas',
-            estIntegrationTerminee: true,
-          ),
+        create: (final context) => UserBloc(
+          repository: UserRepository(client: client),
         ),
       ),
       BlocProvider(

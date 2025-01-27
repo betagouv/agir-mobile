@@ -42,9 +42,8 @@ void setNotification() {
   FeatureContext.instance.dioMock.putM(Endpoints.notificationToken);
 }
 
-void setFirstName() => FeatureContext.instance.dioMock.patchM(
-      Endpoints.profile,
-    );
+void setFirstName() =>
+    FeatureContext.instance.dioMock.patchM(Endpoints.profile);
 
 void setProfile() => FeatureContext.instance.dioMock.getM(
       Endpoints.profile,

@@ -74,8 +74,6 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
   ScenarioContext().quizPortMock = QuizPortMock(ScenarioContext().quiz);
   ScenarioContext().authentificationPortMock = AuthentificationPortMock(
     authenticationService,
-    prenom: prenom,
-    estIntegrationTerminee: ScenarioContext().estIntegrationTerminee,
   );
   ScenarioContext().themePortMock = ThemePortMock(
     missionListe: ScenarioContext().missionListe,
@@ -89,6 +87,10 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
     ..getM(
       Endpoints.bilan,
       responseData: environmentalPerformancePartialData,
+    )
+    ..getM(
+      Endpoints.utilisateur,
+      responseData: {'prenom': prenom, 'is_onboarding_done': true},
     )
     ..getM(
       '/utilisateurs/%7BuserId%7D/defis_v2?status=en_cours',

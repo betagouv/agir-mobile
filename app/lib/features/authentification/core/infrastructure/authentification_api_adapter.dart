@@ -10,7 +10,6 @@ import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/authentification/core/domain/authentification_port.dart';
 import 'package:app/features/authentification/core/domain/information_de_code.dart';
 import 'package:app/features/authentification/core/domain/information_de_connexion.dart';
-import 'package:app/features/utilisateur/domain/utilisateur.dart';
 import 'package:fpdart/fpdart.dart';
 
 class AuthentificationApiAdapter implements AuthentificationPort {
@@ -165,25 +164,5 @@ class AuthentificationApiAdapter implements AuthentificationPort {
             jsonEncode(response.data),
             defaultMessage: 'Erreur lors de la modification du mot de passe',
           );
-  }
-
-  @override
-  Future<Either<Exception, Utilisateur>> recupereUtilisateur() async {
-    final response = await _client.get(Endpoints.utilisateur);
-
-    if (isResponseUnsuccessful(response.statusCode)) {
-      return Left(
-        Exception("Erreur lors de la récupération de l'utilisateur"),
-      );
-    }
-
-    final json = response.data as Map<String, dynamic>;
-
-    return Right(
-      Utilisateur(
-        prenom: json['prenom'] as String? ?? '',
-        estIntegrationTerminee: json['is_onboarding_done'] as bool,
-      ),
-    );
   }
 }

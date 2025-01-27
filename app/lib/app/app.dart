@@ -56,7 +56,8 @@ import 'package:app/features/theme/core/domain/theme_port.dart';
 import 'package:app/features/upgrade/infrastructure/upgrade_interceptor.dart';
 import 'package:app/features/upgrade/presentation/bloc/upgrade_bloc.dart';
 import 'package:app/features/upgrade/presentation/widgets/upgrade_widget.dart';
-import 'package:app/features/utilisateur/presentation/bloc/utilisateur_bloc.dart';
+import 'package:app/features/utilisateur/infrastructure/user_repository.dart';
+import 'package:app/features/utilisateur/presentation/bloc/user_bloc.dart';
 import 'package:app/features/version/infrastructure/version_repository.dart';
 import 'package:app/features/version/presentation/bloc/version_bloc.dart';
 import 'package:app/features/version/presentation/bloc/version_event.dart';
@@ -262,8 +263,8 @@ class _AppState extends State<App> {
                 BlocProvider(create: (final context) => HomeDisclaimerCubit()),
                 BlocProvider(create: (final context) => AidesDisclaimerCubit()),
                 BlocProvider(
-                  create: (final context) => UtilisateurBloc(
-                    authentificationPort: widget.authentificationPort,
+                  create: (final context) => UserBloc(
+                    repository: UserRepository(client: widget.dioHttpClient),
                   ),
                 ),
                 BlocProvider(

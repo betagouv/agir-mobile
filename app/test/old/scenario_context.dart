@@ -35,7 +35,6 @@ class ScenarioContext {
   Dpe? dpe;
   double nombreDePartsFiscales = 0;
   int? revenuFiscal;
-  bool estIntegrationTerminee = true;
   AideVeloParType aideVeloParType = const AideVeloParType(
     mecaniqueSimple: [],
     electrique: [],
