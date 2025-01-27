@@ -13,6 +13,8 @@ Future<void> iAmLoggedIn(final WidgetTester tester) async {
       jsonEncode({'exp': 715341600, 'utilisateurId': 'user123'}).codeUnits,
     )}.signature',
   );
-  FeatureContext.instance.dioMock
-      .getM(Endpoints.utilisateur, responseData: {'is_onboarding_done': true});
+  FeatureContext.instance.dioMock.getM(
+    Endpoints.utilisateur,
+    responseData: {'prenom': 'Joe', 'is_onboarding_done': true},
+  );
 }

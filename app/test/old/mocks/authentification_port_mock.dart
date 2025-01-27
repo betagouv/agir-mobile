@@ -3,17 +3,12 @@ import 'package:app/core/error/domain/api_erreur.dart';
 import 'package:app/features/authentification/core/domain/authentification_port.dart';
 import 'package:app/features/authentification/core/domain/information_de_code.dart';
 import 'package:app/features/authentification/core/domain/information_de_connexion.dart';
-import 'package:app/features/utilisateur/domain/utilisateur.dart';
 import 'package:fpdart/fpdart.dart';
 
 import '../api/constants.dart';
 
 class AuthentificationPortMock implements AuthentificationPort {
-  AuthentificationPortMock(
-    this.authenticationService, {
-    required this.prenom,
-    required this.estIntegrationTerminee,
-  });
+  const AuthentificationPortMock(this.authenticationService);
 
   final AuthenticationService authenticationService;
 
@@ -62,15 +57,4 @@ class AuthentificationPortMock implements AuthentificationPort {
     required final String motDePasse,
   }) async =>
       const Right(null);
-
-  String prenom;
-  bool estIntegrationTerminee;
-
-  @override
-  Future<Either<Exception, Utilisateur>> recupereUtilisateur() async => Right(
-        Utilisateur(
-          prenom: prenom,
-          estIntegrationTerminee: estIntegrationTerminee,
-        ),
-      );
 }

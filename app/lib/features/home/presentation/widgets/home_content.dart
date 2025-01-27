@@ -4,9 +4,9 @@ import 'package:app/features/home/presentation/widgets/home_content_layout.dart'
 import 'package:app/features/notifications/infrastructure/notification_repository.dart';
 import 'package:app/features/notifications/infrastructure/notification_service.dart';
 import 'package:app/features/questions/first_name/presentation/pages/first_name_page.dart';
-import 'package:app/features/utilisateur/presentation/bloc/utilisateur_bloc.dart';
-import 'package:app/features/utilisateur/presentation/bloc/utilisateur_event.dart';
-import 'package:app/features/utilisateur/presentation/bloc/utilisateur_state.dart';
+import 'package:app/features/utilisateur/presentation/bloc/user_bloc.dart';
+import 'package:app/features/utilisateur/presentation/bloc/user_event.dart';
+import 'package:app/features/utilisateur/presentation/bloc/user_state.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,9 +27,7 @@ class _HomeContentState extends State<HomeContent> {
   }
 
   void _initializeData() {
-    context
-        .read<UtilisateurBloc>()
-        .add(const UtilisateurRecuperationDemandee());
+    context.read<UserBloc>().add(const UserFetchRequested());
     context
         .read<EnvironmentalPerformanceBloc>()
         .add(const EnvironmentalPerformanceStarted());
@@ -37,9 +35,9 @@ class _HomeContentState extends State<HomeContent> {
 
   Future<void> _handleUserState(
     final BuildContext context,
-    final UtilisateurState state,
+    final UserState state,
   ) async {
-    final estIntegrationTerminee = state.utilisateur.estIntegrationTerminee;
+    final estIntegrationTerminee = state.user.isIntegrationCompleted;
     if (estIntegrationTerminee == null) {
       return;
     }
@@ -63,12 +61,11 @@ class _HomeContentState extends State<HomeContent> {
   }
 
   @override
-  Widget build(final BuildContext context) =>
-      BlocListener<UtilisateurBloc, UtilisateurState>(
+  Widget build(final BuildContext context) => BlocListener<UserBloc, UserState>(
         listener: _handleUserState,
         listenWhen: (final previous, final current) =>
-            previous.utilisateur.estIntegrationTerminee !=
-            current.utilisateur.estIntegrationTerminee,
+            previous.user.isIntegrationCompleted !=
+            current.user.isIntegrationCompleted,
         child: const HomeContentLayout(),
       );
 }

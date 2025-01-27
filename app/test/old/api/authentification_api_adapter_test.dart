@@ -10,10 +10,8 @@ import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/features/authentification/core/domain/information_de_code.dart';
 import 'package:app/features/authentification/core/domain/information_de_connexion.dart';
 import 'package:app/features/authentification/core/infrastructure/authentification_api_adapter.dart';
-import 'package:app/features/utilisateur/domain/utilisateur.dart';
 import 'package:clock/clock.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../helpers/authentication_service_setup.dart';
@@ -318,42 +316,6 @@ void main() {
         data:
             '{"code":"123456","email":"test@example.com","mot_de_passe":"password123"}',
       ),
-    );
-  });
-
-  test('recupereUtilisateur', () async {
-    // Arrange.
-    const prenom = 'Lucas';
-    final dio = DioMock()
-      ..getM(
-        Endpoints.utilisateur,
-        responseData: jsonDecode(
-          '''
-{
-  "id": "saudon",
-  "nom": "Saudon",
-  "prenom": "$prenom",
-  "email": "ls@mail.com",
-  "is_onboarding_done": true
-}''',
-        ),
-      );
-
-    final adapter = AuthentificationApiAdapter(
-      client: DioHttpClient(
-        dio: dio,
-        authenticationService: authenticationService,
-      ),
-      authenticationService: authenticationService,
-    );
-
-    // Act.
-    final utilisateur = await adapter.recupereUtilisateur();
-
-    // Assert.
-    expect(
-      utilisateur.getRight().getOrElse(() => throw Exception()),
-      const Utilisateur(prenom: prenom, estIntegrationTerminee: true),
     );
   });
 }

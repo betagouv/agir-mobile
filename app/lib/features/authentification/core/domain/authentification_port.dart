@@ -1,7 +1,6 @@
 import 'package:app/core/error/domain/api_erreur.dart';
 import 'package:app/features/authentification/core/domain/information_de_code.dart';
 import 'package:app/features/authentification/core/domain/information_de_connexion.dart';
-import 'package:app/features/utilisateur/domain/utilisateur.dart';
 import 'package:fpdart/fpdart.dart';
 
 abstract interface class AuthentificationPort {
@@ -28,6 +27,4 @@ abstract interface class AuthentificationPort {
     required final String code,
     required final String motDePasse,
   });
-
-  Future<Either<Exception, Utilisateur>> recupereUtilisateur();
 }
