@@ -17,7 +17,6 @@ import 'package:app/features/quiz/infrastructure/quiz_api_adapter.dart';
 import 'package:app/features/recommandations/infrastructure/recommandations_api_adapter.dart';
 import 'package:app/features/simulateur_velo/infrastructure/aide_velo_api_adapter.dart';
 import 'package:app/features/theme/core/infrastructure/theme_api_adapter.dart';
-import 'package:app/features/version/infrastructure/version_adapter.dart';
 import 'package:clock/clock.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +25,6 @@ import 'package:mocktail/mocktail.dart';
 
 import '../helper/feature_context.dart';
 import '../helper/notification_service_fake.dart';
-import '../helper/package_info_fake.dart';
 
 class _TrackerMock extends Mock implements Tracker {}
 
@@ -56,6 +54,7 @@ Future<void> theApplicationIsLaunched(final WidgetTester tester) async {
       tracker: tracker,
       messageBus: messageBus,
       dioHttpClient: dioHttpClient,
+      packageInfo: FeatureContext.instance.packageInfo,
       notificationService:
           const NotificationServiceFake(AuthorizationStatus.authorized),
       authenticationService: authenticationService,
@@ -68,7 +67,6 @@ Future<void> theApplicationIsLaunched(final WidgetTester tester) async {
       bibliothequePort: BibliothequeApiAdapter(client: dioHttpClient),
       recommandationsPort: RecommandationsApiAdapter(client: dioHttpClient),
       quizPort: QuizApiAdapter(client: dioHttpClient),
-      versionPort: const VersionAdapter(packageInfo: PackageInfoFake()),
       communesPort: CommunesApiAdapter(client: dioHttpClient),
       aideVeloPort: AideVeloApiAdapter(client: dioHttpClient),
       firstNamePort: FirstNameAdapter(client: dioHttpClient),

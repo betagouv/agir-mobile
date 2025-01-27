@@ -57,7 +57,7 @@ import 'package:app/features/upgrade/infrastructure/upgrade_interceptor.dart';
 import 'package:app/features/upgrade/presentation/bloc/upgrade_bloc.dart';
 import 'package:app/features/upgrade/presentation/widgets/upgrade_widget.dart';
 import 'package:app/features/utilisateur/presentation/bloc/utilisateur_bloc.dart';
-import 'package:app/features/version/domain/version_port.dart';
+import 'package:app/features/version/infrastructure/version_repository.dart';
 import 'package:app/features/version/presentation/bloc/version_bloc.dart';
 import 'package:app/features/version/presentation/bloc/version_event.dart';
 import 'package:clock/clock.dart';
@@ -66,6 +66,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class App extends StatefulWidget {
   const App({
@@ -74,6 +75,7 @@ class App extends StatefulWidget {
     required this.tracker,
     required this.messageBus,
     required this.dioHttpClient,
+    required this.packageInfo,
     required this.notificationService,
     required this.authenticationService,
     required this.authentificationPort,
@@ -82,7 +84,6 @@ class App extends StatefulWidget {
     required this.bibliothequePort,
     required this.recommandationsPort,
     required this.quizPort,
-    required this.versionPort,
     required this.communesPort,
     required this.aideVeloPort,
     required this.firstNamePort,
@@ -96,6 +97,7 @@ class App extends StatefulWidget {
   final Tracker tracker;
   final MessageBus messageBus;
   final DioHttpClient dioHttpClient;
+  final PackageInfo packageInfo;
   final NotificationService notificationService;
   final AuthenticationService authenticationService;
   final AuthentificationPort authentificationPort;
@@ -104,7 +106,6 @@ class App extends StatefulWidget {
   final BibliothequePort bibliothequePort;
   final RecommandationsPort recommandationsPort;
   final QuizPort quizPort;
-  final VersionPort versionPort;
   final CommunesPort communesPort;
   final AideVeloPort aideVeloPort;
   final FirstNamePort firstNamePort;
@@ -285,9 +286,10 @@ class _AppState extends State<App> {
                 ),
                 BlocProvider(create: (final context) => AideBloc()),
                 BlocProvider(
-                  create: (final context) =>
-                      VersionBloc(versionPort: widget.versionPort)
-                        ..add(const VersionFetched()),
+                  create: (final context) => VersionBloc(
+                    repository:
+                        VersionRepository(packageInfo: widget.packageInfo),
+                  )..add(const VersionFetched()),
                 ),
                 BlocProvider(
                   create: (final context) => AideVeloBloc(

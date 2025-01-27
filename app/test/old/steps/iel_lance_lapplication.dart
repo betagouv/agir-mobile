@@ -15,6 +15,7 @@ import 'package:mocktail_image_network/mocktail_image_network.dart';
 
 import '../../environmental_performance/summary/environmental_performance_data.dart';
 import '../../features/helper/notification_service_fake.dart';
+import '../../features/helper/package_info_fake.dart';
 import '../../helpers/dio_mock.dart';
 import '../../mission/mission_test.dart';
 import '../api/constants.dart';
@@ -30,7 +31,6 @@ import '../mocks/profil_port_mock.dart';
 import '../mocks/quiz_port_mock.dart';
 import '../mocks/recommandations_port_mock.dart';
 import '../mocks/theme_port_mock.dart';
-import '../mocks/version_port_mock.dart';
 import '../scenario_context.dart';
 
 class _TrackerMock extends Mock implements Tracker {}
@@ -110,6 +110,10 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
           dio: dioMock,
           authenticationService: authenticationService,
         ),
+        packageInfo: const PackageInfoFake(
+          version: '1.2.3',
+          buildNumber: '4',
+        ),
         notificationService:
             const NotificationServiceFake(AuthorizationStatus.denied),
         authenticationService: authenticationService,
@@ -121,7 +125,6 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
         recommandationsPort:
             RecommandationsPortMock(ScenarioContext().recommandations),
         quizPort: ScenarioContext().quizPortMock!,
-        versionPort: const VersionPortMock(),
         communesPort: CommunesPortMock(ScenarioContext().communes),
         aideVeloPort: ScenarioContext().aideVeloPortMock!,
         firstNamePort: profilPort,
