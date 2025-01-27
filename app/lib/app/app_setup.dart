@@ -16,7 +16,6 @@ import 'package:app/features/assistances/list/infrastructure/assistances_reposit
 import 'package:app/features/authentification/core/infrastructure/authentification_api_adapter.dart';
 import 'package:app/features/bibliotheque/infrastructure/bibliotheque_api_adapter.dart';
 import 'package:app/features/communes/infrastructure/communes_api_adapter.dart';
-import 'package:app/features/gamification/infrastructure/gamification_api_adapter.dart';
 import 'package:app/features/know_your_customer/core/infrastructure/mieux_vous_connaitre_api_adapter.dart';
 import 'package:app/features/know_your_customer/list/infrastructure/know_your_customers_repository.dart';
 import 'package:app/features/notifications/infrastructure/notification_service.dart';
@@ -151,11 +150,6 @@ class _AppSetupState extends State<AppSetup> {
 
           final messageBus = MessageBus();
 
-          final gamificationApiAdapter = GamificationApiAdapter(
-            client: client,
-            messageBus: messageBus,
-          );
-
           return App(
             clock: _clock,
             tracker: _tracker,
@@ -183,7 +177,6 @@ class _AppSetupState extends State<AppSetup> {
               client: client,
               messageBus: messageBus,
             ),
-            gamificationPort: gamificationApiAdapter,
           );
         },
       );

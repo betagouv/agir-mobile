@@ -3,20 +3,20 @@ import 'dart:async';
 import 'package:app/core/authentication/domain/authentication_service.dart';
 import 'package:app/core/authentication/domain/authentication_status.dart';
 import 'package:app/features/gamification/domain/gamification.dart';
-import 'package:app/features/gamification/domain/gamification_port.dart';
+import 'package:app/features/gamification/infrastructure/gamification_api_adapter.dart';
 import 'package:app/features/gamification/presentation/bloc/gamification_event.dart';
 import 'package:app/features/gamification/presentation/bloc/gamification_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GamificationBloc extends Bloc<GamificationEvent, GamificationState> {
   GamificationBloc({
-    required final GamificationPort gamificationPort,
+    required final GamificationApiAdapter repository,
     required final AuthenticationService authenticationService,
   }) : super(const GamificationState.empty()) {
     on<GamificationAuthentificationAChange>(
       (final event, final emit) async {
         if (event.status is Authenticated) {
-          await gamificationPort.mettreAJourLesPoints();
+          await repository.refresh();
         }
       },
     );
@@ -24,7 +24,7 @@ class GamificationBloc extends Bloc<GamificationEvent, GamificationState> {
       emit(state.copyWith(statut: GamificationStatut.chargement));
 
       await emit.forEach<Gamification>(
-        gamificationPort.gamification(),
+        repository.gamification(),
         onData: (final data) => state.copyWith(
           statut: GamificationStatut.succes,
           points: data.points,

@@ -47,7 +47,7 @@ void main() {
       ),
     );
 
-    await adapter.mettreAJourLesPoints();
+    await adapter.refresh();
 
     await adapter.dispose();
   });

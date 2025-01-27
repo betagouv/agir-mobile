@@ -91,7 +91,7 @@ void setAssistances() => FeatureContext.instance.dioMock.getM(
 
 void setPoints() => FeatureContext.instance.dioMock.getM(
       Endpoints.gamification,
-      responseData: {'points': 0},
+      responseData: {'points': 650},
     );
 
 void setPreferences() => FeatureContext.instance.dioMock
