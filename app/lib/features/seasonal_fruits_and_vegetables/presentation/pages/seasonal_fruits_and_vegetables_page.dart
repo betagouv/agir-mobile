@@ -79,23 +79,37 @@ class _Success extends StatelessWidget {
               child: _Header(value: value),
             ),
             const SizedBox(height: DsfrSpacings.s4w),
-            const TabBar(
-              tabs: [
-                Tab(text: Localisation.fruits),
-                Tab(text: Localisation.legumes),
-              ],
-              indicator: DsfrTabIndicator(
-                borderSide: BorderSide(
-                  color: DsfrColors.blueFranceSun113,
-                  width: 3,
-                ),
+            const DecoratedBox(
+              decoration: BoxDecoration(
+                color: FnvColors.homeBackground,
+                boxShadow: [
+                  BoxShadow(
+                    color: Color(0x08000068),
+                    offset: Offset(0, 5),
+                    blurRadius: 10,
+                  ),
+                ],
               ),
-              indicatorSize: TabBarIndicatorSize.tab,
-              dividerHeight: 0,
-              labelStyle:
-                  DsfrTextStyle.bodyLgBold(color: DsfrColors.blueFranceSun113),
-              labelPadding: EdgeInsets.symmetric(horizontal: DsfrSpacings.s1w),
-              unselectedLabelStyle: DsfrTextStyle.bodyLg(),
+              child: TabBar(
+                tabs: [
+                  Tab(text: Localisation.fruits),
+                  Tab(text: Localisation.legumes),
+                ],
+                indicator: DsfrTabIndicator(
+                  borderSide: BorderSide(
+                    color: DsfrColors.blueFranceSun113,
+                    width: 3,
+                  ),
+                ),
+                indicatorSize: TabBarIndicatorSize.tab,
+                dividerHeight: 0,
+                labelStyle: DsfrTextStyle.bodyLgBold(
+                  color: DsfrColors.blueFranceSun113,
+                ),
+                labelPadding:
+                    EdgeInsets.symmetric(horizontal: DsfrSpacings.s1w),
+                unselectedLabelStyle: DsfrTextStyle.bodyLg(),
+              ),
             ),
             Expanded(
               child: TabBarView(
