@@ -35,6 +35,7 @@ Future<void> initializeContext(final WidgetTester tester) async {
   setActions();
   setRecommandations();
   setServices();
+  setBicycleSimulator();
 }
 
 void setNotification() {
@@ -45,9 +46,10 @@ void setNotification() {
 void setFirstName() =>
     FeatureContext.instance.dioMock.patchM(Endpoints.profile);
 
-void setProfile() => FeatureContext.instance.dioMock.getM(
-      Endpoints.profile,
-      responseData: jsonDecode('''
+void setProfile() {
+  FeatureContext.instance.dioMock.getM(
+    Endpoints.profile,
+    responseData: jsonDecode('''
 {
     "email": "joe@doe.fr",
     "nom": null,
@@ -58,7 +60,9 @@ void setProfile() => FeatureContext.instance.dioMock.getM(
     "nombre_de_parts_fiscales": 1,
     "annee_naissance": null
 }'''),
-    );
+  );
+  FeatureContext.instance.dioMock.patchM(Endpoints.profile);
+}
 
 void setLogement() => FeatureContext.instance.dioMock.patchM(
       Endpoints.logement,
@@ -85,7 +89,28 @@ void setAssistances() => FeatureContext.instance.dioMock.getM(
       Endpoints.assistances,
       responseData: {
         'couverture_aides_ok': false,
-        'liste_aides': <dynamic>[],
+        'liste_aides': [
+          {
+            'id': 'renover_son_logement',
+            'titre': 'Rénover son logement',
+            'thematiques': ['logement'],
+            'contenu': '',
+          },
+          {
+            'titre': 'Acheter un vélo',
+            'contenu':
+                "<p>Vous souhaitez acheter un vélo neuf ou d'occasion, qu'il soit électrique ou classique ? Cette aide est faite pour vous !</p><p></p><h3><strong>Votre éligibilité</strong></h3><p><strong>1 aide nationale disponible</strong> pour les <strong>majeurs, domiciliés en France</strong></p><p><strong>Plusieurs aides sous conditions</strong></p><p></p><h3><strong>Types de vélo</strong></h3><ul><li><p>Mécanique / Électrique</p></li><li><p>Classique / Pliant / Cargo</p></li></ul><p></p><h3><strong>En quoi cela a de l'impact ?</strong></h3><p>Le vélo est un des moyens de transport les moins carbonés.</p><p>Il peut remplacer la voiture dans de nombreux cas et c'est bon pour la santé !</p>",
+            'url_simulateur': '/aides/velo',
+            'thematiques': ['transport'],
+            'montant_max': 1500,
+          },
+          {
+            'id': 'composter_ses_dechets',
+            'titre': 'Composter ses déchets',
+            'thematiques': ['alimentation'],
+            'contenu': '',
+          },
+        ],
       },
     );
 
@@ -764,3 +789,18 @@ void setServices() => FeatureContext.instance.dioMock
     ]
 }'''),
   );
+
+void setBicycleSimulator() => FeatureContext.instance.dioMock.postM(
+      Endpoints.simulerAideVelo,
+      responseData: jsonDecode('''
+{
+    "mécanique simple": [],
+    "électrique": [],
+    "cargo": [],
+    "cargo électrique": [],
+    "pliant": [],
+    "pliant électrique": [],
+    "motorisation": [],
+    "adapté": []
+}'''),
+    );

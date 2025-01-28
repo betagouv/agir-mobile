@@ -59,21 +59,6 @@ Map<String, dynamic> actionFaker({
   };
 }
 
-Map<String, dynamic> aideFaker({final String? thematique}) {
-  final faker = Faker();
-
-  return {
-    'contenu': _fakerSentenceBetter(),
-    'montant_max': faker.randomGenerator.boolean()
-        ? faker.randomGenerator.integer(10000)
-        : null,
-    'thematiques': [thematique ?? generateThematique],
-    'titre': faker.company.name(),
-    'url_simulateur':
-        faker.randomGenerator.boolean() ? faker.internet.uri('https') : null,
-  };
-}
-
 Map<String, dynamic> aideVeloFaker() {
   final faker = Faker();
 

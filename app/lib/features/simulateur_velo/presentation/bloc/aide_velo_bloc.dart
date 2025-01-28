@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:app/features/communes/domain/communes_port.dart';
 import 'package:app/features/profil/core/domain/profil_port.dart';
-import 'package:app/features/simulateur_velo/domain/aide_velo_port.dart';
+import 'package:app/features/simulateur_velo/infrastructure/aide_velo_repository.dart';
 import 'package:app/features/simulateur_velo/presentation/bloc/aide_velo_event.dart';
 import 'package:app/features/simulateur_velo/presentation/bloc/aide_velo_state.dart';
 import 'package:collection/collection.dart';
@@ -13,10 +13,10 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
   AideVeloBloc({
     required final ProfilPort profilPort,
     required final CommunesPort communesPort,
-    required final AideVeloPort aideVeloPort,
+    required final AideVeloRepository aideVeloRepository,
   })  : _profilPort = profilPort,
         _communesPort = communesPort,
-        _aideVeloPort = aideVeloPort,
+        _aideVeloRepository = aideVeloRepository,
         super(const AideVeloState.empty()) {
     on<AideVeloInformationsDemandee>(_onInformationsDemandee);
     on<AideVeloModificationDemandee>(_onModificationDemandee);
@@ -30,7 +30,7 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
 
   final CommunesPort _communesPort;
   final ProfilPort _profilPort;
-  final AideVeloPort _aideVeloPort;
+  final AideVeloRepository _aideVeloRepository;
 
   Future<void> _onInformationsDemandee(
     final AideVeloInformationsDemandee event,
@@ -129,7 +129,7 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
       return;
     }
     emit(state.copyWith(aideVeloStatut: AideVeloStatut.chargement));
-    final result = await _aideVeloPort.simuler(
+    final result = await _aideVeloRepository.simuler(
       prix: state.prix,
       codePostal: state.codePostal,
       commune: state.commune,

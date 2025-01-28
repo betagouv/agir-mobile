@@ -1,14 +1,11 @@
 import 'package:app/core/authentication/domain/authentication_status.dart';
-import 'package:app/features/assistances/core/domain/aide.dart';
 import 'package:app/features/bibliotheque/domain/bibliotheque.dart';
 import 'package:app/features/know_your_customer/core/domain/question.dart';
 import 'package:app/features/profil/logement/presentation/bloc/mon_logement_state.dart';
 import 'package:app/features/quiz/domain/quiz.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
-import 'package:app/features/simulateur_velo/domain/aide_velo_par_type.dart';
 import 'package:app/features/theme/core/domain/mission_liste.dart';
 
-import 'mocks/aide_velo_port_mock.dart';
 import 'mocks/authentification_port_mock.dart';
 import 'mocks/mieux_vous_connaitre_port_mock.dart';
 import 'mocks/profil_port_mock.dart';
@@ -34,17 +31,6 @@ class ScenarioContext {
   Dpe? dpe;
   double nombreDePartsFiscales = 0;
   int? revenuFiscal;
-  AideVeloParType aideVeloParType = const AideVeloParType(
-    mecaniqueSimple: [],
-    electrique: [],
-    cargo: [],
-    cargoElectrique: [],
-    pliant: [],
-    pliantElectrique: [],
-    motorisation: [],
-    adapte: [],
-  );
-  List<Assistance> aides = <Assistance>[];
   List<MissionListe> missionListe = <MissionListe>[];
   List<Recommandation> recommandations = <Recommandation>[];
   Quiz quiz = const Quiz(
@@ -61,7 +47,6 @@ class ScenarioContext {
   List<Question> questions = <Question>[];
   Bibliotheque bibliotheque = const Bibliotheque(contenus: [], filtres: []);
 
-  AideVeloPortMock? aideVeloPortMock;
   ProfilPortMock? profilPortMock;
   AuthentificationPortMock? authentificationPortMock;
   QuizPortMock? quizPortMock;

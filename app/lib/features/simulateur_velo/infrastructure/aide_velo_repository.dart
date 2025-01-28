@@ -5,17 +5,15 @@ import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/simulateur_velo/domain/aide_velo_par_type.dart';
-import 'package:app/features/simulateur_velo/domain/aide_velo_port.dart';
 import 'package:app/features/simulateur_velo/infrastructure/aide_velo_par_type_mapper.dart';
 import 'package:fpdart/fpdart.dart';
 
-class AideVeloApiAdapter implements AideVeloPort {
-  const AideVeloApiAdapter({required final DioHttpClient client})
+class AideVeloRepository {
+  const AideVeloRepository({required final DioHttpClient client})
       : _client = client;
 
   final DioHttpClient _client;
 
-  @override
   Future<Either<Exception, AideVeloParType>> simuler({
     required final int prix,
     required final String codePostal,
