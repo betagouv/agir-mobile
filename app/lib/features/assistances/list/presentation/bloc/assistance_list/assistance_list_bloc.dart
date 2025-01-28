@@ -24,7 +24,6 @@ class AssistanceListBloc
         },
         (final r) {
           final assistanceListModel = _groupAssistancesByTheme(r);
-
           emit(
             AssistanceListLoadSuccess(
               isCovered: r.isCovered,

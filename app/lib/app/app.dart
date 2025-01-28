@@ -50,7 +50,7 @@ import 'package:app/features/quiz/presentation/pages/quiz_page.dart';
 import 'package:app/features/recommandations/domain/recommandations_port.dart';
 import 'package:app/features/recommandations/presentation/bloc/recommandations_bloc.dart';
 import 'package:app/features/seasonal_fruits_and_vegetables/infrastructure/seasonal_fruits_and_vegetables_repository.dart';
-import 'package:app/features/simulateur_velo/domain/aide_velo_port.dart';
+import 'package:app/features/simulateur_velo/infrastructure/aide_velo_repository.dart';
 import 'package:app/features/simulateur_velo/presentation/bloc/aide_velo_bloc.dart';
 import 'package:app/features/theme/core/domain/theme_port.dart';
 import 'package:app/features/upgrade/infrastructure/upgrade_interceptor.dart';
@@ -81,12 +81,10 @@ class App extends StatefulWidget {
     required this.authenticationService,
     required this.authentificationPort,
     required this.themePort,
-    required this.assistancesRepository,
     required this.bibliothequePort,
     required this.recommandationsPort,
     required this.quizPort,
     required this.communesPort,
-    required this.aideVeloPort,
     required this.firstNamePort,
     required this.profilPort,
     required this.knowYourCustomersRepository,
@@ -102,12 +100,10 @@ class App extends StatefulWidget {
   final AuthenticationService authenticationService;
   final AuthentificationPort authentificationPort;
   final ThemePort themePort;
-  final AssistancesRepository assistancesRepository;
   final BibliothequePort bibliothequePort;
   final RecommandationsPort recommandationsPort;
   final QuizPort quizPort;
   final CommunesPort communesPort;
-  final AideVeloPort aideVeloPort;
   final FirstNamePort firstNamePort;
   final ProfilPort profilPort;
   final KnowYourCustomersRepository knowYourCustomersRepository;
@@ -203,6 +199,9 @@ class _AppState extends State<App> {
       messageBus: widget.messageBus,
     );
 
+    final assistancesRepository =
+        AssistancesRepository(client: widget.dioHttpClient);
+
     return InheritedGoRouter(
       goRouter: _goRouter,
       child: AuthenticationInjection(
@@ -215,7 +214,7 @@ class _AppState extends State<App> {
               RepositoryProvider.value(value: widget.clock),
               RepositoryProvider.value(value: widget.authentificationPort),
               RepositoryProvider.value(value: widget.themePort),
-              RepositoryProvider.value(value: widget.assistancesRepository),
+              RepositoryProvider.value(value: assistancesRepository),
               RepositoryProvider.value(value: widget.quizPort),
               RepositoryProvider.value(value: widget.profilPort),
               RepositoryProvider.value(value: widget.communesPort),
@@ -272,7 +271,7 @@ class _AppState extends State<App> {
                 ),
                 BlocProvider(
                   create: (final context) => AidesAccueilBloc(
-                    assistancesRepository: widget.assistancesRepository,
+                    assistancesRepository: assistancesRepository,
                   ),
                 ),
                 BlocProvider(
@@ -299,7 +298,9 @@ class _AppState extends State<App> {
                   create: (final context) => AideVeloBloc(
                     profilPort: widget.profilPort,
                     communesPort: widget.communesPort,
-                    aideVeloPort: widget.aideVeloPort,
+                    aideVeloRepository: AideVeloRepository(
+                      client: widget.dioHttpClient,
+                    ),
                   ),
                 ),
                 BlocProvider(

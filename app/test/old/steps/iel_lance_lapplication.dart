@@ -20,8 +20,6 @@ import '../../helpers/dio_mock.dart';
 import '../../mission/mission_test.dart';
 import '../api/constants.dart';
 import '../api/flutter_secure_storage_fake.dart';
-import '../mocks/aide_velo_port_mock.dart';
-import '../mocks/assistances_repository_mock.dart';
 import '../mocks/authentification_port_mock.dart';
 import '../mocks/bibliotheque_port_mock.dart';
 import '../mocks/communes_port_mock.dart';
@@ -44,9 +42,6 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
   if (ScenarioContext().authentificationStatut is Authenticated) {
     await authenticationService.login(token);
   }
-  ScenarioContext().aideVeloPortMock = AideVeloPortMock(
-    aideVeloParType: ScenarioContext().aideVeloParType,
-  );
   final prenom = ScenarioContext().prenom;
   ScenarioContext().profilPortMock = ProfilPortMock(
     email: ScenarioContext().email,
@@ -100,7 +95,23 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
       responseData: <dynamic>[],
     )
     ..getM(Endpoints.gamification, responseData: {'points': 650})
-    ..getM(Endpoints.missionsRecommandees, responseData: missionThematiques);
+    ..getM(Endpoints.missionsRecommandees, responseData: missionThematiques)
+    ..getM(
+      Endpoints.assistances,
+      responseData: {
+        'couverture_aides_ok': true,
+        'liste_aides': <Map<String, dynamic>>[
+          {
+            'titre': 'Acheter un vélo',
+            'contenu':
+                "<p>Vous souhaitez acheter un vélo neuf ou d'occasion, qu'il soit électrique ou classique ? Cette aide est faite pour vous !</p><p></p><h3><strong>Votre éligibilité</strong></h3><p><strong>1 aide nationale disponible</strong> pour les <strong>majeurs, domiciliés en France</strong></p><p><strong>Plusieurs aides sous conditions</strong></p><p></p><h3><strong>Types de vélo</strong></h3><ul><li><p>Mécanique / Électrique</p></li><li><p>Classique / Pliant / Cargo</p></li></ul><p></p><h3><strong>En quoi cela a de l'impact ?</strong></h3><p>Le vélo est un des moyens de transport les moins carbonés.</p><p>Il peut remplacer la voiture dans de nombreux cas et c'est bon pour la santé !</p>",
+            'url_simulateur': '/aides/velo',
+            'thematiques': ['transport'],
+            'montant_max': 1500,
+          },
+        ],
+      },
+    );
 
   await mockNetworkImages(() async {
     await tester.pumpFrames(
@@ -121,14 +132,11 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
         authenticationService: authenticationService,
         authentificationPort: ScenarioContext().authentificationPortMock!,
         themePort: ScenarioContext().themePortMock!,
-        assistancesRepository:
-            AssistancesRepositoryMock(ScenarioContext().aides),
         bibliothequePort: BibliothequePortMock(ScenarioContext().bibliotheque),
         recommandationsPort:
             RecommandationsPortMock(ScenarioContext().recommandations),
         quizPort: ScenarioContext().quizPortMock!,
         communesPort: CommunesPortMock(ScenarioContext().communes),
-        aideVeloPort: ScenarioContext().aideVeloPortMock!,
         firstNamePort: profilPort,
         profilPort: profilPort,
         knowYourCustomersRepository: mieuxVousConnaitrePort,

@@ -74,17 +74,17 @@ class _Prix extends StatefulWidget {
 }
 
 class _PrixState extends State<_Prix> {
-  final _prixVeloControlleur = TextEditingController();
+  final _prixVeloController = TextEditingController();
 
   @override
   void dispose() {
-    _prixVeloControlleur.dispose();
+    _prixVeloController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(final context) {
-    _prixVeloControlleur.text =
+    _prixVeloController.text =
         context.read<AideVeloBloc>().state.prix.toString();
 
     return Column(
@@ -97,7 +97,7 @@ class _PrixState extends State<_Prix> {
             child: DsfrInput(
               label: Localisation.prixDuVelo,
               suffixText: '€',
-              controller: _prixVeloControlleur,
+              controller: _prixVeloController,
               onChanged: (final value) {
                 final parse = int.tryParse(value);
                 if (parse == null) {
@@ -145,7 +145,7 @@ class _PrixState extends State<_Prix> {
               onTap: () {
                 final prix = e.prix;
                 context.read<AideVeloBloc>().add(AideVeloPrixChange(prix));
-                _prixVeloControlleur.text = '$prix';
+                _prixVeloController.text = '$prix';
               },
             ),
           );

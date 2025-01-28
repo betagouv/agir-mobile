@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/endpoints.dart';
-import 'package:app/features/simulateur_velo/infrastructure/aide_velo_api_adapter.dart';
 import 'package:app/features/simulateur_velo/infrastructure/aide_velo_par_type_mapper.dart';
+import 'package:app/features/simulateur_velo/infrastructure/aide_velo_repository.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -13,12 +13,12 @@ import '../../helpers/faker.dart';
 import '../mocks/authentication_service_fake.dart';
 
 void main() {
-  late AideVeloApiAdapter adapter;
+  late AideVeloRepository adapter;
   late DioMock dio;
 
   setUp(() {
     dio = DioMock();
-    adapter = AideVeloApiAdapter(
+    adapter = AideVeloRepository(
       client: DioHttpClient(
         dio: dio,
         authenticationService: const AuthenticationServiceFake(),
