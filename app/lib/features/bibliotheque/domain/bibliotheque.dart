@@ -22,17 +22,6 @@ class BibliothequeFiltre extends Equatable {
   final String titre;
   final bool choisi;
 
-  BibliothequeFiltre copyWith({
-    final String? code,
-    final String? titre,
-    final bool? choisi,
-  }) =>
-      BibliothequeFiltre(
-        code: code ?? this.code,
-        titre: titre ?? this.titre,
-        choisi: choisi ?? this.choisi,
-      );
-
   @override
   List<Object?> get props => [code, titre, choisi];
 }

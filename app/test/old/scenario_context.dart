@@ -1,5 +1,4 @@
 import 'package:app/core/authentication/domain/authentication_status.dart';
-import 'package:app/features/bibliotheque/domain/bibliotheque.dart';
 import 'package:app/features/know_your_customer/core/domain/question.dart';
 import 'package:app/features/profil/logement/presentation/bloc/mon_logement_state.dart';
 import 'package:app/features/quiz/domain/quiz.dart';
@@ -45,7 +44,6 @@ class ScenarioContext {
   );
   List<String> communes = <String>[];
   List<Question> questions = <Question>[];
-  Bibliotheque bibliotheque = const Bibliotheque(contenus: [], filtres: []);
 
   ProfilPortMock? profilPortMock;
   AuthentificationPortMock? authentificationPortMock;
