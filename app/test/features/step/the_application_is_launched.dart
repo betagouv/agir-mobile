@@ -5,7 +5,6 @@ import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/core/infrastructure/tracker.dart';
 import 'package:app/features/authentification/core/infrastructure/authentification_api_adapter.dart';
-import 'package:app/features/bibliotheque/infrastructure/bibliotheque_api_adapter.dart';
 import 'package:app/features/communes/infrastructure/communes_api_adapter.dart';
 import 'package:app/features/know_your_customer/core/infrastructure/mieux_vous_connaitre_api_adapter.dart';
 import 'package:app/features/know_your_customer/list/infrastructure/know_your_customers_repository.dart';
@@ -60,7 +59,6 @@ Future<void> theApplicationIsLaunched(final WidgetTester tester) async {
         authenticationService: authenticationService,
       ),
       themePort: ThemeApiAdapter(client: dioHttpClient),
-      bibliothequePort: BibliothequeApiAdapter(client: dioHttpClient),
       recommandationsPort: RecommandationsApiAdapter(client: dioHttpClient),
       quizPort: QuizApiAdapter(client: dioHttpClient),
       communesPort: CommunesApiAdapter(client: dioHttpClient),

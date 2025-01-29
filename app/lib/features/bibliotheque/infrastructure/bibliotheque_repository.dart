@@ -4,17 +4,15 @@ import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/bibliotheque/domain/bibliotheque.dart';
-import 'package:app/features/bibliotheque/domain/bibliotheque_port.dart';
 import 'package:app/features/bibliotheque/infrastructure/bibliotheque_mapper.dart';
 import 'package:fpdart/fpdart.dart';
 
-class BibliothequeApiAdapter implements BibliothequePort {
-  const BibliothequeApiAdapter({required final DioHttpClient client})
+class BibliothequeRepository {
+  const BibliothequeRepository({required final DioHttpClient client})
       : _client = client;
 
   final DioHttpClient _client;
 
-  @override
   Future<Either<Exception, Bibliotheque>> recuperer({
     required final List<String>? thematiques,
     required final String? titre,

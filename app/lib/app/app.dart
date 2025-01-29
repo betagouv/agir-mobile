@@ -20,7 +20,7 @@ import 'package:app/features/assistances/item/presentation/bloc/aide_bloc.dart';
 import 'package:app/features/assistances/list/infrastructure/assistances_repository.dart';
 import 'package:app/features/assistances/list/presentation/bloc/aides_disclaimer/aides_disclaimer_cubit.dart';
 import 'package:app/features/authentification/core/domain/authentification_port.dart';
-import 'package:app/features/bibliotheque/domain/bibliotheque_port.dart';
+import 'package:app/features/bibliotheque/infrastructure/bibliotheque_repository.dart';
 import 'package:app/features/bibliotheque/presentation/bloc/bibliotheque_bloc.dart';
 import 'package:app/features/communes/domain/communes_port.dart';
 import 'package:app/features/environmental_performance/questions/infrastructure/environment_performance_question_repository.dart';
@@ -81,7 +81,6 @@ class App extends StatefulWidget {
     required this.authenticationService,
     required this.authentificationPort,
     required this.themePort,
-    required this.bibliothequePort,
     required this.recommandationsPort,
     required this.quizPort,
     required this.communesPort,
@@ -100,7 +99,6 @@ class App extends StatefulWidget {
   final AuthenticationService authenticationService;
   final AuthentificationPort authentificationPort;
   final ThemePort themePort;
-  final BibliothequePort bibliothequePort;
   final RecommandationsPort recommandationsPort;
   final QuizPort quizPort;
   final CommunesPort communesPort;
@@ -316,7 +314,9 @@ class _AppState extends State<App> {
                 ),
                 BlocProvider(
                   create: (final context) => BibliothequeBloc(
-                    bibliothequePort: widget.bibliothequePort,
+                    repository: BibliothequeRepository(
+                      client: widget.dioHttpClient,
+                    ),
                   ),
                 ),
                 BlocProvider(

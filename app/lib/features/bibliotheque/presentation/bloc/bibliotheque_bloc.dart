@@ -1,14 +1,14 @@
-import 'package:app/features/bibliotheque/domain/bibliotheque_port.dart';
+import 'package:app/features/bibliotheque/infrastructure/bibliotheque_repository.dart';
 import 'package:app/features/bibliotheque/presentation/bloc/bibliotheque_event.dart';
 import 'package:app/features/bibliotheque/presentation/bloc/bibliotheque_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BibliothequeBloc extends Bloc<BibliothequeEvent, BibliothequeState> {
-  BibliothequeBloc({required final BibliothequePort bibliothequePort})
+  BibliothequeBloc({required final BibliothequeRepository repository})
       : super(const BibliothequeState.empty()) {
     on<BibliothequeRecuperationDemandee>((final event, final emit) async {
       emit(state.copyWith(statut: BibliothequeStatut.chargement));
-      final result = await bibliothequePort.recuperer(
+      final result = await repository.recuperer(
         thematiques: null,
         titre: null,
         isFavorite: null,
@@ -22,7 +22,7 @@ class BibliothequeBloc extends Bloc<BibliothequeEvent, BibliothequeState> {
     });
     on<BibliothequeRechercheSaisie>((final event, final emit) async {
       final recherche = event.valeur;
-      final result = await bibliothequePort.recuperer(
+      final result = await repository.recuperer(
         thematiques: state.thematiques,
         titre: recherche,
         isFavorite: state.isFavorites,
@@ -43,7 +43,7 @@ class BibliothequeBloc extends Bloc<BibliothequeEvent, BibliothequeState> {
       thematiques.contains(event.valeur)
           ? thematiques.remove(event.valeur)
           : thematiques.add(event.valeur);
-      final result = await bibliothequePort.recuperer(
+      final result = await repository.recuperer(
         thematiques: thematiques,
         titre: state.recherche,
         isFavorite: state.isFavorites,
@@ -60,7 +60,7 @@ class BibliothequeBloc extends Bloc<BibliothequeEvent, BibliothequeState> {
       );
     });
     on<BibliothequeFavorisSelectionnee>((final event, final emit) async {
-      final result = await bibliothequePort.recuperer(
+      final result = await repository.recuperer(
         thematiques: state.thematiques,
         titre: state.recherche,
         isFavorite: event.valeur,
