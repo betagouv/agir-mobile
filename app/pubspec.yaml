@@ -11,7 +11,7 @@ dependencies:
   clock: 1.1.1 #  Bloqué en 1.1.1 par flutter_test
   collection: 1.18.0 # Bloqué en 1.18.0 par flutter_test
   cupertino_icons: 1.0.8
-  device_info_plus: 11.2.1
+  device_info_plus: 11.2.2
   dio: 5.7.0
   dsfr:
     path: ../packages/dsfr.dart
