@@ -3,19 +3,17 @@ import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/theme/core/domain/mission_liste.dart';
 import 'package:app/features/theme/core/domain/service_item.dart';
-import 'package:app/features/theme/core/domain/theme_port.dart';
 import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:app/features/theme/core/infrastructure/mission_liste_mapper.dart';
 import 'package:app/features/theme/core/infrastructure/service_item_mapper.dart';
 import 'package:fpdart/fpdart.dart';
 
-class ThemeApiAdapter implements ThemePort {
-  const ThemeApiAdapter({required final DioHttpClient client})
+class ThemeRepository {
+  const ThemeRepository({required final DioHttpClient client})
       : _client = client;
 
   final DioHttpClient _client;
 
-  @override
   Future<Either<Exception, List<MissionListe>>> getMissions(
     final ThemeType themeType,
   ) async {
@@ -37,7 +35,6 @@ class ThemeApiAdapter implements ThemePort {
     );
   }
 
-  @override
   Future<Either<Exception, List<ServiceItem>>> getServices(
     final ThemeType themeType,
   ) async {
