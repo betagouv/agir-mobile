@@ -12,7 +12,6 @@ import 'package:app/features/profil/core/infrastructure/profil_api_adapter.dart'
 import 'package:app/features/questions/first_name/infrastructure/first_name_adapter.dart';
 import 'package:app/features/quiz/infrastructure/quiz_api_adapter.dart';
 import 'package:app/features/recommandations/infrastructure/recommandations_api_adapter.dart';
-import 'package:app/features/theme/core/infrastructure/theme_api_adapter.dart';
 import 'package:clock/clock.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -58,7 +57,6 @@ Future<void> theApplicationIsLaunched(final WidgetTester tester) async {
         client: dioHttpClient,
         authenticationService: authenticationService,
       ),
-      themePort: ThemeApiAdapter(client: dioHttpClient),
       recommandationsPort: RecommandationsApiAdapter(client: dioHttpClient),
       quizPort: QuizApiAdapter(client: dioHttpClient),
       communesPort: CommunesApiAdapter(client: dioHttpClient),

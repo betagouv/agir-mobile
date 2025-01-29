@@ -28,7 +28,9 @@ class ThemePage extends StatelessWidget {
 
   @override
   Widget build(final context) => BlocProvider(
-        create: (final context) => ThemeBloc(themePort: context.read()),
+        create: (final context) => ThemeBloc(
+          themeApiAdapter: context.read(),
+        ),
         child: _Page(themeType),
       );
 }

@@ -26,7 +26,6 @@ import '../mocks/mieux_vous_connaitre_port_mock.dart';
 import '../mocks/profil_port_mock.dart';
 import '../mocks/quiz_port_mock.dart';
 import '../mocks/recommandations_port_mock.dart';
-import '../mocks/theme_port_mock.dart';
 import '../scenario_context.dart';
 
 class _TrackerMock extends Mock implements Tracker {}
@@ -68,9 +67,6 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
   ScenarioContext().authentificationPortMock = AuthentificationPortMock(
     authenticationService,
   );
-  ScenarioContext().themePortMock = ThemePortMock(
-    missionListe: ScenarioContext().missionListe,
-  );
 
   final profilPort = ScenarioContext().profilPortMock!;
   final tracker = _TrackerMock();
@@ -110,6 +106,14 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
           },
         ],
       },
+    )
+    ..getM(
+      Endpoints.missionsRecommandeesParThematique('alimentation'),
+      responseData: <dynamic>[],
+    )
+    ..getM(
+      Endpoints.servicesParThematique('alimentation'),
+      responseData: <dynamic>[],
     );
 
   await mockNetworkImages(() async {
@@ -130,7 +134,6 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
             const NotificationServiceFake(AuthorizationStatus.denied),
         authenticationService: authenticationService,
         authentificationPort: ScenarioContext().authentificationPortMock!,
-        themePort: ScenarioContext().themePortMock!,
         recommandationsPort:
             RecommandationsPortMock(ScenarioContext().recommandations),
         quizPort: ScenarioContext().quizPortMock!,

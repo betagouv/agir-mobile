@@ -21,7 +21,6 @@ import 'package:app/features/profil/core/infrastructure/profil_api_adapter.dart'
 import 'package:app/features/questions/first_name/infrastructure/first_name_adapter.dart';
 import 'package:app/features/quiz/infrastructure/quiz_api_adapter.dart';
 import 'package:app/features/recommandations/infrastructure/recommandations_api_adapter.dart';
-import 'package:app/features/theme/core/infrastructure/theme_api_adapter.dart';
 import 'package:clock/clock.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
@@ -159,7 +158,6 @@ class _AppSetupState extends State<AppSetup> {
               client: client,
               authenticationService: _authenticationService,
             ),
-            themePort: ThemeApiAdapter(client: client),
             recommandationsPort: RecommandationsApiAdapter(client: client),
             quizPort: QuizApiAdapter(client: client),
             communesPort: CommunesApiAdapter(client: client),

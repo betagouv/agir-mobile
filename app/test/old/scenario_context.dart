@@ -3,13 +3,11 @@ import 'package:app/features/know_your_customer/core/domain/question.dart';
 import 'package:app/features/profil/logement/presentation/bloc/mon_logement_state.dart';
 import 'package:app/features/quiz/domain/quiz.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
-import 'package:app/features/theme/core/domain/mission_liste.dart';
 
 import 'mocks/authentification_port_mock.dart';
 import 'mocks/mieux_vous_connaitre_port_mock.dart';
 import 'mocks/profil_port_mock.dart';
 import 'mocks/quiz_port_mock.dart';
-import 'mocks/theme_port_mock.dart';
 
 class ScenarioContext {
   factory ScenarioContext() => _instance ??= ScenarioContext._();
@@ -30,7 +28,6 @@ class ScenarioContext {
   Dpe? dpe;
   double nombreDePartsFiscales = 0;
   int? revenuFiscal;
-  List<MissionListe> missionListe = <MissionListe>[];
   List<Recommandation> recommandations = <Recommandation>[];
   Quiz quiz = const Quiz(
     id: '',
@@ -49,7 +46,6 @@ class ScenarioContext {
   AuthentificationPortMock? authentificationPortMock;
   QuizPortMock? quizPortMock;
   MieuxVousConnaitrePortMock? mieuxVousConnaitrePortMock;
-  ThemePortMock? themePortMock;
   static ScenarioContext? _instance;
 
   static void dispose() => _instance = null;

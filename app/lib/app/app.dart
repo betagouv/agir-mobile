@@ -52,7 +52,7 @@ import 'package:app/features/recommandations/presentation/bloc/recommandations_b
 import 'package:app/features/seasonal_fruits_and_vegetables/infrastructure/seasonal_fruits_and_vegetables_repository.dart';
 import 'package:app/features/simulateur_velo/infrastructure/aide_velo_repository.dart';
 import 'package:app/features/simulateur_velo/presentation/bloc/aide_velo_bloc.dart';
-import 'package:app/features/theme/core/domain/theme_port.dart';
+import 'package:app/features/theme/core/infrastructure/theme_repository.dart';
 import 'package:app/features/upgrade/infrastructure/upgrade_interceptor.dart';
 import 'package:app/features/upgrade/presentation/bloc/upgrade_bloc.dart';
 import 'package:app/features/upgrade/presentation/widgets/upgrade_widget.dart';
@@ -80,7 +80,6 @@ class App extends StatefulWidget {
     required this.notificationService,
     required this.authenticationService,
     required this.authentificationPort,
-    required this.themePort,
     required this.recommandationsPort,
     required this.quizPort,
     required this.communesPort,
@@ -98,7 +97,6 @@ class App extends StatefulWidget {
   final NotificationService notificationService;
   final AuthenticationService authenticationService;
   final AuthentificationPort authentificationPort;
-  final ThemePort themePort;
   final RecommandationsPort recommandationsPort;
   final QuizPort quizPort;
   final CommunesPort communesPort;
@@ -211,7 +209,6 @@ class _AppState extends State<App> {
               RepositoryProvider.value(value: widget.tracker),
               RepositoryProvider.value(value: widget.clock),
               RepositoryProvider.value(value: widget.authentificationPort),
-              RepositoryProvider.value(value: widget.themePort),
               RepositoryProvider.value(value: assistancesRepository),
               RepositoryProvider.value(value: widget.quizPort),
               RepositoryProvider.value(value: widget.profilPort),
@@ -221,6 +218,11 @@ class _AppState extends State<App> {
               ),
               RepositoryProvider.value(value: widget.mieuxVousConnaitrePort),
               RepositoryProvider.value(value: widget.firstNamePort),
+              RepositoryProvider(
+                create: (final context) => ThemeRepository(
+                  client: widget.dioHttpClient,
+                ),
+              ),
               RepositoryProvider<ArticlesPort>(
                 create: (final context) =>
                     ArticlesApiAdapter(client: widget.dioHttpClient),
