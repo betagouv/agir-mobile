@@ -35,8 +35,8 @@ final class QuizState extends Equatable {
   String get explication => estExacte.fold(
         () => '',
         (final estExacte) =>
-            (estExacte ? quiz.explicationOk : quiz.explicationKo) ??
             quiz.article ??
+            (estExacte ? quiz.explicationOk : quiz.explicationKo) ??
             '',
       );
 
