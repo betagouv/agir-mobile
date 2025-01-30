@@ -1,3 +1,5 @@
+// ignore_for_file: avoid-long-parameter-list
+
 import 'dart:convert';
 import 'dart:io';
 
@@ -49,14 +51,10 @@ class AideVeloRepository {
     });
   }
 
-  String _etatVeloToString(final VeloEtat etatVelo) {
-    switch (etatVelo) {
-      case VeloEtat.neuf:
-        return 'neuf';
-      case VeloEtat.occasion:
-        return 'occasion';
-    }
-  }
+  String _etatVeloToString(final VeloEtat etatVelo) => switch (etatVelo) {
+        VeloEtat.neuf => 'neuf',
+        VeloEtat.occasion => 'occasion',
+      };
 
   Future<Either<Exception, void>> _mettreAJourProfilEtLogement({
     required final double nombreDePartsFiscales,

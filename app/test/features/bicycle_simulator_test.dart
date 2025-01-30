@@ -10,6 +10,7 @@ import './step/the_application_is_launched.dart';
 import './step/i_tap_on_the_menu_button.dart';
 import './step/i_tap_on.dart';
 import './step/i_see.dart';
+import './step/i_scroll_down.dart';
 import './step/i_enter_in_the_field.dart';
 import './step/i_tap_on_dropdown_menu.dart';
 import './step/i_dont_see.dart';
@@ -47,6 +48,7 @@ void main() {
     testWidgets('''Enter postal code''', (tester) async {
       await bddSetUp(tester);
       await iTapOn(tester, 'Accéder au simulateur');
+      await iScrollDown(tester);
       await iEnterInTheField(tester, '39100', 'Code postal');
       await iTapOnDropdownMenu(tester);
       await iSee(tester, 'DOLE');
@@ -63,6 +65,7 @@ void main() {
       await bddSetUp(tester);
       await iTapOn(tester, 'Accéder au simulateur');
       await iTapOn(tester, 'Vélo pliant standard : 500 €');
+      await iScrollDown(tester);
       await iEnterInTheField(tester, '39100', 'Code postal');
       await iTapOnDropdownMenu(tester);
       await iTapOn(tester, 'DOLE');
