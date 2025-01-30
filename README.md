@@ -16,7 +16,20 @@ Accompagner chaque citoyen dans sa transition écologique, en vous proposant des
 
 ### Prérequis
 
+> [!CAUTION]
+> Actuellement, la version de Flutter utilisée est la 3.24.5 car la version stable (3.27.3) n'est pas compatible avec certains SVGs (https://github.com/flutter/flutter/issues/160589). Il est donc recommandé de passer par fvm pour passer sur la version 3.24.5
+
 Vous devez avoir correctement installé [Flutter](https://docs.flutter.dev/get-started/install)
+
+#### Flutter via fvm
+
+Suivre les instructions de la documentation officielle : https://fvm.app/
+
+Une fois fvm installé, il faut installer la version 3.24.5 :
+
+```sh
+fvm use 3.24.5
+```
 
 ### Instructions
 
@@ -24,6 +37,15 @@ Vous devez avoir correctement installé [Flutter](https://docs.flutter.dev/get-s
 
     ```sh
     git clone git@github.com:betagouv/jagis-mobile.git && cd jagis-mobile
+    ```
+
+1. Ajouter le fichier `android/key.properties` :
+
+    ```properties
+    keyAlias=X
+    keyPassword=X
+    storeFile=X
+    storePassword=X
     ```
 
 1. Ajouter les fichiers de configuration Firebase :
