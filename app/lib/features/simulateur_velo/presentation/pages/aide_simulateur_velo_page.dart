@@ -157,36 +157,23 @@ class _PriceState extends State<_Price> {
   }
 }
 
-class _BikeState extends StatefulWidget {
+class _BikeState extends StatelessWidget {
   const _BikeState();
 
   @override
-  State<_BikeState> createState() => _BikeStateState();
-}
-
-class _BikeStateState extends State<_BikeState> {
-  @override
-  Widget build(final context) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Align(
-            alignment: Alignment.centerLeft,
-            child: DsfrRadioButtonSet(
-              title: Localisation.etatDuVelo,
-              values: {
-                VeloEtat.neuf: VeloEtat.neuf.label,
-                VeloEtat.occasion: VeloEtat.occasion.label,
-              },
-              onCallback: (final value) {
-                if (value == null) {
-                  return;
-                }
-                context.read<AideVeloBloc>().add(AideVeloEtatChange(value));
-              },
-              initialValue: VeloEtat.neuf,
-            ),
-          ),
-        ],
+  Widget build(final context) => DsfrRadioButtonSet(
+        title: Localisation.etatDuVelo,
+        values: {
+          VeloEtat.neuf: VeloEtat.neuf.label,
+          VeloEtat.occasion: VeloEtat.occasion.label,
+        },
+        onCallback: (final value) {
+          if (value == null) {
+            return;
+          }
+          context.read<AideVeloBloc>().add(AideVeloEtatChange(value));
+        },
+        initialValue: VeloEtat.neuf,
       );
 }
 

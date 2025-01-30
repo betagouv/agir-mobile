@@ -74,10 +74,7 @@ void main() {
     verify(
       () => dio.post<dynamic>(
         any(),
-        data: jsonEncode({
-          'prix_du_velo': prix,
-          'etat_du_velo': 'neuf',
-        }),
+        data: jsonEncode({'prix_du_velo': prix, 'etat_du_velo': 'neuf'}),
       ),
     );
 

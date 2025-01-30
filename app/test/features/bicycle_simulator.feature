@@ -23,6 +23,7 @@ Feature: Assistance
 
   Scenario: Enter postal code
     When I tap on {'Accéder au simulateur'}
+    When I scroll down
     When I enter {'39100'} in the {'Code postal'} field
     When I tap on dropdown menu
     Then I see {'DOLE'}
@@ -36,6 +37,7 @@ Feature: Assistance
   Scenario: When the form is completed then button is enabled
     When I tap on {'Accéder au simulateur'}
     When I tap on {'Vélo pliant standard : 500 €'}
+    When I scroll down
     When I enter {'39100'} in the {'Code postal'} field
     When I tap on dropdown menu
     When I tap on {'DOLE'}
