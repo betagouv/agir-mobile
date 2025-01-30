@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/endpoints.dart';
+import 'package:app/features/simulateur_velo/domain/velo_pour_simulateur.dart';
 import 'package:app/features/simulateur_velo/infrastructure/aide_velo_par_type_mapper.dart';
 import 'package:app/features/simulateur_velo/infrastructure/aide_velo_repository.dart';
 import 'package:faker/faker.dart';
@@ -45,6 +46,7 @@ void main() {
 
     final result = await adapter.simuler(
       prix: prix,
+      etatVelo: VeloEtat.neuf,
       codePostal: codePostal,
       commune: commune,
       nombreDePartsFiscales: nombreDePartsFiscales,
@@ -70,7 +72,13 @@ void main() {
       ),
     );
     verify(
-      () => dio.post<dynamic>(any(), data: jsonEncode({'prix_du_velo': prix})),
+      () => dio.post<dynamic>(
+        any(),
+        data: jsonEncode({
+          'prix_du_velo': prix,
+          'etat_du_velo': 'neuf',
+        }),
+      ),
     );
 
     // Assert the result

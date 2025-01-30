@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:app/features/communes/domain/communes_port.dart';
 import 'package:app/features/profil/core/domain/profil_port.dart';
+import 'package:app/features/simulateur_velo/domain/velo_pour_simulateur.dart';
 import 'package:app/features/simulateur_velo/infrastructure/aide_velo_repository.dart';
 import 'package:app/features/simulateur_velo/presentation/bloc/aide_velo_event.dart';
 import 'package:app/features/simulateur_velo/presentation/bloc/aide_velo_state.dart';
@@ -21,6 +22,7 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
     on<AideVeloInformationsDemandee>(_onInformationsDemandee);
     on<AideVeloModificationDemandee>(_onModificationDemandee);
     on<AideVeloPrixChange>(_onPrixChange);
+    on<AideVeloEtatChange>(_onEtatChange);
     on<AideVeloCodePostalChange>(_onCodePostalChange);
     on<AideVeloCommuneChange>(_onCommuneChange);
     on<AideVeloNombreDePartsFiscalesChange>(_onNombreDePartsFiscalesChange);
@@ -42,6 +44,7 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
       emit(
         AideVeloState(
           prix: 1000,
+          etatVelo: VeloEtat.neuf,
           codePostal: informations.codePostal ?? '',
           communes: const [],
           commune: informations.commune ?? '',
@@ -79,6 +82,13 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
     final Emitter<AideVeloState> emit,
   ) {
     emit(state.copyWith(prix: event.valeur));
+  }
+
+  void _onEtatChange(
+    final AideVeloEtatChange event,
+    final Emitter<AideVeloState> emit,
+  ) {
+    emit(state.copyWith(etatVelo: event.valeur));
   }
 
   Future<void> _onCodePostalChange(
@@ -131,6 +141,7 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
     emit(state.copyWith(aideVeloStatut: AideVeloStatut.chargement));
     final result = await _aideVeloRepository.simuler(
       prix: state.prix,
+      etatVelo: state.etatVelo,
       codePostal: state.codePostal,
       commune: state.commune,
       nombreDePartsFiscales: state.nombreDePartsFiscales,

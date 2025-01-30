@@ -1,3 +1,4 @@
+import 'package:app/features/simulateur_velo/domain/velo_pour_simulateur.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
@@ -19,6 +20,16 @@ final class AideVeloPrixChange extends AideVeloEvent {
   const AideVeloPrixChange(this.valeur);
 
   final int valeur;
+
+  @override
+  List<Object> get props => [valeur];
+}
+
+@immutable
+final class AideVeloEtatChange extends AideVeloEvent {
+  const AideVeloEtatChange(this.valeur);
+
+  final VeloEtat valeur;
 
   @override
   List<Object> get props => [valeur];
