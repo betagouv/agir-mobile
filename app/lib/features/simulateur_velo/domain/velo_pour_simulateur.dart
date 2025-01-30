@@ -9,3 +9,12 @@ enum VeloPourSimulateur {
   final String label;
   final int prix;
 }
+
+enum VeloEtat {
+  neuf(label: 'Neuf'),
+  occasion(label: 'Occasion');
+
+  const VeloEtat({required this.label});
+
+  final String label;
+}

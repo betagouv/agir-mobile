@@ -5,6 +5,7 @@ import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/simulateur_velo/domain/aide_velo_par_type.dart';
+import 'package:app/features/simulateur_velo/domain/velo_pour_simulateur.dart';
 import 'package:app/features/simulateur_velo/infrastructure/aide_velo_par_type_mapper.dart';
 import 'package:fpdart/fpdart.dart';
 
@@ -16,6 +17,7 @@ class AideVeloRepository {
 
   Future<Either<Exception, AideVeloParType>> simuler({
     required final int prix,
+    required final VeloEtat etatVelo,
     required final String codePostal,
     required final String commune,
     required final double nombreDePartsFiscales,
@@ -31,7 +33,10 @@ class AideVeloRepository {
     return result.fold(Left.new, (final r) async {
       final response = await _client.post(
         Endpoints.simulerAideVelo,
-        data: jsonEncode({'prix_du_velo': prix}),
+        data: jsonEncode({
+          'prix_du_velo': prix,
+          'etat_du_velo': _etatVeloToString(etatVelo),
+        }),
       );
 
       if (response.statusCode! >= HttpStatus.badRequest) {
@@ -42,6 +47,15 @@ class AideVeloRepository {
 
       return Right(AideVeloParTypeMapper.fromJson(json));
     });
+  }
+
+  String _etatVeloToString(final VeloEtat etatVelo) {
+    switch (etatVelo) {
+      case VeloEtat.neuf:
+        return 'neuf';
+      case VeloEtat.occasion:
+        return 'occasion';
+    }
   }
 
   Future<Either<Exception, void>> _mettreAJourProfilEtLogement({

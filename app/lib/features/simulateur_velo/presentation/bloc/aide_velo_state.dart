@@ -1,4 +1,5 @@
 import 'package:app/features/simulateur_velo/domain/aide_velo.dart';
+import 'package:app/features/simulateur_velo/domain/velo_pour_simulateur.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
@@ -8,6 +9,7 @@ enum AideVeloStatut { initial, chargement, succes, erreur }
 final class AideVeloState extends Equatable {
   const AideVeloState({
     required this.prix,
+    required this.etatVelo,
     required this.codePostal,
     required this.communes,
     required this.commune,
@@ -21,6 +23,7 @@ final class AideVeloState extends Equatable {
   const AideVeloState.empty()
       : this(
           prix: 1000,
+          etatVelo: VeloEtat.neuf,
           codePostal: '',
           communes: const [],
           commune: '',
@@ -32,6 +35,7 @@ final class AideVeloState extends Equatable {
         );
 
   final int prix;
+  final VeloEtat etatVelo;
   final bool veutModifierLesInformations;
   final String codePostal;
   final List<String> communes;
@@ -57,6 +61,7 @@ final class AideVeloState extends Equatable {
 
   AideVeloState copyWith({
     final int? prix,
+    final VeloEtat? etatVelo,
     final bool? veutModifierLesInformations,
     final String? codePostal,
     final List<String>? communes,
@@ -68,6 +73,7 @@ final class AideVeloState extends Equatable {
   }) =>
       AideVeloState(
         prix: prix ?? this.prix,
+        etatVelo: etatVelo ?? this.etatVelo,
         codePostal: codePostal ?? this.codePostal,
         communes: communes ?? this.communes,
         commune: commune ?? this.commune,
@@ -83,6 +89,7 @@ final class AideVeloState extends Equatable {
   @override
   List<Object?> get props => [
         prix,
+        etatVelo,
         codePostal,
         communes,
         commune,

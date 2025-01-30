@@ -235,6 +235,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const prixDuVeloExplications =
       'À titre indicatif, voici quelques prix moyens';
   static const prixDuVeloObligatoire = 'Le prix du vélo ne peux pas être vide';
+  static const etatDuVelo = 'État du vélo';
   static const proposePar = 'Proposé par';
   static const propulsePar = 'Propulsé par ';
   static const quelleEstLaSuperficie = 'Quelle est la superficie ?';

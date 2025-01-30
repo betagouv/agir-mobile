@@ -55,7 +55,9 @@ class _AideSimulateurVeloView extends StatelessWidget {
             Text(Localisation.simulerMonAide, style: DsfrTextStyle.headline2()),
             Text(Localisation.acheterUnVelo, style: DsfrTextStyle.bodyXl()),
             SizedBox(height: DsfrSpacings.s2w),
-            _Prix(),
+            _BikeState(),
+            SizedBox(height: DsfrSpacings.s2w),
+            _Price(),
             SizedBox(height: DsfrSpacings.s4w),
             Divider(color: FnvColors.dividerColor),
             SizedBox(height: DsfrSpacings.s3w),
@@ -66,14 +68,14 @@ class _AideSimulateurVeloView extends StatelessWidget {
       );
 }
 
-class _Prix extends StatefulWidget {
-  const _Prix();
+class _Price extends StatefulWidget {
+  const _Price();
 
   @override
-  State<_Prix> createState() => _PrixState();
+  State<_Price> createState() => _PriceState();
 }
 
-class _PrixState extends State<_Prix> {
+class _PriceState extends State<_Price> {
   final _prixVeloController = TextEditingController();
 
   @override
@@ -153,6 +155,39 @@ class _PrixState extends State<_Prix> {
       ],
     );
   }
+}
+
+class _BikeState extends StatefulWidget {
+  const _BikeState();
+
+  @override
+  State<_BikeState> createState() => _BikeStateState();
+}
+
+class _BikeStateState extends State<_BikeState> {
+  @override
+  Widget build(final context) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Align(
+            alignment: Alignment.centerLeft,
+            child: DsfrRadioButtonSet(
+              title: Localisation.etatDuVelo,
+              values: {
+                VeloEtat.neuf: VeloEtat.neuf.label,
+                VeloEtat.occasion: VeloEtat.occasion.label,
+              },
+              onCallback: (final value) {
+                if (value == null) {
+                  return;
+                }
+                context.read<AideVeloBloc>().add(AideVeloEtatChange(value));
+              },
+              initialValue: VeloEtat.neuf,
+            ),
+          ),
+        ],
+      );
 }
 
 class _ElementsNecessaireAuCalcul extends StatelessWidget {
