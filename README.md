@@ -57,6 +57,22 @@ Vous devez avoir correctement installé [Flutter](https://docs.flutter.dev/get-s
     flutter run --flavor development --dart-define-from-file env.development.json --dart-define=cronetHttpNoPlay=true
     ```
 
+### Tests
+
+Dans le dossier `app` :
+
+1. Regénérer les tests gherkin :
+
+    ```sh
+    dart run build_runner build --delete-conflicting-outputs
+    ```
+
+1. Lancer les tests :
+
+    ```sh
+    flutter test --test-randomize-ordering-seed random
+    ```
+
 ## Liens
 
 L'application est branché au [backend](https://github.com/betagouv/agir-back) 
