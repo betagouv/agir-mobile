@@ -54,7 +54,7 @@ Vous devez avoir correctement installé [Flutter](https://docs.flutter.dev/get-s
 1. Aller dans le dossier `app` et lancer cette commande :
 
     ```sh
-    flutter run --flavor development --dart-define-from-file env.development.json
+    flutter run --flavor development --dart-define-from-file env.development.json --dart-define=cronetHttpNoPlay=true
     ```
 
 ## Liens
