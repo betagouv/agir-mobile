@@ -39,15 +39,6 @@ fvm use 3.24.5
     git clone git@github.com:betagouv/jagis-mobile.git && cd jagis-mobile
     ```
 
-1. Ajouter le fichier `android/key.properties` :
-
-    ```properties
-    keyAlias=X
-    keyPassword=X
-    storeFile=X
-    storePassword=X
-    ```
-
 1. Ajouter les fichiers de configuration Firebase :
 
     - `android/app/google-services.json`
