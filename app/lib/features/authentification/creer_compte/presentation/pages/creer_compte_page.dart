@@ -19,7 +19,7 @@ class CreerComptePage extends StatelessWidget {
   @override
   Widget build(final context) => BlocProvider(
         create: (final context) =>
-            CreerCompteBloc(authentificationPort: context.read()),
+            CreerCompteBloc(authentificationRepository: context.read()),
         child: const CreerCompteView(),
       );
 }

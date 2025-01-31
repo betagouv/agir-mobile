@@ -4,7 +4,6 @@ import 'package:app/features/profil/logement/presentation/bloc/mon_logement_stat
 import 'package:app/features/quiz/domain/quiz.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
 
-import 'mocks/authentification_port_mock.dart';
 import 'mocks/mieux_vous_connaitre_port_mock.dart';
 import 'mocks/profil_port_mock.dart';
 import 'mocks/quiz_port_mock.dart';
@@ -43,7 +42,6 @@ class ScenarioContext {
   List<Question> questions = <Question>[];
 
   ProfilPortMock? profilPortMock;
-  AuthentificationPortMock? authentificationPortMock;
   QuizPortMock? quizPortMock;
   MieuxVousConnaitrePortMock? mieuxVousConnaitrePortMock;
   static ScenarioContext? _instance;

@@ -1,5 +1,5 @@
-import 'package:app/features/authentification/core/domain/authentification_port.dart';
 import 'package:app/features/authentification/core/domain/information_de_code.dart';
+import 'package:app/features/authentification/core/infrastructure/authentification_repository.dart';
 import 'package:app/features/authentification/saisie_code/presentation/bloc/saisie_code_event.dart';
 import 'package:app/features/authentification/saisie_code/presentation/bloc/saisie_code_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,7 +7,7 @@ import 'package:fpdart/fpdart.dart';
 
 class SaisieCodeBloc extends Bloc<SaisieCodeEvent, SaisieCodeState> {
   SaisieCodeBloc({
-    required final AuthentificationPort authentificationPort,
+    required final AuthentificationRepository authentificationRepository,
     required final String email,
   }) : super(
           SaisieCodeState(
@@ -18,7 +18,7 @@ class SaisieCodeBloc extends Bloc<SaisieCodeEvent, SaisieCodeState> {
         ) {
     on<SaiseCodeRenvoyerCodeDemandee>((final event, final emit) async {
       emit(state.copyWith(renvoyerCodeDemande: false));
-      await authentificationPort.renvoyerCodeDemande(state.email);
+      await authentificationRepository.renvoyerCodeDemande(state.email);
       emit(state.copyWith(renvoyerCodeDemande: true));
     });
     on<SaisieCodeCodeSaisie>((final event, final emit) async {
@@ -26,7 +26,7 @@ class SaisieCodeBloc extends Bloc<SaisieCodeEvent, SaisieCodeState> {
         return;
       }
 
-      final result = await authentificationPort.validationDemandee(
+      final result = await authentificationRepository.validationDemandee(
         InformationDeCode(adresseMail: state.email, code: event.code),
       );
 

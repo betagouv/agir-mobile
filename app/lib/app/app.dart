@@ -23,7 +23,7 @@ import 'package:app/features/assistances/core/presentation/bloc/aides_accueil_bl
 import 'package:app/features/assistances/item/presentation/bloc/aide_bloc.dart';
 import 'package:app/features/assistances/list/infrastructure/assistances_repository.dart';
 import 'package:app/features/assistances/list/presentation/bloc/aides_disclaimer/aides_disclaimer_cubit.dart';
-import 'package:app/features/authentification/core/domain/authentification_port.dart';
+import 'package:app/features/authentification/core/infrastructure/authentification_repository.dart';
 import 'package:app/features/bibliotheque/infrastructure/bibliotheque_repository.dart';
 import 'package:app/features/bibliotheque/presentation/bloc/bibliotheque_bloc.dart';
 import 'package:app/features/communes/domain/communes_port.dart';
@@ -79,7 +79,6 @@ class App extends StatefulWidget {
     required this.packageInfo,
     required this.notificationService,
     required this.authenticationService,
-    required this.authentificationPort,
     required this.recommandationsPort,
     required this.quizPort,
     required this.communesPort,
@@ -96,7 +95,6 @@ class App extends StatefulWidget {
   final PackageInfo packageInfo;
   final NotificationService notificationService;
   final AuthenticationService authenticationService;
-  final AuthentificationPort authentificationPort;
   final RecommandationsPort recommandationsPort;
   final QuizPort quizPort;
   final CommunesPort communesPort;
@@ -208,7 +206,6 @@ class _AppState extends State<App> {
               RepositoryProvider.value(value: widget.notificationService),
               RepositoryProvider.value(value: widget.tracker),
               RepositoryProvider.value(value: widget.clock),
-              RepositoryProvider.value(value: widget.authentificationPort),
               RepositoryProvider.value(value: assistancesRepository),
               RepositoryProvider.value(value: widget.quizPort),
               RepositoryProvider.value(value: widget.profilPort),
@@ -218,6 +215,12 @@ class _AppState extends State<App> {
               ),
               RepositoryProvider.value(value: widget.mieuxVousConnaitrePort),
               RepositoryProvider.value(value: widget.firstNamePort),
+              RepositoryProvider(
+                create: (final context) => AuthentificationRepository(
+                  client: widget.dioHttpClient,
+                  authenticationService: widget.authenticationService,
+                ),
+              ),
               RepositoryProvider(
                 create: (final context) => ThemeRepository(
                   client: widget.dioHttpClient,

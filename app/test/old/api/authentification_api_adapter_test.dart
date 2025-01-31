@@ -9,7 +9,7 @@ import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/features/authentification/core/domain/information_de_code.dart';
 import 'package:app/features/authentification/core/domain/information_de_connexion.dart';
-import 'package:app/features/authentification/core/infrastructure/authentification_api_adapter.dart';
+import 'package:app/features/authentification/core/infrastructure/authentification_repository.dart';
 import 'package:clock/clock.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -31,7 +31,7 @@ void main() {
       // Arrange.
       final dio = DioMock()..postM(Endpoints.login);
 
-      final adapter = AuthentificationApiAdapter(
+      final adapter = AuthentificationRepository(
         client: DioHttpClient(
           dio: dio,
           authenticationService: authenticationService,
@@ -63,7 +63,7 @@ void main() {
       )
       ..postM(Endpoints.renvoyerCode);
 
-    final adapter = AuthentificationApiAdapter(
+    final adapter = AuthentificationRepository(
       client: DioHttpClient(
         dio: dio,
         authenticationService: authenticationService,
@@ -108,7 +108,7 @@ void main() {
         authenticationRepository: AuthenticationStorage(flutterSecureStorage),
         clock: Clock.fixed(DateTime(1992)),
       );
-      final adapter = AuthentificationApiAdapter(
+      final adapter = AuthentificationRepository(
         client: DioHttpClient(
           dio: dio,
           authenticationService: authenticationService,
@@ -148,7 +148,7 @@ void main() {
       // Arrange.
       final flutterSecureStorageMock = FlutterSecureStorageFake();
 
-      final adapter = AuthentificationApiAdapter(
+      final adapter = AuthentificationRepository(
         client: DioHttpClient(
           dio: DioMock(),
           authenticationService: authenticationService,
@@ -176,7 +176,7 @@ void main() {
         statusCode: HttpStatus.created,
       );
 
-    final adapter = AuthentificationApiAdapter(
+    final adapter = AuthentificationRepository(
       client: DioHttpClient(
         dio: dio,
         authenticationService: authenticationService,
@@ -216,7 +216,7 @@ void main() {
       authenticationRepository: AuthenticationStorage(flutterSecureStorageMock),
       clock: Clock.fixed(DateTime(1992)),
     );
-    final adapter = AuthentificationApiAdapter(
+    final adapter = AuthentificationRepository(
       client: DioHttpClient(
         dio: dio,
         authenticationService: authenticationService,
@@ -246,7 +246,7 @@ void main() {
   test('renvoyerCode', () async {
     final dio = DioMock()..postM(Endpoints.renvoyerCode);
 
-    final adapter = AuthentificationApiAdapter(
+    final adapter = AuthentificationRepository(
       client: DioHttpClient(
         dio: dio,
         authenticationService: authenticationService,
@@ -274,7 +274,7 @@ void main() {
         statusCode: HttpStatus.created,
       );
 
-    final adapter = AuthentificationApiAdapter(
+    final adapter = AuthentificationRepository(
       client: DioHttpClient(
         dio: dio,
         authenticationService: authenticationService,
@@ -296,7 +296,7 @@ void main() {
     final dio = DioMock()
       ..postM(Endpoints.modifierMotDePasse, statusCode: HttpStatus.created);
 
-    final adapter = AuthentificationApiAdapter(
+    final adapter = AuthentificationRepository(
       client: DioHttpClient(
         dio: dio,
         authenticationService: authenticationService,
