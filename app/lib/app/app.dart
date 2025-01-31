@@ -47,7 +47,7 @@ import 'package:app/features/profil/core/domain/profil_port.dart';
 import 'package:app/features/questions/first_name/domain/first_name_port.dart';
 import 'package:app/features/quiz/domain/quiz_port.dart';
 import 'package:app/features/quiz/presentation/pages/quiz_page.dart';
-import 'package:app/features/recommandations/domain/recommandations_port.dart';
+import 'package:app/features/recommandations/infrastructure/recommandations_api_adapter.dart';
 import 'package:app/features/recommandations/presentation/bloc/recommandations_bloc.dart';
 import 'package:app/features/seasonal_fruits_and_vegetables/infrastructure/seasonal_fruits_and_vegetables_repository.dart';
 import 'package:app/features/simulateur_velo/infrastructure/aide_velo_repository.dart';
@@ -79,7 +79,6 @@ class App extends StatefulWidget {
     required this.packageInfo,
     required this.notificationService,
     required this.authenticationService,
-    required this.recommandationsPort,
     required this.quizPort,
     required this.communesPort,
     required this.firstNamePort,
@@ -95,7 +94,6 @@ class App extends StatefulWidget {
   final PackageInfo packageInfo;
   final NotificationService notificationService;
   final AuthenticationService authenticationService;
-  final RecommandationsPort recommandationsPort;
   final QuizPort quizPort;
   final CommunesPort communesPort;
   final FirstNamePort firstNamePort;
@@ -308,7 +306,8 @@ class _AppState extends State<App> {
                 ),
                 BlocProvider(
                   create: (final context) => RecommandationsBloc(
-                    recommandationsPort: widget.recommandationsPort,
+                    recommandationsPort:
+                        RecommandationsApiAdapter(client: widget.dioHttpClient),
                   ),
                 ),
                 BlocProvider(

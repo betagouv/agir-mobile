@@ -16,7 +16,6 @@ import 'package:mocktail_image_network/mocktail_image_network.dart';
 import '../../environmental_performance/summary/environmental_performance_data.dart';
 import '../../features/helper/notification_service_fake.dart';
 import '../../features/helper/package_info_fake.dart';
-import '../../helpers/dio_mock.dart';
 import '../../mission/mission_test.dart';
 import '../api/constants.dart';
 import '../api/flutter_secure_storage_fake.dart';
@@ -24,7 +23,6 @@ import '../mocks/communes_port_mock.dart';
 import '../mocks/mieux_vous_connaitre_port_mock.dart';
 import '../mocks/profil_port_mock.dart';
 import '../mocks/quiz_port_mock.dart';
-import '../mocks/recommandations_port_mock.dart';
 import '../scenario_context.dart';
 
 class _TrackerMock extends Mock implements Tracker {}
@@ -68,7 +66,7 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
   final tracker = _TrackerMock();
   when(() => tracker.navigatorObserver)
       .thenAnswer((final _) => RouteObserver<ModalRoute<void>>());
-  final dioMock = DioMock()
+  ScenarioContext().dioMock!
     ..getM(
       Endpoints.bilan,
       responseData: environmentalPerformancePartialData,
@@ -119,7 +117,7 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
         tracker: tracker,
         messageBus: MessageBus(),
         dioHttpClient: DioHttpClient(
-          dio: dioMock,
+          dio: ScenarioContext().dioMock!,
           authenticationService: authenticationService,
         ),
         packageInfo: const PackageInfoFake(
@@ -129,8 +127,6 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
         notificationService:
             const NotificationServiceFake(AuthorizationStatus.denied),
         authenticationService: authenticationService,
-        recommandationsPort:
-            RecommandationsPortMock(ScenarioContext().recommandations),
         quizPort: ScenarioContext().quizPortMock!,
         communesPort: CommunesPortMock(ScenarioContext().communes),
         firstNamePort: profilPort,
