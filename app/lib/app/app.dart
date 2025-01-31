@@ -7,6 +7,10 @@ import 'package:app/core/authentication/infrastructure/authentication_redirectio
 import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/core/infrastructure/tracker.dart';
+import 'package:app/core/notifications/domain/notification_data.dart';
+import 'package:app/core/notifications/domain/notification_page_type.dart';
+import 'package:app/core/notifications/infrastructure/notification_repository.dart';
+import 'package:app/core/notifications/infrastructure/notification_service.dart';
 import 'package:app/features/actions/detail/infrastructure/action_repository.dart';
 import 'package:app/features/actions/list/domain/actions_port.dart';
 import 'package:app/features/actions/list/infrastructure/actions_adapter.dart';
@@ -39,10 +43,6 @@ import 'package:app/features/mission/home/infrastructure/mission_home_repository
 import 'package:app/features/mission/home/presentation/bloc/mission_home_bloc.dart';
 import 'package:app/features/mission/mission/infrastructure/mission_repository.dart';
 import 'package:app/features/mission/mission/presentation/pages/mission_page.dart';
-import 'package:app/features/notifications/domain/notification_data.dart';
-import 'package:app/features/notifications/domain/notification_page_type.dart';
-import 'package:app/features/notifications/infrastructure/notification_repository.dart';
-import 'package:app/features/notifications/infrastructure/notification_service.dart';
 import 'package:app/features/profil/core/domain/profil_port.dart';
 import 'package:app/features/questions/first_name/domain/first_name_port.dart';
 import 'package:app/features/quiz/domain/quiz_port.dart';

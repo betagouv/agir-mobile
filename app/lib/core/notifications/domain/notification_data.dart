@@ -1,4 +1,4 @@
-import 'package:app/features/notifications/domain/notification_page_type.dart';
+import 'package:app/core/notifications/domain/notification_page_type.dart';
 import 'package:equatable/equatable.dart';
 
 class NotificationData extends Equatable {

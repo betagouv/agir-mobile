@@ -2,9 +2,9 @@
 
 import 'dart:async';
 
-import 'package:app/features/notifications/domain/notification_data.dart';
-import 'package:app/features/notifications/infrastructure/firebase_options.dart';
-import 'package:app/features/notifications/infrastructure/notification_data_mapper.dart';
+import 'package:app/core/notifications/domain/notification_data.dart';
+import 'package:app/core/notifications/infrastructure/firebase_options.dart';
+import 'package:app/core/notifications/infrastructure/notification_data_mapper.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 

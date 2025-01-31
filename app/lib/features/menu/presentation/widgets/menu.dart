@@ -1,3 +1,4 @@
+import 'package:app/core/notifications/infrastructure/notification_repository.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/actions/list/presentation/pages/action_list_page.dart';
@@ -6,7 +7,6 @@ import 'package:app/features/authentification/core/domain/authentification_port.
 import 'package:app/features/bibliotheque/presentation/pages/bibliotheque_page.dart';
 import 'package:app/features/environmental_performance/summary/presentation/page/environmental_performance_summary_page.dart';
 import 'package:app/features/home/presentation/pages/home_page.dart';
-import 'package:app/features/notifications/infrastructure/notification_repository.dart';
 import 'package:app/features/profil/profil/presentation/pages/profil_page.dart';
 import 'package:app/features/version/presentation/widgets/version_label.dart';
 import 'package:app/l10n/l10n.dart';
