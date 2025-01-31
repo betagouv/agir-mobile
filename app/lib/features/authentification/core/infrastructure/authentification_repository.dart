@@ -7,13 +7,12 @@ import 'package:app/core/error/infrastructure/api_erreur_helpers.dart';
 import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
-import 'package:app/features/authentification/core/domain/authentification_port.dart';
 import 'package:app/features/authentification/core/domain/information_de_code.dart';
 import 'package:app/features/authentification/core/domain/information_de_connexion.dart';
 import 'package:fpdart/fpdart.dart';
 
-class AuthentificationApiAdapter implements AuthentificationPort {
-  AuthentificationApiAdapter({
+class AuthentificationRepository {
+  AuthentificationRepository({
     required final DioHttpClient client,
     required final AuthenticationService authenticationService,
   })  : _client = client,
@@ -23,7 +22,6 @@ class AuthentificationApiAdapter implements AuthentificationPort {
   final AuthenticationService _authenticationService;
   bool _connexionDemandee = false;
 
-  @override
   Future<Either<ApiErreur, void>> connexionDemandee(
     final InformationDeConnexion informationDeConnexion,
   ) async {
@@ -58,14 +56,12 @@ class AuthentificationApiAdapter implements AuthentificationPort {
     );
   }
 
-  @override
   Future<Either<Exception, void>> deconnexionDemandee() async {
     await _authenticationService.logout();
 
     return const Right(null);
   }
 
-  @override
   Future<Either<ApiErreur, void>> creationDeCompteDemandee(
     final InformationDeConnexion informationDeConnexion,
   ) async {
@@ -86,7 +82,6 @@ class AuthentificationApiAdapter implements AuthentificationPort {
           );
   }
 
-  @override
   Future<Either<Exception, void>> renvoyerCodeDemande(
     final String email,
   ) async {
@@ -100,7 +95,6 @@ class AuthentificationApiAdapter implements AuthentificationPort {
         : Left(Exception('Erreur lors de la validation du code'));
   }
 
-  @override
   Future<Either<ApiErreur, void>> validationDemandee(
     final InformationDeCode informationDeConnexion,
   ) async {
@@ -131,7 +125,6 @@ class AuthentificationApiAdapter implements AuthentificationPort {
     );
   }
 
-  @override
   Future<Either<Exception, void>> oubliMotDePasse(final String email) async {
     final response = await _client.post(
       Endpoints.oubliMotDePasse,
@@ -143,7 +136,6 @@ class AuthentificationApiAdapter implements AuthentificationPort {
         : Left(Exception('Erreur lors de la demande de mot de passe oublié'));
   }
 
-  @override
   Future<Either<ApiErreur, void>> modifierMotDePasse({
     required final String email,
     required final String code,

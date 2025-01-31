@@ -20,7 +20,6 @@ import '../../helpers/dio_mock.dart';
 import '../../mission/mission_test.dart';
 import '../api/constants.dart';
 import '../api/flutter_secure_storage_fake.dart';
-import '../mocks/authentification_port_mock.dart';
 import '../mocks/communes_port_mock.dart';
 import '../mocks/mieux_vous_connaitre_port_mock.dart';
 import '../mocks/profil_port_mock.dart';
@@ -64,9 +63,6 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
   final mieuxVousConnaitrePort = ScenarioContext().mieuxVousConnaitrePortMock!;
 
   ScenarioContext().quizPortMock = QuizPortMock(ScenarioContext().quiz);
-  ScenarioContext().authentificationPortMock = AuthentificationPortMock(
-    authenticationService,
-  );
 
   final profilPort = ScenarioContext().profilPortMock!;
   final tracker = _TrackerMock();
@@ -133,7 +129,6 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
         notificationService:
             const NotificationServiceFake(AuthorizationStatus.denied),
         authenticationService: authenticationService,
-        authentificationPort: ScenarioContext().authentificationPortMock!,
         recommandationsPort:
             RecommandationsPortMock(ScenarioContext().recommandations),
         quizPort: ScenarioContext().quizPortMock!,

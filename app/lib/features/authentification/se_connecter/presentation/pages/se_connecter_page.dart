@@ -19,7 +19,7 @@ class SeConnecterPage extends StatelessWidget {
   @override
   Widget build(final context) => BlocProvider(
         create: (final context) =>
-            SeConnecterBloc(authentificationPort: context.read()),
+            SeConnecterBloc(authentificationRepository: context.read()),
         child: const SeConnecterView(),
       );
 }
