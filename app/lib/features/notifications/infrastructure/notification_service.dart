@@ -9,6 +9,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 class NotificationService {
+  static const _topicAll = 'all';
   final _messageController = StreamController<NotificationData>.broadcast();
 
   Future<void> initializeApp() async => Firebase.initializeApp(
@@ -26,6 +27,7 @@ class NotificationService {
         badge: true,
         sound: true,
       );
+      await FirebaseMessaging.instance.subscribeToTopic(_topicAll);
     }
 
     final initialMessage = await FirebaseMessaging.instance.getInitialMessage();
@@ -47,5 +49,8 @@ class NotificationService {
 
   Stream<NotificationData> get onMessageOpenedApp => _messageController.stream;
 
-  Future<void> deleteToken() async => FirebaseMessaging.instance.deleteToken();
+  Future<void> deleteToken() async {
+    await FirebaseMessaging.instance.unsubscribeFromTopic(_topicAll);
+    await FirebaseMessaging.instance.deleteToken();
+  }
 }
