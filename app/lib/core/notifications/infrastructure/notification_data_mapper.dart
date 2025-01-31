@@ -1,5 +1,5 @@
-import 'package:app/features/notifications/domain/notification_data.dart';
-import 'package:app/features/notifications/domain/notification_page_type.dart';
+import 'package:app/core/notifications/domain/notification_data.dart';
+import 'package:app/core/notifications/domain/notification_page_type.dart';
 
 abstract final class NotificationDataMapper {
   const NotificationDataMapper._();

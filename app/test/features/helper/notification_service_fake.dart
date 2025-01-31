@@ -1,5 +1,5 @@
-import 'package:app/features/notifications/domain/notification_data.dart';
-import 'package:app/features/notifications/infrastructure/notification_service.dart';
+import 'package:app/core/notifications/domain/notification_data.dart';
+import 'package:app/core/notifications/infrastructure/notification_service.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 class NotificationServiceFake implements NotificationService {

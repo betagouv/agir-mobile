@@ -1,6 +1,7 @@
 import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/message_bus.dart';
+import 'package:app/core/notifications/infrastructure/notification_service.dart';
 import 'package:app/features/actions/section/infrastructure/actions_repository.dart';
 import 'package:app/features/actions/section/presentation/bloc/actions_bloc.dart';
 import 'package:app/features/assistances/core/presentation/bloc/aides_accueil_bloc.dart';
@@ -18,7 +19,6 @@ import 'package:app/features/mission/home/infrastructure/mission_home_repository
 import 'package:app/features/mission/home/presentation/bloc/mission_home_bloc.dart';
 import 'package:app/features/mission/mission/infrastructure/mission_repository.dart';
 import 'package:app/features/mission/mission/presentation/pages/mission_page.dart';
-import 'package:app/features/notifications/infrastructure/notification_service.dart';
 import 'package:app/features/recommandations/presentation/bloc/recommandations_bloc.dart';
 import 'package:app/features/utilisateur/infrastructure/user_repository.dart';
 import 'package:app/features/utilisateur/presentation/bloc/user_bloc.dart';
