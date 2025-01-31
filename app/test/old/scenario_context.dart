@@ -2,8 +2,8 @@ import 'package:app/core/authentication/domain/authentication_status.dart';
 import 'package:app/features/know_your_customer/core/domain/question.dart';
 import 'package:app/features/profil/logement/presentation/bloc/mon_logement_state.dart';
 import 'package:app/features/quiz/domain/quiz.dart';
-import 'package:app/features/recommandations/domain/recommandation.dart';
 
+import '../helpers/dio_mock.dart';
 import 'mocks/mieux_vous_connaitre_port_mock.dart';
 import 'mocks/profil_port_mock.dart';
 import 'mocks/quiz_port_mock.dart';
@@ -11,6 +11,7 @@ import 'mocks/quiz_port_mock.dart';
 class ScenarioContext {
   factory ScenarioContext() => _instance ??= ScenarioContext._();
   ScenarioContext._();
+  DioMock? dioMock;
   AuthenticationStatus authentificationStatut = const Unauthenticated();
   String email = 'lucas@saudon.fr';
   String prenom = 'Lucas';
@@ -27,7 +28,6 @@ class ScenarioContext {
   Dpe? dpe;
   double nombreDePartsFiscales = 0;
   int? revenuFiscal;
-  List<Recommandation> recommandations = <Recommandation>[];
   Quiz quiz = const Quiz(
     id: '',
     thematique: '',

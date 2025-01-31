@@ -1,6 +1,4 @@
 import 'package:app/features/quiz/domain/quiz.dart';
-import 'package:app/features/recommandations/domain/recommandation.dart';
-import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail_image_network/mocktail_image_network.dart';
@@ -23,18 +21,7 @@ void main() {
 
       await mockNetworkImages(() async {
         const titre = 'Une assiette plus durable';
-
-        const recommandation = Recommandation(
-          id: '42',
-          type: TypeDuContenu.quiz,
-          titre: titre,
-          sousTitre: null,
-          imageUrl:
-              'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1702068380/jonathan_ford_6_Zg_T_Etv_D16_I_unsplash_00217cb281.jpg',
-          points: 20,
-          thematique: ThemeType.alimentation,
-        );
-        ielALesRecommandationsSuivantes([recommandation]);
+        ielALesRecommandationsSuivantes(titre);
         const question =
             'Quelle action est la plus efficace pour une alimentation plus durable ?';
         ielALeQuizSuivant(
@@ -65,12 +52,7 @@ void main() {
             article: null,
           ),
         );
-        ielEstConnecte();
-        await ielLanceLapplication(tester);
-        await tester.tap(find.text('Me nourrir').last);
-        await tester.pumpAndSettle();
-        await ielScrolle(tester, recommandation.titre);
-        await ielAppuieSur(tester, recommandation.titre);
+        await _init(tester, titre);
         ielVoitLeTexte(question);
       });
     },
@@ -82,18 +64,7 @@ void main() {
       setUpWidgets(tester);
       await mockNetworkImages(() async {
         const titre = 'Une assiette plus durable';
-
-        const recommandation = Recommandation(
-          id: '42',
-          type: TypeDuContenu.quiz,
-          titre: titre,
-          sousTitre: null,
-          imageUrl:
-              'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1702068380/jonathan_ford_6_Zg_T_Etv_D16_I_unsplash_00217cb281.jpg',
-          points: 20,
-          thematique: ThemeType.alimentation,
-        );
-        ielALesRecommandationsSuivantes([recommandation]);
+        ielALesRecommandationsSuivantes(titre);
         const reponse = 'Diminuer la consommation de viande';
         ielALeQuizSuivant(
           const Quiz(
@@ -122,12 +93,7 @@ void main() {
                 "<p>Que l’on se rende dans un magasin de quartier pour faire ses courses, qu’on allume la lumière ou qu’on chauffe son logement, l’ensemble de nos actions quotidiennes a un impact sur l’environnement. Cet impact, c’est ce que l’on appelle l’<strong>empreinte carbone</strong>, comme une trace invisible que nous laissons derrière nous.</p><p>Elle mesure la quantité totale de gaz à effet de serre (dioxyde de carbone (CO2), protoxyde d'azote, méthane, ...) liés à notre consommation et permet donc de quantifier nos émissions selon notre mode de vie. Elle peut concerner les émissions d’un individu (son mode de vie), d’une entreprise (ses activités) ou d’une population, d'un territoire.</p><ul><li><p>Au niveau des entreprises, la loi Grenelle II impose depuis juillet 2020 le Bilan GES Réglementaire à un nombre de structures publiques et privées. Cela concerne les entreprises publiques de plus de 250 personnes, 500 personnes pour les privées (250 en outre-mer), les collectivités de plus de 50 000 habitants et l’État.</p></li><li><p>A l'échelle du pays, l'empreinte carbone moyenne d'un Français est estimée à <strong>8,9 tonnes d'équivalent CO2</strong> en 2021. Or, pour respecter les objectifs de l’Accord de Paris et maintenir le réchauffement planétaire sous les 2°C, il nous faudrait réduire ce nombre à <strong>deux tonnes</strong>, autrement dit : le diviser presque par cinq !</p></li></ul><p><em>Pour en savoir plus sur l'empreinte carbone de la France, </em><a target=\"_self\" rel=\"\" href=\"/article/L'empreinte carbone de la France/11\"><em>c'est par ici.</em></a></p><h2>Comment connaître votre empreinte carbone ?</h2><p>L’empreinte carbone se calcule aussi au niveau individuel, et elle dépend directement d’un ensemble d’activités que nous effectuons quotidiennement. Calculer son empreinte carbone, c'est prendre conscience de ses activités quotidiennes et de leurs conséquences pour l'environnement.</p><p>On peut ainsi cibler les activités les plus polluantes et ajuster nos usages et nos habitudes de consommation pour diminuer notre impact. Faites le bilan avec le calculateur de l'Ademe : <a target=\"_blank\" rel=\"\" class=\"in-cell-link\" href=\"https://nosgestesclimat.fr/\"><span style=\"color: rgb(17, 85, 204)\">Nos Gestes Climat</span></a>.</p>",
           ),
         );
-        ielEstConnecte();
-        await ielLanceLapplication(tester);
-        await tester.tap(find.text('Me nourrir').last);
-        await tester.pumpAndSettle();
-        await ielScrolle(tester, recommandation.titre);
-        await ielAppuieSur(tester, recommandation.titre);
+        await _init(tester, titre);
         await ielAppuieSur(tester, reponse);
         await ielAppuieSur(tester, Localisation.valider);
         ielVoitLeTexte(Localisation.pourquoi);
@@ -145,18 +111,7 @@ void main() {
       setUpWidgets(tester);
       await mockNetworkImages(() async {
         const titre = 'Une assiette plus durable';
-
-        const recommandation = Recommandation(
-          id: '42',
-          type: TypeDuContenu.quiz,
-          titre: titre,
-          sousTitre: null,
-          imageUrl:
-              'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1702068380/jonathan_ford_6_Zg_T_Etv_D16_I_unsplash_00217cb281.jpg',
-          points: 20,
-          thematique: ThemeType.alimentation,
-        );
-        ielALesRecommandationsSuivantes([recommandation]);
+        ielALesRecommandationsSuivantes(titre);
         const reponse = 'Diminuer la consommation de viande';
         ielALeQuizSuivant(
           const Quiz(
@@ -184,12 +139,7 @@ void main() {
             article: null,
           ),
         );
-        ielEstConnecte();
-        await ielLanceLapplication(tester);
-        await tester.tap(find.text('Me nourrir').last);
-        await tester.pumpAndSettle();
-        await ielScrolle(tester, recommandation.titre);
-        await ielAppuieSur(tester, recommandation.titre);
+        await _init(tester, titre);
         await ielAppuieSur(tester, reponse);
         await ielAppuieSur(tester, Localisation.valider);
         ielVoitLeTexte(Localisation.pourquoi);
@@ -207,18 +157,7 @@ void main() {
       setUpWidgets(tester);
       await mockNetworkImages(() async {
         const titre = 'Une assiette plus durable';
-
-        const recommandation = Recommandation(
-          id: '42',
-          type: TypeDuContenu.quiz,
-          titre: titre,
-          sousTitre: null,
-          imageUrl:
-              'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1702068380/jonathan_ford_6_Zg_T_Etv_D16_I_unsplash_00217cb281.jpg',
-          points: 20,
-          thematique: ThemeType.alimentation,
-        );
-        ielALesRecommandationsSuivantes([recommandation]);
+        ielALesRecommandationsSuivantes(titre);
         const reponse = 'Manger moins de produits de saison';
         ielALeQuizSuivant(
           const Quiz(
@@ -247,12 +186,7 @@ void main() {
                 "<p>Que l’on se rende dans un magasin de quartier pour faire ses courses, qu’on allume la lumière ou qu’on chauffe son logement, l’ensemble de nos actions quotidiennes a un impact sur l’environnement. Cet impact, c’est ce que l’on appelle l’<strong>empreinte carbone</strong>, comme une trace invisible que nous laissons derrière nous.</p><p>Elle mesure la quantité totale de gaz à effet de serre (dioxyde de carbone (CO2), protoxyde d'azote, méthane, ...) liés à notre consommation et permet donc de quantifier nos émissions selon notre mode de vie. Elle peut concerner les émissions d’un individu (son mode de vie), d’une entreprise (ses activités) ou d’une population, d'un territoire.</p><ul><li><p>Au niveau des entreprises, la loi Grenelle II impose depuis juillet 2020 le Bilan GES Réglementaire à un nombre de structures publiques et privées. Cela concerne les entreprises publiques de plus de 250 personnes, 500 personnes pour les privées (250 en outre-mer), les collectivités de plus de 50 000 habitants et l’État.</p></li><li><p>A l'échelle du pays, l'empreinte carbone moyenne d'un Français est estimée à <strong>8,9 tonnes d'équivalent CO2</strong> en 2021. Or, pour respecter les objectifs de l’Accord de Paris et maintenir le réchauffement planétaire sous les 2°C, il nous faudrait réduire ce nombre à <strong>deux tonnes</strong>, autrement dit : le diviser presque par cinq !</p></li></ul><p><em>Pour en savoir plus sur l'empreinte carbone de la France, </em><a target=\"_self\" rel=\"\" href=\"/article/L'empreinte carbone de la France/11\"><em>c'est par ici.</em></a></p><h2>Comment connaître votre empreinte carbone ?</h2><p>L’empreinte carbone se calcule aussi au niveau individuel, et elle dépend directement d’un ensemble d’activités que nous effectuons quotidiennement. Calculer son empreinte carbone, c'est prendre conscience de ses activités quotidiennes et de leurs conséquences pour l'environnement.</p><p>On peut ainsi cibler les activités les plus polluantes et ajuster nos usages et nos habitudes de consommation pour diminuer notre impact. Faites le bilan avec le calculateur de l'Ademe : <a target=\"_blank\" rel=\"\" class=\"in-cell-link\" href=\"https://nosgestesclimat.fr/\"><span style=\"color: rgb(17, 85, 204)\">Nos Gestes Climat</span></a>.</p>",
           ),
         );
-        ielEstConnecte();
-        await ielLanceLapplication(tester);
-        await tester.tap(find.text('Me nourrir').last);
-        await tester.pumpAndSettle();
-        await ielScrolle(tester, recommandation.titre);
-        await ielAppuieSur(tester, recommandation.titre);
+        await _init(tester, titre);
         await ielAppuieSur(tester, reponse);
         await ielAppuieSur(tester, Localisation.valider);
         ielVoitLeTexte(Localisation.pourquoi);
@@ -263,4 +197,13 @@ void main() {
       });
     },
   );
+}
+
+Future<void> _init(final WidgetTester tester, final String titre) async {
+  ielEstConnecte();
+  await ielLanceLapplication(tester);
+  await tester.tap(find.text('Me nourrir').last);
+  await tester.pumpAndSettle();
+  await ielScrolle(tester, titre);
+  await ielAppuieSur(tester, titre);
 }

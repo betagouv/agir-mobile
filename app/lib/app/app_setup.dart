@@ -19,7 +19,6 @@ import 'package:app/features/know_your_customer/list/infrastructure/know_your_cu
 import 'package:app/features/profil/core/infrastructure/profil_api_adapter.dart';
 import 'package:app/features/questions/first_name/infrastructure/first_name_adapter.dart';
 import 'package:app/features/quiz/infrastructure/quiz_api_adapter.dart';
-import 'package:app/features/recommandations/infrastructure/recommandations_api_adapter.dart';
 import 'package:clock/clock.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
@@ -153,7 +152,6 @@ class _AppSetupState extends State<AppSetup> {
             packageInfo: _packageInfo,
             notificationService: _notificationService,
             authenticationService: _authenticationService,
-            recommandationsPort: RecommandationsApiAdapter(client: client),
             quizPort: QuizApiAdapter(client: client),
             communesPort: CommunesApiAdapter(client: client),
             firstNamePort: FirstNameAdapter(client: client),
