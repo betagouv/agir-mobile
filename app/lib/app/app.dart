@@ -45,7 +45,7 @@ import 'package:app/features/mission/mission/infrastructure/mission_repository.d
 import 'package:app/features/mission/mission/presentation/pages/mission_page.dart';
 import 'package:app/features/profil/core/infrastructure/profil_repository.dart';
 import 'package:app/features/questions/first_name/infrastructure/first_name_repository.dart';
-import 'package:app/features/quiz/domain/quiz_port.dart';
+import 'package:app/features/quiz/infrastructure/quiz_repository.dart';
 import 'package:app/features/quiz/presentation/pages/quiz_page.dart';
 import 'package:app/features/recommandations/infrastructure/recommandations_api_adapter.dart';
 import 'package:app/features/recommandations/presentation/bloc/recommandations_bloc.dart';
@@ -79,7 +79,6 @@ class App extends StatefulWidget {
     required this.packageInfo,
     required this.notificationService,
     required this.authenticationService,
-    required this.quizPort,
   });
 
   final Clock clock;
@@ -89,7 +88,6 @@ class App extends StatefulWidget {
   final PackageInfo packageInfo;
   final NotificationService notificationService;
   final AuthenticationService authenticationService;
-  final QuizPort quizPort;
 
   @override
   State<App> createState() => _AppState();
@@ -200,15 +198,12 @@ class _AppState extends State<App> {
               RepositoryProvider.value(value: widget.notificationService),
               RepositoryProvider.value(value: widget.tracker),
               RepositoryProvider.value(value: widget.clock),
-              RepositoryProvider.value(value: widget.quizPort),
               RepositoryProvider.value(value: communesRepository),
               RepositoryProvider.value(value: gamificationRepository),
               RepositoryProvider.value(value: profilRepository),
               RepositoryProvider(
-                create: (final context) => communesRepository,
-              ),
-              RepositoryProvider(
-                create: (final context) => gamificationRepository,
+                create: (final context) =>
+                    QuizRepository(client: widget.dioHttpClient),
               ),
               RepositoryProvider(
                 create: (final context) => assistancesRepository,

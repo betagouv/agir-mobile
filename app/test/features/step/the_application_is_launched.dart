@@ -4,7 +4,6 @@ import 'package:app/core/authentication/infrastructure/authentication_storage.da
 import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/core/infrastructure/tracker.dart';
-import 'package:app/features/quiz/infrastructure/quiz_api_adapter.dart';
 import 'package:clock/clock.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +45,6 @@ Future<void> theApplicationIsLaunched(final WidgetTester tester) async {
       notificationService:
           const NotificationServiceFake(AuthorizationStatus.authorized),
       authenticationService: authenticationService,
-      quizPort: QuizApiAdapter(client: dioHttpClient),
     ),
     Durations.short1,
   );

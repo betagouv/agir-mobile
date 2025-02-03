@@ -4,17 +4,15 @@ import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/quiz/domain/quiz.dart';
-import 'package:app/features/quiz/domain/quiz_port.dart';
 import 'package:app/features/quiz/infrastructure/quiz_mapper.dart';
 import 'package:fpdart/fpdart.dart';
 
-class QuizApiAdapter implements QuizPort {
-  const QuizApiAdapter({required final DioHttpClient client})
+class QuizRepository {
+  const QuizRepository({required final DioHttpClient client})
       : _client = client;
 
   final DioHttpClient _client;
 
-  @override
   Future<Either<Exception, Quiz>> recupererQuiz(final String id) async {
     final response = await _client.get(Endpoints.quiz(id));
 
@@ -27,7 +25,6 @@ class QuizApiAdapter implements QuizPort {
     return Right(QuizMapper.fromJson(json: json));
   }
 
-  @override
   Future<Either<Exception, void>> terminerQuiz({
     required final String id,
     required final bool estExacte,
