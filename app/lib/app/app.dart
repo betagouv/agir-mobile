@@ -44,7 +44,7 @@ import 'package:app/features/mission/home/presentation/bloc/mission_home_bloc.da
 import 'package:app/features/mission/mission/infrastructure/mission_repository.dart';
 import 'package:app/features/mission/mission/presentation/pages/mission_page.dart';
 import 'package:app/features/profil/core/domain/profil_port.dart';
-import 'package:app/features/questions/first_name/domain/first_name_port.dart';
+import 'package:app/features/questions/first_name/infrastructure/first_name_repository.dart';
 import 'package:app/features/quiz/domain/quiz_port.dart';
 import 'package:app/features/quiz/presentation/pages/quiz_page.dart';
 import 'package:app/features/recommandations/infrastructure/recommandations_api_adapter.dart';
@@ -80,7 +80,6 @@ class App extends StatefulWidget {
     required this.notificationService,
     required this.authenticationService,
     required this.quizPort,
-    required this.firstNamePort,
     required this.profilPort,
     required this.knowYourCustomersRepository,
     required this.mieuxVousConnaitrePort,
@@ -94,7 +93,6 @@ class App extends StatefulWidget {
   final NotificationService notificationService;
   final AuthenticationService authenticationService;
   final QuizPort quizPort;
-  final FirstNamePort firstNamePort;
   final ProfilPort profilPort;
   final KnowYourCustomersRepository knowYourCustomersRepository;
   final MieuxVousConnaitrePort mieuxVousConnaitrePort;
@@ -213,7 +211,11 @@ class _AppState extends State<App> {
                 value: widget.knowYourCustomersRepository,
               ),
               RepositoryProvider.value(value: widget.mieuxVousConnaitrePort),
-              RepositoryProvider.value(value: widget.firstNamePort),
+              RepositoryProvider(
+                create: (final context) => FirstNameRepository(
+                  client: widget.dioHttpClient,
+                ),
+              ),
               RepositoryProvider.value(value: communesRepository),
               RepositoryProvider(
                 create: (final context) => AuthentificationRepository(

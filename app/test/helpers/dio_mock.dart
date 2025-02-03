@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -8,8 +10,8 @@ class DioMock extends Mock implements Dio {
 
   void getM<T>(
     final String path, {
+    final int statusCode = HttpStatus.ok,
     required final T responseData,
-    final int statusCode = 200,
   }) {
     when(() => get<dynamic>(path)).thenAnswer(
       (final answer) async => Response(
@@ -22,9 +24,9 @@ class DioMock extends Mock implements Dio {
 
   void postM(
     final String path, {
+    final int statusCode = HttpStatus.ok,
     final dynamic requestData,
     final dynamic responseData,
-    final int statusCode = 200,
   }) {
     when(() => post<dynamic>(path, data: requestData ?? any(named: 'data')))
         .thenAnswer(
@@ -38,12 +40,14 @@ class DioMock extends Mock implements Dio {
 
   void patchM(
     final String path, {
+    final int statusCode = HttpStatus.ok,
     final dynamic requestData,
-    final int statusCode = 200,
+    final dynamic responseData,
   }) {
     when(() => patch<dynamic>(path, data: requestData ?? any(named: 'data')))
         .thenAnswer(
       (final _) async => Response(
+        data: responseData,
         requestOptions: RequestOptions(path: path),
         statusCode: statusCode,
       ),
@@ -52,8 +56,8 @@ class DioMock extends Mock implements Dio {
 
   void putM(
     final String path, {
+    final int statusCode = HttpStatus.ok,
     final dynamic requestData,
-    final int statusCode = 200,
   }) {
     when(() => put<dynamic>(path, data: requestData ?? any(named: 'data')))
         .thenAnswer(
@@ -66,8 +70,8 @@ class DioMock extends Mock implements Dio {
 
   void deleteM(
     final String path, {
+    final int statusCode = HttpStatus.ok,
     final dynamic requestData,
-    final int statusCode = 200,
   }) {
     when(() => delete<dynamic>(path, data: requestData ?? any(named: 'data')))
         .thenAnswer(

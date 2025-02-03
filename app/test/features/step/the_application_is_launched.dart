@@ -7,7 +7,6 @@ import 'package:app/core/infrastructure/tracker.dart';
 import 'package:app/features/know_your_customer/core/infrastructure/mieux_vous_connaitre_api_adapter.dart';
 import 'package:app/features/know_your_customer/list/infrastructure/know_your_customers_repository.dart';
 import 'package:app/features/profil/core/infrastructure/profil_api_adapter.dart';
-import 'package:app/features/questions/first_name/infrastructure/first_name_adapter.dart';
 import 'package:app/features/quiz/infrastructure/quiz_api_adapter.dart';
 import 'package:clock/clock.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -51,7 +50,6 @@ Future<void> theApplicationIsLaunched(final WidgetTester tester) async {
           const NotificationServiceFake(AuthorizationStatus.authorized),
       authenticationService: authenticationService,
       quizPort: QuizApiAdapter(client: dioHttpClient),
-      firstNamePort: FirstNameAdapter(client: dioHttpClient),
       profilPort: ProfilApiAdapter(client: dioHttpClient),
       knowYourCustomersRepository:
           KnowYourCustomersRepository(client: dioHttpClient),

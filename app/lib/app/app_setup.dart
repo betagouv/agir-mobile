@@ -16,7 +16,6 @@ import 'package:app/core/presentation/pages/error_page.dart';
 import 'package:app/features/know_your_customer/core/infrastructure/mieux_vous_connaitre_api_adapter.dart';
 import 'package:app/features/know_your_customer/list/infrastructure/know_your_customers_repository.dart';
 import 'package:app/features/profil/core/infrastructure/profil_api_adapter.dart';
-import 'package:app/features/questions/first_name/infrastructure/first_name_adapter.dart';
 import 'package:app/features/quiz/infrastructure/quiz_api_adapter.dart';
 import 'package:clock/clock.dart';
 import 'package:dio/dio.dart';
@@ -152,7 +151,6 @@ class _AppSetupState extends State<AppSetup> {
             notificationService: _notificationService,
             authenticationService: _authenticationService,
             quizPort: QuizApiAdapter(client: client),
-            firstNamePort: FirstNameAdapter(client: client),
             profilPort: ProfilApiAdapter(client: client),
             knowYourCustomersRepository:
                 KnowYourCustomersRepository(client: client),
