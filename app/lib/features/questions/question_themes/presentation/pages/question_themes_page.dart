@@ -31,7 +31,7 @@ class QuestionThemesPage extends StatelessWidget {
   @override
   Widget build(final context) => BlocProvider(
         create: (final context) =>
-            QuestionThemesBloc(mieuxVousConnaitrePort: context.read())
+            QuestionThemesBloc(mieuxVousConnaitreRepository: context.read())
               ..add(const QuestionThemesRecuperationDemandee()),
         child: const _View(),
       );

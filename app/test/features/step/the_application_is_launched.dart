@@ -4,8 +4,6 @@ import 'package:app/core/authentication/infrastructure/authentication_storage.da
 import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/core/infrastructure/tracker.dart';
-import 'package:app/features/know_your_customer/core/infrastructure/mieux_vous_connaitre_api_adapter.dart';
-import 'package:app/features/know_your_customer/list/infrastructure/know_your_customers_repository.dart';
 import 'package:app/features/profil/core/infrastructure/profil_api_adapter.dart';
 import 'package:app/features/quiz/infrastructure/quiz_api_adapter.dart';
 import 'package:clock/clock.dart';
@@ -51,12 +49,6 @@ Future<void> theApplicationIsLaunched(final WidgetTester tester) async {
       authenticationService: authenticationService,
       quizPort: QuizApiAdapter(client: dioHttpClient),
       profilPort: ProfilApiAdapter(client: dioHttpClient),
-      knowYourCustomersRepository:
-          KnowYourCustomersRepository(client: dioHttpClient),
-      mieuxVousConnaitrePort: MieuxVousConnaitreApiAdapter(
-        client: dioHttpClient,
-        messageBus: messageBus,
-      ),
     ),
     Durations.short1,
   );

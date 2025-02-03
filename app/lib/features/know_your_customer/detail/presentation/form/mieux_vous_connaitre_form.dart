@@ -32,7 +32,7 @@ class MieuxVousConnaitreForm extends StatelessWidget {
   @override
   Widget build(final context) => BlocProvider(
         create: (final context) => MieuxVousConnaitreEditBloc(
-          mieuxVousConnaitrePort: context.read(),
+          mieuxVousConnaitreRepository: context.read(),
         )..add(MieuxVousConnaitreEditRecuperationDemandee(id)),
         lazy: false,
         child: _Content(controller: controller, onSaved: onSaved),

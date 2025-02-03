@@ -1,8 +1,3 @@
-import 'package:app/features/know_your_customer/core/domain/question.dart';
-import 'package:app/features/know_your_customer/core/domain/question_code.dart';
-import 'package:app/features/know_your_customer/core/domain/response.dart';
-import 'package:app/features/know_your_customer/core/domain/response_choice.dart';
-import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -23,16 +18,19 @@ void main() {
       setUpWidgets(tester);
       const question = 'Quelle est votre situation professionnelle ?';
       const reponse = 'J’ai un emploi';
-      leServeurRetourneCesQuestions([
-        const QuestionOpen(
-          id: QuestionCode('KYC005'),
-          theme: ThemeType.decouverte,
-          label: question,
-          isAnswered: true,
-          response: Response(value: reponse),
-          points: 5,
-        ),
-      ]);
+      leServeurRetourneCesQuestions(
+        [
+          {
+            'code': 'KYC005',
+            'type': 'libre',
+            'thematique': 'decouverte',
+            'question': question,
+            'is_answered': true,
+            'reponse_unique': {'value': reponse},
+            'points': 5,
+          },
+        ],
+      );
       await _allerSurMieuxVousConnaitre(tester);
       await ielAppuieSur(tester, question);
       ielVoitLeTexte(question);
@@ -47,14 +45,15 @@ void main() {
       const question = 'Quelle est votre situation professionnelle ?';
       const reponse = 'J’ai un emploi';
       leServeurRetourneCesQuestions([
-        const QuestionOpen(
-          id: QuestionCode('KYC005'),
-          theme: ThemeType.decouverte,
-          label: question,
-          isAnswered: true,
-          response: Response(value: reponse),
-          points: 5,
-        ),
+        {
+          'type': 'libre',
+          'code': 'KYC005',
+          'thematique': 'decouverte',
+          'question': question,
+          'is_answered': true,
+          'reponse_unique': {'value': reponse},
+          'points': 5,
+        },
       ]);
       await _allerSurMieuxVousConnaitre(tester);
       await ielAppuieSur(tester, question);
@@ -63,6 +62,19 @@ void main() {
         tester,
         label: Localisation.maReponse,
         enterText: nouvelleReponse,
+      );
+      leServeurRetourneCesQuestions(
+        [
+          {
+            'type': 'libre',
+            'code': 'KYC005',
+            'thematique': 'decouverte',
+            'question': question,
+            'is_answered': true,
+            'reponse_unique': {'value': nouvelleReponse},
+            'points': 5,
+          },
+        ],
       );
       await ielAppuieSur(tester, Localisation.mettreAJour);
       ielVoitLeTexte(Localisation.mieuxVousConnaitre);
@@ -77,14 +89,15 @@ void main() {
       const question = 'Quelle est votre situation professionnelle ?';
       const reponse = '10000';
       leServeurRetourneCesQuestions([
-        const QuestionInteger(
-          id: QuestionCode('KYC005'),
-          theme: ThemeType.decouverte,
-          label: question,
-          isAnswered: true,
-          response: Response(value: reponse),
-          points: 5,
-        ),
+        {
+          'type': 'entier',
+          'code': 'KYC005',
+          'thematique': 'decouverte',
+          'question': question,
+          'is_answered': true,
+          'reponse_unique': {'value': reponse},
+          'points': 5,
+        },
       ]);
       await _allerSurMieuxVousConnaitre(tester);
       await ielAppuieSur(tester, question);
@@ -94,6 +107,17 @@ void main() {
         label: Localisation.maReponse,
         enterText: nouvelleReponse,
       );
+      leServeurRetourneCesQuestions([
+        {
+          'type': 'entier',
+          'code': 'KYC005',
+          'thematique': 'decouverte',
+          'question': question,
+          'is_answered': true,
+          'reponse_unique': {'value': nouvelleReponse},
+          'points': 5,
+        },
+      ]);
       await ielAppuieSur(tester, Localisation.mettreAJour);
       ielVoitLeTexte(Localisation.mieuxVousConnaitre);
       ielVoitLeTexte(nouvelleReponse);
@@ -107,14 +131,15 @@ void main() {
       const question = 'Quelle est votre situation professionnelle ?';
       const reponse = '10000';
       leServeurRetourneCesQuestions([
-        const QuestionInteger(
-          id: QuestionCode('KYC005'),
-          theme: ThemeType.decouverte,
-          label: question,
-          isAnswered: true,
-          response: Response(value: reponse),
-          points: 5,
-        ),
+        {
+          'type': 'entier',
+          'code': 'KYC005',
+          'thematique': 'decouverte',
+          'question': question,
+          'is_answered': true,
+          'reponse_unique': {'value': reponse},
+          'points': 5,
+        },
       ]);
       await _allerSurMieuxVousConnaitre(tester);
       await ielAppuieSur(tester, question);
@@ -136,14 +161,15 @@ void main() {
     const question = 'Quelle est votre situation professionnelle ?';
     const reponse = 'J’ai un emploi';
     leServeurRetourneCesQuestions([
-      const QuestionOpen(
-        id: QuestionCode('KYC005'),
-        theme: ThemeType.decouverte,
-        label: question,
-        isAnswered: true,
-        response: Response(value: reponse),
-        points: 5,
-      ),
+      {
+        'type': 'libre',
+        'code': 'KYC005',
+        'thematique': 'decouverte',
+        'question': question,
+        'is_answered': true,
+        'reponse_unique': {'value': reponse},
+        'points': 5,
+      },
     ]);
     await _allerSurMieuxVousConnaitre(tester);
     await ielAppuieSur(tester, question);
@@ -160,21 +186,36 @@ void main() {
       const reponse = 'J’ai un emploi';
       const nouvelleReponse = "Je n'ai pas d'emploi";
       leServeurRetourneCesQuestions([
-        const QuestionSingleChoice(
-          id: QuestionCode('KYC005'),
-          theme: ThemeType.decouverte,
-          label: question,
-          isAnswered: true,
-          responses: [
-            ResponseChoice(code: '', label: reponse, isSelected: true),
-            ResponseChoice(code: '', label: nouvelleReponse, isSelected: false),
+        {
+          'type': 'choix_unique',
+          'code': 'KYC005',
+          'thematique': 'decouverte',
+          'question': question,
+          'is_answered': true,
+          'reponse_multiple': [
+            {'code': '', 'label': reponse, 'selected': true},
+            {'code': '', 'label': nouvelleReponse, 'selected': false},
           ],
-          points: 5,
-        ),
+          'points': 5,
+        },
       ]);
       await _allerSurMieuxVousConnaitre(tester);
       await ielAppuieSur(tester, question);
       await ielAppuieSur(tester, nouvelleReponse);
+      leServeurRetourneCesQuestions([
+        {
+          'type': 'choix_unique',
+          'code': 'KYC005',
+          'thematique': 'decouverte',
+          'question': question,
+          'is_answered': true,
+          'reponse_multiple': [
+            {'code': '', 'label': reponse, 'selected': false},
+            {'code': '', 'label': nouvelleReponse, 'selected': true},
+          ],
+          'points': 5,
+        },
+      ]);
       await ielAppuieSur(tester, Localisation.mettreAJour);
       ielVoitLeTexte(Localisation.mieuxVousConnaitre);
       ielVoitLeTexte(nouvelleReponse);
@@ -194,31 +235,40 @@ void main() {
       const reponseEnPlus = 'Économies financières';
 
       leServeurRetourneCesQuestions([
-        QuestionMultipleChoice(
-          id: const QuestionCode('KYC005'),
-          theme: ThemeType.decouverte,
-          label: question,
-          isAnswered: true,
-          responses: [
-            ResponseChoice(code: '', label: reponses.first, isSelected: true),
-            ResponseChoice(code: '', label: reponses[1], isSelected: true),
-            const ResponseChoice(
-              code: '',
-              label: reponseEnPlus,
-              isSelected: false,
-            ),
-            const ResponseChoice(
-              code: '',
-              label: 'Autre raison',
-              isSelected: false,
-            ),
+        {
+          'type': 'choix_multiple',
+          'code': 'KYC005',
+          'thematique': 'decouverte',
+          'question': question,
+          'is_answered': true,
+          'reponse_multiple': [
+            {'code': '', 'label': reponses.first, 'selected': true},
+            {'code': '', 'label': reponses[1], 'selected': true},
+            {'code': '', 'label': reponseEnPlus, 'selected': false},
+            {'code': '', 'label': 'Autre raison', 'selected': false},
           ],
-          points: 5,
-        ),
+          'points': 5,
+        },
       ]);
       await _allerSurMieuxVousConnaitre(tester);
       await ielAppuieSur(tester, question);
       await ielAppuieSur(tester, reponseEnPlus);
+      leServeurRetourneCesQuestions([
+        {
+          'type': 'choix_multiple',
+          'code': 'KYC005',
+          'thematique': 'decouverte',
+          'question': question,
+          'is_answered': true,
+          'reponse_multiple': [
+            {'code': '', 'label': reponses.first, 'selected': true},
+            {'code': '', 'label': reponses[1], 'selected': true},
+            {'code': '', 'label': reponseEnPlus, 'selected': true},
+            {'code': '', 'label': 'Autre raison', 'selected': false},
+          ],
+          'points': 5,
+        },
+      ]);
       await ielAppuieSur(tester, Localisation.mettreAJour);
       ielVoitLeTexte(Localisation.mieuxVousConnaitre);
       ielVoitLeTexte([...reponses, reponseEnPlus].join(' - '));
@@ -234,25 +284,27 @@ void main() {
     const reponse2 = 'Personne ne joue en première base';
     const nouvelleReponse2 = "C'est qui qui qui joue en première base";
     leServeurRetourneCesQuestions([
-      const QuestionOpen(
-        id: QuestionCode('KYC005'),
-        theme: ThemeType.decouverte,
-        label: question,
-        isAnswered: true,
-        response: Response(value: reponse),
-        points: 5,
-      ),
-      const QuestionSingleChoice(
-        id: QuestionCode('KYC006'),
-        theme: ThemeType.decouverte,
-        label: question2,
-        isAnswered: true,
-        responses: [
-          ResponseChoice(code: '', label: reponse2, isSelected: true),
-          ResponseChoice(code: '', label: nouvelleReponse2, isSelected: false),
+      {
+        'type': 'libre',
+        'code': 'KYC005',
+        'thematique': 'decouverte',
+        'question': question,
+        'is_answered': true,
+        'reponse_unique': {'value': reponse},
+        'points': 5,
+      },
+      {
+        'type': 'choix_unique',
+        'code': 'KYC006',
+        'thematique': 'decouverte',
+        'question': question2,
+        'is_answered': true,
+        'reponse_multiple': [
+          {'code': '', 'label': reponse2, 'selected': true},
+          {'code': '', 'label': nouvelleReponse2, 'selected': false},
         ],
-        points: 5,
-      ),
+        'points': 5,
+      },
     ]);
 
     await _allerSurMieuxVousConnaitre(tester);
@@ -263,11 +315,57 @@ void main() {
       label: Localisation.maReponse,
       enterText: nouvelleReponse,
     );
+    leServeurRetourneCesQuestions([
+      {
+        'type': 'libre',
+        'code': 'KYC005',
+        'thematique': 'decouverte',
+        'question': question,
+        'is_answered': true,
+        'reponse_unique': {'value': nouvelleReponse},
+        'points': 5,
+      },
+      {
+        'type': 'choix_unique',
+        'code': 'KYC006',
+        'thematique': 'decouverte',
+        'question': question2,
+        'is_answered': true,
+        'reponse_multiple': [
+          {'code': '', 'label': reponse2, 'selected': true},
+          {'code': '', 'label': nouvelleReponse2, 'selected': false},
+        ],
+        'points': 5,
+      },
+    ]);
     await ielAppuieSur(tester, Localisation.mettreAJour);
     ielVoitLeTexte(Localisation.mieuxVousConnaitre);
     ielVoitLeTexte(nouvelleReponse);
     await ielAppuieSur(tester, question2);
     await ielAppuieSur(tester, nouvelleReponse2);
+    leServeurRetourneCesQuestions([
+      {
+        'type': 'libre',
+        'code': 'KYC005',
+        'thematique': 'decouverte',
+        'question': question,
+        'is_answered': true,
+        'reponse_unique': {'value': nouvelleReponse},
+        'points': 5,
+      },
+      {
+        'type': 'choix_unique',
+        'code': 'KYC006',
+        'thematique': 'decouverte',
+        'question': question2,
+        'is_answered': true,
+        'reponse_multiple': [
+          {'code': '', 'label': reponse2, 'selected': false},
+          {'code': '', 'label': nouvelleReponse2, 'selected': true},
+        ],
+        'points': 5,
+      },
+    ]);
     await ielAppuieSur(tester, Localisation.mettreAJour);
     ielVoitLeTexte(Localisation.mieuxVousConnaitre);
     ielVoitLeTexte(nouvelleReponse2);

@@ -13,8 +13,7 @@ import 'package:app/features/environmental_performance/summary/presentation/bloc
 import 'package:app/features/gamification/presentation/bloc/gamification_bloc.dart';
 import 'package:app/features/home/presentation/cubit/home_disclaimer_cubit.dart';
 import 'package:app/features/home/presentation/pages/home_page.dart';
-import 'package:app/features/know_your_customer/core/domain/mieux_vous_connaitre_port.dart';
-import 'package:app/features/know_your_customer/core/infrastructure/mieux_vous_connaitre_api_adapter.dart';
+import 'package:app/features/know_your_customer/core/infrastructure/mieux_vous_connaitre_repository.dart';
 import 'package:app/features/mission/home/infrastructure/mission_home_repository.dart';
 import 'package:app/features/mission/home/presentation/bloc/mission_home_bloc.dart';
 import 'package:app/features/mission/mission/infrastructure/mission_repository.dart';
@@ -73,8 +72,8 @@ Future<void> pumpForMissionPage(
       RepositoryProvider<MissionRepository>(
         create: (final context) => MissionRepository(client: client),
       ),
-      RepositoryProvider<MieuxVousConnaitrePort>(
-        create: (final context) => MieuxVousConnaitreApiAdapter(
+      RepositoryProvider<MieuxVousConnaitreRepository>(
+        create: (final context) => MieuxVousConnaitreRepository(
           client: client,
           messageBus: MessageBus(),
         ),

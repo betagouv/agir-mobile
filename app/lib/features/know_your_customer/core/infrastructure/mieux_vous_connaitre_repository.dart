@@ -4,13 +4,12 @@ import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/core/infrastructure/message_bus.dart';
-import 'package:app/features/know_your_customer/core/domain/mieux_vous_connaitre_port.dart';
 import 'package:app/features/know_your_customer/core/domain/question.dart';
 import 'package:app/features/know_your_customer/core/infrastructure/question_mapper.dart';
 import 'package:fpdart/fpdart.dart';
 
-class MieuxVousConnaitreApiAdapter implements MieuxVousConnaitrePort {
-  const MieuxVousConnaitreApiAdapter({
+class MieuxVousConnaitreRepository {
+  const MieuxVousConnaitreRepository({
     required final DioHttpClient client,
     required final MessageBus messageBus,
   })  : _client = client,
@@ -19,7 +18,6 @@ class MieuxVousConnaitreApiAdapter implements MieuxVousConnaitrePort {
   final DioHttpClient _client;
   final MessageBus _messageBus;
 
-  @override
   Future<Either<Exception, Question>> recupererQuestion({
     required final String id,
   }) async {
@@ -38,7 +36,6 @@ class MieuxVousConnaitreApiAdapter implements MieuxVousConnaitrePort {
         : Right(fromJson);
   }
 
-  @override
   Future<Either<Exception, Unit>> mettreAJour(final Question question) async {
     final object = switch (question) {
       QuestionMultiple() => question.responses

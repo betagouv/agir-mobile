@@ -36,7 +36,7 @@ import 'package:app/features/gamification/infrastructure/gamification_api_adapte
 import 'package:app/features/gamification/presentation/bloc/gamification_bloc.dart';
 import 'package:app/features/gamification/presentation/bloc/gamification_event.dart';
 import 'package:app/features/home/presentation/cubit/home_disclaimer_cubit.dart';
-import 'package:app/features/know_your_customer/core/domain/mieux_vous_connaitre_port.dart';
+import 'package:app/features/know_your_customer/core/infrastructure/mieux_vous_connaitre_repository.dart';
 import 'package:app/features/know_your_customer/list/infrastructure/know_your_customers_repository.dart';
 import 'package:app/features/mission/actions/infrastructure/mission_actions_repository.dart';
 import 'package:app/features/mission/home/infrastructure/mission_home_repository.dart';
@@ -81,8 +81,6 @@ class App extends StatefulWidget {
     required this.authenticationService,
     required this.quizPort,
     required this.profilPort,
-    required this.knowYourCustomersRepository,
-    required this.mieuxVousConnaitrePort,
   });
 
   final Clock clock;
@@ -94,9 +92,6 @@ class App extends StatefulWidget {
   final AuthenticationService authenticationService;
   final QuizPort quizPort;
   final ProfilPort profilPort;
-  final KnowYourCustomersRepository knowYourCustomersRepository;
-  final MieuxVousConnaitrePort mieuxVousConnaitrePort;
-
   @override
   State<App> createState() => _AppState();
 }
@@ -207,16 +202,33 @@ class _AppState extends State<App> {
               RepositoryProvider.value(value: assistancesRepository),
               RepositoryProvider.value(value: widget.quizPort),
               RepositoryProvider.value(value: widget.profilPort),
-              RepositoryProvider.value(
-                value: widget.knowYourCustomersRepository,
+              RepositoryProvider.value(value: communesRepository),
+              RepositoryProvider.value(value: gamificationRepository),
+              RepositoryProvider(
+                create: (final context) => communesRepository,
               ),
-              RepositoryProvider.value(value: widget.mieuxVousConnaitrePort),
+              RepositoryProvider(
+                create: (final context) => gamificationRepository,
+              ),
+              RepositoryProvider(
+                create: (final context) => assistancesRepository,
+              ),
+              RepositoryProvider(
+                create: (final context) => MieuxVousConnaitreRepository(
+                  client: widget.dioHttpClient,
+                  messageBus: widget.messageBus,
+                ),
+              ),
+              RepositoryProvider(
+                create: (final context) => KnowYourCustomersRepository(
+                  client: widget.dioHttpClient,
+                ),
+              ),
               RepositoryProvider(
                 create: (final context) => FirstNameRepository(
                   client: widget.dioHttpClient,
                 ),
               ),
-              RepositoryProvider.value(value: communesRepository),
               RepositoryProvider(
                 create: (final context) => AuthentificationRepository(
                   client: widget.dioHttpClient,
@@ -236,7 +248,6 @@ class _AppState extends State<App> {
                 create: (final context) =>
                     ActionsAdapter(client: widget.dioHttpClient),
               ),
-              RepositoryProvider.value(value: gamificationRepository),
               RepositoryProvider(
                 create: (final context) => ActionRepository(
                   client: widget.dioHttpClient,
