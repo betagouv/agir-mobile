@@ -5,7 +5,6 @@ import 'package:app/core/presentation/widgets/composants/scaffold.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/authentification/widgets/onboarding_illustration.dart';
-import 'package:app/features/questions/first_name/application/add_first_name.dart';
 import 'package:app/features/questions/first_name/domain/first_name.dart';
 import 'package:app/features/questions/first_name/presentation/bloc/first_name_bloc.dart';
 import 'package:app/features/questions/first_name/presentation/bloc/first_name_event.dart';
@@ -38,7 +37,7 @@ class FirstNamePage extends StatelessWidget {
   @override
   Widget build(final context) => BlocProvider(
         create: (final context) => FirstNameBloc(
-          addFirstName: AddFirstName(context.read()),
+          repository: context.read(),
           clock: context.read(),
         ),
         child: Builder(

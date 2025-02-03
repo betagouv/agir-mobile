@@ -58,8 +58,8 @@ void main() {
     final dio = DioMock()
       ..postM(
         Endpoints.login,
-        responseData: jsonDecode('{"message":"Utilisateur non actif"}'),
         statusCode: HttpStatus.badRequest,
+        responseData: jsonDecode('{"message":"Utilisateur non actif"}'),
       )
       ..postM(Endpoints.renvoyerCode);
 
@@ -90,6 +90,7 @@ void main() {
         ..postM(Endpoints.login, statusCode: HttpStatus.created)
         ..postM(
           Endpoints.loginCode,
+          statusCode: HttpStatus.created,
           responseData: jsonDecode(
             '''
 {
@@ -99,7 +100,6 @@ void main() {
   }
 }''',
           ),
-          statusCode: HttpStatus.created,
         );
 
       final flutterSecureStorage = FlutterSecureStorageFake();
@@ -169,11 +169,11 @@ void main() {
     final dio = DioMock()
       ..postM(
         Endpoints.creationCompte,
+        statusCode: HttpStatus.created,
         responseData: '''
 {
   "email": "${informationDeConnexion.adresseMail}",
 }''',
-        statusCode: HttpStatus.created,
       );
 
     final adapter = AuthentificationRepository(
@@ -199,6 +199,7 @@ void main() {
     final dio = DioMock()
       ..postM(
         Endpoints.validerCode,
+        statusCode: HttpStatus.created,
         responseData: jsonDecode(
           '''
 {
@@ -208,7 +209,6 @@ void main() {
   }
 }''',
         ),
-        statusCode: HttpStatus.created,
       );
 
     final flutterSecureStorageMock = FlutterSecureStorageFake();
@@ -267,11 +267,11 @@ void main() {
     final dio = DioMock()
       ..postM(
         Endpoints.oubliMotDePasse,
+        statusCode: HttpStatus.created,
         responseData: jsonDecode('''
 {
   "email": "test@example.com"
 }'''),
-        statusCode: HttpStatus.created,
       );
 
     final adapter = AuthentificationRepository(

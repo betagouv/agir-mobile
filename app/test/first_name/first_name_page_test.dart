@@ -1,6 +1,9 @@
-import 'package:app/core/error/domain/api_erreur.dart';
+import 'dart:io';
+
+import 'package:app/core/infrastructure/dio_http_client.dart';
+import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/features/questions/first_name/domain/first_name.dart';
-import 'package:app/features/questions/first_name/domain/first_name_port.dart';
+import 'package:app/features/questions/first_name/infrastructure/first_name_repository.dart';
 import 'package:app/features/questions/first_name/presentation/pages/first_name_page.dart';
 import 'package:app/features/questions/question_code_postal/presentation/pages/question_code_postal_page.dart';
 import 'package:app/l10n/l10n.dart';
@@ -9,22 +12,26 @@ import 'package:dsfr/dsfr.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../helpers/authentication_service_setup.dart';
+import '../helpers/dio_mock.dart';
 import '../helpers/pump_page.dart';
-
-class _FirstNamePortMock extends Mock implements FirstNamePort {}
 
 Future<void> _pumpFirstNamePage(
   final WidgetTester tester, {
-  final FirstNamePort? firstNamePort,
+  final DioMock? dio,
 }) async {
   await pumpPage(
     tester: tester,
     repositoryProviders: [
-      RepositoryProvider<FirstNamePort>.value(
-        value: firstNamePort ?? _FirstNamePortMock(),
+      RepositoryProvider<FirstNameRepository>(
+        create: (final context) => FirstNameRepository(
+          client: DioHttpClient(
+            dio: dio ?? DioMock(),
+            authenticationService: authenticationService,
+          ),
+        ),
       ),
       RepositoryProvider<Clock>.value(value: const Clock()),
     ],
@@ -34,8 +41,6 @@ Future<void> _pumpFirstNamePage(
 }
 
 void main() {
-  final faker = Faker();
-
   setUpAll(() {
     registerFallbackValue(const FirstName.create(''));
   });
@@ -44,12 +49,10 @@ void main() {
     testWidgets(
       "aller sur la page suivante lorsqu'il est saisi et valider",
       (final tester) async {
-        final firstNamePort = _FirstNamePortMock();
-        when(() => firstNamePort.addFirstName(any()))
-            .thenAnswer((final _) async => const Right(unit));
-        await _pumpFirstNamePage(tester, firstNamePort: firstNamePort);
+        final dio = DioMock()..patchM(Endpoints.profile);
+        await _pumpFirstNamePage(tester, dio: dio);
 
-        final validFirstName = faker.person.firstName();
+        final validFirstName = Faker().person.firstName();
 
         await tester.enterText(find.byType(DsfrInput), validFirstName);
         await tester.pump();
@@ -68,12 +71,10 @@ void main() {
     testWidgets(
       "aller sur la page suivante lorsqu'il est saisi et appuyer sur le bouton done",
       (final tester) async {
-        final firstNamePort = _FirstNamePortMock();
-        when(() => firstNamePort.addFirstName(any()))
-            .thenAnswer((final _) async => const Right(unit));
-        await _pumpFirstNamePage(tester, firstNamePort: firstNamePort);
+        final dio = DioMock()..patchM(Endpoints.profile);
+        await _pumpFirstNamePage(tester, dio: dio);
 
-        final validFirstName = faker.person.firstName();
+        final validFirstName = Faker().person.firstName();
 
         await tester.enterText(find.byType(DsfrInput), validFirstName);
         await tester.testTextInput.receiveAction(TextInputAction.done);
@@ -118,15 +119,16 @@ void main() {
     testWidgets(
       "afficher une erreur lorsque l'ajout échoue",
       (final tester) async {
-        final firstNamePort = _FirstNamePortMock();
         final message = faker.lorem.sentence();
-        when(() => firstNamePort.addFirstName(any())).thenAnswer(
-          (final _) async => Left(ApiErreur(message)),
-        );
+        final dio = DioMock()
+          ..patchM(
+            Endpoints.profile,
+            statusCode: HttpStatus.badRequest,
+            responseData: {'message': message},
+          );
+        await _pumpFirstNamePage(tester, dio: dio);
 
-        await _pumpFirstNamePage(tester, firstNamePort: firstNamePort);
-
-        final validFirstName = faker.person.firstName();
+        final validFirstName = Faker().person.firstName();
 
         await tester.enterText(find.byType(DsfrInput), validFirstName);
         await tester.pump();

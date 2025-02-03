@@ -127,7 +127,6 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
             const NotificationServiceFake(AuthorizationStatus.denied),
         authenticationService: authenticationService,
         quizPort: ScenarioContext().quizPortMock!,
-        firstNamePort: profilPort,
         profilPort: profilPort,
         knowYourCustomersRepository: mieuxVousConnaitrePort,
         mieuxVousConnaitrePort: mieuxVousConnaitrePort,
