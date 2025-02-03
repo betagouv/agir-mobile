@@ -12,7 +12,6 @@ abstract final class Endpoints {
       '/utilisateurs/{userId}/bibliotheque/quizz/$contentId';
   static const bilan = '/utilisateurs/{userId}/bilans/last_v3';
   static const creationCompte = '/utilisateurs_v2';
-  static const communes = '/communes';
   static const events = '/utilisateurs/{userId}/events';
   static const gamification = '/utilisateurs/{userId}/gamification';
   static const logement = '/utilisateurs/{userId}/logement';
@@ -36,6 +35,8 @@ abstract final class Endpoints {
   static const simulerAideVelo = '/utilisateurs/{userId}/simulerAideVelo';
   static const utilisateur = '/utilisateurs/{userId}';
   static const validerCode = '/utilisateurs/valider';
+  static String communes(final String codePostal) =>
+      '/communes?code_postal=$codePostal';
   static String recommandationsParThematique(final String thematique) =>
       '/utilisateurs/{userId}/thematiques/$thematique/recommandations';
   static String questionKyc(final String questionId) =>

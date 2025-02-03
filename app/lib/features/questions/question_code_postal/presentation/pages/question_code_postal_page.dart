@@ -32,7 +32,7 @@ class QuestionCodePostalPage extends StatelessWidget {
   Widget build(final context) => BlocProvider(
         create: (final context) => QuestionCodePostalBloc(
           profilPort: context.read(),
-          communesPort: context.read(),
+          communesRepository: context.read(),
         )..add(const QuestionCodePostalPrenomDemande()),
         child: const _View(),
       );

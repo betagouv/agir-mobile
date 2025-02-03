@@ -19,7 +19,6 @@ import '../../features/helper/package_info_fake.dart';
 import '../../mission/mission_test.dart';
 import '../api/constants.dart';
 import '../api/flutter_secure_storage_fake.dart';
-import '../mocks/communes_port_mock.dart';
 import '../mocks/mieux_vous_connaitre_port_mock.dart';
 import '../mocks/profil_port_mock.dart';
 import '../mocks/quiz_port_mock.dart';
@@ -128,7 +127,6 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
             const NotificationServiceFake(AuthorizationStatus.denied),
         authenticationService: authenticationService,
         quizPort: ScenarioContext().quizPortMock!,
-        communesPort: CommunesPortMock(ScenarioContext().communes),
         firstNamePort: profilPort,
         profilPort: profilPort,
         knowYourCustomersRepository: mieuxVousConnaitrePort,

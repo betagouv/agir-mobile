@@ -1,4 +1,4 @@
-import 'package:app/features/communes/domain/communes_port.dart';
+import 'package:app/features/communes/infrastructure/communes_repository.dart';
 import 'package:app/features/profil/core/domain/profil_port.dart';
 import 'package:app/features/questions/question_code_postal/presentation/bloc/question_code_postal_event.dart';
 import 'package:app/features/questions/question_code_postal/presentation/bloc/question_code_postal_state.dart';
@@ -9,7 +9,7 @@ class QuestionCodePostalBloc
     extends Bloc<QuestionCodePostalEvent, QuestionCodePostalState> {
   QuestionCodePostalBloc({
     required final ProfilPort profilPort,
-    required final CommunesPort communesPort,
+    required final CommunesRepository communesRepository,
   }) : super(
           const QuestionCodePostalState(
             prenom: '',
@@ -28,7 +28,7 @@ class QuestionCodePostalBloc
     });
     on<QuestionCodePostalAChange>((final event, final emit) async {
       final result = (event.valeur.length == 5
-          ? await communesPort.recupererLesCommunes(event.valeur)
+          ? await communesRepository.recupererLesCommunes(event.valeur)
           : Either<Exception, List<String>>.right(<String>[]));
       if (result.isRight()) {
         final communes = result.getRight().getOrElse(() => throw Exception());

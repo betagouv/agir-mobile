@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:app/features/communes/domain/communes_port.dart';
+import 'package:app/features/communes/infrastructure/communes_repository.dart';
 import 'package:app/features/profil/core/domain/profil_port.dart';
 import 'package:app/features/simulateur_velo/domain/velo_pour_simulateur.dart';
 import 'package:app/features/simulateur_velo/infrastructure/aide_velo_repository.dart';
@@ -13,10 +13,10 @@ import 'package:fpdart/fpdart.dart';
 class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
   AideVeloBloc({
     required final ProfilPort profilPort,
-    required final CommunesPort communesPort,
+    required final CommunesRepository communesRepository,
     required final AideVeloRepository aideVeloRepository,
   })  : _profilPort = profilPort,
-        _communesPort = communesPort,
+        _communesRepository = communesRepository,
         _aideVeloRepository = aideVeloRepository,
         super(const AideVeloState.empty()) {
     on<AideVeloInformationsDemandee>(_onInformationsDemandee);
@@ -30,7 +30,7 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
     on<AideVeloEstimationDemandee>(_onEstimationDemandee);
   }
 
-  final CommunesPort _communesPort;
+  final CommunesRepository _communesRepository;
   final ProfilPort _profilPort;
   final AideVeloRepository _aideVeloRepository;
 
@@ -63,7 +63,7 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
     final Emitter<AideVeloState> emit,
   ) async {
     final result = state.codePostal.length == 5
-        ? await _communesPort.recupererLesCommunes(state.codePostal)
+        ? await _communesRepository.recupererLesCommunes(state.codePostal)
         : Either<Exception, List<String>>.right(<String>[]);
 
     if (result.isRight()) {
@@ -96,7 +96,7 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
     final Emitter<AideVeloState> emit,
   ) async {
     final result = event.valeur.length == 5
-        ? await _communesPort.recupererLesCommunes(event.valeur)
+        ? await _communesRepository.recupererLesCommunes(event.valeur)
         : Either<Exception, List<String>>.right(<String>[]);
     if (result.isRight()) {
       final communes = result.getRight().getOrElse(() => throw Exception());

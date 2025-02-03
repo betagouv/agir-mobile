@@ -38,7 +38,6 @@ class ScenarioContext {
     explicationKo: '',
     article: null,
   );
-  List<String> communes = <String>[];
   List<Question> questions = <Question>[];
 
   ProfilPortMock? profilPortMock;
