@@ -13,7 +13,6 @@ import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/core/infrastructure/tracker.dart';
 import 'package:app/core/notifications/infrastructure/notification_service.dart';
 import 'package:app/core/presentation/pages/error_page.dart';
-import 'package:app/features/quiz/infrastructure/quiz_api_adapter.dart';
 import 'package:clock/clock.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
@@ -147,7 +146,6 @@ class _AppSetupState extends State<AppSetup> {
             packageInfo: _packageInfo,
             notificationService: _notificationService,
             authenticationService: _authenticationService,
-            quizPort: QuizApiAdapter(client: client),
           );
         },
       );

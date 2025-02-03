@@ -19,7 +19,6 @@ import '../../features/helper/package_info_fake.dart';
 import '../../mission/mission_test.dart';
 import '../api/constants.dart';
 import '../api/flutter_secure_storage_fake.dart';
-import '../mocks/quiz_port_mock.dart';
 import '../scenario_context.dart';
 
 class _TrackerMock extends Mock implements Tracker {}
@@ -34,7 +33,6 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
   if (ScenarioContext().authentificationStatut is Authenticated) {
     await authenticationService.login(token);
   }
-  ScenarioContext().quizPortMock = QuizPortMock(ScenarioContext().quiz);
 
   final tracker = _TrackerMock();
   when(() => tracker.navigatorObserver)
@@ -100,7 +98,6 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
         notificationService:
             const NotificationServiceFake(AuthorizationStatus.denied),
         authenticationService: authenticationService,
-        quizPort: ScenarioContext().quizPortMock!,
       ),
       Durations.short1,
     );

@@ -18,7 +18,7 @@ class MissionQuizPage extends StatelessWidget {
   @override
   Widget build(final context) => BlocProvider(
         create: (final context) => QuizBloc(
-          quizPort: context.read(),
+          quizRepository: context.read(),
           gamificationRepository: context.read(),
         )..add(QuizRecuperationDemandee(value.contentId.value)),
         child: Builder(
