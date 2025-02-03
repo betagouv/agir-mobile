@@ -1,24 +1,5 @@
 import 'package:faker/faker.dart';
 
-Map<String, dynamic> generateChoixUniqueQuestion(final bool withResponse) => {
-      'code': 'KYC_type_logement',
-      'question': 'Dans quel type de logement vivez-vous ?',
-      'reponse_multiple': [
-        {'code': 'type_maison', 'label': 'Maison', 'selected': withResponse},
-        {
-          'code': 'type_appartement',
-          'label': 'Appartement',
-          'selected': false,
-        },
-      ],
-      'is_answered': withResponse,
-      'categorie': 'recommandation',
-      'points': 5,
-      'type': 'choix_unique',
-      'is_NGC': true,
-      'thematique': 'logement',
-    };
-
 Map<String, dynamic> actionItemFaker() {
   final faker = Faker();
 

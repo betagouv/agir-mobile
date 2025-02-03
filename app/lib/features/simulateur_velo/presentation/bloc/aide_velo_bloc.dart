@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:app/features/communes/infrastructure/communes_repository.dart';
-import 'package:app/features/profil/core/domain/profil_port.dart';
+import 'package:app/features/profil/core/infrastructure/profil_repository.dart';
 import 'package:app/features/simulateur_velo/domain/velo_pour_simulateur.dart';
 import 'package:app/features/simulateur_velo/infrastructure/aide_velo_repository.dart';
 import 'package:app/features/simulateur_velo/presentation/bloc/aide_velo_event.dart';
@@ -12,10 +12,10 @@ import 'package:fpdart/fpdart.dart';
 
 class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
   AideVeloBloc({
-    required final ProfilPort profilPort,
+    required final ProfilRepository profilRepository,
     required final CommunesRepository communesRepository,
     required final AideVeloRepository aideVeloRepository,
-  })  : _profilPort = profilPort,
+  })  : _profilApiAdapter = profilRepository,
         _communesRepository = communesRepository,
         _aideVeloRepository = aideVeloRepository,
         super(const AideVeloState.empty()) {
@@ -31,14 +31,14 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
   }
 
   final CommunesRepository _communesRepository;
-  final ProfilPort _profilPort;
+  final ProfilRepository _profilApiAdapter;
   final AideVeloRepository _aideVeloRepository;
 
   Future<void> _onInformationsDemandee(
     final AideVeloInformationsDemandee event,
     final Emitter<AideVeloState> emit,
   ) async {
-    final result = await _profilPort.recupererProfil();
+    final result = await _profilApiAdapter.recupererProfil();
     if (result.isRight()) {
       final informations = result.getRight().getOrElse(() => throw Exception());
       emit(

@@ -1,6 +1,9 @@
+import 'package:app/core/infrastructure/endpoints.dart';
+import 'package:app/features/profil/logement/domain/logement.dart';
 import 'package:app/features/profil/logement/presentation/bloc/mon_logement_state.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 
 import 'scenario_context.dart';
 import 'set_up_widgets.dart';
@@ -83,12 +86,8 @@ void main() {
       const commune = 'CHOISEY';
       const nombreAdultes = 1;
       const nombreEnfants = 2;
-      const typeDeLogement = TypeDeLogement.appartement;
-      const estProprietaire = true;
-      const superficie = Superficie.s35;
-      const plusDe15Ans = true;
-      const dpe = Dpe.c;
       leServeurRetourneCetteListeDeCommunes(['AUTHUME', _commune, commune]);
+      ScenarioContext().dioMock!.patchM(Endpoints.logement);
       await _allerSurMonLogement(tester);
       await ielEcritDansLeChamp(
         tester,
@@ -119,31 +118,31 @@ void main() {
 
       await ielAppuieSur(tester, Localisation.mettreAJourMesInformations);
 
-      final profilPortMock = ScenarioContext().profilPortMock!;
-      expect(profilPortMock.codePostal, codePostal);
-      expect(profilPortMock.commune, commune);
-      expect(profilPortMock.nombreAdultes, nombreAdultes);
-      expect(profilPortMock.nombreEnfants, nombreEnfants);
-      expect(profilPortMock.typeDeLogement, typeDeLogement);
-      expect(profilPortMock.estProprietaire, estProprietaire);
-      expect(profilPortMock.superficie, superficie);
-      expect(profilPortMock.plusDe15Ans, plusDe15Ans);
-      expect(profilPortMock.dpe, dpe);
+      verify(
+        () => ScenarioContext().dioMock?.patch<dynamic>(
+              Endpoints.logement,
+              data:
+                  '{"code_postal":"39100","commune":"CHOISEY","dpe":"C","nombre_adultes":1,"nombre_enfants":2,"plus_de_15_ans":true,"proprietaire":true,"superficie":"superficie_35","type":"appartement"}',
+            ),
+      );
     },
   );
 }
 
 Future<void> _allerSurMonLogement(final WidgetTester tester) async {
-  ielACesInformationsDeProfil(
-    codePostal: _codePostal,
-    commune: _commune,
-    nombreAdultes: _nombreAdultes,
-    nombreEnfants: _nombreEnfants,
-    typeDeLogement: TypeDeLogement.maison,
-    estProprietaire: false,
-    superficie: Superficie.s100,
-    plusDe15Ans: false,
-    dpe: Dpe.g,
+  ielACesInformationsDeProfil(codePostal: _codePostal, commune: _commune);
+  ielACesInformationsDeLogement(
+    const Logement(
+      codePostal: _codePostal,
+      commune: _commune,
+      nombreAdultes: 2,
+      nombreEnfants: 1,
+      typeDeLogement: TypeDeLogement.maison,
+      estProprietaire: false,
+      superficie: Superficie.s100,
+      plusDe15Ans: false,
+      dpe: Dpe.g,
+    ),
   );
   ielEstConnecte();
   await ielLanceLapplication(tester);

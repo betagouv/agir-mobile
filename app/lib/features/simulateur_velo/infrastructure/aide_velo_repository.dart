@@ -62,7 +62,7 @@ class AideVeloRepository {
     required final String codePostal,
     required final String commune,
   }) async {
-    final responses = await Future.wait([
+    final [profileResponse, logementResponse] = await Future.wait([
       _client.patch(
         Endpoints.profile,
         data: jsonEncode({
@@ -76,12 +76,15 @@ class AideVeloRepository {
       ),
     ]);
 
-    for (final response in responses) {
-      if (isResponseUnsuccessful(response.statusCode)) {
-        return Left(Exception('Erreur lors de la mise à jour du profil'));
-      }
+    if (isResponseUnsuccessful(profileResponse.statusCode)) {
+      return Left(Exception('Erreur lors de la mise à jour du profil'));
     }
 
+    if (isResponseUnsuccessful(logementResponse.statusCode)) {
+      return Left(Exception('Erreur lors de la mise à jour du profil'));
+    }
+
+    // ignore: prefer-returning-conditional-expressions
     return const Right(null);
   }
 }

@@ -1,6 +1,9 @@
+import 'package:app/core/helpers/input_formatter.dart';
 import 'package:app/core/helpers/number_format.dart';
+import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 
 import 'scenario_context.dart';
 import 'set_up_widgets.dart';
@@ -10,7 +13,6 @@ import 'steps/iel_appuie_sur_accesibilite.dart';
 import 'steps/iel_ecrit_dans_le_champ.dart';
 import 'steps/iel_est_connecte.dart';
 import 'steps/iel_lance_lapplication.dart';
-import 'steps/iel_sappelle.dart';
 import 'steps/iel_scrolle.dart';
 import 'steps/iel_voit_le_texte.dart';
 import 'steps/iel_voit_le_texte_dans_texte_riche.dart';
@@ -36,18 +38,12 @@ void main() {
   testWidgets('Iel voit les informations prérempli', (final tester) async {
     setUpWidgets(tester);
     await _allerSurMesInformations(tester);
-    ielVoitLeTexte(ScenarioContext().nom);
-    ielVoitLeTexte(ScenarioContext().prenom);
-    ielVoitLeTexteDansTexteRiche(ScenarioContext().email);
+    ielVoitLeTexte('Dupont');
+    ielVoitLeTexte('Michel');
+    ielVoitLeTexteDansTexteRiche('michel@dupont.fr');
     await ielScrolle(tester, Localisation.revenuFiscal);
-    ielVoitLeTexte(
-      FnvNumberFormat.formatNumber(ScenarioContext().nombreDePartsFiscales),
-    );
-    await ielEcritDansLeChamp(
-      tester,
-      label: Localisation.revenuFiscal,
-      enterText: '20000',
-    );
+    ielVoitLeTexte(FnvNumberFormat.formatNumber(1));
+    ielVoitLeTexte(formatCurrency(16000));
   });
 
   testWidgets(
@@ -60,7 +56,7 @@ void main() {
       const annee = 1992;
       const nombreDePartsFiscales = 2.5;
       const trancheValeur = 35000;
-
+      ScenarioContext().dioMock!.patchM(Endpoints.profile);
       await ielEcritDansLeChamp(
         tester,
         label: Localisation.nom,
@@ -88,23 +84,25 @@ void main() {
         label: Localisation.revenuFiscal,
         enterText: trancheValeur.toString(),
       );
+
       await ielAppuieSur(tester, Localisation.mettreAJourMesInformations);
 
-      final profilPortMock = ScenarioContext().profilPortMock!;
-      expect(profilPortMock.nom, nom);
-      expect(profilPortMock.prenom, prenom);
-      expect(profilPortMock.anneeDeNaissance, annee);
-      expect(profilPortMock.nombreDePartsFiscales, nombreDePartsFiscales);
-      expect(profilPortMock.revenuFiscal, trancheValeur);
+      verify(
+        () => ScenarioContext().dioMock!.patch<dynamic>(
+              Endpoints.profile,
+              data:
+                  '{"annee_naissance":1992,"nom":"Nouveau nom","nombre_de_parts_fiscales":2.5,"prenom":"Nouveau prenom","revenu_fiscal":35000}',
+            ),
+      );
     },
   );
 }
 
 Future<void> _allerSurMesInformations(final WidgetTester tester) async {
-  const prenom = 'Michel';
-  const nom = 'Dupont';
-  ielSappelle(prenom, nom: nom);
   ielACesInformationsDeProfil(
+    email: 'michel@dupont.fr',
+    prenom: 'Michel',
+    nom: 'Dupont',
     codePostal: '75018',
     commune: 'Paris',
     nombreDePartsFiscales: 1,

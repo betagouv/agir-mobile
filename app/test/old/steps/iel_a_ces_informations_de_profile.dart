@@ -1,32 +1,40 @@
 // ignore_for_file: avoid-long-parameter-list
 
-import 'package:app/features/profil/logement/presentation/bloc/mon_logement_state.dart';
+import 'package:app/core/infrastructure/endpoints.dart';
+import 'package:app/features/profil/core/infrastructure/logement_mapper.dart';
+import 'package:app/features/profil/logement/domain/logement.dart';
 
 import '../scenario_context.dart';
 
 /// Iel a ces informations de profile.
 void ielACesInformationsDeProfil({
+  final String email = '',
+  final String prenom = '',
+  final String nom = '',
   final String codePostal = '',
   final String commune = '',
-  final int nombreAdultes = 0,
-  final int nombreEnfants = 0,
-  final TypeDeLogement? typeDeLogement,
   final double nombreDePartsFiscales = 0,
   final int? revenuFiscal,
-  final bool? estProprietaire,
-  final Superficie? superficie,
-  final bool? plusDe15Ans,
-  final Dpe? dpe,
 }) {
-  ScenarioContext().codePostal = codePostal;
-  ScenarioContext().commune = commune;
-  ScenarioContext().nombreAdultes = nombreAdultes;
-  ScenarioContext().nombreEnfants = nombreEnfants;
-  ScenarioContext().nombreDePartsFiscales = nombreDePartsFiscales;
-  ScenarioContext().revenuFiscal = revenuFiscal;
-  ScenarioContext().typeDeLogement = typeDeLogement;
-  ScenarioContext().estProprietaire = estProprietaire;
-  ScenarioContext().superficie = superficie;
-  ScenarioContext().plusDe15Ans = plusDe15Ans;
-  ScenarioContext().dpe = dpe;
+  ScenarioContext().dioMock!.getM(
+    Endpoints.profile,
+    responseData: {
+      'email': email,
+      'nom': nom,
+      'prenom': prenom,
+      'code_postal': codePostal,
+      'commune': commune,
+      'revenu_fiscal': revenuFiscal,
+      'nombre_de_parts_fiscales': nombreDePartsFiscales,
+      'annee_naissance': null,
+    },
+  );
+}
+
+/// Iel a ces informations de logement.
+void ielACesInformationsDeLogement(final Logement logement) {
+  ScenarioContext().dioMock!.getM(
+        Endpoints.logement,
+        responseData: LogementMapper.mapLogementToJson(logement),
+      );
 }

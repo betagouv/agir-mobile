@@ -1,5 +1,5 @@
 import 'package:app/features/communes/infrastructure/communes_repository.dart';
-import 'package:app/features/profil/core/domain/profil_port.dart';
+import 'package:app/features/profil/core/infrastructure/profil_repository.dart';
 import 'package:app/features/questions/question_code_postal/presentation/bloc/question_code_postal_event.dart';
 import 'package:app/features/questions/question_code_postal/presentation/bloc/question_code_postal_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,7 +8,7 @@ import 'package:fpdart/fpdart.dart';
 class QuestionCodePostalBloc
     extends Bloc<QuestionCodePostalEvent, QuestionCodePostalState> {
   QuestionCodePostalBloc({
-    required final ProfilPort profilPort,
+    required final ProfilRepository profilApiAdapter,
     required final CommunesRepository communesRepository,
   }) : super(
           const QuestionCodePostalState(
@@ -20,7 +20,7 @@ class QuestionCodePostalBloc
           ),
         ) {
     on<QuestionCodePostalPrenomDemande>((final event, final emit) async {
-      final result = await profilPort.recupererProfil();
+      final result = await profilApiAdapter.recupererProfil();
       if (result.isRight()) {
         final profil = result.getRight().getOrElse(() => throw Exception());
         emit(state.copyWith(prenom: profil.prenom));
@@ -45,7 +45,7 @@ class QuestionCodePostalBloc
       (final event, final emit) => emit(state.copyWith(commune: event.valeur)),
     );
     on<QuestionCodePostalMiseAJourDemandee>((final event, final emit) async {
-      await profilPort.mettreAJourCodePostalEtCommune(
+      await profilApiAdapter.mettreAJourCodePostalEtCommune(
         codePostal: state.codePostal,
         commune: state.commune,
       );

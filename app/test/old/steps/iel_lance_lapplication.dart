@@ -19,7 +19,6 @@ import '../../features/helper/package_info_fake.dart';
 import '../../mission/mission_test.dart';
 import '../api/constants.dart';
 import '../api/flutter_secure_storage_fake.dart';
-import '../mocks/profil_port_mock.dart';
 import '../mocks/quiz_port_mock.dart';
 import '../scenario_context.dart';
 
@@ -35,28 +34,8 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
   if (ScenarioContext().authentificationStatut is Authenticated) {
     await authenticationService.login(token);
   }
-  final prenom = ScenarioContext().prenom;
-  ScenarioContext().profilPortMock = ProfilPortMock(
-    email: ScenarioContext().email,
-    prenom: prenom,
-    nom: ScenarioContext().nom,
-    anneeDeNaissance: ScenarioContext().anneeDeNaissance,
-    codePostal: ScenarioContext().codePostal,
-    commune: ScenarioContext().commune,
-    nombreAdultes: ScenarioContext().nombreAdultes,
-    nombreEnfants: ScenarioContext().nombreEnfants,
-    typeDeLogement: ScenarioContext().typeDeLogement,
-    estProprietaire: ScenarioContext().estProprietaire,
-    superficie: ScenarioContext().superficie,
-    plusDe15Ans: ScenarioContext().plusDe15Ans,
-    dpe: ScenarioContext().dpe,
-    nombreDePartsFiscales: ScenarioContext().nombreDePartsFiscales,
-    revenuFiscal: ScenarioContext().revenuFiscal,
-  );
-
   ScenarioContext().quizPortMock = QuizPortMock(ScenarioContext().quiz);
 
-  final profilPort = ScenarioContext().profilPortMock!;
   final tracker = _TrackerMock();
   when(() => tracker.navigatorObserver)
       .thenAnswer((final _) => RouteObserver<ModalRoute<void>>());
@@ -67,7 +46,7 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
     )
     ..getM(
       Endpoints.utilisateur,
-      responseData: {'prenom': prenom, 'is_onboarding_done': true},
+      responseData: {'prenom': 'Lucas', 'is_onboarding_done': true},
     )
     ..getM(
       '/utilisateurs/%7BuserId%7D/defis_v2?status=en_cours',
@@ -122,7 +101,6 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
             const NotificationServiceFake(AuthorizationStatus.denied),
         authenticationService: authenticationService,
         quizPort: ScenarioContext().quizPortMock!,
-        profilPort: profilPort,
       ),
       Durations.short1,
     );
