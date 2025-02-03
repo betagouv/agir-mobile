@@ -1,11 +1,10 @@
 import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/features/actions/detail/presentation/pages/action_detail_page.dart';
-import 'package:app/features/actions/list/domain/actions_port.dart';
 import 'package:app/features/actions/list/infrastructure/action_item_mapper.dart';
-import 'package:app/features/actions/list/infrastructure/actions_adapter.dart';
+import 'package:app/features/actions/list/infrastructure/action_list_repository.dart';
 import 'package:app/features/actions/list/presentation/pages/action_list_page.dart';
-import 'package:app/features/gamification/infrastructure/gamification_api_adapter.dart';
+import 'package:app/features/gamification/infrastructure/gamification_repository.dart';
 import 'package:app/features/gamification/presentation/bloc/gamification_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -26,14 +25,14 @@ Future<void> _pumpPage(
   await pumpPage(
     tester: tester,
     repositoryProviders: [
-      RepositoryProvider<ActionsPort>(
-        create: (final context) => ActionsAdapter(client: client),
+      RepositoryProvider<ActionListRepository>(
+        create: (final context) => ActionListRepository(client: client),
       ),
     ],
     blocProviders: [
       BlocProvider<GamificationBloc>(
         create: (final context) => GamificationBloc(
-          repository: GamificationApiAdapter(
+          repository: GamificationRepository(
             client: client,
             messageBus: MessageBus(),
           ),

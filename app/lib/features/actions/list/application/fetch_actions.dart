@@ -1,16 +1,16 @@
 import 'package:app/features/actions/core/domain/action_status.dart';
 import 'package:app/features/actions/list/domain/action_item.dart';
-import 'package:app/features/actions/list/domain/actions_port.dart';
+import 'package:app/features/actions/list/infrastructure/action_list_repository.dart';
 import 'package:collection/collection.dart';
 import 'package:fpdart/fpdart.dart';
 
 class FetchActions {
-  const FetchActions(this._port);
+  const FetchActions(this._repository);
 
-  final ActionsPort _port;
+  final ActionListRepository _repository;
 
   Future<Either<Exception, List<ActionItem>>> call() async {
-    final result = await _port.fetchActions();
+    final result = await _repository.fetchActions();
 
     return result.map(
       (final actions) => actions.sorted((final a, final b) {

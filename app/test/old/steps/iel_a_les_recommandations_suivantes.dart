@@ -1,6 +1,6 @@
 import 'package:app/core/infrastructure/endpoints.dart';
 
-import '../scenario_context.dart';
+import 'scenario_context.dart';
 
 /// Iel a les recommandations suivantes.
 void ielALesRecommandationsSuivantes(final String titre) {

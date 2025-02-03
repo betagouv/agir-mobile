@@ -5,7 +5,7 @@ import 'package:app/features/theme/presentation/bloc/theme_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
-  ThemeBloc({required final ThemeRepository themeApiAdapter})
+  ThemeBloc({required final ThemeRepository themeRepository})
       : super(
           const ThemeState(
             themeType: ThemeType.alimentation,
@@ -15,8 +15,8 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
         ) {
     on<ThemeRecuperationDemandee>((final event, final emit) async {
       final themeType = event.themeType;
-      final missionsResult = await themeApiAdapter.getMissions(themeType);
-      final servicesResult = await themeApiAdapter.getServices(themeType);
+      final missionsResult = await themeRepository.getMissions(themeType);
+      final servicesResult = await themeRepository.getServices(themeType);
       missionsResult.fold(
         (final l) {},
         (final missions) => servicesResult.fold(

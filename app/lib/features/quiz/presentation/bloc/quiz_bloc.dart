@@ -1,4 +1,4 @@
-import 'package:app/features/gamification/infrastructure/gamification_api_adapter.dart';
+import 'package:app/features/gamification/infrastructure/gamification_repository.dart';
 import 'package:app/features/quiz/infrastructure/quiz_repository.dart';
 import 'package:app/features/quiz/presentation/bloc/quiz_event.dart';
 import 'package:app/features/quiz/presentation/bloc/quiz_state.dart';
@@ -8,7 +8,7 @@ import 'package:fpdart/fpdart.dart';
 class QuizBloc extends Bloc<QuizEvent, QuizState> {
   QuizBloc({
     required final QuizRepository quizRepository,
-    required final GamificationApiAdapter gamificationRepository,
+    required final GamificationRepository gamificationRepository,
   }) : super(const QuizState.empty()) {
     on<QuizRecuperationDemandee>((final event, final emit) async {
       final result = await quizRepository.recupererQuiz(event.id);

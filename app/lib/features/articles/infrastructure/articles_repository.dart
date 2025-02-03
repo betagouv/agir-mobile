@@ -4,17 +4,15 @@ import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/articles/domain/article.dart';
-import 'package:app/features/articles/domain/articles_port.dart';
 import 'package:app/features/articles/infrastructure/article_mapper.dart';
 import 'package:fpdart/fpdart.dart';
 
-class ArticlesApiAdapter implements ArticlesPort {
-  const ArticlesApiAdapter({required final DioHttpClient client})
+class ArticlesRepository {
+  const ArticlesRepository({required final DioHttpClient client})
       : _client = client;
 
   final DioHttpClient _client;
 
-  @override
   Future<Either<Exception, Article>> recupererArticle(final String id) async {
     final responseApi = await _client.get(Endpoints.article(id));
 
@@ -27,7 +25,6 @@ class ArticlesApiAdapter implements ArticlesPort {
           );
   }
 
-  @override
   Future<Either<Exception, void>> addToFavorites(final String id) async {
     final response = await _client.post(
       Endpoints.events,
@@ -39,7 +36,6 @@ class ArticlesApiAdapter implements ArticlesPort {
         : Left(Exception("Erreur lors de l'ajout de l'article aux favoris"));
   }
 
-  @override
   Future<Either<Exception, void>> removeToFavorites(final String id) async {
     final response = await _client.post(
       Endpoints.events,

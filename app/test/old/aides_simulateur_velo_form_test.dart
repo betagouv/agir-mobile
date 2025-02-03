@@ -6,7 +6,6 @@ import 'package:app/l10n/l10n.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail_image_network/mocktail_image_network.dart';
 
-import 'set_up_widgets.dart';
 import 'steps/iel_a_ces_informations_de_profile.dart';
 import 'steps/iel_appuie_sur.dart';
 import 'steps/iel_appuie_sur_accesibilite.dart';
@@ -18,6 +17,7 @@ import 'steps/iel_ne_voit_pas_le_texte.dart';
 import 'steps/iel_scrolle.dart';
 import 'steps/iel_voit_le_texte_dans_texte_riche.dart';
 import 'steps/le_serveur_retourne_cette_liste_de_communes.dart';
+import 'steps/set_up_widgets.dart';
 
 void main() {
   group('Aides Simulateur vélo formulaire', () {

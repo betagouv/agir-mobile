@@ -15,7 +15,7 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
     required final ProfilRepository profilRepository,
     required final CommunesRepository communesRepository,
     required final AideVeloRepository aideVeloRepository,
-  })  : _profilApiAdapter = profilRepository,
+  })  : _profilRepository = profilRepository,
         _communesRepository = communesRepository,
         _aideVeloRepository = aideVeloRepository,
         super(const AideVeloState.empty()) {
@@ -31,14 +31,14 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
   }
 
   final CommunesRepository _communesRepository;
-  final ProfilRepository _profilApiAdapter;
+  final ProfilRepository _profilRepository;
   final AideVeloRepository _aideVeloRepository;
 
   Future<void> _onInformationsDemandee(
     final AideVeloInformationsDemandee event,
     final Emitter<AideVeloState> emit,
   ) async {
-    final result = await _profilApiAdapter.recupererProfil();
+    final result = await _profilRepository.recupererProfil();
     if (result.isRight()) {
       final informations = result.getRight().getOrElse(() => throw Exception());
       emit(

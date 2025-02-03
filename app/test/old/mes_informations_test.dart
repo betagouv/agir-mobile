@@ -5,8 +5,6 @@ import 'package:app/l10n/l10n.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import 'scenario_context.dart';
-import 'set_up_widgets.dart';
 import 'steps/iel_a_ces_informations_de_profile.dart';
 import 'steps/iel_appuie_sur.dart';
 import 'steps/iel_appuie_sur_accesibilite.dart';
@@ -17,6 +15,8 @@ import 'steps/iel_scrolle.dart';
 import 'steps/iel_voit_le_texte.dart';
 import 'steps/iel_voit_le_texte_dans_texte_riche.dart';
 import 'steps/iel_voit_le_texte_markdown.dart';
+import 'steps/scenario_context.dart';
+import 'steps/set_up_widgets.dart';
 
 void main() {
   testWidgets('Voir tous les textes', (final tester) async {

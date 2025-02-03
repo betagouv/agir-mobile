@@ -17,7 +17,7 @@ class ArticleView extends StatelessWidget {
   @override
   Widget build(final context) => BlocProvider(
         create: (final context) => ArticleBloc(
-          articlesPort: context.read(),
+          articlesRepository: context.read(),
           gamificationRepository: context.read(),
         )..add(ArticleRecuperationDemandee(id)),
         child: const _Content(),

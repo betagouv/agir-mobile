@@ -1,6 +1,6 @@
 import 'package:app/core/infrastructure/endpoints.dart';
 
-import '../scenario_context.dart';
+import 'scenario_context.dart';
 
 /// Le serveur retourne ces questions.
 void leServeurRetourneCesQuestions(final List<Map<String, dynamic>> questions) {

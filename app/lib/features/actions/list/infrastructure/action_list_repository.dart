@@ -4,17 +4,15 @@ import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/actions/list/domain/action_item.dart';
-import 'package:app/features/actions/list/domain/actions_port.dart';
 import 'package:app/features/actions/list/infrastructure/action_item_mapper.dart';
 import 'package:fpdart/fpdart.dart';
 
-class ActionsAdapter implements ActionsPort {
-  const ActionsAdapter({required final DioHttpClient client})
+class ActionListRepository {
+  const ActionListRepository({required final DioHttpClient client})
       : _client = client;
 
   final DioHttpClient _client;
 
-  @override
   Future<Either<Exception, List<ActionItem>>> fetchActions() async {
     final string = Uri(
       path: Endpoints.actions,

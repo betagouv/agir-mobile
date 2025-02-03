@@ -5,8 +5,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:mocktail_image_network/mocktail_image_network.dart';
 
-import 'scenario_context.dart';
-import 'set_up_widgets.dart';
 import 'steps/iel_a_le_quiz_suivant.dart';
 import 'steps/iel_a_les_recommandations_suivantes.dart';
 import 'steps/iel_appuie_sur.dart';
@@ -14,6 +12,8 @@ import 'steps/iel_est_connecte.dart';
 import 'steps/iel_lance_lapplication.dart';
 import 'steps/iel_scrolle.dart';
 import 'steps/iel_voit_le_texte.dart';
+import 'steps/scenario_context.dart';
+import 'steps/set_up_widgets.dart';
 
 void main() {
   testWidgets(

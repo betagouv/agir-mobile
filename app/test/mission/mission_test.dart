@@ -18,6 +18,7 @@ import 'package:app/features/mission/home/infrastructure/mission_home_repository
 import 'package:app/features/mission/home/presentation/bloc/mission_home_bloc.dart';
 import 'package:app/features/mission/mission/infrastructure/mission_repository.dart';
 import 'package:app/features/mission/mission/presentation/pages/mission_page.dart';
+import 'package:app/features/recommandations/infrastructure/recommandations_repository.dart';
 import 'package:app/features/recommandations/presentation/bloc/recommandations_bloc.dart';
 import 'package:app/features/utilisateur/infrastructure/user_repository.dart';
 import 'package:app/features/utilisateur/presentation/bloc/user_bloc.dart';
@@ -35,7 +36,6 @@ import '../helpers/dio_mock.dart';
 import '../helpers/pump_page.dart';
 import '../old/mocks/assistances_repository_mock.dart';
 import '../old/mocks/gamification_bloc_fake.dart';
-import '../old/mocks/recommandations_port_mock.dart';
 
 Future<void> pumpForMissionPage(
   final WidgetTester tester, {
@@ -94,7 +94,7 @@ Future<void> pumpForMissionPage(
       ),
       BlocProvider(
         create: (final context) => RecommandationsBloc(
-          recommandationsPort: RecommandationsPortMock([]),
+          recommandationsRepository: RecommandationsRepository(client: client),
         ),
       ),
       BlocProvider<GamificationBloc>(

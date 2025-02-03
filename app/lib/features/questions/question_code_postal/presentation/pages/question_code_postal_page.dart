@@ -31,7 +31,7 @@ class QuestionCodePostalPage extends StatelessWidget {
   @override
   Widget build(final context) => BlocProvider(
         create: (final context) => QuestionCodePostalBloc(
-          profilApiAdapter: context.read(),
+          profilRepository: context.read(),
           communesRepository: context.read(),
         )..add(const QuestionCodePostalPrenomDemande()),
         child: const _View(),

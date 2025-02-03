@@ -1,7 +1,6 @@
 import 'package:app/l10n/l10n.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'set_up_widgets.dart';
 import 'steps/iel_appuie_sur.dart';
 import 'steps/iel_appuie_sur_accesibilite.dart';
 import 'steps/iel_ecrit_dans_le_champ.dart';
@@ -10,6 +9,7 @@ import 'steps/iel_lance_lapplication.dart';
 import 'steps/iel_ne_voit_pas_le_texte.dart';
 import 'steps/iel_voit_le_texte.dart';
 import 'steps/le_serveur_retourne_ces_questions.dart';
+import 'steps/set_up_widgets.dart';
 
 void main() {
   testWidgets(

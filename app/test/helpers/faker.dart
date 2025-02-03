@@ -40,29 +40,6 @@ Map<String, dynamic> actionFaker({
   };
 }
 
-Map<String, dynamic> aideVeloFaker() {
-  final faker = Faker();
-
-  return {
-    'description': _fakerSentenceBetter(),
-    'libelle': faker.company.name(),
-    'lien': faker.internet.uri('https'),
-    'logo': faker.image.loremPicsum(),
-    'montant': faker.randomGenerator.integer(1000),
-  };
-}
-
-Map<String, dynamic> aideVeloParTypeFaker() => {
-      'mécanique simple': <Map<String, dynamic>>[],
-      'électrique': List.generate(2, (final _) => aideVeloFaker()),
-      'cargo': List.generate(2, (final _) => aideVeloFaker()),
-      'cargo électrique': List.generate(2, (final _) => aideVeloFaker()),
-      'pliant': List.generate(2, (final _) => aideVeloFaker()),
-      'pliant électrique': List.generate(2, (final _) => aideVeloFaker()),
-      'motorisation': <Map<String, dynamic>>[],
-      'adapté': List.generate(2, (final _) => aideVeloFaker()),
-    };
-
 final generateThematique = faker.randomGenerator.element([
   'alimentation',
   'transport',

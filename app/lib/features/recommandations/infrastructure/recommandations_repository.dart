@@ -2,18 +2,16 @@ import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
-import 'package:app/features/recommandations/domain/recommandations_port.dart';
 import 'package:app/features/recommandations/infrastructure/recommandation_mapper.dart';
 import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:fpdart/fpdart.dart';
 
-class RecommandationsApiAdapter implements RecommandationsPort {
-  const RecommandationsApiAdapter({required final DioHttpClient client})
+class RecommandationsRepository {
+  const RecommandationsRepository({required final DioHttpClient client})
       : _client = client;
 
   final DioHttpClient _client;
 
-  @override
   Future<Either<Exception, List<Recommandation>>> recuperer(
     final ThemeType thematique,
   ) async {

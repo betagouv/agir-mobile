@@ -16,8 +16,8 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../helpers/authentication_service_setup.dart';
 import '../../helpers/dio_mock.dart';
+import '../mocks/flutter_secure_storage_fake.dart';
 import 'constants.dart';
-import 'flutter_secure_storage_fake.dart';
 
 void main() {
   const informationDeConnexion = InformationDeConnexion(
@@ -31,7 +31,7 @@ void main() {
       // Arrange.
       final dio = DioMock()..postM(Endpoints.login);
 
-      final adapter = AuthentificationRepository(
+      final repository = AuthentificationRepository(
         client: DioHttpClient(
           dio: dio,
           authenticationService: authenticationService,
@@ -40,7 +40,7 @@ void main() {
       );
 
       // Act.
-      await adapter.connexionDemandee(informationDeConnexion);
+      await repository.connexionDemandee(informationDeConnexion);
 
       // Assert.
       verify(
@@ -63,7 +63,7 @@ void main() {
       )
       ..postM(Endpoints.renvoyerCode);
 
-    final adapter = AuthentificationRepository(
+    final repository = AuthentificationRepository(
       client: DioHttpClient(
         dio: dio,
         authenticationService: authenticationService,
@@ -72,7 +72,7 @@ void main() {
     );
 
     // Act.
-    await adapter.connexionDemandee(informationDeConnexion);
+    await repository.connexionDemandee(informationDeConnexion);
 
     // Assert.
     verify(
@@ -108,17 +108,17 @@ void main() {
         authenticationRepository: AuthenticationStorage(flutterSecureStorage),
         clock: Clock.fixed(DateTime(1992)),
       );
-      final adapter = AuthentificationRepository(
+      final repository = AuthentificationRepository(
         client: DioHttpClient(
           dio: dio,
           authenticationService: authenticationService,
         ),
         authenticationService: authenticationService,
       );
-      await adapter.connexionDemandee(informationDeConnexion);
+      await repository.connexionDemandee(informationDeConnexion);
 
       // Act.
-      await adapter.validationDemandee(
+      await repository.validationDemandee(
         const InformationDeCode(
           adresseMail: 'test@example.com',
           code: '123456',
@@ -148,7 +148,7 @@ void main() {
       // Arrange.
       final flutterSecureStorageMock = FlutterSecureStorageFake();
 
-      final adapter = AuthentificationRepository(
+      final repository = AuthentificationRepository(
         client: DioHttpClient(
           dio: DioMock(),
           authenticationService: authenticationService,
@@ -157,7 +157,7 @@ void main() {
       );
 
       // Act.
-      await adapter.deconnexionDemandee();
+      await repository.deconnexionDemandee();
 
       // Assert.
       expect(await flutterSecureStorageMock.readAll(), <String, dynamic>{});
@@ -176,7 +176,7 @@ void main() {
 }''',
       );
 
-    final adapter = AuthentificationRepository(
+    final repository = AuthentificationRepository(
       client: DioHttpClient(
         dio: dio,
         authenticationService: authenticationService,
@@ -184,7 +184,7 @@ void main() {
       authenticationService: authenticationService,
     );
 
-    await adapter.creationDeCompteDemandee(informationDeConnexion);
+    await repository.creationDeCompteDemandee(informationDeConnexion);
 
     verify(
       () => dio.post<dynamic>(
@@ -216,7 +216,7 @@ void main() {
       authenticationRepository: AuthenticationStorage(flutterSecureStorageMock),
       clock: Clock.fixed(DateTime(1992)),
     );
-    final adapter = AuthentificationRepository(
+    final repository = AuthentificationRepository(
       client: DioHttpClient(
         dio: dio,
         authenticationService: authenticationService,
@@ -224,7 +224,7 @@ void main() {
       authenticationService: authenticationService,
     );
 
-    await adapter.validationDemandee(
+    await repository.validationDemandee(
       const InformationDeCode(adresseMail: 'test@example.com', code: '123456'),
     );
 
@@ -246,7 +246,7 @@ void main() {
   test('renvoyerCode', () async {
     final dio = DioMock()..postM(Endpoints.renvoyerCode);
 
-    final adapter = AuthentificationRepository(
+    final repository = AuthentificationRepository(
       client: DioHttpClient(
         dio: dio,
         authenticationService: authenticationService,
@@ -254,7 +254,7 @@ void main() {
       authenticationService: authenticationService,
     );
 
-    await adapter.renvoyerCodeDemande('test@example.com');
+    await repository.renvoyerCodeDemande('test@example.com');
     verify(
       () => dio.post<dynamic>(
         Endpoints.renvoyerCode,
@@ -274,7 +274,7 @@ void main() {
 }'''),
       );
 
-    final adapter = AuthentificationRepository(
+    final repository = AuthentificationRepository(
       client: DioHttpClient(
         dio: dio,
         authenticationService: authenticationService,
@@ -282,7 +282,7 @@ void main() {
       authenticationService: authenticationService,
     );
 
-    await adapter.oubliMotDePasse('test@example.com');
+    await repository.oubliMotDePasse('test@example.com');
 
     verify(
       () => dio.post<dynamic>(
@@ -296,7 +296,7 @@ void main() {
     final dio = DioMock()
       ..postM(Endpoints.modifierMotDePasse, statusCode: HttpStatus.created);
 
-    final adapter = AuthentificationRepository(
+    final repository = AuthentificationRepository(
       client: DioHttpClient(
         dio: dio,
         authenticationService: authenticationService,
@@ -304,7 +304,7 @@ void main() {
       authenticationService: authenticationService,
     );
 
-    await adapter.modifierMotDePasse(
+    await repository.modifierMotDePasse(
       email: 'test@example.com',
       code: '123456',
       motDePasse: 'password123',
