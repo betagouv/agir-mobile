@@ -3,14 +3,14 @@ import 'dart:async';
 import 'package:app/core/authentication/domain/authentication_service.dart';
 import 'package:app/core/authentication/domain/authentication_status.dart';
 import 'package:app/features/gamification/domain/gamification.dart';
-import 'package:app/features/gamification/infrastructure/gamification_api_adapter.dart';
+import 'package:app/features/gamification/infrastructure/gamification_repository.dart';
 import 'package:app/features/gamification/presentation/bloc/gamification_event.dart';
 import 'package:app/features/gamification/presentation/bloc/gamification_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GamificationBloc extends Bloc<GamificationEvent, GamificationState> {
   GamificationBloc({
-    required final GamificationApiAdapter repository,
+    required final GamificationRepository repository,
     required final AuthenticationService authenticationService,
   }) : super(const GamificationState.empty()) {
     on<GamificationAuthentificationAChange>(

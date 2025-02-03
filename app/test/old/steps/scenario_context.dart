@@ -1,6 +1,6 @@
 import 'package:app/core/authentication/domain/authentication_status.dart';
 
-import '../helpers/dio_mock.dart';
+import '../../helpers/dio_mock.dart';
 
 class ScenarioContext {
   factory ScenarioContext() => _instance ??= ScenarioContext._();

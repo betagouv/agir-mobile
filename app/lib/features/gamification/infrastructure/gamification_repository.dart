@@ -8,8 +8,8 @@ import 'package:app/features/gamification/domain/gamification.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:rxdart/subjects.dart';
 
-class GamificationApiAdapter {
-  GamificationApiAdapter({
+class GamificationRepository {
+  GamificationRepository({
     required final DioHttpClient client,
     required final MessageBus messageBus,
   }) : _client = client {
@@ -45,6 +45,7 @@ class GamificationApiAdapter {
 
   Stream<Gamification> gamification() => _gamificationSubject.stream;
 
+  // ignore: unused-code
   Future<void> dispose() async {
     await _subscription.cancel();
     await _subscription2.cancel();

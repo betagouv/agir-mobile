@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import '../helpers/dio_mock.dart';
-import 'device_info.dart';
+import '../../helpers/dio_mock.dart';
+import '../mocks/device_info.dart';
 import 'scenario_context.dart';
 
 void setUpWidgets(final WidgetTester tester) {

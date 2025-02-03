@@ -1,7 +1,7 @@
 import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/features/quiz/domain/quiz.dart';
 
-import '../scenario_context.dart';
+import 'scenario_context.dart';
 
 /// Iel a le quiz suivant.
 void ielALeQuizSuivant(final Quiz valeur) {

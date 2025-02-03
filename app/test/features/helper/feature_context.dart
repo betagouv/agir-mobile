@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_constructors_over_static_methods, avoid-unassigned-late-fields
 
 import '../../helpers/dio_mock.dart';
-import '../../old/api/flutter_secure_storage_fake.dart';
+import '../../old/mocks/flutter_secure_storage_fake.dart';
 import 'package_info_fake.dart';
 
 class FeatureContext {

@@ -7,7 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nested/nested.dart';
 
-import '../old/device_info.dart';
+import '../old/mocks/device_info.dart';
 
 Future<void> pumpPage({
   required final WidgetTester tester,

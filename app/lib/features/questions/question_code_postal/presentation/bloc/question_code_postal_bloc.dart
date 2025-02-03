@@ -8,7 +8,7 @@ import 'package:fpdart/fpdart.dart';
 class QuestionCodePostalBloc
     extends Bloc<QuestionCodePostalEvent, QuestionCodePostalState> {
   QuestionCodePostalBloc({
-    required final ProfilRepository profilApiAdapter,
+    required final ProfilRepository profilRepository,
     required final CommunesRepository communesRepository,
   }) : super(
           const QuestionCodePostalState(
@@ -20,7 +20,7 @@ class QuestionCodePostalBloc
           ),
         ) {
     on<QuestionCodePostalPrenomDemande>((final event, final emit) async {
-      final result = await profilApiAdapter.recupererProfil();
+      final result = await profilRepository.recupererProfil();
       if (result.isRight()) {
         final profil = result.getRight().getOrElse(() => throw Exception());
         emit(state.copyWith(prenom: profil.prenom));
@@ -45,7 +45,7 @@ class QuestionCodePostalBloc
       (final event, final emit) => emit(state.copyWith(commune: event.valeur)),
     );
     on<QuestionCodePostalMiseAJourDemandee>((final event, final emit) async {
-      await profilApiAdapter.mettreAJourCodePostalEtCommune(
+      await profilRepository.mettreAJourCodePostalEtCommune(
         codePostal: state.codePostal,
         commune: state.commune,
       );

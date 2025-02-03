@@ -2,7 +2,7 @@ import 'package:app/core/presentation/widgets/composants/image.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/shadows.dart';
 import 'package:app/features/articles/presentation/pages/article_page.dart';
-import 'package:app/features/gamification/infrastructure/gamification_api_adapter.dart';
+import 'package:app/features/gamification/infrastructure/gamification_repository.dart';
 import 'package:app/features/know_your_customer/detail/presentation/pages/mieux_vous_connaitre_edit_page.dart';
 import 'package:app/features/quiz/presentation/pages/quiz_page.dart';
 import 'package:app/features/recommandations/domain/recommandation.dart';
@@ -71,7 +71,7 @@ class _RecommendationWidgetState extends State<RecommendationWidget>
                   if (result != true || !context.mounted) {
                     return;
                   }
-                  await context.read<GamificationApiAdapter>().refresh();
+                  await context.read<GamificationRepository>().refresh();
                 case TypeDuContenu.quiz:
                   await GoRouter.of(context).pushNamed(
                     QuizPage.name,

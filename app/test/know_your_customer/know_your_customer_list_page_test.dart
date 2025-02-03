@@ -1,7 +1,7 @@
 import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/message_bus.dart';
-import 'package:app/features/gamification/infrastructure/gamification_api_adapter.dart';
+import 'package:app/features/gamification/infrastructure/gamification_repository.dart';
 import 'package:app/features/gamification/presentation/bloc/gamification_bloc.dart';
 import 'package:app/features/know_your_customer/core/domain/question.dart';
 import 'package:app/features/know_your_customer/core/infrastructure/question_mapper.dart';
@@ -35,7 +35,7 @@ Future<void> _pumpPage(
     blocProviders: [
       BlocProvider(
         create: (final context) => GamificationBloc(
-          repository: GamificationApiAdapter(
+          repository: GamificationRepository(
             client: client,
             messageBus: MessageBus(),
           ),

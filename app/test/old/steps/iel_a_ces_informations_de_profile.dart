@@ -4,7 +4,7 @@ import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/features/profil/core/infrastructure/logement_mapper.dart';
 import 'package:app/features/profil/logement/domain/logement.dart';
 
-import '../scenario_context.dart';
+import 'scenario_context.dart';
 
 /// Iel a ces informations de profile.
 void ielACesInformationsDeProfil({

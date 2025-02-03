@@ -18,8 +18,8 @@ import '../../features/helper/notification_service_fake.dart';
 import '../../features/helper/package_info_fake.dart';
 import '../../mission/mission_test.dart';
 import '../api/constants.dart';
-import '../api/flutter_secure_storage_fake.dart';
-import '../scenario_context.dart';
+import '../mocks/flutter_secure_storage_fake.dart';
+import 'scenario_context.dart';
 
 class _TrackerMock extends Mock implements Tracker {}
 
