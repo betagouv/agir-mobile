@@ -26,7 +26,7 @@ class MesInformationsPage extends StatelessWidget {
   @override
   Widget build(final context) => BlocProvider(
         create: (final context) =>
-            MesInformationsBloc(profilPort: context.read())
+            MesInformationsBloc(profilRepository: context.read())
               ..add(const MesInformationsRecuperationDemandee()),
         child: const _MesInformationsView(),
       );

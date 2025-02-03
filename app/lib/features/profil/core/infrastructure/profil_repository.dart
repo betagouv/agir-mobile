@@ -3,19 +3,17 @@ import 'dart:convert';
 import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
-import 'package:app/features/profil/core/domain/profil_port.dart';
 import 'package:app/features/profil/core/infrastructure/logement_mapper.dart';
 import 'package:app/features/profil/informations/domain/entities/informations.dart';
 import 'package:app/features/profil/logement/domain/logement.dart';
 import 'package:fpdart/fpdart.dart';
 
-class ProfilApiAdapter implements ProfilPort {
-  const ProfilApiAdapter({required final DioHttpClient client})
+class ProfilRepository {
+  const ProfilRepository({required final DioHttpClient client})
       : _client = client;
 
   final DioHttpClient _client;
 
-  @override
   Future<Either<Exception, Informations>> recupererProfil() async {
     final response = await _client.get(Endpoints.profile);
 
@@ -40,7 +38,6 @@ class ProfilApiAdapter implements ProfilPort {
     );
   }
 
-  @override
   Future<Either<Exception, void>> mettreAJour({
     required final String? prenom,
     required final String? nom,
@@ -64,7 +61,6 @@ class ProfilApiAdapter implements ProfilPort {
         : Left(Exception('Erreur lors de la mise à jour du profil'));
   }
 
-  @override
   Future<Either<Exception, Logement>> recupererLogement() async {
     final response = await _client.get(Endpoints.logement);
 
@@ -77,20 +73,19 @@ class ProfilApiAdapter implements ProfilPort {
     return Right(LogementMapper.mapLogementFromJson(json));
   }
 
-  @override
   Future<Either<Exception, void>> mettreAJourLogement({
     required final Logement logement,
   }) async {
-    final body = jsonEncode(LogementMapper.mapLogementToJson(logement));
-
-    final response = await _client.patch(Endpoints.logement, data: body);
+    final response = await _client.patch(
+      Endpoints.logement,
+      data: jsonEncode(LogementMapper.mapLogementToJson(logement)),
+    );
 
     return isResponseSuccessful(response.statusCode)
         ? const Right(null)
         : Left(Exception('Erreur lors de la mise à jour du logement'));
   }
 
-  @override
   Future<Either<Exception, void>> supprimerLeCompte() async {
     final response = await _client.delete(Endpoints.utilisateur);
 
@@ -99,7 +94,6 @@ class ProfilApiAdapter implements ProfilPort {
         : Left(Exception('Erreur lors de la suppression du compte'));
   }
 
-  @override
   Future<Either<Exception, void>> changerMotDePasse({
     required final String motDePasse,
   }) async {
@@ -113,7 +107,6 @@ class ProfilApiAdapter implements ProfilPort {
         : Left(Exception('Erreur lors de la mise à jour du mot de passe'));
   }
 
-  @override
   Future<Either<Exception, void>> mettreAJourCodePostalEtCommune({
     required final String codePostal,
     required final String commune,

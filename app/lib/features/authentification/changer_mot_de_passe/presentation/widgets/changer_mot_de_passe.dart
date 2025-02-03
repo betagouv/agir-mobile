@@ -15,7 +15,7 @@ class ChangerMotDePasse extends StatelessWidget {
   @override
   Widget build(final context) => BlocProvider(
         create: (final context) =>
-            ChangerMotDePasseBloc(profilPort: context.read()),
+            ChangerMotDePasseBloc(profilRepository: context.read()),
         child: const _ChangerMotDePasse(),
       );
 }

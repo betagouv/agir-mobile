@@ -1,4 +1,4 @@
-import 'package:app/features/profil/core/domain/profil_port.dart';
+import 'package:app/features/profil/core/infrastructure/profil_repository.dart';
 import 'package:app/features/profil/informations/presentation/bloc/mes_informations_event.dart';
 import 'package:app/features/profil/informations/presentation/bloc/mes_informations_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,11 +6,11 @@ import 'package:fpdart/fpdart.dart';
 
 class MesInformationsBloc
     extends Bloc<MesInformationsEvent, MesInformationsState> {
-  MesInformationsBloc({required final ProfilPort profilPort})
+  MesInformationsBloc({required final ProfilRepository profilRepository})
       : super(const MesInformationsState.empty()) {
     on<MesInformationsRecuperationDemandee>((final event, final emit) async {
       emit(state.copyWith(statut: MesInformationsStatut.chargement));
-      final result = await profilPort.recupererProfil();
+      final result = await profilRepository.recupererProfil();
       if (result.isRight()) {
         final profil = result.getRight().getOrElse(() => throw Exception());
         emit(
@@ -45,7 +45,7 @@ class MesInformationsBloc
           emit(state.copyWith(revenuFiscal: event.valeur)),
     );
     on<MesInformationsMiseAJourDemandee>(
-      (final event, final emit) async => profilPort.mettreAJour(
+      (final event, final emit) async => profilRepository.mettreAJour(
         prenom: state.prenom,
         nom: state.nom,
         anneeDeNaissance: state.anneeDeNaissance,

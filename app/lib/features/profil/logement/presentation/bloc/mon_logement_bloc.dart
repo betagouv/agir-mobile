@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:app/features/communes/infrastructure/communes_repository.dart';
-import 'package:app/features/profil/core/domain/profil_port.dart';
+import 'package:app/features/profil/core/infrastructure/profil_repository.dart';
 import 'package:app/features/profil/logement/domain/logement.dart';
 import 'package:app/features/profil/logement/presentation/bloc/mon_logement_event.dart';
 import 'package:app/features/profil/logement/presentation/bloc/mon_logement_state.dart';
@@ -10,9 +10,9 @@ import 'package:fpdart/fpdart.dart';
 
 class MonLogementBloc extends Bloc<MonLogementEvent, MonLogementState> {
   MonLogementBloc({
-    required final ProfilPort profilPort,
+    required final ProfilRepository profilRepository,
     required final CommunesRepository communesRepository,
-  })  : _profilPort = profilPort,
+  })  : _profilRepository = profilRepository,
         _communesRepository = communesRepository,
         super(const MonLogementState.empty()) {
     on<MonLogementRecuperationDemandee>(_onRecuperationDemandee);
@@ -28,7 +28,7 @@ class MonLogementBloc extends Bloc<MonLogementEvent, MonLogementState> {
     on<MonLogementMiseAJourDemandee>(_onMiseAJourDemandee);
   }
 
-  final ProfilPort _profilPort;
+  final ProfilRepository _profilRepository;
   final CommunesRepository _communesRepository;
 
   Future<void> _onRecuperationDemandee(
@@ -36,7 +36,7 @@ class MonLogementBloc extends Bloc<MonLogementEvent, MonLogementState> {
     final Emitter<MonLogementState> emit,
   ) async {
     emit(state.copyWith(statut: MonLogementStatut.chargement));
-    final result = await _profilPort.recupererLogement();
+    final result = await _profilRepository.recupererLogement();
     if (result.isRight()) {
       final logement = result.getRight().getOrElse(() => throw Exception());
       final communes = logement.codePostal == null
@@ -135,7 +135,7 @@ class MonLogementBloc extends Bloc<MonLogementEvent, MonLogementState> {
     final MonLogementMiseAJourDemandee event,
     final Emitter<MonLogementState> emit,
   ) async {
-    await _profilPort.mettreAJourLogement(
+    await _profilRepository.mettreAJourLogement(
       logement: Logement(
         codePostal: state.codePostal,
         commune: state.commune,
