@@ -13,7 +13,6 @@ import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/core/infrastructure/tracker.dart';
 import 'package:app/core/notifications/infrastructure/notification_service.dart';
 import 'package:app/core/presentation/pages/error_page.dart';
-import 'package:app/features/communes/infrastructure/communes_api_adapter.dart';
 import 'package:app/features/know_your_customer/core/infrastructure/mieux_vous_connaitre_api_adapter.dart';
 import 'package:app/features/know_your_customer/list/infrastructure/know_your_customers_repository.dart';
 import 'package:app/features/profil/core/infrastructure/profil_api_adapter.dart';
@@ -153,7 +152,6 @@ class _AppSetupState extends State<AppSetup> {
             notificationService: _notificationService,
             authenticationService: _authenticationService,
             quizPort: QuizApiAdapter(client: client),
-            communesPort: CommunesApiAdapter(client: client),
             firstNamePort: FirstNameAdapter(client: client),
             profilPort: ProfilApiAdapter(client: client),
             knowYourCustomersRepository:

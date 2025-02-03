@@ -24,6 +24,7 @@ const _nombreEnfants = 1;
 void main() {
   testWidgets('Voir tous les textes', (final tester) async {
     setUpWidgets(tester);
+    leServeurRetourneCetteListeDeCommunes(['AUTHUME', _commune]);
     await _allerSurMonLogement(tester);
     ielVoitLeTexte(Localisation.monLogement);
     ielVoitLeTexte(Localisation.codePostal);
@@ -78,8 +79,8 @@ void main() {
     'Iel rempli ces informations et appuie sur mettre à jour',
     (final tester) async {
       setUpWidgets(tester);
-      const codePostal = '25000';
-      const commune = 'BESANÇON';
+      const codePostal = '39100';
+      const commune = 'CHOISEY';
       const nombreAdultes = 1;
       const nombreEnfants = 2;
       const typeDeLogement = TypeDeLogement.appartement;

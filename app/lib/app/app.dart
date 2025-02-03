@@ -26,7 +26,7 @@ import 'package:app/features/assistances/list/presentation/bloc/aides_disclaimer
 import 'package:app/features/authentification/core/infrastructure/authentification_repository.dart';
 import 'package:app/features/bibliotheque/infrastructure/bibliotheque_repository.dart';
 import 'package:app/features/bibliotheque/presentation/bloc/bibliotheque_bloc.dart';
-import 'package:app/features/communes/domain/communes_port.dart';
+import 'package:app/features/communes/infrastructure/communes_repository.dart';
 import 'package:app/features/environmental_performance/questions/infrastructure/environment_performance_question_repository.dart';
 import 'package:app/features/environmental_performance/questions/presentation/bloc/environmental_performance_question_bloc.dart';
 import 'package:app/features/environmental_performance/summary/application/fetch_environmental_performance.dart';
@@ -80,7 +80,6 @@ class App extends StatefulWidget {
     required this.notificationService,
     required this.authenticationService,
     required this.quizPort,
-    required this.communesPort,
     required this.firstNamePort,
     required this.profilPort,
     required this.knowYourCustomersRepository,
@@ -95,7 +94,6 @@ class App extends StatefulWidget {
   final NotificationService notificationService;
   final AuthenticationService authenticationService;
   final QuizPort quizPort;
-  final CommunesPort communesPort;
   final FirstNamePort firstNamePort;
   final ProfilPort profilPort;
   final KnowYourCustomersRepository knowYourCustomersRepository;
@@ -194,6 +192,10 @@ class _AppState extends State<App> {
     final assistancesRepository =
         AssistancesRepository(client: widget.dioHttpClient);
 
+    final communesRepository = CommunesRepository(
+      client: widget.dioHttpClient,
+    );
+
     return InheritedGoRouter(
       goRouter: _goRouter,
       child: AuthenticationInjection(
@@ -207,12 +209,12 @@ class _AppState extends State<App> {
               RepositoryProvider.value(value: assistancesRepository),
               RepositoryProvider.value(value: widget.quizPort),
               RepositoryProvider.value(value: widget.profilPort),
-              RepositoryProvider.value(value: widget.communesPort),
               RepositoryProvider.value(
                 value: widget.knowYourCustomersRepository,
               ),
               RepositoryProvider.value(value: widget.mieuxVousConnaitrePort),
               RepositoryProvider.value(value: widget.firstNamePort),
+              RepositoryProvider.value(value: communesRepository),
               RepositoryProvider(
                 create: (final context) => AuthentificationRepository(
                   client: widget.dioHttpClient,
@@ -298,7 +300,7 @@ class _AppState extends State<App> {
                 BlocProvider(
                   create: (final context) => AideVeloBloc(
                     profilPort: widget.profilPort,
-                    communesPort: widget.communesPort,
+                    communesRepository: communesRepository,
                     aideVeloRepository: AideVeloRepository(
                       client: widget.dioHttpClient,
                     ),

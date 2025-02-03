@@ -75,6 +75,7 @@ void main() {
             nombreDePartsFiscales: nombreDePart,
             revenuFiscal: revenuFiscal,
           );
+          leServeurRetourneCetteListeDeCommunes(['AUTHUME', commune]);
           await _allerSurLeSimulateurVelo(tester, aide2);
           await ielScrolle(tester, Localisation.modifier);
           await ielAppuieSurTexteComportant(tester, Localisation.modifier);
@@ -141,6 +142,7 @@ void main() {
             nombreDePartsFiscales: nombreDePart,
             revenuFiscal: revenuFiscal,
           );
+          leServeurRetourneCetteListeDeCommunes([commune]);
           await _allerSurLeSimulateurVelo(tester, aide2);
           await ielScrolle(tester, Localisation.modifier);
           await ielAppuieSurTexteComportant(tester, Localisation.modifier);

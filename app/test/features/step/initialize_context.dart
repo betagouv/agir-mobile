@@ -163,8 +163,7 @@ void setForgotPassword() => FeatureContext.instance.dioMock
   ..postM(Endpoints.modifierMotDePasse);
 
 void setCommunes() => FeatureContext.instance.dioMock.getM(
-      Uri(path: Endpoints.communes, queryParameters: {'code_postal': '39100'})
-          .toString(),
+      Endpoints.communes('39100'),
       responseData: jsonDecode('''
 [
   "AUTHUME",
