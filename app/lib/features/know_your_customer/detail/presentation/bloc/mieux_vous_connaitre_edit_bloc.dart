@@ -1,5 +1,5 @@
-import 'package:app/features/know_your_customer/core/domain/mieux_vous_connaitre_port.dart';
 import 'package:app/features/know_your_customer/core/domain/question.dart';
+import 'package:app/features/know_your_customer/core/infrastructure/mieux_vous_connaitre_repository.dart';
 import 'package:app/features/know_your_customer/detail/presentation/bloc/mieux_vous_connaitre_edit_event.dart';
 import 'package:app/features/know_your_customer/detail/presentation/bloc/mieux_vous_connaitre_edit_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,13 +7,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class MieuxVousConnaitreEditBloc
     extends Bloc<MieuxVousConnaitreEditEvent, MieuxVousConnaitreEditState> {
   MieuxVousConnaitreEditBloc({
-    required final MieuxVousConnaitrePort mieuxVousConnaitrePort,
+    required final MieuxVousConnaitreRepository mieuxVousConnaitreRepository,
   }) : super(const MieuxVousConnaitreEditInitial()) {
     on<MieuxVousConnaitreEditRecuperationDemandee>(
       (final event, final emit) async {
         emit(const MieuxVousConnaitreEditInitial());
         final result =
-            await mieuxVousConnaitrePort.recupererQuestion(id: event.id);
+            await mieuxVousConnaitreRepository.recupererQuestion(id: event.id);
 
         result.fold(
           (final l) => emit(
@@ -138,7 +138,7 @@ class MieuxVousConnaitreEditBloc
           case MieuxVousConnaitreEditLoaded():
             final newQuestion = aState.newQuestion;
             final result =
-                await mieuxVousConnaitrePort.mettreAJour(newQuestion);
+                await mieuxVousConnaitreRepository.mettreAJour(newQuestion);
             result.fold(
               (final l) => emit(
                 MieuxVousConnaitreEditError(

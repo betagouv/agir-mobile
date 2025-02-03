@@ -1,10 +1,8 @@
 import 'package:app/core/authentication/domain/authentication_status.dart';
-import 'package:app/features/know_your_customer/core/domain/question.dart';
 import 'package:app/features/profil/logement/presentation/bloc/mon_logement_state.dart';
 import 'package:app/features/quiz/domain/quiz.dart';
 
 import '../helpers/dio_mock.dart';
-import 'mocks/mieux_vous_connaitre_port_mock.dart';
 import 'mocks/profil_port_mock.dart';
 import 'mocks/quiz_port_mock.dart';
 
@@ -38,11 +36,9 @@ class ScenarioContext {
     explicationKo: '',
     article: null,
   );
-  List<Question> questions = <Question>[];
 
   ProfilPortMock? profilPortMock;
   QuizPortMock? quizPortMock;
-  MieuxVousConnaitrePortMock? mieuxVousConnaitrePortMock;
   static ScenarioContext? _instance;
 
   static void dispose() => _instance = null;

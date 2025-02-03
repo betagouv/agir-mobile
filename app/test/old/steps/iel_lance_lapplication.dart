@@ -19,7 +19,6 @@ import '../../features/helper/package_info_fake.dart';
 import '../../mission/mission_test.dart';
 import '../api/constants.dart';
 import '../api/flutter_secure_storage_fake.dart';
-import '../mocks/mieux_vous_connaitre_port_mock.dart';
 import '../mocks/profil_port_mock.dart';
 import '../mocks/quiz_port_mock.dart';
 import '../scenario_context.dart';
@@ -54,10 +53,6 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
     nombreDePartsFiscales: ScenarioContext().nombreDePartsFiscales,
     revenuFiscal: ScenarioContext().revenuFiscal,
   );
-
-  ScenarioContext().mieuxVousConnaitrePortMock =
-      MieuxVousConnaitrePortMock(questions: ScenarioContext().questions);
-  final mieuxVousConnaitrePort = ScenarioContext().mieuxVousConnaitrePortMock!;
 
   ScenarioContext().quizPortMock = QuizPortMock(ScenarioContext().quiz);
 
@@ -128,8 +123,6 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
         authenticationService: authenticationService,
         quizPort: ScenarioContext().quizPortMock!,
         profilPort: profilPort,
-        knowYourCustomersRepository: mieuxVousConnaitrePort,
-        mieuxVousConnaitrePort: mieuxVousConnaitrePort,
       ),
       Durations.short1,
     );
