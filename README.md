@@ -67,7 +67,7 @@ fvm use 3.24.5
 1. Aller dans le dossier `app` et lancer cette commande :
 
     ```sh
-    flutter run --flavor development --dart-define-from-file env.development.json --dart-define=cronetHttpNoPlay=true
+    fvm flutter run --flavor development --dart-define-from-file env.development.json --dart-define=cronetHttpNoPlay=true
     ```
 
 ### Tests
@@ -77,13 +77,13 @@ Dans le dossier `app` :
 1. Regénérer les tests gherkin :
 
     ```sh
-    dart run build_runner build --delete-conflicting-outputs
+    fvm dart run build_runner build --delete-conflicting-outputs
     ```
 
 1. Lancer les tests :
 
     ```sh
-    flutter test --test-randomize-ordering-seed random
+    fvm flutter test --test-randomize-ordering-seed random
     ```
 
 ## Liens

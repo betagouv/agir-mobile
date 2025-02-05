@@ -76,6 +76,11 @@ android {
             applicationIdSuffix ".dev2"
             manifestPlaceholders = [appName: "[DEV] J’agis"]
         }
+        local {
+            dimension "default"
+            applicationIdSuffix ".local"
+            manifestPlaceholders = [appName: "[L] J’agis"]
+        }
     }
 
     buildTypes {

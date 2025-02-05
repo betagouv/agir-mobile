@@ -15,6 +15,19 @@
       ]
     },
     {
+      "name": "[LOCAL] J’agis",
+      "type": "dart",
+      "request": "launch",
+      "cwd": "app",
+      "args": [
+        "--flavor",
+        "local",
+        "--dart-define-from-file",
+        "env.development.json",
+        "--dart-define=cronetHttpNoPlay=true"
+      ]
+    },
+    {
       "name": "[DEV] J’agis mode profile",
       "type": "dart",
       "request": "launch",
