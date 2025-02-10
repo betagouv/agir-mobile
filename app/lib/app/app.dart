@@ -144,7 +144,7 @@ class _AppState extends State<App> {
   }) async {
     await goRouter.pushNamed(
       ArticlePage.name,
-      pathParameters: {'id': pageId},
+      pathParameters: {'titre': 'titre', 'id': pageId},
     );
   }
 
