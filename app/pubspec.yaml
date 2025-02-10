@@ -40,8 +40,8 @@ dependencies:
   package_info_plus: 8.2.1
   pinput: 5.0.1
   rxdart: 0.28.0
-  sentry_dio: 8.13.0
-  sentry_flutter: 8.13.0
+  sentry_dio: 8.12.0 # Bloqué en 8.12.0 par sentry_flutter 8.13.0 qui fonctionne pas
+  sentry_flutter: 8.12.0 # Bloqué en 8.12.0 par sentry_flutter 8.13.0 qui fonctionne pas
   url_launcher: 6.3.1
 
 dev_dependencies:
