@@ -652,10 +652,10 @@ packages:
     dependency: transitive
     description:
       name: jovial_misc
-      sha256: b3f115b3e05c88e926c2db4cefcf1365fb27e9db03ce77ee1f554dc962748ea6
+      sha256: "4301011027d87b8b919cb862db84071a34448eadbb32cc8d40fe505424dfe69a"
       url: "https://pub.dev"
     source: hosted
-    version: "0.9.1"
+    version: "0.9.2"
   jovial_svg:
     dependency: "direct main"
     description:
