@@ -1,4 +1,4 @@
-import 'package:app/features/articles/domain/partenaire.dart';
+import 'package:app/features/articles/domain/partner.dart';
 import 'package:app/features/articles/domain/source.dart';
 import 'package:equatable/equatable.dart';
 
@@ -8,7 +8,7 @@ class Article extends Equatable {
     required this.titre,
     required this.sousTitre,
     required this.contenu,
-    required this.partenaire,
+    required this.partner,
     required this.sources,
     required this.isFavorite,
     required this.isRead,
@@ -18,7 +18,7 @@ class Article extends Equatable {
   final String titre;
   final String? sousTitre;
   final String contenu;
-  final Partenaire? partenaire;
+  final Partner? partner;
   final List<Source> sources;
   final bool isFavorite;
   final bool isRead;
@@ -28,7 +28,7 @@ class Article extends Equatable {
     final String? titre,
     final String? sousTitre,
     final String? contenu,
-    final Partenaire? partenaire,
+    final Partner? partner,
     final List<Source>? sources,
     final bool? isFavorite,
     final bool? isRead,
@@ -38,7 +38,7 @@ class Article extends Equatable {
         titre: titre ?? this.titre,
         sousTitre: sousTitre ?? this.sousTitre,
         contenu: contenu ?? this.contenu,
-        partenaire: partenaire ?? this.partenaire,
+        partner: partner ?? this.partner,
         sources: sources ?? this.sources,
         isFavorite: isFavorite ?? this.isFavorite,
         isRead: isRead ?? this.isRead,
@@ -46,5 +46,5 @@ class Article extends Equatable {
 
   @override
   List<Object?> get props =>
-      [id, titre, sousTitre, contenu, partenaire, sources, isFavorite, isRead];
+      [id, titre, sousTitre, contenu, partner, sources, isFavorite, isRead];
 }

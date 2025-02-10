@@ -86,7 +86,7 @@ void setMissionRecommandedByThematique() =>
     );
 
 void setAssistances() => FeatureContext.instance.dioMock.getM(
-      Endpoints.assistances,
+      Endpoints.aids,
       responseData: {
         'couverture_aides_ok': false,
         'liste_aides': [

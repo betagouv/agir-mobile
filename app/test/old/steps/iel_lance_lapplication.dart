@@ -57,7 +57,7 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
     ..getM(Endpoints.gamification, responseData: {'points': 650})
     ..getM(Endpoints.missionsRecommandees, responseData: missionThematiques)
     ..getM(
-      Endpoints.assistances,
+      Endpoints.aids,
       responseData: {
         'couverture_aides_ok': true,
         'liste_aides': <Map<String, dynamic>>[

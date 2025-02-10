@@ -4,7 +4,7 @@ abstract final class Endpoints {
   static const actions = '/utilisateurs/{userId}/defis_v2';
   static String action(final String defiId) =>
       '/utilisateurs/{userId}/defis/$defiId';
-  static const assistances = '/utilisateurs/{userId}/aides_v2';
+  static const aids = '/utilisateurs/{userId}/aides_v2';
   static const bibliotheque = '/utilisateurs/{userId}/bibliotheque';
   static String article(final String contentId) =>
       '/utilisateurs/{userId}/bibliotheque/articles/$contentId';

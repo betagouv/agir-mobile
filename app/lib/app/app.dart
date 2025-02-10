@@ -15,12 +15,12 @@ import 'package:app/features/actions/detail/infrastructure/action_repository.dar
 import 'package:app/features/actions/list/infrastructure/action_list_repository.dart';
 import 'package:app/features/actions/section/infrastructure/actions_repository.dart';
 import 'package:app/features/actions/section/presentation/bloc/actions_bloc.dart';
+import 'package:app/features/aids/core/presentation/bloc/aids_home_bloc.dart';
+import 'package:app/features/aids/item/presentation/bloc/aid_bloc.dart';
+import 'package:app/features/aids/list/infrastructure/aids_repository.dart';
+import 'package:app/features/aids/list/presentation/bloc/aids_disclaimer/aids_disclaimer_cubit.dart';
 import 'package:app/features/articles/infrastructure/articles_repository.dart';
 import 'package:app/features/articles/presentation/pages/article_page.dart';
-import 'package:app/features/assistances/core/presentation/bloc/aides_accueil_bloc.dart';
-import 'package:app/features/assistances/item/presentation/bloc/aide_bloc.dart';
-import 'package:app/features/assistances/list/infrastructure/assistances_repository.dart';
-import 'package:app/features/assistances/list/presentation/bloc/aides_disclaimer/aides_disclaimer_cubit.dart';
 import 'package:app/features/authentification/core/infrastructure/authentification_repository.dart';
 import 'package:app/features/bibliotheque/infrastructure/bibliotheque_repository.dart';
 import 'package:app/features/bibliotheque/presentation/bloc/bibliotheque_bloc.dart';
@@ -177,8 +177,7 @@ class _AppState extends State<App> {
       messageBus: widget.messageBus,
     );
 
-    final assistancesRepository =
-        AssistancesRepository(client: widget.dioHttpClient);
+    final aidsRepository = AidsRepository(client: widget.dioHttpClient);
 
     final communesRepository = CommunesRepository(
       client: widget.dioHttpClient,
@@ -203,9 +202,7 @@ class _AppState extends State<App> {
                 create: (final context) =>
                     QuizRepository(client: widget.dioHttpClient),
               ),
-              RepositoryProvider(
-                create: (final context) => assistancesRepository,
-              ),
+              RepositoryProvider(create: (final context) => aidsRepository),
               RepositoryProvider(
                 create: (final context) => MieuxVousConnaitreRepository(
                   client: widget.dioHttpClient,
@@ -272,15 +269,15 @@ class _AppState extends State<App> {
               providers: [
                 BlocProvider.value(value: upgradeBloc),
                 BlocProvider(create: (final context) => HomeDisclaimerCubit()),
-                BlocProvider(create: (final context) => AidesDisclaimerCubit()),
+                BlocProvider(create: (final context) => AidsDisclaimerCubit()),
                 BlocProvider(
                   create: (final context) => UserBloc(
                     repository: UserRepository(client: widget.dioHttpClient),
                   ),
                 ),
                 BlocProvider(
-                  create: (final context) => AidesAccueilBloc(
-                    assistancesRepository: assistancesRepository,
+                  create: (final context) => AidsHomeBloc(
+                    aidsRepository: aidsRepository,
                   ),
                 ),
                 BlocProvider(
@@ -296,7 +293,7 @@ class _AppState extends State<App> {
                     ),
                   ),
                 ),
-                BlocProvider(create: (final context) => AideBloc()),
+                BlocProvider(create: (final context) => AidBloc()),
                 BlocProvider(
                   create: (final context) => VersionBloc(
                     repository:
