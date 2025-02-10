@@ -9,7 +9,7 @@ class ArticlePage extends StatelessWidget {
   const ArticlePage({super.key, required this.id});
 
   static const name = 'article';
-  static const path = '$name/:id';
+  static const path = 'article/:titre/:id';
 
   static GoRoute get route => GoRoute(
         path: path,

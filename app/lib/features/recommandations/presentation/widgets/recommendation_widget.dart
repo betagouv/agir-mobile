@@ -61,7 +61,7 @@ class _RecommendationWidgetState extends State<RecommendationWidget>
                 case TypeDuContenu.article:
                   await GoRouter.of(context).pushNamed(
                     ArticlePage.name,
-                    pathParameters: {'id': widget.id},
+                    pathParameters: {'titre': widget.titre, 'id': widget.id},
                   );
                 case TypeDuContenu.kyc:
                   final result = await GoRouter.of(context).pushNamed(
