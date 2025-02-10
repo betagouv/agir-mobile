@@ -3,7 +3,8 @@ import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/notifications/infrastructure/notification_service.dart';
 import 'package:app/features/actions/section/infrastructure/actions_repository.dart';
 import 'package:app/features/actions/section/presentation/bloc/actions_bloc.dart';
-import 'package:app/features/assistances/core/presentation/bloc/aides_accueil_bloc.dart';
+import 'package:app/features/aids/core/presentation/bloc/aids_home_bloc.dart';
+import 'package:app/features/aids/list/infrastructure/aids_repository.dart';
 import 'package:app/features/environmental_performance/questions/infrastructure/environment_performance_question_repository.dart';
 import 'package:app/features/environmental_performance/questions/presentation/bloc/environmental_performance_question_bloc.dart';
 import 'package:app/features/environmental_performance/questions/presentation/page/environmental_performance_question_page.dart';
@@ -32,7 +33,6 @@ import '../../helpers/authentication_service_setup.dart';
 import '../../helpers/dio_mock.dart';
 import '../../helpers/pump_page.dart';
 import '../../mission/mission_test.dart';
-import '../../old/mocks/assistances_repository_mock.dart';
 import '../../old/mocks/gamification_bloc_fake.dart';
 import '../summary/environmental_performance_data.dart';
 
@@ -46,7 +46,15 @@ Future<void> pumpHomePage(final WidgetTester tester, final DioMock dio) async {
     ..getM(
       '/utilisateurs/%7BuserId%7D/defis_v2?status=en_cours',
       responseData: <dynamic>[],
+    )
+    ..getM(
+      Endpoints.aids,
+      responseData: {
+        'couverture_aides_ok': true,
+        'liste_aides': <dynamic>[],
+      },
     );
+
   final client = DioHttpClient(
     dio: dio,
     authenticationService: authenticationService,
@@ -65,8 +73,8 @@ Future<void> pumpHomePage(final WidgetTester tester, final DioMock dio) async {
     ],
     blocProviders: [
       BlocProvider(
-        create: (final context) => AidesAccueilBloc(
-          assistancesRepository: AssistancesRepositoryMock([]),
+        create: (final context) => AidsHomeBloc(
+          aidsRepository: AidsRepository(client: client),
         ),
       ),
       BlocProvider(

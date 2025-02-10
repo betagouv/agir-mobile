@@ -61,7 +61,7 @@ class _Content extends StatelessWidget {
                     : const ArticleAddToFavoritesPressed(),
               ),
         ),
-        if (article.partenaire != null) ...[
+        if (article.partner != null) ...[
           const SizedBox(height: DsfrSpacings.s4w),
           const Text(Localisation.proposePar, style: DsfrTextStyle.bodySm()),
           const SizedBox(height: DsfrSpacings.s1w),
@@ -109,13 +109,13 @@ class _LogoWidget extends StatelessWidget {
 
   @override
   Widget build(final context) {
-    if (article.partenaire == null) {
+    if (article.partner == null) {
       return const SizedBox.shrink();
     }
 
-    final partenaire = article.partenaire!;
-    final logoUrl = partenaire.logo;
-    final logoName = partenaire.nom;
+    final partner = article.partner!;
+    final logoUrl = partner.logo;
+    final logoName = partner.nom;
 
     return FnvImage.network(logoUrl, semanticLabel: logoName);
   }

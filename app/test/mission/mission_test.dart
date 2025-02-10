@@ -4,7 +4,8 @@ import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/core/notifications/infrastructure/notification_service.dart';
 import 'package:app/features/actions/section/infrastructure/actions_repository.dart';
 import 'package:app/features/actions/section/presentation/bloc/actions_bloc.dart';
-import 'package:app/features/assistances/core/presentation/bloc/aides_accueil_bloc.dart';
+import 'package:app/features/aids/core/presentation/bloc/aids_home_bloc.dart';
+import 'package:app/features/aids/list/infrastructure/aids_repository.dart';
 import 'package:app/features/environmental_performance/questions/infrastructure/environment_performance_question_repository.dart';
 import 'package:app/features/environmental_performance/questions/presentation/bloc/environmental_performance_question_bloc.dart';
 import 'package:app/features/environmental_performance/summary/application/fetch_environmental_performance.dart';
@@ -34,7 +35,6 @@ import '../features/helper/notification_service_fake.dart';
 import '../helpers/authentication_service_setup.dart';
 import '../helpers/dio_mock.dart';
 import '../helpers/pump_page.dart';
-import '../old/mocks/assistances_repository_mock.dart';
 import '../old/mocks/gamification_bloc_fake.dart';
 
 Future<void> pumpForMissionPage(
@@ -55,6 +55,13 @@ Future<void> pumpForMissionPage(
     ..getM(
       '/utilisateurs/%7BuserId%7D/defis_v2?status=en_cours',
       responseData: <dynamic>[],
+    )
+    ..getM(
+      Endpoints.aids,
+      responseData: {
+        'couverture_aides_ok': true,
+        'liste_aides': <dynamic>[],
+      },
     );
 
   final client = DioHttpClient(
@@ -85,8 +92,8 @@ Future<void> pumpForMissionPage(
     ],
     blocProviders: [
       BlocProvider(
-        create: (final context) => AidesAccueilBloc(
-          assistancesRepository: AssistancesRepositoryMock([]),
+        create: (final context) => AidsHomeBloc(
+          aidsRepository: AidsRepository(client: client),
         ),
       ),
       BlocProvider(

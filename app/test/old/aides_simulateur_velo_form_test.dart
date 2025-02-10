@@ -1,6 +1,6 @@
 import 'package:app/core/helpers/input_formatter.dart';
 import 'package:app/core/helpers/number_format.dart';
-import 'package:app/features/assistances/core/domain/aide.dart';
+import 'package:app/features/aids/core/domain/aid.dart';
 import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -21,12 +21,12 @@ import 'steps/set_up_widgets.dart';
 
 void main() {
   group('Aides Simulateur vélo formulaire', () {
-    const aide2 = Assistance(
-      titre: 'Acheter un vélo',
+    const aide2 = Aid(
       themeType: ThemeType.transport,
-      contenu: '<p>Contenu</p>',
-      montantMax: 3500,
-      urlSimulateur: '/aides/velo',
+      title: 'Acheter un vélo',
+      content: '<p>Contenu</p>',
+      amountMax: 3500,
+      simulatorUrl: '/aides/velo',
     );
 
     const codePostal = '39100';
@@ -158,12 +158,12 @@ void main() {
 
 Future<void> _allerSurLeSimulateurVelo(
   final WidgetTester tester,
-  final Assistance aide,
+  final Aid aide,
 ) async {
   ielEstConnecte();
   await ielLanceLapplication(tester);
   await ielScrolle(tester, Localisation.mesAidesLien);
   await ielAppuieSur(tester, Localisation.mesAidesLien);
-  await ielAppuieSur(tester, aide.titre);
+  await ielAppuieSur(tester, aide.title);
   await ielAppuieSur(tester, Localisation.accederAuSimulateur);
 }

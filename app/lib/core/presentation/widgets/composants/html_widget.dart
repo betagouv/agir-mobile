@@ -1,5 +1,5 @@
 import 'package:app/core/infrastructure/url_launcher.dart';
-import 'package:app/features/assistances/list/presentation/pages/assistance_list_page.dart';
+import 'package:app/features/aids/list/presentation/pages/aids_page.dart';
 import 'package:app/features/environmental_performance/summary/presentation/page/environmental_performance_summary_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -30,7 +30,7 @@ class FnvHtmlWidget extends StatelessWidget {
               switch (uri.path) {
                 case '/vos-aides':
                 case '/aides':
-                  await GoRouter.of(context).pushNamed(AssistanceListPage.name);
+                  await GoRouter.of(context).pushNamed(AidsPage.name);
 
                   return true;
                 case '/bilan-environnemental':
