@@ -282,7 +282,7 @@ class _AssitanceCard extends StatelessWidget {
               ),
             ),
             if (assistance.partner != null)
-              ColoredBox(
+              Ink(
                 color: const Color(0xffeef2ff),
                 child: PartnerWidget(partner: assistance.partner!),
               ),
