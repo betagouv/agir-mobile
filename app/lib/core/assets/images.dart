@@ -3,6 +3,7 @@ abstract final class AssetImages {
 
   static const franceNationVerte = 'assets/images/logo_fnv.png';
   static const franceNationVerteSemantic = 'Logo de France Nation Verte';
+  static const franceConnect = 'assets/images/france_connect.svg';
 
   static const nosGestesClimat = 'assets/images/nos_gestes_climat.png';
   static const lvaoStore = 'assets/images/lvao_store.svg';

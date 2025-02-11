@@ -17,7 +17,7 @@ void main() {
 
   setUp(() {
     mockRepository = MockAuthenticationRepository();
-    authenticationService = AuthenticationService(authenticationRepository: mockRepository, clock: Clock.fixed(DateTime(1992)));
+    authenticationService = AuthenticationService(authenticationStorage: mockRepository, clock: Clock.fixed(DateTime(1992)));
   });
 
   group('AuthenticationService', () {
@@ -40,12 +40,12 @@ void main() {
 
     test('checkAuthenticationStatus should emit unauthenticated status when token is expired', () async {
       when(() => mockRepository.expirationDate).thenAnswer((final _) => ExpirationDate(DateTime(1991)));
-      when(() => mockRepository.deleteToken()).thenAnswer((final _) async {});
+      when(() => mockRepository.deleteAuthToken()).thenAnswer((final _) async {});
       unawaited(expectLater(authenticationService.authenticationStatus, emitsInOrder([isA<Unauthenticated>()])));
 
       await authenticationService.checkAuthenticationStatus();
 
-      verify(() => mockRepository.deleteToken()).called(1);
+      verify(() => mockRepository.deleteAuthToken()).called(1);
       await authenticationService.dispose();
     });
 
@@ -79,11 +79,11 @@ void main() {
     });
 
     test('logout should emit unauthenticated status and delete token', () async {
-      when(() => mockRepository.deleteToken()).thenAnswer((final _) async {});
+      when(() => mockRepository.deleteAuthToken()).thenAnswer((final _) async {});
       unawaited(expectLater(authenticationService.authenticationStatus, emitsInOrder([isA<Unauthenticated>()])));
       await authenticationService.logout();
 
-      verify(() => mockRepository.deleteToken()).called(1);
+      verify(() => mockRepository.deleteAuthToken()).called(1);
 
       await authenticationService.dispose();
     });

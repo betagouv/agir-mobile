@@ -8,6 +8,7 @@
 	<array>
 		<string>applinks:jagis.beta.gouv.fr</string>
 		<string>webcredentials:jagis.beta.gouv.fr</string>
+		<string>applinks:agir-front-dev.osc-fr1.scalingo.io</string>
 	</array>
 </dict>
 </plist>

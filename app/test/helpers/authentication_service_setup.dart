@@ -5,6 +5,6 @@ import 'package:clock/clock.dart';
 import '../old/mocks/flutter_secure_storage_fake.dart';
 
 final authenticationService = AuthenticationService(
-  authenticationRepository: AuthenticationStorage(FlutterSecureStorageFake()),
+  authenticationStorage: AuthenticationStorage(FlutterSecureStorageFake()),
   clock: Clock.fixed(DateTime(1992)),
 );

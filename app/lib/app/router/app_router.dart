@@ -8,6 +8,7 @@ import 'package:app/features/aids/item/presentation/pages/aid_page.dart';
 import 'package:app/features/aids/list/presentation/pages/aids_page.dart';
 import 'package:app/features/articles/presentation/pages/article_page.dart';
 import 'package:app/features/authentification/creer_compte/presentation/pages/creer_compte_page.dart';
+import 'package:app/features/authentification/france_connect/presentation/pages/france_connect_page.dart';
 import 'package:app/features/authentification/mot_de_passe_oublie/pages/mot_de_passe_oublie_page.dart';
 import 'package:app/features/authentification/mot_de_passe_oublie_code/pages/mot_de_passe_oublie_code_page.dart';
 import 'package:app/features/authentification/saisie_code/presentation/pages/saisie_code_page.dart';
@@ -42,6 +43,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+final navigatorKey = GlobalKey<NavigatorState>();
+
 GoRouter goRouter({required final Tracker tracker}) => GoRouter(
   routes: [
     GoRoute(path: '/loading', builder: (final context, final state) => const ColoredBox(color: Color(0xFFEDFEE7))),
@@ -59,6 +62,7 @@ GoRouter goRouter({required final Tracker tracker}) => GoRouter(
         SaisieCodePage.route,
       ],
     ),
+    FranceConnectPage.route,
     HomePage.route(
       routes: [
         FirstNamePage.route,
@@ -96,9 +100,15 @@ GoRouter goRouter({required final Tracker tracker}) => GoRouter(
       (final context, final state) => switch (context.read<AuthenticationBloc>().state) {
         AuthenticationInitial() => null,
         AuthenticationUnauthenticated() =>
-          state.uri.path.startsWith('/unauthenticated') ? null : '/unauthenticated/${PreOnboardingPage.path}',
-        AuthenticationAuthenticated() => state.uri.path.startsWith('/unauthenticated') ? HomePage.path : null,
+          state.uri.path.startsWith('/unauthenticated') || state.uri.path.startsWith(FranceConnectPage.path)
+              ? null
+              : '/unauthenticated/${PreOnboardingPage.path}',
+        AuthenticationAuthenticated() =>
+          state.uri.path.startsWith('/unauthenticated') || state.uri.path.startsWith(FranceConnectPage.path)
+              ? HomePage.path
+              : null,
       },
   initialLocation: '/loading',
   observers: [themeRouteObserver, tracker.navigatorObserver],
+  navigatorKey: navigatorKey,
 );

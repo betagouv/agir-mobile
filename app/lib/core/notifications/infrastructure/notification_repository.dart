@@ -21,7 +21,7 @@ class NotificationRepository {
         : const Right(null);
   }
 
-  Future<Either<Exception, void>> deleteToken() async {
+  Future<Either<Exception, void>> deleteNotificationToken() async {
     final response = await _client.delete(Endpoints.notificationToken);
 
     if (isResponseUnsuccessful(response.statusCode)) {

@@ -5,6 +5,7 @@ import 'package:app/l10n/l10n.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../helper/feature_context.dart';
+import 'i_scroll_down.dart';
 import 'i_tap_on.dart';
 
 /// Usage: I tap on Create my account button
@@ -22,5 +23,6 @@ Future<void> iTapOnCreateMyAccountButton(final WidgetTester tester) async {
 }'''),
     )
     ..getM(Endpoints.utilisateur, responseData: {'is_onboarding_done': false});
+  await iScrollDown(tester);
   await iTapOn(tester, Localisation.creerMonCompte);
 }

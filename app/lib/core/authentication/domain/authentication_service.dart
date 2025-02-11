@@ -7,11 +7,11 @@ import 'package:clock/clock.dart';
 import 'package:rxdart/subjects.dart';
 
 class AuthenticationService {
-  AuthenticationService({required final AuthenticationStorage authenticationRepository, required final Clock clock})
-    : _authenticationRepository = authenticationRepository,
+  AuthenticationService({required final AuthenticationStorage authenticationStorage, required final Clock clock})
+    : _authenticationStorage = authenticationStorage,
       _clock = clock;
 
-  final AuthenticationStorage _authenticationRepository;
+  final AuthenticationStorage _authenticationStorage;
   final Clock _clock;
 
   final _authenticationStatusController = BehaviorSubject<AuthenticationStatus>.seeded(const Unauthenticated());
@@ -21,21 +21,21 @@ class AuthenticationService {
   AuthenticationStatus get status => _authenticationStatusController.value;
 
   Future<void> login(final String token) async {
-    await _authenticationRepository.saveToken(token);
+    await _authenticationStorage.saveToken(token);
     await checkAuthenticationStatus();
   }
 
   Future<void> checkAuthenticationStatus() async {
     try {
-      final expirationDate = _authenticationRepository.expirationDate;
+      final expirationDate = _authenticationStorage.expirationDate;
       if (expirationDate.value.isAfter(_clock.now())) {
         if (status is Authenticated) {
           return;
         }
-        final userId = _authenticationRepository.userId;
+        final userId = _authenticationStorage.userId;
         _authenticationStatusController.add(Authenticated(userId));
       } else {
-        await _authenticationRepository.deleteToken();
+        await _authenticationStorage.deleteAuthToken();
         _authenticationStatusController.add(const Unauthenticated());
       }
     } on Exception catch (_) {
@@ -43,11 +43,11 @@ class AuthenticationService {
     }
   }
 
-  Token get token => _authenticationRepository.token;
+  Token get token => _authenticationStorage.token;
 
   Future<void> logout() async {
     _authenticationStatusController.add(const Unauthenticated());
-    await _authenticationRepository.deleteToken();
+    await _authenticationStorage.deleteAuthToken();
   }
 
   Future<void> dispose() async => _authenticationStatusController.close();

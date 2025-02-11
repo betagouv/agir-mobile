@@ -1,9 +1,8 @@
-import 'package:app/core/notifications/infrastructure/notification_repository.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
 import 'package:app/features/actions/presentation/pages/actions_page.dart';
 import 'package:app/features/aids/list/presentation/pages/aids_page.dart';
-import 'package:app/features/authentification/core/infrastructure/authentification_repository.dart';
+import 'package:app/features/authentification/logout/presentation/widgets/logout_widget.dart';
 import 'package:app/features/bibliotheque/presentation/pages/bibliotheque_page.dart';
 import 'package:app/features/challenges/list/presentation/pages/challenge_list_page.dart';
 import 'package:app/features/environmental_performance/summary/presentation/page/environmental_performance_summary_page.dart';
@@ -13,7 +12,6 @@ import 'package:app/features/version/presentation/widgets/version_label.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class Menu extends StatelessWidget {
@@ -77,21 +75,7 @@ class _MenuItems extends StatelessWidget {
         }.entries.map((final e) => _MenuItem(label: e.value, value: e.key, groupValue: groupValue)),
         const Spacer(),
         _MenuItem(label: Localisation.monProfil, value: ProfilPage.name, groupValue: groupValue),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
-            child: DsfrLink.md(
-              label: Localisation.seDeconnecter,
-              onTap: () async {
-                await context.read<NotificationRepository>().deleteToken();
-                if (context.mounted) {
-                  await context.read<AuthentificationRepository>().deconnexionDemandee();
-                }
-              },
-            ),
-          ),
-        ),
+        const LogoutWidget(),
         const SizedBox(height: DsfrSpacings.s2w),
         const Padding(padding: EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w), child: VersionLabel()),
         const SizedBox(height: DsfrSpacings.s3w),

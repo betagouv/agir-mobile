@@ -87,7 +87,7 @@ void main() {
       final flutterSecureStorage = FlutterSecureStorageFake();
 
       final authenticationService = AuthenticationService(
-        authenticationRepository: AuthenticationStorage(flutterSecureStorage),
+        authenticationStorage: AuthenticationStorage(flutterSecureStorage),
         clock: Clock.fixed(DateTime(1992)),
       );
       final repository = AuthentificationRepository(
@@ -114,8 +114,9 @@ void main() {
       // Arrange.
       final flutterSecureStorageMock = FlutterSecureStorageFake();
 
+      final dioMock = DioMock()..postM(Endpoints.logout);
       final repository = AuthentificationRepository(
-        client: DioHttpClient(dio: DioMock(), authenticationService: authenticationService),
+        client: DioHttpClient(dio: dioMock, authenticationService: authenticationService),
         authenticationService: authenticationService,
       );
 
@@ -171,7 +172,7 @@ void main() {
 
     final flutterSecureStorageMock = FlutterSecureStorageFake();
     final authenticationService = AuthenticationService(
-      authenticationRepository: AuthenticationStorage(flutterSecureStorageMock),
+      authenticationStorage: AuthenticationStorage(flutterSecureStorageMock),
       clock: Clock.fixed(DateTime(1992)),
     );
     final repository = AuthentificationRepository(

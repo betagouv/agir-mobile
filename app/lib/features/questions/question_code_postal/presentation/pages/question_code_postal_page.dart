@@ -4,7 +4,7 @@ import 'package:app/core/presentation/widgets/composants/bottom_bar.dart';
 import 'package:app/core/presentation/widgets/composants/scaffold.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
-import 'package:app/features/authentification/widgets/onboarding_illustration.dart';
+import 'package:app/features/questions/core/presentation/widgets/onboarding_illustration.dart';
 import 'package:app/features/questions/presentation/pages/app_est_encore_en_experimentation_page.dart';
 import 'package:app/features/questions/question_code_postal/presentation/bloc/question_code_postal_bloc.dart';
 import 'package:app/features/questions/question_code_postal/presentation/bloc/question_code_postal_event.dart';

@@ -8,7 +8,8 @@ class DsfrTextStyle extends TextStyle {
     super.fontWeight = FontWeight.normal,
     super.color = DsfrColors.grey50,
     super.fontStyle = FontStyle.normal,
-  }) : super(package: 'dsfr', fontFamily: 'Marianne', fontSize: fontSize, height: 1.4);
+    super.height = 1.4,
+  }) : super(package: 'dsfr', fontFamily: 'Marianne', fontSize: fontSize);
 
   const DsfrTextStyle.displayXl({final Color color = DsfrColors.grey50})
     : this(fontSize: 72, fontWeight: FontWeight.bold, color: color);

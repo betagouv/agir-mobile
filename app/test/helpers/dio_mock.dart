@@ -1,3 +1,5 @@
+// ignore_for_file: prefer-overriding-parent-equality
+
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -7,6 +9,9 @@ class DioMock extends Mock implements Dio {
   DioMock() {
     when(() => interceptors).thenReturn(Interceptors());
   }
+
+  @override
+  final options = BaseOptions(baseUrl: 'https://api.example.com');
 
   void getM<T>(final String path, {final int statusCode = HttpStatus.ok, required final T responseData}) {
     when(() => get<dynamic>(path)).thenAnswer(

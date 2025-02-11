@@ -3,6 +3,7 @@ Feature: Forgot password
     Given initialize context
     Given The application is launched
     When I tap on {"J’ai déjà un compte"}
+    When I scroll down
     When I tap on {'Mot de passe oublié ?'}
 
   Scenario: Login to my account is successful

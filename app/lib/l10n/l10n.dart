@@ -59,7 +59,7 @@ abstract final class Localisation {
   static const consommationsEnergetiques = 'Consommations énergétiques';
   static const continuer = 'Continuer';
   static const creerMonCompte = 'Créer mon compte';
-  static const creerMonCompteApp = 'Créer mon compte J’agis';
+  static const creerMonCompteApp = 'Créez votre compte J’agis';
   static const declarationAccessibilite = 'Déclaration d’accessibilité';
   static const declarationAccessibiliteSite = 'https://jagis.beta.gouv.fr/accessibilite';
   static const etapes = 'Étapes';
@@ -115,6 +115,13 @@ abstract final class Localisation {
   static const finalementPasPourMoi = 'Finalement, pas pour moi';
   static const firstNameEmpty = 'Le prénom ne peut pas être vide.';
   static const firstNameInvalid = 'Le prénom n’est pas valide.';
+  static const franceConnectPrefix = 'S’identifier avec';
+  static const franceConnect = 'FranceConnect';
+  static const franceConnectEnSavoirPlus = 'Qu’est-ce que FranceConnect ?';
+  static const franceConnectEnSavoirPlusUrl = 'https://franceconnect.gouv.fr/';
+  static const franceConnectTitle = 'Utilisez FranceConnect';
+  static const franceConnectDescription =
+      'FranceConnect est la solution proposée par l’État pour sécuriser et simplifier la connexion à vos services en ligne.';
   static const homeAssistanceSubTitle = 'Toutes les aides **locales** et **nationales** pour vous aider à passer à l’action';
   static const homeAssistanceTitle = '**Aides financières** et bons plans';
   static const jaccepte = 'J’accepte ';
