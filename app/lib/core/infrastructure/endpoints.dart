@@ -1,6 +1,7 @@
 abstract final class Endpoints {
   Endpoints._();
 
+  static const actions = '/actions';
   static const challenges = '/utilisateurs/{userId}/defis_v2';
   static String challenge(final String defiId) =>
       '/utilisateurs/{userId}/defis/$defiId';

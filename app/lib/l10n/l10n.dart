@@ -5,6 +5,11 @@ import 'package:flutter/widgets.dart';
 abstract final class Localisation {
   const Localisation._();
 
+  static const actions = 'Actions';
+  static const action = 'action';
+  static const aide = 'aide';
+
+  static const toutesLesActions = 'Toutes **les actions**';
   static const accederAuSimulateur = 'Accéder au simulateur';
   static const home = 'Accueil';
   static const themeRecommandationsSousTitre =
