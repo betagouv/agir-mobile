@@ -1,6 +1,7 @@
 import 'package:app/core/notifications/infrastructure/notification_repository.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
+import 'package:app/features/actions/presentation/pages/actions_page.dart';
 import 'package:app/features/aids/list/presentation/pages/aids_page.dart';
 import 'package:app/features/authentification/core/infrastructure/authentification_repository.dart';
 import 'package:app/features/bibliotheque/presentation/pages/bibliotheque_page.dart';
@@ -81,6 +82,7 @@ class _MenuItems extends StatelessWidget {
         ...{
           HomePage.name: Localisation.home,
           AidsPage.name: Localisation.mesAides,
+          ActionsPage.name: Localisation.actions,
           ChallengeListPage.name: Localisation.mesActions,
           BibliothequePage.name: Localisation.bibliotheque,
           EnvironmentalPerformanceSummaryPage.name:
