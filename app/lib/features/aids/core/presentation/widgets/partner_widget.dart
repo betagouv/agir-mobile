@@ -1,5 +1,6 @@
 import 'package:app/core/presentation/widgets/composants/image.dart';
 import 'package:app/features/articles/domain/partner.dart';
+import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 
@@ -31,7 +32,7 @@ class PartnerWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'Proposée par',
+                    Localisation.proposePar,
                     style: DsfrTextStyle.bodySmItalic(
                       color: DsfrColors.blueFranceSun113,
                     ),
