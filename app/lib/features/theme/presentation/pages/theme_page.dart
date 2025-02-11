@@ -3,7 +3,7 @@ import 'package:app/core/infrastructure/svg.dart';
 import 'package:app/core/presentation/widgets/composants/badge.dart';
 import 'package:app/core/presentation/widgets/composants/image.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
-import 'package:app/features/actions/section/presentation/widgets/actions_section.dart';
+import 'package:app/features/challenges/section/presentation/widgets/challenges_section.dart';
 import 'package:app/features/mission/mission/presentation/pages/mission_page.dart';
 import 'package:app/features/recommandations/presentation/widgets/mes_recommandations.dart';
 import 'package:app/features/theme/core/domain/mission_liste.dart';
@@ -88,7 +88,7 @@ class _View extends StatelessWidget {
           const SizedBox(height: DsfrSpacings.s5w),
           const _Missions(),
           const SizedBox(height: DsfrSpacings.s5w),
-          ActionsSection(themeType: themeType),
+          ChallengesSection(themeType: themeType),
           const SizedBox(height: DsfrSpacings.s5w),
           const _Services(),
           const SizedBox(height: DsfrSpacings.s5w),

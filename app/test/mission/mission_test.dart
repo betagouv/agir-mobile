@@ -2,10 +2,10 @@ import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/message_bus.dart';
 import 'package:app/core/notifications/infrastructure/notification_service.dart';
-import 'package:app/features/actions/section/infrastructure/actions_repository.dart';
-import 'package:app/features/actions/section/presentation/bloc/actions_bloc.dart';
 import 'package:app/features/aids/core/presentation/bloc/aids_home_bloc.dart';
 import 'package:app/features/aids/list/infrastructure/aids_repository.dart';
+import 'package:app/features/challenges/section/infrastructure/challenges_repository.dart';
+import 'package:app/features/challenges/section/presentation/bloc/challenges_bloc.dart';
 import 'package:app/features/environmental_performance/questions/infrastructure/environment_performance_question_repository.dart';
 import 'package:app/features/environmental_performance/questions/presentation/bloc/environmental_performance_question_bloc.dart';
 import 'package:app/features/environmental_performance/summary/application/fetch_environmental_performance.dart';
@@ -132,7 +132,7 @@ Future<void> pumpForMissionPage(
       ),
       BlocProvider(
         create: (final context) =>
-            ActionsBloc(repository: ActionsRepository(client: client)),
+            ChallengesBloc(repository: ChallengesRepository(client: client)),
       ),
     ],
     router: GoRouter(
