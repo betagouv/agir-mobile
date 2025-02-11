@@ -6,11 +6,11 @@ abstract final class NotificationDataMapper {
 
   static NotificationData fromJson(final Map<String, dynamic> json) =>
       NotificationData(
-        pageType: _actionStatusfromJson(json['page_type'] as String),
+        pageType: _pageTypefromJson(json['page_type'] as String),
         pageId: json['page_id'] as String,
       );
 
-  static NotificationPageType _actionStatusfromJson(final String json) =>
+  static NotificationPageType _pageTypefromJson(final String json) =>
       switch (json) {
         'quiz' => NotificationPageType.quiz,
         'article' => NotificationPageType.article,

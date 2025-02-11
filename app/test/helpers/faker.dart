@@ -1,6 +1,6 @@
 import 'package:faker/faker.dart';
 
-Map<String, dynamic> actionItemFaker() {
+Map<String, dynamic> challengeItemFaker() {
   final faker = Faker();
 
   return {
@@ -12,7 +12,7 @@ Map<String, dynamic> actionItemFaker() {
   };
 }
 
-Map<String, dynamic> actionFaker({
+Map<String, dynamic> challengeFaker({
   final String? id,
   final String? status,
   final String? reason,

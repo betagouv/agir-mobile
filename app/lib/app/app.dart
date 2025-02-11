@@ -11,10 +11,6 @@ import 'package:app/core/notifications/domain/notification_data.dart';
 import 'package:app/core/notifications/domain/notification_page_type.dart';
 import 'package:app/core/notifications/infrastructure/notification_repository.dart';
 import 'package:app/core/notifications/infrastructure/notification_service.dart';
-import 'package:app/features/actions/detail/infrastructure/action_repository.dart';
-import 'package:app/features/actions/list/infrastructure/action_list_repository.dart';
-import 'package:app/features/actions/section/infrastructure/actions_repository.dart';
-import 'package:app/features/actions/section/presentation/bloc/actions_bloc.dart';
 import 'package:app/features/aids/core/presentation/bloc/aids_home_bloc.dart';
 import 'package:app/features/aids/item/presentation/bloc/aid_bloc.dart';
 import 'package:app/features/aids/list/infrastructure/aids_repository.dart';
@@ -24,6 +20,10 @@ import 'package:app/features/articles/presentation/pages/article_page.dart';
 import 'package:app/features/authentification/core/infrastructure/authentification_repository.dart';
 import 'package:app/features/bibliotheque/infrastructure/bibliotheque_repository.dart';
 import 'package:app/features/bibliotheque/presentation/bloc/bibliotheque_bloc.dart';
+import 'package:app/features/challenges/detail/infrastructure/challenge_repository.dart';
+import 'package:app/features/challenges/list/infrastructure/challenge_list_repository.dart';
+import 'package:app/features/challenges/section/infrastructure/challenges_repository.dart';
+import 'package:app/features/challenges/section/presentation/bloc/challenges_bloc.dart';
 import 'package:app/features/communes/infrastructure/communes_repository.dart';
 import 'package:app/features/environmental_performance/questions/infrastructure/environment_performance_question_repository.dart';
 import 'package:app/features/environmental_performance/questions/presentation/bloc/environmental_performance_question_bloc.dart';
@@ -36,7 +36,7 @@ import 'package:app/features/gamification/presentation/bloc/gamification_event.d
 import 'package:app/features/home/presentation/cubit/home_disclaimer_cubit.dart';
 import 'package:app/features/know_your_customer/core/infrastructure/mieux_vous_connaitre_repository.dart';
 import 'package:app/features/know_your_customer/list/infrastructure/know_your_customers_repository.dart';
-import 'package:app/features/mission/actions/infrastructure/mission_actions_repository.dart';
+import 'package:app/features/mission/challenges/infrastructure/mission_challenges_repository.dart';
 import 'package:app/features/mission/home/infrastructure/mission_home_repository.dart';
 import 'package:app/features/mission/home/presentation/bloc/mission_home_bloc.dart';
 import 'package:app/features/mission/mission/infrastructure/mission_repository.dart';
@@ -236,10 +236,10 @@ class _AppState extends State<App> {
               ),
               RepositoryProvider(
                 create: (final context) =>
-                    ActionListRepository(client: widget.dioHttpClient),
+                    ChallengeListRepository(client: widget.dioHttpClient),
               ),
               RepositoryProvider(
-                create: (final context) => ActionRepository(
+                create: (final context) => ChallengeRepository(
                   client: widget.dioHttpClient,
                   messageBus: widget.messageBus,
                 ),
@@ -250,7 +250,7 @@ class _AppState extends State<App> {
               ),
               RepositoryProvider(
                 create: (final context) =>
-                    MissionActionsRepository(client: widget.dioHttpClient),
+                    MissionChallengesRepository(client: widget.dioHttpClient),
               ),
               RepositoryProvider(
                 create: (final context) => NotificationRepository(
@@ -287,8 +287,8 @@ class _AppState extends State<App> {
                   ),
                 ),
                 BlocProvider(
-                  create: (final context) => ActionsBloc(
-                    repository: ActionsRepository(
+                  create: (final context) => ChallengesBloc(
+                    repository: ChallengesRepository(
                       client: widget.dioHttpClient,
                     ),
                   ),

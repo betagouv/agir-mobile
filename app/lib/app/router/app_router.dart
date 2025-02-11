@@ -2,8 +2,6 @@ import 'package:app/core/authentication/presentation/bloc/authentication_bloc.da
 import 'package:app/core/authentication/presentation/bloc/authentication_state.dart';
 import 'package:app/core/infrastructure/tracker.dart';
 import 'package:app/core/presentation/pages/error_route_page.dart';
-import 'package:app/features/actions/detail/presentation/pages/action_detail_page.dart';
-import 'package:app/features/actions/list/presentation/pages/action_list_page.dart';
 import 'package:app/features/aids/item/presentation/pages/aid_page.dart';
 import 'package:app/features/aids/list/presentation/pages/aids_page.dart';
 import 'package:app/features/articles/presentation/pages/article_page.dart';
@@ -13,6 +11,8 @@ import 'package:app/features/authentification/mot_de_passe_oublie_code/pages/mot
 import 'package:app/features/authentification/saisie_code/presentation/pages/saisie_code_page.dart';
 import 'package:app/features/authentification/se_connecter/presentation/pages/se_connecter_page.dart';
 import 'package:app/features/bibliotheque/presentation/pages/bibliotheque_page.dart';
+import 'package:app/features/challenges/detail/presentation/pages/challenge_detail_page.dart';
+import 'package:app/features/challenges/list/presentation/pages/challenge_list_page.dart';
 import 'package:app/features/environmental_performance/questions/presentation/page/environmental_performance_question_page.dart';
 import 'package:app/features/environmental_performance/summary/presentation/page/environmental_performance_summary_page.dart';
 import 'package:app/features/home/presentation/pages/home_page.dart';
@@ -83,8 +83,8 @@ GoRouter goRouter({required final Tracker tracker}) => GoRouter(
             MonLogementPage.route,
             KnowYourCustomersPage.route,
             MieuxVousConnaitreEditPage.route,
-            ActionListPage.route,
-            ActionDetailPage.route,
+            ChallengeListPage.route,
+            ChallengeDetailPage.route,
             SeasonalFruitsAndVegetablesPage.route,
             OptionsAvanceesPage.route,
           ],

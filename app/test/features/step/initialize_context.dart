@@ -32,7 +32,7 @@ Future<void> initializeContext(final WidgetTester tester) async {
   setMissionRecommandedByThematique();
   setAssistances();
   setPoints();
-  setActions();
+  setChallenges();
   setRecommandations();
   setServices();
   setBicycleSimulator();
@@ -183,7 +183,7 @@ void setCommunes() => FeatureContext.instance.dioMock.getM(
 ]'''),
     );
 
-void setActions() => FeatureContext.instance.dioMock
+void setChallenges() => FeatureContext.instance.dioMock
   ..getM(
     '/utilisateurs/%7BuserId%7D/defis_v2?status=en_cours',
     responseData: <dynamic>[],

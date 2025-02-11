@@ -1,10 +1,10 @@
 import 'package:app/core/notifications/infrastructure/notification_repository.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
-import 'package:app/features/actions/list/presentation/pages/action_list_page.dart';
 import 'package:app/features/aids/list/presentation/pages/aids_page.dart';
 import 'package:app/features/authentification/core/infrastructure/authentification_repository.dart';
 import 'package:app/features/bibliotheque/presentation/pages/bibliotheque_page.dart';
+import 'package:app/features/challenges/list/presentation/pages/challenge_list_page.dart';
 import 'package:app/features/environmental_performance/summary/presentation/page/environmental_performance_summary_page.dart';
 import 'package:app/features/home/presentation/pages/home_page.dart';
 import 'package:app/features/profil/profil/presentation/pages/profil_page.dart';
@@ -81,7 +81,7 @@ class _MenuItems extends StatelessWidget {
         ...{
           HomePage.name: Localisation.home,
           AidsPage.name: Localisation.mesAides,
-          ActionListPage.name: Localisation.mesActions,
+          ChallengeListPage.name: Localisation.mesActions,
           BibliothequePage.name: Localisation.bibliotheque,
           EnvironmentalPerformanceSummaryPage.name:
               Localisation.bilanEnvironnemental,

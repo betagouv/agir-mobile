@@ -35,7 +35,7 @@ final class MissionSuccess extends MissionState {
             description: mission.description,
           ),
           ...mission.objectifs.map(MissionStepObjectif.new),
-          const MissionStepActions(),
+          const MissionStepChallenges(),
           MissionStepFin(title: mission.title),
         ];
 
@@ -122,8 +122,8 @@ final class MissionStepObjectif extends MissionStep {
   List<Object?> get props => [objectif];
 }
 
-final class MissionStepActions extends MissionStep {
-  const MissionStepActions();
+final class MissionStepChallenges extends MissionStep {
+  const MissionStepChallenges();
 }
 
 final class MissionStepFin extends MissionStep {

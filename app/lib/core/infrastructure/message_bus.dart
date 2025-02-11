@@ -1,6 +1,6 @@
 import 'dart:async';
 
-const actionCompletedTopic = 'action_completed';
+const challengeCompletedTopic = 'action_completed';
 const kycTopic = 'kyc_completed';
 
 class MessageBus {
