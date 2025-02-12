@@ -44,8 +44,7 @@ class ToutEstPretPage extends StatelessWidget {
         children: [
           const Align(
             alignment: Alignment.centerLeft,
-            child:
-                OnboardingIllustration(assetName: AssetsImages.illustration5),
+            child: OnboardingIllustration(assetName: AssetImages.illustration5),
           ),
           const Text(
             Localisation.toutEstPret,

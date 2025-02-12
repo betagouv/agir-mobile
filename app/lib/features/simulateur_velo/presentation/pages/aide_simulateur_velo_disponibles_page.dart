@@ -77,7 +77,7 @@ class AideSimulateurVeloDisponiblePage extends StatelessWidget {
                     alignment: PlaceholderAlignment.baseline,
                     baseline: TextBaseline.alphabetic,
                     child: FnvSvg.asset(
-                      AssetsImages.mesAidesVeloTexte,
+                      AssetImages.mesAidesVeloTexte,
                       height: 9,
                     ),
                   ),
@@ -86,7 +86,7 @@ class AideSimulateurVeloDisponiblePage extends StatelessWidget {
                     alignment: PlaceholderAlignment.baseline,
                     baseline: TextBaseline.alphabetic,
                     child: FnvSvg.asset(
-                      AssetsImages.mesAidesVeloLogo,
+                      AssetImages.mesAidesVeloLogo,
                       height: 9,
                     ),
                   ),

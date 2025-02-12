@@ -20,7 +20,7 @@ class FnvFailureWidget extends StatelessWidget {
               Localisation.erreurInattendue,
               style: DsfrTextStyle.headline3(),
             ),
-            FnvSvg.asset(AssetsImages.errorIllustration),
+            FnvSvg.asset(AssetImages.errorIllustration),
             const Text(
               Localisation.erreurInattendueContent,
               style: DsfrTextStyle.bodyXl(),

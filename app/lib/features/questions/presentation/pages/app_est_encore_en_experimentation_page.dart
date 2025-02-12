@@ -42,7 +42,7 @@ class AppEstEncoreEnExperimentationPage extends StatelessWidget {
           const Align(
             alignment: Alignment.centerLeft,
             child: OnboardingIllustration(
-              assetName: AssetsImages.illustration3,
+              assetName: AssetImages.illustration3,
             ),
           ),
           const Text(

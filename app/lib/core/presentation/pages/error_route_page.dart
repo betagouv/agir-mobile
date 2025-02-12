@@ -22,7 +22,7 @@ class FnvErrorRoutePage extends StatelessWidget {
               Localisation.erreurRoutePageTitre,
               style: DsfrTextStyle.headline3(),
             ),
-            FnvSvg.asset(AssetsImages.errorIllustration),
+            FnvSvg.asset(AssetImages.errorIllustration),
             const Text(
               Localisation.erreurRoutePageDescription,
               style: DsfrTextStyle.bodyXl(),

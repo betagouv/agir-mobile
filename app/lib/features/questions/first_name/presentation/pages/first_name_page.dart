@@ -71,7 +71,7 @@ class FirstNamePage extends StatelessWidget {
                   const Align(
                     alignment: Alignment.centerLeft,
                     child: OnboardingIllustration(
-                      assetName: AssetsImages.illustration1,
+                      assetName: AssetImages.illustration1,
                     ),
                   ),
                   const Text(

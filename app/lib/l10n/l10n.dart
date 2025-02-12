@@ -1,6 +1,7 @@
 // ignore_for_file: avoid-duplicate-constant-values
 
 import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
 
 abstract final class Localisation {
   const Localisation._();
@@ -334,4 +335,8 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
 
   static String vousAvezTermineLaMission(final String text) =>
       'Vous avez terminé la mission\n“$text”';
+
+  static String distance(final int value) => value >= 1000
+      ? 'À ${NumberFormat('0.#', 'fr').format(value / 1000)} km'
+      : 'À $value m';
 }
