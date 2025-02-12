@@ -21,3 +21,11 @@ Feature: Actions
         Then I don't see {'0 aide'}
         Then I see {'1 aide'}
         Then I see {'2 aides'}
+
+    Scenario: See action details
+        Given I have actions in my library
+            | 'title'                                     | 'nb_actions_completed' | 'nb_aids_available' |
+            | 'Faire réparer une **paire de chaussures**' | 2                      | 2                   |
+        When I tap on {'Actions'}
+        Then I tap on {'Faire réparer une paire de chaussures'}
+        Then I see {'Faites des économies en donnant une seconde vie à vos paires de chaussures'}

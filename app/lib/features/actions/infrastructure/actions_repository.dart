@@ -4,7 +4,7 @@ import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:app/features/actions/domain/action_summary.dart';
-import 'package:app/features/actions/domain/action_summary_mapper.dart';
+import 'package:app/features/actions/infrastructure/action_summary_mapper.dart';
 import 'package:fpdart/fpdart.dart';
 
 class ActionsRepository {

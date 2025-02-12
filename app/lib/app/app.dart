@@ -11,6 +11,7 @@ import 'package:app/core/notifications/domain/notification_data.dart';
 import 'package:app/core/notifications/domain/notification_page_type.dart';
 import 'package:app/core/notifications/infrastructure/notification_repository.dart';
 import 'package:app/core/notifications/infrastructure/notification_service.dart';
+import 'package:app/features/action/infrastructure/action_repository.dart';
 import 'package:app/features/actions/infrastructure/actions_repository.dart';
 import 'package:app/features/aids/core/presentation/bloc/aids_home_bloc.dart';
 import 'package:app/features/aids/item/presentation/bloc/aid_bloc.dart';
@@ -234,6 +235,10 @@ class _AppState extends State<App> {
               RepositoryProvider(
                 create: (final context) =>
                     ActionsRepository(client: widget.dioHttpClient),
+              ),
+              RepositoryProvider(
+                create: (final context) =>
+                    ActionRepository(client: widget.dioHttpClient),
               ),
               RepositoryProvider(
                 create: (final context) =>

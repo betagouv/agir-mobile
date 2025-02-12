@@ -15,3 +15,7 @@ const bottomNavigationBarOmbre = [
 const recommandationOmbre = [
   BoxShadow(color: Color(0x99C1C1C7), offset: Offset(0, 5), blurRadius: 20),
 ];
+
+const actionOmbre = [
+  BoxShadow(color: Color(0x0D000068), offset: Offset(0, 5), blurRadius: 20),
+];
