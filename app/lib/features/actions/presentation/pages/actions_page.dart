@@ -1,5 +1,6 @@
 import 'package:app/core/presentation/widgets/composants/card.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
+import 'package:app/features/action/presentation/pages/action_page.dart';
 import 'package:app/features/actions/domain/action_summary.dart';
 import 'package:app/features/actions/presentation/bloc/actions_bloc.dart';
 import 'package:app/features/actions/presentation/bloc/actions_event.dart';
@@ -95,7 +96,15 @@ class _Element extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => FnvCard(
-        onTap: () {},
+        onTap: () async {
+          await GoRouter.of(context).pushNamed(
+            ActionPage.name,
+            pathParameters: ActionPage.pathParameters(
+              title: action.title,
+              id: action.id,
+            ),
+          );
+        },
         child: Padding(
           padding: const EdgeInsets.all(DsfrSpacings.s2w),
           child: Column(

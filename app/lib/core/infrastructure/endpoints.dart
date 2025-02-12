@@ -2,6 +2,8 @@ abstract final class Endpoints {
   Endpoints._();
 
   static const actions = '/actions';
+  static String action(final String code) => '/actions/$code';
+
   static const challenges = '/utilisateurs/{userId}/defis_v2';
   static String challenge(final String defiId) =>
       '/utilisateurs/{userId}/defis/$defiId';
@@ -36,6 +38,11 @@ abstract final class Endpoints {
   static const simulerAideVelo = '/utilisateurs/{userId}/simulerAideVelo';
   static const utilisateur = '/utilisateurs/{userId}';
   static const validerCode = '/utilisateurs/valider';
+  static const seasonalFruitsAndVegetablesCategories =
+      '/utilisateurs/{userId}/recherche_services/fruits_legumes/categories';
+  static const seasonalFruitsAndVegetablesSearch =
+      '/utilisateurs/{userId}/recherche_services/fruits_legumes/search2';
+
   static String communes(final String codePostal) =>
       '/communes?code_postal=$codePostal';
   static String recommandationsParThematique(final String thematique) =>
@@ -46,8 +53,4 @@ abstract final class Endpoints {
       '/utilisateurs/{userId}/enchainementQuestionsKYC_v2/$enchainementId';
   static String servicesParThematique(final String codeThematique) =>
       '/utilisateurs/{userId}/thematiques/$codeThematique/recherche_services';
-  static const seasonalFruitsAndVegetablesCategories =
-      '/utilisateurs/{userId}/recherche_services/fruits_legumes/categories';
-  static const seasonalFruitsAndVegetablesSearch =
-      '/utilisateurs/{userId}/recherche_services/fruits_legumes/search2';
 }

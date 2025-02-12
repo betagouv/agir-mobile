@@ -44,5 +44,18 @@ void main() {
       await iSee(tester, '1 aide');
       await iSee(tester, '2 aides');
     });
+    testWidgets('''See action details''', (tester) async {
+      await bddSetUp(tester);
+      await iHaveActionsInMyLibrary(
+          tester,
+          const bdd.DataTable([
+            ['title', 'nb_actions_completed', 'nb_aids_available'],
+            ['Faire réparer une **paire de chaussures**', 2, 2]
+          ]));
+      await iTapOn(tester, 'Actions');
+      await iTapOn(tester, 'Faire réparer une paire de chaussures');
+      await iSee(tester,
+          'Faites des économies en donnant une seconde vie à vos paires de chaussures');
+    });
   });
 }
