@@ -157,7 +157,7 @@ class _Icon extends StatelessWidget {
       child: ClipRRect(
         borderRadius: const BorderRadius.all(Radius.circular(DsfrSpacings.s1w)),
         child: FnvSvg.asset(
-          AssetsImages.miniBilan,
+          AssetImages.miniBilan,
           width: dimension,
           height: dimension,
           fit: BoxFit.cover,

@@ -1,4 +1,5 @@
 import 'package:app/features/action/domain/action.dart';
+import 'package:app/features/action/infrastructure/action_service_mapper.dart';
 
 abstract final class ActionMapper {
   const ActionMapper._();
@@ -9,5 +10,9 @@ abstract final class ActionMapper {
         subTitle: json['sous_titre'] as String,
         how: json['comment'] as String,
         why: json['pourquoi'] as String,
+        services: (json['services'] as List<dynamic>)
+            .cast<Map<String, dynamic>>()
+            .map(ActionServiceMapper.fromJson)
+            .toList(),
       );
 }

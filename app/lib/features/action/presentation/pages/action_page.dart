@@ -4,6 +4,7 @@ import 'package:app/core/presentation/widgets/fondamentaux/shadows.dart';
 import 'package:app/features/action/presentation/bloc/action_bloc.dart';
 import 'package:app/features/action/presentation/bloc/action_event.dart';
 import 'package:app/features/action/presentation/bloc/action_state.dart';
+import 'package:app/features/lvao/presentation/widgets/lvao_horizontal_list.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -96,17 +97,25 @@ class _Success extends StatelessWidget {
                 padding: pagePadding,
                 child: MarkdownBody(
                   data: action.how,
-                  styleSheet:
-                      MarkdownStyleSheet(p: const DsfrTextStyle(fontSize: 16)),
+                  styleSheet: MarkdownStyleSheet(
+                    p: const DsfrTextStyle(fontSize: 16),
+                    h1: const DsfrTextStyle(fontSize: 22),
+                  ),
                 ),
               ),
+              if (action.hasLvaoService) ...[
+                const SizedBox(height: DsfrSpacings.s4w),
+                LvaoHorizontalList(category: action.lvaoService.category),
+              ],
               const SizedBox(height: DsfrSpacings.s4w),
               Padding(
                 padding: pagePadding,
                 child: MarkdownBody(
                   data: action.why,
-                  styleSheet:
-                      MarkdownStyleSheet(p: const DsfrTextStyle(fontSize: 16)),
+                  styleSheet: MarkdownStyleSheet(
+                    p: const DsfrTextStyle(fontSize: 16),
+                    h1: const DsfrTextStyle(fontSize: 22),
+                  ),
                 ),
               ),
               const SizedBox(height: DsfrSpacings.s2w),

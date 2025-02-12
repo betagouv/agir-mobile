@@ -38,6 +38,7 @@ import 'package:app/features/gamification/presentation/bloc/gamification_event.d
 import 'package:app/features/home/presentation/cubit/home_disclaimer_cubit.dart';
 import 'package:app/features/know_your_customer/core/infrastructure/mieux_vous_connaitre_repository.dart';
 import 'package:app/features/know_your_customer/list/infrastructure/know_your_customers_repository.dart';
+import 'package:app/features/lvao/infrastructure/lvao_repository.dart';
 import 'package:app/features/mission/challenges/infrastructure/mission_challenges_repository.dart';
 import 'package:app/features/mission/home/infrastructure/mission_home_repository.dart';
 import 'package:app/features/mission/home/presentation/bloc/mission_home_bloc.dart';
@@ -239,6 +240,10 @@ class _AppState extends State<App> {
               RepositoryProvider(
                 create: (final context) =>
                     ActionRepository(client: widget.dioHttpClient),
+              ),
+              RepositoryProvider(
+                create: (final context) =>
+                    LvaoRepository(client: widget.dioHttpClient),
               ),
               RepositoryProvider(
                 create: (final context) =>

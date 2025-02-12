@@ -112,10 +112,10 @@ class _ImageEtTitre extends StatelessWidget {
             dimension: 80,
             child: FnvSvg.asset(
               switch (themeType) {
-                ThemeType.alimentation => AssetsImages.alimentation,
-                ThemeType.transport => AssetsImages.transport,
-                ThemeType.logement => AssetsImages.logement,
-                ThemeType.consommation => AssetsImages.consommation,
+                ThemeType.alimentation => AssetImages.alimentation,
+                ThemeType.transport => AssetImages.transport,
+                ThemeType.logement => AssetImages.logement,
+                ThemeType.consommation => AssetImages.consommation,
                 ThemeType.decouverte => throw UnimplementedError(),
               },
               width: 80,

@@ -196,11 +196,11 @@ class _List extends StatelessWidget {
           items: moreThan5Kg,
         ),
       const PartnerCard(
-        image: AssetsImages.impactCo2Illustration,
+        image: AssetImages.impactCo2Illustration,
         name: Localisation.impactCo2,
         description: Localisation.impactCo2Description,
         url: Localisation.impactCo2Url,
-        logo: AssetsImages.impactCo2Logo,
+        logo: AssetImages.impactCo2Logo,
       ),
       const SizedBox.shrink(),
     ];

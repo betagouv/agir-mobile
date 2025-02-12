@@ -61,7 +61,7 @@ class _View extends StatelessWidget {
             const Align(
               alignment: Alignment.centerLeft,
               child: OnboardingIllustration(
-                assetName: AssetsImages.illustration4,
+                assetName: AssetImages.illustration4,
               ),
             ),
             const Text(

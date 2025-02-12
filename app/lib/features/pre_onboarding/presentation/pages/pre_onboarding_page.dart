@@ -42,22 +42,22 @@ class PreOnboardingPage extends StatelessWidget {
                     Row(
                       children: [
                         FnvSvg.asset(
-                          AssetsImages.republiqueFrancaise,
+                          AssetImages.republiqueFrancaise,
                           height: 69,
                           semanticsLabel:
-                              AssetsImages.republiqueFrancaiseSemantic,
+                              AssetImages.republiqueFrancaiseSemantic,
                         ),
                         const SizedBox(width: DsfrSpacings.s3w),
                         Image.asset(
-                          AssetsImages.franceNationVerte,
-                          semanticLabel: AssetsImages.franceNationVerteSemantic,
+                          AssetImages.franceNationVerte,
+                          semanticLabel: AssetImages.franceNationVerteSemantic,
                           height: 46,
                         ),
                         const SizedBox(width: DsfrSpacings.s3w),
                         FnvSvg.asset(
-                          AssetsImages.ademe,
+                          AssetImages.ademe,
                           height: 55,
-                          semanticsLabel: AssetsImages.ademeSemantic,
+                          semanticsLabel: AssetImages.ademeSemantic,
                         ),
                       ],
                     ),

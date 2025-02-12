@@ -17,14 +17,14 @@ class MissionFinPage extends StatelessWidget {
         alignment: Alignment.topCenter,
         fit: StackFit.expand,
         children: [
-          FnvSvg.asset(AssetsImages.fireworks, alignment: Alignment.topCenter),
+          FnvSvg.asset(AssetImages.fireworks, alignment: Alignment.topCenter),
           Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: paddingVerticalPage),
             child: Column(
               children: [
                 const SizedBox(height: DsfrSpacings.s6w),
-                FnvSvg.asset(AssetsImages.flags),
+                FnvSvg.asset(AssetImages.flags),
                 const SizedBox(height: DsfrSpacings.s1w),
                 const Text(
                   Localisation.bravo,

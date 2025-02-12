@@ -42,6 +42,8 @@ abstract final class Endpoints {
       '/utilisateurs/{userId}/recherche_services/fruits_legumes/categories';
   static const seasonalFruitsAndVegetablesSearch =
       '/utilisateurs/{userId}/recherche_services/fruits_legumes/search2';
+  static const lvaoSearch =
+      '/utilisateurs/{userId}/recherche_services/longue_vie_objets/search2';
 
   static String communes(final String codePostal) =>
       '/communes?code_postal=$codePostal';
