@@ -1,10 +1,12 @@
 import 'package:app/core/presentation/widgets/composants/app_bar.dart';
+import 'package:app/core/presentation/widgets/composants/image.dart';
 import 'package:app/core/presentation/widgets/composants/scaffold.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/shadows.dart';
 import 'package:app/features/action/presentation/bloc/action_bloc.dart';
 import 'package:app/features/action/presentation/bloc/action_event.dart';
 import 'package:app/features/action/presentation/bloc/action_state.dart';
 import 'package:app/features/services/lvao/presentation/widgets/lvao_horizontal_list.dart';
+import 'package:app/features/services/recipes/presentation/widgets/recipe_horizontal_list.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -95,28 +97,20 @@ class _Success extends StatelessWidget {
               const SizedBox(height: DsfrSpacings.s2w),
               Padding(
                 padding: pagePadding,
-                child: MarkdownBody(
-                  data: action.how,
-                  styleSheet: MarkdownStyleSheet(
-                    p: const DsfrTextStyle(fontSize: 16),
-                    h1: const DsfrTextStyle(fontSize: 22),
-                  ),
-                ),
+                child: _Markdown(data: action.why),
               ),
               if (action.hasLvaoService) ...[
                 const SizedBox(height: DsfrSpacings.s4w),
                 LvaoHorizontalList(category: action.lvaoService.category),
               ],
+              if (action.hasRecipesService) ...[
+                const SizedBox(height: DsfrSpacings.s4w),
+                RecipeHorizontalList(category: action.recipesService.category),
+              ],
               const SizedBox(height: DsfrSpacings.s4w),
               Padding(
                 padding: pagePadding,
-                child: MarkdownBody(
-                  data: action.why,
-                  styleSheet: MarkdownStyleSheet(
-                    p: const DsfrTextStyle(fontSize: 16),
-                    h1: const DsfrTextStyle(fontSize: 22),
-                  ),
-                ),
+                child: _Markdown(data: action.how),
               ),
               const SizedBox(height: DsfrSpacings.s2w),
             ],
@@ -125,4 +119,21 @@ class _Success extends StatelessWidget {
       ],
     );
   }
+}
+
+class _Markdown extends StatelessWidget {
+  const _Markdown({required this.data});
+
+  final String data;
+
+  @override
+  Widget build(final BuildContext context) => MarkdownBody(
+        data: data,
+        styleSheet: MarkdownStyleSheet(
+          p: const DsfrTextStyle(fontSize: 16),
+          h1: const DsfrTextStyle(fontSize: 22),
+        ),
+        imageBuilder: (final uri, final title, final alt) =>
+            FnvImage.network(uri.toString(), semanticLabel: alt),
+      );
 }

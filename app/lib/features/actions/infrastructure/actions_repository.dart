@@ -25,6 +25,7 @@ class ActionsRepository {
     return Right(
       json
           .map((final e) => e as Map<String, dynamic>)
+          .where((final e) => e['type'] == 'classique')
           .map(ActionSummaryMapper.fromJson)
           .toList(),
     );

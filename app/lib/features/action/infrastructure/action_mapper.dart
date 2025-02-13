@@ -8,8 +8,8 @@ abstract final class ActionMapper {
         id: json['code'] as String,
         title: json['titre'] as String,
         subTitle: json['sous_titre'] as String,
-        how: json['comment'] as String,
         why: json['pourquoi'] as String,
+        how: json['comment'] as String,
         services: (json['services'] as List<dynamic>)
             .cast<Map<String, dynamic>>()
             .map(ActionServiceMapper.fromJson)
