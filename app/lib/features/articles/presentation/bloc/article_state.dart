@@ -22,8 +22,7 @@ final class ArticleState extends Equatable {
 
   final Article article;
 
-  ArticleState copyWith({final Article? article}) =>
-      ArticleState(article: article ?? this.article);
+  ArticleState copyWith({final Article? article}) => ArticleState(article: article ?? this.article);
 
   @override
   List<Object> get props => [article];

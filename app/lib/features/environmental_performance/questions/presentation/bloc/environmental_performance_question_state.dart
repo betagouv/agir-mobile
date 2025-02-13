@@ -11,17 +11,13 @@ sealed class EnvironmentalPerformanceQuestionState extends Equatable {
 }
 
 @immutable
-final class EnvironmentalPerformanceQuestionInitial
-    extends EnvironmentalPerformanceQuestionState {
+final class EnvironmentalPerformanceQuestionInitial extends EnvironmentalPerformanceQuestionState {
   const EnvironmentalPerformanceQuestionInitial();
 }
 
 @immutable
-final class EnvironmentalPerformanceQuestionLoadSuccess
-    extends EnvironmentalPerformanceQuestionState {
-  const EnvironmentalPerformanceQuestionLoadSuccess({
-    required this.questionIdList,
-  });
+final class EnvironmentalPerformanceQuestionLoadSuccess extends EnvironmentalPerformanceQuestionState {
+  const EnvironmentalPerformanceQuestionLoadSuccess({required this.questionIdList});
 
   final List<QuestionCode> questionIdList;
 
@@ -30,8 +26,7 @@ final class EnvironmentalPerformanceQuestionLoadSuccess
 }
 
 @immutable
-final class EnvironmentalPerformanceQuestionLoadFailure
-    extends EnvironmentalPerformanceQuestionState {
+final class EnvironmentalPerformanceQuestionLoadFailure extends EnvironmentalPerformanceQuestionState {
   const EnvironmentalPerformanceQuestionLoadFailure({required this.message});
 
   final String message;

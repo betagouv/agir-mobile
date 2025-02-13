@@ -6,9 +6,7 @@ abstract final class AidMapper {
   const AidMapper._();
 
   static Aid fromJson(final Map<String, dynamic> json) => Aid(
-    themeType: _mapThemeType(
-      (json['thematiques'] as List<dynamic>).cast<String>().firstOrNull ?? '',
-    ),
+    themeType: _mapThemeType((json['thematiques'] as List<dynamic>).cast<String>().firstOrNull ?? ''),
     title: json['titre'] as String,
     content: json['contenu'] as String,
     amountMax: (json['montant_max'] as num?)?.toInt(),

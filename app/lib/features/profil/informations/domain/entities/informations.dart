@@ -22,14 +22,5 @@ class Informations extends Equatable {
   final int? revenuFiscal;
 
   @override
-  List<Object?> get props => [
-    email,
-    prenom,
-    nom,
-    anneeDeNaissance,
-    codePostal,
-    commune,
-    nombreDePartsFiscales,
-    revenuFiscal,
-  ];
+  List<Object?> get props => [email, prenom, nom, anneeDeNaissance, codePostal, commune, nombreDePartsFiscales, revenuFiscal];
 }

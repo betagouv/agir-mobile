@@ -12,25 +12,18 @@ import 'package:app/features/authentification/core/domain/information_de_connexi
 import 'package:fpdart/fpdart.dart';
 
 class AuthentificationRepository {
-  AuthentificationRepository({
-    required final DioHttpClient client,
-    required final AuthenticationService authenticationService,
-  }) : _client = client,
-       _authenticationService = authenticationService;
+  AuthentificationRepository({required final DioHttpClient client, required final AuthenticationService authenticationService})
+    : _client = client,
+      _authenticationService = authenticationService;
 
   final DioHttpClient _client;
   final AuthenticationService _authenticationService;
   bool _connexionDemandee = false;
 
-  Future<Either<ApiErreur, void>> connexionDemandee(
-    final InformationDeConnexion informationDeConnexion,
-  ) async {
+  Future<Either<ApiErreur, void>> connexionDemandee(final InformationDeConnexion informationDeConnexion) async {
     final response = await _client.post(
       Endpoints.login,
-      data: jsonEncode({
-        'email': informationDeConnexion.adresseMail,
-        'mot_de_passe': informationDeConnexion.motDePasse,
-      }),
+      data: jsonEncode({'email': informationDeConnexion.adresseMail, 'mot_de_passe': informationDeConnexion.motDePasse}),
     );
 
     if (isResponseSuccessful(response.statusCode)) {
@@ -39,10 +32,7 @@ class AuthentificationRepository {
       return const Right(null);
     }
 
-    return handleError(
-      jsonEncode(response.data),
-      defaultMessage: 'Erreur lors de la connexion',
-    ).fold((final l) async {
+    return handleError(jsonEncode(response.data), defaultMessage: 'Erreur lors de la connexion').fold((final l) async {
       if (l.message != 'Utilisateur non actif') {
         return Left(l);
       }
@@ -59,9 +49,7 @@ class AuthentificationRepository {
     return const Right(null);
   }
 
-  Future<Either<ApiErreur, void>> creationDeCompteDemandee(
-    final InformationDeConnexion informationDeConnexion,
-  ) async {
+  Future<Either<ApiErreur, void>> creationDeCompteDemandee(final InformationDeConnexion informationDeConnexion) async {
     final response = await _client.post(
       Endpoints.creationCompte,
       data: jsonEncode({
@@ -73,37 +61,23 @@ class AuthentificationRepository {
 
     return isResponseSuccessful(response.statusCode)
         ? const Right(null)
-        : handleError(
-          jsonEncode(response.data),
-          defaultMessage: 'Erreur lors de la création du compte',
-        );
+        : handleError(jsonEncode(response.data), defaultMessage: 'Erreur lors de la création du compte');
   }
 
-  Future<Either<Exception, void>> renvoyerCodeDemande(
-    final String email,
-  ) async {
-    final response = await _client.post(
-      Endpoints.renvoyerCode,
-      data: jsonEncode({'email': email}),
-    );
+  Future<Either<Exception, void>> renvoyerCodeDemande(final String email) async {
+    final response = await _client.post(Endpoints.renvoyerCode, data: jsonEncode({'email': email}));
 
     return isResponseSuccessful(response.statusCode)
         ? const Right(null)
         : Left(Exception('Erreur lors de la validation du code'));
   }
 
-  Future<Either<ApiErreur, void>> validationDemandee(
-    final InformationDeCode informationDeConnexion,
-  ) async {
-    final uri =
-        _connexionDemandee ? Endpoints.loginCode : Endpoints.validerCode;
+  Future<Either<ApiErreur, void>> validationDemandee(final InformationDeCode informationDeConnexion) async {
+    final uri = _connexionDemandee ? Endpoints.loginCode : Endpoints.validerCode;
 
     final response = await _client.post(
       uri,
-      data: jsonEncode({
-        'code': informationDeConnexion.code,
-        'email': informationDeConnexion.adresseMail,
-      }),
+      data: jsonEncode({'code': informationDeConnexion.code, 'email': informationDeConnexion.adresseMail}),
     );
 
     if (isResponseSuccessful(response.statusCode)) {
@@ -116,17 +90,11 @@ class AuthentificationRepository {
       return const Right(null);
     }
 
-    return handleError(
-      jsonEncode(response.data),
-      defaultMessage: 'Erreur lors de la validation du code',
-    );
+    return handleError(jsonEncode(response.data), defaultMessage: 'Erreur lors de la validation du code');
   }
 
   Future<Either<Exception, void>> oubliMotDePasse(final String email) async {
-    final response = await _client.post(
-      Endpoints.oubliMotDePasse,
-      data: jsonEncode({'email': email}),
-    );
+    final response = await _client.post(Endpoints.oubliMotDePasse, data: jsonEncode({'email': email}));
 
     return isResponseSuccessful(response.statusCode)
         ? const Right(null)
@@ -140,18 +108,11 @@ class AuthentificationRepository {
   }) async {
     final response = await _client.post(
       Endpoints.modifierMotDePasse,
-      data: jsonEncode({
-        'code': code,
-        'email': email,
-        'mot_de_passe': motDePasse,
-      }),
+      data: jsonEncode({'code': code, 'email': email, 'mot_de_passe': motDePasse}),
     );
 
     return isResponseSuccessful(response.statusCode)
         ? const Right(null)
-        : handleError(
-          jsonEncode(response.data),
-          defaultMessage: 'Erreur lors de la modification du mot de passe',
-        );
+        : handleError(jsonEncode(response.data), defaultMessage: 'Erreur lors de la modification du mot de passe');
   }
 }

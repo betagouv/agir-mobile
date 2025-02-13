@@ -2,8 +2,7 @@
 // ignore_for_file: do_not_use_environment
 
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
-import 'package:flutter/foundation.dart'
-    show TargetPlatform, defaultTargetPlatform;
+import 'package:flutter/foundation.dart' show TargetPlatform, defaultTargetPlatform;
 
 /// Default [FirebaseOptions] for use with your Firebase apps.
 ///

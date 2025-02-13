@@ -5,10 +5,7 @@ import 'package:flutter/material.dart';
 class TextPage extends StatefulWidget {
   const TextPage({super.key});
 
-  static final model = PageItem(
-    title: 'Typographie',
-    pageBuilder: (final context) => const TextPage(),
-  );
+  static final model = PageItem(title: 'Typographie', pageBuilder: (final context) => const TextPage());
 
   @override
   State<TextPage> createState() => _TextPageState();
@@ -52,24 +49,14 @@ class _TextPageState extends State<TextPage> {
         const Text('Normal'),
         Text(data, style: dsfrTextStyle),
         const SizedBox(height: 16),
-        Text(
-          data,
-          style: dsfrTextStyle.copyWith(
-            color: Colors.white,
-            backgroundColor: Colors.black,
-          ),
-        ),
+        Text(data, style: dsfrTextStyle.copyWith(color: Colors.white, backgroundColor: Colors.black)),
         const SizedBox(height: 16),
         const Text('Medium'),
         Text(data, style: dsfrTextStyle.copyWith(fontWeight: FontWeight.w500)),
         const SizedBox(height: 16),
         Text(
           data,
-          style: dsfrTextStyle.copyWith(
-            color: Colors.white,
-            backgroundColor: Colors.black,
-            fontWeight: FontWeight.w500,
-          ),
+          style: dsfrTextStyle.copyWith(color: Colors.white, backgroundColor: Colors.black, fontWeight: FontWeight.w500),
         ),
         const SizedBox(height: 16),
         const Text('Bold'),
@@ -77,11 +64,7 @@ class _TextPageState extends State<TextPage> {
         const SizedBox(height: 16),
         Text(
           data,
-          style: dsfrTextStyle.copyWith(
-            color: Colors.white,
-            backgroundColor: Colors.black,
-            fontWeight: FontWeight.bold,
-          ),
+          style: dsfrTextStyle.copyWith(color: Colors.white, backgroundColor: Colors.black, fontWeight: FontWeight.bold),
         ),
       ],
     );

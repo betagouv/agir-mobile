@@ -6,10 +6,7 @@ class CompareBar extends StatelessWidget {
   final double value;
 
   @override
-  Widget build(final context) => CustomPaint(
-    painter: _Painter(value: value),
-    size: const Size(double.infinity, 12),
-  );
+  Widget build(final context) => CustomPaint(painter: _Painter(value: value), size: const Size(double.infinity, 12));
 }
 
 class _Painter extends CustomPainter {
@@ -18,12 +15,7 @@ class _Painter extends CustomPainter {
   final double value;
 
   static const _progressGradient = LinearGradient(
-    colors: [
-      Color(0xFFA6DD00),
-      Color(0xFFFF9D00),
-      Color(0xFFDF1451),
-      Color(0xFFDF1451),
-    ],
+    colors: [Color(0xFFA6DD00), Color(0xFFFF9D00), Color(0xFFDF1451), Color(0xFFDF1451)],
     stops: [0.17, 0.562, 0.995, 1.0],
   );
 
@@ -34,10 +26,7 @@ class _Painter extends CustomPainter {
   }
 
   void _drawTrack(final Canvas canvas, final Size size) {
-    final track = RRect.fromRectAndRadius(
-      Rect.fromLTWH(0, 0, size.width, size.height),
-      Radius.circular(size.height),
-    );
+    final track = RRect.fromRectAndRadius(Rect.fromLTWH(0, 0, size.width, size.height), Radius.circular(size.height));
     final trackPaint = Paint()..color = const Color(0x80C2C2C2);
     canvas.drawRRect(track, trackPaint);
   }
@@ -47,10 +36,7 @@ class _Painter extends CustomPainter {
     if (progressWidth <= 0.0) {
       return;
     }
-    final progressBar = RRect.fromRectAndRadius(
-      Rect.fromLTWH(0, 0, progressWidth, size.height),
-      Radius.circular(size.height),
-    );
+    final progressBar = RRect.fromRectAndRadius(Rect.fromLTWH(0, 0, progressWidth, size.height), Radius.circular(size.height));
     final progressPaint =
         Paint()
           ..shader = _progressGradient.createShader(Offset.zero & size)

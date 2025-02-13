@@ -9,13 +9,8 @@ final class QuestionThemesState extends Equatable {
   final QuestionMultipleChoice? question;
   final List<String> valeur;
 
-  QuestionThemesState copyWith({
-    final QuestionMultipleChoice? question,
-    final List<String>? valeur,
-  }) => QuestionThemesState(
-    question: question ?? this.question,
-    valeur: valeur ?? this.valeur,
-  );
+  QuestionThemesState copyWith({final QuestionMultipleChoice? question, final List<String>? valeur}) =>
+      QuestionThemesState(question: question ?? this.question, valeur: valeur ?? this.valeur);
 
   @override
   List<Object?> get props => [question, valeur];

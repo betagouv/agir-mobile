@@ -25,8 +25,7 @@ class EnvironmentalPerformanceCategoryWidget extends StatelessWidget {
   Widget build(final context) {
     final progression = completion / 100;
 
-    final color =
-        progression >= 1 ? DsfrColors.success425 : DsfrColors.blueFranceSun113;
+    final color = progression >= 1 ? DsfrColors.success425 : DsfrColors.blueFranceSun113;
 
     return Stack(
       alignment: Alignment.topCenter,
@@ -43,8 +42,7 @@ class EnvironmentalPerformanceCategoryWidget extends StatelessWidget {
             numberOfQuestions: numberOfQuestions,
           ),
         ),
-        if (progression >= 1)
-          FnvBadge(label: 'TERMINÉ !', backgroundColor: color),
+        if (progression >= 1) FnvBadge(label: 'TERMINÉ !', backgroundColor: color),
       ],
     );
   }
@@ -112,14 +110,8 @@ class _CardState extends State<_Card> with MaterialStateMixin<_Card> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ClipRRect(
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(DsfrSpacings.s1v),
-                      ),
-                      child: FnvImage.network(
-                        widget.imageUrl,
-                        width: _imageWidth,
-                        height: _imageHeight,
-                      ),
+                      borderRadius: const BorderRadius.all(Radius.circular(DsfrSpacings.s1v)),
+                      child: FnvImage.network(widget.imageUrl, width: _imageWidth, height: _imageHeight),
                     ),
                     const SizedBox(height: DsfrSpacings.s1v),
                     LinearProgressIndicator(
@@ -128,19 +120,11 @@ class _CardState extends State<_Card> with MaterialStateMixin<_Card> {
                       color: widget.color,
                       minHeight: DsfrSpacings.s1v5,
                       semanticsLabel: 'Bilan complété à ${widget.completion}%',
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(DsfrSpacings.s1v),
-                      ),
+                      borderRadius: const BorderRadius.all(Radius.circular(DsfrSpacings.s1v)),
                     ),
                     const SizedBox(height: DsfrSpacings.s1w),
-                    Text(
-                      widget.label,
-                      style: const DsfrTextStyle.bodyLgMedium(),
-                    ),
-                    Text(
-                      '${widget.numberOfQuestions} questions',
-                      style: DsfrTextStyle.bodySm(color: widget.color),
-                    ),
+                    Text(widget.label, style: const DsfrTextStyle.bodyLgMedium()),
+                    Text('${widget.numberOfQuestions} questions', style: DsfrTextStyle.bodySm(color: widget.color)),
                   ],
                 ),
               ),

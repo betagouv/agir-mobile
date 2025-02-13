@@ -47,23 +47,19 @@ abstract final class MissionMapper {
     _ => ThemeType.decouverte,
   };
 
-  static MissionKyc _fromJsonMissionKyc(final Map<String, dynamic> json) =>
-      MissionKyc(
-        contentId: ContentId(json['content_id'] as String),
-        titre: json['titre'] as String,
-        estFait: json['done'] as bool,
-      );
+  static MissionKyc _fromJsonMissionKyc(final Map<String, dynamic> json) => MissionKyc(
+    contentId: ContentId(json['content_id'] as String),
+    titre: json['titre'] as String,
+    estFait: json['done'] as bool,
+  );
 
-  static MissionQuiz _fromJsonMissionQuiz(final Map<String, dynamic> json) =>
-      MissionQuiz(
-        contentId: ContentId(json['content_id'] as String),
-        titre: json['titre'] as String,
-        estFait: json['done'] as bool,
-      );
+  static MissionQuiz _fromJsonMissionQuiz(final Map<String, dynamic> json) => MissionQuiz(
+    contentId: ContentId(json['content_id'] as String),
+    titre: json['titre'] as String,
+    estFait: json['done'] as bool,
+  );
 
-  static MissionArticle _fromJsonMissionArticle(
-    final Map<String, dynamic> json,
-  ) => MissionArticle(
+  static MissionArticle _fromJsonMissionArticle(final Map<String, dynamic> json) => MissionArticle(
     contentId: ContentId(json['content_id'] as String),
     titre: json['titre'] as String,
     estFait: json['done'] as bool,

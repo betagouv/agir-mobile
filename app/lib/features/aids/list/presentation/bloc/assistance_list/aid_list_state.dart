@@ -23,11 +23,7 @@ final class AidListLoadInProgress extends AidListState {
 
 @immutable
 final class AidListLoadSuccess extends AidListState {
-  const AidListLoadSuccess({
-    required this.isCovered,
-    required this.themes,
-    required this.themeSelected,
-  });
+  const AidListLoadSuccess({required this.isCovered, required this.themes, required this.themeSelected});
 
   final bool isCovered;
   final Map<ThemeType, List<Aid>> themes;
@@ -37,9 +33,7 @@ final class AidListLoadSuccess extends AidListState {
       return themes;
     }
 
-    return themes.containsKey(themeSelected)
-        ? {themeSelected!: themes[themeSelected]!}
-        : {};
+    return themes.containsKey(themeSelected) ? {themeSelected!: themes[themeSelected]!} : {};
   }
 
   @override

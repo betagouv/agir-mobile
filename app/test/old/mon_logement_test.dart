@@ -78,9 +78,7 @@ void main() {
     ielVoitLeBoutonRadioAvecCeTexteSelectionne(Localisation.dpeG);
   });
 
-  testWidgets('Iel rempli ces informations et appuie sur mettre à jour', (
-    final tester,
-  ) async {
+  testWidgets('Iel rempli ces informations et appuie sur mettre à jour', (final tester) async {
     setUpWidgets(tester);
     const codePostal = '39100';
     const commune = 'CHOISEY';
@@ -89,23 +87,11 @@ void main() {
     leServeurRetourneCetteListeDeCommunes(['AUTHUME', _commune, commune]);
     ScenarioContext().dioMock!.patchM(Endpoints.logement);
     await _allerSurMonLogement(tester);
-    await ielEcritDansLeChamp(
-      tester,
-      label: Localisation.codePostal,
-      enterText: codePostal,
-    );
+    await ielEcritDansLeChamp(tester, label: Localisation.codePostal, enterText: codePostal);
     await ielAppuieSurLaListeDeroulante(tester);
     await ielAppuieSur(tester, commune);
-    await ielEcritDansLeChamp(
-      tester,
-      label: Localisation.adultes,
-      enterText: nombreAdultes.toString(),
-    );
-    await ielEcritDansLeChamp(
-      tester,
-      label: Localisation.enfants,
-      enterText: nombreEnfants.toString(),
-    );
+    await ielEcritDansLeChamp(tester, label: Localisation.adultes, enterText: nombreAdultes.toString());
+    await ielEcritDansLeChamp(tester, label: Localisation.enfants, enterText: nombreEnfants.toString());
     await ielScrolle(tester, Localisation.maResidencePrincipaleEst);
     await ielAppuieSur(tester, Localisation.unAppartement);
     await ielAppuieSur(tester, Localisation.oui);

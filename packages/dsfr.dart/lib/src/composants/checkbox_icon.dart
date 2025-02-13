@@ -3,11 +3,7 @@ import 'package:dsfr/src/fondamentaux/icons.g.dart';
 import 'package:flutter/material.dart';
 
 class DsfrCheckboxIcon extends StatelessWidget {
-  const DsfrCheckboxIcon({
-    super.key,
-    required this.value,
-    this.padding = EdgeInsets.zero,
-  });
+  const DsfrCheckboxIcon({super.key, required this.value, this.padding = EdgeInsets.zero});
 
   final bool value;
   final EdgeInsets padding;
@@ -29,11 +25,7 @@ class DsfrCheckboxIcon extends StatelessWidget {
           opacity: value ? 1 : 0,
           curve: Easing.emphasizedAccelerate,
           duration: Durations.short3,
-          child: const Icon(
-            DsfrIcons.systemCheckLine,
-            size: dimension,
-            color: DsfrColors.blueFrance975,
-          ),
+          child: const Icon(DsfrIcons.systemCheckLine, size: dimension, color: DsfrColors.blueFrance975),
         ),
       ),
     );

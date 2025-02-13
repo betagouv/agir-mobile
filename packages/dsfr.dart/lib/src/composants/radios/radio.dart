@@ -25,18 +25,14 @@ class DsfrRadioButton<T> extends StatefulWidget {
   State<DsfrRadioButton<T>> createState() => _DsfrRadioButtonState<T>();
 }
 
-class _DsfrRadioButtonState<T> extends State<DsfrRadioButton<T>>
-    with MaterialStateMixin<DsfrRadioButton<T>> {
+class _DsfrRadioButtonState<T> extends State<DsfrRadioButton<T>> with MaterialStateMixin<DsfrRadioButton<T>> {
   @override
   Widget build(final context) => DsfrFocusWidget(
     isFocused: isFocused,
     child: Material(
       color: Colors.transparent,
       child: InkWell(
-        onTap:
-            widget.onChanged == null
-                ? null
-                : () => widget.onChanged!(widget.value),
+        onTap: widget.onChanged == null ? null : () => widget.onChanged!(widget.value),
         onHighlightChanged: updateMaterialState(WidgetState.pressed),
         onHover: updateMaterialState(WidgetState.hovered),
         focusColor: Colors.transparent,
@@ -46,12 +42,7 @@ class _DsfrRadioButtonState<T> extends State<DsfrRadioButton<T>>
           decoration: BoxDecoration(
             color: widget.backgroundColor,
             border: Border.fromBorderSide(
-              BorderSide(
-                color:
-                    widget.groupValue == widget.value
-                        ? DsfrColors.blueFranceSun113
-                        : DsfrColors.grey900,
-              ),
+              BorderSide(color: widget.groupValue == widget.value ? DsfrColors.blueFranceSun113 : DsfrColors.grey900),
             ),
           ),
           child: Padding(
@@ -60,17 +51,8 @@ class _DsfrRadioButtonState<T> extends State<DsfrRadioButton<T>>
               mainAxisSize: MainAxisSize.min,
               spacing: DsfrSpacings.s1w,
               children: [
-                RadioIcon(
-                  key: ValueKey(widget.title),
-                  value: widget.value,
-                  groupValue: widget.groupValue,
-                ),
-                Flexible(
-                  child: Text(
-                    widget.title,
-                    style: const DsfrTextStyle.bodyMd(),
-                  ),
-                ),
+                RadioIcon(key: ValueKey(widget.title), value: widget.value, groupValue: widget.groupValue),
+                Flexible(child: Text(widget.title, style: const DsfrTextStyle.bodyMd())),
               ],
             ),
           ),

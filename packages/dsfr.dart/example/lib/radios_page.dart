@@ -5,10 +5,7 @@ import 'package:flutter/material.dart';
 class RadiosPage extends StatefulWidget {
   const RadiosPage({super.key});
 
-  static final model = PageItem(
-    title: 'Radios',
-    pageBuilder: (final context) => const RadiosPage(),
-  );
+  static final model = PageItem(title: 'Radios', pageBuilder: (final context) => const RadiosPage());
 
   @override
   State<RadiosPage> createState() => _RadiosPageState();
@@ -21,11 +18,7 @@ class _RadiosPageState extends State<RadiosPage> {
   Widget build(final context) => ListView(
     padding: const EdgeInsets.all(16),
     children: [
-      DsfrRadioButtonSet(
-        title: 'Radios',
-        values: const {1: 'Un', 2: 'Deux', 3: 'Trois'},
-        onCallback: (final p0) {},
-      ),
+      DsfrRadioButtonSet(title: 'Radios', values: const {1: 'Un', 2: 'Deux', 3: 'Trois'}, onCallback: (final p0) {}),
       const SizedBox(height: DsfrSpacings.s3w),
       DsfrRadioButton<int>(
         title: 'Un',

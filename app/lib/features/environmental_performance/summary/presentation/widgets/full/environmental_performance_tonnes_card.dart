@@ -8,10 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 
 class EnvironmentalPerformanceTonnesCard extends StatelessWidget {
-  const EnvironmentalPerformanceTonnesCard({
-    super.key,
-    required this.footprint,
-  });
+  const EnvironmentalPerformanceTonnesCard({super.key, required this.footprint});
 
   final Footprint footprint;
 
@@ -20,15 +17,10 @@ class EnvironmentalPerformanceTonnesCard extends StatelessWidget {
     decoration: const ShapeDecoration(
       color: FnvColors.carteFond,
       shadows: recommandationOmbre,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(DsfrSpacings.s1w)),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(DsfrSpacings.s1w))),
     ),
     child: Padding(
-      padding: const EdgeInsets.symmetric(
-        vertical: DsfrSpacings.s3v,
-        horizontal: DsfrSpacings.s2w,
-      ),
+      padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s3v, horizontal: DsfrSpacings.s2w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         spacing: DsfrSpacings.s3v,
@@ -38,24 +30,14 @@ class EnvironmentalPerformanceTonnesCard extends StatelessWidget {
             children: [
               Text(
                 footprint.tonnesRepresentation,
-                style: const DsfrTextStyle(
-                  fontSize: 36,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFFDF1451),
-                ),
+                style: const DsfrTextStyle(fontSize: 36, fontWeight: FontWeight.bold, color: Color(0xFFDF1451)),
               ),
               const Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      EnvironmentalPerformanceSummaryL10n.tonnes,
-                      style: DsfrTextStyle.bodyMdBold(),
-                    ),
-                    Text(
-                      EnvironmentalPerformanceSummaryL10n.deCO2eParAn,
-                      style: DsfrTextStyle.bodyMd(),
-                    ),
+                    Text(EnvironmentalPerformanceSummaryL10n.tonnes, style: DsfrTextStyle.bodyMdBold()),
+                    Text(EnvironmentalPerformanceSummaryL10n.deCO2eParAn, style: DsfrTextStyle.bodyMd()),
                   ],
                 ),
               ),

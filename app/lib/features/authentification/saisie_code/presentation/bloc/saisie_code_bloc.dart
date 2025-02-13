@@ -6,16 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fpdart/fpdart.dart';
 
 class SaisieCodeBloc extends Bloc<SaisieCodeEvent, SaisieCodeState> {
-  SaisieCodeBloc({
-    required final AuthentificationRepository authentificationRepository,
-    required final String email,
-  }) : super(
-         SaisieCodeState(
-           email: email,
-           renvoyerCodeDemande: false,
-           erreur: const None(),
-         ),
-       ) {
+  SaisieCodeBloc({required final AuthentificationRepository authentificationRepository, required final String email})
+    : super(SaisieCodeState(email: email, renvoyerCodeDemande: false, erreur: const None())) {
     on<SaiseCodeRenvoyerCodeDemandee>((final event, final emit) async {
       emit(state.copyWith(renvoyerCodeDemande: false));
       await authentificationRepository.renvoyerCodeDemande(state.email);
@@ -30,11 +22,7 @@ class SaisieCodeBloc extends Bloc<SaisieCodeEvent, SaisieCodeState> {
         InformationDeCode(adresseMail: state.email, code: event.code),
       );
 
-      result.fold(
-        (final exception) =>
-            emit(state.copyWith(erreur: Some(exception.message))),
-        (final _) {},
-      );
+      result.fold((final exception) => emit(state.copyWith(erreur: Some(exception.message))), (final _) {});
     });
   }
 }

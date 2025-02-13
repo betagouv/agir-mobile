@@ -51,11 +51,7 @@ void main() {
     await _allerSurMieuxVousConnaitre(tester);
     await ielAppuieSur(tester, question);
     const nouvelleReponse = "Je n'ai pas d'emploi";
-    await ielEcritDansLeChamp(
-      tester,
-      label: Localisation.maReponse,
-      enterText: nouvelleReponse,
-    );
+    await ielEcritDansLeChamp(tester, label: Localisation.maReponse, enterText: nouvelleReponse);
     leServeurRetourneCesQuestions([
       {
         'type': 'libre',
@@ -72,9 +68,7 @@ void main() {
     ielVoitLeTexte(nouvelleReponse);
   });
 
-  testWidgets('Modifier la réponse à une question entier', (
-    final tester,
-  ) async {
+  testWidgets('Modifier la réponse à une question entier', (final tester) async {
     setUpWidgets(tester);
     const question = 'Quelle est votre situation professionnelle ?';
     const reponse = '10000';
@@ -92,11 +86,7 @@ void main() {
     await _allerSurMieuxVousConnaitre(tester);
     await ielAppuieSur(tester, question);
     const nouvelleReponse = '1000';
-    await ielEcritDansLeChamp(
-      tester,
-      label: Localisation.maReponse,
-      enterText: nouvelleReponse,
-    );
+    await ielEcritDansLeChamp(tester, label: Localisation.maReponse, enterText: nouvelleReponse);
     leServeurRetourneCesQuestions([
       {
         'type': 'entier',
@@ -113,9 +103,7 @@ void main() {
     ielVoitLeTexte(nouvelleReponse);
   });
 
-  testWidgets('Ne pas modifier la réponse à une question entier', (
-    final tester,
-  ) async {
+  testWidgets('Ne pas modifier la réponse à une question entier', (final tester) async {
     setUpWidgets(tester);
     const question = 'Quelle est votre situation professionnelle ?';
     const reponse = '10000';
@@ -133,11 +121,7 @@ void main() {
     await _allerSurMieuxVousConnaitre(tester);
     await ielAppuieSur(tester, question);
     const nouvelleReponse = 'Michel';
-    await ielEcritDansLeChamp(
-      tester,
-      label: Localisation.maReponse,
-      enterText: nouvelleReponse,
-    );
+    await ielEcritDansLeChamp(tester, label: Localisation.maReponse, enterText: nouvelleReponse);
     await ielAppuieSur(tester, Localisation.mettreAJour);
     ielVoitLeTexte(Localisation.mieuxVousConnaitre);
     ielVoitLeTexte(reponse);
@@ -166,9 +150,7 @@ void main() {
     ielVoitLeTexte(reponse);
   });
 
-  testWidgets('Modifier la réponse à une question choix unique', (
-    final tester,
-  ) async {
+  testWidgets('Modifier la réponse à une question choix unique', (final tester) async {
     setUpWidgets(tester);
     const question = 'Quelle est votre situation professionnelle ?';
     const reponse = 'J’ai un emploi';
@@ -209,12 +191,9 @@ void main() {
     ielVoitLeTexte(nouvelleReponse);
   });
 
-  testWidgets('Modifier la réponse à une question choix multiple', (
-    final tester,
-  ) async {
+  testWidgets('Modifier la réponse à une question choix multiple', (final tester) async {
     setUpWidgets(tester);
-    const question =
-        'Qu’est-ce qui vous motive le plus pour adopter des habitudes écologiques ?';
+    const question = 'Qu’est-ce qui vous motive le plus pour adopter des habitudes écologiques ?';
     const reponses = ['Famille ou génération future', 'Conscience écologique'];
     const reponseEnPlus = 'Économies financières';
 
@@ -293,11 +272,7 @@ void main() {
     await _allerSurMieuxVousConnaitre(tester);
     await ielAppuieSur(tester, question);
     const nouvelleReponse = "Je n'ai pas d'emploi";
-    await ielEcritDansLeChamp(
-      tester,
-      label: Localisation.maReponse,
-      enterText: nouvelleReponse,
-    );
+    await ielEcritDansLeChamp(tester, label: Localisation.maReponse, enterText: nouvelleReponse);
     leServeurRetourneCesQuestions([
       {
         'type': 'libre',

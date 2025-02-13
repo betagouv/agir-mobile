@@ -8,8 +8,7 @@ import 'package:app/features/bibliotheque/infrastructure/bibliotheque_mapper.dar
 import 'package:fpdart/fpdart.dart';
 
 class BibliothequeRepository {
-  const BibliothequeRepository({required final DioHttpClient client})
-    : _client = client;
+  const BibliothequeRepository({required final DioHttpClient client}) : _client = client;
 
   final DioHttpClient _client;
 
@@ -19,23 +18,17 @@ class BibliothequeRepository {
     required final bool? isFavorite,
   }) async {
     final map = <String, String>{
-      if (thematiques != null && thematiques.isNotEmpty)
-        'filtre_thematiques': thematiques.join(','),
+      if (thematiques != null && thematiques.isNotEmpty) 'filtre_thematiques': thematiques.join(','),
       if (titre != null && titre.isNotEmpty) 'titre': titre,
       if (isFavorite != null && isFavorite) 'favoris': '$isFavorite',
     };
 
-    final uri = Uri(
-      path: Endpoints.bibliotheque,
-      queryParameters: map.isNotEmpty ? map : null,
-    );
+    final uri = Uri(path: Endpoints.bibliotheque, queryParameters: map.isNotEmpty ? map : null);
 
     final response = await _client.get(uri.toString());
 
     return isResponseUnsuccessful(response.statusCode)
         ? Left(Exception('Erreur lors de la récupération de la bibliothèque'))
-        : Right(
-          BibliothequeMapper.fromJson(response.data as Map<String, dynamic>),
-        );
+        : Right(BibliothequeMapper.fromJson(response.data as Map<String, dynamic>));
   }
 }

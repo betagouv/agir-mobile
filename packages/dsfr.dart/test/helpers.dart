@@ -6,6 +6,5 @@ class App extends StatelessWidget {
   final Widget child;
 
   @override
-  Widget build(final context) =>
-      MaterialApp(home: Scaffold(body: Center(child: child)));
+  Widget build(final context) => MaterialApp(home: Scaffold(body: Center(child: child)));
 }

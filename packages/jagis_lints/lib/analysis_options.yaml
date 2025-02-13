@@ -1,5 +1,8 @@
 include: all_lints.yaml
 
+formatter:
+  page_width: 130
+
 analyzer:
   language:
     strict-casts: true

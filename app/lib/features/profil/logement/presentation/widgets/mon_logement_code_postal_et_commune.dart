@@ -12,12 +12,10 @@ class MonLogementCodePostalEtCommune extends StatefulWidget {
   const MonLogementCodePostalEtCommune({super.key});
 
   @override
-  State<MonLogementCodePostalEtCommune> createState() =>
-      _MonLogementCodePostalEtCommuneState();
+  State<MonLogementCodePostalEtCommune> createState() => _MonLogementCodePostalEtCommuneState();
 }
 
-class _MonLogementCodePostalEtCommuneState
-    extends State<MonLogementCodePostalEtCommune> {
+class _MonLogementCodePostalEtCommuneState extends State<MonLogementCodePostalEtCommune> {
   late final _textEditingController = TextEditingController();
 
   void _handleCommune(final BuildContext context, final String? value) {
@@ -54,16 +52,11 @@ class _MonLogementCodePostalEtCommuneState
               label: Localisation.codePostal,
               initialValue: state.codePostal,
               onChanged: (final value) {
-                context.read<MonLogementBloc>().add(
-                  MonLogementCodePostalChange(value),
-                );
+                context.read<MonLogementBloc>().add(MonLogementCodePostalChange(value));
                 _textEditingController.clear();
               },
               keyboardType: TextInputType.number,
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(5),
-              ],
+              inputFormatters: [FilteringTextInputFormatter.digitsOnly, LengthLimitingTextInputFormatter(5)],
               autofillHints: const [AutofillHints.postalCode],
             ),
           ),
@@ -71,10 +64,7 @@ class _MonLogementCodePostalEtCommuneState
           Expanded(
             child: DsfrSelect<String>(
               label: Localisation.commune,
-              dropdownMenuEntries:
-                  state.communes
-                      .map((final e) => DropdownMenuEntry(value: e, label: e))
-                      .toList(),
+              dropdownMenuEntries: state.communes.map((final e) => DropdownMenuEntry(value: e, label: e)).toList(),
               onSelected: (final value) => _handleCommune(context, value),
               controller: _textEditingController,
             ),

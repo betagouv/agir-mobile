@@ -64,9 +64,7 @@ class _MosaicSetState extends State<_MosaicSet> {
                                   : r,
                         )
                         .toList();
-                context.read<MieuxVousConnaitreEditBloc>().add(
-                  MieuxVousConnaitreEditMosaicChangee(_responses),
-                );
+                context.read<MieuxVousConnaitreEditBloc>().add(MieuxVousConnaitreEditMosaicChangee(_responses));
               });
             },
           );

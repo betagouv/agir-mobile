@@ -8,8 +8,7 @@ import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AidListBloc extends Bloc<AidListEvent, AidListState> {
-  AidListBloc({required final AidsRepository aidsRepository})
-    : super(const AidListInitial()) {
+  AidListBloc({required final AidsRepository aidsRepository}) : super(const AidListInitial()) {
     on<AidListFetch>((final event, final emit) async {
       emit(const AidListLoadInProgress());
       final result = await aidsRepository.fetch();
@@ -19,43 +18,26 @@ class AidListBloc extends Bloc<AidListEvent, AidListState> {
         },
         (final r) {
           final assistanceListModel = _groupAssistancesByTheme(r);
-          emit(
-            AidListLoadSuccess(
-              isCovered: r.isCovered,
-              themes: assistanceListModel,
-              themeSelected: null,
-            ),
-          );
+          emit(AidListLoadSuccess(isCovered: r.isCovered, themes: assistanceListModel, themeSelected: null));
         },
       );
     });
     on<AidListThemeSelected>((final event, final emit) async {
       final aState = state;
       if (aState is AidListLoadSuccess) {
-        emit(
-          AidListLoadSuccess(
-            isCovered: aState.isCovered,
-            themes: aState.themes,
-            themeSelected: event.value,
-          ),
-        );
+        emit(AidListLoadSuccess(isCovered: aState.isCovered, themes: aState.themes, themeSelected: event.value));
       }
     });
   }
 
-  Map<ThemeType, List<Aid>> _groupAssistancesByTheme(final AidList r) =>
-      Map.fromEntries(
-        ThemeType.values
-            .map((final themeType) {
-              final assistances = r.aids.where(
-                (final a) => a.themeType == themeType,
-              );
+  Map<ThemeType, List<Aid>> _groupAssistancesByTheme(final AidList r) => Map.fromEntries(
+    ThemeType.values
+        .map((final themeType) {
+          final assistances = r.aids.where((final a) => a.themeType == themeType);
 
-              return assistances.isNotEmpty
-                  ? MapEntry(themeType, assistances.toList())
-                  : null;
-            })
-            .where((final entry) => entry != null)
-            .cast<MapEntry<ThemeType, List<Aid>>>(),
-      );
+          return assistances.isNotEmpty ? MapEntry(themeType, assistances.toList()) : null;
+        })
+        .where((final entry) => entry != null)
+        .cast<MapEntry<ThemeType, List<Aid>>>(),
+  );
 }

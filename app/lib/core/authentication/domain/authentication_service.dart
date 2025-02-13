@@ -7,20 +7,16 @@ import 'package:clock/clock.dart';
 import 'package:rxdart/subjects.dart';
 
 class AuthenticationService {
-  AuthenticationService({
-    required final AuthenticationStorage authenticationRepository,
-    required final Clock clock,
-  }) : _authenticationRepository = authenticationRepository,
-       _clock = clock;
+  AuthenticationService({required final AuthenticationStorage authenticationRepository, required final Clock clock})
+    : _authenticationRepository = authenticationRepository,
+      _clock = clock;
 
   final AuthenticationStorage _authenticationRepository;
   final Clock _clock;
 
-  final _authenticationStatusController =
-      BehaviorSubject<AuthenticationStatus>.seeded(const Unauthenticated());
+  final _authenticationStatusController = BehaviorSubject<AuthenticationStatus>.seeded(const Unauthenticated());
 
-  Stream<AuthenticationStatus> get authenticationStatus =>
-      _authenticationStatusController.stream;
+  Stream<AuthenticationStatus> get authenticationStatus => _authenticationStatusController.stream;
 
   AuthenticationStatus get status => _authenticationStatusController.value;
 

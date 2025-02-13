@@ -13,19 +13,11 @@ class FnvErrorRoutePage extends StatelessWidget {
   @override
   Widget build(final context) => FnvScaffold(
     body: ListView(
-      padding: MediaQuery.paddingOf(
-        context,
-      ).copyWith(left: DsfrSpacings.s2w, right: DsfrSpacings.s2w),
+      padding: MediaQuery.paddingOf(context).copyWith(left: DsfrSpacings.s2w, right: DsfrSpacings.s2w),
       children: [
-        const Text(
-          Localisation.erreurRoutePageTitre,
-          style: DsfrTextStyle.headline3(),
-        ),
+        const Text(Localisation.erreurRoutePageTitre, style: DsfrTextStyle.headline3()),
         FnvSvg.asset(AssetImages.errorIllustration),
-        const Text(
-          Localisation.erreurRoutePageDescription,
-          style: DsfrTextStyle.bodyXl(),
-        ),
+        const Text(Localisation.erreurRoutePageDescription, style: DsfrTextStyle.bodyXl()),
         const SizedBox(height: DsfrSpacings.s4w),
         DsfrButton(
           label: Localisation.erreurRoutePageAction,

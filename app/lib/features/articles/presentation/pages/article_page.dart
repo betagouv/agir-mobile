@@ -11,22 +11,14 @@ class ArticlePage extends StatelessWidget {
   static const name = 'article';
   static const path = 'article/:titre/:id';
 
-  static GoRoute get route => GoRoute(
-    path: path,
-    name: name,
-    builder:
-        (final context, final state) =>
-            ArticlePage(id: state.pathParameters['id']!),
-  );
+  static GoRoute get route =>
+      GoRoute(path: path, name: name, builder: (final context, final state) => ArticlePage(id: state.pathParameters['id']!));
 
   final String id;
 
   @override
   Widget build(final context) => FnvScaffold(
     appBar: FnvAppBar(),
-    body: SingleChildScrollView(
-      padding: const EdgeInsets.all(paddingVerticalPage),
-      child: SafeArea(child: ArticleView(id: id)),
-    ),
+    body: SingleChildScrollView(padding: const EdgeInsets.all(paddingVerticalPage), child: SafeArea(child: ArticleView(id: id))),
   );
 }

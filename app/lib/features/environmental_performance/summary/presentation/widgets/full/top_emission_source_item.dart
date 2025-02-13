@@ -35,16 +35,8 @@ class TopEmissionSourceItem extends StatelessWidget {
                   Text.rich(
                     TextSpan(
                       children: [
-                        TextSpan(
-                          text: '$percentage%',
-                          style: const DsfrTextStyle.bodyLgBold(
-                            color: Color(0xFFDF1451),
-                          ),
-                        ),
-                        const TextSpan(
-                          text: ' de vos émissions',
-                          style: DsfrTextStyle.bodyLg(),
-                        ),
+                        TextSpan(text: '$percentage%', style: const DsfrTextStyle.bodyLgBold(color: Color(0xFFDF1451))),
+                        const TextSpan(text: ' de vos émissions', style: DsfrTextStyle.bodyLg()),
                       ],
                     ),
                   ),

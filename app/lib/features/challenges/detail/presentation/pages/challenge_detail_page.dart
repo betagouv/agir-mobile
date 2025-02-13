@@ -24,19 +24,14 @@ class ChallengeDetailPage extends StatelessWidget {
   static GoRoute get route => GoRoute(
     path: path,
     name: name,
-    builder:
-        (final context, final state) =>
-            ChallengeDetailPage(id: ChallengeId(state.pathParameters['id']!)),
+    builder: (final context, final state) => ChallengeDetailPage(id: ChallengeId(state.pathParameters['id']!)),
   );
 
   final ChallengeId id;
 
   @override
   Widget build(final context) => BlocProvider(
-    create:
-        (final context) =>
-            ChallengeDetailBloc(repository: context.read())
-              ..add(ChallengeDetailLoadRequested(id)),
+    create: (final context) => ChallengeDetailBloc(repository: context.read())..add(ChallengeDetailLoadRequested(id)),
     child: const _View(),
   );
 }
@@ -45,44 +40,34 @@ class _View extends StatelessWidget {
   const _View();
 
   @override
-  Widget build(final context) =>
-      BlocListener<ChallengeDetailBloc, ChallengeDetailState>(
-        listener: (final context, final state) {
-          switch (state) {
-            case ChallengeDetailUpdateSuccess():
-              context.pop(true);
-            case ChallengeDetailUpdateIgnored():
-              context.pop(false);
-            default:
-              break;
-          }
-        },
-        child: FnvScaffold(
-          appBar: FnvAppBar(),
-          body: const _Body(),
-          bottomNavigationBar: const _BottomBar(),
-        ),
-      );
+  Widget build(final context) => BlocListener<ChallengeDetailBloc, ChallengeDetailState>(
+    listener: (final context, final state) {
+      switch (state) {
+        case ChallengeDetailUpdateSuccess():
+          context.pop(true);
+        case ChallengeDetailUpdateIgnored():
+          context.pop(false);
+        default:
+          break;
+      }
+    },
+    child: FnvScaffold(appBar: FnvAppBar(), body: const _Body(), bottomNavigationBar: const _BottomBar()),
+  );
 }
 
 class _Body extends StatelessWidget {
   const _Body();
 
   @override
-  Widget build(final context) =>
-      BlocBuilder<ChallengeDetailBloc, ChallengeDetailState>(
-        builder:
-            (final context, final state) => switch (state) {
-              ChallengeDetailInitial() ||
-              ChallengeDetailUpdateSuccess() ||
-              ChallengeDetailUpdateIgnored() => const SizedBox(),
-              ChallengeDetailLoadInProgress() => const Center(
-                child: CircularProgressIndicator(),
-              ),
-              ChallengeDetailLoadSuccess() => _SuccessContent(state: state),
-              ChallengeDetailLoadFailure() => const Text('Oups'),
-            },
-      );
+  Widget build(final context) => BlocBuilder<ChallengeDetailBloc, ChallengeDetailState>(
+    builder:
+        (final context, final state) => switch (state) {
+          ChallengeDetailInitial() || ChallengeDetailUpdateSuccess() || ChallengeDetailUpdateIgnored() => const SizedBox(),
+          ChallengeDetailLoadInProgress() => const Center(child: CircularProgressIndicator()),
+          ChallengeDetailLoadSuccess() => _SuccessContent(state: state),
+          ChallengeDetailLoadFailure() => const Text('Oups'),
+        },
+  );
 }
 
 class _SuccessContent extends StatelessWidget {
@@ -94,57 +79,37 @@ class _SuccessContent extends StatelessWidget {
   Widget build(final context) => ListView(
     padding: const EdgeInsets.all(paddingVerticalPage),
     children: [
-      Align(
-        alignment: Alignment.centerLeft,
-        child: ThemeTypeTag(themeType: state.challenge.themeType),
-      ),
+      Align(alignment: Alignment.centerLeft, child: ThemeTypeTag(themeType: state.challenge.themeType)),
       const SizedBox(height: DsfrSpacings.s1w),
       FnvTitle(title: state.challenge.title),
       const SizedBox(height: DsfrSpacings.s3w),
       DsfrRadioButtonSetHeadless(
-        values: {
-          true: DsfrRadioButtonItem(state.acceptanceText),
-          false: DsfrRadioButtonItem(state.refusalText),
-        },
+        values: {true: DsfrRadioButtonItem(state.acceptanceText), false: DsfrRadioButtonItem(state.refusalText)},
         onCallback: (final value) {
           if (value == null) {
             return;
           }
-          context.read<ChallengeDetailBloc>().add(
-            ChallengeDetailResponseSubmitted(value),
-          );
+          context.read<ChallengeDetailBloc>().add(ChallengeDetailResponseSubmitted(value));
         },
         initialValue: state.isAccepted,
       ),
       if (state.isAccepted ?? true) ...[
         const SizedBox(height: DsfrSpacings.s4w),
-        const Text(
-          Localisation.bonnesAstucesPourRealiserCetteAction,
-          style: DsfrTextStyle.headline4(),
-        ),
+        const Text(Localisation.bonnesAstucesPourRealiserCetteAction, style: DsfrTextStyle.headline4()),
         const SizedBox(height: DsfrSpacings.s1w),
         FnvHtmlWidget(state.challenge.tips),
         const SizedBox(height: DsfrSpacings.s4w),
-        const Text(
-          Localisation.pourquoiCetteAction,
-          style: DsfrTextStyle.headline4(),
-        ),
+        const Text(Localisation.pourquoiCetteAction, style: DsfrTextStyle.headline4()),
         const SizedBox(height: DsfrSpacings.s1w),
         FnvHtmlWidget(state.challenge.why),
       ] else ...[
         const SizedBox(height: DsfrSpacings.s2w),
-        const Text(
-          Localisation.cetteActionNeVousConvientPas,
-          style: DsfrTextStyle.headline3(),
-        ),
+        const Text(Localisation.cetteActionNeVousConvientPas, style: DsfrTextStyle.headline3()),
         const SizedBox(height: DsfrSpacings.s2w),
         DsfrInput(
           label: Localisation.cetteActionNeVousConvientPasDetails,
           initialValue: state.challenge.reason,
-          onChanged:
-              (final value) => context.read<ChallengeDetailBloc>().add(
-                ChallengeDetailReasonChanged(value),
-              ),
+          onChanged: (final value) => context.read<ChallengeDetailBloc>().add(ChallengeDetailReasonChanged(value)),
         ),
       ],
     ],
@@ -161,9 +126,7 @@ class _BottomBar extends StatelessWidget {
       variant: DsfrButtonVariant.primary,
       size: DsfrButtonSize.lg,
       onPressed: () {
-        context.read<ChallengeDetailBloc>().add(
-          const ChallengeDetailValidatePressed(),
-        );
+        context.read<ChallengeDetailBloc>().add(const ChallengeDetailValidatePressed());
       },
     ),
   );

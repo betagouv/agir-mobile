@@ -20,69 +20,49 @@ class CreerCompteView extends StatelessWidget {
   const CreerCompteView({super.key});
 
   @override
-  Widget build(final context) =>
-      BlocListener<CreerCompteBloc, CreerCompteState>(
-        listener:
-            (final context, final state) async =>
-                GoRouter.of(context).pushNamed(
-                  SaisieCodePage.name,
-                  pathParameters: {'email': state.adresseMail},
-                ),
-        listenWhen:
-            (final previous, final current) =>
-                previous.compteCree != current.compteCree && current.compteCree,
-        child: FnvScaffold(
-          appBar: AppBar(
-            backgroundColor: FnvColors.homeBackground,
-            iconTheme: const IconThemeData(color: DsfrColors.blueFranceSun113),
+  Widget build(final context) => BlocListener<CreerCompteBloc, CreerCompteState>(
+    listener:
+        (final context, final state) async =>
+            GoRouter.of(context).pushNamed(SaisieCodePage.name, pathParameters: {'email': state.adresseMail}),
+    listenWhen: (final previous, final current) => previous.compteCree != current.compteCree && current.compteCree,
+    child: FnvScaffold(
+      appBar: AppBar(
+        backgroundColor: FnvColors.homeBackground,
+        iconTheme: const IconThemeData(color: DsfrColors.blueFranceSun113),
+      ),
+      body: ListView(
+        padding: const EdgeInsets.all(paddingVerticalPage),
+        children: [
+          const Text(Localisation.creerMonCompteApp, style: DsfrTextStyle.headline2()),
+          const SizedBox(height: DsfrSpacings.s3w),
+          DsfrInput(
+            label: Localisation.adresseEmail,
+            hintText: Localisation.adresseEmailHint,
+            onChanged: (final value) => context.read<CreerCompteBloc>().add(CreerCompteAdresseMailAChangee(value)),
+            autocorrect: false,
+            keyboardType: TextInputType.emailAddress,
+            textInputAction: TextInputAction.next,
+            autofillHints: const [AutofillHints.email],
           ),
-          body: ListView(
-            padding: const EdgeInsets.all(paddingVerticalPage),
-            children: [
-              const Text(
-                Localisation.creerMonCompteApp,
-                style: DsfrTextStyle.headline2(),
-              ),
-              const SizedBox(height: DsfrSpacings.s3w),
-              DsfrInput(
-                label: Localisation.adresseEmail,
-                hintText: Localisation.adresseEmailHint,
-                onChanged:
-                    (final value) => context.read<CreerCompteBloc>().add(
-                      CreerCompteAdresseMailAChangee(value),
-                    ),
-                autocorrect: false,
-                keyboardType: TextInputType.emailAddress,
-                textInputAction: TextInputAction.next,
-                autofillHints: const [AutofillHints.email],
-              ),
-              const SizedBox(height: DsfrSpacings.s2w),
-              FnvMotDePasse(
-                onChanged:
-                    (final value) => context.read<CreerCompteBloc>().add(
-                      CreerCompteMotDePasseAChange(value),
-                    ),
-              ),
-              const _MessageErreur(),
-              const SizedBox(height: DsfrSpacings.s2w),
-              const _Cgu(),
-              const SizedBox(height: DsfrSpacings.s3w),
-              const _BoutonCreerCompte(),
-              const SizedBox(height: DsfrSpacings.s2w),
-              Center(
-                child: DsfrLink.md(
-                  label: Localisation.vousAvezDejaUnCompte,
-                  onTap:
-                      () async => GoRouter.of(
-                        context,
-                      ).pushReplacementNamed(SeConnecterPage.name),
-                ),
-              ),
-              const SafeArea(child: SizedBox.shrink()),
-            ],
+          const SizedBox(height: DsfrSpacings.s2w),
+          FnvMotDePasse(onChanged: (final value) => context.read<CreerCompteBloc>().add(CreerCompteMotDePasseAChange(value))),
+          const _MessageErreur(),
+          const SizedBox(height: DsfrSpacings.s2w),
+          const _Cgu(),
+          const SizedBox(height: DsfrSpacings.s3w),
+          const _BoutonCreerCompte(),
+          const SizedBox(height: DsfrSpacings.s2w),
+          Center(
+            child: DsfrLink.md(
+              label: Localisation.vousAvezDejaUnCompte,
+              onTap: () async => GoRouter.of(context).pushReplacementNamed(SeConnecterPage.name),
+            ),
           ),
-        ),
-      );
+          const SafeArea(child: SizedBox.shrink()),
+        ],
+      ),
+    ),
+  );
 }
 
 class _Cgu extends StatelessWidget {
@@ -90,17 +70,13 @@ class _Cgu extends StatelessWidget {
 
   @override
   Widget build(final context) {
-    final valeur = context.select<CreerCompteBloc, bool>(
-      (final bloc) => bloc.state.aCguAcceptees,
-    );
+    final valeur = context.select<CreerCompteBloc, bool>((final bloc) => bloc.state.aCguAcceptees);
 
     return Jaccepte(
       label: Localisation.lesCgu,
       url: Localisation.lesCguSite,
       value: valeur,
-      onChanged:
-          (final value) =>
-              context.read<CreerCompteBloc>().add(CreerCompteCguAChange(value)),
+      onChanged: (final value) => context.read<CreerCompteBloc>().add(CreerCompteCguAChange(value)),
     );
   }
 }
@@ -110,17 +86,10 @@ class _MessageErreur extends StatelessWidget {
 
   @override
   Widget build(final context) => context
-      .select<CreerCompteBloc, Option<String>>(
-        (final bloc) => bloc.state.erreur,
-      )
+      .select<CreerCompteBloc, Option<String>>((final bloc) => bloc.state.erreur)
       .fold(
         () => const SizedBox.shrink(),
-        (final t) => Column(
-          children: [
-            const SizedBox(height: DsfrSpacings.s2w),
-            FnvAlert.error(label: t),
-          ],
-        ),
+        (final t) => Column(children: [const SizedBox(height: DsfrSpacings.s2w), FnvAlert.error(label: t)]),
       );
 }
 
@@ -129,20 +98,13 @@ class _BoutonCreerCompte extends StatelessWidget {
 
   @override
   Widget build(final context) {
-    final estValide = context.select<CreerCompteBloc, bool>(
-      (final bloc) => bloc.state.estValide,
-    );
+    final estValide = context.select<CreerCompteBloc, bool>((final bloc) => bloc.state.estValide);
 
     return DsfrButton(
       label: Localisation.creerMonCompte,
       variant: DsfrButtonVariant.primary,
       size: DsfrButtonSize.lg,
-      onPressed:
-          estValide
-              ? () => context.read<CreerCompteBloc>().add(
-                const CreerCompteCreationDemandee(),
-              )
-              : null,
+      onPressed: estValide ? () => context.read<CreerCompteBloc>().add(const CreerCompteCreationDemandee()) : null,
     );
   }
 }

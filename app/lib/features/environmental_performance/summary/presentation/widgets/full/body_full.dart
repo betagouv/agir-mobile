@@ -25,32 +25,23 @@ class BodyFull extends StatelessWidget {
     children: [
       const Padding(
         padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-        child: FnvTitle(
-          title: EnvironmentalPerformanceSummaryL10n.monBilanEnvironnemental,
-        ),
+        child: FnvTitle(title: EnvironmentalPerformanceSummaryL10n.monBilanEnvironnemental),
       ),
       const SizedBox(height: DsfrSpacings.s4w),
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-        child: EnvironmentalPerformanceTonnesCard(
-          footprint: data.footprintInKgOfCO2ePerYear,
-        ),
+        child: EnvironmentalPerformanceTonnesCard(footprint: data.footprintInKgOfCO2ePerYear),
       ),
       const SizedBox(height: DsfrSpacings.s4w),
       const Padding(
         padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-        child: Text(
-          EnvironmentalPerformanceSummaryL10n.mesPrincipauxPostesDemission,
-          style: DsfrTextStyle.headline4(),
-        ),
+        child: Text(EnvironmentalPerformanceSummaryL10n.mesPrincipauxPostesDemission, style: DsfrTextStyle.headline4()),
       ),
       const SizedBox(height: DsfrSpacings.s4w),
       ...data.top
           .mapIndexed(
             (final i, final e) => Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: paddingVerticalPage,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: paddingVerticalPage),
               child: TopEmissionSourceItem(
                 rank: i + 1,
                 label: e.label,
@@ -63,10 +54,7 @@ class BodyFull extends StatelessWidget {
       const SizedBox(height: DsfrSpacings.s4w),
       const Padding(
         padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-        child: Text(
-          EnvironmentalPerformanceSummaryL10n.voirDetailHebdomadaire,
-          style: DsfrTextStyle.headline4(),
-        ),
+        child: Text(EnvironmentalPerformanceSummaryL10n.voirDetailHebdomadaire, style: DsfrTextStyle.headline4()),
       ),
       const SizedBox(height: DsfrSpacings.s4w),
       FnvAccordionsGroup(
@@ -76,16 +64,11 @@ class BodyFull extends StatelessWidget {
                   (final e) => FnvAccordion(
                     headerBuilder:
                         (final isExpanded) => Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: DsfrSpacings.s3w,
-                          ),
+                          padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s3w),
                           child: _DetailHeader(
                             emoji: e.emoji,
                             label: e.label,
-                            value:
-                                e
-                                    .footprintInKgOfCO2ePerYear
-                                    .tonnesRepresentation,
+                            value: e.footprintInKgOfCO2ePerYear.tonnesRepresentation,
                           ),
                         ),
                     body: Padding(
@@ -97,20 +80,12 @@ class BodyFull extends StatelessWidget {
                                   (final f) => _DetailBody(
                                     emoji: f.emoji,
                                     label: f.label,
-                                    value:
-                                        f
-                                            .footprintInKgOfCO2ePerYear
-                                            .kilogramsRepresentation,
+                                    value: f.footprintInKgOfCO2ePerYear.kilogramsRepresentation,
                                     progress:
-                                        (f.percentage?.toDouble() ?? 0.0) /
-                                        (e.subItems.first.percentage
-                                                ?.toDouble() ??
-                                            100.0),
+                                        (f.percentage?.toDouble() ?? 0.0) / (e.subItems.first.percentage?.toDouble() ?? 100.0),
                                   ),
                                 )
-                                .separator(
-                                  const SizedBox(height: DsfrSpacings.s3w),
-                                )
+                                .separator(const SizedBox(height: DsfrSpacings.s3w))
                                 .toList(),
                       ),
                     ),
@@ -124,16 +99,11 @@ class BodyFull extends StatelessWidget {
         child: Text.rich(
           TextSpan(
             children: [
-              TextSpan(
-                text: EnvironmentalPerformanceSummaryL10n.modifier,
-                style: DsfrTextStyle.headline4(),
-              ),
+              TextSpan(text: EnvironmentalPerformanceSummaryL10n.modifier, style: DsfrTextStyle.headline4()),
               TextSpan(text: ' ', style: DsfrTextStyle.headline4()),
               TextSpan(
                 text: EnvironmentalPerformanceSummaryL10n.vosReponses,
-                style: DsfrTextStyle.headline4(
-                  color: DsfrColors.blueFranceSun113,
-                ),
+                style: DsfrTextStyle.headline4(color: DsfrColors.blueFranceSun113),
               ),
             ],
           ),
@@ -142,10 +112,7 @@ class BodyFull extends StatelessWidget {
       const SizedBox(height: DsfrSpacings.s1v5),
       const Padding(
         padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-        child: Text(
-          EnvironmentalPerformanceSummaryL10n.affinerMonEstimationSousTitre,
-          style: DsfrTextStyle.bodyMd(),
-        ),
+        child: Text(EnvironmentalPerformanceSummaryL10n.affinerMonEstimationSousTitre, style: DsfrTextStyle.bodyMd()),
       ),
       const SizedBox(height: DsfrSpacings.s3v),
       Padding(
@@ -153,21 +120,14 @@ class BodyFull extends StatelessWidget {
         child: EnvironmentalPerformanceCategories(categories: data.categories),
       ),
       const SizedBox(height: DsfrSpacings.s7w),
-      const Padding(
-        padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-        child: EnvironmentalPerformancePartnerCard(),
-      ),
+      const Padding(padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage), child: EnvironmentalPerformancePartnerCard()),
       const SafeArea(child: SizedBox.shrink()),
     ],
   );
 }
 
 class _DetailHeader extends StatelessWidget {
-  const _DetailHeader({
-    required this.emoji,
-    required this.label,
-    required this.value,
-  });
+  const _DetailHeader({required this.emoji, required this.label, required this.value});
 
   final String emoji;
   final String label;
@@ -185,10 +145,7 @@ class _DetailHeader extends StatelessWidget {
         Text.rich(
           TextSpan(
             children: [
-              TextSpan(
-                text: value,
-                style: const DsfrTextStyle.bodySmBold(color: color),
-              ),
+              TextSpan(text: value, style: const DsfrTextStyle.bodySmBold(color: color)),
               const TextSpan(text: ' '),
               const TextSpan(text: EnvironmentalPerformanceSummaryL10n.tonnes),
             ],
@@ -201,12 +158,7 @@ class _DetailHeader extends StatelessWidget {
 }
 
 class _DetailBody extends StatelessWidget {
-  const _DetailBody({
-    required this.emoji,
-    required this.label,
-    required this.value,
-    required this.progress,
-  });
+  const _DetailBody({required this.emoji, required this.label, required this.value, required this.progress});
 
   final String emoji;
   final String label;
@@ -223,20 +175,14 @@ class _DetailBody extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           spacing: DsfrSpacings.s1v5,
-          children: [
-            Text(label, style: const DsfrTextStyle.bodySmMedium()),
-            ProgressBar(value: progress),
-          ],
+          children: [Text(label, style: const DsfrTextStyle.bodySmMedium()), ProgressBar(value: progress)],
         ),
       ),
       const SizedBox(width: DsfrSpacings.s2w),
       Text.rich(
         TextSpan(
           children: [
-            TextSpan(
-              text: value,
-              style: const DsfrTextStyle.bodySmBold(color: Color(0xff3636A1)),
-            ),
+            TextSpan(text: value, style: const DsfrTextStyle.bodySmBold(color: Color(0xff3636A1))),
             const TextSpan(text: ' '),
             const TextSpan(text: EnvironmentalPerformanceSummaryL10n.kg),
           ],

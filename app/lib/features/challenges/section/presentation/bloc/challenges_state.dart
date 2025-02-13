@@ -18,10 +18,7 @@ final class ChallengesInitial extends ChallengesState {
 
 @immutable
 final class ChallengesLoadSuccess extends ChallengesState {
-  const ChallengesLoadSuccess({
-    required this.themeType,
-    required this.challenges,
-  });
+  const ChallengesLoadSuccess({required this.themeType, required this.challenges});
 
   final ThemeType? themeType;
   final List<ChallengeItem> challenges;

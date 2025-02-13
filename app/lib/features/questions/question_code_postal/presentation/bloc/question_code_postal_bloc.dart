@@ -5,20 +5,9 @@ import 'package:app/features/questions/question_code_postal/presentation/bloc/qu
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fpdart/fpdart.dart';
 
-class QuestionCodePostalBloc
-    extends Bloc<QuestionCodePostalEvent, QuestionCodePostalState> {
-  QuestionCodePostalBloc({
-    required final ProfilRepository profilRepository,
-    required final CommunesRepository communesRepository,
-  }) : super(
-         const QuestionCodePostalState(
-           prenom: '',
-           codePostal: '',
-           communes: [],
-           commune: '',
-           aEteChange: false,
-         ),
-       ) {
+class QuestionCodePostalBloc extends Bloc<QuestionCodePostalEvent, QuestionCodePostalState> {
+  QuestionCodePostalBloc({required final ProfilRepository profilRepository, required final CommunesRepository communesRepository})
+    : super(const QuestionCodePostalState(prenom: '', codePostal: '', communes: [], commune: '', aEteChange: false)) {
     on<QuestionCodePostalPrenomDemande>((final event, final emit) async {
       final result = await profilRepository.recupererProfil();
       if (result.isRight()) {
@@ -33,23 +22,12 @@ class QuestionCodePostalBloc
               : Either<Exception, List<String>>.right(<String>[]));
       if (result.isRight()) {
         final communes = result.getRight().getOrElse(() => throw Exception());
-        emit(
-          state.copyWith(
-            codePostal: event.valeur,
-            communes: communes,
-            commune: communes.length == 1 ? communes.first : '',
-          ),
-        );
+        emit(state.copyWith(codePostal: event.valeur, communes: communes, commune: communes.length == 1 ? communes.first : ''));
       }
     });
-    on<QuestionCommuneAChange>(
-      (final event, final emit) => emit(state.copyWith(commune: event.valeur)),
-    );
+    on<QuestionCommuneAChange>((final event, final emit) => emit(state.copyWith(commune: event.valeur)));
     on<QuestionCodePostalMiseAJourDemandee>((final event, final emit) async {
-      await profilRepository.mettreAJourCodePostalEtCommune(
-        codePostal: state.codePostal,
-        commune: state.commune,
-      );
+      await profilRepository.mettreAJourCodePostalEtCommune(codePostal: state.codePostal, commune: state.commune);
 
       emit(state.copyWith(aEteChange: true));
     });

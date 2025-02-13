@@ -27,10 +27,7 @@ class MissionArticlePage extends StatelessWidget {
               label: Localisation.continuer,
               variant: DsfrButtonVariant.primary,
               size: DsfrButtonSize.lg,
-              onPressed:
-                  () => context.read<MissionBloc>().add(
-                    const MissionNextRequested(),
-                  ),
+              onPressed: () => context.read<MissionBloc>().add(const MissionNextRequested()),
             ),
           ),
         ),

@@ -15,17 +15,13 @@ class AidsSection extends StatelessWidget {
 
   @override
   Widget build(final context) {
-    final bloc =
-        context.read<AidsHomeBloc>()..add(const AidsHomeLoadRequested());
+    final bloc = context.read<AidsHomeBloc>()..add(const AidsHomeLoadRequested());
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: DsfrSpacings.s2w,
       children: [
-        const TitleSection(
-          title: Localisation.homeAssistanceTitle,
-          subTitle: Localisation.homeAssistanceSubTitle,
-        ),
+        const TitleSection(title: Localisation.homeAssistanceTitle, subTitle: Localisation.homeAssistanceSubTitle),
         BlocBuilder<AidsHomeBloc, AidsHomeState>(
           builder: (final context, final state) {
             if (state.aids.isEmpty) {
@@ -37,11 +33,8 @@ class AidsSection extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               padding: EdgeInsets.zero,
-              itemBuilder:
-                  (final context, final index) => AidCard(aid: aids[index]),
-              separatorBuilder:
-                  (final context, final index) =>
-                      const SizedBox(height: DsfrSpacings.s1w),
+              itemBuilder: (final context, final index) => AidCard(aid: aids[index]),
+              separatorBuilder: (final context, final index) => const SizedBox(height: DsfrSpacings.s1w),
               itemCount: aids.length,
             );
           },
@@ -49,10 +42,7 @@ class AidsSection extends StatelessWidget {
         ),
         Align(
           alignment: Alignment.centerLeft,
-          child: DsfrLink.md(
-            label: Localisation.mesAidesLien,
-            onTap: () async => GoRouter.of(context).pushNamed(AidsPage.name),
-          ),
+          child: DsfrLink.md(label: Localisation.mesAidesLien, onTap: () async => GoRouter.of(context).pushNamed(AidsPage.name)),
         ),
       ],
     );

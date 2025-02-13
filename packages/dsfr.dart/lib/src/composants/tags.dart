@@ -44,10 +44,7 @@ class DsfrTag extends StatelessWidget {
 
   @override
   Widget build(final context) => DecoratedBox(
-    decoration: ShapeDecoration(
-      color: backgroundColor,
-      shape: const StadiumBorder(),
-    ),
+    decoration: ShapeDecoration(color: backgroundColor, shape: const StadiumBorder()),
     child: GestureDetector(
       onTap: onTap,
       behavior: HitTestBehavior.opaque,

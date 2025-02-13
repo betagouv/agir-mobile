@@ -2,12 +2,7 @@ import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 
 class FnvCheckboxSet extends StatefulWidget {
-  const FnvCheckboxSet({
-    super.key,
-    required this.options,
-    required this.selectedOptions,
-    required this.onChanged,
-  });
+  const FnvCheckboxSet({super.key, required this.options, required this.selectedOptions, required this.onChanged});
 
   final List<String> options;
   final List<String> selectedOptions;
@@ -32,12 +27,7 @@ class _FnvCheckboxSetState extends State<FnvCheckboxSet> {
     required final String option,
     required final bool value,
   }) {
-    final newSelectedOptions = _updateSelectedOptions(
-      options,
-      option,
-      selectedOptions,
-      value,
-    );
+    final newSelectedOptions = _updateSelectedOptions(options, option, selectedOptions, value);
 
     setState(() {
       _selectedOptions = newSelectedOptions;
@@ -54,8 +44,7 @@ class _FnvCheckboxSetState extends State<FnvCheckboxSet> {
     final newSelectedOptions = List<String>.of(selectedOptions);
     final valeurAucune = options.lastOrNull;
 
-    if (option == valeurAucune ||
-        (selectedOptions.contains(valeurAucune) && value)) {
+    if (option == valeurAucune || (selectedOptions.contains(valeurAucune) && value)) {
       newSelectedOptions
         ..clear()
         ..add(option);
@@ -87,20 +76,12 @@ class _FnvCheckboxSetState extends State<FnvCheckboxSet> {
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     border: Border.fromBorderSide(
-                      BorderSide(
-                        color:
-                            _selectedOptions.contains(option)
-                                ? DsfrColors.blueFranceSun113
-                                : DsfrColors.grey900,
-                      ),
+                      BorderSide(color: _selectedOptions.contains(option) ? DsfrColors.blueFranceSun113 : DsfrColors.grey900),
                     ),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(DsfrSpacings.s2w),
-                    child: DsfrCheckbox.md(
-                      label: option,
-                      value: _selectedOptions.contains(option),
-                    ),
+                    child: DsfrCheckbox.md(label: option, value: _selectedOptions.contains(option)),
                   ),
                 ),
               ),

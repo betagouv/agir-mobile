@@ -21,22 +21,7 @@ final class MissionChallenge extends Equatable {
   final bool isCollected;
 
   @override
-  List<Object> get props => [
-    contentId,
-    title,
-    status,
-    points,
-    isRecommended,
-    isDone,
-    isCollected,
-  ];
+  List<Object> get props => [contentId, title, status, points, isRecommended, isDone, isCollected];
 }
 
-enum MissionChallengeStatus {
-  toDo,
-  inProgress,
-  refused,
-  alreadyDone,
-  abandonned,
-  done,
-}
+enum MissionChallengeStatus { toDo, inProgress, refused, alreadyDone, abandonned, done }

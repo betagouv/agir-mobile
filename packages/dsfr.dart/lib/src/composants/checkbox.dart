@@ -21,14 +21,7 @@ class DsfrCheckbox extends StatelessWidget {
     required final ValueChanged<bool>? onChanged,
     final FocusNode? focusNode,
     final Key? key,
-  }) : this._(
-         key: key,
-         label: label,
-         value: value,
-         onChanged: onChanged,
-         padding: EdgeInsets.zero,
-         focusNode: focusNode,
-       );
+  }) : this._(key: key, label: label, value: value, onChanged: onChanged, padding: EdgeInsets.zero, focusNode: focusNode);
 
   const DsfrCheckbox.md({
     required final String label,
@@ -68,8 +61,7 @@ class DsfrCheckbox extends StatelessWidget {
             Focus(
               focusNode: focusNode,
               onKeyEvent: (final node, final event) {
-                if (event is KeyDownEvent &&
-                    event.logicalKey == LogicalKeyboardKey.space) {
+                if (event is KeyDownEvent && event.logicalKey == LogicalKeyboardKey.space) {
                   onChanged?.call(!value);
 
                   return KeyEventResult.handled;

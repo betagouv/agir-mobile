@@ -9,14 +9,12 @@ sealed class SeasonalFruitsAndVegetablesEvent extends Equatable {
 }
 
 @immutable
-final class SeasonalFruitsAndVegetablesFetch
-    extends SeasonalFruitsAndVegetablesEvent {
+final class SeasonalFruitsAndVegetablesFetch extends SeasonalFruitsAndVegetablesEvent {
   const SeasonalFruitsAndVegetablesFetch();
 }
 
 @immutable
-final class SeasonalFruitsAndVegetablesMonthSelected
-    extends SeasonalFruitsAndVegetablesEvent {
+final class SeasonalFruitsAndVegetablesMonthSelected extends SeasonalFruitsAndVegetablesEvent {
   const SeasonalFruitsAndVegetablesMonthSelected(this.value);
 
   final String value;

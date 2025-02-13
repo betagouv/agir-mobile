@@ -19,27 +19,19 @@ class ActionPage extends StatelessWidget {
   static const name = 'action';
 
   static const path = 'action/:titre/:id';
-  static Map<String, String> pathParameters({
-    required final String title,
-    required final String id,
-  }) => {'titre': title, 'id': id};
+  static Map<String, String> pathParameters({required final String title, required final String id}) => {
+    'titre': title,
+    'id': id,
+  };
 
   final String id;
 
-  static GoRoute get route => GoRoute(
-    path: path,
-    name: name,
-    builder:
-        (final context, final state) =>
-            ActionPage(id: state.pathParameters['id']!),
-  );
+  static GoRoute get route =>
+      GoRoute(path: path, name: name, builder: (final context, final state) => ActionPage(id: state.pathParameters['id']!));
 
   @override
   Widget build(final BuildContext context) => BlocProvider(
-    create:
-        (final context) =>
-            ActionBloc(repository: context.read())
-              ..add(ActionLoadRequested(id)),
+    create: (final context) => ActionBloc(repository: context.read())..add(ActionLoadRequested(id)),
     child: const _View(),
   );
 }
@@ -53,13 +45,9 @@ class _View extends StatelessWidget {
     body: BlocBuilder<ActionBloc, ActionState>(
       builder:
           (final context, final state) => switch (state) {
-            ActionInitial() || ActionLoadInProgress() => const Center(
-              child: CircularProgressIndicator(),
-            ),
+            ActionInitial() || ActionLoadInProgress() => const Center(child: CircularProgressIndicator()),
             ActionLoadSuccess() => _Success(state),
-            ActionLoadFailure() => const Center(
-              child: Text("Erreur lors du chargement de l'action"),
-            ),
+            ActionLoadFailure() => const Center(child: Text("Erreur lors du chargement de l'action")),
           },
     ),
   );
@@ -80,24 +68,13 @@ class _Success extends StatelessWidget {
       children: [
         Padding(
           padding: pagePadding,
-          child: MarkdownBody(
-            data: action.title,
-            styleSheet: MarkdownStyleSheet(
-              p: const DsfrTextStyle(fontSize: 28),
-            ),
-          ),
+          child: MarkdownBody(data: action.title, styleSheet: MarkdownStyleSheet(p: const DsfrTextStyle(fontSize: 28))),
         ),
         const SizedBox(height: DsfrSpacings.s2w),
-        Padding(
-          padding: pagePadding,
-          child: Text(action.subTitle, style: const DsfrTextStyle.bodyLg()),
-        ),
+        Padding(padding: pagePadding, child: Text(action.subTitle, style: const DsfrTextStyle.bodyLg())),
         const SizedBox(height: DsfrSpacings.s4w),
         DecoratedBox(
-          decoration: const BoxDecoration(
-            color: Colors.white,
-            boxShadow: actionOmbre,
-          ),
+          decoration: const BoxDecoration(color: Colors.white, boxShadow: actionOmbre),
           child: Column(
             children: [
               const SizedBox(height: DsfrSpacings.s2w),
@@ -129,12 +106,7 @@ class _Markdown extends StatelessWidget {
   @override
   Widget build(final BuildContext context) => MarkdownBody(
     data: data,
-    styleSheet: MarkdownStyleSheet(
-      p: const DsfrTextStyle(fontSize: 16),
-      h1: const DsfrTextStyle(fontSize: 22),
-    ),
-    imageBuilder:
-        (final uri, final title, final alt) =>
-            FnvImage.network(uri.toString(), semanticLabel: alt),
+    styleSheet: MarkdownStyleSheet(p: const DsfrTextStyle(fontSize: 16), h1: const DsfrTextStyle(fontSize: 22)),
+    imageBuilder: (final uri, final title, final alt) => FnvImage.network(uri.toString(), semanticLabel: alt),
   );
 }

@@ -10,17 +10,11 @@ class CreerComptePage extends StatelessWidget {
   static const name = 'creer-compte';
   static const path = name;
 
-  static GoRoute get route => GoRoute(
-    path: path,
-    name: name,
-    builder: (final context, final state) => const CreerComptePage(),
-  );
+  static GoRoute get route => GoRoute(path: path, name: name, builder: (final context, final state) => const CreerComptePage());
 
   @override
   Widget build(final context) => BlocProvider(
-    create:
-        (final context) =>
-            CreerCompteBloc(authentificationRepository: context.read()),
+    create: (final context) => CreerCompteBloc(authentificationRepository: context.read()),
     child: const CreerCompteView(),
   );
 }

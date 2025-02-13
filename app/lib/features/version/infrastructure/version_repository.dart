@@ -1,8 +1,7 @@
 import 'package:package_info_plus/package_info_plus.dart';
 
 class VersionRepository {
-  const VersionRepository({required final PackageInfo packageInfo})
-    : _packageInfo = packageInfo;
+  const VersionRepository({required final PackageInfo packageInfo}) : _packageInfo = packageInfo;
 
   final PackageInfo _packageInfo;
 

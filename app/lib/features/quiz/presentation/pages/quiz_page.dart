@@ -19,46 +19,30 @@ class QuizPage extends StatelessWidget {
   static const name = 'quiz';
   static const path = '$name/:id';
 
-  static GoRoute get route => GoRoute(
-    path: path,
-    name: name,
-    builder:
-        (final context, final state) =>
-            QuizPage(id: state.pathParameters['id']!),
-  );
+  static GoRoute get route =>
+      GoRoute(path: path, name: name, builder: (final context, final state) => QuizPage(id: state.pathParameters['id']!));
 
   final String id;
 
   @override
   Widget build(final context) => BlocProvider(
     create:
-        (final context) => QuizBloc(
-          quizRepository: context.read(),
-          gamificationRepository: context.read(),
-        )..add(QuizRecuperationDemandee(id)),
+        (final context) =>
+            QuizBloc(quizRepository: context.read(), gamificationRepository: context.read())..add(QuizRecuperationDemandee(id)),
     child: Builder(
       builder:
           (final context) => BlocListener<QuizBloc, QuizState>(
             listener: (final context, final state) {
               if (state.estExacte.getOrElse(() => false)) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      'Bien joué ! Vous récoltez ${state.quiz.points} points.',
-                    ),
-                  ),
-                );
+                ScaffoldMessenger.of(
+                  context,
+                ).showSnackBar(SnackBar(content: Text('Bien joué ! Vous récoltez ${state.quiz.points} points.')));
               }
             },
-            listenWhen:
-                (final previous, final current) =>
-                    previous.estExacte != current.estExacte,
+            listenWhen: (final previous, final current) => previous.estExacte != current.estExacte,
             child: FnvScaffold(
               appBar: FnvAppBar(),
-              body: const SingleChildScrollView(
-                padding: EdgeInsets.all(paddingVerticalPage),
-                child: QuizContent(),
-              ),
+              body: const SingleChildScrollView(padding: EdgeInsets.all(paddingVerticalPage), child: QuizContent()),
               bottomNavigationBar: const _BottomButton(),
             ),
           ),
@@ -71,9 +55,7 @@ class _BottomButton extends StatelessWidget {
 
   @override
   Widget build(final context) {
-    final estValidee = context.select<QuizBloc, bool>(
-      (final bloc) => bloc.state.estExacte.isSome(),
-    );
+    final estValidee = context.select<QuizBloc, bool>((final bloc) => bloc.state.estExacte.isSome());
 
     return FnvBottomBar(
       child:
@@ -94,19 +76,13 @@ class _BoutonValider extends StatelessWidget {
 
   @override
   Widget build(final context) {
-    final estSelectionnee = context.select<QuizBloc, bool>(
-      (final bloc) => bloc.state.estSelectionnee,
-    );
+    final estSelectionnee = context.select<QuizBloc, bool>((final bloc) => bloc.state.estSelectionnee);
 
     return DsfrButton(
       label: Localisation.valider,
       variant: DsfrButtonVariant.primary,
       size: DsfrButtonSize.lg,
-      onPressed:
-          estSelectionnee
-              ? () =>
-                  context.read<QuizBloc>().add(const QuizValidationDemandee())
-              : null,
+      onPressed: estSelectionnee ? () => context.read<QuizBloc>().add(const QuizValidationDemandee()) : null,
     );
   }
 }

@@ -8,8 +8,7 @@ import 'package:app/features/aids/core/infrastructure/aid_mapper.dart';
 import 'package:fpdart/fpdart.dart';
 
 class AidsRepository {
-  const AidsRepository({required final DioHttpClient client})
-    : _client = client;
+  const AidsRepository({required final DioHttpClient client}) : _client = client;
 
   final DioHttpClient _client;
 
@@ -25,10 +24,7 @@ class AidsRepository {
     return Right(
       AidList(
         isCovered: json['couverture_aides_ok'] as bool,
-        aids:
-            (json['liste_aides'] as List<dynamic>)
-                .map((final e) => AidMapper.fromJson(e as Map<String, dynamic>))
-                .toList(),
+        aids: (json['liste_aides'] as List<dynamic>).map((final e) => AidMapper.fromJson(e as Map<String, dynamic>)).toList(),
       ),
     );
   }

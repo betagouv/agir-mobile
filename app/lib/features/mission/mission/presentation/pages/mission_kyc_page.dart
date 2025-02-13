@@ -34,8 +34,7 @@ class _MissionKycPageState extends State<MissionKycPage> {
       MieuxVousConnaitreForm(
         id: widget.value.contentId.value,
         controller: _mieuxVousConnaitreController,
-        onSaved:
-            () => context.read<MissionBloc>().add(const MissionNextRequested()),
+        onSaved: () => context.read<MissionBloc>().add(const MissionNextRequested()),
       ),
       const SizedBox(height: DsfrSpacings.s3w),
       SafeArea(

@@ -36,8 +36,7 @@ class RecommendationWidget extends StatefulWidget {
   State<RecommendationWidget> createState() => _RecommendationWidgetState();
 }
 
-class _RecommendationWidgetState extends State<RecommendationWidget>
-    with MaterialStateMixin<RecommendationWidget> {
+class _RecommendationWidgetState extends State<RecommendationWidget> with MaterialStateMixin<RecommendationWidget> {
   @override
   Widget build(final context) {
     const width = 200.0;
@@ -59,23 +58,19 @@ class _RecommendationWidgetState extends State<RecommendationWidget>
             onTap: () async {
               switch (widget.type) {
                 case TypeDuContenu.article:
-                  await GoRouter.of(context).pushNamed(
-                    ArticlePage.name,
-                    pathParameters: {'titre': widget.titre, 'id': widget.id},
-                  );
+                  await GoRouter.of(
+                    context,
+                  ).pushNamed(ArticlePage.name, pathParameters: {'titre': widget.titre, 'id': widget.id});
                 case TypeDuContenu.kyc:
-                  final result = await GoRouter.of(context).pushNamed(
-                    MieuxVousConnaitreEditPage.name,
-                    pathParameters: {'id': widget.id},
-                  );
+                  final result = await GoRouter.of(
+                    context,
+                  ).pushNamed(MieuxVousConnaitreEditPage.name, pathParameters: {'id': widget.id});
                   if (result != true || !context.mounted) {
                     return;
                   }
                   await context.read<GamificationRepository>().refresh();
                 case TypeDuContenu.quiz:
-                  await GoRouter.of(
-                    context,
-                  ).pushNamed(QuizPage.name, pathParameters: {'id': widget.id});
+                  await GoRouter.of(context).pushNamed(QuizPage.name, pathParameters: {'id': widget.id});
               }
               widget.onPop();
             },
@@ -99,11 +94,7 @@ class _RecommendationWidgetState extends State<RecommendationWidget>
                     Stack(
                       alignment: Alignment.topRight,
                       children: [
-                        _Image(
-                          imageUrl: widget.imageUrl,
-                          width: width,
-                          borderRadius: borderRadius,
-                        ),
+                        _Image(imageUrl: widget.imageUrl, width: width, borderRadius: borderRadius),
                         Padding(
                           padding: const EdgeInsets.only(
                             left: DsfrSpacings.s1v5,
@@ -116,10 +107,7 @@ class _RecommendationWidgetState extends State<RecommendationWidget>
                             spacing: DsfrSpacings.s1v,
                             children: [
                               Flexible(child: _TypeTag(type: widget.type)),
-                              _Points(
-                                points: widget.points,
-                                borderRadius: borderRadius,
-                              ),
+                              _Points(points: widget.points, borderRadius: borderRadius),
                             ],
                           ),
                         ),
@@ -170,16 +158,11 @@ class _Title extends StatelessWidget {
   final String titre;
 
   @override
-  Widget build(final context) =>
-      Text(titre, style: const DsfrTextStyle.bodyMdMedium());
+  Widget build(final context) => Text(titre, style: const DsfrTextStyle.bodyMdMedium());
 }
 
 class _Image extends StatelessWidget {
-  const _Image({
-    required this.imageUrl,
-    required this.width,
-    required this.borderRadius,
-  });
+  const _Image({required this.imageUrl, required this.width, required this.borderRadius});
 
   final String imageUrl;
   final double width;
@@ -191,12 +174,7 @@ class _Image extends StatelessWidget {
 
     return ClipRRect(
       borderRadius: borderRadius,
-      child: FnvImage.network(
-        imageUrl,
-        width: width,
-        height: height,
-        fit: BoxFit.cover,
-      ),
+      child: FnvImage.network(imageUrl, width: width, height: height, fit: BoxFit.cover),
     );
   }
 }
@@ -211,20 +189,13 @@ class _Points extends StatelessWidget {
   Widget build(final context) => DecoratedBox(
     decoration: BoxDecoration(color: Colors.white, borderRadius: borderRadius),
     child: Padding(
-      padding: const EdgeInsets.symmetric(
-        vertical: DsfrSpacings.s1v5,
-        horizontal: DsfrSpacings.s1w,
-      ),
+      padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s1v5, horizontal: DsfrSpacings.s1w),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         spacing: DsfrSpacings.s1v,
         children: [
           Text(points, style: const DsfrTextStyle.bodySmBold()),
-          const Icon(
-            DsfrIcons.othersLeafFill,
-            size: DsfrSpacings.s2w,
-            color: Color(0xFF3CD277),
-          ),
+          const Icon(DsfrIcons.othersLeafFill, size: DsfrSpacings.s2w, color: Color(0xFF3CD277)),
         ],
       ),
     ),

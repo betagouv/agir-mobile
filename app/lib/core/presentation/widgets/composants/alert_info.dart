@@ -13,18 +13,8 @@ class FnvAlertInfo extends StatelessWidget {
     Widget child = Row(
       spacing: DsfrSpacings.s1w,
       children: [
-        const Icon(
-          DsfrIcons.systemQuestionLine,
-          color: DsfrColors.blueFranceSun113,
-        ),
-        Expanded(
-          child: MarkdownBody(
-            data: label,
-            styleSheet: MarkdownStyleSheet(
-              p: const DsfrTextStyle(fontSize: 15),
-            ),
-          ),
-        ),
+        const Icon(DsfrIcons.systemQuestionLine, color: DsfrColors.blueFranceSun113),
+        Expanded(child: MarkdownBody(data: label, styleSheet: MarkdownStyleSheet(p: const DsfrTextStyle(fontSize: 15)))),
       ],
     );
     if (content != null) {
@@ -39,10 +29,7 @@ class FnvAlertInfo extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(DsfrSpacings.s1w)),
         ),
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(DsfrSpacings.s2w),
-        child: child,
-      ),
+      child: Padding(padding: const EdgeInsets.all(DsfrSpacings.s2w), child: child),
     );
   }
 }

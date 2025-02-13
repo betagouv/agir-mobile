@@ -28,15 +28,10 @@ class _HomeContentState extends State<HomeContent> {
 
   void _initializeData() {
     context.read<UserBloc>().add(const UserFetchRequested());
-    context.read<EnvironmentalPerformanceBloc>().add(
-      const EnvironmentalPerformanceStarted(),
-    );
+    context.read<EnvironmentalPerformanceBloc>().add(const EnvironmentalPerformanceStarted());
   }
 
-  Future<void> _handleUserState(
-    final BuildContext context,
-    final UserState state,
-  ) async {
+  Future<void> _handleUserState(final BuildContext context, final UserState state) async {
     final estIntegrationTerminee = state.user.isIntegrationCompleted;
     if (estIntegrationTerminee == null) {
       return;
@@ -54,8 +49,7 @@ class _HomeContentState extends State<HomeContent> {
   Future<void> _handleNotifications(final BuildContext context) async {
     final notificationService = context.read<NotificationService>();
     final authorizationStatus = await notificationService.requestPermission();
-    if (authorizationStatus == AuthorizationStatus.authorized &&
-        context.mounted) {
+    if (authorizationStatus == AuthorizationStatus.authorized && context.mounted) {
       await context.read<NotificationRepository>().saveToken();
     }
   }
@@ -63,10 +57,7 @@ class _HomeContentState extends State<HomeContent> {
   @override
   Widget build(final BuildContext context) => BlocListener<UserBloc, UserState>(
     listener: _handleUserState,
-    listenWhen:
-        (final previous, final current) =>
-            previous.user.isIntegrationCompleted !=
-            current.user.isIntegrationCompleted,
+    listenWhen: (final previous, final current) => previous.user.isIntegrationCompleted != current.user.isIntegrationCompleted,
     child: const HomeContentLayout(),
   );
 }

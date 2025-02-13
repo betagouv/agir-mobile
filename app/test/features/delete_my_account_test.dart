@@ -32,10 +32,7 @@ void main() {
       await bddSetUp(tester);
       await iTapOn(tester, 'Confirmer');
       await theAccountDeletionEndpointHasBeenCalled(tester);
-      await iSee(
-        tester,
-        'Ensemble,\naméliorons\nnos habitudes\nau jour le jour',
-      );
+      await iSee(tester, 'Ensemble,\naméliorons\nnos habitudes\nau jour le jour');
     });
     testWidgets('''Cancel account deletion''', (tester) async {
       await bddSetUp(tester);

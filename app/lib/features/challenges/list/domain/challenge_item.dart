@@ -4,12 +4,7 @@ import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:equatable/equatable.dart';
 
 final class ChallengeItem extends Equatable {
-  const ChallengeItem({
-    required this.id,
-    required this.themeType,
-    required this.titre,
-    required this.status,
-  });
+  const ChallengeItem({required this.id, required this.themeType, required this.titre, required this.status});
 
   final ChallengeId id;
   final ThemeType themeType;

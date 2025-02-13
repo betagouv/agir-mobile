@@ -27,18 +27,8 @@ class PartnerWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                Localisation.proposePar,
-                style: DsfrTextStyle.bodySmItalic(
-                  color: DsfrColors.blueFranceSun113,
-                ),
-              ),
-              Text(
-                partner.nom,
-                style: const DsfrTextStyle.bodyMd(),
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1,
-              ),
+              const Text(Localisation.proposePar, style: DsfrTextStyle.bodySmItalic(color: DsfrColors.blueFranceSun113)),
+              Text(partner.nom, style: const DsfrTextStyle.bodyMd(), overflow: TextOverflow.ellipsis, maxLines: 1),
             ],
           ),
         ),

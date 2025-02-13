@@ -16,15 +16,9 @@ class FnvFailureWidget extends StatelessWidget {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          Localisation.erreurInattendue,
-          style: DsfrTextStyle.headline3(),
-        ),
+        const Text(Localisation.erreurInattendue, style: DsfrTextStyle.headline3()),
         FnvSvg.asset(AssetImages.errorIllustration),
-        const Text(
-          Localisation.erreurInattendueContent,
-          style: DsfrTextStyle.bodyXl(),
-        ),
+        const Text(Localisation.erreurInattendueContent, style: DsfrTextStyle.bodyXl()),
         const SizedBox(height: DsfrSpacings.s4w),
         DsfrButton(
           label: Localisation.rafraichir,

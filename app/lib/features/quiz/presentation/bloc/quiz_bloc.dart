@@ -6,10 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fpdart/fpdart.dart';
 
 class QuizBloc extends Bloc<QuizEvent, QuizState> {
-  QuizBloc({
-    required final QuizRepository quizRepository,
-    required final GamificationRepository gamificationRepository,
-  }) : super(const QuizState.empty()) {
+  QuizBloc({required final QuizRepository quizRepository, required final GamificationRepository gamificationRepository})
+    : super(const QuizState.empty()) {
     on<QuizRecuperationDemandee>((final event, final emit) async {
       final result = await quizRepository.recupererQuiz(event.id);
       if (result.isRight()) {
@@ -17,18 +15,10 @@ class QuizBloc extends Bloc<QuizEvent, QuizState> {
         emit(state.copyWith(quiz: quiz));
       }
     });
-    on<QuizReponseSelectionnee>(
-      (final event, final emit) =>
-          emit(state.copyWith(reponse: Some(event.valeur))),
-    );
+    on<QuizReponseSelectionnee>((final event, final emit) => emit(state.copyWith(reponse: Some(event.valeur))));
     on<QuizValidationDemandee>((final event, final emit) async {
-      final estExacte = state.quiz.reponses.any(
-        (final e) => e.reponse == state.reponse.getOrElse(() => '') && e.exact,
-      );
-      await quizRepository.terminerQuiz(
-        id: state.quiz.id,
-        estExacte: estExacte,
-      );
+      final estExacte = state.quiz.reponses.any((final e) => e.reponse == state.reponse.getOrElse(() => '') && e.exact);
+      await quizRepository.terminerQuiz(id: state.quiz.id, estExacte: estExacte);
       await gamificationRepository.refresh();
       emit(state.copyWith(estExacte: Some(estExacte)));
     });

@@ -35,23 +35,12 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
   }
 
   final tracker = _TrackerMock();
-  when(
-    () => tracker.navigatorObserver,
-  ).thenAnswer((final _) => RouteObserver<ModalRoute<void>>());
+  when(() => tracker.navigatorObserver).thenAnswer((final _) => RouteObserver<ModalRoute<void>>());
   ScenarioContext().dioMock!
     ..getM(Endpoints.bilan, responseData: environmentalPerformancePartialData)
-    ..getM(
-      Endpoints.utilisateur,
-      responseData: {'prenom': 'Lucas', 'is_onboarding_done': true},
-    )
-    ..getM(
-      '/utilisateurs/%7BuserId%7D/defis_v2?status=en_cours',
-      responseData: <dynamic>[],
-    )
-    ..getM(
-      '/utilisateurs/%7BuserId%7D/defis_v2?status=en_cours&thematique=alimentation',
-      responseData: <dynamic>[],
-    )
+    ..getM(Endpoints.utilisateur, responseData: {'prenom': 'Lucas', 'is_onboarding_done': true})
+    ..getM('/utilisateurs/%7BuserId%7D/defis_v2?status=en_cours', responseData: <dynamic>[])
+    ..getM('/utilisateurs/%7BuserId%7D/defis_v2?status=en_cours&thematique=alimentation', responseData: <dynamic>[])
     ..getM(Endpoints.gamification, responseData: {'points': 650})
     ..getM(Endpoints.missionsRecommandees, responseData: missionThematiques)
     ..getM(
@@ -70,14 +59,8 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
         ],
       },
     )
-    ..getM(
-      Endpoints.missionsRecommandeesParThematique('alimentation'),
-      responseData: <dynamic>[],
-    )
-    ..getM(
-      Endpoints.servicesParThematique('alimentation'),
-      responseData: <dynamic>[],
-    );
+    ..getM(Endpoints.missionsRecommandeesParThematique('alimentation'), responseData: <dynamic>[])
+    ..getM(Endpoints.servicesParThematique('alimentation'), responseData: <dynamic>[]);
 
   await mockNetworkImages(() async {
     await tester.pumpFrames(
@@ -85,14 +68,9 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
         clock: clock,
         tracker: tracker,
         messageBus: MessageBus(),
-        dioHttpClient: DioHttpClient(
-          dio: ScenarioContext().dioMock!,
-          authenticationService: authenticationService,
-        ),
+        dioHttpClient: DioHttpClient(dio: ScenarioContext().dioMock!, authenticationService: authenticationService),
         packageInfo: const PackageInfoFake(version: '1.2.3', buildNumber: '4'),
-        notificationService: const NotificationServiceFake(
-          AuthorizationStatus.denied,
-        ),
+        notificationService: const NotificationServiceFake(AuthorizationStatus.denied),
         authenticationService: authenticationService,
       ),
       Durations.short1,

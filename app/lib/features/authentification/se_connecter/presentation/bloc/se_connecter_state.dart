@@ -12,13 +12,7 @@ final class SeConnecterState extends Equatable {
     required this.connexionFaite,
   });
 
-  const SeConnecterState.empty()
-    : this(
-        adresseMail: '',
-        motDePasse: '',
-        erreur: const None(),
-        connexionFaite: false,
-      );
+  const SeConnecterState.empty() : this(adresseMail: '', motDePasse: '', erreur: const None(), connexionFaite: false);
 
   final String adresseMail;
   final String motDePasse;

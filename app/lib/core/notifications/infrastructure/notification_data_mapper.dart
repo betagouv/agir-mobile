@@ -5,16 +5,12 @@ abstract final class NotificationDataMapper {
   const NotificationDataMapper._();
 
   static NotificationData fromJson(final Map<String, dynamic> json) =>
-      NotificationData(
-        pageType: _pageTypefromJson(json['page_type'] as String),
-        pageId: json['page_id'] as String,
-      );
+      NotificationData(pageType: _pageTypefromJson(json['page_type'] as String), pageId: json['page_id'] as String);
 
-  static NotificationPageType _pageTypefromJson(final String json) =>
-      switch (json) {
-        'quiz' => NotificationPageType.quiz,
-        'article' => NotificationPageType.article,
-        'mission' => NotificationPageType.mission,
-        _ => throw UnimplementedError(),
-      };
+  static NotificationPageType _pageTypefromJson(final String json) => switch (json) {
+    'quiz' => NotificationPageType.quiz,
+    'article' => NotificationPageType.article,
+    'mission' => NotificationPageType.mission,
+    _ => throw UnimplementedError(),
+  };
 }

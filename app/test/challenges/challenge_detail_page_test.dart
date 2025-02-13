@@ -26,9 +26,7 @@ void main() {
     final widget = tester.widget<DsfrRadioButton<T>>(
       find.descendant(
         of: find.byType(DsfrRadioButtonSetHeadless<T>),
-        matching: find.byWidgetPredicate(
-          (final w) => w is DsfrRadioButton<T> && w.title == title,
-        ),
+        matching: find.byWidgetPredicate((final w) => w is DsfrRadioButton<T> && w.title == title),
       ),
     );
 
@@ -53,232 +51,112 @@ void main() {
       repositoryProviders: [
         RepositoryProvider<ChallengeRepository>.value(
           value: ChallengeRepository(
-            client: DioHttpClient(
-              dio: dioMock,
-              authenticationService: const AuthenticationServiceFake(),
-            ),
+            client: DioHttpClient(dio: dioMock, authenticationService: const AuthenticationServiceFake()),
             messageBus: messageBus ?? MessageBus(),
           ),
         ),
       ],
-      blocProviders: [
-        BlocProvider<GamificationBloc>(
-          create: (final context) => GamificationBlocFake(),
-        ),
-      ],
+      blocProviders: [BlocProvider<GamificationBloc>(create: (final context) => GamificationBlocFake())],
       page: GoRoute(
         path: 'path',
         name: 'name',
-        builder:
-            (final context, final state) =>
-                const ChallengeDetailPage(id: challengeId),
+        builder: (final context, final state) => const ChallengeDetailPage(id: challengeId),
       ),
     );
   }
 
   group("L'affichage du défi devrait être correct pour ", () {
     testWidgets('le défi à faire', (final tester) async {
-      await pumpChallengeDetailPage(
-        tester,
-        responseData: challengeFaker(status: 'todo'),
-      );
+      await pumpChallengeDetailPage(tester, responseData: challengeFaker(status: 'todo'));
       await tester.pumpAndSettle();
-      expect(
-        isRadioButtonEnabled<bool>(tester, Localisation.jeReleveLAction),
-        false,
-      );
-      expect(
-        isRadioButtonEnabled<bool>(tester, Localisation.pasPourMoi),
-        false,
-      );
-      expect(
-        find.text(Localisation.bonnesAstucesPourRealiserCetteAction),
-        findsOneWidget,
-      );
-      expect(
-        find.text(Localisation.pourquoiCetteAction, skipOffstage: false),
-        findsOneWidget,
-      );
+      expect(isRadioButtonEnabled<bool>(tester, Localisation.jeReleveLAction), false);
+      expect(isRadioButtonEnabled<bool>(tester, Localisation.pasPourMoi), false);
+      expect(find.text(Localisation.bonnesAstucesPourRealiserCetteAction), findsOneWidget);
+      expect(find.text(Localisation.pourquoiCetteAction, skipOffstage: false), findsOneWidget);
     });
 
     testWidgets('le défi non désirée', (final tester) async {
-      await pumpChallengeDetailPage(
-        tester,
-        responseData: challengeFaker(status: 'pas_envie'),
-      );
+      await pumpChallengeDetailPage(tester, responseData: challengeFaker(status: 'pas_envie'));
       await tester.pumpAndSettle();
-      expect(
-        isRadioButtonEnabled<bool>(tester, Localisation.jeReleveLAction),
-        false,
-      );
+      expect(isRadioButtonEnabled<bool>(tester, Localisation.jeReleveLAction), false);
       expect(isRadioButtonEnabled<bool>(tester, Localisation.pasPourMoi), true);
-      expect(
-        find.text(Localisation.bonnesAstucesPourRealiserCetteAction),
-        findsNothing,
-      );
+      expect(find.text(Localisation.bonnesAstucesPourRealiserCetteAction), findsNothing);
       expect(find.text(Localisation.pourquoiCetteAction), findsNothing);
     });
 
     testWidgets('le défi non désirée avec motif', (final tester) async {
       const reason = 'parce que';
-      await pumpChallengeDetailPage(
-        tester,
-        responseData: challengeFaker(status: 'pas_envie', reason: reason),
-      );
+      await pumpChallengeDetailPage(tester, responseData: challengeFaker(status: 'pas_envie', reason: reason));
       await tester.pumpAndSettle();
-      expect(
-        isRadioButtonEnabled<bool>(tester, Localisation.jeReleveLAction),
-        false,
-      );
+      expect(isRadioButtonEnabled<bool>(tester, Localisation.jeReleveLAction), false);
       expect(isRadioButtonEnabled<bool>(tester, Localisation.pasPourMoi), true);
-      expect(
-        find.text(Localisation.bonnesAstucesPourRealiserCetteAction),
-        findsNothing,
-      );
+      expect(find.text(Localisation.bonnesAstucesPourRealiserCetteAction), findsNothing);
       expect(find.text(Localisation.pourquoiCetteAction), findsNothing);
       expect(find.text(reason), findsOneWidget);
     });
 
     testWidgets('le défi en cours', (final tester) async {
-      await pumpChallengeDetailPage(
-        tester,
-        responseData: challengeFaker(status: 'en_cours'),
-      );
+      await pumpChallengeDetailPage(tester, responseData: challengeFaker(status: 'en_cours'));
       await tester.pumpAndSettle();
-      expect(
-        isRadioButtonEnabled<bool>(tester, Localisation.actionRealisee),
-        false,
-      );
-      expect(
-        isRadioButtonEnabled<bool>(tester, Localisation.finalementPasPourMoi),
-        false,
-      );
-      expect(
-        find.text(Localisation.bonnesAstucesPourRealiserCetteAction),
-        findsOneWidget,
-      );
-      expect(
-        find.text(Localisation.pourquoiCetteAction, skipOffstage: false),
-        findsOneWidget,
-      );
+      expect(isRadioButtonEnabled<bool>(tester, Localisation.actionRealisee), false);
+      expect(isRadioButtonEnabled<bool>(tester, Localisation.finalementPasPourMoi), false);
+      expect(find.text(Localisation.bonnesAstucesPourRealiserCetteAction), findsOneWidget);
+      expect(find.text(Localisation.pourquoiCetteAction, skipOffstage: false), findsOneWidget);
     });
 
     testWidgets('le défi déjà réalisée', (final tester) async {
-      await pumpChallengeDetailPage(
-        tester,
-        responseData: challengeFaker(status: 'deja_fait'),
-      );
+      await pumpChallengeDetailPage(tester, responseData: challengeFaker(status: 'deja_fait'));
       await tester.pumpAndSettle();
-      expect(
-        isRadioButtonEnabled<bool>(tester, Localisation.actionRealisee),
-        true,
-      );
-      expect(
-        isRadioButtonEnabled<bool>(tester, Localisation.finalementPasPourMoi),
-        false,
-      );
-      expect(
-        find.text(Localisation.bonnesAstucesPourRealiserCetteAction),
-        findsOneWidget,
-      );
-      expect(
-        find.text(Localisation.pourquoiCetteAction, skipOffstage: false),
-        findsOneWidget,
-      );
+      expect(isRadioButtonEnabled<bool>(tester, Localisation.actionRealisee), true);
+      expect(isRadioButtonEnabled<bool>(tester, Localisation.finalementPasPourMoi), false);
+      expect(find.text(Localisation.bonnesAstucesPourRealiserCetteAction), findsOneWidget);
+      expect(find.text(Localisation.pourquoiCetteAction, skipOffstage: false), findsOneWidget);
     });
 
     testWidgets('le défi abandonnée', (final tester) async {
-      await pumpChallengeDetailPage(
-        tester,
-        responseData: challengeFaker(status: 'abondon'),
-      );
+      await pumpChallengeDetailPage(tester, responseData: challengeFaker(status: 'abondon'));
       await tester.pumpAndSettle();
-      expect(
-        isRadioButtonEnabled<bool>(tester, Localisation.actionRealisee),
-        false,
-      );
-      expect(
-        isRadioButtonEnabled<bool>(tester, Localisation.finalementPasPourMoi),
-        true,
-      );
-      expect(
-        find.text(Localisation.bonnesAstucesPourRealiserCetteAction),
-        findsNothing,
-      );
+      expect(isRadioButtonEnabled<bool>(tester, Localisation.actionRealisee), false);
+      expect(isRadioButtonEnabled<bool>(tester, Localisation.finalementPasPourMoi), true);
+      expect(find.text(Localisation.bonnesAstucesPourRealiserCetteAction), findsNothing);
       expect(find.text(Localisation.pourquoiCetteAction), findsNothing);
     });
 
     testWidgets('le défi abandonnée avec motif', (final tester) async {
       const reason = 'parce que';
-      await pumpChallengeDetailPage(
-        tester,
-        responseData: challengeFaker(status: 'abondon', reason: reason),
-      );
+      await pumpChallengeDetailPage(tester, responseData: challengeFaker(status: 'abondon', reason: reason));
       await tester.pumpAndSettle();
-      expect(
-        isRadioButtonEnabled<bool>(tester, Localisation.actionRealisee),
-        false,
-      );
-      expect(
-        isRadioButtonEnabled<bool>(tester, Localisation.finalementPasPourMoi),
-        true,
-      );
-      expect(
-        find.text(Localisation.bonnesAstucesPourRealiserCetteAction),
-        findsNothing,
-      );
+      expect(isRadioButtonEnabled<bool>(tester, Localisation.actionRealisee), false);
+      expect(isRadioButtonEnabled<bool>(tester, Localisation.finalementPasPourMoi), true);
+      expect(find.text(Localisation.bonnesAstucesPourRealiserCetteAction), findsNothing);
       expect(find.text(Localisation.pourquoiCetteAction), findsNothing);
       expect(find.text(reason), findsOneWidget);
     });
 
     testWidgets('le défi terminée', (final tester) async {
-      await pumpChallengeDetailPage(
-        tester,
-        responseData: challengeFaker(status: 'fait'),
-      );
+      await pumpChallengeDetailPage(tester, responseData: challengeFaker(status: 'fait'));
       await tester.pumpAndSettle();
-      expect(
-        isRadioButtonEnabled<bool>(tester, Localisation.actionRealisee),
-        true,
-      );
-      expect(
-        isRadioButtonEnabled<bool>(tester, Localisation.finalementPasPourMoi),
-        false,
-      );
-      expect(
-        find.text(Localisation.bonnesAstucesPourRealiserCetteAction),
-        findsOneWidget,
-      );
-      expect(
-        find.text(Localisation.pourquoiCetteAction, skipOffstage: false),
-        findsOneWidget,
-      );
+      expect(isRadioButtonEnabled<bool>(tester, Localisation.actionRealisee), true);
+      expect(isRadioButtonEnabled<bool>(tester, Localisation.finalementPasPourMoi), false);
+      expect(find.text(Localisation.bonnesAstucesPourRealiserCetteAction), findsOneWidget);
+      expect(find.text(Localisation.pourquoiCetteAction, skipOffstage: false), findsOneWidget);
     });
   });
 
   group('La modification de le défi devrait fonctionner pour ', () {
     testWidgets('choisir "pas pour moi" sans valider', (final tester) async {
-      await pumpChallengeDetailPage(
-        tester,
-        responseData: challengeFaker(status: 'todo'),
-      );
+      await pumpChallengeDetailPage(tester, responseData: challengeFaker(status: 'todo'));
       await tester.pumpAndSettle();
 
       await tester.tap(find.text(Localisation.pasPourMoi));
 
       await tester.pumpAndSettle();
 
-      expect(
-        isRadioButtonEnabled<bool>(tester, Localisation.jeReleveLAction),
-        false,
-      );
+      expect(isRadioButtonEnabled<bool>(tester, Localisation.jeReleveLAction), false);
 
       expect(isRadioButtonEnabled<bool>(tester, Localisation.pasPourMoi), true);
 
-      expect(
-        find.text(Localisation.bonnesAstucesPourRealiserCetteAction),
-        findsNothing,
-      );
+      expect(find.text(Localisation.bonnesAstucesPourRealiserCetteAction), findsNothing);
 
       expect(find.text(Localisation.pourquoiCetteAction), findsNothing);
     });
@@ -299,10 +177,7 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      expect(
-        isRadioButtonEnabled<bool>(tester, Localisation.jeReleveLAction),
-        true,
-      );
+      expect(isRadioButtonEnabled<bool>(tester, Localisation.jeReleveLAction), true);
 
       await tester.tap(find.text(Localisation.valider));
 
@@ -332,12 +207,7 @@ void main() {
       expect(isRadioButtonEnabled<bool>(tester, Localisation.pasPourMoi), true);
 
       const reason = 'parce que';
-      await tester.enterText(
-        find.byKey(
-          const ValueKey(Localisation.cetteActionNeVousConvientPasDetails),
-        ),
-        reason,
-      );
+      await tester.enterText(find.byKey(const ValueKey(Localisation.cetteActionNeVousConvientPasDetails)), reason);
 
       await tester.pump();
 
@@ -345,71 +215,44 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      verify(
-        () => dio.patch<dynamic>(
-          path,
-          data: {'motif': reason, 'status': 'pas_envie'},
-        ),
-      );
+      verify(() => dio.patch<dynamic>(path, data: {'motif': reason, 'status': 'pas_envie'}));
 
       expect(find.text('pop'), findsOneWidget);
     });
 
-    testWidgets(
-      'l\'action "pas pour moi" qui devient "en cours" (motif effacé)',
-      (final tester) async {
-        const id = '73';
-        final path = Endpoints.challenge(id);
-        final dio =
-            DioMock()
-              ..getM(
-                path,
-                responseData: challengeFaker(
-                  id: id,
-                  status: 'pas_envie',
-                  reason: 'parce que',
-                ),
-              )
-              ..patchM(path);
-
-        await pumpChallengeDetailPage(tester, dio: dio);
-
-        await tester.pumpAndSettle();
-
-        await tester.tap(find.text(Localisation.jeReleveLAction));
-
-        await tester.pumpAndSettle();
-
-        expect(
-          isRadioButtonEnabled<bool>(tester, Localisation.jeReleveLAction),
-          true,
-        );
-
-        await tester.tap(find.text(Localisation.valider));
-
-        await tester.pumpAndSettle();
-
-        verify(() => dio.patch<dynamic>(path, data: {'status': 'en_cours'}));
-
-        expect(find.text('pop'), findsOneWidget);
-      },
-    );
-
-    testWidgets('l\'action "pas pour moi" dont seul le motif change', (
-      final tester,
-    ) async {
+    testWidgets('l\'action "pas pour moi" qui devient "en cours" (motif effacé)', (final tester) async {
       const id = '73';
       final path = Endpoints.challenge(id);
       final dio =
           DioMock()
-            ..getM(
-              path,
-              responseData: challengeFaker(
-                id: id,
-                status: 'pas_envie',
-                reason: 'parce que',
-              ),
-            )
+            ..getM(path, responseData: challengeFaker(id: id, status: 'pas_envie', reason: 'parce que'))
+            ..patchM(path);
+
+      await pumpChallengeDetailPage(tester, dio: dio);
+
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text(Localisation.jeReleveLAction));
+
+      await tester.pumpAndSettle();
+
+      expect(isRadioButtonEnabled<bool>(tester, Localisation.jeReleveLAction), true);
+
+      await tester.tap(find.text(Localisation.valider));
+
+      await tester.pumpAndSettle();
+
+      verify(() => dio.patch<dynamic>(path, data: {'status': 'en_cours'}));
+
+      expect(find.text('pop'), findsOneWidget);
+    });
+
+    testWidgets('l\'action "pas pour moi" dont seul le motif change', (final tester) async {
+      const id = '73';
+      final path = Endpoints.challenge(id);
+      final dio =
+          DioMock()
+            ..getM(path, responseData: challengeFaker(id: id, status: 'pas_envie', reason: 'parce que'))
             ..patchM(path);
 
       await pumpChallengeDetailPage(tester, dio: dio);
@@ -417,82 +260,54 @@ void main() {
       await tester.pumpAndSettle();
 
       const reason = 'parce que 2';
-      await tester.enterText(
-        find.byKey(
-          const ValueKey(Localisation.cetteActionNeVousConvientPasDetails),
-        ),
-        reason,
-      );
+      await tester.enterText(find.byKey(const ValueKey(Localisation.cetteActionNeVousConvientPasDetails)), reason);
 
       await tester.pump();
 
       await tester.scrollUntilVisible(
         find.text(Localisation.valider),
         300,
-        scrollable: find.descendant(
-          of: find.byType(ListView),
-          matching: find.byType(Scrollable).first,
-        ),
+        scrollable: find.descendant(of: find.byType(ListView), matching: find.byType(Scrollable).first),
       );
       await tester.pumpAndSettle();
       await tester.tap(find.text(Localisation.valider, skipOffstage: false));
 
       await tester.pumpAndSettle();
 
-      verify(
-        () => dio.patch<dynamic>(
-          path,
-          data: {'motif': reason, 'status': 'pas_envie'},
-        ),
-      );
+      verify(() => dio.patch<dynamic>(path, data: {'motif': reason, 'status': 'pas_envie'}));
 
       expect(find.text('pop'), findsOneWidget);
     });
 
-    testWidgets(
-      'l\'action "pas pour moi" qui change de statut puis revient à "pas pour moi"',
-      (final tester) async {
-        const id = '73';
-        const reason = 'parce que';
-        final path = Endpoints.challenge(id);
-        final dio =
-            DioMock()
-              ..getM(
-                path,
-                responseData: challengeFaker(
-                  id: id,
-                  status: 'pas_envie',
-                  reason: reason,
-                ),
-              )
-              ..patchM(path);
+    testWidgets('l\'action "pas pour moi" qui change de statut puis revient à "pas pour moi"', (final tester) async {
+      const id = '73';
+      const reason = 'parce que';
+      final path = Endpoints.challenge(id);
+      final dio =
+          DioMock()
+            ..getM(path, responseData: challengeFaker(id: id, status: 'pas_envie', reason: reason))
+            ..patchM(path);
 
-        await pumpChallengeDetailPage(tester, dio: dio);
+      await pumpChallengeDetailPage(tester, dio: dio);
 
-        await tester.pumpAndSettle();
+      await tester.pumpAndSettle();
 
-        await tester.tap(find.text(Localisation.jeReleveLAction));
+      await tester.tap(find.text(Localisation.jeReleveLAction));
 
-        await tester.pumpAndSettle();
+      await tester.pumpAndSettle();
 
-        await tester.tap(find.text(Localisation.pasPourMoi));
+      await tester.tap(find.text(Localisation.pasPourMoi));
 
-        await tester.pumpAndSettle();
+      await tester.pumpAndSettle();
 
-        await tester.tap(find.text(Localisation.valider));
+      await tester.tap(find.text(Localisation.valider));
 
-        await tester.pumpAndSettle();
+      await tester.pumpAndSettle();
 
-        verify(
-          () => dio.patch<dynamic>(
-            path,
-            data: {'motif': reason, 'status': 'pas_envie'},
-          ),
-        );
+      verify(() => dio.patch<dynamic>(path, data: {'motif': reason, 'status': 'pas_envie'}));
 
-        expect(find.text('pop'), findsOneWidget);
-      },
-    );
+      expect(find.text('pop'), findsOneWidget);
+    });
 
     group('réaliser le défi', () {
       const id = '73';
@@ -502,10 +317,7 @@ void main() {
       setUp(() {
         dio =
             DioMock()
-              ..getM(
-                path,
-                responseData: challengeFaker(id: id, status: 'en_cours'),
-              )
+              ..getM(path, responseData: challengeFaker(id: id, status: 'en_cours'))
               ..patchM(path);
         messageBus = MessageBus();
       });
@@ -517,18 +329,13 @@ void main() {
 
       testWidgets('réaliser le défi', (final tester) async {
         final completer = Completer<void>();
-        final subscription = messageBus
-            .subscribe(challengeCompletedTopic)
-            .listen((final event) => completer.complete());
+        final subscription = messageBus.subscribe(challengeCompletedTopic).listen((final event) => completer.complete());
 
         await pumpChallengeDetailPage(tester, dio: dio, messageBus: messageBus);
         await tester.pumpAndSettle();
         await tester.tap(find.text(Localisation.actionRealisee));
         await tester.pumpAndSettle();
-        expect(
-          isRadioButtonEnabled<bool>(tester, Localisation.actionRealisee),
-          true,
-        );
+        expect(isRadioButtonEnabled<bool>(tester, Localisation.actionRealisee), true);
         await tester.tap(find.text(Localisation.valider));
         await tester.pumpAndSettle();
 

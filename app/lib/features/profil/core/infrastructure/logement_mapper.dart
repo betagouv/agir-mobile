@@ -16,18 +16,17 @@ abstract final class LogementMapper {
     'type': _mapTypeDeLogementToJson(logement.typeDeLogement),
   };
 
-  static Logement mapLogementFromJson(final Map<String, dynamic> json) =>
-      Logement(
-        codePostal: json['code_postal'] as String?,
-        commune: json['commune'] as String?,
-        nombreAdultes: (json['nombre_adultes'] as num?)?.toInt(),
-        nombreEnfants: (json['nombre_enfants'] as num?)?.toInt(),
-        typeDeLogement: _mapTypeDeLogementFromJson(json['type'] as String?),
-        estProprietaire: json['proprietaire'] as bool?,
-        superficie: _mapSuperficieFromJson(json['superficie'] as String?),
-        plusDe15Ans: json['plus_de_15_ans'] as bool?,
-        dpe: _mapDpeFromJson(json['dpe'] as String?),
-      );
+  static Logement mapLogementFromJson(final Map<String, dynamic> json) => Logement(
+    codePostal: json['code_postal'] as String?,
+    commune: json['commune'] as String?,
+    nombreAdultes: (json['nombre_adultes'] as num?)?.toInt(),
+    nombreEnfants: (json['nombre_enfants'] as num?)?.toInt(),
+    typeDeLogement: _mapTypeDeLogementFromJson(json['type'] as String?),
+    estProprietaire: json['proprietaire'] as bool?,
+    superficie: _mapSuperficieFromJson(json['superficie'] as String?),
+    plusDe15Ans: json['plus_de_15_ans'] as bool?,
+    dpe: _mapDpeFromJson(json['dpe'] as String?),
+  );
 
   static String? _mapDpeToJson(final Dpe? dpe) => switch (dpe) {
     Dpe.a => 'A',
@@ -53,38 +52,33 @@ abstract final class LogementMapper {
     _ => null,
   };
 
-  static String? _mapSuperficieToJson(final Superficie? superficie) =>
-      switch (superficie) {
-        Superficie.s35 => 'superficie_35',
-        Superficie.s70 => 'superficie_70',
-        Superficie.s100 => 'superficie_100',
-        Superficie.s150 => 'superficie_150',
-        Superficie.s150EtPlus => 'superficie_150_et_plus',
-        null => null,
-      };
+  static String? _mapSuperficieToJson(final Superficie? superficie) => switch (superficie) {
+    Superficie.s35 => 'superficie_35',
+    Superficie.s70 => 'superficie_70',
+    Superficie.s100 => 'superficie_100',
+    Superficie.s150 => 'superficie_150',
+    Superficie.s150EtPlus => 'superficie_150_et_plus',
+    null => null,
+  };
 
-  static Superficie? _mapSuperficieFromJson(final String? superficie) =>
-      switch (superficie) {
-        'superficie_35' => Superficie.s35,
-        'superficie_70' => Superficie.s70,
-        'superficie_100' => Superficie.s100,
-        'superficie_150' => Superficie.s150,
-        'superficie_150_et_plus' => Superficie.s150EtPlus,
-        _ => null,
-      };
+  static Superficie? _mapSuperficieFromJson(final String? superficie) => switch (superficie) {
+    'superficie_35' => Superficie.s35,
+    'superficie_70' => Superficie.s70,
+    'superficie_100' => Superficie.s100,
+    'superficie_150' => Superficie.s150,
+    'superficie_150_et_plus' => Superficie.s150EtPlus,
+    _ => null,
+  };
 
-  static String? _mapTypeDeLogementToJson(
-    final TypeDeLogement? typeDeLogement,
-  ) => switch (typeDeLogement) {
+  static String? _mapTypeDeLogementToJson(final TypeDeLogement? typeDeLogement) => switch (typeDeLogement) {
     TypeDeLogement.appartement => 'appartement',
     TypeDeLogement.maison => 'maison',
     null => null,
   };
 
-  static TypeDeLogement? _mapTypeDeLogementFromJson(final String? type) =>
-      switch (type) {
-        'appartement' => TypeDeLogement.appartement,
-        'maison' => TypeDeLogement.maison,
-        _ => null,
-      };
+  static TypeDeLogement? _mapTypeDeLogementFromJson(final String? type) => switch (type) {
+    'appartement' => TypeDeLogement.appartement,
+    'maison' => TypeDeLogement.maison,
+    _ => null,
+  };
 }

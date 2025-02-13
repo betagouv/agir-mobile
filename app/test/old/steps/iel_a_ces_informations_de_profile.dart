@@ -33,8 +33,5 @@ void ielACesInformationsDeProfil({
 
 /// Iel a ces informations de logement.
 void ielACesInformationsDeLogement(final Logement logement) {
-  ScenarioContext().dioMock!.getM(
-    Endpoints.logement,
-    responseData: LogementMapper.mapLogementToJson(logement),
-  );
+  ScenarioContext().dioMock!.getM(Endpoints.logement, responseData: LogementMapper.mapLogementToJson(logement));
 }

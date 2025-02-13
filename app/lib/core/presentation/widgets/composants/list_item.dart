@@ -4,12 +4,7 @@ import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 
 class ListItem extends StatelessWidget {
-  const ListItem({
-    super.key,
-    required this.title,
-    required this.subTitle,
-    required this.onTap,
-  });
+  const ListItem({super.key, required this.title, required this.subTitle, required this.onTap});
 
   final String title;
   final String subTitle;

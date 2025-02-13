@@ -5,10 +5,7 @@ import 'package:flutter/material.dart';
 class TagsPage extends StatelessWidget {
   const TagsPage({super.key});
 
-  static final model = PageItem(
-    title: 'Tags',
-    pageBuilder: (final context) => const TagsPage(),
-  );
+  static final model = PageItem(title: 'Tags', pageBuilder: (final context) => const TagsPage());
 
   @override
   Widget build(final context) => const SingleChildScrollView(

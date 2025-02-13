@@ -1,18 +1,15 @@
 abstract final class EnvironmentalPerformanceSummaryL10n {
   const EnvironmentalPerformanceSummaryL10n._();
 
-  static const estimerMonBilanEnvironnemental =
-      'Estimer mon **bilan environnemental**';
+  static const estimerMonBilanEnvironnemental = 'Estimer mon **bilan environnemental**';
   static const monBilanEnvironnemental = 'Mon **bilan environnemental**';
   static const affiner = 'Affiner';
   static const modifier = 'Modifier';
   static const vosReponses = 'vos réponses';
   static const monEstimation = 'mon estimation';
   static const estimerUnPremierBilan = 'Estimer un premier bilan';
-  static const estimerMonEstimationSousTitre =
-      'Et obtenez des **recommandations** et **aides** personnalisées';
-  static const affinerMonEstimationSousTitre =
-      'Et obtenez un bilan détaillé de votre impact sur l’environnement';
+  static const estimerMonEstimationSousTitre = 'Et obtenez des **recommandations** et **aides** personnalisées';
+  static const affinerMonEstimationSousTitre = 'Et obtenez un bilan détaillé de votre impact sur l’environnement';
   static const questions = 'questions';
   static const minutes = 'minutes';
   static const commencerMonMiniBilanDescription =
@@ -51,11 +48,9 @@ Calculer son **bilan environnemental** permet de comprendre quels sont nos usage
   static const estimationCompleteA = 'Estimation complète à';
   static const tonnes = 'tonnes';
   static const kg = 'kg';
-  static const mesPrincipauxPostesDemission =
-      'Mes principaux postes d’émission';
+  static const mesPrincipauxPostesDemission = 'Mes principaux postes d’émission';
   static const voirDetailHebdomadaire = 'Voir le détail hebdomadaire';
   static const deCO2eParAn = 'de CO₂e par an';
-  static const aTitreDeComparaison =
-      'À titre de comparaison, la moyenne française est de **9,2 tonnes**';
+  static const aTitreDeComparaison = 'À titre de comparaison, la moyenne française est de **9,2 tonnes**';
   static const voirMonBilanDetaille = 'Voir mon bilan détaillé';
 }

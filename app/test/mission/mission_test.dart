@@ -37,112 +37,50 @@ import '../helpers/dio_mock.dart';
 import '../helpers/pump_page.dart';
 import '../old/mocks/gamification_bloc_fake.dart';
 
-Future<void> pumpForMissionPage(
-  final WidgetTester tester, {
-  required final DioMock dio,
-}) async {
+Future<void> pumpForMissionPage(final WidgetTester tester, {required final DioMock dio}) async {
   dio
-    ..getM(
-      Endpoints.utilisateur,
-      responseData: {'prenom': 'Lucas', 'is_onboarding_done': true},
-    )
+    ..getM(Endpoints.utilisateur, responseData: {'prenom': 'Lucas', 'is_onboarding_done': true})
     ..getM(Endpoints.bilan, responseData: environmentalPerformanceEmptyData)
-    ..getM(
-      Endpoints.questions('ENCHAINEMENT_KYC_mini_bilan_carbone'),
-      responseData: miniBilan,
-    )
+    ..getM(Endpoints.questions('ENCHAINEMENT_KYC_mini_bilan_carbone'), responseData: miniBilan)
     ..getM(Endpoints.missionsRecommandees, responseData: missionThematiques)
-    ..getM(
-      '/utilisateurs/%7BuserId%7D/defis_v2?status=en_cours',
-      responseData: <dynamic>[],
-    )
-    ..getM(
-      Endpoints.aids,
-      responseData: {'couverture_aides_ok': true, 'liste_aides': <dynamic>[]},
-    );
+    ..getM('/utilisateurs/%7BuserId%7D/defis_v2?status=en_cours', responseData: <dynamic>[])
+    ..getM(Endpoints.aids, responseData: {'couverture_aides_ok': true, 'liste_aides': <dynamic>[]});
 
-  final client = DioHttpClient(
-    dio: dio,
-    authenticationService: authenticationService,
-  );
+  final client = DioHttpClient(dio: dio, authenticationService: authenticationService);
 
   await pumpPage(
     tester: tester,
     repositoryProviders: [
-      RepositoryProvider(
-        create:
-            (final context) =>
-                EnvironmentalPerformanceSummaryRepository(client: client),
-      ),
-      RepositoryProvider<MissionRepository>(
-        create: (final context) => MissionRepository(client: client),
-      ),
+      RepositoryProvider(create: (final context) => EnvironmentalPerformanceSummaryRepository(client: client)),
+      RepositoryProvider<MissionRepository>(create: (final context) => MissionRepository(client: client)),
       RepositoryProvider<MieuxVousConnaitreRepository>(
-        create:
-            (final context) => MieuxVousConnaitreRepository(
-              client: client,
-              messageBus: MessageBus(),
-            ),
+        create: (final context) => MieuxVousConnaitreRepository(client: client, messageBus: MessageBus()),
       ),
       RepositoryProvider<NotificationService>(
-        create:
-            (final context) =>
-                const NotificationServiceFake(AuthorizationStatus.denied),
+        create: (final context) => const NotificationServiceFake(AuthorizationStatus.denied),
       ),
     ],
     blocProviders: [
+      BlocProvider(create: (final context) => AidsHomeBloc(aidsRepository: AidsRepository(client: client))),
+      BlocProvider(create: (final context) => HomeDisclaimerCubit()..closeDisclaimer()),
       BlocProvider(
-        create:
-            (final context) =>
-                AidsHomeBloc(aidsRepository: AidsRepository(client: client)),
+        create: (final context) => RecommandationsBloc(recommandationsRepository: RecommandationsRepository(client: client)),
       ),
-      BlocProvider(
-        create: (final context) => HomeDisclaimerCubit()..closeDisclaimer(),
-      ),
-      BlocProvider(
-        create:
-            (final context) => RecommandationsBloc(
-              recommandationsRepository: RecommandationsRepository(
-                client: client,
-              ),
-            ),
-      ),
-      BlocProvider<GamificationBloc>(
-        create: (final context) => GamificationBlocFake(),
-      ),
-      BlocProvider(
-        create:
-            (final context) =>
-                UserBloc(repository: UserRepository(client: client)),
-      ),
+      BlocProvider<GamificationBloc>(create: (final context) => GamificationBlocFake()),
+      BlocProvider(create: (final context) => UserBloc(repository: UserRepository(client: client))),
       BlocProvider(
         create:
             (final context) => EnvironmentalPerformanceBloc(
-              useCase: FetchEnvironmentalPerformance(
-                EnvironmentalPerformanceSummaryRepository(client: client),
-              ),
+              useCase: FetchEnvironmentalPerformance(EnvironmentalPerformanceSummaryRepository(client: client)),
             ),
       ),
       BlocProvider(
         create:
-            (final context) => EnvironmentalPerformanceQuestionBloc(
-              repository: EnvironmentalPerformanceQuestionRepository(
-                client: client,
-              ),
-            ),
+            (final context) =>
+                EnvironmentalPerformanceQuestionBloc(repository: EnvironmentalPerformanceQuestionRepository(client: client)),
       ),
-      BlocProvider(
-        create:
-            (final context) => MissionHomeBloc(
-              repository: MissionHomeRepository(client: client),
-            ),
-      ),
-      BlocProvider(
-        create:
-            (final context) => ChallengesBloc(
-              repository: ChallengesRepository(client: client),
-            ),
-      ),
+      BlocProvider(create: (final context) => MissionHomeBloc(repository: MissionHomeRepository(client: client))),
+      BlocProvider(create: (final context) => ChallengesBloc(repository: ChallengesRepository(client: client))),
     ],
     router: GoRouter(
       routes: [
@@ -159,29 +97,19 @@ void main() {
       await mockNetworkImages(() async {
         await pumpForMissionPage(tester, dio: DioMock());
         expect(find.text('Recommandés pour vous'), findsOneWidget);
-        expect(
-          find.text('Valoriser ses restes avec un compost'),
-          findsOneWidget,
-        );
+        expect(find.text('Valoriser ses restes avec un compost'), findsOneWidget);
       });
     });
 
-    testWidgets("Aller sur une mission montre l'introduction de celle ci", (
-      final tester,
-    ) async {
+    testWidgets("Aller sur une mission montre l'introduction de celle ci", (final tester) async {
       await mockNetworkImages(() async {
-        final dio =
-            DioMock()
-              ..getM(Endpoints.mission('compost'), responseData: missionMap);
+        final dio = DioMock()..getM(Endpoints.mission('compost'), responseData: missionMap);
         await pumpForMissionPage(tester, dio: dio);
         await tester.tap(find.text('Valoriser ses restes avec un compost'));
         await tester.pumpAndSettle();
 
         expect(find.textContaining('Me nourrir'), findsOneWidget);
-        expect(
-          find.text('Valoriser ses restes avec un compost'),
-          findsOneWidget,
-        );
+        expect(find.text('Valoriser ses restes avec un compost'), findsOneWidget);
         expect(find.text(Localisation.commencer), findsOneWidget);
       });
     });
@@ -191,19 +119,13 @@ void main() {
         final dio =
             DioMock()
               ..getM(Endpoints.mission('compost'), responseData: missionMap)
-              ..getM(
-                Endpoints.questionKyc('KYC_compost_pratique'),
-                responseData: kyc,
-              );
+              ..getM(Endpoints.questionKyc('KYC_compost_pratique'), responseData: kyc);
         await pumpForMissionPage(tester, dio: dio);
         await tester.tap(find.text('Valoriser ses restes avec un compost'));
         await tester.pumpAndSettle();
         await tester.tap(find.text(Localisation.commencer));
         await tester.pumpAndSettle();
-        expect(
-          find.text('Comment valorisez-vous vos déchets alimentaires ?'),
-          findsOneWidget,
-        );
+        expect(find.text('Comment valorisez-vous vos déchets alimentaires ?'), findsOneWidget);
       });
     });
 
@@ -211,23 +133,14 @@ void main() {
       await mockNetworkImages(() async {
         final dio =
             DioMock()
-              ..getM(
-                Endpoints.mission('compost'),
-                responseData: missionPartiallyAnswered,
-              )
-              ..getM(
-                Endpoints.questionKyc('KYC_compost_motivation'),
-                responseData: kyc2,
-              );
+              ..getM(Endpoints.mission('compost'), responseData: missionPartiallyAnswered)
+              ..getM(Endpoints.questionKyc('KYC_compost_motivation'), responseData: kyc2);
         await pumpForMissionPage(tester, dio: dio);
         await tester.tap(find.text('Valoriser ses restes avec un compost'));
         await tester.pumpAndSettle();
         await tester.tap(find.text(Localisation.commencer));
         await tester.pumpAndSettle();
-        expect(
-          find.text('Quelles sont vos motivations au sujet du compostage ?'),
-          findsOneWidget,
-        );
+        expect(find.text('Quelles sont vos motivations au sujet du compostage ?'), findsOneWidget);
       });
     });
   });
@@ -237,8 +150,7 @@ const missionThematiques = [
   {
     'cible_progression': 9,
     'code': 'compost',
-    'image_url':
-        'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1724937236/compost_6868eb1743.svg',
+    'image_url': 'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1724937236/compost_6868eb1743.svg',
     'is_new': true,
     'progression': 0,
     'thematique': 'alimentation',
@@ -247,8 +159,7 @@ const missionThematiques = [
   {
     'cible_progression': 8,
     'code': 'saison',
-    'image_url':
-        'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1724937259/saison_cb78c5f2aa.svg',
+    'image_url': 'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1724937259/saison_cb78c5f2aa.svg',
     'is_new': true,
     'progression': 0,
     'thematique': 'alimentation',
@@ -257,8 +168,7 @@ const missionThematiques = [
   {
     'cible_progression': 8,
     'code': 'gaspi',
-    'image_url':
-        'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1724937236/gaspi_f071cc0cbb.svg',
+    'image_url': 'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1724937236/gaspi_f071cc0cbb.svg',
     'is_new': true,
     'progression': 0,
     'thematique': 'alimentation',
@@ -267,8 +177,7 @@ const missionThematiques = [
   {
     'cible_progression': 10,
     'code': 'local',
-    'image_url':
-        'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1724937236/local_aa18745357.svg',
+    'image_url': 'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1724937236/local_aa18745357.svg',
     'is_new': true,
     'progression': 0,
     'thematique': 'alimentation',
@@ -277,8 +186,7 @@ const missionThematiques = [
   {
     'cible_progression': 10,
     'code': 'viande',
-    'image_url':
-        'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1724937236/viande_74c32bae22.svg',
+    'image_url': 'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1724937236/viande_74c32bae22.svg',
     'is_new': true,
     'progression': 0,
     'thematique': 'alimentation',
@@ -287,8 +195,7 @@ const missionThematiques = [
   {
     'cible_progression': 9,
     'code': 'legumineuses',
-    'image_url':
-        'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1724937236/legumineuse_3724544daf.svg',
+    'image_url': 'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1724937236/legumineuse_3724544daf.svg',
     'is_new': true,
     'progression': 0,
     'thematique': 'alimentation',
@@ -300,8 +207,7 @@ const missionMap = {
   'code': 'compost',
   'done_at': '2024-11-18T09:20:36.571Z',
   'id': '31',
-  'image_url':
-      'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1724937236/compost_6868eb1743.svg',
+  'image_url': 'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1724937236/compost_6868eb1743.svg',
   'is_new': false,
   'objectifs': [
     {
@@ -325,8 +231,7 @@ const missionMap = {
       'is_reco': false,
       'points': 5,
       'sont_points_en_poche': true,
-      'titre':
-          'Quelles sont vos idées reçues ou freins concernant le compost ?',
+      'titre': 'Quelles sont vos idées reçues ou freins concernant le compost ?',
       'type': 'kyc',
     },
     {
@@ -362,8 +267,7 @@ const missionMap = {
       'is_reco': false,
       'points': 5,
       'sont_points_en_poche': true,
-      'titre':
-          '3 conseils pour un compost réussi : équilibrer, aérer, humidifier',
+      'titre': '3 conseils pour un compost réussi : équilibrer, aérer, humidifier',
       'type': 'article',
     },
     {
@@ -375,8 +279,7 @@ const missionMap = {
       'is_reco': false,
       'points': 5,
       'sont_points_en_poche': true,
-      'titre':
-          'Quel est un avantage de mélanger le compost avec le sol du jardin ?',
+      'titre': 'Quel est un avantage de mélanger le compost avec le sol du jardin ?',
       'type': 'quizz',
     },
     {
@@ -414,8 +317,7 @@ const missionMap = {
       'is_reco': false,
       'points': 5,
       'sont_points_en_poche': true,
-      'titre':
-          'Se poser les 4 questions essentielles avant de se lancer dans le compost',
+      'titre': 'Se poser les 4 questions essentielles avant de se lancer dans le compost',
       'type': 'defi',
     },
     {
@@ -454,8 +356,7 @@ const missionMap = {
       'is_reco': false,
       'points': 10,
       'sont_points_en_poche': false,
-      'titre':
-          'Réaliser une première expérience de compostage avec le marc de café ou le thé',
+      'titre': 'Réaliser une première expérience de compostage avec le marc de café ou le thé',
       'type': 'defi',
     },
     {
@@ -468,8 +369,7 @@ const missionMap = {
       'is_reco': true,
       'points': 15,
       'sont_points_en_poche': false,
-      'titre':
-          'Valoriser autrement vos déchets alimentaires avec une recette anti-gaspi',
+      'titre': 'Valoriser autrement vos déchets alimentaires avec une recette anti-gaspi',
       'type': 'defi',
     },
     {
@@ -482,8 +382,7 @@ const missionMap = {
       'is_reco': true,
       'points': 15,
       'sont_points_en_poche': false,
-      'titre':
-          'Partager vos conseils pour débuter le compostage aux habitants de Dole',
+      'titre': 'Partager vos conseils pour débuter le compostage aux habitants de Dole',
       'type': 'defi',
     },
   ],
@@ -498,8 +397,7 @@ const missionPartiallyAnswered = {
   'code': 'compost',
   'done_at': '2024-11-18T09:20:36.571Z',
   'id': '31',
-  'image_url':
-      'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1724937236/compost_6868eb1743.svg',
+  'image_url': 'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1724937236/compost_6868eb1743.svg',
   'is_new': false,
   'objectifs': [
     {
@@ -523,8 +421,7 @@ const missionPartiallyAnswered = {
       'is_reco': false,
       'points': 5,
       'sont_points_en_poche': true,
-      'titre':
-          'Quelles sont vos idées reçues ou freins concernant le compost ?',
+      'titre': 'Quelles sont vos idées reçues ou freins concernant le compost ?',
       'type': 'kyc',
     },
     {
@@ -560,8 +457,7 @@ const missionPartiallyAnswered = {
       'is_reco': false,
       'points': 5,
       'sont_points_en_poche': true,
-      'titre':
-          '3 conseils pour un compost réussi : équilibrer, aérer, humidifier',
+      'titre': '3 conseils pour un compost réussi : équilibrer, aérer, humidifier',
       'type': 'article',
     },
     {
@@ -573,8 +469,7 @@ const missionPartiallyAnswered = {
       'is_reco': false,
       'points': 5,
       'sont_points_en_poche': true,
-      'titre':
-          'Quel est un avantage de mélanger le compost avec le sol du jardin ?',
+      'titre': 'Quel est un avantage de mélanger le compost avec le sol du jardin ?',
       'type': 'quizz',
     },
     {
@@ -612,8 +507,7 @@ const missionPartiallyAnswered = {
       'is_reco': false,
       'points': 5,
       'sont_points_en_poche': true,
-      'titre':
-          'Se poser les 4 questions essentielles avant de se lancer dans le compost',
+      'titre': 'Se poser les 4 questions essentielles avant de se lancer dans le compost',
       'type': 'defi',
     },
     {
@@ -652,8 +546,7 @@ const missionPartiallyAnswered = {
       'is_reco': false,
       'points': 10,
       'sont_points_en_poche': false,
-      'titre':
-          'Réaliser une première expérience de compostage avec le marc de café ou le thé',
+      'titre': 'Réaliser une première expérience de compostage avec le marc de café ou le thé',
       'type': 'defi',
     },
     {
@@ -666,8 +559,7 @@ const missionPartiallyAnswered = {
       'is_reco': true,
       'points': 15,
       'sont_points_en_poche': false,
-      'titre':
-          'Valoriser autrement vos déchets alimentaires avec une recette anti-gaspi',
+      'titre': 'Valoriser autrement vos déchets alimentaires avec une recette anti-gaspi',
       'type': 'defi',
     },
     {
@@ -680,8 +572,7 @@ const missionPartiallyAnswered = {
       'is_reco': true,
       'points': 15,
       'sont_points_en_poche': false,
-      'titre':
-          'Partager vos conseils pour débuter le compostage aux habitants de Dole',
+      'titre': 'Partager vos conseils pour débuter le compostage aux habitants de Dole',
       'type': 'defi',
     },
   ],
@@ -696,16 +587,8 @@ const kyc = {
   'code': 'KYC_compost_pratique',
   'question': 'Comment valorisez-vous vos déchets alimentaires ?',
   'reponse_multiple': [
-    {
-      'code': 'compost_indiv',
-      'label': 'Avec un composteur individuel',
-      'selected': false,
-    },
-    {
-      'code': 'compost_collectif',
-      'label': 'Avec un composteur collectif',
-      'selected': true,
-    },
+    {'code': 'compost_indiv', 'label': 'Avec un composteur individuel', 'selected': false},
+    {'code': 'compost_collectif', 'label': 'Avec un composteur collectif', 'selected': true},
     {'code': 'aucun', 'label': 'Pas de valorisation', 'selected': false},
   ],
   'is_answered': true,
@@ -721,22 +604,10 @@ const kyc2 = {
   'question': 'Quelles sont vos motivations au sujet du compostage ?',
   'reponse_multiple': [
     {'code': 'apprendre', 'label': 'En apprendre davantage', 'selected': true},
-    {
-      'code': 'se_lancer',
-      'label': "Se lancer sans faire d'erreurs",
-      'selected': false,
-    },
+    {'code': 'se_lancer', 'label': "Se lancer sans faire d'erreurs", 'selected': false},
     {'code': 'pratique', 'label': 'Améliorer mes pratiques', 'selected': false},
-    {
-      'code': 'partager',
-      'label': 'Partager ma connaissance et expérience',
-      'selected': false,
-    },
-    {
-      'code': 'aide',
-      'label': 'Connaître la réglementation et les aides',
-      'selected': false,
-    },
+    {'code': 'partager', 'label': 'Partager ma connaissance et expérience', 'selected': false},
+    {'code': 'aide', 'label': 'Connaître la réglementation et les aides', 'selected': false},
     {'code': 'aucun', 'label': 'Aucun', 'selected': false},
   ],
   'is_answered': true,

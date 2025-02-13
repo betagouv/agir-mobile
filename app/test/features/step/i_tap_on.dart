@@ -7,12 +7,7 @@ import '../helper/finders.dart';
 /// Usage: I tap on {'Je crée mon compte'}
 Future<void> iTapOn(final WidgetTester tester, final String text) async {
   await mockNetworkImages(() async {
-    await tester.tap(
-      find.descendant(
-        of: find.byType(GestureDetector),
-        matching: findText(text),
-      ),
-    );
+    await tester.tap(find.descendant(of: find.byType(GestureDetector), matching: findText(text)));
     await tester.pumpAndSettle();
   });
 }

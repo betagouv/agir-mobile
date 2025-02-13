@@ -45,17 +45,12 @@ final class AideVeloState extends Equatable {
   final AideVeloStatut aideVeloStatut;
 
   bool get prixEstValide => prix > 0;
-  bool get codePostalEstValide =>
-      codePostal.isNotEmpty && codePostal.length == 5;
+  bool get codePostalEstValide => codePostal.isNotEmpty && codePostal.length == 5;
   bool get communeEstValide => commune.isNotEmpty;
   bool get nombreDePartsFiscalesEstValide => nombreDePartsFiscales > 0;
   bool get revenuFiscalEstValide => revenuFiscal != null && revenuFiscal! >= 0;
   bool get estValide =>
-      prixEstValide &&
-      codePostalEstValide &&
-      communeEstValide &&
-      nombreDePartsFiscalesEstValide &&
-      revenuFiscalEstValide;
+      prixEstValide && codePostalEstValide && communeEstValide && nombreDePartsFiscalesEstValide && revenuFiscalEstValide;
 
   final List<AideDisponiblesViewModel> aidesDisponibles;
 
@@ -79,8 +74,7 @@ final class AideVeloState extends Equatable {
     nombreDePartsFiscales: nombreDePartsFiscales ?? this.nombreDePartsFiscales,
     revenuFiscal: revenuFiscal ?? this.revenuFiscal,
     aidesDisponibles: aidesDisponibles ?? this.aidesDisponibles,
-    veutModifierLesInformations:
-        veutModifierLesInformations ?? this.veutModifierLesInformations,
+    veutModifierLesInformations: veutModifierLesInformations ?? this.veutModifierLesInformations,
     aideVeloStatut: aideVeloStatut ?? this.aideVeloStatut,
   );
 
@@ -100,11 +94,7 @@ final class AideVeloState extends Equatable {
 }
 
 class AideDisponiblesViewModel extends Equatable {
-  const AideDisponiblesViewModel({
-    required this.titre,
-    required this.montantTotal,
-    required this.aides,
-  });
+  const AideDisponiblesViewModel({required this.titre, required this.montantTotal, required this.aides});
 
   final String titre;
   final int? montantTotal;

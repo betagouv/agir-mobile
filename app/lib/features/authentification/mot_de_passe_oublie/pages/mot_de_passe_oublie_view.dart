@@ -15,30 +15,18 @@ class MotDePasseOublieView extends StatelessWidget {
 
   @override
   Widget build(final context) => FnvScaffold(
-    appBar: AppBar(
-      backgroundColor: FnvColors.homeBackground,
-      iconTheme: const IconThemeData(color: DsfrColors.blueFranceSun113),
-    ),
+    appBar: AppBar(backgroundColor: FnvColors.homeBackground, iconTheme: const IconThemeData(color: DsfrColors.blueFranceSun113)),
     body: ListView(
       padding: const EdgeInsets.all(paddingVerticalPage),
       children: [
-        const Text(
-          Localisation.motDePasseOublieTitre,
-          style: DsfrTextStyle.headline2(),
-        ),
+        const Text(Localisation.motDePasseOublieTitre, style: DsfrTextStyle.headline2()),
         const SizedBox(height: DsfrSpacings.s1w),
-        const Text(
-          Localisation.motDePasseOublieDetails,
-          style: DsfrTextStyle.bodyLg(),
-        ),
+        const Text(Localisation.motDePasseOublieDetails, style: DsfrTextStyle.bodyLg()),
         const SizedBox(height: DsfrSpacings.s3w),
         DsfrInput(
           label: Localisation.adresseEmail,
           hintText: Localisation.adresseEmailHint,
-          onChanged:
-              (final value) => context.read<MotDePasseOublieBloc>().add(
-                MotDePasseOublieEmailChange(value),
-              ),
+          onChanged: (final value) => context.read<MotDePasseOublieBloc>().add(MotDePasseOublieEmailChange(value)),
           autocorrect: false,
           keyboardType: TextInputType.emailAddress,
           autofillHints: const [AutofillHints.email],
@@ -55,9 +43,7 @@ class _Valider extends StatelessWidget {
 
   @override
   Widget build(final context) {
-    final emailEstValide = context.select<MotDePasseOublieBloc, bool>(
-      (final bloc) => bloc.state.emailEstValide,
-    );
+    final emailEstValide = context.select<MotDePasseOublieBloc, bool>((final bloc) => bloc.state.emailEstValide);
 
     return DsfrButton(
       label: Localisation.valider,
@@ -66,13 +52,8 @@ class _Valider extends StatelessWidget {
       onPressed:
           emailEstValide
               ? () async {
-                final bloc =
-                    context.read<MotDePasseOublieBloc>()
-                      ..add(const MotDePasseOublieValider());
-                await GoRouter.of(context).pushNamed(
-                  MotDePasseOublieCodePage.name,
-                  pathParameters: {'email': bloc.state.email},
-                );
+                final bloc = context.read<MotDePasseOublieBloc>()..add(const MotDePasseOublieValider());
+                await GoRouter.of(context).pushNamed(MotDePasseOublieCodePage.name, pathParameters: {'email': bloc.state.email});
               }
               : null,
     );

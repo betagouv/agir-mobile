@@ -16,12 +16,7 @@ abstract final class QuizMapper {
       reponses:
           responses
               .cast<Map<String, dynamic>>()
-              .map(
-                (final e) => QuizReponse(
-                  reponse: e['reponse'] as String,
-                  exact: e['exact'] as bool? ?? false,
-                ),
-              )
+              .map((final e) => QuizReponse(reponse: e['reponse'] as String, exact: e['exact'] as bool? ?? false))
               .toList(),
       points: json['points'] as int,
       explicationOk: question['explicationOk'] as String?,

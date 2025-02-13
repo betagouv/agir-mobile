@@ -34,10 +34,7 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
   final ProfilRepository _profilRepository;
   final AideVeloRepository _aideVeloRepository;
 
-  Future<void> _onInformationsDemandee(
-    final AideVeloInformationsDemandee event,
-    final Emitter<AideVeloState> emit,
-  ) async {
+  Future<void> _onInformationsDemandee(final AideVeloInformationsDemandee event, final Emitter<AideVeloState> emit) async {
     final result = await _profilRepository.recupererProfil();
     if (result.isRight()) {
       final informations = result.getRight().getOrElse(() => throw Exception());
@@ -58,10 +55,7 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
     }
   }
 
-  Future<void> _onModificationDemandee(
-    final AideVeloModificationDemandee event,
-    final Emitter<AideVeloState> emit,
-  ) async {
+  Future<void> _onModificationDemandee(final AideVeloModificationDemandee event, final Emitter<AideVeloState> emit) async {
     final result =
         state.codePostal.length == 5
             ? await _communesRepository.recupererLesCommunes(state.codePostal)
@@ -69,71 +63,42 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
 
     if (result.isRight()) {
       final communes = result.getRight().getOrElse(() => throw Exception());
-      emit(
-        state.copyWith(veutModifierLesInformations: true, communes: communes),
-      );
+      emit(state.copyWith(veutModifierLesInformations: true, communes: communes));
     }
   }
 
-  void _onPrixChange(
-    final AideVeloPrixChange event,
-    final Emitter<AideVeloState> emit,
-  ) {
+  void _onPrixChange(final AideVeloPrixChange event, final Emitter<AideVeloState> emit) {
     emit(state.copyWith(prix: event.valeur));
   }
 
-  void _onEtatChange(
-    final AideVeloEtatChange event,
-    final Emitter<AideVeloState> emit,
-  ) {
+  void _onEtatChange(final AideVeloEtatChange event, final Emitter<AideVeloState> emit) {
     emit(state.copyWith(etatVelo: event.valeur));
   }
 
-  Future<void> _onCodePostalChange(
-    final AideVeloCodePostalChange event,
-    final Emitter<AideVeloState> emit,
-  ) async {
+  Future<void> _onCodePostalChange(final AideVeloCodePostalChange event, final Emitter<AideVeloState> emit) async {
     final result =
         event.valeur.length == 5
             ? await _communesRepository.recupererLesCommunes(event.valeur)
             : Either<Exception, List<String>>.right(<String>[]);
     if (result.isRight()) {
       final communes = result.getRight().getOrElse(() => throw Exception());
-      emit(
-        state.copyWith(
-          codePostal: event.valeur,
-          communes: communes,
-          commune: communes.length == 1 ? communes.first : '',
-        ),
-      );
+      emit(state.copyWith(codePostal: event.valeur, communes: communes, commune: communes.length == 1 ? communes.first : ''));
     }
   }
 
-  void _onCommuneChange(
-    final AideVeloCommuneChange event,
-    final Emitter<AideVeloState> emit,
-  ) {
+  void _onCommuneChange(final AideVeloCommuneChange event, final Emitter<AideVeloState> emit) {
     emit(state.copyWith(commune: event.valeur));
   }
 
-  void _onNombreDePartsFiscalesChange(
-    final AideVeloNombreDePartsFiscalesChange event,
-    final Emitter<AideVeloState> emit,
-  ) {
+  void _onNombreDePartsFiscalesChange(final AideVeloNombreDePartsFiscalesChange event, final Emitter<AideVeloState> emit) {
     emit(state.copyWith(nombreDePartsFiscales: event.valeur));
   }
 
-  void _onRevenuFiscalChange(
-    final AideVeloRevenuFiscalChange event,
-    final Emitter<AideVeloState> emit,
-  ) {
+  void _onRevenuFiscalChange(final AideVeloRevenuFiscalChange event, final Emitter<AideVeloState> emit) {
     emit(state.copyWith(revenuFiscal: event.valeur));
   }
 
-  Future<void> _onEstimationDemandee(
-    final AideVeloEstimationDemandee event,
-    final Emitter<AideVeloState> emit,
-  ) async {
+  Future<void> _onEstimationDemandee(final AideVeloEstimationDemandee event, final Emitter<AideVeloState> emit) async {
     if (!state.estValide) {
       return;
     }

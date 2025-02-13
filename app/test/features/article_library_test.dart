@@ -78,10 +78,7 @@ void main() {
       await iTapOn(tester, 'Ma bibliothèque');
       await iTapOnTheFirstArticle(tester);
       await iSee(tester, "Qu'est-ce qu'une alimentation durable ?");
-      await iSee(
-        tester,
-        "Comment réduire l'impact de notre alimentation sur le climat ?",
-      );
+      await iSee(tester, "Comment réduire l'impact de notre alimentation sur le climat ?");
     });
   });
 }

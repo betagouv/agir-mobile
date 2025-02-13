@@ -45,8 +45,7 @@ final class MesInformationsAnneeChange extends MesInformationsEvent {
 }
 
 @immutable
-final class MesInformationsNombreDePartsFiscalesChange
-    extends MesInformationsEvent {
+final class MesInformationsNombreDePartsFiscalesChange extends MesInformationsEvent {
   const MesInformationsNombreDePartsFiscalesChange(this.valeur);
 
   final double valeur;

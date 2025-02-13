@@ -23,9 +23,8 @@ class EnvironmentalPerformanceQuestionPage extends StatelessWidget {
     path: path,
     name: name,
     builder:
-        (final context, final state) => EnvironmentalPerformanceQuestionPage(
-          number: int.parse(state.pathParameters['number'] ?? '1'),
-        ),
+        (final context, final state) =>
+            EnvironmentalPerformanceQuestionPage(number: int.parse(state.pathParameters['number'] ?? '1')),
   );
 
   final int number;
@@ -42,21 +41,12 @@ class _View extends StatelessWidget {
   @override
   Widget build(final context) => FnvScaffold(
     appBar: FnvAppBar(),
-    body: BlocBuilder<
-      EnvironmentalPerformanceQuestionBloc,
-      EnvironmentalPerformanceQuestionState
-    >(
+    body: BlocBuilder<EnvironmentalPerformanceQuestionBloc, EnvironmentalPerformanceQuestionState>(
       builder:
           (final context, final state) => switch (state) {
-            EnvironmentalPerformanceQuestionInitial() =>
-              const SizedBox.shrink(),
-            EnvironmentalPerformanceQuestionLoadSuccess() => _LoadSuccess(
-              state: state,
-              number: number,
-            ),
-            EnvironmentalPerformanceQuestionLoadFailure() => const Text(
-              'Erreur',
-            ),
+            EnvironmentalPerformanceQuestionInitial() => const SizedBox.shrink(),
+            EnvironmentalPerformanceQuestionLoadSuccess() => _LoadSuccess(state: state, number: number),
+            EnvironmentalPerformanceQuestionLoadFailure() => const Text('Erreur'),
           },
     ),
   );
@@ -84,10 +74,7 @@ class _LoadSuccessState extends State<_LoadSuccess> {
   @override
   Widget build(final context) => Column(
     children: [
-      FnvProgressBar(
-        current: widget.number,
-        total: widget.state.questionIdList.length,
-      ),
+      FnvProgressBar(current: widget.number, total: widget.state.questionIdList.length),
       Expanded(
         child: ListView(
           padding: const EdgeInsets.all(paddingVerticalPage),
@@ -97,17 +84,13 @@ class _LoadSuccessState extends State<_LoadSuccess> {
               controller: _mieuxVousConnaitreController,
               onSaved: () async {
                 if (widget.number == widget.state.questionIdList.length) {
-                  GoRouter.of(context).popUntilNumber(
-                    widget.state.questionIdList.length + 1,
-                    result: true,
-                  );
+                  GoRouter.of(context).popUntilNumber(widget.state.questionIdList.length + 1, result: true);
 
                   return;
                 }
-                await GoRouter.of(context).pushNamed(
-                  EnvironmentalPerformanceQuestionPage.name,
-                  pathParameters: {'number': '${widget.number + 1}'},
-                );
+                await GoRouter.of(
+                  context,
+                ).pushNamed(EnvironmentalPerformanceQuestionPage.name, pathParameters: {'number': '${widget.number + 1}'});
               },
             ),
             const SizedBox(height: DsfrSpacings.s3w),

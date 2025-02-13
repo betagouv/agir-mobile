@@ -10,29 +10,14 @@ void main() {
   group('Liste déroulante', () {
     testWidgets('Voir le label', (final tester) async {
       const label = 'Label';
-      await tester.pumpWidget(
-        App(
-          child: DsfrSelect(
-            label: label,
-            dropdownMenuEntries: const [],
-            onSelected: (final value) {},
-          ),
-        ),
-      );
+      await tester.pumpWidget(App(child: DsfrSelect(label: label, dropdownMenuEntries: const [], onSelected: (final value) {})));
       expect(find.text(label), findsOneWidget);
     });
 
     testWidgets('Voir la description', (final tester) async {
       const hint = 'Hint';
       await tester.pumpWidget(
-        App(
-          child: DsfrSelect(
-            label: 'Label',
-            hint: hint,
-            dropdownMenuEntries: const [],
-            onSelected: (final value) {},
-          ),
-        ),
+        App(child: DsfrSelect(label: 'Label', hint: hint, dropdownMenuEntries: const [], onSelected: (final value) {})),
       );
       expect(find.text(hint), findsOneWidget);
     });
@@ -54,9 +39,7 @@ void main() {
         ),
       );
 
-      await tester.tap(
-        find.byIcon(DsfrIcons.systemArrowDownSLine).hitTestable(),
-      );
+      await tester.tap(find.byIcon(DsfrIcons.systemArrowDownSLine).hitTestable());
       await tester.pump();
 
       await tester.tap(find.text(deux).hitTestable());

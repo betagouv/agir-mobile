@@ -9,16 +9,12 @@ class MesInformationsRevenuFiscal extends StatelessWidget {
 
   @override
   Widget build(final context) {
-    final revenuFiscal = context.select<MesInformationsBloc, int?>(
-      (final bloc) => bloc.state.revenuFiscal,
-    );
+    final revenuFiscal = context.select<MesInformationsBloc, int?>((final bloc) => bloc.state.revenuFiscal);
 
     return RevenuFiscalInput(
       initialValue: revenuFiscal,
       onChanged: (final value) {
-        context.read<MesInformationsBloc>().add(
-          MesInformationsRevenuFiscalChange(value),
-        );
+        context.read<MesInformationsBloc>().add(MesInformationsRevenuFiscalChange(value));
       },
     );
   }

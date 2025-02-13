@@ -4,44 +4,25 @@ import 'package:app/features/know_your_customer/detail/presentation/bloc/mieux_v
 import 'package:app/features/know_your_customer/detail/presentation/bloc/mieux_vous_connaitre_edit_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class MieuxVousConnaitreEditBloc
-    extends Bloc<MieuxVousConnaitreEditEvent, MieuxVousConnaitreEditState> {
-  MieuxVousConnaitreEditBloc({
-    required final MieuxVousConnaitreRepository mieuxVousConnaitreRepository,
-  }) : super(const MieuxVousConnaitreEditInitial()) {
-    on<MieuxVousConnaitreEditRecuperationDemandee>((
-      final event,
-      final emit,
-    ) async {
+class MieuxVousConnaitreEditBloc extends Bloc<MieuxVousConnaitreEditEvent, MieuxVousConnaitreEditState> {
+  MieuxVousConnaitreEditBloc({required final MieuxVousConnaitreRepository mieuxVousConnaitreRepository})
+    : super(const MieuxVousConnaitreEditInitial()) {
+    on<MieuxVousConnaitreEditRecuperationDemandee>((final event, final emit) async {
       emit(const MieuxVousConnaitreEditInitial());
-      final result = await mieuxVousConnaitreRepository.recupererQuestion(
-        id: event.id,
-      );
+      final result = await mieuxVousConnaitreRepository.recupererQuestion(id: event.id);
 
       result.fold(
-        (final l) => emit(
-          MieuxVousConnaitreEditError(id: event.id, error: l.toString()),
-        ),
-        (final r) => emit(
-          MieuxVousConnaitreEditLoaded(
-            question: r,
-            newQuestion: r,
-            updated: false,
-          ),
-        ),
+        (final l) => emit(MieuxVousConnaitreEditError(id: event.id, error: l.toString())),
+        (final r) => emit(MieuxVousConnaitreEditLoaded(question: r, newQuestion: r, updated: false)),
       );
     });
-    on<MieuxVousConnaitreEditChoixMultipleChangee>((
-      final event,
-      final emit,
-    ) async {
+    on<MieuxVousConnaitreEditChoixMultipleChangee>((final event, final emit) async {
       final aState = state;
       if (aState is MieuxVousConnaitreEditLoaded) {
         final question = aState.question;
         final newQuestion = aState.newQuestion;
 
-        if (question is QuestionMultipleChoice &&
-            newQuestion is QuestionMultipleChoice) {
+        if (question is QuestionMultipleChoice && newQuestion is QuestionMultipleChoice) {
           emit(
             MieuxVousConnaitreEditLoaded(
               question: question,
@@ -52,17 +33,13 @@ class MieuxVousConnaitreEditBloc
         }
       }
     });
-    on<MieuxVousConnaitreEditChoixUniqueChangee>((
-      final event,
-      final emit,
-    ) async {
+    on<MieuxVousConnaitreEditChoixUniqueChangee>((final event, final emit) async {
       final aState = state;
       if (aState is MieuxVousConnaitreEditLoaded) {
         final question = aState.question;
         final newQuestion = aState.newQuestion;
 
-        if (question is QuestionSingleChoice &&
-            newQuestion is QuestionSingleChoice) {
+        if (question is QuestionSingleChoice && newQuestion is QuestionSingleChoice) {
           emit(
             MieuxVousConnaitreEditLoaded(
               question: question,
@@ -112,16 +89,12 @@ class MieuxVousConnaitreEditBloc
         final question = aState.question;
         final newQuestion = aState.newQuestion;
 
-        if (question is QuestionMosaicBoolean &&
-            newQuestion is QuestionMosaicBoolean) {
+        if (question is QuestionMosaicBoolean && newQuestion is QuestionMosaicBoolean) {
           emit(
             MieuxVousConnaitreEditLoaded(
               question: question,
               newQuestion: newQuestion.changeResponses(
-                event.value
-                    .where((final e) => e.isSelected)
-                    .map((final e) => e.label)
-                    .toList(),
+                event.value.where((final e) => e.isSelected).map((final e) => e.label).toList(),
               ),
               updated: false,
             ),
@@ -134,33 +107,13 @@ class MieuxVousConnaitreEditBloc
       switch (aState) {
         case MieuxVousConnaitreEditLoaded():
           final newQuestion = aState.newQuestion;
-          final result = await mieuxVousConnaitreRepository.mettreAJour(
-            newQuestion,
-          );
-          result.fold(
-            (final l) => emit(
-              MieuxVousConnaitreEditError(
-                id: aState.question.id.value,
-                error: l.toString(),
-              ),
-            ),
-            (final r) {
-              emit(
-                MieuxVousConnaitreEditLoaded(
-                  question: newQuestion,
-                  newQuestion: newQuestion,
-                  updated: true,
-                ),
-              );
-              emit(
-                MieuxVousConnaitreEditLoaded(
-                  question: newQuestion,
-                  newQuestion: newQuestion,
-                  updated: false,
-                ),
-              );
-            },
-          );
+          final result = await mieuxVousConnaitreRepository.mettreAJour(newQuestion);
+          result.fold((final l) => emit(MieuxVousConnaitreEditError(id: aState.question.id.value, error: l.toString())), (
+            final r,
+          ) {
+            emit(MieuxVousConnaitreEditLoaded(question: newQuestion, newQuestion: newQuestion, updated: true));
+            emit(MieuxVousConnaitreEditLoaded(question: newQuestion, newQuestion: newQuestion, updated: false));
+          });
         default:
           return;
       }

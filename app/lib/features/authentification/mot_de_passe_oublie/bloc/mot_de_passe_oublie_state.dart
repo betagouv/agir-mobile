@@ -9,8 +9,7 @@ final class MotDePasseOublieState extends Equatable {
   final String email;
   bool get emailEstValide => mailRegex.hasMatch(email);
 
-  MotDePasseOublieState copyWith({final String? email}) =>
-      MotDePasseOublieState(email: email ?? this.email);
+  MotDePasseOublieState copyWith({final String? email}) => MotDePasseOublieState(email: email ?? this.email);
 
   @override
   List<Object> get props => [email];

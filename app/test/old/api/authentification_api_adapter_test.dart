@@ -20,38 +20,28 @@ import '../mocks/flutter_secure_storage_fake.dart';
 import 'constants.dart';
 
 void main() {
-  const informationDeConnexion = InformationDeConnexion(
-    adresseMail: 'test@example.com',
-    motDePasse: 'password123',
-  );
+  const informationDeConnexion = InformationDeConnexion(adresseMail: 'test@example.com', motDePasse: 'password123');
 
-  test(
-    "connexionDemandee envoie une requête POST à l'API avec les informations de connexion",
-    () async {
-      // Arrange.
-      final dio = DioMock()..postM(Endpoints.login);
+  test("connexionDemandee envoie une requête POST à l'API avec les informations de connexion", () async {
+    // Arrange.
+    final dio = DioMock()..postM(Endpoints.login);
 
-      final repository = AuthentificationRepository(
-        client: DioHttpClient(
-          dio: dio,
-          authenticationService: authenticationService,
-        ),
-        authenticationService: authenticationService,
-      );
+    final repository = AuthentificationRepository(
+      client: DioHttpClient(dio: dio, authenticationService: authenticationService),
+      authenticationService: authenticationService,
+    );
 
-      // Act.
-      await repository.connexionDemandee(informationDeConnexion);
+    // Act.
+    await repository.connexionDemandee(informationDeConnexion);
 
-      // Assert.
-      verify(
-        () => dio.post<dynamic>(
-          Endpoints.login,
-          data:
-              '{"email":"${informationDeConnexion.adresseMail}","mot_de_passe":"${informationDeConnexion.motDePasse}"}',
-        ),
-      );
-    },
-  );
+    // Assert.
+    verify(
+      () => dio.post<dynamic>(
+        Endpoints.login,
+        data: '{"email":"${informationDeConnexion.adresseMail}","mot_de_passe":"${informationDeConnexion.motDePasse}"}',
+      ),
+    );
+  });
 
   test('connexionDemandee avec un utilisateur non actif', () async {
     // Arrange.
@@ -65,10 +55,7 @@ void main() {
           ..postM(Endpoints.renvoyerCode);
 
     final repository = AuthentificationRepository(
-      client: DioHttpClient(
-        dio: dio,
-        authenticationService: authenticationService,
-      ),
+      client: DioHttpClient(dio: dio, authenticationService: authenticationService),
       authenticationService: authenticationService,
     );
 
@@ -76,12 +63,7 @@ void main() {
     await repository.connexionDemandee(informationDeConnexion);
 
     // Assert.
-    verify(
-      () => dio.post<dynamic>(
-        Endpoints.renvoyerCode,
-        data: '{"email":"${informationDeConnexion.adresseMail}"}',
-      ),
-    );
+    verify(() => dio.post<dynamic>(Endpoints.renvoyerCode, data: '{"email":"${informationDeConnexion.adresseMail}"}'));
   });
 
   test(
@@ -109,36 +91,20 @@ void main() {
         clock: Clock.fixed(DateTime(1992)),
       );
       final repository = AuthentificationRepository(
-        client: DioHttpClient(
-          dio: dio,
-          authenticationService: authenticationService,
-        ),
+        client: DioHttpClient(dio: dio, authenticationService: authenticationService),
         authenticationService: authenticationService,
       );
       await repository.connexionDemandee(informationDeConnexion);
 
       // Act.
-      await repository.validationDemandee(
-        const InformationDeCode(
-          adresseMail: 'test@example.com',
-          code: '123456',
-        ),
-      );
+      await repository.validationDemandee(const InformationDeCode(adresseMail: 'test@example.com', code: '123456'));
 
       // Assert.
       final actual = await flutterSecureStorage.readAll();
       expect(actual, {'token': token});
-      expect(
-        authenticationService.status,
-        const Authenticated(UserId(utilisateurId)),
-      );
+      expect(authenticationService.status, const Authenticated(UserId(utilisateurId)));
 
-      verify(
-        () => dio.post<dynamic>(
-          Endpoints.loginCode,
-          data: '{"code":"123456","email":"test@example.com"}',
-        ),
-      );
+      verify(() => dio.post<dynamic>(Endpoints.loginCode, data: '{"code":"123456","email":"test@example.com"}'));
     },
   );
 
@@ -149,10 +115,7 @@ void main() {
       final flutterSecureStorageMock = FlutterSecureStorageFake();
 
       final repository = AuthentificationRepository(
-        client: DioHttpClient(
-          dio: DioMock(),
-          authenticationService: authenticationService,
-        ),
+        client: DioHttpClient(dio: DioMock(), authenticationService: authenticationService),
         authenticationService: authenticationService,
       );
 
@@ -177,10 +140,7 @@ void main() {
         );
 
     final repository = AuthentificationRepository(
-      client: DioHttpClient(
-        dio: dio,
-        authenticationService: authenticationService,
-      ),
+      client: DioHttpClient(dio: dio, authenticationService: authenticationService),
       authenticationService: authenticationService,
     );
 
@@ -215,50 +175,29 @@ void main() {
       clock: Clock.fixed(DateTime(1992)),
     );
     final repository = AuthentificationRepository(
-      client: DioHttpClient(
-        dio: dio,
-        authenticationService: authenticationService,
-      ),
+      client: DioHttpClient(dio: dio, authenticationService: authenticationService),
       authenticationService: authenticationService,
     );
 
-    await repository.validationDemandee(
-      const InformationDeCode(adresseMail: 'test@example.com', code: '123456'),
-    );
+    await repository.validationDemandee(const InformationDeCode(adresseMail: 'test@example.com', code: '123456'));
 
     // Assert.
     expect(await flutterSecureStorageMock.readAll(), {'token': token});
-    expect(
-      authenticationService.status,
-      const Authenticated(UserId(utilisateurId)),
-    );
+    expect(authenticationService.status, const Authenticated(UserId(utilisateurId)));
 
-    verify(
-      () => dio.post<dynamic>(
-        Endpoints.validerCode,
-        data: '{"code":"123456","email":"test@example.com"}',
-      ),
-    );
+    verify(() => dio.post<dynamic>(Endpoints.validerCode, data: '{"code":"123456","email":"test@example.com"}'));
   });
 
   test('renvoyerCode', () async {
     final dio = DioMock()..postM(Endpoints.renvoyerCode);
 
     final repository = AuthentificationRepository(
-      client: DioHttpClient(
-        dio: dio,
-        authenticationService: authenticationService,
-      ),
+      client: DioHttpClient(dio: dio, authenticationService: authenticationService),
       authenticationService: authenticationService,
     );
 
     await repository.renvoyerCodeDemande('test@example.com');
-    verify(
-      () => dio.post<dynamic>(
-        Endpoints.renvoyerCode,
-        data: '{"email":"test@example.com"}',
-      ),
-    );
+    verify(() => dio.post<dynamic>(Endpoints.renvoyerCode, data: '{"email":"test@example.com"}'));
   });
 
   test('oubliMotDePasse', () async {
@@ -273,47 +212,29 @@ void main() {
         );
 
     final repository = AuthentificationRepository(
-      client: DioHttpClient(
-        dio: dio,
-        authenticationService: authenticationService,
-      ),
+      client: DioHttpClient(dio: dio, authenticationService: authenticationService),
       authenticationService: authenticationService,
     );
 
     await repository.oubliMotDePasse('test@example.com');
 
-    verify(
-      () => dio.post<dynamic>(
-        Endpoints.oubliMotDePasse,
-        data: '{"email":"test@example.com"}',
-      ),
-    );
+    verify(() => dio.post<dynamic>(Endpoints.oubliMotDePasse, data: '{"email":"test@example.com"}'));
   });
 
   test('modifierMotDePasse', () async {
-    final dio =
-        DioMock()
-          ..postM(Endpoints.modifierMotDePasse, statusCode: HttpStatus.created);
+    final dio = DioMock()..postM(Endpoints.modifierMotDePasse, statusCode: HttpStatus.created);
 
     final repository = AuthentificationRepository(
-      client: DioHttpClient(
-        dio: dio,
-        authenticationService: authenticationService,
-      ),
+      client: DioHttpClient(dio: dio, authenticationService: authenticationService),
       authenticationService: authenticationService,
     );
 
-    await repository.modifierMotDePasse(
-      email: 'test@example.com',
-      code: '123456',
-      motDePasse: 'password123',
-    );
+    await repository.modifierMotDePasse(email: 'test@example.com', code: '123456', motDePasse: 'password123');
 
     verify(
       () => dio.post<dynamic>(
         Endpoints.modifierMotDePasse,
-        data:
-            '{"code":"123456","email":"test@example.com","mot_de_passe":"password123"}',
+        data: '{"code":"123456","email":"test@example.com","mot_de_passe":"password123"}',
       ),
     );
   });

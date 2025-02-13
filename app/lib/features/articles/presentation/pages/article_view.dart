@@ -17,10 +17,9 @@ class ArticleView extends StatelessWidget {
   @override
   Widget build(final context) => BlocProvider(
     create:
-        (final context) => ArticleBloc(
-          articlesRepository: context.read(),
-          gamificationRepository: context.read(),
-        )..add(ArticleRecuperationDemandee(id)),
+        (final context) =>
+            ArticleBloc(articlesRepository: context.read(), gamificationRepository: context.read())
+              ..add(ArticleRecuperationDemandee(id)),
     child: const _Content(),
   );
 }
@@ -30,9 +29,7 @@ class _Content extends StatelessWidget {
 
   @override
   Widget build(final context) {
-    final article = context.select<ArticleBloc, Article>(
-      (final v) => v.state.article,
-    );
+    final article = context.select<ArticleBloc, Article>((final v) => v.state.article);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,23 +43,15 @@ class _Content extends StatelessWidget {
         FnvHtmlWidget(article.contenu),
         const SizedBox(height: DsfrSpacings.s2w),
         DsfrButton(
-          label:
-              article.isFavorite
-                  ? Localisation.retirerDesFavoris
-                  : Localisation.ajouterEnFavoris,
-          icon:
-              article.isFavorite
-                  ? DsfrIcons.healthHeartFill
-                  : DsfrIcons.healthHeartLine,
+          label: article.isFavorite ? Localisation.retirerDesFavoris : Localisation.ajouterEnFavoris,
+          icon: article.isFavorite ? DsfrIcons.healthHeartFill : DsfrIcons.healthHeartLine,
           iconLocation: DsfrButtonIconLocation.right,
           iconColor: article.isFavorite ? DsfrColors.redMarianneMain472 : null,
           variant: DsfrButtonVariant.tertiary,
           size: DsfrButtonSize.lg,
           onPressed:
               () => context.read<ArticleBloc>().add(
-                article.isFavorite
-                    ? const ArticleRemoveToFavoritesPressed()
-                    : const ArticleAddToFavoritesPressed(),
+                article.isFavorite ? const ArticleRemoveToFavoritesPressed() : const ArticleAddToFavoritesPressed(),
               ),
         ),
         if (article.partner != null) ...[
@@ -84,15 +73,10 @@ class _Content extends StatelessWidget {
                   TextSpan(
                     text: source.label,
                     children: const [
-                      WidgetSpan(
-                        alignment: PlaceholderAlignment.middle,
-                        child: Icon(DsfrIcons.systemExternalLinkLine, size: 14),
-                      ),
+                      WidgetSpan(alignment: PlaceholderAlignment.middle, child: Icon(DsfrIcons.systemExternalLinkLine, size: 14)),
                     ],
                   ),
-                  style: const DsfrTextStyle.bodySm().copyWith(
-                    decoration: TextDecoration.underline,
-                  ),
+                  style: const DsfrTextStyle.bodySm().copyWith(decoration: TextDecoration.underline),
                 ),
               ),
             ),

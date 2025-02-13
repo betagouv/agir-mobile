@@ -10,10 +10,6 @@ abstract final class ActionMapper {
     subTitle: json['sous_titre'] as String,
     why: json['pourquoi'] as String,
     how: json['comment'] as String,
-    services:
-        (json['services'] as List<dynamic>)
-            .cast<Map<String, dynamic>>()
-            .map(ActionServiceMapper.fromJson)
-            .toList(),
+    services: (json['services'] as List<dynamic>).cast<Map<String, dynamic>>().map(ActionServiceMapper.fromJson).toList(),
   );
 }

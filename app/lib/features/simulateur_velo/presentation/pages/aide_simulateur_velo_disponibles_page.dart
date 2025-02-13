@@ -21,13 +21,8 @@ class AideSimulateurVeloDisponiblePage extends StatelessWidget {
   static const name = 'aide-simulateur-velo-disponible';
   static const path = name;
 
-  static GoRoute get route => GoRoute(
-    path: path,
-    name: name,
-    builder:
-        (final context, final state) =>
-            const AideSimulateurVeloDisponiblePage(),
-  );
+  static GoRoute get route =>
+      GoRoute(path: path, name: name, builder: (final context, final state) => const AideSimulateurVeloDisponiblePage());
 
   @override
   Widget build(final context) {
@@ -40,10 +35,7 @@ class AideSimulateurVeloDisponiblePage extends StatelessWidget {
         children: [
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
-            child: Text(
-              Localisation.mesAidesDisponibles,
-              style: DsfrTextStyle.headline2(),
-            ),
+            child: Text(Localisation.mesAidesDisponibles, style: DsfrTextStyle.headline2()),
           ),
           const SizedBox(height: DsfrSpacings.s2w),
           if (state.aideVeloStatut == AideVeloStatut.chargement)
@@ -55,11 +47,7 @@ class AideSimulateurVeloDisponiblePage extends StatelessWidget {
                       .map(
                         (final e) => DsfrAccordion(
                           headerBuilder:
-                              (final isExpanded) => _Header(
-                                titre: e.titre,
-                                montantMax: e.montantTotal,
-                                isExpanded: isExpanded,
-                              ),
+                              (final isExpanded) => _Header(titre: e.titre, montantMax: e.montantTotal, isExpanded: isExpanded),
                           body: _Body(aides: e.aides),
                           isEnable: e.aides.isNotEmpty,
                         ),
@@ -72,26 +60,17 @@ class AideSimulateurVeloDisponiblePage extends StatelessWidget {
             child: Text.rich(
               TextSpan(
                 children: [
-                  const TextSpan(
-                    text: Localisation.propulsePar,
-                    style: DsfrTextStyle.bodyXsBold(),
-                  ),
+                  const TextSpan(text: Localisation.propulsePar, style: DsfrTextStyle.bodyXsBold()),
                   WidgetSpan(
                     alignment: PlaceholderAlignment.baseline,
                     baseline: TextBaseline.alphabetic,
-                    child: FnvSvg.asset(
-                      AssetImages.mesAidesVeloTexte,
-                      height: 9,
-                    ),
+                    child: FnvSvg.asset(AssetImages.mesAidesVeloTexte, height: 9),
                   ),
                   const WidgetSpan(child: SizedBox(width: DsfrSpacings.s1v)),
                   WidgetSpan(
                     alignment: PlaceholderAlignment.baseline,
                     baseline: TextBaseline.alphabetic,
-                    child: FnvSvg.asset(
-                      AssetImages.mesAidesVeloLogo,
-                      height: 9,
-                    ),
+                    child: FnvSvg.asset(AssetImages.mesAidesVeloLogo, height: 9),
                   ),
                 ],
               ),
@@ -112,11 +91,7 @@ class AideSimulateurVeloDisponiblePage extends StatelessWidget {
 }
 
 class _Header extends StatelessWidget {
-  const _Header({
-    required this.titre,
-    required this.montantMax,
-    required this.isExpanded,
-  });
+  const _Header({required this.titre, required this.montantMax, required this.isExpanded});
 
   final String titre;
   final int? montantMax;
@@ -128,31 +103,15 @@ class _Header extends StatelessWidget {
     child: Row(
       spacing: DsfrSpacings.s1w,
       children: [
-        Expanded(
-          child: Text(
-            titre,
-            style:
-                isExpanded
-                    ? const DsfrTextStyle.bodyMdBold()
-                    : const DsfrTextStyle.bodyMd(),
-          ),
-        ),
+        Expanded(child: Text(titre, style: isExpanded ? const DsfrTextStyle.bodyMdBold() : const DsfrTextStyle.bodyMd())),
         Text.rich(
           TextSpan(
             children:
                 montantMax == null
-                    ? [
-                      const TextSpan(
-                        text: Localisation.aucuneAideDisponible,
-                        style: DsfrTextStyle.bodyMdBold(),
-                      ),
-                    ]
+                    ? [const TextSpan(text: Localisation.aucuneAideDisponible, style: DsfrTextStyle.bodyMdBold())]
                     : [
                       const TextSpan(text: Localisation.jusqua),
-                      TextSpan(
-                        text: Localisation.euro(montantMax!),
-                        style: const DsfrTextStyle.bodyMdBold(),
-                      ),
+                      TextSpan(text: Localisation.euro(montantMax!), style: const DsfrTextStyle.bodyMdBold()),
                     ],
           ),
           style: const DsfrTextStyle.bodyMd(),
@@ -178,24 +137,14 @@ class _Body extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   spacing: DsfrSpacings.s1w,
                   children: [
-                    FnvImage.network(
-                      e.logo,
-                      width: DsfrSpacings.s7w,
-                      height: DsfrSpacings.s7w,
-                    ),
+                    FnvImage.network(e.logo, width: DsfrSpacings.s7w, height: DsfrSpacings.s7w),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         spacing: DsfrSpacings.s1v,
                         children: [
-                          Text(
-                            e.libelle,
-                            style: const DsfrTextStyle.bodyMdBold(),
-                          ),
-                          Text(
-                            e.description.trim(),
-                            style: const DsfrTextStyle.bodyXs(),
-                          ),
+                          Text(e.libelle, style: const DsfrTextStyle.bodyMdBold()),
+                          Text(e.description.trim(), style: const DsfrTextStyle.bodyXs()),
                           DsfrLink.sm(
                             label: Localisation.voirLesDemarches,
                             icon: DsfrIcons.systemExternalLinkFill,
@@ -205,10 +154,7 @@ class _Body extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Text(
-                      Localisation.euro(e.montant),
-                      style: const DsfrTextStyle.bodyMdBold(),
-                    ),
+                    Text(Localisation.euro(e.montant), style: const DsfrTextStyle.bodyMdBold()),
                   ],
                 ),
               ),

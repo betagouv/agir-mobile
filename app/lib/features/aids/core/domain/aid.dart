@@ -23,12 +23,5 @@ class Aid extends Equatable {
   final Partner? partner;
 
   @override
-  List<Object?> get props => [
-    title,
-    themeType,
-    content,
-    amountMax,
-    simulatorUrl,
-    partner,
-  ];
+  List<Object?> get props => [title, themeType, content, amountMax, simulatorUrl, partner];
 }

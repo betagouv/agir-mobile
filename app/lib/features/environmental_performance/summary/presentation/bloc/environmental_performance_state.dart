@@ -11,20 +11,17 @@ sealed class EnvironmentalPerformanceState extends Equatable {
 }
 
 @immutable
-final class EnvironmentalPerformanceInitial
-    extends EnvironmentalPerformanceState {
+final class EnvironmentalPerformanceInitial extends EnvironmentalPerformanceState {
   const EnvironmentalPerformanceInitial();
 }
 
 @immutable
-final class EnvironmentalPerformanceLoading
-    extends EnvironmentalPerformanceState {
+final class EnvironmentalPerformanceLoading extends EnvironmentalPerformanceState {
   const EnvironmentalPerformanceLoading();
 }
 
 @immutable
-final class EnvironmentalPerformanceSuccess
-    extends EnvironmentalPerformanceState {
+final class EnvironmentalPerformanceSuccess extends EnvironmentalPerformanceState {
   const EnvironmentalPerformanceSuccess({required this.data});
 
   final EnvironmentalPerformanceData data;
@@ -34,8 +31,7 @@ final class EnvironmentalPerformanceSuccess
 }
 
 @immutable
-final class EnvironmentalPerformanceFailure
-    extends EnvironmentalPerformanceState {
+final class EnvironmentalPerformanceFailure extends EnvironmentalPerformanceState {
   const EnvironmentalPerformanceFailure({required this.errorMessage});
 
   final String errorMessage;

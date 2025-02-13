@@ -30,15 +30,12 @@ void main() {
       await iSee(tester, 'Poire');
       await iDontSee(tester, 'Fraise');
     });
-    testWidgets(
-      '''Change the month to view different seasonal fruits and vegetables''',
-      (tester) async {
-        await bddSetUp(tester);
-        await iTapOn(tester, 'janvier');
-        await iTapOn(tester, 'juin');
-        await iSee(tester, 'Fraise');
-        await iDontSee(tester, 'Poire');
-      },
-    );
+    testWidgets('''Change the month to view different seasonal fruits and vegetables''', (tester) async {
+      await bddSetUp(tester);
+      await iTapOn(tester, 'janvier');
+      await iTapOn(tester, 'juin');
+      await iSee(tester, 'Fraise');
+      await iDontSee(tester, 'Poire');
+    });
   });
 }

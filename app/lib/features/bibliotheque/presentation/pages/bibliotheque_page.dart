@@ -13,32 +13,25 @@ class BibliothequePage extends StatelessWidget {
   static const name = 'bibliotheque';
   static const path = name;
 
-  static GoRoute get route => GoRoute(
-    path: path,
-    name: name,
-    builder: (final context, final state) => const BibliothequePage(),
-  );
+  static GoRoute get route => GoRoute(path: path, name: name, builder: (final context, final state) => const BibliothequePage());
 
   @override
   Widget build(final context) {
-    context.read<BibliothequeBloc>().add(
-      const BibliothequeRecuperationDemandee(),
-    );
+    context.read<BibliothequeBloc>().add(const BibliothequeRecuperationDemandee());
 
     return RootPage(
-      body:
-          BlocSelector<BibliothequeBloc, BibliothequeState, BibliothequeStatut>(
-            selector: (final state) => state.statut,
-            builder: (final context, final state) {
-              switch (state) {
-                case BibliothequeStatut.initial:
-                case BibliothequeStatut.chargement:
-                  return const Center(child: CircularProgressIndicator());
-                case BibliothequeStatut.succes:
-                  return const BibliothequeView();
-              }
-            },
-          ),
+      body: BlocSelector<BibliothequeBloc, BibliothequeState, BibliothequeStatut>(
+        selector: (final state) => state.statut,
+        builder: (final context, final state) {
+          switch (state) {
+            case BibliothequeStatut.initial:
+            case BibliothequeStatut.chargement:
+              return const Center(child: CircularProgressIndicator());
+            case BibliothequeStatut.succes:
+              return const BibliothequeView();
+          }
+        },
+      ),
     );
   }
 }

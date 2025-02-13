@@ -4,10 +4,7 @@ import 'package:app/core/error/domain/api_erreur.dart';
 import 'package:app/core/error/infrastructure/api_erreur_mapper.dart';
 import 'package:fpdart/fpdart.dart';
 
-Left<ApiErreur, Unit> handleError(
-  final String errorMessage, {
-  required final String defaultMessage,
-}) {
+Left<ApiErreur, Unit> handleError(final String errorMessage, {required final String defaultMessage}) {
   if (errorMessage.isEmpty) {
     return Left(ApiErreur(defaultMessage));
   }

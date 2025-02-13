@@ -5,11 +5,7 @@ import 'dart:ui';
 import 'package:flutter_test/flutter_test.dart';
 
 class DeviceInfo {
-  const DeviceInfo({
-    required this.devicePixelRatio,
-    required this.height,
-    required this.width,
-  });
+  const DeviceInfo({required this.devicePixelRatio, required this.height, required this.width});
 
   DeviceInfo.iPhone11() : this(devicePixelRatio: 2, height: 896, width: 414);
 

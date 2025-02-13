@@ -91,29 +91,21 @@ class FlutterSecureStorageFake implements FlutterSecureStorage {
   WebOptions get webOptions => throw UnimplementedError();
 
   @override
-  Future<bool?> isCupertinoProtectedDataAvailable() =>
-      throw UnimplementedError();
+  Future<bool?> isCupertinoProtectedDataAvailable() => throw UnimplementedError();
 
   @override
-  Stream<bool> get onCupertinoProtectedDataAvailabilityChanged =>
-      throw UnimplementedError();
+  Stream<bool> get onCupertinoProtectedDataAvailabilityChanged => throw UnimplementedError();
 
   @override
-  void registerListener({
-    required final String key,
-    required final ValueChanged<String?> listener,
-  }) => throw UnimplementedError();
+  void registerListener({required final String key, required final ValueChanged<String?> listener}) => throw UnimplementedError();
 
   @override
   void unregisterAllListeners() => throw UnimplementedError();
 
   @override
-  void unregisterAllListenersForKey({required final String key}) =>
-      throw UnimplementedError();
+  void unregisterAllListenersForKey({required final String key}) => throw UnimplementedError();
 
   @override
-  void unregisterListener({
-    required final String key,
-    required final ValueChanged<String?> listener,
-  }) => throw UnimplementedError();
+  void unregisterListener({required final String key, required final ValueChanged<String?> listener}) =>
+      throw UnimplementedError();
 }

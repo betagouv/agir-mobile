@@ -5,11 +5,7 @@ import 'package:dsfr/src/fondamentaux/spacing.g.dart';
 import 'package:flutter/material.dart';
 
 class DsfrModal extends StatelessWidget {
-  const DsfrModal({
-    super.key,
-    required this.isDismissible,
-    required this.child,
-  });
+  const DsfrModal({super.key, required this.isDismissible, required this.child});
 
   static Future<T?> showModal<T>({
     required final BuildContext context,
@@ -18,9 +14,7 @@ class DsfrModal extends StatelessWidget {
     final bool isDismissible = true,
   }) async => showModalBottomSheet<T>(
     context: context,
-    builder:
-        (final context) =>
-            DsfrModal(isDismissible: isDismissible, child: builder(context)),
+    builder: (final context) => DsfrModal(isDismissible: isDismissible, child: builder(context)),
     backgroundColor: Colors.transparent,
     elevation: 0,
     shape: const RoundedRectangleBorder(),

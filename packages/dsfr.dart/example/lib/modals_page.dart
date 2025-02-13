@@ -5,10 +5,7 @@ import 'package:flutter/material.dart';
 class ModalsPage extends StatelessWidget {
   const ModalsPage({super.key});
 
-  static final model = PageItem(
-    title: 'Modales',
-    pageBuilder: (final context) => const ModalsPage(),
-  );
+  static final model = PageItem(title: 'Modales', pageBuilder: (final context) => const ModalsPage());
 
   @override
   Widget build(final context) => ListView(
@@ -25,19 +22,13 @@ class ModalsPage extends StatelessWidget {
                 (final context) => Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const Text(
-                      'Veuillez confirmer la suppression du compte',
-                      style: DsfrTextStyle.headline4(),
-                    ),
+                    const Text('Veuillez confirmer la suppression du compte', style: DsfrTextStyle.headline4()),
                     const SizedBox(height: DsfrSpacings.s2w),
                     const Text(
                       'Voulez-vous vraiment supprimer votre compte ainsi que les données associées ?',
                       style: DsfrTextStyle.bodyMd(),
                     ),
-                    const Text(
-                      'Attention : Aucune donnée ne pourra être récupérée.',
-                      style: DsfrTextStyle.bodyMdBold(),
-                    ),
+                    const Text('Attention : Aucune donnée ne pourra être récupérée.', style: DsfrTextStyle.bodyMdBold()),
                     const SizedBox(height: DsfrSpacings.s4w),
                     DsfrButton(
                       label: 'Confirmer',

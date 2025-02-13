@@ -2,9 +2,7 @@ import 'package:app/core/domain/value_object.dart';
 
 class Footprint extends ValueObject<double> {
   Footprint(super.value)
-    : tonnesRepresentation = (value / 1000)
-          .toStringAsFixed(1)
-          .replaceAll('.', ','),
+    : tonnesRepresentation = (value / 1000).toStringAsFixed(1).replaceAll('.', ','),
       kilogramsRepresentation = value.toStringAsFixed(0).replaceAll('.', ','),
       percentageOfMaxFootprint = value / _maxCarbonFootprint;
 

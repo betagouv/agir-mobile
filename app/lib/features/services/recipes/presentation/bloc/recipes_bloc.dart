@@ -4,8 +4,7 @@ import 'package:app/features/services/recipes/presentation/bloc/recipes_state.da
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RecipesBloc extends Bloc<RecipesEvent, RecipesState> {
-  RecipesBloc({required final RecipesRepository repository})
-    : super(const RecipesInitial()) {
+  RecipesBloc({required final RecipesRepository repository}) : super(const RecipesInitial()) {
     on<RecipesLoadRequested>((final event, final emit) async {
       emit(const RecipesLoadInProgress());
       final result = await repository.fetch(category: event.category);

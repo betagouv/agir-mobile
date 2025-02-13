@@ -20,11 +20,7 @@ class AidPage extends StatelessWidget {
   static const name = 'aide';
   static const path = name;
 
-  static GoRoute get route => GoRoute(
-    path: path,
-    name: name,
-    builder: (final context, final state) => const AidPage(),
-  );
+  static GoRoute get route => GoRoute(path: path, name: name, builder: (final context, final state) => const AidPage());
 
   @override
   Widget build(final context) {
@@ -35,10 +31,7 @@ class AidPage extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(paddingVerticalPage),
         children: [
-          Align(
-            alignment: Alignment.centerLeft,
-            child: ThemeTypeTag(themeType: aid.themeType),
-          ),
+          Align(alignment: Alignment.centerLeft, child: ThemeTypeTag(themeType: aid.themeType)),
           const SizedBox(height: DsfrSpacings.s2w),
           Text(aid.title, style: const DsfrTextStyle.headline2()),
           if (aid.aUnSimulateur || aid.amountMax != null) ...[
@@ -48,11 +41,7 @@ class AidPage extends StatelessWidget {
               children: [
                 if (aid.amountMax != null)
                   DsfrTag.sm(
-                    label: TextSpan(
-                      text:
-                          Localisation.jusqua +
-                          Localisation.euro(aid.amountMax!),
-                    ),
+                    label: TextSpan(text: Localisation.jusqua + Localisation.euro(aid.amountMax!)),
                     backgroundColor: DsfrColors.purpleGlycine925Hover,
                     foregroundColor: const Color(0xFF432636),
                   ),
@@ -65,12 +54,8 @@ class AidPage extends StatelessWidget {
             DecoratedBox(
               decoration: const BoxDecoration(
                 color: Color(0xffeef2ff),
-                border: Border.fromBorderSide(
-                  BorderSide(color: Color(0xffb1b1ff)),
-                ),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(DsfrSpacings.s1v5),
-                ),
+                border: Border.fromBorderSide(BorderSide(color: Color(0xffb1b1ff))),
+                borderRadius: BorderRadius.all(Radius.circular(DsfrSpacings.s1v5)),
               ),
               child: PartnerWidget(partner: aid.partner!),
             ),
@@ -89,9 +74,7 @@ class AidPage extends StatelessWidget {
                   size: DsfrButtonSize.lg,
                   onPressed: () async {
                     if (aid.estSimulateurVelo) {
-                      await GoRouter.of(
-                        context,
-                      ).pushNamed(AideSimulateurVeloPage.name);
+                      await GoRouter.of(context).pushNamed(AideSimulateurVeloPage.name);
                     }
                   },
                 ),

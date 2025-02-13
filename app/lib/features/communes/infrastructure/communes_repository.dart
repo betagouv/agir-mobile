@@ -4,14 +4,11 @@ import 'package:app/core/infrastructure/http_client_helpers.dart';
 import 'package:fpdart/fpdart.dart';
 
 class CommunesRepository {
-  const CommunesRepository({required final DioHttpClient client})
-    : _client = client;
+  const CommunesRepository({required final DioHttpClient client}) : _client = client;
 
   final DioHttpClient _client;
 
-  Future<Either<Exception, List<String>>> recupererLesCommunes(
-    final String codePostal,
-  ) async {
+  Future<Either<Exception, List<String>>> recupererLesCommunes(final String codePostal) async {
     final response = await _client.get(Endpoints.communes(codePostal));
 
     return isResponseSuccessful(response.statusCode)

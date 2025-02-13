@@ -11,8 +11,7 @@ Future<void> iTapOnTheFirstArticle(final WidgetTester tester) async {
     responseData: {
       'content_id': '15',
       'titre': "Qu'est-ce qu'une alimentation durable ?",
-      'soustitre':
-          "Comment réduire l'impact de notre alimentation sur le climat ?",
+      'soustitre': "Comment réduire l'impact de notre alimentation sur le climat ?",
       'thematique_principale': 'alimentation',
       'thematique_principale_label': 'Me nourrir',
       'thematiques': ['alimentation'],
@@ -29,21 +28,16 @@ Future<void> iTapOnTheFirstArticle(final WidgetTester tester) async {
           'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1701947358/Logo_Ademe_2020_c234624ba3.jpg',
       'sources': [
         {
-          'label':
-              "Infographie ADEME - Impact de notre alimentation sur l'environnement",
-          'url':
-              'https://presse.ademe.fr/wp-content/uploads/2019/02/HAVAS_ADEME_infographie_SIA_vdef-1.pdf',
+          'label': "Infographie ADEME - Impact de notre alimentation sur l'environnement",
+          'url': 'https://presse.ademe.fr/wp-content/uploads/2019/02/HAVAS_ADEME_infographie_SIA_vdef-1.pdf',
         },
         {
-          'label':
-              "Infographie QQF - Vers une alimentation saine et durable : quelle est l'assiette idéale ?",
-          'url':
-              'https://www.qqf.fr/infographie/vers-une-alimentation-saine-et-durable-quelle-est-lassiette-ideale/',
+          'label': "Infographie QQF - Vers une alimentation saine et durable : quelle est l'assiette idéale ?",
+          'url': 'https://www.qqf.fr/infographie/vers-une-alimentation-saine-et-durable-quelle-est-lassiette-ideale/',
         },
         {
           'label': 'Nations Unies - Alimentation et changement climatique',
-          'url':
-              'https://www.un.org/fr/climatechange/science/climate-issues/food',
+          'url': 'https://www.un.org/fr/climatechange/science/climate-issues/food',
         },
       ],
     },

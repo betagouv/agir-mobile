@@ -72,8 +72,7 @@ class DsfrLinkForegroundColor extends WidgetStateColor {
   static const _disabled = DsfrColors.grey625;
 
   @override
-  Color resolve(final Set<WidgetState> states) =>
-      states.contains(WidgetState.disabled) ? _disabled : _default;
+  Color resolve(final Set<WidgetState> states) => states.contains(WidgetState.disabled) ? _disabled : _default;
 }
 
 class _DsfrLinkState extends State<DsfrLink> with MaterialStateMixin<DsfrLink> {
@@ -99,11 +98,7 @@ class _DsfrLinkState extends State<DsfrLink> with MaterialStateMixin<DsfrLink> {
       if (widget.icon != null) ...[
         WidgetSpan(
           alignment: PlaceholderAlignment.middle,
-          child: Icon(
-            widget.icon,
-            size: widget.iconSize,
-            color: resolveForegroundColor,
-          ),
+          child: Icon(widget.icon, size: widget.iconSize, color: resolveForegroundColor),
         ),
         const WidgetSpan(child: SizedBox(width: DsfrSpacings.s1w)),
       ],
@@ -130,10 +125,7 @@ class _DsfrLinkState extends State<DsfrLink> with MaterialStateMixin<DsfrLink> {
                       ? Border(
                         bottom: BorderSide(
                           color: resolveForegroundColor,
-                          width:
-                              isPressed || isHovered
-                                  ? widget.underlineThickness
-                                  : 1,
+                          width: isPressed || isHovered ? widget.underlineThickness : 1,
                         ),
                       )
                       : null,
@@ -141,12 +133,7 @@ class _DsfrLinkState extends State<DsfrLink> with MaterialStateMixin<DsfrLink> {
             child: DsfrFocusWidget(
               isFocused: isFocused,
               child: Text.rich(
-                TextSpan(
-                  children:
-                      widget.iconPosition == DsfrLinkIconPosition.start
-                          ? list
-                          : list.reversed.toList(),
-                ),
+                TextSpan(children: widget.iconPosition == DsfrLinkIconPosition.start ? list : list.reversed.toList()),
                 style: widget.textStyle.copyWith(color: resolveForegroundColor),
               ),
             ),

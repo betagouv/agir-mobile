@@ -16,10 +16,5 @@ class EnvironmentalPerformanceDetailItem extends Equatable {
   final List<EnvironmentalPerformanceDetailSubItem> subItems;
 
   @override
-  List<Object?> get props => [
-    emoji,
-    label,
-    footprintInKgOfCO2ePerYear,
-    subItems,
-  ];
+  List<Object?> get props => [emoji, label, footprintInKgOfCO2ePerYear, subItems];
 }

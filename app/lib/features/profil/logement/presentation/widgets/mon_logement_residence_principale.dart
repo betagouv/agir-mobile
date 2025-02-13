@@ -12,26 +12,20 @@ class MonLogementResidencePrincipale extends StatelessWidget {
 
   @override
   Widget build(final context) {
-    final typeDeLogement = context.select<MonLogementBloc, TypeDeLogement?>(
-      (final bloc) => bloc.state.typeDeLogement,
-    );
+    final typeDeLogement = context.select<MonLogementBloc, TypeDeLogement?>((final bloc) => bloc.state.typeDeLogement);
 
     return MonLogementTitreEtContenu(
       titre: Localisation.maResidencePrincipaleEst,
       contenu: DsfrRadioButtonSetHeadless(
         values: const {
-          TypeDeLogement.appartement: DsfrRadioButtonItem(
-            Localisation.unAppartement,
-          ),
+          TypeDeLogement.appartement: DsfrRadioButtonItem(Localisation.unAppartement),
           TypeDeLogement.maison: DsfrRadioButtonItem(Localisation.uneMaison),
         },
         onCallback: (final value) {
           if (value == null) {
             return;
           }
-          context.read<MonLogementBloc>().add(
-            MonLogementTypeDeLogementChange(value),
-          );
+          context.read<MonLogementBloc>().add(MonLogementTypeDeLogementChange(value));
         },
         initialValue: typeDeLogement,
       ),

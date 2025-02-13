@@ -9,10 +9,8 @@ import 'package:app/features/gamification/presentation/bloc/gamification_state.d
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GamificationBloc extends Bloc<GamificationEvent, GamificationState> {
-  GamificationBloc({
-    required final GamificationRepository repository,
-    required final AuthenticationService authenticationService,
-  }) : super(const GamificationState.empty()) {
+  GamificationBloc({required final GamificationRepository repository, required final AuthenticationService authenticationService})
+    : super(const GamificationState.empty()) {
     on<GamificationAuthentificationAChange>((final event, final emit) async {
       if (event.status is Authenticated) {
         await repository.refresh();
@@ -23,14 +21,8 @@ class GamificationBloc extends Bloc<GamificationEvent, GamificationState> {
 
       await emit.forEach<Gamification>(
         repository.gamification(),
-        onData:
-            (final data) => state.copyWith(
-              statut: GamificationStatut.succes,
-              points: data.points,
-            ),
-        onError:
-            (final _, final __) =>
-                state.copyWith(statut: GamificationStatut.erreur),
+        onData: (final data) => state.copyWith(statut: GamificationStatut.succes, points: data.points),
+        onError: (final _, final __) => state.copyWith(statut: GamificationStatut.erreur),
       );
     });
     _subscription = authenticationService.authenticationStatus.listen(

@@ -24,31 +24,21 @@ class KnowYourCustomersPage extends StatelessWidget {
   static const name = 'know_your_customers';
   static const path = name;
 
-  static GoRoute get route => GoRoute(
-    path: path,
-    name: name,
-    builder: (final context, final state) => const KnowYourCustomersPage(),
-  );
+  static GoRoute get route =>
+      GoRoute(path: path, name: name, builder: (final context, final state) => const KnowYourCustomersPage());
 
   @override
   Widget build(final context) => BlocProvider(
-    create:
-        (final context) =>
-            KnowYourCustomersBloc(repository: context.read())
-              ..add(const KnowYourCustomersStarted()),
+    create: (final context) => KnowYourCustomersBloc(repository: context.read())..add(const KnowYourCustomersStarted()),
     child: Builder(
       builder:
           (final context) => FnvScaffold(
             appBar: FnvAppBar(),
             body: ListView(
-              padding: const EdgeInsets.symmetric(
-                vertical: paddingVerticalPage,
-              ),
+              padding: const EdgeInsets.symmetric(vertical: paddingVerticalPage),
               children: [
                 const Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: paddingVerticalPage,
-                  ),
+                  padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
                   child: FnvTitle(title: Localisation.mieuxVousConnaitre),
                 ),
                 const SizedBox(height: DsfrSpacings.s3w),
@@ -56,15 +46,10 @@ class KnowYourCustomersPage extends StatelessWidget {
                   builder:
                       (final context, final state) => switch (state) {
                         KnowYourCustomersInitial() => const SizedBox.shrink(),
-                        KnowYourCustomersLoading() => const Center(
-                          child: CircularProgressIndicator(),
-                        ),
+                        KnowYourCustomersLoading() => const Center(child: CircularProgressIndicator()),
                         KnowYourCustomersSuccess() => _Success(state),
                         KnowYourCustomersFailure() => FnvFailureWidget(
-                          onPressed:
-                              () => context.read<KnowYourCustomersBloc>().add(
-                                const KnowYourCustomersStarted(),
-                              ),
+                          onPressed: () => context.read<KnowYourCustomersBloc>().add(const KnowYourCustomersStarted()),
                         ),
                       },
                 ),
@@ -89,13 +74,7 @@ class _Success extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: padding,
-          child: Text(
-            Localisation.lesCategories,
-            style: DsfrTextStyle.headline4(),
-          ),
-        ),
+        const Padding(padding: padding, child: Text(Localisation.lesCategories, style: DsfrTextStyle.headline4())),
         const SizedBox(height: DsfrSpacings.s2w),
         Padding(
           padding: padding,
@@ -104,15 +83,7 @@ class _Success extends StatelessWidget {
             runSpacing: DsfrSpacings.s1w,
             children:
                 [null, ...ThemeType.values]
-                    .map(
-                      (final e) => _Tag(
-                        thematique: e,
-                        isSelected: themeSelected.fold(
-                          () => e == null,
-                          (final s) => s == e,
-                        ),
-                      ),
-                    )
+                    .map((final e) => _Tag(thematique: e, isSelected: themeSelected.fold(() => e == null, (final s) => s == e)))
                     .toList(),
           ),
         ),
@@ -148,9 +119,7 @@ class _Tag extends StatelessWidget {
       child: InkWell(
         onTap:
             () => context.read<KnowYourCustomersBloc>().add(
-              KnowYourCustomersThemePressed(
-                thematique == null ? const None() : Some(thematique!),
-              ),
+              KnowYourCustomersThemePressed(thematique == null ? const None() : Some(thematique!)),
             ),
         borderRadius: borderRadius,
         child: DecoratedBox(
@@ -163,9 +132,7 @@ class _Tag extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
             child: Text(
               thematique?.displayName ?? Localisation.tout,
-              style: DsfrTextStyle.bodySmMedium(
-                color: isSelected ? Colors.white : blue,
-              ),
+              style: DsfrTextStyle.bodySmMedium(color: isSelected ? Colors.white : blue),
               semanticsLabel: thematique?.displayNameWithoutEmoji,
             ),
           ),
@@ -185,18 +152,15 @@ class _Item extends StatelessWidget {
     title: question.label,
     subTitle: question.responsesDisplay(),
     onTap: () async {
-      final result = await GoRouter.of(context).pushNamed<bool>(
-        MieuxVousConnaitreEditPage.name,
-        pathParameters: {'id': question.id.value},
-      );
+      final result = await GoRouter.of(
+        context,
+      ).pushNamed<bool>(MieuxVousConnaitreEditPage.name, pathParameters: {'id': question.id.value});
 
       if (result != true || !context.mounted) {
         return;
       }
 
-      context.read<KnowYourCustomersBloc>().add(
-        const KnowYourCustomersRefreshNeed(),
-      );
+      context.read<KnowYourCustomersBloc>().add(const KnowYourCustomersRefreshNeed());
     },
   );
 }

@@ -7,13 +7,7 @@ import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:collection/collection.dart';
 
 sealed class Question extends Entity<QuestionCode> {
-  const Question({
-    required super.id,
-    required this.theme,
-    required this.label,
-    required this.isAnswered,
-    required this.points,
-  });
+  const Question({required super.id, required this.theme, required this.label, required this.isAnswered, required this.points});
 
   final ThemeType theme;
   final String label;
@@ -121,24 +115,17 @@ final class QuestionSingleChoice extends QuestionMultiple {
   });
 
   @override
-  String responsesDisplay() =>
-      responses.firstWhereOrNull((final r) => r.isSelected)?.label ?? '';
+  String responsesDisplay() => responses.firstWhereOrNull((final r) => r.isSelected)?.label ?? '';
 
   @override
-  QuestionSingleChoice changeResponses(final List<String> values) =>
-      QuestionSingleChoice(
-        id: id,
-        theme: theme,
-        label: label,
-        isAnswered: isAnswered,
-        responses:
-            responses
-                .map(
-                  (final r) => r.copyWith(isSelected: values.contains(r.label)),
-                )
-                .toList(),
-        points: points,
-      );
+  QuestionSingleChoice changeResponses(final List<String> values) => QuestionSingleChoice(
+    id: id,
+    theme: theme,
+    label: label,
+    isAnswered: isAnswered,
+    responses: responses.map((final r) => r.copyWith(isSelected: values.contains(r.label))).toList(),
+    points: points,
+  );
 }
 
 final class QuestionMultipleChoice extends QuestionMultiple {
@@ -152,26 +139,17 @@ final class QuestionMultipleChoice extends QuestionMultiple {
   });
 
   @override
-  String responsesDisplay() => responses
-      .where((final r) => r.isSelected)
-      .map((final e) => e.label)
-      .join(' - ');
+  String responsesDisplay() => responses.where((final r) => r.isSelected).map((final e) => e.label).join(' - ');
 
   @override
-  QuestionMultipleChoice changeResponses(final List<String> values) =>
-      QuestionMultipleChoice(
-        id: id,
-        theme: theme,
-        label: label,
-        isAnswered: isAnswered,
-        responses:
-            responses
-                .map(
-                  (final r) => r.copyWith(isSelected: values.contains(r.label)),
-                )
-                .toList(),
-        points: points,
-      );
+  QuestionMultipleChoice changeResponses(final List<String> values) => QuestionMultipleChoice(
+    id: id,
+    theme: theme,
+    label: label,
+    isAnswered: isAnswered,
+    responses: responses.map((final r) => r.copyWith(isSelected: values.contains(r.label))).toList(),
+    points: points,
+  );
 }
 
 final class QuestionMosaicBoolean extends Question {
@@ -187,25 +165,16 @@ final class QuestionMosaicBoolean extends Question {
   final List<ResponseMosaic> responses;
 
   @override
-  String responsesDisplay() => responses
-      .where((final r) => r.isSelected)
-      .map((final e) => e.label)
-      .join(' - ');
+  String responsesDisplay() => responses.where((final r) => r.isSelected).map((final e) => e.label).join(' - ');
 
-  QuestionMosaicBoolean changeResponses(final List<String> values) =>
-      QuestionMosaicBoolean(
-        id: id,
-        theme: theme,
-        label: label,
-        isAnswered: isAnswered,
-        responses:
-            responses
-                .map(
-                  (final r) => r.copyWith(isSelected: values.contains(r.label)),
-                )
-                .toList(),
-        points: points,
-      );
+  QuestionMosaicBoolean changeResponses(final List<String> values) => QuestionMosaicBoolean(
+    id: id,
+    theme: theme,
+    label: label,
+    isAnswered: isAnswered,
+    responses: responses.map((final r) => r.copyWith(isSelected: values.contains(r.label))).toList(),
+    points: points,
+  );
 
   @override
   List<Object> get props => [...super.props, responses];

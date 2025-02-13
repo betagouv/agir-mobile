@@ -46,9 +46,7 @@ void main() {
     ielVoitLeTexte(formatCurrency(16000));
   });
 
-  testWidgets('Iel rempli ces informations et appuie sur mettre à jour', (
-    final tester,
-  ) async {
+  testWidgets('Iel rempli ces informations et appuie sur mettre à jour', (final tester) async {
     setUpWidgets(tester);
     await _allerSurMesInformations(tester);
     const nom = 'Nouveau nom';
@@ -58,28 +56,12 @@ void main() {
     const trancheValeur = 35000;
     ScenarioContext().dioMock!.patchM(Endpoints.profile);
     await ielEcritDansLeChamp(tester, label: Localisation.nom, enterText: nom);
-    await ielEcritDansLeChamp(
-      tester,
-      label: Localisation.prenom,
-      enterText: prenom,
-    );
-    await ielEcritDansLeChamp(
-      tester,
-      label: Localisation.anneeDeNaissance,
-      enterText: annee.toString(),
-    );
+    await ielEcritDansLeChamp(tester, label: Localisation.prenom, enterText: prenom);
+    await ielEcritDansLeChamp(tester, label: Localisation.anneeDeNaissance, enterText: annee.toString());
 
     await ielScrolle(tester, Localisation.revenuFiscal);
-    await ielEcritDansLeChamp(
-      tester,
-      label: Localisation.nombreDePartsFiscales,
-      enterText: nombreDePartsFiscales.toString(),
-    );
-    await ielEcritDansLeChamp(
-      tester,
-      label: Localisation.revenuFiscal,
-      enterText: trancheValeur.toString(),
-    );
+    await ielEcritDansLeChamp(tester, label: Localisation.nombreDePartsFiscales, enterText: nombreDePartsFiscales.toString());
+    await ielEcritDansLeChamp(tester, label: Localisation.revenuFiscal, enterText: trancheValeur.toString());
 
     await ielAppuieSur(tester, Localisation.mettreAJourMesInformations);
 

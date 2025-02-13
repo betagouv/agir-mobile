@@ -16,15 +16,10 @@ class FnvTitle extends StatelessWidget {
         data: title,
         styleSheet: MarkdownStyleSheet(
           p: const DsfrTextStyle.headline2(),
-          strong: const DsfrTextStyle.headline2(
-            color: DsfrColors.blueFranceSun113,
-          ),
+          strong: const DsfrTextStyle.headline2(color: DsfrColors.blueFranceSun113),
         ),
       ),
-      if (subtitle != null) ...[
-        const SizedBox(height: DsfrSpacings.s1v5),
-        Text(subtitle!, style: const DsfrTextStyle.bodyMd()),
-      ],
+      if (subtitle != null) ...[const SizedBox(height: DsfrSpacings.s1v5), Text(subtitle!, style: const DsfrTextStyle.bodyMd())],
       const SizedBox(height: DsfrSpacings.s2w),
       const DsfrDivider(
         width: DsfrSpacings.s4w,

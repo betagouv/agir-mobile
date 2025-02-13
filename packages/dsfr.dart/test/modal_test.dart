@@ -8,9 +8,7 @@ void main() {
   group('Modal', () {
     testWidgets('Voir le bouton fermer', (final tester) async {
       const buttonLabel = 'Button';
-      await tester.pumpWidget(
-        const App(child: _Modal(buttonLabel: buttonLabel)),
-      );
+      await tester.pumpWidget(const App(child: _Modal(buttonLabel: buttonLabel)));
       final closeText = find.text('Fermer');
       expect(closeText, findsNothing);
       await tester.tap(find.text(buttonLabel));
@@ -33,11 +31,6 @@ class _Modal extends StatelessWidget {
     label: buttonLabel,
     variant: DsfrButtonVariant.primary,
     size: DsfrButtonSize.lg,
-    onPressed:
-        () async => DsfrModal.showModal(
-          context: context,
-          builder: (final context) => const SizedBox(),
-          name: 'name',
-        ),
+    onPressed: () async => DsfrModal.showModal(context: context, builder: (final context) => const SizedBox(), name: 'name'),
   );
 }

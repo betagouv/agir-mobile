@@ -15,10 +15,7 @@ class RecipeHorizontalList extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => BlocProvider(
-    create:
-        (final context) =>
-            RecipesBloc(repository: context.read())
-              ..add(RecipesLoadRequested(category)),
+    create: (final context) => RecipesBloc(repository: context.read())..add(RecipesLoadRequested(category)),
     child: const _Part(),
   );
 }
@@ -27,16 +24,13 @@ class _Part extends StatelessWidget {
   const _Part();
 
   @override
-  Widget build(final BuildContext context) =>
-      BlocBuilder<RecipesBloc, RecipesState>(
-        builder:
-            (final context, final state) => switch (state) {
-              RecipesInitial() ||
-              RecipesLoadInProgress() ||
-              RecipesLoadFailure() => const SizedBox(),
-              RecipesLoadSuccess() => _Success(state: state),
-            },
-      );
+  Widget build(final BuildContext context) => BlocBuilder<RecipesBloc, RecipesState>(
+    builder:
+        (final context, final state) => switch (state) {
+          RecipesInitial() || RecipesLoadInProgress() || RecipesLoadFailure() => const SizedBox(),
+          RecipesLoadSuccess() => _Success(state: state),
+        },
+  );
 }
 
 class _Success extends StatelessWidget {
@@ -80,19 +74,11 @@ class _Success extends StatelessWidget {
                               children: [
                                 DecoratedBox(
                                   decoration: const BoxDecoration(
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(DsfrSpacings.s1w),
-                                    ),
+                                    borderRadius: BorderRadius.all(Radius.circular(DsfrSpacings.s1w)),
                                   ),
                                   child: FnvImage.network(e.imageUrl),
                                 ),
-                                Expanded(
-                                  child: Text(
-                                    e.title,
-                                    style: const DsfrTextStyle.bodyMdBold(),
-                                    maxLines: 3,
-                                  ),
-                                ),
+                                Expanded(child: Text(e.title, style: const DsfrTextStyle.bodyMdBold(), maxLines: 3)),
                                 const SizedBox(height: DsfrSpacings.s1w),
                                 Row(
                                   spacing: DsfrSpacings.s1v,
@@ -100,19 +86,12 @@ class _Success extends StatelessWidget {
                                     Flexible(
                                       child: DsfrTag.sm(
                                         label: TextSpan(text: e.difficulty),
-                                        backgroundColor: const Color(
-                                          0xffEAEAEA,
-                                        ),
-                                        foregroundColor: const Color(
-                                          0xff3F3F3F,
-                                        ),
-                                        textStyle:
-                                            const DsfrTextStyle.bodyXsMedium(),
+                                        backgroundColor: const Color(0xffEAEAEA),
+                                        foregroundColor: const Color(0xff3F3F3F),
+                                        textStyle: const DsfrTextStyle.bodyXsMedium(),
                                       ),
                                     ),
-                                    _EstimadedTimedInfo(
-                                      text: '${e.preparationTime} min',
-                                    ),
+                                    _EstimadedTimedInfo(text: '${e.preparationTime} min'),
                                   ],
                                 ),
                               ],
@@ -141,13 +120,8 @@ class _EstimadedTimedInfo extends StatelessWidget {
     return Text.rich(
       TextSpan(
         children: [
-          const WidgetSpan(
-            child: Icon(DsfrIcons.systemTimerLine, size: 15, color: color),
-          ),
-          TextSpan(
-            text: text,
-            style: const DsfrTextStyle.bodyXsMedium(color: color),
-          ),
+          const WidgetSpan(child: Icon(DsfrIcons.systemTimerLine, size: 15, color: color)),
+          TextSpan(text: text, style: const DsfrTextStyle.bodyXsMedium(color: color)),
         ],
       ),
     );

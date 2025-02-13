@@ -8,18 +8,14 @@ import 'package:app/features/know_your_customer/core/infrastructure/question_map
 import 'package:fpdart/fpdart.dart';
 
 class EnvironmentalPerformanceSummaryRepository {
-  const EnvironmentalPerformanceSummaryRepository({
-    required final DioHttpClient client,
-  }) : _client = client;
+  const EnvironmentalPerformanceSummaryRepository({required final DioHttpClient client}) : _client = client;
 
   final DioHttpClient _client;
 
   Future<Either<Exception, EnvironmentalPerformanceData>> fetch() async {
     final response = await _client.get(Endpoints.bilan);
     if (isResponseUnsuccessful(response.statusCode)) {
-      return Left(
-        Exception('Erreur lors de la récupération du bilan environnemental'),
-      );
+      return Left(Exception('Erreur lors de la récupération du bilan environnemental'));
     }
 
     final data = response.data! as Map<String, dynamic>;
@@ -28,21 +24,13 @@ class EnvironmentalPerformanceSummaryRepository {
   }
 
   Future<Either<Exception, List<Question>>> fetchMiniBilan() async {
-    final response = await _client.get(
-      Endpoints.questions('ENCHAINEMENT_KYC_mini_bilan_carbone'),
-    );
+    final response = await _client.get(Endpoints.questions('ENCHAINEMENT_KYC_mini_bilan_carbone'));
     if (isResponseUnsuccessful(response.statusCode)) {
       return Left(Exception('Erreur lors de la récupération du mini bilan'));
     }
 
     final data = response.data! as List<dynamic>;
 
-    return Right(
-      data
-          .map((final e) => e as Map<String, dynamic>)
-          .map(QuestionMapper.fromJson)
-          .whereType<Question>()
-          .toList(),
-    );
+    return Right(data.map((final e) => e as Map<String, dynamic>).map(QuestionMapper.fromJson).whereType<Question>().toList());
   }
 }

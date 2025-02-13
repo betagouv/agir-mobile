@@ -6,13 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
   ThemeBloc({required final ThemeRepository themeRepository})
-    : super(
-        const ThemeState(
-          themeType: ThemeType.alimentation,
-          missions: [],
-          services: [],
-        ),
-      ) {
+    : super(const ThemeState(themeType: ThemeType.alimentation, missions: [], services: [])) {
     on<ThemeRecuperationDemandee>((final event, final emit) async {
       final themeType = event.themeType;
       final missionsResult = await themeRepository.getMissions(themeType);
@@ -21,13 +15,7 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
         (final l) {},
         (final missions) => servicesResult.fold(
           (final l) {},
-          (final services) => emit(
-            state.copyWith(
-              themeType: themeType,
-              missions: missions,
-              services: services,
-            ),
-          ),
+          (final services) => emit(state.copyWith(themeType: themeType, missions: missions, services: services)),
         ),
       );
     });

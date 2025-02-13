@@ -6,29 +6,19 @@ import 'package:flutter/material.dart';
 
 @immutable
 class DsfrButtonForegroundColor extends WidgetStateColor {
-  DsfrButtonForegroundColor({
-    required final Color $default,
-    required final Color disabled,
-  }) : _default = $default,
-       _disabled = disabled,
-       super($default.value);
+  DsfrButtonForegroundColor({required final Color $default, required final Color disabled})
+    : _default = $default,
+      _disabled = disabled,
+      super($default.value);
 
-  factory DsfrButtonForegroundColor.fromVariant(
-    final DsfrButtonVariant variant,
-  ) {
+  factory DsfrButtonForegroundColor.fromVariant(final DsfrButtonVariant variant) {
     switch (variant) {
       case DsfrButtonVariant.primary:
-        return DsfrButtonForegroundColor(
-          $default: DsfrColors.blueFrance975,
-          disabled: DsfrColors.grey625,
-        );
+        return DsfrButtonForegroundColor($default: DsfrColors.blueFrance975, disabled: DsfrColors.grey625);
       case DsfrButtonVariant.secondary:
       case DsfrButtonVariant.tertiary:
       case DsfrButtonVariant.tertiaryWithouBorder:
-        return DsfrButtonForegroundColor(
-          $default: DsfrColors.blueFranceSun113,
-          disabled: DsfrColors.grey625,
-        );
+        return DsfrButtonForegroundColor($default: DsfrColors.blueFranceSun113, disabled: DsfrColors.grey625);
     }
   }
 
@@ -36,8 +26,7 @@ class DsfrButtonForegroundColor extends WidgetStateColor {
   final Color _disabled;
 
   @override
-  Color resolve(final Set<WidgetState> states) =>
-      states.contains(WidgetState.disabled) ? _disabled : _default;
+  Color resolve(final Set<WidgetState> states) => states.contains(WidgetState.disabled) ? _disabled : _default;
 
   @override
   bool operator ==(final Object other) =>

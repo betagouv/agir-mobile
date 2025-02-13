@@ -13,10 +13,7 @@ import '../helper/package_info_fake.dart';
 Future<void> initializeContext(final WidgetTester tester) async {
   FeatureContext.reset();
   FeatureContext.instance.secureStorage = FlutterSecureStorageFake();
-  FeatureContext.instance.packageInfo = const PackageInfoFake(
-    version: '1.2.3',
-    buildNumber: '4',
-  );
+  FeatureContext.instance.packageInfo = const PackageInfoFake(version: '1.2.3', buildNumber: '4');
   FeatureContext.instance.dioMock = DioMock();
   setNotification();
   setFirstName();
@@ -43,8 +40,7 @@ void setNotification() {
   FeatureContext.instance.dioMock.putM(Endpoints.notificationToken);
 }
 
-void setFirstName() =>
-    FeatureContext.instance.dioMock.patchM(Endpoints.profile);
+void setFirstName() => FeatureContext.instance.dioMock.patchM(Endpoints.profile);
 
 void setProfile() {
   FeatureContext.instance.dioMock.getM(
@@ -64,29 +60,17 @@ void setProfile() {
   FeatureContext.instance.dioMock.patchM(Endpoints.profile);
 }
 
-void setLogement() =>
-    FeatureContext.instance.dioMock.patchM(Endpoints.logement);
+void setLogement() => FeatureContext.instance.dioMock.patchM(Endpoints.logement);
 
-void setBilanEmpty() => FeatureContext.instance.dioMock.getM(
-  Endpoints.bilan,
-  responseData: environmentalPerformanceEmptyData,
-);
+void setBilanEmpty() => FeatureContext.instance.dioMock.getM(Endpoints.bilan, responseData: environmentalPerformanceEmptyData);
 
-void setMiniBilan() => FeatureContext.instance.dioMock.getM(
-  Endpoints.questions('ENCHAINEMENT_KYC_mini_bilan_carbone'),
-  responseData: miniBilan,
-);
+void setMiniBilan() =>
+    FeatureContext.instance.dioMock.getM(Endpoints.questions('ENCHAINEMENT_KYC_mini_bilan_carbone'), responseData: miniBilan);
 
-void setMissionRecommanded() => FeatureContext.instance.dioMock.getM(
-  Endpoints.missionsRecommandees,
-  responseData: <dynamic>[],
-);
+void setMissionRecommanded() => FeatureContext.instance.dioMock.getM(Endpoints.missionsRecommandees, responseData: <dynamic>[]);
 
 void setMissionRecommandedByThematique() =>
-    FeatureContext.instance.dioMock.getM(
-      Endpoints.missionsRecommandeesParThematique('alimentation'),
-      responseData: <dynamic>[],
-    );
+    FeatureContext.instance.dioMock.getM(Endpoints.missionsRecommandeesParThematique('alimentation'), responseData: <dynamic>[]);
 
 void setAssistances() => FeatureContext.instance.dioMock.getM(
   Endpoints.aids,
@@ -117,10 +101,7 @@ void setAssistances() => FeatureContext.instance.dioMock.getM(
   },
 );
 
-void setPoints() => FeatureContext.instance.dioMock.getM(
-  Endpoints.gamification,
-  responseData: {'points': 650},
-);
+void setPoints() => FeatureContext.instance.dioMock.getM(Endpoints.gamification, responseData: {'points': 650});
 
 void setPreferences() =>
     FeatureContext.instance.dioMock
@@ -128,30 +109,13 @@ void setPreferences() =>
         Endpoints.questionKyc('KYC_preference'),
         responseData: {
           'code': 'KYC_preference',
-          'question':
-              'Sur quels thèmes recherchez-vous en priorité des aides et conseils ?',
+          'question': 'Sur quels thèmes recherchez-vous en priorité des aides et conseils ?',
           'reponse_multiple': [
-            {
-              'code': 'alimentation',
-              'label': 'La cuisine et l’alimentation',
-              'selected': false,
-            },
-            {
-              'code': 'transport',
-              'label': 'Mes déplacements',
-              'selected': false,
-            },
+            {'code': 'alimentation', 'label': 'La cuisine et l’alimentation', 'selected': false},
+            {'code': 'transport', 'label': 'Mes déplacements', 'selected': false},
             {'code': 'logement', 'label': 'Mon logement', 'selected': false},
-            {
-              'code': 'consommation',
-              'label': 'Ma consommation',
-              'selected': false,
-            },
-            {
-              'code': 'ne_sais_pas',
-              'label': 'Je ne sais pas encore',
-              'selected': false,
-            },
+            {'code': 'consommation', 'label': 'Ma consommation', 'selected': false},
+            {'code': 'ne_sais_pas', 'label': 'Je ne sais pas encore', 'selected': false},
           ],
           'is_answered': true,
           'categorie': 'recommandation',
@@ -163,8 +127,7 @@ void setPreferences() =>
       )
       ..putM(Endpoints.questionKyc('KYC_preference'));
 
-void setDeleteAccount() =>
-    FeatureContext.instance.dioMock.deleteM(Endpoints.utilisateur);
+void setDeleteAccount() => FeatureContext.instance.dioMock.deleteM(Endpoints.utilisateur);
 
 void setForgotPassword() =>
     FeatureContext.instance.dioMock
@@ -194,20 +157,11 @@ void setCommunes() => FeatureContext.instance.dioMock.getM(
 
 void setChallenges() =>
     FeatureContext.instance.dioMock
-      ..getM(
-        '/utilisateurs/%7BuserId%7D/defis_v2?status=en_cours',
-        responseData: <dynamic>[],
-      )
-      ..getM(
-        '/utilisateurs/%7BuserId%7D/defis_v2?status=en_cours&thematique=alimentation',
-        responseData: <dynamic>[],
-      );
+      ..getM('/utilisateurs/%7BuserId%7D/defis_v2?status=en_cours', responseData: <dynamic>[])
+      ..getM('/utilisateurs/%7BuserId%7D/defis_v2?status=en_cours&thematique=alimentation', responseData: <dynamic>[]);
 
 void setRecommandations() =>
-    FeatureContext.instance.dioMock..getM(
-      Endpoints.recommandationsParThematique('alimentation'),
-      responseData: <dynamic>[],
-    );
+    FeatureContext.instance.dioMock..getM(Endpoints.recommandationsParThematique('alimentation'), responseData: <dynamic>[]);
 
 void setServices() =>
     FeatureContext.instance.dioMock

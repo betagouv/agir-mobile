@@ -5,10 +5,7 @@ import 'package:flutter/material.dart';
 class TogglesPage extends StatefulWidget {
   const TogglesPage({super.key});
 
-  static final model = PageItem(
-    title: 'Interrupteur',
-    pageBuilder: (final context) => const TogglesPage(),
-  );
+  static final model = PageItem(title: 'Interrupteur', pageBuilder: (final context) => const TogglesPage());
 
   @override
   State<TogglesPage> createState() => _TogglesPageState();

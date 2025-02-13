@@ -35,7 +35,6 @@ final class QuestionCommuneAChange extends QuestionCodePostalEvent {
 }
 
 @immutable
-final class QuestionCodePostalMiseAJourDemandee
-    extends QuestionCodePostalEvent {
+final class QuestionCodePostalMiseAJourDemandee extends QuestionCodePostalEvent {
   const QuestionCodePostalMiseAJourDemandee();
 }

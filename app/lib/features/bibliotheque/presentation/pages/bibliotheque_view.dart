@@ -30,10 +30,7 @@ class BibliothequeView extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: padding),
           sliver: SliverList.list(
             children: const [
-              FnvTitle(
-                title: Localisation.bibliotheque,
-                subtitle: Localisation.bibliothequeSousTitre,
-              ),
+              FnvTitle(title: Localisation.bibliotheque, subtitle: Localisation.bibliothequeSousTitre),
               SizedBox(height: DsfrSpacings.s3w),
               _ChampRecherche(),
               SizedBox(height: DsfrSpacings.s1w),
@@ -46,13 +43,8 @@ class BibliothequeView extends StatelessWidget {
             ],
           ),
         ),
-        const SliverPadding(
-          padding: EdgeInsets.symmetric(horizontal: padding),
-          sliver: _SliverListe(),
-        ),
-        const SliverSafeArea(
-          sliver: SliverPadding(padding: EdgeInsets.only(bottom: padding)),
-        ),
+        const SliverPadding(padding: EdgeInsets.symmetric(horizontal: padding), sliver: _SliverListe()),
+        const SliverSafeArea(sliver: SliverPadding(padding: EdgeInsets.only(bottom: padding))),
       ],
     );
   }
@@ -64,13 +56,8 @@ class _Favorites extends StatelessWidget {
   @override
   Widget build(final context) => DsfrToggleSwitch(
     label: Localisation.mesFavoris,
-    value: context.select<BibliothequeBloc, bool>(
-      (final value) => value.state.isFavorites,
-    ),
-    onChanged:
-        (final value) => context.read<BibliothequeBloc>().add(
-          BibliothequeFavorisSelectionnee(value),
-        ),
+    value: context.select<BibliothequeBloc, bool>((final value) => value.state.isFavorites),
+    onChanged: (final value) => context.read<BibliothequeBloc>().add(BibliothequeFavorisSelectionnee(value)),
   );
 }
 
@@ -79,9 +66,7 @@ class _Thematiques extends StatelessWidget {
 
   @override
   Widget build(final context) {
-    final filtres = context.select<BibliothequeBloc, List<BibliothequeFiltre>>(
-      (final value) => value.state.bibliotheque.filtres,
-    );
+    final filtres = context.select<BibliothequeBloc, List<BibliothequeFiltre>>((final value) => value.state.bibliotheque.filtres);
     const s1w = DsfrSpacings.s1w;
 
     return Wrap(
@@ -89,24 +74,14 @@ class _Thematiques extends StatelessWidget {
       runSpacing: s1w,
       children:
           filtres
-              .map(
-                (final thematique) => _Tag(
-                  label: thematique.titre,
-                  thematique: thematique.code,
-                  choisi: thematique.choisi,
-                ),
-              )
+              .map((final thematique) => _Tag(label: thematique.titre, thematique: thematique.code, choisi: thematique.choisi))
               .toList(),
     );
   }
 }
 
 class _Tag extends StatefulWidget {
-  const _Tag({
-    required this.label,
-    required this.thematique,
-    required this.choisi,
-  });
+  const _Tag({required this.label, required this.thematique, required this.choisi});
 
   final String label;
   final String thematique;
@@ -132,10 +107,7 @@ class _TagState extends State<_Tag> with MaterialStateMixin<_Tag> {
           borderRadius: borderRadius,
         ),
         child: InkWell(
-          onTap:
-              () => context.read<BibliothequeBloc>().add(
-                BibliothequeThematiqueSelectionnee(widget.thematique),
-              ),
+          onTap: () => context.read<BibliothequeBloc>().add(BibliothequeThematiqueSelectionnee(widget.thematique)),
           onHighlightChanged: updateMaterialState(WidgetState.pressed),
           onHover: updateMaterialState(WidgetState.hovered),
           focusColor: FnvColors.transparent,
@@ -143,12 +115,7 @@ class _TagState extends State<_Tag> with MaterialStateMixin<_Tag> {
           onFocusChange: updateMaterialState(WidgetState.focused),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
-            child: Text(
-              widget.label,
-              style: DsfrTextStyle.bodySmMedium(
-                color: widget.choisi ? Colors.white : blue,
-              ),
-            ),
+            child: Text(widget.label, style: DsfrTextStyle.bodySmMedium(color: widget.choisi ? Colors.white : blue)),
           ),
         ),
       ),
@@ -181,9 +148,7 @@ class _ChampRechercheState extends State<_ChampRecherche> {
       }
       _timer = Timer(
         const Duration(milliseconds: 500),
-        () => context.read<BibliothequeBloc>().add(
-          BibliothequeRechercheSaisie(value),
-        ),
+        () => context.read<BibliothequeBloc>().add(BibliothequeRechercheSaisie(value)),
       );
     },
     keyboardType: TextInputType.text,
@@ -195,14 +160,9 @@ class _Nombre extends StatelessWidget {
 
   @override
   Widget build(final context) {
-    final nombreArticle = context.select<BibliothequeBloc, int>(
-      (final value) => value.state.bibliotheque.contenus.length,
-    );
+    final nombreArticle = context.select<BibliothequeBloc, int>((final value) => value.state.bibliotheque.contenus.length);
 
-    return Text(
-      Localisation.nombreArticle(nombreArticle),
-      style: const DsfrTextStyle.bodyLgBold(),
-    );
+    return Text(Localisation.nombreArticle(nombreArticle), style: const DsfrTextStyle.bodyLgBold());
   }
 }
 
@@ -211,9 +171,7 @@ class _SliverListe extends StatelessWidget {
 
   @override
   Widget build(final context) {
-    final contenus = context.select<BibliothequeBloc, List<Recommandation>>(
-      (final value) => value.state.bibliotheque.contenus,
-    );
+    final contenus = context.select<BibliothequeBloc, List<Recommandation>>((final value) => value.state.bibliotheque.contenus);
 
     return contenus.isEmpty
         ? SliverFillRemaining(
@@ -222,19 +180,13 @@ class _SliverListe extends StatelessWidget {
             spacing: DsfrSpacings.s2w,
             children: [
               FnvSvg.asset(AssetImages.bibliothequeEmpty),
-              const Text(
-                Localisation.bibliothequeAucunArticle,
-                style: DsfrTextStyle.headline4(),
-              ),
+              const Text(Localisation.bibliothequeAucunArticle, style: DsfrTextStyle.headline4()),
             ],
           ),
         )
         : SliverList.separated(
-          itemBuilder:
-              (final context, final index) => Contenu(contenu: contenus[index]),
-          separatorBuilder:
-              (final context, final index) =>
-                  const SizedBox(height: DsfrSpacings.s2w),
+          itemBuilder: (final context, final index) => Contenu(contenu: contenus[index]),
+          separatorBuilder: (final context, final index) => const SizedBox(height: DsfrSpacings.s2w),
           itemCount: contenus.length,
         );
   }

@@ -24,49 +24,28 @@ import '../../old/steps/iel_ecrit_dans_le_champ.dart';
 import '../summary/environmental_performance_data.dart';
 import 'environmental_performance_questions_data.dart';
 
-Future<void> pumpEnvironmentalPerformancePage(
-  final WidgetTester tester, {
-  required final Dio dio,
-}) async {
-  final client = DioHttpClient(
-    dio: dio,
-    authenticationService: authenticationService,
-  );
-  final environmentalPerformanceRepository =
-      EnvironmentalPerformanceSummaryRepository(client: client);
-  final mieuxVousConnaitreRepository = MieuxVousConnaitreRepository(
-    client: client,
-    messageBus: MessageBus(),
-  );
+Future<void> pumpEnvironmentalPerformancePage(final WidgetTester tester, {required final Dio dio}) async {
+  final client = DioHttpClient(dio: dio, authenticationService: authenticationService);
+  final environmentalPerformanceRepository = EnvironmentalPerformanceSummaryRepository(client: client);
+  final mieuxVousConnaitreRepository = MieuxVousConnaitreRepository(client: client, messageBus: MessageBus());
   await pumpPage(
     tester: tester,
     repositoryProviders: [
-      RepositoryProvider<MieuxVousConnaitreRepository>.value(
-        value: mieuxVousConnaitreRepository,
-      ),
-      RepositoryProvider<EnvironmentalPerformanceSummaryRepository>.value(
-        value: environmentalPerformanceRepository,
-      ),
+      RepositoryProvider<MieuxVousConnaitreRepository>.value(value: mieuxVousConnaitreRepository),
+      RepositoryProvider<EnvironmentalPerformanceSummaryRepository>.value(value: environmentalPerformanceRepository),
     ],
     blocProviders: [
-      BlocProvider<GamificationBloc>(
-        create: (final context) => GamificationBlocFake(),
-      ),
+      BlocProvider<GamificationBloc>(create: (final context) => GamificationBlocFake()),
       BlocProvider(
         create:
             (final context) => EnvironmentalPerformanceBloc(
-              useCase: FetchEnvironmentalPerformance(
-                EnvironmentalPerformanceSummaryRepository(client: client),
-              ),
+              useCase: FetchEnvironmentalPerformance(EnvironmentalPerformanceSummaryRepository(client: client)),
             ),
       ),
       BlocProvider(
         create:
-            (final context) => EnvironmentalPerformanceQuestionBloc(
-              repository: EnvironmentalPerformanceQuestionRepository(
-                client: client,
-              ),
-            ),
+            (final context) =>
+                EnvironmentalPerformanceQuestionBloc(repository: EnvironmentalPerformanceQuestionRepository(client: client)),
       ),
     ],
     page: EnvironmentalPerformanceSummaryPage.route,
@@ -80,36 +59,18 @@ void main() {
     testWidgets('Aller sur les questions', (final tester) async {
       final dio =
           DioMock()
-            ..getM(
-              Endpoints.bilan,
-              responseData: environmentalPerformanceEmptyData,
-            )
-            ..getM(
-              Endpoints.questions('ENCHAINEMENT_KYC_mini_bilan_carbone'),
-              responseData: miniBilanQuestions,
-            )
-            ..getM(
-              Endpoints.questionKyc('KYC_transport_voiture_km'),
-              responseData: miniBilanQuestions.first,
-            )
+            ..getM(Endpoints.bilan, responseData: environmentalPerformanceEmptyData)
+            ..getM(Endpoints.questions('ENCHAINEMENT_KYC_mini_bilan_carbone'), responseData: miniBilanQuestions)
+            ..getM(Endpoints.questionKyc('KYC_transport_voiture_km'), responseData: miniBilanQuestions.first)
             ..putM(Endpoints.questionKyc('KYC_transport_voiture_km'))
-            ..getM(
-              Endpoints.questionKyc('KYC_transport_avion_3_annees'),
-              responseData: miniBilanQuestions[1],
-            )
+            ..getM(Endpoints.questionKyc('KYC_transport_avion_3_annees'), responseData: miniBilanQuestions[1])
             ..putM(Endpoints.questionKyc('KYC_transport_avion_3_annees'));
       await pumpEnvironmentalPerformancePage(tester, dio: dio);
       await tester.pumpAndSettle();
-      await tester.tap(
-        find.text(EnvironmentalPerformanceSummaryL10n.commencerMonMiniBilan),
-      );
+      await tester.tap(find.text(EnvironmentalPerformanceSummaryL10n.commencerMonMiniBilan));
       await tester.pumpAndSettle();
       expect(find.bySemanticsLabel('Question 1 sur 2'), findsOneWidget);
-      await ielEcritDansLeChamp(
-        tester,
-        label: Localisation.maReponse,
-        enterText: '42',
-      );
+      await ielEcritDansLeChamp(tester, label: Localisation.maReponse, enterText: '42');
       await tester.tap(find.text(Localisation.continuer));
       await tester.pumpAndSettle();
       expect(find.bySemanticsLabel('Question 2 sur 2'), findsOneWidget);

@@ -15,9 +15,7 @@ class MesRecommandations extends StatelessWidget {
 
   @override
   Widget build(final context) {
-    context.read<RecommandationsBloc>().add(
-      RecommandationsRecuperationDemandee(theme),
-    );
+    context.read<RecommandationsBloc>().add(RecommandationsRecuperationDemandee(theme));
 
     return const _View();
   }
@@ -35,14 +33,8 @@ class _View extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         spacing: DsfrSpacings.s1v5,
         children: [
-          Text(
-            Localisation.recommandationsTitre,
-            style: DsfrTextStyle.headline4(),
-          ),
-          Text(
-            Localisation.themeRecommandationsSousTitre,
-            style: DsfrTextStyle.bodyMd(),
-          ),
+          Text(Localisation.recommandationsTitre, style: DsfrTextStyle.headline4()),
+          Text(Localisation.themeRecommandationsSousTitre, style: DsfrTextStyle.bodyMd()),
         ],
       ),
       _List(),
@@ -55,8 +47,7 @@ class _List extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    final recommandations =
-        context.watch<RecommandationsBloc>().state.recommandations;
+    final recommandations = context.watch<RecommandationsBloc>().state.recommandations;
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
@@ -75,9 +66,7 @@ class _List extends StatelessWidget {
                       themeTag: ThemeTypeTag(themeType: e.thematique),
                       titre: e.titre,
                       onPop: () {
-                        context.read<RecommandationsBloc>().add(
-                          RecommandationsRecuperationDemandee(e.thematique),
-                        );
+                        context.read<RecommandationsBloc>().add(RecommandationsRecuperationDemandee(e.thematique));
                       },
                     ),
                   )

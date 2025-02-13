@@ -6,23 +6,14 @@ import 'package:app/core/authentication/presentation/bloc/authentication_event.d
 import 'package:app/core/authentication/presentation/bloc/authentication_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class AuthenticationBloc
-    extends Bloc<AuthenticationEvent, AuthenticationState> {
-  AuthenticationBloc({
-    required final AuthenticationService authenticationService,
-  }) : super(const AuthenticationInitial()) {
-    _subscription = authenticationService.authenticationStatus.listen((
-      final status,
-    ) {
+class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
+  AuthenticationBloc({required final AuthenticationService authenticationService}) : super(const AuthenticationInitial()) {
+    _subscription = authenticationService.authenticationStatus.listen((final status) {
       add(const AuthenticationCheckRequested());
     });
     on<AuthenticationCheckRequested>((final event, final emit) {
       final status = authenticationService.status;
-      emit(
-        status == const Unauthenticated()
-            ? const AuthenticationUnauthenticated()
-            : const AuthenticationAuthenticated(),
-      );
+      emit(status == const Unauthenticated() ? const AuthenticationUnauthenticated() : const AuthenticationAuthenticated());
     });
   }
 

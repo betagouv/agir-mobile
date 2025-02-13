@@ -13,15 +13,13 @@ abstract final class Localisation {
   static const toutesLesActions = 'Toutes **les actions**';
   static const accederAuSimulateur = 'Accéder au simulateur';
   static const home = 'Accueil';
-  static const themeRecommandationsSousTitre =
-      'Une sélection d’articles et de services, pour vous, selon vos préférences !';
+  static const themeRecommandationsSousTitre = 'Une sélection d’articles et de services, pour vous, selon vos préférences !';
   static const acheterUnVelo = 'Acheter un vélo';
   static const actionRealisee = 'Action réalisée';
   static const adresseEmail = 'Mon adresse email';
   static const adresseEmailHint = 'Format attendu : nom@domaine.fr';
   static const adultes = 'Adulte(s)';
-  static const aideVeloAvertissement =
-      'Veuillez compléter ces informations afin de débuter l’estimation';
+  static const aideVeloAvertissement = 'Veuillez compléter ces informations afin de débuter l’estimation';
   static const ajouterEnFavoris = 'Ajouter en favoris';
   static const allerALAction = 'Aller à l’action';
   static const anneeDeNaissance = 'Année de naissance';
@@ -29,42 +27,31 @@ abstract final class Localisation {
   static const appEstEnConstruction = 'J’agis est en construction !';
   static const appEstEnConstructionDescription =
       'Cette version est encore très incomplète et de nombreuses évolutions et nouvelles fonctionnalités sont mises en ligne chaque semaine.';
-  static const appEstEncoreEnExperimentation =
-      'J’agis est encore en expérimentation !';
-  static const appEstEncoreEnExperimentationDetails =
-      'Nous ajoutons progressivement les aides et contenus locaux à ';
-  static const appEstEncoreEnExperimentationDetails2 =
-      '\nRevenez régulièrement pour profiter de nos dernières nouveautés';
+  static const appEstEncoreEnExperimentation = 'J’agis est encore en expérimentation !';
+  static const appEstEncoreEnExperimentationDetails = 'Nous ajoutons progressivement les aides et contenus locaux à ';
+  static const appEstEncoreEnExperimentationDetails2 = '\nRevenez régulièrement pour profiter de nos dernières nouveautés';
   static const article = 'Article';
-  static const assistanceListTitle =
-      '**Aides financières** et bons plans **chez vous**';
-  static const attentionAucuneDonneeNePourraEtreRecuperee =
-      'Attention, aucune donnée ne pourra être récupérée.';
+  static const assistanceListTitle = '**Aides financières** et bons plans **chez vous**';
+  static const attentionAucuneDonneeNePourraEtreRecuperee = 'Attention, aucune donnée ne pourra être récupérée.';
   static const aucuneAideDisponible = 'Aucune aide\ndisponible';
   static const bibliotheque = 'Ma bibliothèque';
   static const bibliothequeAucunArticle = 'Aucun article trouvé';
-  static const bibliothequeSousTitre =
-      'Retrouver ici vos articles déjà consultés ainsi que vos favoris';
+  static const bibliothequeSousTitre = 'Retrouver ici vos articles déjà consultés ainsi que vos favoris';
   static const bienvenueSur = 'Bienvenue sur J’agis ! Faisons connaissance...';
-  static const bienvenueSurDetails =
-      'Nous avons quelques questions à vous poser pour personnaliser votre expérience !';
+  static const bienvenueSurDetails = 'Nous avons quelques questions à vous poser pour personnaliser votre expérience !';
   static const bilanEnvironnemental = 'Mon bilan environnemental';
   static const bonjour = 'Bonjour,\n';
-  static const bonnesAstucesPourRealiserCetteAction =
-      'Bonnes astuces pour réaliser cette action';
+  static const bonnesAstucesPourRealiserCetteAction = 'Bonnes astuces pour réaliser cette action';
   static const bravo = 'BRAVO !';
   static const cestParti = 'C’est parti !';
   static const cestPresqueTermine = 'C’est presque terminé !';
-  static const cetteActionNeVousConvientPas =
-      'Cette action ne vous convient pas ?';
+  static const cetteActionNeVousConvientPas = 'Cette action ne vous convient pas ?';
   static const cetteActionNeVousConvientPasDetails =
       'On ne vise pas toujours juste ! Dites-nous pourquoi en quelques mots et nous affinerons nos recommandations à l’avenir. (facultatif)';
   static const changerMonMotDePasse = 'Changer mon mot de passe';
-  static const changerVotreMotDePasseConfirmation =
-      'Votre mot de passe a été changé.';
+  static const changerVotreMotDePasseConfirmation = 'Votre mot de passe a été changé.';
   static const codePostal = 'Code postal';
-  static const combienEtesVousDansVotreLogement =
-      'Combien êtes-vous dans votre logement (vous inclus) ?';
+  static const combienEtesVousDansVotreLogement = 'Combien êtes-vous dans votre logement (vous inclus) ?';
   static const commencer = 'Commencer';
   static const commune = 'Commune';
   static const confirmer = 'Confirmer';
@@ -73,24 +60,18 @@ abstract final class Localisation {
   static const creerMonCompte = 'Créer mon compte';
   static const creerMonCompteApp = 'Créer mon compte J’agis';
   static const declarationAccessibilite = 'Déclaration d’accessibilité';
-  static const declarationAccessibiliteSite =
-      'https://jagis.beta.gouv.fr/accessibilite';
+  static const declarationAccessibiliteSite = 'https://jagis.beta.gouv.fr/accessibilite';
   static const fruits = 'Fruits';
   static const legumes = 'Légumes';
   static const fruitsEtLegumesTitre = 'Les fruits et légumes pour le mois de ';
   static const fruitsEtLegumesPeuConsommateurs = 'Peu consommateurs';
-  static const fruitsEtLegumesPeuConsommateursDescription =
-      'Moins de 1 kg CO₂e par kg';
-  static const fruitsEtLegumesMoyennementConsommateurs =
-      'Moyennement consommateurs';
-  static const fruitsEtLegumesMoyennementConsommateursDescription =
-      'Entre 1 et 5 kg CO₂e par kg';
+  static const fruitsEtLegumesPeuConsommateursDescription = 'Moins de 1 kg CO₂e par kg';
+  static const fruitsEtLegumesMoyennementConsommateurs = 'Moyennement consommateurs';
+  static const fruitsEtLegumesMoyennementConsommateursDescription = 'Entre 1 et 5 kg CO₂e par kg';
   static const fruitsEtLegumesConsommateurs = 'Consommateurs';
-  static const fruitsEtLegumesConsommateursDescription =
-      'Plus de 5 kg CO₂e par kg';
+  static const fruitsEtLegumesConsommateursDescription = 'Plus de 5 kg CO₂e par kg';
   static const impactCo2 = 'Impact CO₂';
-  static const impactCo2Description =
-      'Des informations fiables et sourcées issues des données environnementales de l’ADEME';
+  static const impactCo2Description = 'Des informations fiables et sourcées issues des données environnementales de l’ADEME';
   static const impactCo2Url = 'https://impactco2.fr/';
   static const donneesPersonnelles = 'Données personnelles';
   static const donneesUtiliseesPart1 = 'Données utilisées : code postal ';
@@ -118,8 +99,7 @@ abstract final class Localisation {
   static const entrezLeCodeRecuParMail = 'Entrez le code reçu par e-mail !';
   static const codeDeVerification = 'Code de vérification';
   static const erreurRoutePageTitre = 'Page non trouvée';
-  static const erreurRoutePageDescription =
-      'La page est introuvable. Excusez-nous pour la gêne occasionnée.';
+  static const erreurRoutePageDescription = 'La page est introuvable. Excusez-nous pour la gêne occasionnée.';
   static const erreurRoutePageAction = 'Page d’accueil';
   static const erreurInattendue = 'Erreur inattendue';
   static const erreurInattendueContent =
@@ -130,8 +110,7 @@ abstract final class Localisation {
   static const finalementPasPourMoi = 'Finalement, pas pour moi';
   static const firstNameEmpty = 'Le prénom ne peut pas être vide.';
   static const firstNameInvalid = 'Le prénom n’est pas valide.';
-  static const homeAssistanceSubTitle =
-      'Toutes les aides **locales** et **nationales** pour vous aider à passer à l’action';
+  static const homeAssistanceSubTitle = 'Toutes les aides **locales** et **nationales** pour vous aider à passer à l’action';
   static const homeAssistanceTitle = '**Aides financières** et bons plans';
   static const jaccepte = 'J’accepte ';
   static const jaiCompris = 'J’ai compris';
@@ -139,10 +118,8 @@ abstract final class Localisation {
   static const jeCreeMonCompte = 'Je crée mon compte';
   static const jeReleveLAction = 'Je relève l’action';
   static const jusqua = 'Jusqu’à ';
-  static const leServiveNeCouvrePasEncoreVotreVille =
-      'Le service ne couvre pas encore votre ville.';
-  static const leServiveNeCouvrePasEncoreVotreVilleDescription =
-      'Nous mettons les informations à jour progressivement.';
+  static const leServiveNeCouvrePasEncoreVotreVille = 'Le service ne couvre pas encore votre ville.';
+  static const leServiveNeCouvrePasEncoreVotreVilleDescription = 'Nous mettons les informations à jour progressivement.';
   static const lesCategories = 'Les catégories';
   static const lesCgu = 'les conditions générales d’utilisation';
   static const lesCguMenu = 'CGU';
@@ -151,8 +128,7 @@ abstract final class Localisation {
   static const maResidencePrincipaleEst = 'Ma résidence principale est ...';
   static const meConnecter = 'Me connecter';
   static const mentionsLegales = 'Mentions légales';
-  static const mentionsLegalesSite =
-      'https://jagis.beta.gouv.fr/mentions-legales';
+  static const mentionsLegalesSite = 'https://jagis.beta.gouv.fr/mentions-legales';
   static const menu = 'Menu';
   static const mesActions = 'Mes actions';
   static const mesAides = 'Mes aides';
@@ -166,16 +142,12 @@ abstract final class Localisation {
   static const mettreAJourMesInformations = 'Mettre à jour mes informations';
   static const mieuxVousConnaitre = 'Mieux vous connaître';
   static const miseAJourEffectuee = 'Mise à jour effectuée';
-  static const missionActionsSubTitle =
-      'Pour réduire votre impact, voici une liste d’actions recommandés **pour vous !**';
-  static const missionActionsTitle =
-      'Choisir au moins **une action** que vous pourriez réaliser';
+  static const missionActionsSubTitle = 'Pour réduire votre impact, voici une liste d’actions recommandés **pour vous !**';
+  static const missionActionsTitle = 'Choisir au moins **une action** que vous pourriez réaliser';
   static const missionTitle = 'Recommandés **pour vous**';
-  static const missionSubTitle =
-      'Des solutions **adaptées à votre situation** et les clés pour comprendre';
+  static const missionSubTitle = 'Des solutions **adaptées à votre situation** et les clés pour comprendre';
   static const actionsSectionTitle = 'Mes actions';
-  static const actionsSectionSubTitle =
-      'Gagner des feuilles chaque semaine avec de nouvelles actions';
+  static const actionsSectionSubTitle = 'Gagner des feuilles chaque semaine avec de nouvelles actions';
   static const actionsSectionListEmpty =
       'Vous n’avez aucune action à réaliser en ce moment. Débloquez-en de nouvelles dans les missions.';
   static const modifier = 'Modifier';
@@ -188,21 +160,16 @@ abstract final class Localisation {
   static const monProfil = 'Mon profil';
   static const motDePasse = 'Mot de passe';
   static const motDePasse12CaractresMinimum = '12 caractères minimum';
-  static const motDePasse1CaractreSpecialMinimum =
-      '1 caractère spécial minimum';
+  static const motDePasse1CaractreSpecialMinimum = '1 caractère spécial minimum';
   static const motDePasse1ChiffreMinimum = '1 chiffre minimum';
-  static const motDePasse1MajusculeEt1Minuscule =
-      'Au moins 1 majuscule et 1 minuscule';
+  static const motDePasse1MajusculeEt1Minuscule = 'Au moins 1 majuscule et 1 minuscule';
   static const motDePasseOublie = 'Mot de passe oublié ?';
-  static const motDePasseOublieDetails =
-      'Saisissez l’adresse électronique associé à votre compte.';
+  static const motDePasseOublieDetails = 'Saisissez l’adresse électronique associé à votre compte.';
   static const motDePasseOublieTitre = 'Mot de passe oublié - 1/2';
   static const motDePasseOublieTitre2 = 'Mot de passe oublié - 2/2';
   static const nom = 'Nom';
-  static const nombreDePartsFiscales =
-      'Nombre de parts fiscales de votre foyer';
-  static const nombreDePartsFiscalesDescription =
-      '(Pré-calculé à partir des membres de votre foyer)';
+  static const nombreDePartsFiscales = 'Nombre de parts fiscales de votre foyer';
+  static const nombreDePartsFiscalesDescription = '(Pré-calculé à partir des membres de votre foyer)';
   static const non = 'Non';
   static const nouveau = 'NOUVEAU !';
   static const obligatoire = 'obligatoire';
@@ -226,20 +193,17 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const plusieursReponsesPossibles = 'Plusieurs réponses possibles';
   static const point = '.';
   static const politiqueDeConfidentialite = 'Politique de confidentialité';
-  static const politiqueDeConfidentialiteSite =
-      'https://jagis.beta.gouv.fr/politique-de-confidentialite';
+  static const politiqueDeConfidentialiteSite = 'https://jagis.beta.gouv.fr/politique-de-confidentialite';
   static const pourquoi = 'Pourquoi ?';
   static const pourquoiCesQuestions = 'Pourquoi ces questions ?';
   static const pourquoiCesQuestionsReponse =
       'Votre revenu fiscal de référence et le nombre de parts permettent d’afficher les aides en fonction de vos ressources.';
   static const pourquoiCetteAction = 'Pourquoi cette action ?';
-  static const preOnboardingTitre =
-      'Ensemble,\naméliorons\nnos habitudes\nau jour le jour';
+  static const preOnboardingTitre = 'Ensemble,\naméliorons\nnos habitudes\nau jour le jour';
   static const premiereFoisSur = 'Première fois sur J’agis ?';
   static const prenom = 'Prénom';
   static const prixDuVelo = 'Prix du vélo';
-  static const prixDuVeloExplications =
-      'À titre indicatif, voici quelques prix moyens';
+  static const prixDuVeloExplications = 'À titre indicatif, voici quelques prix moyens';
   static const prixDuVeloObligatoire = 'Le prix du vélo ne peux pas être vide';
   static const etatDuVelo = 'État du vélo';
   static const proposePar = 'Proposé par';
@@ -265,8 +229,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const statistiques = 'Statistiques';
   static const statistiquesSite = 'https://jagis.beta.gouv.fr/statistiques';
   static const supprimerVotreCompte = 'Supprimer mon compte';
-  static const supprimerVotreCompteConfirmation =
-      'Veuillez confirmer la suppression du compte';
+  static const supprimerVotreCompteConfirmation = 'Veuillez confirmer la suppression du compte';
   static const supprimerVotreCompteContenu =
       'Vous pouvez à tout moment choisir de supprimer votre compte ainsi que l’ensemble des données qui y sont associées.';
   static const termine = 'TERMINÉ !';
@@ -279,12 +242,10 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const voirLesDemarches = 'Voir les démarches';
   static const homeActionsLink = 'Voir toutes mes actions';
   static const vousAvezDejaUnCompte = 'Vous avez déjà un compte ?';
-  static const vousEtesProprietaireDeVotreLogement =
-      'Vous êtes propriétaire de votre logement ?';
+  static const vousEtesProprietaireDeVotreLogement = 'Vous êtes propriétaire de votre logement ?';
 
   static String cacherEmail(final String email) {
-    final indexArobase =
-        email.characters.findFirst(Characters('@'))!.stringBeforeLength;
+    final indexArobase = email.characters.findFirst(Characters('@'))!.stringBeforeLength;
 
     if (indexArobase > 2) {
       final debut = email.characters.getRange(0, 1);
@@ -296,22 +257,16 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
     return email;
   }
 
-  static String communeEtSaRegion(final String commune) =>
-      '$commune et sa région.';
+  static String communeEtSaRegion(final String commune) => '$commune et sa région.';
 
-  static String donneesUtiliseesCodePostalEtCommune({
-    required final String codePostal,
-    required final String commune,
-  }) => '($codePostal - $commune)';
+  static String donneesUtiliseesCodePostalEtCommune({required final String codePostal, required final String commune}) =>
+      '($codePostal - $commune)';
 
   static String donneesUtiliseesNombreDeParts(final double value) => '($value)';
 
-  static String donneesUtiliseesRevenuFiscal(final int? value) =>
-      '(${value == null ? '' : euro(value)})';
+  static String donneesUtiliseesRevenuFiscal(final int? value) => '(${value == null ? '' : euro(value)})';
 
-  static String entrezLeCodeRecuOublieMotDePasseParMailDetails(
-    final String value,
-  ) =>
+  static String entrezLeCodeRecuOublieMotDePasseParMailDetails(final String value) =>
       'Pour vérifier votre identité et vous permettre de modifier votre mot de passe, nous vous avons envoyé un e-mail à l’adresse : ${cacherEmail(value)}';
 
   static String entrezLeCodeRecuParMailDetails(final String value) =>
@@ -319,24 +274,18 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
 
   static String euro(final int value) => '$value €';
 
-  static String nombreArticle(final int value) =>
-      value <= 1 ? '$value article' : '$value articles';
+  static String nombreArticle(final int value) => value <= 1 ? '$value article' : '$value articles';
 
-  static String nombrePoints(final int value) =>
-      value <= 1 ? '$value point' : '$value points';
+  static String nombrePoints(final int value) => value <= 1 ? '$value point' : '$value points';
 
   static String prenomExclamation(final String value) => '$value !';
 
-  static String questionCourantSurMax(final int actuel, final int max) =>
-      '**Question $actuel** sur $max';
+  static String questionCourantSurMax(final int actuel, final int max) => '**Question $actuel** sur $max';
 
   static String veloLabel(final String text) => '$text : ';
 
-  static String vousAvezTermineLaMission(final String text) =>
-      'Vous avez terminé la mission\n“$text”';
+  static String vousAvezTermineLaMission(final String text) => 'Vous avez terminé la mission\n“$text”';
 
   static String distance(final int value) =>
-      value >= 1000
-          ? 'À ${NumberFormat('0.#', 'fr').format(value / 1000)} km'
-          : 'À $value m';
+      value >= 1000 ? 'À ${NumberFormat('0.#', 'fr').format(value / 1000)} km' : 'À $value m';
 }

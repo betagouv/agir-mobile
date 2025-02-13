@@ -41,20 +41,12 @@ class _Section extends StatelessWidget {
     crossAxisAlignment: CrossAxisAlignment.start,
     spacing: DsfrSpacings.s2w,
     children: [
-      const TitleSection(
-        title: Localisation.missionTitle,
-        subTitle: Localisation.missionSubTitle,
-      ),
+      const TitleSection(title: Localisation.missionTitle, subTitle: Localisation.missionSubTitle),
       SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         padding: EdgeInsets.zero,
         clipBehavior: Clip.none,
-        child: IntrinsicHeight(
-          child: Row(
-            spacing: DsfrSpacings.s2w,
-            children: data.missions.map(_Mission.new).toList(),
-          ),
-        ),
+        child: IntrinsicHeight(child: Row(spacing: DsfrSpacings.s2w, children: data.missions.map(_Mission.new).toList())),
       ),
     ],
   );
@@ -98,10 +90,7 @@ class _MissionState extends State<_Mission> with MaterialStateMixin<_Mission> {
               onTap: () async {
                 await GoRouter.of(context).pushNamed(
                   MissionPage.name,
-                  pathParameters: {
-                    'mission': widget.mission.code,
-                    'thematique': widget.mission.themeType.routeCode,
-                  },
+                  pathParameters: {'mission': widget.mission.code, 'thematique': widget.mission.themeType.routeCode},
                 );
                 if (context.mounted) {
                   context.read<MissionHomeBloc>().add(const MissionHomeFetch());
@@ -125,36 +114,21 @@ class _MissionState extends State<_Mission> with MaterialStateMixin<_Mission> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ClipRRect(
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(DsfrSpacings.s1w),
-                        ),
-                        child: FnvImage.network(
-                          widget.mission.imageUrl,
-                          width: width,
-                          height: 124,
-                          fit: BoxFit.cover,
-                        ),
+                        borderRadius: const BorderRadius.all(Radius.circular(DsfrSpacings.s1w)),
+                        child: FnvImage.network(widget.mission.imageUrl, width: width, height: 124, fit: BoxFit.cover),
                       ),
                       const SizedBox(height: DsfrSpacings.s2w),
                       ThemeTypeTag(themeType: widget.mission.themeType),
                       const SizedBox(height: DsfrSpacings.s1v),
-                      Expanded(
-                        child: Text(
-                          widget.mission.titre,
-                          style: const DsfrTextStyle.bodyLg(),
-                        ),
-                      ),
+                      Expanded(child: Text(widget.mission.titre, style: const DsfrTextStyle.bodyLg())),
                       const SizedBox(height: DsfrSpacings.s1w),
                       LinearProgressIndicator(
                         value: progression,
                         backgroundColor: const Color(0xFFDDDDFF),
                         color: progression == 1 ? success : color,
                         minHeight: 7,
-                        semanticsLabel:
-                            '$missionProgression/$missionProgressionCible terminée',
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(DsfrSpacings.s1v),
-                        ),
+                        semanticsLabel: '$missionProgression/$missionProgressionCible terminée',
+                        borderRadius: const BorderRadius.all(Radius.circular(DsfrSpacings.s1v)),
                       ),
                     ],
                   ),

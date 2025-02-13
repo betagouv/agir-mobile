@@ -9,16 +9,7 @@ void main() {
   group('Radios', () {
     testWidgets('Voir le label', (final tester) async {
       const label = 'Label radio';
-      await tester.pumpWidget(
-        App(
-          child: DsfrRadioButton(
-            title: label,
-            value: 0,
-            groupValue: 1,
-            onChanged: (final value) {},
-          ),
-        ),
-      );
+      await tester.pumpWidget(App(child: DsfrRadioButton(title: label, value: 0, groupValue: 1, onChanged: (final value) {})));
       expect(find.text(label), findsOneWidget);
     });
 
@@ -50,11 +41,7 @@ void main() {
       const label3 = 'Trois';
       await tester.pumpWidget(
         App(
-          child: DsfrRadioButtonSet(
-            title: title,
-            values: const {1: label1, 2: label2, 3: label3},
-            onCallback: (final value) {},
-          ),
+          child: DsfrRadioButtonSet(title: title, values: const {1: label1, 2: label2, 3: label3}, onCallback: (final value) {}),
         ),
       );
 

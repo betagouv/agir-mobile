@@ -7,8 +7,7 @@ import 'package:app/features/mission/mission/infrastructure/mission_mapper.dart'
 import 'package:fpdart/fpdart.dart';
 
 class MissionRepository {
-  const MissionRepository({required final DioHttpClient client})
-    : _client = client;
+  const MissionRepository({required final DioHttpClient client}) : _client = client;
 
   final DioHttpClient _client;
 
@@ -27,8 +26,6 @@ class MissionRepository {
   Future<Either<Exception, void>> complete(final MissionCode code) async {
     final response = await _client.post(Endpoints.missionTerminer(code.value));
 
-    return isResponseSuccessful(response.statusCode)
-        ? const Right(null)
-        : Left(Exception('Erreur lors de la fin de la mission'));
+    return isResponseSuccessful(response.statusCode) ? const Right(null) : Left(Exception('Erreur lors de la fin de la mission'));
   }
 }

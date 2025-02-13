@@ -10,19 +10,10 @@ class SupprimerCompteModal extends StatelessWidget {
   Widget build(final context) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      const Text(
-        Localisation.supprimerVotreCompteConfirmation,
-        style: DsfrTextStyle.headline4(),
-      ),
+      const Text(Localisation.supprimerVotreCompteConfirmation, style: DsfrTextStyle.headline4()),
       const SizedBox(height: DsfrSpacings.s2w),
-      const Text(
-        Localisation.supprimerVotreCompteContenu,
-        style: DsfrTextStyle.bodyMd(),
-      ),
-      const Text(
-        Localisation.attentionAucuneDonneeNePourraEtreRecuperee,
-        style: DsfrTextStyle.bodyMdBold(),
-      ),
+      const Text(Localisation.supprimerVotreCompteContenu, style: DsfrTextStyle.bodyMd()),
+      const Text(Localisation.attentionAucuneDonneeNePourraEtreRecuperee, style: DsfrTextStyle.bodyMdBold()),
       const SizedBox(height: DsfrSpacings.s4w),
       DsfrButton(
         label: Localisation.confirmer,

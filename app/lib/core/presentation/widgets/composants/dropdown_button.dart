@@ -3,12 +3,7 @@ import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 
 class FnvDropdown<T> extends StatelessWidget {
-  const FnvDropdown({
-    super.key,
-    required this.items,
-    required this.value,
-    required this.onChanged,
-  });
+  const FnvDropdown({super.key, required this.items, required this.value, required this.onChanged});
 
   final Map<T, String> items;
   final T value;
@@ -24,10 +19,7 @@ class FnvDropdown<T> extends StatelessWidget {
             height: 48,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(entry.value, style: const DsfrTextStyle.bodyMd()),
-              ),
+              child: Align(alignment: Alignment.centerLeft, child: Text(entry.value, style: const DsfrTextStyle.bodyMd())),
             ),
           ),
         ),
@@ -41,22 +33,13 @@ class FnvDropdown<T> extends StatelessWidget {
           Flexible(
             child: CustomPaint(
               painter: const _DottedLinePainter(),
-              child: Text(
-                items[value]!,
-                style: const DsfrTextStyle.headline2(
-                  color: DsfrColors.blueFranceSun113,
-                ),
-              ),
+              child: Text(items[value]!, style: const DsfrTextStyle.headline2(color: DsfrColors.blueFranceSun113)),
             ),
           ),
           const Padding(
             // HACK(lsaudon): Pour aligner l'icône
             padding: EdgeInsets.only(top: 10),
-            child: Icon(
-              DsfrIcons.systemArrowDownSLine,
-              size: 24,
-              color: DsfrColors.blueFranceSun113,
-            ),
+            child: Icon(DsfrIcons.systemArrowDownSLine, size: 24, color: DsfrColors.blueFranceSun113),
           ),
         ],
       ),
@@ -70,13 +53,7 @@ class FnvDropdown<T> extends StatelessWidget {
     menuStyle: const DropdownMenuStyle(
       decoration: ShapeDecoration(
         color: Color(0xFFFFFFFF),
-        shadows: [
-          BoxShadow(
-            color: Color(0x0D000000),
-            offset: Offset(0, 4),
-            blurRadius: 4,
-          ),
-        ],
+        shadows: [BoxShadow(color: Color(0x0D000000), offset: Offset(0, 4), blurRadius: 4)],
         shape: RoundedRectangleBorder(
           side: BorderSide(color: Color(0x0D000000)),
           borderRadius: BorderRadius.all(Radius.circular(4)),
@@ -104,11 +81,7 @@ class _DottedLinePainter extends CustomPainter {
 
     while (startX < size.width) {
       final height = size.height + 3;
-      canvas.drawLine(
-        Offset(startX, height),
-        Offset(startX + dashWidth, height),
-        paint,
-      );
+      canvas.drawLine(Offset(startX, height), Offset(startX + dashWidth, height), paint);
       startX += dashWidth + dashSpace;
     }
   }

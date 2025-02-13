@@ -39,11 +39,7 @@ final class MissionSuccess extends MissionState {
         MissionStepFin(title: mission.title),
       ];
 
-  const MissionSuccess._({
-    required this.code,
-    required this.index,
-    required this.steps,
-  });
+  const MissionSuccess._({required this.code, required this.index, required this.steps});
 
   final MissionCode code;
   final int index;
@@ -55,24 +51,13 @@ final class MissionSuccess extends MissionState {
       return copyWith(index: index + 1);
     }
 
-    final firstPendingIndex = steps.indexWhere(
-      (final e) => e is MissionStepObjectif && !e.objectif.estFait,
-    );
+    final firstPendingIndex = steps.indexWhere((final e) => e is MissionStepObjectif && !e.objectif.estFait);
 
-    return firstPendingIndex == -1
-        ? copyWith(index: steps.length - 2)
-        : copyWith(index: firstPendingIndex);
+    return firstPendingIndex == -1 ? copyWith(index: steps.length - 2) : copyWith(index: firstPendingIndex);
   }
 
-  MissionSuccess copyWith({
-    final MissionCode? code,
-    final int? index,
-    final List<MissionStep>? steps,
-  }) => MissionSuccess._(
-    code: code ?? this.code,
-    index: index ?? this.index,
-    steps: steps ?? this.steps,
-  );
+  MissionSuccess copyWith({final MissionCode? code, final int? index, final List<MissionStep>? steps}) =>
+      MissionSuccess._(code: code ?? this.code, index: index ?? this.index, steps: steps ?? this.steps);
 
   @override
   List<Object> get props => [index, steps, code];

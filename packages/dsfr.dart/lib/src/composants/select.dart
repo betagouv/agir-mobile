@@ -59,17 +59,12 @@ class DsfrSelect<T> extends StatelessWidget {
         label: label,
         hint: hint,
         labelStyle: labelStyle,
-        labelColor:
-            dropdownMenuEntries.isNotEmpty ? labelColor : labelDisableColor,
+        labelColor: dropdownMenuEntries.isNotEmpty ? labelColor : labelDisableColor,
         hintStyle: hintStyle,
         hintColor: hintColor,
         child: DropdownMenu(
           enabled: dropdownMenuEntries.isNotEmpty,
-          trailingIcon: const Icon(
-            DsfrIcons.systemArrowDownSLine,
-            size: DsfrSpacings.s2w,
-            semanticLabel: 'Cacher les options',
-          ),
+          trailingIcon: const Icon(DsfrIcons.systemArrowDownSLine, size: DsfrSpacings.s2w, semanticLabel: 'Cacher les options'),
           selectedTrailingIcon: const Icon(
             DsfrIcons.systemArrowUpSLine,
             size: DsfrSpacings.s2w,
@@ -119,13 +114,8 @@ class _Label extends StatelessWidget {
   Widget build(final context) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      ExcludeSemantics(
-        child: Text(label, style: labelStyle.copyWith(color: labelColor)),
-      ),
-      if (hint != null) ...[
-        const SizedBox(height: DsfrSpacings.s1v),
-        Text(hint!, style: hintStyle.copyWith(color: hintColor)),
-      ],
+      ExcludeSemantics(child: Text(label, style: labelStyle.copyWith(color: labelColor))),
+      if (hint != null) ...[const SizedBox(height: DsfrSpacings.s1v), Text(hint!, style: hintStyle.copyWith(color: hintColor))],
       const SizedBox(height: 10),
       child,
     ],

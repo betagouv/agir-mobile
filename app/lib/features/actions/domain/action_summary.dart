@@ -14,10 +14,5 @@ final class ActionSummary extends Equatable {
   final int numberOfAidsAvailable;
 
   @override
-  List<Object?> get props => [
-    id,
-    title,
-    numberOfActionsCompleted,
-    numberOfAidsAvailable,
-  ];
+  List<Object?> get props => [id, title, numberOfActionsCompleted, numberOfAidsAvailable];
 }

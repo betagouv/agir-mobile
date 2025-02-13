@@ -5,26 +5,19 @@ import 'package:app/core/notifications/infrastructure/notification_service.dart'
 import 'package:fpdart/fpdart.dart';
 
 class NotificationRepository {
-  const NotificationRepository({
-    required final DioHttpClient client,
-    required final NotificationService notificationService,
-  }) : _client = client,
-       _notificationService = notificationService;
+  const NotificationRepository({required final DioHttpClient client, required final NotificationService notificationService})
+    : _client = client,
+      _notificationService = notificationService;
 
   final DioHttpClient _client;
   final NotificationService _notificationService;
 
   Future<Either<Exception, void>> saveToken() async {
     final token = await _notificationService.getToken();
-    final response = await _client.put(
-      Endpoints.notificationToken,
-      data: {'token': token},
-    );
+    final response = await _client.put(Endpoints.notificationToken, data: {'token': token});
 
     return isResponseUnsuccessful(response.statusCode)
-        ? Left(
-          Exception('Erreur lors de la sauvegarde du token de notification'),
-        )
+        ? Left(Exception('Erreur lors de la sauvegarde du token de notification'))
         : const Right(null);
   }
 
@@ -32,9 +25,7 @@ class NotificationRepository {
     final response = await _client.delete(Endpoints.notificationToken);
 
     if (isResponseUnsuccessful(response.statusCode)) {
-      return Left(
-        Exception('Erreur lors de la suppression du token de notification'),
-      );
+      return Left(Exception('Erreur lors de la suppression du token de notification'));
     }
 
     await _notificationService.deleteToken();

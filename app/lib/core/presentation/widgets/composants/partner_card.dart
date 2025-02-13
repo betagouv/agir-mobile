@@ -42,44 +42,27 @@ class PartnerCard extends StatelessWidget {
               ),
               child: ColoredBox(
                 color: Colors.white,
-                child: FnvImage.asset(
-                  image,
-                  alignment: Alignment.topCenter,
-                  height: 170,
-                  fit: BoxFit.cover,
-                ),
+                child: FnvImage.asset(image, alignment: Alignment.topCenter, height: 170, fit: BoxFit.cover),
               ),
             ),
           ),
           const DsfrDivider(color: borderColor),
           Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: DsfrSpacings.s1w,
-              horizontal: DsfrSpacings.s3w,
-            ),
+            padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s1w, horizontal: DsfrSpacings.s3w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
                   EnvironmentalPerformanceSummaryL10n.proposePar,
-                  style: DsfrTextStyle.bodySmItalic(
-                    color: DsfrColors.blueFranceSun113,
-                  ),
+                  style: DsfrTextStyle.bodySmItalic(color: DsfrColors.blueFranceSun113),
                 ),
                 Text(name, style: const DsfrTextStyle.headline5()),
                 const SizedBox(height: DsfrSpacings.s1w),
                 Text(description, style: const DsfrTextStyle(fontSize: 15)),
                 const SizedBox(height: DsfrSpacings.s1w),
-                DsfrLink.md(
-                  label: url,
-                  onTap: () async => FnvUrlLauncher.launch(url),
-                ),
+                DsfrLink.md(label: url, onTap: () async => FnvUrlLauncher.launch(url)),
                 const SizedBox(height: DsfrSpacings.s4w),
-                FnvImage.asset(
-                  logo,
-                  height: 40,
-                  semanticLabel: 'Logo de $name',
-                ),
+                FnvImage.asset(logo, height: 40, semanticLabel: 'Logo de $name'),
               ],
             ),
           ),

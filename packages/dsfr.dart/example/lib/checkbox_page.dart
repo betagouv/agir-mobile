@@ -5,10 +5,7 @@ import 'package:flutter/material.dart';
 class CheckboxPage extends StatefulWidget {
   const CheckboxPage({super.key});
 
-  static final model = PageItem(
-    title: 'Case à cocher',
-    pageBuilder: (final context) => const CheckboxPage(),
-  );
+  static final model = PageItem(title: 'Case à cocher', pageBuilder: (final context) => const CheckboxPage());
 
   @override
   State<CheckboxPage> createState() => _CheckboxPageState();

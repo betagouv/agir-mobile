@@ -10,17 +10,12 @@ class MotDePasseOubliePage extends StatelessWidget {
   static const name = 'mot-de-passe-oublie';
   static const path = name;
 
-  static GoRoute get route => GoRoute(
-    path: path,
-    name: name,
-    builder: (final context, final state) => const MotDePasseOubliePage(),
-  );
+  static GoRoute get route =>
+      GoRoute(path: path, name: name, builder: (final context, final state) => const MotDePasseOubliePage());
 
   @override
   Widget build(final context) => BlocProvider(
-    create:
-        (final context) =>
-            MotDePasseOublieBloc(authentificationRepository: context.read()),
+    create: (final context) => MotDePasseOublieBloc(authentificationRepository: context.read()),
     child: const MotDePasseOublieView(),
   );
 }

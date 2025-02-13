@@ -7,13 +7,8 @@ import 'package:mocktail/mocktail.dart';
 import '../helper/feature_context.dart';
 
 /// Usage: The change password endpoint has been called
-Future<void> theChangePasswordEndpointHasBeenCalled(
-  final WidgetTester tester,
-) async {
+Future<void> theChangePasswordEndpointHasBeenCalled(final WidgetTester tester) async {
   verify(
-    () => FeatureContext.instance.dioMock.patch<dynamic>(
-      Endpoints.profile,
-      data: jsonEncode({'mot_de_passe': 'Azertyuiop1&'}),
-    ),
+    () => FeatureContext.instance.dioMock.patch<dynamic>(Endpoints.profile, data: jsonEncode({'mot_de_passe': 'Azertyuiop1&'})),
   );
 }

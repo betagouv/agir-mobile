@@ -25,9 +25,7 @@ abstract final class MissionChallengesMapper {
     );
   }
 
-  static MissionChallenge _fromJsonMissionChallenge(
-    final Map<String, dynamic> json,
-  ) => MissionChallenge(
+  static MissionChallenge _fromJsonMissionChallenge(final Map<String, dynamic> json) => MissionChallenge(
     contentId: ContentId(json['content_id'] as String),
     title: json['titre'] as String,
     status: _statusFromJson(json['defi_status'] as String),
@@ -37,15 +35,14 @@ abstract final class MissionChallengesMapper {
     isCollected: json['sont_points_en_poche'] as bool,
   );
 
-  static MissionChallengeStatus _statusFromJson(final String? type) =>
-      switch (type) {
-        'todo' => MissionChallengeStatus.toDo,
-        'en_cours' => MissionChallengeStatus.inProgress,
-        'pas_envie' => MissionChallengeStatus.refused,
-        'deja_fait' => MissionChallengeStatus.alreadyDone,
-        'abondon' => MissionChallengeStatus.abandonned,
-        'fait' => MissionChallengeStatus.done,
-        // ignore: no-equal-switch-expression-cases
-        _ => MissionChallengeStatus.toDo,
-      };
+  static MissionChallengeStatus _statusFromJson(final String? type) => switch (type) {
+    'todo' => MissionChallengeStatus.toDo,
+    'en_cours' => MissionChallengeStatus.inProgress,
+    'pas_envie' => MissionChallengeStatus.refused,
+    'deja_fait' => MissionChallengeStatus.alreadyDone,
+    'abondon' => MissionChallengeStatus.abandonned,
+    'fait' => MissionChallengeStatus.done,
+    // ignore: no-equal-switch-expression-cases
+    _ => MissionChallengeStatus.toDo,
+  };
 }

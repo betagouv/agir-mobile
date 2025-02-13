@@ -31,16 +31,10 @@ class AidCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               spacing: DsfrSpacings.s1v,
-              children: [
-                Text(aid.title, style: const DsfrTextStyle.bodyMdMedium()),
-                ThemeTypeTag(themeType: aid.themeType),
-              ],
+              children: [Text(aid.title, style: const DsfrTextStyle.bodyMdMedium()), ThemeTypeTag(themeType: aid.themeType)],
             ),
           ),
-          if (aid.aUnSimulateur) ...[
-            const SizedBox(width: DsfrSpacings.s1v),
-            const SimulatorTag(),
-          ],
+          if (aid.aUnSimulateur) ...[const SizedBox(width: DsfrSpacings.s1v), const SimulatorTag()],
           const SizedBox(width: DsfrSpacings.s1v),
           const Icon(DsfrIcons.systemArrowRightSLine),
         ],

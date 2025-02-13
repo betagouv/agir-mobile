@@ -8,8 +8,7 @@ import 'package:app/features/quiz/infrastructure/quiz_mapper.dart';
 import 'package:fpdart/fpdart.dart';
 
 class QuizRepository {
-  const QuizRepository({required final DioHttpClient client})
-    : _client = client;
+  const QuizRepository({required final DioHttpClient client}) : _client = client;
 
   final DioHttpClient _client;
 
@@ -25,17 +24,10 @@ class QuizRepository {
     return Right(QuizMapper.fromJson(json: json));
   }
 
-  Future<Either<Exception, void>> terminerQuiz({
-    required final String id,
-    required final bool estExacte,
-  }) async {
+  Future<Either<Exception, void>> terminerQuiz({required final String id, required final bool estExacte}) async {
     final response = await _client.post(
       Endpoints.events,
-      data: jsonEncode({
-        'content_id': id,
-        'number_value': estExacte ? 100 : 0,
-        'type': 'quizz_score',
-      }),
+      data: jsonEncode({'content_id': id, 'number_value': estExacte ? 100 : 0, 'type': 'quizz_score'}),
     );
 
     return isResponseSuccessful(response.statusCode)

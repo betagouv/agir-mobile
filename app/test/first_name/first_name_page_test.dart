@@ -18,21 +18,14 @@ import '../helpers/authentication_service_setup.dart';
 import '../helpers/dio_mock.dart';
 import '../helpers/pump_page.dart';
 
-Future<void> _pumpFirstNamePage(
-  final WidgetTester tester, {
-  final DioMock? dio,
-}) async {
+Future<void> _pumpFirstNamePage(final WidgetTester tester, {final DioMock? dio}) async {
   await pumpPage(
     tester: tester,
     repositoryProviders: [
       RepositoryProvider<FirstNameRepository>(
         create:
-            (final context) => FirstNameRepository(
-              client: DioHttpClient(
-                dio: dio ?? DioMock(),
-                authenticationService: authenticationService,
-              ),
-            ),
+            (final context) =>
+                FirstNameRepository(client: DioHttpClient(dio: dio ?? DioMock(), authenticationService: authenticationService)),
       ),
       RepositoryProvider<Clock>.value(value: const Clock()),
     ],
@@ -47,9 +40,7 @@ void main() {
   });
 
   group('Prénom devrait ', () {
-    testWidgets("aller sur la page suivante lorsqu'il est saisi et valider", (
-      final tester,
-    ) async {
+    testWidgets("aller sur la page suivante lorsqu'il est saisi et valider", (final tester) async {
       final dio = DioMock()..patchM(Endpoints.profile);
       await _pumpFirstNamePage(tester, dio: dio);
 
@@ -62,34 +53,23 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      expect(
-        find.text('route: ${QuestionCodePostalPage.name}'),
-        findsOneWidget,
-      );
+      expect(find.text('route: ${QuestionCodePostalPage.name}'), findsOneWidget);
     });
 
-    testWidgets(
-      "aller sur la page suivante lorsqu'il est saisi et appuyer sur le bouton done",
-      (final tester) async {
-        final dio = DioMock()..patchM(Endpoints.profile);
-        await _pumpFirstNamePage(tester, dio: dio);
+    testWidgets("aller sur la page suivante lorsqu'il est saisi et appuyer sur le bouton done", (final tester) async {
+      final dio = DioMock()..patchM(Endpoints.profile);
+      await _pumpFirstNamePage(tester, dio: dio);
 
-        final validFirstName = Faker().person.firstName();
+      final validFirstName = Faker().person.firstName();
 
-        await tester.enterText(find.byType(DsfrInput), validFirstName);
-        await tester.testTextInput.receiveAction(TextInputAction.done);
-        await tester.pumpAndSettle();
+      await tester.enterText(find.byType(DsfrInput), validFirstName);
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pumpAndSettle();
 
-        expect(
-          find.text('route: ${QuestionCodePostalPage.name}'),
-          findsOneWidget,
-        );
-      },
-    );
+      expect(find.text('route: ${QuestionCodePostalPage.name}'), findsOneWidget);
+    });
 
-    testWidgets("afficher une erreur lorsqu'un prénom vide est saisi", (
-      final tester,
-    ) async {
+    testWidgets("afficher une erreur lorsqu'un prénom vide est saisi", (final tester) async {
       await _pumpFirstNamePage(tester);
 
       await tester.enterText(find.byType(DsfrInput), 'a');
@@ -101,9 +81,7 @@ void main() {
       expect(find.text(Localisation.firstNameEmpty), findsOneWidget);
     });
 
-    testWidgets("afficher une erreur lorsqu'un prénom invalide est saisi", (
-      final tester,
-    ) async {
+    testWidgets("afficher une erreur lorsqu'un prénom invalide est saisi", (final tester) async {
       await _pumpFirstNamePage(tester);
 
       const invalidFirstName = '123';
@@ -114,16 +92,9 @@ void main() {
       expect(find.text(Localisation.firstNameInvalid), findsOneWidget);
     });
 
-    testWidgets("afficher une erreur lorsque l'ajout échoue", (
-      final tester,
-    ) async {
+    testWidgets("afficher une erreur lorsque l'ajout échoue", (final tester) async {
       final message = faker.lorem.sentence();
-      final dio =
-          DioMock()..patchM(
-            Endpoints.profile,
-            statusCode: HttpStatus.badRequest,
-            responseData: {'message': message},
-          );
+      final dio = DioMock()..patchM(Endpoints.profile, statusCode: HttpStatus.badRequest, responseData: {'message': message});
       await _pumpFirstNamePage(tester, dio: dio);
 
       final validFirstName = Faker().person.firstName();
@@ -139,17 +110,9 @@ void main() {
 
     testWidgets('être accessible', (final tester) async {
       await _pumpFirstNamePage(tester);
-      expect(
-        find.bySemanticsLabel(
-          Localisation.questionCourantSurMax(1, 3).replaceAll('**', ''),
-        ),
-        findsOneWidget,
-      );
+      expect(find.bySemanticsLabel(Localisation.questionCourantSurMax(1, 3).replaceAll('**', '')), findsOneWidget);
       expect(find.bySemanticsLabel(Localisation.bienvenueSur), findsOneWidget);
-      expect(
-        find.bySemanticsLabel(Localisation.bienvenueSurDetails),
-        findsOneWidget,
-      );
+      expect(find.bySemanticsLabel(Localisation.bienvenueSurDetails), findsOneWidget);
       expect(find.bySemanticsLabel(Localisation.monPrenom), findsOneWidget);
       expect(find.bySemanticsLabel(Localisation.continuer), findsOneWidget);
     });

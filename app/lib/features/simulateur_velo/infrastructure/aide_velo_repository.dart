@@ -12,8 +12,7 @@ import 'package:app/features/simulateur_velo/infrastructure/aide_velo_par_type_m
 import 'package:fpdart/fpdart.dart';
 
 class AideVeloRepository {
-  const AideVeloRepository({required final DioHttpClient client})
-    : _client = client;
+  const AideVeloRepository({required final DioHttpClient client}) : _client = client;
 
   final DioHttpClient _client;
 
@@ -35,10 +34,7 @@ class AideVeloRepository {
     return result.fold(Left.new, (final r) async {
       final response = await _client.post(
         Endpoints.simulerAideVelo,
-        data: jsonEncode({
-          'prix_du_velo': prix,
-          'etat_du_velo': _etatVeloToString(etatVelo),
-        }),
+        data: jsonEncode({'prix_du_velo': prix, 'etat_du_velo': _etatVeloToString(etatVelo)}),
       );
 
       if (response.statusCode! >= HttpStatus.badRequest) {
@@ -65,15 +61,9 @@ class AideVeloRepository {
     final [profileResponse, logementResponse] = await Future.wait([
       _client.patch(
         Endpoints.profile,
-        data: jsonEncode({
-          'nombre_de_parts_fiscales': nombreDePartsFiscales,
-          'revenu_fiscal': revenuFiscal,
-        }),
+        data: jsonEncode({'nombre_de_parts_fiscales': nombreDePartsFiscales, 'revenu_fiscal': revenuFiscal}),
       ),
-      _client.patch(
-        Endpoints.logement,
-        data: jsonEncode({'code_postal': codePostal, 'commune': commune}),
-      ),
+      _client.patch(Endpoints.logement, data: jsonEncode({'code_postal': codePostal, 'commune': commune})),
     ]);
 
     if (isResponseUnsuccessful(profileResponse.statusCode)) {

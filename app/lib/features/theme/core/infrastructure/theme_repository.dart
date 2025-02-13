@@ -9,45 +9,27 @@ import 'package:app/features/theme/core/infrastructure/service_item_mapper.dart'
 import 'package:fpdart/fpdart.dart';
 
 class ThemeRepository {
-  const ThemeRepository({required final DioHttpClient client})
-    : _client = client;
+  const ThemeRepository({required final DioHttpClient client}) : _client = client;
 
   final DioHttpClient _client;
 
-  Future<Either<Exception, List<MissionListe>>> getMissions(
-    final ThemeType themeType,
-  ) async {
-    final response = await _client.get(
-      Endpoints.missionsRecommandeesParThematique(themeType.name),
-    );
+  Future<Either<Exception, List<MissionListe>>> getMissions(final ThemeType themeType) async {
+    final response = await _client.get(Endpoints.missionsRecommandeesParThematique(themeType.name));
 
     if (isResponseUnsuccessful(response.statusCode)) {
       return Left(Exception('Erreur lors de la récupération des missions'));
     }
     final json = response.data as List<dynamic>;
 
-    return Right(
-      json
-          .map(
-            (final e) => MissionListeMapper.fromJson(e as Map<String, dynamic>),
-          )
-          .toList(),
-    );
+    return Right(json.map((final e) => MissionListeMapper.fromJson(e as Map<String, dynamic>)).toList());
   }
 
-  Future<Either<Exception, List<ServiceItem>>> getServices(
-    final ThemeType themeType,
-  ) async {
-    final response = await _client.get(
-      Endpoints.servicesParThematique(themeType.name),
-    );
+  Future<Either<Exception, List<ServiceItem>>> getServices(final ThemeType themeType) async {
+    final response = await _client.get(Endpoints.servicesParThematique(themeType.name));
 
     return isResponseSuccessful(response.statusCode)
         ? Right(
-          (response.data as List<dynamic>)
-              .map((final e) => e as Map<String, dynamic>)
-              .map(ServiceItemMapper.fromJson)
-              .toList(),
+          (response.data as List<dynamic>).map((final e) => e as Map<String, dynamic>).map(ServiceItemMapper.fromJson).toList(),
         )
         : Left(Exception('Erreur lors de la récupération des services'));
   }

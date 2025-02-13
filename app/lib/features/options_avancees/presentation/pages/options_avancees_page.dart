@@ -15,11 +15,8 @@ class OptionsAvanceesPage extends StatelessWidget {
   static const name = 'options-avancees';
   static const path = name;
 
-  static GoRoute get route => GoRoute(
-    path: path,
-    name: name,
-    builder: (final context, final state) => const OptionsAvanceesPage(),
-  );
+  static GoRoute get route =>
+      GoRoute(path: path, name: name, builder: (final context, final state) => const OptionsAvanceesPage());
 
   @override
   Widget build(final context) => FnvScaffold(

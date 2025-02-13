@@ -14,21 +14,14 @@ final class CreerCompteState extends Equatable {
   });
 
   const CreerCompteState.empty()
-    : this(
-        adresseMail: '',
-        motDePasse: '',
-        aCguAcceptees: false,
-        erreur: const None(),
-        compteCree: false,
-      );
+    : this(adresseMail: '', motDePasse: '', aCguAcceptees: false, erreur: const None(), compteCree: false);
 
   final String adresseMail;
   final String motDePasse;
   final bool aCguAcceptees;
   final Option<String> erreur;
   bool get adresseMailEstValide => mailRegex.hasMatch(adresseMail);
-  bool get estValide =>
-      adresseMailEstValide && motDePasse.isNotEmpty && aCguAcceptees;
+  bool get estValide => adresseMailEstValide && motDePasse.isNotEmpty && aCguAcceptees;
 
   final bool compteCree;
 
@@ -47,11 +40,5 @@ final class CreerCompteState extends Equatable {
   );
 
   @override
-  List<Object> get props => [
-    adresseMail,
-    motDePasse,
-    erreur,
-    aCguAcceptees,
-    compteCree,
-  ];
+  List<Object> get props => [adresseMail, motDePasse, erreur, aCguAcceptees, compteCree];
 }

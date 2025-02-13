@@ -5,10 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import '../helper/feature_context.dart';
 
 /// Usage: I have action detail in my library
-Future<void> iHaveActionDetailInMyLibrary(
-  final WidgetTester tester,
-  final bdd.DataTable dataTable,
-) async {
+Future<void> iHaveActionDetailInMyLibrary(final WidgetTester tester, final bdd.DataTable dataTable) async {
   dataTable
       .asMaps()
       .map(
@@ -19,17 +16,11 @@ Future<void> iHaveActionDetailInMyLibrary(
           'comment': e['how'],
           'pourquoi': e['why'],
           'services': [
-            {
-              'recherche_service_id': e['service_id'],
-              'categorie': e['service_category'],
-            },
+            {'recherche_service_id': e['service_id'], 'categorie': e['service_category']},
           ],
         },
       )
       .forEach((final e) {
-        FeatureContext.instance.dioMock.getM(
-          Endpoints.action(e['code'] as String),
-          responseData: e,
-        );
+        FeatureContext.instance.dioMock.getM(Endpoints.action(e['code'] as String), responseData: e);
       });
 }
