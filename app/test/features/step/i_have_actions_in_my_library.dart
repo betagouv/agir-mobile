@@ -14,6 +14,7 @@ Future<void> iHaveActionsInMyLibrary(
       .asMaps()
       .map(
         (final e) => {
+          'type': 'classique',
           'code': e['code'],
           'titre': e['title'],
           'sous_titre': Faker().lorem.sentence(),
