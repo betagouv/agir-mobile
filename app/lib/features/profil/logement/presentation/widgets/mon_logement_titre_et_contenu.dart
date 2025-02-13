@@ -3,11 +3,7 @@ import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 
 class MonLogementTitreEtContenu extends StatelessWidget {
-  const MonLogementTitreEtContenu({
-    super.key,
-    required this.titre,
-    required this.contenu,
-  });
+  const MonLogementTitreEtContenu({super.key, required this.titre, required this.contenu});
 
   final String titre;
   final Widget contenu;

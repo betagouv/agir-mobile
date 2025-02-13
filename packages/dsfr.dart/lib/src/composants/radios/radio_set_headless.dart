@@ -30,12 +30,10 @@ class DsfrRadioButtonSetHeadless<T> extends StatefulWidget {
   final bool isEnabled;
 
   @override
-  State<DsfrRadioButtonSetHeadless<T>> createState() =>
-      _DsfrRadioButtonSetHeadlessState<T>();
+  State<DsfrRadioButtonSetHeadless<T>> createState() => _DsfrRadioButtonSetHeadlessState<T>();
 }
 
-class _DsfrRadioButtonSetHeadlessState<T>
-    extends State<DsfrRadioButtonSetHeadless<T>> {
+class _DsfrRadioButtonSetHeadlessState<T> extends State<DsfrRadioButtonSetHeadless<T>> {
   T? _value;
 
   @override
@@ -65,11 +63,7 @@ class _DsfrRadioButtonSetHeadlessState<T>
             .toList();
 
     return switch (widget.mode) {
-      DsfrRadioButtonSetMode.row => Wrap(
-        spacing: DsfrSpacings.s1w,
-        runSpacing: DsfrSpacings.s1w,
-        children: children,
-      ),
+      DsfrRadioButtonSetMode.row => Wrap(spacing: DsfrSpacings.s1w, runSpacing: DsfrSpacings.s1w, children: children),
       DsfrRadioButtonSetMode.column => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         spacing: DsfrSpacings.s1w,

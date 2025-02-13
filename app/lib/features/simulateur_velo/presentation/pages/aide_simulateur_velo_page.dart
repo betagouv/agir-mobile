@@ -28,12 +28,8 @@ class AideSimulateurVeloPage extends StatelessWidget {
   static const name = 'aide-simulateur-velo';
   static const path = name;
 
-  static GoRoute route({required final List<RouteBase> routes}) => GoRoute(
-    path: path,
-    name: name,
-    builder: (final context, final state) => const AideSimulateurVeloPage(),
-    routes: routes,
-  );
+  static GoRoute route({required final List<RouteBase> routes}) =>
+      GoRoute(path: path, name: name, builder: (final context, final state) => const AideSimulateurVeloPage(), routes: routes);
 
   @override
   Widget build(final context) {
@@ -86,8 +82,7 @@ class _PriceState extends State<_Price> {
 
   @override
   Widget build(final context) {
-    _prixVeloController.text =
-        context.read<AideVeloBloc>().state.prix.toString();
+    _prixVeloController.text = context.read<AideVeloBloc>().state.prix.toString();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -107,11 +102,7 @@ class _PriceState extends State<_Price> {
                 }
                 context.read<AideVeloBloc>().add(AideVeloPrixChange(parse));
               },
-              validator:
-                  (final value) =>
-                      value == null || value.isEmpty
-                          ? Localisation.prixDuVeloObligatoire
-                          : null,
+              validator: (final value) => value == null || value.isEmpty ? Localisation.prixDuVeloObligatoire : null,
               textAlign: TextAlign.end,
               keyboardType: TextInputType.number,
               textInputAction: TextInputAction.next,
@@ -120,10 +111,7 @@ class _PriceState extends State<_Price> {
           ),
         ),
         const SizedBox(height: DsfrSpacings.s2w),
-        const Text(
-          Localisation.prixDuVeloExplications,
-          style: FnvTextStyles.prixExplicationsStyle,
-        ),
+        const Text(Localisation.prixDuVeloExplications, style: FnvTextStyles.prixExplicationsStyle),
         const SizedBox(height: DsfrSpacings.s1w),
         ...VeloPourSimulateur.values
             .map((final e) {
@@ -137,10 +125,7 @@ class _PriceState extends State<_Price> {
                     children: [
                       TextSpan(
                         text: Localisation.euro(e.prix),
-                        style: const TextStyle(
-                          decoration: TextDecoration.underline,
-                          decorationColor: foregroundColor,
-                        ),
+                        style: const TextStyle(decoration: TextDecoration.underline, decorationColor: foregroundColor),
                       ),
                     ],
                   ),
@@ -167,10 +152,7 @@ class _BikeState extends StatelessWidget {
   @override
   Widget build(final context) => DsfrRadioButtonSet(
     title: Localisation.etatDuVelo,
-    values: {
-      VeloEtat.neuf: VeloEtat.neuf.label,
-      VeloEtat.occasion: VeloEtat.occasion.label,
-    },
+    values: {VeloEtat.neuf: VeloEtat.neuf.label, VeloEtat.occasion: VeloEtat.occasion.label},
     onCallback: (final value) {
       if (value == null) {
         return;
@@ -187,9 +169,7 @@ class _ElementsNecessaireAuCalcul extends StatelessWidget {
   @override
   Widget build(final context) {
     final state = context.watch<AideVeloBloc>().state;
-    const bodySmMediumBlue = DsfrTextStyle.bodySmMedium(
-      color: DsfrColors.blueFranceSun113,
-    );
+    const bodySmMediumBlue = DsfrTextStyle.bodySmMedium(color: DsfrColors.blueFranceSun113);
 
     return state.veutModifierLesInformations
         ? const Column(
@@ -213,10 +193,7 @@ class _ElementsNecessaireAuCalcul extends StatelessWidget {
             const Text.rich(
               TextSpan(
                 children: [
-                  WidgetSpan(
-                    alignment: PlaceholderAlignment.middle,
-                    child: Icon(DsfrIcons.systemErrorWarningLine, size: 16),
-                  ),
+                  WidgetSpan(alignment: PlaceholderAlignment.middle, child: Icon(DsfrIcons.systemErrorWarningLine, size: 16)),
                   WidgetSpan(child: SizedBox(width: DsfrSpacings.s1v)),
                   TextSpan(text: Localisation.elementsNecessaireAuCalcul),
                 ],
@@ -229,24 +206,14 @@ class _ElementsNecessaireAuCalcul extends StatelessWidget {
                 text: Localisation.donneesUtiliseesPart1,
                 children: [
                   TextSpan(
-                    text: Localisation.donneesUtiliseesCodePostalEtCommune(
-                      codePostal: state.codePostal,
-                      commune: state.commune,
-                    ),
+                    text: Localisation.donneesUtiliseesCodePostalEtCommune(codePostal: state.codePostal, commune: state.commune),
                     style: bodySmMediumBlue,
                   ),
                   const TextSpan(text: Localisation.donneesUtiliseesPart2),
-                  TextSpan(
-                    text: Localisation.donneesUtiliseesRevenuFiscal(
-                      state.revenuFiscal,
-                    ),
-                    style: bodySmMediumBlue,
-                  ),
+                  TextSpan(text: Localisation.donneesUtiliseesRevenuFiscal(state.revenuFiscal), style: bodySmMediumBlue),
                   const TextSpan(text: Localisation.donneesUtiliseesPart3),
                   TextSpan(
-                    text: Localisation.donneesUtiliseesNombreDeParts(
-                      state.nombreDePartsFiscales,
-                    ),
+                    text: Localisation.donneesUtiliseesNombreDeParts(state.nombreDePartsFiscales),
                     style: bodySmMediumBlue,
                   ),
                   const TextSpan(text: Localisation.point),
@@ -260,10 +227,7 @@ class _ElementsNecessaireAuCalcul extends StatelessWidget {
               child: DsfrLink.md(
                 label: Localisation.modifier,
                 icon: DsfrIcons.designPencilFill,
-                onTap:
-                    () => context.read<AideVeloBloc>().add(
-                      const AideVeloModificationDemandee(),
-                    ),
+                onTap: () => context.read<AideVeloBloc>().add(const AideVeloModificationDemandee()),
               ),
             ),
           ],
@@ -279,10 +243,7 @@ class _Avertissement extends StatelessWidget {
       context.watch<AideVeloBloc>().state.estValide
           ? const SizedBox.shrink()
           : const Column(
-            children: [
-              FnvAlert.error(label: Localisation.aideVeloAvertissement),
-              SizedBox(height: DsfrSpacings.s2w),
-            ],
+            children: [FnvAlert.error(label: Localisation.aideVeloAvertissement), SizedBox(height: DsfrSpacings.s2w)],
           );
 }
 
@@ -333,10 +294,7 @@ class _CodePostalEtCommuneState extends State<_CodePostalEtCommune> {
               _textEditingController.clear();
             },
             keyboardType: TextInputType.number,
-            inputFormatters: [
-              FilteringTextInputFormatter.digitsOnly,
-              LengthLimitingTextInputFormatter(5),
-            ],
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly, LengthLimitingTextInputFormatter(5)],
             autofillHints: const [AutofillHints.postalCode],
           ),
         ),
@@ -344,10 +302,7 @@ class _CodePostalEtCommuneState extends State<_CodePostalEtCommune> {
         Expanded(
           child: DsfrSelect<String>(
             label: Localisation.commune,
-            dropdownMenuEntries:
-                state.communes
-                    .map((final e) => DropdownMenuEntry(value: e, label: e))
-                    .toList(),
+            dropdownMenuEntries: state.communes.map((final e) => DropdownMenuEntry(value: e, label: e)).toList(),
             onSelected: (final value) => _handleCommune(context, value),
             controller: _textEditingController,
           ),
@@ -362,8 +317,7 @@ class _NombreDePartsFiscales extends StatelessWidget {
 
   @override
   Widget build(final context) {
-    final nombreDePartsFiscales =
-        context.read<AideVeloBloc>().state.nombreDePartsFiscales;
+    final nombreDePartsFiscales = context.read<AideVeloBloc>().state.nombreDePartsFiscales;
 
     return DsfrInput(
       label: Localisation.nombreDePartsFiscales,
@@ -372,15 +326,11 @@ class _NombreDePartsFiscales extends StatelessWidget {
       onChanged: (final value) {
         final parse = double.tryParse(value.replaceFirst(',', '.'));
         if (parse == null) {
-          context.read<AideVeloBloc>().add(
-            const AideVeloNombreDePartsFiscalesChange(0),
-          );
+          context.read<AideVeloBloc>().add(const AideVeloNombreDePartsFiscalesChange(0));
 
           return;
         }
-        context.read<AideVeloBloc>().add(
-          AideVeloNombreDePartsFiscalesChange(parse),
-        );
+        context.read<AideVeloBloc>().add(AideVeloNombreDePartsFiscalesChange(parse));
       },
       width: adjustTextSize(context, _inputWidth),
       keyboardType: const TextInputType.numberWithOptions(decimal: true),
@@ -417,12 +367,8 @@ class _EstimerMesAides extends StatelessWidget {
     onPressed:
         context.watch<AideVeloBloc>().state.estValide
             ? () async {
-              context.read<AideVeloBloc>().add(
-                const AideVeloEstimationDemandee(),
-              );
-              await GoRouter.of(
-                context,
-              ).pushNamed(AideSimulateurVeloDisponiblePage.name);
+              context.read<AideVeloBloc>().add(const AideVeloEstimationDemandee());
+              await GoRouter.of(context).pushNamed(AideSimulateurVeloDisponiblePage.name);
             }
             : null,
   );
@@ -435,29 +381,20 @@ class _Questions extends StatelessWidget {
   Widget build(final context) => DsfrAccordionsGroup(
     values: [
       DsfrAccordion(
-        headerBuilder:
-            (final isExpanded) => const _AccordionHeader(
-              text: Localisation.ouTrouverCesInformations,
-            ),
+        headerBuilder: (final isExpanded) => const _AccordionHeader(text: Localisation.ouTrouverCesInformations),
         body: _AccordionBody(
           child: MarkdownBody(
             data: Localisation.ouTrouverCesInformationsReponse,
-            styleSheet: MarkdownStyleSheet(
-              p: const DsfrTextStyle(fontSize: 15),
-            ),
+            styleSheet: MarkdownStyleSheet(p: const DsfrTextStyle(fontSize: 15)),
           ),
         ),
       ),
       DsfrAccordion(
-        headerBuilder:
-            (final isExpanded) =>
-                const _AccordionHeader(text: Localisation.pourquoiCesQuestions),
+        headerBuilder: (final isExpanded) => const _AccordionHeader(text: Localisation.pourquoiCesQuestions),
         body: _AccordionBody(
           child: MarkdownBody(
             data: Localisation.pourquoiCesQuestionsReponse,
-            styleSheet: MarkdownStyleSheet(
-              p: const DsfrTextStyle(fontSize: 15),
-            ),
+            styleSheet: MarkdownStyleSheet(p: const DsfrTextStyle(fontSize: 15)),
           ),
         ),
       ),
@@ -471,8 +408,7 @@ class _AccordionBody extends StatelessWidget {
   final Widget child;
 
   @override
-  Widget build(final context) =>
-      Padding(padding: const EdgeInsets.all(DsfrSpacings.s2w), child: child);
+  Widget build(final context) => Padding(padding: const EdgeInsets.all(DsfrSpacings.s2w), child: child);
 }
 
 class _AccordionHeader extends StatelessWidget {
@@ -488,10 +424,7 @@ class _AccordionHeader extends StatelessWidget {
         children: [
           const WidgetSpan(
             alignment: PlaceholderAlignment.middle,
-            child: Icon(
-              DsfrIcons.systemQuestionFill,
-              color: DsfrColors.blueFranceSun113,
-            ),
+            child: Icon(DsfrIcons.systemQuestionFill, color: DsfrColors.blueFranceSun113),
           ),
           const WidgetSpan(child: SizedBox(width: DsfrSpacings.s1w)),
           TextSpan(text: text),

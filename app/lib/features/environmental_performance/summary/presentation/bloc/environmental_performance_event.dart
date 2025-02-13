@@ -10,8 +10,7 @@ sealed class EnvironmentalPerformanceEvent extends Equatable {
 }
 
 @immutable
-final class EnvironmentalPerformanceStarted
-    extends EnvironmentalPerformanceEvent {
+final class EnvironmentalPerformanceStarted extends EnvironmentalPerformanceEvent {
   const EnvironmentalPerformanceStarted();
 
   @override

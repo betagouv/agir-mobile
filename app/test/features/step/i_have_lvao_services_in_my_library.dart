@@ -7,11 +7,7 @@ import '../helper/feature_context.dart';
 Future<void> iHaveLvaoServicesInMyLibrary(final WidgetTester tester) async {
   FeatureContext.instance.dioMock.postM(
     Endpoints.lvaoSearch,
-    requestData: {
-      'categorie': 'reparer',
-      'nombre_max_resultats': 4,
-      'rayon_metres': 5000,
-    },
+    requestData: {'categorie': 'reparer', 'nombre_max_resultats': 4, 'rayon_metres': 5000},
     responseData: {
       'encore_plus_resultats_dispo': true,
       'resultats': [

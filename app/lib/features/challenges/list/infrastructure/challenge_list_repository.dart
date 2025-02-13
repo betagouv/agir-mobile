@@ -8,8 +8,7 @@ import 'package:app/features/challenges/list/infrastructure/challenge_item_mappe
 import 'package:fpdart/fpdart.dart';
 
 class ChallengeListRepository {
-  const ChallengeListRepository({required final DioHttpClient client})
-    : _client = client;
+  const ChallengeListRepository({required final DioHttpClient client}) : _client = client;
 
   final DioHttpClient _client;
 
@@ -30,13 +29,6 @@ class ChallengeListRepository {
 
     final json = response.data! as List<dynamic>;
 
-    return Right(
-      json
-          .map(
-            (final e) =>
-                ChallengeItemMapper.fromJson(e as Map<String, dynamic>),
-          )
-          .toList(),
-    );
+    return Right(json.map((final e) => ChallengeItemMapper.fromJson(e as Map<String, dynamic>)).toList());
   }
 }

@@ -8,11 +8,7 @@ typedef FnvAccordionCallback = void Function(int panelIndex, bool isExpanded);
 typedef FnvAccordionHeaderBuilder = Widget Function(bool isExpanded);
 
 class FnvAccordion {
-  const FnvAccordion({
-    required this.headerBuilder,
-    required this.body,
-    this.isEnable = true,
-  });
+  const FnvAccordion({required this.headerBuilder, required this.body, this.isEnable = true});
 
   final FnvAccordionHeaderBuilder headerBuilder;
   final Widget body;
@@ -62,12 +58,7 @@ class _FnvAccordionsGroupState extends State<FnvAccordionsGroup> {
 }
 
 class _FnvAccordion extends StatelessWidget {
-  const _FnvAccordion({
-    required this.index,
-    required this.item,
-    required this.isExpanded,
-    required this.onAccordionCallback,
-  });
+  const _FnvAccordion({required this.index, required this.item, required this.isExpanded, required this.onAccordionCallback});
 
   final int index;
   final FnvAccordion item;
@@ -91,11 +82,7 @@ class _FnvAccordion extends StatelessWidget {
                 AnimatedRotation(
                   turns: isExpanded ? 0.25 : 0,
                   duration: Durations.short4,
-                  child: const Icon(
-                    DsfrIcons.systemArrowRightSLine,
-                    size: DsfrSpacings.s3w,
-                    color: Color(0xFF491273),
-                  ),
+                  child: const Icon(DsfrIcons.systemArrowRightSLine, size: DsfrSpacings.s3w, color: Color(0xFF491273)),
                 ),
               const SizedBox(width: DsfrSpacings.s2w),
             ],
@@ -108,25 +95,11 @@ class _FnvAccordion extends StatelessWidget {
         secondChild: DecoratedBox(
           decoration: const BoxDecoration(
             color: Color(0xFFF2F2F2),
-            boxShadow: [
-              BoxShadow(
-                color: Color(0x0D150323),
-                offset: Offset(0, 6),
-                blurRadius: 6,
-                inset: true,
-              ),
-            ],
+            boxShadow: [BoxShadow(color: Color(0x0D150323), offset: Offset(0, 6), blurRadius: 6, inset: true)],
           ),
-          child: Padding(
-            padding: const EdgeInsets.only(
-              top: DsfrSpacings.s2w,
-              bottom: DsfrSpacings.s3w,
-            ),
-            child: item.body,
-          ),
+          child: Padding(padding: const EdgeInsets.only(top: DsfrSpacings.s2w, bottom: DsfrSpacings.s3w), child: item.body),
         ),
-        crossFadeState:
-            isExpanded ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+        crossFadeState: isExpanded ? CrossFadeState.showSecond : CrossFadeState.showFirst,
         duration: Durations.short4,
       ),
     ],

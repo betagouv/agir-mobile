@@ -23,9 +23,7 @@ class Entier extends StatelessWidget {
         if (int.tryParse(value) == null) {
           return;
         }
-        context.read<MieuxVousConnaitreEditBloc>().add(
-          MieuxVousConnaitreEditEntierChangee(value),
-        );
+        context.read<MieuxVousConnaitreEditBloc>().add(MieuxVousConnaitreEditEntierChangee(value));
       },
       keyboardType: TextInputType.number,
       inputFormatters: [FilteringTextInputFormatter.digitsOnly],

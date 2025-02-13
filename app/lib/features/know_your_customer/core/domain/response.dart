@@ -6,8 +6,7 @@ class Response extends Equatable {
   final String value;
   final String? unit;
 
-  Response copyWith({final String? value, final String? unit}) =>
-      Response(value: value ?? this.value, unit: unit ?? this.unit);
+  Response copyWith({final String? value, final String? unit}) => Response(value: value ?? this.value, unit: unit ?? this.unit);
 
   @override
   List<Object?> get props => [value, unit];

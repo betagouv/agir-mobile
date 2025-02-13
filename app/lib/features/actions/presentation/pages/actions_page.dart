@@ -19,18 +19,11 @@ class ActionsPage extends StatelessWidget {
   static const name = 'actions';
   static const path = name;
 
-  static GoRoute get route => GoRoute(
-    path: path,
-    name: name,
-    builder: (final context, final state) => const ActionsPage(),
-  );
+  static GoRoute get route => GoRoute(path: path, name: name, builder: (final context, final state) => const ActionsPage());
 
   @override
   Widget build(final BuildContext context) => BlocProvider(
-    create:
-        (final context) =>
-            ActionsBloc(repository: context.read())
-              ..add(const ActionsLoadRequested()),
+    create: (final context) => ActionsBloc(repository: context.read())..add(const ActionsLoadRequested()),
     child: const _View(),
   );
 }
@@ -43,21 +36,14 @@ class _View extends StatelessWidget {
     body: ListView(
       padding: const EdgeInsets.all(paddingVerticalPage),
       children: [
-        MarkdownBody(
-          data: Localisation.toutesLesActions,
-          styleSheet: MarkdownStyleSheet(p: const DsfrTextStyle(fontSize: 24)),
-        ),
+        MarkdownBody(data: Localisation.toutesLesActions, styleSheet: MarkdownStyleSheet(p: const DsfrTextStyle(fontSize: 24))),
         const SizedBox(height: 16),
         BlocBuilder<ActionsBloc, ActionsState>(
           builder:
               (final context, final state) => switch (state) {
-                ActionsInitial() || ActionsLoadInProgress() => const Center(
-                  child: CircularProgressIndicator(),
-                ),
+                ActionsInitial() || ActionsLoadInProgress() => const Center(child: CircularProgressIndicator()),
                 ActionsLoadSuccess() => _Success(state: state),
-                ActionsLoadFailure() => const Center(
-                  child: Text('Erreur lors du chargement des actions'),
-                ),
+                ActionsLoadFailure() => const Center(child: Text('Erreur lors du chargement des actions')),
               },
         ),
       ],
@@ -78,13 +64,8 @@ class _Success extends StatelessWidget {
       primary: false,
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        mainAxisSpacing: 16,
-        crossAxisSpacing: 16,
-      ),
-      itemBuilder:
-          (final context, final index) => _Element(action: actions[index]),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, mainAxisSpacing: 16, crossAxisSpacing: 16),
+      itemBuilder: (final context, final index) => _Element(action: actions[index]),
       itemCount: actions.length,
     );
   }
@@ -98,28 +79,17 @@ class _Element extends StatelessWidget {
   @override
   Widget build(final BuildContext context) => FnvCard(
     onTap: () async {
-      await GoRouter.of(context).pushNamed(
-        ActionPage.name,
-        pathParameters: ActionPage.pathParameters(
-          title: action.title,
-          id: action.id,
-        ),
-      );
+      await GoRouter.of(
+        context,
+      ).pushNamed(ActionPage.name, pathParameters: ActionPage.pathParameters(title: action.title, id: action.id));
     },
     child: Padding(
       padding: const EdgeInsets.all(DsfrSpacings.s2w),
       child: Column(
         children: [
-          MarkdownBody(
-            data: action.title,
-            styleSheet: MarkdownStyleSheet(p: const DsfrTextStyle.bodyMd()),
-          ),
+          MarkdownBody(data: action.title, styleSheet: MarkdownStyleSheet(p: const DsfrTextStyle.bodyMd())),
           const SizedBox(height: DsfrSpacings.s2w),
-          _Information(
-            icon: DsfrIcons.userTeamLine,
-            value: action.numberOfActionsCompleted,
-            suffix: Localisation.action,
-          ),
+          _Information(icon: DsfrIcons.userTeamLine, value: action.numberOfActionsCompleted, suffix: Localisation.action),
           _Information(
             icon: DsfrIcons.financeMoneyEuroCircleLine,
             value: action.numberOfAidsAvailable,
@@ -132,11 +102,7 @@ class _Element extends StatelessWidget {
 }
 
 class _Information extends StatelessWidget {
-  const _Information({
-    required this.icon,
-    required this.value,
-    required this.suffix,
-  });
+  const _Information({required this.icon, required this.value, required this.suffix});
 
   final IconData icon;
   final int value;
@@ -151,20 +117,10 @@ class _Information extends StatelessWidget {
             child: Row(
               spacing: DsfrSpacings.s1w,
               children: [
-                ExcludeSemantics(
-                  child: Icon(
-                    icon,
-                    size: 18,
-                    color: DsfrColors.blueFranceSun113,
-                  ),
-                ),
+                ExcludeSemantics(child: Icon(icon, size: 18, color: DsfrColors.blueFranceSun113)),
                 MarkdownBody(
                   data: '**$value** $suffix${value > 1 ? 's' : ''}',
-                  styleSheet: MarkdownStyleSheet(
-                    p: const DsfrTextStyle.bodySmMedium(
-                      color: Color(0xff5d5d5d),
-                    ),
-                  ),
+                  styleSheet: MarkdownStyleSheet(p: const DsfrTextStyle.bodySmMedium(color: Color(0xff5d5d5d))),
                 ),
               ],
             ),

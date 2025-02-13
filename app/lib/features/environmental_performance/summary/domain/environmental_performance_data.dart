@@ -16,8 +16,7 @@ sealed class EnvironmentalPerformanceData extends Equatable {
 final class EnvironmentalPerformanceEmpty extends EnvironmentalPerformanceData {
   EnvironmentalPerformanceEmpty({required this.questions})
     : questionsNumber = questions.length,
-      questionsNumberAnswered =
-          questions.where((final question) => question.isAnswered).length;
+      questionsNumberAnswered = questions.where((final question) => question.isAnswered).length;
 
   final List<Question> questions;
   final int questionsNumber;
@@ -25,15 +24,10 @@ final class EnvironmentalPerformanceEmpty extends EnvironmentalPerformanceData {
   double get percentageCompletion => questionsNumberAnswered / questionsNumber;
 
   @override
-  List<Object> get props => [
-    questions,
-    questionsNumberAnswered,
-    questionsNumber,
-  ];
+  List<Object> get props => [questions, questionsNumberAnswered, questionsNumber];
 }
 
-final class EnvironmentalPerformancePartial
-    extends EnvironmentalPerformanceData {
+final class EnvironmentalPerformancePartial extends EnvironmentalPerformanceData {
   const EnvironmentalPerformancePartial({
     required this.performanceOnTransport,
     required this.performanceOnFood,
@@ -75,10 +69,5 @@ final class EnvironmentalPerformanceFull extends EnvironmentalPerformanceData {
   final List<EnvironmentalPerformanceCategory> categories;
 
   @override
-  List<Object> get props => [
-    top,
-    footprintInKgOfCO2ePerYear,
-    detail,
-    categories,
-  ];
+  List<Object> get props => [top, footprintInKgOfCO2ePerYear, detail, categories];
 }

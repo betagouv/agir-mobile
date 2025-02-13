@@ -13,9 +13,7 @@ class HomeTabBar extends TabBar {
         ],
         isScrollable: true,
         padding: const EdgeInsets.symmetric(horizontal: 12),
-        indicator: const UnderlineTabIndicator(
-          borderSide: BorderSide(color: DsfrColors.blueFranceSun113, width: 3),
-        ),
+        indicator: const UnderlineTabIndicator(borderSide: BorderSide(color: DsfrColors.blueFranceSun113, width: 3)),
         dividerHeight: 0,
         labelStyle: const DsfrTextStyle.bodyMd(),
         labelPadding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s1w),

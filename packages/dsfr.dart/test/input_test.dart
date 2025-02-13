@@ -8,23 +8,13 @@ void main() {
   group('Champ de saisie', () {
     testWidgets('Voir le label', (final tester) async {
       const label = 'Label';
-      await tester.pumpWidget(
-        App(child: DsfrInput(label: label, onChanged: (final value) {})),
-      );
+      await tester.pumpWidget(App(child: DsfrInput(label: label, onChanged: (final value) {})));
       expect(find.text(label), findsOneWidget);
     });
 
     testWidgets('Voir la description', (final tester) async {
       const hintText = 'Indice';
-      await tester.pumpWidget(
-        App(
-          child: DsfrInput(
-            label: 'Label',
-            hintText: hintText,
-            onChanged: (final value) {},
-          ),
-        ),
-      );
+      await tester.pumpWidget(App(child: DsfrInput(label: 'Label', hintText: hintText, onChanged: (final value) {})));
       expect(find.text(hintText), findsOneWidget);
     });
 
@@ -32,14 +22,7 @@ void main() {
       const initialValue = 'Valeur';
       final controller = TextEditingController(text: initialValue);
       await tester.pumpWidget(
-        App(
-          child: DsfrInput(
-            label: 'Label',
-            hintText: 'Indice',
-            controller: controller,
-            onChanged: (final value) {},
-          ),
-        ),
+        App(child: DsfrInput(label: 'Label', hintText: 'Indice', controller: controller, onChanged: (final value) {})),
       );
       expect(find.text(initialValue), findsOneWidget);
     });
@@ -47,9 +30,7 @@ void main() {
     testWidgets('Je saisie', (final tester) async {
       const label = 'Label';
       const text = 'a';
-      await tester.pumpWidget(
-        App(child: DsfrInput(label: label, onChanged: (final value) {})),
-      );
+      await tester.pumpWidget(App(child: DsfrInput(label: label, onChanged: (final value) {})));
 
       await tester.enterText(find.byType(DsfrInput), text);
 

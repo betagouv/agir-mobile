@@ -77,16 +77,11 @@ class _AppSetupState extends State<AppSetup> {
 
   Future<AuthenticationService> _initializeAuthenticationService() async {
     final authenticationStorage = AuthenticationStorage(
-      const FlutterSecureStorage(
-        aOptions: AndroidOptions(encryptedSharedPreferences: true),
-      ),
+      const FlutterSecureStorage(aOptions: AndroidOptions(encryptedSharedPreferences: true)),
     );
     await authenticationStorage.init();
 
-    final authenticationService = AuthenticationService(
-      authenticationRepository: authenticationStorage,
-      clock: _clock,
-    );
+    final authenticationService = AuthenticationService(authenticationRepository: authenticationStorage, clock: _clock);
     await authenticationService.checkAuthenticationStatus();
 
     return authenticationService;
@@ -108,10 +103,7 @@ class _AppSetupState extends State<AppSetup> {
         return const SizedBox.shrink();
       } else if (snapshot.hasError) {
         FlutterNativeSplash.remove();
-        ErrorHandler.captureException(
-          snapshot.error!.toString(),
-          snapshot.stackTrace,
-        );
+        ErrorHandler.captureException(snapshot.error!.toString(), snapshot.stackTrace);
 
         return ErrorScreen(packageInfo: _packageInfo);
       }
@@ -124,18 +116,10 @@ class _AppSetupState extends State<AppSetup> {
       }
 
       final dio =
-          Dio(
-              BaseOptions(
-                baseUrl: Uri.parse(apiUrl).toString(),
-                validateStatus: (final status) => true,
-              ),
-            )
+          Dio(BaseOptions(baseUrl: Uri.parse(apiUrl).toString(), validateStatus: (final status) => true))
             ..httpClientAdapter = NativeAdapter()
             ..addSentry();
-      final client = DioHttpClient(
-        dio: dio,
-        authenticationService: _authenticationService,
-      );
+      final client = DioHttpClient(dio: dio, authenticationService: _authenticationService);
 
       final messageBus = MessageBus();
 

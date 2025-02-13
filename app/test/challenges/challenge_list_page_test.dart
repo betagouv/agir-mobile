@@ -14,29 +14,18 @@ import '../helpers/dio_mock.dart';
 import '../helpers/faker.dart';
 import '../helpers/pump_page.dart';
 
-Future<void> _pumpPage(
-  final WidgetTester tester, {
-  required final DioMock dio,
-}) async {
-  final client = DioHttpClient(
-    dio: dio,
-    authenticationService: authenticationService,
-  );
+Future<void> _pumpPage(final WidgetTester tester, {required final DioMock dio}) async {
+  final client = DioHttpClient(dio: dio, authenticationService: authenticationService);
   await pumpPage(
     tester: tester,
     repositoryProviders: [
-      RepositoryProvider<ChallengeListRepository>(
-        create: (final context) => ChallengeListRepository(client: client),
-      ),
+      RepositoryProvider<ChallengeListRepository>(create: (final context) => ChallengeListRepository(client: client)),
     ],
     blocProviders: [
       BlocProvider<GamificationBloc>(
         create:
             (final context) => GamificationBloc(
-              repository: GamificationRepository(
-                client: client,
-                messageBus: MessageBus(),
-              ),
+              repository: GamificationRepository(client: client, messageBus: MessageBus()),
               authenticationService: authenticationService,
             ),
       ),
@@ -52,11 +41,7 @@ void main() {
 
   setUp(() {
     dio = DioMock();
-    challenges =
-        List.generate(
-          4,
-          (final _) => challengeItemFaker(),
-        ).where((final e) => e['status'] != 'todo').toList();
+    challenges = List.generate(4, (final _) => challengeItemFaker()).where((final e) => e['status'] != 'todo').toList();
     dio.getM(
       '/utilisateurs/%7BuserId%7D/defis_v2?status=en_cours&status=pas_envie&status=abondon&status=fait',
       responseData: challenges,
@@ -75,16 +60,12 @@ void main() {
       }
     });
 
-    testWidgets('appuyer sur une défi devrait ouvrir la page de détails', (
-      final tester,
-    ) async {
+    testWidgets('appuyer sur une défi devrait ouvrir la page de détails', (final tester) async {
       await _pumpPage(tester, dio: dio);
 
       await tester.pumpAndSettle();
 
-      final expected = ChallengeItemMapper.fromJson(
-        challenges.firstWhere((final e) => e['status'] != 'todo'),
-      );
+      final expected = ChallengeItemMapper.fromJson(challenges.firstWhere((final e) => e['status'] != 'todo'));
 
       await tester.tap(find.text(expected.titre));
 

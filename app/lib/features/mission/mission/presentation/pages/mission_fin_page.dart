@@ -28,9 +28,7 @@ class MissionFinPage extends StatelessWidget {
             const Text(Localisation.bravo, style: DsfrTextStyle.headline2()),
             Text(
               Localisation.vousAvezTermineLaMission(step.title),
-              style: const DsfrTextStyle.bodyXl(
-                color: DsfrColors.blueFranceSun113,
-              ),
+              style: const DsfrTextStyle.bodyXl(color: DsfrColors.blueFranceSun113),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: DsfrSpacings.s2w),

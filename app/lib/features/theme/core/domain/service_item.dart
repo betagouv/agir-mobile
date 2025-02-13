@@ -19,11 +19,5 @@ final class ServiceItem extends Equatable {
   bool get isFruitsLegumesService => idService == 'fruits_legumes';
 
   @override
-  List<Object?> get props => [
-    idService,
-    titre,
-    sousTitre,
-    externalUrl,
-    iconUrl,
-  ];
+  List<Object?> get props => [idService, titre, sousTitre, externalUrl, iconUrl];
 }

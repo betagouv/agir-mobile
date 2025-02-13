@@ -27,10 +27,8 @@ class ThemePage extends StatelessWidget {
   final ThemeType themeType;
 
   @override
-  Widget build(final context) => BlocProvider(
-    create: (final context) => ThemeBloc(themeRepository: context.read()),
-    child: _Page(themeType),
-  );
+  Widget build(final context) =>
+      BlocProvider(create: (final context) => ThemeBloc(themeRepository: context.read()), child: _Page(themeType));
 }
 
 class _Page extends StatefulWidget {
@@ -45,9 +43,7 @@ class _Page extends StatefulWidget {
 class _PageState extends State<_Page> with RouteAware {
   void _handleMission() {
     if (mounted) {
-      context.read<ThemeBloc>().add(
-        ThemeRecuperationDemandee(widget.themeType),
-      );
+      context.read<ThemeBloc>().add(ThemeRecuperationDemandee(widget.themeType));
     }
   }
 
@@ -100,9 +96,7 @@ class _ImageEtTitre extends StatelessWidget {
 
   @override
   Widget build(final context) {
-    final themeType = context.select<ThemeBloc, ThemeType>(
-      (final bloc) => bloc.state.themeType,
-    );
+    final themeType = context.select<ThemeBloc, ThemeType>((final bloc) => bloc.state.themeType);
 
     return Column(
       spacing: DsfrSpacings.s1w,
@@ -124,10 +118,7 @@ class _ImageEtTitre extends StatelessWidget {
             ),
           ),
         ),
-        Text(
-          themeType.displayNameWithoutEmoji,
-          style: const DsfrTextStyle.headline2(),
-        ),
+        Text(themeType.displayNameWithoutEmoji, style: const DsfrTextStyle.headline2()),
       ],
     );
   }
@@ -138,18 +129,13 @@ class _Missions extends StatelessWidget {
 
   @override
   Widget build(final context) {
-    final thematiques = context.select<ThemeBloc, List<MissionListe>>(
-      (final bloc) => bloc.state.missions,
-    );
+    final thematiques = context.select<ThemeBloc, List<MissionListe>>((final bloc) => bloc.state.missions);
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       clipBehavior: Clip.none,
       child: IntrinsicHeight(
-        child: Row(
-          spacing: DsfrSpacings.s2w,
-          children: thematiques.map((final e) => _Mission(mission: e)).toList(),
-        ),
+        child: Row(spacing: DsfrSpacings.s2w, children: thematiques.map((final e) => _Mission(mission: e)).toList()),
       ),
     );
   }
@@ -170,39 +156,22 @@ class _Mission extends StatelessWidget {
     return ThemeCard(
       badge:
           mission.estNouvelle
-              ? const FnvBadge(
-                label: Localisation.nouveau,
-                backgroundColor: DsfrColors.info425,
-              )
+              ? const FnvBadge(label: Localisation.nouveau, backgroundColor: DsfrColors.info425)
               : progression == 1
-              ? const FnvBadge(
-                label: Localisation.termine,
-                backgroundColor: success,
-              )
+              ? const FnvBadge(label: Localisation.termine, backgroundColor: success)
               : null,
       onTap:
-          () async => GoRouter.of(context).pushNamed(
-            MissionPage.name,
-            pathParameters: {
-              'mission': mission.code,
-              'thematique': mission.themeType.routeCode,
-            },
-          ),
+          () async => GoRouter.of(
+            context,
+          ).pushNamed(MissionPage.name, pathParameters: {'mission': mission.code, 'thematique': mission.themeType.routeCode}),
       child: SizedBox(
         width: width,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ClipRRect(
-              borderRadius: const BorderRadius.all(
-                Radius.circular(DsfrSpacings.s1v),
-              ),
-              child: FnvImage.network(
-                mission.imageUrl,
-                width: width,
-                height: 130,
-                fit: BoxFit.cover,
-              ),
+              borderRadius: const BorderRadius.all(Radius.circular(DsfrSpacings.s1v)),
+              child: FnvImage.network(mission.imageUrl, width: width, height: 130, fit: BoxFit.cover),
             ),
             const SizedBox(height: DsfrSpacings.s3v),
             LinearProgressIndicator(
@@ -210,11 +179,8 @@ class _Mission extends StatelessWidget {
               backgroundColor: const Color(0xFFDDDDFF),
               color: progression == 1 ? success : color,
               minHeight: 7,
-              semanticsLabel:
-                  '${mission.progression}/${mission.progressionCible} terminée',
-              borderRadius: const BorderRadius.all(
-                Radius.circular(DsfrSpacings.s1v),
-              ),
+              semanticsLabel: '${mission.progression}/${mission.progressionCible} terminée',
+              borderRadius: const BorderRadius.all(Radius.circular(DsfrSpacings.s1v)),
             ),
             const SizedBox(height: DsfrSpacings.s1w),
             Text(mission.titre, style: const DsfrTextStyle.bodyLg()),
@@ -230,9 +196,7 @@ class _Services extends StatelessWidget {
 
   @override
   Widget build(final context) {
-    final services = context.select<ThemeBloc, List<ServiceItem>>(
-      (final bloc) => bloc.state.services,
-    );
+    final services = context.select<ThemeBloc, List<ServiceItem>>((final bloc) => bloc.state.services);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -244,11 +208,7 @@ class _Services extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           clipBehavior: Clip.none,
           child: IntrinsicHeight(
-            child: Row(
-              spacing: DsfrSpacings.s2w,
-              children:
-                  services.map((final e) => ServiceCard(service: e)).toList(),
-            ),
+            child: Row(spacing: DsfrSpacings.s2w, children: services.map((final e) => ServiceCard(service: e)).toList()),
           ),
         ),
       ],
@@ -261,9 +221,7 @@ class _Recommandations extends StatelessWidget {
 
   @override
   Widget build(final context) {
-    final type = context.select<ThemeBloc, ThemeType>(
-      (final bloc) => bloc.state.themeType,
-    );
+    final type = context.select<ThemeBloc, ThemeType>((final bloc) => bloc.state.themeType);
 
     return MesRecommandations(theme: type);
   }

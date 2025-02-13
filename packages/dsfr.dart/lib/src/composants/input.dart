@@ -68,18 +68,12 @@ class DsfrInput extends StatefulWidget {
 class _DsfrInputState extends State<DsfrInput> {
   bool _passwordVisibility = false;
 
-  void _handlePasswordVisibility(final bool value) =>
-      setState(() => _passwordVisibility = value);
+  void _handlePasswordVisibility(final bool value) => setState(() => _passwordVisibility = value);
 
   @override
   Widget build(final context) {
     final labelText = widget.label;
-    Widget label = ExcludeSemantics(
-      child: Text(
-        labelText,
-        style: widget.labelStyle.copyWith(color: widget.labelColor),
-      ),
-    );
+    Widget label = ExcludeSemantics(child: Text(labelText, style: widget.labelStyle.copyWith(color: widget.labelColor)));
 
     if (widget.isPasswordMode) {
       label = Row(
@@ -89,11 +83,7 @@ class _DsfrInputState extends State<DsfrInput> {
           if (widget.isPasswordMode)
             FocusTraversalOrder(
               order: const NumericFocusOrder(2),
-              child: DsfrCheckbox.sm(
-                label: 'Afficher',
-                value: _passwordVisibility,
-                onChanged: _handlePasswordVisibility,
-              ),
+              child: DsfrCheckbox.sm(label: 'Afficher', value: _passwordVisibility, onChanged: _handlePasswordVisibility),
             ),
         ],
       );
@@ -111,12 +101,7 @@ class _DsfrInputState extends State<DsfrInput> {
             label,
             if (widget.hintText != null) ...[
               const SizedBox(height: DsfrSpacings.s1v),
-              ExcludeSemantics(
-                child: Text(
-                  widget.hintText!,
-                  style: widget.hintStyle.copyWith(color: widget.hintColor),
-                ),
-              ),
+              ExcludeSemantics(child: Text(widget.hintText!, style: widget.hintStyle.copyWith(color: widget.hintColor))),
             ],
             const SizedBox(height: DsfrSpacings.s1w),
             FocusTraversalOrder(

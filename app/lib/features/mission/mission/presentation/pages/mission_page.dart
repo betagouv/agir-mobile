@@ -32,21 +32,13 @@ class MissionPage extends StatelessWidget {
   static GoRoute get route => GoRoute(
     path: path,
     name: name,
-    builder:
-        (final context, final state) =>
-            MissionPage(code: MissionCode(state.pathParameters['mission']!)),
+    builder: (final context, final state) => MissionPage(code: MissionCode(state.pathParameters['mission']!)),
   );
 
   @override
   Widget build(final context) => BlocProvider(
-    create:
-        (final context) =>
-            MissionBloc(missionRepository: context.read())
-              ..add(MissionLoadRequested(code)),
-    child: FnvScaffold(
-      appBar: FnvAppBar(leading: const _BackButton()),
-      body: const _View(),
-    ),
+    create: (final context) => MissionBloc(missionRepository: context.read())..add(MissionLoadRequested(code)),
+    child: FnvScaffold(appBar: FnvAppBar(leading: const _BackButton()), body: const _View()),
   );
 }
 
@@ -66,14 +58,8 @@ class _BackButton extends StatelessWidget {
         GoRouter.of(context).pop();
       }
     },
-    style: const ButtonStyle(
-      shape: WidgetStatePropertyAll(roundedRectangleBorder),
-    ),
-    icon: const Icon(
-      DsfrIcons.systemArrowLeftLine,
-      color: DsfrColors.blueFranceSun113,
-      semanticLabel: Localisation.retour,
-    ),
+    style: const ButtonStyle(shape: WidgetStatePropertyAll(roundedRectangleBorder)),
+    icon: const Icon(DsfrIcons.systemArrowLeftLine, color: DsfrColors.blueFranceSun113, semanticLabel: Localisation.retour),
   );
 }
 
@@ -118,21 +104,13 @@ class _SuccessState extends State<_Success> {
   @override
   Widget build(final context) => BlocListener<MissionBloc, MissionState>(
     listener: (final context, final state) async {
-      if (state is MissionSuccess &&
-          state.index != _pageController.page?.round()) {
-        await _pageController.animateToPage(
-          state.index,
-          duration: const Duration(milliseconds: 250),
-          curve: Curves.easeInOut,
-        );
+      if (state is MissionSuccess && state.index != _pageController.page?.round()) {
+        await _pageController.animateToPage(state.index, duration: const Duration(milliseconds: 250), curve: Curves.easeInOut);
       }
     },
     child: Column(
       children: [
-        FnvProgressBar(
-          current: widget.state.index + 1,
-          total: widget.state.steps.length,
-        ),
+        FnvProgressBar(current: widget.state.index + 1, total: widget.state.steps.length),
         Expanded(
           child: PageView.builder(
             controller: _pageController,
@@ -142,19 +120,14 @@ class _SuccessState extends State<_Success> {
                 (final context, final index) =>
                     index == widget.state.index
                         ? switch (widget.state.steps[index]) {
-                          final MissionStepIntroduction s =>
-                            MissionIntroductionPage(step: s),
+                          final MissionStepIntroduction s => MissionIntroductionPage(step: s),
                           final MissionStepObjectif s => switch (s.objectif) {
                             final MissionKyc a => MissionKycPage(value: a),
-                            final MissionArticle a => MissionArticlePage(
-                              value: a,
-                            ),
+                            final MissionArticle a => MissionArticlePage(value: a),
                             final MissionQuiz a => MissionQuizPage(value: a),
                             _ => throw UnimplementedError(),
                           },
-                          MissionStepChallenges _ => MissionChallengesPage(
-                            code: widget.state.code,
-                          ),
+                          MissionStepChallenges _ => MissionChallengesPage(code: widget.state.code),
                           final MissionStepFin s => MissionFinPage(step: s),
                         }
                         : const SizedBox(),

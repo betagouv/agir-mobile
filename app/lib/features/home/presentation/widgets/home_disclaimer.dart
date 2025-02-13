@@ -9,17 +9,15 @@ class HomeDisclaimer extends StatelessWidget {
   const HomeDisclaimer({super.key});
 
   @override
-  Widget build(final BuildContext context) =>
-      BlocBuilder<HomeDisclaimerCubit, HomeDisclaimerState>(
-        builder:
-            (final context, final state) => switch (state) {
-              HomeDisclaimerVisible() => DsfrNotice(
-                titre: Localisation.appEstEnConstruction,
-                description: Localisation.appEstEnConstructionDescription,
-                onClose:
-                    () => context.read<HomeDisclaimerCubit>().closeDisclaimer(),
-              ),
-              HomeDisclaimerNotVisible() => const SizedBox(),
-            },
-      );
+  Widget build(final BuildContext context) => BlocBuilder<HomeDisclaimerCubit, HomeDisclaimerState>(
+    builder:
+        (final context, final state) => switch (state) {
+          HomeDisclaimerVisible() => DsfrNotice(
+            titre: Localisation.appEstEnConstruction,
+            description: Localisation.appEstEnConstructionDescription,
+            onClose: () => context.read<HomeDisclaimerCubit>().closeDisclaimer(),
+          ),
+          HomeDisclaimerNotVisible() => const SizedBox(),
+        },
+  );
 }

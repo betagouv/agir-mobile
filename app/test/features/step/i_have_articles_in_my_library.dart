@@ -3,10 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import '../helper/feature_context.dart';
 
 /// Usage: I have {2} articles in my library
-Future<void> iHaveArticlesInMyLibrary(
-  final WidgetTester tester,
-  final int number,
-) async {
+Future<void> iHaveArticlesInMyLibrary(final WidgetTester tester, final int number) async {
   FeatureContext.instance.dioMock.getM(
     '/utilisateurs/%7BuserId%7D/bibliotheque',
     responseData: {
@@ -15,8 +12,7 @@ Future<void> iHaveArticlesInMyLibrary(
           'content_id': '15',
           'type': 'article',
           'titre': "Qu'est-ce qu'une alimentation durable ?",
-          'soustitre':
-              "Comment réduire l'impact de notre alimentation sur le climat ?",
+          'soustitre': "Comment réduire l'impact de notre alimentation sur le climat ?",
           'thematique_principale': 'alimentation',
           'thematique_principale_label': '🥦 Alimentation',
           'thematiques': ['alimentation'],
@@ -43,11 +39,7 @@ Future<void> iHaveArticlesInMyLibrary(
         {'code': 'alimentation', 'label': '🥦 Alimentation', 'selected': false},
         {'code': 'transport', 'label': '🚗 Transports', 'selected': false},
         {'code': 'logement', 'label': '🏡 Logement', 'selected': false},
-        {
-          'code': 'consommation',
-          'label': '🛒 Consommation durable',
-          'selected': false,
-        },
+        {'code': 'consommation', 'label': '🛒 Consommation durable', 'selected': false},
         {'code': 'climat', 'label': '☀️ Environnement', 'selected': false},
         {'code': 'dechet', 'label': '🗑️ Déchets', 'selected': false},
         {'code': 'loisir', 'label': '⚽ Loisirs', 'selected': false},

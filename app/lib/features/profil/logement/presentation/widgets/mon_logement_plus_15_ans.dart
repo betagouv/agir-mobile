@@ -11,21 +11,13 @@ class MonLogementPlus15Ans extends StatelessWidget {
 
   @override
   Widget build(final context) {
-    final plusDe15ans = context.select<MonLogementBloc, bool?>(
-      (final bloc) => bloc.state.plusDe15Ans,
-    );
+    final plusDe15ans = context.select<MonLogementBloc, bool?>((final bloc) => bloc.state.plusDe15Ans);
 
     return MonLogementTitreEtContenu(
       titre: Localisation.monLogementPlusDe15Ans,
       contenu: DsfrRadioButtonSetHeadless(
-        values: const {
-          true: DsfrRadioButtonItem(Localisation.oui),
-          false: DsfrRadioButtonItem(Localisation.non),
-        },
-        onCallback:
-            (final value) => context.read<MonLogementBloc>().add(
-              MonLogementPlusDe15AnsChange(value),
-            ),
+        values: const {true: DsfrRadioButtonItem(Localisation.oui), false: DsfrRadioButtonItem(Localisation.non)},
+        onCallback: (final value) => context.read<MonLogementBloc>().add(MonLogementPlusDe15AnsChange(value)),
         initialValue: plusDe15ans,
       ),
     );

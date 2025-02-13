@@ -10,8 +10,6 @@ Finder findText(final String text) => find.byWidgetPredicate(
   description: 'text "$text"',
 );
 
-bool _matchEditableText(final EditableText widget, final String text) =>
-    widget.controller.text == text;
+bool _matchEditableText(final EditableText widget, final String text) => widget.controller.text == text;
 
-bool _matchRichText(final RichText widget, final String text) =>
-    widget.text.toPlainText().replaceAll('￼', ' ').trim() == text;
+bool _matchRichText(final RichText widget, final String text) => widget.text.toPlainText().replaceAll('￼', ' ').trim() == text;

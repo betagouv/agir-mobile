@@ -2,8 +2,7 @@ const environmentalPerformanceEmptyData = {
   'liens_bilans_thematique': [
     {
       'id_enchainement_kyc': 'ENCHAINEMENT_KYC_bilan_transport',
-      'image_url':
-          'https://res.cloudinary.com/dq023imd8/image/upload/v1728466903/Mobilite_df75aefd09.svg',
+      'image_url': 'https://res.cloudinary.com/dq023imd8/image/upload/v1728466903/Mobilite_df75aefd09.svg',
       'nombre_total_question': 9,
       'pourcentage_progression': 0,
       'temps_minutes': 5,
@@ -11,8 +10,7 @@ const environmentalPerformanceEmptyData = {
     },
     {
       'id_enchainement_kyc': 'ENCHAINEMENT_KYC_bilan_alimentation',
-      'image_url':
-          'https://res.cloudinary.com/dq023imd8/image/upload/v1728466523/cuisine_da54797693.svg',
+      'image_url': 'https://res.cloudinary.com/dq023imd8/image/upload/v1728466523/cuisine_da54797693.svg',
       'nombre_total_question': 6,
       'pourcentage_progression': 0,
       'temps_minutes': 3,
@@ -20,8 +18,7 @@ const environmentalPerformanceEmptyData = {
     },
     {
       'id_enchainement_kyc': 'ENCHAINEMENT_KYC_bilan_consommation',
-      'image_url':
-          'https://res.cloudinary.com/dq023imd8/image/upload/v1728468852/conso_7522b1950d.svg',
+      'image_url': 'https://res.cloudinary.com/dq023imd8/image/upload/v1728468852/conso_7522b1950d.svg',
       'nombre_total_question': 8,
       'pourcentage_progression': 0,
       'temps_minutes': 10,
@@ -29,8 +26,7 @@ const environmentalPerformanceEmptyData = {
     },
     {
       'id_enchainement_kyc': 'ENCHAINEMENT_KYC_bilan_logement',
-      'image_url':
-          'https://res.cloudinary.com/dq023imd8/image/upload/v1728468978/maison_80242d91f3.svg',
+      'image_url': 'https://res.cloudinary.com/dq023imd8/image/upload/v1728468978/maison_80242d91f3.svg',
       'nombre_total_question': 8,
       'pourcentage_progression': 0,
       'temps_minutes': 9,
@@ -50,8 +46,7 @@ const environmentalPerformancePartialData = {
   'liens_bilans_thematique': [
     {
       'id_enchainement_kyc': 'ENCHAINEMENT_KYC_bilan_transport',
-      'image_url':
-          'https://res.cloudinary.com/dq023imd8/image/upload/v1728466903/Mobilite_df75aefd09.svg',
+      'image_url': 'https://res.cloudinary.com/dq023imd8/image/upload/v1728466903/Mobilite_df75aefd09.svg',
       'nombre_total_question': 7,
       'pourcentage_progression': 0,
       'temps_minutes': 5,
@@ -59,8 +54,7 @@ const environmentalPerformancePartialData = {
     },
     {
       'id_enchainement_kyc': 'ENCHAINEMENT_KYC_bilan_alimentation',
-      'image_url':
-          'https://res.cloudinary.com/dq023imd8/image/upload/v1728466523/cuisine_da54797693.svg',
+      'image_url': 'https://res.cloudinary.com/dq023imd8/image/upload/v1728466523/cuisine_da54797693.svg',
       'nombre_total_question': 5,
       'pourcentage_progression': 20,
       'temps_minutes': 3,
@@ -68,8 +62,7 @@ const environmentalPerformancePartialData = {
     },
     {
       'id_enchainement_kyc': 'ENCHAINEMENT_KYC_bilan_consommation',
-      'image_url':
-          'https://res.cloudinary.com/dq023imd8/image/upload/v1728468852/conso_7522b1950d.svg',
+      'image_url': 'https://res.cloudinary.com/dq023imd8/image/upload/v1728468852/conso_7522b1950d.svg',
       'nombre_total_question': 8,
       'pourcentage_progression': 0,
       'temps_minutes': 10,
@@ -77,8 +70,7 @@ const environmentalPerformancePartialData = {
     },
     {
       'id_enchainement_kyc': 'ENCHAINEMENT_KYC_bilan_logement',
-      'image_url':
-          'https://res.cloudinary.com/dq023imd8/image/upload/v1728468978/maison_80242d91f3.svg',
+      'image_url': 'https://res.cloudinary.com/dq023imd8/image/upload/v1728468978/maison_80242d91f3.svg',
       'nombre_total_question': 6,
       'pourcentage_progression': 0,
       'temps_minutes': 9,
@@ -165,13 +157,7 @@ const environmentalPerformanceFullData = {
             'pourcentage': null,
             'pourcentage_categorie': 5,
           },
-          {
-            'emoji': '🚬',
-            'impact_kg_annee': 7.28,
-            'label': 'Tabac',
-            'pourcentage': null,
-            'pourcentage_categorie': 1,
-          },
+          {'emoji': '🚬', 'impact_kg_annee': 7.28, 'label': 'Tabac', 'pourcentage': null, 'pourcentage_categorie': 1},
         ],
         'emoji': '📦',
         'impact_kg_annee': 1125.4872619054079,
@@ -201,41 +187,11 @@ const environmentalPerformanceFullData = {
             'pourcentage': null,
             'pourcentage_categorie': 6,
           },
-          {
-            'emoji': '⛴',
-            'impact_kg_annee': 11.88805068661542,
-            'label': 'Ferry',
-            'pourcentage': null,
-            'pourcentage_categorie': 3,
-          },
-          {
-            'emoji': '🚋',
-            'impact_kg_annee': 8.8198802395209,
-            'label': 'Train',
-            'pourcentage': null,
-            'pourcentage_categorie': 2,
-          },
-          {
-            'emoji': '✈️',
-            'impact_kg_annee': 0,
-            'label': 'Avion',
-            'pourcentage': null,
-            'pourcentage_categorie': 0,
-          },
-          {
-            'emoji': '🚲',
-            'impact_kg_annee': 0,
-            'label': 'Mobilité douce',
-            'pourcentage': null,
-            'pourcentage_categorie': 0,
-          },
-          {
-            'emoji': '🏖️',
-            'impact_kg_annee': 0,
-            'label': 'Vacances',
-            'pourcentage': null,
-            'pourcentage_categorie': 0,
-          },
+          {'emoji': '⛴', 'impact_kg_annee': 11.88805068661542, 'label': 'Ferry', 'pourcentage': null, 'pourcentage_categorie': 3},
+          {'emoji': '🚋', 'impact_kg_annee': 8.8198802395209, 'label': 'Train', 'pourcentage': null, 'pourcentage_categorie': 2},
+          {'emoji': '✈️', 'impact_kg_annee': 0, 'label': 'Avion', 'pourcentage': null, 'pourcentage_categorie': 0},
+          {'emoji': '🚲', 'impact_kg_annee': 0, 'label': 'Mobilité douce', 'pourcentage': null, 'pourcentage_categorie': 0},
+          {'emoji': '🏖️', 'impact_kg_annee': 0, 'label': 'Vacances', 'pourcentage': null, 'pourcentage_categorie': 0},
         ],
         'emoji': '🚦',
         'impact_kg_annee': 405.9709121611947,
@@ -286,13 +242,7 @@ const environmentalPerformanceFullData = {
             'pourcentage': null,
             'pourcentage_categorie': 0,
           },
-          {
-            'emoji': '🏊',
-            'impact_kg_annee': 0,
-            'label': 'Piscine',
-            'pourcentage': null,
-            'pourcentage_categorie': 0,
-          },
+          {'emoji': '🏊', 'impact_kg_annee': 0, 'label': 'Piscine', 'pourcentage': null, 'pourcentage_categorie': 0},
         ],
         'emoji': '🏠',
         'impact_kg_annee': 273.0815742219873,
@@ -322,20 +272,8 @@ const environmentalPerformanceFullData = {
             'pourcentage': null,
             'pourcentage_categorie': null,
           },
-          {
-            'emoji': '🥩',
-            'impact_kg_annee': 0,
-            'label': 'Viandes',
-            'pourcentage': null,
-            'pourcentage_categorie': null,
-          },
-          {
-            'emoji': '🐟',
-            'impact_kg_annee': 0,
-            'label': 'Poissons',
-            'pourcentage': null,
-            'pourcentage_categorie': null,
-          },
+          {'emoji': '🥩', 'impact_kg_annee': 0, 'label': 'Viandes', 'pourcentage': null, 'pourcentage_categorie': null},
+          {'emoji': '🐟', 'impact_kg_annee': 0, 'label': 'Poissons', 'pourcentage': null, 'pourcentage_categorie': null},
         ],
         'emoji': '🍴',
         'impact_kg_annee': 0,
@@ -351,27 +289,14 @@ const environmentalPerformanceFullData = {
         'pourcentage': null,
         'pourcentage_categorie': 81,
       },
-      {
-        'emoji': '✈️',
-        'impact_kg_annee': 0,
-        'label': 'Avion',
-        'pourcentage': null,
-        'pourcentage_categorie': 0,
-      },
-      {
-        'emoji': '🛵',
-        'impact_kg_annee': 23.196418035061875,
-        'label': '2 roues',
-        'pourcentage': null,
-        'pourcentage_categorie': 6,
-      },
+      {'emoji': '✈️', 'impact_kg_annee': 0, 'label': 'Avion', 'pourcentage': null, 'pourcentage_categorie': 0},
+      {'emoji': '🛵', 'impact_kg_annee': 23.196418035061875, 'label': '2 roues', 'pourcentage': null, 'pourcentage_categorie': 6},
     ],
   },
   'liens_bilans_thematique': [
     {
       'id_enchainement_kyc': 'ENCHAINEMENT_KYC_bilan_transport',
-      'image_url':
-          'https://res.cloudinary.com/dq023imd8/image/upload/v1728466903/Mobilite_df75aefd09.svg',
+      'image_url': 'https://res.cloudinary.com/dq023imd8/image/upload/v1728466903/Mobilite_df75aefd09.svg',
       'nombre_total_question': 7,
       'pourcentage_progression': 0,
       'temps_minutes': 5,
@@ -379,8 +304,7 @@ const environmentalPerformanceFullData = {
     },
     {
       'id_enchainement_kyc': 'ENCHAINEMENT_KYC_bilan_alimentation',
-      'image_url':
-          'https://res.cloudinary.com/dq023imd8/image/upload/v1728466523/cuisine_da54797693.svg',
+      'image_url': 'https://res.cloudinary.com/dq023imd8/image/upload/v1728466523/cuisine_da54797693.svg',
       'nombre_total_question': 5,
       'pourcentage_progression': 20,
       'temps_minutes': 3,
@@ -388,8 +312,7 @@ const environmentalPerformanceFullData = {
     },
     {
       'id_enchainement_kyc': 'ENCHAINEMENT_KYC_bilan_consommation',
-      'image_url':
-          'https://res.cloudinary.com/dq023imd8/image/upload/v1728468852/conso_7522b1950d.svg',
+      'image_url': 'https://res.cloudinary.com/dq023imd8/image/upload/v1728468852/conso_7522b1950d.svg',
       'nombre_total_question': 8,
       'pourcentage_progression': 0,
       'temps_minutes': 10,
@@ -397,8 +320,7 @@ const environmentalPerformanceFullData = {
     },
     {
       'id_enchainement_kyc': 'ENCHAINEMENT_KYC_bilan_logement',
-      'image_url':
-          'https://res.cloudinary.com/dq023imd8/image/upload/v1728468978/maison_80242d91f3.svg',
+      'image_url': 'https://res.cloudinary.com/dq023imd8/image/upload/v1728468978/maison_80242d91f3.svg',
       'nombre_total_question': 6,
       'pourcentage_progression': 0,
       'temps_minutes': 9,
@@ -422,8 +344,7 @@ const miniBilan = [
   },
   {
     'code': 'KYC_transport_avion_3_annees',
-    'question':
-        "Avez-vous pris l'avion au moins une fois ces 3 dernières années ?",
+    'question': "Avez-vous pris l'avion au moins une fois ces 3 dernières années ?",
     'reponse_multiple': [
       {'code': 'oui', 'label': 'Oui', 'selected': false},
       {'code': 'non', 'label': 'Non', 'selected': true},
@@ -509,11 +430,7 @@ const miniBilan = [
       {'code': 'vegetalien', 'label': 'Végétalien', 'selected': false},
       {'code': 'vegetarien', 'label': 'Végétarien', 'selected': true},
       {'code': 'peu_viande', 'label': 'Peu de viande', 'selected': false},
-      {
-        'code': 'chaque_jour_viande',
-        'label': 'Viande chaque jour',
-        'selected': false,
-      },
+      {'code': 'chaque_jour_viande', 'label': 'Viande chaque jour', 'selected': false},
     ],
     'is_answered': true,
     'categorie': 'mission',
@@ -526,27 +443,16 @@ const miniBilan = [
     'code': 'KYC_consommation_type_consommateur',
     'question': 'Quel genre de consommateur êtes vous ?',
     'reponse_multiple': [
-      {
-        'code': 'achete_jamais',
-        'label': "Je n'achète presque jamais, et rarement neuf",
-        'selected': false,
-      },
-      {
-        'code': 'seconde_main',
-        'label':
-            "Je chine : l'essentiel de mes achats, c'est de la seconde main",
-        'selected': false,
-      },
+      {'code': 'achete_jamais', 'label': "Je n'achète presque jamais, et rarement neuf", 'selected': false},
+      {'code': 'seconde_main', 'label': "Je chine : l'essentiel de mes achats, c'est de la seconde main", 'selected': false},
       {
         'code': 'raisonnable',
-        'label':
-            "J'achète raisonnablement selon mes besoins et me fais plaisir de temps en temps",
+        'label': "J'achète raisonnablement selon mes besoins et me fais plaisir de temps en temps",
         'selected': true,
       },
       {
         'code': 'shopping_addict',
-        'label':
-            "J'adore le shopping : il me faut absolument le dernier téléphone ou le dernier t-shirt qui vient de sortir",
+        'label': "J'adore le shopping : il me faut absolument le dernier téléphone ou le dernier t-shirt qui vient de sortir",
         'selected': false,
       },
     ],

@@ -38,17 +38,11 @@ final class EnvironmentalPerformanceLevelRepresentation extends Equatable {
         labelColor: const Color(0xFF910501),
       );
 
-  factory EnvironmentalPerformanceLevelRepresentation.fromProgress(
-    final EnvironmentalPerformanceLevel level,
-  ) => switch (level) {
-    EnvironmentalPerformanceLevel.low =>
-      const EnvironmentalPerformanceLevelRepresentation.low(),
-    EnvironmentalPerformanceLevel.medium =>
-      const EnvironmentalPerformanceLevelRepresentation.medium(),
-    EnvironmentalPerformanceLevel.high =>
-      const EnvironmentalPerformanceLevelRepresentation.high(),
-    EnvironmentalPerformanceLevel.veryHigh =>
-      const EnvironmentalPerformanceLevelRepresentation.veryHigh(),
+  factory EnvironmentalPerformanceLevelRepresentation.fromProgress(final EnvironmentalPerformanceLevel level) => switch (level) {
+    EnvironmentalPerformanceLevel.low => const EnvironmentalPerformanceLevelRepresentation.low(),
+    EnvironmentalPerformanceLevel.medium => const EnvironmentalPerformanceLevelRepresentation.medium(),
+    EnvironmentalPerformanceLevel.high => const EnvironmentalPerformanceLevelRepresentation.high(),
+    EnvironmentalPerformanceLevel.veryHigh => const EnvironmentalPerformanceLevelRepresentation.veryHigh(),
   };
 
   final String label;

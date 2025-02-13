@@ -12,19 +12,14 @@ class AuthenticationRedirection extends StatelessWidget {
   final Widget child;
 
   @override
-  Widget build(final context) =>
-      BlocListener<AuthenticationBloc, AuthenticationState>(
-        listener:
-            (final context, final state) => switch (state) {
-              AuthenticationUnauthenticated() => GoRouter.of(
-                context,
-              ).goNamed(PreOnboardingPage.name),
-              AuthenticationAuthenticated() => GoRouter.of(
-                context,
-              ).goNamed(HomePage.name),
-              AuthenticationInitial() => null,
-            },
-        bloc: context.read(),
-        child: child,
-      );
+  Widget build(final context) => BlocListener<AuthenticationBloc, AuthenticationState>(
+    listener:
+        (final context, final state) => switch (state) {
+          AuthenticationUnauthenticated() => GoRouter.of(context).goNamed(PreOnboardingPage.name),
+          AuthenticationAuthenticated() => GoRouter.of(context).goNamed(HomePage.name),
+          AuthenticationInitial() => null,
+        },
+    bloc: context.read(),
+    child: child,
+  );
 }

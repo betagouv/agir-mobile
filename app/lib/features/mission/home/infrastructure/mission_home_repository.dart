@@ -6,8 +6,7 @@ import 'package:app/features/theme/core/infrastructure/mission_liste_mapper.dart
 import 'package:fpdart/fpdart.dart';
 
 class MissionHomeRepository {
-  const MissionHomeRepository({required final DioHttpClient client})
-    : _client = client;
+  const MissionHomeRepository({required final DioHttpClient client}) : _client = client;
 
   final DioHttpClient _client;
 
@@ -20,12 +19,6 @@ class MissionHomeRepository {
 
     final json = response.data as List<dynamic>;
 
-    return Right(
-      json
-          .map(
-            (final e) => MissionListeMapper.fromJson(e as Map<String, dynamic>),
-          )
-          .toList(),
-    );
+    return Right(json.map((final e) => MissionListeMapper.fromJson(e as Map<String, dynamic>)).toList());
   }
 }

@@ -11,10 +11,7 @@ Future<void> theProfileEndpointHasBeenCalled(final WidgetTester tester) async {
   verify(
     () => FeatureContext.instance.dioMock.patch<dynamic>(
       Endpoints.profile,
-      data: jsonEncode({
-        'nombre_de_parts_fiscales': 2.5,
-        'revenu_fiscal': 16000,
-      }),
+      data: jsonEncode({'nombre_de_parts_fiscales': 2.5, 'revenu_fiscal': 16000}),
     ),
   );
 }

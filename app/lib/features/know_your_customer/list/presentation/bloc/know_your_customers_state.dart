@@ -24,27 +24,19 @@ final class KnowYourCustomersLoading extends KnowYourCustomersState {
 
 @immutable
 final class KnowYourCustomersSuccess extends KnowYourCustomersState {
-  const KnowYourCustomersSuccess({
-    required this.allQuestions,
-    this.themeSelected = const None(),
-  });
+  const KnowYourCustomersSuccess({required this.allQuestions, this.themeSelected = const None()});
 
   final List<Question> allQuestions;
   final Option<ThemeType> themeSelected;
 
-  List<Question> get questionsFiltered => themeSelected.fold(
-    () => allQuestions,
-    (final s) =>
-        allQuestions.where((final question) => question.theme == s).toList(),
-  );
+  List<Question> get questionsFiltered =>
+      themeSelected.fold(() => allQuestions, (final s) => allQuestions.where((final question) => question.theme == s).toList());
 
-  KnowYourCustomersSuccess copyWith({
-    final List<Question>? allQuestions,
-    final Option<ThemeType>? themeSelected,
-  }) => KnowYourCustomersSuccess(
-    allQuestions: allQuestions ?? this.allQuestions,
-    themeSelected: themeSelected ?? this.themeSelected,
-  );
+  KnowYourCustomersSuccess copyWith({final List<Question>? allQuestions, final Option<ThemeType>? themeSelected}) =>
+      KnowYourCustomersSuccess(
+        allQuestions: allQuestions ?? this.allQuestions,
+        themeSelected: themeSelected ?? this.themeSelected,
+      );
 
   @override
   List<Object?> get props => [allQuestions, themeSelected];

@@ -8,11 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class ChallengeWidget extends StatelessWidget {
-  const ChallengeWidget({
-    super.key,
-    required this.challenge,
-    required this.onChanged,
-  });
+  const ChallengeWidget({super.key, required this.challenge, required this.onChanged});
 
   final MissionChallenge challenge;
   final VoidCallback onChanged;
@@ -20,10 +16,9 @@ class ChallengeWidget extends StatelessWidget {
   @override
   Widget build(final context) {
     Future<void> onPressed() async {
-      final result = await GoRouter.of(context).pushNamed<bool>(
-        ChallengeDetailPage.name,
-        pathParameters: {'id': challenge.contentId.value},
-      );
+      final result = await GoRouter.of(
+        context,
+      ).pushNamed<bool>(ChallengeDetailPage.name, pathParameters: {'id': challenge.contentId.value});
 
       if (result ?? false) {
         onChanged();
@@ -46,11 +41,7 @@ class ChallengeWidget extends StatelessWidget {
               ),
               borderColor: challenge.isRecommended ? DsfrColors.info425 : null,
             ),
-            if (challenge.isRecommended)
-              const _Badge(
-                label: Localisation.recommande,
-                backgroundColor: DsfrColors.info425,
-              ),
+            if (challenge.isRecommended) const _Badge(label: Localisation.recommande, backgroundColor: DsfrColors.info425),
           ],
         );
       case MissionChallengeStatus.inProgress:
@@ -69,11 +60,7 @@ class ChallengeWidget extends StatelessWidget {
               ),
               borderColor: color,
             ),
-            const _Badge(
-              label: Localisation.enCours,
-              backgroundColor: color,
-              foregroundColor: DsfrColors.grey50,
-            ),
+            const _Badge(label: Localisation.enCours, backgroundColor: color, foregroundColor: DsfrColors.grey50),
           ],
         );
       case MissionChallengeStatus.abandonned:
@@ -85,10 +72,7 @@ class ChallengeWidget extends StatelessWidget {
           alignment: Alignment.topLeft,
           children: [
             _ActionCard(title: challenge.title, borderColor: success425),
-            const _Badge(
-              label: Localisation.termine2,
-              backgroundColor: success425,
-            ),
+            const _Badge(label: Localisation.termine2, backgroundColor: success425),
           ],
         );
     }
@@ -96,11 +80,7 @@ class ChallengeWidget extends StatelessWidget {
 }
 
 class _Badge extends StatelessWidget {
-  const _Badge({
-    required this.label,
-    required this.backgroundColor,
-    this.foregroundColor = Colors.white,
-  });
+  const _Badge({required this.label, required this.backgroundColor, this.foregroundColor = Colors.white});
 
   final String label;
   final Color backgroundColor;
@@ -109,11 +89,7 @@ class _Badge extends StatelessWidget {
   @override
   Widget build(final context) => Padding(
     padding: const EdgeInsets.only(left: DsfrSpacings.s3v),
-    child: FnvBadge(
-      label: label,
-      backgroundColor: backgroundColor,
-      foregroundColor: foregroundColor,
-    ),
+    child: FnvBadge(label: label, backgroundColor: backgroundColor, foregroundColor: foregroundColor),
   );
 }
 
@@ -135,10 +111,7 @@ class _ActionCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(title, style: const DsfrTextStyle.bodyLg()),
-            if (button != null) ...[
-              const SizedBox(height: DsfrSpacings.s2w),
-              button!,
-            ],
+            if (button != null) ...[const SizedBox(height: DsfrSpacings.s2w), button!],
           ],
         ),
       ),

@@ -25,14 +25,5 @@ class Mission extends Equatable {
   final bool isCompleted;
 
   @override
-  List<Object?> get props => [
-    code,
-    title,
-    imageUrl,
-    description,
-    objectifs,
-    canBeCompleted,
-    isCompleted,
-    themeType,
-  ];
+  List<Object?> get props => [code, title, imageUrl, description, objectifs, canBeCompleted, isCompleted, themeType];
 }

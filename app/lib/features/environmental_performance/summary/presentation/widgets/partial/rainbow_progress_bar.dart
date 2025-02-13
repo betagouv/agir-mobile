@@ -13,10 +13,7 @@ class RainbowProgressBar extends StatelessWidget {
   final double value;
 
   @override
-  Widget build(final context) => CustomPaint(
-    painter: _Painter(value: value),
-    size: const Size(double.infinity, 6),
-  );
+  Widget build(final context) => CustomPaint(painter: _Painter(value: value), size: const Size(double.infinity, 6));
 }
 
 class _Painter extends CustomPainter {
@@ -25,12 +22,7 @@ class _Painter extends CustomPainter {
   final double value;
 
   static const _gradient = LinearGradient(
-    colors: [
-      Color(0xFFA6DD00),
-      Color(0xFFFF9D00),
-      Color(0xFFDF1451),
-      Color(0xFFDF1451),
-    ],
+    colors: [Color(0xFFA6DD00), Color(0xFFFF9D00), Color(0xFFDF1451), Color(0xFFDF1451)],
     stops: [0.17, 0.562, 0.995, 1.0],
   );
 
@@ -41,10 +33,7 @@ class _Painter extends CustomPainter {
       return;
     }
 
-    final rrect = RRect.fromRectAndRadius(
-      Rect.fromLTWH(0, 0, width, size.height),
-      Radius.circular(size.height),
-    );
+    final rrect = RRect.fromRectAndRadius(Rect.fromLTWH(0, 0, width, size.height), Radius.circular(size.height));
 
     final paint =
         Paint()

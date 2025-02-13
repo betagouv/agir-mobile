@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 
 class DsfrTabIndicator extends Decoration {
-  const DsfrTabIndicator({
-    this.borderSide = const BorderSide(color: Colors.white, width: 2),
-    this.insets = EdgeInsets.zero,
-  });
+  const DsfrTabIndicator({this.borderSide = const BorderSide(color: Colors.white, width: 2), this.insets = EdgeInsets.zero});
   final BorderSide borderSide;
   final EdgeInsetsGeometry insets;
 
@@ -27,23 +24,16 @@ class DsfrTabIndicator extends Decoration {
           : super.lerpTo(b, t);
 
   @override
-  BoxPainter createBoxPainter([final VoidCallback? onChanged]) =>
-      _AboveLinePainter(this, onChanged);
+  BoxPainter createBoxPainter([final VoidCallback? onChanged]) => _AboveLinePainter(this, onChanged);
 
   Rect indicatorRectFor(final Rect rect, final TextDirection textDirection) {
     final indicator = insets.resolve(textDirection).deflateRect(rect);
 
-    return Rect.fromLTWH(
-      indicator.left,
-      indicator.top,
-      indicator.width,
-      borderSide.width,
-    );
+    return Rect.fromLTWH(indicator.left, indicator.top, indicator.width, borderSide.width);
   }
 
   @override
-  Path getClipPath(final Rect rect, final TextDirection textDirection) =>
-      Path()..addRect(indicatorRectFor(rect, textDirection));
+  Path getClipPath(final Rect rect, final TextDirection textDirection) => Path()..addRect(indicatorRectFor(rect, textDirection));
 }
 
 class _AboveLinePainter extends BoxPainter {
@@ -52,18 +42,12 @@ class _AboveLinePainter extends BoxPainter {
   final DsfrTabIndicator decoration;
 
   @override
-  void paint(
-    final Canvas canvas,
-    final Offset offset,
-    final ImageConfiguration configuration,
-  ) {
+  void paint(final Canvas canvas, final Offset offset, final ImageConfiguration configuration) {
     assert(configuration.size != null, 'configuration.size is null');
     final rect = offset & configuration.size!;
     final textDirection = configuration.textDirection!;
     final paint = decoration.borderSide.toPaint()..strokeCap = StrokeCap.square;
-    final indicator = decoration
-        .indicatorRectFor(rect, textDirection)
-        .deflate(decoration.borderSide.width / 2.0);
+    final indicator = decoration.indicatorRectFor(rect, textDirection).deflate(decoration.borderSide.width / 2.0);
 
     final backgroundPaint = Paint()..color = Colors.white;
     canvas

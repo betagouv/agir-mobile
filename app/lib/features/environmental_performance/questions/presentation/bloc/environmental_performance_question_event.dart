@@ -11,8 +11,7 @@ sealed class EnvironmentalPerformanceQuestionEvent extends Equatable {
 }
 
 @immutable
-final class EnvironmentalPerformanceQuestionIdListGiven
-    extends EnvironmentalPerformanceQuestionEvent {
+final class EnvironmentalPerformanceQuestionIdListGiven extends EnvironmentalPerformanceQuestionEvent {
   const EnvironmentalPerformanceQuestionIdListGiven(this.questionIdList);
 
   final List<QuestionCode> questionIdList;
@@ -22,8 +21,7 @@ final class EnvironmentalPerformanceQuestionIdListGiven
 }
 
 @immutable
-final class EnvironmentalPerformanceQuestionIdListRequested
-    extends EnvironmentalPerformanceQuestionEvent {
+final class EnvironmentalPerformanceQuestionIdListRequested extends EnvironmentalPerformanceQuestionEvent {
   const EnvironmentalPerformanceQuestionIdListRequested(this.categoryId);
 
   final String categoryId;

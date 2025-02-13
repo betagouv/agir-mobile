@@ -5,13 +5,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class Jaccepte extends StatefulWidget {
-  const Jaccepte({
-    super.key,
-    required this.label,
-    required this.url,
-    required this.value,
-    required this.onChanged,
-  });
+  const Jaccepte({super.key, required this.label, required this.url, required this.value, required this.onChanged});
 
   final String label;
   final String url;
@@ -59,17 +53,12 @@ class _JaccepteState extends State<Jaccepte> {
                   children: [
                     TextSpan(
                       text: '${widget.label} ',
-                      style: style.copyWith(
-                        decoration: TextDecoration.underline,
-                      ),
+                      style: style.copyWith(decoration: TextDecoration.underline),
                       recognizer: _recognizer,
                       children: const [
                         WidgetSpan(
                           alignment: PlaceholderAlignment.middle,
-                          child: Icon(
-                            DsfrIcons.systemExternalLinkFill,
-                            size: 16,
-                          ),
+                          child: Icon(DsfrIcons.systemExternalLinkFill, size: 16),
                         ),
                       ],
                     ),

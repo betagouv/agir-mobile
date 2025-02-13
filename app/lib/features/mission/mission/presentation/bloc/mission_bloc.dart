@@ -4,15 +4,12 @@ import 'package:app/features/mission/mission/presentation/bloc/mission_state.dar
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MissionBloc extends Bloc<MissionEvent, MissionState> {
-  MissionBloc({required final MissionRepository missionRepository})
-    : super(const MissionInitial()) {
+  MissionBloc({required final MissionRepository missionRepository}) : super(const MissionInitial()) {
     on<MissionLoadRequested>((final event, final emit) async {
       emit(const MissionLoading());
       final mission = await missionRepository.fetch(event.code);
       mission.fold(
-        (final l) => emit(
-          const MissionFailure(errorMessage: 'Erreur lors du chargement'),
-        ),
+        (final l) => emit(const MissionFailure(errorMessage: 'Erreur lors du chargement')),
         (final r) => emit(MissionSuccess(mission: r, index: 0)),
       );
     });

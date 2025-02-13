@@ -4,8 +4,7 @@ import 'package:app/features/profil/supprimer_compte/presentation/bloc/supprimer
 import 'package:app/features/profil/supprimer_compte/presentation/bloc/supprimer_compte_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SupprimerCompteBloc
-    extends Bloc<SupprimerCompteEvent, SupprimerCompteState> {
+class SupprimerCompteBloc extends Bloc<SupprimerCompteEvent, SupprimerCompteState> {
   SupprimerCompteBloc({
     required final AuthentificationRepository authentificationRepository,
     required final ProfilRepository profilRepository,

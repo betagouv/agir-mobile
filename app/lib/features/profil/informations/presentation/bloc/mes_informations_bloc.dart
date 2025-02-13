@@ -4,10 +4,8 @@ import 'package:app/features/profil/informations/presentation/bloc/mes_informati
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fpdart/fpdart.dart';
 
-class MesInformationsBloc
-    extends Bloc<MesInformationsEvent, MesInformationsState> {
-  MesInformationsBloc({required final ProfilRepository profilRepository})
-    : super(const MesInformationsState.empty()) {
+class MesInformationsBloc extends Bloc<MesInformationsEvent, MesInformationsState> {
+  MesInformationsBloc({required final ProfilRepository profilRepository}) : super(const MesInformationsState.empty()) {
     on<MesInformationsRecuperationDemandee>((final event, final emit) async {
       emit(state.copyWith(statut: MesInformationsStatut.chargement));
       final result = await profilRepository.recupererProfil();
@@ -26,24 +24,13 @@ class MesInformationsBloc
         );
       }
     });
-    on<MesInformationsPrenomChange>(
-      (final event, final emit) => emit(state.copyWith(prenom: event.valeur)),
-    );
-    on<MesInformationsNomChange>(
-      (final event, final emit) => emit(state.copyWith(nom: event.valeur)),
-    );
-    on<MesInformationsAnneeChange>(
-      (final event, final emit) =>
-          emit(state.copyWith(anneeDeNaissance: event.valeur)),
-    );
+    on<MesInformationsPrenomChange>((final event, final emit) => emit(state.copyWith(prenom: event.valeur)));
+    on<MesInformationsNomChange>((final event, final emit) => emit(state.copyWith(nom: event.valeur)));
+    on<MesInformationsAnneeChange>((final event, final emit) => emit(state.copyWith(anneeDeNaissance: event.valeur)));
     on<MesInformationsNombreDePartsFiscalesChange>(
-      (final event, final emit) =>
-          emit(state.copyWith(nombreDePartsFiscales: event.valeur)),
+      (final event, final emit) => emit(state.copyWith(nombreDePartsFiscales: event.valeur)),
     );
-    on<MesInformationsRevenuFiscalChange>(
-      (final event, final emit) =>
-          emit(state.copyWith(revenuFiscal: event.valeur)),
-    );
+    on<MesInformationsRevenuFiscalChange>((final event, final emit) => emit(state.copyWith(revenuFiscal: event.valeur)));
     on<MesInformationsMiseAJourDemandee>(
       (final event, final emit) async => profilRepository.mettreAJour(
         prenom: state.prenom,

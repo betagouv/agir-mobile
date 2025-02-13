@@ -46,17 +46,10 @@ abstract final class ErrorHandler {
     unawaited(CrashReporting.captureException(error, stackTrace: stack));
   }
 
-  static Widget _buildErrorWidget(final FlutterErrorDetails details) =>
-      MaterialApp(
-        home: FnvScaffold(
-          appBar: AppBar(
-            title: const Text(Localisation.erreurInattendue),
-            backgroundColor: FnvColors.appBarFond,
-          ),
-          body: Padding(
-            padding: const EdgeInsets.all(paddingVerticalPage),
-            child: Center(child: Text(details.exceptionAsString())),
-          ),
-        ),
-      );
+  static Widget _buildErrorWidget(final FlutterErrorDetails details) => MaterialApp(
+    home: FnvScaffold(
+      appBar: AppBar(title: const Text(Localisation.erreurInattendue), backgroundColor: FnvColors.appBarFond),
+      body: Padding(padding: const EdgeInsets.all(paddingVerticalPage), child: Center(child: Text(details.exceptionAsString()))),
+    ),
+  );
 }

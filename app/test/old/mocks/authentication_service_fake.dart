@@ -12,8 +12,7 @@ class AuthenticationServiceFake implements AuthenticationService {
   const AuthenticationServiceFake();
 
   @override
-  Stream<AuthenticationStatus> get authenticationStatus =>
-      throw UnimplementedError();
+  Stream<AuthenticationStatus> get authenticationStatus => throw UnimplementedError();
 
   @override
   Future<void> checkAuthenticationStatus() => throw UnimplementedError();
@@ -33,7 +32,6 @@ class AuthenticationServiceFake implements AuthenticationService {
   AuthenticationStatus get status => const Authenticated(UserId(_userId));
 
   @override
-  Token get token => Token(
-    'header.${base64Encode(jsonEncode({'exp': 1727698718, 'utilisateurId': _userId}).codeUnits)}.signature',
-  );
+  Token get token =>
+      Token('header.${base64Encode(jsonEncode({'exp': 1727698718, 'utilisateurId': _userId}).codeUnits)}.signature');
 }

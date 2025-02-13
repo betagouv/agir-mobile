@@ -15,10 +15,7 @@ class SurveySection extends StatelessWidget {
         padding: const EdgeInsets.all(paddingVerticalPage),
         child: Column(
           children: [
-            const Text(
-              SurveySectionL10n.title,
-              style: DsfrTextStyle.bodyLgBold(color: Colors.white),
-            ),
+            const Text(SurveySectionL10n.title, style: DsfrTextStyle.bodyLgBold(color: Colors.white)),
             const SizedBox(height: paddingVerticalPage),
             DsfrButton(
               label: SurveySectionL10n.button,
@@ -26,8 +23,7 @@ class SurveySection extends StatelessWidget {
               variant: DsfrButtonVariant.secondary,
               foregroundColor: Colors.white,
               size: DsfrButtonSize.lg,
-              onPressed:
-                  () async => FnvUrlLauncher.launch(SurveySectionL10n.link),
+              onPressed: () async => FnvUrlLauncher.launch(SurveySectionL10n.link),
             ),
           ],
         ),

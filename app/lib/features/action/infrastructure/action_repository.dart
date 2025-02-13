@@ -8,8 +8,7 @@ import 'package:app/features/action/infrastructure/action_mapper.dart';
 import 'package:fpdart/fpdart.dart';
 
 class ActionRepository {
-  const ActionRepository({required final DioHttpClient client})
-    : _client = client;
+  const ActionRepository({required final DioHttpClient client}) : _client = client;
 
   final DioHttpClient _client;
 

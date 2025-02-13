@@ -10,10 +10,8 @@ class FnvMotDePasse extends StatelessWidget {
   final ValueChanged<String> onChanged;
 
   @override
-  Widget build(final context) => BlocProvider(
-    create: (final context) => MotDePasseCubit(),
-    child: _MotDePasse(onChanged: onChanged),
-  );
+  Widget build(final context) =>
+      BlocProvider(create: (final context) => MotDePasseCubit(), child: _MotDePasse(onChanged: onChanged));
 }
 
 class _MotDePasse extends StatelessWidget {
@@ -28,23 +26,17 @@ class _MotDePasse extends StatelessWidget {
       DsfrInput(
         label: Localisation.motDePasse,
         onChanged: (final value) {
-          final cubit =
-              context.read<MotDePasseCubit>()..changerMotDePasseAChange(value);
+          final cubit = context.read<MotDePasseCubit>()..changerMotDePasseAChange(value);
           if (cubit.state.estValide) {
             onChanged(value);
           }
         },
         isPasswordMode: true,
         keyboardType: TextInputType.visiblePassword,
-        scrollPadding: EdgeInsets.only(
-          bottom: MediaQuery.viewInsetsOf(context).bottom + 190,
-        ),
+        scrollPadding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom + 190),
         autofillHints: const [AutofillHints.password],
       ),
-      const Text(
-        Localisation.monMotDePasseDoitContenir,
-        style: DsfrTextStyle.bodyXs(color: DsfrColors.grey425),
-      ),
+      const Text(Localisation.monMotDePasseDoitContenir, style: DsfrTextStyle.bodyXs(color: DsfrColors.grey425)),
       const _DouzeCarateresMinimum(),
       const _AuMoinsUnMajusculeEtUneMinuscule(),
       const _UnCaractereSpecialMinimum(),
@@ -58,9 +50,7 @@ class _DouzeCarateresMinimum extends StatelessWidget {
 
   @override
   Widget build(final context) => _DoitContenir(
-    valid: context.select<MotDePasseCubit, bool>(
-      (final bloc) => bloc.state.douzeCaracteresMinimum,
-    ),
+    valid: context.select<MotDePasseCubit, bool>((final bloc) => bloc.state.douzeCaracteresMinimum),
     text: Localisation.motDePasse12CaractresMinimum,
   );
 }
@@ -70,9 +60,7 @@ class _AuMoinsUnMajusculeEtUneMinuscule extends StatelessWidget {
 
   @override
   Widget build(final context) => _DoitContenir(
-    valid: context.select<MotDePasseCubit, bool>(
-      (final bloc) => bloc.state.auMoinsUneMajusculeEtUneMinuscule,
-    ),
+    valid: context.select<MotDePasseCubit, bool>((final bloc) => bloc.state.auMoinsUneMajusculeEtUneMinuscule),
     text: Localisation.motDePasse1MajusculeEt1Minuscule,
   );
 }
@@ -82,9 +70,7 @@ class _UnCaractereSpecialMinimum extends StatelessWidget {
 
   @override
   Widget build(final context) => _DoitContenir(
-    valid: context.select<MotDePasseCubit, bool>(
-      (final bloc) => bloc.state.unCaractereSpecialMinimum,
-    ),
+    valid: context.select<MotDePasseCubit, bool>((final bloc) => bloc.state.unCaractereSpecialMinimum),
     text: Localisation.motDePasse1CaractreSpecialMinimum,
   );
 }
@@ -94,9 +80,7 @@ class _UnChiffreMinimum extends StatelessWidget {
 
   @override
   Widget build(final context) => _DoitContenir(
-    valid: context.select<MotDePasseCubit, bool>(
-      (final bloc) => bloc.state.unChiffreMinimum,
-    ),
+    valid: context.select<MotDePasseCubit, bool>((final bloc) => bloc.state.unChiffreMinimum),
     text: Localisation.motDePasse1ChiffreMinimum,
   );
 }
@@ -108,8 +92,5 @@ class _DoitContenir extends StatelessWidget {
   final String text;
 
   @override
-  Widget build(final context) => DsfrFormMessage(
-    type: valid ? DsfrFormMessageType.valid : DsfrFormMessageType.info,
-    text: text,
-  );
+  Widget build(final context) => DsfrFormMessage(type: valid ? DsfrFormMessageType.valid : DsfrFormMessageType.info, text: text);
 }

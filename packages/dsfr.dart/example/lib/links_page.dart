@@ -5,10 +5,7 @@ import 'package:flutter/material.dart';
 class LinksPage extends StatelessWidget {
   const LinksPage({super.key});
 
-  static final model = PageItem(
-    title: 'Lien',
-    pageBuilder: (final context) => const LinksPage(),
-  );
+  static final model = PageItem(title: 'Lien', pageBuilder: (final context) => const LinksPage());
 
   void _handleTap() {}
 
@@ -24,11 +21,7 @@ class LinksPage extends StatelessWidget {
         children: [
           const DsfrLink.md(label: label),
           DsfrLink.md(label: label, onTap: _handleTap),
-          DsfrLink.md(
-            label: label,
-            icon: DsfrIcons.systemArrowLeftLine,
-            onTap: _handleTap,
-          ),
+          DsfrLink.md(label: label, icon: DsfrIcons.systemArrowLeftLine, onTap: _handleTap),
           DsfrLink.md(
             label: label,
             icon: DsfrIcons.systemArrowLeftLine,

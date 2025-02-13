@@ -1,12 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class Plant extends Equatable {
-  const Plant({
-    required this.type,
-    required this.title,
-    required this.carbonFootprintInKg,
-    required this.imageUrl,
-  });
+  const Plant({required this.type, required this.title, required this.carbonFootprintInKg, required this.imageUrl});
 
   final PlantType type;
   final String title;

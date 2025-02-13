@@ -6,12 +6,7 @@ import 'package:dsfr/src/fondamentaux/spacing.g.dart';
 import 'package:flutter/material.dart';
 
 class DsfrToggleSwitch extends StatefulWidget {
-  const DsfrToggleSwitch({
-    super.key,
-    required this.label,
-    required this.value,
-    required this.onChanged,
-  });
+  const DsfrToggleSwitch({super.key, required this.label, required this.value, required this.onChanged});
 
   final bool value;
   final ValueChanged<bool> onChanged;
@@ -21,8 +16,7 @@ class DsfrToggleSwitch extends StatefulWidget {
   State<DsfrToggleSwitch> createState() => _DsfrToggleSwitchState();
 }
 
-class _DsfrToggleSwitchState extends State<DsfrToggleSwitch>
-    with MaterialStateMixin<DsfrToggleSwitch> {
+class _DsfrToggleSwitchState extends State<DsfrToggleSwitch> with MaterialStateMixin<DsfrToggleSwitch> {
   @override
   Widget build(final context) => Semantics(
     toggled: widget.value,
@@ -43,9 +37,7 @@ class _DsfrToggleSwitchState extends State<DsfrToggleSwitch>
             borderRadius: const BorderRadius.all(Radius.circular(24)),
             child: _Switch(value: widget.value),
           ),
-          Flexible(
-            child: Text(widget.label, style: const DsfrTextStyle.bodyMd()),
-          ),
+          Flexible(child: Text(widget.label, style: const DsfrTextStyle.bodyMd())),
         ],
       ),
     ),
@@ -72,13 +64,7 @@ class _Switch extends StatelessWidget {
       child: Stack(
         fit: StackFit.expand,
         children: [
-          DecoratedBox(
-            decoration: BoxDecoration(
-              color: value ? primary : null,
-              border: border,
-              borderRadius: borderRadius,
-            ),
-          ),
+          DecoratedBox(decoration: BoxDecoration(color: value ? primary : null, border: border, borderRadius: borderRadius)),
           Positioned(
             left: value ? offset : 0,
             top: 0,
@@ -87,23 +73,10 @@ class _Switch extends StatelessWidget {
             child:
                 value
                     ? const DecoratedBox(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: border,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Icon(
-                        DsfrIcons.systemCheckLine,
-                        size: 16,
-                        color: primary,
-                      ),
+                      decoration: BoxDecoration(color: Colors.white, border: border, shape: BoxShape.circle),
+                      child: Icon(DsfrIcons.systemCheckLine, size: 16, color: primary),
                     )
-                    : const DecoratedBox(
-                      decoration: BoxDecoration(
-                        border: border,
-                        borderRadius: borderRadius,
-                      ),
-                    ),
+                    : const DecoratedBox(decoration: BoxDecoration(border: border, borderRadius: borderRadius)),
           ),
         ],
       ),

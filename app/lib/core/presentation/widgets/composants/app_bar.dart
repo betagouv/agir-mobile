@@ -12,15 +12,8 @@ import 'package:go_router/go_router.dart';
 const preferredHeight = 59.0;
 
 class FnvAppBar extends StatelessWidget implements PreferredSizeWidget {
-  FnvAppBar({
-    super.key,
-    this.leading,
-    this.title,
-    this.bottom,
-    this.isRoot = false,
-  }) : preferredSize = Size.fromHeight(
-         preferredHeight + (bottom == null ? 0 : 48),
-       );
+  FnvAppBar({super.key, this.leading, this.title, this.bottom, this.isRoot = false})
+    : preferredSize = Size.fromHeight(preferredHeight + (bottom == null ? 0 : 48));
 
   final Widget? leading;
   final Widget? title;
@@ -35,10 +28,7 @@ class FnvAppBar extends StatelessWidget implements PreferredSizeWidget {
     Widget widget = SizedBox(
       height: preferredHeight,
       child: Padding(
-        padding: const EdgeInsets.only(
-          left: DsfrSpacings.s1w,
-          right: DsfrSpacings.s3w,
-        ),
+        padding: const EdgeInsets.only(left: DsfrSpacings.s1w, right: DsfrSpacings.s3w),
         child: Row(
           children: [
             leading ??
@@ -55,24 +45,14 @@ class FnvAppBar extends StatelessWidget implements PreferredSizeWidget {
                       GoRouter.of(context).pop();
                     }
                   },
-                  style: const ButtonStyle(
-                    shape: WidgetStatePropertyAll(roundedRectangleBorder),
-                  ),
+                  style: const ButtonStyle(shape: WidgetStatePropertyAll(roundedRectangleBorder)),
                   icon: Icon(
-                    isRoot
-                        ? DsfrIcons.systemMenuFill
-                        : DsfrIcons.systemArrowLeftLine,
+                    isRoot ? DsfrIcons.systemMenuFill : DsfrIcons.systemArrowLeftLine,
                     color: DsfrColors.blueFranceSun113,
-                    semanticLabel:
-                        isRoot ? Localisation.menu : Localisation.retour,
+                    semanticLabel: isRoot ? Localisation.menu : Localisation.retour,
                   ),
                 ),
-            if (title == null)
-              const Spacer()
-            else ...[
-              const SizedBox(width: DsfrSpacings.s1w),
-              Expanded(child: title!),
-            ],
+            if (title == null) const Spacer() else ...[const SizedBox(width: DsfrSpacings.s1w), Expanded(child: title!)],
             const SizedBox(width: DsfrSpacings.s1w),
             const Points(),
           ],
@@ -86,10 +66,7 @@ class FnvAppBar extends StatelessWidget implements PreferredSizeWidget {
 
     return Material(
       color: FnvColors.appBarFond,
-      child: DecoratedBox(
-        decoration: const BoxDecoration(boxShadow: appBarOmbre),
-        child: SafeArea(child: widget),
-      ),
+      child: DecoratedBox(decoration: const BoxDecoration(boxShadow: appBarOmbre), child: SafeArea(child: widget)),
     );
   }
 }

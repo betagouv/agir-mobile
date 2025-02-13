@@ -14,9 +14,7 @@ class ChangerMotDePasse extends StatelessWidget {
 
   @override
   Widget build(final context) => BlocProvider(
-    create:
-        (final context) =>
-            ChangerMotDePasseBloc(profilRepository: context.read()),
+    create: (final context) => ChangerMotDePasseBloc(profilRepository: context.read()),
     child: const _ChangerMotDePasse(),
   );
 }
@@ -25,43 +23,32 @@ class _ChangerMotDePasse extends StatelessWidget {
   const _ChangerMotDePasse();
 
   @override
-  Widget build(final context) =>
-      BlocListener<ChangerMotDePasseBloc, ChangerMotDePasseState>(
-        listener: (final context, final state) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text(Localisation.changerVotreMotDePasseConfirmation),
-            ),
-          );
-          GoRouter.of(context).pop();
-        },
-        listenWhen:
-            (final previous, final current) =>
-                previous.motPasseEstChange != current.motPasseEstChange &&
-                current.motPasseEstChange,
-        child: const Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ProfilTitrePartie(titre: Localisation.changerMonMotDePasse),
-            SizedBox(height: DsfrSpacings.s2w),
-            _MotDePasse(),
-            SizedBox(height: DsfrSpacings.s3w),
-            _ChangerMotDePasseButton(),
-          ],
-        ),
-      );
+  Widget build(final context) => BlocListener<ChangerMotDePasseBloc, ChangerMotDePasseState>(
+    listener: (final context, final state) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text(Localisation.changerVotreMotDePasseConfirmation)));
+      GoRouter.of(context).pop();
+    },
+    listenWhen:
+        (final previous, final current) => previous.motPasseEstChange != current.motPasseEstChange && current.motPasseEstChange,
+    child: const Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ProfilTitrePartie(titre: Localisation.changerMonMotDePasse),
+        SizedBox(height: DsfrSpacings.s2w),
+        _MotDePasse(),
+        SizedBox(height: DsfrSpacings.s3w),
+        _ChangerMotDePasseButton(),
+      ],
+    ),
+  );
 }
 
 class _MotDePasse extends StatelessWidget {
   const _MotDePasse();
 
   @override
-  Widget build(final context) => FnvMotDePasse(
-    onChanged:
-        (final value) => context.read<ChangerMotDePasseBloc>().add(
-          ChangerMotDePasseAChange(value),
-        ),
-  );
+  Widget build(final context) =>
+      FnvMotDePasse(onChanged: (final value) => context.read<ChangerMotDePasseBloc>().add(ChangerMotDePasseAChange(value)));
 }
 
 class _ChangerMotDePasseButton extends StatelessWidget {
@@ -73,12 +60,8 @@ class _ChangerMotDePasseButton extends StatelessWidget {
     variant: DsfrButtonVariant.primary,
     size: DsfrButtonSize.lg,
     onPressed:
-        context.select<ChangerMotDePasseBloc, bool>(
-              (final bloc) => bloc.state.estValide,
-            )
-            ? () => context.read<ChangerMotDePasseBloc>().add(
-              const ChangerMotDePasseChangementDemande(),
-            )
+        context.select<ChangerMotDePasseBloc, bool>((final bloc) => bloc.state.estValide)
+            ? () => context.read<ChangerMotDePasseBloc>().add(const ChangerMotDePasseChangementDemande())
             : null,
   );
 }

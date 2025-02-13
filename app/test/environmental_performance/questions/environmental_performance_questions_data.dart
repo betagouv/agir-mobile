@@ -12,8 +12,7 @@ const miniBilanQuestions = [
   },
   {
     'code': 'KYC_transport_avion_3_annees',
-    'question':
-        "Avez-vous pris l'avion au moins une fois ces 3 dernières années ?",
+    'question': "Avez-vous pris l'avion au moins une fois ces 3 dernières années ?",
     'reponse_multiple': [
       {'code': 'oui', 'label': 'Oui', 'selected': false},
       {'code': 'non', 'label': 'Non', 'selected': true},

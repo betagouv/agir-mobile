@@ -9,18 +9,14 @@ import 'package:app/features/challenges/detail/infrastructure/challenge_mapper.d
 import 'package:fpdart/fpdart.dart';
 
 class ChallengeRepository {
-  const ChallengeRepository({
-    required final DioHttpClient client,
-    required final MessageBus messageBus,
-  }) : _client = client,
-       _messageBus = messageBus;
+  const ChallengeRepository({required final DioHttpClient client, required final MessageBus messageBus})
+    : _client = client,
+      _messageBus = messageBus;
 
   final DioHttpClient _client;
   final MessageBus _messageBus;
 
-  Future<Either<Exception, Challenge>> fetchChallenge(
-    final ChallengeId id,
-  ) async {
+  Future<Either<Exception, Challenge>> fetchChallenge(final ChallengeId id) async {
     final response = await _client.get(Endpoints.challenge(id.value));
 
     return isResponseSuccessful(response.statusCode)
@@ -33,24 +29,20 @@ class ChallengeRepository {
     required final ChallengeStatus status,
     required final String? reason,
   }) async {
-    String challengeStatusToJson(final ChallengeStatus status) =>
-        switch (status) {
-          ChallengeStatus.toDo => 'todo',
-          ChallengeStatus.inProgress => 'en_cours',
-          ChallengeStatus.refused => 'pas_envie',
-          ChallengeStatus.alreadyDone => 'deja_fait',
-          ChallengeStatus.abandonned => 'abondon',
-          ChallengeStatus.done => 'fait',
-        };
+    String challengeStatusToJson(final ChallengeStatus status) => switch (status) {
+      ChallengeStatus.toDo => 'todo',
+      ChallengeStatus.inProgress => 'en_cours',
+      ChallengeStatus.refused => 'pas_envie',
+      ChallengeStatus.alreadyDone => 'deja_fait',
+      ChallengeStatus.abandonned => 'abondon',
+      ChallengeStatus.done => 'fait',
+    };
 
     final data = {'status': challengeStatusToJson(status)};
     if (reason != null) {
       data['motif'] = reason;
     }
-    final response = await _client.patch(
-      Endpoints.challenge(id.value),
-      data: data,
-    );
+    final response = await _client.patch(Endpoints.challenge(id.value), data: data);
 
     if (isResponseSuccessful(response.statusCode)) {
       _messageBus.publish(challengeCompletedTopic);

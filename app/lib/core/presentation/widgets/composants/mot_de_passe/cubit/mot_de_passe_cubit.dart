@@ -6,6 +6,5 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class MotDePasseCubit extends Cubit<MotDePasseState> {
   MotDePasseCubit() : super(const MotDePasseState(valeur: ''));
 
-  void changerMotDePasseAChange(final String value) =>
-      emit(MotDePasseState(valeur: value));
+  void changerMotDePasseAChange(final String value) => emit(MotDePasseState(valeur: value));
 }

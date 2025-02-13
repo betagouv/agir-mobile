@@ -12,11 +12,7 @@ typedef DsfrAccordionCallback = void Function(int panelIndex, bool isExpanded);
 typedef DsfrAccordionHeaderBuilder = Widget Function(bool isExpanded);
 
 class DsfrAccordion {
-  const DsfrAccordion({
-    required this.headerBuilder,
-    required this.body,
-    this.isEnable = true,
-  });
+  const DsfrAccordion({required this.headerBuilder, required this.body, this.isEnable = true});
 
   final DsfrAccordionHeaderBuilder headerBuilder;
   final Widget body;
@@ -36,11 +32,10 @@ class _DsfrAccordionsGroupState extends State<DsfrAccordionsGroup> {
   int? _panelIndex;
   bool _isExpanded = false;
 
-  void _handleCallback(final int? panelIndex, final bool isExpanded) =>
-      setState(() {
-        _panelIndex = panelIndex;
-        _isExpanded = isExpanded;
-      });
+  void _handleCallback(final int? panelIndex, final bool isExpanded) => setState(() {
+    _panelIndex = panelIndex;
+    _isExpanded = isExpanded;
+  });
 
   @override
   Widget build(final context) {
@@ -68,12 +63,7 @@ class _DsfrAccordionsGroupState extends State<DsfrAccordionsGroup> {
 }
 
 class _DsfrAccordion extends StatefulWidget {
-  const _DsfrAccordion({
-    required this.index,
-    required this.item,
-    required this.isExpanded,
-    required this.onAccordionCallback,
-  });
+  const _DsfrAccordion({required this.index, required this.item, required this.isExpanded, required this.onAccordionCallback});
 
   final int index;
   final DsfrAccordion item;
@@ -84,10 +74,8 @@ class _DsfrAccordion extends StatefulWidget {
   State<_DsfrAccordion> createState() => _DsfrAccordionState();
 }
 
-class _DsfrAccordionState extends State<_DsfrAccordion>
-    with MaterialStateMixin<_DsfrAccordion> {
-  void _handleTap() =>
-      widget.onAccordionCallback(widget.index, !widget.isExpanded);
+class _DsfrAccordionState extends State<_DsfrAccordion> with MaterialStateMixin<_DsfrAccordion> {
+  void _handleTap() => widget.onAccordionCallback(widget.index, !widget.isExpanded);
 
   @override
   Widget build(final context) => Column(
@@ -102,19 +90,14 @@ class _DsfrAccordionState extends State<_DsfrAccordion>
         child: DsfrFocusWidget(
           isFocused: isFocused,
           child: ColoredBox(
-            color:
-                widget.isExpanded
-                    ? DsfrColors.blueFrance925
-                    : Colors.transparent,
+            color: widget.isExpanded ? DsfrColors.blueFrance925 : Colors.transparent,
             child: ConstrainedBox(
               constraints: const BoxConstraints(minHeight: 48),
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s3v),
                 child: Row(
                   children: [
-                    Expanded(
-                      child: widget.item.headerBuilder(widget.isExpanded),
-                    ),
+                    Expanded(child: widget.item.headerBuilder(widget.isExpanded)),
                     if (widget.item.isEnable)
                       AnimatedRotation(
                         turns: widget.isExpanded ? -0.5 : 0,
@@ -136,16 +119,10 @@ class _DsfrAccordionState extends State<_DsfrAccordion>
       AnimatedCrossFade(
         firstChild: const SizedBox.shrink(),
         secondChild: Padding(
-          padding: const EdgeInsets.only(
-            top: DsfrSpacings.s2w,
-            bottom: DsfrSpacings.s3w,
-          ),
+          padding: const EdgeInsets.only(top: DsfrSpacings.s2w, bottom: DsfrSpacings.s3w),
           child: widget.item.body,
         ),
-        crossFadeState:
-            widget.isExpanded
-                ? CrossFadeState.showSecond
-                : CrossFadeState.showFirst,
+        crossFadeState: widget.isExpanded ? CrossFadeState.showSecond : CrossFadeState.showFirst,
         duration: Durations.short4,
       ),
     ],

@@ -4,6 +4,5 @@ class MissingEnvironmentKeyException implements Exception {
   final String message;
 
   @override
-  String toString() =>
-      'MissingEnvironmentKeyException: The environment key "$message" is missing.';
+  String toString() => 'MissingEnvironmentKeyException: The environment key "$message" is missing.';
 }

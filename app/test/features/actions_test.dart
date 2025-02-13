@@ -33,15 +33,7 @@ void main() {
       await iHaveActionDetailInMyLibrary(
         tester,
         const bdd.DataTable([
-          [
-            'id',
-            'title',
-            'subTitle',
-            'how',
-            'why',
-            'service_id',
-            'service_category',
-          ],
+          ['id', 'title', 'subTitle', 'how', 'why', 'service_id', 'service_category'],
           [
             '1',
             'Faire réparer une **paire de chaussures**',
@@ -86,10 +78,7 @@ void main() {
       await bddSetUp(tester);
       await iTapOn(tester, 'Actions');
       await iTapOn(tester, 'Faire réparer une paire de chaussures');
-      await iSee(
-        tester,
-        'Faites des économies en donnant une seconde vie à vos paires de chaussures',
-      );
+      await iSee(tester, 'Faites des économies en donnant une seconde vie à vos paires de chaussures');
     });
     testWidgets('''See Longues vies aux objets service''', (tester) async {
       await bddSetUp(tester);

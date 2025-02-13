@@ -17,29 +17,18 @@ import '../helpers/dio_mock.dart';
 import '../helpers/faker.dart';
 import '../helpers/pump_page.dart';
 
-Future<void> _pumpPage(
-  final WidgetTester tester, {
-  required final DioMock dio,
-}) async {
-  final client = DioHttpClient(
-    dio: dio,
-    authenticationService: authenticationService,
-  );
+Future<void> _pumpPage(final WidgetTester tester, {required final DioMock dio}) async {
+  final client = DioHttpClient(dio: dio, authenticationService: authenticationService);
   await pumpPage(
     tester: tester,
     repositoryProviders: [
-      RepositoryProvider<KnowYourCustomersRepository>(
-        create: (final context) => KnowYourCustomersRepository(client: client),
-      ),
+      RepositoryProvider<KnowYourCustomersRepository>(create: (final context) => KnowYourCustomersRepository(client: client)),
     ],
     blocProviders: [
       BlocProvider(
         create:
             (final context) => GamificationBloc(
-              repository: GamificationRepository(
-                client: client,
-                messageBus: MessageBus(),
-              ),
+              repository: GamificationRepository(client: client, messageBus: MessageBus()),
               authenticationService: authenticationService,
             ),
       ),
@@ -89,10 +78,7 @@ void main() {
       for (final question in questions) {
         final expected = QuestionMapper.fromJson(question)!;
 
-        Matcher findsWhenAnsweredAndPartOfTheme(
-          final Question expected,
-          final ThemeType? theme,
-        ) {
+        Matcher findsWhenAnsweredAndPartOfTheme(final Question expected, final ThemeType? theme) {
           if (!expected.isAnswered) {
             return findsNothing;
           }
@@ -104,10 +90,7 @@ void main() {
           return expected.theme == theme ? findsOneWidget : findsNothing;
         }
 
-        expect(
-          find.text(expected.label),
-          findsWhenAnsweredAndPartOfTheme(expected, theme),
-        );
+        expect(find.text(expected.label), findsWhenAnsweredAndPartOfTheme(expected, theme));
       }
     }
   });

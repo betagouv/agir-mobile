@@ -12,11 +12,7 @@ class Bibliotheque extends Equatable {
 }
 
 class BibliothequeFiltre extends Equatable {
-  const BibliothequeFiltre({
-    required this.code,
-    required this.titre,
-    required this.choisi,
-  });
+  const BibliothequeFiltre({required this.code, required this.titre, required this.choisi});
 
   final String code;
   final String titre;

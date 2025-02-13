@@ -7,35 +7,21 @@ import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:fpdart/fpdart.dart';
 
 class RecommandationsRepository {
-  const RecommandationsRepository({required final DioHttpClient client})
-    : _client = client;
+  const RecommandationsRepository({required final DioHttpClient client}) : _client = client;
 
   final DioHttpClient _client;
 
-  Future<Either<Exception, List<Recommandation>>> recuperer(
-    final ThemeType thematique,
-  ) async {
-    final recommandationsParThematique = Endpoints.recommandationsParThematique(
-      thematique.name,
-    );
+  Future<Either<Exception, List<Recommandation>>> recuperer(final ThemeType thematique) async {
+    final recommandationsParThematique = Endpoints.recommandationsParThematique(thematique.name);
 
     final response = await _client.get(recommandationsParThematique);
 
     if (isResponseUnsuccessful(response.statusCode)) {
-      return Left(
-        Exception('Erreur lors de la récupération des recommandations'),
-      );
+      return Left(Exception('Erreur lors de la récupération des recommandations'));
     }
 
     final json = response.data as List<dynamic>;
 
-    return Right(
-      json
-          .map(
-            (final e) =>
-                RecommandationMapper.fromJson(e as Map<String, dynamic>),
-          )
-          .toList(),
-    );
+    return Right(json.map((final e) => RecommandationMapper.fromJson(e as Map<String, dynamic>)).toList());
   }
 }

@@ -17,19 +17,14 @@ class MonLogementPage extends StatelessWidget {
   static const name = 'mon-logement';
   static const path = name;
 
-  static GoRoute get route => GoRoute(
-    path: path,
-    name: name,
-    builder: (final context, final state) => const MonLogementPage(),
-  );
+  static GoRoute get route => GoRoute(path: path, name: name, builder: (final context, final state) => const MonLogementPage());
 
   @override
   Widget build(final context) => BlocProvider(
     create:
-        (final context) => MonLogementBloc(
-          profilRepository: context.read(),
-          communesRepository: context.read(),
-        )..add(const MonLogementRecuperationDemandee()),
+        (final context) =>
+            MonLogementBloc(profilRepository: context.read(), communesRepository: context.read())
+              ..add(const MonLogementRecuperationDemandee()),
     child: const _MonLogementView(),
   );
 }
@@ -57,14 +52,10 @@ class _MonLogementView extends StatelessWidget {
         variant: DsfrButtonVariant.primary,
         size: DsfrButtonSize.lg,
         onPressed: () {
-          context.read<MonLogementBloc>().add(
-            const MonLogementMiseAJourDemandee(),
-          );
+          context.read<MonLogementBloc>().add(const MonLogementMiseAJourDemandee());
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
-            ..showSnackBar(
-              const SnackBar(content: Text(Localisation.miseAJourEffectuee)),
-            );
+            ..showSnackBar(const SnackBar(content: Text(Localisation.miseAJourEffectuee)));
           GoRouter.of(context).pop();
         },
       ),

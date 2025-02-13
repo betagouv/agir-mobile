@@ -9,44 +9,19 @@ sealed class SeasonalFruitsAndVegetablesState extends Equatable {
 }
 
 @immutable
-final class SeasonalFruitsAndVegetablesInitial
-    extends SeasonalFruitsAndVegetablesState {
+final class SeasonalFruitsAndVegetablesInitial extends SeasonalFruitsAndVegetablesState {
   const SeasonalFruitsAndVegetablesInitial();
 }
 
 @immutable
-final class SeasonalFruitsAndVegetablesLoadSuccess
-    extends SeasonalFruitsAndVegetablesState {
-  SeasonalFruitsAndVegetablesLoadSuccess({
-    required this.months,
-    required this.monthSelected,
-    required final List<Plant> plants,
-  }) : fruitsLessThan1Kg = _filterAndSortPlants(plants, PlantType.fruit, 0, 1),
-       fruitsLessThan5Kg = _filterAndSortPlants(plants, PlantType.fruit, 1, 5),
-       fruitsMoreThan5Kg = _filterAndSortPlants(
-         plants,
-         PlantType.fruit,
-         5,
-         double.infinity,
-       ),
-       vegetablesLessThan1Kg = _filterAndSortPlants(
-         plants,
-         PlantType.vegetable,
-         0,
-         1,
-       ),
-       vegetablesLessThan5Kg = _filterAndSortPlants(
-         plants,
-         PlantType.vegetable,
-         1,
-         5,
-       ),
-       vegetablesMoreThan5Kg = _filterAndSortPlants(
-         plants,
-         PlantType.vegetable,
-         5,
-         double.infinity,
-       );
+final class SeasonalFruitsAndVegetablesLoadSuccess extends SeasonalFruitsAndVegetablesState {
+  SeasonalFruitsAndVegetablesLoadSuccess({required this.months, required this.monthSelected, required final List<Plant> plants})
+    : fruitsLessThan1Kg = _filterAndSortPlants(plants, PlantType.fruit, 0, 1),
+      fruitsLessThan5Kg = _filterAndSortPlants(plants, PlantType.fruit, 1, 5),
+      fruitsMoreThan5Kg = _filterAndSortPlants(plants, PlantType.fruit, 5, double.infinity),
+      vegetablesLessThan1Kg = _filterAndSortPlants(plants, PlantType.vegetable, 0, 1),
+      vegetablesLessThan5Kg = _filterAndSortPlants(plants, PlantType.vegetable, 1, 5),
+      vegetablesMoreThan5Kg = _filterAndSortPlants(plants, PlantType.vegetable, 5, double.infinity);
 
   final List<PlantMonth> months;
   final String monthSelected;
@@ -83,15 +58,11 @@ final class SeasonalFruitsAndVegetablesLoadSuccess
                 plant.carbonFootprintInKg < maxKg,
           )
           .toList()
-        ..sort(
-          (final a, final b) =>
-              a.carbonFootprintInKg.compareTo(b.carbonFootprintInKg),
-        );
+        ..sort((final a, final b) => a.carbonFootprintInKg.compareTo(b.carbonFootprintInKg));
 }
 
 @immutable
-final class SeasonalFruitsAndVegetablesLoadFailure
-    extends SeasonalFruitsAndVegetablesState {
+final class SeasonalFruitsAndVegetablesLoadFailure extends SeasonalFruitsAndVegetablesState {
   const SeasonalFruitsAndVegetablesLoadFailure(this.error);
 
   final String error;

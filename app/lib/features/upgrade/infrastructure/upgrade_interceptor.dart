@@ -10,10 +10,7 @@ class UpgradeInterceptor extends Interceptor {
   final UpgradeBloc upgradeBloc;
 
   @override
-  void onResponse(
-    final Response<dynamic> response,
-    final ResponseInterceptorHandler handler,
-  ) {
+  void onResponse(final Response<dynamic> response, final ResponseInterceptorHandler handler) {
     if (response.statusCode == HttpStatus.gone) {
       upgradeBloc.add(const UpgradeRequested());
     }

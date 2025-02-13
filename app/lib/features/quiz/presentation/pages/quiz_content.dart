@@ -42,8 +42,7 @@ class _Choices extends StatelessWidget {
       return null;
     }
 
-    final reponseExacte =
-        state.quiz.reponses.firstWhereOrNull((final r) => r.exact)?.reponse;
+    final reponseExacte = state.quiz.reponses.firstWhereOrNull((final r) => r.exact)?.reponse;
     if (reponse == reponseExacte) {
       return DsfrColors.success950;
     }
@@ -51,10 +50,7 @@ class _Choices extends StatelessWidget {
     final reponseUtilisateur = state.reponse.getOrElse(() => '');
 
     return reponse == reponseUtilisateur
-        ? state.estExacte.fold(
-          () => null,
-          (final t) => t ? DsfrColors.success950 : DsfrColors.error950,
-        )
+        ? state.estExacte.fold(() => null, (final t) => t ? DsfrColors.success950 : DsfrColors.error950)
         : null;
   }
 
@@ -63,16 +59,9 @@ class _Choices extends StatelessWidget {
     values: Map.fromEntries(
       state.quiz.reponses
           .map((final e) => e.reponse)
-          .map(
-            (final e) => MapEntry(
-              e,
-              DsfrRadioButtonItem(e, backgroundColor: _getColor(state, e)),
-            ),
-          ),
+          .map((final e) => MapEntry(e, DsfrRadioButtonItem(e, backgroundColor: _getColor(state, e)))),
     ),
-    onCallback:
-        (final value) =>
-            context.read<QuizBloc>().add(QuizReponseSelectionnee(value ?? '')),
+    onCallback: (final value) => context.read<QuizBloc>().add(QuizReponseSelectionnee(value ?? '')),
     mode: DsfrRadioButtonSetMode.column,
     isEnabled: state.estExacte.isNone(),
   );

@@ -9,10 +9,7 @@ Future<void> ielEcritDansLeChamp(
   required final String enterText,
 }) async {
   await tester.enterText(
-    find.byWidgetPredicate(
-      (final widget) =>
-          widget is DsfrInputHeadless && widget.key == ValueKey(label),
-    ),
+    find.byWidgetPredicate((final widget) => widget is DsfrInputHeadless && widget.key == ValueKey(label)),
     enterText,
   );
 

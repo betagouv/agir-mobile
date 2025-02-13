@@ -24,10 +24,7 @@ class AuthenticationStorage {
       final payloadMap = _decodeJwtToken(jwtPayload);
       final userId = payloadMap['utilisateurId'] as String;
       _cachedUserId = UserId(userId);
-      final expirationTime = DateTime.fromMillisecondsSinceEpoch(
-        (payloadMap['exp'] as int) * 1000,
-        isUtc: true,
-      );
+      final expirationTime = DateTime.fromMillisecondsSinceEpoch((payloadMap['exp'] as int) * 1000, isUtc: true);
       _cachedExpirationDate = ExpirationDate(expirationTime);
     }
   }
@@ -43,10 +40,7 @@ class AuthenticationStorage {
     final payloadMap = _decodeJwtToken(jwtPayload);
     final userId = payloadMap['utilisateurId'] as String;
     _cachedUserId = UserId(userId);
-    final expirationTime = DateTime.fromMillisecondsSinceEpoch(
-      (payloadMap['exp'] as int) * 1000,
-      isUtc: true,
-    );
+    final expirationTime = DateTime.fromMillisecondsSinceEpoch((payloadMap['exp'] as int) * 1000, isUtc: true);
     _cachedExpirationDate = ExpirationDate(expirationTime);
   }
 
@@ -82,6 +76,5 @@ class AuthenticationStorage {
   }
 
   Map<String, dynamic> _decodeJwtToken(final String jwtToken) =>
-      jsonDecode(utf8.decode(base64.decode(base64.normalize(jwtToken))))
-          as Map<String, dynamic>;
+      jsonDecode(utf8.decode(base64.decode(base64.normalize(jwtToken)))) as Map<String, dynamic>;
 }

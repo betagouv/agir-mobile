@@ -17,9 +17,7 @@ class DsfrButtonBackgroundColor extends WidgetStateColor {
        _disabled = disabled,
        super($default.value);
 
-  factory DsfrButtonBackgroundColor.fromVariant(
-    final DsfrButtonVariant variant,
-  ) {
+  factory DsfrButtonBackgroundColor.fromVariant(final DsfrButtonVariant variant) {
     switch (variant) {
       case DsfrButtonVariant.primary:
         return DsfrButtonBackgroundColor(
@@ -67,9 +65,5 @@ class DsfrButtonBackgroundColor extends WidgetStateColor {
           other._disabled == _disabled);
 
   @override
-  int get hashCode =>
-      _default.hashCode ^
-      _active.hashCode ^
-      _hover.hashCode ^
-      _disabled.hashCode;
+  int get hashCode => _default.hashCode ^ _active.hashCode ^ _hover.hashCode ^ _disabled.hashCode;
 }

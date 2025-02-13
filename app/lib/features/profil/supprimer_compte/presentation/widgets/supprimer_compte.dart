@@ -25,10 +25,7 @@ class SupprimerCompte extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: DsfrSpacings.s1v,
           children: [
-            Padding(
-              padding: EdgeInsets.only(top: 3),
-              child: Icon(DsfrIcons.systemFrInfoFill, size: 16, color: color),
-            ),
+            Padding(padding: EdgeInsets.only(top: 3), child: Icon(DsfrIcons.systemFrInfoFill, size: 16, color: color)),
             Expanded(
               child: Text.rich(
                 TextSpan(
@@ -36,9 +33,7 @@ class SupprimerCompte extends StatelessWidget {
                     TextSpan(text: Localisation.supprimerVotreCompteContenu),
                     TextSpan(text: ' '),
                     TextSpan(
-                      text:
-                          Localisation
-                              .attentionAucuneDonneeNePourraEtreRecuperee,
+                      text: Localisation.attentionAucuneDonneeNePourraEtreRecuperee,
                       style: DsfrTextStyle.bodyXsBold(color: color),
                     ),
                   ],
@@ -55,10 +50,7 @@ class SupprimerCompte extends StatelessWidget {
           foregroundColor: color,
           size: DsfrButtonSize.lg,
           onPressed: () async {
-            final bloc = SupprimerCompteBloc(
-              authentificationRepository: context.read(),
-              profilRepository: context.read(),
-            );
+            final bloc = SupprimerCompteBloc(authentificationRepository: context.read(), profilRepository: context.read());
             final result = await DsfrModal.showModal<bool>(
               context: context,
               builder: (final context) => const SupprimerCompteModal(),

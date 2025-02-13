@@ -3,10 +3,8 @@ import 'package:app/features/authentification/changer_mot_de_passe/presentation/
 import 'package:app/features/profil/core/infrastructure/profil_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ChangerMotDePasseBloc
-    extends Bloc<ChangerMotDePasseEvent, ChangerMotDePasseState> {
-  ChangerMotDePasseBloc({required final ProfilRepository profilRepository})
-    : super(const ChangerMotDePasseState.empty()) {
+class ChangerMotDePasseBloc extends Bloc<ChangerMotDePasseEvent, ChangerMotDePasseState> {
+  ChangerMotDePasseBloc({required final ProfilRepository profilRepository}) : super(const ChangerMotDePasseState.empty()) {
     on<ChangerMotDePasseAChange>((final event, final emit) {
       emit(state.copyWith(motDePasse: event.valeur));
     });

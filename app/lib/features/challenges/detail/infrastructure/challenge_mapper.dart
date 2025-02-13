@@ -16,17 +16,16 @@ abstract final class ChallengeMapper {
     why: json['pourquoi'] as String,
   );
 
-  static ChallengeStatus _challengeStatusfromJson(final String json) =>
-      switch (json) {
-        'todo' => ChallengeStatus.toDo,
-        'en_cours' => ChallengeStatus.inProgress,
-        'pas_envie' => ChallengeStatus.refused,
-        'deja_fait' => ChallengeStatus.alreadyDone,
-        'abondon' => ChallengeStatus.abandonned,
-        'fait' => ChallengeStatus.done,
-        // ignore: no-equal-switch-expression-cases
-        _ => ChallengeStatus.toDo,
-      };
+  static ChallengeStatus _challengeStatusfromJson(final String json) => switch (json) {
+    'todo' => ChallengeStatus.toDo,
+    'en_cours' => ChallengeStatus.inProgress,
+    'pas_envie' => ChallengeStatus.refused,
+    'deja_fait' => ChallengeStatus.alreadyDone,
+    'abondon' => ChallengeStatus.abandonned,
+    'fait' => ChallengeStatus.done,
+    // ignore: no-equal-switch-expression-cases
+    _ => ChallengeStatus.toDo,
+  };
 
   static ThemeType _mapThemeType(final String? type) => switch (type) {
     'alimentation' => ThemeType.alimentation,

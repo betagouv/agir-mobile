@@ -5,10 +5,7 @@ import 'package:flutter/material.dart';
 class SelectPage extends StatelessWidget {
   const SelectPage({super.key});
 
-  static final model = PageItem(
-    title: 'Liste déroulante',
-    pageBuilder: (final context) => const SelectPage(),
-  );
+  static final model = PageItem(title: 'Liste déroulante', pageBuilder: (final context) => const SelectPage());
 
   @override
   Widget build(final context) => ListView(
@@ -23,11 +20,7 @@ class SelectPage extends StatelessWidget {
         ],
         onSelected: (final value) {},
       ),
-      DsfrSelect(
-        label: 'Label',
-        dropdownMenuEntries: const [],
-        onSelected: (final value) {},
-      ),
+      DsfrSelect(label: 'Label', dropdownMenuEntries: const [], onSelected: (final value) {}),
     ],
   );
 }

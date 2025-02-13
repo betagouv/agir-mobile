@@ -13,10 +13,7 @@ extension GoRouterExt on GoRouter {
         }
 
         if (i != 0 && routeStacks.elementAtOrNull(i - 1) is ShellRoute) {
-          final last =
-              currentConfiguration.matches.isNotEmpty
-                  ? currentConfiguration.matches.lastOrNull
-                  : null;
+          final last = currentConfiguration.matches.isNotEmpty ? currentConfiguration.matches.lastOrNull : null;
           if (last != null) {
             restore(currentConfiguration.remove(last));
           }
@@ -38,10 +35,7 @@ extension GoRouterExt on GoRouter {
         }
 
         if (i != 0 && routeStacks.elementAtOrNull(i - 1) is ShellRoute) {
-          final last =
-              currentConfiguration.matches.isNotEmpty
-                  ? currentConfiguration.matches.lastOrNull
-                  : null;
+          final last = currentConfiguration.matches.isNotEmpty ? currentConfiguration.matches.lastOrNull : null;
           if (last != null) {
             restore(currentConfiguration.remove(last));
           }

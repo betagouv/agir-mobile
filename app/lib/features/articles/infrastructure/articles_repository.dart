@@ -8,8 +8,7 @@ import 'package:app/features/articles/infrastructure/article_mapper.dart';
 import 'package:fpdart/fpdart.dart';
 
 class ArticlesRepository {
-  const ArticlesRepository({required final DioHttpClient client})
-    : _client = client;
+  const ArticlesRepository({required final DioHttpClient client}) : _client = client;
 
   final DioHttpClient _client;
 
@@ -18,18 +17,11 @@ class ArticlesRepository {
 
     return isResponseUnsuccessful(responseApi.statusCode)
         ? Left(Exception("Erreur lors de la récupération de l'article"))
-        : Right(
-          ArticleMapper.fromJson(
-            json: responseApi.data as Map<String, dynamic>,
-          ),
-        );
+        : Right(ArticleMapper.fromJson(json: responseApi.data as Map<String, dynamic>));
   }
 
   Future<Either<Exception, void>> addToFavorites(final String id) async {
-    final response = await _client.post(
-      Endpoints.events,
-      data: jsonEncode({'content_id': id, 'type': 'article_favoris'}),
-    );
+    final response = await _client.post(Endpoints.events, data: jsonEncode({'content_id': id, 'type': 'article_favoris'}));
 
     return isResponseSuccessful(response.statusCode)
         ? const Right(null)
@@ -37,10 +29,7 @@ class ArticlesRepository {
   }
 
   Future<Either<Exception, void>> removeToFavorites(final String id) async {
-    final response = await _client.post(
-      Endpoints.events,
-      data: jsonEncode({'content_id': id, 'type': 'article_non_favoris'}),
-    );
+    final response = await _client.post(Endpoints.events, data: jsonEncode({'content_id': id, 'type': 'article_non_favoris'}));
 
     return isResponseSuccessful(response.statusCode)
         ? const Right(null)

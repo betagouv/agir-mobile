@@ -21,15 +21,7 @@ class Recommandation extends Equatable {
   final ThemeType thematique;
 
   @override
-  List<Object?> get props => [
-    id,
-    type,
-    titre,
-    sousTitre,
-    imageUrl,
-    points,
-    thematique,
-  ];
+  List<Object?> get props => [id, type, titre, sousTitre, imageUrl, points, thematique];
 }
 
 enum TypeDuContenu { article, kyc, quiz }

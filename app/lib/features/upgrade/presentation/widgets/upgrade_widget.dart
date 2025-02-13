@@ -10,11 +10,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UpgradeWidget extends StatelessWidget {
-  const UpgradeWidget({
-    super.key,
-    required this.navigatorKey,
-    required this.child,
-  });
+  const UpgradeWidget({super.key, required this.navigatorKey, required this.child});
 
   final GlobalKey<NavigatorState> navigatorKey;
   final Widget child;

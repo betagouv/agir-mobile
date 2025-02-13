@@ -7,10 +7,7 @@ abstract final class CrashReporting {
     p0.considerInAppFramesByDefault = false;
   });
 
-  static Future<void> captureException(
-    final dynamic exception, {
-    final dynamic stackTrace,
-  }) async {
+  static Future<void> captureException(final dynamic exception, {final dynamic stackTrace}) async {
     await Sentry.captureException(exception, stackTrace: stackTrace);
   }
 

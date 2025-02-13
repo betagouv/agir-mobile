@@ -11,21 +11,13 @@ class MonLogementEstProprietaire extends StatelessWidget {
 
   @override
   Widget build(final context) {
-    final estProprietaire = context.select<MonLogementBloc, bool?>(
-      (final bloc) => bloc.state.estProprietaire,
-    );
+    final estProprietaire = context.select<MonLogementBloc, bool?>((final bloc) => bloc.state.estProprietaire);
 
     return MonLogementTitreEtContenu(
       titre: Localisation.vousEtesProprietaireDeVotreLogement,
       contenu: DsfrRadioButtonSetHeadless(
-        values: const {
-          true: DsfrRadioButtonItem(Localisation.oui),
-          false: DsfrRadioButtonItem(Localisation.non),
-        },
-        onCallback:
-            (final value) => context.read<MonLogementBloc>().add(
-              MonLogementEstProprietaireChange(value),
-            ),
+        values: const {true: DsfrRadioButtonItem(Localisation.oui), false: DsfrRadioButtonItem(Localisation.non)},
+        onCallback: (final value) => context.read<MonLogementBloc>().add(MonLogementEstProprietaireChange(value)),
         initialValue: estProprietaire,
       ),
     );

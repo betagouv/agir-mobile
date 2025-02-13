@@ -10,18 +10,13 @@ class MesInformationsPrenom extends StatelessWidget {
 
   @override
   Widget build(final context) {
-    final prenom = context.select<MesInformationsBloc, String?>(
-      (final bloc) => bloc.state.prenom,
-    );
+    final prenom = context.select<MesInformationsBloc, String?>((final bloc) => bloc.state.prenom);
 
     return DsfrInput(
       label: Localisation.prenom,
       hintText: Localisation.obligatoire,
       initialValue: prenom,
-      onChanged:
-          (final value) => context.read<MesInformationsBloc>().add(
-            MesInformationsPrenomChange(value),
-          ),
+      onChanged: (final value) => context.read<MesInformationsBloc>().add(MesInformationsPrenomChange(value)),
       textCapitalization: TextCapitalization.sentences,
       textInputAction: TextInputAction.next,
       autofillHints: const [AutofillHints.givenName],

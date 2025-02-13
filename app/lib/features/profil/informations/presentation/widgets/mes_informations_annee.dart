@@ -11,9 +11,7 @@ class MesInformationsAnnee extends StatelessWidget {
 
   @override
   Widget build(final context) {
-    final anneeDeNaissance = context.select<MesInformationsBloc, int?>(
-      (final bloc) => bloc.state.anneeDeNaissance,
-    );
+    final anneeDeNaissance = context.select<MesInformationsBloc, int?>((final bloc) => bloc.state.anneeDeNaissance);
 
     return DsfrInput(
       label: Localisation.anneeDeNaissance,
@@ -24,16 +22,11 @@ class MesInformationsAnnee extends StatelessWidget {
         if (parsedValue == null) {
           return;
         }
-        context.read<MesInformationsBloc>().add(
-          MesInformationsAnneeChange(parsedValue),
-        );
+        context.read<MesInformationsBloc>().add(MesInformationsAnneeChange(parsedValue));
       },
       keyboardType: TextInputType.number,
       textInputAction: TextInputAction.next,
-      inputFormatters: [
-        FilteringTextInputFormatter.digitsOnly,
-        LengthLimitingTextInputFormatter(4),
-      ],
+      inputFormatters: [FilteringTextInputFormatter.digitsOnly, LengthLimitingTextInputFormatter(4)],
     );
   }
 }

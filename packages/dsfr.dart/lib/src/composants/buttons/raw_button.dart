@@ -32,8 +32,7 @@ class DsfrRawButton extends StatefulWidget {
   State<DsfrRawButton> createState() => _DsfrRawButtonState();
 }
 
-class _DsfrRawButtonState extends State<DsfrRawButton>
-    with MaterialStateMixin<DsfrRawButton> {
+class _DsfrRawButtonState extends State<DsfrRawButton> with MaterialStateMixin<DsfrRawButton> {
   late final double _minHeight;
   late final EdgeInsetsGeometry _padding;
   late final TextStyle _textStyle;
@@ -49,20 +48,13 @@ class _DsfrRawButtonState extends State<DsfrRawButton>
     _foregroundColor =
         widget.foregroundColor == null
             ? DsfrButtonForegroundColor.fromVariant(widget.variant)
-            : DsfrButtonForegroundColor(
-              $default: widget.foregroundColor!,
-              disabled: DsfrColors.grey625,
-            );
+            : DsfrButtonForegroundColor($default: widget.foregroundColor!, disabled: DsfrColors.grey625);
     _border =
         widget.foregroundColor == null
             ? DsfrButtonBorder.fromVariant(widget.variant)
             : DsfrButtonBorder(
-              $default: Border.fromBorderSide(
-                BorderSide(color: widget.foregroundColor!),
-              ),
-              disabled: const Border.fromBorderSide(
-                BorderSide(color: DsfrColors.grey925),
-              ),
+              $default: Border.fromBorderSide(BorderSide(color: widget.foregroundColor!)),
+              disabled: const Border.fromBorderSide(BorderSide(color: DsfrColors.grey925)),
             );
     _padding = _getPadding(widget.size);
     _textStyle = _getTextStyle(widget.size);
@@ -71,18 +63,9 @@ class _DsfrRawButtonState extends State<DsfrRawButton>
   }
 
   EdgeInsetsGeometry _getPadding(final DsfrButtonSize size) => switch (size) {
-    DsfrButtonSize.lg => const EdgeInsets.symmetric(
-      vertical: 10,
-      horizontal: 24,
-    ),
-    DsfrButtonSize.md => const EdgeInsets.symmetric(
-      vertical: 8,
-      horizontal: 16,
-    ),
-    DsfrButtonSize.sm => const EdgeInsets.symmetric(
-      vertical: 4,
-      horizontal: 12,
-    ),
+    DsfrButtonSize.lg => const EdgeInsets.symmetric(vertical: 10, horizontal: 24),
+    DsfrButtonSize.md => const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+    DsfrButtonSize.sm => const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
   };
 
   TextStyle _getTextStyle(final DsfrButtonSize size) => switch (size) {
@@ -138,10 +121,7 @@ class _DsfrRawButtonState extends State<DsfrRawButton>
                             return;
                           }
                           widget.onPressed!();
-                          _timer = Timer(
-                            const Duration(milliseconds: 500),
-                            () {},
-                          );
+                          _timer = Timer(const Duration(milliseconds: 500), () {});
                         },
                 onHighlightChanged: updateMaterialState(WidgetState.pressed),
                 onHover: updateMaterialState(WidgetState.hovered),
@@ -155,10 +135,7 @@ class _DsfrRawButtonState extends State<DsfrRawButton>
                     heightFactor: 1,
                     child: IconTheme(
                       data: IconThemeData(color: textColor),
-                      child: DefaultTextStyle(
-                        style: _textStyle.copyWith(color: textColor),
-                        child: widget.child,
-                      ),
+                      child: DefaultTextStyle(style: _textStyle.copyWith(color: textColor), child: widget.child),
                     ),
                   ),
                 ),

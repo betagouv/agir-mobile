@@ -44,11 +44,5 @@ final class BibliothequeState extends Equatable {
   );
 
   @override
-  List<Object?> get props => [
-    bibliotheque,
-    recherche,
-    thematiques,
-    statut,
-    isFavorites,
-  ];
+  List<Object?> get props => [bibliotheque, recherche, thematiques, statut, isFavorites];
 }

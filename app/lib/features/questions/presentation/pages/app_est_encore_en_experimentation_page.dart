@@ -21,10 +21,7 @@ class AppEstEncoreEnExperimentationPage extends StatelessWidget {
   static GoRoute get route => GoRoute(
     path: path,
     name: name,
-    builder:
-        (final context, final state) => AppEstEncoreEnExperimentationPage(
-          commune: state.pathParameters['commune']!,
-        ),
+    builder: (final context, final state) => AppEstEncoreEnExperimentationPage(commune: state.pathParameters['commune']!),
   );
 
   @override
@@ -39,14 +36,8 @@ class AppEstEncoreEnExperimentationPage extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(paddingVerticalPage),
         children: [
-          const Align(
-            alignment: Alignment.centerLeft,
-            child: OnboardingIllustration(assetName: AssetImages.illustration3),
-          ),
-          const Text(
-            Localisation.appEstEncoreEnExperimentation,
-            style: DsfrTextStyle.headline2(),
-          ),
+          const Align(alignment: Alignment.centerLeft, child: OnboardingIllustration(assetName: AssetImages.illustration3)),
+          const Text(Localisation.appEstEncoreEnExperimentation, style: DsfrTextStyle.headline2()),
           const SizedBox(height: DsfrSpacings.s2w),
           Text.rich(
             TextSpan(
@@ -54,14 +45,9 @@ class AppEstEncoreEnExperimentationPage extends StatelessWidget {
               children: [
                 TextSpan(
                   text: Localisation.communeEtSaRegion(commune),
-                  style: bodyLg.copyWith(
-                    color: DsfrColors.blueFranceSun113,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: bodyLg.copyWith(color: DsfrColors.blueFranceSun113, fontWeight: FontWeight.bold),
                 ),
-                const TextSpan(
-                  text: Localisation.appEstEncoreEnExperimentationDetails2,
-                ),
+                const TextSpan(text: Localisation.appEstEncoreEnExperimentationDetails2),
               ],
             ),
             style: bodyLg,
@@ -73,9 +59,7 @@ class AppEstEncoreEnExperimentationPage extends StatelessWidget {
           label: Localisation.jaiCompris,
           variant: DsfrButtonVariant.primary,
           size: DsfrButtonSize.lg,
-          onPressed:
-              () async =>
-                  GoRouter.of(context).pushNamed(QuestionThemesPage.name),
+          onPressed: () async => GoRouter.of(context).pushNamed(QuestionThemesPage.name),
         ),
       ),
     );

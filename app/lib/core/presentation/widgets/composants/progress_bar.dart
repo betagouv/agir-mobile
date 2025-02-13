@@ -10,10 +10,7 @@ class FnvProgressBar extends StatelessWidget {
   @override
   Widget build(final context) => Semantics(
     label: 'Question $current sur $total',
-    child: CustomPaint(
-      painter: _Painter(value: current / total),
-      size: const Size(double.infinity, 8),
-    ),
+    child: CustomPaint(painter: _Painter(value: current / total), size: const Size(double.infinity, 8)),
   );
 }
 

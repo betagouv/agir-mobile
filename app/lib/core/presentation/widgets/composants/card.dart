@@ -27,13 +27,7 @@ class _FnvCardState extends State<FnvCard> with MaterialStateMixin<FnvCard> {
           color: FnvColors.carteFond,
           shadows: carteOmbre,
           shape: RoundedRectangleBorder(
-            side:
-                widget.borderColor == null
-                    ? BorderSide.none
-                    : BorderSide(
-                      color: widget.borderColor!,
-                      width: DsfrSpacings.s0v5,
-                    ),
+            side: widget.borderColor == null ? BorderSide.none : BorderSide(color: widget.borderColor!, width: DsfrSpacings.s0v5),
             borderRadius: borderRadius,
           ),
         ),

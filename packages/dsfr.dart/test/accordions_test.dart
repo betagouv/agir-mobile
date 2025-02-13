@@ -15,14 +15,8 @@ void main() {
         App(
           child: DsfrAccordionsGroup(
             values: [
-              DsfrAccordion(
-                headerBuilder: (final isExpanded) => const Text(header1),
-                body: const Text(body1),
-              ),
-              DsfrAccordion(
-                headerBuilder: (final isExpanded) => const Text(header2),
-                body: const Text(body2),
-              ),
+              DsfrAccordion(headerBuilder: (final isExpanded) => const Text(header1), body: const Text(body1)),
+              DsfrAccordion(headerBuilder: (final isExpanded) => const Text(header2), body: const Text(body2)),
             ],
           ),
         ),
@@ -36,14 +30,8 @@ void main() {
         App(
           child: DsfrAccordionsGroup(
             values: [
-              DsfrAccordion(
-                headerBuilder: (final isExpanded) => const Text(header1),
-                body: const Text(body1),
-              ),
-              DsfrAccordion(
-                headerBuilder: (final isExpanded) => const Text('Header 2'),
-                body: const Text('Body 2'),
-              ),
+              DsfrAccordion(headerBuilder: (final isExpanded) => const Text(header1), body: const Text(body1)),
+              DsfrAccordion(headerBuilder: (final isExpanded) => const Text('Header 2'), body: const Text('Body 2')),
             ],
           ),
         ),

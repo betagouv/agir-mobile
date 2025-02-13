@@ -18,9 +18,7 @@ class MonLogementDpe extends StatelessWidget {
 
   @override
   Widget build(final context) {
-    final dpe = context.select<MonLogementBloc, Dpe?>(
-      (final bloc) => bloc.state.dpe,
-    );
+    final dpe = context.select<MonLogementBloc, Dpe?>((final bloc) => bloc.state.dpe);
 
     return MonLogementTitreEtContenu(
       titre: Localisation.consommationsEnergetiques,
@@ -29,10 +27,7 @@ class MonLogementDpe extends StatelessWidget {
         children: [
           _FnvDpe(
             initialValue: dpe,
-            onCallback:
-                (final value) => context.read<MonLogementBloc>().add(
-                  MonLogementDpeChange(value),
-                ),
+            onCallback: (final value) => context.read<MonLogementBloc>().add(MonLogementDpeChange(value)),
           ),
           FnvAlertInfo(
             label: Localisation.dpeExplication,
@@ -40,9 +35,7 @@ class MonLogementDpe extends StatelessWidget {
               data:
                   "Le DPE, c'est le **Diagnostic de Performance Énergétique de votre logement**. Il mesure d'un côté l'énergie nécessaire pour y maintenir une température standard, et de l'autre l'empreinte climat associée. Le DPE est exprimé comme une note de A (très bon) à G (passoire thermique). Vous pouvez obtenir une estimation de votre DPE en 2 clics avec le service [Go Renov](https://particulier.gorenove.fr/).",
               styleSheet: MarkdownStyleSheet(
-                a: const DsfrTextStyle(
-                  fontSize: 15,
-                ).copyWith(color: DsfrColors.blueFranceSun113),
+                a: const DsfrTextStyle(fontSize: 15).copyWith(color: DsfrColors.blueFranceSun113),
                 p: const DsfrTextStyle(fontSize: 15),
               ),
               onTapLink: (final text, final href, final title) async {
@@ -87,45 +80,14 @@ class _FnvDpeState extends State<_FnvDpe> {
     final width = MediaQuery.sizeOf(context).width / 100;
 
     final labels = [
-      const _DpeConfig(
-        value: Dpe.a,
-        name: Localisation.dpeA,
-        color: Color(0xff009c6d),
-      ),
-      const _DpeConfig(
-        value: Dpe.b,
-        name: Localisation.dpeB,
-        color: Color(0xff52b153),
-      ),
-      const _DpeConfig(
-        value: Dpe.c,
-        name: Localisation.dpeC,
-        color: Color(0xff78bd0b),
-      ),
-      const _DpeConfig(
-        value: Dpe.d,
-        name: Localisation.dpeD,
-        color: Color(0xfff4e70f),
-      ),
-      const _DpeConfig(
-        value: Dpe.e,
-        name: Localisation.dpeE,
-        color: Color(0xfff0b50f),
-      ),
-      const _DpeConfig(
-        value: Dpe.f,
-        name: Localisation.dpeF,
-        color: Color(0xffeb8235),
-      ),
-      const _DpeConfig(
-        value: Dpe.g,
-        name: Localisation.dpeG,
-        color: Color(0xffd7221f),
-      ),
-      const _DpeConfig(
-        value: Dpe.jeNeSaisPas,
-        name: Localisation.dpeJeNeSaisPas,
-      ),
+      const _DpeConfig(value: Dpe.a, name: Localisation.dpeA, color: Color(0xff009c6d)),
+      const _DpeConfig(value: Dpe.b, name: Localisation.dpeB, color: Color(0xff52b153)),
+      const _DpeConfig(value: Dpe.c, name: Localisation.dpeC, color: Color(0xff78bd0b)),
+      const _DpeConfig(value: Dpe.d, name: Localisation.dpeD, color: Color(0xfff4e70f)),
+      const _DpeConfig(value: Dpe.e, name: Localisation.dpeE, color: Color(0xfff0b50f)),
+      const _DpeConfig(value: Dpe.f, name: Localisation.dpeF, color: Color(0xffeb8235)),
+      const _DpeConfig(value: Dpe.g, name: Localisation.dpeG, color: Color(0xffd7221f)),
+      const _DpeConfig(value: Dpe.jeNeSaisPas, name: Localisation.dpeJeNeSaisPas),
     ];
 
     return Column(
@@ -185,10 +147,7 @@ class _FvnDpeEtiquette extends StatelessWidget {
         painter: _Painter(color: color!, isSelected: groupValue == value),
         child: Padding(
           padding: const EdgeInsets.all(DsfrSpacings.s2w),
-          child: Text(
-            label,
-            style: const DsfrTextStyle.bodyMdBold(color: Colors.white),
-          ),
+          child: Text(label, style: const DsfrTextStyle.bodyMdBold(color: Colors.white)),
         ),
       );
     }
@@ -200,14 +159,7 @@ class _FvnDpeEtiquette extends StatelessWidget {
         width: width,
         child: Row(
           spacing: DsfrSpacings.s1w,
-          children: [
-            RadioIcon(
-              key: ValueKey(label),
-              value: value,
-              groupValue: groupValue,
-            ),
-            Expanded(child: customPaint),
-          ],
+          children: [RadioIcon(key: ValueKey(label), value: value, groupValue: groupValue), Expanded(child: customPaint)],
         ),
       ),
     );

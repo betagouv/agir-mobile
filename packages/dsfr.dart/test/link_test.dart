@@ -15,9 +15,7 @@ void main() {
   testWidgets('Appuyer', (final tester) async {
     const label = 'Label lien';
     final completer = Completer<void>();
-    await tester.pumpWidget(
-      App(child: DsfrLink.md(label: label, onTap: completer.complete)),
-    );
+    await tester.pumpWidget(App(child: DsfrLink.md(label: label, onTap: completer.complete)));
 
     await tester.tap(find.text(label));
 
@@ -30,19 +28,14 @@ void main() {
       const label = 'Label lien';
       await tester.pumpWidget(const App(child: DsfrLink.md(label: label)));
 
-      expect(
-        tester.getSemantics(find.text(label)),
-        containsSemantics(label: label, isLink: true, hasEnabledState: true),
-      );
+      expect(tester.getSemantics(find.text(label)), containsSemantics(label: label, isLink: true, hasEnabledState: true));
       handle.dispose();
     });
 
     testWidgets('État activé', (final tester) async {
       final handle = tester.ensureSemantics();
       const label = 'Label lien';
-      await tester.pumpWidget(
-        App(child: DsfrLink.md(label: label, onTap: () {})),
-      );
+      await tester.pumpWidget(App(child: DsfrLink.md(label: label, onTap: () {})));
       expect(
         tester.getSemantics(find.text(label)),
         containsSemantics(

@@ -22,12 +22,8 @@ class SeasonalFruitsAndVegetablesPage extends StatelessWidget {
   static const name = 'fruits-et-legumes';
   static const path = name;
 
-  static GoRoute get route => GoRoute(
-    path: path,
-    name: name,
-    builder:
-        (final context, final state) => const SeasonalFruitsAndVegetablesPage(),
-  );
+  static GoRoute get route =>
+      GoRoute(path: path, name: name, builder: (final context, final state) => const SeasonalFruitsAndVegetablesPage());
 
   @override
   Widget build(final BuildContext context) => FnvScaffold(
@@ -35,8 +31,7 @@ class SeasonalFruitsAndVegetablesPage extends StatelessWidget {
     body: BlocProvider(
       create:
           (final context) =>
-              SeasonalFruitsAndVegetablesBloc(repository: context.read())
-                ..add(const SeasonalFruitsAndVegetablesFetch()),
+              SeasonalFruitsAndVegetablesBloc(repository: context.read())..add(const SeasonalFruitsAndVegetablesFetch()),
       child: const _Body(),
     ),
   );
@@ -50,15 +45,10 @@ final class _Body extends StatelessWidget {
     final state = context.watch<SeasonalFruitsAndVegetablesBloc>().state;
 
     return switch (state) {
-      SeasonalFruitsAndVegetablesInitial() => const Center(
-        child: CircularProgressIndicator(),
-      ),
+      SeasonalFruitsAndVegetablesInitial() => const Center(child: CircularProgressIndicator()),
       final SeasonalFruitsAndVegetablesLoadSuccess s => _Success(value: s),
       final SeasonalFruitsAndVegetablesLoadFailure f => Center(
-        child: Text(
-          'Erreur lors du chargement des fruits et légumes: ${f.error}',
-          style: const TextStyle(color: Colors.red),
-        ),
+        child: Text('Erreur lors du chargement des fruits et légumes: ${f.error}', style: const TextStyle(color: Colors.red)),
       ),
     };
   }
@@ -75,38 +65,19 @@ class _Success extends StatelessWidget {
     child: Column(
       children: [
         const SizedBox(height: DsfrSpacings.s4w),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-          child: _Header(value: value),
-        ),
+        Padding(padding: const EdgeInsets.symmetric(horizontal: paddingVerticalPage), child: _Header(value: value)),
         const SizedBox(height: DsfrSpacings.s4w),
         const DecoratedBox(
           decoration: BoxDecoration(
             color: FnvColors.homeBackground,
-            boxShadow: [
-              BoxShadow(
-                color: Color(0x08000068),
-                offset: Offset(0, 5),
-                blurRadius: 10,
-              ),
-            ],
+            boxShadow: [BoxShadow(color: Color(0x08000068), offset: Offset(0, 5), blurRadius: 10)],
           ),
           child: TabBar(
-            tabs: [
-              Tab(text: Localisation.fruits),
-              Tab(text: Localisation.legumes),
-            ],
-            indicator: DsfrTabIndicator(
-              borderSide: BorderSide(
-                color: DsfrColors.blueFranceSun113,
-                width: 3,
-              ),
-            ),
+            tabs: [Tab(text: Localisation.fruits), Tab(text: Localisation.legumes)],
+            indicator: DsfrTabIndicator(borderSide: BorderSide(color: DsfrColors.blueFranceSun113, width: 3)),
             indicatorSize: TabBarIndicatorSize.tab,
             dividerHeight: 0,
-            labelStyle: DsfrTextStyle.bodyLgBold(
-              color: DsfrColors.blueFranceSun113,
-            ),
+            labelStyle: DsfrTextStyle.bodyLgBold(color: DsfrColors.blueFranceSun113),
             labelPadding: EdgeInsets.symmetric(horizontal: DsfrSpacings.s1w),
             unselectedLabelStyle: DsfrTextStyle.bodyLg(),
           ),
@@ -147,14 +118,11 @@ class _Header extends StatelessWidget {
           alignment: PlaceholderAlignment.baseline,
           baseline: TextBaseline.alphabetic,
           child: FnvDropdown(
-            items: Map.fromEntries(
-              value.months.map((final e) => MapEntry(e.code, e.label)),
-            ),
+            items: Map.fromEntries(value.months.map((final e) => MapEntry(e.code, e.label))),
             value: value.monthSelected,
             onChanged:
-                (final value) => context
-                    .read<SeasonalFruitsAndVegetablesBloc>()
-                    .add(SeasonalFruitsAndVegetablesMonthSelected(value)),
+                (final value) =>
+                    context.read<SeasonalFruitsAndVegetablesBloc>().add(SeasonalFruitsAndVegetablesMonthSelected(value)),
           ),
         ),
       ],
@@ -163,11 +131,7 @@ class _Header extends StatelessWidget {
 }
 
 class _List extends StatelessWidget {
-  const _List({
-    required this.lessThan1Kg,
-    required this.lessThan5Kg,
-    required this.moreThan5Kg,
-  });
+  const _List({required this.lessThan1Kg, required this.lessThan5Kg, required this.moreThan5Kg});
 
   final List<Plant> lessThan1Kg;
   final List<Plant> lessThan5Kg;
@@ -185,8 +149,7 @@ class _List extends StatelessWidget {
       if (lessThan5Kg.isNotEmpty)
         _Section(
           title: Localisation.fruitsEtLegumesMoyennementConsommateurs,
-          subtitle:
-              Localisation.fruitsEtLegumesMoyennementConsommateursDescription,
+          subtitle: Localisation.fruitsEtLegumesMoyennementConsommateursDescription,
           items: lessThan5Kg,
         ),
       if (moreThan5Kg.isNotEmpty)
@@ -206,25 +169,16 @@ class _List extends StatelessWidget {
     ];
 
     return ListView.separated(
-      padding: const EdgeInsets.symmetric(
-        vertical: DsfrSpacings.s3w,
-        horizontal: DsfrSpacings.s2w,
-      ),
+      padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s3w, horizontal: DsfrSpacings.s2w),
       itemBuilder: (final context, final index) => allItems[index],
-      separatorBuilder:
-          (final context, final index) =>
-              const SizedBox(height: DsfrSpacings.s4w),
+      separatorBuilder: (final context, final index) => const SizedBox(height: DsfrSpacings.s4w),
       itemCount: allItems.length,
     );
   }
 }
 
 class _Section extends StatelessWidget {
-  const _Section({
-    required this.title,
-    required this.subtitle,
-    required this.items,
-  });
+  const _Section({required this.title, required this.subtitle, required this.items});
 
   final String title;
   final String subtitle;
@@ -235,10 +189,7 @@ class _Section extends StatelessWidget {
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(title, style: const DsfrTextStyle.headline4()),
-      Text(
-        subtitle,
-        style: const DsfrTextStyle.bodyMd(color: DsfrColors.grey425),
-      ),
+      Text(subtitle, style: const DsfrTextStyle.bodyMd(color: DsfrColors.grey425)),
       const SizedBox(height: DsfrSpacings.s3w),
       ...items.map(
         (final e) => Padding(
@@ -271,9 +222,7 @@ class _PlantCard extends StatelessWidget {
     decoration: const ShapeDecoration(
       color: FnvColors.carteFond,
       shadows: carteOmbre,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(DsfrSpacings.s1w)),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(DsfrSpacings.s1w))),
     ),
     child: child,
   );

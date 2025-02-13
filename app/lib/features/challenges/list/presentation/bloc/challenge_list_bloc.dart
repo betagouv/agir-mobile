@@ -5,17 +5,12 @@ import 'package:app/features/challenges/list/presentation/bloc/challenge_list_st
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChallengeListBloc extends Bloc<ChallengeListEvent, ChallengeListState> {
-  ChallengeListBloc(final FetchChallenges useCase)
-    : super(const ChallengeListInitial()) {
+  ChallengeListBloc(final FetchChallenges useCase) : super(const ChallengeListInitial()) {
     on<ChallengeListFetch>((final event, final emit) async {
       emit(const ChallengeListLoading());
       final result = await useCase();
       result.fold(
-        (final l) => emit(
-          ChallengeListFailure(
-            errorMessage: l is ApiErreur ? l.message : l.toString(),
-          ),
-        ),
+        (final l) => emit(ChallengeListFailure(errorMessage: l is ApiErreur ? l.message : l.toString())),
         (final r) => emit(ChallengeListSuccess(challenges: r)),
       );
     });

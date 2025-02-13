@@ -17,11 +17,7 @@ final class MieuxVousConnaitreEditInitial extends MieuxVousConnaitreEditState {
 
 @immutable
 final class MieuxVousConnaitreEditLoaded extends MieuxVousConnaitreEditState {
-  const MieuxVousConnaitreEditLoaded({
-    required this.question,
-    required this.newQuestion,
-    required this.updated,
-  });
+  const MieuxVousConnaitreEditLoaded({required this.question, required this.newQuestion, required this.updated});
 
   final Question question;
   final Question newQuestion;

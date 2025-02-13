@@ -5,23 +5,17 @@ import 'package:app/features/questions/question_themes/presentation/bloc/questio
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fpdart/fpdart.dart';
 
-class QuestionThemesBloc
-    extends Bloc<QuestionThemesEvent, QuestionThemesState> {
-  QuestionThemesBloc({
-    required final MieuxVousConnaitreRepository mieuxVousConnaitreRepository,
-  }) : super(const QuestionThemesState(valeur: [])) {
+class QuestionThemesBloc extends Bloc<QuestionThemesEvent, QuestionThemesState> {
+  QuestionThemesBloc({required final MieuxVousConnaitreRepository mieuxVousConnaitreRepository})
+    : super(const QuestionThemesState(valeur: [])) {
     on<QuestionThemesRecuperationDemandee>((final event, final emit) async {
-      final result = await mieuxVousConnaitreRepository.recupererQuestion(
-        id: _id,
-      );
+      final result = await mieuxVousConnaitreRepository.recupererQuestion(id: _id);
       if (result.isRight()) {
         final question = result.getRight().getOrElse(() => throw Exception());
         emit(state.copyWith(question: question as QuestionMultipleChoice));
       }
     });
-    on<QuestionThemesOntChange>(
-      (final event, final emit) => emit(state.copyWith(valeur: event.valeur)),
-    );
+    on<QuestionThemesOntChange>((final event, final emit) => emit(state.copyWith(valeur: event.valeur)));
     on<QuestionThemesMiseAJourDemandee>((final event, final emit) async {
       await mieuxVousConnaitreRepository.mettreAJour(state.question!);
     });

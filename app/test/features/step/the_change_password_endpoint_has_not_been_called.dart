@@ -7,13 +7,8 @@ import 'package:mocktail/mocktail.dart';
 import '../helper/feature_context.dart';
 
 /// Usage: The change password endpoint has not been called
-Future<void> theChangePasswordEndpointHasNotBeenCalled(
-  final WidgetTester tester,
-) async {
+Future<void> theChangePasswordEndpointHasNotBeenCalled(final WidgetTester tester) async {
   verifyNever(
-    () => FeatureContext.instance.dioMock.patch<dynamic>(
-      Endpoints.profile,
-      data: jsonEncode({'mot_de_passe': 'pasvalide'}),
-    ),
+    () => FeatureContext.instance.dioMock.patch<dynamic>(Endpoints.profile, data: jsonEncode({'mot_de_passe': 'pasvalide'})),
   );
 }

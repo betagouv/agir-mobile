@@ -12,9 +12,7 @@ class MonLogementSuperficie extends StatelessWidget {
 
   @override
   Widget build(final context) {
-    final superficie = context.select<MonLogementBloc, Superficie?>(
-      (final bloc) => bloc.state.superficie,
-    );
+    final superficie = context.select<MonLogementBloc, Superficie?>((final bloc) => bloc.state.superficie);
 
     return MonLogementTitreEtContenu(
       titre: Localisation.quelleEstLaSuperficie,
@@ -26,10 +24,7 @@ class MonLogementSuperficie extends StatelessWidget {
           Superficie.s150: DsfrRadioButtonItem(Localisation.entre100et150m2),
           Superficie.s150EtPlus: DsfrRadioButtonItem(Localisation.plusDe150m2),
         },
-        onCallback:
-            (final value) => context.read<MonLogementBloc>().add(
-              MonLogementSuperficieChange(value),
-            ),
+        onCallback: (final value) => context.read<MonLogementBloc>().add(MonLogementSuperficieChange(value)),
         initialValue: superficie,
       ),
     );

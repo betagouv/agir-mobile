@@ -44,11 +44,7 @@ class DsfrButton extends StatelessWidget {
     Widget child = Text(label);
     if (icon != null) {
       final buttonIcon = Icon(icon, size: _getIconSize(size));
-      var children = <Widget>[
-        buttonIcon,
-        const SizedBox(width: DsfrSpacings.s1w),
-        Flexible(child: child),
-      ];
+      var children = <Widget>[buttonIcon, const SizedBox(width: DsfrSpacings.s1w), Flexible(child: child)];
       if (iconLocation == DsfrButtonIconLocation.right) {
         children = children.reversed.toList();
       }

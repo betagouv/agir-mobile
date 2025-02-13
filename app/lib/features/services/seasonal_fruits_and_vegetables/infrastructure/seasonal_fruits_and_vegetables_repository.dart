@@ -8,48 +8,25 @@ import 'package:app/features/services/seasonal_fruits_and_vegetables/infrastruct
 import 'package:fpdart/fpdart.dart';
 
 class SeasonalFruitsAndVegetablesRepository {
-  const SeasonalFruitsAndVegetablesRepository({
-    required final DioHttpClient client,
-  }) : _client = client;
+  const SeasonalFruitsAndVegetablesRepository({required final DioHttpClient client}) : _client = client;
 
   final DioHttpClient _client;
 
   Future<Either<Exception, List<PlantMonth>>> fetchCategories() async {
-    final response = await _client.get(
-      Endpoints.seasonalFruitsAndVegetablesCategories,
-    );
+    final response = await _client.get(Endpoints.seasonalFruitsAndVegetablesCategories);
 
     return isResponseUnsuccessful(response.statusCode)
-        ? Left(
-          Exception(
-            'Erreur lors de la récupération les mois des fruits et légumes',
-          ),
-        )
-        : Right(
-          (response.data as List<dynamic>)
-              .cast<Map<String, dynamic>>()
-              .map(PlantMonthMapper.fromJson)
-              .toList(),
-        );
+        ? Left(Exception('Erreur lors de la récupération les mois des fruits et légumes'))
+        : Right((response.data as List<dynamic>).cast<Map<String, dynamic>>().map(PlantMonthMapper.fromJson).toList());
   }
 
-  Future<Either<Exception, List<Plant>>> fetchPlants(
-    final String category,
-  ) async {
-    final response = await _client.post(
-      Endpoints.seasonalFruitsAndVegetablesSearch,
-      data: {'categorie': category},
-    );
+  Future<Either<Exception, List<Plant>>> fetchPlants(final String category) async {
+    final response = await _client.post(Endpoints.seasonalFruitsAndVegetablesSearch, data: {'categorie': category});
 
     return isResponseUnsuccessful(response.statusCode)
-        ? Left(
-          Exception(
-            'Erreur lors de la récupération les mois des fruits et légumes',
-          ),
-        )
+        ? Left(Exception('Erreur lors de la récupération les mois des fruits et légumes'))
         : Right(
-          ((response.data as Map<String, dynamic>)['resultats']
-                  as List<dynamic>)
+          ((response.data as Map<String, dynamic>)['resultats'] as List<dynamic>)
               .cast<Map<String, dynamic>>()
               .where((final e) => e['type_fruit_legume'] != null)
               .map(PlantMapper.fromJson)

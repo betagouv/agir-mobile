@@ -5,8 +5,7 @@ import 'package:app/features/utilisateur/domain/user.dart';
 import 'package:fpdart/fpdart.dart';
 
 class UserRepository {
-  const UserRepository({required final DioHttpClient client})
-    : _client = client;
+  const UserRepository({required final DioHttpClient client}) : _client = client;
 
   final DioHttpClient _client;
 
@@ -19,11 +18,6 @@ class UserRepository {
 
     final json = response.data as Map<String, dynamic>;
 
-    return Right(
-      User(
-        firstName: json['prenom'] as String? ?? '',
-        isIntegrationCompleted: json['is_onboarding_done'] as bool,
-      ),
-    );
+    return Right(User(firstName: json['prenom'] as String? ?? '', isIntegrationCompleted: json['is_onboarding_done'] as bool));
   }
 }

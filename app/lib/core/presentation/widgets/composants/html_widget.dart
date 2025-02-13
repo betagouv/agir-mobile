@@ -15,9 +15,7 @@ class FnvHtmlWidget extends StatelessWidget {
   /// Le CMS peut retourner des balises `<li>` avec des balises `<p>` dedans.
   /// Cela pose des problèmes de mise en forme, alors on retire les marges.
   Map<String, String>? _handlePDansLi(final dom.Element element) =>
-      element.parent?.localName == 'li' && element.localName == 'p'
-          ? {'margin': '0'}
-          : null;
+      element.parent?.localName == 'li' && element.localName == 'p' ? {'margin': '0'} : null;
 
   @override
   Widget build(final context) => SelectionArea(
@@ -34,9 +32,7 @@ class FnvHtmlWidget extends StatelessWidget {
 
               return true;
             case '/bilan-environnemental':
-              await GoRouter.of(
-                context,
-              ).pushNamed(EnvironmentalPerformanceSummaryPage.name);
+              await GoRouter.of(context).pushNamed(EnvironmentalPerformanceSummaryPage.name);
 
               return true;
             default:

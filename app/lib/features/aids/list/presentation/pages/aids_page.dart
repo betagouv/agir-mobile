@@ -28,18 +28,11 @@ class AidsPage extends StatelessWidget {
   static const name = 'aides';
   static const path = name;
 
-  static GoRoute get route => GoRoute(
-    path: path,
-    name: name,
-    builder: (final context, final state) => const AidsPage(),
-  );
+  static GoRoute get route => GoRoute(path: path, name: name, builder: (final context, final state) => const AidsPage());
 
   @override
   Widget build(final context) => BlocProvider(
-    create:
-        (final context) =>
-            AidListBloc(aidsRepository: context.read())
-              ..add(const AidListFetch()),
+    create: (final context) => AidListBloc(aidsRepository: context.read())..add(const AidListFetch()),
     child: const RootPage(body: _View()),
   );
 }
@@ -51,9 +44,7 @@ class _View extends StatelessWidget {
   Widget build(final context) => BlocBuilder<AidListBloc, AidListState>(
     builder:
         (final context, final state) => switch (state) {
-          AidListInitial() ||
-          AidListLoadInProgress() ||
-          AidListLoadFailure() => const SizedBox(),
+          AidListInitial() || AidListLoadInProgress() || AidListLoadFailure() => const SizedBox(),
           AidListLoadSuccess() => _Success(state: state),
         },
   );
@@ -73,12 +64,8 @@ class _Success extends StatelessWidget {
               (final context, final state) => switch (state) {
                 AidsDisclaimerVisible() => DsfrNotice(
                   titre: Localisation.leServiveNeCouvrePasEncoreVotreVille,
-                  description:
-                      Localisation
-                          .leServiveNeCouvrePasEncoreVotreVilleDescription,
-                  onClose:
-                      () =>
-                          context.read<AidsDisclaimerCubit>().closeDisclaimer(),
+                  description: Localisation.leServiveNeCouvrePasEncoreVotreVilleDescription,
+                  onClose: () => context.read<AidsDisclaimerCubit>().closeDisclaimer(),
                 ),
                 AidsDisclaimerNotVisible() => const SizedBox(),
               },
@@ -103,9 +90,7 @@ class _List extends StatelessWidget {
           data: Localisation.assistanceListTitle,
           styleSheet: MarkdownStyleSheet(
             p: const DsfrTextStyle.headline2(),
-            strong: const DsfrTextStyle.headline2(
-              color: DsfrColors.blueFranceSun113,
-            ),
+            strong: const DsfrTextStyle.headline2(color: DsfrColors.blueFranceSun113),
           ),
         ),
         const SizedBox(height: DsfrSpacings.s3w),
@@ -113,20 +98,10 @@ class _List extends StatelessWidget {
           spacing: DsfrSpacings.s1w,
           runSpacing: DsfrSpacings.s1w,
           children: [
-            _Tag(
-              label: Localisation.tout,
-              value: null,
-              groupValue: state.themeSelected,
-            ),
+            _Tag(label: Localisation.tout, value: null, groupValue: state.themeSelected),
             ...ThemeType.values
                 .where(state.themes.containsKey)
-                .map(
-                  (final e) => _Tag(
-                    label: e.displayNameWithoutEmoji,
-                    value: e,
-                    groupValue: state.themeSelected,
-                  ),
-                ),
+                .map((final e) => _Tag(label: e.displayNameWithoutEmoji, value: e, groupValue: state.themeSelected)),
           ],
         ),
         const SizedBox(height: DsfrSpacings.s4w),
@@ -137,11 +112,7 @@ class _List extends StatelessWidget {
 }
 
 class _Tag extends StatelessWidget {
-  const _Tag({
-    required this.label,
-    required this.value,
-    required this.groupValue,
-  });
+  const _Tag({required this.label, required this.value, required this.groupValue});
 
   final String label;
   final ThemeType? value;
@@ -162,21 +133,12 @@ class _Tag extends StatelessWidget {
         child: DecoratedBox(
           decoration: BoxDecoration(
             color: isSelected ? selectedColor : null,
-            border: const Border.fromBorderSide(
-              BorderSide(color: selectedColor),
-            ),
-            borderRadius: const BorderRadius.all(
-              Radius.circular(DsfrSpacings.s4w),
-            ),
+            border: const Border.fromBorderSide(BorderSide(color: selectedColor)),
+            borderRadius: const BorderRadius.all(Radius.circular(DsfrSpacings.s4w)),
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
-            child: Text(
-              label,
-              style: DsfrTextStyle.bodySmMedium(
-                color: isSelected ? Colors.white : selectedColor,
-              ),
-            ),
+            child: Text(label, style: DsfrTextStyle.bodySmMedium(color: isSelected ? Colors.white : selectedColor)),
           ),
         ),
       ),
@@ -207,9 +169,7 @@ class _Elements extends StatelessWidget {
 
         return _ThemeSection(themeType: a.key, assistances: a.value);
       },
-      separatorBuilder:
-          (final context, final index) =>
-              const SizedBox(height: DsfrSpacings.s3w),
+      separatorBuilder: (final context, final index) => const SizedBox(height: DsfrSpacings.s3w),
       itemCount: entries.length,
     );
   }
@@ -226,21 +186,13 @@ class _ThemeSection extends StatelessWidget {
     crossAxisAlignment: CrossAxisAlignment.start,
     spacing: DsfrSpacings.s2w,
     children: [
-      Text(
-        themeType.displayName,
-        style: const DsfrTextStyle.headline4(),
-        semanticsLabel: themeType.displayNameWithoutEmoji,
-      ),
+      Text(themeType.displayName, style: const DsfrTextStyle.headline4(), semanticsLabel: themeType.displayNameWithoutEmoji),
       ListView.separated(
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         padding: EdgeInsets.zero,
-        itemBuilder:
-            (final context, final index) =>
-                _AssitanceCard(assistance: assistances[index]),
-        separatorBuilder:
-            (final context, final index) =>
-                const SizedBox(height: DsfrSpacings.s1w),
+        itemBuilder: (final context, final index) => _AssitanceCard(assistance: assistances[index]),
+        separatorBuilder: (final context, final index) => const SizedBox(height: DsfrSpacings.s1w),
         itemCount: assistances.length,
       ),
     ],
@@ -270,10 +222,7 @@ class _AssitanceCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    if (assistance.aUnSimulateur) ...[
-                      const SimulatorTag(),
-                      const SizedBox(width: DsfrSpacings.s1w),
-                    ],
+                    if (assistance.aUnSimulateur) ...[const SimulatorTag(), const SizedBox(width: DsfrSpacings.s1w)],
                     Text(assistance.title, style: const DsfrTextStyle.bodyMd()),
                     if (assistance.amountMax != null) ...[
                       const SizedBox(height: DsfrSpacings.s1w),
@@ -282,18 +231,11 @@ class _AssitanceCard extends StatelessWidget {
                   ],
                 ),
               ),
-              const Icon(
-                DsfrIcons.systemArrowRightSLine,
-                color: DsfrColors.blueFranceSun113,
-              ),
+              const Icon(DsfrIcons.systemArrowRightSLine, color: DsfrColors.blueFranceSun113),
             ],
           ),
         ),
-        if (assistance.partner != null)
-          Ink(
-            color: const Color(0xffeef2ff),
-            child: PartnerWidget(partner: assistance.partner!),
-          ),
+        if (assistance.partner != null) Ink(color: const Color(0xffeef2ff), child: PartnerWidget(partner: assistance.partner!)),
       ],
     ),
   );
@@ -310,17 +252,11 @@ class _AmountMax extends StatelessWidget {
       children: [
         const WidgetSpan(
           alignment: PlaceholderAlignment.middle,
-          child: Icon(
-            DsfrIcons.financeMoneyEuroCircleLine,
-            color: DsfrColors.blueFranceSun113,
-          ),
+          child: Icon(DsfrIcons.financeMoneyEuroCircleLine, color: DsfrColors.blueFranceSun113),
         ),
         const WidgetSpan(child: SizedBox(width: DsfrSpacings.s1w)),
         const TextSpan(text: Localisation.jusqua),
-        TextSpan(
-          text: Localisation.euro(value),
-          style: const DsfrTextStyle.bodySmBold(),
-        ),
+        TextSpan(text: Localisation.euro(value), style: const DsfrTextStyle.bodySmBold()),
       ],
     ),
     style: const DsfrTextStyle.bodySm(),

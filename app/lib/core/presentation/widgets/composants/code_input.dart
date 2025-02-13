@@ -16,8 +16,7 @@ class FnvCodeInput extends StatelessWidget {
       width: width,
       height: width * 1.27,
       padding: EdgeInsets.only(
-        bottom:
-            6, // HACK(lsaudon): Fix vertical alignment parce que la police Marianne est mal pris en compte par flutter
+        bottom: 6, // HACK(lsaudon): Fix vertical alignment parce que la police Marianne est mal pris en compte par flutter
       ),
       textStyle: DsfrTextStyle(fontSize: width * 0.68),
       decoration: BoxDecoration(
@@ -32,19 +31,10 @@ class FnvCodeInput extends StatelessWidget {
       child: Pinput(
         length: 6,
         defaultPinTheme: pinTheme,
-        focusedPinTheme: pinTheme.copyBorderWith(
-          border: const Border.fromBorderSide(
-            BorderSide(color: DsfrColors.focus525),
-          ),
-        ),
+        focusedPinTheme: pinTheme.copyBorderWith(border: const Border.fromBorderSide(BorderSide(color: DsfrColors.focus525))),
         onChanged: onChanged,
-        inputFormatters: [
-          FilteringTextInputFormatter.digitsOnly,
-          LengthLimitingTextInputFormatter(6),
-        ],
-        scrollPadding: EdgeInsets.only(
-          bottom: MediaQuery.viewInsetsOf(context).bottom + 130,
-        ),
+        inputFormatters: [FilteringTextInputFormatter.digitsOnly, LengthLimitingTextInputFormatter(6)],
+        scrollPadding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom + 130),
       ),
     );
   }

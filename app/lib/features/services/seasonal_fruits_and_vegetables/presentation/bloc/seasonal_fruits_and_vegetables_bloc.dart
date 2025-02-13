@@ -9,54 +9,27 @@ import 'package:fpdart/fpdart.dart';
 part 'seasonal_fruits_and_vegetables_event.dart';
 part 'seasonal_fruits_and_vegetables_state.dart';
 
-class SeasonalFruitsAndVegetablesBloc
-    extends
-        Bloc<
-          SeasonalFruitsAndVegetablesEvent,
-          SeasonalFruitsAndVegetablesState
-        > {
-  SeasonalFruitsAndVegetablesBloc({
-    required final SeasonalFruitsAndVegetablesRepository repository,
-  }) : super(const SeasonalFruitsAndVegetablesInitial()) {
+class SeasonalFruitsAndVegetablesBloc extends Bloc<SeasonalFruitsAndVegetablesEvent, SeasonalFruitsAndVegetablesState> {
+  SeasonalFruitsAndVegetablesBloc({required final SeasonalFruitsAndVegetablesRepository repository})
+    : super(const SeasonalFruitsAndVegetablesInitial()) {
     on<SeasonalFruitsAndVegetablesFetch>((final event, final emit) async {
       final categoriesResult = await repository.fetchCategories();
       if (categoriesResult.isRight()) {
-        final categories = categoriesResult.getRight().getOrElse(
-          () => throw Exception(),
-        );
+        final categories = categoriesResult.getRight().getOrElse(() => throw Exception());
         final monthSelected = categories.where((final e) => e.value).first.code;
         final plantsResult = await repository.fetchPlants(monthSelected);
         if (plantsResult.isRight()) {
-          final plants = plantsResult.getRight().getOrElse(
-            () => throw Exception(),
-          );
-          emit(
-            SeasonalFruitsAndVegetablesLoadSuccess(
-              months: categories,
-              monthSelected: monthSelected,
-              plants: plants,
-            ),
-          );
+          final plants = plantsResult.getRight().getOrElse(() => throw Exception());
+          emit(SeasonalFruitsAndVegetablesLoadSuccess(months: categories, monthSelected: monthSelected, plants: plants));
         } else {
-          emit(
-            SeasonalFruitsAndVegetablesLoadFailure(
-              plantsResult.getLeft().toString(),
-            ),
-          );
+          emit(SeasonalFruitsAndVegetablesLoadFailure(plantsResult.getLeft().toString()));
         }
       } else {
-        emit(
-          SeasonalFruitsAndVegetablesLoadFailure(
-            categoriesResult.getLeft().toString(),
-          ),
-        );
+        emit(SeasonalFruitsAndVegetablesLoadFailure(categoriesResult.getLeft().toString()));
       }
     });
 
-    on<SeasonalFruitsAndVegetablesMonthSelected>((
-      final event,
-      final emit,
-    ) async {
+    on<SeasonalFruitsAndVegetablesMonthSelected>((final event, final emit) async {
       final monthSelected = event.value;
       final result = await repository.fetchPlants(monthSelected);
 

@@ -53,13 +53,5 @@ final class MesInformationsState extends Equatable {
   );
 
   @override
-  List<Object?> get props => [
-    email,
-    prenom,
-    nom,
-    anneeDeNaissance,
-    nombreDePartsFiscales,
-    revenuFiscal,
-    statut,
-  ];
+  List<Object?> get props => [email, prenom, nom, anneeDeNaissance, nombreDePartsFiscales, revenuFiscal, statut];
 }

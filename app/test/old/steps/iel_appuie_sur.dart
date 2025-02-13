@@ -20,8 +20,7 @@ Finder findTextInGestureDetector(final String text) => find.descendant(
   }),
 );
 
-String _extractTextFromRichText(final RichText richText) =>
-    _extractTextFromTextSpan(richText.text);
+String _extractTextFromRichText(final RichText richText) => _extractTextFromTextSpan(richText.text);
 
 String _extractTextFromTextSpan(final InlineSpan textSpan) {
   final buffer = StringBuffer();

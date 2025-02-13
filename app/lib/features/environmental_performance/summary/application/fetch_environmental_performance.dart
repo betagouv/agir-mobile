@@ -14,10 +14,7 @@ class FetchEnvironmentalPerformance {
       if (r is EnvironmentalPerformanceEmpty) {
         final kyc = await _port.fetchMiniBilan();
 
-        return kyc.fold(
-          Left.new,
-          (final r2) => Right(EnvironmentalPerformanceEmpty(questions: r2)),
-        );
+        return kyc.fold(Left.new, (final r2) => Right(EnvironmentalPerformanceEmpty(questions: r2)));
       }
 
       return Right(r);

@@ -32,13 +32,8 @@ Future<void> pumpPage({
                 if (realRoutes != null) realRoutes,
                 if (realRoutes == null)
                   ...?routes?.entries.map(
-                    (final e) => GoRoute(
-                      path: e.value,
-                      name: e.key,
-                      builder:
-                          (final context, final state) =>
-                              Text('route: ${e.key}'),
-                    ),
+                    (final e) =>
+                        GoRoute(path: e.value, name: e.key, builder: (final context, final state) => Text('route: ${e.key}')),
                   ),
               ],
             ),
@@ -57,10 +52,7 @@ Future<void> pumpPage({
   }
 
   if (repositoryProviders.isNotEmpty) {
-    widget = MultiRepositoryProvider(
-      providers: repositoryProviders,
-      child: widget,
-    );
+    widget = MultiRepositoryProvider(providers: repositoryProviders, child: widget);
   }
 
   await tester.pumpWidget(widget);

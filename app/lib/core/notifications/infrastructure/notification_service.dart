@@ -12,28 +12,20 @@ class NotificationService {
   static const _topicAll = 'all';
   final _messageController = StreamController<NotificationData>.broadcast();
 
-  Future<void> initializeApp() async =>
-      Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  Future<void> initializeApp() async => Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   Future<String?> getToken() async => FirebaseMessaging.instance.getToken();
 
   Future<AuthorizationStatus> requestPermission() async {
     final permission = await FirebaseMessaging.instance.requestPermission();
     if (permission.authorizationStatus == AuthorizationStatus.authorized) {
-      await FirebaseMessaging.instance
-          .setForegroundNotificationPresentationOptions(
-            alert: true,
-            badge: true,
-            sound: true,
-          );
+      await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(alert: true, badge: true, sound: true);
       await FirebaseMessaging.instance.subscribeToTopic(_topicAll);
     }
 
     final initialMessage = await FirebaseMessaging.instance.getInitialMessage();
     if (initialMessage != null && initialMessage.data.isNotEmpty) {
-      _messageController.add(
-        NotificationDataMapper.fromJson(initialMessage.data),
-      );
+      _messageController.add(NotificationDataMapper.fromJson(initialMessage.data));
     }
 
     FirebaseMessaging.onMessageOpenedApp.listen((final event) {

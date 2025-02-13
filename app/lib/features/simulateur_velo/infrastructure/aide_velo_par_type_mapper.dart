@@ -2,29 +2,19 @@ import 'package:app/features/simulateur_velo/domain/aide_velo.dart';
 import 'package:app/features/simulateur_velo/domain/aide_velo_par_type.dart';
 
 abstract final class AideVeloParTypeMapper {
-  static AideVeloParType fromJson(final Map<String, dynamic> json) =>
-      AideVeloParType(
-        mecaniqueSimple: _mapAideVeloList(
-          json['mécanique simple'] as List<dynamic>,
-        ),
-        electrique: _mapAideVeloList(json['électrique'] as List<dynamic>),
-        cargo: _mapAideVeloList(json['cargo'] as List<dynamic>),
-        cargoElectrique: _mapAideVeloList(
-          json['cargo électrique'] as List<dynamic>,
-        ),
-        pliant: _mapAideVeloList(json['pliant'] as List<dynamic>),
-        pliantElectrique: _mapAideVeloList(
-          json['pliant électrique'] as List<dynamic>,
-        ),
-        motorisation: _mapAideVeloList(json['motorisation'] as List<dynamic>),
-        adapte: _mapAideVeloList(json['adapté'] as List<dynamic>),
-      );
+  static AideVeloParType fromJson(final Map<String, dynamic> json) => AideVeloParType(
+    mecaniqueSimple: _mapAideVeloList(json['mécanique simple'] as List<dynamic>),
+    electrique: _mapAideVeloList(json['électrique'] as List<dynamic>),
+    cargo: _mapAideVeloList(json['cargo'] as List<dynamic>),
+    cargoElectrique: _mapAideVeloList(json['cargo électrique'] as List<dynamic>),
+    pliant: _mapAideVeloList(json['pliant'] as List<dynamic>),
+    pliantElectrique: _mapAideVeloList(json['pliant électrique'] as List<dynamic>),
+    motorisation: _mapAideVeloList(json['motorisation'] as List<dynamic>),
+    adapte: _mapAideVeloList(json['adapté'] as List<dynamic>),
+  );
 
   static List<AideVelo> _mapAideVeloList(final List<dynamic> jsonList) =>
-      jsonList
-          .map((final e) => e as Map<String, dynamic>)
-          .map(AideVeloMapper.fromJson)
-          .toList();
+      jsonList.map((final e) => e as Map<String, dynamic>).map(AideVeloMapper.fromJson).toList();
 }
 
 abstract final class AideVeloMapper {

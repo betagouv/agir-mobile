@@ -12,9 +12,7 @@ class MesInformationsNombreDePartsFiscales extends StatelessWidget {
 
   @override
   Widget build(final context) {
-    final nombreDePartsFiscales = context.select<MesInformationsBloc, double>(
-      (final bloc) => bloc.state.nombreDePartsFiscales,
-    );
+    final nombreDePartsFiscales = context.select<MesInformationsBloc, double>((final bloc) => bloc.state.nombreDePartsFiscales);
 
     return DsfrInput(
       label: Localisation.nombreDePartsFiscales,
@@ -23,15 +21,11 @@ class MesInformationsNombreDePartsFiscales extends StatelessWidget {
       onChanged: (final value) {
         final parse = double.tryParse(value.replaceFirst(',', '.'));
         if (parse == null) {
-          context.read<MesInformationsBloc>().add(
-            const MesInformationsNombreDePartsFiscalesChange(0),
-          );
+          context.read<MesInformationsBloc>().add(const MesInformationsNombreDePartsFiscalesChange(0));
 
           return;
         }
-        context.read<MesInformationsBloc>().add(
-          MesInformationsNombreDePartsFiscalesChange(parse),
-        );
+        context.read<MesInformationsBloc>().add(MesInformationsNombreDePartsFiscalesChange(parse));
       },
       keyboardType: const TextInputType.numberWithOptions(decimal: true),
       textInputAction: TextInputAction.next,

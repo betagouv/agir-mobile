@@ -20,14 +20,12 @@ final class MotDePasseOublieCodeCodeChange extends MotDePasseOublieCodeEvent {
 }
 
 @immutable
-final class MotDePasseOublieCodeRenvoyerCodeDemande
-    extends MotDePasseOublieCodeEvent {
+final class MotDePasseOublieCodeRenvoyerCodeDemande extends MotDePasseOublieCodeEvent {
   const MotDePasseOublieCodeRenvoyerCodeDemande();
 }
 
 @immutable
-final class MotDePasseOublieCodeMotDePasseChange
-    extends MotDePasseOublieCodeEvent {
+final class MotDePasseOublieCodeMotDePasseChange extends MotDePasseOublieCodeEvent {
   const MotDePasseOublieCodeMotDePasseChange(this.valeur);
 
   final String valeur;
@@ -37,7 +35,6 @@ final class MotDePasseOublieCodeMotDePasseChange
 }
 
 @immutable
-final class MotDePasseOublieCodeValidationDemande
-    extends MotDePasseOublieCodeEvent {
+final class MotDePasseOublieCodeValidationDemande extends MotDePasseOublieCodeEvent {
   const MotDePasseOublieCodeValidationDemande();
 }

@@ -8,24 +8,15 @@ import 'package:app/features/questions/first_name/domain/first_name.dart';
 import 'package:fpdart/fpdart.dart';
 
 final class FirstNameRepository {
-  const FirstNameRepository({required final DioHttpClient client})
-    : _client = client;
+  const FirstNameRepository({required final DioHttpClient client}) : _client = client;
 
   final DioHttpClient _client;
 
-  Future<Either<Exception, Unit>> addFirstName(
-    final FirstName firstName,
-  ) async {
-    final response = await _client.patch(
-      Endpoints.profile,
-      data: jsonEncode({'prenom': firstName.value}),
-    );
+  Future<Either<Exception, Unit>> addFirstName(final FirstName firstName) async {
+    final response = await _client.patch(Endpoints.profile, data: jsonEncode({'prenom': firstName.value}));
 
     return isResponseSuccessful(response.statusCode)
         ? const Right(unit)
-        : handleError(
-          jsonEncode(response.data),
-          defaultMessage: 'Erreur lors de la mise à jour du prénom',
-        );
+        : handleError(jsonEncode(response.data), defaultMessage: 'Erreur lors de la mise à jour du prénom');
   }
 }

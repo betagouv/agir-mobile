@@ -9,52 +9,35 @@ import 'package:app/features/know_your_customer/core/infrastructure/question_map
 import 'package:fpdart/fpdart.dart';
 
 class MieuxVousConnaitreRepository {
-  const MieuxVousConnaitreRepository({
-    required final DioHttpClient client,
-    required final MessageBus messageBus,
-  }) : _client = client,
-       _messageBus = messageBus;
+  const MieuxVousConnaitreRepository({required final DioHttpClient client, required final MessageBus messageBus})
+    : _client = client,
+      _messageBus = messageBus;
 
   final DioHttpClient _client;
   final MessageBus _messageBus;
 
-  Future<Either<Exception, Question>> recupererQuestion({
-    required final String id,
-  }) async {
+  Future<Either<Exception, Question>> recupererQuestion({required final String id}) async {
     final response = await _client.get(Endpoints.questionKyc(id));
 
     if (isResponseUnsuccessful(response.statusCode)) {
       return Left(Exception('Erreur lors de la récupération de la question'));
     }
 
-    final fromJson = QuestionMapper.fromJson(
-      response.data as Map<String, dynamic>,
-    );
+    final fromJson = QuestionMapper.fromJson(response.data as Map<String, dynamic>);
 
-    return fromJson == null
-        ? Left(Exception('Erreur lors de la récupération de la question'))
-        : Right(fromJson);
+    return fromJson == null ? Left(Exception('Erreur lors de la récupération de la question')) : Right(fromJson);
   }
 
   Future<Either<Exception, Unit>> mettreAJour(final Question question) async {
     final object = switch (question) {
-      QuestionMultiple() =>
-        question.responses
-            .map((final e) => {'code': e.code, 'selected': e.isSelected})
-            .toList(),
+      QuestionMultiple() => question.responses.map((final e) => {'code': e.code, 'selected': e.isSelected}).toList(),
       QuestionUnique() => [
         {'value': question.response.value},
       ],
-      QuestionMosaicBoolean() =>
-        question.responses
-            .map((final e) => {'code': e.code, 'selected': e.isSelected})
-            .toList(),
+      QuestionMosaicBoolean() => question.responses.map((final e) => {'code': e.code, 'selected': e.isSelected}).toList(),
     };
 
-    final response = await _client.put(
-      Endpoints.questionKyc(question.id.value),
-      data: jsonEncode(object),
-    );
+    final response = await _client.put(Endpoints.questionKyc(question.id.value), data: jsonEncode(object));
 
     if (isResponseSuccessful(response.statusCode)) {
       _messageBus.publish(kycTopic);

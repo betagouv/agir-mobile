@@ -5,14 +5,11 @@ abstract final class Endpoints {
   static String action(final String code) => '/actions/$code';
 
   static const challenges = '/utilisateurs/{userId}/defis_v2';
-  static String challenge(final String defiId) =>
-      '/utilisateurs/{userId}/defis/$defiId';
+  static String challenge(final String defiId) => '/utilisateurs/{userId}/defis/$defiId';
   static const aids = '/utilisateurs/{userId}/aides_v2';
   static const bibliotheque = '/utilisateurs/{userId}/bibliotheque';
-  static String article(final String contentId) =>
-      '/utilisateurs/{userId}/bibliotheque/articles/$contentId';
-  static String quiz(final String contentId) =>
-      '/utilisateurs/{userId}/bibliotheque/quizz/$contentId';
+  static String article(final String contentId) => '/utilisateurs/{userId}/bibliotheque/articles/$contentId';
+  static String quiz(final String contentId) => '/utilisateurs/{userId}/bibliotheque/quizz/$contentId';
   static const bilan = '/utilisateurs/{userId}/bilans/last_v3';
   static const creationCompte = '/utilisateurs_v2';
   static const events = '/utilisateurs/{userId}/events';
@@ -21,13 +18,10 @@ abstract final class Endpoints {
   static const login = '/utilisateurs/login_v2';
   static const loginCode = '/utilisateurs/login_v2_code';
   static const missionsRecommandees = '/utilisateurs/{userId}/tuiles_missions';
-  static String missionsRecommandeesParThematique(
-    final String codeThematique,
-  ) => '/utilisateurs/{userId}/thematiques/$codeThematique/tuiles_missions';
-  static String mission(final String codeMission) =>
-      '/utilisateurs/{userId}/missions/$codeMission';
-  static String missionTerminer(final String codeMission) =>
-      '/utilisateurs/{userId}/missions/$codeMission/terminer';
+  static String missionsRecommandeesParThematique(final String codeThematique) =>
+      '/utilisateurs/{userId}/thematiques/$codeThematique/tuiles_missions';
+  static String mission(final String codeMission) => '/utilisateurs/{userId}/missions/$codeMission';
+  static String missionTerminer(final String codeMission) => '/utilisateurs/{userId}/missions/$codeMission/terminer';
   static const modifierMotDePasse = '/utilisateurs/modifier_mot_de_passe';
   static const notificationToken = '/utilisateurs/{userId}/mobile_token';
   static const oubliMotDePasse = '/utilisateurs/oubli_mot_de_passe';
@@ -37,23 +31,16 @@ abstract final class Endpoints {
   static const simulerAideVelo = '/utilisateurs/{userId}/simulerAideVelo';
   static const utilisateur = '/utilisateurs/{userId}';
   static const validerCode = '/utilisateurs/valider';
-  static const seasonalFruitsAndVegetablesCategories =
-      '/utilisateurs/{userId}/recherche_services/fruits_legumes/categories';
-  static const seasonalFruitsAndVegetablesSearch =
-      '/utilisateurs/{userId}/recherche_services/fruits_legumes/search2';
-  static const lvaoSearch =
-      '/utilisateurs/{userId}/recherche_services/longue_vie_objets/search2';
-  static const recipesSearch =
-      '/utilisateurs/{userId}/recherche_services/recettes/search2';
+  static const seasonalFruitsAndVegetablesCategories = '/utilisateurs/{userId}/recherche_services/fruits_legumes/categories';
+  static const seasonalFruitsAndVegetablesSearch = '/utilisateurs/{userId}/recherche_services/fruits_legumes/search2';
+  static const lvaoSearch = '/utilisateurs/{userId}/recherche_services/longue_vie_objets/search2';
+  static const recipesSearch = '/utilisateurs/{userId}/recherche_services/recettes/search2';
 
-  static String communes(final String codePostal) =>
-      '/communes?code_postal=$codePostal';
+  static String communes(final String codePostal) => '/communes?code_postal=$codePostal';
   static String recommandationsParThematique(final String thematique) =>
       '/utilisateurs/{userId}/thematiques/$thematique/recommandations';
-  static String questionKyc(final String questionId) =>
-      '/utilisateurs/{userId}/questionsKYC_v2/$questionId';
-  static String questions(final String enchainementId) =>
-      '/utilisateurs/{userId}/enchainementQuestionsKYC_v2/$enchainementId';
+  static String questionKyc(final String questionId) => '/utilisateurs/{userId}/questionsKYC_v2/$questionId';
+  static String questions(final String enchainementId) => '/utilisateurs/{userId}/enchainementQuestionsKYC_v2/$enchainementId';
   static String servicesParThematique(final String codeThematique) =>
       '/utilisateurs/{userId}/thematiques/$codeThematique/recherche_services';
 }

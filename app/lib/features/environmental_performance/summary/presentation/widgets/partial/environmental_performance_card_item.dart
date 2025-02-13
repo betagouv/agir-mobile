@@ -6,12 +6,7 @@ import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 
 class EnvironmentalPerformanceCardItem extends StatelessWidget {
-  const EnvironmentalPerformanceCardItem({
-    super.key,
-    required this.emoji,
-    required this.label,
-    required this.level,
-  });
+  const EnvironmentalPerformanceCardItem({super.key, required this.emoji, required this.label, required this.level});
 
   final String emoji;
   final String label;
@@ -19,8 +14,7 @@ class EnvironmentalPerformanceCardItem extends StatelessWidget {
 
   @override
   Widget build(final context) {
-    final levelRepresentation =
-        EnvironmentalPerformanceLevelRepresentation.fromProgress(level);
+    final levelRepresentation = EnvironmentalPerformanceLevelRepresentation.fromProgress(level);
 
     return Row(
       spacing: DsfrSpacings.s3v,
@@ -33,12 +27,7 @@ class EnvironmentalPerformanceCardItem extends StatelessWidget {
               Row(
                 spacing: DsfrSpacings.s1v5,
                 children: [
-                  Expanded(
-                    child: Text(
-                      label,
-                      style: const DsfrTextStyle.bodyMdMedium(),
-                    ),
-                  ),
+                  Expanded(child: Text(label, style: const DsfrTextStyle.bodyMdMedium())),
                   EnvironmentalPerformanceCardItemLevel(
                     label: levelRepresentation.label,
                     backgroundColor: levelRepresentation.backgroundColor,

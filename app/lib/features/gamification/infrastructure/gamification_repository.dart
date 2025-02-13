@@ -9,13 +9,8 @@ import 'package:fpdart/fpdart.dart';
 import 'package:rxdart/subjects.dart';
 
 class GamificationRepository {
-  GamificationRepository({
-    required final DioHttpClient client,
-    required final MessageBus messageBus,
-  }) : _client = client {
-    _subscription = messageBus.subscribe(challengeCompletedTopic).listen((
-      final event,
-    ) async {
+  GamificationRepository({required final DioHttpClient client, required final MessageBus messageBus}) : _client = client {
+    _subscription = messageBus.subscribe(challengeCompletedTopic).listen((final event) async {
       await refresh();
     });
     _subscription2 = messageBus.subscribe(kycTopic).listen((final event) async {

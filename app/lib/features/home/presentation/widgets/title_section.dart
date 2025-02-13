@@ -17,15 +17,10 @@ class TitleSection extends StatelessWidget {
         data: title,
         styleSheet: MarkdownStyleSheet(
           p: const DsfrTextStyle.headline4(),
-          strong: const DsfrTextStyle.headline4(
-            color: DsfrColors.blueFranceSun113,
-          ),
+          strong: const DsfrTextStyle.headline4(color: DsfrColors.blueFranceSun113),
         ),
       ),
-      MarkdownBody(
-        data: subTitle,
-        styleSheet: MarkdownStyleSheet(p: const DsfrTextStyle.bodyMd()),
-      ),
+      MarkdownBody(data: subTitle, styleSheet: MarkdownStyleSheet(p: const DsfrTextStyle.bodyMd())),
     ],
   );
 }

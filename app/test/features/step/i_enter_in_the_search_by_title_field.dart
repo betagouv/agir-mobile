@@ -5,10 +5,7 @@ import '../helper/feature_context.dart';
 import 'i_enter_in_the_field.dart';
 
 /// Usage: I enter {'vêtements'} in the search by title field
-Future<void> iEnterInTheSearchByTitleField(
-  final WidgetTester tester,
-  final String text,
-) async {
+Future<void> iEnterInTheSearchByTitleField(final WidgetTester tester, final String text) async {
   FeatureContext.instance.dioMock.getM(
     Uri.parse('/utilisateurs/{userId}/bibliotheque?titre=$text').toString(),
     responseData: {
@@ -31,11 +28,7 @@ Future<void> iEnterInTheSearchByTitleField(
         {'code': 'alimentation', 'label': '🥦 Alimentation', 'selected': false},
         {'code': 'transport', 'label': '🚗 Transports', 'selected': false},
         {'code': 'logement', 'label': '🏡 Logement', 'selected': false},
-        {
-          'code': 'consommation',
-          'label': '🛒 Consommation durable',
-          'selected': false,
-        },
+        {'code': 'consommation', 'label': '🛒 Consommation durable', 'selected': false},
         {'code': 'climat', 'label': '☀️ Environnement', 'selected': false},
         {'code': 'dechet', 'label': '🗑️ Déchets', 'selected': false},
         {'code': 'loisir', 'label': '⚽ Loisirs', 'selected': false},

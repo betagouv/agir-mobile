@@ -11,8 +11,7 @@ sealed class MieuxVousConnaitreEditEvent extends Equatable {
 }
 
 @immutable
-final class MieuxVousConnaitreEditRecuperationDemandee
-    extends MieuxVousConnaitreEditEvent {
+final class MieuxVousConnaitreEditRecuperationDemandee extends MieuxVousConnaitreEditEvent {
   const MieuxVousConnaitreEditRecuperationDemandee(this.id);
 
   final String id;
@@ -22,8 +21,7 @@ final class MieuxVousConnaitreEditRecuperationDemandee
 }
 
 @immutable
-final class MieuxVousConnaitreEditChoixMultipleChangee
-    extends MieuxVousConnaitreEditEvent {
+final class MieuxVousConnaitreEditChoixMultipleChangee extends MieuxVousConnaitreEditEvent {
   const MieuxVousConnaitreEditChoixMultipleChangee(this.value);
 
   final List<String> value;
@@ -33,8 +31,7 @@ final class MieuxVousConnaitreEditChoixMultipleChangee
 }
 
 @immutable
-final class MieuxVousConnaitreEditChoixUniqueChangee
-    extends MieuxVousConnaitreEditEvent {
+final class MieuxVousConnaitreEditChoixUniqueChangee extends MieuxVousConnaitreEditEvent {
   const MieuxVousConnaitreEditChoixUniqueChangee(this.value);
 
   final String value;
@@ -44,8 +41,7 @@ final class MieuxVousConnaitreEditChoixUniqueChangee
 }
 
 @immutable
-final class MieuxVousConnaitreEditLibreChangee
-    extends MieuxVousConnaitreEditEvent {
+final class MieuxVousConnaitreEditLibreChangee extends MieuxVousConnaitreEditEvent {
   const MieuxVousConnaitreEditLibreChangee(this.value);
 
   final String value;
@@ -55,8 +51,7 @@ final class MieuxVousConnaitreEditLibreChangee
 }
 
 @immutable
-final class MieuxVousConnaitreEditMosaicChangee
-    extends MieuxVousConnaitreEditEvent {
+final class MieuxVousConnaitreEditMosaicChangee extends MieuxVousConnaitreEditEvent {
   const MieuxVousConnaitreEditMosaicChangee(this.value);
 
   final List<ResponseMosaic> value;
@@ -66,8 +61,7 @@ final class MieuxVousConnaitreEditMosaicChangee
 }
 
 @immutable
-final class MieuxVousConnaitreEditEntierChangee
-    extends MieuxVousConnaitreEditEvent {
+final class MieuxVousConnaitreEditEntierChangee extends MieuxVousConnaitreEditEvent {
   const MieuxVousConnaitreEditEntierChangee(this.value);
 
   final String value;
@@ -77,8 +71,7 @@ final class MieuxVousConnaitreEditEntierChangee
 }
 
 @immutable
-final class MieuxVousConnaitreEditMisAJourDemandee
-    extends MieuxVousConnaitreEditEvent {
+final class MieuxVousConnaitreEditMisAJourDemandee extends MieuxVousConnaitreEditEvent {
   const MieuxVousConnaitreEditMisAJourDemandee(this.id);
 
   final String id;

@@ -9,30 +9,14 @@ void main() {
   group('Interrupteur', () {
     testWidgets('Voir le label', (final tester) async {
       const label = 'Label';
-      await tester.pumpWidget(
-        App(
-          child: DsfrToggleSwitch(
-            label: label,
-            value: false,
-            onChanged: (final value) {},
-          ),
-        ),
-      );
+      await tester.pumpWidget(App(child: DsfrToggleSwitch(label: label, value: false, onChanged: (final value) {})));
       expect(find.text(label), findsOneWidget);
     });
 
     testWidgets('Appuyer', (final tester) async {
       const label = 'Label';
       final completer = Completer<void>();
-      await tester.pumpWidget(
-        App(
-          child: DsfrToggleSwitch(
-            label: label,
-            value: false,
-            onChanged: completer.complete,
-          ),
-        ),
-      );
+      await tester.pumpWidget(App(child: DsfrToggleSwitch(label: label, value: false, onChanged: completer.complete)));
 
       await tester.tap(find.text(label));
 

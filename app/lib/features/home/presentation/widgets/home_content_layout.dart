@@ -20,25 +20,13 @@ class HomeContentLayout extends StatelessWidget {
       children: const [
         HomeDisclaimer(),
         SizedBox(height: paddingVerticalPage),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-          child: EnvironmentalPerformanceSection(),
-        ),
+        Padding(padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage), child: EnvironmentalPerformanceSection()),
         spacing,
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-          child: MissionSection(),
-        ),
+        Padding(padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage), child: MissionSection()),
         spacing,
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-          child: AidsSection(),
-        ),
+        Padding(padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage), child: AidsSection()),
         spacing,
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-          child: ChallengesSection(),
-        ),
+        Padding(padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage), child: ChallengesSection()),
         spacing,
         SurveySection(),
       ],

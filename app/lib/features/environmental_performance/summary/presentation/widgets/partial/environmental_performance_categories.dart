@@ -11,10 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class EnvironmentalPerformanceCategories extends StatelessWidget {
-  const EnvironmentalPerformanceCategories({
-    super.key,
-    required this.categories,
-  });
+  const EnvironmentalPerformanceCategories({super.key, required this.categories});
 
   final List<EnvironmentalPerformanceCategory> categories;
 
@@ -38,18 +35,15 @@ class EnvironmentalPerformanceCategories extends StatelessWidget {
                       context.read<EnvironmentalPerformanceQuestionBloc>().add(
                         EnvironmentalPerformanceQuestionIdListRequested(e.id),
                       );
-                      await GoRouter.of(context).pushNamed(
-                        EnvironmentalPerformanceQuestionPage.name,
-                        pathParameters: {'number': '1'},
-                      );
+                      await GoRouter.of(
+                        context,
+                      ).pushNamed(EnvironmentalPerformanceQuestionPage.name, pathParameters: {'number': '1'});
 
                       if (!context.mounted) {
                         return;
                       }
 
-                      context.read<EnvironmentalPerformanceBloc>().add(
-                        const EnvironmentalPerformanceStarted(),
-                      );
+                      context.read<EnvironmentalPerformanceBloc>().add(const EnvironmentalPerformanceStarted());
                     },
                   ),
                 )

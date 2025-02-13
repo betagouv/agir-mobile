@@ -25,30 +25,20 @@ final class ChallengeDetailLoadInProgress extends ChallengeDetailState {
 
 @immutable
 final class ChallengeDetailLoadSuccess extends ChallengeDetailState {
-  const ChallengeDetailLoadSuccess({
-    required this.challenge,
-    this.newStatus,
-    this.newReason = const None(),
-  });
+  const ChallengeDetailLoadSuccess({required this.challenge, this.newStatus, this.newReason = const None()});
 
   final Challenge challenge;
   final ChallengeStatus? newStatus;
   final Option<String?> newReason;
 
-  String get acceptanceText => _getRadioButtonText(
-    initialStatus: Localisation.jeReleveLAction,
-    progressStatus: Localisation.actionRealisee,
-  );
+  String get acceptanceText =>
+      _getRadioButtonText(initialStatus: Localisation.jeReleveLAction, progressStatus: Localisation.actionRealisee);
 
-  String get refusalText => _getRadioButtonText(
-    initialStatus: Localisation.pasPourMoi,
-    progressStatus: Localisation.finalementPasPourMoi,
-  );
+  String get refusalText =>
+      _getRadioButtonText(initialStatus: Localisation.pasPourMoi, progressStatus: Localisation.finalementPasPourMoi);
 
-  String _getRadioButtonText({
-    required final String initialStatus,
-    required final String progressStatus,
-  }) => switch (challenge.status) {
+  String _getRadioButtonText({required final String initialStatus, required final String progressStatus}) => switch (challenge
+      .status) {
     ChallengeStatus.toDo || ChallengeStatus.refused => initialStatus,
     ChallengeStatus.inProgress ||
     ChallengeStatus.alreadyDone ||

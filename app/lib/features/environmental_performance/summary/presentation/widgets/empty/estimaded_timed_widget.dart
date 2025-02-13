@@ -3,11 +3,7 @@ import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 
 class EstimadedTimedWidget extends StatelessWidget {
-  const EstimadedTimedWidget({
-    super.key,
-    required this.questionsNumber,
-    required this.questionsMinutes,
-  });
+  const EstimadedTimedWidget({super.key, required this.questionsNumber, required this.questionsMinutes});
 
   final String questionsNumber;
   final String questionsMinutes;
@@ -24,10 +20,7 @@ class EstimadedTimedWidget extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(DsfrSpacings.s1w)),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: DsfrSpacings.s3v,
-          horizontal: DsfrSpacings.s3w,
-        ),
+        padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s3v, horizontal: DsfrSpacings.s3w),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -53,11 +46,7 @@ class EstimadedTimedWidget extends StatelessWidget {
 }
 
 class _EstimadedTimedInfo extends StatelessWidget {
-  const _EstimadedTimedInfo({
-    required this.icon,
-    required this.number,
-    required this.text,
-  });
+  const _EstimadedTimedInfo({required this.icon, required this.number, required this.text});
 
   final IconData icon;
   final String number;
@@ -77,14 +66,8 @@ class _EstimadedTimedInfo extends StatelessWidget {
           child: Text.rich(
             TextSpan(
               children: [
-                TextSpan(
-                  text: number,
-                  style: const DsfrTextStyle.bodyMdBold(color: color),
-                ),
-                TextSpan(
-                  text: ' $text',
-                  style: const DsfrTextStyle.bodyMd(color: color),
-                ),
+                TextSpan(text: number, style: const DsfrTextStyle.bodyMdBold(color: color)),
+                TextSpan(text: ' $text', style: const DsfrTextStyle.bodyMd(color: color)),
               ],
             ),
           ),

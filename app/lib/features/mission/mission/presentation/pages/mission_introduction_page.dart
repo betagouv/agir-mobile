@@ -19,10 +19,7 @@ class MissionIntroductionPage extends StatelessWidget {
   Widget build(final context) => ListView(
     padding: const EdgeInsets.all(paddingVerticalPage),
     children: [
-      Align(
-        alignment: Alignment.centerLeft,
-        child: ThemeTypeTag(themeType: step.themeType),
-      ),
+      Align(alignment: Alignment.centerLeft, child: ThemeTypeTag(themeType: step.themeType)),
       const SizedBox(height: DsfrSpacings.s1w),
       FnvTitle(title: step.title),
       const SizedBox(height: DsfrSpacings.s3w),
@@ -44,10 +41,7 @@ class MissionIntroductionPage extends StatelessWidget {
               label: Localisation.commencer,
               variant: DsfrButtonVariant.primary,
               size: DsfrButtonSize.lg,
-              onPressed:
-                  () => context.read<MissionBloc>().add(
-                    const MissionNextRequested(),
-                  ),
+              onPressed: () => context.read<MissionBloc>().add(const MissionNextRequested()),
             ),
           ),
         ),

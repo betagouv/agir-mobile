@@ -16,9 +16,7 @@ class FirstName extends Equatable {
       return const Some(Localisation.firstNameEmpty);
     }
 
-    return RegExp(_firstNameRegex).hasMatch(value)
-        ? const None()
-        : const Some(Localisation.firstNameInvalid);
+    return RegExp(_firstNameRegex).hasMatch(value) ? const None() : const Some(Localisation.firstNameInvalid);
   }
 
   @override

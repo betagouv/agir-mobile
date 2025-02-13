@@ -15,11 +15,7 @@ class PreOnboardingPage extends StatelessWidget {
   static const name = 'pre-onboarding';
   static const path = name;
 
-  static GoRoute get route => GoRoute(
-    path: path,
-    name: name,
-    builder: (final context, final state) => const PreOnboardingPage(),
-  );
+  static GoRoute get route => GoRoute(path: path, name: name, builder: (final context, final state) => const PreOnboardingPage());
 
   @override
   Widget build(final context) => FnvScaffold(
@@ -33,11 +29,7 @@ class PreOnboardingPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const SizedBox(height: DsfrSpacings.s15w),
-                const Text(
-                  Localisation.preOnboardingTitre,
-                  style: DsfrTextStyle.displayXs(),
-                  textScaler: TextScaler.noScaling,
-                ),
+                const Text(Localisation.preOnboardingTitre, style: DsfrTextStyle.displayXs(), textScaler: TextScaler.noScaling),
                 const SizedBox(height: DsfrSpacings.s3w),
                 Row(
                   spacing: DsfrSpacings.s3w,
@@ -47,16 +39,8 @@ class PreOnboardingPage extends StatelessWidget {
                       height: 69,
                       semanticsLabel: AssetImages.republiqueFrancaiseSemantic,
                     ),
-                    Image.asset(
-                      AssetImages.franceNationVerte,
-                      semanticLabel: AssetImages.franceNationVerteSemantic,
-                      height: 46,
-                    ),
-                    FnvSvg.asset(
-                      AssetImages.ademe,
-                      height: 55,
-                      semanticsLabel: AssetImages.ademeSemantic,
-                    ),
+                    Image.asset(AssetImages.franceNationVerte, semanticLabel: AssetImages.franceNationVerteSemantic, height: 46),
+                    FnvSvg.asset(AssetImages.ademe, height: 55, semanticsLabel: AssetImages.ademeSemantic),
                   ],
                 ),
               ],
@@ -68,18 +52,13 @@ class PreOnboardingPage extends StatelessWidget {
                   label: Localisation.jeCreeMonCompte,
                   variant: DsfrButtonVariant.primary,
                   size: DsfrButtonSize.lg,
-                  onPressed:
-                      () async =>
-                          GoRouter.of(context).pushNamed(CreerComptePage.name),
+                  onPressed: () async => GoRouter.of(context).pushNamed(CreerComptePage.name),
                 ),
                 const SizedBox(height: DsfrSpacings.s2w),
                 Center(
                   child: DsfrLink.md(
                     label: Localisation.jaiDejaUnCompte,
-                    onTap:
-                        () async => GoRouter.of(
-                          context,
-                        ).pushNamed(SeConnecterPage.name),
+                    onTap: () async => GoRouter.of(context).pushNamed(SeConnecterPage.name),
                   ),
                 ),
                 const SizedBox(height: DsfrSpacings.s3w),

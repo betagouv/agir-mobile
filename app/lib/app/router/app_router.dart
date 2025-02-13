@@ -42,19 +42,12 @@ import 'package:go_router/go_router.dart';
 
 GoRouter goRouter({required final Tracker tracker}) => GoRouter(
   routes: [
-    GoRoute(
-      path: '/loading',
-      builder:
-          (final context, final state) =>
-              const ColoredBox(color: Color(0xFFEDFEE7)),
-    ),
+    GoRoute(path: '/loading', builder: (final context, final state) => const ColoredBox(color: Color(0xFFEDFEE7))),
     GoRoute(
       path: '/unauthenticated',
       redirect:
           (final context, final state) =>
-              state.uri.path == '/unauthenticated'
-                  ? '/unauthenticated/${PreOnboardingPage.path}'
-                  : null,
+              state.uri.path == '/unauthenticated' ? '/unauthenticated/${PreOnboardingPage.path}' : null,
       routes: [
         PreOnboardingPage.route,
         CreerComptePage.route,
@@ -76,9 +69,7 @@ GoRouter goRouter({required final Tracker tracker}) => GoRouter(
         MissionPage.route,
         AidsPage.route,
         AidPage.route,
-        AideSimulateurVeloPage.route(
-          routes: [AideSimulateurVeloDisponiblePage.route],
-        ),
+        AideSimulateurVeloPage.route(routes: [AideSimulateurVeloDisponiblePage.route]),
         ArticlePage.route,
         BibliothequePage.route,
         ActionsPage.route,
@@ -96,20 +87,13 @@ GoRouter goRouter({required final Tracker tracker}) => GoRouter(
       ],
     ),
   ],
-  errorPageBuilder:
-      (final context, final state) =>
-          const NoTransitionPage(child: FnvErrorRoutePage()),
+  errorPageBuilder: (final context, final state) => const NoTransitionPage(child: FnvErrorRoutePage()),
   redirect:
-      (final context, final state) => switch (context
-          .read<AuthenticationBloc>()
-          .state) {
+      (final context, final state) => switch (context.read<AuthenticationBloc>().state) {
         AuthenticationInitial() => null,
         AuthenticationUnauthenticated() =>
-          state.uri.path.startsWith('/unauthenticated')
-              ? null
-              : '/unauthenticated/${PreOnboardingPage.path}',
-        AuthenticationAuthenticated() =>
-          state.uri.path.startsWith('/unauthenticated') ? HomePage.path : null,
+          state.uri.path.startsWith('/unauthenticated') ? null : '/unauthenticated/${PreOnboardingPage.path}',
+        AuthenticationAuthenticated() => state.uri.path.startsWith('/unauthenticated') ? HomePage.path : null,
       },
   initialLocation: '/loading',
   observers: [themeRouteObserver, tracker.navigatorObserver],

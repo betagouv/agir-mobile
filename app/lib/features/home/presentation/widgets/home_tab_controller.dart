@@ -12,9 +12,7 @@ class HomeTabController extends StatelessWidget {
     length: 5,
     child: RootPage(
       title: const HomeAppBarTitle(),
-      appBarBottom: HomeTabBar(
-        textScaler: MediaQuery.textScalerOf(context).clamp(maxScaleFactor: 2),
-      ),
+      appBarBottom: HomeTabBar(textScaler: MediaQuery.textScalerOf(context).clamp(maxScaleFactor: 2)),
       body: const HomeTabBarView(),
     ),
   );

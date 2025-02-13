@@ -20,18 +20,11 @@ class ChallengeListPage extends StatelessWidget {
   static const name = 'action-list';
   static const path = 'mes-actions';
 
-  static GoRoute get route => GoRoute(
-    path: path,
-    name: name,
-    builder: (final context, final state) => const ChallengeListPage(),
-  );
+  static GoRoute get route => GoRoute(path: path, name: name, builder: (final context, final state) => const ChallengeListPage());
 
   @override
   Widget build(final context) => BlocProvider(
-    create:
-        (final context) =>
-            ChallengeListBloc(FetchChallenges(context.read()))
-              ..add(const ChallengeListFetch()),
+    create: (final context) => ChallengeListBloc(FetchChallenges(context.read()))..add(const ChallengeListFetch()),
     child: const RootPage(body: _View()),
   );
 }
@@ -52,9 +45,7 @@ class _View extends StatelessWidget {
         builder:
             (final context, final state) => switch (state) {
               ChallengeListInitial() => const SizedBox.shrink(),
-              ChallengeListLoading() => const Center(
-                child: CircularProgressIndicator(),
-              ),
+              ChallengeListLoading() => const Center(child: CircularProgressIndicator()),
               ChallengeListSuccess() => ListView.separated(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
@@ -74,24 +65,19 @@ class _View extends StatelessWidget {
                     title: item.titre,
                     subTitle: subTitle,
                     onTap: () async {
-                      final result = await GoRouter.of(context).pushNamed(
-                        ChallengeDetailPage.name,
-                        pathParameters: {'id': item.id.value},
-                      );
+                      final result = await GoRouter.of(
+                        context,
+                      ).pushNamed(ChallengeDetailPage.name, pathParameters: {'id': item.id.value});
 
                       if (result != true || !context.mounted) {
                         return;
                       }
 
-                      context.read<ChallengeListBloc>().add(
-                        const ChallengeListFetch(),
-                      );
+                      context.read<ChallengeListBloc>().add(const ChallengeListFetch());
                     },
                   );
                 },
-                separatorBuilder:
-                    (final context, final index) =>
-                        const DsfrDivider(color: Color(0xFFEAEBF6)),
+                separatorBuilder: (final context, final index) => const DsfrDivider(color: Color(0xFFEAEBF6)),
                 itemCount: state.challenges.length,
               ),
               ChallengeListFailure() => const Text('Oups'),

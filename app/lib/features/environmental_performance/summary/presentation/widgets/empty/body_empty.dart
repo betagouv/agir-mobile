@@ -26,27 +26,17 @@ class BodyEmpty extends StatelessWidget {
     children: [
       const Padding(
         padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-        child: FnvTitle(
-          title:
-              EnvironmentalPerformanceSummaryL10n
-                  .estimerMonBilanEnvironnemental,
-        ),
+        child: FnvTitle(title: EnvironmentalPerformanceSummaryL10n.estimerMonBilanEnvironnemental),
       ),
       const SizedBox(height: DsfrSpacings.s4w),
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-        child: EstimadedTimedWidget(
-          questionsNumber: data.questionsNumber.toString(),
-          questionsMinutes: '2',
-        ),
+        child: EstimadedTimedWidget(questionsNumber: data.questionsNumber.toString(), questionsMinutes: '2'),
       ),
       const SizedBox(height: DsfrSpacings.s3v),
       const Padding(
         padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-        child: Text(
-          EnvironmentalPerformanceSummaryL10n.commencerMonMiniBilanDescription,
-          style: DsfrTextStyle.bodyLg(),
-        ),
+        child: Text(EnvironmentalPerformanceSummaryL10n.commencerMonMiniBilanDescription, style: DsfrTextStyle.bodyLg()),
       ),
       const SizedBox(height: DsfrSpacings.s3w),
       Padding(
@@ -60,22 +50,15 @@ class BodyEmpty extends StatelessWidget {
               size: DsfrButtonSize.lg,
               onPressed: () async {
                 context.read<EnvironmentalPerformanceQuestionBloc>().add(
-                  EnvironmentalPerformanceQuestionIdListGiven(
-                    data.questions.map((final e) => e.id).toList(),
-                  ),
+                  EnvironmentalPerformanceQuestionIdListGiven(data.questions.map((final e) => e.id).toList()),
                 );
-                await GoRouter.of(context).pushNamed(
-                  EnvironmentalPerformanceQuestionPage.name,
-                  pathParameters: {'number': '1'},
-                );
+                await GoRouter.of(context).pushNamed(EnvironmentalPerformanceQuestionPage.name, pathParameters: {'number': '1'});
 
                 if (!context.mounted) {
                   return;
                 }
 
-                context.read<EnvironmentalPerformanceBloc>().add(
-                  const EnvironmentalPerformanceStarted(),
-                );
+                context.read<EnvironmentalPerformanceBloc>().add(const EnvironmentalPerformanceStarted());
               },
             ),
           ),
@@ -84,10 +67,7 @@ class BodyEmpty extends StatelessWidget {
       const SizedBox(height: DsfrSpacings.s4w),
       const QuestionSection(),
       const SizedBox(height: DsfrSpacings.s4w),
-      const Padding(
-        padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-        child: EnvironmentalPerformancePartnerCard(),
-      ),
+      const Padding(padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage), child: EnvironmentalPerformancePartnerCard()),
       const SafeArea(child: SizedBox.shrink()),
     ],
   );

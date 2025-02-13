@@ -21,12 +21,7 @@ class FetchChallenges {
 
     return result.map(
       (final challenges) =>
-          challenges
-              .sorted(
-                (final a, final b) =>
-                    order.indexOf(a.status).compareTo(order.indexOf(b.status)),
-              )
-              .toList(),
+          challenges.sorted((final a, final b) => order.indexOf(a.status).compareTo(order.indexOf(b.status))).toList(),
     );
   }
 }

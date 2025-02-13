@@ -18,9 +18,7 @@ class MieuxVousConnaitreEditPage extends StatelessWidget {
   static GoRoute get route => GoRoute(
     path: path,
     name: name,
-    builder:
-        (final context, final state) =>
-            MieuxVousConnaitreEditPage(id: state.pathParameters['id']!),
+    builder: (final context, final state) => MieuxVousConnaitreEditPage(id: state.pathParameters['id']!),
   );
 
   final String id;
@@ -58,9 +56,7 @@ class _ViewState extends State<_View> {
         onSaved: () {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
-            ..showSnackBar(
-              const SnackBar(content: Text(Localisation.miseAJourEffectuee)),
-            );
+            ..showSnackBar(const SnackBar(content: Text(Localisation.miseAJourEffectuee)));
           GoRouter.of(context).pop<bool>(true);
         },
       ),

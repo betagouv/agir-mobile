@@ -16,34 +16,22 @@ import 'steps/scenario_context.dart';
 import 'steps/set_up_widgets.dart';
 
 void main() {
-  testWidgets('Iel voir un quiz après avoir cliqué sur une recommandation', (
-    final tester,
-  ) async {
+  testWidgets('Iel voir un quiz après avoir cliqué sur une recommandation', (final tester) async {
     setUpWidgets(tester);
 
     await mockNetworkImages(() async {
       const titre = 'Une assiette plus durable';
       ielALesRecommandationsSuivantes(titre);
-      const question =
-          'Quelle action est la plus efficace pour une alimentation plus durable ?';
+      const question = 'Quelle action est la plus efficace pour une alimentation plus durable ?';
       ielALeQuizSuivant(
         const Quiz(
           id: '42',
           thematique: '🥦 Alimentation',
           question: question,
           reponses: [
-            QuizReponse(
-              reponse: 'Manger moins de produits de saison',
-              exact: false,
-            ),
-            QuizReponse(
-              reponse: 'Diminuer la consommation de viande',
-              exact: true,
-            ),
-            QuizReponse(
-              reponse: 'Privilégier la volaille et le porc',
-              exact: false,
-            ),
+            QuizReponse(reponse: 'Manger moins de produits de saison', exact: false),
+            QuizReponse(reponse: 'Diminuer la consommation de viande', exact: true),
+            QuizReponse(reponse: 'Privilégier la volaille et le porc', exact: false),
             QuizReponse(reponse: 'Réduire ses déchets', exact: false),
           ],
           points: 5,
@@ -59,9 +47,7 @@ void main() {
     });
   });
 
-  testWidgets("La bonne réponse affiche l'explication ok", (
-    final tester,
-  ) async {
+  testWidgets("La bonne réponse affiche l'explication ok", (final tester) async {
     setUpWidgets(tester);
     await mockNetworkImages(() async {
       const titre = 'Une assiette plus durable';
@@ -70,18 +56,11 @@ void main() {
       const quiz = Quiz(
         id: '42',
         thematique: '🥦 Alimentation',
-        question:
-            'Quelle action est la plus efficace pour une alimentation plus durable ?',
+        question: 'Quelle action est la plus efficace pour une alimentation plus durable ?',
         reponses: [
-          QuizReponse(
-            reponse: 'Manger moins de produits de saison',
-            exact: false,
-          ),
+          QuizReponse(reponse: 'Manger moins de produits de saison', exact: false),
           QuizReponse(reponse: reponse, exact: true),
-          QuizReponse(
-            reponse: 'Privilégier la volaille et le porc',
-            exact: false,
-          ),
+          QuizReponse(reponse: 'Privilégier la volaille et le porc', exact: false),
           QuizReponse(reponse: 'Réduire ses déchets', exact: false),
         ],
         points: 5,
@@ -109,58 +88,46 @@ void main() {
     });
   });
 
-  testWidgets(
-    "N'appelle pas la fonction marquerCommeLu si l'article n'est pas présent",
-    (final tester) async {
-      setUpWidgets(tester);
-      await mockNetworkImages(() async {
-        const titre = 'Une assiette plus durable';
-        ielALesRecommandationsSuivantes(titre);
-        const reponse = 'Diminuer la consommation de viande';
-        ielALeQuizSuivant(
-          const Quiz(
-            id: '42',
-            thematique: '🥦 Alimentation',
-            question:
-                'Quelle action est la plus efficace pour une alimentation plus durable ?',
-            reponses: [
-              QuizReponse(
-                reponse: 'Manger moins de produits de saison',
-                exact: false,
-              ),
-              QuizReponse(reponse: reponse, exact: true),
-              QuizReponse(
-                reponse: 'Privilégier la volaille et le porc',
-                exact: false,
-              ),
-              QuizReponse(reponse: 'Réduire ses déchets', exact: false),
-            ],
-            points: 5,
-            explicationOk:
-                '<p><span>Le secteur de l’élevage génère à lui seul près de 15 % des émissions mondiales de gaz à effet de serre. Réduire notre consommation de viande permet d’agir sur la production et de diminuer les impacts qui lui sont associés.<br><br>Pour rendre notre alimentation plus durable, on peut aussi privilégier les produits locaux, de saison et biologiques, limiter l’achat de produits transformés et réduire le gaspillage alimentaire.</span></p>',
-            explicationKo:
-                "<p><span>Au contraire ! Pour rendre notre alimentation plus durable, nous pouvons manger davantage de produits de saison et augmenter la part de repas végétariens dans les menus de la semaine. Diminuer notre consommation de viande permet en effet de réduire les impacts écologiques du secteur de l’élevage, qui génère à lui seul près de 15 % des émissions mondiales de gaz à effet de serre : c'est donc l'action la plus efficace pour limiter l'impact de notre alimentation.<br><br>On peut aussi privilégier les produits locaux et biologiques, limiter l’achat de produits transformés et réduire le gaspillage alimentaire.</span></p>",
-            article: null,
-          ),
-        );
-        await _init(tester, titre);
-        await ielAppuieSur(tester, reponse);
-        await ielAppuieSur(tester, Localisation.valider);
-        ielVoitLeTexte(Localisation.pourquoi);
+  testWidgets("N'appelle pas la fonction marquerCommeLu si l'article n'est pas présent", (final tester) async {
+    setUpWidgets(tester);
+    await mockNetworkImages(() async {
+      const titre = 'Une assiette plus durable';
+      ielALesRecommandationsSuivantes(titre);
+      const reponse = 'Diminuer la consommation de viande';
+      ielALeQuizSuivant(
+        const Quiz(
+          id: '42',
+          thematique: '🥦 Alimentation',
+          question: 'Quelle action est la plus efficace pour une alimentation plus durable ?',
+          reponses: [
+            QuizReponse(reponse: 'Manger moins de produits de saison', exact: false),
+            QuizReponse(reponse: reponse, exact: true),
+            QuizReponse(reponse: 'Privilégier la volaille et le porc', exact: false),
+            QuizReponse(reponse: 'Réduire ses déchets', exact: false),
+          ],
+          points: 5,
+          explicationOk:
+              '<p><span>Le secteur de l’élevage génère à lui seul près de 15 % des émissions mondiales de gaz à effet de serre. Réduire notre consommation de viande permet d’agir sur la production et de diminuer les impacts qui lui sont associés.<br><br>Pour rendre notre alimentation plus durable, on peut aussi privilégier les produits locaux, de saison et biologiques, limiter l’achat de produits transformés et réduire le gaspillage alimentaire.</span></p>',
+          explicationKo:
+              "<p><span>Au contraire ! Pour rendre notre alimentation plus durable, nous pouvons manger davantage de produits de saison et augmenter la part de repas végétariens dans les menus de la semaine. Diminuer notre consommation de viande permet en effet de réduire les impacts écologiques du secteur de l’élevage, qui génère à lui seul près de 15 % des émissions mondiales de gaz à effet de serre : c'est donc l'action la plus efficace pour limiter l'impact de notre alimentation.<br><br>On peut aussi privilégier les produits locaux et biologiques, limiter l’achat de produits transformés et réduire le gaspillage alimentaire.</span></p>",
+          article: null,
+        ),
+      );
+      await _init(tester, titre);
+      await ielAppuieSur(tester, reponse);
+      await ielAppuieSur(tester, Localisation.valider);
+      ielVoitLeTexte(Localisation.pourquoi);
 
-        verify(
-          () => ScenarioContext().dioMock!.post<dynamic>(
-            Endpoints.events,
-            data: '{"content_id":"42","number_value":100,"type":"quizz_score"}',
-          ),
-        );
-      });
-    },
-  );
+      verify(
+        () => ScenarioContext().dioMock!.post<dynamic>(
+          Endpoints.events,
+          data: '{"content_id":"42","number_value":100,"type":"quizz_score"}',
+        ),
+      );
+    });
+  });
 
-  testWidgets("Les mauvaises réponses affiche l'explication ko", (
-    final tester,
-  ) async {
+  testWidgets("Les mauvaises réponses affiche l'explication ko", (final tester) async {
     setUpWidgets(tester);
     await mockNetworkImages(() async {
       const titre = 'Une assiette plus durable';
@@ -170,18 +137,11 @@ void main() {
         const Quiz(
           id: '42',
           thematique: '🥦 Alimentation',
-          question:
-              'Quelle action est la plus efficace pour une alimentation plus durable ?',
+          question: 'Quelle action est la plus efficace pour une alimentation plus durable ?',
           reponses: [
             QuizReponse(reponse: reponse, exact: false),
-            QuizReponse(
-              reponse: 'Diminuer la consommation de viande',
-              exact: true,
-            ),
-            QuizReponse(
-              reponse: 'Privilégier la volaille et le porc',
-              exact: false,
-            ),
+            QuizReponse(reponse: 'Diminuer la consommation de viande', exact: true),
+            QuizReponse(reponse: 'Privilégier la volaille et le porc', exact: false),
             QuizReponse(reponse: 'Réduire ses déchets', exact: false),
           ],
           points: 5,

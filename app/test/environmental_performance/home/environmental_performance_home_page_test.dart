@@ -38,24 +38,12 @@ import '../summary/environmental_performance_data.dart';
 
 Future<void> pumpHomePage(final WidgetTester tester, final DioMock dio) async {
   dio
-    ..getM(
-      Endpoints.utilisateur,
-      responseData: {'prenom': 'Lucas', 'is_onboarding_done': true},
-    )
+    ..getM(Endpoints.utilisateur, responseData: {'prenom': 'Lucas', 'is_onboarding_done': true})
     ..getM(Endpoints.missionsRecommandees, responseData: missionThematiques)
-    ..getM(
-      '/utilisateurs/%7BuserId%7D/defis_v2?status=en_cours',
-      responseData: <dynamic>[],
-    )
-    ..getM(
-      Endpoints.aids,
-      responseData: {'couverture_aides_ok': true, 'liste_aides': <dynamic>[]},
-    );
+    ..getM('/utilisateurs/%7BuserId%7D/defis_v2?status=en_cours', responseData: <dynamic>[])
+    ..getM(Endpoints.aids, responseData: {'couverture_aides_ok': true, 'liste_aides': <dynamic>[]});
 
-  final client = DioHttpClient(
-    dio: dio,
-    authenticationService: authenticationService,
-  );
+  final client = DioHttpClient(dio: dio, authenticationService: authenticationService);
 
   await pumpPage(
     tester: tester,
@@ -64,63 +52,29 @@ Future<void> pumpHomePage(final WidgetTester tester, final DioMock dio) async {
         value: EnvironmentalPerformanceSummaryRepository(client: client),
       ),
       RepositoryProvider<NotificationService>(
-        create:
-            (final context) =>
-                const NotificationServiceFake(AuthorizationStatus.denied),
+        create: (final context) => const NotificationServiceFake(AuthorizationStatus.denied),
       ),
     ],
     blocProviders: [
+      BlocProvider(create: (final context) => AidsHomeBloc(aidsRepository: AidsRepository(client: client))),
+      BlocProvider(create: (final context) => HomeDisclaimerCubit()..closeDisclaimer()),
       BlocProvider(
-        create:
-            (final context) =>
-                AidsHomeBloc(aidsRepository: AidsRepository(client: client)),
+        create: (final context) => RecommandationsBloc(recommandationsRepository: RecommandationsRepository(client: client)),
       ),
-      BlocProvider(
-        create: (final context) => HomeDisclaimerCubit()..closeDisclaimer(),
-      ),
-      BlocProvider(
-        create:
-            (final context) => RecommandationsBloc(
-              recommandationsRepository: RecommandationsRepository(
-                client: client,
-              ),
-            ),
-      ),
-      BlocProvider<GamificationBloc>(
-        create: (final context) => GamificationBlocFake(),
-      ),
-      BlocProvider<ChallengesBloc>(
-        create:
-            (final context) => ChallengesBloc(
-              repository: ChallengesRepository(client: client),
-            ),
-      ),
-      BlocProvider(
-        create:
-            (final context) =>
-                UserBloc(repository: UserRepository(client: client)),
-      ),
-      BlocProvider(
-        create:
-            (final context) => MissionHomeBloc(
-              repository: MissionHomeRepository(client: client),
-            ),
-      ),
+      BlocProvider<GamificationBloc>(create: (final context) => GamificationBlocFake()),
+      BlocProvider<ChallengesBloc>(create: (final context) => ChallengesBloc(repository: ChallengesRepository(client: client))),
+      BlocProvider(create: (final context) => UserBloc(repository: UserRepository(client: client))),
+      BlocProvider(create: (final context) => MissionHomeBloc(repository: MissionHomeRepository(client: client))),
       BlocProvider(
         create:
             (final context) => EnvironmentalPerformanceBloc(
-              useCase: FetchEnvironmentalPerformance(
-                EnvironmentalPerformanceSummaryRepository(client: client),
-              ),
+              useCase: FetchEnvironmentalPerformance(EnvironmentalPerformanceSummaryRepository(client: client)),
             ),
       ),
       BlocProvider(
         create:
-            (final context) => EnvironmentalPerformanceQuestionBloc(
-              repository: EnvironmentalPerformanceQuestionRepository(
-                client: client,
-              ),
-            ),
+            (final context) =>
+                EnvironmentalPerformanceQuestionBloc(repository: EnvironmentalPerformanceQuestionRepository(client: client)),
       ),
     ],
     router: GoRouter(
@@ -130,10 +84,7 @@ Future<void> pumpHomePage(final WidgetTester tester, final DioMock dio) async {
             GoRoute(
               path: EnvironmentalPerformanceQuestionPage.path,
               name: EnvironmentalPerformanceQuestionPage.name,
-              builder:
-                  (final context, final state) => const Text(
-                    'route: ${EnvironmentalPerformanceQuestionPage.name}',
-                  ),
+              builder: (final context, final state) => const Text('route: ${EnvironmentalPerformanceQuestionPage.name}'),
             ),
           ],
         ),
@@ -145,97 +96,52 @@ Future<void> pumpHomePage(final WidgetTester tester, final DioMock dio) async {
 
 void main() {
   group("Mon bilan environnemental sur la page d'accueil", () {
-    testWidgets(
-      'Voir le contenu de Estimer mon bilan environnemental avec un bilan vide',
-      (final tester) async {
-        final dio =
-            DioMock()
-              ..getM(
-                Endpoints.bilan,
-                responseData: environmentalPerformanceEmptyData,
-              )
-              ..getM(
-                Endpoints.questions('ENCHAINEMENT_KYC_mini_bilan_carbone'),
-                responseData: miniBilan,
-              );
-        await mockNetworkImages(() async {
-          await pumpHomePage(tester, dio);
-          await tester.pumpAndSettle();
-          expect(
-            find.text('Estimer mon bilan environnemental'),
-            findsOneWidget,
-          );
-          expect(
-            find.text(
-              EnvironmentalPerformanceSummaryL10n.estimerUnPremierBilan,
-            ),
-            findsOneWidget,
-          );
-          expect(find.text('7 questions'), findsOneWidget);
-        });
-      },
-    );
+    testWidgets('Voir le contenu de Estimer mon bilan environnemental avec un bilan vide', (final tester) async {
+      final dio =
+          DioMock()
+            ..getM(Endpoints.bilan, responseData: environmentalPerformanceEmptyData)
+            ..getM(Endpoints.questions('ENCHAINEMENT_KYC_mini_bilan_carbone'), responseData: miniBilan);
+      await mockNetworkImages(() async {
+        await pumpHomePage(tester, dio);
+        await tester.pumpAndSettle();
+        expect(find.text('Estimer mon bilan environnemental'), findsOneWidget);
+        expect(find.text(EnvironmentalPerformanceSummaryL10n.estimerUnPremierBilan), findsOneWidget);
+        expect(find.text('7 questions'), findsOneWidget);
+      });
+    });
 
     testWidgets('Aller sur les questions du mini bilan', (final tester) async {
       final dio =
           DioMock()
-            ..getM(
-              Endpoints.bilan,
-              responseData: environmentalPerformanceEmptyData,
-            )
-            ..getM(
-              Endpoints.questions('ENCHAINEMENT_KYC_mini_bilan_carbone'),
-              responseData: miniBilan,
-            );
+            ..getM(Endpoints.bilan, responseData: environmentalPerformanceEmptyData)
+            ..getM(Endpoints.questions('ENCHAINEMENT_KYC_mini_bilan_carbone'), responseData: miniBilan);
       await mockNetworkImages(() async {
         await pumpHomePage(tester, dio);
         await tester.pumpAndSettle();
-        await tester.tap(
-          find.text(EnvironmentalPerformanceSummaryL10n.estimerUnPremierBilan),
-        );
+        await tester.tap(find.text(EnvironmentalPerformanceSummaryL10n.estimerUnPremierBilan));
         await tester.pumpAndSettle();
 
-        expect(
-          find.text('route: ${EnvironmentalPerformanceQuestionPage.name}'),
-          findsOneWidget,
-        );
+        expect(find.text('route: ${EnvironmentalPerformanceQuestionPage.name}'), findsOneWidget);
       });
     });
 
-    testWidgets('Aller sur les questions du Mes déplacements', (
-      final tester,
-    ) async {
+    testWidgets('Aller sur les questions du Mes déplacements', (final tester) async {
       final dio =
           DioMock()
-            ..getM(
-              Endpoints.bilan,
-              responseData: environmentalPerformancePartialData,
-            )
-            ..getM(
-              Endpoints.questions('ENCHAINEMENT_KYC_bilan_transport'),
-              responseData: miniBilan,
-            );
+            ..getM(Endpoints.bilan, responseData: environmentalPerformancePartialData)
+            ..getM(Endpoints.questions('ENCHAINEMENT_KYC_bilan_transport'), responseData: miniBilan);
       await mockNetworkImages(() async {
         await pumpHomePage(tester, dio);
         await tester.pumpAndSettle();
         await tester.tap(find.text('7 questions'));
         await tester.pumpAndSettle();
 
-        expect(
-          find.text('route: ${EnvironmentalPerformanceQuestionPage.name}'),
-          findsOneWidget,
-        );
+        expect(find.text('route: ${EnvironmentalPerformanceQuestionPage.name}'), findsOneWidget);
       });
     });
 
-    testWidgets('Voir le contenu de Mon bilan environnemental', (
-      final tester,
-    ) async {
-      final dio =
-          DioMock()..getM(
-            Endpoints.bilan,
-            responseData: environmentalPerformanceFullData,
-          );
+    testWidgets('Voir le contenu de Mon bilan environnemental', (final tester) async {
+      final dio = DioMock()..getM(Endpoints.bilan, responseData: environmentalPerformanceFullData);
       await mockNetworkImages(() async {
         await pumpHomePage(tester, dio);
         expect(find.text('Mon bilan environnemental'), findsOneWidget);
@@ -243,14 +149,8 @@ void main() {
       });
     });
 
-    testWidgets('Voir le contenu de "Activer le mode développeur"', (
-      final tester,
-    ) async {
-      final dio =
-          DioMock()..getM(
-            Endpoints.bilan,
-            responseData: environmentalPerformanceFullData,
-          );
+    testWidgets('Voir le contenu de "Activer le mode développeur"', (final tester) async {
+      final dio = DioMock()..getM(Endpoints.bilan, responseData: environmentalPerformanceFullData);
       await mockNetworkImages(() async {
         await pumpHomePage(tester, dio);
         await expectLater(tester, meetsGuideline(androidTapTargetGuideline));

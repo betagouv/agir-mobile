@@ -8,12 +8,7 @@ class DsfrTextStyle extends TextStyle {
     super.fontWeight = FontWeight.normal,
     super.color = DsfrColors.grey50,
     super.fontStyle = FontStyle.normal,
-  }) : super(
-         package: 'dsfr',
-         fontFamily: 'Marianne',
-         fontSize: fontSize,
-         height: 1.4,
-       );
+  }) : super(package: 'dsfr', fontFamily: 'Marianne', fontSize: fontSize, height: 1.4);
 
   const DsfrTextStyle.displayXl({final Color color = DsfrColors.grey50})
     : this(fontSize: 72, fontWeight: FontWeight.bold, color: color);
@@ -48,8 +43,7 @@ class DsfrTextStyle extends TextStyle {
   const DsfrTextStyle.headline6({final Color color = DsfrColors.grey50})
     : this(fontSize: 18, fontWeight: FontWeight.bold, color: color);
 
-  const DsfrTextStyle.bodyXl({final Color color = DsfrColors.grey50})
-    : this(fontSize: 20, color: color);
+  const DsfrTextStyle.bodyXl({final Color color = DsfrColors.grey50}) : this(fontSize: 20, color: color);
 
   const DsfrTextStyle.bodyXlMedium({final Color color = DsfrColors.grey50})
     : this(fontSize: 20, fontWeight: FontWeight.w500, color: color);
@@ -57,8 +51,7 @@ class DsfrTextStyle extends TextStyle {
   const DsfrTextStyle.bodyXlBold({final Color color = DsfrColors.grey50})
     : this(fontSize: 20, fontWeight: FontWeight.bold, color: color);
 
-  const DsfrTextStyle.bodyLg({final Color color = DsfrColors.grey50})
-    : this(fontSize: 18, color: color);
+  const DsfrTextStyle.bodyLg({final Color color = DsfrColors.grey50}) : this(fontSize: 18, color: color);
 
   const DsfrTextStyle.bodyLgMedium({final Color color = DsfrColors.grey50})
     : this(fontSize: 18, fontWeight: FontWeight.w500, color: color);
@@ -66,8 +59,7 @@ class DsfrTextStyle extends TextStyle {
   const DsfrTextStyle.bodyLgBold({final Color color = DsfrColors.grey50})
     : this(fontSize: 18, fontWeight: FontWeight.bold, color: color);
 
-  const DsfrTextStyle.bodyMd({final Color color = DsfrColors.grey50})
-    : this(fontSize: 16, color: color);
+  const DsfrTextStyle.bodyMd({final Color color = DsfrColors.grey50}) : this(fontSize: 16, color: color);
 
   const DsfrTextStyle.bodyMdMedium({final Color color = DsfrColors.grey50})
     : this(fontSize: 16, fontWeight: FontWeight.w500, color: color);
@@ -75,8 +67,7 @@ class DsfrTextStyle extends TextStyle {
   const DsfrTextStyle.bodyMdBold({final Color color = DsfrColors.grey50})
     : this(fontSize: 16, fontWeight: FontWeight.bold, color: color);
 
-  const DsfrTextStyle.bodySm({final Color color = DsfrColors.grey50})
-    : this(fontSize: 14, color: color);
+  const DsfrTextStyle.bodySm({final Color color = DsfrColors.grey50}) : this(fontSize: 14, color: color);
 
   const DsfrTextStyle.bodySmItalic({final Color color = DsfrColors.grey50})
     : this(fontSize: 14, color: color, fontStyle: FontStyle.italic);
@@ -87,8 +78,7 @@ class DsfrTextStyle extends TextStyle {
   const DsfrTextStyle.bodySmBold({final Color color = DsfrColors.grey50})
     : this(fontSize: 14, fontWeight: FontWeight.bold, color: color);
 
-  const DsfrTextStyle.bodyXs({final Color color = DsfrColors.grey50})
-    : this(fontSize: 12, color: color);
+  const DsfrTextStyle.bodyXs({final Color color = DsfrColors.grey50}) : this(fontSize: 12, color: color);
 
   const DsfrTextStyle.bodyXsMedium({final Color color = DsfrColors.grey50})
     : this(fontSize: 12, fontWeight: FontWeight.w500, color: color);
@@ -96,6 +86,5 @@ class DsfrTextStyle extends TextStyle {
   const DsfrTextStyle.bodyXsBold({final Color color = DsfrColors.grey50})
     : this(fontSize: 12, fontWeight: FontWeight.bold, color: color);
 
-  const DsfrTextStyle.fontFamily()
-    : super(package: 'dsfr', fontFamily: 'Marianne');
+  const DsfrTextStyle.fontFamily() : super(package: 'dsfr', fontFamily: 'Marianne');
 }

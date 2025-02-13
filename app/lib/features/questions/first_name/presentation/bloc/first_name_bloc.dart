@@ -6,15 +6,9 @@ import 'package:clock/clock.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FirstNameBloc extends Bloc<FirstNameEvent, FirstNameState> {
-  FirstNameBloc({
-    required final FirstNameRepository repository,
-    required final Clock clock,
-  }) : super(const FirstNameInitial()) {
+  FirstNameBloc({required final FirstNameRepository repository, required final Clock clock}) : super(const FirstNameInitial()) {
     on<FirstNameChanged>((final event, final emit) {
-      event.value.validate.fold(
-        () => emit(FirstNameEntered(event.value)),
-        (final t) => emit(FirstNameFailure(errorMessage: t)),
-      );
+      event.value.validate.fold(() => emit(FirstNameEntered(event.value)), (final t) => emit(FirstNameFailure(errorMessage: t)));
     });
     on<FirstNameSubmitted>((final event, final emit) async {
       final currentState = state;
@@ -23,11 +17,7 @@ class FirstNameBloc extends Bloc<FirstNameEvent, FirstNameState> {
           emit(const FirstNameLoading());
           final result = await repository.addFirstName(currentState.firstName);
           result.fold(
-            (final l) => emit(
-              FirstNameFailure(
-                errorMessage: l is ApiErreur ? l.message : l.toString(),
-              ),
-            ),
+            (final l) => emit(FirstNameFailure(errorMessage: l is ApiErreur ? l.message : l.toString())),
             (final r) => emit(FirstNameSuccess(DateTime.now())),
           );
 

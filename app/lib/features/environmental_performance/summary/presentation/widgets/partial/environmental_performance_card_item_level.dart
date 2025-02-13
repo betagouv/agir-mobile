@@ -15,10 +15,7 @@ class EnvironmentalPerformanceCardItemLevel extends StatelessWidget {
 
   @override
   Widget build(final context) => DecoratedBox(
-    decoration: BoxDecoration(
-      color: backgroundColor,
-      borderRadius: const BorderRadius.all(Radius.circular(4)),
-    ),
+    decoration: BoxDecoration(color: backgroundColor, borderRadius: const BorderRadius.all(Radius.circular(4))),
     child: Padding(
       padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 6),
       child: Text(label, style: DsfrTextStyle.bodyXsMedium(color: labelColor)),

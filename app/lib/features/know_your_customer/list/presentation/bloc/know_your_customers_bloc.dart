@@ -4,19 +4,13 @@ import 'package:app/features/know_your_customer/list/presentation/bloc/know_your
 import 'package:app/features/know_your_customer/list/presentation/bloc/know_your_customers_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class KnowYourCustomersBloc
-    extends Bloc<KnowYourCustomersEvent, KnowYourCustomersState> {
-  KnowYourCustomersBloc({required final KnowYourCustomersRepository repository})
-    : super(const KnowYourCustomersInitial()) {
+class KnowYourCustomersBloc extends Bloc<KnowYourCustomersEvent, KnowYourCustomersState> {
+  KnowYourCustomersBloc({required final KnowYourCustomersRepository repository}) : super(const KnowYourCustomersInitial()) {
     on<KnowYourCustomersStarted>((final event, final emit) async {
       emit(const KnowYourCustomersLoading());
       final result = await repository.fetchQuestions();
       result.fold(
-        (final l) => emit(
-          KnowYourCustomersFailure(
-            errorMessage: l is ApiErreur ? l.message : l.toString(),
-          ),
-        ),
+        (final l) => emit(KnowYourCustomersFailure(errorMessage: l is ApiErreur ? l.message : l.toString())),
         (final r) => emit(KnowYourCustomersSuccess(allQuestions: r)),
       );
     });
@@ -25,11 +19,7 @@ class KnowYourCustomersBloc
       if (aState is KnowYourCustomersSuccess) {
         final result = await repository.fetchQuestions();
         result.fold(
-          (final l) => emit(
-            KnowYourCustomersFailure(
-              errorMessage: l is ApiErreur ? l.message : l.toString(),
-            ),
-          ),
+          (final l) => emit(KnowYourCustomersFailure(errorMessage: l is ApiErreur ? l.message : l.toString())),
           (final r) => emit(aState.copyWith(allQuestions: r)),
         );
       }

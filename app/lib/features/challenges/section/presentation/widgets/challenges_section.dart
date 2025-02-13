@@ -44,18 +44,13 @@ class _Section extends StatelessWidget {
     crossAxisAlignment: CrossAxisAlignment.start,
     spacing: DsfrSpacings.s2w,
     children: [
-      const TitleSection(
-        title: Localisation.actionsSectionTitle,
-        subTitle: Localisation.actionsSectionSubTitle,
-      ),
+      const TitleSection(title: Localisation.actionsSectionTitle, subTitle: Localisation.actionsSectionSubTitle),
       _Challenges(value: state.challenges),
       Align(
         alignment: Alignment.centerLeft,
         child: DsfrLink.md(
           label: Localisation.homeActionsLink,
-          onTap:
-              () async =>
-                  GoRouter.of(context).pushNamed(ChallengeListPage.name),
+          onTap: () async => GoRouter.of(context).pushNamed(ChallengeListPage.name),
         ),
       ),
     ],
@@ -70,20 +65,12 @@ class _Challenges extends StatelessWidget {
   @override
   Widget build(final BuildContext context) =>
       value.isEmpty
-          ? const Text(
-            Localisation.actionsSectionListEmpty,
-            style: DsfrTextStyle.bodySm(),
-          )
+          ? const Text(Localisation.actionsSectionListEmpty, style: DsfrTextStyle.bodySm())
           : SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             padding: EdgeInsets.zero,
             clipBehavior: Clip.none,
-            child: IntrinsicHeight(
-              child: Row(
-                spacing: DsfrSpacings.s2w,
-                children: value.map(_Challenge.new).toList(),
-              ),
-            ),
+            child: IntrinsicHeight(child: Row(spacing: DsfrSpacings.s2w, children: value.map(_Challenge.new).toList())),
           );
 }
 
@@ -96,8 +83,7 @@ class _Challenge extends StatefulWidget {
   State<_Challenge> createState() => _ChallengeState();
 }
 
-class _ChallengeState extends State<_Challenge>
-    with MaterialStateMixin<_Challenge> {
+class _ChallengeState extends State<_Challenge> with MaterialStateMixin<_Challenge> {
   @override
   Widget build(final context) {
     const width = 250.0;
@@ -116,16 +102,13 @@ class _ChallengeState extends State<_Challenge>
           color: FnvColors.transparent,
           child: InkWell(
             onTap: () async {
-              final result = await GoRouter.of(context).pushNamed(
-                ChallengeDetailPage.name,
-                pathParameters: {'id': widget.item.id.value},
-              );
+              final result = await GoRouter.of(
+                context,
+              ).pushNamed(ChallengeDetailPage.name, pathParameters: {'id': widget.item.id.value});
 
               if (result != true || !context.mounted) {}
               if (context.mounted) {
-                context.read<ChallengesBloc>().add(
-                  const ChallengesRefreshRequested(),
-                );
+                context.read<ChallengesBloc>().add(const ChallengesRefreshRequested());
               }
             },
             onHighlightChanged: updateMaterialState(WidgetState.pressed),
@@ -142,12 +125,7 @@ class _ChallengeState extends State<_Challenge>
                   spacing: DsfrSpacings.s1w,
                   children: [
                     ThemeTypeTag(themeType: widget.item.themeType),
-                    Expanded(
-                      child: Text(
-                        widget.item.titre,
-                        style: const DsfrTextStyle.bodyLg(),
-                      ),
-                    ),
+                    Expanded(child: Text(widget.item.titre, style: const DsfrTextStyle.bodyLg())),
                   ],
                 ),
               ),

@@ -5,11 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class RevenuFiscalInput extends StatelessWidget {
-  const RevenuFiscalInput({
-    super.key,
-    required this.initialValue,
-    required this.onChanged,
-  });
+  const RevenuFiscalInput({super.key, required this.initialValue, required this.onChanged});
 
   final int? initialValue;
   final ValueChanged<int> onChanged;
@@ -27,9 +23,6 @@ class RevenuFiscalInput extends StatelessWidget {
       onChanged(parsedValue.toInt());
     },
     keyboardType: TextInputType.number,
-    inputFormatters: [
-      FilteringTextInputFormatter.digitsOnly,
-      InputFormatter.currency,
-    ],
+    inputFormatters: [FilteringTextInputFormatter.digitsOnly, InputFormatter.currency],
   );
 }

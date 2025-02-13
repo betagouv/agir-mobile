@@ -53,21 +53,12 @@ class FnvImage extends StatelessWidget {
                 alignment: alignment,
               )
           : _imageUrl.endsWith('.svg')
-          ? FnvSvg.network(
-            _imageUrl,
-            width: width,
-            height: height,
-            fit: fit,
-            alignment: alignment,
-            semanticsLabel: semanticLabel,
-          )
+          ? FnvSvg.network(_imageUrl, width: width, height: height, fit: fit, alignment: alignment, semanticsLabel: semanticLabel)
           : Image.network(
             _imageUrl,
             loadingBuilder:
                 (final context, final child, final loadingProgress) =>
-                    loadingProgress == null
-                        ? child
-                        : SizedBox(width: width, height: height),
+                    loadingProgress == null ? child : SizedBox(width: width, height: height),
             semanticLabel: semanticLabel,
             width: width,
             height: height,
