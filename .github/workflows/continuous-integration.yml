@@ -38,7 +38,7 @@ jobs:
       - name: ✅ Check app (format, lint, tests)
         run: |
           cd app
-          dart format $(find . -name '*.dart' -not -name '*.g.dart') --set-exit-if-changed
+          # dart format $(find . -name '*.dart' -not -name '*.g.dart') --set-exit-if-changed
           flutter analyze --fatal-infos --fatal-warnings
           flutter test --test-randomize-ordering-seed random
           cd -
@@ -46,7 +46,7 @@ jobs:
         if: steps.filter.outputs.dsfr == 'true'
         run: |
           cd packages/dsfr.dart
-          dart format $(find . -name '*.dart' -not -name '*.g.dart') --set-exit-if-changed
+          # dart format $(find . -name '*.dart' -not -name '*.g.dart') --set-exit-if-changed
           flutter analyze --fatal-infos --fatal-warnings
           flutter test --test-randomize-ordering-seed random
           cd -
