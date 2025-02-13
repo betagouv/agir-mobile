@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:dsfr/src/composants/buttons/button_variant.dart';
 import 'package:dsfr/src/fondamentaux/colors.g.dart';
 import 'package:flutter/material.dart';
