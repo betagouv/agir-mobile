@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:dsfr/src/atoms/focus_widget.dart';
 import 'package:dsfr/src/composants/link_icon_position.dart';
 import 'package:dsfr/src/fondamentaux/colors.g.dart';

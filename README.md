@@ -16,20 +16,7 @@ Accompagner chaque citoyen dans sa transition écologique, en vous proposant des
 
 ### Prérequis
 
-> [!CAUTION]
-> Actuellement, la version de Flutter utilisée est la 3.24.5 car la version stable (3.27.3) n'est pas compatible avec certains SVGs (https://github.com/flutter/flutter/issues/160589). Il est donc recommandé de passer par fvm pour passer sur la version 3.24.5
-
 Vous devez avoir correctement installé [Flutter](https://docs.flutter.dev/get-started/install)
-
-#### Flutter via fvm
-
-Suivre les instructions de la documentation officielle : https://fvm.app/
-
-Une fois fvm installé, il faut installer la version 3.24.5 :
-
-```sh
-fvm use 3.24.5
-```
 
 ### Instructions
 
@@ -67,7 +54,7 @@ fvm use 3.24.5
 1. Aller dans le dossier `app` et lancer cette commande :
 
     ```sh
-    fvm flutter run --flavor development --dart-define-from-file env.development.json --dart-define=cronetHttpNoPlay=true
+    flutter run --flavor development --dart-define-from-file env.development.json --dart-define=cronetHttpNoPlay=true
     ```
 
 ### Tests
@@ -77,13 +64,13 @@ Dans le dossier `app` :
 1. Regénérer les tests gherkin :
 
     ```sh
-    fvm dart run build_runner build --delete-conflicting-outputs
+    dart run build_runner build --delete-conflicting-outputs
     ```
 
 1. Lancer les tests :
 
     ```sh
-    fvm flutter test --test-randomize-ordering-seed random
+    flutter test --test-randomize-ordering-seed random
     ```
 
 ## Liens

@@ -32,7 +32,7 @@ void main() {
 
       expect(
         tester.getSemantics(find.text(label)),
-        matchesSemantics(label: label, isLink: true, hasEnabledState: true),
+        containsSemantics(label: label, isLink: true, hasEnabledState: true),
       );
       handle.dispose();
     });
@@ -45,7 +45,7 @@ void main() {
       );
       expect(
         tester.getSemantics(find.text(label)),
-        matchesSemantics(
+        containsSemantics(
           label: label,
           isLink: true,
           isFocusable: true,

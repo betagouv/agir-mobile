@@ -19,6 +19,5 @@
   "dart.flutterTestAdditionalArgs": [
     "--test-randomize-ordering-seed",
     "random"
-  ],
-  "dart.flutterSdkPath": ".fvm/versions/3.24.5"
+  ]
 }

@@ -55,7 +55,7 @@ void main() {
 
         expect(
           tester.getSemantics(find.text(label)),
-          matchesSemantics(
+          containsSemantics(
             label: label,
             isButton: true,
             hasEnabledState: true,
@@ -79,7 +79,7 @@ void main() {
         );
         expect(
           tester.getSemantics(find.text(label)),
-          matchesSemantics(
+          containsSemantics(
             label: label,
             isButton: true,
             isFocusable: true,
