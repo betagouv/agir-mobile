@@ -302,8 +302,7 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static String donneesUtiliseesCodePostalEtCommune({
     required final String codePostal,
     required final String commune,
-  }) =>
-      '($codePostal - $commune)';
+  }) => '($codePostal - $commune)';
 
   static String donneesUtiliseesNombreDeParts(final double value) => '($value)';
 
@@ -336,7 +335,8 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static String vousAvezTermineLaMission(final String text) =>
       'Vous avez terminé la mission\n“$text”';
 
-  static String distance(final int value) => value >= 1000
-      ? 'À ${NumberFormat('0.#', 'fr').format(value / 1000)} km'
-      : 'À $value m';
+  static String distance(final int value) =>
+      value >= 1000
+          ? 'À ${NumberFormat('0.#', 'fr').format(value / 1000)} km'
+          : 'À $value m';
 }

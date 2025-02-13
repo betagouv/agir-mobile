@@ -17,9 +17,10 @@ class ServiceCard extends StatelessWidget {
   final ServiceItem service;
 
   @override
-  Widget build(final context) => service.isInternalService
-      ? _InternalServiceCard(service)
-      : _ExternalServiceCard(service);
+  Widget build(final context) =>
+      service.isInternalService
+          ? _InternalServiceCard(service)
+          : _ExternalServiceCard(service);
 }
 
 class _ExternalServiceCard extends StatelessWidget {
@@ -29,18 +30,18 @@ class _ExternalServiceCard extends StatelessWidget {
 
   @override
   Widget build(final context) => _ServiceCardBase(
-        service: service,
-        backgroundColor: const Color(0xFFEEF2FF),
-        borderColor: const Color(0xFFB1B1FF),
-        titleColor: DsfrColors.blueFranceSun113,
-        subTitleColor: DsfrColors.blueFranceSun113,
-        icon: const Icon(
-          DsfrIcons.systemExternalLinkLine,
-          size: 20,
-          color: DsfrColors.blueFranceSun113,
-        ),
-        onTap: () async => FnvUrlLauncher.launch(service.externalUrl),
-      );
+    service: service,
+    backgroundColor: const Color(0xFFEEF2FF),
+    borderColor: const Color(0xFFB1B1FF),
+    titleColor: DsfrColors.blueFranceSun113,
+    subTitleColor: DsfrColors.blueFranceSun113,
+    icon: const Icon(
+      DsfrIcons.systemExternalLinkLine,
+      size: 20,
+      color: DsfrColors.blueFranceSun113,
+    ),
+    onTap: () async => FnvUrlLauncher.launch(service.externalUrl),
+  );
 }
 
 class _InternalServiceCard extends StatelessWidget {
@@ -50,19 +51,20 @@ class _InternalServiceCard extends StatelessWidget {
 
   @override
   Widget build(final context) => _ServiceCardBase(
-        service: service,
-        backgroundColor: Colors.white,
-        borderColor: Colors.white,
-        titleColor: DsfrColors.grey50,
-        subTitleColor: DsfrColors.grey425,
-        icon: FnvImage.network(service.iconUrl, width: 26, height: 26),
-        onTap: () async {
-          if (service.isFruitsLegumesService) {
-            await GoRouter.of(context)
-                .pushNamed(SeasonalFruitsAndVegetablesPage.name);
-          }
-        },
-      );
+    service: service,
+    backgroundColor: Colors.white,
+    borderColor: Colors.white,
+    titleColor: DsfrColors.grey50,
+    subTitleColor: DsfrColors.grey425,
+    icon: FnvImage.network(service.iconUrl, width: 26, height: 26),
+    onTap: () async {
+      if (service.isFruitsLegumesService) {
+        await GoRouter.of(
+          context,
+        ).pushNamed(SeasonalFruitsAndVegetablesPage.name);
+      }
+    },
+  );
 }
 
 class _ServiceCardBase extends StatefulWidget {
@@ -125,8 +127,9 @@ class _ServiceCardBaseState extends State<_ServiceCardBase>
                   children: [
                     Text(
                       widget.service.titre,
-                      style:
-                          DsfrTextStyle.bodyMdMedium(color: widget.titleColor),
+                      style: DsfrTextStyle.bodyMdMedium(
+                        color: widget.titleColor,
+                      ),
                     ),
                     const SizedBox(height: DsfrSpacings.s1w),
                     const Spacer(),

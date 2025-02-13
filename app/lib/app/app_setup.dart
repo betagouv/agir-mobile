@@ -102,51 +102,52 @@ class _AppSetupState extends State<AppSetup> {
 
   @override
   Widget build(final context) => FutureBuilder<void>(
-        future: _initializeDependenciesFuture,
-        builder: (final context, final snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const SizedBox.shrink();
-          } else if (snapshot.hasError) {
-            FlutterNativeSplash.remove();
-            ErrorHandler.captureException(
-              snapshot.error!.toString(),
-              snapshot.stackTrace,
-            );
+    future: _initializeDependenciesFuture,
+    builder: (final context, final snapshot) {
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return const SizedBox.shrink();
+      } else if (snapshot.hasError) {
+        FlutterNativeSplash.remove();
+        ErrorHandler.captureException(
+          snapshot.error!.toString(),
+          snapshot.stackTrace,
+        );
 
-            return ErrorScreen(packageInfo: _packageInfo);
-          }
-          FlutterNativeSplash.remove();
+        return ErrorScreen(packageInfo: _packageInfo);
+      }
+      FlutterNativeSplash.remove();
 
-          const apiUrlKey = 'API_URL';
-          const apiUrl = String.fromEnvironment(apiUrlKey);
-          if (apiUrl.isEmpty) {
-            throw const MissingEnvironmentKeyException(apiUrlKey);
-          }
+      const apiUrlKey = 'API_URL';
+      const apiUrl = String.fromEnvironment(apiUrlKey);
+      if (apiUrl.isEmpty) {
+        throw const MissingEnvironmentKeyException(apiUrlKey);
+      }
 
-          final dio = Dio(
-            BaseOptions(
-              baseUrl: Uri.parse(apiUrl).toString(),
-              validateStatus: (final status) => true,
-            ),
-          )
+      final dio =
+          Dio(
+              BaseOptions(
+                baseUrl: Uri.parse(apiUrl).toString(),
+                validateStatus: (final status) => true,
+              ),
+            )
             ..httpClientAdapter = NativeAdapter()
             ..addSentry();
-          final client = DioHttpClient(
-            dio: dio,
-            authenticationService: _authenticationService,
-          );
-
-          final messageBus = MessageBus();
-
-          return App(
-            clock: _clock,
-            tracker: _tracker,
-            messageBus: messageBus,
-            dioHttpClient: client,
-            packageInfo: _packageInfo,
-            notificationService: _notificationService,
-            authenticationService: _authenticationService,
-          );
-        },
+      final client = DioHttpClient(
+        dio: dio,
+        authenticationService: _authenticationService,
       );
+
+      final messageBus = MessageBus();
+
+      return App(
+        clock: _clock,
+        tracker: _tracker,
+        messageBus: messageBus,
+        dioHttpClient: client,
+        packageInfo: _packageInfo,
+        notificationService: _notificationService,
+        authenticationService: _authenticationService,
+      );
+    },
+  );
 }

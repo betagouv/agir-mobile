@@ -21,18 +21,19 @@ class ChallengeListPage extends StatelessWidget {
   static const path = 'mes-actions';
 
   static GoRoute get route => GoRoute(
-        path: path,
-        name: name,
-        builder: (final context, final state) => const ChallengeListPage(),
-      );
+    path: path,
+    name: name,
+    builder: (final context, final state) => const ChallengeListPage(),
+  );
 
   @override
   Widget build(final context) => BlocProvider(
-        create: (final context) =>
+    create:
+        (final context) =>
             ChallengeListBloc(FetchChallenges(context.read()))
               ..add(const ChallengeListFetch()),
-        child: const RootPage(body: _View()),
-      );
+    child: const RootPage(body: _View()),
+  );
 }
 
 class _View extends StatelessWidget {
@@ -40,59 +41,62 @@ class _View extends StatelessWidget {
 
   @override
   Widget build(final context) => ListView(
-        padding: const EdgeInsets.symmetric(vertical: paddingVerticalPage),
-        children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-            child: FnvTitle(title: Localisation.mesActions),
-          ),
-          const SizedBox(height: DsfrSpacings.s3w),
-          BlocBuilder<ChallengeListBloc, ChallengeListState>(
-            builder: (final context, final state) => switch (state) {
+    padding: const EdgeInsets.symmetric(vertical: paddingVerticalPage),
+    children: [
+      const Padding(
+        padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
+        child: FnvTitle(title: Localisation.mesActions),
+      ),
+      const SizedBox(height: DsfrSpacings.s3w),
+      BlocBuilder<ChallengeListBloc, ChallengeListState>(
+        builder:
+            (final context, final state) => switch (state) {
               ChallengeListInitial() => const SizedBox.shrink(),
-              ChallengeListLoading() =>
-                const Center(child: CircularProgressIndicator()),
+              ChallengeListLoading() => const Center(
+                child: CircularProgressIndicator(),
+              ),
               ChallengeListSuccess() => ListView.separated(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  padding: EdgeInsets.zero,
-                  itemBuilder: (final context, final index) {
-                    final item = state.challenges[index];
-                    final subTitle = switch (item.status) {
-                      ChallengeStatus.toDo => '📝 À faire',
-                      ChallengeStatus.inProgress => '⏳ Action en cours',
-                      ChallengeStatus.refused => '👎 Pas envie',
-                      ChallengeStatus.alreadyDone => '✅ Déjà fait',
-                      ChallengeStatus.abandonned => '❌ Abandonnée',
-                      ChallengeStatus.done => '🏆 Action réalisée',
-                    };
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                padding: EdgeInsets.zero,
+                itemBuilder: (final context, final index) {
+                  final item = state.challenges[index];
+                  final subTitle = switch (item.status) {
+                    ChallengeStatus.toDo => '📝 À faire',
+                    ChallengeStatus.inProgress => '⏳ Action en cours',
+                    ChallengeStatus.refused => '👎 Pas envie',
+                    ChallengeStatus.alreadyDone => '✅ Déjà fait',
+                    ChallengeStatus.abandonned => '❌ Abandonnée',
+                    ChallengeStatus.done => '🏆 Action réalisée',
+                  };
 
-                    return ListItem(
-                      title: item.titre,
-                      subTitle: subTitle,
-                      onTap: () async {
-                        final result = await GoRouter.of(context).pushNamed(
-                          ChallengeDetailPage.name,
-                          pathParameters: {'id': item.id.value},
-                        );
+                  return ListItem(
+                    title: item.titre,
+                    subTitle: subTitle,
+                    onTap: () async {
+                      final result = await GoRouter.of(context).pushNamed(
+                        ChallengeDetailPage.name,
+                        pathParameters: {'id': item.id.value},
+                      );
 
-                        if (result != true || !context.mounted) {
-                          return;
-                        }
+                      if (result != true || !context.mounted) {
+                        return;
+                      }
 
-                        context
-                            .read<ChallengeListBloc>()
-                            .add(const ChallengeListFetch());
-                      },
-                    );
-                  },
-                  separatorBuilder: (final context, final index) =>
-                      const DsfrDivider(color: Color(0xFFEAEBF6)),
-                  itemCount: state.challenges.length,
-                ),
+                      context.read<ChallengeListBloc>().add(
+                        const ChallengeListFetch(),
+                      );
+                    },
+                  );
+                },
+                separatorBuilder:
+                    (final context, final index) =>
+                        const DsfrDivider(color: Color(0xFFEAEBF6)),
+                itemCount: state.challenges.length,
+              ),
               ChallengeListFailure() => const Text('Oups'),
             },
-          ),
-        ],
-      );
+      ),
+    ],
+  );
 }

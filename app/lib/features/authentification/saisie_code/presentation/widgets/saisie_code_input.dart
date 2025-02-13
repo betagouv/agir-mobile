@@ -10,16 +10,16 @@ class SaisieCodeInput extends StatelessWidget {
 
   @override
   Widget build(final context) => Semantics(
-        textField: true,
-        label: Localisation.codeDeVerification,
-        child: ExcludeSemantics(
-          child: FnvCodeInput(
-            onChanged: (final value) {
-              if (value.length == 6) {
-                context.read<SaisieCodeBloc>().add(SaisieCodeCodeSaisie(value));
-              }
-            },
-          ),
-        ),
-      );
+    textField: true,
+    label: Localisation.codeDeVerification,
+    child: ExcludeSemantics(
+      child: FnvCodeInput(
+        onChanged: (final value) {
+          if (value.length == 6) {
+            context.read<SaisieCodeBloc>().add(SaisieCodeCodeSaisie(value));
+          }
+        },
+      ),
+    ),
+  );
 }

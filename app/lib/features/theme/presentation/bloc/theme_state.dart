@@ -20,12 +20,11 @@ final class ThemeState extends Equatable {
     final ThemeType? themeType,
     final List<MissionListe>? missions,
     final List<ServiceItem>? services,
-  }) =>
-      ThemeState(
-        themeType: themeType ?? this.themeType,
-        missions: missions ?? this.missions,
-        services: services ?? this.services,
-      );
+  }) => ThemeState(
+    themeType: themeType ?? this.themeType,
+    missions: missions ?? this.missions,
+    services: services ?? this.services,
+  );
 
   @override
   List<Object?> get props => [themeType, missions, services];

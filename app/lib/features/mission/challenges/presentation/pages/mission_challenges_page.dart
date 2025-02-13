@@ -19,11 +19,12 @@ class MissionChallengesPage extends StatelessWidget {
 
   @override
   Widget build(final context) => BlocProvider(
-        create: (final context) =>
+    create:
+        (final context) =>
             MissionChallengesBloc(repository: context.read())
               ..add(MissionChallengesRefreshRequested(code)),
-        child: _View(code: code),
-      );
+    child: _View(code: code),
+  );
 }
 
 class _View extends StatelessWidget {
@@ -34,55 +35,59 @@ class _View extends StatelessWidget {
   @override
   Widget build(final context) =>
       BlocBuilder<MissionChallengesBloc, MissionChallengesState>(
-        builder: (final context, final state) => ListView(
-          padding: const EdgeInsets.all(paddingVerticalPage),
-          children: [
-            MarkdownBody(
-              data: Localisation.missionActionsTitle,
-              styleSheet: MarkdownStyleSheet(
-                p: const DsfrTextStyle.headline2(),
-                strong: const DsfrTextStyle.headline2(
-                  color: DsfrColors.blueFranceSun113,
+        builder:
+            (final context, final state) => ListView(
+              padding: const EdgeInsets.all(paddingVerticalPage),
+              children: [
+                MarkdownBody(
+                  data: Localisation.missionActionsTitle,
+                  styleSheet: MarkdownStyleSheet(
+                    p: const DsfrTextStyle.headline2(),
+                    strong: const DsfrTextStyle.headline2(
+                      color: DsfrColors.blueFranceSun113,
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            const SizedBox(height: DsfrSpacings.s1w),
-            MarkdownBody(
-              data: Localisation.missionActionsSubTitle,
-              styleSheet: MarkdownStyleSheet(p: const DsfrTextStyle.bodyMd()),
-            ),
-            const SizedBox(height: DsfrSpacings.s3w),
-            ...state.challenges.values
-                .map(
-                  (final e) => ChallengeWidget(
-                    challenge: e,
-                    onChanged: () {
-                      context.read<MissionChallengesBloc>().add(
+                const SizedBox(height: DsfrSpacings.s1w),
+                MarkdownBody(
+                  data: Localisation.missionActionsSubTitle,
+                  styleSheet: MarkdownStyleSheet(
+                    p: const DsfrTextStyle.bodyMd(),
+                  ),
+                ),
+                const SizedBox(height: DsfrSpacings.s3w),
+                ...state.challenges.values
+                    .map(
+                      (final e) => ChallengeWidget(
+                        challenge: e,
+                        onChanged: () {
+                          context.read<MissionChallengesBloc>().add(
                             MissionChallengesRefreshRequested(code),
                           );
-                    },
-                  ),
-                )
-                .separator(const SizedBox(height: DsfrSpacings.s2w)),
-            const SizedBox(height: DsfrSpacings.s3w),
-            SafeArea(
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: FittedBox(
-                  child: DsfrButton(
-                    label: Localisation.continuer,
-                    variant: DsfrButtonVariant.primary,
-                    size: DsfrButtonSize.lg,
-                    onPressed: state.challenges.canBeCompleted
-                        ? () => context
-                            .read<MissionBloc>()
-                            .add(const MissionCompleteRequested())
-                        : null,
+                        },
+                      ),
+                    )
+                    .separator(const SizedBox(height: DsfrSpacings.s2w)),
+                const SizedBox(height: DsfrSpacings.s3w),
+                SafeArea(
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: FittedBox(
+                      child: DsfrButton(
+                        label: Localisation.continuer,
+                        variant: DsfrButtonVariant.primary,
+                        size: DsfrButtonSize.lg,
+                        onPressed:
+                            state.challenges.canBeCompleted
+                                ? () => context.read<MissionBloc>().add(
+                                  const MissionCompleteRequested(),
+                                )
+                                : null,
+                      ),
+                    ),
                   ),
                 ),
-              ),
+              ],
             ),
-          ],
-        ),
       );
 }

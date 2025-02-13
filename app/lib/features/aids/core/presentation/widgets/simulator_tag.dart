@@ -7,9 +7,9 @@ class SimulatorTag extends StatelessWidget {
 
   @override
   Widget build(final context) => const DsfrTag.sm(
-        label: TextSpan(text: Localisation.simulateur),
-        backgroundColor: Color(0xFFEEF2FF),
-        foregroundColor: DsfrColors.blueFranceSun113,
-        icon: DsfrIcons.financeMoneyEuroCircleLine,
-      );
+    label: TextSpan(text: Localisation.simulateur),
+    backgroundColor: Color(0xFFEEF2FF),
+    foregroundColor: DsfrColors.blueFranceSun113,
+    icon: DsfrIcons.financeMoneyEuroCircleLine,
+  );
 }

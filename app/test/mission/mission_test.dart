@@ -58,10 +58,7 @@ Future<void> pumpForMissionPage(
     )
     ..getM(
       Endpoints.aids,
-      responseData: {
-        'couverture_aides_ok': true,
-        'liste_aides': <dynamic>[],
-      },
+      responseData: {'couverture_aides_ok': true, 'liste_aides': <dynamic>[]},
     );
 
   final client = DioHttpClient(
@@ -73,66 +70,78 @@ Future<void> pumpForMissionPage(
     tester: tester,
     repositoryProviders: [
       RepositoryProvider(
-        create: (final context) =>
-            EnvironmentalPerformanceSummaryRepository(client: client),
+        create:
+            (final context) =>
+                EnvironmentalPerformanceSummaryRepository(client: client),
       ),
       RepositoryProvider<MissionRepository>(
         create: (final context) => MissionRepository(client: client),
       ),
       RepositoryProvider<MieuxVousConnaitreRepository>(
-        create: (final context) => MieuxVousConnaitreRepository(
-          client: client,
-          messageBus: MessageBus(),
-        ),
+        create:
+            (final context) => MieuxVousConnaitreRepository(
+              client: client,
+              messageBus: MessageBus(),
+            ),
       ),
       RepositoryProvider<NotificationService>(
-        create: (final context) =>
-            const NotificationServiceFake(AuthorizationStatus.denied),
+        create:
+            (final context) =>
+                const NotificationServiceFake(AuthorizationStatus.denied),
       ),
     ],
     blocProviders: [
       BlocProvider(
-        create: (final context) => AidsHomeBloc(
-          aidsRepository: AidsRepository(client: client),
-        ),
+        create:
+            (final context) =>
+                AidsHomeBloc(aidsRepository: AidsRepository(client: client)),
       ),
       BlocProvider(
         create: (final context) => HomeDisclaimerCubit()..closeDisclaimer(),
       ),
       BlocProvider(
-        create: (final context) => RecommandationsBloc(
-          recommandationsRepository: RecommandationsRepository(client: client),
-        ),
+        create:
+            (final context) => RecommandationsBloc(
+              recommandationsRepository: RecommandationsRepository(
+                client: client,
+              ),
+            ),
       ),
       BlocProvider<GamificationBloc>(
         create: (final context) => GamificationBlocFake(),
       ),
       BlocProvider(
-        create: (final context) => UserBloc(
-          repository: UserRepository(client: client),
-        ),
+        create:
+            (final context) =>
+                UserBloc(repository: UserRepository(client: client)),
       ),
       BlocProvider(
-        create: (final context) => EnvironmentalPerformanceBloc(
-          useCase: FetchEnvironmentalPerformance(
-            EnvironmentalPerformanceSummaryRepository(client: client),
-          ),
-        ),
+        create:
+            (final context) => EnvironmentalPerformanceBloc(
+              useCase: FetchEnvironmentalPerformance(
+                EnvironmentalPerformanceSummaryRepository(client: client),
+              ),
+            ),
       ),
       BlocProvider(
-        create: (final context) => EnvironmentalPerformanceQuestionBloc(
-          repository: EnvironmentalPerformanceQuestionRepository(
-            client: client,
-          ),
-        ),
+        create:
+            (final context) => EnvironmentalPerformanceQuestionBloc(
+              repository: EnvironmentalPerformanceQuestionRepository(
+                client: client,
+              ),
+            ),
       ),
       BlocProvider(
-        create: (final context) =>
-            MissionHomeBloc(repository: MissionHomeRepository(client: client)),
+        create:
+            (final context) => MissionHomeBloc(
+              repository: MissionHomeRepository(client: client),
+            ),
       ),
       BlocProvider(
-        create: (final context) =>
-            ChallengesBloc(repository: ChallengesRepository(client: client)),
+        create:
+            (final context) => ChallengesBloc(
+              repository: ChallengesRepository(client: client),
+            ),
       ),
     ],
     router: GoRouter(
@@ -146,48 +155,46 @@ Future<void> pumpForMissionPage(
 
 void main() {
   group('Mission', () {
-    testWidgets(
-      'Voir la liste des missions recommander',
-      (final tester) async {
-        await mockNetworkImages(() async {
-          await pumpForMissionPage(tester, dio: DioMock());
-          expect(find.text('Recommandés pour vous'), findsOneWidget);
-          expect(
-            find.text('Valoriser ses restes avec un compost'),
-            findsOneWidget,
-          );
-        });
-      },
-    );
+    testWidgets('Voir la liste des missions recommander', (final tester) async {
+      await mockNetworkImages(() async {
+        await pumpForMissionPage(tester, dio: DioMock());
+        expect(find.text('Recommandés pour vous'), findsOneWidget);
+        expect(
+          find.text('Valoriser ses restes avec un compost'),
+          findsOneWidget,
+        );
+      });
+    });
 
-    testWidgets(
-      "Aller sur une mission montre l'introduction de celle ci",
-      (final tester) async {
-        await mockNetworkImages(() async {
-          final dio = DioMock()
-            ..getM(Endpoints.mission('compost'), responseData: missionMap);
-          await pumpForMissionPage(tester, dio: dio);
-          await tester.tap(find.text('Valoriser ses restes avec un compost'));
-          await tester.pumpAndSettle();
+    testWidgets("Aller sur une mission montre l'introduction de celle ci", (
+      final tester,
+    ) async {
+      await mockNetworkImages(() async {
+        final dio =
+            DioMock()
+              ..getM(Endpoints.mission('compost'), responseData: missionMap);
+        await pumpForMissionPage(tester, dio: dio);
+        await tester.tap(find.text('Valoriser ses restes avec un compost'));
+        await tester.pumpAndSettle();
 
-          expect(find.textContaining('Me nourrir'), findsOneWidget);
-          expect(
-            find.text('Valoriser ses restes avec un compost'),
-            findsOneWidget,
-          );
-          expect(find.text(Localisation.commencer), findsOneWidget);
-        });
-      },
-    );
+        expect(find.textContaining('Me nourrir'), findsOneWidget);
+        expect(
+          find.text('Valoriser ses restes avec un compost'),
+          findsOneWidget,
+        );
+        expect(find.text(Localisation.commencer), findsOneWidget);
+      });
+    });
 
     testWidgets('Afficher la question KYC', (final tester) async {
       await mockNetworkImages(() async {
-        final dio = DioMock()
-          ..getM(Endpoints.mission('compost'), responseData: missionMap)
-          ..getM(
-            Endpoints.questionKyc('KYC_compost_pratique'),
-            responseData: kyc,
-          );
+        final dio =
+            DioMock()
+              ..getM(Endpoints.mission('compost'), responseData: missionMap)
+              ..getM(
+                Endpoints.questionKyc('KYC_compost_pratique'),
+                responseData: kyc,
+              );
         await pumpForMissionPage(tester, dio: dio);
         await tester.tap(find.text('Valoriser ses restes avec un compost'));
         await tester.pumpAndSettle();
@@ -202,15 +209,16 @@ void main() {
 
     testWidgets('Afficher le premier objectif non fait', (final tester) async {
       await mockNetworkImages(() async {
-        final dio = DioMock()
-          ..getM(
-            Endpoints.mission('compost'),
-            responseData: missionPartiallyAnswered,
-          )
-          ..getM(
-            Endpoints.questionKyc('KYC_compost_motivation'),
-            responseData: kyc2,
-          );
+        final dio =
+            DioMock()
+              ..getM(
+                Endpoints.mission('compost'),
+                responseData: missionPartiallyAnswered,
+              )
+              ..getM(
+                Endpoints.questionKyc('KYC_compost_motivation'),
+                responseData: kyc2,
+              );
         await pumpForMissionPage(tester, dio: dio);
         await tester.tap(find.text('Valoriser ses restes avec un compost'));
         await tester.pumpAndSettle();
@@ -712,21 +720,13 @@ const kyc2 = {
   'code': 'KYC_compost_motivation',
   'question': 'Quelles sont vos motivations au sujet du compostage ?',
   'reponse_multiple': [
-    {
-      'code': 'apprendre',
-      'label': 'En apprendre davantage',
-      'selected': true,
-    },
+    {'code': 'apprendre', 'label': 'En apprendre davantage', 'selected': true},
     {
       'code': 'se_lancer',
       'label': "Se lancer sans faire d'erreurs",
       'selected': false,
     },
-    {
-      'code': 'pratique',
-      'label': 'Améliorer mes pratiques',
-      'selected': false,
-    },
+    {'code': 'pratique', 'label': 'Améliorer mes pratiques', 'selected': false},
     {
       'code': 'partager',
       'label': 'Partager ma connaissance et expérience',

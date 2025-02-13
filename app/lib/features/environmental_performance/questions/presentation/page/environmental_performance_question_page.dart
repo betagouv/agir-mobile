@@ -14,22 +14,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class EnvironmentalPerformanceQuestionPage extends StatelessWidget {
-  const EnvironmentalPerformanceQuestionPage({
-    super.key,
-    required this.number,
-  });
+  const EnvironmentalPerformanceQuestionPage({super.key, required this.number});
 
   static const name = 'bilan-question';
   static const path = '$name/:number';
 
   static GoRoute get route => GoRoute(
-        path: path,
-        name: name,
-        builder: (final context, final state) =>
-            EnvironmentalPerformanceQuestionPage(
+    path: path,
+    name: name,
+    builder:
+        (final context, final state) => EnvironmentalPerformanceQuestionPage(
           number: int.parse(state.pathParameters['number'] ?? '1'),
         ),
-      );
+  );
 
   final int number;
 
@@ -44,19 +41,25 @@ class _View extends StatelessWidget {
 
   @override
   Widget build(final context) => FnvScaffold(
-        appBar: FnvAppBar(),
-        body: BlocBuilder<EnvironmentalPerformanceQuestionBloc,
-            EnvironmentalPerformanceQuestionState>(
-          builder: (final context, final state) => switch (state) {
+    appBar: FnvAppBar(),
+    body: BlocBuilder<
+      EnvironmentalPerformanceQuestionBloc,
+      EnvironmentalPerformanceQuestionState
+    >(
+      builder:
+          (final context, final state) => switch (state) {
             EnvironmentalPerformanceQuestionInitial() =>
               const SizedBox.shrink(),
-            EnvironmentalPerformanceQuestionLoadSuccess() =>
-              _LoadSuccess(state: state, number: number),
-            EnvironmentalPerformanceQuestionLoadFailure() =>
-              const Text('Erreur'),
+            EnvironmentalPerformanceQuestionLoadSuccess() => _LoadSuccess(
+              state: state,
+              number: number,
+            ),
+            EnvironmentalPerformanceQuestionLoadFailure() => const Text(
+              'Erreur',
+            ),
           },
-        ),
-      );
+    ),
+  );
 }
 
 class _LoadSuccess extends StatefulWidget {
@@ -80,49 +83,49 @@ class _LoadSuccessState extends State<_LoadSuccess> {
 
   @override
   Widget build(final context) => Column(
-        children: [
-          FnvProgressBar(
-            current: widget.number,
-            total: widget.state.questionIdList.length,
-          ),
-          Expanded(
-            child: ListView(
-              padding: const EdgeInsets.all(paddingVerticalPage),
-              children: [
-                MieuxVousConnaitreForm(
-                  id: widget.state.questionIdList[widget.number - 1].value,
-                  controller: _mieuxVousConnaitreController,
-                  onSaved: () async {
-                    if (widget.number == widget.state.questionIdList.length) {
-                      GoRouter.of(context).popUntilNumber(
-                        widget.state.questionIdList.length + 1,
-                        result: true,
-                      );
+    children: [
+      FnvProgressBar(
+        current: widget.number,
+        total: widget.state.questionIdList.length,
+      ),
+      Expanded(
+        child: ListView(
+          padding: const EdgeInsets.all(paddingVerticalPage),
+          children: [
+            MieuxVousConnaitreForm(
+              id: widget.state.questionIdList[widget.number - 1].value,
+              controller: _mieuxVousConnaitreController,
+              onSaved: () async {
+                if (widget.number == widget.state.questionIdList.length) {
+                  GoRouter.of(context).popUntilNumber(
+                    widget.state.questionIdList.length + 1,
+                    result: true,
+                  );
 
-                      return;
-                    }
-                    await GoRouter.of(context).pushNamed(
-                      EnvironmentalPerformanceQuestionPage.name,
-                      pathParameters: {'number': '${widget.number + 1}'},
-                    );
-                  },
-                ),
-                const SizedBox(height: DsfrSpacings.s3w),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: FittedBox(
-                    child: DsfrButton(
-                      label: Localisation.continuer,
-                      variant: DsfrButtonVariant.primary,
-                      size: DsfrButtonSize.lg,
-                      onPressed: _mieuxVousConnaitreController.save,
-                    ),
-                  ),
-                ),
-                const SafeArea(child: SizedBox.shrink()),
-              ],
+                  return;
+                }
+                await GoRouter.of(context).pushNamed(
+                  EnvironmentalPerformanceQuestionPage.name,
+                  pathParameters: {'number': '${widget.number + 1}'},
+                );
+              },
             ),
-          ),
-        ],
-      );
+            const SizedBox(height: DsfrSpacings.s3w),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: FittedBox(
+                child: DsfrButton(
+                  label: Localisation.continuer,
+                  variant: DsfrButtonVariant.primary,
+                  size: DsfrButtonSize.lg,
+                  onPressed: _mieuxVousConnaitreController.save,
+                ),
+              ),
+            ),
+            const SafeArea(child: SizedBox.shrink()),
+          ],
+        ),
+      ),
+    ],
+  );
 }

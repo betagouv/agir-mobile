@@ -8,8 +8,8 @@ class DsfrButtonBorder extends WidgetStateProperty<Border> {
   DsfrButtonBorder({
     required final Border $default,
     required final Border disabled,
-  })  : _default = $default,
-        _disabled = disabled;
+  }) : _default = $default,
+       _disabled = disabled;
 
   factory DsfrButtonBorder.fromVariant(final DsfrButtonVariant variant) {
     switch (variant) {

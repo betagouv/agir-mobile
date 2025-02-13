@@ -26,13 +26,13 @@ class Mission extends Equatable {
 
   @override
   List<Object?> get props => [
-        code,
-        title,
-        imageUrl,
-        description,
-        objectifs,
-        canBeCompleted,
-        isCompleted,
-        themeType,
-      ];
+    code,
+    title,
+    imageUrl,
+    description,
+    objectifs,
+    canBeCompleted,
+    isCompleted,
+    themeType,
+  ];
 }

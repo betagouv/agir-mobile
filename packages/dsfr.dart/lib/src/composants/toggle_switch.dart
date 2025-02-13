@@ -25,31 +25,31 @@ class _DsfrToggleSwitchState extends State<DsfrToggleSwitch>
     with MaterialStateMixin<DsfrToggleSwitch> {
   @override
   Widget build(final context) => Semantics(
-        toggled: widget.value,
-        child: InkWell(
-          onTap: () => widget.onChanged(!widget.value),
-          onHighlightChanged: updateMaterialState(WidgetState.pressed),
-          onHover: updateMaterialState(WidgetState.hovered),
-          focusColor: Colors.transparent,
-          highlightColor: Colors.transparent,
-          splashFactory: NoSplash.splashFactory,
-          excludeFromSemantics: true,
-          onFocusChange: updateMaterialState(WidgetState.focused),
-          child: Row(
-            children: [
-              DsfrFocusWidget(
-                isFocused: isFocused,
-                borderRadius: const BorderRadius.all(Radius.circular(24)),
-                child: _Switch(value: widget.value),
-              ),
-              const SizedBox(width: DsfrSpacings.s2w),
-              Flexible(
-                child: Text(widget.label, style: const DsfrTextStyle.bodyMd()),
-              ),
-            ],
+    toggled: widget.value,
+    child: InkWell(
+      onTap: () => widget.onChanged(!widget.value),
+      onHighlightChanged: updateMaterialState(WidgetState.pressed),
+      onHover: updateMaterialState(WidgetState.hovered),
+      focusColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      splashFactory: NoSplash.splashFactory,
+      excludeFromSemantics: true,
+      onFocusChange: updateMaterialState(WidgetState.focused),
+      child: Row(
+        children: [
+          DsfrFocusWidget(
+            isFocused: isFocused,
+            borderRadius: const BorderRadius.all(Radius.circular(24)),
+            child: _Switch(value: widget.value),
           ),
-        ),
-      );
+          const SizedBox(width: DsfrSpacings.s2w),
+          Flexible(
+            child: Text(widget.label, style: const DsfrTextStyle.bodyMd()),
+          ),
+        ],
+      ),
+    ),
+  );
 }
 
 class _Switch extends StatelessWidget {
@@ -84,25 +84,26 @@ class _Switch extends StatelessWidget {
             top: 0,
             right: value ? 0 : offset,
             bottom: 0,
-            child: value
-                ? const DecoratedBox(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: border,
-                      shape: BoxShape.circle,
+            child:
+                value
+                    ? const DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: border,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        DsfrIcons.systemCheckLine,
+                        size: 16,
+                        color: primary,
+                      ),
+                    )
+                    : const DecoratedBox(
+                      decoration: BoxDecoration(
+                        border: border,
+                        borderRadius: borderRadius,
+                      ),
                     ),
-                    child: Icon(
-                      DsfrIcons.systemCheckLine,
-                      size: 16,
-                      color: primary,
-                    ),
-                  )
-                : const DecoratedBox(
-                    decoration: BoxDecoration(
-                      border: border,
-                      borderRadius: borderRadius,
-                    ),
-                  ),
           ),
         ],
       ),

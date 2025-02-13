@@ -22,76 +22,73 @@ class BodyEmpty extends StatelessWidget {
 
   @override
   Widget build(final context) => ListView(
-        padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s3w),
-        children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-            child: FnvTitle(
-              title: EnvironmentalPerformanceSummaryL10n
-                  .estimerMonBilanEnvironnemental,
-            ),
-          ),
-          const SizedBox(height: DsfrSpacings.s4w),
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-            child: EstimadedTimedWidget(
-              questionsNumber: data.questionsNumber.toString(),
-              questionsMinutes: '2',
-            ),
-          ),
-          const SizedBox(height: DsfrSpacings.s3v),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-            child: Text(
+    padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s3w),
+    children: [
+      const Padding(
+        padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
+        child: FnvTitle(
+          title:
               EnvironmentalPerformanceSummaryL10n
-                  .commencerMonMiniBilanDescription,
-              style: DsfrTextStyle.bodyLg(),
+                  .estimerMonBilanEnvironnemental,
+        ),
+      ),
+      const SizedBox(height: DsfrSpacings.s4w),
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: paddingVerticalPage),
+        child: EstimadedTimedWidget(
+          questionsNumber: data.questionsNumber.toString(),
+          questionsMinutes: '2',
+        ),
+      ),
+      const SizedBox(height: DsfrSpacings.s3v),
+      const Padding(
+        padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
+        child: Text(
+          EnvironmentalPerformanceSummaryL10n.commencerMonMiniBilanDescription,
+          style: DsfrTextStyle.bodyLg(),
+        ),
+      ),
+      const SizedBox(height: DsfrSpacings.s3w),
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: paddingVerticalPage),
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: FittedBox(
+            child: DsfrButton(
+              label: EnvironmentalPerformanceSummaryL10n.commencerMonMiniBilan,
+              variant: DsfrButtonVariant.primary,
+              size: DsfrButtonSize.lg,
+              onPressed: () async {
+                context.read<EnvironmentalPerformanceQuestionBloc>().add(
+                  EnvironmentalPerformanceQuestionIdListGiven(
+                    data.questions.map((final e) => e.id).toList(),
+                  ),
+                );
+                await GoRouter.of(context).pushNamed(
+                  EnvironmentalPerformanceQuestionPage.name,
+                  pathParameters: {'number': '1'},
+                );
+
+                if (!context.mounted) {
+                  return;
+                }
+
+                context.read<EnvironmentalPerformanceBloc>().add(
+                  const EnvironmentalPerformanceStarted(),
+                );
+              },
             ),
           ),
-          const SizedBox(height: DsfrSpacings.s3w),
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: FittedBox(
-                child: DsfrButton(
-                  label:
-                      EnvironmentalPerformanceSummaryL10n.commencerMonMiniBilan,
-                  variant: DsfrButtonVariant.primary,
-                  size: DsfrButtonSize.lg,
-                  onPressed: () async {
-                    context.read<EnvironmentalPerformanceQuestionBloc>().add(
-                          EnvironmentalPerformanceQuestionIdListGiven(
-                            data.questions.map((final e) => e.id).toList(),
-                          ),
-                        );
-                    await GoRouter.of(context).pushNamed(
-                      EnvironmentalPerformanceQuestionPage.name,
-                      pathParameters: {'number': '1'},
-                    );
-
-                    if (!context.mounted) {
-                      return;
-                    }
-
-                    context
-                        .read<EnvironmentalPerformanceBloc>()
-                        .add(const EnvironmentalPerformanceStarted());
-                  },
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(height: DsfrSpacings.s4w),
-          const QuestionSection(),
-          const SizedBox(height: DsfrSpacings.s4w),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-            child: EnvironmentalPerformancePartnerCard(),
-          ),
-          const SafeArea(child: SizedBox.shrink()),
-        ],
-      );
+        ),
+      ),
+      const SizedBox(height: DsfrSpacings.s4w),
+      const QuestionSection(),
+      const SizedBox(height: DsfrSpacings.s4w),
+      const Padding(
+        padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
+        child: EnvironmentalPerformancePartnerCard(),
+      ),
+      const SafeArea(child: SizedBox.shrink()),
+    ],
+  );
 }

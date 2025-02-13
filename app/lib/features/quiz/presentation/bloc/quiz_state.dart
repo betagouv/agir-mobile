@@ -12,20 +12,20 @@ final class QuizState extends Equatable {
   });
 
   const QuizState.empty()
-      : this(
-          quiz: const Quiz(
-            id: '',
-            thematique: '',
-            question: '',
-            reponses: [],
-            points: 0,
-            explicationOk: '',
-            explicationKo: '',
-            article: null,
-          ),
-          reponse: const None(),
-          estExacte: const None(),
-        );
+    : this(
+        quiz: const Quiz(
+          id: '',
+          thematique: '',
+          question: '',
+          reponses: [],
+          points: 0,
+          explicationOk: '',
+          explicationKo: '',
+          article: null,
+        ),
+        reponse: const None(),
+        estExacte: const None(),
+      );
 
   final Quiz quiz;
   final Option<String> reponse;
@@ -33,23 +33,22 @@ final class QuizState extends Equatable {
   final Option<bool> estExacte;
 
   String get explication => estExacte.fold(
-        () => '',
-        (final estExacte) =>
-            quiz.article ??
-            (estExacte ? quiz.explicationOk : quiz.explicationKo) ??
-            '',
-      );
+    () => '',
+    (final estExacte) =>
+        quiz.article ??
+        (estExacte ? quiz.explicationOk : quiz.explicationKo) ??
+        '',
+  );
 
   QuizState copyWith({
     final Quiz? quiz,
     final Option<String>? reponse,
     final Option<bool>? estExacte,
-  }) =>
-      QuizState(
-        quiz: quiz ?? this.quiz,
-        reponse: reponse ?? this.reponse,
-        estExacte: estExacte ?? this.estExacte,
-      );
+  }) => QuizState(
+    quiz: quiz ?? this.quiz,
+    reponse: reponse ?? this.reponse,
+    estExacte: estExacte ?? this.estExacte,
+  );
 
   @override
   List<Object?> get props => [quiz, reponse, estExacte];

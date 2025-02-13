@@ -24,11 +24,11 @@ class Aid extends Equatable {
 
   @override
   List<Object?> get props => [
-        title,
-        themeType,
-        content,
-        amountMax,
-        simulatorUrl,
-        partner,
-      ];
+    title,
+    themeType,
+    content,
+    amountMax,
+    simulatorUrl,
+    partner,
+  ];
 }

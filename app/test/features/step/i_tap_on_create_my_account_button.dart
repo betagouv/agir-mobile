@@ -13,17 +13,13 @@ Future<void> iTapOnCreateMyAccountButton(final WidgetTester tester) async {
   FeatureContext.instance.dioMock
     ..postM(
       Endpoints.validerCode,
-      responseData: jsonDecode(
-        '''
+      responseData: jsonDecode('''
 {
-  "token": "${"header.${base64Encode(
-          jsonEncode({'exp': 1727698718, 'utilisateurId': user}).codeUnits,
-        )}.signature"}",
+  "token": "${"header.${base64Encode(jsonEncode({'exp': 1727698718, 'utilisateurId': user}).codeUnits)}.signature"}",
   "utilisateur": {
     "id": "$user"
   }
-}''',
-      ),
+}'''),
     )
     ..getM(Endpoints.utilisateur, responseData: {'is_onboarding_done': false});
   await iTapOn(tester, Localisation.creerMonCompte);

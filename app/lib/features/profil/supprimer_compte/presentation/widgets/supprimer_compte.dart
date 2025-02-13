@@ -26,11 +26,7 @@ class SupprimerCompte extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.only(top: 3),
-              child: Icon(
-                DsfrIcons.systemFrInfoFill,
-                size: 16,
-                color: color,
-              ),
+              child: Icon(DsfrIcons.systemFrInfoFill, size: 16, color: color),
             ),
             SizedBox(width: DsfrSpacings.s1v),
             Expanded(
@@ -40,8 +36,9 @@ class SupprimerCompte extends StatelessWidget {
                     TextSpan(text: Localisation.supprimerVotreCompteContenu),
                     TextSpan(text: ' '),
                     TextSpan(
-                      text: Localisation
-                          .attentionAucuneDonneeNePourraEtreRecuperee,
+                      text:
+                          Localisation
+                              .attentionAucuneDonneeNePourraEtreRecuperee,
                       style: DsfrTextStyle.bodyXsBold(color: color),
                     ),
                   ],

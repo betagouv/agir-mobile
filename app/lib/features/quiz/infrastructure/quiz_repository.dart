@@ -9,7 +9,7 @@ import 'package:fpdart/fpdart.dart';
 
 class QuizRepository {
   const QuizRepository({required final DioHttpClient client})
-      : _client = client;
+    : _client = client;
 
   final DioHttpClient _client;
 

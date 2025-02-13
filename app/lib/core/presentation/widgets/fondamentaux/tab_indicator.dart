@@ -12,18 +12,18 @@ class DsfrTabIndicator extends Decoration {
   Decoration? lerpFrom(final Decoration? a, final double t) =>
       a is DsfrTabIndicator
           ? DsfrTabIndicator(
-              borderSide: BorderSide.lerp(a.borderSide, borderSide, t),
-              insets: EdgeInsetsGeometry.lerp(a.insets, insets, t)!,
-            )
+            borderSide: BorderSide.lerp(a.borderSide, borderSide, t),
+            insets: EdgeInsetsGeometry.lerp(a.insets, insets, t)!,
+          )
           : super.lerpFrom(a, t);
 
   @override
   Decoration? lerpTo(final Decoration? b, final double t) =>
       b is DsfrTabIndicator
           ? DsfrTabIndicator(
-              borderSide: BorderSide.lerp(borderSide, b.borderSide, t),
-              insets: EdgeInsetsGeometry.lerp(insets, b.insets, t)!,
-            )
+            borderSide: BorderSide.lerp(borderSide, b.borderSide, t),
+            insets: EdgeInsetsGeometry.lerp(insets, b.insets, t)!,
+          )
           : super.lerpTo(b, t);
 
   @override

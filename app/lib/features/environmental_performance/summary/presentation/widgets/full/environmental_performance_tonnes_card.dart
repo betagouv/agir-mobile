@@ -17,60 +17,58 @@ class EnvironmentalPerformanceTonnesCard extends StatelessWidget {
 
   @override
   Widget build(final context) => DecoratedBox(
-        decoration: const ShapeDecoration(
-          color: FnvColors.carteFond,
-          shadows: recommandationOmbre,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(DsfrSpacings.s1w)),
-          ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: DsfrSpacings.s3v,
-            horizontal: DsfrSpacings.s2w,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    decoration: const ShapeDecoration(
+      color: FnvColors.carteFond,
+      shadows: recommandationOmbre,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(DsfrSpacings.s1w)),
+      ),
+    ),
+    child: Padding(
+      padding: const EdgeInsets.symmetric(
+        vertical: DsfrSpacings.s3v,
+        horizontal: DsfrSpacings.s2w,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
             children: [
-              Row(
-                children: [
-                  Text(
-                    footprint.tonnesRepresentation,
-                    style: const DsfrTextStyle(
-                      fontSize: 36,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFFDF1451),
-                    ),
-                  ),
-                  const SizedBox(width: DsfrSpacings.s1w),
-                  const Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          EnvironmentalPerformanceSummaryL10n.tonnes,
-                          style: DsfrTextStyle.bodyMdBold(),
-                        ),
-                        Text(
-                          EnvironmentalPerformanceSummaryL10n.deCO2eParAn,
-                          style: DsfrTextStyle.bodyMd(),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+              Text(
+                footprint.tonnesRepresentation,
+                style: const DsfrTextStyle(
+                  fontSize: 36,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFFDF1451),
+                ),
               ),
-              const SizedBox(height: DsfrSpacings.s3v),
-              CompareBar(value: footprint.percentageOfMaxFootprint),
-              const SizedBox(height: DsfrSpacings.s3v),
-              MarkdownBody(
-                data: EnvironmentalPerformanceSummaryL10n.aTitreDeComparaison,
-                styleSheet: MarkdownStyleSheet(
-                  p: const DsfrTextStyle.bodyMd(),
+              const SizedBox(width: DsfrSpacings.s1w),
+              const Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      EnvironmentalPerformanceSummaryL10n.tonnes,
+                      style: DsfrTextStyle.bodyMdBold(),
+                    ),
+                    Text(
+                      EnvironmentalPerformanceSummaryL10n.deCO2eParAn,
+                      style: DsfrTextStyle.bodyMd(),
+                    ),
+                  ],
                 ),
               ),
             ],
           ),
-        ),
-      );
+          const SizedBox(height: DsfrSpacings.s3v),
+          CompareBar(value: footprint.percentageOfMaxFootprint),
+          const SizedBox(height: DsfrSpacings.s3v),
+          MarkdownBody(
+            data: EnvironmentalPerformanceSummaryL10n.aTitreDeComparaison,
+            styleSheet: MarkdownStyleSheet(p: const DsfrTextStyle.bodyMd()),
+          ),
+        ],
+      ),
+    ),
+  );
 }

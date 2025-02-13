@@ -9,7 +9,7 @@ import 'package:fpdart/fpdart.dart';
 
 class BibliothequeRepository {
   const BibliothequeRepository({required final DioHttpClient client})
-      : _client = client;
+    : _client = client;
 
   final DioHttpClient _client;
 
@@ -33,11 +33,9 @@ class BibliothequeRepository {
     final response = await _client.get(uri.toString());
 
     return isResponseUnsuccessful(response.statusCode)
-        ? Left(
-            Exception('Erreur lors de la récupération de la bibliothèque'),
-          )
+        ? Left(Exception('Erreur lors de la récupération de la bibliothèque'))
         : Right(
-            BibliothequeMapper.fromJson(response.data as Map<String, dynamic>),
-          );
+          BibliothequeMapper.fromJson(response.data as Map<String, dynamic>),
+        );
   }
 }

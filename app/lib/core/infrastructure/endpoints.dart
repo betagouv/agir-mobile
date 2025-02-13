@@ -23,8 +23,7 @@ abstract final class Endpoints {
   static const missionsRecommandees = '/utilisateurs/{userId}/tuiles_missions';
   static String missionsRecommandeesParThematique(
     final String codeThematique,
-  ) =>
-      '/utilisateurs/{userId}/thematiques/$codeThematique/tuiles_missions';
+  ) => '/utilisateurs/{userId}/thematiques/$codeThematique/tuiles_missions';
   static String mission(final String codeMission) =>
       '/utilisateurs/{userId}/missions/$codeMission';
   static String missionTerminer(final String codeMission) =>

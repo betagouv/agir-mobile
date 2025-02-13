@@ -33,17 +33,17 @@ class _View extends StatelessWidget {
   @override
   Widget build(final context) =>
       BlocBuilder<EnvironmentalPerformanceBloc, EnvironmentalPerformanceState>(
-        builder: (final context, final state) => switch (state) {
-          EnvironmentalPerformanceInitial() ||
-          EnvironmentalPerformanceLoading() ||
-          EnvironmentalPerformanceFailure() =>
-            const SizedBox.shrink(),
-          EnvironmentalPerformanceSuccess() => switch (state.data) {
-              (final EnvironmentalPerformanceEmpty a) => _Empty(data: a),
-              (final EnvironmentalPerformancePartial a) => _Partial(data: a),
-              (final EnvironmentalPerformanceFull a) => _Full(data: a),
+        builder:
+            (final context, final state) => switch (state) {
+              EnvironmentalPerformanceInitial() ||
+              EnvironmentalPerformanceLoading() ||
+              EnvironmentalPerformanceFailure() => const SizedBox.shrink(),
+              EnvironmentalPerformanceSuccess() => switch (state.data) {
+                (final EnvironmentalPerformanceEmpty a) => _Empty(data: a),
+                (final EnvironmentalPerformancePartial a) => _Partial(data: a),
+                (final EnvironmentalPerformanceFull a) => _Full(data: a),
+              },
             },
-        },
       );
 }
 
@@ -54,95 +54,96 @@ class _Empty extends StatelessWidget {
 
   @override
   Widget build(final context) => Column(
-        children: [
-          const _TitleAndSubtitle(),
-          const SizedBox(height: DsfrSpacings.s2w),
-          DecoratedBox(
-            decoration: const ShapeDecoration(
-              color: FnvColors.carteFond,
-              shadows: recommandationOmbre,
-              shape: RoundedRectangleBorder(
-                borderRadius:
-                    BorderRadius.all(Radius.circular(DsfrSpacings.s1w)),
-              ),
-            ),
-            child: Material(
-              color: FnvColors.transparent,
-              child: InkWell(
-                onTap: () async {
-                  context.read<EnvironmentalPerformanceQuestionBloc>().add(
-                        EnvironmentalPerformanceQuestionIdListGiven(
-                          data.questions.map((final e) => e.id).toList(),
-                        ),
-                      );
-                  final result = await GoRouter.of(context).pushNamed(
-                    EnvironmentalPerformanceQuestionPage.name,
-                    pathParameters: {'number': '1'},
-                  );
-
-                  if (!context.mounted) {
-                    return;
-                  }
-
-                  if (result == true) {
-                    await GoRouter.of(context)
-                        .pushNamed(EnvironmentalPerformanceSummaryPage.name);
-
-                    return;
-                  }
-
-                  context
-                      .read<EnvironmentalPerformanceBloc>()
-                      .add(const EnvironmentalPerformanceStarted());
-                },
-                borderRadius:
-                    const BorderRadius.all(Radius.circular(DsfrSpacings.s1w)),
-                child: Padding(
-                  padding: const EdgeInsets.all(DsfrSpacings.s1w),
-                  child: Row(
-                    children: [
-                      const _Icon(),
-                      const SizedBox(width: DsfrSpacings.s1w),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              EnvironmentalPerformanceSummaryL10n
-                                  .estimerUnPremierBilan,
-                              style: DsfrTextStyle.bodyLgBold(),
-                            ),
-                            Text(
-                              '${data.questionsNumber} questions',
-                              style: const DsfrTextStyle.bodySm(
-                                color: DsfrColors.blueFranceSun113,
-                              ),
-                            ),
-                            const SizedBox(height: DsfrSpacings.s1w),
-                            LinearProgressIndicator(
-                              value: data.percentageCompletion,
-                              backgroundColor: const Color(0xFFEEEEFF),
-                              color: DsfrColors.blueFranceSun113,
-                              minHeight: 5,
-                              semanticsLabel:
-                                  '${data.questionsNumberAnswered} questions répondues sur ${data.questionsNumber}',
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(DsfrSpacings.s1v),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(width: DsfrSpacings.s1w),
-                      const Icon(DsfrIcons.systemArrowRightSLine),
-                    ],
-                  ),
+    children: [
+      const _TitleAndSubtitle(),
+      const SizedBox(height: DsfrSpacings.s2w),
+      DecoratedBox(
+        decoration: const ShapeDecoration(
+          color: FnvColors.carteFond,
+          shadows: recommandationOmbre,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(DsfrSpacings.s1w)),
+          ),
+        ),
+        child: Material(
+          color: FnvColors.transparent,
+          child: InkWell(
+            onTap: () async {
+              context.read<EnvironmentalPerformanceQuestionBloc>().add(
+                EnvironmentalPerformanceQuestionIdListGiven(
+                  data.questions.map((final e) => e.id).toList(),
                 ),
+              );
+              final result = await GoRouter.of(context).pushNamed(
+                EnvironmentalPerformanceQuestionPage.name,
+                pathParameters: {'number': '1'},
+              );
+
+              if (!context.mounted) {
+                return;
+              }
+
+              if (result == true) {
+                await GoRouter.of(
+                  context,
+                ).pushNamed(EnvironmentalPerformanceSummaryPage.name);
+
+                return;
+              }
+
+              context.read<EnvironmentalPerformanceBloc>().add(
+                const EnvironmentalPerformanceStarted(),
+              );
+            },
+            borderRadius: const BorderRadius.all(
+              Radius.circular(DsfrSpacings.s1w),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(DsfrSpacings.s1w),
+              child: Row(
+                children: [
+                  const _Icon(),
+                  const SizedBox(width: DsfrSpacings.s1w),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          EnvironmentalPerformanceSummaryL10n
+                              .estimerUnPremierBilan,
+                          style: DsfrTextStyle.bodyLgBold(),
+                        ),
+                        Text(
+                          '${data.questionsNumber} questions',
+                          style: const DsfrTextStyle.bodySm(
+                            color: DsfrColors.blueFranceSun113,
+                          ),
+                        ),
+                        const SizedBox(height: DsfrSpacings.s1w),
+                        LinearProgressIndicator(
+                          value: data.percentageCompletion,
+                          backgroundColor: const Color(0xFFEEEEFF),
+                          color: DsfrColors.blueFranceSun113,
+                          minHeight: 5,
+                          semanticsLabel:
+                              '${data.questionsNumberAnswered} questions répondues sur ${data.questionsNumber}',
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(DsfrSpacings.s1v),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: DsfrSpacings.s1w),
+                  const Icon(DsfrIcons.systemArrowRightSLine),
+                ],
               ),
             ),
           ),
-        ],
-      );
+        ),
+      ),
+    ],
+  );
 }
 
 class _Icon extends StatelessWidget {
@@ -174,20 +175,21 @@ class _Partial extends StatelessWidget {
 
   @override
   Widget build(final context) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const _TitleAndSubtitle(),
-          const SizedBox(height: DsfrSpacings.s2w),
-          EnvironmentalPerformanceCategories(categories: data.categories),
-          const SizedBox(height: DsfrSpacings.s2w),
-          DsfrLink.md(
-            label: EnvironmentalPerformanceSummaryL10n.voirMonBilanDetaille,
-            onTap: () async => GoRouter.of(context).pushNamed(
-              EnvironmentalPerformanceSummaryPage.name,
-            ),
-          ),
-        ],
-      );
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      const _TitleAndSubtitle(),
+      const SizedBox(height: DsfrSpacings.s2w),
+      EnvironmentalPerformanceCategories(categories: data.categories),
+      const SizedBox(height: DsfrSpacings.s2w),
+      DsfrLink.md(
+        label: EnvironmentalPerformanceSummaryL10n.voirMonBilanDetaille,
+        onTap:
+            () async => GoRouter.of(
+              context,
+            ).pushNamed(EnvironmentalPerformanceSummaryPage.name),
+      ),
+    ],
+  );
 }
 
 class _TitleAndSubtitle extends StatelessWidget {
@@ -195,11 +197,9 @@ class _TitleAndSubtitle extends StatelessWidget {
 
   @override
   Widget build(final context) => const TitleSection(
-        title:
-            EnvironmentalPerformanceSummaryL10n.estimerMonBilanEnvironnemental,
-        subTitle:
-            EnvironmentalPerformanceSummaryL10n.estimerMonEstimationSousTitre,
-      );
+    title: EnvironmentalPerformanceSummaryL10n.estimerMonBilanEnvironnemental,
+    subTitle: EnvironmentalPerformanceSummaryL10n.estimerMonEstimationSousTitre,
+  );
 }
 
 class _Full extends StatelessWidget {
@@ -209,28 +209,29 @@ class _Full extends StatelessWidget {
 
   @override
   Widget build(final context) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          MarkdownBody(
-            data: EnvironmentalPerformanceSummaryL10n.monBilanEnvironnemental,
-            styleSheet: MarkdownStyleSheet(
-              p: const DsfrTextStyle.headline4(),
-              strong: const DsfrTextStyle.headline4(
-                color: DsfrColors.blueFranceSun113,
-              ),
-            ),
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      MarkdownBody(
+        data: EnvironmentalPerformanceSummaryL10n.monBilanEnvironnemental,
+        styleSheet: MarkdownStyleSheet(
+          p: const DsfrTextStyle.headline4(),
+          strong: const DsfrTextStyle.headline4(
+            color: DsfrColors.blueFranceSun113,
           ),
-          const SizedBox(height: DsfrSpacings.s2w),
-          EnvironmentalPerformanceTonnesCard(
-            footprint: data.footprintInKgOfCO2ePerYear,
-          ),
-          const SizedBox(height: DsfrSpacings.s2w),
-          DsfrLink.md(
-            label: EnvironmentalPerformanceSummaryL10n.voirMonBilanDetaille,
-            onTap: () async => GoRouter.of(context).pushNamed(
-              EnvironmentalPerformanceSummaryPage.name,
-            ),
-          ),
-        ],
-      );
+        ),
+      ),
+      const SizedBox(height: DsfrSpacings.s2w),
+      EnvironmentalPerformanceTonnesCard(
+        footprint: data.footprintInKgOfCO2ePerYear,
+      ),
+      const SizedBox(height: DsfrSpacings.s2w),
+      DsfrLink.md(
+        label: EnvironmentalPerformanceSummaryL10n.voirMonBilanDetaille,
+        onTap:
+            () async => GoRouter.of(
+              context,
+            ).pushNamed(EnvironmentalPerformanceSummaryPage.name),
+      ),
+    ],
+  );
 }

@@ -19,30 +19,30 @@ class _TogglesPageState extends State<TogglesPage> {
 
   @override
   Widget build(final context) => SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            DsfrToggleSwitch(
-              label: 'Vos favoris',
-              value: _toggle,
-              onChanged: (final value) {
-                setState(() {
-                  _toggle = value;
-                });
-              },
-            ),
-            const SizedBox(height: 16),
-            DsfrToggleSwitch(
-              label: 'Vos favoris',
-              value: !_toggle,
-              onChanged: (final value) {
-                setState(() {
-                  _toggle = !value;
-                });
-              },
-            ),
-          ],
+    padding: const EdgeInsets.all(16),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        DsfrToggleSwitch(
+          label: 'Vos favoris',
+          value: _toggle,
+          onChanged: (final value) {
+            setState(() {
+              _toggle = value;
+            });
+          },
         ),
-      );
+        const SizedBox(height: 16),
+        DsfrToggleSwitch(
+          label: 'Vos favoris',
+          value: !_toggle,
+          onChanged: (final value) {
+            setState(() {
+              _toggle = !value;
+            });
+          },
+        ),
+      ],
+    ),
+  );
 }

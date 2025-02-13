@@ -28,11 +28,7 @@ Future<void> iFilterWithTheme(
         },
       ],
       'filtres': [
-        {
-          'code': 'alimentation',
-          'label': '🥦 Alimentation',
-          'selected': true,
-        },
+        {'code': 'alimentation', 'label': '🥦 Alimentation', 'selected': true},
         {'code': 'transport', 'label': '🚗 Transports', 'selected': false},
         {'code': 'logement', 'label': '🏡 Logement', 'selected': false},
         {

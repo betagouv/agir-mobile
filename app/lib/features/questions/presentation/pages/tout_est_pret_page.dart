@@ -17,10 +17,10 @@ class ToutEstPretPage extends StatelessWidget {
   static const path = name;
 
   static GoRoute get route => GoRoute(
-        path: path,
-        name: name,
-        builder: (final context, final state) => const ToutEstPretPage(),
-      );
+    path: path,
+    name: name,
+    builder: (final context, final state) => const ToutEstPretPage(),
+  );
 
   @override
   Widget build(final context) {

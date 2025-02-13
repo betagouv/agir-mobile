@@ -11,14 +11,14 @@ class QuestionCodePostalBloc
     required final ProfilRepository profilRepository,
     required final CommunesRepository communesRepository,
   }) : super(
-          const QuestionCodePostalState(
-            prenom: '',
-            codePostal: '',
-            communes: [],
-            commune: '',
-            aEteChange: false,
-          ),
-        ) {
+         const QuestionCodePostalState(
+           prenom: '',
+           codePostal: '',
+           communes: [],
+           commune: '',
+           aEteChange: false,
+         ),
+       ) {
     on<QuestionCodePostalPrenomDemande>((final event, final emit) async {
       final result = await profilRepository.recupererProfil();
       if (result.isRight()) {
@@ -27,9 +27,10 @@ class QuestionCodePostalBloc
       }
     });
     on<QuestionCodePostalAChange>((final event, final emit) async {
-      final result = (event.valeur.length == 5
-          ? await communesRepository.recupererLesCommunes(event.valeur)
-          : Either<Exception, List<String>>.right(<String>[]));
+      final result =
+          (event.valeur.length == 5
+              ? await communesRepository.recupererLesCommunes(event.valeur)
+              : Either<Exception, List<String>>.right(<String>[]));
       if (result.isRight()) {
         final communes = result.getRight().getOrElse(() => throw Exception());
         emit(

@@ -18,9 +18,10 @@ class MesInformationsPrenom extends StatelessWidget {
       label: Localisation.prenom,
       hintText: Localisation.obligatoire,
       initialValue: prenom,
-      onChanged: (final value) => context
-          .read<MesInformationsBloc>()
-          .add(MesInformationsPrenomChange(value)),
+      onChanged:
+          (final value) => context.read<MesInformationsBloc>().add(
+            MesInformationsPrenomChange(value),
+          ),
       textCapitalization: TextCapitalization.sentences,
       textInputAction: TextInputAction.next,
       autofillHints: const [AutofillHints.givenName],

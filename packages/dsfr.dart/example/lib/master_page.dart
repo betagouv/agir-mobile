@@ -15,27 +15,25 @@ class _MasterPageState extends State<MasterPage> {
 
   @override
   Widget build(final context) => Scaffold(
-        appBar: AppBar(title: const Text("Système de Design de l'État")),
-        body: widget.pageItems
-            .elementAtOrNull(_currentIndex)
-            ?.pageBuilder(context),
-        drawer: Drawer(
-          child: ListView.builder(
-            itemBuilder: (final context, final index) {
-              final pageItem = widget.pageItems[index];
+    appBar: AppBar(title: const Text("Système de Design de l'État")),
+    body: widget.pageItems.elementAtOrNull(_currentIndex)?.pageBuilder(context),
+    drawer: Drawer(
+      child: ListView.builder(
+        itemBuilder: (final context, final index) {
+          final pageItem = widget.pageItems[index];
 
-              return ListTile(
-                title: Text(pageItem.title),
-                onTap: () {
-                  setState(() {
-                    _currentIndex = index;
-                  });
-                  Navigator.pop(context);
-                },
-              );
+          return ListTile(
+            title: Text(pageItem.title),
+            onTap: () {
+              setState(() {
+                _currentIndex = index;
+              });
+              Navigator.pop(context);
             },
-            itemCount: widget.pageItems.length,
-          ),
-        ),
-      );
+          );
+        },
+        itemCount: widget.pageItems.length,
+      ),
+    ),
+  );
 }

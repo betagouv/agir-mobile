@@ -16,9 +16,9 @@ class MesInformationsRevenuFiscal extends StatelessWidget {
     return RevenuFiscalInput(
       initialValue: revenuFiscal,
       onChanged: (final value) {
-        context
-            .read<MesInformationsBloc>()
-            .add(MesInformationsRevenuFiscalChange(value));
+        context.read<MesInformationsBloc>().add(
+          MesInformationsRevenuFiscalChange(value),
+        );
       },
     );
   }

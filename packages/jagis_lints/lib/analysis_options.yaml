@@ -36,6 +36,7 @@ linter:
     public_member_api_docs: false
     type_annotate_public_apis: false
     unnecessary_final: false # incompatible with `prefer_final_parameters`.
+    require_trailing_commas: false
 
 dart_code_metrics:
   extends:
@@ -139,5 +140,7 @@ dart_code_metrics:
     - prefer-static-class: false
     - prefer-static-method: false
     - prefer-test-matchers: false
+    - prefer-trailing-comma: false # TODO(lsaudon): à réactiver après une maj de dcm
     - prefer-widget-private-members:
         ignore-static: true
+    - unnecessary-trailing-comma: false # TODO(lsaudon): à réactiver après une maj de dcm

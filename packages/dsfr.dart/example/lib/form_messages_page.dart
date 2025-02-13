@@ -12,23 +12,23 @@ class FormMessagesPage extends StatelessWidget {
 
   @override
   Widget build(final context) => ListView(
-        children: const [
-          DsfrFormMessage(
-            type: DsfrFormMessageType.error,
-            text: "Texte d'erreur obligatoire",
-          ),
-          DsfrFormMessage(
-            type: DsfrFormMessageType.valid,
-            text: 'Texte de validation optionnel',
-          ),
-          DsfrFormMessage(
-            type: DsfrFormMessageType.warning,
-            text: "Texte d'avertissement",
-          ),
-          DsfrFormMessage(
-            type: DsfrFormMessageType.info,
-            text: "Texte d'information",
-          ),
-        ],
-      );
+    children: const [
+      DsfrFormMessage(
+        type: DsfrFormMessageType.error,
+        text: "Texte d'erreur obligatoire",
+      ),
+      DsfrFormMessage(
+        type: DsfrFormMessageType.valid,
+        text: 'Texte de validation optionnel',
+      ),
+      DsfrFormMessage(
+        type: DsfrFormMessageType.warning,
+        text: "Texte d'avertissement",
+      ),
+      DsfrFormMessage(
+        type: DsfrFormMessageType.info,
+        text: "Texte d'information",
+      ),
+    ],
+  );
 }

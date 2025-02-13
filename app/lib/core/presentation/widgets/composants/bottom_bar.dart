@@ -11,25 +11,23 @@ class FnvBottomBar extends StatelessWidget {
 
   @override
   Widget build(final context) => SafeArea(
-        left: false,
-        top: false,
-        right: false,
-        child: DecoratedBox(
-          decoration: const BoxDecoration(
-            boxShadow: bottomNavigationBarOmbre,
+    left: false,
+    top: false,
+    right: false,
+    child: DecoratedBox(
+      decoration: const BoxDecoration(boxShadow: bottomNavigationBarOmbre),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: DsfrSpacings.s3v,
+              horizontal: DsfrSpacings.s2w,
+            ),
+            child: child,
           ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: DsfrSpacings.s3v,
-                  horizontal: DsfrSpacings.s2w,
-                ),
-                child: child,
-              ),
-            ],
-          ),
-        ),
-      );
+        ],
+      ),
+    ),
+  );
 }

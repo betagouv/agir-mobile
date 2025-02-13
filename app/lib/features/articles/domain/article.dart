@@ -32,19 +32,26 @@ class Article extends Equatable {
     final List<Source>? sources,
     final bool? isFavorite,
     final bool? isRead,
-  }) =>
-      Article(
-        id: id ?? this.id,
-        titre: titre ?? this.titre,
-        sousTitre: sousTitre ?? this.sousTitre,
-        contenu: contenu ?? this.contenu,
-        partner: partner ?? this.partner,
-        sources: sources ?? this.sources,
-        isFavorite: isFavorite ?? this.isFavorite,
-        isRead: isRead ?? this.isRead,
-      );
+  }) => Article(
+    id: id ?? this.id,
+    titre: titre ?? this.titre,
+    sousTitre: sousTitre ?? this.sousTitre,
+    contenu: contenu ?? this.contenu,
+    partner: partner ?? this.partner,
+    sources: sources ?? this.sources,
+    isFavorite: isFavorite ?? this.isFavorite,
+    isRead: isRead ?? this.isRead,
+  );
 
   @override
-  List<Object?> get props =>
-      [id, titre, sousTitre, contenu, partner, sources, isFavorite, isRead];
+  List<Object?> get props => [
+    id,
+    titre,
+    sousTitre,
+    contenu,
+    partner,
+    sources,
+    isFavorite,
+    isRead,
+  ];
 }

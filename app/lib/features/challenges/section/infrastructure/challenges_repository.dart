@@ -8,7 +8,7 @@ import 'package:fpdart/fpdart.dart';
 
 class ChallengesRepository {
   const ChallengesRepository({required final DioHttpClient client})
-      : _client = client;
+    : _client = client;
 
   final DioHttpClient _client;
 
@@ -20,8 +20,10 @@ class ChallengesRepository {
       queryParameters.putIfAbsent('thematique', () => themeType.name);
     }
     final response = await _client.get(
-      Uri(path: Endpoints.challenges, queryParameters: queryParameters)
-          .toString(),
+      Uri(
+        path: Endpoints.challenges,
+        queryParameters: queryParameters,
+      ).toString(),
     );
 
     if (isResponseUnsuccessful(response.statusCode)) {

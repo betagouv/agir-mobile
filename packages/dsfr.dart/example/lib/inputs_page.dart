@@ -12,31 +12,25 @@ class InputsPage extends StatelessWidget {
 
   @override
   Widget build(final context) => ListView(
-        padding: const EdgeInsets.all(16),
+    padding: const EdgeInsets.all(16),
+    children: [
+      Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: DsfrInput(
-                  label: 'Label',
-                  onChanged: (final value) {},
-                ),
-              ),
-              Expanded(
-                child: DsfrInput(
-                  label: 'Label',
-                  onChanged: (final value) {},
-                ),
-              ),
-            ],
+          Expanded(
+            child: DsfrInput(label: 'Label', onChanged: (final value) {}),
           ),
-          const DsfrInput(
-            label: 'Password',
-            onChanged: print,
-            isPasswordMode: true,
+          Expanded(
+            child: DsfrInput(label: 'Label', onChanged: (final value) {}),
           ),
-          const DsfrInputHeadless(onChanged: print),
         ],
-      );
+      ),
+      const DsfrInput(
+        label: 'Password',
+        onChanged: print,
+        isPasswordMode: true,
+      ),
+      const DsfrInputHeadless(onChanged: print),
+    ],
+  );
 }

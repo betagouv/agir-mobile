@@ -7,9 +7,10 @@ Future<void> iEnterInTheField(
   final String text,
   final String label,
 ) async {
-  final field = find
-      .byWidgetPredicate((final widget) => widget.key == ValueKey(label))
-      .first;
+  final field =
+      find
+          .byWidgetPredicate((final widget) => widget.key == ValueKey(label))
+          .first;
   await tester.enterText(field, text);
   await tester.testTextInput.receiveAction(TextInputAction.done);
   await tester.pumpAndSettle();

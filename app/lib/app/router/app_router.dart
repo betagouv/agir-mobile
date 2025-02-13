@@ -41,64 +41,68 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 GoRouter goRouter({required final Tracker tracker}) => GoRouter(
-      routes: [
-        GoRoute(
-          path: '/loading',
-          builder: (final context, final state) =>
+  routes: [
+    GoRoute(
+      path: '/loading',
+      builder:
+          (final context, final state) =>
               const ColoredBox(color: Color(0xFFEDFEE7)),
-        ),
-        GoRoute(
-          path: '/unauthenticated',
-          redirect: (final context, final state) =>
+    ),
+    GoRoute(
+      path: '/unauthenticated',
+      redirect:
+          (final context, final state) =>
               state.uri.path == '/unauthenticated'
                   ? '/unauthenticated/${PreOnboardingPage.path}'
                   : null,
-          routes: [
-            PreOnboardingPage.route,
-            CreerComptePage.route,
-            SeConnecterPage.route,
-            MotDePasseOubliePage.route,
-            MotDePasseOublieCodePage.route,
-            SaisieCodePage.route,
-          ],
-        ),
-        HomePage.route(
-          routes: [
-            FirstNamePage.route,
-            QuestionCodePostalPage.route,
-            AppEstEncoreEnExperimentationPage.route,
-            QuestionThemesPage.route,
-            ToutEstPretPage.route,
-            EnvironmentalPerformanceSummaryPage.route,
-            EnvironmentalPerformanceQuestionPage.route,
-            MissionPage.route,
-            AidsPage.route,
-            AidPage.route,
-            AideSimulateurVeloPage.route(
-              routes: [AideSimulateurVeloDisponiblePage.route],
-            ),
-            ArticlePage.route,
-            BibliothequePage.route,
-            ActionsPage.route,
-            ActionPage.route,
-            QuizPage.route,
-            ProfilPage.route,
-            MesInformationsPage.route,
-            MonLogementPage.route,
-            KnowYourCustomersPage.route,
-            MieuxVousConnaitreEditPage.route,
-            ChallengeListPage.route,
-            ChallengeDetailPage.route,
-            SeasonalFruitsAndVegetablesPage.route,
-            OptionsAvanceesPage.route,
-          ],
-        ),
+      routes: [
+        PreOnboardingPage.route,
+        CreerComptePage.route,
+        SeConnecterPage.route,
+        MotDePasseOubliePage.route,
+        MotDePasseOublieCodePage.route,
+        SaisieCodePage.route,
       ],
-      errorPageBuilder: (final context, final state) => const NoTransitionPage(
-        child: FnvErrorRoutePage(),
-      ),
-      redirect: (final context, final state) =>
-          switch (context.read<AuthenticationBloc>().state) {
+    ),
+    HomePage.route(
+      routes: [
+        FirstNamePage.route,
+        QuestionCodePostalPage.route,
+        AppEstEncoreEnExperimentationPage.route,
+        QuestionThemesPage.route,
+        ToutEstPretPage.route,
+        EnvironmentalPerformanceSummaryPage.route,
+        EnvironmentalPerformanceQuestionPage.route,
+        MissionPage.route,
+        AidsPage.route,
+        AidPage.route,
+        AideSimulateurVeloPage.route(
+          routes: [AideSimulateurVeloDisponiblePage.route],
+        ),
+        ArticlePage.route,
+        BibliothequePage.route,
+        ActionsPage.route,
+        ActionPage.route,
+        QuizPage.route,
+        ProfilPage.route,
+        MesInformationsPage.route,
+        MonLogementPage.route,
+        KnowYourCustomersPage.route,
+        MieuxVousConnaitreEditPage.route,
+        ChallengeListPage.route,
+        ChallengeDetailPage.route,
+        SeasonalFruitsAndVegetablesPage.route,
+        OptionsAvanceesPage.route,
+      ],
+    ),
+  ],
+  errorPageBuilder:
+      (final context, final state) =>
+          const NoTransitionPage(child: FnvErrorRoutePage()),
+  redirect:
+      (final context, final state) => switch (context
+          .read<AuthenticationBloc>()
+          .state) {
         AuthenticationInitial() => null,
         AuthenticationUnauthenticated() =>
           state.uri.path.startsWith('/unauthenticated')
@@ -107,6 +111,6 @@ GoRouter goRouter({required final Tracker tracker}) => GoRouter(
         AuthenticationAuthenticated() =>
           state.uri.path.startsWith('/unauthenticated') ? HomePage.path : null,
       },
-      initialLocation: '/loading',
-      observers: [themeRouteObserver, tracker.navigatorObserver],
-    );
+  initialLocation: '/loading',
+  observers: [themeRouteObserver, tracker.navigatorObserver],
+);

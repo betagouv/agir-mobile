@@ -21,52 +21,50 @@ class Menu extends StatelessWidget {
 
   @override
   Widget build(final context) => Drawer(
-        backgroundColor: Colors.white,
-        shadowColor: DsfrColors.blueFranceSun113,
-        surfaceTintColor: Colors.white,
-        shape: const RoundedRectangleBorder(),
-        child: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: DsfrSpacings.s1w,
-                  right: DsfrSpacings.s3w,
+    backgroundColor: Colors.white,
+    shadowColor: DsfrColors.blueFranceSun113,
+    surfaceTintColor: Colors.white,
+    shape: const RoundedRectangleBorder(),
+    child: SafeArea(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(
+              left: DsfrSpacings.s1w,
+              right: DsfrSpacings.s3w,
+            ),
+            child: Row(
+              children: [
+                IconButton(
+                  iconSize: 24,
+                  padding: const EdgeInsets.all(DsfrSpacings.s1w),
+                  onPressed: () => GoRouter.of(context).pop(),
+                  style: const ButtonStyle(
+                    shape: WidgetStatePropertyAll(roundedRectangleBorder),
+                  ),
+                  icon: const Icon(
+                    DsfrIcons.systemCloseLine,
+                    color: DsfrColors.blueFranceSun113,
+                    semanticLabel: Localisation.fermer,
+                  ),
                 ),
-                child: Row(
-                  children: [
-                    IconButton(
-                      iconSize: 24,
-                      padding: const EdgeInsets.all(DsfrSpacings.s1w),
-                      onPressed: () => GoRouter.of(context).pop(),
-                      style: const ButtonStyle(
-                        shape: WidgetStatePropertyAll(roundedRectangleBorder),
-                      ),
-                      icon: const Icon(
-                        DsfrIcons.systemCloseLine,
-                        color: DsfrColors.blueFranceSun113,
-                        semanticLabel: Localisation.fermer,
-                      ),
-                    ),
-                    const SizedBox(width: DsfrSpacings.s1w),
-                    const Expanded(
-                      child: Text(
-                        Localisation.menu,
-                        style: DsfrTextStyle.bodyMdBold(),
-                      ),
-                    ),
-                  ],
+                const SizedBox(width: DsfrSpacings.s1w),
+                const Expanded(
+                  child: Text(
+                    Localisation.menu,
+                    style: DsfrTextStyle.bodyMdBold(),
+                  ),
                 ),
-              ),
-              const SizedBox(height: DsfrSpacings.s3w),
-              const Expanded(
-                child: SafeArea(top: false, child: _MenuItems()),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      );
+          const SizedBox(height: DsfrSpacings.s3w),
+          const Expanded(child: SafeArea(top: false, child: _MenuItems())),
+        ],
+      ),
+    ),
+  );
 }
 
 class _MenuItems extends StatelessWidget {
@@ -88,12 +86,9 @@ class _MenuItems extends StatelessWidget {
           EnvironmentalPerformanceSummaryPage.name:
               Localisation.bilanEnvironnemental,
         }.entries.map(
-              (final e) => _MenuItem(
-                label: e.value,
-                value: e.key,
-                groupValue: groupValue,
-              ),
-            ),
+          (final e) =>
+              _MenuItem(label: e.value, value: e.key, groupValue: groupValue),
+        ),
         const Spacer(),
         _MenuItem(
           label: Localisation.monProfil,
@@ -148,9 +143,11 @@ class _MenuItem extends StatelessWidget {
       child: Material(
         color: FnvColors.transparent,
         child: InkWell(
-          onTap: isCurrentPage
-              ? null
-              : () async => GoRouter.of(context).pushReplacementNamed(value),
+          onTap:
+              isCurrentPage
+                  ? null
+                  : () async =>
+                      GoRouter.of(context).pushReplacementNamed(value),
           child: Stack(
             alignment: Alignment.centerLeft,
             children: [
@@ -167,15 +164,17 @@ class _MenuItem extends StatelessWidget {
                   child: SizedBox(width: 3, height: 24),
                 ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: DsfrSpacings.s2w,
+                ),
                 child: Text(
                   label,
-                  style: isCurrentPage
-                      ? const DsfrTextStyle.bodyLgBold(
-                          color: DsfrColors.blueFranceSun113,
-                        )
-                      : const DsfrTextStyle.bodyLg(),
+                  style:
+                      isCurrentPage
+                          ? const DsfrTextStyle.bodyLgBold(
+                            color: DsfrColors.blueFranceSun113,
+                          )
+                          : const DsfrTextStyle.bodyLg(),
                 ),
               ),
             ],

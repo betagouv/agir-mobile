@@ -10,12 +10,12 @@ class SaisieCodeBloc extends Bloc<SaisieCodeEvent, SaisieCodeState> {
     required final AuthentificationRepository authentificationRepository,
     required final String email,
   }) : super(
-          SaisieCodeState(
-            email: email,
-            renvoyerCodeDemande: false,
-            erreur: const None(),
-          ),
-        ) {
+         SaisieCodeState(
+           email: email,
+           renvoyerCodeDemande: false,
+           erreur: const None(),
+         ),
+       ) {
     on<SaiseCodeRenvoyerCodeDemandee>((final event, final emit) async {
       emit(state.copyWith(renvoyerCodeDemande: false));
       await authentificationRepository.renvoyerCodeDemande(state.email);

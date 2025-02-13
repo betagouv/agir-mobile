@@ -8,7 +8,7 @@ import 'package:fpdart/fpdart.dart';
 class ChallengeDetailBloc
     extends Bloc<ChallengeDetailEvent, ChallengeDetailState> {
   ChallengeDetailBloc({required final ChallengeRepository repository})
-      : super(const ChallengeDetailInitial()) {
+    : super(const ChallengeDetailInitial()) {
     on<ChallengeDetailLoadRequested>((final event, final emit) async {
       emit(const ChallengeDetailLoadInProgress());
       final result = await repository.fetchChallenge(event.id);
@@ -27,11 +27,12 @@ class ChallengeDetailBloc
       final firstStep =
           status == ChallengeStatus.toDo || status == ChallengeStatus.refused;
 
-      final newStatus = event.value
-          ? firstStep
-              ? ChallengeStatus.inProgress
-              : ChallengeStatus.done
-          : firstStep
+      final newStatus =
+          event.value
+              ? firstStep
+                  ? ChallengeStatus.inProgress
+                  : ChallengeStatus.done
+              : firstStep
               ? ChallengeStatus.refused
               : ChallengeStatus.abandonned;
 
@@ -60,10 +61,11 @@ class ChallengeDetailBloc
       final result = await repository.updateChallengeStatus(
         id: currentState.challenge.id,
         status: newStatus,
-        reason: newStatus == ChallengeStatus.refused
-            ? (currentState.newReason.fold(() => null, (final r) => r) ??
-                currentState.challenge.reason)
-            : null,
+        reason:
+            newStatus == ChallengeStatus.refused
+                ? (currentState.newReason.fold(() => null, (final r) => r) ??
+                    currentState.challenge.reason)
+                : null,
       );
 
       result.fold(

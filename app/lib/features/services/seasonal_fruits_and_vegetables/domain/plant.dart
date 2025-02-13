@@ -17,8 +17,4 @@ class Plant extends Equatable {
   List<Object> get props => [type, title, carbonFootprintInKg, imageUrl];
 }
 
-enum PlantType {
-  fruit,
-  vegetable,
-  both,
-}
+enum PlantType { fruit, vegetable, both }

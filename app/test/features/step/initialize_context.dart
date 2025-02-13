@@ -64,20 +64,23 @@ void setProfile() {
   FeatureContext.instance.dioMock.patchM(Endpoints.profile);
 }
 
-void setLogement() => FeatureContext.instance.dioMock.patchM(
-      Endpoints.logement,
-    );
+void setLogement() =>
+    FeatureContext.instance.dioMock.patchM(Endpoints.logement);
 
-void setBilanEmpty() => FeatureContext.instance.dioMock
-    .getM(Endpoints.bilan, responseData: environmentalPerformanceEmptyData);
+void setBilanEmpty() => FeatureContext.instance.dioMock.getM(
+  Endpoints.bilan,
+  responseData: environmentalPerformanceEmptyData,
+);
 
 void setMiniBilan() => FeatureContext.instance.dioMock.getM(
-      Endpoints.questions('ENCHAINEMENT_KYC_mini_bilan_carbone'),
-      responseData: miniBilan,
-    );
+  Endpoints.questions('ENCHAINEMENT_KYC_mini_bilan_carbone'),
+  responseData: miniBilan,
+);
 
-void setMissionRecommanded() => FeatureContext.instance.dioMock
-    .getM(Endpoints.missionsRecommandees, responseData: <dynamic>[]);
+void setMissionRecommanded() => FeatureContext.instance.dioMock.getM(
+  Endpoints.missionsRecommandees,
+  responseData: <dynamic>[],
+);
 
 void setMissionRecommandedByThematique() =>
     FeatureContext.instance.dioMock.getM(
@@ -86,85 +89,91 @@ void setMissionRecommandedByThematique() =>
     );
 
 void setAssistances() => FeatureContext.instance.dioMock.getM(
-      Endpoints.aids,
-      responseData: {
-        'couverture_aides_ok': false,
-        'liste_aides': [
-          {
-            'id': 'renover_son_logement',
-            'titre': 'Rénover son logement',
-            'thematiques': ['logement'],
-            'contenu': '',
-          },
-          {
-            'titre': 'Acheter un vélo',
-            'contenu':
-                "<p>Vous souhaitez acheter un vélo neuf ou d'occasion, qu'il soit électrique ou classique ? Cette aide est faite pour vous !</p><p></p><h3><strong>Votre éligibilité</strong></h3><p><strong>1 aide nationale disponible</strong> pour les <strong>majeurs, domiciliés en France</strong></p><p><strong>Plusieurs aides sous conditions</strong></p><p></p><h3><strong>Types de vélo</strong></h3><ul><li><p>Mécanique / Électrique</p></li><li><p>Classique / Pliant / Cargo</p></li></ul><p></p><h3><strong>En quoi cela a de l'impact ?</strong></h3><p>Le vélo est un des moyens de transport les moins carbonés.</p><p>Il peut remplacer la voiture dans de nombreux cas et c'est bon pour la santé !</p>",
-            'url_simulateur': '/aides/velo',
-            'thematiques': ['transport'],
-            'montant_max': 1500,
-          },
-          {
-            'id': 'composter_ses_dechets',
-            'titre': 'Composter ses déchets',
-            'thematiques': ['alimentation'],
-            'contenu': '',
-          },
-        ],
+  Endpoints.aids,
+  responseData: {
+    'couverture_aides_ok': false,
+    'liste_aides': [
+      {
+        'id': 'renover_son_logement',
+        'titre': 'Rénover son logement',
+        'thematiques': ['logement'],
+        'contenu': '',
       },
-    );
+      {
+        'titre': 'Acheter un vélo',
+        'contenu':
+            "<p>Vous souhaitez acheter un vélo neuf ou d'occasion, qu'il soit électrique ou classique ? Cette aide est faite pour vous !</p><p></p><h3><strong>Votre éligibilité</strong></h3><p><strong>1 aide nationale disponible</strong> pour les <strong>majeurs, domiciliés en France</strong></p><p><strong>Plusieurs aides sous conditions</strong></p><p></p><h3><strong>Types de vélo</strong></h3><ul><li><p>Mécanique / Électrique</p></li><li><p>Classique / Pliant / Cargo</p></li></ul><p></p><h3><strong>En quoi cela a de l'impact ?</strong></h3><p>Le vélo est un des moyens de transport les moins carbonés.</p><p>Il peut remplacer la voiture dans de nombreux cas et c'est bon pour la santé !</p>",
+        'url_simulateur': '/aides/velo',
+        'thematiques': ['transport'],
+        'montant_max': 1500,
+      },
+      {
+        'id': 'composter_ses_dechets',
+        'titre': 'Composter ses déchets',
+        'thematiques': ['alimentation'],
+        'contenu': '',
+      },
+    ],
+  },
+);
 
 void setPoints() => FeatureContext.instance.dioMock.getM(
-      Endpoints.gamification,
-      responseData: {'points': 650},
-    );
+  Endpoints.gamification,
+  responseData: {'points': 650},
+);
 
-void setPreferences() => FeatureContext.instance.dioMock
-  ..getM(
-    Endpoints.questionKyc('KYC_preference'),
-    responseData: {
-      'code': 'KYC_preference',
-      'question':
-          'Sur quels thèmes recherchez-vous en priorité des aides et conseils ?',
-      'reponse_multiple': [
-        {
-          'code': 'alimentation',
-          'label': 'La cuisine et l’alimentation',
-          'selected': false,
+void setPreferences() =>
+    FeatureContext.instance.dioMock
+      ..getM(
+        Endpoints.questionKyc('KYC_preference'),
+        responseData: {
+          'code': 'KYC_preference',
+          'question':
+              'Sur quels thèmes recherchez-vous en priorité des aides et conseils ?',
+          'reponse_multiple': [
+            {
+              'code': 'alimentation',
+              'label': 'La cuisine et l’alimentation',
+              'selected': false,
+            },
+            {
+              'code': 'transport',
+              'label': 'Mes déplacements',
+              'selected': false,
+            },
+            {'code': 'logement', 'label': 'Mon logement', 'selected': false},
+            {
+              'code': 'consommation',
+              'label': 'Ma consommation',
+              'selected': false,
+            },
+            {
+              'code': 'ne_sais_pas',
+              'label': 'Je ne sais pas encore',
+              'selected': false,
+            },
+          ],
+          'is_answered': true,
+          'categorie': 'recommandation',
+          'points': 0,
+          'type': 'choix_multiple',
+          'is_NGC': false,
+          'thematique': 'climat',
         },
-        {'code': 'transport', 'label': 'Mes déplacements', 'selected': false},
-        {'code': 'logement', 'label': 'Mon logement', 'selected': false},
-        {
-          'code': 'consommation',
-          'label': 'Ma consommation',
-          'selected': false,
-        },
-        {
-          'code': 'ne_sais_pas',
-          'label': 'Je ne sais pas encore',
-          'selected': false,
-        },
-      ],
-      'is_answered': true,
-      'categorie': 'recommandation',
-      'points': 0,
-      'type': 'choix_multiple',
-      'is_NGC': false,
-      'thematique': 'climat',
-    },
-  )
-  ..putM(Endpoints.questionKyc('KYC_preference'));
+      )
+      ..putM(Endpoints.questionKyc('KYC_preference'));
 
 void setDeleteAccount() =>
     FeatureContext.instance.dioMock.deleteM(Endpoints.utilisateur);
 
-void setForgotPassword() => FeatureContext.instance.dioMock
-  ..postM(Endpoints.oubliMotDePasse)
-  ..postM(Endpoints.modifierMotDePasse);
+void setForgotPassword() =>
+    FeatureContext.instance.dioMock
+      ..postM(Endpoints.oubliMotDePasse)
+      ..postM(Endpoints.modifierMotDePasse);
 
 void setCommunes() => FeatureContext.instance.dioMock.getM(
-      Endpoints.communes('39100'),
-      responseData: jsonDecode('''
+  Endpoints.communes('39100'),
+  responseData: jsonDecode('''
 [
   "AUTHUME",
   "BAVERANS",
@@ -181,28 +190,30 @@ void setCommunes() => FeatureContext.instance.dioMock.getM(
   "SAMPANS",
   "VILLETTE LES DOLE"
 ]'''),
+);
+
+void setChallenges() =>
+    FeatureContext.instance.dioMock
+      ..getM(
+        '/utilisateurs/%7BuserId%7D/defis_v2?status=en_cours',
+        responseData: <dynamic>[],
+      )
+      ..getM(
+        '/utilisateurs/%7BuserId%7D/defis_v2?status=en_cours&thematique=alimentation',
+        responseData: <dynamic>[],
+      );
+
+void setRecommandations() =>
+    FeatureContext.instance.dioMock..getM(
+      Endpoints.recommandationsParThematique('alimentation'),
+      responseData: <dynamic>[],
     );
 
-void setChallenges() => FeatureContext.instance.dioMock
-  ..getM(
-    '/utilisateurs/%7BuserId%7D/defis_v2?status=en_cours',
-    responseData: <dynamic>[],
-  )
-  ..getM(
-    '/utilisateurs/%7BuserId%7D/defis_v2?status=en_cours&thematique=alimentation',
-    responseData: <dynamic>[],
-  );
-
-void setRecommandations() => FeatureContext.instance.dioMock
-  ..getM(
-    Endpoints.recommandationsParThematique('alimentation'),
-    responseData: <dynamic>[],
-  );
-
-void setServices() => FeatureContext.instance.dioMock
-  ..getM(
-    Endpoints.servicesParThematique('alimentation'),
-    responseData: jsonDecode('''
+void setServices() =>
+    FeatureContext.instance.dioMock
+      ..getM(
+        Endpoints.servicesParThematique('alimentation'),
+        responseData: jsonDecode('''
 [
  {
       "id_service": "fruits_legumes",
@@ -214,16 +225,18 @@ void setServices() => FeatureContext.instance.dioMock
       "is_available_inhouse": true
   }
 ]'''),
-  )
-  ..getM(
-    Endpoints.seasonalFruitsAndVegetablesCategories,
-    responseData: jsonDecode('''
-[{"code":"janvier","label":"janvier","is_default":true},{"code":"fevrier","label":"février","is_default":false},{"code":"mars","label":"mars","is_default":false},{"code":"avril","label":"avril","is_default":false},{"code":"mai","label":"mai","is_default":false},{"code":"juin","label":"juin","is_default":false},{"code":"juillet","label":"juillet","is_default":false},{"code":"aout","label":"août","is_default":false},{"code":"septembre","label":"septembre","is_default":false},{"code":"octobre","label":"octobre","is_default":false},{"code":"novembre","label":"novembre","is_default":false},{"code":"decembre","label":"décembre","is_default":false}]'''),
-  )
-  ..postM(
-    Endpoints.seasonalFruitsAndVegetablesSearch,
-    requestData: {'categorie': 'janvier'},
-    responseData: jsonDecode('''
+      )
+      ..getM(
+        Endpoints.seasonalFruitsAndVegetablesCategories,
+        responseData: jsonDecode(
+          '''
+[{"code":"janvier","label":"janvier","is_default":true},{"code":"fevrier","label":"février","is_default":false},{"code":"mars","label":"mars","is_default":false},{"code":"avril","label":"avril","is_default":false},{"code":"mai","label":"mai","is_default":false},{"code":"juin","label":"juin","is_default":false},{"code":"juillet","label":"juillet","is_default":false},{"code":"aout","label":"août","is_default":false},{"code":"septembre","label":"septembre","is_default":false},{"code":"octobre","label":"octobre","is_default":false},{"code":"novembre","label":"novembre","is_default":false},{"code":"decembre","label":"décembre","is_default":false}]''',
+        ),
+      )
+      ..postM(
+        Endpoints.seasonalFruitsAndVegetablesSearch,
+        requestData: {'categorie': 'janvier'},
+        responseData: jsonDecode('''
 {
   "encore_plus_resultats_dispo": true,
   "resultats": [
@@ -529,11 +542,11 @@ void setServices() => FeatureContext.instance.dioMock
     }
   ]
 }'''),
-  )
-  ..postM(
-    Endpoints.seasonalFruitsAndVegetablesSearch,
-    requestData: {'categorie': 'juin'},
-    responseData: jsonDecode('''
+      )
+      ..postM(
+        Endpoints.seasonalFruitsAndVegetablesSearch,
+        requestData: {'categorie': 'juin'},
+        responseData: jsonDecode('''
 {
     "encore_plus_resultats_dispo": true,
     "resultats": [
@@ -787,11 +800,11 @@ void setServices() => FeatureContext.instance.dioMock
         }
     ]
 }'''),
-  );
+      );
 
 void setBicycleSimulator() => FeatureContext.instance.dioMock.postM(
-      Endpoints.simulerAideVelo,
-      responseData: jsonDecode('''
+  Endpoints.simulerAideVelo,
+  responseData: jsonDecode('''
 {
     "mécanique simple": [],
     "électrique": [],
@@ -802,4 +815,4 @@ void setBicycleSimulator() => FeatureContext.instance.dioMock.postM(
     "motorisation": [],
     "adapté": []
 }'''),
-    );
+);

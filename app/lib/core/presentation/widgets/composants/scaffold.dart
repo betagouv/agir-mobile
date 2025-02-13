@@ -17,10 +17,10 @@ class FnvScaffold extends StatelessWidget {
 
   @override
   Widget build(final context) => Scaffold(
-        appBar: appBar,
-        body: body,
-        drawer: drawer,
-        bottomNavigationBar: bottomNavigationBar,
-        backgroundColor: FnvColors.homeBackground,
-      );
+    appBar: appBar,
+    body: body,
+    drawer: drawer,
+    bottomNavigationBar: bottomNavigationBar,
+    backgroundColor: FnvColors.homeBackground,
+  );
 }

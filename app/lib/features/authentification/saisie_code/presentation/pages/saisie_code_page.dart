@@ -22,47 +22,49 @@ class SaisieCodePage extends StatelessWidget {
   final String email;
 
   static GoRoute get route => GoRoute(
-        path: path,
-        name: name,
-        builder: (final context, final state) =>
+    path: path,
+    name: name,
+    builder:
+        (final context, final state) =>
             SaisieCodePage(email: state.pathParameters['email']!),
-      );
+  );
 
   @override
   Widget build(final context) => BlocProvider(
-        create: (final context) => SaisieCodeBloc(
+    create:
+        (final context) => SaisieCodeBloc(
           authentificationRepository: context.read(),
           email: email,
         ),
-        child: FnvScaffold(
-          appBar: AppBar(
-            backgroundColor: FnvColors.homeBackground,
-            iconTheme: const IconThemeData(color: DsfrColors.blueFranceSun113),
+    child: FnvScaffold(
+      appBar: AppBar(
+        backgroundColor: FnvColors.homeBackground,
+        iconTheme: const IconThemeData(color: DsfrColors.blueFranceSun113),
+      ),
+      body: ListView(
+        padding: const EdgeInsets.all(paddingVerticalPage),
+        children: [
+          const Text(
+            Localisation.entrezLeCodeRecuParMail,
+            style: DsfrTextStyle.headline2(),
           ),
-          body: ListView(
-            padding: const EdgeInsets.all(paddingVerticalPage),
-            children: [
-              const Text(
-                Localisation.entrezLeCodeRecuParMail,
-                style: DsfrTextStyle.headline2(),
-              ),
-              const SizedBox(height: DsfrSpacings.s1w),
-              Text(
-                Localisation.entrezLeCodeRecuParMailDetails(email),
-                style: const DsfrTextStyle.bodyLg(),
-              ),
-              const SizedBox(height: DsfrSpacings.s3w),
-              const SaisieCodeInput(),
-              const _MessageErreur(),
-              const SizedBox(height: DsfrSpacings.s3w),
-              const Align(
-                alignment: Alignment.centerLeft,
-                child: _ButtonRenvoyerCode(),
-              ),
-            ],
+          const SizedBox(height: DsfrSpacings.s1w),
+          Text(
+            Localisation.entrezLeCodeRecuParMailDetails(email),
+            style: const DsfrTextStyle.bodyLg(),
           ),
-        ),
-      );
+          const SizedBox(height: DsfrSpacings.s3w),
+          const SaisieCodeInput(),
+          const _MessageErreur(),
+          const SizedBox(height: DsfrSpacings.s3w),
+          const Align(
+            alignment: Alignment.centerLeft,
+            child: _ButtonRenvoyerCode(),
+          ),
+        ],
+      ),
+    ),
+  );
 }
 
 class _MessageErreur extends StatelessWidget {
@@ -70,9 +72,7 @@ class _MessageErreur extends StatelessWidget {
 
   @override
   Widget build(final context) => context
-      .select<SaisieCodeBloc, Option<String>>(
-        (final bloc) => bloc.state.erreur,
-      )
+      .select<SaisieCodeBloc, Option<String>>((final bloc) => bloc.state.erreur)
       .fold(
         () => const SizedBox.shrink(),
         (final t) => Column(
@@ -89,18 +89,22 @@ class _ButtonRenvoyerCode extends StatelessWidget {
 
   @override
   Widget build(final context) => BlocListener<SaisieCodeBloc, SaisieCodeState>(
-        listener: (final context, final state) =>
-            ScaffoldMessenger.of(context).showSnackBar(
+    listener:
+        (final context, final state) => ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(
           const SnackBar(content: Text(Localisation.emailDeConnexionRenvoye)),
         ),
-        listenWhen: (final previous, final current) =>
+    listenWhen:
+        (final previous, final current) =>
             previous.renvoyerCodeDemande != current.renvoyerCodeDemande &&
             current.renvoyerCodeDemande,
-        child: DsfrLink.md(
-          label: Localisation.renvoyerEmailDeConnexion,
-          onTap: () => context.read<SaisieCodeBloc>().add(
-                const SaiseCodeRenvoyerCodeDemandee(),
-              ),
-        ),
-      );
+    child: DsfrLink.md(
+      label: Localisation.renvoyerEmailDeConnexion,
+      onTap:
+          () => context.read<SaisieCodeBloc>().add(
+            const SaiseCodeRenvoyerCodeDemandee(),
+          ),
+    ),
+  );
 }

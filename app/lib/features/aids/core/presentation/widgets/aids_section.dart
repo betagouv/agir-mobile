@@ -15,8 +15,8 @@ class AidsSection extends StatelessWidget {
 
   @override
   Widget build(final context) {
-    final bloc = context.read<AidsHomeBloc>()
-      ..add(const AidsHomeLoadRequested());
+    final bloc =
+        context.read<AidsHomeBloc>()..add(const AidsHomeLoadRequested());
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,10 +37,11 @@ class AidsSection extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               padding: EdgeInsets.zero,
-              itemBuilder: (final context, final index) =>
-                  AidCard(aid: aids[index]),
-              separatorBuilder: (final context, final index) =>
-                  const SizedBox(height: DsfrSpacings.s1w),
+              itemBuilder:
+                  (final context, final index) => AidCard(aid: aids[index]),
+              separatorBuilder:
+                  (final context, final index) =>
+                      const SizedBox(height: DsfrSpacings.s1w),
               itemCount: aids.length,
             );
           },

@@ -15,8 +15,7 @@ class FlutterSecureStorageFake implements FlutterSecureStorage {
     final WebOptions? webOptions,
     final MacOsOptions? mOptions,
     final WindowsOptions? wOptions,
-  }) async =>
-      _map.containsKey(key);
+  }) async => _map.containsKey(key);
 
   @override
   Future<void> delete({
@@ -52,8 +51,7 @@ class FlutterSecureStorageFake implements FlutterSecureStorage {
     final WebOptions? webOptions,
     final MacOsOptions? mOptions,
     final WindowsOptions? wOptions,
-  }) async =>
-      _map.containsKey(key) ? _map[key] : null;
+  }) async => _map.containsKey(key) ? _map[key] : null;
 
   @override
   Future<Map<String, String>> readAll({
@@ -63,8 +61,7 @@ class FlutterSecureStorageFake implements FlutterSecureStorage {
     final WebOptions? webOptions,
     final MacOsOptions? mOptions,
     final WindowsOptions? wOptions,
-  }) async =>
-      _map;
+  }) async => _map;
 
   @override
   Future<void> write({
@@ -105,8 +102,7 @@ class FlutterSecureStorageFake implements FlutterSecureStorage {
   void registerListener({
     required final String key,
     required final ValueChanged<String?> listener,
-  }) =>
-      throw UnimplementedError();
+  }) => throw UnimplementedError();
 
   @override
   void unregisterAllListeners() => throw UnimplementedError();
@@ -119,6 +115,5 @@ class FlutterSecureStorageFake implements FlutterSecureStorage {
   void unregisterListener({
     required final String key,
     required final ValueChanged<String?> listener,
-  }) =>
-      throw UnimplementedError();
+  }) => throw UnimplementedError();
 }

@@ -18,10 +18,10 @@ class Libre extends StatelessWidget {
     return DsfrInputHeadless(
       key: const ValueKey(Localisation.maReponse),
       controller: controller,
-      onChanged: (final value) =>
-          context.read<MieuxVousConnaitreEditBloc>().add(
-                MieuxVousConnaitreEditLibreChangee(value),
-              ),
+      onChanged:
+          (final value) => context.read<MieuxVousConnaitreEditBloc>().add(
+            MieuxVousConnaitreEditLibreChangee(value),
+          ),
       maxLines: 4,
       minLines: 3,
       inputConstraints: null,

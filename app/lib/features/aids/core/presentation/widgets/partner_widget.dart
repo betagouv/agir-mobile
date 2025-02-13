@@ -11,42 +11,38 @@ class PartnerWidget extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => Padding(
-        padding: const EdgeInsets.all(DsfrSpacings.s1w),
-        child: Row(
-          children: [
-            DecoratedBox(
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                border: Border.fromBorderSide(
-                  BorderSide(color: Color(0xffb1b1ff)),
-                ),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(DsfrSpacings.s1v5),
-                ),
-              ),
-              child: FnvImage.network(partner.logo, width: 40, height: 40),
-            ),
-            const SizedBox(width: DsfrSpacings.s1w),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    Localisation.proposePar,
-                    style: DsfrTextStyle.bodySmItalic(
-                      color: DsfrColors.blueFranceSun113,
-                    ),
-                  ),
-                  Text(
-                    partner.nom,
-                    style: const DsfrTextStyle.bodyMd(),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                  ),
-                ],
-              ),
-            ),
-          ],
+    padding: const EdgeInsets.all(DsfrSpacings.s1w),
+    child: Row(
+      children: [
+        DecoratedBox(
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            border: Border.fromBorderSide(BorderSide(color: Color(0xffb1b1ff))),
+            borderRadius: BorderRadius.all(Radius.circular(DsfrSpacings.s1v5)),
+          ),
+          child: FnvImage.network(partner.logo, width: 40, height: 40),
         ),
-      );
+        const SizedBox(width: DsfrSpacings.s1w),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                Localisation.proposePar,
+                style: DsfrTextStyle.bodySmItalic(
+                  color: DsfrColors.blueFranceSun113,
+                ),
+              ),
+              Text(
+                partner.nom,
+                style: const DsfrTextStyle.bodyMd(),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
 }

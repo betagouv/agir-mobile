@@ -17,40 +17,41 @@ class MissionIntroductionPage extends StatelessWidget {
 
   @override
   Widget build(final context) => ListView(
-        padding: const EdgeInsets.all(paddingVerticalPage),
-        children: [
-          Align(
-            alignment: Alignment.centerLeft,
-            child: ThemeTypeTag(themeType: step.themeType),
-          ),
-          const SizedBox(height: DsfrSpacings.s1w),
-          FnvTitle(title: step.title),
-          const SizedBox(height: DsfrSpacings.s3w),
-          FnvImage.network(
-            step.imageUrl,
-            width: MediaQuery.sizeOf(context).width,
-            height: MediaQuery.sizeOf(context).width * 190 / 328,
-          ),
-          const SizedBox(height: DsfrSpacings.s3w),
-          if (step.description != null) ...[
-            Text(step.description!, style: const DsfrTextStyle.bodyMdBold()),
-            const SizedBox(height: DsfrSpacings.s3w),
-          ],
-          SafeArea(
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: FittedBox(
-                child: DsfrButton(
-                  label: Localisation.commencer,
-                  variant: DsfrButtonVariant.primary,
-                  size: DsfrButtonSize.lg,
-                  onPressed: () => context
-                      .read<MissionBloc>()
-                      .add(const MissionNextRequested()),
-                ),
-              ),
+    padding: const EdgeInsets.all(paddingVerticalPage),
+    children: [
+      Align(
+        alignment: Alignment.centerLeft,
+        child: ThemeTypeTag(themeType: step.themeType),
+      ),
+      const SizedBox(height: DsfrSpacings.s1w),
+      FnvTitle(title: step.title),
+      const SizedBox(height: DsfrSpacings.s3w),
+      FnvImage.network(
+        step.imageUrl,
+        width: MediaQuery.sizeOf(context).width,
+        height: MediaQuery.sizeOf(context).width * 190 / 328,
+      ),
+      const SizedBox(height: DsfrSpacings.s3w),
+      if (step.description != null) ...[
+        Text(step.description!, style: const DsfrTextStyle.bodyMdBold()),
+        const SizedBox(height: DsfrSpacings.s3w),
+      ],
+      SafeArea(
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: FittedBox(
+            child: DsfrButton(
+              label: Localisation.commencer,
+              variant: DsfrButtonVariant.primary,
+              size: DsfrButtonSize.lg,
+              onPressed:
+                  () => context.read<MissionBloc>().add(
+                    const MissionNextRequested(),
+                  ),
             ),
           ),
-        ],
-      );
+        ),
+      ),
+    ],
+  );
 }

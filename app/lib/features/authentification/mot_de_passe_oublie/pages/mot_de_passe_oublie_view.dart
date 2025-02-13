@@ -15,39 +15,39 @@ class MotDePasseOublieView extends StatelessWidget {
 
   @override
   Widget build(final context) => FnvScaffold(
-        appBar: AppBar(
-          backgroundColor: FnvColors.homeBackground,
-          iconTheme: const IconThemeData(color: DsfrColors.blueFranceSun113),
+    appBar: AppBar(
+      backgroundColor: FnvColors.homeBackground,
+      iconTheme: const IconThemeData(color: DsfrColors.blueFranceSun113),
+    ),
+    body: ListView(
+      padding: const EdgeInsets.all(paddingVerticalPage),
+      children: [
+        const Text(
+          Localisation.motDePasseOublieTitre,
+          style: DsfrTextStyle.headline2(),
         ),
-        body: ListView(
-          padding: const EdgeInsets.all(paddingVerticalPage),
-          children: [
-            const Text(
-              Localisation.motDePasseOublieTitre,
-              style: DsfrTextStyle.headline2(),
-            ),
-            const SizedBox(height: DsfrSpacings.s1w),
-            const Text(
-              Localisation.motDePasseOublieDetails,
-              style: DsfrTextStyle.bodyLg(),
-            ),
-            const SizedBox(height: DsfrSpacings.s3w),
-            DsfrInput(
-              label: Localisation.adresseEmail,
-              hintText: Localisation.adresseEmailHint,
-              onChanged: (final value) =>
-                  context.read<MotDePasseOublieBloc>().add(
-                        MotDePasseOublieEmailChange(value),
-                      ),
-              autocorrect: false,
-              keyboardType: TextInputType.emailAddress,
-              autofillHints: const [AutofillHints.email],
-            ),
-            const SizedBox(height: DsfrSpacings.s2w),
-            const _Valider(),
-          ],
+        const SizedBox(height: DsfrSpacings.s1w),
+        const Text(
+          Localisation.motDePasseOublieDetails,
+          style: DsfrTextStyle.bodyLg(),
         ),
-      );
+        const SizedBox(height: DsfrSpacings.s3w),
+        DsfrInput(
+          label: Localisation.adresseEmail,
+          hintText: Localisation.adresseEmailHint,
+          onChanged:
+              (final value) => context.read<MotDePasseOublieBloc>().add(
+                MotDePasseOublieEmailChange(value),
+              ),
+          autocorrect: false,
+          keyboardType: TextInputType.emailAddress,
+          autofillHints: const [AutofillHints.email],
+        ),
+        const SizedBox(height: DsfrSpacings.s2w),
+        const _Valider(),
+      ],
+    ),
+  );
 }
 
 class _Valider extends StatelessWidget {
@@ -63,16 +63,18 @@ class _Valider extends StatelessWidget {
       label: Localisation.valider,
       variant: DsfrButtonVariant.primary,
       size: DsfrButtonSize.lg,
-      onPressed: emailEstValide
-          ? () async {
-              final bloc = context.read<MotDePasseOublieBloc>()
-                ..add(const MotDePasseOublieValider());
-              await GoRouter.of(context).pushNamed(
-                MotDePasseOublieCodePage.name,
-                pathParameters: {'email': bloc.state.email},
-              );
-            }
-          : null,
+      onPressed:
+          emailEstValide
+              ? () async {
+                final bloc =
+                    context.read<MotDePasseOublieBloc>()
+                      ..add(const MotDePasseOublieValider());
+                await GoRouter.of(context).pushNamed(
+                  MotDePasseOublieCodePage.name,
+                  pathParameters: {'email': bloc.state.email},
+                );
+              }
+              : null,
     );
   }
 }

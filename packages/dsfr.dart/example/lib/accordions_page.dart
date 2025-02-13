@@ -12,22 +12,24 @@ class AccordionsPage extends StatelessWidget {
 
   @override
   Widget build(final context) => ListView(
-        padding: const EdgeInsets.all(16),
-        children: [
-          DsfrAccordionsGroup(
-            values: [
-              DsfrAccordion(
-                headerBuilder: (final isExpanded) => isExpanded
-                    ? const Text('Header Expanded 1')
-                    : const Text('Header 1'),
-                body: const Text('Body 1'),
-              ),
-              DsfrAccordion(
-                headerBuilder: (final isExpanded) => const Text('Header 2'),
-                body: const Text('Body 2'),
-              ),
-            ],
+    padding: const EdgeInsets.all(16),
+    children: [
+      DsfrAccordionsGroup(
+        values: [
+          DsfrAccordion(
+            headerBuilder:
+                (final isExpanded) =>
+                    isExpanded
+                        ? const Text('Header Expanded 1')
+                        : const Text('Header 1'),
+            body: const Text('Body 1'),
+          ),
+          DsfrAccordion(
+            headerBuilder: (final isExpanded) => const Text('Header 2'),
+            body: const Text('Body 2'),
           ),
         ],
-      );
+      ),
+    ],
+  );
 }

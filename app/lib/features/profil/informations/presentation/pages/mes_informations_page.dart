@@ -18,18 +18,19 @@ class MesInformationsPage extends StatelessWidget {
   static const path = name;
 
   static GoRoute get route => GoRoute(
-        path: path,
-        name: name,
-        builder: (final context, final state) => const MesInformationsPage(),
-      );
+    path: path,
+    name: name,
+    builder: (final context, final state) => const MesInformationsPage(),
+  );
 
   @override
   Widget build(final context) => BlocProvider(
-        create: (final context) =>
+    create:
+        (final context) =>
             MesInformationsBloc(profilRepository: context.read())
               ..add(const MesInformationsRecuperationDemandee()),
-        child: const _MesInformationsView(),
-      );
+    child: const _MesInformationsView(),
+  );
 }
 
 class _MesInformationsView extends StatelessWidget {
@@ -37,37 +38,35 @@ class _MesInformationsView extends StatelessWidget {
 
   @override
   Widget build(final context) => FnvScaffold(
-        appBar: FnvAppBar(),
-        body: BlocBuilder<MesInformationsBloc, MesInformationsState>(
-          builder: (final context, final state) {
-            switch (state.statut) {
-              case MesInformationsStatut.initial:
-              case MesInformationsStatut.chargement:
-                return const Center(child: CircularProgressIndicator());
-              case MesInformationsStatut.succes:
-                return const MesInformationsForm();
-            }
-          },
-        ),
-        bottomNavigationBar: FnvBottomBar(
-          child: DsfrButton(
-            label: Localisation.mettreAJourMesInformations,
-            variant: DsfrButtonVariant.primary,
-            size: DsfrButtonSize.lg,
-            onPressed: () {
-              context
-                  .read<MesInformationsBloc>()
-                  .add(const MesInformationsMiseAJourDemandee());
-              ScaffoldMessenger.of(context)
-                ..hideCurrentSnackBar()
-                ..showSnackBar(
-                  const SnackBar(
-                    content: Text(Localisation.miseAJourEffectuee),
-                  ),
-                );
-              GoRouter.of(context).pop();
-            },
-          ),
-        ),
-      );
+    appBar: FnvAppBar(),
+    body: BlocBuilder<MesInformationsBloc, MesInformationsState>(
+      builder: (final context, final state) {
+        switch (state.statut) {
+          case MesInformationsStatut.initial:
+          case MesInformationsStatut.chargement:
+            return const Center(child: CircularProgressIndicator());
+          case MesInformationsStatut.succes:
+            return const MesInformationsForm();
+        }
+      },
+    ),
+    bottomNavigationBar: FnvBottomBar(
+      child: DsfrButton(
+        label: Localisation.mettreAJourMesInformations,
+        variant: DsfrButtonVariant.primary,
+        size: DsfrButtonSize.lg,
+        onPressed: () {
+          context.read<MesInformationsBloc>().add(
+            const MesInformationsMiseAJourDemandee(),
+          );
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              const SnackBar(content: Text(Localisation.miseAJourEffectuee)),
+            );
+          GoRouter.of(context).pop();
+        },
+      ),
+    ),
+  );
 }

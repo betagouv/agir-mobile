@@ -18,19 +18,20 @@ class MonLogementPage extends StatelessWidget {
   static const path = name;
 
   static GoRoute get route => GoRoute(
-        path: path,
-        name: name,
-        builder: (final context, final state) => const MonLogementPage(),
-      );
+    path: path,
+    name: name,
+    builder: (final context, final state) => const MonLogementPage(),
+  );
 
   @override
   Widget build(final context) => BlocProvider(
-        create: (final context) => MonLogementBloc(
+    create:
+        (final context) => MonLogementBloc(
           profilRepository: context.read(),
           communesRepository: context.read(),
         )..add(const MonLogementRecuperationDemandee()),
-        child: const _MonLogementView(),
-      );
+    child: const _MonLogementView(),
+  );
 }
 
 class _MonLogementView extends StatelessWidget {
@@ -38,37 +39,35 @@ class _MonLogementView extends StatelessWidget {
 
   @override
   Widget build(final context) => FnvScaffold(
-        appBar: FnvAppBar(),
-        body: BlocBuilder<MonLogementBloc, MonLogementState>(
-          builder: (final context, final state) {
-            switch (state.statut) {
-              case MonLogementStatut.initial:
-              case MonLogementStatut.chargement:
-                return const Center(child: CircularProgressIndicator());
-              case MonLogementStatut.succes:
-                return const MonLogementForm();
-            }
-          },
-        ),
-        bottomNavigationBar: FnvBottomBar(
-          child: DsfrButton(
-            label: Localisation.mettreAJourMesInformations,
-            variant: DsfrButtonVariant.primary,
-            size: DsfrButtonSize.lg,
-            onPressed: () {
-              context
-                  .read<MonLogementBloc>()
-                  .add(const MonLogementMiseAJourDemandee());
-              ScaffoldMessenger.of(context)
-                ..hideCurrentSnackBar()
-                ..showSnackBar(
-                  const SnackBar(
-                    content: Text(Localisation.miseAJourEffectuee),
-                  ),
-                );
-              GoRouter.of(context).pop();
-            },
-          ),
-        ),
-      );
+    appBar: FnvAppBar(),
+    body: BlocBuilder<MonLogementBloc, MonLogementState>(
+      builder: (final context, final state) {
+        switch (state.statut) {
+          case MonLogementStatut.initial:
+          case MonLogementStatut.chargement:
+            return const Center(child: CircularProgressIndicator());
+          case MonLogementStatut.succes:
+            return const MonLogementForm();
+        }
+      },
+    ),
+    bottomNavigationBar: FnvBottomBar(
+      child: DsfrButton(
+        label: Localisation.mettreAJourMesInformations,
+        variant: DsfrButtonVariant.primary,
+        size: DsfrButtonSize.lg,
+        onPressed: () {
+          context.read<MonLogementBloc>().add(
+            const MonLogementMiseAJourDemandee(),
+          );
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              const SnackBar(content: Text(Localisation.miseAJourEffectuee)),
+            );
+          GoRouter.of(context).pop();
+        },
+      ),
+    ),
+  );
 }

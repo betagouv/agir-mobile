@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class KnowYourCustomersBloc
     extends Bloc<KnowYourCustomersEvent, KnowYourCustomersState> {
   KnowYourCustomersBloc({required final KnowYourCustomersRepository repository})
-      : super(const KnowYourCustomersInitial()) {
+    : super(const KnowYourCustomersInitial()) {
     on<KnowYourCustomersStarted>((final event, final emit) async {
       emit(const KnowYourCustomersLoading());
       final result = await repository.fetchQuestions();

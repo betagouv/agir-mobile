@@ -13,13 +13,14 @@ class MotDePasseOublieCodeBloc
     on<MotDePasseOublieCodeCodeChange>(
       (final event, final emit) => emit(state.copyWith(code: event.valeur)),
     );
-    on<MotDePasseOublieCodeRenvoyerCodeDemande>(
-      (final event, final emit) async {
-        emit(state.copyWith(renvoyerCodeDemande: false));
-        await authentificationRepository.renvoyerCodeDemande(state.email);
-        emit(state.copyWith(renvoyerCodeDemande: true));
-      },
-    );
+    on<MotDePasseOublieCodeRenvoyerCodeDemande>((
+      final event,
+      final emit,
+    ) async {
+      emit(state.copyWith(renvoyerCodeDemande: false));
+      await authentificationRepository.renvoyerCodeDemande(state.email);
+      emit(state.copyWith(renvoyerCodeDemande: true));
+    });
     on<MotDePasseOublieCodeMotDePasseChange>((final event, final emit) {
       emit(state.copyWith(motDePasse: event.valeur));
     });

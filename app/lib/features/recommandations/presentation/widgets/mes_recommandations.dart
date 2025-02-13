@@ -15,9 +15,9 @@ class MesRecommandations extends StatelessWidget {
 
   @override
   Widget build(final context) {
-    context
-        .read<RecommandationsBloc>()
-        .add(RecommandationsRecuperationDemandee(theme));
+    context.read<RecommandationsBloc>().add(
+      RecommandationsRecuperationDemandee(theme),
+    );
 
     return const _View();
   }
@@ -28,26 +28,26 @@ class _View extends StatelessWidget {
 
   @override
   Widget build(final context) => const Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                Localisation.recommandationsTitre,
-                style: DsfrTextStyle.headline4(),
-              ),
-              SizedBox(height: DsfrSpacings.s1v5),
-              Text(
-                Localisation.themeRecommandationsSousTitre,
-                style: DsfrTextStyle.bodyMd(),
-              ),
-            ],
+          Text(
+            Localisation.recommandationsTitre,
+            style: DsfrTextStyle.headline4(),
           ),
-          SizedBox(height: DsfrSpacings.s2w),
-          _List(),
+          SizedBox(height: DsfrSpacings.s1v5),
+          Text(
+            Localisation.themeRecommandationsSousTitre,
+            style: DsfrTextStyle.bodyMd(),
+          ),
         ],
-      );
+      ),
+      SizedBox(height: DsfrSpacings.s2w),
+      _List(),
+    ],
+  );
 }
 
 class _List extends StatelessWidget {
@@ -63,24 +63,25 @@ class _List extends StatelessWidget {
       clipBehavior: Clip.none,
       child: IntrinsicHeight(
         child: Row(
-          children: recommandations
-              .map(
-                (final e) => RecommendationWidget(
-                  id: e.id,
-                  type: e.type,
-                  points: '${e.points}',
-                  imageUrl: e.imageUrl,
-                  themeTag: ThemeTypeTag(themeType: e.thematique),
-                  titre: e.titre,
-                  onPop: () {
-                    context
-                        .read<RecommandationsBloc>()
-                        .add(RecommandationsRecuperationDemandee(e.thematique));
-                  },
-                ),
-              )
-              .separator(const SizedBox(width: DsfrSpacings.s2w))
-              .toList(),
+          children:
+              recommandations
+                  .map(
+                    (final e) => RecommendationWidget(
+                      id: e.id,
+                      type: e.type,
+                      points: '${e.points}',
+                      imageUrl: e.imageUrl,
+                      themeTag: ThemeTypeTag(themeType: e.thematique),
+                      titre: e.titre,
+                      onPop: () {
+                        context.read<RecommandationsBloc>().add(
+                          RecommandationsRecuperationDemandee(e.thematique),
+                        );
+                      },
+                    ),
+                  )
+                  .separator(const SizedBox(width: DsfrSpacings.s2w))
+                  .toList(),
         ),
       ),
     );

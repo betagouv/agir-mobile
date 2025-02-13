@@ -20,17 +20,19 @@ class ActionsPage extends StatelessWidget {
   static const path = name;
 
   static GoRoute get route => GoRoute(
-        path: path,
-        name: name,
-        builder: (final context, final state) => const ActionsPage(),
-      );
+    path: path,
+    name: name,
+    builder: (final context, final state) => const ActionsPage(),
+  );
 
   @override
   Widget build(final BuildContext context) => BlocProvider(
-        create: (final context) => ActionsBloc(repository: context.read())
-          ..add(const ActionsLoadRequested()),
-        child: const _View(),
-      );
+    create:
+        (final context) =>
+            ActionsBloc(repository: context.read())
+              ..add(const ActionsLoadRequested()),
+    child: const _View(),
+  );
 }
 
 class _View extends StatelessWidget {
@@ -38,30 +40,29 @@ class _View extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => RootPage(
-        body: ListView(
-          padding: const EdgeInsets.all(paddingVerticalPage),
-          children: [
-            MarkdownBody(
-              data: Localisation.toutesLesActions,
-              styleSheet: MarkdownStyleSheet(
-                p: const DsfrTextStyle(fontSize: 24),
-              ),
-            ),
-            const SizedBox(height: 16),
-            BlocBuilder<ActionsBloc, ActionsState>(
-              builder: (final context, final state) => switch (state) {
-                ActionsInitial() ||
-                ActionsLoadInProgress() =>
-                  const Center(child: CircularProgressIndicator()),
+    body: ListView(
+      padding: const EdgeInsets.all(paddingVerticalPage),
+      children: [
+        MarkdownBody(
+          data: Localisation.toutesLesActions,
+          styleSheet: MarkdownStyleSheet(p: const DsfrTextStyle(fontSize: 24)),
+        ),
+        const SizedBox(height: 16),
+        BlocBuilder<ActionsBloc, ActionsState>(
+          builder:
+              (final context, final state) => switch (state) {
+                ActionsInitial() || ActionsLoadInProgress() => const Center(
+                  child: CircularProgressIndicator(),
+                ),
                 ActionsLoadSuccess() => _Success(state: state),
                 ActionsLoadFailure() => const Center(
-                    child: Text('Erreur lors du chargement des actions'),
-                  ),
+                  child: Text('Erreur lors du chargement des actions'),
+                ),
               },
-            ),
-          ],
         ),
-      );
+      ],
+    ),
+  );
 }
 
 class _Success extends StatelessWidget {
@@ -82,8 +83,8 @@ class _Success extends StatelessWidget {
         mainAxisSpacing: 16,
         crossAxisSpacing: 16,
       ),
-      itemBuilder: (final context, final index) =>
-          _Element(action: actions[index]),
+      itemBuilder:
+          (final context, final index) => _Element(action: actions[index]),
       itemCount: actions.length,
     );
   }
@@ -96,40 +97,38 @@ class _Element extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => FnvCard(
-        onTap: () async {
-          await GoRouter.of(context).pushNamed(
-            ActionPage.name,
-            pathParameters: ActionPage.pathParameters(
-              title: action.title,
-              id: action.id,
-            ),
-          );
-        },
-        child: Padding(
-          padding: const EdgeInsets.all(DsfrSpacings.s2w),
-          child: Column(
-            children: [
-              MarkdownBody(
-                data: action.title,
-                styleSheet: MarkdownStyleSheet(
-                  p: const DsfrTextStyle.bodyMd(),
-                ),
-              ),
-              const SizedBox(height: DsfrSpacings.s2w),
-              _Information(
-                icon: DsfrIcons.userTeamLine,
-                value: action.numberOfActionsCompleted,
-                suffix: Localisation.action,
-              ),
-              _Information(
-                icon: DsfrIcons.financeMoneyEuroCircleLine,
-                value: action.numberOfAidsAvailable,
-                suffix: Localisation.aide,
-              ),
-            ],
-          ),
+    onTap: () async {
+      await GoRouter.of(context).pushNamed(
+        ActionPage.name,
+        pathParameters: ActionPage.pathParameters(
+          title: action.title,
+          id: action.id,
         ),
       );
+    },
+    child: Padding(
+      padding: const EdgeInsets.all(DsfrSpacings.s2w),
+      child: Column(
+        children: [
+          MarkdownBody(
+            data: action.title,
+            styleSheet: MarkdownStyleSheet(p: const DsfrTextStyle.bodyMd()),
+          ),
+          const SizedBox(height: DsfrSpacings.s2w),
+          _Information(
+            icon: DsfrIcons.userTeamLine,
+            value: action.numberOfActionsCompleted,
+            suffix: Localisation.action,
+          ),
+          _Information(
+            icon: DsfrIcons.financeMoneyEuroCircleLine,
+            value: action.numberOfAidsAvailable,
+            suffix: Localisation.aide,
+          ),
+        ],
+      ),
+    ),
+  );
 }
 
 class _Information extends StatelessWidget {
@@ -144,25 +143,30 @@ class _Information extends StatelessWidget {
   final String suffix;
 
   @override
-  Widget build(final BuildContext context) => value == 0
-      ? const SizedBox()
-      : ConstrainedBox(
-          constraints: const BoxConstraints(minHeight: 24),
-          child: Row(
-            children: [
-              ExcludeSemantics(
-                child: Icon(icon, size: 18, color: DsfrColors.blueFranceSun113),
-              ),
-              const SizedBox(width: 8),
-              MarkdownBody(
-                data: '**$value** $suffix${value > 1 ? 's' : ''}',
-                styleSheet: MarkdownStyleSheet(
-                  p: const DsfrTextStyle.bodySmMedium(
-                    color: Color(0xff5d5d5d),
+  Widget build(final BuildContext context) =>
+      value == 0
+          ? const SizedBox()
+          : ConstrainedBox(
+            constraints: const BoxConstraints(minHeight: 24),
+            child: Row(
+              children: [
+                ExcludeSemantics(
+                  child: Icon(
+                    icon,
+                    size: 18,
+                    color: DsfrColors.blueFranceSun113,
                   ),
                 ),
-              ),
-            ],
-          ),
-        );
+                const SizedBox(width: 8),
+                MarkdownBody(
+                  data: '**$value** $suffix${value > 1 ? 's' : ''}',
+                  styleSheet: MarkdownStyleSheet(
+                    p: const DsfrTextStyle.bodySmMedium(
+                      color: Color(0xff5d5d5d),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
 }

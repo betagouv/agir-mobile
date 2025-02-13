@@ -29,17 +29,19 @@ class AidsPage extends StatelessWidget {
   static const path = name;
 
   static GoRoute get route => GoRoute(
-        path: path,
-        name: name,
-        builder: (final context, final state) => const AidsPage(),
-      );
+    path: path,
+    name: name,
+    builder: (final context, final state) => const AidsPage(),
+  );
 
   @override
   Widget build(final context) => BlocProvider(
-        create: (final context) => AidListBloc(aidsRepository: context.read())
-          ..add(const AidListFetch()),
-        child: const RootPage(body: _View()),
-      );
+    create:
+        (final context) =>
+            AidListBloc(aidsRepository: context.read())
+              ..add(const AidListFetch()),
+    child: const RootPage(body: _View()),
+  );
 }
 
 class _View extends StatelessWidget {
@@ -47,14 +49,14 @@ class _View extends StatelessWidget {
 
   @override
   Widget build(final context) => BlocBuilder<AidListBloc, AidListState>(
-        builder: (final context, final state) => switch (state) {
+    builder:
+        (final context, final state) => switch (state) {
           AidListInitial() ||
           AidListLoadInProgress() ||
-          AidListLoadFailure() =>
-            const SizedBox(),
+          AidListLoadFailure() => const SizedBox(),
           AidListLoadSuccess() => _Success(state: state),
         },
-      );
+  );
 }
 
 class _Success extends StatelessWidget {
@@ -64,23 +66,26 @@ class _Success extends StatelessWidget {
 
   @override
   Widget build(final context) => ListView(
-        children: [
-          if (!state.isCovered)
-            BlocBuilder<AidsDisclaimerCubit, AidsDisclaimerState>(
-              builder: (final context, final state) => switch (state) {
+    children: [
+      if (!state.isCovered)
+        BlocBuilder<AidsDisclaimerCubit, AidsDisclaimerState>(
+          builder:
+              (final context, final state) => switch (state) {
                 AidsDisclaimerVisible() => DsfrNotice(
-                    titre: Localisation.leServiveNeCouvrePasEncoreVotreVille,
-                    description: Localisation
-                        .leServiveNeCouvrePasEncoreVotreVilleDescription,
-                    onClose: () =>
-                        context.read<AidsDisclaimerCubit>().closeDisclaimer(),
-                  ),
+                  titre: Localisation.leServiveNeCouvrePasEncoreVotreVille,
+                  description:
+                      Localisation
+                          .leServiveNeCouvrePasEncoreVotreVilleDescription,
+                  onClose:
+                      () =>
+                          context.read<AidsDisclaimerCubit>().closeDisclaimer(),
+                ),
                 AidsDisclaimerNotVisible() => const SizedBox(),
               },
-            ),
-          SafeArea(child: _List(state: state)),
-        ],
-      );
+        ),
+      SafeArea(child: _List(state: state)),
+    ],
+  );
 }
 
 class _List extends StatelessWidget {
@@ -90,43 +95,45 @@ class _List extends StatelessWidget {
 
   @override
   Widget build(final context) => Padding(
-        padding: const EdgeInsets.all(paddingVerticalPage),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+    padding: const EdgeInsets.all(paddingVerticalPage),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        MarkdownBody(
+          data: Localisation.assistanceListTitle,
+          styleSheet: MarkdownStyleSheet(
+            p: const DsfrTextStyle.headline2(),
+            strong: const DsfrTextStyle.headline2(
+              color: DsfrColors.blueFranceSun113,
+            ),
+          ),
+        ),
+        const SizedBox(height: DsfrSpacings.s3w),
+        Wrap(
+          spacing: DsfrSpacings.s1w,
+          runSpacing: DsfrSpacings.s1w,
           children: [
-            MarkdownBody(
-              data: Localisation.assistanceListTitle,
-              styleSheet: MarkdownStyleSheet(
-                p: const DsfrTextStyle.headline2(),
-                strong: const DsfrTextStyle.headline2(
-                  color: DsfrColors.blueFranceSun113,
-                ),
-              ),
+            _Tag(
+              label: Localisation.tout,
+              value: null,
+              groupValue: state.themeSelected,
             ),
-            const SizedBox(height: DsfrSpacings.s3w),
-            Wrap(
-              spacing: DsfrSpacings.s1w,
-              runSpacing: DsfrSpacings.s1w,
-              children: [
-                _Tag(
-                  label: Localisation.tout,
-                  value: null,
-                  groupValue: state.themeSelected,
+            ...ThemeType.values
+                .where(state.themes.containsKey)
+                .map(
+                  (final e) => _Tag(
+                    label: e.displayNameWithoutEmoji,
+                    value: e,
+                    groupValue: state.themeSelected,
+                  ),
                 ),
-                ...ThemeType.values.where(state.themes.containsKey).map(
-                      (final e) => _Tag(
-                        label: e.displayNameWithoutEmoji,
-                        value: e,
-                        groupValue: state.themeSelected,
-                      ),
-                    ),
-              ],
-            ),
-            const SizedBox(height: DsfrSpacings.s4w),
-            _Elements(themes: state.currentTheme),
           ],
         ),
-      );
+        const SizedBox(height: DsfrSpacings.s4w),
+        _Elements(themes: state.currentTheme),
+      ],
+    ),
+  );
 }
 
 class _Tag extends StatelessWidget {
@@ -155,10 +162,12 @@ class _Tag extends StatelessWidget {
         child: DecoratedBox(
           decoration: BoxDecoration(
             color: isSelected ? selectedColor : null,
-            border:
-                const Border.fromBorderSide(BorderSide(color: selectedColor)),
-            borderRadius:
-                const BorderRadius.all(Radius.circular(DsfrSpacings.s4w)),
+            border: const Border.fromBorderSide(
+              BorderSide(color: selectedColor),
+            ),
+            borderRadius: const BorderRadius.all(
+              Radius.circular(DsfrSpacings.s4w),
+            ),
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
@@ -198,8 +207,9 @@ class _Elements extends StatelessWidget {
 
         return _ThemeSection(themeType: a.key, assistances: a.value);
       },
-      separatorBuilder: (final context, final index) =>
-          const SizedBox(height: DsfrSpacings.s3w),
+      separatorBuilder:
+          (final context, final index) =>
+              const SizedBox(height: DsfrSpacings.s3w),
       itemCount: entries.length,
     );
   }
@@ -213,27 +223,28 @@ class _ThemeSection extends StatelessWidget {
 
   @override
   Widget build(final context) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            themeType.displayName,
-            style: const DsfrTextStyle.headline4(),
-            semanticsLabel: themeType.displayNameWithoutEmoji,
-          ),
-          const SizedBox(height: DsfrSpacings.s2w),
-          ListView.separated(
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            padding: EdgeInsets.zero,
-            itemBuilder: (final context, final index) => _AssitanceCard(
-              assistance: assistances[index],
-            ),
-            separatorBuilder: (final context, final index) =>
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        themeType.displayName,
+        style: const DsfrTextStyle.headline4(),
+        semanticsLabel: themeType.displayNameWithoutEmoji,
+      ),
+      const SizedBox(height: DsfrSpacings.s2w),
+      ListView.separated(
+        physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        padding: EdgeInsets.zero,
+        itemBuilder:
+            (final context, final index) =>
+                _AssitanceCard(assistance: assistances[index]),
+        separatorBuilder:
+            (final context, final index) =>
                 const SizedBox(height: DsfrSpacings.s1w),
-            itemCount: assistances.length,
-          ),
-        ],
-      );
+        itemCount: assistances.length,
+      ),
+    ],
+  );
 }
 
 class _AssitanceCard extends StatelessWidget {
@@ -243,52 +254,49 @@ class _AssitanceCard extends StatelessWidget {
 
   @override
   Widget build(final context) => FnvCard(
-        onTap: () async {
-          context.read<AidBloc>().add(AidSelected(assistance));
-          context.read<Tracker>().trackClick('Aides', assistance.title);
-          await GoRouter.of(context).pushNamed(AidPage.name);
-        },
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(DsfrSpacings.s2w),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        if (assistance.aUnSimulateur) ...[
-                          const SimulatorTag(),
-                          const SizedBox(width: DsfrSpacings.s1w),
-                        ],
-                        Text(
-                          assistance.title,
-                          style: const DsfrTextStyle.bodyMd(),
-                        ),
-                        if (assistance.amountMax != null) ...[
-                          const SizedBox(height: DsfrSpacings.s1w),
-                          _AmountMax(value: assistance.amountMax!),
-                        ],
-                      ],
-                    ),
-                  ),
-                  const SizedBox(width: DsfrSpacings.s2w),
-                  const Icon(
-                    DsfrIcons.systemArrowRightSLine,
-                    color: DsfrColors.blueFranceSun113,
-                  ),
-                ],
+    onTap: () async {
+      context.read<AidBloc>().add(AidSelected(assistance));
+      context.read<Tracker>().trackClick('Aides', assistance.title);
+      await GoRouter.of(context).pushNamed(AidPage.name);
+    },
+    child: Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(DsfrSpacings.s2w),
+          child: Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (assistance.aUnSimulateur) ...[
+                      const SimulatorTag(),
+                      const SizedBox(width: DsfrSpacings.s1w),
+                    ],
+                    Text(assistance.title, style: const DsfrTextStyle.bodyMd()),
+                    if (assistance.amountMax != null) ...[
+                      const SizedBox(height: DsfrSpacings.s1w),
+                      _AmountMax(value: assistance.amountMax!),
+                    ],
+                  ],
+                ),
               ),
-            ),
-            if (assistance.partner != null)
-              Ink(
-                color: const Color(0xffeef2ff),
-                child: PartnerWidget(partner: assistance.partner!),
+              const SizedBox(width: DsfrSpacings.s2w),
+              const Icon(
+                DsfrIcons.systemArrowRightSLine,
+                color: DsfrColors.blueFranceSun113,
               ),
-          ],
+            ],
+          ),
         ),
-      );
+        if (assistance.partner != null)
+          Ink(
+            color: const Color(0xffeef2ff),
+            child: PartnerWidget(partner: assistance.partner!),
+          ),
+      ],
+    ),
+  );
 }
 
 class _AmountMax extends StatelessWidget {
@@ -298,23 +306,23 @@ class _AmountMax extends StatelessWidget {
 
   @override
   Widget build(final context) => Text.rich(
-        TextSpan(
-          children: [
-            const WidgetSpan(
-              alignment: PlaceholderAlignment.middle,
-              child: Icon(
-                DsfrIcons.financeMoneyEuroCircleLine,
-                color: DsfrColors.blueFranceSun113,
-              ),
-            ),
-            const WidgetSpan(child: SizedBox(width: DsfrSpacings.s1w)),
-            const TextSpan(text: Localisation.jusqua),
-            TextSpan(
-              text: Localisation.euro(value),
-              style: const DsfrTextStyle.bodySmBold(),
-            ),
-          ],
+    TextSpan(
+      children: [
+        const WidgetSpan(
+          alignment: PlaceholderAlignment.middle,
+          child: Icon(
+            DsfrIcons.financeMoneyEuroCircleLine,
+            color: DsfrColors.blueFranceSun113,
+          ),
         ),
-        style: const DsfrTextStyle.bodySm(),
-      );
+        const WidgetSpan(child: SizedBox(width: DsfrSpacings.s1w)),
+        const TextSpan(text: Localisation.jusqua),
+        TextSpan(
+          text: Localisation.euro(value),
+          style: const DsfrTextStyle.bodySmBold(),
+        ),
+      ],
+    ),
+    style: const DsfrTextStyle.bodySm(),
+  );
 }

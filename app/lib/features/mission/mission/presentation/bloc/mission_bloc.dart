@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MissionBloc extends Bloc<MissionEvent, MissionState> {
   MissionBloc({required final MissionRepository missionRepository})
-      : super(const MissionInitial()) {
+    : super(const MissionInitial()) {
     on<MissionLoadRequested>((final event, final emit) async {
       emit(const MissionLoading());
       final mission = await missionRepository.fetch(event.code);

@@ -35,8 +35,9 @@ void main() {
       await iEnterInThePinField(tester, '999999');
       await iSee(tester, 'Bienvenue sur J’agis ! Faisons connaissance...');
     });
-    testWidgets('''See the error message when the email already exists''',
-        (tester) async {
+    testWidgets('''See the error message when the email already exists''', (
+      tester,
+    ) async {
       await bddSetUp(tester);
       await theEmailAlreadyExists(tester);
       await iEnterInTheField(tester, 'joe@doe.fr', 'Mon adresse email');

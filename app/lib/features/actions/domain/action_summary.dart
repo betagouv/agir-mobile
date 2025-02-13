@@ -15,9 +15,9 @@ final class ActionSummary extends Equatable {
 
   @override
   List<Object?> get props => [
-        id,
-        title,
-        numberOfActionsCompleted,
-        numberOfAidsAvailable,
-      ];
+    id,
+    title,
+    numberOfActionsCompleted,
+    numberOfAidsAvailable,
+  ];
 }

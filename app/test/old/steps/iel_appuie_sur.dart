@@ -8,17 +8,17 @@ Future<void> ielAppuieSur(final WidgetTester tester, final String text) async {
 }
 
 Finder findTextInGestureDetector(final String text) => find.descendant(
-      of: find.byType(GestureDetector),
-      matching: find.byWidgetPredicate((final widget) {
-        if (widget is RichText) {
-          final combinedText = _extractTextFromRichText(widget);
+  of: find.byType(GestureDetector),
+  matching: find.byWidgetPredicate((final widget) {
+    if (widget is RichText) {
+      final combinedText = _extractTextFromRichText(widget);
 
-          return combinedText.contains(text);
-        }
+      return combinedText.contains(text);
+    }
 
-        return false;
-      }),
-    );
+    return false;
+  }),
+);
 
 String _extractTextFromRichText(final RichText richText) =>
     _extractTextFromTextSpan(richText.text);

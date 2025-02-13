@@ -9,7 +9,7 @@ import 'package:fpdart/fpdart.dart';
 
 final class FirstNameRepository {
   const FirstNameRepository({required final DioHttpClient client})
-      : _client = client;
+    : _client = client;
 
   final DioHttpClient _client;
 
@@ -24,8 +24,8 @@ final class FirstNameRepository {
     return isResponseSuccessful(response.statusCode)
         ? const Right(unit)
         : handleError(
-            jsonEncode(response.data),
-            defaultMessage: 'Erreur lors de la mise à jour du prénom',
-          );
+          jsonEncode(response.data),
+          defaultMessage: 'Erreur lors de la mise à jour du prénom',
+        );
   }
 }

@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MissionHomeBloc extends Bloc<MissionHomeEvent, MissionHomeState> {
   MissionHomeBloc({required final MissionHomeRepository repository})
-      : super(const MissionHomeInitial()) {
+    : super(const MissionHomeInitial()) {
     on<MissionHomeFetch>((final event, final emit) async {
       final result = await repository.fetch();
       result.fold(

@@ -7,7 +7,7 @@ import 'package:fpdart/fpdart.dart';
 
 class KnowYourCustomersRepository {
   const KnowYourCustomersRepository({required final DioHttpClient client})
-      : _client = client;
+    : _client = client;
 
   final DioHttpClient _client;
 

@@ -63,14 +63,15 @@ class _Favorites extends StatelessWidget {
 
   @override
   Widget build(final context) => DsfrToggleSwitch(
-        label: Localisation.mesFavoris,
-        value: context.select<BibliothequeBloc, bool>(
-          (final value) => value.state.isFavorites,
+    label: Localisation.mesFavoris,
+    value: context.select<BibliothequeBloc, bool>(
+      (final value) => value.state.isFavorites,
+    ),
+    onChanged:
+        (final value) => context.read<BibliothequeBloc>().add(
+          BibliothequeFavorisSelectionnee(value),
         ),
-        onChanged: (final value) => context.read<BibliothequeBloc>().add(
-              BibliothequeFavorisSelectionnee(value),
-            ),
-      );
+  );
 }
 
 class _Thematiques extends StatelessWidget {
@@ -86,15 +87,16 @@ class _Thematiques extends StatelessWidget {
     return Wrap(
       spacing: s1w,
       runSpacing: s1w,
-      children: filtres
-          .map(
-            (final thematique) => _Tag(
-              label: thematique.titre,
-              thematique: thematique.code,
-              choisi: thematique.choisi,
-            ),
-          )
-          .toList(),
+      children:
+          filtres
+              .map(
+                (final thematique) => _Tag(
+                  label: thematique.titre,
+                  thematique: thematique.code,
+                  choisi: thematique.choisi,
+                ),
+              )
+              .toList(),
     );
   }
 }
@@ -130,7 +132,8 @@ class _TagState extends State<_Tag> with MaterialStateMixin<_Tag> {
           borderRadius: borderRadius,
         ),
         child: InkWell(
-          onTap: () => context.read<BibliothequeBloc>().add(
+          onTap:
+              () => context.read<BibliothequeBloc>().add(
                 BibliothequeThematiqueSelectionnee(widget.thematique),
               ),
           onHighlightChanged: updateMaterialState(WidgetState.pressed),
@@ -171,20 +174,20 @@ class _ChampRechercheState extends State<_ChampRecherche> {
 
   @override
   Widget build(final context) => DsfrInput(
-        label: Localisation.rechercherParTitre,
-        onChanged: (final value) {
-          if (_timer?.isActive ?? false) {
-            _timer?.cancel();
-          }
-          _timer = Timer(
-            const Duration(milliseconds: 500),
-            () => context.read<BibliothequeBloc>().add(
-                  BibliothequeRechercheSaisie(value),
-                ),
-          );
-        },
-        keyboardType: TextInputType.text,
+    label: Localisation.rechercherParTitre,
+    onChanged: (final value) {
+      if (_timer?.isActive ?? false) {
+        _timer?.cancel();
+      }
+      _timer = Timer(
+        const Duration(milliseconds: 500),
+        () => context.read<BibliothequeBloc>().add(
+          BibliothequeRechercheSaisie(value),
+        ),
       );
+    },
+    keyboardType: TextInputType.text,
+  );
 }
 
 class _Nombre extends StatelessWidget {
@@ -214,24 +217,25 @@ class _SliverListe extends StatelessWidget {
 
     return contenus.isEmpty
         ? SliverFillRemaining(
-            hasScrollBody: false,
-            child: Column(
-              children: [
-                FnvSvg.asset(AssetImages.bibliothequeEmpty),
-                const SizedBox(height: DsfrSpacings.s2w),
-                const Text(
-                  Localisation.bibliothequeAucunArticle,
-                  style: DsfrTextStyle.headline4(),
-                ),
-              ],
-            ),
-          )
+          hasScrollBody: false,
+          child: Column(
+            children: [
+              FnvSvg.asset(AssetImages.bibliothequeEmpty),
+              const SizedBox(height: DsfrSpacings.s2w),
+              const Text(
+                Localisation.bibliothequeAucunArticle,
+                style: DsfrTextStyle.headline4(),
+              ),
+            ],
+          ),
+        )
         : SliverList.separated(
-            itemBuilder: (final context, final index) =>
-                Contenu(contenu: contenus[index]),
-            separatorBuilder: (final context, final index) =>
-                const SizedBox(height: DsfrSpacings.s2w),
-            itemCount: contenus.length,
-          );
+          itemBuilder:
+              (final context, final index) => Contenu(contenu: contenus[index]),
+          separatorBuilder:
+              (final context, final index) =>
+                  const SizedBox(height: DsfrSpacings.s2w),
+          itemCount: contenus.length,
+        );
   }
 }

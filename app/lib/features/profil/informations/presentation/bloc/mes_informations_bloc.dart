@@ -7,7 +7,7 @@ import 'package:fpdart/fpdart.dart';
 class MesInformationsBloc
     extends Bloc<MesInformationsEvent, MesInformationsState> {
   MesInformationsBloc({required final ProfilRepository profilRepository})
-      : super(const MesInformationsState.empty()) {
+    : super(const MesInformationsState.empty()) {
     on<MesInformationsRecuperationDemandee>((final event, final emit) async {
       emit(state.copyWith(statut: MesInformationsStatut.chargement));
       final result = await profilRepository.recupererProfil();

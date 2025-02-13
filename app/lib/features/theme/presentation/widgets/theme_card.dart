@@ -12,15 +12,15 @@ class ThemeCard extends StatelessWidget {
 
   @override
   Widget build(final context) => Stack(
-        alignment: Alignment.topCenter,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 11),
-            child: _Card(onTap: onTap, child: child),
-          ),
-          if (badge != null) badge!,
-        ],
-      );
+    alignment: Alignment.topCenter,
+    children: [
+      Padding(
+        padding: const EdgeInsets.only(top: 11),
+        child: _Card(onTap: onTap, child: child),
+      ),
+      if (badge != null) badge!,
+    ],
+  );
 }
 
 class _Card extends StatefulWidget {

@@ -9,9 +9,9 @@ class DsfrButtonForegroundColor extends WidgetStateColor {
   DsfrButtonForegroundColor({
     required final Color $default,
     required final Color disabled,
-  })  : _default = $default,
-        _disabled = disabled,
-        super($default.value);
+  }) : _default = $default,
+       _disabled = disabled,
+       super($default.value);
 
   factory DsfrButtonForegroundColor.fromVariant(
     final DsfrButtonVariant variant,

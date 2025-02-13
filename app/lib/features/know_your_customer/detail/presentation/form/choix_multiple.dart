@@ -12,13 +12,15 @@ class ChoixMultiple extends StatelessWidget {
 
   @override
   Widget build(final context) => FnvCheckboxSet(
-        options: question.responses.map((final e) => e.label).toList(),
-        selectedOptions: question.responses
+    options: question.responses.map((final e) => e.label).toList(),
+    selectedOptions:
+        question.responses
             .where((final e) => e.isSelected)
             .map((final e) => e.label)
             .toList(),
-        onChanged: (final value) => context
-            .read<MieuxVousConnaitreEditBloc>()
-            .add(MieuxVousConnaitreEditChoixMultipleChangee(value)),
-      );
+    onChanged:
+        (final value) => context.read<MieuxVousConnaitreEditBloc>().add(
+          MieuxVousConnaitreEditChoixMultipleChangee(value),
+        ),
+  );
 }

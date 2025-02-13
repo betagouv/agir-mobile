@@ -16,11 +16,12 @@ class MieuxVousConnaitreEditPage extends StatelessWidget {
   static const path = '$name/:id';
 
   static GoRoute get route => GoRoute(
-        path: path,
-        name: name,
-        builder: (final context, final state) =>
+    path: path,
+    name: name,
+    builder:
+        (final context, final state) =>
             MieuxVousConnaitreEditPage(id: state.pathParameters['id']!),
-      );
+  );
 
   final String id;
 
@@ -48,32 +49,30 @@ class _ViewState extends State<_View> {
 
   @override
   Widget build(final context) => FnvScaffold(
-        appBar: FnvAppBar(),
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.all(paddingVerticalPage),
-          child: MieuxVousConnaitreForm(
-            id: widget.id,
-            controller: _mieuxVousConnaitreController,
-            onSaved: () {
-              ScaffoldMessenger.of(context)
-                ..hideCurrentSnackBar()
-                ..showSnackBar(
-                  const SnackBar(
-                    content: Text(Localisation.miseAJourEffectuee),
-                  ),
-                );
-              GoRouter.of(context).pop<bool>(true);
-            },
-          ),
-        ),
-        bottomNavigationBar: FnvBottomBar(
-          child: DsfrButton(
-            label: Localisation.mettreAJour,
-            icon: DsfrIcons.deviceSave3Fill,
-            variant: DsfrButtonVariant.primary,
-            size: DsfrButtonSize.lg,
-            onPressed: _mieuxVousConnaitreController.save,
-          ),
-        ),
-      );
+    appBar: FnvAppBar(),
+    body: SingleChildScrollView(
+      padding: const EdgeInsets.all(paddingVerticalPage),
+      child: MieuxVousConnaitreForm(
+        id: widget.id,
+        controller: _mieuxVousConnaitreController,
+        onSaved: () {
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              const SnackBar(content: Text(Localisation.miseAJourEffectuee)),
+            );
+          GoRouter.of(context).pop<bool>(true);
+        },
+      ),
+    ),
+    bottomNavigationBar: FnvBottomBar(
+      child: DsfrButton(
+        label: Localisation.mettreAJour,
+        icon: DsfrIcons.deviceSave3Fill,
+        variant: DsfrButtonVariant.primary,
+        size: DsfrButtonSize.lg,
+        onPressed: _mieuxVousConnaitreController.save,
+      ),
+    ),
+  );
 }

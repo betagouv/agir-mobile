@@ -10,13 +10,11 @@ class MonLogementCombienEtesVous extends StatelessWidget {
 
   @override
   Widget build(final context) => const Column(
-        children: [
-          ProfilTitrePartie(
-            titre: Localisation.combienEtesVousDansVotreLogement,
-          ),
-          SizedBox(height: DsfrSpacings.s2w),
-          MonLogementNombreAdultes(),
-          MonLogementNombreEnfants(),
-        ],
-      );
+    children: [
+      ProfilTitrePartie(titre: Localisation.combienEtesVousDansVotreLogement),
+      SizedBox(height: DsfrSpacings.s2w),
+      MonLogementNombreAdultes(),
+      MonLogementNombreEnfants(),
+    ],
+  );
 }

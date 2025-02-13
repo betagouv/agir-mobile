@@ -17,10 +17,12 @@ class LvaoHorizontalList extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => BlocProvider(
-        create: (final context) => LvaoBloc(repository: context.read())
-          ..add(LvaoLoadRequested(category)),
-        child: const _Part(),
-      );
+    create:
+        (final context) =>
+            LvaoBloc(repository: context.read())
+              ..add(LvaoLoadRequested(category)),
+    child: const _Part(),
+  );
 }
 
 class _Part extends StatelessWidget {
@@ -28,14 +30,14 @@ class _Part extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => BlocBuilder<LvaoBloc, LvaoState>(
-        builder: (final context, final state) => switch (state) {
+    builder:
+        (final context, final state) => switch (state) {
           LvaoInitial() ||
           LvaoLoadInProgress() ||
-          LvaoLoadFailure() =>
-            const SizedBox(),
+          LvaoLoadFailure() => const SizedBox(),
           LvaoLoadSuccess() => _Success(state: state),
         },
-      );
+  );
 }
 
 class _Success extends StatelessWidget {
@@ -45,35 +47,35 @@ class _Success extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                MarkdownBody(
-                  data:
-                      'Où faire **réparer** ?', // TODO(lsaudon): Ajouter la ville
-                  styleSheet: MarkdownStyleSheet(
-                    p: const DsfrTextStyle(fontSize: 22),
-                  ),
-                ),
-                const Text(
-                  'Trouvez les cordonniers et réparateurs agréés près de chez vous pour bénéficier d’une aide d’État', // TODO(lsaudon): Texte pour réparation
-                  style: DsfrTextStyle(fontSize: 16),
-                ),
-              ],
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            MarkdownBody(
+              data: 'Où faire **réparer** ?', // TODO(lsaudon): Ajouter la ville
+              styleSheet: MarkdownStyleSheet(
+                p: const DsfrTextStyle(fontSize: 22),
+              ),
             ),
-          ),
-          const SizedBox(height: DsfrSpacings.s1w),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
-            clipBehavior: Clip.none,
-            child: IntrinsicHeight(
-              child: Row(
-                children: state.actors
+            const Text(
+              'Trouvez les cordonniers et réparateurs agréés près de chez vous pour bénéficier d’une aide d’État', // TODO(lsaudon): Texte pour réparation
+              style: DsfrTextStyle(fontSize: 16),
+            ),
+          ],
+        ),
+      ),
+      const SizedBox(height: DsfrSpacings.s1w),
+      SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
+        clipBehavior: Clip.none,
+        child: IntrinsicHeight(
+          child: Row(
+            children:
+                state.actors
                     .map(
                       (final e) => FnvCard(
                         child: SizedBox(
@@ -118,10 +120,12 @@ class _Success extends StatelessWidget {
                                             e.distanceInMeters,
                                           ),
                                         ),
-                                        backgroundColor:
-                                            const Color(0xffEAEAEA),
-                                        foregroundColor:
-                                            const Color(0xff3F3F3F),
+                                        backgroundColor: const Color(
+                                          0xffEAEAEA,
+                                        ),
+                                        foregroundColor: const Color(
+                                          0xff3F3F3F,
+                                        ),
                                         textStyle:
                                             const DsfrTextStyle.bodyXsMedium(),
                                       ),
@@ -136,9 +140,9 @@ class _Success extends StatelessWidget {
                     )
                     .separator(const SizedBox(width: DsfrSpacings.s2w))
                     .toList(),
-              ),
-            ),
           ),
-        ],
-      );
+        ),
+      ),
+    ],
+  );
 }

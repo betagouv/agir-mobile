@@ -14,9 +14,10 @@ void ielALeQuizSuivant(final Quiz valeur) {
       'questions': [
         {
           'libelle': valeur.question,
-          'reponses': valeur.reponses
-              .map((final e) => {'reponse': e.reponse, 'exact': e.exact})
-              .toList(),
+          'reponses':
+              valeur.reponses
+                  .map((final e) => {'reponse': e.reponse, 'exact': e.exact})
+                  .toList(),
           'explicationOk': valeur.explicationOk,
           'explicationKO': valeur.explicationKo,
         },

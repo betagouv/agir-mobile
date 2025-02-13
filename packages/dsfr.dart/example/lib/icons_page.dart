@@ -27,13 +27,13 @@ class IconsPage extends StatelessWidget {
         return allIconsKey == null
             ? const SizedBox()
             : Tooltip(
-                message: allIconsKey,
-                child: Icon(
-                  allIcons[allIconsKey],
-                  size: 32,
-                  color: DsfrColors.blueFranceSun113,
-                ),
-              );
+              message: allIconsKey,
+              child: Icon(
+                allIcons[allIconsKey],
+                size: 32,
+                color: DsfrColors.blueFranceSun113,
+              ),
+            );
       },
       itemCount: allIcons.length,
     );

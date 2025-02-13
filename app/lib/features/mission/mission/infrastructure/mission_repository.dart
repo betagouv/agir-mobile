@@ -8,7 +8,7 @@ import 'package:fpdart/fpdart.dart';
 
 class MissionRepository {
   const MissionRepository({required final DioHttpClient client})
-      : _client = client;
+    : _client = client;
 
   final DioHttpClient _client;
 
@@ -25,9 +25,7 @@ class MissionRepository {
   }
 
   Future<Either<Exception, void>> complete(final MissionCode code) async {
-    final response = await _client.post(
-      Endpoints.missionTerminer(code.value),
-    );
+    final response = await _client.post(Endpoints.missionTerminer(code.value));
 
     return isResponseSuccessful(response.statusCode)
         ? const Right(null)

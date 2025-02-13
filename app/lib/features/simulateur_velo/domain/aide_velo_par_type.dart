@@ -24,13 +24,13 @@ class AideVeloParType extends Equatable {
 
   @override
   List<Object?> get props => [
-        mecaniqueSimple,
-        electrique,
-        cargo,
-        cargoElectrique,
-        pliant,
-        pliantElectrique,
-        motorisation,
-        adapte,
-      ];
+    mecaniqueSimple,
+    electrique,
+    cargo,
+    cargoElectrique,
+    pliant,
+    pliantElectrique,
+    motorisation,
+    adapte,
+  ];
 }

@@ -7,7 +7,7 @@ import 'package:fpdart/fpdart.dart';
 
 class LvaoRepository {
   const LvaoRepository({required final DioHttpClient client})
-      : _client = client;
+    : _client = client;
 
   final DioHttpClient _client;
 
@@ -25,16 +25,16 @@ class LvaoRepository {
 
     return isResponseUnsuccessful(response.statusCode)
         ? Left(
-            Exception(
-              'Erreur lors de la récupération des lieux de Que faire de mes objets',
-            ),
-          )
+          Exception(
+            'Erreur lors de la récupération des lieux de Que faire de mes objets',
+          ),
+        )
         : Right(
-            ((response.data as Map<String, dynamic>)['resultats']
-                    as List<dynamic>)
-                .cast<Map<String, dynamic>>()
-                .map(LvaoActorMapper.fromJson)
-                .toList(),
-          );
+          ((response.data as Map<String, dynamic>)['resultats']
+                  as List<dynamic>)
+              .cast<Map<String, dynamic>>()
+              .map(LvaoActorMapper.fromJson)
+              .toList(),
+        );
   }
 }

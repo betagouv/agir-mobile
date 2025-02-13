@@ -21,14 +21,16 @@ class SeConnecterView extends StatelessWidget {
   @override
   Widget build(final context) =>
       BlocListener<SeConnecterBloc, SeConnecterState>(
-        listener: (final context, final state) async =>
-            GoRouter.of(context).pushNamed(
-          SaisieCodePage.name,
-          pathParameters: {'email': state.adresseMail},
-        ),
-        listenWhen: (final previous, final current) =>
-            previous.connexionFaite != current.connexionFaite &&
-            current.connexionFaite,
+        listener:
+            (final context, final state) async =>
+                GoRouter.of(context).pushNamed(
+                  SaisieCodePage.name,
+                  pathParameters: {'email': state.adresseMail},
+                ),
+        listenWhen:
+            (final previous, final current) =>
+                previous.connexionFaite != current.connexionFaite &&
+                current.connexionFaite,
         child: FnvScaffold(
           appBar: AppBar(
             backgroundColor: FnvColors.homeBackground,
@@ -45,9 +47,10 @@ class SeConnecterView extends StatelessWidget {
               DsfrInput(
                 label: Localisation.adresseEmail,
                 hintText: Localisation.adresseEmailHint,
-                onChanged: (final value) => context
-                    .read<SeConnecterBloc>()
-                    .add(SeConnecterAdresseMailAChange(value)),
+                onChanged:
+                    (final value) => context.read<SeConnecterBloc>().add(
+                      SeConnecterAdresseMailAChange(value),
+                    ),
                 autocorrect: false,
                 keyboardType: TextInputType.emailAddress,
                 textInputAction: TextInputAction.next,
@@ -56,9 +59,10 @@ class SeConnecterView extends StatelessWidget {
               const SizedBox(height: DsfrSpacings.s2w),
               DsfrInput(
                 label: Localisation.motDePasse,
-                onChanged: (final value) => context
-                    .read<SeConnecterBloc>()
-                    .add(SeConnecterMotDePasseAChange(value)),
+                onChanged:
+                    (final value) => context.read<SeConnecterBloc>().add(
+                      SeConnecterMotDePasseAChange(value),
+                    ),
                 isPasswordMode: true,
                 keyboardType: TextInputType.visiblePassword,
                 autofillHints: const [AutofillHints.password],
@@ -69,32 +73,38 @@ class SeConnecterView extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: DsfrLink.md(
                   label: Localisation.motDePasseOublie,
-                  onTap: () async =>
-                      GoRouter.of(context).pushNamed(MotDePasseOubliePage.name),
+                  onTap:
+                      () async => GoRouter.of(
+                        context,
+                      ).pushNamed(MotDePasseOubliePage.name),
                 ),
               ),
               const SizedBox(height: DsfrSpacings.s3w),
               BlocSelector<SeConnecterBloc, SeConnecterState, bool>(
                 selector: (final state) => state.estValide,
-                builder: (final context, final state) => DsfrButton(
-                  label: Localisation.meConnecter,
-                  variant: DsfrButtonVariant.primary,
-                  size: DsfrButtonSize.lg,
-                  onPressed: state
-                      ? () {
-                          context
-                              .read<SeConnecterBloc>()
-                              .add(const SeConnecterConnexionDemandee());
-                        }
-                      : null,
-                ),
+                builder:
+                    (final context, final state) => DsfrButton(
+                      label: Localisation.meConnecter,
+                      variant: DsfrButtonVariant.primary,
+                      size: DsfrButtonSize.lg,
+                      onPressed:
+                          state
+                              ? () {
+                                context.read<SeConnecterBloc>().add(
+                                  const SeConnecterConnexionDemandee(),
+                                );
+                              }
+                              : null,
+                    ),
               ),
               const SizedBox(height: DsfrSpacings.s2w),
               Center(
                 child: DsfrLink.md(
                   label: Localisation.premiereFoisSur,
-                  onTap: () async => GoRouter.of(context)
-                      .pushReplacementNamed(CreerComptePage.name),
+                  onTap:
+                      () async => GoRouter.of(
+                        context,
+                      ).pushReplacementNamed(CreerComptePage.name),
                 ),
               ),
               const SafeArea(child: SizedBox.shrink()),

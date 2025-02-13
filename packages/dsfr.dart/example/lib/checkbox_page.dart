@@ -19,21 +19,18 @@ class _CheckboxPageState extends State<CheckboxPage> {
 
   @override
   Widget build(final context) => ListView(
-        padding: const EdgeInsets.all(16),
-        children: [
-          DsfrCheckbox.sm(
-            label: 'Label',
-            value: _value,
-            onChanged: (final value) => setState(() {
+    padding: const EdgeInsets.all(16),
+    children: [
+      DsfrCheckbox.sm(
+        label: 'Label',
+        value: _value,
+        onChanged:
+            (final value) => setState(() {
               _value = value;
             }),
-          ),
-          const DsfrCheckbox.sm(label: 'Label', value: false, onChanged: null),
-          DsfrCheckbox.sm(
-            label: 'Label',
-            value: true,
-            onChanged: (final value) {},
-          ),
-        ],
-      );
+      ),
+      const DsfrCheckbox.sm(label: 'Label', value: false, onChanged: null),
+      DsfrCheckbox.sm(label: 'Label', value: true, onChanged: (final value) {}),
+    ],
+  );
 }

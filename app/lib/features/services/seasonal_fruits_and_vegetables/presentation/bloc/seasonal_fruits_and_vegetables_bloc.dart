@@ -9,21 +9,27 @@ import 'package:fpdart/fpdart.dart';
 part 'seasonal_fruits_and_vegetables_event.dart';
 part 'seasonal_fruits_and_vegetables_state.dart';
 
-class SeasonalFruitsAndVegetablesBloc extends Bloc<
-    SeasonalFruitsAndVegetablesEvent, SeasonalFruitsAndVegetablesState> {
+class SeasonalFruitsAndVegetablesBloc
+    extends
+        Bloc<
+          SeasonalFruitsAndVegetablesEvent,
+          SeasonalFruitsAndVegetablesState
+        > {
   SeasonalFruitsAndVegetablesBloc({
     required final SeasonalFruitsAndVegetablesRepository repository,
   }) : super(const SeasonalFruitsAndVegetablesInitial()) {
     on<SeasonalFruitsAndVegetablesFetch>((final event, final emit) async {
       final categoriesResult = await repository.fetchCategories();
       if (categoriesResult.isRight()) {
-        final categories =
-            categoriesResult.getRight().getOrElse(() => throw Exception());
+        final categories = categoriesResult.getRight().getOrElse(
+          () => throw Exception(),
+        );
         final monthSelected = categories.where((final e) => e.value).first.code;
         final plantsResult = await repository.fetchPlants(monthSelected);
         if (plantsResult.isRight()) {
-          final plants =
-              plantsResult.getRight().getOrElse(() => throw Exception());
+          final plants = plantsResult.getRight().getOrElse(
+            () => throw Exception(),
+          );
           emit(
             SeasonalFruitsAndVegetablesLoadSuccess(
               months: categories,
@@ -47,26 +53,26 @@ class SeasonalFruitsAndVegetablesBloc extends Bloc<
       }
     });
 
-    on<SeasonalFruitsAndVegetablesMonthSelected>(
-      (final event, final emit) async {
-        final monthSelected = event.value;
-        final result = await repository.fetchPlants(monthSelected);
+    on<SeasonalFruitsAndVegetablesMonthSelected>((
+      final event,
+      final emit,
+    ) async {
+      final monthSelected = event.value;
+      final result = await repository.fetchPlants(monthSelected);
 
-        result.fold(
-          (final l) =>
-              emit(SeasonalFruitsAndVegetablesLoadFailure(l.toString())),
-          (final r) => emit(
-            SeasonalFruitsAndVegetablesLoadSuccess(
-              months: switch (state) {
-                final SeasonalFruitsAndVegetablesLoadSuccess s => s.months,
-                _ => const [],
-              },
-              monthSelected: monthSelected,
-              plants: r,
-            ),
+      result.fold(
+        (final l) => emit(SeasonalFruitsAndVegetablesLoadFailure(l.toString())),
+        (final r) => emit(
+          SeasonalFruitsAndVegetablesLoadSuccess(
+            months: switch (state) {
+              final SeasonalFruitsAndVegetablesLoadSuccess s => s.months,
+              _ => const [],
+            },
+            monthSelected: monthSelected,
+            plants: r,
           ),
-        );
-      },
-    );
+        ),
+      );
+    });
   }
 }

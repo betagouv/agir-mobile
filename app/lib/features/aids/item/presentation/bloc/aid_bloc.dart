@@ -6,13 +6,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AidBloc extends Bloc<AidEvent, AidState> {
   AidBloc()
-      : super(
-          const AidState(
-            Aid(themeType: ThemeType.decouverte, title: '', content: ''),
-          ),
-        ) {
-    on<AidSelected>(
-      (final event, final emit) => emit(AidState(event.value)),
-    );
+    : super(
+        const AidState(
+          Aid(themeType: ThemeType.decouverte, title: '', content: ''),
+        ),
+      ) {
+    on<AidSelected>((final event, final emit) => emit(AidState(event.value)));
   }
 }

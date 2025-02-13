@@ -28,8 +28,9 @@ class DioMock extends Mock implements Dio {
     final dynamic requestData,
     final dynamic responseData,
   }) {
-    when(() => post<dynamic>(path, data: requestData ?? any(named: 'data')))
-        .thenAnswer(
+    when(
+      () => post<dynamic>(path, data: requestData ?? any(named: 'data')),
+    ).thenAnswer(
       (final answer) async => Response(
         data: responseData,
         requestOptions: RequestOptions(path: path),
@@ -44,8 +45,9 @@ class DioMock extends Mock implements Dio {
     final dynamic requestData,
     final dynamic responseData,
   }) {
-    when(() => patch<dynamic>(path, data: requestData ?? any(named: 'data')))
-        .thenAnswer(
+    when(
+      () => patch<dynamic>(path, data: requestData ?? any(named: 'data')),
+    ).thenAnswer(
       (final _) async => Response(
         data: responseData,
         requestOptions: RequestOptions(path: path),
@@ -59,8 +61,9 @@ class DioMock extends Mock implements Dio {
     final int statusCode = HttpStatus.ok,
     final dynamic requestData,
   }) {
-    when(() => put<dynamic>(path, data: requestData ?? any(named: 'data')))
-        .thenAnswer(
+    when(
+      () => put<dynamic>(path, data: requestData ?? any(named: 'data')),
+    ).thenAnswer(
       (final _) async => Response(
         requestOptions: RequestOptions(path: path),
         statusCode: statusCode,
@@ -73,8 +76,9 @@ class DioMock extends Mock implements Dio {
     final int statusCode = HttpStatus.ok,
     final dynamic requestData,
   }) {
-    when(() => delete<dynamic>(path, data: requestData ?? any(named: 'data')))
-        .thenAnswer(
+    when(
+      () => delete<dynamic>(path, data: requestData ?? any(named: 'data')),
+    ).thenAnswer(
       (final _) async => Response(
         requestOptions: RequestOptions(path: path),
         statusCode: statusCode,

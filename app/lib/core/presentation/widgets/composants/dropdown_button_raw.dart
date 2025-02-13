@@ -10,9 +10,9 @@ class DropdownButtonRaw<T> extends StatefulWidget {
     required this.onChanged,
     required this.menuStyle,
   }) : assert(
-          items.containsKey(selectedItem.key),
-          'Selected item not found in items',
-        );
+         items.containsKey(selectedItem.key),
+         'Selected item not found in items',
+       );
 
   final Map<T, Widget> items;
   final MapEntry<T, Widget> selectedItem;
@@ -40,8 +40,10 @@ class _DropdownButtonRawState<T> extends State<DropdownButtonRaw<T>> {
           final overlay =
               Overlay.of(rootContext).context.findRenderObject()! as RenderBox;
           final anchorBox = rootContext.findRenderObject()! as RenderBox;
-          final upperLeft =
-              anchorBox.localToGlobal(Offset.zero, ancestor: overlay);
+          final upperLeft = anchorBox.localToGlobal(
+            Offset.zero,
+            ancestor: overlay,
+          );
           final bottomRight = anchorBox.localToGlobal(
             anchorBox.paintBounds.bottomRight,
             ancestor: overlay,
@@ -52,17 +54,18 @@ class _DropdownButtonRawState<T> extends State<DropdownButtonRaw<T>> {
             anchorRect: anchorRect,
             onTapOutside: (final _) => _controller.hide(),
             style: widget.menuStyle,
-            children: widget.items.entries
-                .map(
-                  (final e) => _DropdownMenuItem(
-                    item: e,
-                    onChanged: (final value) {
-                      _controller.hide();
-                      widget.onChanged(value);
-                    },
-                  ),
-                )
-                .toList(),
+            children:
+                widget.items.entries
+                    .map(
+                      (final e) => _DropdownMenuItem(
+                        item: e,
+                        onChanged: (final value) {
+                          _controller.hide();
+                          widget.onChanged(value);
+                        },
+                      ),
+                    )
+                    .toList(),
           );
         },
         child: value,
@@ -98,13 +101,13 @@ class _DropdownMenu extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => TapRegion(
-        onTapOutside: onTapOutside,
-        child: _DropdownMenuLayout(
-          anchorRect: anchorRect,
-          style: style,
-          children: children,
-        ),
-      );
+    onTapOutside: onTapOutside,
+    child: _DropdownMenuLayout(
+      anchorRect: anchorRect,
+      style: style,
+      children: children,
+    ),
+  );
 }
 
 class _DropdownMenuItem<T> extends StatelessWidget {
@@ -119,12 +122,12 @@ class _DropdownMenuItem<T> extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => Material(
-        type: MaterialType.transparency,
-        child: InkWell(
-          onTap: () => onChanged(item.key),
-          child: Center(child: item.value),
-        ),
-      );
+    type: MaterialType.transparency,
+    child: InkWell(
+      onTap: () => onChanged(item.key),
+      child: Center(child: item.value),
+    ),
+  );
 }
 
 class _DropdownMenuLayout extends StatelessWidget {
@@ -140,13 +143,13 @@ class _DropdownMenuLayout extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => CustomSingleChildLayout(
-        delegate: _DropdownMenuPositionDelegate(
-          anchorRect: anchorRect,
-          alignment: style.alignment,
-          offset: style.offset,
-        ),
-        child: _DropdownMenuContent(style: style, children: children),
-      );
+    delegate: _DropdownMenuPositionDelegate(
+      anchorRect: anchorRect,
+      alignment: style.alignment,
+      offset: style.offset,
+    ),
+    child: _DropdownMenuContent(style: style, children: children),
+  );
 }
 
 class _DropdownMenuContent extends StatefulWidget {
@@ -170,30 +173,30 @@ class _DropdownMenuContentState extends State<_DropdownMenuContent> {
 
   @override
   Widget build(final BuildContext context) => IntrinsicWidth(
-        child: Material(
-          type: MaterialType.transparency,
-          child: DecoratedBox(
-            decoration: widget.style.decoration,
-            child: ScrollConfiguration(
-              behavior: ScrollConfiguration.of(context).copyWith(
-                scrollbars: false,
-                overscroll: false,
-                physics: const ClampingScrollPhysics(),
-              ),
-              child: PrimaryScrollController(
-                controller: _scrollController,
-                child: SingleChildScrollView(
-                  controller: _scrollController,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: widget.children,
-                  ),
-                ),
+    child: Material(
+      type: MaterialType.transparency,
+      child: DecoratedBox(
+        decoration: widget.style.decoration,
+        child: ScrollConfiguration(
+          behavior: ScrollConfiguration.of(context).copyWith(
+            scrollbars: false,
+            overscroll: false,
+            physics: const ClampingScrollPhysics(),
+          ),
+          child: PrimaryScrollController(
+            controller: _scrollController,
+            child: SingleChildScrollView(
+              controller: _scrollController,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: widget.children,
               ),
             ),
           ),
         ),
-      );
+      ),
+    ),
+  );
 }
 
 class _DropdownMenuPositionDelegate extends SingleChildLayoutDelegate {
@@ -211,7 +214,8 @@ class _DropdownMenuPositionDelegate extends SingleChildLayoutDelegate {
   BoxConstraints getConstraintsForChild(final BoxConstraints constraints) =>
       BoxConstraints(
         maxWidth: constraints.maxWidth,
-        maxHeight: constraints.maxHeight -
+        maxHeight:
+            constraints.maxHeight -
             (alignment.withinRect(anchorRect) + offset).dy -
             48,
       );

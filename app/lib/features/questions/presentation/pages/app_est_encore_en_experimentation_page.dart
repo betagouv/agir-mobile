@@ -19,13 +19,13 @@ class AppEstEncoreEnExperimentationPage extends StatelessWidget {
   final String commune;
 
   static GoRoute get route => GoRoute(
-        path: path,
-        name: name,
-        builder: (final context, final state) =>
-            AppEstEncoreEnExperimentationPage(
+    path: path,
+    name: name,
+    builder:
+        (final context, final state) => AppEstEncoreEnExperimentationPage(
           commune: state.pathParameters['commune']!,
         ),
-      );
+  );
 
   @override
   Widget build(final context) {
@@ -41,9 +41,7 @@ class AppEstEncoreEnExperimentationPage extends StatelessWidget {
         children: [
           const Align(
             alignment: Alignment.centerLeft,
-            child: OnboardingIllustration(
-              assetName: AssetImages.illustration3,
-            ),
+            child: OnboardingIllustration(assetName: AssetImages.illustration3),
           ),
           const Text(
             Localisation.appEstEncoreEnExperimentation,
@@ -75,8 +73,9 @@ class AppEstEncoreEnExperimentationPage extends StatelessWidget {
           label: Localisation.jaiCompris,
           variant: DsfrButtonVariant.primary,
           size: DsfrButtonSize.lg,
-          onPressed: () async =>
-              GoRouter.of(context).pushNamed(QuestionThemesPage.name),
+          onPressed:
+              () async =>
+                  GoRouter.of(context).pushNamed(QuestionThemesPage.name),
         ),
       ),
     );

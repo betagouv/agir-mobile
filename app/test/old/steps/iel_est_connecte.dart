@@ -6,6 +6,7 @@ import 'scenario_context.dart';
 
 /// Iel est connecté.
 void ielEstConnecte() {
-  ScenarioContext().authentificationStatut =
-      const Authenticated(UserId(utilisateurId));
+  ScenarioContext().authentificationStatut = const Authenticated(
+    UserId(utilisateurId),
+  );
 }

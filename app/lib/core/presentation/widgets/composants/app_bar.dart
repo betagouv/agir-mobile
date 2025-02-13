@@ -18,8 +18,9 @@ class FnvAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.title,
     this.bottom,
     this.isRoot = false,
-  }) : preferredSize =
-            Size.fromHeight(preferredHeight + (bottom == null ? 0 : 48));
+  }) : preferredSize = Size.fromHeight(
+         preferredHeight + (bottom == null ? 0 : 48),
+       );
 
   final Widget? leading;
   final Widget? title;

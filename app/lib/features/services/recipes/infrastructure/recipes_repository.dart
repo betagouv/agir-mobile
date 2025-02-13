@@ -7,7 +7,7 @@ import 'package:fpdart/fpdart.dart';
 
 class RecipesRepository {
   const RecipesRepository({required final DioHttpClient client})
-      : _client = client;
+    : _client = client;
 
   final DioHttpClient _client;
 
@@ -26,11 +26,11 @@ class RecipesRepository {
     return isResponseUnsuccessful(response.statusCode)
         ? Left(Exception('Erreur lors de la récupération des recettes'))
         : Right(
-            ((response.data as Map<String, dynamic>)['resultats']
-                    as List<dynamic>)
-                .cast<Map<String, dynamic>>()
-                .map(RecipeMapper.fromJson)
-                .toList(),
-          );
+          ((response.data as Map<String, dynamic>)['resultats']
+                  as List<dynamic>)
+              .cast<Map<String, dynamic>>()
+              .map(RecipeMapper.fromJson)
+              .toList(),
+        );
   }
 }

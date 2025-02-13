@@ -14,13 +14,13 @@ final class CreerCompteState extends Equatable {
   });
 
   const CreerCompteState.empty()
-      : this(
-          adresseMail: '',
-          motDePasse: '',
-          aCguAcceptees: false,
-          erreur: const None(),
-          compteCree: false,
-        );
+    : this(
+        adresseMail: '',
+        motDePasse: '',
+        aCguAcceptees: false,
+        erreur: const None(),
+        compteCree: false,
+      );
 
   final String adresseMail;
   final String motDePasse;
@@ -38,21 +38,20 @@ final class CreerCompteState extends Equatable {
     final bool? aCguAcceptees,
     final Option<String>? erreur,
     final bool? compteCree,
-  }) =>
-      CreerCompteState(
-        adresseMail: adresseMail ?? this.adresseMail,
-        motDePasse: motDePasse ?? this.motDePasse,
-        aCguAcceptees: aCguAcceptees ?? this.aCguAcceptees,
-        erreur: erreur ?? this.erreur,
-        compteCree: compteCree ?? this.compteCree,
-      );
+  }) => CreerCompteState(
+    adresseMail: adresseMail ?? this.adresseMail,
+    motDePasse: motDePasse ?? this.motDePasse,
+    aCguAcceptees: aCguAcceptees ?? this.aCguAcceptees,
+    erreur: erreur ?? this.erreur,
+    compteCree: compteCree ?? this.compteCree,
+  );
 
   @override
   List<Object> get props => [
-        adresseMail,
-        motDePasse,
-        erreur,
-        aCguAcceptees,
-        compteCree,
-      ];
+    adresseMail,
+    motDePasse,
+    erreur,
+    aCguAcceptees,
+    compteCree,
+  ];
 }

@@ -13,7 +13,7 @@ import 'package:fpdart/fpdart.dart';
 
 class AideVeloRepository {
   const AideVeloRepository({required final DioHttpClient client})
-      : _client = client;
+    : _client = client;
 
   final DioHttpClient _client;
 
@@ -52,9 +52,9 @@ class AideVeloRepository {
   }
 
   String _etatVeloToString(final VeloEtat etatVelo) => switch (etatVelo) {
-        VeloEtat.neuf => 'neuf',
-        VeloEtat.occasion => 'occasion',
-      };
+    VeloEtat.neuf => 'neuf',
+    VeloEtat.occasion => 'occasion',
+  };
 
   Future<Either<Exception, void>> _mettreAJourProfilEtLogement({
     required final double nombreDePartsFiscales,

@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChallengeListBloc extends Bloc<ChallengeListEvent, ChallengeListState> {
   ChallengeListBloc(final FetchChallenges useCase)
-      : super(const ChallengeListInitial()) {
+    : super(const ChallengeListInitial()) {
     on<ChallengeListFetch>((final event, final emit) async {
       emit(const ChallengeListLoading());
       final result = await useCase();

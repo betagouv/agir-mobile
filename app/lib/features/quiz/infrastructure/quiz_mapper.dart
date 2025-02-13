@@ -13,15 +13,16 @@ abstract final class QuizMapper {
       id: json['content_id'] as String,
       thematique: json['thematique_principale'] as String,
       question: question['libelle'] as String,
-      reponses: responses
-          .cast<Map<String, dynamic>>()
-          .map(
-            (final e) => QuizReponse(
-              reponse: e['reponse'] as String,
-              exact: e['exact'] as bool? ?? false,
-            ),
-          )
-          .toList(),
+      reponses:
+          responses
+              .cast<Map<String, dynamic>>()
+              .map(
+                (final e) => QuizReponse(
+                  reponse: e['reponse'] as String,
+                  exact: e['exact'] as bool? ?? false,
+                ),
+              )
+              .toList(),
       points: json['points'] as int,
       explicationOk: question['explicationOk'] as String?,
       explicationKo: question['explicationKO'] as String?,

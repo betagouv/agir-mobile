@@ -21,10 +21,10 @@ class AidPage extends StatelessWidget {
   static const path = name;
 
   static GoRoute get route => GoRoute(
-        path: path,
-        name: name,
-        builder: (final context, final state) => const AidPage(),
-      );
+    path: path,
+    name: name,
+    builder: (final context, final state) => const AidPage(),
+  );
 
   @override
   Widget build(final context) {
@@ -49,7 +49,8 @@ class AidPage extends StatelessWidget {
                 if (aid.amountMax != null)
                   DsfrTag.sm(
                     label: TextSpan(
-                      text: Localisation.jusqua +
+                      text:
+                          Localisation.jusqua +
                           Localisation.euro(aid.amountMax!),
                     ),
                     backgroundColor: DsfrColors.purpleGlycine925Hover,
@@ -79,21 +80,23 @@ class AidPage extends StatelessWidget {
           const SizedBox(height: DsfrSpacings.s6w),
         ],
       ),
-      bottomNavigationBar: aid.aUnSimulateur
-          ? FnvBottomBar(
-              child: DsfrButton(
-                label: Localisation.accederAuSimulateur,
-                variant: DsfrButtonVariant.primary,
-                size: DsfrButtonSize.lg,
-                onPressed: () async {
-                  if (aid.estSimulateurVelo) {
-                    await GoRouter.of(context)
-                        .pushNamed(AideSimulateurVeloPage.name);
-                  }
-                },
-              ),
-            )
-          : null,
+      bottomNavigationBar:
+          aid.aUnSimulateur
+              ? FnvBottomBar(
+                child: DsfrButton(
+                  label: Localisation.accederAuSimulateur,
+                  variant: DsfrButtonVariant.primary,
+                  size: DsfrButtonSize.lg,
+                  onPressed: () async {
+                    if (aid.estSimulateurVelo) {
+                      await GoRouter.of(
+                        context,
+                      ).pushNamed(AideSimulateurVeloPage.name);
+                    }
+                  },
+                ),
+              )
+              : null,
     );
   }
 }

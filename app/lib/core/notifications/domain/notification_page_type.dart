@@ -1,5 +1,1 @@
-enum NotificationPageType {
-  quiz,
-  article,
-  mission,
-}
+enum NotificationPageType { quiz, article, mission }

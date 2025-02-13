@@ -31,13 +31,14 @@ Future<void> _pumpPage(
     ],
     blocProviders: [
       BlocProvider<GamificationBloc>(
-        create: (final context) => GamificationBloc(
-          repository: GamificationRepository(
-            client: client,
-            messageBus: MessageBus(),
-          ),
-          authenticationService: authenticationService,
-        ),
+        create:
+            (final context) => GamificationBloc(
+              repository: GamificationRepository(
+                client: client,
+                messageBus: MessageBus(),
+              ),
+              authenticationService: authenticationService,
+            ),
       ),
     ],
     page: ChallengeListPage.route,
@@ -51,9 +52,11 @@ void main() {
 
   setUp(() {
     dio = DioMock();
-    challenges = List.generate(4, (final _) => challengeItemFaker())
-        .where((final e) => e['status'] != 'todo')
-        .toList();
+    challenges =
+        List.generate(
+          4,
+          (final _) => challengeItemFaker(),
+        ).where((final e) => e['status'] != 'todo').toList();
     dio.getM(
       '/utilisateurs/%7BuserId%7D/defis_v2?status=en_cours&status=pas_envie&status=abondon&status=fait',
       responseData: challenges,
@@ -61,37 +64,33 @@ void main() {
   });
 
   group('La liste des défis devrait ', () {
-    testWidgets(
-      "afficher les défis lorsqu'il y en a",
-      (final tester) async {
-        await _pumpPage(tester, dio: dio);
+    testWidgets("afficher les défis lorsqu'il y en a", (final tester) async {
+      await _pumpPage(tester, dio: dio);
 
-        await tester.pumpAndSettle();
+      await tester.pumpAndSettle();
 
-        for (final action in challenges) {
-          final expected = ChallengeItemMapper.fromJson(action);
-          expect(find.text(expected.titre), findsOneWidget);
-        }
-      },
-    );
+      for (final action in challenges) {
+        final expected = ChallengeItemMapper.fromJson(action);
+        expect(find.text(expected.titre), findsOneWidget);
+      }
+    });
 
-    testWidgets(
-      'appuyer sur une défi devrait ouvrir la page de détails',
-      (final tester) async {
-        await _pumpPage(tester, dio: dio);
+    testWidgets('appuyer sur une défi devrait ouvrir la page de détails', (
+      final tester,
+    ) async {
+      await _pumpPage(tester, dio: dio);
 
-        await tester.pumpAndSettle();
+      await tester.pumpAndSettle();
 
-        final expected = ChallengeItemMapper.fromJson(
-          challenges.firstWhere((final e) => e['status'] != 'todo'),
-        );
+      final expected = ChallengeItemMapper.fromJson(
+        challenges.firstWhere((final e) => e['status'] != 'todo'),
+      );
 
-        await tester.tap(find.text(expected.titre));
+      await tester.tap(find.text(expected.titre));
 
-        await tester.pumpAndSettle();
+      await tester.pumpAndSettle();
 
-        expect(find.text('route: ${ChallengeDetailPage.name}'), findsOneWidget);
-      },
-    );
+      expect(find.text('route: ${ChallengeDetailPage.name}'), findsOneWidget);
+    });
   });
 }

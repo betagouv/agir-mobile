@@ -22,14 +22,14 @@ final class MissionChallenge extends Equatable {
 
   @override
   List<Object> get props => [
-        contentId,
-        title,
-        status,
-        points,
-        isRecommended,
-        isDone,
-        isCollected,
-      ];
+    contentId,
+    title,
+    status,
+    points,
+    isRecommended,
+    isDone,
+    isCollected,
+  ];
 }
 
 enum MissionChallengeStatus {

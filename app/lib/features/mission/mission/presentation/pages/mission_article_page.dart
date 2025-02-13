@@ -15,25 +15,26 @@ class MissionArticlePage extends StatelessWidget {
 
   @override
   Widget build(final context) => ListView(
-        padding: const EdgeInsets.all(paddingVerticalPage),
-        children: [
-          ArticleView(id: value.contentId.value),
-          const SizedBox(height: DsfrSpacings.s3w),
-          SafeArea(
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: FittedBox(
-                child: DsfrButton(
-                  label: Localisation.continuer,
-                  variant: DsfrButtonVariant.primary,
-                  size: DsfrButtonSize.lg,
-                  onPressed: () => context
-                      .read<MissionBloc>()
-                      .add(const MissionNextRequested()),
-                ),
-              ),
+    padding: const EdgeInsets.all(paddingVerticalPage),
+    children: [
+      ArticleView(id: value.contentId.value),
+      const SizedBox(height: DsfrSpacings.s3w),
+      SafeArea(
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: FittedBox(
+            child: DsfrButton(
+              label: Localisation.continuer,
+              variant: DsfrButtonVariant.primary,
+              size: DsfrButtonSize.lg,
+              onPressed:
+                  () => context.read<MissionBloc>().add(
+                    const MissionNextRequested(),
+                  ),
             ),
           ),
-        ],
-      );
+        ),
+      ),
+    ],
+  );
 }

@@ -10,21 +10,19 @@ Future<void> iHaveActionsInMyLibrary(
   final WidgetTester tester,
   final bdd.DataTable dataTable,
 ) async {
-  final list = dataTable
-      .asMaps()
-      .map(
-        (final e) => {
-          'type': 'classique',
-          'code': e['code'],
-          'titre': e['title'],
-          'sous_titre': Faker().lorem.sentence(),
-          'nombre_actions_en_cours': e['nb_actions_completed'],
-          'nombre_aides_disponibles': e['nb_aids_available'],
-        },
-      )
-      .toList();
-  FeatureContext.instance.dioMock.getM(
-    Endpoints.actions,
-    responseData: list,
-  );
+  final list =
+      dataTable
+          .asMaps()
+          .map(
+            (final e) => {
+              'type': 'classique',
+              'code': e['code'],
+              'titre': e['title'],
+              'sous_titre': Faker().lorem.sentence(),
+              'nombre_actions_en_cours': e['nb_actions_completed'],
+              'nombre_aides_disponibles': e['nb_aids_available'],
+            },
+          )
+          .toList();
+  FeatureContext.instance.dioMock.getM(Endpoints.actions, responseData: list);
 }

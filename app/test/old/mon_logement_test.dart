@@ -78,55 +78,54 @@ void main() {
     ielVoitLeBoutonRadioAvecCeTexteSelectionne(Localisation.dpeG);
   });
 
-  testWidgets(
-    'Iel rempli ces informations et appuie sur mettre à jour',
-    (final tester) async {
-      setUpWidgets(tester);
-      const codePostal = '39100';
-      const commune = 'CHOISEY';
-      const nombreAdultes = 1;
-      const nombreEnfants = 2;
-      leServeurRetourneCetteListeDeCommunes(['AUTHUME', _commune, commune]);
-      ScenarioContext().dioMock!.patchM(Endpoints.logement);
-      await _allerSurMonLogement(tester);
-      await ielEcritDansLeChamp(
-        tester,
-        label: Localisation.codePostal,
-        enterText: codePostal,
-      );
-      await ielAppuieSurLaListeDeroulante(tester);
-      await ielAppuieSur(tester, commune);
-      await ielEcritDansLeChamp(
-        tester,
-        label: Localisation.adultes,
-        enterText: nombreAdultes.toString(),
-      );
-      await ielEcritDansLeChamp(
-        tester,
-        label: Localisation.enfants,
-        enterText: nombreEnfants.toString(),
-      );
-      await ielScrolle(tester, Localisation.maResidencePrincipaleEst);
-      await ielAppuieSur(tester, Localisation.unAppartement);
-      await ielAppuieSur(tester, Localisation.oui);
-      await ielAppuieSur(tester, Localisation.moinsDe35m2);
+  testWidgets('Iel rempli ces informations et appuie sur mettre à jour', (
+    final tester,
+  ) async {
+    setUpWidgets(tester);
+    const codePostal = '39100';
+    const commune = 'CHOISEY';
+    const nombreAdultes = 1;
+    const nombreEnfants = 2;
+    leServeurRetourneCetteListeDeCommunes(['AUTHUME', _commune, commune]);
+    ScenarioContext().dioMock!.patchM(Endpoints.logement);
+    await _allerSurMonLogement(tester);
+    await ielEcritDansLeChamp(
+      tester,
+      label: Localisation.codePostal,
+      enterText: codePostal,
+    );
+    await ielAppuieSurLaListeDeroulante(tester);
+    await ielAppuieSur(tester, commune);
+    await ielEcritDansLeChamp(
+      tester,
+      label: Localisation.adultes,
+      enterText: nombreAdultes.toString(),
+    );
+    await ielEcritDansLeChamp(
+      tester,
+      label: Localisation.enfants,
+      enterText: nombreEnfants.toString(),
+    );
+    await ielScrolle(tester, Localisation.maResidencePrincipaleEst);
+    await ielAppuieSur(tester, Localisation.unAppartement);
+    await ielAppuieSur(tester, Localisation.oui);
+    await ielAppuieSur(tester, Localisation.moinsDe35m2);
 
-      await ielScrolle(tester, Localisation.monLogementPlusDe15Ans);
-      await ielAppuieSur(tester, Localisation.oui);
-      await ielScrolle(tester, Localisation.consommationsEnergetiques);
-      await ielAppuieSur(tester, Localisation.dpeC);
+    await ielScrolle(tester, Localisation.monLogementPlusDe15Ans);
+    await ielAppuieSur(tester, Localisation.oui);
+    await ielScrolle(tester, Localisation.consommationsEnergetiques);
+    await ielAppuieSur(tester, Localisation.dpeC);
 
-      await ielAppuieSur(tester, Localisation.mettreAJourMesInformations);
+    await ielAppuieSur(tester, Localisation.mettreAJourMesInformations);
 
-      verify(
-        () => ScenarioContext().dioMock?.patch<dynamic>(
-              Endpoints.logement,
-              data:
-                  '{"code_postal":"39100","commune":"CHOISEY","dpe":"C","nombre_adultes":1,"nombre_enfants":2,"plus_de_15_ans":true,"proprietaire":true,"superficie":"superficie_35","type":"appartement"}',
-            ),
-      );
-    },
-  );
+    verify(
+      () => ScenarioContext().dioMock?.patch<dynamic>(
+        Endpoints.logement,
+        data:
+            '{"code_postal":"39100","commune":"CHOISEY","dpe":"C","nombre_adultes":1,"nombre_enfants":2,"plus_de_15_ans":true,"proprietaire":true,"superficie":"superficie_35","type":"appartement"}',
+      ),
+    );
+  });
 }
 
 Future<void> _allerSurMonLogement(final WidgetTester tester) async {

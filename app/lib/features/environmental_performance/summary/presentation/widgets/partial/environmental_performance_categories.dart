@@ -20,12 +20,13 @@ class EnvironmentalPerformanceCategories extends StatelessWidget {
 
   @override
   Widget build(final context) => SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.zero,
-        clipBehavior: Clip.none,
-        child: IntrinsicHeight(
-          child: Row(
-            children: categories
+    scrollDirection: Axis.horizontal,
+    padding: EdgeInsets.zero,
+    clipBehavior: Clip.none,
+    child: IntrinsicHeight(
+      child: Row(
+        children:
+            categories
                 .map(
                   (final e) => EnvironmentalPerformanceCategoryWidget(
                     imageUrl: e.imageUrl,
@@ -34,10 +35,8 @@ class EnvironmentalPerformanceCategories extends StatelessWidget {
                     numberOfQuestions: e.totalNumberQuestions,
                     onTap: () async {
                       context.read<EnvironmentalPerformanceQuestionBloc>().add(
-                            EnvironmentalPerformanceQuestionIdListRequested(
-                              e.id,
-                            ),
-                          );
+                        EnvironmentalPerformanceQuestionIdListRequested(e.id),
+                      );
                       await GoRouter.of(context).pushNamed(
                         EnvironmentalPerformanceQuestionPage.name,
                         pathParameters: {'number': '1'},
@@ -47,15 +46,15 @@ class EnvironmentalPerformanceCategories extends StatelessWidget {
                         return;
                       }
 
-                      context
-                          .read<EnvironmentalPerformanceBloc>()
-                          .add(const EnvironmentalPerformanceStarted());
+                      context.read<EnvironmentalPerformanceBloc>().add(
+                        const EnvironmentalPerformanceStarted(),
+                      );
                     },
                   ),
                 )
                 .separator(const SizedBox(width: DsfrSpacings.s2w))
                 .toList(),
-          ),
-        ),
-      );
+      ),
+    ),
+  );
 }

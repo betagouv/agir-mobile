@@ -15,10 +15,12 @@ class RecipeHorizontalList extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => BlocProvider(
-        create: (final context) => RecipesBloc(repository: context.read())
-          ..add(RecipesLoadRequested(category)),
-        child: const _Part(),
-      );
+    create:
+        (final context) =>
+            RecipesBloc(repository: context.read())
+              ..add(RecipesLoadRequested(category)),
+    child: const _Part(),
+  );
 }
 
 class _Part extends StatelessWidget {
@@ -27,13 +29,13 @@ class _Part extends StatelessWidget {
   @override
   Widget build(final BuildContext context) =>
       BlocBuilder<RecipesBloc, RecipesState>(
-        builder: (final context, final state) => switch (state) {
-          RecipesInitial() ||
-          RecipesLoadInProgress() ||
-          RecipesLoadFailure() =>
-            const SizedBox(),
-          RecipesLoadSuccess() => _Success(state: state),
-        },
+        builder:
+            (final context, final state) => switch (state) {
+              RecipesInitial() ||
+              RecipesLoadInProgress() ||
+              RecipesLoadFailure() => const SizedBox(),
+              RecipesLoadSuccess() => _Success(state: state),
+            },
       );
 }
 
@@ -44,25 +46,24 @@ class _Success extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
-            child: MarkdownBody(
-              data: "Besoin **d'inspiration** ?",
-              styleSheet: MarkdownStyleSheet(
-                p: const DsfrTextStyle(fontSize: 22),
-              ),
-            ),
-          ),
-          const SizedBox(height: DsfrSpacings.s1w),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
-            clipBehavior: Clip.none,
-            child: IntrinsicHeight(
-              child: Row(
-                children: state.recipes
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
+        child: MarkdownBody(
+          data: "Besoin **d'inspiration** ?",
+          styleSheet: MarkdownStyleSheet(p: const DsfrTextStyle(fontSize: 22)),
+        ),
+      ),
+      const SizedBox(height: DsfrSpacings.s1w),
+      SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
+        clipBehavior: Clip.none,
+        child: IntrinsicHeight(
+          child: Row(
+            children:
+                state.recipes
                     .map(
                       (final e) => FnvCard(
                         child: SizedBox(
@@ -97,10 +98,12 @@ class _Success extends StatelessWidget {
                                     Flexible(
                                       child: DsfrTag.sm(
                                         label: TextSpan(text: e.difficulty),
-                                        backgroundColor:
-                                            const Color(0xffEAEAEA),
-                                        foregroundColor:
-                                            const Color(0xff3F3F3F),
+                                        backgroundColor: const Color(
+                                          0xffEAEAEA,
+                                        ),
+                                        foregroundColor: const Color(
+                                          0xff3F3F3F,
+                                        ),
                                         textStyle:
                                             const DsfrTextStyle.bodyXsMedium(),
                                       ),
@@ -119,11 +122,11 @@ class _Success extends StatelessWidget {
                     )
                     .separator(const SizedBox(width: DsfrSpacings.s2w))
                     .toList(),
-              ),
-            ),
           ),
-        ],
-      );
+        ),
+      ),
+    ],
+  );
 }
 
 class _EstimadedTimedInfo extends StatelessWidget {

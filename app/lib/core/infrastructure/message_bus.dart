@@ -5,7 +5,7 @@ const kycTopic = 'kyc_completed';
 
 class MessageBus {
   MessageBus({final bool sync = false})
-      : _controller = StreamController<String>.broadcast(sync: sync);
+    : _controller = StreamController<String>.broadcast(sync: sync);
 
   final StreamController<String> _controller;
 

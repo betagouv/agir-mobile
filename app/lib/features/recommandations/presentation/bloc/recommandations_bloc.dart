@@ -10,11 +10,13 @@ class RecommandationsBloc
     required final RecommandationsRepository recommandationsRepository,
   }) : super(const RecommandationsState.empty()) {
     on<RecommandationsRecuperationDemandee>((final event, final emit) async {
-      final result =
-          await recommandationsRepository.recuperer(event.thematique);
+      final result = await recommandationsRepository.recuperer(
+        event.thematique,
+      );
       if (result.isRight()) {
-        final recommandations =
-            result.getRight().getOrElse(() => throw Exception());
+        final recommandations = result.getRight().getOrElse(
+          () => throw Exception(),
+        );
 
         emit(RecommandationsState(recommandations: recommandations));
       }

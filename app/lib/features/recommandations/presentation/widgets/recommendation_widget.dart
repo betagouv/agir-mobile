@@ -73,10 +73,9 @@ class _RecommendationWidgetState extends State<RecommendationWidget>
                   }
                   await context.read<GamificationRepository>().refresh();
                 case TypeDuContenu.quiz:
-                  await GoRouter.of(context).pushNamed(
-                    QuizPage.name,
-                    pathParameters: {'id': widget.id},
-                  );
+                  await GoRouter.of(
+                    context,
+                  ).pushNamed(QuizPage.name, pathParameters: {'id': widget.id});
               }
               widget.onPop();
             },
@@ -148,21 +147,21 @@ class _TypeTag extends StatelessWidget {
 
   @override
   Widget build(final context) => DsfrTag.sm(
-        label: TextSpan(
-          text: switch (type) {
-            TypeDuContenu.article => Localisation.article,
-            TypeDuContenu.kyc => Localisation.mieuxVousConnaitre,
-            TypeDuContenu.quiz => Localisation.quiz,
-          },
-        ),
-        backgroundColor: switch (type) {
-          TypeDuContenu.article => DsfrColors.brownCaramel925,
-          TypeDuContenu.kyc => DsfrColors.pinkTuile925,
-          TypeDuContenu.quiz => DsfrColors.greenBourgeon950,
-        },
-        foregroundColor: DsfrColors.grey50,
-        textStyle: const DsfrTextStyle.bodySm(),
-      );
+    label: TextSpan(
+      text: switch (type) {
+        TypeDuContenu.article => Localisation.article,
+        TypeDuContenu.kyc => Localisation.mieuxVousConnaitre,
+        TypeDuContenu.quiz => Localisation.quiz,
+      },
+    ),
+    backgroundColor: switch (type) {
+      TypeDuContenu.article => DsfrColors.brownCaramel925,
+      TypeDuContenu.kyc => DsfrColors.pinkTuile925,
+      TypeDuContenu.quiz => DsfrColors.greenBourgeon950,
+    },
+    foregroundColor: DsfrColors.grey50,
+    textStyle: const DsfrTextStyle.bodySm(),
+  );
 }
 
 class _Title extends StatelessWidget {
@@ -210,27 +209,24 @@ class _Points extends StatelessWidget {
 
   @override
   Widget build(final context) => DecoratedBox(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: borderRadius,
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: DsfrSpacings.s1v5,
-            horizontal: DsfrSpacings.s1w,
+    decoration: BoxDecoration(color: Colors.white, borderRadius: borderRadius),
+    child: Padding(
+      padding: const EdgeInsets.symmetric(
+        vertical: DsfrSpacings.s1v5,
+        horizontal: DsfrSpacings.s1w,
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(points, style: const DsfrTextStyle.bodySmBold()),
+          const SizedBox(width: DsfrSpacings.s1v),
+          const Icon(
+            DsfrIcons.othersLeafFill,
+            size: DsfrSpacings.s2w,
+            color: Color(0xFF3CD277),
           ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(points, style: const DsfrTextStyle.bodySmBold()),
-              const SizedBox(width: DsfrSpacings.s1v),
-              const Icon(
-                DsfrIcons.othersLeafFill,
-                size: DsfrSpacings.s2w,
-                color: Color(0xFF3CD277),
-              ),
-            ],
-          ),
-        ),
-      );
+        ],
+      ),
+    ),
+  );
 }

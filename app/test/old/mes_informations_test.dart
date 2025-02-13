@@ -46,56 +46,51 @@ void main() {
     ielVoitLeTexte(formatCurrency(16000));
   });
 
-  testWidgets(
-    'Iel rempli ces informations et appuie sur mettre à jour',
-    (final tester) async {
-      setUpWidgets(tester);
-      await _allerSurMesInformations(tester);
-      const nom = 'Nouveau nom';
-      const prenom = 'Nouveau prenom';
-      const annee = 1992;
-      const nombreDePartsFiscales = 2.5;
-      const trancheValeur = 35000;
-      ScenarioContext().dioMock!.patchM(Endpoints.profile);
-      await ielEcritDansLeChamp(
-        tester,
-        label: Localisation.nom,
-        enterText: nom,
-      );
-      await ielEcritDansLeChamp(
-        tester,
-        label: Localisation.prenom,
-        enterText: prenom,
-      );
-      await ielEcritDansLeChamp(
-        tester,
-        label: Localisation.anneeDeNaissance,
-        enterText: annee.toString(),
-      );
+  testWidgets('Iel rempli ces informations et appuie sur mettre à jour', (
+    final tester,
+  ) async {
+    setUpWidgets(tester);
+    await _allerSurMesInformations(tester);
+    const nom = 'Nouveau nom';
+    const prenom = 'Nouveau prenom';
+    const annee = 1992;
+    const nombreDePartsFiscales = 2.5;
+    const trancheValeur = 35000;
+    ScenarioContext().dioMock!.patchM(Endpoints.profile);
+    await ielEcritDansLeChamp(tester, label: Localisation.nom, enterText: nom);
+    await ielEcritDansLeChamp(
+      tester,
+      label: Localisation.prenom,
+      enterText: prenom,
+    );
+    await ielEcritDansLeChamp(
+      tester,
+      label: Localisation.anneeDeNaissance,
+      enterText: annee.toString(),
+    );
 
-      await ielScrolle(tester, Localisation.revenuFiscal);
-      await ielEcritDansLeChamp(
-        tester,
-        label: Localisation.nombreDePartsFiscales,
-        enterText: nombreDePartsFiscales.toString(),
-      );
-      await ielEcritDansLeChamp(
-        tester,
-        label: Localisation.revenuFiscal,
-        enterText: trancheValeur.toString(),
-      );
+    await ielScrolle(tester, Localisation.revenuFiscal);
+    await ielEcritDansLeChamp(
+      tester,
+      label: Localisation.nombreDePartsFiscales,
+      enterText: nombreDePartsFiscales.toString(),
+    );
+    await ielEcritDansLeChamp(
+      tester,
+      label: Localisation.revenuFiscal,
+      enterText: trancheValeur.toString(),
+    );
 
-      await ielAppuieSur(tester, Localisation.mettreAJourMesInformations);
+    await ielAppuieSur(tester, Localisation.mettreAJourMesInformations);
 
-      verify(
-        () => ScenarioContext().dioMock!.patch<dynamic>(
-              Endpoints.profile,
-              data:
-                  '{"annee_naissance":1992,"nom":"Nouveau nom","nombre_de_parts_fiscales":2.5,"prenom":"Nouveau prenom","revenu_fiscal":35000}',
-            ),
-      );
-    },
-  );
+    verify(
+      () => ScenarioContext().dioMock!.patch<dynamic>(
+        Endpoints.profile,
+        data:
+            '{"annee_naissance":1992,"nom":"Nouveau nom","nombre_de_parts_fiscales":2.5,"prenom":"Nouveau prenom","revenu_fiscal":35000}',
+      ),
+    );
+  });
 }
 
 Future<void> _allerSurMesInformations(final WidgetTester tester) async {

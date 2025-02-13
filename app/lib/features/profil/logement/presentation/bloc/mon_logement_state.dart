@@ -3,10 +3,7 @@ import 'package:flutter/foundation.dart';
 
 enum MonLogementStatut { initial, chargement, succes }
 
-enum TypeDeLogement {
-  appartement,
-  maison,
-}
+enum TypeDeLogement { appartement, maison }
 
 enum Superficie {
   s35, // = 'superficie_35',.
@@ -35,19 +32,19 @@ final class MonLogementState extends Equatable {
   });
 
   const MonLogementState.empty()
-      : this(
-          codePostal: '',
-          communes: const [],
-          commune: '',
-          nombreAdultes: 0,
-          nombreEnfants: 0,
-          typeDeLogement: null,
-          estProprietaire: null,
-          superficie: null,
-          plusDe15Ans: null,
-          dpe: null,
-          statut: MonLogementStatut.initial,
-        );
+    : this(
+        codePostal: '',
+        communes: const [],
+        commune: '',
+        nombreAdultes: 0,
+        nombreEnfants: 0,
+        typeDeLogement: null,
+        estProprietaire: null,
+        superficie: null,
+        plusDe15Ans: null,
+        dpe: null,
+        statut: MonLogementStatut.initial,
+      );
 
   final String codePostal;
   final List<String> communes;
@@ -73,33 +70,32 @@ final class MonLogementState extends Equatable {
     final bool? plusDe15Ans,
     final Dpe? dpe,
     final MonLogementStatut? statut,
-  }) =>
-      MonLogementState(
-        codePostal: codePostal ?? this.codePostal,
-        communes: communes ?? this.communes,
-        commune: commune ?? this.commune,
-        nombreAdultes: nombreAdultes ?? this.nombreAdultes,
-        nombreEnfants: nombreEnfants ?? this.nombreEnfants,
-        typeDeLogement: typeDeLogement ?? this.typeDeLogement,
-        estProprietaire: estProprietaire ?? this.estProprietaire,
-        superficie: superficie ?? this.superficie,
-        plusDe15Ans: plusDe15Ans ?? this.plusDe15Ans,
-        dpe: dpe ?? this.dpe,
-        statut: statut ?? this.statut,
-      );
+  }) => MonLogementState(
+    codePostal: codePostal ?? this.codePostal,
+    communes: communes ?? this.communes,
+    commune: commune ?? this.commune,
+    nombreAdultes: nombreAdultes ?? this.nombreAdultes,
+    nombreEnfants: nombreEnfants ?? this.nombreEnfants,
+    typeDeLogement: typeDeLogement ?? this.typeDeLogement,
+    estProprietaire: estProprietaire ?? this.estProprietaire,
+    superficie: superficie ?? this.superficie,
+    plusDe15Ans: plusDe15Ans ?? this.plusDe15Ans,
+    dpe: dpe ?? this.dpe,
+    statut: statut ?? this.statut,
+  );
 
   @override
   List<Object?> get props => [
-        codePostal,
-        communes,
-        commune,
-        nombreAdultes,
-        nombreEnfants,
-        typeDeLogement,
-        estProprietaire,
-        superficie,
-        plusDe15Ans,
-        dpe,
-        statut,
-      ];
+    codePostal,
+    communes,
+    commune,
+    nombreAdultes,
+    nombreEnfants,
+    typeDeLogement,
+    estProprietaire,
+    superficie,
+    plusDe15Ans,
+    dpe,
+    statut,
+  ];
 }

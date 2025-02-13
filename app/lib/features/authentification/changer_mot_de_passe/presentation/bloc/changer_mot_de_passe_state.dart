@@ -9,7 +9,7 @@ final class ChangerMotDePasseState extends Equatable {
   });
 
   const ChangerMotDePasseState.empty()
-      : this(motDePasse: '', motPasseEstChange: false);
+    : this(motDePasse: '', motPasseEstChange: false);
 
   final String motDePasse;
   bool get estValide => motDePasse.isNotEmpty;
@@ -19,11 +19,10 @@ final class ChangerMotDePasseState extends Equatable {
   ChangerMotDePasseState copyWith({
     final String? motDePasse,
     final bool? motPasseEstChange,
-  }) =>
-      ChangerMotDePasseState(
-        motDePasse: motDePasse ?? this.motDePasse,
-        motPasseEstChange: motPasseEstChange ?? this.motPasseEstChange,
-      );
+  }) => ChangerMotDePasseState(
+    motDePasse: motDePasse ?? this.motDePasse,
+    motPasseEstChange: motPasseEstChange ?? this.motPasseEstChange,
+  );
 
   @override
   List<Object> get props => [motDePasse, motPasseEstChange];
