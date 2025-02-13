@@ -1,10 +1,10 @@
 import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
-import 'package:app/features/seasonal_fruits_and_vegetables/domain/plant.dart';
-import 'package:app/features/seasonal_fruits_and_vegetables/domain/plant_month.dart';
-import 'package:app/features/seasonal_fruits_and_vegetables/infrastructure/plant_mapper.dart';
-import 'package:app/features/seasonal_fruits_and_vegetables/infrastructure/plant_month_mapper.dart';
+import 'package:app/features/services/seasonal_fruits_and_vegetables/domain/plant.dart';
+import 'package:app/features/services/seasonal_fruits_and_vegetables/domain/plant_month.dart';
+import 'package:app/features/services/seasonal_fruits_and_vegetables/infrastructure/plant_mapper.dart';
+import 'package:app/features/services/seasonal_fruits_and_vegetables/infrastructure/plant_month_mapper.dart';
 import 'package:fpdart/fpdart.dart';
 
 class SeasonalFruitsAndVegetablesRepository {

@@ -1,8 +1,8 @@
 import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
-import 'package:app/features/lvao/domain/lvao_actor.dart';
-import 'package:app/features/lvao/infrastructure/lvao_actor_mapper.dart';
+import 'package:app/features/services/lvao/domain/lvao_actor.dart';
+import 'package:app/features/services/lvao/infrastructure/lvao_actor_mapper.dart';
 import 'package:fpdart/fpdart.dart';
 
 class LvaoRepository {

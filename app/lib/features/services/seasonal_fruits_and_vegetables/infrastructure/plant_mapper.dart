@@ -1,4 +1,4 @@
-import 'package:app/features/seasonal_fruits_and_vegetables/domain/plant.dart';
+import 'package:app/features/services/seasonal_fruits_and_vegetables/domain/plant.dart';
 
 abstract final class PlantMapper {
   static Plant fromJson(final Map<String, dynamic> json) => Plant(
