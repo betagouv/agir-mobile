@@ -22,10 +22,11 @@ class MissionSection extends StatelessWidget {
     context.read<MissionHomeBloc>().add(const MissionHomeFetch());
 
     return BlocBuilder<MissionHomeBloc, MissionHomeState>(
-      builder: (final context, final state) => switch (state) {
-        MissionHomeInitial() => const SizedBox.shrink(),
-        MissionHomeLoadSuccess() => _Section(state),
-      },
+      builder:
+          (final context, final state) => switch (state) {
+            MissionHomeInitial() => const SizedBox.shrink(),
+            MissionHomeLoadSuccess() => _Section(state),
+          },
     );
   }
 }
@@ -37,28 +38,29 @@ class _Section extends StatelessWidget {
 
   @override
   Widget build(final context) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const TitleSection(
-            title: Localisation.missionTitle,
-            subTitle: Localisation.missionSubTitle,
-          ),
-          const SizedBox(height: DsfrSpacings.s2w),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            padding: EdgeInsets.zero,
-            clipBehavior: Clip.none,
-            child: IntrinsicHeight(
-              child: Row(
-                children: data.missions
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      const TitleSection(
+        title: Localisation.missionTitle,
+        subTitle: Localisation.missionSubTitle,
+      ),
+      const SizedBox(height: DsfrSpacings.s2w),
+      SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        padding: EdgeInsets.zero,
+        clipBehavior: Clip.none,
+        child: IntrinsicHeight(
+          child: Row(
+            children:
+                data.missions
                     .map(_Mission.new)
                     .separator(const SizedBox(width: DsfrSpacings.s2w))
                     .toList(),
-              ),
-            ),
           ),
-        ],
-      );
+        ),
+      ),
+    ],
+  );
 }
 
 class _Mission extends StatefulWidget {

@@ -27,16 +27,15 @@ abstract final class MissionChallengesMapper {
 
   static MissionChallenge _fromJsonMissionChallenge(
     final Map<String, dynamic> json,
-  ) =>
-      MissionChallenge(
-        contentId: ContentId(json['content_id'] as String),
-        title: json['titre'] as String,
-        status: _statusFromJson(json['defi_status'] as String),
-        points: json['points'] as int,
-        isRecommended: json['is_reco'] as bool,
-        isDone: json['done'] as bool,
-        isCollected: json['sont_points_en_poche'] as bool,
-      );
+  ) => MissionChallenge(
+    contentId: ContentId(json['content_id'] as String),
+    title: json['titre'] as String,
+    status: _statusFromJson(json['defi_status'] as String),
+    points: json['points'] as int,
+    isRecommended: json['is_reco'] as bool,
+    isDone: json['done'] as bool,
+    isCollected: json['sont_points_en_poche'] as bool,
+  );
 
   static MissionChallengeStatus _statusFromJson(final String? type) =>
       switch (type) {

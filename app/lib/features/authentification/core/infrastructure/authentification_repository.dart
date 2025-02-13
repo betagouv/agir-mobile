@@ -15,8 +15,8 @@ class AuthentificationRepository {
   AuthentificationRepository({
     required final DioHttpClient client,
     required final AuthenticationService authenticationService,
-  })  : _client = client,
-        _authenticationService = authenticationService;
+  }) : _client = client,
+       _authenticationService = authenticationService;
 
   final DioHttpClient _client;
   final AuthenticationService _authenticationService;
@@ -42,18 +42,15 @@ class AuthentificationRepository {
     return handleError(
       jsonEncode(response.data),
       defaultMessage: 'Erreur lors de la connexion',
-    ).fold(
-      (final l) async {
-        if (l.message != 'Utilisateur non actif') {
-          return Left(l);
-        }
+    ).fold((final l) async {
+      if (l.message != 'Utilisateur non actif') {
+        return Left(l);
+      }
 
-        await renvoyerCodeDemande(informationDeConnexion.adresseMail);
+      await renvoyerCodeDemande(informationDeConnexion.adresseMail);
 
-        return const Right(null);
-      },
-      (final r) => const Right(null),
-    );
+      return const Right(null);
+    }, (final r) => const Right(null));
   }
 
   Future<Either<Exception, void>> deconnexionDemandee() async {
@@ -77,9 +74,9 @@ class AuthentificationRepository {
     return isResponseSuccessful(response.statusCode)
         ? const Right(null)
         : handleError(
-            jsonEncode(response.data),
-            defaultMessage: 'Erreur lors de la création du compte',
-          );
+          jsonEncode(response.data),
+          defaultMessage: 'Erreur lors de la création du compte',
+        );
   }
 
   Future<Either<Exception, void>> renvoyerCodeDemande(
@@ -153,8 +150,8 @@ class AuthentificationRepository {
     return isResponseSuccessful(response.statusCode)
         ? const Right(null)
         : handleError(
-            jsonEncode(response.data),
-            defaultMessage: 'Erreur lors de la modification du mot de passe',
-          );
+          jsonEncode(response.data),
+          defaultMessage: 'Erreur lors de la modification du mot de passe',
+        );
   }
 }

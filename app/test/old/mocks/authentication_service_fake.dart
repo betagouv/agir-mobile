@@ -33,7 +33,7 @@ class AuthenticationServiceFake implements AuthenticationService {
   AuthenticationStatus get status => const Authenticated(UserId(_userId));
 
   @override
-  Token get token => Token('header.${base64Encode(
-        jsonEncode({'exp': 1727698718, 'utilisateurId': _userId}).codeUnits,
-      )}.signature');
+  Token get token => Token(
+    'header.${base64Encode(jsonEncode({'exp': 1727698718, 'utilisateurId': _userId}).codeUnits)}.signature',
+  );
 }

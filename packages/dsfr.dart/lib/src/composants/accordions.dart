@@ -47,16 +47,18 @@ class _DsfrAccordionsGroupState extends State<DsfrAccordionsGroup> {
     return Column(
       children: [
         divider,
-        ...widget.values.indexed.map((final (int, DsfrAccordion) e) {
-          final index = e.$1;
+        ...widget.values.indexed
+            .map((final (int, DsfrAccordion) e) {
+              final index = e.$1;
 
-          return _DsfrAccordion(
-            index: index,
-            item: e.$2,
-            isExpanded: _panelIndex == index && _isExpanded,
-            onAccordionCallback: _handleCallback,
-          );
-        }).separator(divider),
+              return _DsfrAccordion(
+                index: index,
+                item: e.$2,
+                isExpanded: _panelIndex == index && _isExpanded,
+                onAccordionCallback: _handleCallback,
+              );
+            })
+            .separator(divider),
         divider,
       ],
     );
@@ -87,62 +89,63 @@ class _DsfrAccordionState extends State<_DsfrAccordion>
 
   @override
   Widget build(final context) => Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          InkWell(
-            onTap: widget.item.isEnable ? _handleTap : null,
-            onHighlightChanged: updateMaterialState(WidgetState.pressed),
-            onHover: updateMaterialState(WidgetState.hovered),
-            focusColor: Colors.transparent,
-            onFocusChange: updateMaterialState(WidgetState.focused),
-            child: DsfrFocusWidget(
-              isFocused: isFocused,
-              child: ColoredBox(
-                color: widget.isExpanded
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      InkWell(
+        onTap: widget.item.isEnable ? _handleTap : null,
+        onHighlightChanged: updateMaterialState(WidgetState.pressed),
+        onHover: updateMaterialState(WidgetState.hovered),
+        focusColor: Colors.transparent,
+        onFocusChange: updateMaterialState(WidgetState.focused),
+        child: DsfrFocusWidget(
+          isFocused: isFocused,
+          child: ColoredBox(
+            color:
+                widget.isExpanded
                     ? DsfrColors.blueFrance925
                     : Colors.transparent,
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(minHeight: 48),
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: DsfrSpacings.s3v),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: widget.item.headerBuilder(widget.isExpanded),
-                        ),
-                        if (widget.item.isEnable)
-                          AnimatedRotation(
-                            turns: widget.isExpanded ? -0.5 : 0,
-                            duration: Durations.short4,
-                            child: const Icon(
-                              DsfrIcons.systemArrowDownSLine,
-                              size: DsfrSpacings.s2w,
-                              color: DsfrColors.blueFranceSun113,
-                            ),
-                          ),
-                        const SizedBox(width: DsfrSpacings.s2w),
-                      ],
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(minHeight: 48),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s3v),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: widget.item.headerBuilder(widget.isExpanded),
                     ),
-                  ),
+                    if (widget.item.isEnable)
+                      AnimatedRotation(
+                        turns: widget.isExpanded ? -0.5 : 0,
+                        duration: Durations.short4,
+                        child: const Icon(
+                          DsfrIcons.systemArrowDownSLine,
+                          size: DsfrSpacings.s2w,
+                          color: DsfrColors.blueFranceSun113,
+                        ),
+                      ),
+                    const SizedBox(width: DsfrSpacings.s2w),
+                  ],
                 ),
               ),
             ),
           ),
-          AnimatedCrossFade(
-            firstChild: const SizedBox.shrink(),
-            secondChild: Padding(
-              padding: const EdgeInsets.only(
-                top: DsfrSpacings.s2w,
-                bottom: DsfrSpacings.s3w,
-              ),
-              child: widget.item.body,
-            ),
-            crossFadeState: widget.isExpanded
+        ),
+      ),
+      AnimatedCrossFade(
+        firstChild: const SizedBox.shrink(),
+        secondChild: Padding(
+          padding: const EdgeInsets.only(
+            top: DsfrSpacings.s2w,
+            bottom: DsfrSpacings.s3w,
+          ),
+          child: widget.item.body,
+        ),
+        crossFadeState:
+            widget.isExpanded
                 ? CrossFadeState.showSecond
                 : CrossFadeState.showFirst,
-            duration: Durations.short4,
-          ),
-        ],
-      );
+        duration: Durations.short4,
+      ),
+    ],
+  );
 }

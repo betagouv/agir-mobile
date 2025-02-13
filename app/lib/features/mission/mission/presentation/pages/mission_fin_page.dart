@@ -14,43 +14,39 @@ class MissionFinPage extends StatelessWidget {
 
   @override
   Widget build(final context) => Stack(
-        alignment: Alignment.topCenter,
-        fit: StackFit.expand,
-        children: [
-          FnvSvg.asset(AssetImages.fireworks, alignment: Alignment.topCenter),
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-            child: Column(
-              children: [
-                const SizedBox(height: DsfrSpacings.s6w),
-                FnvSvg.asset(AssetImages.flags),
-                const SizedBox(height: DsfrSpacings.s1w),
-                const Text(
-                  Localisation.bravo,
-                  style: DsfrTextStyle.headline2(),
-                ),
-                Text(
-                  Localisation.vousAvezTermineLaMission(step.title),
-                  style: const DsfrTextStyle.bodyXl(
-                    color: DsfrColors.blueFranceSun113,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: DsfrSpacings.s2w),
-                Center(
-                  child: FittedBox(
-                    child: DsfrButton(
-                      label: Localisation.retour,
-                      variant: DsfrButtonVariant.primary,
-                      size: DsfrButtonSize.lg,
-                      onPressed: () => GoRouter.of(context).pop(),
-                    ),
-                  ),
-                ),
-              ],
+    alignment: Alignment.topCenter,
+    fit: StackFit.expand,
+    children: [
+      FnvSvg.asset(AssetImages.fireworks, alignment: Alignment.topCenter),
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: paddingVerticalPage),
+        child: Column(
+          children: [
+            const SizedBox(height: DsfrSpacings.s6w),
+            FnvSvg.asset(AssetImages.flags),
+            const SizedBox(height: DsfrSpacings.s1w),
+            const Text(Localisation.bravo, style: DsfrTextStyle.headline2()),
+            Text(
+              Localisation.vousAvezTermineLaMission(step.title),
+              style: const DsfrTextStyle.bodyXl(
+                color: DsfrColors.blueFranceSun113,
+              ),
+              textAlign: TextAlign.center,
             ),
-          ),
-        ],
-      );
+            const SizedBox(height: DsfrSpacings.s2w),
+            Center(
+              child: FittedBox(
+                child: DsfrButton(
+                  label: Localisation.retour,
+                  variant: DsfrButtonVariant.primary,
+                  size: DsfrButtonSize.lg,
+                  onPressed: () => GoRouter.of(context).pop(),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    ],
+  );
 }

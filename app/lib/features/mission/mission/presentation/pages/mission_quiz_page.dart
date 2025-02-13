@@ -17,12 +17,14 @@ class MissionQuizPage extends StatelessWidget {
 
   @override
   Widget build(final context) => BlocProvider(
-        create: (final context) => QuizBloc(
+    create:
+        (final context) => QuizBloc(
           quizRepository: context.read(),
           gamificationRepository: context.read(),
         )..add(QuizRecuperationDemandee(value.contentId.value)),
-        child: Builder(
-          builder: (final context) => ListView(
+    child: Builder(
+      builder:
+          (final context) => ListView(
             padding: const EdgeInsets.all(paddingVerticalPage),
             children: const [
               QuizContent(),
@@ -35,8 +37,8 @@ class MissionQuizPage extends StatelessWidget {
               ),
             ],
           ),
-        ),
-      );
+    ),
+  );
 }
 
 class _BottomButton extends StatelessWidget {
@@ -44,17 +46,19 @@ class _BottomButton extends StatelessWidget {
 
   @override
   Widget build(final context) {
-    final estValidee = context
-        .select<QuizBloc, bool>((final bloc) => bloc.state.estExacte.isSome());
+    final estValidee = context.select<QuizBloc, bool>(
+      (final bloc) => bloc.state.estExacte.isSome(),
+    );
 
     return estValidee
         ? DsfrButton(
-            label: Localisation.continuer,
-            variant: DsfrButtonVariant.primary,
-            size: DsfrButtonSize.lg,
-            onPressed: () =>
-                context.read<MissionBloc>().add(const MissionNextRequested()),
-          )
+          label: Localisation.continuer,
+          variant: DsfrButtonVariant.primary,
+          size: DsfrButtonSize.lg,
+          onPressed:
+              () =>
+                  context.read<MissionBloc>().add(const MissionNextRequested()),
+        )
         : const _BoutonValider();
   }
 }
@@ -64,16 +68,19 @@ class _BoutonValider extends StatelessWidget {
 
   @override
   Widget build(final context) {
-    final estSelectionnee = context
-        .select<QuizBloc, bool>((final bloc) => bloc.state.estSelectionnee);
+    final estSelectionnee = context.select<QuizBloc, bool>(
+      (final bloc) => bloc.state.estSelectionnee,
+    );
 
     return DsfrButton(
       label: Localisation.valider,
       variant: DsfrButtonVariant.primary,
       size: DsfrButtonSize.lg,
-      onPressed: estSelectionnee
-          ? () => context.read<QuizBloc>().add(const QuizValidationDemandee())
-          : null,
+      onPressed:
+          estSelectionnee
+              ? () =>
+                  context.read<QuizBloc>().add(const QuizValidationDemandee())
+              : null,
     );
   }
 }

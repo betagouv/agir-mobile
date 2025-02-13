@@ -8,8 +8,11 @@ class Tracker {
     required final String siteId,
     required final String url,
   }) async {
-    await MatomoTracker.instance
-        .initialize(siteId: siteId, url: url, verbosityLevel: Level.all);
+    await MatomoTracker.instance.initialize(
+      siteId: siteId,
+      url: url,
+      verbosityLevel: Level.all,
+    );
   }
 
   void trackClick(final String page, final String contenu) {
@@ -38,7 +41,8 @@ class Tracker {
     MatomoTracker.instance.dispose();
   }
 
-  NavigatorObserver get navigatorObserver => MatomoTracker.instance.initialized
-      ? MatomoGlobalObserver(tracker: MatomoTracker.instance)
-      : NavigatorObserver();
+  NavigatorObserver get navigatorObserver =>
+      MatomoTracker.instance.initialized
+          ? MatomoGlobalObserver(tracker: MatomoTracker.instance)
+          : NavigatorObserver();
 }

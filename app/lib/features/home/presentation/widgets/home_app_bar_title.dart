@@ -18,10 +18,7 @@ class HomeAppBarTitle extends StatelessWidget {
       TextSpan(
         text: Localisation.bonjour,
         children: [
-          TextSpan(
-            text: Localisation.prenomExclamation(prenom),
-            style: font,
-          ),
+          TextSpan(text: Localisation.prenomExclamation(prenom), style: font),
         ],
       ),
       style: font.copyWith(fontWeight: FontWeight.bold),

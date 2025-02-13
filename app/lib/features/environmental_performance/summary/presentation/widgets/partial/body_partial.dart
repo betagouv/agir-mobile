@@ -16,99 +16,96 @@ class BodyPartial extends StatelessWidget {
 
   @override
   Widget build(final context) => ListView(
-        padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s3w),
-        children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-            child: FnvTitle(
-              title: EnvironmentalPerformanceSummaryL10n
+    padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s3w),
+    children: [
+      const Padding(
+        padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
+        child: FnvTitle(
+          title:
+              EnvironmentalPerformanceSummaryL10n
                   .estimerMonBilanEnvironnemental,
-            ),
-          ),
-          const SizedBox(height: DsfrSpacings.s4w),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-            child: Text(
-              EnvironmentalPerformanceSummaryL10n.maPremiereEstimation,
-              style: DsfrTextStyle.headline4(),
-            ),
-          ),
-          const SizedBox(height: DsfrSpacings.s3v),
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-            child: EnvironmentalPerformanceCard(partial: data),
-          ),
-          const SizedBox(height: DsfrSpacings.s3v),
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-            child: Text.rich(
-              TextSpan(
-                children: [
-                  const TextSpan(
-                    text: EnvironmentalPerformanceSummaryL10n.etincelles,
-                    style: DsfrTextStyle.headline4(),
-                  ),
-                  const TextSpan(
-                    text:
-                        ' ${EnvironmentalPerformanceSummaryL10n.estimationCompleteA} ',
-                    style: DsfrTextStyle.bodyMd(),
-                  ),
-                  TextSpan(
-                    text: '${data.percentageCompletion}%',
-                    style: const DsfrTextStyle.bodyMd(
-                      color: DsfrColors.blueFranceSun113,
-                    ),
-                  ),
-                ],
+        ),
+      ),
+      const SizedBox(height: DsfrSpacings.s4w),
+      const Padding(
+        padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
+        child: Text(
+          EnvironmentalPerformanceSummaryL10n.maPremiereEstimation,
+          style: DsfrTextStyle.headline4(),
+        ),
+      ),
+      const SizedBox(height: DsfrSpacings.s3v),
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: paddingVerticalPage),
+        child: EnvironmentalPerformanceCard(partial: data),
+      ),
+      const SizedBox(height: DsfrSpacings.s3v),
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: paddingVerticalPage),
+        child: Text.rich(
+          TextSpan(
+            children: [
+              const TextSpan(
+                text: EnvironmentalPerformanceSummaryL10n.etincelles,
+                style: DsfrTextStyle.headline4(),
               ),
-            ),
-          ),
-          const SizedBox(height: DsfrSpacings.s4w),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-            child: Text.rich(
-              TextSpan(
-                children: [
-                  TextSpan(
-                    text: EnvironmentalPerformanceSummaryL10n.affiner,
-                    style: DsfrTextStyle.headline4(),
-                  ),
-                  TextSpan(text: ' ', style: DsfrTextStyle.headline4()),
-                  TextSpan(
-                    text: EnvironmentalPerformanceSummaryL10n.monEstimation,
-                    style: DsfrTextStyle.headline4(
-                      color: DsfrColors.blueFranceSun113,
-                    ),
-                  ),
-                ],
+              const TextSpan(
+                text:
+                    ' ${EnvironmentalPerformanceSummaryL10n.estimationCompleteA} ',
+                style: DsfrTextStyle.bodyMd(),
               ),
-            ),
+              TextSpan(
+                text: '${data.percentageCompletion}%',
+                style: const DsfrTextStyle.bodyMd(
+                  color: DsfrColors.blueFranceSun113,
+                ),
+              ),
+            ],
           ),
-          const SizedBox(height: DsfrSpacings.s1v5),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-            child: Text(
-              EnvironmentalPerformanceSummaryL10n.affinerMonEstimationSousTitre,
-              style: DsfrTextStyle.bodyMd(),
-            ),
+        ),
+      ),
+      const SizedBox(height: DsfrSpacings.s4w),
+      const Padding(
+        padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
+        child: Text.rich(
+          TextSpan(
+            children: [
+              TextSpan(
+                text: EnvironmentalPerformanceSummaryL10n.affiner,
+                style: DsfrTextStyle.headline4(),
+              ),
+              TextSpan(text: ' ', style: DsfrTextStyle.headline4()),
+              TextSpan(
+                text: EnvironmentalPerformanceSummaryL10n.monEstimation,
+                style: DsfrTextStyle.headline4(
+                  color: DsfrColors.blueFranceSun113,
+                ),
+              ),
+            ],
           ),
-          const SizedBox(height: DsfrSpacings.s3v),
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-            child:
-                EnvironmentalPerformanceCategories(categories: data.categories),
-          ),
-          const SizedBox(height: DsfrSpacings.s7w),
-          const QuestionSection(),
-          const SizedBox(height: DsfrSpacings.s4w),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-            child: EnvironmentalPerformancePartnerCard(),
-          ),
-          const SafeArea(child: SizedBox.shrink()),
-        ],
-      );
+        ),
+      ),
+      const SizedBox(height: DsfrSpacings.s1v5),
+      const Padding(
+        padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
+        child: Text(
+          EnvironmentalPerformanceSummaryL10n.affinerMonEstimationSousTitre,
+          style: DsfrTextStyle.bodyMd(),
+        ),
+      ),
+      const SizedBox(height: DsfrSpacings.s3v),
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: paddingVerticalPage),
+        child: EnvironmentalPerformanceCategories(categories: data.categories),
+      ),
+      const SizedBox(height: DsfrSpacings.s7w),
+      const QuestionSection(),
+      const SizedBox(height: DsfrSpacings.s4w),
+      const Padding(
+        padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
+        child: EnvironmentalPerformancePartnerCard(),
+      ),
+      const SafeArea(child: SizedBox.shrink()),
+    ],
+  );
 }

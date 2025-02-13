@@ -43,7 +43,8 @@ void main() {
   }) async {
     const challengeId = ChallengeId('73');
     final endpoint = Endpoints.challenge(challengeId.value);
-    final dioMock = dio ??
+    final dioMock =
+        dio ??
         (DioMock()
           ..getM(endpoint, responseData: responseData)
           ..patchM(endpoint));
@@ -68,8 +69,9 @@ void main() {
       page: GoRoute(
         path: 'path',
         name: 'name',
-        builder: (final context, final state) =>
-            const ChallengeDetailPage(id: challengeId),
+        builder:
+            (final context, final state) =>
+                const ChallengeDetailPage(id: challengeId),
       ),
     );
   }
@@ -109,10 +111,7 @@ void main() {
         isRadioButtonEnabled<bool>(tester, Localisation.jeReleveLAction),
         false,
       );
-      expect(
-        isRadioButtonEnabled<bool>(tester, Localisation.pasPourMoi),
-        true,
-      );
+      expect(isRadioButtonEnabled<bool>(tester, Localisation.pasPourMoi), true);
       expect(
         find.text(Localisation.bonnesAstucesPourRealiserCetteAction),
         findsNothing,
@@ -131,10 +130,7 @@ void main() {
         isRadioButtonEnabled<bool>(tester, Localisation.jeReleveLAction),
         false,
       );
-      expect(
-        isRadioButtonEnabled<bool>(tester, Localisation.pasPourMoi),
-        true,
-      );
+      expect(isRadioButtonEnabled<bool>(tester, Localisation.pasPourMoi), true);
       expect(
         find.text(Localisation.bonnesAstucesPourRealiserCetteAction),
         findsNothing,
@@ -277,10 +273,7 @@ void main() {
         false,
       );
 
-      expect(
-        isRadioButtonEnabled<bool>(tester, Localisation.pasPourMoi),
-        true,
-      );
+      expect(isRadioButtonEnabled<bool>(tester, Localisation.pasPourMoi), true);
 
       expect(
         find.text(Localisation.bonnesAstucesPourRealiserCetteAction),
@@ -293,9 +286,10 @@ void main() {
     testWidgets('commencer le défi', (final tester) async {
       const id = '73';
       final path = Endpoints.challenge(id);
-      final dio = DioMock()
-        ..getM(path, responseData: challengeFaker(id: id, status: 'todo'))
-        ..patchM(path);
+      final dio =
+          DioMock()
+            ..getM(path, responseData: challengeFaker(id: id, status: 'todo'))
+            ..patchM(path);
 
       await pumpChallengeDetailPage(tester, dio: dio);
 
@@ -322,9 +316,10 @@ void main() {
     testWidgets('choisir "pas pour moi" avec un motif', (final tester) async {
       const id = '73';
       final path = Endpoints.challenge(id);
-      final dio = DioMock()
-        ..getM(path, responseData: challengeFaker(id: id, status: 'todo'))
-        ..patchM(path);
+      final dio =
+          DioMock()
+            ..getM(path, responseData: challengeFaker(id: id, status: 'todo'))
+            ..patchM(path);
 
       await pumpChallengeDetailPage(tester, dio: dio);
 
@@ -334,10 +329,7 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      expect(
-        isRadioButtonEnabled<bool>(tester, Localisation.pasPourMoi),
-        true,
-      );
+      expect(isRadioButtonEnabled<bool>(tester, Localisation.pasPourMoi), true);
 
       const reason = 'parce que';
       await tester.enterText(
@@ -368,16 +360,17 @@ void main() {
       (final tester) async {
         const id = '73';
         final path = Endpoints.challenge(id);
-        final dio = DioMock()
-          ..getM(
-            path,
-            responseData: challengeFaker(
-              id: id,
-              status: 'pas_envie',
-              reason: 'parce que',
-            ),
-          )
-          ..patchM(path);
+        final dio =
+            DioMock()
+              ..getM(
+                path,
+                responseData: challengeFaker(
+                  id: id,
+                  status: 'pas_envie',
+                  reason: 'parce que',
+                ),
+              )
+              ..patchM(path);
 
         await pumpChallengeDetailPage(tester, dio: dio);
 
@@ -402,59 +395,59 @@ void main() {
       },
     );
 
-    testWidgets(
-      'l\'action "pas pour moi" dont seul le motif change',
-      (final tester) async {
-        const id = '73';
-        final path = Endpoints.challenge(id);
-        final dio = DioMock()
-          ..getM(
-            path,
-            responseData: challengeFaker(
-              id: id,
-              status: 'pas_envie',
-              reason: 'parce que',
-            ),
-          )
-          ..patchM(path);
+    testWidgets('l\'action "pas pour moi" dont seul le motif change', (
+      final tester,
+    ) async {
+      const id = '73';
+      final path = Endpoints.challenge(id);
+      final dio =
+          DioMock()
+            ..getM(
+              path,
+              responseData: challengeFaker(
+                id: id,
+                status: 'pas_envie',
+                reason: 'parce que',
+              ),
+            )
+            ..patchM(path);
 
-        await pumpChallengeDetailPage(tester, dio: dio);
+      await pumpChallengeDetailPage(tester, dio: dio);
 
-        await tester.pumpAndSettle();
+      await tester.pumpAndSettle();
 
-        const reason = 'parce que 2';
-        await tester.enterText(
-          find.byKey(
-            const ValueKey(Localisation.cetteActionNeVousConvientPasDetails),
-          ),
-          reason,
-        );
+      const reason = 'parce que 2';
+      await tester.enterText(
+        find.byKey(
+          const ValueKey(Localisation.cetteActionNeVousConvientPasDetails),
+        ),
+        reason,
+      );
 
-        await tester.pump();
+      await tester.pump();
 
-        await tester.scrollUntilVisible(
-          find.text(Localisation.valider),
-          300,
-          scrollable: find.descendant(
-            of: find.byType(ListView),
-            matching: find.byType(Scrollable).first,
-          ),
-        );
-        await tester.pumpAndSettle();
-        await tester.tap(find.text(Localisation.valider, skipOffstage: false));
+      await tester.scrollUntilVisible(
+        find.text(Localisation.valider),
+        300,
+        scrollable: find.descendant(
+          of: find.byType(ListView),
+          matching: find.byType(Scrollable).first,
+        ),
+      );
+      await tester.pumpAndSettle();
+      await tester.tap(find.text(Localisation.valider, skipOffstage: false));
 
-        await tester.pumpAndSettle();
+      await tester.pumpAndSettle();
 
-        verify(
-          () => dio.patch<dynamic>(
-            path,
-            data: {'motif': reason, 'status': 'pas_envie'},
-          ),
-        );
+      verify(
+        () => dio.patch<dynamic>(
+          path,
+          data: {'motif': reason, 'status': 'pas_envie'},
+        ),
+      );
 
-        expect(find.text('pop'), findsOneWidget);
-      },
-    );
+      expect(find.text('pop'), findsOneWidget);
+    });
 
     testWidgets(
       'l\'action "pas pour moi" qui change de statut puis revient à "pas pour moi"',
@@ -462,13 +455,17 @@ void main() {
         const id = '73';
         const reason = 'parce que';
         final path = Endpoints.challenge(id);
-        final dio = DioMock()
-          ..getM(
-            path,
-            responseData:
-                challengeFaker(id: id, status: 'pas_envie', reason: reason),
-          )
-          ..patchM(path);
+        final dio =
+            DioMock()
+              ..getM(
+                path,
+                responseData: challengeFaker(
+                  id: id,
+                  status: 'pas_envie',
+                  reason: reason,
+                ),
+              )
+              ..patchM(path);
 
         await pumpChallengeDetailPage(tester, dio: dio);
 
@@ -503,9 +500,13 @@ void main() {
       late MessageBus messageBus;
       late DioMock dio;
       setUp(() {
-        dio = DioMock()
-          ..getM(path, responseData: challengeFaker(id: id, status: 'en_cours'))
-          ..patchM(path);
+        dio =
+            DioMock()
+              ..getM(
+                path,
+                responseData: challengeFaker(id: id, status: 'en_cours'),
+              )
+              ..patchM(path);
         messageBus = MessageBus();
       });
 

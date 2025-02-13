@@ -55,13 +55,14 @@ void main() {
 
   test('connexionDemandee avec un utilisateur non actif', () async {
     // Arrange.
-    final dio = DioMock()
-      ..postM(
-        Endpoints.login,
-        statusCode: HttpStatus.badRequest,
-        responseData: jsonDecode('{"message":"Utilisateur non actif"}'),
-      )
-      ..postM(Endpoints.renvoyerCode);
+    final dio =
+        DioMock()
+          ..postM(
+            Endpoints.login,
+            statusCode: HttpStatus.badRequest,
+            responseData: jsonDecode('{"message":"Utilisateur non actif"}'),
+          )
+          ..postM(Endpoints.renvoyerCode);
 
     final repository = AuthentificationRepository(
       client: DioHttpClient(
@@ -86,21 +87,20 @@ void main() {
   test(
     "validationCodeConnexionDemandee ajoute le token et l'utisateurId dans le secure storage et modifie le statut a connecté",
     () async {
-      final dio = DioMock()
-        ..postM(Endpoints.login, statusCode: HttpStatus.created)
-        ..postM(
-          Endpoints.loginCode,
-          statusCode: HttpStatus.created,
-          responseData: jsonDecode(
-            '''
+      final dio =
+          DioMock()
+            ..postM(Endpoints.login, statusCode: HttpStatus.created)
+            ..postM(
+              Endpoints.loginCode,
+              statusCode: HttpStatus.created,
+              responseData: jsonDecode('''
 {
   "token": "$token",
   "utilisateur": {
     "id": "user123"
   }
-}''',
-          ),
-        );
+}'''),
+            );
 
       final flutterSecureStorage = FlutterSecureStorageFake();
 
@@ -166,15 +166,15 @@ void main() {
   );
 
   test('creationDeCompteDemandee', () async {
-    final dio = DioMock()
-      ..postM(
-        Endpoints.creationCompte,
-        statusCode: HttpStatus.created,
-        responseData: '''
+    final dio =
+        DioMock()..postM(
+          Endpoints.creationCompte,
+          statusCode: HttpStatus.created,
+          responseData: '''
 {
   "email": "${informationDeConnexion.adresseMail}",
 }''',
-      );
+        );
 
     final repository = AuthentificationRepository(
       client: DioHttpClient(
@@ -196,20 +196,18 @@ void main() {
   });
 
   test('validationDemandee', () async {
-    final dio = DioMock()
-      ..postM(
-        Endpoints.validerCode,
-        statusCode: HttpStatus.created,
-        responseData: jsonDecode(
-          '''
+    final dio =
+        DioMock()..postM(
+          Endpoints.validerCode,
+          statusCode: HttpStatus.created,
+          responseData: jsonDecode('''
 {
   "token": "$token",
   "utilisateur": {
     "id": "$utilisateurId"
   }
-}''',
-        ),
-      );
+}'''),
+        );
 
     final flutterSecureStorageMock = FlutterSecureStorageFake();
     final authenticationService = AuthenticationService(
@@ -264,15 +262,15 @@ void main() {
   });
 
   test('oubliMotDePasse', () async {
-    final dio = DioMock()
-      ..postM(
-        Endpoints.oubliMotDePasse,
-        statusCode: HttpStatus.created,
-        responseData: jsonDecode('''
+    final dio =
+        DioMock()..postM(
+          Endpoints.oubliMotDePasse,
+          statusCode: HttpStatus.created,
+          responseData: jsonDecode('''
 {
   "email": "test@example.com"
 }'''),
-      );
+        );
 
     final repository = AuthentificationRepository(
       client: DioHttpClient(
@@ -293,8 +291,9 @@ void main() {
   });
 
   test('modifierMotDePasse', () async {
-    final dio = DioMock()
-      ..postM(Endpoints.modifierMotDePasse, statusCode: HttpStatus.created);
+    final dio =
+        DioMock()
+          ..postM(Endpoints.modifierMotDePasse, statusCode: HttpStatus.created);
 
     final repository = AuthentificationRepository(
       client: DioHttpClient(

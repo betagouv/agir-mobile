@@ -15,8 +15,9 @@ class AuthenticationInjection extends StatelessWidget {
 
   @override
   Widget build(final context) => BlocProvider(
-        create: (final context) =>
+    create:
+        (final context) =>
             AuthenticationBloc(authenticationService: authenticationService),
-        child: child,
-      );
+    child: child,
+  );
 }

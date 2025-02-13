@@ -22,18 +22,14 @@ class Recommandation extends Equatable {
 
   @override
   List<Object?> get props => [
-        id,
-        type,
-        titre,
-        sousTitre,
-        imageUrl,
-        points,
-        thematique,
-      ];
+    id,
+    type,
+    titre,
+    sousTitre,
+    imageUrl,
+    points,
+    thematique,
+  ];
 }
 
-enum TypeDuContenu {
-  article,
-  kyc,
-  quiz,
-}
+enum TypeDuContenu { article, kyc, quiz }

@@ -21,34 +21,35 @@ class FnvHtmlWidget extends StatelessWidget {
 
   @override
   Widget build(final context) => SelectionArea(
-        child: HtmlWidget(
-          html,
-          customStylesBuilder: _handlePDansLi,
-          onTapUrl: (final url) async {
-            final uri = Uri.parse(url);
-            if (uri.host == 'jagis.beta.gouv.fr') {
-              switch (uri.path) {
-                case '/vos-aides':
-                case '/aides':
-                  await GoRouter.of(context).pushNamed(AidsPage.name);
+    child: HtmlWidget(
+      html,
+      customStylesBuilder: _handlePDansLi,
+      onTapUrl: (final url) async {
+        final uri = Uri.parse(url);
+        if (uri.host == 'jagis.beta.gouv.fr') {
+          switch (uri.path) {
+            case '/vos-aides':
+            case '/aides':
+              await GoRouter.of(context).pushNamed(AidsPage.name);
 
-                  return true;
-                case '/bilan-environnemental':
-                  await GoRouter.of(context)
-                      .pushNamed(EnvironmentalPerformanceSummaryPage.name);
+              return true;
+            case '/bilan-environnemental':
+              await GoRouter.of(
+                context,
+              ).pushNamed(EnvironmentalPerformanceSummaryPage.name);
 
-                  return true;
-                default:
-                  return false;
-              }
-            }
-
-            try {
-              return await FnvUrlLauncher.launch(url);
-            } on PlatformException {
+              return true;
+            default:
               return false;
-            }
-          },
-        ),
-      );
+          }
+        }
+
+        try {
+          return await FnvUrlLauncher.launch(url);
+        } on PlatformException {
+          return false;
+        }
+      },
+    ),
+  );
 }

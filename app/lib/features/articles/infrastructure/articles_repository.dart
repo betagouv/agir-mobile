@@ -9,7 +9,7 @@ import 'package:fpdart/fpdart.dart';
 
 class ArticlesRepository {
   const ArticlesRepository({required final DioHttpClient client})
-      : _client = client;
+    : _client = client;
 
   final DioHttpClient _client;
 
@@ -19,10 +19,10 @@ class ArticlesRepository {
     return isResponseUnsuccessful(responseApi.statusCode)
         ? Left(Exception("Erreur lors de la récupération de l'article"))
         : Right(
-            ArticleMapper.fromJson(
-              json: responseApi.data as Map<String, dynamic>,
-            ),
-          );
+          ArticleMapper.fromJson(
+            json: responseApi.data as Map<String, dynamic>,
+          ),
+        );
   }
 
   Future<Either<Exception, void>> addToFavorites(final String id) async {

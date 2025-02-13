@@ -19,99 +19,107 @@ class ProfilPage extends StatelessWidget {
   static const path = name;
 
   static GoRoute get route => GoRoute(
-        path: path,
-        name: name,
-        builder: (final context, final state) => const ProfilPage(),
-      );
+    path: path,
+    name: name,
+    builder: (final context, final state) => const ProfilPage(),
+  );
 
   @override
   Widget build(final context) => RootPage(
-        body: ListView(
-          padding: const EdgeInsets.all(paddingVerticalPage),
-          children: [
-            const FnvTitle(title: Localisation.monProfil),
-            const SizedBox(height: DsfrSpacings.s3w),
-            FnvCard(
-              child: Column(
-                children: [
-                  _MenuElement(
-                    icon: DsfrIcons.userAccountCircleLine,
-                    label: Localisation.mesInformations,
-                    onTap: () async => GoRouter.of(context)
-                        .pushNamed(MesInformationsPage.name),
-                  ),
-                  const DsfrDivider(),
-                  _MenuElement(
-                    icon: DsfrIcons.buildingsHome4Line,
-                    label: Localisation.monLogement,
-                    onTap: () async =>
+    body: ListView(
+      padding: const EdgeInsets.all(paddingVerticalPage),
+      children: [
+        const FnvTitle(title: Localisation.monProfil),
+        const SizedBox(height: DsfrSpacings.s3w),
+        FnvCard(
+          child: Column(
+            children: [
+              _MenuElement(
+                icon: DsfrIcons.userAccountCircleLine,
+                label: Localisation.mesInformations,
+                onTap:
+                    () async => GoRouter.of(
+                      context,
+                    ).pushNamed(MesInformationsPage.name),
+              ),
+              const DsfrDivider(),
+              _MenuElement(
+                icon: DsfrIcons.buildingsHome4Line,
+                label: Localisation.monLogement,
+                onTap:
+                    () async =>
                         GoRouter.of(context).pushNamed(MonLogementPage.name),
-                  ),
-                  const DsfrDivider(),
-                  _MenuElement(
-                    icon: DsfrIcons.userUserSettingLine,
-                    label: Localisation.mieuxVousConnaitre,
-                    onTap: () async => GoRouter.of(context)
-                        .pushNamed(KnowYourCustomersPage.name),
-                  ),
-                  const DsfrDivider(),
-                  _MenuElement(
-                    icon: DsfrIcons.documentArticleLine,
-                    label: Localisation.politiqueDeConfidentialite,
-                    onTap: () async => FnvUrlLauncher.launch(
+              ),
+              const DsfrDivider(),
+              _MenuElement(
+                icon: DsfrIcons.userUserSettingLine,
+                label: Localisation.mieuxVousConnaitre,
+                onTap:
+                    () async => GoRouter.of(
+                      context,
+                    ).pushNamed(KnowYourCustomersPage.name),
+              ),
+              const DsfrDivider(),
+              _MenuElement(
+                icon: DsfrIcons.documentArticleLine,
+                label: Localisation.politiqueDeConfidentialite,
+                onTap:
+                    () async => FnvUrlLauncher.launch(
                       Localisation.politiqueDeConfidentialiteSite,
                     ),
-                    iconRight: DsfrIcons.systemExternalLinkLine,
-                  ),
-                  const DsfrDivider(),
-                  _MenuElement(
-                    icon: DsfrIcons.documentArticleLine,
-                    label: Localisation.lesCguMenu,
-                    onTap: () async => FnvUrlLauncher.launch(
-                      Localisation.lesCguSite,
-                    ),
-                    iconRight: DsfrIcons.systemExternalLinkLine,
-                  ),
-                  const DsfrDivider(),
-                  _MenuElement(
-                    icon: DsfrIcons.documentArticleLine,
-                    label: Localisation.mentionsLegales,
-                    onTap: () async => FnvUrlLauncher.launch(
-                      Localisation.mentionsLegalesSite,
-                    ),
-                    iconRight: DsfrIcons.systemExternalLinkLine,
-                  ),
-                  const DsfrDivider(),
-                  _MenuElement(
-                    icon: DsfrIcons.documentArticleLine,
-                    label: Localisation.declarationAccessibilite,
-                    onTap: () async => FnvUrlLauncher.launch(
+                iconRight: DsfrIcons.systemExternalLinkLine,
+              ),
+              const DsfrDivider(),
+              _MenuElement(
+                icon: DsfrIcons.documentArticleLine,
+                label: Localisation.lesCguMenu,
+                onTap:
+                    () async => FnvUrlLauncher.launch(Localisation.lesCguSite),
+                iconRight: DsfrIcons.systemExternalLinkLine,
+              ),
+              const DsfrDivider(),
+              _MenuElement(
+                icon: DsfrIcons.documentArticleLine,
+                label: Localisation.mentionsLegales,
+                onTap:
+                    () async =>
+                        FnvUrlLauncher.launch(Localisation.mentionsLegalesSite),
+                iconRight: DsfrIcons.systemExternalLinkLine,
+              ),
+              const DsfrDivider(),
+              _MenuElement(
+                icon: DsfrIcons.documentArticleLine,
+                label: Localisation.declarationAccessibilite,
+                onTap:
+                    () async => FnvUrlLauncher.launch(
                       Localisation.declarationAccessibiliteSite,
                     ),
-                    iconRight: DsfrIcons.systemExternalLinkLine,
-                  ),
-                  const DsfrDivider(),
-                  _MenuElement(
-                    icon: DsfrIcons.businessLineChartLine,
-                    label: Localisation.statistiques,
-                    onTap: () async => FnvUrlLauncher.launch(
-                      Localisation.statistiquesSite,
-                    ),
-                    iconRight: DsfrIcons.systemExternalLinkLine,
-                  ),
-                  const DsfrDivider(),
-                  _MenuElement(
-                    icon: DsfrIcons.systemSettings5Line,
-                    label: Localisation.optionsAvancees,
-                    onTap: () async => GoRouter.of(context)
-                        .pushNamed(OptionsAvanceesPage.name),
-                  ),
-                ],
+                iconRight: DsfrIcons.systemExternalLinkLine,
               ),
-            ),
-          ],
+              const DsfrDivider(),
+              _MenuElement(
+                icon: DsfrIcons.businessLineChartLine,
+                label: Localisation.statistiques,
+                onTap:
+                    () async =>
+                        FnvUrlLauncher.launch(Localisation.statistiquesSite),
+                iconRight: DsfrIcons.systemExternalLinkLine,
+              ),
+              const DsfrDivider(),
+              _MenuElement(
+                icon: DsfrIcons.systemSettings5Line,
+                label: Localisation.optionsAvancees,
+                onTap:
+                    () async => GoRouter.of(
+                      context,
+                    ).pushNamed(OptionsAvanceesPage.name),
+              ),
+            ],
+          ),
         ),
-      );
+      ],
+    ),
+  );
 }
 
 class _MenuElement extends StatelessWidget {

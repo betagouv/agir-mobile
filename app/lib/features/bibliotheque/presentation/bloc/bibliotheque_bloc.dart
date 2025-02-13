@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BibliothequeBloc extends Bloc<BibliothequeEvent, BibliothequeState> {
   BibliothequeBloc({required final BibliothequeRepository repository})
-      : super(const BibliothequeState.empty()) {
+    : super(const BibliothequeState.empty()) {
     on<BibliothequeRecuperationDemandee>((final event, final emit) async {
       emit(state.copyWith(statut: BibliothequeStatut.chargement));
       final result = await repository.recuperer(

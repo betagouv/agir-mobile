@@ -8,13 +8,13 @@ class HomeTabBarView extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => const TabBarView(
-        physics: NeverScrollableScrollPhysics(),
-        children: [
-          HomeContent(),
-          ThemePage(themeType: ThemeType.alimentation),
-          ThemePage(themeType: ThemeType.logement),
-          ThemePage(themeType: ThemeType.transport),
-          ThemePage(themeType: ThemeType.consommation),
-        ],
-      );
+    physics: NeverScrollableScrollPhysics(),
+    children: [
+      HomeContent(),
+      ThemePage(themeType: ThemeType.alimentation),
+      ThemePage(themeType: ThemeType.logement),
+      ThemePage(themeType: ThemeType.transport),
+      ThemePage(themeType: ThemeType.consommation),
+    ],
+  );
 }

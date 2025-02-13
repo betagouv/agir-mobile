@@ -8,11 +8,10 @@ class EnvironmentalPerformancePartnerCard extends StatelessWidget {
 
   @override
   Widget build(final context) => const PartnerCard(
-        image: AssetImages.nosGestesClimatIllustration,
-        name: EnvironmentalPerformanceSummaryL10n.nosGestesClimat,
-        description:
-            EnvironmentalPerformanceSummaryL10n.nosGestesClimatDescription,
-        url: EnvironmentalPerformanceSummaryL10n.nosGestesClimatUrl,
-        logo: AssetImages.nosGestesClimat,
-      );
+    image: AssetImages.nosGestesClimatIllustration,
+    name: EnvironmentalPerformanceSummaryL10n.nosGestesClimat,
+    description: EnvironmentalPerformanceSummaryL10n.nosGestesClimatDescription,
+    url: EnvironmentalPerformanceSummaryL10n.nosGestesClimatUrl,
+    logo: AssetImages.nosGestesClimat,
+  );
 }

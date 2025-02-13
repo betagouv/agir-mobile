@@ -28,11 +28,9 @@ class ThemePage extends StatelessWidget {
 
   @override
   Widget build(final context) => BlocProvider(
-        create: (final context) => ThemeBloc(
-          themeRepository: context.read(),
-        ),
-        child: _Page(themeType),
-      );
+    create: (final context) => ThemeBloc(themeRepository: context.read()),
+    child: _Page(themeType),
+  );
 }
 
 class _Page extends StatefulWidget {
@@ -47,9 +45,9 @@ class _Page extends StatefulWidget {
 class _PageState extends State<_Page> with RouteAware {
   void _handleMission() {
     if (mounted) {
-      context
-          .read<ThemeBloc>()
-          .add(ThemeRecuperationDemandee(widget.themeType));
+      context.read<ThemeBloc>().add(
+        ThemeRecuperationDemandee(widget.themeType),
+      );
     }
   }
 
@@ -82,19 +80,19 @@ class _View extends StatelessWidget {
 
   @override
   Widget build(final context) => ListView(
-        padding: const EdgeInsets.all(paddingVerticalPage),
-        children: [
-          const _ImageEtTitre(),
-          const SizedBox(height: DsfrSpacings.s5w),
-          const _Missions(),
-          const SizedBox(height: DsfrSpacings.s5w),
-          ChallengesSection(themeType: themeType),
-          const SizedBox(height: DsfrSpacings.s5w),
-          const _Services(),
-          const SizedBox(height: DsfrSpacings.s5w),
-          const SafeArea(child: _Recommandations()),
-        ],
-      );
+    padding: const EdgeInsets.all(paddingVerticalPage),
+    children: [
+      const _ImageEtTitre(),
+      const SizedBox(height: DsfrSpacings.s5w),
+      const _Missions(),
+      const SizedBox(height: DsfrSpacings.s5w),
+      ChallengesSection(themeType: themeType),
+      const SizedBox(height: DsfrSpacings.s5w),
+      const _Services(),
+      const SizedBox(height: DsfrSpacings.s5w),
+      const SafeArea(child: _Recommandations()),
+    ],
+  );
 }
 
 class _ImageEtTitre extends StatelessWidget {
@@ -102,8 +100,9 @@ class _ImageEtTitre extends StatelessWidget {
 
   @override
   Widget build(final context) {
-    final themeType = context
-        .select<ThemeBloc, ThemeType>((final bloc) => bloc.state.themeType);
+    final themeType = context.select<ThemeBloc, ThemeType>(
+      (final bloc) => bloc.state.themeType,
+    );
 
     return Column(
       children: [
@@ -148,10 +147,11 @@ class _Missions extends StatelessWidget {
       clipBehavior: Clip.none,
       child: IntrinsicHeight(
         child: Row(
-          children: thematiques
-              .map((final e) => _Mission(mission: e))
-              .separator(const SizedBox(width: DsfrSpacings.s2w))
-              .toList(),
+          children:
+              thematiques
+                  .map((final e) => _Mission(mission: e))
+                  .separator(const SizedBox(width: DsfrSpacings.s2w))
+                  .toList(),
         ),
       ),
     );
@@ -171,24 +171,26 @@ class _Mission extends StatelessWidget {
     final progression = mission.progression / mission.progressionCible;
 
     return ThemeCard(
-      badge: mission.estNouvelle
-          ? const FnvBadge(
-              label: Localisation.nouveau,
-              backgroundColor: DsfrColors.info425,
-            )
-          : progression == 1
+      badge:
+          mission.estNouvelle
               ? const FnvBadge(
-                  label: Localisation.termine,
-                  backgroundColor: success,
-                )
+                label: Localisation.nouveau,
+                backgroundColor: DsfrColors.info425,
+              )
+              : progression == 1
+              ? const FnvBadge(
+                label: Localisation.termine,
+                backgroundColor: success,
+              )
               : null,
-      onTap: () async => GoRouter.of(context).pushNamed(
-        MissionPage.name,
-        pathParameters: {
-          'mission': mission.code,
-          'thematique': mission.themeType.routeCode,
-        },
-      ),
+      onTap:
+          () async => GoRouter.of(context).pushNamed(
+            MissionPage.name,
+            pathParameters: {
+              'mission': mission.code,
+              'thematique': mission.themeType.routeCode,
+            },
+          ),
       child: SizedBox(
         width: width,
         child: Column(
@@ -238,20 +240,18 @@ class _Services extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          Localisation.mesServices,
-          style: DsfrTextStyle.headline4(),
-        ),
+        const Text(Localisation.mesServices, style: DsfrTextStyle.headline4()),
         const SizedBox(height: DsfrSpacings.s2w),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           clipBehavior: Clip.none,
           child: IntrinsicHeight(
             child: Row(
-              children: services
-                  .map((final e) => ServiceCard(service: e))
-                  .separator(const SizedBox(width: DsfrSpacings.s2w))
-                  .toList(),
+              children:
+                  services
+                      .map((final e) => ServiceCard(service: e))
+                      .separator(const SizedBox(width: DsfrSpacings.s2w))
+                      .toList(),
             ),
           ),
         ),

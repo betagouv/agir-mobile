@@ -32,8 +32,12 @@ class _FnvCheckboxSetState extends State<FnvCheckboxSet> {
     required final String option,
     required final bool value,
   }) {
-    final newSelectedOptions =
-        _updateSelectedOptions(options, option, selectedOptions, value);
+    final newSelectedOptions = _updateSelectedOptions(
+      options,
+      option,
+      selectedOptions,
+      value,
+    );
 
     setState(() {
       _selectedOptions = newSelectedOptions;
@@ -66,24 +70,27 @@ class _FnvCheckboxSetState extends State<FnvCheckboxSet> {
 
   @override
   Widget build(final context) => Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: widget.options
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children:
+        widget.options
             .map(
               (final option) => GestureDetector(
-                onTap: () => _handleChanged(
-                  options: widget.options,
-                  selectedOptions: _selectedOptions,
-                  option: option,
-                  value: !_selectedOptions.contains(option),
-                ),
+                onTap:
+                    () => _handleChanged(
+                      options: widget.options,
+                      selectedOptions: _selectedOptions,
+                      option: option,
+                      value: !_selectedOptions.contains(option),
+                    ),
                 behavior: HitTestBehavior.opaque,
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     border: Border.fromBorderSide(
                       BorderSide(
-                        color: _selectedOptions.contains(option)
-                            ? DsfrColors.blueFranceSun113
-                            : DsfrColors.grey900,
+                        color:
+                            _selectedOptions.contains(option)
+                                ? DsfrColors.blueFranceSun113
+                                : DsfrColors.grey900,
                       ),
                     ),
                   ),
@@ -99,5 +106,5 @@ class _FnvCheckboxSetState extends State<FnvCheckboxSet> {
             )
             .separator(const SizedBox(height: DsfrSpacings.s2w))
             .toList(),
-      );
+  );
 }

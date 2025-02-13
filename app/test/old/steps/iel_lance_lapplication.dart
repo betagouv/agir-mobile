@@ -35,13 +35,11 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
   }
 
   final tracker = _TrackerMock();
-  when(() => tracker.navigatorObserver)
-      .thenAnswer((final _) => RouteObserver<ModalRoute<void>>());
+  when(
+    () => tracker.navigatorObserver,
+  ).thenAnswer((final _) => RouteObserver<ModalRoute<void>>());
   ScenarioContext().dioMock!
-    ..getM(
-      Endpoints.bilan,
-      responseData: environmentalPerformancePartialData,
-    )
+    ..getM(Endpoints.bilan, responseData: environmentalPerformancePartialData)
     ..getM(
       Endpoints.utilisateur,
       responseData: {'prenom': 'Lucas', 'is_onboarding_done': true},
@@ -91,12 +89,10 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
           dio: ScenarioContext().dioMock!,
           authenticationService: authenticationService,
         ),
-        packageInfo: const PackageInfoFake(
-          version: '1.2.3',
-          buildNumber: '4',
+        packageInfo: const PackageInfoFake(version: '1.2.3', buildNumber: '4'),
+        notificationService: const NotificationServiceFake(
+          AuthorizationStatus.denied,
         ),
-        notificationService:
-            const NotificationServiceFake(AuthorizationStatus.denied),
         authenticationService: authenticationService,
       ),
       Durations.short1,

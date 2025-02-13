@@ -17,32 +17,34 @@ void main() {
 
   setUp(() {
     mockSecureStorage = MockFlutterSecureStorage();
-    when(() => mockSecureStorage.read(key: 'token'))
-        .thenAnswer((final answer) async => null);
+    when(
+      () => mockSecureStorage.read(key: 'token'),
+    ).thenAnswer((final answer) async => null);
     when(
       () => mockSecureStorage.write(
         key: any(named: 'key'),
         value: any(named: 'value'),
       ),
     ).thenAnswer((final answer) async => Future<void>.value());
-    when(() => mockSecureStorage.delete(key: any(named: 'key')))
-        .thenAnswer((final answer) async => Future<void>.value());
+    when(
+      () => mockSecureStorage.delete(key: any(named: 'key')),
+    ).thenAnswer((final answer) async => Future<void>.value());
     repository = AuthenticationStorage(mockSecureStorage);
   });
 
   group('Authentication Repository', () {
     test('Saving a token', () async {
       // Given
-      final value = 'header.${base64Encode(
-        jsonEncode({'exp': 1727698718, 'utilisateurId': 'user123'}).codeUnits,
-      )}.signature';
+      final value =
+          'header.${base64Encode(jsonEncode({'exp': 1727698718, 'utilisateurId': 'user123'}).codeUnits)}.signature';
 
       // When
       await repository.saveToken(value);
 
       // Then
-      verify(() => mockSecureStorage.write(key: 'token', value: value))
-          .called(1);
+      verify(
+        () => mockSecureStorage.write(key: 'token', value: value),
+      ).called(1);
     });
 
     test('Deleting a token', () async {
@@ -58,11 +60,11 @@ void main() {
 
     test('Getting token', () async {
       // Given
-      final validToken = 'header.${base64Encode(
-        jsonEncode({'exp': 1727698718, 'utilisateurId': 'user123'}).codeUnits,
-      )}.signature';
-      when(() => mockSecureStorage.read(key: 'token'))
-          .thenAnswer((final answer) async => validToken);
+      final validToken =
+          'header.${base64Encode(jsonEncode({'exp': 1727698718, 'utilisateurId': 'user123'}).codeUnits)}.signature';
+      when(
+        () => mockSecureStorage.read(key: 'token'),
+      ).thenAnswer((final answer) async => validToken);
       await repository.init();
 
       // When
@@ -74,11 +76,11 @@ void main() {
 
     test('Getting user ID', () async {
       // Given
-      final validToken = 'header.${base64Encode(
-        jsonEncode({'exp': 1727698718, 'utilisateurId': 'user123'}).codeUnits,
-      )}.signature';
-      when(() => mockSecureStorage.read(key: 'token'))
-          .thenAnswer((final answer) async => validToken);
+      final validToken =
+          'header.${base64Encode(jsonEncode({'exp': 1727698718, 'utilisateurId': 'user123'}).codeUnits)}.signature';
+      when(
+        () => mockSecureStorage.read(key: 'token'),
+      ).thenAnswer((final answer) async => validToken);
       await repository.init();
 
       // When
@@ -91,12 +93,11 @@ void main() {
     test('Getting expiration date', () async {
       // Given
       const expirationTime = 1727698718;
-      final validToken = 'header.${base64Encode(
-        jsonEncode({'exp': expirationTime, 'utilisateurId': 'user123'})
-            .codeUnits,
-      )}.signature';
-      when(() => mockSecureStorage.read(key: 'token'))
-          .thenAnswer((final answer) async => validToken);
+      final validToken =
+          'header.${base64Encode(jsonEncode({'exp': expirationTime, 'utilisateurId': 'user123'}).codeUnits)}.signature';
+      when(
+        () => mockSecureStorage.read(key: 'token'),
+      ).thenAnswer((final answer) async => validToken);
       await repository.init();
 
       // When
@@ -117,11 +118,11 @@ void main() {
 
     test('Caching behavior for user ID', () async {
       // Given
-      final validToken = 'header.${base64Encode(
-        jsonEncode({'exp': 1727698718, 'utilisateurId': 'user123'}).codeUnits,
-      )}.signature';
-      when(() => mockSecureStorage.read(key: 'token'))
-          .thenAnswer((final answer) async => validToken);
+      final validToken =
+          'header.${base64Encode(jsonEncode({'exp': 1727698718, 'utilisateurId': 'user123'}).codeUnits)}.signature';
+      when(
+        () => mockSecureStorage.read(key: 'token'),
+      ).thenAnswer((final answer) async => validToken);
       await repository.init();
 
       // When
@@ -136,11 +137,11 @@ void main() {
 
     test('Caching behavior for expiration date', () async {
       // Given
-      final validToken = 'header.${base64Encode(
-        jsonEncode({'exp': 1727698718, 'utilisateurId': 'user123'}).codeUnits,
-      )}.signature';
-      when(() => mockSecureStorage.read(key: 'token'))
-          .thenAnswer((final answer) async => validToken);
+      final validToken =
+          'header.${base64Encode(jsonEncode({'exp': 1727698718, 'utilisateurId': 'user123'}).codeUnits)}.signature';
+      when(
+        () => mockSecureStorage.read(key: 'token'),
+      ).thenAnswer((final answer) async => validToken);
       await repository.init();
 
       // When

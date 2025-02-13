@@ -16,6 +16,11 @@ class EnvironmentalPerformanceCategory extends Equatable {
   final int totalNumberQuestions;
 
   @override
-  List<Object?> get props =>
-      [id, imageUrl, percentageCompletion, label, totalNumberQuestions];
+  List<Object?> get props => [
+    id,
+    imageUrl,
+    percentageCompletion,
+    label,
+    totalNumberQuestions,
+  ];
 }

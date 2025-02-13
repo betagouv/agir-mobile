@@ -10,8 +10,8 @@ final class MotDePasseState extends Equatable {
   bool get auMoinsUneMajusculeEtUneMinuscule =>
       valeur.contains(RegExp('[A-Z]')) && valeur.contains(RegExp('[a-z]'));
   bool get unCaractereSpecialMinimum => valeur.contains(
-        RegExp(r'''[&~»#)‘\-_`{[|`_\\^@)\]=}+%*$£¨!§/:;.?¿\'",§éèêëàâä»]'''),
-      );
+    RegExp(r'''[&~»#)‘\-_`{[|`_\\^@)\]=}+%*$£¨!§/:;.?¿\'",§éèêëàâä»]'''),
+  );
   bool get unChiffreMinimum => valeur.contains(RegExp(r'\d'));
   bool get estValide =>
       douzeCaracteresMinimum &&

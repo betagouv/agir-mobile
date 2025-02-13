@@ -36,44 +36,41 @@ final class ChallengeDetailLoadSuccess extends ChallengeDetailState {
   final Option<String?> newReason;
 
   String get acceptanceText => _getRadioButtonText(
-        initialStatus: Localisation.jeReleveLAction,
-        progressStatus: Localisation.actionRealisee,
-      );
+    initialStatus: Localisation.jeReleveLAction,
+    progressStatus: Localisation.actionRealisee,
+  );
 
   String get refusalText => _getRadioButtonText(
-        initialStatus: Localisation.pasPourMoi,
-        progressStatus: Localisation.finalementPasPourMoi,
-      );
+    initialStatus: Localisation.pasPourMoi,
+    progressStatus: Localisation.finalementPasPourMoi,
+  );
 
   String _getRadioButtonText({
     required final String initialStatus,
     required final String progressStatus,
-  }) =>
-      switch (challenge.status) {
-        ChallengeStatus.toDo || ChallengeStatus.refused => initialStatus,
-        ChallengeStatus.inProgress ||
-        ChallengeStatus.alreadyDone ||
-        ChallengeStatus.abandonned ||
-        ChallengeStatus.done =>
-          progressStatus,
-      };
+  }) => switch (challenge.status) {
+    ChallengeStatus.toDo || ChallengeStatus.refused => initialStatus,
+    ChallengeStatus.inProgress ||
+    ChallengeStatus.alreadyDone ||
+    ChallengeStatus.abandonned ||
+    ChallengeStatus.done => progressStatus,
+  };
 
   bool? get isAccepted => switch (newStatus ?? challenge.status) {
-        ChallengeStatus.toDo || ChallengeStatus.inProgress => null,
-        ChallengeStatus.abandonned || ChallengeStatus.refused => false,
-        ChallengeStatus.alreadyDone || ChallengeStatus.done => true,
-      };
+    ChallengeStatus.toDo || ChallengeStatus.inProgress => null,
+    ChallengeStatus.abandonned || ChallengeStatus.refused => false,
+    ChallengeStatus.alreadyDone || ChallengeStatus.done => true,
+  };
 
   ChallengeDetailLoadSuccess copyWith({
     final Challenge? challenge,
     final ChallengeStatus? newStatus,
     final Option<String?>? newReason,
-  }) =>
-      ChallengeDetailLoadSuccess(
-        challenge: challenge ?? this.challenge,
-        newStatus: newStatus ?? this.newStatus,
-        newReason: newReason ?? this.newReason,
-      );
+  }) => ChallengeDetailLoadSuccess(
+    challenge: challenge ?? this.challenge,
+    newStatus: newStatus ?? this.newStatus,
+    newReason: newReason ?? this.newReason,
+  );
 
   @override
   List<Object?> get props => [challenge, newStatus, newReason];

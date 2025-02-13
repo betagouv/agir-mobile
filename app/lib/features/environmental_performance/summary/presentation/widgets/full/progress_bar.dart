@@ -14,9 +14,9 @@ class ProgressBar extends StatelessWidget {
 
   @override
   Widget build(final context) => CustomPaint(
-        painter: _Painter(value: value),
-        size: const Size(double.infinity, 6),
-      );
+    painter: _Painter(value: value),
+    size: const Size(double.infinity, 6),
+  );
 }
 
 class _Painter extends CustomPainter {
@@ -38,9 +38,10 @@ class _Painter extends CustomPainter {
       Radius.circular(size.height),
     );
 
-    final paint = Paint()
-      ..color = _color
-      ..style = PaintingStyle.fill;
+    final paint =
+        Paint()
+          ..color = _color
+          ..style = PaintingStyle.fill;
 
     canvas.drawRRect(rrect, paint);
   }

@@ -37,9 +37,10 @@ class _MosaicSetState extends State<_MosaicSet> {
 
   @override
   Widget build(final context) => Wrap(
-        spacing: DsfrSpacings.s2w,
-        runSpacing: DsfrSpacings.s2w,
-        children: _responses.map((final e) {
+    spacing: DsfrSpacings.s2w,
+    runSpacing: DsfrSpacings.s2w,
+    children:
+        _responses.map((final e) {
           const size = 40.0;
 
           return MosaicButton(
@@ -48,25 +49,27 @@ class _MosaicSetState extends State<_MosaicSet> {
             value: e.isSelected,
             onChanged: (final value) {
               setState(() {
-                _responses = _responses
-                    .map(
-                      (final r) => r.code == e.code
-                          ? ResponseMosaic(
-                              code: r.code,
-                              label: r.label,
-                              emoji: r.emoji,
-                              imageUrl: r.imageUrl,
-                              isSelected: value,
-                            )
-                          : r,
-                    )
-                    .toList();
-                context
-                    .read<MieuxVousConnaitreEditBloc>()
-                    .add(MieuxVousConnaitreEditMosaicChangee(_responses));
+                _responses =
+                    _responses
+                        .map(
+                          (final r) =>
+                              r.code == e.code
+                                  ? ResponseMosaic(
+                                    code: r.code,
+                                    label: r.label,
+                                    emoji: r.emoji,
+                                    imageUrl: r.imageUrl,
+                                    isSelected: value,
+                                  )
+                                  : r,
+                        )
+                        .toList();
+                context.read<MieuxVousConnaitreEditBloc>().add(
+                  MieuxVousConnaitreEditMosaicChangee(_responses),
+                );
               });
             },
           );
         }).toList(),
-      );
+  );
 }

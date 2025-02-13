@@ -31,12 +31,13 @@ class MieuxVousConnaitreForm extends StatelessWidget {
 
   @override
   Widget build(final context) => BlocProvider(
-        create: (final context) => MieuxVousConnaitreEditBloc(
+    create:
+        (final context) => MieuxVousConnaitreEditBloc(
           mieuxVousConnaitreRepository: context.read(),
         )..add(MieuxVousConnaitreEditRecuperationDemandee(id)),
-        lazy: false,
-        child: _Content(controller: controller, onSaved: onSaved),
-      );
+    lazy: false,
+    child: _Content(controller: controller, onSaved: onSaved),
+  );
 }
 
 class _Content extends StatelessWidget {
@@ -46,32 +47,37 @@ class _Content extends StatelessWidget {
   final OnSavedCallback? onSaved;
 
   @override
-  Widget build(final context) =>
-      BlocListener<MieuxVousConnaitreEditBloc, MieuxVousConnaitreEditState>(
-        listener: (final context, final state) {
-          final aState = state;
-          if (aState is MieuxVousConnaitreEditLoaded && aState.updated) {
-            onSaved?.call();
-          }
-        },
-        child: BlocBuilder<MieuxVousConnaitreEditBloc,
-            MieuxVousConnaitreEditState>(
-          builder: (final context, final state) => switch (state) {
+  Widget build(
+    final context,
+  ) => BlocListener<MieuxVousConnaitreEditBloc, MieuxVousConnaitreEditState>(
+    listener: (final context, final state) {
+      final aState = state;
+      if (aState is MieuxVousConnaitreEditLoaded && aState.updated) {
+        onSaved?.call();
+      }
+    },
+    child: BlocBuilder<MieuxVousConnaitreEditBloc, MieuxVousConnaitreEditState>(
+      builder:
+          (final context, final state) => switch (state) {
             MieuxVousConnaitreEditInitial() => const SizedBox.shrink(),
-            MieuxVousConnaitreEditLoaded() =>
-              _LoadedContent(controller: controller, state: state),
+            MieuxVousConnaitreEditLoaded() => _LoadedContent(
+              controller: controller,
+              state: state,
+            ),
             MieuxVousConnaitreEditError() => FnvFailureWidget(
-                onPressed: () => context.read<MieuxVousConnaitreEditBloc>().add(
-                      MieuxVousConnaitreEditRecuperationDemandee(state.id),
-                    ),
-              ),
+              onPressed:
+                  () => context.read<MieuxVousConnaitreEditBloc>().add(
+                    MieuxVousConnaitreEditRecuperationDemandee(state.id),
+                  ),
+            ),
           },
-          buildWhen: (final oldState, final newState) =>
+      buildWhen:
+          (final oldState, final newState) =>
               (oldState is! MieuxVousConnaitreEditLoaded ||
                   newState is! MieuxVousConnaitreEditLoaded) ||
               oldState.question != newState.question,
-        ),
-      );
+    ),
+  );
 }
 
 class _LoadedContent extends StatefulWidget {
@@ -92,8 +98,8 @@ class _LoadedContentState extends State<_LoadedContent> {
   }
 
   void _listener() => context.read<MieuxVousConnaitreEditBloc>().add(
-        MieuxVousConnaitreEditMisAJourDemandee(widget.state.question.id.value),
-      );
+    MieuxVousConnaitreEditMisAJourDemandee(widget.state.question.id.value),
+  );
 
   @override
   void dispose() {
@@ -122,15 +128,15 @@ class _ChoixMultipleContent extends StatelessWidget {
 
   @override
   Widget build(final context) => Column(
-        children: [
-          FnvTitle(
-            title: question.label,
-            subtitle: Localisation.plusieursReponsesPossibles,
-          ),
-          const SizedBox(height: DsfrSpacings.s3w),
-          ChoixMultiple(question: question),
-        ],
-      );
+    children: [
+      FnvTitle(
+        title: question.label,
+        subtitle: Localisation.plusieursReponsesPossibles,
+      ),
+      const SizedBox(height: DsfrSpacings.s3w),
+      ChoixMultiple(question: question),
+    ],
+  );
 }
 
 class _ChoixUniqueContent extends StatelessWidget {
@@ -140,12 +146,12 @@ class _ChoixUniqueContent extends StatelessWidget {
 
   @override
   Widget build(final context) => Column(
-        children: [
-          FnvTitle(title: question.label),
-          const SizedBox(height: DsfrSpacings.s3w),
-          ChoixUnique(question: question),
-        ],
-      );
+    children: [
+      FnvTitle(title: question.label),
+      const SizedBox(height: DsfrSpacings.s3w),
+      ChoixUnique(question: question),
+    ],
+  );
 }
 
 class _LibreContent extends StatelessWidget {
@@ -155,12 +161,12 @@ class _LibreContent extends StatelessWidget {
 
   @override
   Widget build(final context) => Column(
-        children: [
-          FnvTitle(title: question.label),
-          const SizedBox(height: DsfrSpacings.s3w),
-          Libre(question: question),
-        ],
-      );
+    children: [
+      FnvTitle(title: question.label),
+      const SizedBox(height: DsfrSpacings.s3w),
+      Libre(question: question),
+    ],
+  );
 }
 
 class _EntierContent extends StatelessWidget {
@@ -170,12 +176,12 @@ class _EntierContent extends StatelessWidget {
 
   @override
   Widget build(final context) => Column(
-        children: [
-          FnvTitle(title: question.label),
-          const SizedBox(height: DsfrSpacings.s3w),
-          Entier(question: question),
-        ],
-      );
+    children: [
+      FnvTitle(title: question.label),
+      const SizedBox(height: DsfrSpacings.s3w),
+      Entier(question: question),
+    ],
+  );
 }
 
 class _MosaicContent extends StatelessWidget {
@@ -185,14 +191,14 @@ class _MosaicContent extends StatelessWidget {
 
   @override
   Widget build(final context) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          FnvTitle(
-            title: question.label,
-            subtitle: Localisation.plusieursReponsesPossibles,
-          ),
-          const SizedBox(height: DsfrSpacings.s3w),
-          Mosaic(question: question),
-        ],
-      );
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      FnvTitle(
+        title: question.label,
+        subtitle: Localisation.plusieursReponsesPossibles,
+      ),
+      const SizedBox(height: DsfrSpacings.s3w),
+      Mosaic(question: question),
+    ],
+  );
 }

@@ -9,15 +9,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AidListBloc extends Bloc<AidListEvent, AidListState> {
   AidListBloc({required final AidsRepository aidsRepository})
-      : super(const AidListInitial()) {
+    : super(const AidListInitial()) {
     on<AidListFetch>((final event, final emit) async {
       emit(const AidListLoadInProgress());
       final result = await aidsRepository.fetch();
       result.fold(
         (final l) {
-          emit(
-            AidListLoadFailure(l is ApiErreur ? l.message : l.toString()),
-          );
+          emit(AidListLoadFailure(l is ApiErreur ? l.message : l.toString()));
         },
         (final r) {
           final assistanceListModel = _groupAssistancesByTheme(r);
@@ -49,8 +47,9 @@ class AidListBloc extends Bloc<AidListEvent, AidListState> {
       Map.fromEntries(
         ThemeType.values
             .map((final themeType) {
-              final assistances =
-                  r.aids.where((final a) => a.themeType == themeType);
+              final assistances = r.aids.where(
+                (final a) => a.themeType == themeType,
+              );
 
               return assistances.isNotEmpty
                   ? MapEntry(themeType, assistances.toList())

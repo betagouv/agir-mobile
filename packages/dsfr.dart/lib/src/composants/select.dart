@@ -48,10 +48,7 @@ class DsfrSelect<T> extends StatelessWidget {
   @override
   Widget build(final context) {
     final underlineInputBorder = UnderlineInputBorder(
-      borderSide: BorderSide(
-        color: inputBorderColor,
-        width: inputBorderWidth,
-      ),
+      borderSide: BorderSide(color: inputBorderColor, width: inputBorderWidth),
       borderRadius: BorderRadius.vertical(top: Radius.circular(radius)),
     );
 
@@ -120,17 +117,17 @@ class _Label extends StatelessWidget {
 
   @override
   Widget build(final context) => Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          ExcludeSemantics(
-            child: Text(label, style: labelStyle.copyWith(color: labelColor)),
-          ),
-          if (hint != null) ...[
-            const SizedBox(height: DsfrSpacings.s1v),
-            Text(hint!, style: hintStyle.copyWith(color: hintColor)),
-          ],
-          const SizedBox(height: 10),
-          child,
-        ],
-      );
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      ExcludeSemantics(
+        child: Text(label, style: labelStyle.copyWith(color: labelColor)),
+      ),
+      if (hint != null) ...[
+        const SizedBox(height: DsfrSpacings.s1v),
+        Text(hint!, style: hintStyle.copyWith(color: hintColor)),
+      ],
+      const SizedBox(height: 10),
+      child,
+    ],
+  );
 }

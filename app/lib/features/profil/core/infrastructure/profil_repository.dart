@@ -10,7 +10,7 @@ import 'package:fpdart/fpdart.dart';
 
 class ProfilRepository {
   const ProfilRepository({required final DioHttpClient client})
-      : _client = client;
+    : _client = client;
 
   final DioHttpClient _client;
 
@@ -119,9 +119,9 @@ class ProfilRepository {
     return isResponseSuccessful(response.statusCode)
         ? const Right(null)
         : Left(
-            Exception(
-              'Erreur lors de la mise à jour du code postal et de la commune',
-            ),
-          );
+          Exception(
+            'Erreur lors de la mise à jour du code postal et de la commune',
+          ),
+        );
   }
 }

@@ -7,9 +7,10 @@ Future<void> iSeeTheFormMessage(
   final String text,
   final String typeString,
 ) async {
-  final type = typeString == 'valid'
-      ? DsfrFormMessageType.valid
-      : typeString == 'info'
+  final type =
+      typeString == 'valid'
+          ? DsfrFormMessageType.valid
+          : typeString == 'info'
           ? DsfrFormMessageType.info
           : UnimplementedError();
   expect(

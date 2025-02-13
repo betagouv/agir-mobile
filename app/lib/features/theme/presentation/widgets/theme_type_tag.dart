@@ -10,11 +10,11 @@ class ThemeTypeTag extends StatelessWidget {
 
   @override
   Widget build(final context) => DsfrTag.sm(
-        label: TextSpan(
-          text: themeType.displayName,
-          semanticsLabel: removeEmoji(themeType.displayName),
-        ),
-        backgroundColor: themeType.backgroundColor,
-        foregroundColor: themeType.foregroundColor,
-      );
+    label: TextSpan(
+      text: themeType.displayName,
+      semanticsLabel: removeEmoji(themeType.displayName),
+    ),
+    backgroundColor: themeType.backgroundColor,
+    foregroundColor: themeType.foregroundColor,
+  );
 }

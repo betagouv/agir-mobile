@@ -120,8 +120,9 @@ class _DsfrInputHeadlessState extends State<DsfrInputHeadless> {
         ),
       ),
       child: Padding(
-        padding: widget.focusPadding
-            .add(EdgeInsets.only(bottom: widget.inputBorderWidth)),
+        padding: widget.focusPadding.add(
+          EdgeInsets.only(bottom: widget.inputBorderWidth),
+        ),
         child: SizedBox(
           width: widget.width,
           child: TextFormField(
@@ -150,8 +151,8 @@ class _DsfrInputHeadlessState extends State<DsfrInputHeadless> {
             maxLines: widget.maxLines,
             minLines: widget.minLines,
             onChanged: widget.onChanged,
-            onTapOutside: (final event) =>
-                FocusManager.instance.primaryFocus?.unfocus(),
+            onTapOutside:
+                (final event) => FocusManager.instance.primaryFocus?.unfocus(),
             onFieldSubmitted: widget.onFieldSubmitted,
             validator: widget.validator,
             inputFormatters: widget.inputFormatters,

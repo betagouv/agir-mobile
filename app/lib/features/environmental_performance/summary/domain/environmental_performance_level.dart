@@ -1,6 +1,1 @@
-enum EnvironmentalPerformanceLevel {
-  low,
-  medium,
-  high,
-  veryHigh,
-}
+enum EnvironmentalPerformanceLevel { low, medium, high, veryHigh }

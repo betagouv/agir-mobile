@@ -10,7 +10,7 @@ import 'package:fpdart/fpdart.dart';
 
 class MissionChallengesRepository {
   const MissionChallengesRepository({required final DioHttpClient client})
-      : _client = client;
+    : _client = client;
 
   final DioHttpClient _client;
 

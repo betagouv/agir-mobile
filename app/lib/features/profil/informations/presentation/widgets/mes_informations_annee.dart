@@ -24,9 +24,9 @@ class MesInformationsAnnee extends StatelessWidget {
         if (parsedValue == null) {
           return;
         }
-        context
-            .read<MesInformationsBloc>()
-            .add(MesInformationsAnneeChange(parsedValue));
+        context.read<MesInformationsBloc>().add(
+          MesInformationsAnneeChange(parsedValue),
+        );
       },
       keyboardType: TextInputType.number,
       textInputAction: TextInputAction.next,

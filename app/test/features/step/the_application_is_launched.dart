@@ -18,8 +18,9 @@ class _TrackerMock extends Mock implements Tracker {}
 /// Usage: The application is launched
 Future<void> theApplicationIsLaunched(final WidgetTester tester) async {
   final clock = Clock.fixed(DateTime(1992, 9));
-  final authenticationStorage =
-      AuthenticationStorage(FeatureContext.instance.secureStorage);
+  final authenticationStorage = AuthenticationStorage(
+    FeatureContext.instance.secureStorage,
+  );
   await authenticationStorage.init();
   final authenticationService = AuthenticationService(
     authenticationRepository: authenticationStorage,
@@ -31,8 +32,9 @@ Future<void> theApplicationIsLaunched(final WidgetTester tester) async {
     authenticationService: authenticationService,
   );
   final tracker = _TrackerMock();
-  when(() => tracker.navigatorObserver)
-      .thenAnswer((final _) => RouteObserver<ModalRoute<void>>());
+  when(
+    () => tracker.navigatorObserver,
+  ).thenAnswer((final _) => RouteObserver<ModalRoute<void>>());
   final messageBus = MessageBus();
 
   await tester.pumpFrames(
@@ -42,8 +44,9 @@ Future<void> theApplicationIsLaunched(final WidgetTester tester) async {
       messageBus: messageBus,
       dioHttpClient: dioHttpClient,
       packageInfo: FeatureContext.instance.packageInfo,
-      notificationService:
-          const NotificationServiceFake(AuthorizationStatus.authorized),
+      notificationService: const NotificationServiceFake(
+        AuthorizationStatus.authorized,
+      ),
       authenticationService: authenticationService,
     ),
     Durations.short1,

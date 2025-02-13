@@ -23,21 +23,19 @@ class MesInformationsNombreDePartsFiscales extends StatelessWidget {
       onChanged: (final value) {
         final parse = double.tryParse(value.replaceFirst(',', '.'));
         if (parse == null) {
-          context
-              .read<MesInformationsBloc>()
-              .add(const MesInformationsNombreDePartsFiscalesChange(0));
+          context.read<MesInformationsBloc>().add(
+            const MesInformationsNombreDePartsFiscalesChange(0),
+          );
 
           return;
         }
-        context
-            .read<MesInformationsBloc>()
-            .add(MesInformationsNombreDePartsFiscalesChange(parse));
+        context.read<MesInformationsBloc>().add(
+          MesInformationsNombreDePartsFiscalesChange(parse),
+        );
       },
       keyboardType: const TextInputType.numberWithOptions(decimal: true),
       textInputAction: TextInputAction.next,
-      inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp('[0-9,.]')),
-      ],
+      inputFormatters: [FilteringTextInputFormatter.allow(RegExp('[0-9,.]'))],
     );
   }
 }

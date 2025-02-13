@@ -20,7 +20,8 @@ Future<void> pumpPage({
 }) async {
   DeviceInfo.setup(tester);
   Widget widget = MaterialApp.router(
-    routerConfig: router ??
+    routerConfig:
+        router ??
         GoRouter(
           routes: [
             GoRoute(
@@ -34,8 +35,9 @@ Future<void> pumpPage({
                     (final e) => GoRoute(
                       path: e.value,
                       name: e.key,
-                      builder: (final context, final state) =>
-                          Text('route: ${e.key}'),
+                      builder:
+                          (final context, final state) =>
+                              Text('route: ${e.key}'),
                     ),
                   ),
               ],
@@ -55,8 +57,10 @@ Future<void> pumpPage({
   }
 
   if (repositoryProviders.isNotEmpty) {
-    widget =
-        MultiRepositoryProvider(providers: repositoryProviders, child: widget);
+    widget = MultiRepositoryProvider(
+      providers: repositoryProviders,
+      child: widget,
+    );
   }
 
   await tester.pumpWidget(widget);

@@ -28,9 +28,10 @@ class MonLogementDpe extends StatelessWidget {
         children: [
           _FnvDpe(
             initialValue: dpe,
-            onCallback: (final value) => context
-                .read<MonLogementBloc>()
-                .add(MonLogementDpeChange(value)),
+            onCallback:
+                (final value) => context.read<MonLogementBloc>().add(
+                  MonLogementDpeChange(value),
+                ),
           ),
           const SizedBox(height: DsfrSpacings.s2w),
           FnvAlertInfo(
@@ -39,8 +40,9 @@ class MonLogementDpe extends StatelessWidget {
               data:
                   "Le DPE, c'est le **Diagnostic de Performance Énergétique de votre logement**. Il mesure d'un côté l'énergie nécessaire pour y maintenir une température standard, et de l'autre l'empreinte climat associée. Le DPE est exprimé comme une note de A (très bon) à G (passoire thermique). Vous pouvez obtenir une estimation de votre DPE en 2 clics avec le service [Go Renov](https://particulier.gorenove.fr/).",
               styleSheet: MarkdownStyleSheet(
-                a: const DsfrTextStyle(fontSize: 15)
-                    .copyWith(color: DsfrColors.blueFranceSun113),
+                a: const DsfrTextStyle(
+                  fontSize: 15,
+                ).copyWith(color: DsfrColors.blueFranceSun113),
                 p: const DsfrTextStyle(fontSize: 15),
               ),
               onTapLink: (final text, final href, final title) async {
@@ -76,9 +78,9 @@ class _FnvDpeState extends State<_FnvDpe> {
   }
 
   void _handleChange(final Dpe? value) => setState(() {
-        _value = value;
-        widget.onCallback(_value);
-      });
+    _value = value;
+    widget.onCallback(_value);
+  });
 
   @override
   Widget build(final context) {
@@ -128,19 +130,20 @@ class _FnvDpeState extends State<_FnvDpe> {
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: labels
-          .mapIndexed(
-            (final index, final e) => _FvnDpeEtiquette(
-              label: e.name,
-              value: e.value,
-              groupValue: _value,
-              onCallback: _handleChange,
-              color: e.color,
-              width: width * ((index + 1) * 10 + 17),
-            ),
-          )
-          .separator(const SizedBox(height: DsfrSpacings.s1w))
-          .toList(),
+      children:
+          labels
+              .mapIndexed(
+                (final index, final e) => _FvnDpeEtiquette(
+                  label: e.name,
+                  value: e.value,
+                  groupValue: _value,
+                  onCallback: _handleChange,
+                  color: e.color,
+                  width: width * ((index + 1) * 10 + 17),
+                ),
+              )
+              .separator(const SizedBox(height: DsfrSpacings.s1w))
+              .toList(),
     );
   }
 }
@@ -219,24 +222,27 @@ class _Painter extends CustomPainter {
 
   @override
   void paint(final Canvas canvas, final Size size) {
-    final path = Path()
-      ..moveTo(0, 0)
-      ..lineTo(size.width - 20, 0)
-      ..lineTo(size.width, size.height / 2)
-      ..lineTo(size.width - 20, size.height)
-      ..lineTo(0, size.height)
-      ..close();
+    final path =
+        Path()
+          ..moveTo(0, 0)
+          ..lineTo(size.width - 20, 0)
+          ..lineTo(size.width, size.height / 2)
+          ..lineTo(size.width - 20, size.height)
+          ..lineTo(0, size.height)
+          ..close();
 
-    final fillPaint = Paint()
-      ..color = color
-      ..style = PaintingStyle.fill;
+    final fillPaint =
+        Paint()
+          ..color = color
+          ..style = PaintingStyle.fill;
     canvas.drawPath(path, fillPaint);
 
     if (isSelected) {
-      final strokePaint = Paint()
-        ..color = DsfrColors.blueFranceSun113
-        ..strokeWidth = 2
-        ..style = PaintingStyle.stroke;
+      final strokePaint =
+          Paint()
+            ..color = DsfrColors.blueFranceSun113
+            ..strokeWidth = 2
+            ..style = PaintingStyle.stroke;
       canvas.drawPath(path, strokePaint);
     }
   }

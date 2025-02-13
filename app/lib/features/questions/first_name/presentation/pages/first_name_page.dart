@@ -25,10 +25,10 @@ class FirstNamePage extends StatelessWidget {
   static const path = name;
 
   static GoRoute get route => GoRoute(
-        path: path,
-        name: name,
-        builder: (final context, final state) => const FirstNamePage(),
-      );
+    path: path,
+    name: name,
+    builder: (final context, final state) => const FirstNamePage(),
+  );
 
   void _handleSubmitted(final BuildContext context) {
     context.read<FirstNameBloc>().add(const FirstNameSubmitted());
@@ -36,25 +36,26 @@ class FirstNamePage extends StatelessWidget {
 
   @override
   Widget build(final context) => BlocProvider(
-        create: (final context) => FirstNameBloc(
-          repository: context.read(),
-          clock: context.read(),
-        ),
-        child: Builder(
-          builder: (final context) =>
-              BlocListener<FirstNameBloc, FirstNameState>(
+    create:
+        (final context) =>
+            FirstNameBloc(repository: context.read(), clock: context.read()),
+    child: Builder(
+      builder:
+          (final context) => BlocListener<FirstNameBloc, FirstNameState>(
             listener: (final context, final state) async {
               if (state is FirstNameSuccess) {
-                await GoRouter.of(context)
-                    .pushNamed(QuestionCodePostalPage.name);
+                await GoRouter.of(
+                  context,
+                ).pushNamed(QuestionCodePostalPage.name);
               }
             },
             child: FnvScaffold(
               appBar: AppBar(
                 automaticallyImplyLeading: false,
                 backgroundColor: FnvColors.homeBackground,
-                iconTheme:
-                    const IconThemeData(color: DsfrColors.blueFranceSun113),
+                iconTheme: const IconThemeData(
+                  color: DsfrColors.blueFranceSun113,
+                ),
               ),
               body: ListView(
                 padding: const EdgeInsets.all(paddingVerticalPage),
@@ -88,8 +89,8 @@ class FirstNamePage extends StatelessWidget {
                     label: Localisation.monPrenom,
                     onChanged: (final value) {
                       context.read<FirstNameBloc>().add(
-                            FirstNameChanged(FirstName.create(value)),
-                          );
+                        FirstNameChanged(FirstName.create(value)),
+                      );
                     },
                     onFieldSubmitted: (final value) {
                       _handleSubmitted(context);
@@ -101,40 +102,46 @@ class FirstNamePage extends StatelessWidget {
                     autofillHints: const [AutofillHints.givenName],
                   ),
                   BlocSelector<FirstNameBloc, FirstNameState, Option<String>>(
-                    selector: (final state) => switch (state) {
-                      FirstNameFailure() => Some(state.errorMessage),
-                      _ => const None(),
-                    },
-                    builder: (final context, final state) => state.fold(
-                      () => const SizedBox.shrink(),
-                      (final t) => Column(
-                        children: [
-                          const SizedBox(height: DsfrSpacings.s2w),
-                          FnvAlert.error(label: t),
-                        ],
-                      ),
-                    ),
+                    selector:
+                        (final state) => switch (state) {
+                          FirstNameFailure() => Some(state.errorMessage),
+                          _ => const None(),
+                        },
+                    builder:
+                        (final context, final state) => state.fold(
+                          () => const SizedBox.shrink(),
+                          (final t) => Column(
+                            children: [
+                              const SizedBox(height: DsfrSpacings.s2w),
+                              FnvAlert.error(label: t),
+                            ],
+                          ),
+                        ),
                   ),
                 ],
               ),
               bottomNavigationBar:
                   BlocSelector<FirstNameBloc, FirstNameState, bool>(
-                selector: (final state) => switch (state) {
-                  FirstNameEntered() => state.firstName.value.isNotEmpty,
-                  FirstNameSuccess() => true,
-                  _ => false,
-                },
-                builder: (final context, final state) => FnvBottomBar(
-                  child: DsfrButton(
-                    label: Localisation.continuer,
-                    variant: DsfrButtonVariant.primary,
-                    size: DsfrButtonSize.lg,
-                    onPressed: state ? () => _handleSubmitted(context) : null,
+                    selector:
+                        (final state) => switch (state) {
+                          FirstNameEntered() =>
+                            state.firstName.value.isNotEmpty,
+                          FirstNameSuccess() => true,
+                          _ => false,
+                        },
+                    builder:
+                        (final context, final state) => FnvBottomBar(
+                          child: DsfrButton(
+                            label: Localisation.continuer,
+                            variant: DsfrButtonVariant.primary,
+                            size: DsfrButtonSize.lg,
+                            onPressed:
+                                state ? () => _handleSubmitted(context) : null,
+                          ),
+                        ),
                   ),
-                ),
-              ),
             ),
           ),
-        ),
-      );
+    ),
+  );
 }

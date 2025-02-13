@@ -12,9 +12,9 @@ class MonLogementBloc extends Bloc<MonLogementEvent, MonLogementState> {
   MonLogementBloc({
     required final ProfilRepository profilRepository,
     required final CommunesRepository communesRepository,
-  })  : _profilRepository = profilRepository,
-        _communesRepository = communesRepository,
-        super(const MonLogementState.empty()) {
+  }) : _profilRepository = profilRepository,
+       _communesRepository = communesRepository,
+       super(const MonLogementState.empty()) {
     on<MonLogementRecuperationDemandee>(_onRecuperationDemandee);
     on<MonLogementCodePostalChange>(_onCodePostalChange);
     on<MonLogementCommuneChange>(_onCommuneChange);
@@ -39,10 +39,12 @@ class MonLogementBloc extends Bloc<MonLogementEvent, MonLogementState> {
     final result = await _profilRepository.recupererLogement();
     if (result.isRight()) {
       final logement = result.getRight().getOrElse(() => throw Exception());
-      final communes = logement.codePostal == null
-          ? Either<Exception, List<String>>.right(<String>[])
-          : await _communesRepository
-              .recupererLesCommunes(logement.codePostal!);
+      final communes =
+          logement.codePostal == null
+              ? Either<Exception, List<String>>.right(<String>[])
+              : await _communesRepository.recupererLesCommunes(
+                logement.codePostal!,
+              );
 
       emit(
         state.copyWith(
@@ -66,9 +68,10 @@ class MonLogementBloc extends Bloc<MonLogementEvent, MonLogementState> {
     final MonLogementCodePostalChange event,
     final Emitter<MonLogementState> emit,
   ) async {
-    final result = (event.valeur.length == 5
-        ? await _communesRepository.recupererLesCommunes(event.valeur)
-        : Either<Exception, List<String>>.right(<String>[]));
+    final result =
+        (event.valeur.length == 5
+            ? await _communesRepository.recupererLesCommunes(event.valeur)
+            : Either<Exception, List<String>>.right(<String>[]));
     if (result.isRight()) {
       final communes = result.getRight().getOrElse(() => throw Exception());
       emit(
@@ -84,38 +87,32 @@ class MonLogementBloc extends Bloc<MonLogementEvent, MonLogementState> {
   void _onCommuneChange(
     final MonLogementCommuneChange event,
     final Emitter<MonLogementState> emit,
-  ) =>
-      emit(state.copyWith(commune: event.valeur));
+  ) => emit(state.copyWith(commune: event.valeur));
 
   void _onNombreAdultesChange(
     final MonLogementNombreAdultesChange event,
     final Emitter<MonLogementState> emit,
-  ) =>
-      emit(state.copyWith(nombreAdultes: event.valeur));
+  ) => emit(state.copyWith(nombreAdultes: event.valeur));
 
   void _onNombreEnfantsChange(
     final MonLogementNombreEnfantsChange event,
     final Emitter<MonLogementState> emit,
-  ) =>
-      emit(state.copyWith(nombreEnfants: event.valeur));
+  ) => emit(state.copyWith(nombreEnfants: event.valeur));
 
   void _onNombreTypeDeLogementChange(
     final MonLogementTypeDeLogementChange event,
     final Emitter<MonLogementState> emit,
-  ) =>
-      emit(state.copyWith(typeDeLogement: event.valeur));
+  ) => emit(state.copyWith(typeDeLogement: event.valeur));
 
   void _onEstProprietaireChange(
     final MonLogementEstProprietaireChange event,
     final Emitter<MonLogementState> emit,
-  ) =>
-      emit(state.copyWith(estProprietaire: event.valeur));
+  ) => emit(state.copyWith(estProprietaire: event.valeur));
 
   void _onSuperficieChange(
     final MonLogementSuperficieChange event,
     final Emitter<MonLogementState> emit,
-  ) =>
-      emit(state.copyWith(superficie: event.valeur));
+  ) => emit(state.copyWith(superficie: event.valeur));
 
   void _onPlusDe15AnsChange(
     final MonLogementPlusDe15AnsChange event,

@@ -26,14 +26,14 @@ class Logement extends Equatable {
 
   @override
   List<Object?> get props => [
-        codePostal,
-        commune,
-        nombreAdultes,
-        nombreEnfants,
-        typeDeLogement,
-        estProprietaire,
-        superficie,
-        plusDe15Ans,
-        dpe,
-      ];
+    codePostal,
+    commune,
+    nombreAdultes,
+    nombreEnfants,
+    typeDeLogement,
+    estProprietaire,
+    superficie,
+    plusDe15Ans,
+    dpe,
+  ];
 }

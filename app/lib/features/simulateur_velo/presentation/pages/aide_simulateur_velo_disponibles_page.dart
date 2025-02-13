@@ -22,11 +22,12 @@ class AideSimulateurVeloDisponiblePage extends StatelessWidget {
   static const path = name;
 
   static GoRoute get route => GoRoute(
-        path: path,
-        name: name,
-        builder: (final context, final state) =>
+    path: path,
+    name: name,
+    builder:
+        (final context, final state) =>
             const AideSimulateurVeloDisponiblePage(),
-      );
+  );
 
   @override
   Widget build(final context) {
@@ -49,19 +50,21 @@ class AideSimulateurVeloDisponiblePage extends StatelessWidget {
             const Center(child: CircularProgressIndicator())
           else
             DsfrAccordionsGroup(
-              values: state.aidesDisponibles
-                  .map(
-                    (final e) => DsfrAccordion(
-                      headerBuilder: (final isExpanded) => _Header(
-                        titre: e.titre,
-                        montantMax: e.montantTotal,
-                        isExpanded: isExpanded,
-                      ),
-                      body: _Body(aides: e.aides),
-                      isEnable: e.aides.isNotEmpty,
-                    ),
-                  )
-                  .toList(),
+              values:
+                  state.aidesDisponibles
+                      .map(
+                        (final e) => DsfrAccordion(
+                          headerBuilder:
+                              (final isExpanded) => _Header(
+                                titre: e.titre,
+                                montantMax: e.montantTotal,
+                                isExpanded: isExpanded,
+                              ),
+                          body: _Body(aides: e.aides),
+                          isEnable: e.aides.isNotEmpty,
+                        ),
+                      )
+                      .toList(),
             ),
           const SizedBox(height: DsfrSpacings.s3w),
           Padding(
@@ -121,40 +124,42 @@ class _Header extends StatelessWidget {
 
   @override
   Widget build(final context) => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
-        child: Row(
-          children: [
-            Expanded(
-              child: Text(
-                titre,
-                style: isExpanded
+    padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
+    child: Row(
+      children: [
+        Expanded(
+          child: Text(
+            titre,
+            style:
+                isExpanded
                     ? const DsfrTextStyle.bodyMdBold()
                     : const DsfrTextStyle.bodyMd(),
-              ),
-            ),
-            const SizedBox(width: DsfrSpacings.s1w),
-            Text.rich(
-              TextSpan(
-                children: montantMax == null
-                    ? [
-                        const TextSpan(
-                          text: Localisation.aucuneAideDisponible,
-                          style: DsfrTextStyle.bodyMdBold(),
-                        ),
-                      ]
-                    : [
-                        const TextSpan(text: Localisation.jusqua),
-                        TextSpan(
-                          text: Localisation.euro(montantMax!),
-                          style: const DsfrTextStyle.bodyMdBold(),
-                        ),
-                      ],
-              ),
-              style: const DsfrTextStyle.bodyMd(),
-            ),
-          ],
+          ),
         ),
-      );
+        const SizedBox(width: DsfrSpacings.s1w),
+        Text.rich(
+          TextSpan(
+            children:
+                montantMax == null
+                    ? [
+                      const TextSpan(
+                        text: Localisation.aucuneAideDisponible,
+                        style: DsfrTextStyle.bodyMdBold(),
+                      ),
+                    ]
+                    : [
+                      const TextSpan(text: Localisation.jusqua),
+                      TextSpan(
+                        text: Localisation.euro(montantMax!),
+                        style: const DsfrTextStyle.bodyMdBold(),
+                      ),
+                    ],
+          ),
+          style: const DsfrTextStyle.bodyMd(),
+        ),
+      ],
+    ),
+  );
 }
 
 class _Body extends StatelessWidget {
@@ -164,7 +169,8 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(final context) => Column(
-        children: aides
+    children:
+        aides
             .map(
               (final e) => Padding(
                 padding: const EdgeInsets.all(DsfrSpacings.s2w),
@@ -211,5 +217,5 @@ class _Body extends StatelessWidget {
             )
             .separator(const Divider())
             .toList(),
-      );
+  );
 }

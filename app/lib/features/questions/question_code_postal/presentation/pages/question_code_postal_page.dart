@@ -23,19 +23,20 @@ class QuestionCodePostalPage extends StatelessWidget {
   static const path = name;
 
   static GoRoute get route => GoRoute(
-        path: path,
-        name: name,
-        builder: (final context, final state) => const QuestionCodePostalPage(),
-      );
+    path: path,
+    name: name,
+    builder: (final context, final state) => const QuestionCodePostalPage(),
+  );
 
   @override
   Widget build(final context) => BlocProvider(
-        create: (final context) => QuestionCodePostalBloc(
+    create:
+        (final context) => QuestionCodePostalBloc(
           profilRepository: context.read(),
           communesRepository: context.read(),
         )..add(const QuestionCodePostalPrenomDemande()),
-        child: const _View(),
-      );
+    child: const _View(),
+  );
 }
 
 class _View extends StatelessWidget {
@@ -43,39 +44,33 @@ class _View extends StatelessWidget {
 
   @override
   Widget build(final context) => FnvScaffold(
-        appBar: AppBar(
-          backgroundColor: FnvColors.homeBackground,
-          iconTheme: const IconThemeData(color: DsfrColors.blueFranceSun113),
+    appBar: AppBar(
+      backgroundColor: FnvColors.homeBackground,
+      iconTheme: const IconThemeData(color: DsfrColors.blueFranceSun113),
+    ),
+    body: ListView(
+      padding: const EdgeInsets.all(paddingVerticalPage),
+      children: [
+        MarkdownBody(
+          data: Localisation.questionCourantSurMax(2, 3),
+          styleSheet: MarkdownStyleSheet(
+            p: const DsfrTextStyle.bodyMd(color: DsfrColors.blueFranceSun113),
+          ),
         ),
-        body: ListView(
-          padding: const EdgeInsets.all(paddingVerticalPage),
-          children: [
-            MarkdownBody(
-              data: Localisation.questionCourantSurMax(2, 3),
-              styleSheet: MarkdownStyleSheet(
-                p: const DsfrTextStyle.bodyMd(
-                  color: DsfrColors.blueFranceSun113,
-                ),
-              ),
-            ),
-            const SizedBox(height: DsfrSpacings.s3v),
-            const Align(
-              alignment: Alignment.centerLeft,
-              child:
-                  OnboardingIllustration(assetName: AssetImages.illustration2),
-            ),
-            const _Prenom(),
-            const SizedBox(height: DsfrSpacings.s2w),
-            const Text(
-              Localisation.enchanteDetails,
-              style: DsfrTextStyle.bodyLg(),
-            ),
-            const SizedBox(height: DsfrSpacings.s4w),
-            const _CodePostalEtCommune(),
-          ],
+        const SizedBox(height: DsfrSpacings.s3v),
+        const Align(
+          alignment: Alignment.centerLeft,
+          child: OnboardingIllustration(assetName: AssetImages.illustration2),
         ),
-        bottomNavigationBar: const FnvBottomBar(child: _ButtonContinuer()),
-      );
+        const _Prenom(),
+        const SizedBox(height: DsfrSpacings.s2w),
+        const Text(Localisation.enchanteDetails, style: DsfrTextStyle.bodyLg()),
+        const SizedBox(height: DsfrSpacings.s4w),
+        const _CodePostalEtCommune(),
+      ],
+    ),
+    bottomNavigationBar: const FnvBottomBar(child: _ButtonContinuer()),
+  );
 }
 
 class _Prenom extends StatelessWidget {
@@ -147,9 +142,9 @@ class _CodePostalEtCommuneState extends State<_CodePostalEtCommune> {
             label: Localisation.codePostal,
             initialValue: state.codePostal,
             onChanged: (final value) {
-              context
-                  .read<QuestionCodePostalBloc>()
-                  .add(QuestionCodePostalAChange(value));
+              context.read<QuestionCodePostalBloc>().add(
+                QuestionCodePostalAChange(value),
+              );
               _textEditingController.clear();
             },
             autofocus: true,
@@ -165,9 +160,10 @@ class _CodePostalEtCommuneState extends State<_CodePostalEtCommune> {
         Expanded(
           child: DsfrSelect<String>(
             label: Localisation.commune,
-            dropdownMenuEntries: state.communes
-                .map((final e) => DropdownMenuEntry(value: e, label: e))
-                .toList(),
+            dropdownMenuEntries:
+                state.communes
+                    .map((final e) => DropdownMenuEntry(value: e, label: e))
+                    .toList(),
             onSelected: (final value) => _handleCommune(context, value),
             controller: _textEditingController,
           ),
@@ -190,17 +186,19 @@ class _ButtonContinuer extends StatelessWidget {
       label: Localisation.continuer,
       variant: DsfrButtonVariant.primary,
       size: DsfrButtonSize.lg,
-      onPressed: estRempli
-          ? () async {
-              final bloc = context.read<QuestionCodePostalBloc>()
-                ..add(const QuestionCodePostalMiseAJourDemandee());
+      onPressed:
+          estRempli
+              ? () async {
+                final bloc =
+                    context.read<QuestionCodePostalBloc>()
+                      ..add(const QuestionCodePostalMiseAJourDemandee());
 
-              await GoRouter.of(context).pushNamed(
-                AppEstEncoreEnExperimentationPage.name,
-                pathParameters: {'commune': bloc.state.commune},
-              );
-            }
-          : null,
+                await GoRouter.of(context).pushNamed(
+                  AppEstEncoreEnExperimentationPage.name,
+                  pathParameters: {'commune': bloc.state.commune},
+                );
+              }
+              : null,
     );
   }
 }

@@ -9,31 +9,31 @@ class Points extends StatelessWidget {
 
   @override
   Widget build(final context) => const DecoratedBox(
-        decoration: BoxDecoration(
-          color: Color(0xFFF1F6EC),
-          borderRadius: BorderRadius.all(Radius.circular(DsfrSpacings.s1w)),
-        ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            vertical: DsfrSpacings.s1v5,
-            horizontal: DsfrSpacings.s1w,
+    decoration: BoxDecoration(
+      color: Color(0xFFF1F6EC),
+      borderRadius: BorderRadius.all(Radius.circular(DsfrSpacings.s1w)),
+    ),
+    child: Padding(
+      padding: EdgeInsets.symmetric(
+        vertical: DsfrSpacings.s1v5,
+        horizontal: DsfrSpacings.s1w,
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          _Content(),
+          SizedBox(width: DsfrSpacings.s1v),
+          ExcludeSemantics(
+            child: Icon(
+              DsfrIcons.othersLeafFill,
+              size: DsfrSpacings.s2w,
+              color: Color(0xFF3CD277),
+            ),
           ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _Content(),
-              SizedBox(width: DsfrSpacings.s1v),
-              ExcludeSemantics(
-                child: Icon(
-                  DsfrIcons.othersLeafFill,
-                  size: DsfrSpacings.s2w,
-                  color: Color(0xFF3CD277),
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
+        ],
+      ),
+    ),
+  );
 }
 
 class _Content extends StatelessWidget {
@@ -41,8 +41,9 @@ class _Content extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    final points = context
-        .select<GamificationBloc, int>((final value) => value.state.points);
+    final points = context.select<GamificationBloc, int>(
+      (final value) => value.state.points,
+    );
 
     return Text(
       '$points',

@@ -15,12 +15,11 @@ class ResponseChoice extends Equatable {
     final String? code,
     final String? label,
     final bool? isSelected,
-  }) =>
-      ResponseChoice(
-        code: code ?? this.code,
-        label: label ?? this.label,
-        isSelected: isSelected ?? this.isSelected,
-      );
+  }) => ResponseChoice(
+    code: code ?? this.code,
+    label: label ?? this.label,
+    isSelected: isSelected ?? this.isSelected,
+  );
 
   @override
   List<Object?> get props => [code, label, isSelected];

@@ -18,12 +18,11 @@ final class SaisieCodeState extends Equatable {
     final String? email,
     final Option<String>? erreur,
     final bool? renvoyerCodeDemande,
-  }) =>
-      SaisieCodeState(
-        email: email ?? this.email,
-        renvoyerCodeDemande: renvoyerCodeDemande ?? this.renvoyerCodeDemande,
-        erreur: erreur ?? this.erreur,
-      );
+  }) => SaisieCodeState(
+    email: email ?? this.email,
+    renvoyerCodeDemande: renvoyerCodeDemande ?? this.renvoyerCodeDemande,
+    erreur: erreur ?? this.erreur,
+  );
 
   @override
   List<Object> get props => [email, renvoyerCodeDemande, erreur];

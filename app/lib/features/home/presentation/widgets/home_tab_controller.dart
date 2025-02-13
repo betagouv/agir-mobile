@@ -9,14 +9,13 @@ class HomeTabController extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => DefaultTabController(
-        length: 5,
-        child: RootPage(
-          title: const HomeAppBarTitle(),
-          appBarBottom: HomeTabBar(
-            textScaler:
-                MediaQuery.textScalerOf(context).clamp(maxScaleFactor: 2),
-          ),
-          body: const HomeTabBarView(),
-        ),
-      );
+    length: 5,
+    child: RootPage(
+      title: const HomeAppBarTitle(),
+      appBarBottom: HomeTabBar(
+        textScaler: MediaQuery.textScalerOf(context).clamp(maxScaleFactor: 2),
+      ),
+      body: const HomeTabBarView(),
+    ),
+  );
 }

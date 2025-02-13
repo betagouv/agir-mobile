@@ -22,13 +22,13 @@ class DsfrCheckbox extends StatelessWidget {
     final FocusNode? focusNode,
     final Key? key,
   }) : this._(
-          key: key,
-          label: label,
-          value: value,
-          onChanged: onChanged,
-          padding: EdgeInsets.zero,
-          focusNode: focusNode,
-        );
+         key: key,
+         label: label,
+         value: value,
+         onChanged: onChanged,
+         padding: EdgeInsets.zero,
+         focusNode: focusNode,
+       );
 
   const DsfrCheckbox.md({
     required final String label,
@@ -37,13 +37,13 @@ class DsfrCheckbox extends StatelessWidget {
     final FocusNode? focusNode,
     final Key? key,
   }) : this._(
-          key: key,
-          label: label,
-          value: value,
-          onChanged: onChanged,
-          padding: const EdgeInsets.all(DsfrSpacings.s1v),
-          focusNode: focusNode,
-        );
+         key: key,
+         label: label,
+         value: value,
+         onChanged: onChanged,
+         padding: const EdgeInsets.all(DsfrSpacings.s1v),
+         focusNode: focusNode,
+       );
 
   final String label;
   final bool value;
@@ -54,49 +54,46 @@ class DsfrCheckbox extends StatelessWidget {
 
   @override
   Widget build(final context) => Semantics(
-        enabled: isEnabled,
-        checked: value,
-        label: label,
-        child: ExcludeSemantics(
-          child: GestureDetector(
-            onTap: onChanged == null ? null : () => onChanged?.call(!value),
-            behavior: HitTestBehavior.opaque,
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Focus(
-                  focusNode: focusNode,
-                  onKeyEvent: (final node, final event) {
-                    if (event is KeyDownEvent &&
-                        event.logicalKey == LogicalKeyboardKey.space) {
-                      onChanged?.call(!value);
+    enabled: isEnabled,
+    checked: value,
+    label: label,
+    child: ExcludeSemantics(
+      child: GestureDetector(
+        onTap: onChanged == null ? null : () => onChanged?.call(!value),
+        behavior: HitTestBehavior.opaque,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Focus(
+              focusNode: focusNode,
+              onKeyEvent: (final node, final event) {
+                if (event is KeyDownEvent &&
+                    event.logicalKey == LogicalKeyboardKey.space) {
+                  onChanged?.call(!value);
 
-                      return KeyEventResult.handled;
-                    }
+                  return KeyEventResult.handled;
+                }
 
-                    return KeyEventResult.ignored;
-                  },
-                  canRequestFocus: isEnabled,
-                  child: Builder(
-                    builder: (final context) {
-                      final isFocused = Focus.of(context).hasFocus;
+                return KeyEventResult.ignored;
+              },
+              canRequestFocus: isEnabled,
+              child: Builder(
+                builder: (final context) {
+                  final isFocused = Focus.of(context).hasFocus;
 
-                      return DsfrFocusWidget(
-                        isFocused: isFocused,
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(4)),
-                        child: DsfrCheckboxIcon(value: value, padding: padding),
-                      );
-                    },
-                  ),
-                ),
-                const SizedBox(width: DsfrSpacings.s1w),
-                Flexible(
-                  child: Text(label, style: const DsfrTextStyle.bodyMd()),
-                ),
-              ],
+                  return DsfrFocusWidget(
+                    isFocused: isFocused,
+                    borderRadius: const BorderRadius.all(Radius.circular(4)),
+                    child: DsfrCheckboxIcon(value: value, padding: padding),
+                  );
+                },
+              ),
             ),
-          ),
+            const SizedBox(width: DsfrSpacings.s1w),
+            Flexible(child: Text(label, style: const DsfrTextStyle.bodyMd())),
+          ],
         ),
-      );
+      ),
+    ),
+  );
 }

@@ -26,27 +26,26 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(final context) => MaterialApp(
-        home: MasterPage(
-          pageItems: [
-            SandboxPage.model,
-            TextPage.model,
-            AccordionsPage.model,
-            ButtonsPage.model,
-            CheckboxPage.model,
-            ColorsPage.model,
-            SelectPage.model,
-            FormMessagesPage.model,
-            IconsPage.model,
-            InputsPage.model,
-            LinksPage.model,
-            ModalsPage.model,
-            RadiosPage.model,
-            TagsPage.model,
-            TogglesPage.model,
-          ],
-        ),
-        builder: (final context, final child) =>
-            AccessibilityTools(child: child),
-        debugShowCheckedModeBanner: false,
-      );
+    home: MasterPage(
+      pageItems: [
+        SandboxPage.model,
+        TextPage.model,
+        AccordionsPage.model,
+        ButtonsPage.model,
+        CheckboxPage.model,
+        ColorsPage.model,
+        SelectPage.model,
+        FormMessagesPage.model,
+        IconsPage.model,
+        InputsPage.model,
+        LinksPage.model,
+        ModalsPage.model,
+        RadiosPage.model,
+        TagsPage.model,
+        TogglesPage.model,
+      ],
+    ),
+    builder: (final context, final child) => AccessibilityTools(child: child),
+    debugShowCheckedModeBanner: false,
+  );
 }

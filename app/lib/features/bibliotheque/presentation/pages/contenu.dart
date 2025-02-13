@@ -34,13 +34,14 @@ class _ContenuState extends State<Contenu> with MaterialStateMixin<Contenu> {
         child: Material(
           color: FnvColors.transparent,
           child: InkWell(
-            onTap: () async => GoRouter.of(context).pushNamed(
-              ArticlePage.name,
-              pathParameters: {
-                'titre': widget.contenu.titre,
-                'id': widget.contenu.id,
-              },
-            ),
+            onTap:
+                () async => GoRouter.of(context).pushNamed(
+                  ArticlePage.name,
+                  pathParameters: {
+                    'titre': widget.contenu.titre,
+                    'id': widget.contenu.id,
+                  },
+                ),
             onHighlightChanged: updateMaterialState(WidgetState.pressed),
             onHover: updateMaterialState(WidgetState.hovered),
             focusColor: FnvColors.transparent,

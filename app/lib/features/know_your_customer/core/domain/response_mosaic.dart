@@ -19,14 +19,13 @@ class ResponseMosaic extends ResponseChoice {
     final String? emoji,
     final String? imageUrl,
     final bool? isSelected,
-  }) =>
-      ResponseMosaic(
-        code: code ?? this.code,
-        label: label ?? this.label,
-        emoji: emoji ?? this.emoji,
-        imageUrl: imageUrl ?? this.imageUrl,
-        isSelected: isSelected ?? this.isSelected,
-      );
+  }) => ResponseMosaic(
+    code: code ?? this.code,
+    label: label ?? this.label,
+    emoji: emoji ?? this.emoji,
+    imageUrl: imageUrl ?? this.imageUrl,
+    isSelected: isSelected ?? this.isSelected,
+  );
 
   @override
   List<Object?> get props => [...super.props, emoji, imageUrl];

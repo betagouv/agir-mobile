@@ -32,17 +32,16 @@ class FnvSvg extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => SizedBox(
-        width: width,
-        height: height,
-        child: Semantics(
-          label: semanticsLabel,
-          child: ScalableImageWidget.fromSISource(
-            si: source,
-            fit: fit,
-            alignment: alignment,
-            onLoading: (final context) =>
-                SizedBox(width: width, height: height),
-          ),
-        ),
-      );
+    width: width,
+    height: height,
+    child: Semantics(
+      label: semanticsLabel,
+      child: ScalableImageWidget.fromSISource(
+        si: source,
+        fit: fit,
+        alignment: alignment,
+        onLoading: (final context) => SizedBox(width: width, height: height),
+      ),
+    ),
+  );
 }

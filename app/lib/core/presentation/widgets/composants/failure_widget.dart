@@ -12,27 +12,27 @@ class FnvFailureWidget extends StatelessWidget {
 
   @override
   Widget build(final context) => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              Localisation.erreurInattendue,
-              style: DsfrTextStyle.headline3(),
-            ),
-            FnvSvg.asset(AssetImages.errorIllustration),
-            const Text(
-              Localisation.erreurInattendueContent,
-              style: DsfrTextStyle.bodyXl(),
-            ),
-            const SizedBox(height: DsfrSpacings.s4w),
-            DsfrButton(
-              label: Localisation.rafraichir,
-              variant: DsfrButtonVariant.secondary,
-              size: DsfrButtonSize.lg,
-              onPressed: onPressed,
-            ),
-          ],
+    padding: const EdgeInsets.symmetric(horizontal: paddingVerticalPage),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          Localisation.erreurInattendue,
+          style: DsfrTextStyle.headline3(),
         ),
-      );
+        FnvSvg.asset(AssetImages.errorIllustration),
+        const Text(
+          Localisation.erreurInattendueContent,
+          style: DsfrTextStyle.bodyXl(),
+        ),
+        const SizedBox(height: DsfrSpacings.s4w),
+        DsfrButton(
+          label: Localisation.rafraichir,
+          variant: DsfrButtonVariant.secondary,
+          size: DsfrButtonSize.lg,
+          onPressed: onPressed,
+        ),
+      ],
+    ),
+  );
 }

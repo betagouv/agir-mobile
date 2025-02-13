@@ -29,28 +29,28 @@ class _MissionKycPageState extends State<MissionKycPage> {
 
   @override
   Widget build(final context) => ListView(
-        padding: const EdgeInsets.all(paddingVerticalPage),
-        children: [
-          MieuxVousConnaitreForm(
-            id: widget.value.contentId.value,
-            controller: _mieuxVousConnaitreController,
-            onSaved: () =>
-                context.read<MissionBloc>().add(const MissionNextRequested()),
-          ),
-          const SizedBox(height: DsfrSpacings.s3w),
-          SafeArea(
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: FittedBox(
-                child: DsfrButton(
-                  label: Localisation.continuer,
-                  variant: DsfrButtonVariant.primary,
-                  size: DsfrButtonSize.lg,
-                  onPressed: _mieuxVousConnaitreController.save,
-                ),
-              ),
+    padding: const EdgeInsets.all(paddingVerticalPage),
+    children: [
+      MieuxVousConnaitreForm(
+        id: widget.value.contentId.value,
+        controller: _mieuxVousConnaitreController,
+        onSaved:
+            () => context.read<MissionBloc>().add(const MissionNextRequested()),
+      ),
+      const SizedBox(height: DsfrSpacings.s3w),
+      SafeArea(
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: FittedBox(
+            child: DsfrButton(
+              label: Localisation.continuer,
+              variant: DsfrButtonVariant.primary,
+              size: DsfrButtonSize.lg,
+              onPressed: _mieuxVousConnaitreController.save,
             ),
           ),
-        ],
-      );
+        ),
+      ),
+    ],
+  );
 }

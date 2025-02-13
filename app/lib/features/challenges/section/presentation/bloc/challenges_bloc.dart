@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChallengesBloc extends Bloc<ChallengesEvent, ChallengesState> {
   ChallengesBloc({required final ChallengesRepository repository})
-      : super(const ChallengesInitial()) {
+    : super(const ChallengesInitial()) {
     on<ChallengesLoadRequested>((final event, final emit) async {
       final result = await repository.fetch(themeType: event.themeType);
       result.fold(

@@ -34,13 +34,14 @@ Future<void> _pumpPage(
     ],
     blocProviders: [
       BlocProvider(
-        create: (final context) => GamificationBloc(
-          repository: GamificationRepository(
-            client: client,
-            messageBus: MessageBus(),
-          ),
-          authenticationService: authenticationService,
-        ),
+        create:
+            (final context) => GamificationBloc(
+              repository: GamificationRepository(
+                client: client,
+                messageBus: MessageBus(),
+              ),
+              authenticationService: authenticationService,
+            ),
       ),
     ],
     page: KnowYourCustomersPage.route,

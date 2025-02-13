@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ActionBloc extends Bloc<ActionEvent, ActionState> {
   ActionBloc({required final ActionRepository repository})
-      : super(const ActionInitial()) {
+    : super(const ActionInitial()) {
     on<ActionLoadRequested>((final event, final emit) async {
       emit(const ActionLoadInProgress());
       final result = await repository.fetch(event.id);

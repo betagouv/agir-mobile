@@ -26,18 +26,18 @@ final class MissionLoading extends MissionState {
 @immutable
 final class MissionSuccess extends MissionState {
   MissionSuccess({required final Mission mission, required this.index})
-      : code = mission.code,
-        steps = [
-          MissionStepIntroduction(
-            themeType: mission.themeType,
-            title: mission.title,
-            imageUrl: mission.imageUrl,
-            description: mission.description,
-          ),
-          ...mission.objectifs.map(MissionStepObjectif.new),
-          const MissionStepChallenges(),
-          MissionStepFin(title: mission.title),
-        ];
+    : code = mission.code,
+      steps = [
+        MissionStepIntroduction(
+          themeType: mission.themeType,
+          title: mission.title,
+          imageUrl: mission.imageUrl,
+          description: mission.description,
+        ),
+        ...mission.objectifs.map(MissionStepObjectif.new),
+        const MissionStepChallenges(),
+        MissionStepFin(title: mission.title),
+      ];
 
   const MissionSuccess._({
     required this.code,
@@ -68,12 +68,11 @@ final class MissionSuccess extends MissionState {
     final MissionCode? code,
     final int? index,
     final List<MissionStep>? steps,
-  }) =>
-      MissionSuccess._(
-        code: code ?? this.code,
-        index: index ?? this.index,
-        steps: steps ?? this.steps,
-      );
+  }) => MissionSuccess._(
+    code: code ?? this.code,
+    index: index ?? this.index,
+    steps: steps ?? this.steps,
+  );
 
   @override
   List<Object> get props => [index, steps, code];

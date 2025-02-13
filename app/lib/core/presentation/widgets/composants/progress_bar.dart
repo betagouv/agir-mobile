@@ -2,23 +2,19 @@ import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 
 class FnvProgressBar extends StatelessWidget {
-  const FnvProgressBar({
-    super.key,
-    required this.current,
-    required this.total,
-  });
+  const FnvProgressBar({super.key, required this.current, required this.total});
 
   final int current;
   final int total;
 
   @override
   Widget build(final context) => Semantics(
-        label: 'Question $current sur $total',
-        child: CustomPaint(
-          painter: _Painter(value: current / total),
-          size: const Size(double.infinity, 8),
-        ),
-      );
+    label: 'Question $current sur $total',
+    child: CustomPaint(
+      painter: _Painter(value: current / total),
+      size: const Size(double.infinity, 8),
+    ),
+  );
 }
 
 class _Painter extends CustomPainter {
@@ -47,9 +43,10 @@ class _Painter extends CustomPainter {
     }
 
     final rect = Rect.fromLTWH(0, 0, width, size.height);
-    final paint = Paint()
-      ..color = _color
-      ..style = PaintingStyle.fill;
+    final paint =
+        Paint()
+          ..color = _color
+          ..style = PaintingStyle.fill;
 
     canvas.drawRect(rect, paint);
   }

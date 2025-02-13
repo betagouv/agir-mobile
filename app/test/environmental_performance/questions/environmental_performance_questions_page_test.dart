@@ -34,8 +34,10 @@ Future<void> pumpEnvironmentalPerformancePage(
   );
   final environmentalPerformanceRepository =
       EnvironmentalPerformanceSummaryRepository(client: client);
-  final mieuxVousConnaitreRepository =
-      MieuxVousConnaitreRepository(client: client, messageBus: MessageBus());
+  final mieuxVousConnaitreRepository = MieuxVousConnaitreRepository(
+    client: client,
+    messageBus: MessageBus(),
+  );
   await pumpPage(
     tester: tester,
     repositoryProviders: [
@@ -51,18 +53,20 @@ Future<void> pumpEnvironmentalPerformancePage(
         create: (final context) => GamificationBlocFake(),
       ),
       BlocProvider(
-        create: (final context) => EnvironmentalPerformanceBloc(
-          useCase: FetchEnvironmentalPerformance(
-            EnvironmentalPerformanceSummaryRepository(client: client),
-          ),
-        ),
+        create:
+            (final context) => EnvironmentalPerformanceBloc(
+              useCase: FetchEnvironmentalPerformance(
+                EnvironmentalPerformanceSummaryRepository(client: client),
+              ),
+            ),
       ),
       BlocProvider(
-        create: (final context) => EnvironmentalPerformanceQuestionBloc(
-          repository: EnvironmentalPerformanceQuestionRepository(
-            client: client,
-          ),
-        ),
+        create:
+            (final context) => EnvironmentalPerformanceQuestionBloc(
+              repository: EnvironmentalPerformanceQuestionRepository(
+                client: client,
+              ),
+            ),
       ),
     ],
     page: EnvironmentalPerformanceSummaryPage.route,
@@ -74,25 +78,26 @@ Future<void> pumpEnvironmentalPerformancePage(
 void main() {
   group('Votre bilan environnemental', () {
     testWidgets('Aller sur les questions', (final tester) async {
-      final dio = DioMock()
-        ..getM(
-          Endpoints.bilan,
-          responseData: environmentalPerformanceEmptyData,
-        )
-        ..getM(
-          Endpoints.questions('ENCHAINEMENT_KYC_mini_bilan_carbone'),
-          responseData: miniBilanQuestions,
-        )
-        ..getM(
-          Endpoints.questionKyc('KYC_transport_voiture_km'),
-          responseData: miniBilanQuestions.first,
-        )
-        ..putM(Endpoints.questionKyc('KYC_transport_voiture_km'))
-        ..getM(
-          Endpoints.questionKyc('KYC_transport_avion_3_annees'),
-          responseData: miniBilanQuestions[1],
-        )
-        ..putM(Endpoints.questionKyc('KYC_transport_avion_3_annees'));
+      final dio =
+          DioMock()
+            ..getM(
+              Endpoints.bilan,
+              responseData: environmentalPerformanceEmptyData,
+            )
+            ..getM(
+              Endpoints.questions('ENCHAINEMENT_KYC_mini_bilan_carbone'),
+              responseData: miniBilanQuestions,
+            )
+            ..getM(
+              Endpoints.questionKyc('KYC_transport_voiture_km'),
+              responseData: miniBilanQuestions.first,
+            )
+            ..putM(Endpoints.questionKyc('KYC_transport_voiture_km'))
+            ..getM(
+              Endpoints.questionKyc('KYC_transport_avion_3_annees'),
+              responseData: miniBilanQuestions[1],
+            )
+            ..putM(Endpoints.questionKyc('KYC_transport_avion_3_annees'));
       await pumpEnvironmentalPerformancePage(tester, dio: dio);
       await tester.pumpAndSettle();
       await tester.tap(
@@ -110,10 +115,7 @@ void main() {
       expect(find.bySemanticsLabel('Question 2 sur 2'), findsOneWidget);
       await tester.pumpAndSettle();
       await tester.tap(find.text(Localisation.non));
-      dio.getM(
-        Endpoints.bilan,
-        responseData: environmentalPerformanceFullData,
-      );
+      dio.getM(Endpoints.bilan, responseData: environmentalPerformanceFullData);
       await tester.tap(find.text(Localisation.continuer));
       await tester.pumpAndSettle();
       expect(find.text('Mon bilan environnemental'), findsOneWidget);

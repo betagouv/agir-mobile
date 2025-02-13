@@ -23,38 +23,37 @@ abstract final class QuestionMapper {
 
   static QuestionMultipleChoice _questionMultipleChoice(
     final Map<String, dynamic> json,
-  ) =>
-      QuestionMultipleChoice(
-        id: QuestionCode(json['code'] as String),
-        theme: _mapThemeType(json['thematique'] as String),
-        label: json['question'] as String,
-        isAnswered: json['is_answered'] as bool,
-        responses: _responseChoices(json['reponse_multiple'] as List<dynamic>),
-        points: (json['points'] as num).toInt(),
-      );
+  ) => QuestionMultipleChoice(
+    id: QuestionCode(json['code'] as String),
+    theme: _mapThemeType(json['thematique'] as String),
+    label: json['question'] as String,
+    isAnswered: json['is_answered'] as bool,
+    responses: _responseChoices(json['reponse_multiple'] as List<dynamic>),
+    points: (json['points'] as num).toInt(),
+  );
 
   static QuestionSingleChoice _questionSingleChoice(
     final Map<String, dynamic> json,
-  ) =>
-      QuestionSingleChoice(
-        id: QuestionCode(json['code'] as String),
-        theme: _mapThemeType(json['thematique'] as String),
-        label: json['question'] as String,
-        isAnswered: json['is_answered'] as bool,
-        responses: _responseChoices(json['reponse_multiple'] as List<dynamic>),
-        points: (json['points'] as num).toInt(),
-      );
+  ) => QuestionSingleChoice(
+    id: QuestionCode(json['code'] as String),
+    theme: _mapThemeType(json['thematique'] as String),
+    label: json['question'] as String,
+    isAnswered: json['is_answered'] as bool,
+    responses: _responseChoices(json['reponse_multiple'] as List<dynamic>),
+    points: (json['points'] as num).toInt(),
+  );
 
-  static List<ResponseChoice> _responseChoices(final List<dynamic> json) => json
-      .cast<Map<String, dynamic>>()
-      .map(
-        (final e) => ResponseChoice(
-          code: e['code'] as String,
-          label: e['label'] as String,
-          isSelected: e['selected'] as bool,
-        ),
-      )
-      .toList();
+  static List<ResponseChoice> _responseChoices(final List<dynamic> json) =>
+      json
+          .cast<Map<String, dynamic>>()
+          .map(
+            (final e) => ResponseChoice(
+              code: e['code'] as String,
+              label: e['label'] as String,
+              isSelected: e['selected'] as bool,
+            ),
+          )
+          .toList();
 
   static QuestionOpen _questionOpen(final Map<String, dynamic> json) =>
       QuestionOpen(
@@ -77,42 +76,40 @@ abstract final class QuestionMapper {
       );
 
   static Response _response(final Map<String, dynamic> json) => Response(
-        value: json.containsKey('value') ? json['value'] as String : '',
-        unit: json.containsKey('unite') ? json['unite'] as String : null,
-      );
+    value: json.containsKey('value') ? json['value'] as String : '',
+    unit: json.containsKey('unite') ? json['unite'] as String : null,
+  );
 
   static QuestionMosaicBoolean _questionMosaicBoolean(
     final Map<String, dynamic> json,
-  ) =>
-      QuestionMosaicBoolean(
-        id: QuestionCode(json['code'] as String),
-        theme: _mapThemeType(json['thematique'] as String),
-        label: json['question'] as String,
-        isAnswered: json['is_answered'] as bool,
-        responses: _responseMosaics(
-          json['reponse_multiple'] as List<dynamic>,
-        ),
-        points: (json['points'] as num).toInt(),
-      );
+  ) => QuestionMosaicBoolean(
+    id: QuestionCode(json['code'] as String),
+    theme: _mapThemeType(json['thematique'] as String),
+    label: json['question'] as String,
+    isAnswered: json['is_answered'] as bool,
+    responses: _responseMosaics(json['reponse_multiple'] as List<dynamic>),
+    points: (json['points'] as num).toInt(),
+  );
 
-  static List<ResponseMosaic> _responseMosaics(final List<dynamic> json) => json
-      .cast<Map<String, dynamic>>()
-      .map(
-        (final e) => ResponseMosaic(
-          code: e['code'] as String,
-          label: e['label'] as String,
-          emoji: e['emoji'] as String?,
-          imageUrl: e['image_url'] as String,
-          isSelected: e['selected'] as bool,
-        ),
-      )
-      .toList();
+  static List<ResponseMosaic> _responseMosaics(final List<dynamic> json) =>
+      json
+          .cast<Map<String, dynamic>>()
+          .map(
+            (final e) => ResponseMosaic(
+              code: e['code'] as String,
+              label: e['label'] as String,
+              emoji: e['emoji'] as String?,
+              imageUrl: e['image_url'] as String,
+              isSelected: e['selected'] as bool,
+            ),
+          )
+          .toList();
 
   static ThemeType _mapThemeType(final String? type) => switch (type) {
-        'alimentation' => ThemeType.alimentation,
-        'transport' => ThemeType.transport,
-        'consommation' => ThemeType.consommation,
-        'logement' => ThemeType.logement,
-        _ => ThemeType.decouverte,
-      };
+    'alimentation' => ThemeType.alimentation,
+    'transport' => ThemeType.transport,
+    'consommation' => ThemeType.consommation,
+    'logement' => ThemeType.logement,
+    _ => ThemeType.decouverte,
+  };
 }

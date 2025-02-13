@@ -29,51 +29,53 @@ class _DsfrRadioButtonState<T> extends State<DsfrRadioButton<T>>
     with MaterialStateMixin<DsfrRadioButton<T>> {
   @override
   Widget build(final context) => DsfrFocusWidget(
-        isFocused: isFocused,
-        child: Material(
-          color: Colors.transparent,
-          child: InkWell(
-            onTap: widget.onChanged == null
+    isFocused: isFocused,
+    child: Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap:
+            widget.onChanged == null
                 ? null
                 : () => widget.onChanged!(widget.value),
-            onHighlightChanged: updateMaterialState(WidgetState.pressed),
-            onHover: updateMaterialState(WidgetState.hovered),
-            focusColor: Colors.transparent,
-            canRequestFocus: widget.onChanged != null,
-            onFocusChange: updateMaterialState(WidgetState.focused),
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                color: widget.backgroundColor,
-                border: Border.fromBorderSide(
-                  BorderSide(
-                    color: widget.groupValue == widget.value
+        onHighlightChanged: updateMaterialState(WidgetState.pressed),
+        onHover: updateMaterialState(WidgetState.hovered),
+        focusColor: Colors.transparent,
+        canRequestFocus: widget.onChanged != null,
+        onFocusChange: updateMaterialState(WidgetState.focused),
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            color: widget.backgroundColor,
+            border: Border.fromBorderSide(
+              BorderSide(
+                color:
+                    widget.groupValue == widget.value
                         ? DsfrColors.blueFranceSun113
                         : DsfrColors.grey900,
-                  ),
-                ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(DsfrSpacings.s2w),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    RadioIcon(
-                      key: ValueKey(widget.title),
-                      value: widget.value,
-                      groupValue: widget.groupValue,
-                    ),
-                    const SizedBox(width: DsfrSpacings.s1w),
-                    Flexible(
-                      child: Text(
-                        widget.title,
-                        style: const DsfrTextStyle.bodyMd(),
-                      ),
-                    ),
-                  ],
-                ),
               ),
             ),
           ),
+          child: Padding(
+            padding: const EdgeInsets.all(DsfrSpacings.s2w),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                RadioIcon(
+                  key: ValueKey(widget.title),
+                  value: widget.value,
+                  groupValue: widget.groupValue,
+                ),
+                const SizedBox(width: DsfrSpacings.s1w),
+                Flexible(
+                  child: Text(
+                    widget.title,
+                    style: const DsfrTextStyle.bodyMd(),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
-      );
+      ),
+    ),
+  );
 }

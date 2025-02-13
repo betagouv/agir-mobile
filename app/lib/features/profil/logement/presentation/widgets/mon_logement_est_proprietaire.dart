@@ -22,9 +22,10 @@ class MonLogementEstProprietaire extends StatelessWidget {
           true: DsfrRadioButtonItem(Localisation.oui),
           false: DsfrRadioButtonItem(Localisation.non),
         },
-        onCallback: (final value) => context
-            .read<MonLogementBloc>()
-            .add(MonLogementEstProprietaireChange(value)),
+        onCallback:
+            (final value) => context.read<MonLogementBloc>().add(
+              MonLogementEstProprietaireChange(value),
+            ),
         initialValue: estProprietaire,
       ),
     );

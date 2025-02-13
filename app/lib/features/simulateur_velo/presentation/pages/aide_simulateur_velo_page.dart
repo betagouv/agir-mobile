@@ -29,11 +29,11 @@ class AideSimulateurVeloPage extends StatelessWidget {
   static const path = name;
 
   static GoRoute route({required final List<RouteBase> routes}) => GoRoute(
-        path: path,
-        name: name,
-        builder: (final context, final state) => const AideSimulateurVeloPage(),
-        routes: routes,
-      );
+    path: path,
+    name: name,
+    builder: (final context, final state) => const AideSimulateurVeloPage(),
+    routes: routes,
+  );
 
   @override
   Widget build(final context) {
@@ -48,24 +48,24 @@ class _AideSimulateurVeloView extends StatelessWidget {
 
   @override
   Widget build(final context) => FnvScaffold(
-        appBar: FnvAppBar(),
-        body: ListView(
-          padding: const EdgeInsets.all(paddingVerticalPage),
-          children: const [
-            Text(Localisation.simulerMonAide, style: DsfrTextStyle.headline2()),
-            Text(Localisation.acheterUnVelo, style: DsfrTextStyle.bodyXl()),
-            SizedBox(height: DsfrSpacings.s2w),
-            _BikeState(),
-            SizedBox(height: DsfrSpacings.s2w),
-            _Price(),
-            SizedBox(height: DsfrSpacings.s4w),
-            Divider(color: FnvColors.dividerColor),
-            SizedBox(height: DsfrSpacings.s3w),
-            _ElementsNecessaireAuCalcul(),
-          ],
-        ),
-        bottomNavigationBar: const FnvBottomBar(child: _EstimerMesAides()),
-      );
+    appBar: FnvAppBar(),
+    body: ListView(
+      padding: const EdgeInsets.all(paddingVerticalPage),
+      children: const [
+        Text(Localisation.simulerMonAide, style: DsfrTextStyle.headline2()),
+        Text(Localisation.acheterUnVelo, style: DsfrTextStyle.bodyXl()),
+        SizedBox(height: DsfrSpacings.s2w),
+        _BikeState(),
+        SizedBox(height: DsfrSpacings.s2w),
+        _Price(),
+        SizedBox(height: DsfrSpacings.s4w),
+        Divider(color: FnvColors.dividerColor),
+        SizedBox(height: DsfrSpacings.s3w),
+        _ElementsNecessaireAuCalcul(),
+      ],
+    ),
+    bottomNavigationBar: const FnvBottomBar(child: _EstimerMesAides()),
+  );
 }
 
 class _Price extends StatefulWidget {
@@ -107,9 +107,11 @@ class _PriceState extends State<_Price> {
                 }
                 context.read<AideVeloBloc>().add(AideVeloPrixChange(parse));
               },
-              validator: (final value) => value == null || value.isEmpty
-                  ? Localisation.prixDuVeloObligatoire
-                  : null,
+              validator:
+                  (final value) =>
+                      value == null || value.isEmpty
+                          ? Localisation.prixDuVeloObligatoire
+                          : null,
               textAlign: TextAlign.end,
               keyboardType: TextInputType.number,
               textInputAction: TextInputAction.next,
@@ -123,35 +125,37 @@ class _PriceState extends State<_Price> {
           style: FnvTextStyles.prixExplicationsStyle,
         ),
         const SizedBox(height: DsfrSpacings.s1w),
-        ...VeloPourSimulateur.values.map((final e) {
-          const foregroundColor = DsfrColors.grey50;
+        ...VeloPourSimulateur.values
+            .map((final e) {
+              const foregroundColor = DsfrColors.grey50;
 
-          return Align(
-            alignment: Alignment.centerLeft,
-            child: DsfrTag.sm(
-              label: TextSpan(
-                text: Localisation.veloLabel(e.label),
-                children: [
-                  TextSpan(
-                    text: Localisation.euro(e.prix),
-                    style: const TextStyle(
-                      decoration: TextDecoration.underline,
-                      decorationColor: foregroundColor,
-                    ),
+              return Align(
+                alignment: Alignment.centerLeft,
+                child: DsfrTag.sm(
+                  label: TextSpan(
+                    text: Localisation.veloLabel(e.label),
+                    children: [
+                      TextSpan(
+                        text: Localisation.euro(e.prix),
+                        style: const TextStyle(
+                          decoration: TextDecoration.underline,
+                          decorationColor: foregroundColor,
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              backgroundColor: DsfrColors.info950,
-              foregroundColor: foregroundColor,
-              textStyle: const DsfrTextStyle.bodySm(),
-              onTap: () {
-                final prix = e.prix;
-                context.read<AideVeloBloc>().add(AideVeloPrixChange(prix));
-                _prixVeloController.text = '$prix';
-              },
-            ),
-          );
-        }).separator(const SizedBox(height: 10)),
+                  backgroundColor: DsfrColors.info950,
+                  foregroundColor: foregroundColor,
+                  textStyle: const DsfrTextStyle.bodySm(),
+                  onTap: () {
+                    final prix = e.prix;
+                    context.read<AideVeloBloc>().add(AideVeloPrixChange(prix));
+                    _prixVeloController.text = '$prix';
+                  },
+                ),
+              );
+            })
+            .separator(const SizedBox(height: 10)),
       ],
     );
   }
@@ -162,19 +166,19 @@ class _BikeState extends StatelessWidget {
 
   @override
   Widget build(final context) => DsfrRadioButtonSet(
-        title: Localisation.etatDuVelo,
-        values: {
-          VeloEtat.neuf: VeloEtat.neuf.label,
-          VeloEtat.occasion: VeloEtat.occasion.label,
-        },
-        onCallback: (final value) {
-          if (value == null) {
-            return;
-          }
-          context.read<AideVeloBloc>().add(AideVeloEtatChange(value));
-        },
-        initialValue: VeloEtat.neuf,
-      );
+    title: Localisation.etatDuVelo,
+    values: {
+      VeloEtat.neuf: VeloEtat.neuf.label,
+      VeloEtat.occasion: VeloEtat.occasion.label,
+    },
+    onCallback: (final value) {
+      if (value == null) {
+        return;
+      }
+      context.read<AideVeloBloc>().add(AideVeloEtatChange(value));
+    },
+    initialValue: VeloEtat.neuf,
+  );
 }
 
 class _ElementsNecessaireAuCalcul extends StatelessWidget {
@@ -183,88 +187,87 @@ class _ElementsNecessaireAuCalcul extends StatelessWidget {
   @override
   Widget build(final context) {
     final state = context.watch<AideVeloBloc>().state;
-    const bodySmMediumBlue =
-        DsfrTextStyle.bodySmMedium(color: DsfrColors.blueFranceSun113);
+    const bodySmMediumBlue = DsfrTextStyle.bodySmMedium(
+      color: DsfrColors.blueFranceSun113,
+    );
 
     return state.veutModifierLesInformations
         ? const Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _Avertissement(),
-              _CodePostalEtCommune(),
-              SizedBox(height: DsfrSpacings.s3w),
-              Text(
-                Localisation.revenuQuestion,
-                style: DsfrTextStyle.headline6(),
-              ),
-              SizedBox(height: DsfrSpacings.s1v),
-              _NombreDePartsFiscales(),
-              SizedBox(height: DsfrSpacings.s3w),
-              _RevenuFiscal(),
-              SizedBox(height: DsfrSpacings.s3w),
-              _Questions(),
-            ],
-          )
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _Avertissement(),
+            _CodePostalEtCommune(),
+            SizedBox(height: DsfrSpacings.s3w),
+            Text(Localisation.revenuQuestion, style: DsfrTextStyle.headline6()),
+            SizedBox(height: DsfrSpacings.s1v),
+            _NombreDePartsFiscales(),
+            SizedBox(height: DsfrSpacings.s3w),
+            _RevenuFiscal(),
+            SizedBox(height: DsfrSpacings.s3w),
+            _Questions(),
+          ],
+        )
         : Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const Text.rich(
-                TextSpan(
-                  children: [
-                    WidgetSpan(
-                      alignment: PlaceholderAlignment.middle,
-                      child: Icon(DsfrIcons.systemErrorWarningLine, size: 16),
-                    ),
-                    WidgetSpan(child: SizedBox(width: DsfrSpacings.s1v)),
-                    TextSpan(text: Localisation.elementsNecessaireAuCalcul),
-                  ],
-                ),
-                style: DsfrTextStyle.bodySmBold(),
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const Text.rich(
+              TextSpan(
+                children: [
+                  WidgetSpan(
+                    alignment: PlaceholderAlignment.middle,
+                    child: Icon(DsfrIcons.systemErrorWarningLine, size: 16),
+                  ),
+                  WidgetSpan(child: SizedBox(width: DsfrSpacings.s1v)),
+                  TextSpan(text: Localisation.elementsNecessaireAuCalcul),
+                ],
               ),
-              const SizedBox(height: DsfrSpacings.s1v),
-              Text.rich(
-                TextSpan(
-                  text: Localisation.donneesUtiliseesPart1,
-                  children: [
-                    TextSpan(
-                      text: Localisation.donneesUtiliseesCodePostalEtCommune(
-                        codePostal: state.codePostal,
-                        commune: state.commune,
-                      ),
-                      style: bodySmMediumBlue,
+              style: DsfrTextStyle.bodySmBold(),
+            ),
+            const SizedBox(height: DsfrSpacings.s1v),
+            Text.rich(
+              TextSpan(
+                text: Localisation.donneesUtiliseesPart1,
+                children: [
+                  TextSpan(
+                    text: Localisation.donneesUtiliseesCodePostalEtCommune(
+                      codePostal: state.codePostal,
+                      commune: state.commune,
                     ),
-                    const TextSpan(text: Localisation.donneesUtiliseesPart2),
-                    TextSpan(
-                      text: Localisation.donneesUtiliseesRevenuFiscal(
-                        state.revenuFiscal,
-                      ),
-                      style: bodySmMediumBlue,
+                    style: bodySmMediumBlue,
+                  ),
+                  const TextSpan(text: Localisation.donneesUtiliseesPart2),
+                  TextSpan(
+                    text: Localisation.donneesUtiliseesRevenuFiscal(
+                      state.revenuFiscal,
                     ),
-                    const TextSpan(text: Localisation.donneesUtiliseesPart3),
-                    TextSpan(
-                      text: Localisation.donneesUtiliseesNombreDeParts(
-                        state.nombreDePartsFiscales,
-                      ),
-                      style: bodySmMediumBlue,
+                    style: bodySmMediumBlue,
+                  ),
+                  const TextSpan(text: Localisation.donneesUtiliseesPart3),
+                  TextSpan(
+                    text: Localisation.donneesUtiliseesNombreDeParts(
+                      state.nombreDePartsFiscales,
                     ),
-                    const TextSpan(text: Localisation.point),
-                  ],
-                ),
-                style: const DsfrTextStyle.bodySm(),
+                    style: bodySmMediumBlue,
+                  ),
+                  const TextSpan(text: Localisation.point),
+                ],
               ),
-              const SizedBox(height: DsfrSpacings.s3v),
-              Align(
-                alignment: Alignment.centerRight,
-                child: DsfrLink.md(
-                  label: Localisation.modifier,
-                  icon: DsfrIcons.designPencilFill,
-                  onTap: () => context
-                      .read<AideVeloBloc>()
-                      .add(const AideVeloModificationDemandee()),
-                ),
+              style: const DsfrTextStyle.bodySm(),
+            ),
+            const SizedBox(height: DsfrSpacings.s3v),
+            Align(
+              alignment: Alignment.centerRight,
+              child: DsfrLink.md(
+                label: Localisation.modifier,
+                icon: DsfrIcons.designPencilFill,
+                onTap:
+                    () => context.read<AideVeloBloc>().add(
+                      const AideVeloModificationDemandee(),
+                    ),
               ),
-            ],
-          );
+            ),
+          ],
+        );
   }
 }
 
@@ -272,14 +275,15 @@ class _Avertissement extends StatelessWidget {
   const _Avertissement();
 
   @override
-  Widget build(final context) => context.watch<AideVeloBloc>().state.estValide
-      ? const SizedBox.shrink()
-      : const Column(
-          children: [
-            FnvAlert.error(label: Localisation.aideVeloAvertissement),
-            SizedBox(height: DsfrSpacings.s2w),
-          ],
-        );
+  Widget build(final context) =>
+      context.watch<AideVeloBloc>().state.estValide
+          ? const SizedBox.shrink()
+          : const Column(
+            children: [
+              FnvAlert.error(label: Localisation.aideVeloAvertissement),
+              SizedBox(height: DsfrSpacings.s2w),
+            ],
+          );
 }
 
 class _CodePostalEtCommune extends StatefulWidget {
@@ -340,9 +344,10 @@ class _CodePostalEtCommuneState extends State<_CodePostalEtCommune> {
         Expanded(
           child: DsfrSelect<String>(
             label: Localisation.commune,
-            dropdownMenuEntries: state.communes
-                .map((final e) => DropdownMenuEntry(value: e, label: e))
-                .toList(),
+            dropdownMenuEntries:
+                state.communes
+                    .map((final e) => DropdownMenuEntry(value: e, label: e))
+                    .toList(),
             onSelected: (final value) => _handleCommune(context, value),
             controller: _textEditingController,
           ),
@@ -367,15 +372,15 @@ class _NombreDePartsFiscales extends StatelessWidget {
       onChanged: (final value) {
         final parse = double.tryParse(value.replaceFirst(',', '.'));
         if (parse == null) {
-          context
-              .read<AideVeloBloc>()
-              .add(const AideVeloNombreDePartsFiscalesChange(0));
+          context.read<AideVeloBloc>().add(
+            const AideVeloNombreDePartsFiscalesChange(0),
+          );
 
           return;
         }
-        context
-            .read<AideVeloBloc>()
-            .add(AideVeloNombreDePartsFiscalesChange(parse));
+        context.read<AideVeloBloc>().add(
+          AideVeloNombreDePartsFiscalesChange(parse),
+        );
       },
       width: adjustTextSize(context, _inputWidth),
       keyboardType: const TextInputType.numberWithOptions(decimal: true),
@@ -406,19 +411,21 @@ class _EstimerMesAides extends StatelessWidget {
 
   @override
   Widget build(final context) => DsfrButton(
-        label: Localisation.estimerMesAides,
-        variant: DsfrButtonVariant.primary,
-        size: DsfrButtonSize.lg,
-        onPressed: context.watch<AideVeloBloc>().state.estValide
+    label: Localisation.estimerMesAides,
+    variant: DsfrButtonVariant.primary,
+    size: DsfrButtonSize.lg,
+    onPressed:
+        context.watch<AideVeloBloc>().state.estValide
             ? () async {
-                context
-                    .read<AideVeloBloc>()
-                    .add(const AideVeloEstimationDemandee());
-                await GoRouter.of(context)
-                    .pushNamed(AideSimulateurVeloDisponiblePage.name);
-              }
+              context.read<AideVeloBloc>().add(
+                const AideVeloEstimationDemandee(),
+              );
+              await GoRouter.of(
+                context,
+              ).pushNamed(AideSimulateurVeloDisponiblePage.name);
+            }
             : null,
-      );
+  );
 }
 
 class _Questions extends StatelessWidget {
@@ -426,34 +433,36 @@ class _Questions extends StatelessWidget {
 
   @override
   Widget build(final context) => DsfrAccordionsGroup(
-        values: [
-          DsfrAccordion(
-            headerBuilder: (final isExpanded) => const _AccordionHeader(
+    values: [
+      DsfrAccordion(
+        headerBuilder:
+            (final isExpanded) => const _AccordionHeader(
               text: Localisation.ouTrouverCesInformations,
             ),
-            body: _AccordionBody(
-              child: MarkdownBody(
-                data: Localisation.ouTrouverCesInformationsReponse,
-                styleSheet: MarkdownStyleSheet(
-                  p: const DsfrTextStyle(fontSize: 15),
-                ),
-              ),
+        body: _AccordionBody(
+          child: MarkdownBody(
+            data: Localisation.ouTrouverCesInformationsReponse,
+            styleSheet: MarkdownStyleSheet(
+              p: const DsfrTextStyle(fontSize: 15),
             ),
           ),
-          DsfrAccordion(
-            headerBuilder: (final isExpanded) =>
+        ),
+      ),
+      DsfrAccordion(
+        headerBuilder:
+            (final isExpanded) =>
                 const _AccordionHeader(text: Localisation.pourquoiCesQuestions),
-            body: _AccordionBody(
-              child: MarkdownBody(
-                data: Localisation.pourquoiCesQuestionsReponse,
-                styleSheet: MarkdownStyleSheet(
-                  p: const DsfrTextStyle(fontSize: 15),
-                ),
-              ),
+        body: _AccordionBody(
+          child: MarkdownBody(
+            data: Localisation.pourquoiCesQuestionsReponse,
+            styleSheet: MarkdownStyleSheet(
+              p: const DsfrTextStyle(fontSize: 15),
             ),
           ),
-        ],
-      );
+        ),
+      ),
+    ],
+  );
 }
 
 class _AccordionBody extends StatelessWidget {
@@ -462,10 +471,8 @@ class _AccordionBody extends StatelessWidget {
   final Widget child;
 
   @override
-  Widget build(final context) => Padding(
-        padding: const EdgeInsets.all(DsfrSpacings.s2w),
-        child: child,
-      );
+  Widget build(final context) =>
+      Padding(padding: const EdgeInsets.all(DsfrSpacings.s2w), child: child);
 }
 
 class _AccordionHeader extends StatelessWidget {
@@ -475,22 +482,22 @@ class _AccordionHeader extends StatelessWidget {
 
   @override
   Widget build(final context) => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s1w),
-        child: Text.rich(
-          TextSpan(
-            children: [
-              const WidgetSpan(
-                alignment: PlaceholderAlignment.middle,
-                child: Icon(
-                  DsfrIcons.systemQuestionFill,
-                  color: DsfrColors.blueFranceSun113,
-                ),
-              ),
-              const WidgetSpan(child: SizedBox(width: DsfrSpacings.s1w)),
-              TextSpan(text: text),
-            ],
+    padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s1w),
+    child: Text.rich(
+      TextSpan(
+        children: [
+          const WidgetSpan(
+            alignment: PlaceholderAlignment.middle,
+            child: Icon(
+              DsfrIcons.systemQuestionFill,
+              color: DsfrColors.blueFranceSun113,
+            ),
           ),
-          style: const DsfrTextStyle.bodySmMedium(),
-        ),
-      );
+          const WidgetSpan(child: SizedBox(width: DsfrSpacings.s1w)),
+          TextSpan(text: text),
+        ],
+      ),
+      style: const DsfrTextStyle.bodySmMedium(),
+    ),
+  );
 }

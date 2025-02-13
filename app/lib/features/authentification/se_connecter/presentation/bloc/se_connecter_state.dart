@@ -13,12 +13,12 @@ final class SeConnecterState extends Equatable {
   });
 
   const SeConnecterState.empty()
-      : this(
-          adresseMail: '',
-          motDePasse: '',
-          erreur: const None(),
-          connexionFaite: false,
-        );
+    : this(
+        adresseMail: '',
+        motDePasse: '',
+        erreur: const None(),
+        connexionFaite: false,
+      );
 
   final String adresseMail;
   final String motDePasse;
@@ -34,13 +34,12 @@ final class SeConnecterState extends Equatable {
     final String? motDePasse,
     final Option<String>? erreur,
     final bool? connexionFaite,
-  }) =>
-      SeConnecterState(
-        adresseMail: adresseMail ?? this.adresseMail,
-        motDePasse: motDePasse ?? this.motDePasse,
-        erreur: erreur ?? this.erreur,
-        connexionFaite: connexionFaite ?? this.connexionFaite,
-      );
+  }) => SeConnecterState(
+    adresseMail: adresseMail ?? this.adresseMail,
+    motDePasse: motDePasse ?? this.motDePasse,
+    erreur: erreur ?? this.erreur,
+    connexionFaite: connexionFaite ?? this.connexionFaite,
+  );
 
   @override
   List<Object?> get props => [adresseMail, motDePasse, connexionFaite, erreur];

@@ -21,138 +21,145 @@ class BodyFull extends StatelessWidget {
 
   @override
   Widget build(final context) => ListView(
-        padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s3w),
-        children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-            child: FnvTitle(
-              title:
-                  EnvironmentalPerformanceSummaryL10n.monBilanEnvironnemental,
+    padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s3w),
+    children: [
+      const Padding(
+        padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
+        child: FnvTitle(
+          title: EnvironmentalPerformanceSummaryL10n.monBilanEnvironnemental,
+        ),
+      ),
+      const SizedBox(height: DsfrSpacings.s4w),
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: paddingVerticalPage),
+        child: EnvironmentalPerformanceTonnesCard(
+          footprint: data.footprintInKgOfCO2ePerYear,
+        ),
+      ),
+      const SizedBox(height: DsfrSpacings.s4w),
+      const Padding(
+        padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
+        child: Text(
+          EnvironmentalPerformanceSummaryL10n.mesPrincipauxPostesDemission,
+          style: DsfrTextStyle.headline4(),
+        ),
+      ),
+      const SizedBox(height: DsfrSpacings.s4w),
+      ...data.top
+          .mapIndexed(
+            (final i, final e) => Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: paddingVerticalPage,
+              ),
+              child: TopEmissionSourceItem(
+                rank: i + 1,
+                label: e.label,
+                percentage: e.percentage?.toString() ?? '-',
+                emoji: e.emoji,
+              ),
             ),
-          ),
-          const SizedBox(height: DsfrSpacings.s4w),
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-            child: EnvironmentalPerformanceTonnesCard(
-              footprint: data.footprintInKgOfCO2ePerYear,
-            ),
-          ),
-          const SizedBox(height: DsfrSpacings.s4w),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-            child: Text(
-              EnvironmentalPerformanceSummaryL10n.mesPrincipauxPostesDemission,
-              style: DsfrTextStyle.headline4(),
-            ),
-          ),
-          const SizedBox(height: DsfrSpacings.s4w),
-          ...data.top
-              .mapIndexed(
-                (final i, final e) => Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: paddingVerticalPage,
-                  ),
-                  child: TopEmissionSourceItem(
-                    rank: i + 1,
-                    label: e.label,
-                    percentage: e.percentage?.toString() ?? '-',
-                    emoji: e.emoji,
-                  ),
-                ),
-              )
-              .separator(const SizedBox(height: DsfrSpacings.s3w)),
-          const SizedBox(height: DsfrSpacings.s4w),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-            child: Text(
-              EnvironmentalPerformanceSummaryL10n.voirDetailHebdomadaire,
-              style: DsfrTextStyle.headline4(),
-            ),
-          ),
-          const SizedBox(height: DsfrSpacings.s4w),
-          FnvAccordionsGroup(
-            values: data.detail
+          )
+          .separator(const SizedBox(height: DsfrSpacings.s3w)),
+      const SizedBox(height: DsfrSpacings.s4w),
+      const Padding(
+        padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
+        child: Text(
+          EnvironmentalPerformanceSummaryL10n.voirDetailHebdomadaire,
+          style: DsfrTextStyle.headline4(),
+        ),
+      ),
+      const SizedBox(height: DsfrSpacings.s4w),
+      FnvAccordionsGroup(
+        values:
+            data.detail
                 .map(
                   (final e) => FnvAccordion(
-                    headerBuilder: (final isExpanded) => Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: DsfrSpacings.s3w,
-                      ),
-                      child: _DetailHeader(
-                        emoji: e.emoji,
-                        label: e.label,
-                        value:
-                            e.footprintInKgOfCO2ePerYear.tonnesRepresentation,
-                      ),
-                    ),
+                    headerBuilder:
+                        (final isExpanded) => Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: DsfrSpacings.s3w,
+                          ),
+                          child: _DetailHeader(
+                            emoji: e.emoji,
+                            label: e.label,
+                            value:
+                                e
+                                    .footprintInKgOfCO2ePerYear
+                                    .tonnesRepresentation,
+                          ),
+                        ),
                     body: Padding(
                       padding: const EdgeInsets.all(DsfrSpacings.s3w),
                       child: Column(
-                        children: e.subItems
-                            .map(
-                              (final f) => _DetailBody(
-                                emoji: f.emoji,
-                                label: f.label,
-                                value: f.footprintInKgOfCO2ePerYear
-                                    .kilogramsRepresentation,
-                                progress: (f.percentage?.toDouble() ?? 0.0) /
-                                    (e.subItems.first.percentage?.toDouble() ??
-                                        100.0),
-                              ),
-                            )
-                            .separator(const SizedBox(height: DsfrSpacings.s3w))
-                            .toList(),
+                        children:
+                            e.subItems
+                                .map(
+                                  (final f) => _DetailBody(
+                                    emoji: f.emoji,
+                                    label: f.label,
+                                    value:
+                                        f
+                                            .footprintInKgOfCO2ePerYear
+                                            .kilogramsRepresentation,
+                                    progress:
+                                        (f.percentage?.toDouble() ?? 0.0) /
+                                        (e.subItems.first.percentage
+                                                ?.toDouble() ??
+                                            100.0),
+                                  ),
+                                )
+                                .separator(
+                                  const SizedBox(height: DsfrSpacings.s3w),
+                                )
+                                .toList(),
                       ),
                     ),
                   ),
                 )
                 .toList(),
-          ),
-          const SizedBox(height: DsfrSpacings.s4w),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-            child: Text.rich(
+      ),
+      const SizedBox(height: DsfrSpacings.s4w),
+      const Padding(
+        padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
+        child: Text.rich(
+          TextSpan(
+            children: [
               TextSpan(
-                children: [
-                  TextSpan(
-                    text: EnvironmentalPerformanceSummaryL10n.modifier,
-                    style: DsfrTextStyle.headline4(),
-                  ),
-                  TextSpan(text: ' ', style: DsfrTextStyle.headline4()),
-                  TextSpan(
-                    text: EnvironmentalPerformanceSummaryL10n.vosReponses,
-                    style: DsfrTextStyle.headline4(
-                      color: DsfrColors.blueFranceSun113,
-                    ),
-                  ),
-                ],
+                text: EnvironmentalPerformanceSummaryL10n.modifier,
+                style: DsfrTextStyle.headline4(),
               ),
-            ),
+              TextSpan(text: ' ', style: DsfrTextStyle.headline4()),
+              TextSpan(
+                text: EnvironmentalPerformanceSummaryL10n.vosReponses,
+                style: DsfrTextStyle.headline4(
+                  color: DsfrColors.blueFranceSun113,
+                ),
+              ),
+            ],
           ),
-          const SizedBox(height: DsfrSpacings.s1v5),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-            child: Text(
-              EnvironmentalPerformanceSummaryL10n.affinerMonEstimationSousTitre,
-              style: DsfrTextStyle.bodyMd(),
-            ),
-          ),
-          const SizedBox(height: DsfrSpacings.s3v),
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-            child:
-                EnvironmentalPerformanceCategories(categories: data.categories),
-          ),
-          const SizedBox(height: DsfrSpacings.s7w),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-            child: EnvironmentalPerformancePartnerCard(),
-          ),
-          const SafeArea(child: SizedBox.shrink()),
-        ],
-      );
+        ),
+      ),
+      const SizedBox(height: DsfrSpacings.s1v5),
+      const Padding(
+        padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
+        child: Text(
+          EnvironmentalPerformanceSummaryL10n.affinerMonEstimationSousTitre,
+          style: DsfrTextStyle.bodyMd(),
+        ),
+      ),
+      const SizedBox(height: DsfrSpacings.s3v),
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: paddingVerticalPage),
+        child: EnvironmentalPerformanceCategories(categories: data.categories),
+      ),
+      const SizedBox(height: DsfrSpacings.s7w),
+      const Padding(
+        padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
+        child: EnvironmentalPerformancePartnerCard(),
+      ),
+      const SafeArea(child: SizedBox.shrink()),
+    ],
+  );
 }
 
 class _DetailHeader extends StatelessWidget {
@@ -174,9 +181,7 @@ class _DetailHeader extends StatelessWidget {
       children: [
         Text(emoji, style: const DsfrTextStyle.bodySmMedium()),
         const SizedBox(width: DsfrSpacings.s1w),
-        Expanded(
-          child: Text(label, style: const DsfrTextStyle.bodySmMedium()),
-        ),
+        Expanded(child: Text(label, style: const DsfrTextStyle.bodySmMedium())),
         const SizedBox(width: DsfrSpacings.s1w),
         Text.rich(
           TextSpan(
@@ -211,35 +216,34 @@ class _DetailBody extends StatelessWidget {
 
   @override
   Widget build(final context) => Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(emoji, style: const DsfrTextStyle.bodySmMedium()),
-          const SizedBox(width: DsfrSpacings.s1w),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(label, style: const DsfrTextStyle.bodySmMedium()),
-                const SizedBox(height: DsfrSpacings.s1v5),
-                ProgressBar(value: progress),
-              ],
-            ),
-          ),
-          const SizedBox(width: DsfrSpacings.s2w),
-          Text.rich(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(emoji, style: const DsfrTextStyle.bodySmMedium()),
+      const SizedBox(width: DsfrSpacings.s1w),
+      Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(label, style: const DsfrTextStyle.bodySmMedium()),
+            const SizedBox(height: DsfrSpacings.s1v5),
+            ProgressBar(value: progress),
+          ],
+        ),
+      ),
+      const SizedBox(width: DsfrSpacings.s2w),
+      Text.rich(
+        TextSpan(
+          children: [
             TextSpan(
-              children: [
-                TextSpan(
-                  text: value,
-                  style:
-                      const DsfrTextStyle.bodySmBold(color: Color(0xff3636A1)),
-                ),
-                const TextSpan(text: ' '),
-                const TextSpan(text: EnvironmentalPerformanceSummaryL10n.kg),
-              ],
+              text: value,
+              style: const DsfrTextStyle.bodySmBold(color: Color(0xff3636A1)),
             ),
-            style: const DsfrTextStyle.bodySm(color: Color(0xff3636A1)),
-          ),
-        ],
-      );
+            const TextSpan(text: ' '),
+            const TextSpan(text: EnvironmentalPerformanceSummaryL10n.kg),
+          ],
+        ),
+        style: const DsfrTextStyle.bodySm(color: Color(0xff3636A1)),
+      ),
+    ],
+  );
 }

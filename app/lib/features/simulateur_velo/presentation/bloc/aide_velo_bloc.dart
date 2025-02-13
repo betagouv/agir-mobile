@@ -15,10 +15,10 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
     required final ProfilRepository profilRepository,
     required final CommunesRepository communesRepository,
     required final AideVeloRepository aideVeloRepository,
-  })  : _profilRepository = profilRepository,
-        _communesRepository = communesRepository,
-        _aideVeloRepository = aideVeloRepository,
-        super(const AideVeloState.empty()) {
+  }) : _profilRepository = profilRepository,
+       _communesRepository = communesRepository,
+       _aideVeloRepository = aideVeloRepository,
+       super(const AideVeloState.empty()) {
     on<AideVeloInformationsDemandee>(_onInformationsDemandee);
     on<AideVeloModificationDemandee>(_onModificationDemandee);
     on<AideVeloPrixChange>(_onPrixChange);
@@ -62,17 +62,15 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
     final AideVeloModificationDemandee event,
     final Emitter<AideVeloState> emit,
   ) async {
-    final result = state.codePostal.length == 5
-        ? await _communesRepository.recupererLesCommunes(state.codePostal)
-        : Either<Exception, List<String>>.right(<String>[]);
+    final result =
+        state.codePostal.length == 5
+            ? await _communesRepository.recupererLesCommunes(state.codePostal)
+            : Either<Exception, List<String>>.right(<String>[]);
 
     if (result.isRight()) {
       final communes = result.getRight().getOrElse(() => throw Exception());
       emit(
-        state.copyWith(
-          veutModifierLesInformations: true,
-          communes: communes,
-        ),
+        state.copyWith(veutModifierLesInformations: true, communes: communes),
       );
     }
   }
@@ -95,9 +93,10 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
     final AideVeloCodePostalChange event,
     final Emitter<AideVeloState> emit,
   ) async {
-    final result = event.valeur.length == 5
-        ? await _communesRepository.recupererLesCommunes(event.valeur)
-        : Either<Exception, List<String>>.right(<String>[]);
+    final result =
+        event.valeur.length == 5
+            ? await _communesRepository.recupererLesCommunes(event.valeur)
+            : Either<Exception, List<String>>.right(<String>[]);
     if (result.isRight()) {
       final communes = result.getRight().getOrElse(() => throw Exception());
       emit(
@@ -151,24 +150,25 @@ class AideVeloBloc extends Bloc<AideVeloEvent, AideVeloState> {
       (final l) => emit(state.copyWith(aideVeloStatut: AideVeloStatut.erreur)),
       (final r) => emit(
         state.copyWith(
-          aidesDisponibles: {
-            'Acheter un vélo mécanique': r.mecaniqueSimple,
-            '⚡Acheter un vélo électrique': r.electrique,
-            'Acheter un vélo cargo': r.cargo,
-            '⚡Acheter un vélo cargo électrique': r.cargoElectrique,
-            'Acheter un vélo pliant': r.pliant,
-            '⚡Acheter un vélo pliant électrique': r.pliantElectrique,
-            '⚡️Transformer un vélo classique en électrique': r.motorisation,
-            '🦽Acheter un vélo adapté': r.adapte,
-          }.entries.map((final e) {
-            final value = e.value;
+          aidesDisponibles:
+              {
+                'Acheter un vélo mécanique': r.mecaniqueSimple,
+                '⚡Acheter un vélo électrique': r.electrique,
+                'Acheter un vélo cargo': r.cargo,
+                '⚡Acheter un vélo cargo électrique': r.cargoElectrique,
+                'Acheter un vélo pliant': r.pliant,
+                '⚡Acheter un vélo pliant électrique': r.pliantElectrique,
+                '⚡️Transformer un vélo classique en électrique': r.motorisation,
+                '🦽Acheter un vélo adapté': r.adapte,
+              }.entries.map((final e) {
+                final value = e.value;
 
-            return AideDisponiblesViewModel(
-              titre: e.key,
-              montantTotal: value.map((final e) => e.montant).maxOrNull,
-              aides: value,
-            );
-          }).toList(),
+                return AideDisponiblesViewModel(
+                  titre: e.key,
+                  montantTotal: value.map((final e) => e.montant).maxOrNull,
+                  aides: value,
+                );
+              }).toList(),
           aideVeloStatut: AideVeloStatut.succes,
         ),
       ),

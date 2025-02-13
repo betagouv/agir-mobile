@@ -25,10 +25,11 @@ class ChallengesSection extends StatelessWidget {
     context.read<ChallengesBloc>().add(ChallengesLoadRequested(themeType));
 
     return BlocBuilder<ChallengesBloc, ChallengesState>(
-      builder: (final context, final state) => switch (state) {
-        ChallengesInitial() => const SizedBox.shrink(),
-        ChallengesLoadSuccess() => _Section(state),
-      },
+      builder:
+          (final context, final state) => switch (state) {
+            ChallengesInitial() => const SizedBox.shrink(),
+            ChallengesLoadSuccess() => _Section(state),
+          },
     );
   }
 }
@@ -40,25 +41,26 @@ class _Section extends StatelessWidget {
 
   @override
   Widget build(final context) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const TitleSection(
-            title: Localisation.actionsSectionTitle,
-            subTitle: Localisation.actionsSectionSubTitle,
-          ),
-          const SizedBox(height: DsfrSpacings.s2w),
-          _Challenges(value: state.challenges),
-          const SizedBox(height: DsfrSpacings.s2w),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: DsfrLink.md(
-              label: Localisation.homeActionsLink,
-              onTap: () async =>
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      const TitleSection(
+        title: Localisation.actionsSectionTitle,
+        subTitle: Localisation.actionsSectionSubTitle,
+      ),
+      const SizedBox(height: DsfrSpacings.s2w),
+      _Challenges(value: state.challenges),
+      const SizedBox(height: DsfrSpacings.s2w),
+      Align(
+        alignment: Alignment.centerLeft,
+        child: DsfrLink.md(
+          label: Localisation.homeActionsLink,
+          onTap:
+              () async =>
                   GoRouter.of(context).pushNamed(ChallengeListPage.name),
-            ),
-          ),
-        ],
-      );
+        ),
+      ),
+    ],
+  );
 }
 
 class _Challenges extends StatelessWidget {
@@ -67,24 +69,26 @@ class _Challenges extends StatelessWidget {
   final List<ChallengeItem> value;
 
   @override
-  Widget build(final BuildContext context) => value.isEmpty
-      ? const Text(
-          Localisation.actionsSectionListEmpty,
-          style: DsfrTextStyle.bodySm(),
-        )
-      : SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          padding: EdgeInsets.zero,
-          clipBehavior: Clip.none,
-          child: IntrinsicHeight(
-            child: Row(
-              children: value
-                  .map(_Challenge.new)
-                  .separator(const SizedBox(width: DsfrSpacings.s2w))
-                  .toList(),
+  Widget build(final BuildContext context) =>
+      value.isEmpty
+          ? const Text(
+            Localisation.actionsSectionListEmpty,
+            style: DsfrTextStyle.bodySm(),
+          )
+          : SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            padding: EdgeInsets.zero,
+            clipBehavior: Clip.none,
+            child: IntrinsicHeight(
+              child: Row(
+                children:
+                    value
+                        .map(_Challenge.new)
+                        .separator(const SizedBox(width: DsfrSpacings.s2w))
+                        .toList(),
+              ),
             ),
-          ),
-        );
+          );
 }
 
 class _Challenge extends StatefulWidget {
@@ -123,9 +127,9 @@ class _ChallengeState extends State<_Challenge>
 
               if (result != true || !context.mounted) {}
               if (context.mounted) {
-                context
-                    .read<ChallengesBloc>()
-                    .add(const ChallengesRefreshRequested());
+                context.read<ChallengesBloc>().add(
+                  const ChallengesRefreshRequested(),
+                );
               }
             },
             onHighlightChanged: updateMaterialState(WidgetState.pressed),

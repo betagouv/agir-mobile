@@ -16,78 +16,80 @@ class PreOnboardingPage extends StatelessWidget {
   static const path = name;
 
   static GoRoute get route => GoRoute(
-        path: path,
-        name: name,
-        builder: (final context, final state) => const PreOnboardingPage(),
-      );
+    path: path,
+    name: name,
+    builder: (final context, final state) => const PreOnboardingPage(),
+  );
 
   @override
   Widget build(final context) => FnvScaffold(
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
-            child: Stack(
-              alignment: AlignmentDirectional.bottomCenter,
+    body: SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
+        child: Stack(
+          alignment: AlignmentDirectional.bottomCenter,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    const SizedBox(height: DsfrSpacings.s15w),
-                    const Text(
-                      Localisation.preOnboardingTitre,
-                      style: DsfrTextStyle.displayXs(),
-                      textScaler: TextScaler.noScaling,
-                    ),
-                    const SizedBox(height: DsfrSpacings.s3w),
-                    Row(
-                      children: [
-                        FnvSvg.asset(
-                          AssetImages.republiqueFrancaise,
-                          height: 69,
-                          semanticsLabel:
-                              AssetImages.republiqueFrancaiseSemantic,
-                        ),
-                        const SizedBox(width: DsfrSpacings.s3w),
-                        Image.asset(
-                          AssetImages.franceNationVerte,
-                          semanticLabel: AssetImages.franceNationVerteSemantic,
-                          height: 46,
-                        ),
-                        const SizedBox(width: DsfrSpacings.s3w),
-                        FnvSvg.asset(
-                          AssetImages.ademe,
-                          height: 55,
-                          semanticsLabel: AssetImages.ademeSemantic,
-                        ),
-                      ],
-                    ),
-                  ],
+                const SizedBox(height: DsfrSpacings.s15w),
+                const Text(
+                  Localisation.preOnboardingTitre,
+                  style: DsfrTextStyle.displayXs(),
+                  textScaler: TextScaler.noScaling,
                 ),
-                Column(
-                  mainAxisSize: MainAxisSize.min,
+                const SizedBox(height: DsfrSpacings.s3w),
+                Row(
                   children: [
-                    DsfrButton(
-                      label: Localisation.jeCreeMonCompte,
-                      variant: DsfrButtonVariant.primary,
-                      size: DsfrButtonSize.lg,
-                      onPressed: () async =>
-                          GoRouter.of(context).pushNamed(CreerComptePage.name),
+                    FnvSvg.asset(
+                      AssetImages.republiqueFrancaise,
+                      height: 69,
+                      semanticsLabel: AssetImages.republiqueFrancaiseSemantic,
                     ),
-                    const SizedBox(height: DsfrSpacings.s2w),
-                    Center(
-                      child: DsfrLink.md(
-                        label: Localisation.jaiDejaUnCompte,
-                        onTap: () async => GoRouter.of(context)
-                            .pushNamed(SeConnecterPage.name),
-                      ),
+                    const SizedBox(width: DsfrSpacings.s3w),
+                    Image.asset(
+                      AssetImages.franceNationVerte,
+                      semanticLabel: AssetImages.franceNationVerteSemantic,
+                      height: 46,
                     ),
-                    const SizedBox(height: DsfrSpacings.s3w),
-                    const Center(child: VersionLabel()),
+                    const SizedBox(width: DsfrSpacings.s3w),
+                    FnvSvg.asset(
+                      AssetImages.ademe,
+                      height: 55,
+                      semanticsLabel: AssetImages.ademeSemantic,
+                    ),
                   ],
                 ),
               ],
             ),
-          ),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                DsfrButton(
+                  label: Localisation.jeCreeMonCompte,
+                  variant: DsfrButtonVariant.primary,
+                  size: DsfrButtonSize.lg,
+                  onPressed:
+                      () async =>
+                          GoRouter.of(context).pushNamed(CreerComptePage.name),
+                ),
+                const SizedBox(height: DsfrSpacings.s2w),
+                Center(
+                  child: DsfrLink.md(
+                    label: Localisation.jaiDejaUnCompte,
+                    onTap:
+                        () async => GoRouter.of(
+                          context,
+                        ).pushNamed(SeConnecterPage.name),
+                  ),
+                ),
+                const SizedBox(height: DsfrSpacings.s3w),
+                const Center(child: VersionLabel()),
+              ],
+            ),
+          ],
         ),
-      );
+      ),
+    ),
+  );
 }

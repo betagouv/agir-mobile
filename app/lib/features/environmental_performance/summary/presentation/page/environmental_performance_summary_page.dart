@@ -17,17 +17,18 @@ class EnvironmentalPerformanceSummaryPage extends StatelessWidget {
   static const path = name;
 
   static GoRoute get route => GoRoute(
-        path: path,
-        name: name,
-        builder: (final context, final state) =>
+    path: path,
+    name: name,
+    builder:
+        (final context, final state) =>
             const EnvironmentalPerformanceSummaryPage(),
-      );
+  );
 
   @override
   Widget build(final context) {
-    context
-        .read<EnvironmentalPerformanceBloc>()
-        .add(const EnvironmentalPerformanceStarted());
+    context.read<EnvironmentalPerformanceBloc>().add(
+      const EnvironmentalPerformanceStarted(),
+    );
 
     return const _View();
   }
@@ -38,21 +39,23 @@ class _View extends StatelessWidget {
 
   @override
   Widget build(final context) => RootPage(
-        body: BlocBuilder<EnvironmentalPerformanceBloc,
-            EnvironmentalPerformanceState>(
-          builder: (final context, final state) => switch (state) {
+    body: BlocBuilder<
+      EnvironmentalPerformanceBloc,
+      EnvironmentalPerformanceState
+    >(
+      builder:
+          (final context, final state) => switch (state) {
             EnvironmentalPerformanceInitial() => const SizedBox.shrink(),
             EnvironmentalPerformanceLoading() => const Center(
-                child: CircularProgressIndicator(),
-              ),
+              child: CircularProgressIndicator(),
+            ),
             EnvironmentalPerformanceSuccess() => switch (state.data) {
-                (final EnvironmentalPerformanceEmpty a) => BodyEmpty(data: a),
-                (final EnvironmentalPerformancePartial a) =>
-                  BodyPartial(data: a),
-                (final EnvironmentalPerformanceFull a) => BodyFull(data: a),
-              },
+              (final EnvironmentalPerformanceEmpty a) => BodyEmpty(data: a),
+              (final EnvironmentalPerformancePartial a) => BodyPartial(data: a),
+              (final EnvironmentalPerformanceFull a) => BodyFull(data: a),
+            },
             EnvironmentalPerformanceFailure() => Text(state.errorMessage),
           },
-        ),
-      );
+    ),
+  );
 }

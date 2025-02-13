@@ -21,18 +21,18 @@ final class AideVeloState extends Equatable {
   });
 
   const AideVeloState.empty()
-      : this(
-          prix: 1000,
-          etatVelo: VeloEtat.neuf,
-          codePostal: '',
-          communes: const [],
-          commune: '',
-          nombreDePartsFiscales: 1,
-          revenuFiscal: null,
-          aidesDisponibles: const [],
-          veutModifierLesInformations: false,
-          aideVeloStatut: AideVeloStatut.initial,
-        );
+    : this(
+        prix: 1000,
+        etatVelo: VeloEtat.neuf,
+        codePostal: '',
+        communes: const [],
+        commune: '',
+        nombreDePartsFiscales: 1,
+        revenuFiscal: null,
+        aidesDisponibles: const [],
+        veutModifierLesInformations: false,
+        aideVeloStatut: AideVeloStatut.initial,
+      );
 
   final int prix;
   final VeloEtat etatVelo;
@@ -70,35 +70,33 @@ final class AideVeloState extends Equatable {
     final int? revenuFiscal,
     final List<AideDisponiblesViewModel>? aidesDisponibles,
     final AideVeloStatut? aideVeloStatut,
-  }) =>
-      AideVeloState(
-        prix: prix ?? this.prix,
-        etatVelo: etatVelo ?? this.etatVelo,
-        codePostal: codePostal ?? this.codePostal,
-        communes: communes ?? this.communes,
-        commune: commune ?? this.commune,
-        nombreDePartsFiscales:
-            nombreDePartsFiscales ?? this.nombreDePartsFiscales,
-        revenuFiscal: revenuFiscal ?? this.revenuFiscal,
-        aidesDisponibles: aidesDisponibles ?? this.aidesDisponibles,
-        veutModifierLesInformations:
-            veutModifierLesInformations ?? this.veutModifierLesInformations,
-        aideVeloStatut: aideVeloStatut ?? this.aideVeloStatut,
-      );
+  }) => AideVeloState(
+    prix: prix ?? this.prix,
+    etatVelo: etatVelo ?? this.etatVelo,
+    codePostal: codePostal ?? this.codePostal,
+    communes: communes ?? this.communes,
+    commune: commune ?? this.commune,
+    nombreDePartsFiscales: nombreDePartsFiscales ?? this.nombreDePartsFiscales,
+    revenuFiscal: revenuFiscal ?? this.revenuFiscal,
+    aidesDisponibles: aidesDisponibles ?? this.aidesDisponibles,
+    veutModifierLesInformations:
+        veutModifierLesInformations ?? this.veutModifierLesInformations,
+    aideVeloStatut: aideVeloStatut ?? this.aideVeloStatut,
+  );
 
   @override
   List<Object?> get props => [
-        prix,
-        etatVelo,
-        codePostal,
-        communes,
-        commune,
-        nombreDePartsFiscales,
-        revenuFiscal,
-        aidesDisponibles,
-        veutModifierLesInformations,
-        aideVeloStatut,
-      ];
+    prix,
+    etatVelo,
+    codePostal,
+    communes,
+    commune,
+    nombreDePartsFiscales,
+    revenuFiscal,
+    aidesDisponibles,
+    veutModifierLesInformations,
+    aideVeloStatut,
+  ];
 }
 
 class AideDisponiblesViewModel extends Equatable {

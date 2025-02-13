@@ -27,9 +27,9 @@ Future<void> iHaveActionDetailInMyLibrary(
         },
       )
       .forEach((final e) {
-    FeatureContext.instance.dioMock.getM(
-      Endpoints.action(e['code'] as String),
-      responseData: e,
-    );
-  });
+        FeatureContext.instance.dioMock.getM(
+          Endpoints.action(e['code'] as String),
+          responseData: e,
+        );
+      });
 }

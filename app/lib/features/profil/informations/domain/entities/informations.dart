@@ -23,13 +23,13 @@ class Informations extends Equatable {
 
   @override
   List<Object?> get props => [
-        email,
-        prenom,
-        nom,
-        anneeDeNaissance,
-        codePostal,
-        commune,
-        nombreDePartsFiscales,
-        revenuFiscal,
-      ];
+    email,
+    prenom,
+    nom,
+    anneeDeNaissance,
+    codePostal,
+    commune,
+    nombreDePartsFiscales,
+    revenuFiscal,
+  ];
 }

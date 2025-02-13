@@ -22,24 +22,26 @@ class ActionPage extends StatelessWidget {
   static Map<String, String> pathParameters({
     required final String title,
     required final String id,
-  }) =>
-      {'titre': title, 'id': id};
+  }) => {'titre': title, 'id': id};
 
   final String id;
 
   static GoRoute get route => GoRoute(
-        path: path,
-        name: name,
-        builder: (final context, final state) =>
+    path: path,
+    name: name,
+    builder:
+        (final context, final state) =>
             ActionPage(id: state.pathParameters['id']!),
-      );
+  );
 
   @override
   Widget build(final BuildContext context) => BlocProvider(
-        create: (final context) => ActionBloc(repository: context.read())
-          ..add(ActionLoadRequested(id)),
-        child: const _View(),
-      );
+    create:
+        (final context) =>
+            ActionBloc(repository: context.read())
+              ..add(ActionLoadRequested(id)),
+    child: const _View(),
+  );
 }
 
 class _View extends StatelessWidget {
@@ -47,19 +49,20 @@ class _View extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => FnvScaffold(
-        appBar: FnvAppBar(),
-        body: BlocBuilder<ActionBloc, ActionState>(
-          builder: (final context, final state) => switch (state) {
-            ActionInitial() ||
-            ActionLoadInProgress() =>
-              const Center(child: CircularProgressIndicator()),
+    appBar: FnvAppBar(),
+    body: BlocBuilder<ActionBloc, ActionState>(
+      builder:
+          (final context, final state) => switch (state) {
+            ActionInitial() || ActionLoadInProgress() => const Center(
+              child: CircularProgressIndicator(),
+            ),
             ActionLoadSuccess() => _Success(state),
             ActionLoadFailure() => const Center(
-                child: Text("Erreur lors du chargement de l'action"),
-              ),
+              child: Text("Erreur lors du chargement de l'action"),
+            ),
           },
-        ),
-      );
+    ),
+  );
 }
 
 class _Success extends StatelessWidget {
@@ -79,8 +82,9 @@ class _Success extends StatelessWidget {
           padding: pagePadding,
           child: MarkdownBody(
             data: action.title,
-            styleSheet:
-                MarkdownStyleSheet(p: const DsfrTextStyle(fontSize: 28)),
+            styleSheet: MarkdownStyleSheet(
+              p: const DsfrTextStyle(fontSize: 28),
+            ),
           ),
         ),
         const SizedBox(height: DsfrSpacings.s2w),
@@ -90,15 +94,14 @@ class _Success extends StatelessWidget {
         ),
         const SizedBox(height: DsfrSpacings.s4w),
         DecoratedBox(
-          decoration:
-              const BoxDecoration(color: Colors.white, boxShadow: actionOmbre),
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            boxShadow: actionOmbre,
+          ),
           child: Column(
             children: [
               const SizedBox(height: DsfrSpacings.s2w),
-              Padding(
-                padding: pagePadding,
-                child: _Markdown(data: action.why),
-              ),
+              Padding(padding: pagePadding, child: _Markdown(data: action.why)),
               if (action.hasLvaoService) ...[
                 const SizedBox(height: DsfrSpacings.s4w),
                 LvaoHorizontalList(category: action.lvaoService.category),
@@ -108,10 +111,7 @@ class _Success extends StatelessWidget {
                 RecipeHorizontalList(category: action.recipesService.category),
               ],
               const SizedBox(height: DsfrSpacings.s4w),
-              Padding(
-                padding: pagePadding,
-                child: _Markdown(data: action.how),
-              ),
+              Padding(padding: pagePadding, child: _Markdown(data: action.how)),
               const SizedBox(height: DsfrSpacings.s2w),
             ],
           ),
@@ -128,12 +128,13 @@ class _Markdown extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => MarkdownBody(
-        data: data,
-        styleSheet: MarkdownStyleSheet(
-          p: const DsfrTextStyle(fontSize: 16),
-          h1: const DsfrTextStyle(fontSize: 22),
-        ),
-        imageBuilder: (final uri, final title, final alt) =>
+    data: data,
+    styleSheet: MarkdownStyleSheet(
+      p: const DsfrTextStyle(fontSize: 16),
+      h1: const DsfrTextStyle(fontSize: 22),
+    ),
+    imageBuilder:
+        (final uri, final title, final alt) =>
             FnvImage.network(uri.toString(), semanticLabel: alt),
-      );
+  );
 }

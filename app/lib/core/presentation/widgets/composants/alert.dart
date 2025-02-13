@@ -10,12 +10,12 @@ class FnvAlert extends StatelessWidget {
   });
 
   const FnvAlert.error({required final String label, final Key? key})
-      : this._(
-          key: key,
-          icon: DsfrIcons.systemFrWarningFill,
-          label: label,
-          color: DsfrColors.error425,
-        );
+    : this._(
+        key: key,
+        icon: DsfrIcons.systemFrWarningFill,
+        label: label,
+        color: DsfrColors.error425,
+      );
 
   final IconData icon;
   final String label;
@@ -23,12 +23,10 @@ class FnvAlert extends StatelessWidget {
 
   @override
   Widget build(final context) => Row(
-        children: [
-          Icon(icon, size: DsfrSpacings.s2w, color: color),
-          const SizedBox(width: DsfrSpacings.s1w),
-          Expanded(
-            child: Text(label, style: DsfrTextStyle.bodySm(color: color)),
-          ),
-        ],
-      );
+    children: [
+      Icon(icon, size: DsfrSpacings.s2w, color: color),
+      const SizedBox(width: DsfrSpacings.s1w),
+      Expanded(child: Text(label, style: DsfrTextStyle.bodySm(color: color))),
+    ],
+  );
 }

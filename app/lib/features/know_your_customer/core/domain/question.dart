@@ -59,13 +59,13 @@ final class QuestionOpen extends QuestionUnique {
 
   @override
   QuestionOpen changeResponse(final String value) => QuestionOpen(
-        id: id,
-        theme: theme,
-        label: label,
-        isAnswered: isAnswered,
-        response: response.copyWith(value: value),
-        points: points,
-      );
+    id: id,
+    theme: theme,
+    label: label,
+    isAnswered: isAnswered,
+    response: response.copyWith(value: value),
+    points: points,
+  );
 }
 
 final class QuestionInteger extends QuestionUnique {
@@ -83,13 +83,13 @@ final class QuestionInteger extends QuestionUnique {
 
   @override
   QuestionInteger changeResponse(final String value) => QuestionInteger(
-        id: id,
-        theme: theme,
-        label: label,
-        isAnswered: isAnswered,
-        response: response.copyWith(value: value),
-        points: points,
-      );
+    id: id,
+    theme: theme,
+    label: label,
+    isAnswered: isAnswered,
+    response: response.copyWith(value: value),
+    points: points,
+  );
 }
 
 sealed class QuestionMultiple extends Question {
@@ -131,9 +131,12 @@ final class QuestionSingleChoice extends QuestionMultiple {
         theme: theme,
         label: label,
         isAnswered: isAnswered,
-        responses: responses
-            .map((final r) => r.copyWith(isSelected: values.contains(r.label)))
-            .toList(),
+        responses:
+            responses
+                .map(
+                  (final r) => r.copyWith(isSelected: values.contains(r.label)),
+                )
+                .toList(),
         points: points,
       );
 }
@@ -161,9 +164,12 @@ final class QuestionMultipleChoice extends QuestionMultiple {
         theme: theme,
         label: label,
         isAnswered: isAnswered,
-        responses: responses
-            .map((final r) => r.copyWith(isSelected: values.contains(r.label)))
-            .toList(),
+        responses:
+            responses
+                .map(
+                  (final r) => r.copyWith(isSelected: values.contains(r.label)),
+                )
+                .toList(),
         points: points,
       );
 }
@@ -192,9 +198,12 @@ final class QuestionMosaicBoolean extends Question {
         theme: theme,
         label: label,
         isAnswered: isAnswered,
-        responses: responses
-            .map((final r) => r.copyWith(isSelected: values.contains(r.label)))
-            .toList(),
+        responses:
+            responses
+                .map(
+                  (final r) => r.copyWith(isSelected: values.contains(r.label)),
+                )
+                .toList(),
         points: points,
       );
 

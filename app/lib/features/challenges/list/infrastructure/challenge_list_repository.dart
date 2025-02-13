@@ -9,17 +9,18 @@ import 'package:fpdart/fpdart.dart';
 
 class ChallengeListRepository {
   const ChallengeListRepository({required final DioHttpClient client})
-      : _client = client;
+    : _client = client;
 
   final DioHttpClient _client;
 
   Future<Either<Exception, List<ChallengeItem>>> fetchChallenges() async {
-    final string = Uri(
-      path: Endpoints.challenges,
-      queryParameters: {
-        'status': ['en_cours', 'pas_envie', 'abondon', 'fait'],
-      },
-    ).toString();
+    final string =
+        Uri(
+          path: Endpoints.challenges,
+          queryParameters: {
+            'status': ['en_cours', 'pas_envie', 'abondon', 'fait'],
+          },
+        ).toString();
 
     final response = await _client.get(string);
 

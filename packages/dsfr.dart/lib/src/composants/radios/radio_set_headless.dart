@@ -46,36 +46,38 @@ class _DsfrRadioButtonSetHeadlessState<T>
   }
 
   void _handleChange(final T? value) => setState(() {
-        _value = value;
-        widget.onCallback(_value);
-      });
+    _value = value;
+    widget.onCallback(_value);
+  });
 
   @override
   Widget build(final context) {
-    final children = widget.values.entries
-        .map(
-          (final e) => DsfrRadioButton<T>(
-            title: e.value.value,
-            value: e.key,
-            groupValue: _value,
-            onChanged: widget.isEnabled ? _handleChange : null,
-            backgroundColor: e.value.backgroundColor,
-          ),
-        )
-        .toList();
+    final children =
+        widget.values.entries
+            .map(
+              (final e) => DsfrRadioButton<T>(
+                title: e.value.value,
+                value: e.key,
+                groupValue: _value,
+                onChanged: widget.isEnabled ? _handleChange : null,
+                backgroundColor: e.value.backgroundColor,
+              ),
+            )
+            .toList();
 
     return switch (widget.mode) {
       DsfrRadioButtonSetMode.row => Wrap(
-          spacing: DsfrSpacings.s1w,
-          runSpacing: DsfrSpacings.s1w,
-          children: children,
-        ),
+        spacing: DsfrSpacings.s1w,
+        runSpacing: DsfrSpacings.s1w,
+        children: children,
+      ),
       DsfrRadioButtonSetMode.column => Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: children
-              .separator(const SizedBox(height: DsfrSpacings.s1w))
-              .toList(),
-        ),
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children:
+            children
+                .separator(const SizedBox(height: DsfrSpacings.s1w))
+                .toList(),
+      ),
     };
   }
 }

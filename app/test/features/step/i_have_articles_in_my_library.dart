@@ -40,11 +40,7 @@ Future<void> iHaveArticlesInMyLibrary(
         },
       ].sublist(0, number),
       'filtres': [
-        {
-          'code': 'alimentation',
-          'label': '🥦 Alimentation',
-          'selected': false,
-        },
+        {'code': 'alimentation', 'label': '🥦 Alimentation', 'selected': false},
         {'code': 'transport', 'label': '🚗 Transports', 'selected': false},
         {'code': 'logement', 'label': '🏡 Logement', 'selected': false},
         {

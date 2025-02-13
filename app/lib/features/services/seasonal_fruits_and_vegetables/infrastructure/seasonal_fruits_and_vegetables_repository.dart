@@ -21,16 +21,16 @@ class SeasonalFruitsAndVegetablesRepository {
 
     return isResponseUnsuccessful(response.statusCode)
         ? Left(
-            Exception(
-              'Erreur lors de la récupération les mois des fruits et légumes',
-            ),
-          )
+          Exception(
+            'Erreur lors de la récupération les mois des fruits et légumes',
+          ),
+        )
         : Right(
-            (response.data as List<dynamic>)
-                .cast<Map<String, dynamic>>()
-                .map(PlantMonthMapper.fromJson)
-                .toList(),
-          );
+          (response.data as List<dynamic>)
+              .cast<Map<String, dynamic>>()
+              .map(PlantMonthMapper.fromJson)
+              .toList(),
+        );
   }
 
   Future<Either<Exception, List<Plant>>> fetchPlants(
@@ -43,17 +43,17 @@ class SeasonalFruitsAndVegetablesRepository {
 
     return isResponseUnsuccessful(response.statusCode)
         ? Left(
-            Exception(
-              'Erreur lors de la récupération les mois des fruits et légumes',
-            ),
-          )
+          Exception(
+            'Erreur lors de la récupération les mois des fruits et légumes',
+          ),
+        )
         : Right(
-            ((response.data as Map<String, dynamic>)['resultats']
-                    as List<dynamic>)
-                .cast<Map<String, dynamic>>()
-                .where((final e) => e['type_fruit_legume'] != null)
-                .map(PlantMapper.fromJson)
-                .toList(),
-          );
+          ((response.data as Map<String, dynamic>)['resultats']
+                  as List<dynamic>)
+              .cast<Map<String, dynamic>>()
+              .where((final e) => e['type_fruit_legume'] != null)
+              .map(PlantMapper.fromJson)
+              .toList(),
+        );
   }
 }

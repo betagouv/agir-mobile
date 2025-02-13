@@ -54,8 +54,9 @@ void main() {
         ),
       );
 
-      await tester
-          .tap(find.byIcon(DsfrIcons.systemArrowDownSLine).hitTestable());
+      await tester.tap(
+        find.byIcon(DsfrIcons.systemArrowDownSLine).hitTestable(),
+      );
       await tester.pump();
 
       await tester.tap(find.text(deux).hitTestable());

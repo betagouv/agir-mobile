@@ -23,9 +23,10 @@ class DioHttpClient {
           } on Exception catch (_) {}
           final status = authenticationService.status;
           if (status is Authenticated) {
-            final updatedUri = options.uri
-                .toString()
-                .replaceFirst('%7BuserId%7D', status.userId.value);
+            final updatedUri = options.uri.toString().replaceFirst(
+              '%7BuserId%7D',
+              status.userId.value,
+            );
             options.path = updatedUri;
           }
           handler.next(options);
@@ -48,18 +49,15 @@ class DioHttpClient {
   Future<Response<dynamic>> patch(
     final String path, {
     final Object? data,
-  }) async =>
-      _dio.patch(path, data: data);
+  }) async => _dio.patch(path, data: data);
   Future<Response<dynamic>> post(
     final String path, {
     final Object? data,
-  }) async =>
-      _dio.post(path, data: data);
+  }) async => _dio.post(path, data: data);
   Future<Response<dynamic>> put(
     final String path, {
     final Object? data,
-  }) async =>
-      _dio.put(path, data: data);
+  }) async => _dio.put(path, data: data);
   Future<Response<dynamic>> delete(final String path, {final Object? data}) =>
       _dio.delete(path, data: data);
 }

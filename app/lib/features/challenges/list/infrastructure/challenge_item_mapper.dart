@@ -27,10 +27,10 @@ abstract final class ChallengeItemMapper {
       };
 
   static ThemeType _mapThemeType(final String? type) => switch (type) {
-        'alimentation' => ThemeType.alimentation,
-        'transport' => ThemeType.transport,
-        'consommation' => ThemeType.consommation,
-        'logement' => ThemeType.logement,
-        _ => ThemeType.decouverte,
-      };
+    'alimentation' => ThemeType.alimentation,
+    'transport' => ThemeType.transport,
+    'consommation' => ThemeType.consommation,
+    'logement' => ThemeType.logement,
+    _ => ThemeType.decouverte,
+  };
 }

@@ -11,22 +11,22 @@ class _MosaicButtonStyle {
   });
 
   const _MosaicButtonStyle.selected()
-      : this._(
-          backgroundColor: const Color(0xfff3f3f8),
-          borderColor: DsfrColors.blueFranceSun113,
-          borderWidth: 3,
-          textStyle: const DsfrTextStyle.bodySmBold(
-            color: DsfrColors.blueFranceSun113,
-          ),
-        );
+    : this._(
+        backgroundColor: const Color(0xfff3f3f8),
+        borderColor: DsfrColors.blueFranceSun113,
+        borderWidth: 3,
+        textStyle: const DsfrTextStyle.bodySmBold(
+          color: DsfrColors.blueFranceSun113,
+        ),
+      );
 
   const _MosaicButtonStyle.unselected()
-      : this._(
-          backgroundColor: const Color(0xfff8f8f7),
-          borderColor: const Color(0xffe3e3db),
-          borderWidth: 1,
-          textStyle: const DsfrTextStyle.bodySmMedium(),
-        );
+    : this._(
+        backgroundColor: const Color(0xfff8f8f7),
+        borderColor: const Color(0xffe3e3db),
+        borderWidth: 1,
+        textStyle: const DsfrTextStyle.bodySmMedium(),
+      );
 
   final Color backgroundColor;
   final Color borderColor;
@@ -37,8 +37,9 @@ class _MosaicButtonStyle {
 abstract final class _MosaicButtonStyles {
   static const selected = _MosaicButtonStyle.selected();
   static const unselected = _MosaicButtonStyle.unselected();
-  static const borderRadius =
-      BorderRadius.all(Radius.circular(DsfrSpacings.s1w));
+  static const borderRadius = BorderRadius.all(
+    Radius.circular(DsfrSpacings.s1w),
+  );
   static const minSize = 120.0;
 }
 
@@ -60,8 +61,9 @@ class MosaicButton extends StatelessWidget {
   Widget build(final context) {
     final style =
         value ? _MosaicButtonStyles.selected : _MosaicButtonStyles.unselected;
-    final size =
-        MediaQuery.textScalerOf(context).scale(_MosaicButtonStyles.minSize);
+    final size = MediaQuery.textScalerOf(
+      context,
+    ).scale(_MosaicButtonStyles.minSize);
 
     return Stack(
       alignment: Alignment.topRight,
@@ -70,8 +72,10 @@ class MosaicButton extends StatelessWidget {
         DecoratedBox(
           decoration: BoxDecoration(
             color: style.backgroundColor,
-            border:
-                Border.all(color: style.borderColor, width: style.borderWidth),
+            border: Border.all(
+              color: style.borderColor,
+              width: style.borderWidth,
+            ),
             borderRadius: _MosaicButtonStyles.borderRadius,
           ),
           child: ConstrainedBox(

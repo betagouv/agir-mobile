@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ChangerMotDePasseBloc
     extends Bloc<ChangerMotDePasseEvent, ChangerMotDePasseState> {
   ChangerMotDePasseBloc({required final ProfilRepository profilRepository})
-      : super(const ChangerMotDePasseState.empty()) {
+    : super(const ChangerMotDePasseState.empty()) {
     on<ChangerMotDePasseAChange>((final event, final emit) {
       emit(state.copyWith(motDePasse: event.valeur));
     });

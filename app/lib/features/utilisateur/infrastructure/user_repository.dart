@@ -6,7 +6,7 @@ import 'package:fpdart/fpdart.dart';
 
 class UserRepository {
   const UserRepository({required final DioHttpClient client})
-      : _client = client;
+    : _client = client;
 
   final DioHttpClient _client;
 
@@ -14,9 +14,7 @@ class UserRepository {
     final response = await _client.get(Endpoints.utilisateur);
 
     if (isResponseUnsuccessful(response.statusCode)) {
-      return Left(
-        Exception("Erreur lors de la récupération de l'utilisateur"),
-      );
+      return Left(Exception("Erreur lors de la récupération de l'utilisateur"));
     }
 
     final json = response.data as Map<String, dynamic>;

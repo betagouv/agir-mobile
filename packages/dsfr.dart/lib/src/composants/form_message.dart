@@ -13,18 +13,18 @@ class DsfrFormMessage extends StatelessWidget {
   final String text;
 
   Color _getColorByType(final DsfrFormMessageType type) => switch (type) {
-        DsfrFormMessageType.error => DsfrColors.error425,
-        DsfrFormMessageType.valid => DsfrColors.success425,
-        DsfrFormMessageType.warning => DsfrColors.warning425,
-        DsfrFormMessageType.info => DsfrColors.info425,
-      };
+    DsfrFormMessageType.error => DsfrColors.error425,
+    DsfrFormMessageType.valid => DsfrColors.success425,
+    DsfrFormMessageType.warning => DsfrColors.warning425,
+    DsfrFormMessageType.info => DsfrColors.info425,
+  };
 
   IconData _getIconByType(final DsfrFormMessageType type) => switch (type) {
-        DsfrFormMessageType.error => DsfrIcons.systemFrErrorFill,
-        DsfrFormMessageType.valid => DsfrIcons.systemCheckboxCircleFill,
-        DsfrFormMessageType.warning => DsfrIcons.systemFrWarningFill,
-        DsfrFormMessageType.info => DsfrIcons.systemFrInfoFill,
-      };
+    DsfrFormMessageType.error => DsfrIcons.systemFrErrorFill,
+    DsfrFormMessageType.valid => DsfrIcons.systemCheckboxCircleFill,
+    DsfrFormMessageType.warning => DsfrIcons.systemFrWarningFill,
+    DsfrFormMessageType.info => DsfrIcons.systemFrInfoFill,
+  };
 
   @override
   Widget build(final context) {

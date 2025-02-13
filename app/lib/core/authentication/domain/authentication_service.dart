@@ -10,8 +10,8 @@ class AuthenticationService {
   AuthenticationService({
     required final AuthenticationStorage authenticationRepository,
     required final Clock clock,
-  })  : _authenticationRepository = authenticationRepository,
-        _clock = clock;
+  }) : _authenticationRepository = authenticationRepository,
+       _clock = clock;
 
   final AuthenticationStorage _authenticationRepository;
   final Clock _clock;

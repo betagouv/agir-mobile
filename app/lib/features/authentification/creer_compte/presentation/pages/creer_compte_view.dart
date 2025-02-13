@@ -22,13 +22,15 @@ class CreerCompteView extends StatelessWidget {
   @override
   Widget build(final context) =>
       BlocListener<CreerCompteBloc, CreerCompteState>(
-        listener: (final context, final state) async =>
-            GoRouter.of(context).pushNamed(
-          SaisieCodePage.name,
-          pathParameters: {'email': state.adresseMail},
-        ),
-        listenWhen: (final previous, final current) =>
-            previous.compteCree != current.compteCree && current.compteCree,
+        listener:
+            (final context, final state) async =>
+                GoRouter.of(context).pushNamed(
+                  SaisieCodePage.name,
+                  pathParameters: {'email': state.adresseMail},
+                ),
+        listenWhen:
+            (final previous, final current) =>
+                previous.compteCree != current.compteCree && current.compteCree,
         child: FnvScaffold(
           appBar: AppBar(
             backgroundColor: FnvColors.homeBackground,
@@ -45,9 +47,10 @@ class CreerCompteView extends StatelessWidget {
               DsfrInput(
                 label: Localisation.adresseEmail,
                 hintText: Localisation.adresseEmailHint,
-                onChanged: (final value) => context
-                    .read<CreerCompteBloc>()
-                    .add(CreerCompteAdresseMailAChangee(value)),
+                onChanged:
+                    (final value) => context.read<CreerCompteBloc>().add(
+                      CreerCompteAdresseMailAChangee(value),
+                    ),
                 autocorrect: false,
                 keyboardType: TextInputType.emailAddress,
                 textInputAction: TextInputAction.next,
@@ -55,9 +58,10 @@ class CreerCompteView extends StatelessWidget {
               ),
               const SizedBox(height: DsfrSpacings.s2w),
               FnvMotDePasse(
-                onChanged: (final value) => context
-                    .read<CreerCompteBloc>()
-                    .add(CreerCompteMotDePasseAChange(value)),
+                onChanged:
+                    (final value) => context.read<CreerCompteBloc>().add(
+                      CreerCompteMotDePasseAChange(value),
+                    ),
               ),
               const _MessageErreur(),
               const SizedBox(height: DsfrSpacings.s2w),
@@ -68,8 +72,10 @@ class CreerCompteView extends StatelessWidget {
               Center(
                 child: DsfrLink.md(
                   label: Localisation.vousAvezDejaUnCompte,
-                  onTap: () async => GoRouter.of(context)
-                      .pushReplacementNamed(SeConnecterPage.name),
+                  onTap:
+                      () async => GoRouter.of(
+                        context,
+                      ).pushReplacementNamed(SeConnecterPage.name),
                 ),
               ),
               const SafeArea(child: SizedBox.shrink()),
@@ -92,8 +98,9 @@ class _Cgu extends StatelessWidget {
       label: Localisation.lesCgu,
       url: Localisation.lesCguSite,
       value: valeur,
-      onChanged: (final value) =>
-          context.read<CreerCompteBloc>().add(CreerCompteCguAChange(value)),
+      onChanged:
+          (final value) =>
+              context.read<CreerCompteBloc>().add(CreerCompteCguAChange(value)),
     );
   }
 }
@@ -130,11 +137,12 @@ class _BoutonCreerCompte extends StatelessWidget {
       label: Localisation.creerMonCompte,
       variant: DsfrButtonVariant.primary,
       size: DsfrButtonSize.lg,
-      onPressed: estValide
-          ? () => context
-              .read<CreerCompteBloc>()
-              .add(const CreerCompteCreationDemandee())
-          : null,
+      onPressed:
+          estValide
+              ? () => context.read<CreerCompteBloc>().add(
+                const CreerCompteCreationDemandee(),
+              )
+              : null,
     );
   }
 }

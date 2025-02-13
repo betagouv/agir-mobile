@@ -40,12 +40,12 @@ abstract final class MissionMapper {
   }
 
   static ThemeType _mapThemeType(final String? type) => switch (type) {
-        'alimentation' => ThemeType.alimentation,
-        'transport' => ThemeType.transport,
-        'consommation' => ThemeType.consommation,
-        'logement' => ThemeType.logement,
-        _ => ThemeType.decouverte,
-      };
+    'alimentation' => ThemeType.alimentation,
+    'transport' => ThemeType.transport,
+    'consommation' => ThemeType.consommation,
+    'logement' => ThemeType.logement,
+    _ => ThemeType.decouverte,
+  };
 
   static MissionKyc _fromJsonMissionKyc(final Map<String, dynamic> json) =>
       MissionKyc(
@@ -63,10 +63,9 @@ abstract final class MissionMapper {
 
   static MissionArticle _fromJsonMissionArticle(
     final Map<String, dynamic> json,
-  ) =>
-      MissionArticle(
-        contentId: ContentId(json['content_id'] as String),
-        titre: json['titre'] as String,
-        estFait: json['done'] as bool,
-      );
+  ) => MissionArticle(
+    contentId: ContentId(json['content_id'] as String),
+    titre: json['titre'] as String,
+    estFait: json['done'] as bool,
+  );
 }

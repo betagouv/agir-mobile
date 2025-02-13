@@ -5,16 +5,16 @@ abstract final class LogementMapper {
   const LogementMapper._();
 
   static Map<String, dynamic> mapLogementToJson(final Logement logement) => {
-        'code_postal': logement.codePostal,
-        'commune': logement.commune,
-        'dpe': _mapDpeToJson(logement.dpe),
-        'nombre_adultes': logement.nombreAdultes,
-        'nombre_enfants': logement.nombreEnfants,
-        'plus_de_15_ans': logement.plusDe15Ans,
-        'proprietaire': logement.estProprietaire,
-        'superficie': _mapSuperficieToJson(logement.superficie),
-        'type': _mapTypeDeLogementToJson(logement.typeDeLogement),
-      };
+    'code_postal': logement.codePostal,
+    'commune': logement.commune,
+    'dpe': _mapDpeToJson(logement.dpe),
+    'nombre_adultes': logement.nombreAdultes,
+    'nombre_enfants': logement.nombreEnfants,
+    'plus_de_15_ans': logement.plusDe15Ans,
+    'proprietaire': logement.estProprietaire,
+    'superficie': _mapSuperficieToJson(logement.superficie),
+    'type': _mapTypeDeLogementToJson(logement.typeDeLogement),
+  };
 
   static Logement mapLogementFromJson(final Map<String, dynamic> json) =>
       Logement(
@@ -30,28 +30,28 @@ abstract final class LogementMapper {
       );
 
   static String? _mapDpeToJson(final Dpe? dpe) => switch (dpe) {
-        Dpe.a => 'A',
-        Dpe.b => 'B',
-        Dpe.c => 'C',
-        Dpe.d => 'D',
-        Dpe.e => 'E',
-        Dpe.f => 'F',
-        Dpe.g => 'G',
-        Dpe.jeNeSaisPas => 'ne_sais_pas',
-        null => null,
-      };
+    Dpe.a => 'A',
+    Dpe.b => 'B',
+    Dpe.c => 'C',
+    Dpe.d => 'D',
+    Dpe.e => 'E',
+    Dpe.f => 'F',
+    Dpe.g => 'G',
+    Dpe.jeNeSaisPas => 'ne_sais_pas',
+    null => null,
+  };
 
   static Dpe? _mapDpeFromJson(final String? dpe) => switch (dpe) {
-        'A' => Dpe.a,
-        'B' => Dpe.b,
-        'C' => Dpe.c,
-        'D' => Dpe.d,
-        'E' => Dpe.e,
-        'F' => Dpe.f,
-        'G' => Dpe.g,
-        'ne_sais_pas' => Dpe.jeNeSaisPas,
-        _ => null,
-      };
+    'A' => Dpe.a,
+    'B' => Dpe.b,
+    'C' => Dpe.c,
+    'D' => Dpe.d,
+    'E' => Dpe.e,
+    'F' => Dpe.f,
+    'G' => Dpe.g,
+    'ne_sais_pas' => Dpe.jeNeSaisPas,
+    _ => null,
+  };
 
   static String? _mapSuperficieToJson(final Superficie? superficie) =>
       switch (superficie) {
@@ -75,12 +75,11 @@ abstract final class LogementMapper {
 
   static String? _mapTypeDeLogementToJson(
     final TypeDeLogement? typeDeLogement,
-  ) =>
-      switch (typeDeLogement) {
-        TypeDeLogement.appartement => 'appartement',
-        TypeDeLogement.maison => 'maison',
-        null => null,
-      };
+  ) => switch (typeDeLogement) {
+    TypeDeLogement.appartement => 'appartement',
+    TypeDeLogement.maison => 'maison',
+    null => null,
+  };
 
   static TypeDeLogement? _mapTypeDeLogementFromJson(final String? type) =>
       switch (type) {

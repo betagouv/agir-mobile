@@ -54,9 +54,9 @@ class _MonLogementCodePostalEtCommuneState
               label: Localisation.codePostal,
               initialValue: state.codePostal,
               onChanged: (final value) {
-                context
-                    .read<MonLogementBloc>()
-                    .add(MonLogementCodePostalChange(value));
+                context.read<MonLogementBloc>().add(
+                  MonLogementCodePostalChange(value),
+                );
                 _textEditingController.clear();
               },
               keyboardType: TextInputType.number,
@@ -71,9 +71,10 @@ class _MonLogementCodePostalEtCommuneState
           Expanded(
             child: DsfrSelect<String>(
               label: Localisation.commune,
-              dropdownMenuEntries: state.communes
-                  .map((final e) => DropdownMenuEntry(value: e, label: e))
-                  .toList(),
+              dropdownMenuEntries:
+                  state.communes
+                      .map((final e) => DropdownMenuEntry(value: e, label: e))
+                      .toList(),
               onSelected: (final value) => _handleCommune(context, value),
               controller: _textEditingController,
             ),

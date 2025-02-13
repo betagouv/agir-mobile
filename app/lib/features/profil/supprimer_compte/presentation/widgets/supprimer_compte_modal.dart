@@ -8,35 +8,35 @@ class SupprimerCompteModal extends StatelessWidget {
 
   @override
   Widget build(final context) => Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          const Text(
-            Localisation.supprimerVotreCompteConfirmation,
-            style: DsfrTextStyle.headline4(),
-          ),
-          const SizedBox(height: DsfrSpacings.s2w),
-          const Text(
-            Localisation.supprimerVotreCompteContenu,
-            style: DsfrTextStyle.bodyMd(),
-          ),
-          const Text(
-            Localisation.attentionAucuneDonneeNePourraEtreRecuperee,
-            style: DsfrTextStyle.bodyMdBold(),
-          ),
-          const SizedBox(height: DsfrSpacings.s4w),
-          DsfrButton(
-            label: Localisation.confirmer,
-            variant: DsfrButtonVariant.primary,
-            size: DsfrButtonSize.lg,
-            onPressed: () => GoRouter.of(context).pop(true),
-          ),
-          const SizedBox(height: DsfrSpacings.s2w),
-          DsfrButton(
-            label: Localisation.annuler,
-            variant: DsfrButtonVariant.secondary,
-            size: DsfrButtonSize.lg,
-            onPressed: () => GoRouter.of(context).pop(false),
-          ),
-        ],
-      );
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      const Text(
+        Localisation.supprimerVotreCompteConfirmation,
+        style: DsfrTextStyle.headline4(),
+      ),
+      const SizedBox(height: DsfrSpacings.s2w),
+      const Text(
+        Localisation.supprimerVotreCompteContenu,
+        style: DsfrTextStyle.bodyMd(),
+      ),
+      const Text(
+        Localisation.attentionAucuneDonneeNePourraEtreRecuperee,
+        style: DsfrTextStyle.bodyMdBold(),
+      ),
+      const SizedBox(height: DsfrSpacings.s4w),
+      DsfrButton(
+        label: Localisation.confirmer,
+        variant: DsfrButtonVariant.primary,
+        size: DsfrButtonSize.lg,
+        onPressed: () => GoRouter.of(context).pop(true),
+      ),
+      const SizedBox(height: DsfrSpacings.s2w),
+      DsfrButton(
+        label: Localisation.annuler,
+        variant: DsfrButtonVariant.secondary,
+        size: DsfrButtonSize.lg,
+        onPressed: () => GoRouter.of(context).pop(false),
+      ),
+    ],
+  );
 }

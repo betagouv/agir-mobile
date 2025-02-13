@@ -20,9 +20,7 @@ class DsfrCheckboxIcon extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(
         color: value ? backgroundColor : null,
-        border: const Border.fromBorderSide(
-          BorderSide(color: backgroundColor),
-        ),
+        border: const Border.fromBorderSide(BorderSide(color: backgroundColor)),
         borderRadius: const BorderRadius.all(Radius.circular(4)),
       ),
       child: Padding(

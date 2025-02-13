@@ -12,8 +12,8 @@ class ChallengeRepository {
   const ChallengeRepository({
     required final DioHttpClient client,
     required final MessageBus messageBus,
-  })  : _client = client,
-        _messageBus = messageBus;
+  }) : _client = client,
+       _messageBus = messageBus;
 
   final DioHttpClient _client;
   final MessageBus _messageBus;
@@ -47,8 +47,10 @@ class ChallengeRepository {
     if (reason != null) {
       data['motif'] = reason;
     }
-    final response =
-        await _client.patch(Endpoints.challenge(id.value), data: data);
+    final response = await _client.patch(
+      Endpoints.challenge(id.value),
+      data: data,
+    );
 
     if (isResponseSuccessful(response.statusCode)) {
       _messageBus.publish(challengeCompletedTopic);
@@ -56,8 +58,6 @@ class ChallengeRepository {
       return const Right(unit);
     }
 
-    return Left(
-      Exception('Erreur lors de la mise à jour du statut du défi'),
-    );
+    return Left(Exception('Erreur lors de la mise à jour du statut du défi'));
   }
 }

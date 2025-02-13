@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LvaoBloc extends Bloc<LvaoEvent, LvaoState> {
   LvaoBloc({required final LvaoRepository repository})
-      : super(const LvaoInitial()) {
+    : super(const LvaoInitial()) {
     on<LvaoLoadRequested>((final event, final emit) async {
       emit(const LvaoLoadInProgress());
       final result = await repository.fetch(category: event.category);

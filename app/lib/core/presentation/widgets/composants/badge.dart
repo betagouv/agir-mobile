@@ -15,19 +15,19 @@ class FnvBadge extends StatelessWidget {
 
   @override
   Widget build(final context) => DecoratedBox(
-        decoration: ShapeDecoration(
-          color: backgroundColor,
-          shape: const StadiumBorder(),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: DsfrSpacings.s0v5,
-            horizontal: DsfrSpacings.s1w,
-          ),
-          child: Text(
-            label,
-            style: DsfrTextStyle.bodySmBold(color: foregroundColor),
-          ),
-        ),
-      );
+    decoration: ShapeDecoration(
+      color: backgroundColor,
+      shape: const StadiumBorder(),
+    ),
+    child: Padding(
+      padding: const EdgeInsets.symmetric(
+        vertical: DsfrSpacings.s0v5,
+        horizontal: DsfrSpacings.s1w,
+      ),
+      child: Text(
+        label,
+        style: DsfrTextStyle.bodySmBold(color: foregroundColor),
+      ),
+    ),
+  );
 }

@@ -16,8 +16,9 @@ void main() {
       await initializeContext(tester);
     }
 
-    testWidgets('''User launches app and sees version number''',
-        (tester) async {
+    testWidgets('''User launches app and sees version number''', (
+      tester,
+    ) async {
       await bddSetUp(tester);
       await theApplicationIsLaunched(tester);
       await iSee(tester, '1.2.3+4');

@@ -10,7 +10,7 @@ import 'package:fpdart/fpdart.dart';
 
 class ThemeRepository {
   const ThemeRepository({required final DioHttpClient client})
-      : _client = client;
+    : _client = client;
 
   final DioHttpClient _client;
 
@@ -44,11 +44,11 @@ class ThemeRepository {
 
     return isResponseSuccessful(response.statusCode)
         ? Right(
-            (response.data as List<dynamic>)
-                .map((final e) => e as Map<String, dynamic>)
-                .map(ServiceItemMapper.fromJson)
-                .toList(),
-          )
+          (response.data as List<dynamic>)
+              .map((final e) => e as Map<String, dynamic>)
+              .map(ServiceItemMapper.fromJson)
+              .toList(),
+        )
         : Left(Exception('Erreur lors de la récupération des services'));
   }
 }

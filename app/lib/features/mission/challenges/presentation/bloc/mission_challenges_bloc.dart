@@ -6,17 +6,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MissionChallengesBloc
     extends Bloc<MissionChallengesEvent, MissionChallengesState> {
-  MissionChallengesBloc({
-    required final MissionChallengesRepository repository,
-  }) : super(
-          const MissionChallengesState(
-            challenges: MissionChallenges(
-              values: [],
-              canBeCompleted: false,
-              isCompleted: false,
-            ),
+  MissionChallengesBloc({required final MissionChallengesRepository repository})
+    : super(
+        const MissionChallengesState(
+          challenges: MissionChallenges(
+            values: [],
+            canBeCompleted: false,
+            isCompleted: false,
           ),
-        ) {
+        ),
+      ) {
     on<MissionChallengesRefreshRequested>((final event, final emit) async {
       final result = await repository.fetch(event.code);
 

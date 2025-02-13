@@ -8,21 +8,23 @@ class NotificationRepository {
   const NotificationRepository({
     required final DioHttpClient client,
     required final NotificationService notificationService,
-  })  : _client = client,
-        _notificationService = notificationService;
+  }) : _client = client,
+       _notificationService = notificationService;
 
   final DioHttpClient _client;
   final NotificationService _notificationService;
 
   Future<Either<Exception, void>> saveToken() async {
     final token = await _notificationService.getToken();
-    final response =
-        await _client.put(Endpoints.notificationToken, data: {'token': token});
+    final response = await _client.put(
+      Endpoints.notificationToken,
+      data: {'token': token},
+    );
 
     return isResponseUnsuccessful(response.statusCode)
         ? Left(
-            Exception('Erreur lors de la sauvegarde du token de notification'),
-          )
+          Exception('Erreur lors de la sauvegarde du token de notification'),
+        )
         : const Right(null);
   }
 

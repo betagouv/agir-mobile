@@ -16,23 +16,23 @@ class OptionsAvanceesPage extends StatelessWidget {
   static const path = name;
 
   static GoRoute get route => GoRoute(
-        path: path,
-        name: name,
-        builder: (final context, final state) => const OptionsAvanceesPage(),
-      );
+    path: path,
+    name: name,
+    builder: (final context, final state) => const OptionsAvanceesPage(),
+  );
 
   @override
   Widget build(final context) => FnvScaffold(
-        appBar: FnvAppBar(),
-        body: ListView(
-          padding: const EdgeInsets.all(paddingVerticalPage),
-          children: const [
-            FnvTitle(title: Localisation.optionsAvancees),
-            SizedBox(height: DsfrSpacings.s3w),
-            ChangerMotDePasse(),
-            SizedBox(height: DsfrSpacings.s5w),
-            SupprimerCompte(),
-          ],
-        ),
-      );
+    appBar: FnvAppBar(),
+    body: ListView(
+      padding: const EdgeInsets.all(paddingVerticalPage),
+      children: const [
+        FnvTitle(title: Localisation.optionsAvancees),
+        SizedBox(height: DsfrSpacings.s3w),
+        ChangerMotDePasse(),
+        SizedBox(height: DsfrSpacings.s5w),
+        SupprimerCompte(),
+      ],
+    ),
+  );
 }

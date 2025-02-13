@@ -17,8 +17,8 @@ class RootPage extends StatelessWidget {
 
   @override
   Widget build(final context) => FnvScaffold(
-        appBar: FnvAppBar(title: title, bottom: appBarBottom, isRoot: true),
-        body: body,
-        drawer: const Menu(),
-      );
+    appBar: FnvAppBar(title: title, bottom: appBarBottom, isRoot: true),
+    body: body,
+    drawer: const Menu(),
+  );
 }

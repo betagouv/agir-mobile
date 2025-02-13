@@ -11,46 +11,45 @@ final class EnvironmentalPerformanceLevelRepresentation extends Equatable {
   });
 
   const EnvironmentalPerformanceLevelRepresentation.low()
-      : this._(
-          label: EnvironmentalPerformanceSummaryL10n.faible,
-          backgroundColor: const Color(0xFFF1FFE3),
-          labelColor: const Color(0xFF105A06),
-        );
+    : this._(
+        label: EnvironmentalPerformanceSummaryL10n.faible,
+        backgroundColor: const Color(0xFFF1FFE3),
+        labelColor: const Color(0xFF105A06),
+      );
 
   const EnvironmentalPerformanceLevelRepresentation.medium()
-      : this._(
-          label: EnvironmentalPerformanceSummaryL10n.moyen,
-          backgroundColor: const Color(0xFFFFFAE3),
-          labelColor: const Color(0xFF784000),
-        );
+    : this._(
+        label: EnvironmentalPerformanceSummaryL10n.moyen,
+        backgroundColor: const Color(0xFFFFFAE3),
+        labelColor: const Color(0xFF784000),
+      );
 
   const EnvironmentalPerformanceLevelRepresentation.high()
-      : this._(
-          label: EnvironmentalPerformanceSummaryL10n.fort,
-          backgroundColor: const Color(0xFFFFF3E3),
-          labelColor: const Color(0xFF950704),
-        );
+    : this._(
+        label: EnvironmentalPerformanceSummaryL10n.fort,
+        backgroundColor: const Color(0xFFFFF3E3),
+        labelColor: const Color(0xFF950704),
+      );
 
   const EnvironmentalPerformanceLevelRepresentation.veryHigh()
-      : this._(
-          label: EnvironmentalPerformanceSummaryL10n.tresFort,
-          backgroundColor: const Color(0xFFFFE3E3),
-          labelColor: const Color(0xFF910501),
-        );
+    : this._(
+        label: EnvironmentalPerformanceSummaryL10n.tresFort,
+        backgroundColor: const Color(0xFFFFE3E3),
+        labelColor: const Color(0xFF910501),
+      );
 
   factory EnvironmentalPerformanceLevelRepresentation.fromProgress(
     final EnvironmentalPerformanceLevel level,
-  ) =>
-      switch (level) {
-        EnvironmentalPerformanceLevel.low =>
-          const EnvironmentalPerformanceLevelRepresentation.low(),
-        EnvironmentalPerformanceLevel.medium =>
-          const EnvironmentalPerformanceLevelRepresentation.medium(),
-        EnvironmentalPerformanceLevel.high =>
-          const EnvironmentalPerformanceLevelRepresentation.high(),
-        EnvironmentalPerformanceLevel.veryHigh =>
-          const EnvironmentalPerformanceLevelRepresentation.veryHigh(),
-      };
+  ) => switch (level) {
+    EnvironmentalPerformanceLevel.low =>
+      const EnvironmentalPerformanceLevelRepresentation.low(),
+    EnvironmentalPerformanceLevel.medium =>
+      const EnvironmentalPerformanceLevelRepresentation.medium(),
+    EnvironmentalPerformanceLevel.high =>
+      const EnvironmentalPerformanceLevelRepresentation.high(),
+    EnvironmentalPerformanceLevel.veryHigh =>
+      const EnvironmentalPerformanceLevelRepresentation.veryHigh(),
+  };
 
   final String label;
   final Color backgroundColor;

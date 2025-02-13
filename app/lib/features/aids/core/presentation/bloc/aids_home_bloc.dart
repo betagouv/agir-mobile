@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AidsHomeBloc extends Bloc<AidsHomeEvent, AidsHomeState> {
   AidsHomeBloc({required final AidsRepository aidsRepository})
-      : super(const AidsHomeState([])) {
+    : super(const AidsHomeState([])) {
     on<AidsHomeLoadRequested>((final event, final emit) async {
       final result = await aidsRepository.fetch();
       result.fold(

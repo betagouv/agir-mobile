@@ -8,15 +8,16 @@ import 'package:fpdart/fpdart.dart';
 
 class RecommandationsRepository {
   const RecommandationsRepository({required final DioHttpClient client})
-      : _client = client;
+    : _client = client;
 
   final DioHttpClient _client;
 
   Future<Either<Exception, List<Recommandation>>> recuperer(
     final ThemeType thematique,
   ) async {
-    final recommandationsParThematique =
-        Endpoints.recommandationsParThematique(thematique.name);
+    final recommandationsParThematique = Endpoints.recommandationsParThematique(
+      thematique.name,
+    );
 
     final response = await _client.get(recommandationsParThematique);
 

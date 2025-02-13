@@ -4,8 +4,8 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 
 abstract final class CrashReporting {
   static Future<void> init() => SentryFlutter.init((final p0) {
-        p0.considerInAppFramesByDefault = false;
-      });
+    p0.considerInAppFramesByDefault = false;
+  });
 
   static Future<void> captureException(
     final dynamic exception, {

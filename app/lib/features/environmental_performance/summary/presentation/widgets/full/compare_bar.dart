@@ -7,9 +7,9 @@ class CompareBar extends StatelessWidget {
 
   @override
   Widget build(final context) => CustomPaint(
-        painter: _Painter(value: value),
-        size: const Size(double.infinity, 12),
-      );
+    painter: _Painter(value: value),
+    size: const Size(double.infinity, 12),
+  );
 }
 
 class _Painter extends CustomPainter {
@@ -51,9 +51,10 @@ class _Painter extends CustomPainter {
       Rect.fromLTWH(0, 0, progressWidth, size.height),
       Radius.circular(size.height),
     );
-    final progressPaint = Paint()
-      ..shader = _progressGradient.createShader(Offset.zero & size)
-      ..style = PaintingStyle.fill;
+    final progressPaint =
+        Paint()
+          ..shader = _progressGradient.createShader(Offset.zero & size)
+          ..style = PaintingStyle.fill;
     canvas.drawRRect(progressBar, progressPaint);
   }
 

@@ -7,14 +7,14 @@ abstract final class ChallengeMapper {
   const ChallengeMapper._();
 
   static Challenge fromJson(final Map<String, dynamic> json) => Challenge(
-        id: ChallengeId(json['id'] as String),
-        themeType: _mapThemeType(json['thematique'] as String),
-        title: json['titre'] as String,
-        status: _challengeStatusfromJson(json['status'] as String),
-        reason: json['motif'] as String?,
-        tips: json['astuces'] as String,
-        why: json['pourquoi'] as String,
-      );
+    id: ChallengeId(json['id'] as String),
+    themeType: _mapThemeType(json['thematique'] as String),
+    title: json['titre'] as String,
+    status: _challengeStatusfromJson(json['status'] as String),
+    reason: json['motif'] as String?,
+    tips: json['astuces'] as String,
+    why: json['pourquoi'] as String,
+  );
 
   static ChallengeStatus _challengeStatusfromJson(final String json) =>
       switch (json) {
@@ -29,10 +29,10 @@ abstract final class ChallengeMapper {
       };
 
   static ThemeType _mapThemeType(final String? type) => switch (type) {
-        'alimentation' => ThemeType.alimentation,
-        'transport' => ThemeType.transport,
-        'consommation' => ThemeType.consommation,
-        'logement' => ThemeType.logement,
-        _ => ThemeType.decouverte,
-      };
+    'alimentation' => ThemeType.alimentation,
+    'transport' => ThemeType.transport,
+    'consommation' => ThemeType.consommation,
+    'logement' => ThemeType.logement,
+    _ => ThemeType.decouverte,
+  };
 }

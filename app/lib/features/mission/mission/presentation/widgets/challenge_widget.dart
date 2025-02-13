@@ -108,13 +108,13 @@ class _Badge extends StatelessWidget {
 
   @override
   Widget build(final context) => Padding(
-        padding: const EdgeInsets.only(left: DsfrSpacings.s3v),
-        child: FnvBadge(
-          label: label,
-          backgroundColor: backgroundColor,
-          foregroundColor: foregroundColor,
-        ),
-      );
+    padding: const EdgeInsets.only(left: DsfrSpacings.s3v),
+    child: FnvBadge(
+      label: label,
+      backgroundColor: backgroundColor,
+      foregroundColor: foregroundColor,
+    ),
+  );
 }
 
 class _ActionCard extends StatelessWidget {
@@ -126,22 +126,22 @@ class _ActionCard extends StatelessWidget {
 
   @override
   Widget build(final context) => Padding(
-        padding: const EdgeInsets.only(top: 14),
-        child: FnvCard(
-          borderColor: borderColor,
-          child: Padding(
-            padding: const EdgeInsets.all(DsfrSpacings.s2w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(title, style: const DsfrTextStyle.bodyLg()),
-                if (button != null) ...[
-                  const SizedBox(height: DsfrSpacings.s2w),
-                  button!,
-                ],
-              ],
-            ),
-          ),
+    padding: const EdgeInsets.only(top: 14),
+    child: FnvCard(
+      borderColor: borderColor,
+      child: Padding(
+        padding: const EdgeInsets.all(DsfrSpacings.s2w),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(title, style: const DsfrTextStyle.bodyLg()),
+            if (button != null) ...[
+              const SizedBox(height: DsfrSpacings.s2w),
+              button!,
+            ],
+          ],
         ),
-      );
+      ),
+    ),
+  );
 }

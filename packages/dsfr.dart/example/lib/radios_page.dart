@@ -19,52 +19,52 @@ class _RadiosPageState extends State<RadiosPage> {
 
   @override
   Widget build(final context) => ListView(
-        padding: const EdgeInsets.all(16),
-        children: [
-          DsfrRadioButtonSet(
-            title: 'Radios',
-            values: const {1: 'Un', 2: 'Deux', 3: 'Trois'},
-            onCallback: (final p0) {},
-          ),
-          const SizedBox(height: DsfrSpacings.s3w),
-          DsfrRadioButton<int>(
-            title: 'Un',
-            value: 0,
-            groupValue: _value,
-            onChanged: (final value) {
-              if (value != null) {
-                setState(() {
-                  _value = value;
-                });
-              }
-            },
-          ),
-          const SizedBox(height: DsfrSpacings.s1w),
-          DsfrRadioButton<int>(
-            title: 'Deux',
-            value: 1,
-            groupValue: _value,
-            onChanged: (final value) {
-              if (value != null) {
-                setState(() {
-                  _value = value;
-                });
-              }
-            },
-          ),
-          const SizedBox(height: DsfrSpacings.s1w),
-          DsfrRadioButton<int>(
-            title: 'Trois',
-            value: 2,
-            groupValue: _value,
-            onChanged: (final value) {
-              if (value != null) {
-                setState(() {
-                  _value = value;
-                });
-              }
-            },
-          ),
-        ],
-      );
+    padding: const EdgeInsets.all(16),
+    children: [
+      DsfrRadioButtonSet(
+        title: 'Radios',
+        values: const {1: 'Un', 2: 'Deux', 3: 'Trois'},
+        onCallback: (final p0) {},
+      ),
+      const SizedBox(height: DsfrSpacings.s3w),
+      DsfrRadioButton<int>(
+        title: 'Un',
+        value: 0,
+        groupValue: _value,
+        onChanged: (final value) {
+          if (value != null) {
+            setState(() {
+              _value = value;
+            });
+          }
+        },
+      ),
+      const SizedBox(height: DsfrSpacings.s1w),
+      DsfrRadioButton<int>(
+        title: 'Deux',
+        value: 1,
+        groupValue: _value,
+        onChanged: (final value) {
+          if (value != null) {
+            setState(() {
+              _value = value;
+            });
+          }
+        },
+      ),
+      const SizedBox(height: DsfrSpacings.s1w),
+      DsfrRadioButton<int>(
+        title: 'Trois',
+        value: 2,
+        groupValue: _value,
+        onChanged: (final value) {
+          if (value != null) {
+            setState(() {
+              _value = value;
+            });
+          }
+        },
+      ),
+    ],
+  );
 }

@@ -46,22 +46,24 @@ class _DsfrRawButtonState extends State<DsfrRawButton>
   void initState() {
     super.initState();
     _backgroundColor = DsfrButtonBackgroundColor.fromVariant(widget.variant);
-    _foregroundColor = widget.foregroundColor == null
-        ? DsfrButtonForegroundColor.fromVariant(widget.variant)
-        : DsfrButtonForegroundColor(
-            $default: widget.foregroundColor!,
-            disabled: DsfrColors.grey625,
-          );
-    _border = widget.foregroundColor == null
-        ? DsfrButtonBorder.fromVariant(widget.variant)
-        : DsfrButtonBorder(
-            $default: Border.fromBorderSide(
-              BorderSide(color: widget.foregroundColor!),
-            ),
-            disabled: const Border.fromBorderSide(
-              BorderSide(color: DsfrColors.grey925),
-            ),
-          );
+    _foregroundColor =
+        widget.foregroundColor == null
+            ? DsfrButtonForegroundColor.fromVariant(widget.variant)
+            : DsfrButtonForegroundColor(
+              $default: widget.foregroundColor!,
+              disabled: DsfrColors.grey625,
+            );
+    _border =
+        widget.foregroundColor == null
+            ? DsfrButtonBorder.fromVariant(widget.variant)
+            : DsfrButtonBorder(
+              $default: Border.fromBorderSide(
+                BorderSide(color: widget.foregroundColor!),
+              ),
+              disabled: const Border.fromBorderSide(
+                BorderSide(color: DsfrColors.grey925),
+              ),
+            );
     _padding = _getPadding(widget.size);
     _textStyle = _getTextStyle(widget.size);
     _minHeight = _getMinHeight(widget.size);
@@ -69,25 +71,31 @@ class _DsfrRawButtonState extends State<DsfrRawButton>
   }
 
   EdgeInsetsGeometry _getPadding(final DsfrButtonSize size) => switch (size) {
-        DsfrButtonSize.lg =>
-          const EdgeInsets.symmetric(vertical: 10, horizontal: 24),
-        DsfrButtonSize.md =>
-          const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-        DsfrButtonSize.sm =>
-          const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
-      };
+    DsfrButtonSize.lg => const EdgeInsets.symmetric(
+      vertical: 10,
+      horizontal: 24,
+    ),
+    DsfrButtonSize.md => const EdgeInsets.symmetric(
+      vertical: 8,
+      horizontal: 16,
+    ),
+    DsfrButtonSize.sm => const EdgeInsets.symmetric(
+      vertical: 4,
+      horizontal: 12,
+    ),
+  };
 
   TextStyle _getTextStyle(final DsfrButtonSize size) => switch (size) {
-        DsfrButtonSize.lg => const DsfrTextStyle.bodyLgMedium(),
-        DsfrButtonSize.md => const DsfrTextStyle.bodyMdMedium(),
-        DsfrButtonSize.sm => const DsfrTextStyle.bodySmMedium(),
-      };
+    DsfrButtonSize.lg => const DsfrTextStyle.bodyLgMedium(),
+    DsfrButtonSize.md => const DsfrTextStyle.bodyMdMedium(),
+    DsfrButtonSize.sm => const DsfrTextStyle.bodySmMedium(),
+  };
 
   double _getMinHeight(final DsfrButtonSize size) => switch (size) {
-        DsfrButtonSize.lg => DsfrSpacings.s6w,
-        DsfrButtonSize.md => DsfrSpacings.s5w,
-        DsfrButtonSize.sm => DsfrSpacings.s4w,
-      };
+    DsfrButtonSize.lg => DsfrSpacings.s6w,
+    DsfrButtonSize.md => DsfrSpacings.s5w,
+    DsfrButtonSize.sm => DsfrSpacings.s4w,
+  };
 
   @override
   void didUpdateWidget(final DsfrRawButton oldWidget) {
@@ -122,16 +130,19 @@ class _DsfrRawButtonState extends State<DsfrRawButton>
             child: Material(
               color: Colors.transparent,
               child: InkWell(
-                onTap: widget.onPressed == null
-                    ? null
-                    : () {
-                        if (_timer?.isActive ?? false) {
-                          return;
-                        }
-                        widget.onPressed!();
-                        _timer =
-                            Timer(const Duration(milliseconds: 500), () {});
-                      },
+                onTap:
+                    widget.onPressed == null
+                        ? null
+                        : () {
+                          if (_timer?.isActive ?? false) {
+                            return;
+                          }
+                          widget.onPressed!();
+                          _timer = Timer(
+                            const Duration(milliseconds: 500),
+                            () {},
+                          );
+                        },
                 onHighlightChanged: updateMaterialState(WidgetState.pressed),
                 onHover: updateMaterialState(WidgetState.hovered),
                 focusColor: Colors.transparent,

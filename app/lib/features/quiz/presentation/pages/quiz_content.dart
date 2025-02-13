@@ -53,25 +53,28 @@ class _Choices extends StatelessWidget {
 
     return reponse == reponseUtilisateur
         ? state.estExacte.fold(
-            () => null,
-            (final t) => t ? DsfrColors.success950 : DsfrColors.error950,
-          )
+          () => null,
+          (final t) => t ? DsfrColors.success950 : DsfrColors.error950,
+        )
         : null;
   }
 
   @override
   Widget build(final context) => DsfrRadioButtonSetHeadless(
-        values: Map.fromEntries(
-          state.quiz.reponses.map((final e) => e.reponse).map(
-                (final e) => MapEntry(
-                  e,
-                  DsfrRadioButtonItem(e, backgroundColor: _getColor(state, e)),
-                ),
-              ),
-        ),
-        onCallback: (final value) =>
+    values: Map.fromEntries(
+      state.quiz.reponses
+          .map((final e) => e.reponse)
+          .map(
+            (final e) => MapEntry(
+              e,
+              DsfrRadioButtonItem(e, backgroundColor: _getColor(state, e)),
+            ),
+          ),
+    ),
+    onCallback:
+        (final value) =>
             context.read<QuizBloc>().add(QuizReponseSelectionnee(value ?? '')),
-        mode: DsfrRadioButtonSetMode.column,
-        isEnabled: state.estExacte.isNone(),
-      );
+    mode: DsfrRadioButtonSetMode.column,
+    isEnabled: state.estExacte.isNone(),
+  );
 }

@@ -9,9 +9,8 @@ import '../helper/feature_context.dart';
 Future<void> iAmLoggedIn(final WidgetTester tester) async {
   await FeatureContext.instance.secureStorage.write(
     key: 'token',
-    value: 'header.${base64Encode(
-      jsonEncode({'exp': 715341600, 'utilisateurId': 'user123'}).codeUnits,
-    )}.signature',
+    value:
+        'header.${base64Encode(jsonEncode({'exp': 715341600, 'utilisateurId': 'user123'}).codeUnits)}.signature',
   );
   FeatureContext.instance.dioMock.getM(
     Endpoints.utilisateur,

@@ -24,14 +24,13 @@ final class QuestionCodePostalState extends Equatable {
     final List<String>? communes,
     final String? commune,
     final bool? aEteChange,
-  }) =>
-      QuestionCodePostalState(
-        prenom: prenom ?? this.prenom,
-        codePostal: codePostal ?? this.codePostal,
-        communes: communes ?? this.communes,
-        commune: commune ?? this.commune,
-        aEteChange: aEteChange ?? this.aEteChange,
-      );
+  }) => QuestionCodePostalState(
+    prenom: prenom ?? this.prenom,
+    codePostal: codePostal ?? this.codePostal,
+    communes: communes ?? this.communes,
+    commune: commune ?? this.commune,
+    aEteChange: aEteChange ?? this.aEteChange,
+  );
 
   @override
   List<Object> get props => [prenom, codePostal, communes, commune, aEteChange];

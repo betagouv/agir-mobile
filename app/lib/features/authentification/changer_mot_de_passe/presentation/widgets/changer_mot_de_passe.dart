@@ -14,10 +14,11 @@ class ChangerMotDePasse extends StatelessWidget {
 
   @override
   Widget build(final context) => BlocProvider(
-        create: (final context) =>
+    create:
+        (final context) =>
             ChangerMotDePasseBloc(profilRepository: context.read()),
-        child: const _ChangerMotDePasse(),
-      );
+    child: const _ChangerMotDePasse(),
+  );
 }
 
 class _ChangerMotDePasse extends StatelessWidget {
@@ -34,9 +35,10 @@ class _ChangerMotDePasse extends StatelessWidget {
           );
           GoRouter.of(context).pop();
         },
-        listenWhen: (final previous, final current) =>
-            previous.motPasseEstChange != current.motPasseEstChange &&
-            current.motPasseEstChange,
+        listenWhen:
+            (final previous, final current) =>
+                previous.motPasseEstChange != current.motPasseEstChange &&
+                current.motPasseEstChange,
         child: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -55,10 +57,11 @@ class _MotDePasse extends StatelessWidget {
 
   @override
   Widget build(final context) => FnvMotDePasse(
-        onChanged: (final value) => context
-            .read<ChangerMotDePasseBloc>()
-            .add(ChangerMotDePasseAChange(value)),
-      );
+    onChanged:
+        (final value) => context.read<ChangerMotDePasseBloc>().add(
+          ChangerMotDePasseAChange(value),
+        ),
+  );
 }
 
 class _ChangerMotDePasseButton extends StatelessWidget {
@@ -66,15 +69,16 @@ class _ChangerMotDePasseButton extends StatelessWidget {
 
   @override
   Widget build(final context) => DsfrButton(
-        label: Localisation.changerMonMotDePasse,
-        variant: DsfrButtonVariant.primary,
-        size: DsfrButtonSize.lg,
-        onPressed: context.select<ChangerMotDePasseBloc, bool>(
-          (final bloc) => bloc.state.estValide,
-        )
-            ? () => context
-                .read<ChangerMotDePasseBloc>()
-                .add(const ChangerMotDePasseChangementDemande())
+    label: Localisation.changerMonMotDePasse,
+    variant: DsfrButtonVariant.primary,
+    size: DsfrButtonSize.lg,
+    onPressed:
+        context.select<ChangerMotDePasseBloc, bool>(
+              (final bloc) => bloc.state.estValide,
+            )
+            ? () => context.read<ChangerMotDePasseBloc>().add(
+              const ChangerMotDePasseChangementDemande(),
+            )
             : null,
-      );
+  );
 }

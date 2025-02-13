@@ -11,8 +11,9 @@ class AuthenticationBloc
   AuthenticationBloc({
     required final AuthenticationService authenticationService,
   }) : super(const AuthenticationInitial()) {
-    _subscription =
-        authenticationService.authenticationStatus.listen((final status) {
+    _subscription = authenticationService.authenticationStatus.listen((
+      final status,
+    ) {
       add(const AuthenticationCheckRequested());
     });
     on<AuthenticationCheckRequested>((final event, final emit) {

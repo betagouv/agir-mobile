@@ -22,9 +22,10 @@ class MonLogementPlus15Ans extends StatelessWidget {
           true: DsfrRadioButtonItem(Localisation.oui),
           false: DsfrRadioButtonItem(Localisation.non),
         },
-        onCallback: (final value) => context
-            .read<MonLogementBloc>()
-            .add(MonLogementPlusDe15AnsChange(value)),
+        onCallback:
+            (final value) => context.read<MonLogementBloc>().add(
+              MonLogementPlusDe15AnsChange(value),
+            ),
         initialValue: plusDe15ans,
       ),
     );

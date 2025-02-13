@@ -12,8 +12,8 @@ class MieuxVousConnaitreRepository {
   const MieuxVousConnaitreRepository({
     required final DioHttpClient client,
     required final MessageBus messageBus,
-  })  : _client = client,
-        _messageBus = messageBus;
+  }) : _client = client,
+       _messageBus = messageBus;
 
   final DioHttpClient _client;
   final MessageBus _messageBus;
@@ -38,15 +38,17 @@ class MieuxVousConnaitreRepository {
 
   Future<Either<Exception, Unit>> mettreAJour(final Question question) async {
     final object = switch (question) {
-      QuestionMultiple() => question.responses
-          .map((final e) => {'code': e.code, 'selected': e.isSelected})
-          .toList(),
+      QuestionMultiple() =>
+        question.responses
+            .map((final e) => {'code': e.code, 'selected': e.isSelected})
+            .toList(),
       QuestionUnique() => [
-          {'value': question.response.value},
-        ],
-      QuestionMosaicBoolean() => question.responses
-          .map((final e) => {'code': e.code, 'selected': e.isSelected})
-          .toList(),
+        {'value': question.response.value},
+      ],
+      QuestionMosaicBoolean() =>
+        question.responses
+            .map((final e) => {'code': e.code, 'selected': e.isSelected})
+            .toList(),
     };
 
     final response = await _client.put(

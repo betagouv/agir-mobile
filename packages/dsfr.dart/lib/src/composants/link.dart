@@ -26,15 +26,15 @@ class DsfrLink extends StatefulWidget {
     final VoidCallback? onTap,
     final Key? key,
   }) : this._(
-          key: key,
-          label: label,
-          textStyle: const DsfrTextStyle.bodySm(),
-          underlineThickness: 1.75,
-          iconSize: 16,
-          iconPosition: iconPosition,
-          icon: icon,
-          onTap: onTap,
-        );
+         key: key,
+         label: label,
+         textStyle: const DsfrTextStyle.bodySm(),
+         underlineThickness: 1.75,
+         iconSize: 16,
+         iconPosition: iconPosition,
+         icon: icon,
+         onTap: onTap,
+       );
 
   const DsfrLink.md({
     required final String label,
@@ -43,15 +43,15 @@ class DsfrLink extends StatefulWidget {
     final VoidCallback? onTap,
     final Key? key,
   }) : this._(
-          key: key,
-          label: label,
-          textStyle: const DsfrTextStyle.bodyMd(),
-          underlineThickness: 2,
-          iconSize: 16,
-          iconPosition: iconPosition,
-          icon: icon,
-          onTap: onTap,
-        );
+         key: key,
+         label: label,
+         textStyle: const DsfrTextStyle.bodyMd(),
+         underlineThickness: 2,
+         iconSize: 16,
+         iconPosition: iconPosition,
+         icon: icon,
+         onTap: onTap,
+       );
 
   final String label;
   final IconData? icon;
@@ -125,24 +125,27 @@ class _DsfrLinkState extends State<DsfrLink> with MaterialStateMixin<DsfrLink> {
           onFocusChange: updateMaterialState(WidgetState.focused),
           child: DecoratedBox(
             decoration: BoxDecoration(
-              border: !isFocused && !isDisabled
-                  ? Border(
-                      bottom: BorderSide(
-                        color: resolveForegroundColor,
-                        width: isPressed || isHovered
-                            ? widget.underlineThickness
-                            : 1,
-                      ),
-                    )
-                  : null,
+              border:
+                  !isFocused && !isDisabled
+                      ? Border(
+                        bottom: BorderSide(
+                          color: resolveForegroundColor,
+                          width:
+                              isPressed || isHovered
+                                  ? widget.underlineThickness
+                                  : 1,
+                        ),
+                      )
+                      : null,
             ),
             child: DsfrFocusWidget(
               isFocused: isFocused,
               child: Text.rich(
                 TextSpan(
-                  children: widget.iconPosition == DsfrLinkIconPosition.start
-                      ? list
-                      : list.reversed.toList(),
+                  children:
+                      widget.iconPosition == DsfrLinkIconPosition.start
+                          ? list
+                          : list.reversed.toList(),
                 ),
                 style: widget.textStyle.copyWith(color: resolveForegroundColor),
               ),

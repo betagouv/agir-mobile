@@ -11,8 +11,9 @@ class QuestionThemesBloc
     required final MieuxVousConnaitreRepository mieuxVousConnaitreRepository,
   }) : super(const QuestionThemesState(valeur: [])) {
     on<QuestionThemesRecuperationDemandee>((final event, final emit) async {
-      final result =
-          await mieuxVousConnaitreRepository.recupererQuestion(id: _id);
+      final result = await mieuxVousConnaitreRepository.recupererQuestion(
+        id: _id,
+      );
       if (result.isRight()) {
         final question = result.getRight().getOrElse(() => throw Exception());
         emit(state.copyWith(question: question as QuestionMultipleChoice));

@@ -10,22 +10,22 @@ class TitleSection extends StatelessWidget {
 
   @override
   Widget build(final context) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          MarkdownBody(
-            data: title,
-            styleSheet: MarkdownStyleSheet(
-              p: const DsfrTextStyle.headline4(),
-              strong: const DsfrTextStyle.headline4(
-                color: DsfrColors.blueFranceSun113,
-              ),
-            ),
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      MarkdownBody(
+        data: title,
+        styleSheet: MarkdownStyleSheet(
+          p: const DsfrTextStyle.headline4(),
+          strong: const DsfrTextStyle.headline4(
+            color: DsfrColors.blueFranceSun113,
           ),
-          const SizedBox(height: DsfrSpacings.s1v5),
-          MarkdownBody(
-            data: subTitle,
-            styleSheet: MarkdownStyleSheet(p: const DsfrTextStyle.bodyMd()),
-          ),
-        ],
-      );
+        ),
+      ),
+      const SizedBox(height: DsfrSpacings.s1v5),
+      MarkdownBody(
+        data: subTitle,
+        styleSheet: MarkdownStyleSheet(p: const DsfrTextStyle.bodyMd()),
+      ),
+    ],
+  );
 }

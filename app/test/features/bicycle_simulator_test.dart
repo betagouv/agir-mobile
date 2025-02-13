@@ -60,8 +60,9 @@ void main() {
       await iTapOn(tester, 'Estimer mes aides');
       await iDontSee(tester, 'Mes aides disponibles');
     });
-    testWidgets('''When the form is completed then button is enabled''',
-        (tester) async {
+    testWidgets('''When the form is completed then button is enabled''', (
+      tester,
+    ) async {
       await bddSetUp(tester);
       await iTapOn(tester, 'Accéder au simulateur');
       await iTapOn(tester, 'Vélo pliant standard : 500 €');
@@ -70,9 +71,15 @@ void main() {
       await iTapOnDropdownMenu(tester);
       await iTapOn(tester, 'DOLE');
       await iEnterInTheField(
-          tester, '2.5', 'Nombre de parts fiscales de votre foyer');
+        tester,
+        '2.5',
+        'Nombre de parts fiscales de votre foyer',
+      );
       await iEnterInTheField(
-          tester, '16000', 'Revenu fiscal de référence de mon foyer');
+        tester,
+        '16000',
+        'Revenu fiscal de référence de mon foyer',
+      );
       await iTapOn(tester, 'Estimer mes aides');
       await theProfileEndpointHasBeenCalled(tester);
       await theLogementEndpointHasBeenCalled(tester);

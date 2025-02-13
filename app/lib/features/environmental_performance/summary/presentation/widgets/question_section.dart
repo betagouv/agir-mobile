@@ -10,60 +10,62 @@ class QuestionSection extends StatelessWidget {
 
   @override
   Widget build(final context) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-            child: Text(
-              EnvironmentalPerformanceSummaryL10n.uneQuestion,
-              style: DsfrTextStyle.headline4(),
-            ),
-          ),
-          const SizedBox(height: DsfrSpacings.s3v),
-          DsfrAccordionsGroup(
-            values: [
-              DsfrAccordion(
-                headerBuilder: (final isExpanded) => const _AccordionHeader(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      const Padding(
+        padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
+        child: Text(
+          EnvironmentalPerformanceSummaryL10n.uneQuestion,
+          style: DsfrTextStyle.headline4(),
+        ),
+      ),
+      const SizedBox(height: DsfrSpacings.s3v),
+      DsfrAccordionsGroup(
+        values: [
+          DsfrAccordion(
+            headerBuilder:
+                (final isExpanded) => const _AccordionHeader(
                   text: EnvironmentalPerformanceSummaryL10n.quEstCeQuUn,
                 ),
-                body: _AccordionBody(
-                  child: MarkdownBody(
-                    data:
-                        EnvironmentalPerformanceSummaryL10n.quEstCeQuUnContenu,
-                    styleSheet: MarkdownStyleSheet(
-                      p: const DsfrTextStyle(fontSize: 15),
-                    ),
-                  ),
+            body: _AccordionBody(
+              child: MarkdownBody(
+                data: EnvironmentalPerformanceSummaryL10n.quEstCeQuUnContenu,
+                styleSheet: MarkdownStyleSheet(
+                  p: const DsfrTextStyle(fontSize: 15),
                 ),
               ),
-              DsfrAccordion(
-                headerBuilder: (final isExpanded) => const _AccordionHeader(
+            ),
+          ),
+          DsfrAccordion(
+            headerBuilder:
+                (final isExpanded) => const _AccordionHeader(
                   text: EnvironmentalPerformanceSummaryL10n.commentEstCalcule,
                 ),
-                body: _AccordionBody(
-                  child: MarkdownBody(
-                    data: EnvironmentalPerformanceSummaryL10n
+            body: _AccordionBody(
+              child: MarkdownBody(
+                data:
+                    EnvironmentalPerformanceSummaryL10n
                         .commentEstCalculeContenu,
-                    styleSheet: MarkdownStyleSheet(
-                      a: const DsfrTextStyle(
-                        fontSize: 15,
-                        color: DsfrColors.blueFranceSun113,
-                      ),
-                      p: const DsfrTextStyle(fontSize: 15),
-                    ),
-                    onTapLink: (final text, final href, final title) async {
-                      if (href == null) {
-                        return;
-                      }
-                      await FnvUrlLauncher.launch(href);
-                    },
+                styleSheet: MarkdownStyleSheet(
+                  a: const DsfrTextStyle(
+                    fontSize: 15,
+                    color: DsfrColors.blueFranceSun113,
                   ),
+                  p: const DsfrTextStyle(fontSize: 15),
                 ),
+                onTapLink: (final text, final href, final title) async {
+                  if (href == null) {
+                    return;
+                  }
+                  await FnvUrlLauncher.launch(href);
+                },
               ),
-            ],
+            ),
           ),
         ],
-      );
+      ),
+    ],
+  );
 }
 
 class _AccordionHeader extends StatelessWidget {
@@ -73,14 +75,14 @@ class _AccordionHeader extends StatelessWidget {
 
   @override
   Widget build(final context) => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: paddingVerticalPage),
-        child: Text(
-          text,
-          style: const DsfrTextStyle.bodyMdMedium(
-            color: DsfrColors.blueFranceSun113,
-          ),
-        ),
-      );
+    padding: const EdgeInsets.symmetric(horizontal: paddingVerticalPage),
+    child: Text(
+      text,
+      style: const DsfrTextStyle.bodyMdMedium(
+        color: DsfrColors.blueFranceSun113,
+      ),
+    ),
+  );
 }
 
 class _AccordionBody extends StatelessWidget {
@@ -89,8 +91,6 @@ class _AccordionBody extends StatelessWidget {
   final Widget child;
 
   @override
-  Widget build(final context) => Padding(
-        padding: const EdgeInsets.all(paddingVerticalPage),
-        child: child,
-      );
+  Widget build(final context) =>
+      Padding(padding: const EdgeInsets.all(paddingVerticalPage), child: child);
 }
