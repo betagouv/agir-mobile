@@ -31,9 +31,9 @@ class DsfrFormMessage extends StatelessWidget {
     final color = _getColorByType(type);
 
     return Row(
+      spacing: DsfrSpacings.s1v,
       children: [
         Icon(_getIconByType(type), size: DsfrSpacings.s2w, color: color),
-        const SizedBox(width: DsfrSpacings.s1v),
         Flexible(child: Text(text, style: DsfrTextStyle.bodyXs(color: color))),
       ],
     );

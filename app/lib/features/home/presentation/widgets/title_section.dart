@@ -11,6 +11,7 @@ class TitleSection extends StatelessWidget {
   @override
   Widget build(final context) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
+    spacing: DsfrSpacings.s1v5,
     children: [
       MarkdownBody(
         data: title,
@@ -21,7 +22,6 @@ class TitleSection extends StatelessWidget {
           ),
         ),
       ),
-      const SizedBox(height: DsfrSpacings.s1v5),
       MarkdownBody(
         data: subTitle,
         styleSheet: MarkdownStyleSheet(p: const DsfrTextStyle.bodyMd()),

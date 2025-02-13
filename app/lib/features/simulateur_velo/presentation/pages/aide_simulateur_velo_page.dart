@@ -155,7 +155,7 @@ class _PriceState extends State<_Price> {
                 ),
               );
             })
-            .separator(const SizedBox(height: 10)),
+            .separator(const SizedBox(height: DsfrSpacings.s2w)),
       ],
     );
   }

@@ -20,12 +20,12 @@ class AidsSection extends StatelessWidget {
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: DsfrSpacings.s2w,
       children: [
         const TitleSection(
           title: Localisation.homeAssistanceTitle,
           subTitle: Localisation.homeAssistanceSubTitle,
         ),
-        const SizedBox(height: DsfrSpacings.s2w),
         BlocBuilder<AidsHomeBloc, AidsHomeState>(
           builder: (final context, final state) {
             if (state.aids.isEmpty) {
@@ -47,7 +47,6 @@ class AidsSection extends StatelessWidget {
           },
           bloc: bloc,
         ),
-        const SizedBox(height: DsfrSpacings.s2w),
         Align(
           alignment: Alignment.centerLeft,
           child: DsfrLink.md(

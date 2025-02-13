@@ -86,9 +86,9 @@ class _Question extends StatelessWidget {
     return question == null
         ? const SizedBox.shrink()
         : Column(
+          spacing: DsfrSpacings.s3w,
           children: [
             Text(question.label, style: const DsfrTextStyle.bodyLg()),
-            const SizedBox(height: DsfrSpacings.s3w),
             FnvCheckboxSet(
               options: question.responses.map((final e) => e.label).toList(),
               selectedOptions:

@@ -18,17 +18,17 @@ class SupprimerCompte extends StatelessWidget {
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: DsfrSpacings.s2w,
       children: [
         const ProfilTitrePartie(titre: Localisation.supprimerVotreCompte),
-        const SizedBox(height: DsfrSpacings.s2w),
         const Row(
           crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: DsfrSpacings.s1v,
           children: [
             Padding(
               padding: EdgeInsets.only(top: 3),
               child: Icon(DsfrIcons.systemFrInfoFill, size: 16, color: color),
             ),
-            SizedBox(width: DsfrSpacings.s1v),
             Expanded(
               child: Text.rich(
                 TextSpan(
@@ -48,7 +48,6 @@ class SupprimerCompte extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: DsfrSpacings.s2w),
         DsfrButton(
           label: Localisation.supprimerVotreCompte,
           icon: DsfrIcons.systemFrWarningLine,

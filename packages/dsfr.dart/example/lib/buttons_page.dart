@@ -15,7 +15,6 @@ class ButtonsPage extends StatelessWidget {
   @override
   Widget build(final context) {
     const label = 'Bouton';
-    const gap = SizedBox(height: DsfrSpacings.s2w);
 
     final children = <Widget>[];
     for (final variant in DsfrButtonVariant.values) {
@@ -52,7 +51,8 @@ class ButtonsPage extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: children.separator(gap).toList(),
+        spacing: DsfrSpacings.s2w,
+        children: children,
       ),
     );
   }

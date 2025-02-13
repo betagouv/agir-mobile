@@ -20,9 +20,9 @@ class Points extends StatelessWidget {
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
+        spacing: DsfrSpacings.s1v,
         children: [
           _Content(),
-          SizedBox(width: DsfrSpacings.s1v),
           ExcludeSemantics(
             child: Icon(
               DsfrIcons.othersLeafFill,

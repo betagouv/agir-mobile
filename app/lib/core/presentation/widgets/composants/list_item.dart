@@ -23,6 +23,7 @@ class ListItem extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(paddingVerticalPage),
         child: Row(
+          spacing: DsfrSpacings.s1v,
           children: [
             Expanded(
               child: Column(
@@ -38,7 +39,6 @@ class ListItem extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(width: DsfrSpacings.s1v),
             const Icon(DsfrIcons.systemArrowRightSLine),
           ],
         ),

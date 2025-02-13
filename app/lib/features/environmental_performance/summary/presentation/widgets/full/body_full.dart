@@ -178,11 +178,10 @@ class _DetailHeader extends StatelessWidget {
     const color = Color(0xFF3636A1);
 
     return Row(
+      spacing: DsfrSpacings.s1w,
       children: [
         Text(emoji, style: const DsfrTextStyle.bodySmMedium()),
-        const SizedBox(width: DsfrSpacings.s1w),
         Expanded(child: Text(label, style: const DsfrTextStyle.bodySmMedium())),
-        const SizedBox(width: DsfrSpacings.s1w),
         Text.rich(
           TextSpan(
             children: [
@@ -223,9 +222,9 @@ class _DetailBody extends StatelessWidget {
       Expanded(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
+          spacing: DsfrSpacings.s1v5,
           children: [
             Text(label, style: const DsfrTextStyle.bodySmMedium()),
-            const SizedBox(height: DsfrSpacings.s1v5),
             ProgressBar(value: progress),
           ],
         ),

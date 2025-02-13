@@ -54,9 +54,9 @@ class _Empty extends StatelessWidget {
 
   @override
   Widget build(final context) => Column(
+    spacing: DsfrSpacings.s2w,
     children: [
       const _TitleAndSubtitle(),
-      const SizedBox(height: DsfrSpacings.s2w),
       DecoratedBox(
         decoration: const ShapeDecoration(
           color: FnvColors.carteFond,
@@ -101,9 +101,9 @@ class _Empty extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(DsfrSpacings.s1w),
               child: Row(
+                spacing: DsfrSpacings.s1w,
                 children: [
                   const _Icon(),
-                  const SizedBox(width: DsfrSpacings.s1w),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -134,7 +134,6 @@ class _Empty extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(width: DsfrSpacings.s1w),
                   const Icon(DsfrIcons.systemArrowRightSLine),
                 ],
               ),
@@ -176,11 +175,10 @@ class _Partial extends StatelessWidget {
   @override
   Widget build(final context) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
+    spacing: DsfrSpacings.s2w,
     children: [
       const _TitleAndSubtitle(),
-      const SizedBox(height: DsfrSpacings.s2w),
       EnvironmentalPerformanceCategories(categories: data.categories),
-      const SizedBox(height: DsfrSpacings.s2w),
       DsfrLink.md(
         label: EnvironmentalPerformanceSummaryL10n.voirMonBilanDetaille,
         onTap:
@@ -210,6 +208,7 @@ class _Full extends StatelessWidget {
   @override
   Widget build(final context) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
+    spacing: DsfrSpacings.s2w,
     children: [
       MarkdownBody(
         data: EnvironmentalPerformanceSummaryL10n.monBilanEnvironnemental,
@@ -220,11 +219,9 @@ class _Full extends StatelessWidget {
           ),
         ),
       ),
-      const SizedBox(height: DsfrSpacings.s2w),
       EnvironmentalPerformanceTonnesCard(
         footprint: data.footprintInKgOfCO2ePerYear,
       ),
-      const SizedBox(height: DsfrSpacings.s2w),
       DsfrLink.md(
         label: EnvironmentalPerformanceSummaryL10n.voirMonBilanDetaille,
         onTap:

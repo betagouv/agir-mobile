@@ -145,13 +145,12 @@ class _MenuElement extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(DsfrSpacings.s2w),
         child: Row(
+          spacing: DsfrSpacings.s1w,
           children: [
             Icon(icon, color: iconColor),
-            const SizedBox(width: DsfrSpacings.s1w),
             Expanded(
               child: Text(label, style: const DsfrTextStyle.bodyMdMedium()),
             ),
-            const SizedBox(width: DsfrSpacings.s1w),
             Icon(iconRight, color: iconColor),
           ],
         ),

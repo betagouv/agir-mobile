@@ -64,22 +64,20 @@ class _ContenuState extends State<Contenu> with MaterialStateMixin<Contenu> {
                   padding: const EdgeInsets.all(DsfrSpacings.s2w),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
+                    spacing: DsfrSpacings.s1w,
                     children: [
                       Text(
                         widget.contenu.thematique.displayName,
                         style: const DsfrTextStyle.bodyXsBold(),
                       ),
-                      const SizedBox(height: DsfrSpacings.s1w),
                       Text(
                         widget.contenu.titre,
                         style: const DsfrTextStyle.headline4(
                           color: DsfrColors.blueFranceSun113,
                         ),
                       ),
-                      if (sousTitre != null) ...[
-                        const SizedBox(height: DsfrSpacings.s2w),
+                      if (sousTitre != null)
                         Text(sousTitre, style: const DsfrTextStyle.bodyMd()),
-                      ],
                     ],
                   ),
                 ),

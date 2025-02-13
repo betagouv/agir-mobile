@@ -28,6 +28,7 @@ class Menu extends StatelessWidget {
     child: SafeArea(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
+        spacing: DsfrSpacings.s3w,
         children: [
           Padding(
             padding: const EdgeInsets.only(
@@ -35,6 +36,7 @@ class Menu extends StatelessWidget {
               right: DsfrSpacings.s3w,
             ),
             child: Row(
+              spacing: DsfrSpacings.s1w,
               children: [
                 IconButton(
                   iconSize: 24,
@@ -49,7 +51,6 @@ class Menu extends StatelessWidget {
                     semanticLabel: Localisation.fermer,
                   ),
                 ),
-                const SizedBox(width: DsfrSpacings.s1w),
                 const Expanded(
                   child: Text(
                     Localisation.menu,
@@ -59,7 +60,6 @@ class Menu extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: DsfrSpacings.s3w),
           const Expanded(child: SafeArea(top: false, child: _MenuItems())),
         ],
       ),

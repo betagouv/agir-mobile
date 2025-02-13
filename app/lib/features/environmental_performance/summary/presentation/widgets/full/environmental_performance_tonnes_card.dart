@@ -31,8 +31,10 @@ class EnvironmentalPerformanceTonnesCard extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: DsfrSpacings.s3v,
         children: [
           Row(
+            spacing: DsfrSpacings.s1w,
             children: [
               Text(
                 footprint.tonnesRepresentation,
@@ -42,7 +44,6 @@ class EnvironmentalPerformanceTonnesCard extends StatelessWidget {
                   color: Color(0xFFDF1451),
                 ),
               ),
-              const SizedBox(width: DsfrSpacings.s1w),
               const Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,9 +61,7 @@ class EnvironmentalPerformanceTonnesCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: DsfrSpacings.s3v),
           CompareBar(value: footprint.percentageOfMaxFootprint),
-          const SizedBox(height: DsfrSpacings.s3v),
           MarkdownBody(
             data: EnvironmentalPerformanceSummaryL10n.aTitreDeComparaison,
             styleSheet: MarkdownStyleSheet(p: const DsfrTextStyle.bodyMd()),

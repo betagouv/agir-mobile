@@ -39,23 +39,20 @@ class _Section extends StatelessWidget {
   @override
   Widget build(final context) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
+    spacing: DsfrSpacings.s2w,
     children: [
       const TitleSection(
         title: Localisation.missionTitle,
         subTitle: Localisation.missionSubTitle,
       ),
-      const SizedBox(height: DsfrSpacings.s2w),
       SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         padding: EdgeInsets.zero,
         clipBehavior: Clip.none,
         child: IntrinsicHeight(
           child: Row(
-            children:
-                data.missions
-                    .map(_Mission.new)
-                    .separator(const SizedBox(width: DsfrSpacings.s2w))
-                    .toList(),
+            spacing: DsfrSpacings.s2w,
+            children: data.missions.map(_Mission.new).toList(),
           ),
         ),
       ),

@@ -12,16 +12,16 @@ class TagsPage extends StatelessWidget {
 
   @override
   Widget build(final context) => const SingleChildScrollView(
-    padding: EdgeInsets.all(16),
+    padding: EdgeInsets.all(DsfrSpacings.s2w),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: DsfrSpacings.s1w,
       children: [
         DsfrTag.sm(
           label: TextSpan(text: 'Label tag'),
           backgroundColor: DsfrColors.blueFrance925,
           foregroundColor: DsfrColors.blueFranceSun113,
         ),
-        SizedBox(height: DsfrSpacings.s1w),
         DsfrTag.sm(
           label: TextSpan(text: 'Label tag'),
           backgroundColor: DsfrColors.blueFrance925,

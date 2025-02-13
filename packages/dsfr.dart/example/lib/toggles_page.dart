@@ -22,6 +22,7 @@ class _TogglesPageState extends State<TogglesPage> {
     padding: const EdgeInsets.all(16),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: 16,
       children: [
         DsfrToggleSwitch(
           label: 'Vos favoris',
@@ -32,7 +33,6 @@ class _TogglesPageState extends State<TogglesPage> {
             });
           },
         ),
-        const SizedBox(height: 16),
         DsfrToggleSwitch(
           label: 'Vos favoris',
           value: !_toggle,

@@ -40,19 +40,18 @@ class PreOnboardingPage extends StatelessWidget {
                 ),
                 const SizedBox(height: DsfrSpacings.s3w),
                 Row(
+                  spacing: DsfrSpacings.s3w,
                   children: [
                     FnvSvg.asset(
                       AssetImages.republiqueFrancaise,
                       height: 69,
                       semanticsLabel: AssetImages.republiqueFrancaiseSemantic,
                     ),
-                    const SizedBox(width: DsfrSpacings.s3w),
                     Image.asset(
                       AssetImages.franceNationVerte,
                       semanticLabel: AssetImages.franceNationVerteSemantic,
                       height: 46,
                     ),
-                    const SizedBox(width: DsfrSpacings.s3w),
                     FnvSvg.asset(
                       AssetImages.ademe,
                       height: 55,

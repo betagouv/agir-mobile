@@ -224,13 +224,13 @@ class _ThemeSection extends StatelessWidget {
   @override
   Widget build(final context) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
+    spacing: DsfrSpacings.s2w,
     children: [
       Text(
         themeType.displayName,
         style: const DsfrTextStyle.headline4(),
         semanticsLabel: themeType.displayNameWithoutEmoji,
       ),
-      const SizedBox(height: DsfrSpacings.s2w),
       ListView.separated(
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
@@ -264,6 +264,7 @@ class _AssitanceCard extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(DsfrSpacings.s2w),
           child: Row(
+            spacing: DsfrSpacings.s2w,
             children: [
               Expanded(
                 child: Column(
@@ -281,7 +282,6 @@ class _AssitanceCard extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(width: DsfrSpacings.s2w),
               const Icon(
                 DsfrIcons.systemArrowRightSLine,
                 color: DsfrColors.blueFranceSun113,

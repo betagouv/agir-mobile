@@ -1,6 +1,5 @@
 import 'package:dsfr/src/composants/radios/radio.dart';
 import 'package:dsfr/src/fondamentaux/spacing.g.dart';
-import 'package:dsfr/src/helpers/iterable_extension.dart';
 import 'package:flutter/material.dart';
 
 typedef Callback<T> = void Function(T value);
@@ -73,10 +72,8 @@ class _DsfrRadioButtonSetHeadlessState<T>
       ),
       DsfrRadioButtonSetMode.column => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children:
-            children
-                .separator(const SizedBox(height: DsfrSpacings.s1w))
-                .toList(),
+        spacing: DsfrSpacings.s1w,
+        children: children,
       ),
     };
   }

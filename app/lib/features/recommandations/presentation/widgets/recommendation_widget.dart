@@ -113,9 +113,9 @@ class _RecommendationWidgetState extends State<RecommendationWidget>
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.start,
+                            spacing: DsfrSpacings.s1v,
                             children: [
                               Flexible(child: _TypeTag(type: widget.type)),
-                              const SizedBox(width: DsfrSpacings.s1v),
                               _Points(
                                 points: widget.points,
                                 borderRadius: borderRadius,
@@ -217,9 +217,9 @@ class _Points extends StatelessWidget {
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
+        spacing: DsfrSpacings.s1v,
         children: [
           Text(points, style: const DsfrTextStyle.bodySmBold()),
-          const SizedBox(width: DsfrSpacings.s1v),
           const Icon(
             DsfrIcons.othersLeafFill,
             size: DsfrSpacings.s2w,
