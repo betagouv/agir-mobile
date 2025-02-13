@@ -63,6 +63,7 @@ class DsfrCheckbox extends StatelessWidget {
         behavior: HitTestBehavior.opaque,
         child: Row(
           mainAxisSize: MainAxisSize.min,
+          spacing: DsfrSpacings.s1w,
           children: [
             Focus(
               focusNode: focusNode,
@@ -89,7 +90,6 @@ class DsfrCheckbox extends StatelessWidget {
                 },
               ),
             ),
-            const SizedBox(width: DsfrSpacings.s1w),
             Flexible(child: Text(label, style: const DsfrTextStyle.bodyMd())),
           ],
         ),

@@ -11,12 +11,12 @@ class FnvAlertInfo extends StatelessWidget {
   @override
   Widget build(final context) {
     Widget child = Row(
+      spacing: DsfrSpacings.s1w,
       children: [
         const Icon(
           DsfrIcons.systemQuestionLine,
           color: DsfrColors.blueFranceSun113,
         ),
-        const SizedBox(width: DsfrSpacings.s1w),
         Expanded(
           child: MarkdownBody(
             data: label,

@@ -94,9 +94,9 @@ class MosaicButton extends StatelessWidget {
                     padding: const EdgeInsets.all(DsfrSpacings.s1w),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
+                      spacing: DsfrSpacings.s1w,
                       children: [
                         emoji,
-                        const SizedBox(height: DsfrSpacings.s1w),
                         Text(
                           title,
                           style: style.textStyle,

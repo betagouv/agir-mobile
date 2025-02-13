@@ -29,22 +29,22 @@ class _View extends StatelessWidget {
   @override
   Widget build(final context) => const Column(
     crossAxisAlignment: CrossAxisAlignment.start,
+    spacing: DsfrSpacings.s2w,
     children: [
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: DsfrSpacings.s1v5,
         children: [
           Text(
             Localisation.recommandationsTitre,
             style: DsfrTextStyle.headline4(),
           ),
-          SizedBox(height: DsfrSpacings.s1v5),
           Text(
             Localisation.themeRecommandationsSousTitre,
             style: DsfrTextStyle.bodyMd(),
           ),
         ],
       ),
-      SizedBox(height: DsfrSpacings.s2w),
       _List(),
     ],
   );
@@ -63,6 +63,7 @@ class _List extends StatelessWidget {
       clipBehavior: Clip.none,
       child: IntrinsicHeight(
         child: Row(
+          spacing: DsfrSpacings.s2w,
           children:
               recommandations
                   .map(
@@ -80,7 +81,6 @@ class _List extends StatelessWidget {
                       },
                     ),
                   )
-                  .separator(const SizedBox(width: DsfrSpacings.s2w))
                   .toList(),
         ),
       ),

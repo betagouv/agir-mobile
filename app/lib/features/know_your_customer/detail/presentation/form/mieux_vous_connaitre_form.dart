@@ -128,12 +128,12 @@ class _ChoixMultipleContent extends StatelessWidget {
 
   @override
   Widget build(final context) => Column(
+    spacing: DsfrSpacings.s3w,
     children: [
       FnvTitle(
         title: question.label,
         subtitle: Localisation.plusieursReponsesPossibles,
       ),
-      const SizedBox(height: DsfrSpacings.s3w),
       ChoixMultiple(question: question),
     ],
   );
@@ -146,9 +146,9 @@ class _ChoixUniqueContent extends StatelessWidget {
 
   @override
   Widget build(final context) => Column(
+    spacing: DsfrSpacings.s3w,
     children: [
       FnvTitle(title: question.label),
-      const SizedBox(height: DsfrSpacings.s3w),
       ChoixUnique(question: question),
     ],
   );
@@ -161,11 +161,8 @@ class _LibreContent extends StatelessWidget {
 
   @override
   Widget build(final context) => Column(
-    children: [
-      FnvTitle(title: question.label),
-      const SizedBox(height: DsfrSpacings.s3w),
-      Libre(question: question),
-    ],
+    spacing: DsfrSpacings.s3w,
+    children: [FnvTitle(title: question.label), Libre(question: question)],
   );
 }
 
@@ -176,11 +173,8 @@ class _EntierContent extends StatelessWidget {
 
   @override
   Widget build(final context) => Column(
-    children: [
-      FnvTitle(title: question.label),
-      const SizedBox(height: DsfrSpacings.s3w),
-      Entier(question: question),
-    ],
+    spacing: DsfrSpacings.s3w,
+    children: [FnvTitle(title: question.label), Entier(question: question)],
   );
 }
 
@@ -192,12 +186,12 @@ class _MosaicContent extends StatelessWidget {
   @override
   Widget build(final context) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
+    spacing: DsfrSpacings.s3w,
     children: [
       FnvTitle(
         title: question.label,
         subtitle: Localisation.plusieursReponsesPossibles,
       ),
-      const SizedBox(height: DsfrSpacings.s3w),
       Mosaic(question: question),
     ],
   );

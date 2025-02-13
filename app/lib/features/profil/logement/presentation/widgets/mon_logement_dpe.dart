@@ -25,6 +25,7 @@ class MonLogementDpe extends StatelessWidget {
     return MonLogementTitreEtContenu(
       titre: Localisation.consommationsEnergetiques,
       contenu: Column(
+        spacing: DsfrSpacings.s2w,
         children: [
           _FnvDpe(
             initialValue: dpe,
@@ -33,7 +34,6 @@ class MonLogementDpe extends StatelessWidget {
                   MonLogementDpeChange(value),
                 ),
           ),
-          const SizedBox(height: DsfrSpacings.s2w),
           FnvAlertInfo(
             label: Localisation.dpeExplication,
             content: MarkdownBody(
@@ -130,6 +130,7 @@ class _FnvDpeState extends State<_FnvDpe> {
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: DsfrSpacings.s1w,
       children:
           labels
               .mapIndexed(
@@ -142,7 +143,6 @@ class _FnvDpeState extends State<_FnvDpe> {
                   width: width * ((index + 1) * 10 + 17),
                 ),
               )
-              .separator(const SizedBox(height: DsfrSpacings.s1w))
               .toList(),
     );
   }
@@ -199,13 +199,13 @@ class _FvnDpeEtiquette extends StatelessWidget {
       child: SizedBox(
         width: width,
         child: Row(
+          spacing: DsfrSpacings.s1w,
           children: [
             RadioIcon(
               key: ValueKey(label),
               value: value,
               groupValue: groupValue,
             ),
-            const SizedBox(width: DsfrSpacings.s1w),
             Expanded(child: customPaint),
           ],
         ),

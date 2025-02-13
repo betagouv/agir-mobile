@@ -49,9 +49,9 @@ class _JaccepteState extends State<Jaccepte> {
         checked: widget.value,
         label: '$jaccepte${widget.label}',
         child: Row(
+          spacing: DsfrSpacings.s1w,
           children: [
             DsfrCheckboxIcon(value: widget.value),
-            const SizedBox(width: DsfrSpacings.s1w),
             Expanded(
               child: Text.rich(
                 TextSpan(

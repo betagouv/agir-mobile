@@ -13,6 +13,7 @@ class PartnerWidget extends StatelessWidget {
   Widget build(final BuildContext context) => Padding(
     padding: const EdgeInsets.all(DsfrSpacings.s1w),
     child: Row(
+      spacing: DsfrSpacings.s1w,
       children: [
         DecoratedBox(
           decoration: const BoxDecoration(
@@ -22,7 +23,6 @@ class PartnerWidget extends StatelessWidget {
           ),
           child: FnvImage.network(partner.logo, width: 40, height: 40),
         ),
-        const SizedBox(width: DsfrSpacings.s1w),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

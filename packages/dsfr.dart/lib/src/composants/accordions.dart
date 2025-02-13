@@ -1,3 +1,5 @@
+// ignore_for_file: prefer-spacing
+
 import 'package:dsfr/src/atoms/focus_widget.dart';
 import 'package:dsfr/src/composants/divider.dart';
 import 'package:dsfr/src/fondamentaux/colors.g.dart';

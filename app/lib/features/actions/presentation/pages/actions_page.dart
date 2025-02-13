@@ -149,6 +149,7 @@ class _Information extends StatelessWidget {
           : ConstrainedBox(
             constraints: const BoxConstraints(minHeight: 24),
             child: Row(
+              spacing: DsfrSpacings.s1w,
               children: [
                 ExcludeSemantics(
                   child: Icon(
@@ -157,7 +158,6 @@ class _Information extends StatelessWidget {
                     color: DsfrColors.blueFranceSun113,
                   ),
                 ),
-                const SizedBox(width: 8),
                 MarkdownBody(
                   data: '**$value** $suffix${value > 1 ? 's' : ''}',
                   styleSheet: MarkdownStyleSheet(

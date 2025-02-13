@@ -30,9 +30,9 @@ class AidCard extends StatelessWidget {
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: DsfrSpacings.s1v,
               children: [
                 Text(aid.title, style: const DsfrTextStyle.bodyMdMedium()),
-                const SizedBox(height: DsfrSpacings.s1v),
                 ThemeTypeTag(themeType: aid.themeType),
               ],
             ),

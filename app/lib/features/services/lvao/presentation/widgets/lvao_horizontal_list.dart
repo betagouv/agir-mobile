@@ -48,6 +48,7 @@ class _Success extends StatelessWidget {
   @override
   Widget build(final BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
+    spacing: DsfrSpacings.s1w,
     children: [
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
@@ -67,13 +68,13 @@ class _Success extends StatelessWidget {
           ],
         ),
       ),
-      const SizedBox(height: DsfrSpacings.s1w),
       SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
         clipBehavior: Clip.none,
         child: IntrinsicHeight(
           child: Row(
+            spacing: DsfrSpacings.s2w,
             children:
                 state.actors
                     .map(
@@ -83,6 +84,7 @@ class _Success extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.all(DsfrSpacings.s1w),
                             child: Row(
+                              spacing: DsfrSpacings.s2w,
                               children: [
                                 const DecoratedBox(
                                   decoration: BoxDecoration(
@@ -97,7 +99,6 @@ class _Success extends StatelessWidget {
                                     height: 99,
                                   ),
                                 ),
-                                const SizedBox(width: DsfrSpacings.s2w),
                                 Expanded(
                                   child: Column(
                                     crossAxisAlignment:
@@ -138,7 +139,6 @@ class _Success extends StatelessWidget {
                         ),
                       ),
                     )
-                    .separator(const SizedBox(width: DsfrSpacings.s2w))
                     .toList(),
           ),
         ),

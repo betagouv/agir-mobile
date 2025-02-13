@@ -55,10 +55,8 @@ class EnvironmentalPerformanceCard extends StatelessWidget {
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children:
-              items
-                  .separator(const SizedBox(height: DsfrSpacings.s2w))
-                  .toList(),
+          spacing: DsfrSpacings.s2w,
+          children: items,
         ),
       ),
     );

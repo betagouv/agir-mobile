@@ -30,6 +30,7 @@ class DsfrNotice extends StatelessWidget {
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: DsfrSpacings.s1w,
           children: [
             Expanded(
               child: Padding(
@@ -37,9 +38,9 @@ class DsfrNotice extends StatelessWidget {
                 child: Column(
                   children: [
                     Row(
+                      spacing: DsfrSpacings.s1w,
                       children: [
                         const Icon(DsfrIcons.systemFrInfoFill, color: color),
-                        const SizedBox(width: DsfrSpacings.s1w),
                         Expanded(
                           child: Text(
                             titre,
@@ -55,7 +56,6 @@ class DsfrNotice extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(width: DsfrSpacings.s1w),
             IconButton(
               iconSize: DsfrSpacings.s2w,
               onPressed: onClose,

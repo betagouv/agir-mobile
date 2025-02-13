@@ -1,3 +1,5 @@
+// ignore_for_file: prefer-spacing
+
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 
@@ -21,15 +23,15 @@ class TopEmissionSourceItem extends StatelessWidget {
       Expanded(
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: DsfrSpacings.s1w,
           children: [
             Text('$rank.', style: const DsfrTextStyle.bodyXlMedium()),
-            const SizedBox(width: DsfrSpacings.s1w),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                spacing: DsfrSpacings.s1v5,
                 children: [
                   Text(label, style: const DsfrTextStyle.bodyXlBold()),
-                  const SizedBox(height: DsfrSpacings.s1v5),
                   Text.rich(
                     TextSpan(
                       children: [

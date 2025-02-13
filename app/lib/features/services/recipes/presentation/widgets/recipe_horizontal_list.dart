@@ -47,6 +47,7 @@ class _Success extends StatelessWidget {
   @override
   Widget build(final BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
+    spacing: DsfrSpacings.s1w,
     children: [
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
@@ -55,13 +56,13 @@ class _Success extends StatelessWidget {
           styleSheet: MarkdownStyleSheet(p: const DsfrTextStyle(fontSize: 22)),
         ),
       ),
-      const SizedBox(height: DsfrSpacings.s1w),
       SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
         clipBehavior: Clip.none,
         child: IntrinsicHeight(
           child: Row(
+            spacing: DsfrSpacings.s2w,
             children:
                 state.recipes
                     .map(
@@ -94,6 +95,7 @@ class _Success extends StatelessWidget {
                                 ),
                                 const SizedBox(height: DsfrSpacings.s1w),
                                 Row(
+                                  spacing: DsfrSpacings.s1v,
                                   children: [
                                     Flexible(
                                       child: DsfrTag.sm(
@@ -108,7 +110,6 @@ class _Success extends StatelessWidget {
                                             const DsfrTextStyle.bodyXsMedium(),
                                       ),
                                     ),
-                                    const SizedBox(width: DsfrSpacings.s1v),
                                     _EstimadedTimedInfo(
                                       text: '${e.preparationTime} min',
                                     ),
@@ -120,7 +121,6 @@ class _Success extends StatelessWidget {
                         ),
                       ),
                     )
-                    .separator(const SizedBox(width: DsfrSpacings.s2w))
                     .toList(),
           ),
         ),

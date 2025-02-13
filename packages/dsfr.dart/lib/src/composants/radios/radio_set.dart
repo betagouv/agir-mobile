@@ -20,9 +20,9 @@ class DsfrRadioButtonSet<T> extends StatelessWidget {
   @override
   Widget build(final context) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
+    spacing: DsfrSpacings.s1w,
     children: [
       Text(title, style: const DsfrTextStyle.bodyMd()),
-      const SizedBox(height: DsfrSpacings.s1w),
       DsfrRadioButtonSetHeadless(
         values: values.map(
           (final key, final value) => MapEntry(key, DsfrRadioButtonItem(value)),

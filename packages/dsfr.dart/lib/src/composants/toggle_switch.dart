@@ -36,13 +36,13 @@ class _DsfrToggleSwitchState extends State<DsfrToggleSwitch>
       excludeFromSemantics: true,
       onFocusChange: updateMaterialState(WidgetState.focused),
       child: Row(
+        spacing: DsfrSpacings.s2w,
         children: [
           DsfrFocusWidget(
             isFocused: isFocused,
             borderRadius: const BorderRadius.all(Radius.circular(24)),
             child: _Switch(value: widget.value),
           ),
-          const SizedBox(width: DsfrSpacings.s2w),
           Flexible(
             child: Text(widget.label, style: const DsfrTextStyle.bodyMd()),
           ),

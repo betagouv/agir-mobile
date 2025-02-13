@@ -126,6 +126,7 @@ class _Header extends StatelessWidget {
   Widget build(final context) => Padding(
     padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w),
     child: Row(
+      spacing: DsfrSpacings.s1w,
       children: [
         Expanded(
           child: Text(
@@ -136,7 +137,6 @@ class _Header extends StatelessWidget {
                     : const DsfrTextStyle.bodyMd(),
           ),
         ),
-        const SizedBox(width: DsfrSpacings.s1w),
         Text.rich(
           TextSpan(
             children:
@@ -176,27 +176,26 @@ class _Body extends StatelessWidget {
                 padding: const EdgeInsets.all(DsfrSpacings.s2w),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  spacing: DsfrSpacings.s1w,
                   children: [
                     FnvImage.network(
                       e.logo,
                       width: DsfrSpacings.s7w,
                       height: DsfrSpacings.s7w,
                     ),
-                    const SizedBox(width: DsfrSpacings.s1w),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        spacing: DsfrSpacings.s1v,
                         children: [
                           Text(
                             e.libelle,
                             style: const DsfrTextStyle.bodyMdBold(),
                           ),
-                          const SizedBox(height: DsfrSpacings.s1v),
                           Text(
                             e.description.trim(),
                             style: const DsfrTextStyle.bodyXs(),
                           ),
-                          const SizedBox(height: DsfrSpacings.s1v),
                           DsfrLink.sm(
                             label: Localisation.voirLesDemarches,
                             icon: DsfrIcons.systemExternalLinkFill,
@@ -206,7 +205,6 @@ class _Body extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const SizedBox(width: DsfrSpacings.s1w),
                     Text(
                       Localisation.euro(e.montant),
                       style: const DsfrTextStyle.bodyMdBold(),

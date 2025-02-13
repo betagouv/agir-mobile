@@ -105,6 +105,7 @@ class _ImageEtTitre extends StatelessWidget {
     );
 
     return Column(
+      spacing: DsfrSpacings.s1w,
       children: [
         ClipOval(
           child: SizedBox.square(
@@ -123,7 +124,6 @@ class _ImageEtTitre extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: DsfrSpacings.s1w),
         Text(
           themeType.displayNameWithoutEmoji,
           style: const DsfrTextStyle.headline2(),
@@ -147,11 +147,8 @@ class _Missions extends StatelessWidget {
       clipBehavior: Clip.none,
       child: IntrinsicHeight(
         child: Row(
-          children:
-              thematiques
-                  .map((final e) => _Mission(mission: e))
-                  .separator(const SizedBox(width: DsfrSpacings.s2w))
-                  .toList(),
+          spacing: DsfrSpacings.s2w,
+          children: thematiques.map((final e) => _Mission(mission: e)).toList(),
         ),
       ),
     );
@@ -239,19 +236,18 @@ class _Services extends StatelessWidget {
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: DsfrSpacings.s2w,
       children: [
         const Text(Localisation.mesServices, style: DsfrTextStyle.headline4()),
-        const SizedBox(height: DsfrSpacings.s2w),
+
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           clipBehavior: Clip.none,
           child: IntrinsicHeight(
             child: Row(
+              spacing: DsfrSpacings.s2w,
               children:
-                  services
-                      .map((final e) => ServiceCard(service: e))
-                      .separator(const SizedBox(width: DsfrSpacings.s2w))
-                      .toList(),
+                  services.map((final e) => ServiceCard(service: e)).toList(),
             ),
           ),
         ),

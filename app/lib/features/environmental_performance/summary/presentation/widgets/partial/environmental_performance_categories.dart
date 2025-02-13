@@ -25,6 +25,7 @@ class EnvironmentalPerformanceCategories extends StatelessWidget {
     clipBehavior: Clip.none,
     child: IntrinsicHeight(
       child: Row(
+        spacing: DsfrSpacings.s2w,
         children:
             categories
                 .map(
@@ -52,7 +53,6 @@ class EnvironmentalPerformanceCategories extends StatelessWidget {
                     },
                   ),
                 )
-                .separator(const SizedBox(width: DsfrSpacings.s2w))
                 .toList(),
       ),
     ),

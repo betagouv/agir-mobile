@@ -71,6 +71,7 @@ class _FnvCheckboxSetState extends State<FnvCheckboxSet> {
   @override
   Widget build(final context) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
+    spacing: DsfrSpacings.s2w,
     children:
         widget.options
             .map(
@@ -104,7 +105,6 @@ class _FnvCheckboxSetState extends State<FnvCheckboxSet> {
                 ),
               ),
             )
-            .separator(const SizedBox(height: DsfrSpacings.s2w))
             .toList(),
   );
 }

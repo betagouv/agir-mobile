@@ -58,13 +58,13 @@ class _DsfrRadioButtonState<T> extends State<DsfrRadioButton<T>>
             padding: const EdgeInsets.all(DsfrSpacings.s2w),
             child: Row(
               mainAxisSize: MainAxisSize.min,
+              spacing: DsfrSpacings.s1w,
               children: [
                 RadioIcon(
                   key: ValueKey(widget.title),
                   value: widget.value,
                   groupValue: widget.groupValue,
                 ),
-                const SizedBox(width: DsfrSpacings.s1w),
                 Flexible(
                   child: Text(
                     widget.title,

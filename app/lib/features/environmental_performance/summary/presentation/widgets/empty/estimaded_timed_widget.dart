@@ -70,9 +70,9 @@ class _EstimadedTimedInfo extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
+      spacing: DsfrSpacings.s1w,
       children: [
         Icon(icon, size: 24, color: color),
-        const SizedBox(width: DsfrSpacings.s1w),
         Flexible(
           child: Text.rich(
             TextSpan(

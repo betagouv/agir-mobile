@@ -23,13 +23,15 @@ class EnvironmentalPerformanceCardItem extends StatelessWidget {
         EnvironmentalPerformanceLevelRepresentation.fromProgress(level);
 
     return Row(
+      spacing: DsfrSpacings.s3v,
       children: [
         Text(emoji, style: const DsfrTextStyle.headline4()),
-        const SizedBox(width: DsfrSpacings.s3v),
         Expanded(
           child: Column(
+            spacing: DsfrSpacings.s1v5,
             children: [
               Row(
+                spacing: DsfrSpacings.s1v5,
                 children: [
                   Expanded(
                     child: Text(
@@ -37,7 +39,6 @@ class EnvironmentalPerformanceCardItem extends StatelessWidget {
                       style: const DsfrTextStyle.bodyMdMedium(),
                     ),
                   ),
-                  const SizedBox(width: DsfrSpacings.s1v5),
                   EnvironmentalPerformanceCardItemLevel(
                     label: levelRepresentation.label,
                     backgroundColor: levelRepresentation.backgroundColor,
@@ -45,7 +46,6 @@ class EnvironmentalPerformanceCardItem extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: DsfrSpacings.s1v5),
               RainbowProgressBar(
                 value: switch (level) {
                   EnvironmentalPerformanceLevel.low => 0.23,

@@ -42,14 +42,13 @@ class _Section extends StatelessWidget {
   @override
   Widget build(final context) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
+    spacing: DsfrSpacings.s2w,
     children: [
       const TitleSection(
         title: Localisation.actionsSectionTitle,
         subTitle: Localisation.actionsSectionSubTitle,
       ),
-      const SizedBox(height: DsfrSpacings.s2w),
       _Challenges(value: state.challenges),
-      const SizedBox(height: DsfrSpacings.s2w),
       Align(
         alignment: Alignment.centerLeft,
         child: DsfrLink.md(
@@ -81,11 +80,8 @@ class _Challenges extends StatelessWidget {
             clipBehavior: Clip.none,
             child: IntrinsicHeight(
               child: Row(
-                children:
-                    value
-                        .map(_Challenge.new)
-                        .separator(const SizedBox(width: DsfrSpacings.s2w))
-                        .toList(),
+                spacing: DsfrSpacings.s2w,
+                children: value.map(_Challenge.new).toList(),
               ),
             ),
           );
@@ -143,9 +139,9 @@ class _ChallengeState extends State<_Challenge>
                 padding: const EdgeInsets.all(DsfrSpacings.s2w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  spacing: DsfrSpacings.s1w,
                   children: [
                     ThemeTypeTag(themeType: widget.item.themeType),
-                    const SizedBox(height: DsfrSpacings.s1w),
                     Expanded(
                       child: Text(
                         widget.item.titre,

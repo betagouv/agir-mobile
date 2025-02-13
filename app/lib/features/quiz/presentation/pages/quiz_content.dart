@@ -18,14 +18,13 @@ class QuizContent extends StatelessWidget {
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: DsfrSpacings.s2w,
       children: [
         Text(state.quiz.question, style: const DsfrTextStyle.headline2()),
         const SizedBox(height: DsfrSpacings.s2w),
         _Choices(state: state),
         if (state.estExacte.isSome()) ...[
-          const SizedBox(height: DsfrSpacings.s2w),
           const Text(Localisation.pourquoi, style: DsfrTextStyle.headline2()),
-          const SizedBox(height: DsfrSpacings.s2w),
           FnvHtmlWidget(state.explication),
         ],
       ],

@@ -23,9 +23,9 @@ class FnvAlert extends StatelessWidget {
 
   @override
   Widget build(final context) => Row(
+    spacing: DsfrSpacings.s1w,
     children: [
       Icon(icon, size: DsfrSpacings.s2w, color: color),
-      const SizedBox(width: DsfrSpacings.s1w),
       Expanded(child: Text(label, style: DsfrTextStyle.bodySm(color: color))),
     ],
   );

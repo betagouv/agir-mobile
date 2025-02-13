@@ -11,6 +11,7 @@ class QuestionSection extends StatelessWidget {
   @override
   Widget build(final context) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
+    spacing: DsfrSpacings.s3v,
     children: [
       const Padding(
         padding: EdgeInsets.symmetric(horizontal: paddingVerticalPage),
@@ -19,7 +20,6 @@ class QuestionSection extends StatelessWidget {
           style: DsfrTextStyle.headline4(),
         ),
       ),
-      const SizedBox(height: DsfrSpacings.s3v),
       DsfrAccordionsGroup(
         values: [
           DsfrAccordion(

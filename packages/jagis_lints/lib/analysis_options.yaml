@@ -136,7 +136,6 @@ dart_code_metrics:
     - prefer-single-declaration-per-file: false
     - prefer-single-widget-per-file:
         ignore-private-widgets: true
-    - prefer-spacing: false # TODO(lsaudon): à réactiver après être passer sur flutter 3.27 ou plus
     - prefer-static-class: false
     - prefer-static-method: false
     - prefer-test-matchers: false

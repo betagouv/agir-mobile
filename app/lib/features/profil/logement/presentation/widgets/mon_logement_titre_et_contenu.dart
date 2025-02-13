@@ -15,10 +15,7 @@ class MonLogementTitreEtContenu extends StatelessWidget {
   @override
   Widget build(final context) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      ProfilTitrePartie(titre: titre),
-      const SizedBox(height: DsfrSpacings.s2w),
-      contenu,
-    ],
+    spacing: DsfrSpacings.s2w,
+    children: [ProfilTitrePartie(titre: titre), contenu],
   );
 }
