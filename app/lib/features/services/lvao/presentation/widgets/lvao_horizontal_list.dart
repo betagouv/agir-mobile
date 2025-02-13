@@ -1,9 +1,9 @@
 import 'package:app/core/assets/images.dart';
 import 'package:app/core/presentation/widgets/composants/card.dart';
 import 'package:app/core/presentation/widgets/composants/image.dart';
-import 'package:app/features/lvao/presentation/bloc/lvao_bloc.dart';
-import 'package:app/features/lvao/presentation/bloc/lvao_event.dart';
-import 'package:app/features/lvao/presentation/bloc/lvao_state.dart';
+import 'package:app/features/services/lvao/presentation/bloc/lvao_bloc.dart';
+import 'package:app/features/services/lvao/presentation/bloc/lvao_event.dart';
+import 'package:app/features/services/lvao/presentation/bloc/lvao_state.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/widgets.dart';

@@ -1,4 +1,4 @@
-import 'package:app/features/lvao/domain/lvao_actor.dart';
+import 'package:app/features/services/lvao/domain/lvao_actor.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 

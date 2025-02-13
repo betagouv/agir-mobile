@@ -1,4 +1,4 @@
-import 'package:app/features/lvao/domain/lvao_actor.dart';
+import 'package:app/features/services/lvao/domain/lvao_actor.dart';
 
 abstract final class LvaoActorMapper {
   const LvaoActorMapper._();

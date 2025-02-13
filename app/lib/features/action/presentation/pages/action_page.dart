@@ -4,7 +4,7 @@ import 'package:app/core/presentation/widgets/fondamentaux/shadows.dart';
 import 'package:app/features/action/presentation/bloc/action_bloc.dart';
 import 'package:app/features/action/presentation/bloc/action_event.dart';
 import 'package:app/features/action/presentation/bloc/action_state.dart';
-import 'package:app/features/lvao/presentation/widgets/lvao_horizontal_list.dart';
+import 'package:app/features/services/lvao/presentation/widgets/lvao_horizontal_list.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

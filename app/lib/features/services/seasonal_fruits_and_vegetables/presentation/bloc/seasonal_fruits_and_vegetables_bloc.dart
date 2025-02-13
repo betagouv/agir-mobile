@@ -1,6 +1,6 @@
-import 'package:app/features/seasonal_fruits_and_vegetables/domain/plant.dart';
-import 'package:app/features/seasonal_fruits_and_vegetables/domain/plant_month.dart';
-import 'package:app/features/seasonal_fruits_and_vegetables/infrastructure/seasonal_fruits_and_vegetables_repository.dart';
+import 'package:app/features/services/seasonal_fruits_and_vegetables/domain/plant.dart';
+import 'package:app/features/services/seasonal_fruits_and_vegetables/domain/plant_month.dart';
+import 'package:app/features/services/seasonal_fruits_and_vegetables/infrastructure/seasonal_fruits_and_vegetables_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
