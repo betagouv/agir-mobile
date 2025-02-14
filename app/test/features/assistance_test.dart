@@ -20,7 +20,8 @@ void main() {
       await theApplicationIsLaunched(tester);
     }
 
-    testWidgets('''Show 2 first assistances on the home page''', (tester) async {
+    testWidgets('''Show 2 first assistances on the home page''',
+        (tester) async {
       await bddSetUp(tester);
       await iSee(tester, 'Rénover son logement');
       await iSee(tester, 'Acheter un vélo');

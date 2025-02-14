@@ -31,17 +31,20 @@ void main() {
       await bddSetUp(tester);
       await iEnterInTheField(tester, 'Azertyuiop1&', 'Mot de passe');
       await iSeeTheFormMessage(tester, '12 caractères minimum', 'valid');
-      await iSeeTheFormMessage(tester, 'Au moins 1 majuscule et 1 minuscule', 'valid');
+      await iSeeTheFormMessage(
+          tester, 'Au moins 1 majuscule et 1 minuscule', 'valid');
       await iSeeTheFormMessage(tester, '1 caractère spécial minimum', 'valid');
       await iSeeTheFormMessage(tester, '1 chiffre minimum', 'valid');
       await iTapOn(tester, 'Changer mon mot de passe');
       await theChangePasswordEndpointHasBeenCalled(tester);
     });
-    testWidgets('''Change my password with an invalid password''', (tester) async {
+    testWidgets('''Change my password with an invalid password''',
+        (tester) async {
       await bddSetUp(tester);
       await iEnterInTheField(tester, 'pasvalide', 'Mot de passe');
       await iSeeTheFormMessage(tester, '12 caractères minimum', 'info');
-      await iSeeTheFormMessage(tester, 'Au moins 1 majuscule et 1 minuscule', 'info');
+      await iSeeTheFormMessage(
+          tester, 'Au moins 1 majuscule et 1 minuscule', 'info');
       await iSeeTheFormMessage(tester, '1 caractère spécial minimum', 'info');
       await iSeeTheFormMessage(tester, '1 chiffre minimum', 'info');
       await iTapOn(tester, 'Changer mon mot de passe');

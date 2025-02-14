@@ -15,7 +15,9 @@ void main() {
       await initializeContext(tester);
     }
 
-    testWidgets('''Login to my account is successful and notification token is saved''', (tester) async {
+    testWidgets(
+        '''Login to my account is successful and notification token is saved''',
+        (tester) async {
       await bddSetUp(tester);
       await iAmLoggedIn(tester);
       await theApplicationIsLaunched(tester);

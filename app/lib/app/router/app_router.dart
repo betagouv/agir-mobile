@@ -32,6 +32,7 @@ import 'package:app/features/questions/presentation/pages/tout_est_pret_page.dar
 import 'package:app/features/questions/question_code_postal/presentation/pages/question_code_postal_page.dart';
 import 'package:app/features/questions/question_themes/presentation/pages/question_themes_page.dart';
 import 'package:app/features/quiz/presentation/pages/quiz_page.dart';
+import 'package:app/features/services/recipes/item/presentation/pages/recipe_page.dart';
 import 'package:app/features/services/seasonal_fruits_and_vegetables/presentation/pages/seasonal_fruits_and_vegetables_page.dart';
 import 'package:app/features/simulateur_velo/presentation/pages/aide_simulateur_velo_disponibles_page.dart';
 import 'package:app/features/simulateur_velo/presentation/pages/aide_simulateur_velo_page.dart';
@@ -74,6 +75,7 @@ GoRouter goRouter({required final Tracker tracker}) => GoRouter(
         BibliothequePage.route,
         ActionsPage.route,
         ActionPage.route,
+        RecipePage.route,
         QuizPage.route,
         ProfilPage.route,
         MesInformationsPage.route,

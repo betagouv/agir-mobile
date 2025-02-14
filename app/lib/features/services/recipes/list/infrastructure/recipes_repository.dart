@@ -1,8 +1,8 @@
 import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/endpoints.dart';
 import 'package:app/core/infrastructure/http_client_helpers.dart';
-import 'package:app/features/services/recipes/domain/recipe.dart';
-import 'package:app/features/services/recipes/infrastructure/recipe_mapper.dart';
+import 'package:app/features/services/recipes/list/domain/recipe_summary.dart';
+import 'package:app/features/services/recipes/list/infrastructure/recipe_summary_mapper.dart';
 import 'package:fpdart/fpdart.dart';
 
 class RecipesRepository {
@@ -10,7 +10,7 @@ class RecipesRepository {
 
   final DioHttpClient _client;
 
-  Future<Either<Exception, List<Recipe>>> fetch({required final String category}) async {
+  Future<Either<Exception, List<RecipeSummary>>> fetch({required final String category}) async {
     final response = await _client.post(
       Endpoints.recipesSearch,
       data: {'categorie': category, 'nombre_max_resultats': 4, 'rayon_metres': 5000},
@@ -21,7 +21,7 @@ class RecipesRepository {
         : Right(
           ((response.data as Map<String, dynamic>)['resultats'] as List<dynamic>)
               .cast<Map<String, dynamic>>()
-              .map(RecipeMapper.fromJson)
+              .map(RecipeSummaryMapper.fromJson)
               .toList(),
         );
   }

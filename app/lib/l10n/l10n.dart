@@ -61,6 +61,7 @@ abstract final class Localisation {
   static const creerMonCompteApp = 'Créer mon compte J’agis';
   static const declarationAccessibilite = 'Déclaration d’accessibilité';
   static const declarationAccessibiliteSite = 'https://jagis.beta.gouv.fr/accessibilite';
+  static const etapes = 'Étapes';
   static const fruits = 'Fruits';
   static const legumes = 'Légumes';
   static const fruitsEtLegumesTitre = 'Les fruits et légumes pour le mois de ';
@@ -73,6 +74,7 @@ abstract final class Localisation {
   static const impactCo2 = 'Impact CO₂';
   static const impactCo2Description = 'Des informations fiables et sourcées issues des données environnementales de l’ADEME';
   static const impactCo2Url = 'https://impactco2.fr/';
+  static const ingredients = 'Ingrédients';
   static const donneesPersonnelles = 'Données personnelles';
   static const donneesUtiliseesPart1 = 'Données utilisées : code postal ';
   static const donneesUtiliseesPart2 = ', revenu fiscal de référence ';
@@ -288,4 +290,6 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
 
   static String distance(final int value) =>
       value >= 1000 ? 'À ${NumberFormat('0.#', 'fr').format(value / 1000)} km' : 'À $value m';
+
+  static String tempsDePreparation(final int value) => 'Temps de préparation : $value min';
 }
