@@ -18,7 +18,7 @@ class AuthentificationRepository {
 
   final DioHttpClient _client;
   final AuthenticationService _authenticationService;
-  bool _connexionDemandee = false;
+  var _connexionDemandee = false;
 
   Future<Either<ApiErreur, void>> connexionDemandee(final InformationDeConnexion informationDeConnexion) async {
     final response = await _client.post(

@@ -30,7 +30,7 @@ class DsfrAccordionsGroup extends StatefulWidget {
 
 class _DsfrAccordionsGroupState extends State<DsfrAccordionsGroup> {
   int? _panelIndex;
-  bool _isExpanded = false;
+  var _isExpanded = false;
 
   void _handleCallback(final int? panelIndex, final bool isExpanded) => setState(() {
     _panelIndex = panelIndex;

@@ -12,7 +12,7 @@ class TogglesPage extends StatefulWidget {
 }
 
 class _TogglesPageState extends State<TogglesPage> {
-  bool _toggle = false;
+  var _toggle = false;
 
   @override
   Widget build(final context) => SingleChildScrollView(

@@ -12,7 +12,7 @@ class TextPage extends StatefulWidget {
 }
 
 class _TextPageState extends State<TextPage> {
-  String _text = 'Lorem ipsum dolor sit amet';
+  var _text = 'Lorem ipsum dolor sit amet';
   double _fontSize = 16;
 
   @override

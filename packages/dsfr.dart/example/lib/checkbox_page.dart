@@ -12,7 +12,7 @@ class CheckboxPage extends StatefulWidget {
 }
 
 class _CheckboxPageState extends State<CheckboxPage> {
-  bool _value = false;
+  var _value = false;
 
   @override
   Widget build(final context) => ListView(

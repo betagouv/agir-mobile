@@ -12,7 +12,7 @@ class RadiosPage extends StatefulWidget {
 }
 
 class _RadiosPageState extends State<RadiosPage> {
-  int _value = 0;
+  var _value = 0;
 
   @override
   Widget build(final context) => ListView(

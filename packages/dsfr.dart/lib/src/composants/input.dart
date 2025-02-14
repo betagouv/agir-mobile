@@ -66,7 +66,7 @@ class DsfrInput extends StatefulWidget {
 }
 
 class _DsfrInputState extends State<DsfrInput> {
-  bool _passwordVisibility = false;
+  var _passwordVisibility = false;
 
   void _handlePasswordVisibility(final bool value) => setState(() => _passwordVisibility = value);
 

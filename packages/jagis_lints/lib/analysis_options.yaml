@@ -9,13 +9,10 @@ analyzer:
     strict-inference: true
     strict-raw-types: true
   errors:
-    close_sinks: ignore
-    collection_methods_unrelated_type: error
     included_file_warning: ignore
     missing_required_param: error
     missing_return: error
     record_literal_one_positional_no_trailing_comma: error
-    unrelated_type_equality_checks: error
   exclude: 
     - '**/*.g.dart'
 
@@ -37,9 +34,14 @@ linter:
     prefer_double_quotes: false # incompatible with `prefer_single_quotes`.
     prefer_relative_imports: false # incompatible with `always_use_package_imports`.
     public_member_api_docs: false
+    require_trailing_commas: false # false positive
+    specify_nonobvious_property_types: false
+    specify_nonobvious_local_variable_types: false
     type_annotate_public_apis: false
+    unnecessary_async: false
     unnecessary_final: false # incompatible with `prefer_final_parameters`.
-    require_trailing_commas: false
+    unsafe_variance: false
+
 
 dart_code_metrics:
   extends:
@@ -77,18 +79,16 @@ dart_code_metrics:
     - avoid-long-functions:
         exclude:
           - test/**
-    - avoid-missing-image-alt: false # voir pour réactiver
     - avoid-nested-conditional-expressions: false
     - avoid-nested-switch-expressions: false
     - avoid-non-ascii-symbols: false
     - avoid-non-null-assertion: false
     - avoid-passing-async-when-sync-expected: false
-    - avoid-passing-self-as-argument: false # voir pour réactiver
     - avoid-positional-record-field-access: false
     - avoid-redundant-async: false
     - avoid-returning-cascades: false
     - avoid-shadowing: false
-    - avoid-shrink-wrap-in-lists: false # à réactiver
+    - avoid-shrink-wrap-in-lists: false # TODO(lsaudon): à réactiver quand tu pourras fix
     - avoid-similar-names: false
     - avoid-top-level-members-in-tests: false
     - avoid-type-casts: false
@@ -114,7 +114,7 @@ dart_code_metrics:
     - parameters-ordering: false
     - prefer-addition-subtraction-assignments: false
     - prefer-boolean-prefixes: false
-    - prefer-class-destructuring: false # à voir pour réactiver
+    - prefer-class-destructuring: false
     - prefer-commenting-analyzer-ignores: false
     - prefer-container: false
     - prefer-correct-identifier-length: false
@@ -142,7 +142,7 @@ dart_code_metrics:
     - prefer-static-class: false
     - prefer-static-method: false
     - prefer-test-matchers: false
-    - prefer-trailing-comma: false # TODO(lsaudon): à réactiver après une maj de dcm
+    - prefer-trailing-comma: false # TODO(lsaudon): false positive
     - prefer-widget-private-members:
         ignore-static: true
     - unnecessary-trailing-comma: false # TODO(lsaudon): à réactiver après une maj de dcm
