@@ -50,7 +50,8 @@ import 'package:app/features/quiz/presentation/pages/quiz_page.dart';
 import 'package:app/features/recommandations/infrastructure/recommandations_repository.dart';
 import 'package:app/features/recommandations/presentation/bloc/recommandations_bloc.dart';
 import 'package:app/features/services/lvao/infrastructure/lvao_repository.dart';
-import 'package:app/features/services/recipes/infrastructure/recipes_repository.dart';
+import 'package:app/features/services/recipes/item/infrastructure/recipe_repository.dart';
+import 'package:app/features/services/recipes/list/infrastructure/recipes_repository.dart';
 import 'package:app/features/services/seasonal_fruits_and_vegetables/infrastructure/seasonal_fruits_and_vegetables_repository.dart';
 import 'package:app/features/simulateur_velo/infrastructure/aide_velo_repository.dart';
 import 'package:app/features/simulateur_velo/presentation/bloc/aide_velo_bloc.dart';
@@ -188,6 +189,7 @@ class _AppState extends State<App> {
               RepositoryProvider(create: (final context) => ActionRepository(client: widget.dioHttpClient)),
               RepositoryProvider(create: (final context) => LvaoRepository(client: widget.dioHttpClient)),
               RepositoryProvider(create: (final context) => RecipesRepository(client: widget.dioHttpClient)),
+              RepositoryProvider(create: (final context) => RecipeRepository(client: widget.dioHttpClient)),
               RepositoryProvider(create: (final context) => ArticlesRepository(client: widget.dioHttpClient)),
               RepositoryProvider(create: (final context) => ChallengeListRepository(client: widget.dioHttpClient)),
               RepositoryProvider(

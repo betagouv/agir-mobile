@@ -30,15 +30,15 @@ Feature: Actions
 
     Scenario: See action details
         When I tap on {'Actions'}
-        Then I tap on {'Faire réparer une paire de chaussures'}
+        When I tap on {'Faire réparer une paire de chaussures'}
         Then I see {'Faites des économies en donnant une seconde vie à vos paires de chaussures'}
 
     Scenario: See Longues vies aux objets service
         When I tap on {'Actions'}
-        Then I tap on {'Faire réparer une paire de chaussures'}
+        When I tap on {'Faire réparer une paire de chaussures'}
         Then I see {'Octavent'}
 
     Scenario: See recipe service
         When I tap on {'Actions'}
-        Then I tap on {'Tester une nouvelle recette végétarienne'}
+        When I tap on {'Tester une nouvelle recette végétarienne'}
         Then I see {'Salade de pâtes complètes et lentilles'}

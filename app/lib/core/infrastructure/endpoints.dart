@@ -43,4 +43,5 @@ abstract final class Endpoints {
   static String questions(final String enchainementId) => '/utilisateurs/{userId}/enchainementQuestionsKYC_v2/$enchainementId';
   static String servicesParThematique(final String codeThematique) =>
       '/utilisateurs/{userId}/thematiques/$codeThematique/recherche_services';
+  static String recipe(final String recipeId) => '/utilisateurs/{userId}/recherche_services/recettes/last_results/$recipeId';
 }

@@ -17,7 +17,9 @@ void main() {
       await initializeContext(tester);
     }
 
-    testWidgets('''L'utilisateur se déconnecte de l'application alors le token de notification est supprimé''', (tester) async {
+    testWidgets(
+        '''L'utilisateur se déconnecte de l'application alors le token de notification est supprimé''',
+        (tester) async {
       await bddSetUp(tester);
       await iAmLoggedIn(tester);
       await theApplicationIsLaunched(tester);

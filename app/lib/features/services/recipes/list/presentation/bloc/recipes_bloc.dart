@@ -1,6 +1,6 @@
-import 'package:app/features/services/recipes/infrastructure/recipes_repository.dart';
-import 'package:app/features/services/recipes/presentation/bloc/recipes_event.dart';
-import 'package:app/features/services/recipes/presentation/bloc/recipes_state.dart';
+import 'package:app/features/services/recipes/list/infrastructure/recipes_repository.dart';
+import 'package:app/features/services/recipes/list/presentation/bloc/recipes_event.dart';
+import 'package:app/features/services/recipes/list/presentation/bloc/recipes_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RecipesBloc extends Bloc<RecipesEvent, RecipesState> {

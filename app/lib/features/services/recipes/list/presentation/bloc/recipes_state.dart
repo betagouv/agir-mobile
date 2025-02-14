@@ -1,4 +1,4 @@
-import 'package:app/features/services/recipes/domain/recipe.dart';
+import 'package:app/features/services/recipes/list/domain/recipe_summary.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
@@ -24,7 +24,7 @@ final class RecipesLoadInProgress extends RecipesState {
 final class RecipesLoadSuccess extends RecipesState {
   const RecipesLoadSuccess({required this.recipes});
 
-  final List<Recipe> recipes;
+  final List<RecipeSummary> recipes;
 
   @override
   List<Object> get props => [recipes];

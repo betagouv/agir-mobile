@@ -33,10 +33,8 @@ void main() {
     testWidgets('''Answer the first questions.''', (tester) async {
       await bddSetUp(tester);
       await iEnterInTheField(tester, 'Joe', 'Mon prénom');
-      await iSee(
-        tester,
-        'Pour découvrir des aides, services et contenus disponibles proches de chez vous, indiquez-nous votre lieu de résidence.',
-      );
+      await iSee(tester,
+          'Pour découvrir des aides, services et contenus disponibles proches de chez vous, indiquez-nous votre lieu de résidence.');
       await iEnterInTheField(tester, '39100', 'Code postal');
       await iSelectInTheField(tester, 'DOLE', 'Commune');
       await iTapOn(tester, 'Continuer');

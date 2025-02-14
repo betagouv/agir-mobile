@@ -8,25 +8,23 @@ import 'package:flutter_test/flutter_test.dart';
 import './step/initialize_context.dart';
 import './step/i_have_actions_in_my_library.dart';
 import './step/i_have_action_detail_in_my_library.dart';
-import './step/i_have_lvao_services_in_my_library.dart';
-import './step/i_have_recipe_services_in_my_library.dart';
 import './step/i_am_logged_in.dart';
 import './step/the_application_is_launched.dart';
 import './step/i_tap_on_the_menu_button.dart';
 import './step/i_tap_on.dart';
+import './step/i_have_recipe_services_in_my_library.dart';
+import './step/i_have_recipe_detail_in_my_library.dart';
+import './step/i_scroll_down.dart';
 import './step/i_see.dart';
-import './step/i_dont_see.dart';
 
 void main() {
-  group('''Actions''', () {
+  group('''Recipe''', () {
     Future<void> bddSetUp(WidgetTester tester) async {
       await initializeContext(tester);
       await iHaveActionsInMyLibrary(
           tester,
           const bdd.DataTable([
             ['code', 'title', 'nb_actions_completed', 'nb_aids_available'],
-            ['1', 'Faire réparer une **paire de chaussures**', 2, 2],
-            ['2', 'Contribuer à la **bonne santé de son sol**', 0, 0],
             ['3', 'Tester une **nouvelle recette végétarienne**', 1, 1]
           ]));
       await iHaveActionDetailInMyLibrary(
@@ -42,15 +40,6 @@ void main() {
               'service_category'
             ],
             [
-              '1',
-              'Faire réparer une **paire de chaussures**',
-              'Faites des économies en donnant une seconde vie à vos paires de chaussures',
-              '# Nos astuces\n\n- **Choisissez un cordonnier agréé** : pour profiter de l’aide d’État sur vos réparations\n\n- **Bottes, chaussures de ski, baskets** : toutes les chaussures sont éligibles\n\n- **Si vos chaussures sont trop abimées** : Déposez-les dans un point de collecte pour que valoriser les matériaux utilisés',
-              '# En quelques mots\n\n- Pour chaque paire de chaussure réparée, vous économisez **entre 20 et 60€**\n\n- Les paires de chaussures jetées représentent plusieurs **milliers de tonnes** de déchets généralement non recyclables. \n\n- Chaque année, un Français achète en moyenne 4 paires de chaussures.',
-              'longue_vie_objets',
-              'reparer'
-            ],
-            [
               '3',
               'Tester une **nouvelle recette végétarienne**',
               'Faites des économies et le plein de vitamines ! Cette semaine, on cuisine une recette saine et délicieuse !',
@@ -60,44 +49,25 @@ void main() {
               'vegan'
             ]
           ]));
-      await iHaveLvaoServicesInMyLibrary(tester);
-      await iHaveRecipeServicesInMyLibrary(tester);
       await iAmLoggedIn(tester);
       await theApplicationIsLaunched(tester);
       await iTapOnTheMenuButton(tester);
     }
 
-    testWidgets('''See all actions''', (tester) async {
+    testWidgets('''See recipe detail''', (tester) async {
       await bddSetUp(tester);
       await iTapOn(tester, 'Actions');
-      await iSee(tester, 'Contribuer à la bonne santé de son sol');
-      await iSee(tester, 'Tester une nouvelle recette végétarienne');
-      await iSee(tester, 'Faire réparer une paire de chaussures');
-      await iDontSee(tester, '0 action');
-      await iSee(tester, '1 action');
-      await iSee(tester, '2 actions');
-      await iDontSee(tester, '0 aide');
-      await iSee(tester, '1 aide');
-      await iSee(tester, '2 aides');
-    });
-    testWidgets('''See action details''', (tester) async {
-      await bddSetUp(tester);
-      await iTapOn(tester, 'Actions');
-      await iTapOn(tester, 'Faire réparer une paire de chaussures');
-      await iSee(tester,
-          'Faites des économies en donnant une seconde vie à vos paires de chaussures');
-    });
-    testWidgets('''See Longues vies aux objets service''', (tester) async {
-      await bddSetUp(tester);
-      await iTapOn(tester, 'Actions');
-      await iTapOn(tester, 'Faire réparer une paire de chaussures');
-      await iSee(tester, 'Octavent');
-    });
-    testWidgets('''See recipe service''', (tester) async {
-      await bddSetUp(tester);
-      await iTapOn(tester, 'Actions');
+      await iHaveRecipeServicesInMyLibrary(tester);
+      await iHaveRecipeDetailInMyLibrary(
+          tester,
+          const bdd.DataTable([
+            ['id', 'title', 'preparation_time'],
+            ['1', 'Salade de pâtes complètes et lentilles', 5]
+          ]));
       await iTapOn(tester, 'Tester une nouvelle recette végétarienne');
-      await iSee(tester, 'Salade de pâtes complètes et lentilles');
+      await iScrollDown(tester);
+      await iTapOn(tester, 'Salade de pâtes complètes et lentilles');
+      await iSee(tester, 'Temps de préparation : 5 min');
     });
   });
 }

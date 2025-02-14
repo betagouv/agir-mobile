@@ -1,12 +1,16 @@
 import 'package:app/core/presentation/widgets/composants/card.dart';
 import 'package:app/core/presentation/widgets/composants/image.dart';
-import 'package:app/features/services/recipes/presentation/bloc/recipes_bloc.dart';
-import 'package:app/features/services/recipes/presentation/bloc/recipes_event.dart';
-import 'package:app/features/services/recipes/presentation/bloc/recipes_state.dart';
+import 'package:app/features/services/recipes/core/presentation/widgets/estimaded_timed_info.dart';
+import 'package:app/features/services/recipes/core/presentation/widgets/recipe_difficulty.dart';
+import 'package:app/features/services/recipes/item/presentation/pages/recipe_page.dart';
+import 'package:app/features/services/recipes/list/presentation/bloc/recipes_bloc.dart';
+import 'package:app/features/services/recipes/list/presentation/bloc/recipes_event.dart';
+import 'package:app/features/services/recipes/list/presentation/bloc/recipes_state.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:go_router/go_router.dart';
 
 class RecipeHorizontalList extends StatelessWidget {
   const RecipeHorizontalList({super.key, required this.category});
@@ -61,6 +65,7 @@ class _Success extends StatelessWidget {
                 state.recipes
                     .map(
                       (final e) => FnvCard(
+                        onTap: () async => context.pushNamed(RecipePage.name, pathParameters: {'id': e.id}),
                         child: SizedBox(
                           width: 173,
                           child: Padding(
@@ -83,15 +88,8 @@ class _Success extends StatelessWidget {
                                 Row(
                                   spacing: DsfrSpacings.s1v,
                                   children: [
-                                    Flexible(
-                                      child: DsfrTag.sm(
-                                        label: TextSpan(text: e.difficulty),
-                                        backgroundColor: const Color(0xffEAEAEA),
-                                        foregroundColor: const Color(0xff3F3F3F),
-                                        textStyle: const DsfrTextStyle.bodyXsMedium(),
-                                      ),
-                                    ),
-                                    _EstimadedTimedInfo(text: '${e.preparationTime} min'),
+                                    Flexible(child: RecipeDifficulty(value: e.difficulty)),
+                                    EstimadedTimedInfo(text: '${e.preparationTime} min'),
                                   ],
                                 ),
                               ],
@@ -106,24 +104,4 @@ class _Success extends StatelessWidget {
       ),
     ],
   );
-}
-
-class _EstimadedTimedInfo extends StatelessWidget {
-  const _EstimadedTimedInfo({required this.text});
-
-  final String text;
-
-  @override
-  Widget build(final context) {
-    const color = Color(0xff6A6A6A);
-
-    return Text.rich(
-      TextSpan(
-        children: [
-          const WidgetSpan(child: Icon(DsfrIcons.systemTimerLine, size: 15, color: color)),
-          TextSpan(text: text, style: const DsfrTextStyle.bodyXsMedium(color: color)),
-        ],
-      ),
-    );
-  }
 }
