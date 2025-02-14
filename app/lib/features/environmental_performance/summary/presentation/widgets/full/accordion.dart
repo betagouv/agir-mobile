@@ -26,7 +26,7 @@ class FnvAccordionsGroup extends StatefulWidget {
 
 class _FnvAccordionsGroupState extends State<FnvAccordionsGroup> {
   int? _panelIndex;
-  bool _isExpanded = false;
+  var _isExpanded = false;
 
   @override
   Widget build(final context) {

@@ -74,7 +74,7 @@ class DsfrInputHeadless extends StatefulWidget {
 }
 
 class _DsfrInputHeadlessState extends State<DsfrInputHeadless> {
-  bool _isFocused = false;
+  var _isFocused = false;
   final _focusNode = FocusNode();
 
   @override

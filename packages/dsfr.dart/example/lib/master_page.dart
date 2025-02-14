@@ -11,7 +11,7 @@ class MasterPage extends StatefulWidget {
 }
 
 class _MasterPageState extends State<MasterPage> {
-  int _currentIndex = 0;
+  var _currentIndex = 0;
 
   @override
   Widget build(final context) => Scaffold(
