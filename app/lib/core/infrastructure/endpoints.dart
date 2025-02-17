@@ -2,15 +2,13 @@ abstract final class Endpoints {
   Endpoints._();
 
   static const actions = '/actions';
-  static String action(final String code) => '/actions/$code';
-
+  static String action(final String code) => '/actions/classique/$code';
+  static const aids = '/utilisateurs/{userId}/aides_v2';
+  static String article(final String contentId) => '/utilisateurs/{userId}/bibliotheque/articles/$contentId';
+  static const bibliotheque = '/utilisateurs/{userId}/bibliotheque';
+  static const bilan = '/utilisateurs/{userId}/bilans/last_v3';
   static const challenges = '/utilisateurs/{userId}/defis_v2';
   static String challenge(final String defiId) => '/utilisateurs/{userId}/defis/$defiId';
-  static const aids = '/utilisateurs/{userId}/aides_v2';
-  static const bibliotheque = '/utilisateurs/{userId}/bibliotheque';
-  static String article(final String contentId) => '/utilisateurs/{userId}/bibliotheque/articles/$contentId';
-  static String quiz(final String contentId) => '/utilisateurs/{userId}/bibliotheque/quizz/$contentId';
-  static const bilan = '/utilisateurs/{userId}/bilans/last_v3';
   static const creationCompte = '/utilisateurs_v2';
   static const events = '/utilisateurs/{userId}/events';
   static const gamification = '/utilisateurs/{userId}/gamification';
@@ -27,6 +25,7 @@ abstract final class Endpoints {
   static const oubliMotDePasse = '/utilisateurs/oubli_mot_de_passe';
   static const profile = '/utilisateurs/{userId}/profile';
   static const questionsKyc = '/utilisateurs/{userId}/questionsKYC_v2';
+  static String quiz(final String contentId) => '/utilisateurs/{userId}/bibliotheque/quizz/$contentId';
   static const renvoyerCode = '/utilisateurs/renvoyer_code';
   static const simulerAideVelo = '/utilisateurs/{userId}/simulerAideVelo';
   static const utilisateur = '/utilisateurs/{userId}';
