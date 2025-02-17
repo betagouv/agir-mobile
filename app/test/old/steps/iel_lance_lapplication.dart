@@ -55,6 +55,7 @@ Future<void> ielLanceLapplication(final WidgetTester tester) async {
             'url_simulateur': '/aides/velo',
             'thematiques': ['transport'],
             'montant_max': 1500,
+            'est_gratuit': false,
           },
         ],
       },

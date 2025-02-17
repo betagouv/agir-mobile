@@ -71,6 +71,7 @@ abstract final class Localisation {
   static const fruitsEtLegumesMoyennementConsommateursDescription = 'Entre 1 et 5 kg CO₂e par kg';
   static const fruitsEtLegumesConsommateurs = 'Consommateurs';
   static const fruitsEtLegumesConsommateursDescription = 'Plus de 5 kg CO₂e par kg';
+  static const gratuit = 'Gratuit';
   static const impactCo2 = 'Impact CO₂';
   static const impactCo2Description = 'Des informations fiables et sourcées issues des données environnementales de l’ADEME';
   static const impactCo2Url = 'https://impactco2.fr/';

@@ -10,6 +10,7 @@ abstract final class AidMapper {
     title: json['titre'] as String,
     content: json['contenu'] as String,
     amountMax: (json['montant_max'] as num?)?.toInt(),
+    isFree: json['est_gratuit'] as bool,
     simulatorUrl: json['url_simulateur'] as String?,
     partner:
         json['partenaire_nom'] == null

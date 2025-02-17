@@ -34,7 +34,7 @@ class AidPage extends StatelessWidget {
           Align(alignment: Alignment.centerLeft, child: ThemeTypeTag(themeType: aid.themeType)),
           const SizedBox(height: DsfrSpacings.s2w),
           Text(aid.title, style: const DsfrTextStyle.headline2()),
-          if (aid.aUnSimulateur || aid.amountMax != null) ...[
+          if (aid.hasSimulator || aid.amountMax != null) ...[
             const SizedBox(height: DsfrSpacings.s1w),
             Wrap(
               spacing: DsfrSpacings.s1w,
@@ -45,7 +45,7 @@ class AidPage extends StatelessWidget {
                     backgroundColor: DsfrColors.purpleGlycine925Hover,
                     foregroundColor: const Color(0xFF432636),
                   ),
-                if (aid.aUnSimulateur) const SimulatorTag(),
+                if (aid.hasSimulator) const SimulatorTag(),
               ],
             ),
           ],
@@ -66,14 +66,14 @@ class AidPage extends StatelessWidget {
         ],
       ),
       bottomNavigationBar:
-          aid.aUnSimulateur
+          aid.hasSimulator
               ? FnvBottomBar(
                 child: DsfrButton(
                   label: Localisation.accederAuSimulateur,
                   variant: DsfrButtonVariant.primary,
                   size: DsfrButtonSize.lg,
                   onPressed: () async {
-                    if (aid.estSimulateurVelo) {
+                    if (aid.hasBikeSimulator) {
                       await GoRouter.of(context).pushNamed(AideSimulateurVeloPage.name);
                     }
                   },
