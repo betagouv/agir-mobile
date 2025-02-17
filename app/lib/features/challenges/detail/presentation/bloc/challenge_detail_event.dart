@@ -1,6 +1,6 @@
 import 'package:app/features/challenges/core/domain/challenge_id.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
+import 'package:meta/meta.dart';
 
 @immutable
 sealed class ChallengeDetailEvent extends Equatable {

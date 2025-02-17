@@ -1,7 +1,7 @@
 import 'package:app/features/quiz/domain/quiz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:meta/meta.dart';
 
 @immutable
 final class QuizState extends Equatable {

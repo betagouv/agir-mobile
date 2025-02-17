@@ -1,6 +1,6 @@
 import 'package:app/core/authentication/domain/authentication_status.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
+import 'package:meta/meta.dart';
 
 @immutable
 sealed class GamificationEvent extends Equatable {

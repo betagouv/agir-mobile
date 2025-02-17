@@ -1,6 +1,6 @@
 import 'package:app/features/bibliotheque/domain/bibliotheque.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
+import 'package:meta/meta.dart';
 
 enum BibliothequeStatut { initial, chargement, succes }
 

@@ -1,6 +1,6 @@
 import 'package:app/features/know_your_customer/core/domain/response_mosaic.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
+import 'package:meta/meta.dart';
 
 @immutable
 sealed class MieuxVousConnaitreEditEvent extends Equatable {

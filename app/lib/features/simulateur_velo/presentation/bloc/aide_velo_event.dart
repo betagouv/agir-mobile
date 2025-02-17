@@ -1,6 +1,6 @@
 import 'package:app/features/simulateur_velo/domain/velo_pour_simulateur.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
+import 'package:meta/meta.dart';
 
 @immutable
 sealed class AideVeloEvent extends Equatable {

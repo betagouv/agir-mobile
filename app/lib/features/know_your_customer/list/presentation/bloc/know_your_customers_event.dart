@@ -1,7 +1,7 @@
 import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:meta/meta.dart';
 
 @immutable
 sealed class KnowYourCustomersEvent extends Equatable {

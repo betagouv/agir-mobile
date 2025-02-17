@@ -1,6 +1,6 @@
 import 'package:app/features/theme/core/domain/mission_liste.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
+import 'package:meta/meta.dart';
 
 @immutable
 sealed class MissionHomeState extends Equatable {

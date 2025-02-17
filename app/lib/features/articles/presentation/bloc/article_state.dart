@@ -1,6 +1,6 @@
 import 'package:app/features/articles/domain/article.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
+import 'package:meta/meta.dart';
 
 @immutable
 final class ArticleState extends Equatable {
