@@ -31,7 +31,7 @@ abstract final class Localisation {
   static const appEstEncoreEnExperimentationDetails = 'Nous ajoutons progressivement les aides et contenus locaux à ';
   static const appEstEncoreEnExperimentationDetails2 = '\nRevenez régulièrement pour profiter de nos dernières nouveautés';
   static const article = 'Article';
-  static const assistanceListTitle = '**Aides financières** et bons plans **chez vous**';
+  static const aidListTitle = '**Aides financières** et bons plans **chez vous**';
   static const attentionAucuneDonneeNePourraEtreRecuperee = 'Attention, aucune donnée ne pourra être récupérée.';
   static const aucuneAideDisponible = 'Aucune aide\ndisponible';
   static const bibliotheque = 'Ma bibliothèque';

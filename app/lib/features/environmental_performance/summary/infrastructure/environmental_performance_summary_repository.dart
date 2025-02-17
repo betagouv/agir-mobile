@@ -31,6 +31,6 @@ class EnvironmentalPerformanceSummaryRepository {
 
     final data = response.data! as List<dynamic>;
 
-    return Right(data.map((final e) => e as Map<String, dynamic>).map(QuestionMapper.fromJson).whereType<Question>().toList());
+    return Right(data.cast<Map<String, dynamic>>().map(QuestionMapper.fromJson).whereType<Question>().toList());
   }
 }

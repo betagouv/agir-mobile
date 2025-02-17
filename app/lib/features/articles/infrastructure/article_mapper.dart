@@ -22,7 +22,7 @@ abstract final class ArticleMapper {
             ),
     sources:
         (json['sources'] as List<dynamic>)
-            .map((final e) => e as Map<String, dynamic>)
+            .cast<Map<String, dynamic>>()
             .map((final e) => Source(label: e['label'] as String, url: e['url'] as String))
             .toList(),
     isFavorite: json['favoris'] as bool,

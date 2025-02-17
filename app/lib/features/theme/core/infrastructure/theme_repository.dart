@@ -28,9 +28,7 @@ class ThemeRepository {
     final response = await _client.get(Endpoints.servicesParThematique(themeType.name));
 
     return isResponseSuccessful(response.statusCode)
-        ? Right(
-          (response.data as List<dynamic>).map((final e) => e as Map<String, dynamic>).map(ServiceItemMapper.fromJson).toList(),
-        )
+        ? Right((response.data as List<dynamic>).cast<Map<String, dynamic>>().map(ServiceItemMapper.fromJson).toList())
         : Left(Exception('Erreur lors de la récupération des services'));
   }
 }

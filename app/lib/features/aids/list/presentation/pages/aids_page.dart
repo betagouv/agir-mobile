@@ -87,7 +87,7 @@ class _List extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         MarkdownBody(
-          data: Localisation.assistanceListTitle,
+          data: Localisation.aidListTitle,
           styleSheet: MarkdownStyleSheet(
             p: const DsfrTextStyle.headline2(),
             strong: const DsfrTextStyle.headline2(color: DsfrColors.blueFranceSun113),

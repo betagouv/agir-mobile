@@ -21,6 +21,6 @@ Future<void> iHaveActionDetailInMyLibrary(final WidgetTester tester, final bdd.D
         },
       )
       .forEach((final e) {
-        FeatureContext.instance.dioMock.getM(Endpoints.action(e['code'] as String), responseData: e);
+        FeatureContext.instance.dioMock.getM(Endpoints.action(type: 'classique', code: e['code'] as String), responseData: e);
       });
 }

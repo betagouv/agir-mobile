@@ -9,9 +9,8 @@ abstract final class RecipeMapper {
     title: json['titre'] as String,
     difficulty: json['difficulty_plat'] as String,
     preparationTime: json['temps_prepa_min'] as int,
-    ingredients:
-        (json['ingredients'] as List<dynamic>).map((final e) => e as Map<String, dynamic>).map(ingredientFromJson).toList(),
-    steps: (json['etapes_recette'] as List<dynamic>).map((final e) => e as Map<String, dynamic>).map(stepFromJson).toList(),
+    ingredients: (json['ingredients'] as List<dynamic>).cast<Map<String, dynamic>>().map(ingredientFromJson).toList(),
+    steps: (json['etapes_recette'] as List<dynamic>).cast<Map<String, dynamic>>().map(stepFromJson).toList(),
   );
 
   static Ingredient ingredientFromJson(final Map<String, dynamic> json) => Ingredient(

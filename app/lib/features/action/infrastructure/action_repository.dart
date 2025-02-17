@@ -13,7 +13,7 @@ class ActionRepository {
   final DioHttpClient _client;
 
   Future<Either<Exception, Action>> fetch(final String id) async {
-    final response = await _client.get(Endpoints.action(id));
+    final response = await _client.get(Endpoints.action(type: 'classique', code: id));
 
     if (isResponseUnsuccessful(response.statusCode)) {
       return Left(Exception("Erreur lors de la récupération l'action"));
