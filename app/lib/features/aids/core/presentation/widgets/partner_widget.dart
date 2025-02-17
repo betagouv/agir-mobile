@@ -21,7 +21,7 @@ class PartnerWidget extends StatelessWidget {
             border: Border.fromBorderSide(BorderSide(color: Color(0xffb1b1ff))),
             borderRadius: BorderRadius.all(Radius.circular(DsfrSpacings.s1v5)),
           ),
-          child: FnvImage.network(partner.logo, width: 40, height: 40),
+          child: Padding(padding: const EdgeInsets.all(1), child: FnvImage.network(partner.logo, width: 40, height: 40)),
         ),
         Expanded(
           child: Column(
