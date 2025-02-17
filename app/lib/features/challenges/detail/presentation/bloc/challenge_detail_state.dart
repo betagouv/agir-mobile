@@ -2,8 +2,8 @@ import 'package:app/features/challenges/core/domain/challenge_status.dart';
 import 'package:app/features/challenges/detail/domain/challenge.dart';
 import 'package:app/l10n/l10n.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:meta/meta.dart';
 
 @immutable
 sealed class ChallengeDetailState extends Equatable {

@@ -1,6 +1,6 @@
 import 'package:app/features/aids/core/domain/aid.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
+import 'package:meta/meta.dart';
 
 @immutable
 final class AidState extends Equatable {

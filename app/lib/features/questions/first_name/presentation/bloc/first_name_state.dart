@@ -1,6 +1,6 @@
 import 'package:app/features/questions/first_name/domain/first_name.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
+import 'package:meta/meta.dart';
 
 @immutable
 sealed class FirstNameState extends Equatable {

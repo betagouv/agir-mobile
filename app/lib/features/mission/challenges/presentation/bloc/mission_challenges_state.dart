@@ -1,6 +1,6 @@
 import 'package:app/features/mission/challenges/domain/mission_challenges.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
+import 'package:meta/meta.dart';
 
 @immutable
 final class MissionChallengesState extends Equatable {

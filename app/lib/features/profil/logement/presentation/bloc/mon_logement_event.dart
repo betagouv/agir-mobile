@@ -1,6 +1,6 @@
 import 'package:app/features/profil/logement/presentation/bloc/mon_logement_state.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
+import 'package:meta/meta.dart';
 
 @immutable
 sealed class MonLogementEvent extends Equatable {

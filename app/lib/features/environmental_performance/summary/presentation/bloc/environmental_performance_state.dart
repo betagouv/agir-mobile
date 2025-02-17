@@ -1,6 +1,6 @@
 import 'package:app/features/environmental_performance/summary/domain/environmental_performance_data.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
+import 'package:meta/meta.dart';
 
 @immutable
 sealed class EnvironmentalPerformanceState extends Equatable {

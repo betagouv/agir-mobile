@@ -1,7 +1,7 @@
 import 'package:app/features/simulateur_velo/domain/aide_velo.dart';
 import 'package:app/features/simulateur_velo/domain/velo_pour_simulateur.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
+import 'package:meta/meta.dart';
 
 enum AideVeloStatut { initial, chargement, succes, erreur }
 

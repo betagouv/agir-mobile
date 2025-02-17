@@ -1,6 +1,6 @@
 import 'package:app/features/services/recipes/list/domain/recipe_summary.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
+import 'package:meta/meta.dart';
 
 @immutable
 sealed class RecipesState extends Equatable {
