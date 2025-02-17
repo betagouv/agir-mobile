@@ -17,7 +17,7 @@ class KnowYourCustomersRepository {
 
       return Right(
         data
-            .map((final e) => e as Map<String, dynamic>)
+            .cast<Map<String, dynamic>>()
             .map(QuestionMapper.fromJson)
             .whereType<Question>()
             .where((final e) => e.isAnswered)

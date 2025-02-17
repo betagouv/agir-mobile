@@ -24,10 +24,7 @@ abstract final class EnvironmentalPerformanceSummaryMapperyMapper {
     final partial = json['bilan_approximatif'] as Map<String, dynamic>;
     final percentageCompletion = (json['pourcentage_completion_totale'] as num).toInt();
     final categories =
-        (json['liens_bilans_thematique'] as List<dynamic>)
-            .map((final e) => e as Map<String, dynamic>)
-            .map(_categoryFromJson)
-            .toList();
+        (json['liens_bilans_thematique'] as List<dynamic>).cast<Map<String, dynamic>>().map(_categoryFromJson).toList();
 
     return EnvironmentalPerformancePartial(
       performanceOnTransport: _mapLevelFromJson(partial['impact_transport'] as String?),
@@ -42,19 +39,12 @@ abstract final class EnvironmentalPerformanceSummaryMapperyMapper {
   static EnvironmentalPerformanceFull _fromFullJson(final Map<String, dynamic> json) {
     final full = json['bilan_complet'] as Map<String, dynamic>;
     final categories =
-        (json['liens_bilans_thematique'] as List<dynamic>)
-            .map((final e) => e as Map<String, dynamic>)
-            .map(_categoryFromJson)
-            .toList();
+        (json['liens_bilans_thematique'] as List<dynamic>).cast<Map<String, dynamic>>().map(_categoryFromJson).toList();
 
     return EnvironmentalPerformanceFull(
       footprintInKgOfCO2ePerYear: Footprint((full['impact_kg_annee'] as num).toDouble()),
-      top: (full['top_3'] as List<dynamic>).map((final e) => e as Map<String, dynamic>).map(_topItemFromJson).toList(),
-      detail:
-          (full['impact_thematique'] as List<dynamic>)
-              .map((final e) => e as Map<String, dynamic>)
-              .map(_detailItemFromJson)
-              .toList(),
+      top: (full['top_3'] as List<dynamic>).cast<Map<String, dynamic>>().map(_topItemFromJson).toList(),
+      detail: (full['impact_thematique'] as List<dynamic>).cast<Map<String, dynamic>>().map(_detailItemFromJson).toList(),
       categories: categories,
     );
   }
@@ -79,8 +69,7 @@ abstract final class EnvironmentalPerformanceSummaryMapperyMapper {
         emoji: json['emoji'] as String,
         label: _mapThematique(json['thematique'] as String),
         footprintInKgOfCO2ePerYear: Footprint((json['impact_kg_annee'] as num).toDouble()),
-        subItems:
-            (json['details'] as List<dynamic>).map((final e) => e as Map<String, dynamic>).map(_detailSubItemFromJson).toList(),
+        subItems: (json['details'] as List<dynamic>).cast<Map<String, dynamic>>().map(_detailSubItemFromJson).toList(),
       );
 
   static EnvironmentalPerformanceDetailSubItem _detailSubItemFromJson(final Map<String, dynamic> json) =>

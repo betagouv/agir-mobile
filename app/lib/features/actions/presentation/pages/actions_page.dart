@@ -79,9 +79,10 @@ class _Element extends StatelessWidget {
   @override
   Widget build(final BuildContext context) => FnvCard(
     onTap: () async {
-      await GoRouter.of(
-        context,
-      ).pushNamed(ActionPage.name, pathParameters: ActionPage.pathParameters(title: action.title, id: action.id));
+      await GoRouter.of(context).pushNamed(
+        ActionPage.name,
+        pathParameters: ActionPage.pathParameters(title: action.title, type: action.type, id: action.id),
+      );
     },
     child: Padding(
       padding: const EdgeInsets.all(DsfrSpacings.s2w),

@@ -12,7 +12,7 @@ Future<void> iHaveActionsInMyLibrary(final WidgetTester tester, final bdd.DataTa
           .asMaps()
           .map(
             (final e) => {
-              'type': 'classique',
+              'type': e['type'],
               'code': e['code'],
               'titre': e['title'],
               'sous_titre': Faker().lorem.sentence(),

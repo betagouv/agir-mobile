@@ -5,6 +5,7 @@ import 'package:app/core/presentation/widgets/fondamentaux/shadows.dart';
 import 'package:app/features/action/presentation/bloc/action_bloc.dart';
 import 'package:app/features/action/presentation/bloc/action_event.dart';
 import 'package:app/features/action/presentation/bloc/action_state.dart';
+import 'package:app/features/actions/domain/action_summary.dart';
 import 'package:app/features/services/lvao/presentation/widgets/lvao_horizontal_list.dart';
 import 'package:app/features/services/recipes/list/presentation/widgets/recipe_horizontal_list.dart';
 import 'package:dsfr/dsfr.dart';
@@ -18,11 +19,12 @@ class ActionPage extends StatelessWidget {
 
   static const name = 'action';
 
-  static const path = 'action/:titre/:id';
-  static Map<String, String> pathParameters({required final String title, required final String id}) => {
-    'titre': title,
-    'id': id,
-  };
+  static const path = 'action/:titre/:type/:id';
+  static Map<String, String> pathParameters({
+    required final String title,
+    required final ActionType type,
+    required final String id,
+  }) => {'titre': title, 'type': type.name, 'id': id};
 
   final String id;
 

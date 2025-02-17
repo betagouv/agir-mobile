@@ -14,7 +14,7 @@ abstract final class AideVeloParTypeMapper {
   );
 
   static List<AideVelo> _mapAideVeloList(final List<dynamic> jsonList) =>
-      jsonList.map((final e) => e as Map<String, dynamic>).map(AideVeloMapper.fromJson).toList();
+      jsonList.cast<Map<String, dynamic>>().map(AideVeloMapper.fromJson).toList();
 }
 
 abstract final class AideVeloMapper {

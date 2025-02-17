@@ -8,14 +8,14 @@ import 'package:flutter_test/flutter_test.dart';
 import './step/initialize_context.dart';
 import './step/i_have_actions_in_my_library.dart';
 import './step/i_have_action_detail_in_my_library.dart';
-import './step/i_have_lvao_services_in_my_library.dart';
-import './step/i_have_recipe_services_in_my_library.dart';
 import './step/i_am_logged_in.dart';
 import './step/the_application_is_launched.dart';
 import './step/i_tap_on_the_menu_button.dart';
 import './step/i_tap_on.dart';
 import './step/i_see.dart';
 import './step/i_dont_see.dart';
+import './step/i_have_lvao_services_in_my_library.dart';
+import './step/i_have_recipe_services_in_my_library.dart';
 
 void main() {
   group('''Actions''', () {
@@ -24,10 +24,34 @@ void main() {
       await iHaveActionsInMyLibrary(
           tester,
           const bdd.DataTable([
-            ['code', 'title', 'nb_actions_completed', 'nb_aids_available'],
-            ['1', 'Faire réparer une **paire de chaussures**', 2, 2],
-            ['2', 'Contribuer à la **bonne santé de son sol**', 0, 0],
-            ['3', 'Tester une **nouvelle recette végétarienne**', 1, 1]
+            [
+              'type',
+              'code',
+              'title',
+              'nb_actions_completed',
+              'nb_aids_available'
+            ],
+            [
+              'classique',
+              '1',
+              'Faire réparer une **paire de chaussures**',
+              2,
+              2
+            ],
+            [
+              'classique',
+              '2',
+              'Contribuer à la **bonne santé de son sol**',
+              0,
+              0
+            ],
+            [
+              'classique',
+              '3',
+              'Tester une **nouvelle recette végétarienne**',
+              1,
+              1
+            ]
           ]));
       await iHaveActionDetailInMyLibrary(
           tester,
@@ -60,8 +84,6 @@ void main() {
               'vegan'
             ]
           ]));
-      await iHaveLvaoServicesInMyLibrary(tester);
-      await iHaveRecipeServicesInMyLibrary(tester);
       await iAmLoggedIn(tester);
       await theApplicationIsLaunched(tester);
       await iTapOnTheMenuButton(tester);
@@ -80,8 +102,9 @@ void main() {
       await iSee(tester, '1 aide');
       await iSee(tester, '2 aides');
     });
-    testWidgets('''See action details''', (tester) async {
+    testWidgets('''See details classic action''', (tester) async {
       await bddSetUp(tester);
+      await iHaveLvaoServicesInMyLibrary(tester);
       await iTapOn(tester, 'Actions');
       await iTapOn(tester, 'Faire réparer une paire de chaussures');
       await iSee(tester,
@@ -89,12 +112,14 @@ void main() {
     });
     testWidgets('''See Longues vies aux objets service''', (tester) async {
       await bddSetUp(tester);
+      await iHaveLvaoServicesInMyLibrary(tester);
       await iTapOn(tester, 'Actions');
       await iTapOn(tester, 'Faire réparer une paire de chaussures');
       await iSee(tester, 'Octavent');
     });
     testWidgets('''See recipe service''', (tester) async {
       await bddSetUp(tester);
+      await iHaveRecipeServicesInMyLibrary(tester);
       await iTapOn(tester, 'Actions');
       await iTapOn(tester, 'Tester une nouvelle recette végétarienne');
       await iSee(tester, 'Salade de pâtes complètes et lentilles');

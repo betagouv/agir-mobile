@@ -22,11 +22,7 @@ class ActionsRepository {
     final json = response.data! as List<dynamic>;
 
     return Right(
-      json
-          .map((final e) => e as Map<String, dynamic>)
-          .where((final e) => e['type'] == 'classique')
-          .map(ActionSummaryMapper.fromJson)
-          .toList(),
+      json.cast<Map<String, dynamic>>().where((final e) => e['type'] == 'classique').map(ActionSummaryMapper.fromJson).toList(),
     );
   }
 }
