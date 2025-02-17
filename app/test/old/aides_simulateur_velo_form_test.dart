@@ -26,7 +26,9 @@ void main() {
       title: 'Acheter un vélo',
       content: '<p>Contenu</p>',
       amountMax: 3500,
+      isFree: false,
       simulatorUrl: '/aides/velo',
+      partner: null,
     );
 
     const codePostal = '39100';

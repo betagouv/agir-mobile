@@ -7,21 +7,23 @@ class Aid extends Equatable {
     required this.themeType,
     required this.title,
     required this.content,
-    this.amountMax,
-    this.simulatorUrl,
-    this.partner,
+    required this.amountMax,
+    required this.isFree,
+    required this.simulatorUrl,
+    required this.partner,
   });
 
   final ThemeType themeType;
   final String title;
   final String content;
   final int? amountMax;
+  final bool isFree;
   final String? simulatorUrl;
-  bool get aUnSimulateur => simulatorUrl != null && simulatorUrl!.isNotEmpty;
-  bool get estSimulateurVelo => simulatorUrl == '/aides/velo';
+  bool get hasSimulator => simulatorUrl != null && simulatorUrl!.isNotEmpty;
+  bool get hasBikeSimulator => simulatorUrl == '/aides/velo';
 
   final Partner? partner;
 
   @override
-  List<Object?> get props => [title, themeType, content, amountMax, simulatorUrl, partner];
+  List<Object?> get props => [title, themeType, content, amountMax, isFree, simulatorUrl, partner];
 }

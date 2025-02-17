@@ -222,8 +222,9 @@ class _AssitanceCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    if (assistance.aUnSimulateur) ...[const SimulatorTag(), const SizedBox(width: DsfrSpacings.s1w)],
+                    if (assistance.hasSimulator) ...[const SimulatorTag(), const SizedBox(width: DsfrSpacings.s1w)],
                     Text(assistance.title, style: const DsfrTextStyle.bodyMd()),
+                    if (assistance.isFree) ...[const SizedBox(height: DsfrSpacings.s1w), const _IsFree()],
                     if (assistance.amountMax != null) ...[
                       const SizedBox(height: DsfrSpacings.s1w),
                       _AmountMax(value: assistance.amountMax!),
@@ -260,5 +261,24 @@ class _AmountMax extends StatelessWidget {
       ],
     ),
     style: const DsfrTextStyle.bodySm(),
+  );
+}
+
+class _IsFree extends StatelessWidget {
+  const _IsFree();
+
+  @override
+  Widget build(final context) => const Text.rich(
+    TextSpan(
+      children: [
+        WidgetSpan(
+          alignment: PlaceholderAlignment.middle,
+          child: Icon(DsfrIcons.financeMoneyEuroCircleLine, color: DsfrColors.blueFranceSun113),
+        ),
+        WidgetSpan(child: SizedBox(width: DsfrSpacings.s1w)),
+        TextSpan(text: Localisation.gratuit, style: DsfrTextStyle.bodySmBold()),
+      ],
+    ),
+    style: DsfrTextStyle.bodySm(),
   );
 }

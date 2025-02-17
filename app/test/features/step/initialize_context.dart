@@ -82,6 +82,7 @@ void setAssistances() => FeatureContext.instance.dioMock.getM(
         'titre': 'Rénover son logement',
         'thematiques': ['logement'],
         'contenu': '',
+        'est_gratuit': false,
       },
       {
         'titre': 'Acheter un vélo',
@@ -90,12 +91,14 @@ void setAssistances() => FeatureContext.instance.dioMock.getM(
         'url_simulateur': '/aides/velo',
         'thematiques': ['transport'],
         'montant_max': 1500,
+        'est_gratuit': false,
       },
       {
         'id': 'composter_ses_dechets',
         'titre': 'Composter ses déchets',
         'thematiques': ['alimentation'],
         'contenu': '',
+        'est_gratuit': true,
       },
     ],
   },

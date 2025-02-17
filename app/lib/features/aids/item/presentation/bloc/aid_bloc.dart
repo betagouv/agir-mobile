@@ -5,7 +5,20 @@ import 'package:app/features/theme/core/domain/theme_type.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AidBloc extends Bloc<AidEvent, AidState> {
-  AidBloc() : super(const AidState(Aid(themeType: ThemeType.decouverte, title: '', content: ''))) {
+  AidBloc()
+    : super(
+        const AidState(
+          Aid(
+            themeType: ThemeType.decouverte,
+            title: '',
+            content: '',
+            amountMax: null,
+            isFree: false,
+            simulatorUrl: null,
+            partner: null,
+          ),
+        ),
+      ) {
     on<AidSelected>((final event, final emit) => emit(AidState(event.value)));
   }
 }
