@@ -24,7 +24,7 @@ dependencies:
   flutter_inset_shadow: 2.0.3
   flutter_localizations:
     sdk: flutter
-  flutter_markdown: 0.7.6
+  flutter_markdown: 0.7.6+2
   flutter_native_splash: 2.4.5
   flutter_secure_storage: 9.2.4
   flutter_widget_from_html_core: 0.15.2
@@ -48,7 +48,7 @@ dependencies:
 dev_dependencies:
   bdd_widget_test: 1.8.0
   build_runner: 2.4.15
-  dart_code_metrics_presets: 2.20.0
+  dart_code_metrics_presets: 2.21.0
   faker: 2.2.0
   flutter_launcher_icons: 0.14.3
   flutter_test:
