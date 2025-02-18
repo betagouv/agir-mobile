@@ -1,3 +1,4 @@
+import 'package:app/features/services/recipes/list/domain/recipe_filter.dart';
 import 'package:app/features/services/recipes/list/domain/recipe_summary.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
@@ -22,12 +23,14 @@ final class RecipesLoadInProgress extends RecipesState {
 
 @immutable
 final class RecipesLoadSuccess extends RecipesState {
-  const RecipesLoadSuccess({required this.recipes});
+  const RecipesLoadSuccess({required this.filters, required this.filterSelected, required this.recipes});
 
+  final List<RecipeFilter> filters;
+  final String filterSelected;
   final List<RecipeSummary> recipes;
 
   @override
-  List<Object> get props => [recipes];
+  List<Object> get props => [filters, filterSelected, recipes];
 }
 
 @immutable

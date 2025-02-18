@@ -11,10 +11,15 @@ sealed class RecipesEvent extends Equatable {
 
 @immutable
 final class RecipesLoadRequested extends RecipesEvent {
-  const RecipesLoadRequested(this.category);
+  const RecipesLoadRequested();
+}
 
-  final String category;
+@immutable
+final class RecipesFilterSelected extends RecipesEvent {
+  const RecipesFilterSelected(this.value);
+
+  final String value;
 
   @override
-  List<Object> get props => [category];
+  List<Object> get props => [value];
 }

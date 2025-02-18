@@ -61,7 +61,7 @@ class PartnerCard extends StatelessWidget {
                 Text(description, style: const DsfrTextStyle(fontSize: 15)),
                 const SizedBox(height: DsfrSpacings.s1w),
                 DsfrLink.md(label: url, onTap: () async => FnvUrlLauncher.launch(url)),
-                const SizedBox(height: DsfrSpacings.s4w),
+                const SizedBox(height: DsfrSpacings.s2w),
                 FnvImage.asset(logo, height: 40, semanticLabel: 'Logo de $name'),
               ],
             ),

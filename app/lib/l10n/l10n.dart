@@ -34,6 +34,7 @@ abstract final class Localisation {
   static const aidListTitle = '**Aides financières** et bons plans **chez vous**';
   static const attentionAucuneDonneeNePourraEtreRecuperee = 'Attention, aucune donnée ne pourra être récupérée.';
   static const aucuneAideDisponible = 'Aucune aide\ndisponible';
+  static const besoinDInspiration = "Besoin **d'inspiration** ?";
   static const bibliotheque = 'Ma bibliothèque';
   static const bibliothequeAucunArticle = 'Aucun article trouvé';
   static const bibliothequeSousTitre = 'Retrouver ici vos articles déjà consultés ainsi que vos favoris';
@@ -215,6 +216,10 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const quiz = 'Quiz';
   static const rafraichir = 'Rafraichir';
   static const rechercherParTitre = 'Rechercher par titre';
+  static const recettes = 'Recettes';
+  static const mangerBougerNom = 'La fabrique à Menus';
+  static const mangerBougerDescription = 'Pour vous aider jour après jour à manger varié et équilibré.';
+  static const mangerBougerUrl = 'https://www.mangerbouger.fr/manger-mieux/la-fabrique-a-menus/';
   static const recommandationsTitre = 'Recommandé, pour vous';
   static const recommande = 'Recommandé';
   static const renvoyerCode = 'Renvoyer le code';

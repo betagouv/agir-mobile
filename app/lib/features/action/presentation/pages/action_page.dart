@@ -7,7 +7,7 @@ import 'package:app/features/action/presentation/bloc/action_event.dart';
 import 'package:app/features/action/presentation/bloc/action_state.dart';
 import 'package:app/features/actions/domain/action_summary.dart';
 import 'package:app/features/services/lvao/presentation/widgets/lvao_horizontal_list.dart';
-import 'package:app/features/services/recipes/list/presentation/widgets/recipe_horizontal_list.dart';
+import 'package:app/features/services/recipes/action/presentation/widgets/recipe_horizontal_list.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
