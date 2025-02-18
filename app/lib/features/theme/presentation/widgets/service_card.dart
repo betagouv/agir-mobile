@@ -5,6 +5,7 @@ import 'package:app/core/infrastructure/url_launcher.dart';
 import 'package:app/core/presentation/widgets/composants/image.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/shadows.dart';
+import 'package:app/features/services/recipes/list/presentation/pages/recipes_page.dart';
 import 'package:app/features/services/seasonal_fruits_and_vegetables/presentation/pages/seasonal_fruits_and_vegetables_page.dart';
 import 'package:app/features/theme/core/domain/service_item.dart';
 import 'package:dsfr/dsfr.dart';
@@ -53,6 +54,8 @@ class _InternalServiceCard extends StatelessWidget {
     onTap: () async {
       if (service.isFruitsLegumesService) {
         await GoRouter.of(context).pushNamed(SeasonalFruitsAndVegetablesPage.name);
+      } else if (service.isRecipeService) {
+        await GoRouter.of(context).pushNamed(RecipesPage.name);
       }
     },
   );

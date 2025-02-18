@@ -118,23 +118,15 @@ class _DsfrLinkState extends State<DsfrLink> with MaterialStateMixin<DsfrLink> {
           highlightColor: const Color(0x21000000),
           canRequestFocus: widget.onTap != null,
           onFocusChange: updateMaterialState(WidgetState.focused),
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              border:
-                  !isFocused && !isDisabled
-                      ? Border(
-                        bottom: BorderSide(
-                          color: resolveForegroundColor,
-                          width: isPressed || isHovered ? widget.underlineThickness : 1,
-                        ),
-                      )
-                      : null,
-            ),
-            child: DsfrFocusWidget(
-              isFocused: isFocused,
-              child: Text.rich(
-                TextSpan(children: widget.iconPosition == DsfrLinkIconPosition.start ? list : list.reversed.toList()),
-                style: widget.textStyle.copyWith(color: resolveForegroundColor),
+          child: DsfrFocusWidget(
+            isFocused: isFocused,
+            child: Text.rich(
+              TextSpan(children: widget.iconPosition == DsfrLinkIconPosition.start ? list : list.reversed.toList()),
+              style: widget.textStyle.copyWith(
+                color: resolveForegroundColor,
+                decoration: !isFocused && !isDisabled ? TextDecoration.underline : null,
+                decorationColor: resolveForegroundColor,
+                decorationThickness: isPressed || isHovered ? widget.underlineThickness : 1,
               ),
             ),
           ),
