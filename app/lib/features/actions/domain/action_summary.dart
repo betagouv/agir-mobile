@@ -1,3 +1,4 @@
+import 'package:app/features/actions/domain/action_type.dart';
 import 'package:equatable/equatable.dart';
 
 final class ActionSummary extends Equatable {
@@ -18,5 +19,3 @@ final class ActionSummary extends Equatable {
   @override
   List<Object?> get props => [type, id, title, numberOfActionsCompleted, numberOfAidsAvailable];
 }
-
-enum ActionType { classic, quiz, performance, simulator }

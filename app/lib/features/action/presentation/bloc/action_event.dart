@@ -1,3 +1,4 @@
+import 'package:app/features/actions/domain/action_type.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
@@ -11,10 +12,11 @@ sealed class ActionEvent extends Equatable {
 
 @immutable
 final class ActionLoadRequested extends ActionEvent {
-  const ActionLoadRequested(this.id);
+  const ActionLoadRequested(this.id, this.type);
 
+  final ActionType type;
   final String id;
 
   @override
-  List<Object> get props => [id];
+  List<Object> get props => [id, type];
 }
