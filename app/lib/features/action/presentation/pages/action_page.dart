@@ -5,7 +5,7 @@ import 'package:app/core/presentation/widgets/fondamentaux/shadows.dart';
 import 'package:app/features/action/presentation/bloc/action_bloc.dart';
 import 'package:app/features/action/presentation/bloc/action_event.dart';
 import 'package:app/features/action/presentation/bloc/action_state.dart';
-import 'package:app/features/actions/domain/action_summary.dart';
+import 'package:app/features/actions/domain/action_type.dart';
 import 'package:app/features/services/lvao/presentation/widgets/lvao_horizontal_list.dart';
 import 'package:app/features/services/recipes/action/presentation/widgets/recipe_horizontal_list.dart';
 import 'package:dsfr/dsfr.dart';
@@ -15,7 +15,10 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:go_router/go_router.dart';
 
 class ActionPage extends StatelessWidget {
-  const ActionPage({super.key, required this.id});
+  const ActionPage({super.key, required this.id, required this.type});
+
+  final String id;
+  final ActionType type;
 
   static const name = 'action';
 
@@ -24,16 +27,22 @@ class ActionPage extends StatelessWidget {
     required final String title,
     required final ActionType type,
     required final String id,
-  }) => {'titre': title, 'type': type.name, 'id': id};
+  }) => {'titre': title, 'type': type.toAPIString(), 'id': id};
 
-  final String id;
-
-  static GoRoute get route =>
-      GoRoute(path: path, name: name, builder: (final context, final state) => ActionPage(id: state.pathParameters['id']!));
+  static GoRoute get route => GoRoute(
+    path: path,
+    name: name,
+    builder:
+        (final context, final state) => ActionPage(
+          id: state.pathParameters['id']!,
+          // NOTE: ne pourrait-on pas éviter de devoir reparser le type ici ?
+          type: actionTypeFromAPIString(state.pathParameters['type']!),
+        ),
+  );
 
   @override
   Widget build(final BuildContext context) => BlocProvider(
-    create: (final context) => ActionBloc(repository: context.read())..add(ActionLoadRequested(id)),
+    create: (final context) => ActionBloc(repository: context.read())..add(ActionLoadRequested(id, type)),
     child: const _View(),
   );
 }
@@ -49,7 +58,7 @@ class _View extends StatelessWidget {
           (final context, final state) => switch (state) {
             ActionInitial() || ActionLoadInProgress() => const Center(child: CircularProgressIndicator()),
             ActionLoadSuccess() => _Success(state),
-            ActionLoadFailure() => const Center(child: Text("Erreur lors du chargement de l'action")),
+            ActionLoadFailure(errorMessage: final errorMessage) => Center(child: Text(errorMessage)),
           },
     ),
   );
