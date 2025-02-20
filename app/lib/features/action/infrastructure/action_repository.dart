@@ -18,7 +18,7 @@ class ActionRepository {
     final response = await _client.get(Endpoints.action(type: actionTypeAPI, code: id));
 
     if (isResponseUnsuccessful(response.statusCode)) {
-      // TODO: specify a better error message?
+      // TODO(erolley): specify a better error message?
       return Left(Exception("Type: $actionTypeAPI,\nID: $id,\nError: Erreur lors de la récupération de l'action: $response"));
     }
 
@@ -30,10 +30,8 @@ class ActionRepository {
       case ActionType.classic:
         return Right(ActionClassicMapper.fromJson(json));
       case ActionType.quiz:
-        // TODO: Handle this case.
-        throw UnimplementedError();
       case ActionType.performance:
-        // TODO: Handle this case.
+        // TODO(erolley): Handle this case.
         throw UnimplementedError();
     }
   }
