@@ -2,12 +2,14 @@ import 'package:app/core/presentation/widgets/composants/app_bar.dart';
 import 'package:app/core/presentation/widgets/composants/image.dart';
 import 'package:app/core/presentation/widgets/composants/scaffold.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/shadows.dart';
+import 'package:app/features/action/domain/action.dart';
 import 'package:app/features/action/presentation/bloc/action_bloc.dart';
 import 'package:app/features/action/presentation/bloc/action_event.dart';
 import 'package:app/features/action/presentation/bloc/action_state.dart';
 import 'package:app/features/actions/domain/action_type.dart';
 import 'package:app/features/services/lvao/presentation/widgets/lvao_horizontal_list.dart';
 import 'package:app/features/services/recipes/action/presentation/widgets/recipe_horizontal_list.dart';
+import 'package:app/l10n/l10n.dart';
 import 'package:dsfr/dsfr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,22 +24,19 @@ class ActionPage extends StatelessWidget {
 
   static const name = 'action';
 
-  static const path = 'action/:titre/:type/:id';
+  static const path = 'action/:type/:titre/:id';
   static Map<String, String> pathParameters({
-    required final String title,
     required final ActionType type,
+    required final String title,
     required final String id,
-  }) => {'titre': title, 'type': type.toAPIString(), 'id': id};
+  }) => {'type': actionTypeToAPIString(type), 'titre': title, 'id': id};
 
   static GoRoute get route => GoRoute(
     path: path,
     name: name,
     builder:
-        (final context, final state) => ActionPage(
-          id: state.pathParameters['id']!,
-          // NOTE: ne pourrait-on pas éviter de devoir reparser le type ici ?
-          type: actionTypeFromAPIString(state.pathParameters['type']!),
-        ),
+        (final context, final state) =>
+            ActionPage(id: state.pathParameters['id']!, type: actionTypeFromAPIString(state.pathParameters['type']!)),
   );
 
   @override
@@ -77,35 +76,112 @@ class _Success extends StatelessWidget {
 
     return ListView(
       children: [
-        Padding(
-          padding: pagePadding,
-          child: MarkdownBody(data: action.title, styleSheet: MarkdownStyleSheet(p: const DsfrTextStyle(fontSize: 28))),
-        ),
-        const SizedBox(height: DsfrSpacings.s2w),
-        Padding(padding: pagePadding, child: Text(action.subTitle, style: const DsfrTextStyle.bodyLg())),
-        const SizedBox(height: DsfrSpacings.s4w),
-        DecoratedBox(
-          decoration: const BoxDecoration(color: Colors.white, boxShadow: actionOmbre),
-          child: Column(
-            children: [
-              const SizedBox(height: DsfrSpacings.s2w),
-              Padding(padding: pagePadding, child: _Markdown(data: action.why)),
-              if (action.hasLvaoService) ...[
-                const SizedBox(height: DsfrSpacings.s4w),
-                LvaoHorizontalList(category: action.lvaoService.category),
-              ],
-              if (action.hasRecipesService) ...[
-                const SizedBox(height: DsfrSpacings.s4w),
-                RecipeHorizontalList(category: action.recipesService.category),
-              ],
-              const SizedBox(height: DsfrSpacings.s4w),
-              Padding(padding: pagePadding, child: _Markdown(data: action.how)),
-              const SizedBox(height: DsfrSpacings.s2w),
-            ],
-          ),
-        ),
+        _TitleWithSubTitleView(pagePadding: pagePadding, title: action.title, subTitle: action.subTitle),
+        _WhySection(pagePadding: pagePadding, why: action.why),
+        switch (action) {
+          ActionClassic() => _ActionClassicView(action: action),
+          ActionSimulator() => _ActionSimulatorView(action: action),
+        },
       ],
     );
+  }
+}
+
+class _TitleWithSubTitleView extends StatelessWidget {
+  const _TitleWithSubTitleView({required this.pagePadding, required this.title, required this.subTitle});
+
+  final EdgeInsets pagePadding;
+  final String title;
+  final String subTitle;
+
+  @override
+  Widget build(final BuildContext context) => Padding(
+    padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s4w),
+    child: Column(
+      children: [
+        Padding(
+          padding: pagePadding,
+          child: MarkdownBody(data: title, styleSheet: MarkdownStyleSheet(p: const DsfrTextStyle(fontSize: 28))),
+        ),
+        const SizedBox(height: DsfrSpacings.s2w),
+        Padding(padding: pagePadding, child: Text(subTitle, style: const DsfrTextStyle.bodyLg())),
+      ],
+    ),
+  );
+}
+
+class _WhySection extends StatelessWidget {
+  const _WhySection({required this.pagePadding, required this.why});
+
+  final EdgeInsets pagePadding;
+  final String why;
+
+  @override
+  Widget build(final BuildContext context) {
+    // FIXME: Should remove the text from the CMS directly.
+    final sanitizedWhy = why.replaceAll(RegExp(r'En quelques mots|En \*\*quelques mots\*\*'), '');
+
+    return DecoratedBox(
+      decoration: const BoxDecoration(color: Colors.white, boxShadow: actionOmbre),
+      child: Padding(
+        padding: pagePadding,
+        child: Column(
+          children: [
+            const SizedBox(height: DsfrSpacings.s4w),
+            const Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(DsfrIcons.editorFrQuoteLine, size: 32, color: DsfrColors.blueFranceSun113),
+                SizedBox(width: DsfrSpacings.s2w),
+                Text(Localisation.enQuelquesMots, style: DsfrTextStyle.headline2()),
+              ],
+            ),
+            const SizedBox(height: DsfrSpacings.s1w),
+            _Markdown(data: sanitizedWhy),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _ActionClassicView extends StatelessWidget {
+  const _ActionClassicView({required this.action});
+
+  final ActionClassic action;
+
+  static const pagePadding = EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w);
+
+  @override
+  Widget build(final BuildContext context) => DecoratedBox(
+    decoration: const BoxDecoration(color: Colors.white, boxShadow: actionOmbre),
+    child: Column(
+      children: [
+        if (action.hasLvaoService) ...[
+          const SizedBox(height: DsfrSpacings.s4w),
+          LvaoHorizontalList(category: action.lvaoService.category),
+        ],
+        if (action.hasRecipesService) ...[
+          const SizedBox(height: DsfrSpacings.s4w),
+          RecipeHorizontalList(category: action.recipesService.category),
+        ],
+        const SizedBox(height: DsfrSpacings.s4w),
+        Padding(padding: pagePadding, child: _Markdown(data: action.how)),
+        const SizedBox(height: DsfrSpacings.s2w),
+      ],
+    ),
+  );
+}
+
+class _ActionSimulatorView extends StatelessWidget {
+  const _ActionSimulatorView({required this.action});
+
+  final ActionSimulator action;
+
+  @override
+  Widget build(final BuildContext context) {
+    // TODO: implement the questions repository on top of the new backend routes.
+    return const Placeholder();
   }
 }
 

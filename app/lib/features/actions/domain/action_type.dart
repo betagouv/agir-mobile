@@ -8,11 +8,9 @@ ActionType actionTypeFromAPIString(final String value) => switch (value) {
   _ => throw UnimplementedError('Unknown action type: $value'),
 };
 
-extension ToAPIString on ActionType {
-  String toAPIString() => switch (this) {
-    ActionType.classic => 'classique',
-    ActionType.quiz => 'quizz',
-    ActionType.performance => 'bilan',
-    ActionType.simulator => 'simulateur',
-  };
-}
+String actionTypeToAPIString(final ActionType value) => switch (value) {
+  ActionType.classic => 'classique',
+  ActionType.quiz => 'quizz',
+  ActionType.performance => 'bilan',
+  ActionType.simulator => 'simulateur',
+};
