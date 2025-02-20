@@ -5,6 +5,7 @@ import 'package:app/features/know_your_customer/detail/presentation/bloc/mieux_v
 import 'package:app/features/know_your_customer/detail/presentation/bloc/mieux_vous_connaitre_edit_state.dart';
 import 'package:app/features/know_your_customer/detail/presentation/form/choix_multiple.dart';
 import 'package:app/features/know_your_customer/detail/presentation/form/choix_unique.dart';
+import 'package:app/features/know_your_customer/detail/presentation/form/decimal.dart';
 import 'package:app/features/know_your_customer/detail/presentation/form/entier.dart';
 import 'package:app/features/know_your_customer/detail/presentation/form/libre.dart';
 import 'package:app/features/know_your_customer/detail/presentation/form/mieux_vous_connaitre_controller.dart';
@@ -101,6 +102,7 @@ class _LoadedContentState extends State<_LoadedContent> {
       QuestionSingleChoice() => _ChoixUniqueContent(question: question),
       QuestionMultipleChoice() => _ChoixMultipleContent(question: question),
       QuestionInteger() => _EntierContent(question: question),
+      QuestionDecimal() => _DecimalContent(question: question),
       QuestionOpen() => _LibreContent(question: question),
       QuestionMosaicBoolean() => _MosaicContent(question: question),
     };
@@ -150,6 +152,16 @@ class _EntierContent extends StatelessWidget {
   @override
   Widget build(final context) =>
       Column(spacing: DsfrSpacings.s3w, children: [FnvTitle(title: question.label), Entier(question: question)]);
+}
+
+class _DecimalContent extends StatelessWidget {
+  const _DecimalContent({required this.question});
+
+  final QuestionDecimal question;
+
+  @override
+  Widget build(final context) =>
+      Column(spacing: DsfrSpacings.s3w, children: [FnvTitle(title: question.label), Decimal(question: question)]);
 }
 
 class _MosaicContent extends StatelessWidget {

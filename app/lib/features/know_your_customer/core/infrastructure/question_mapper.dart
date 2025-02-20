@@ -17,6 +17,7 @@ abstract final class QuestionMapper {
       'libre' => _questionOpen(json),
       'mosaic_boolean' => _questionMosaicBoolean(json),
       'entier' => _questionInteger(json),
+      'decimal' => _questionDecimal(json),
       _ => null,
     };
   }
@@ -58,6 +59,15 @@ abstract final class QuestionMapper {
   );
 
   static QuestionInteger _questionInteger(final Map<String, dynamic> json) => QuestionInteger(
+    id: QuestionCode(json['code'] as String),
+    theme: _mapThemeType(json['thematique'] as String),
+    label: json['question'] as String,
+    isAnswered: json['is_answered'] as bool,
+    response: _response(json['reponse_unique'] as Map<String, dynamic>),
+    points: (json['points'] as num).toInt(),
+  );
+
+  static QuestionDecimal _questionDecimal(final Map<String, dynamic> json) => QuestionDecimal(
     id: QuestionCode(json['code'] as String),
     theme: _mapThemeType(json['thematique'] as String),
     label: json['question'] as String,
