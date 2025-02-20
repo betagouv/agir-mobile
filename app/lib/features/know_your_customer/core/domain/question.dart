@@ -86,6 +86,31 @@ final class QuestionInteger extends QuestionUnique {
   );
 }
 
+// TODO: Could be factorized with QuestionInteger
+final class QuestionDecimal extends QuestionUnique {
+  const QuestionDecimal({
+    required super.id,
+    required super.theme,
+    required super.label,
+    required super.isAnswered,
+    required super.response,
+    required super.points,
+  });
+
+  @override
+  String responsesDisplay() => response.value;
+
+  @override
+  QuestionDecimal changeResponse(final String value) => QuestionDecimal(
+    id: id,
+    theme: theme,
+    label: label,
+    isAnswered: isAnswered,
+    response: response.copyWith(value: value),
+    points: points,
+  );
+}
+
 sealed class QuestionMultiple extends Question {
   const QuestionMultiple({
     required super.id,
