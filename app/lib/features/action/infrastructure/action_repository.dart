@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:app/core/infrastructure/dio_http_client.dart';
 import 'package:app/core/infrastructure/endpoints.dart';
@@ -15,22 +14,21 @@ class ActionRepository {
   final DioHttpClient _client;
 
   Future<Either<Exception, Action>> fetch(final String id, final ActionType type) async {
-    log("Fetching action with type: ${type.toAPIString()} and id: $id");
-    final response = await _client.get(Endpoints.action(type: type.toAPIString(), code: id));
+    final actionTypeAPI = actionTypeToAPIString(type);
+    final response = await _client.get(Endpoints.action(type: actionTypeAPI, code: id));
 
     if (isResponseUnsuccessful(response.statusCode)) {
-      return Left(
-        Exception("Type: ${type.toAPIString()},\nID: $id,\nError: Erreur lors de la récupération de l'action: ${response}"),
-      );
+      // TODO: specify a better error message?
+      return Left(Exception("Type: $actionTypeAPI,\nID: $id,\nError: Erreur lors de la récupération de l'action: $response"));
     }
 
     final json = response.data! as Map<String, dynamic>;
 
     switch (type) {
       case ActionType.simulator:
-        return Right(ActionSimulateurMapper.fromJson(json));
+        return Right(ActionSimulatorMapper.fromJson(json));
       case ActionType.classic:
-        return Right(ActionMapper.fromJson(json));
+        return Right(ActionClassicMapper.fromJson(json));
       case ActionType.quiz:
         // TODO: Handle this case.
         throw UnimplementedError();

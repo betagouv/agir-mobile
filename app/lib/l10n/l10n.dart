@@ -97,6 +97,7 @@ abstract final class Localisation {
   static const enchanteDetails =
       'Pour découvrir des aides, services et contenus disponibles proches de chez vous, indiquez-nous votre lieu de résidence.';
   static const enfants = 'Enfant(s) de moins de 18 ans';
+  static const enQuelquesMots = 'En quelques mots';
   static const entre100et150m2 = 'Entre 100 et 150 m²';
   static const entre35et70m2 = 'Entre 35 et 70 m²';
   static const entre70et100m2 = 'Entre 70 et 100 m²';
