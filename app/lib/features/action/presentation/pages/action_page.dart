@@ -19,17 +19,17 @@ import 'package:go_router/go_router.dart';
 class ActionPage extends StatelessWidget {
   const ActionPage({super.key, required this.id, required this.type});
 
-  final String id;
-  final ActionType type;
-
   static const name = 'action';
-
   static const path = 'action/:type/:titre/:id';
+
   static Map<String, String> pathParameters({
     required final ActionType type,
     required final String title,
     required final String id,
   }) => {'type': actionTypeToAPIString(type), 'titre': title, 'id': id};
+
+  final String id;
+  final ActionType type;
 
   static GoRoute get route => GoRoute(
     path: path,
@@ -57,7 +57,7 @@ class _View extends StatelessWidget {
           (final context, final state) => switch (state) {
             ActionInitial() || ActionLoadInProgress() => const Center(child: CircularProgressIndicator()),
             ActionLoadSuccess() => _Success(state),
-            ActionLoadFailure(errorMessage: final errorMessage) => Center(child: Text(errorMessage)),
+            ActionLoadFailure(:final errorMessage) => Center(child: Text(errorMessage)),
           },
     ),
   );
@@ -98,12 +98,12 @@ class _TitleWithSubTitleView extends StatelessWidget {
   Widget build(final BuildContext context) => Padding(
     padding: const EdgeInsets.symmetric(vertical: DsfrSpacings.s4w),
     child: Column(
+      spacing: DsfrSpacings.s2w,
       children: [
         Padding(
           padding: pagePadding,
           child: MarkdownBody(data: title, styleSheet: MarkdownStyleSheet(p: const DsfrTextStyle(fontSize: 28))),
         ),
-        const SizedBox(height: DsfrSpacings.s2w),
         Padding(padding: pagePadding, child: Text(subTitle, style: const DsfrTextStyle.bodyLg())),
       ],
     ),
@@ -118,7 +118,7 @@ class _WhySection extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    // FIXME: Should remove the text from the CMS directly.
+    // FIXME(erolley): Should remove the text from the CMS directly.
     final sanitizedWhy = why.replaceAll(RegExp(r'En quelques mots|En \*\*quelques mots\*\*'), '');
 
     return DecoratedBox(
@@ -130,9 +130,9 @@ class _WhySection extends StatelessWidget {
             const SizedBox(height: DsfrSpacings.s4w),
             const Row(
               crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: DsfrSpacings.s2w,
               children: [
                 Icon(DsfrIcons.editorFrQuoteLine, size: 32, color: DsfrColors.blueFranceSun113),
-                SizedBox(width: DsfrSpacings.s2w),
                 Text(Localisation.enQuelquesMots, style: DsfrTextStyle.headline2()),
               ],
             ),
@@ -148,9 +148,9 @@ class _WhySection extends StatelessWidget {
 class _ActionClassicView extends StatelessWidget {
   const _ActionClassicView({required this.action});
 
-  final ActionClassic action;
-
   static const pagePadding = EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w);
+
+  final ActionClassic action;
 
   @override
   Widget build(final BuildContext context) => DecoratedBox(
@@ -178,11 +178,9 @@ class _ActionSimulatorView extends StatelessWidget {
 
   final ActionSimulator action;
 
+  // TODO(erolley): implement the questions repository on top of the new backend routes.
   @override
-  Widget build(final BuildContext context) {
-    // TODO: implement the questions repository on top of the new backend routes.
-    return const Placeholder();
-  }
+  Widget build(final BuildContext context) => Text(action.title);
 }
 
 class _Markdown extends StatelessWidget {

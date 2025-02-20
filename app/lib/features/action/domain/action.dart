@@ -32,7 +32,7 @@ final class ActionClassic extends Action {
   bool get hasRecipesService => services.any((final service) => service.id == ServiceId.recipes);
 
   @override
-  List<Object?> get props => [id, title, subTitle, why, how, services];
+  List<Object?> get props => [...super.props, how, services];
 }
 
 final class ActionSimulator extends Action {
@@ -47,5 +47,5 @@ final class ActionSimulator extends Action {
   final List<Question> questions;
 
   @override
-  List<Object?> get props => [id, title, subTitle, why];
+  List<Object?> get props => [...super.props, questions];
 }

@@ -86,7 +86,7 @@ final class QuestionInteger extends QuestionUnique {
   );
 }
 
-// TODO: Could be factorized with QuestionInteger
+// TODO(erolley): Could be factorized with QuestionInteger
 final class QuestionDecimal extends QuestionUnique {
   const QuestionDecimal({
     required super.id,
