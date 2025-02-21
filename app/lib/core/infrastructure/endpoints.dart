@@ -44,4 +44,9 @@ abstract final class Endpoints {
   static String servicesParThematique(final String codeThematique) =>
       '/utilisateurs/{userId}/thematiques/$codeThematique/recherche_services';
   static String recipe(final String recipeId) => '/utilisateurs/{userId}/recherche_services/recettes/last_results/$recipeId';
+
+  // Car Simulator Endpoints
+  // NOTE(erolley): Should we have sub classes for each endpoint type (eg: Endpoints.CarSimulator.getCurrentCarResult)?
+
+  static const carSimulatorComputeCurrentCar = '/utilisateurs/{userId}/simulateur_voiture/resultat/voiture_actuelle';
 }

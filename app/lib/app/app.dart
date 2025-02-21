@@ -22,6 +22,8 @@ import 'package:app/features/articles/presentation/pages/article_page.dart';
 import 'package:app/features/authentification/core/infrastructure/authentification_repository.dart';
 import 'package:app/features/bibliotheque/infrastructure/bibliotheque_repository.dart';
 import 'package:app/features/bibliotheque/presentation/bloc/bibliotheque_bloc.dart';
+import 'package:app/features/car_simulator/infrastructure/car_simulator_repository.dart';
+import 'package:app/features/car_simulator/presentation/bloc/car_simulator_bloc.dart';
 import 'package:app/features/challenges/detail/infrastructure/challenge_repository.dart';
 import 'package:app/features/challenges/list/infrastructure/challenge_list_repository.dart';
 import 'package:app/features/challenges/section/infrastructure/challenges_repository.dart';
@@ -263,6 +265,9 @@ class _AppState extends State<App> {
                           EnvironmentalPerformanceSummaryRepository(client: widget.dioHttpClient),
                         ),
                       ),
+                ),
+                BlocProvider(
+                  create: (final context) => CarSimulatorBloc(repository: CarSimulatorRepository(client: widget.dioHttpClient)),
                 ),
               ],
               child: MaterialApp.router(
