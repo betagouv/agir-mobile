@@ -48,4 +48,11 @@ final class ActionSimulator extends Action {
 
   @override
   List<Object?> get props => [...super.props, questions];
+
+  ActionSimulatorId getId() => switch (id) {
+    'action_simulateur_voiture' => ActionSimulatorId.carSimulator,
+    _ => throw UnimplementedError(),
+  };
 }
+
+enum ActionSimulatorId { carSimulator }
