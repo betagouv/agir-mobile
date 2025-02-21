@@ -1,6 +1,6 @@
 import 'package:flutter/painting.dart';
 
-const carteOmbre = [BoxShadow(color: Color(0x17262626), offset: Offset(0, 2), blurRadius: 13)];
+const cardBoxShadow = [BoxShadow(color: Color(0x17262626), offset: Offset(0, 2), blurRadius: 13)];
 
 const appBarOmbre = [BoxShadow(color: Color(0x0A000000), offset: Offset(0, 2), blurRadius: 10)];
 

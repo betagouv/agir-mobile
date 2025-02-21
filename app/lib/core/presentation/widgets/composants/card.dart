@@ -25,7 +25,7 @@ class _FnvCardState extends State<FnvCard> with MaterialStateMixin<FnvCard> {
       child: DecoratedBox(
         decoration: ShapeDecoration(
           color: FnvColors.carteFond,
-          shadows: carteOmbre,
+          shadows: cardBoxShadow,
           shape: RoundedRectangleBorder(
             side: widget.borderColor == null ? BorderSide.none : BorderSide(color: widget.borderColor!, width: DsfrSpacings.s0v5),
             borderRadius: borderRadius,

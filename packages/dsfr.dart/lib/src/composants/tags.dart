@@ -33,6 +33,25 @@ class DsfrTag extends StatelessWidget {
          onTap: onTap,
        );
 
+  const DsfrTag.md({
+    required final InlineSpan label,
+    required final Color backgroundColor,
+    required final Color foregroundColor,
+    final IconData? icon,
+    final TextStyle textStyle = const DsfrTextStyle.bodyMd(),
+    final GestureTapCallback? onTap,
+    final Key? key,
+  }) : this._(
+         key: key,
+         label: label,
+         textStyle: textStyle,
+         backgroundColor: backgroundColor,
+         foregroundColor: foregroundColor,
+         padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
+         icon: icon,
+         onTap: onTap,
+       );
+
   final IconData? icon;
   final InlineSpan label;
   final GestureTapCallback? onTap;

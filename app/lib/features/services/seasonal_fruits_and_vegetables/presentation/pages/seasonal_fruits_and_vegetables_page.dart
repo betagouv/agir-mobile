@@ -221,7 +221,7 @@ class _PlantCard extends StatelessWidget {
   Widget build(final BuildContext context) => DecoratedBox(
     decoration: const ShapeDecoration(
       color: FnvColors.carteFond,
-      shadows: carteOmbre,
+      shadows: cardBoxShadow,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(DsfrSpacings.s1w))),
     ),
     child: child,

@@ -7,12 +7,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fpdart/fpdart.dart';
 
 class CarSimulatorBloc extends Bloc<CarSimulatorEvent, CarSimulatorState> {
-  CarSimulatorBloc({
-    // required final ProfilRepository profilRepository,
-    required final CarSimulatorRepository repository,
-  }) : /* _profilRepository = profilRepository, */
-       _carSimulatorRepository = repository,
-       super(const CarSimulatorInitial()) {
+  CarSimulatorBloc({required final CarSimulatorRepository repository})
+    : _carSimulatorRepository = repository,
+      super(const CarSimulatorLoading()) {
     on<CarSimulatorGetCurrentCarResult>(_onGetCurrentCarResult);
   }
 

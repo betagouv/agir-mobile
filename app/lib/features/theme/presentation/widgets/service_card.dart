@@ -95,7 +95,7 @@ class _ServiceCardBaseState extends State<_ServiceCardBase> with MaterialStateMi
       child: DecoratedBox(
         decoration: ShapeDecoration(
           color: widget.backgroundColor,
-          shadows: carteOmbre,
+          shadows: cardBoxShadow,
           shape: RoundedRectangleBorder(side: BorderSide(color: widget.borderColor), borderRadius: borderRadius),
         ),
         child: Material(

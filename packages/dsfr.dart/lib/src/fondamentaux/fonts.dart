@@ -43,6 +43,14 @@ class DsfrTextStyle extends TextStyle {
   const DsfrTextStyle.headline6({final Color color = DsfrColors.grey50})
     : this(fontSize: 18, fontWeight: FontWeight.bold, color: color);
 
+  const DsfrTextStyle.body2Xl({final Color color = DsfrColors.grey50}) : this(fontSize: 22, color: color);
+
+  const DsfrTextStyle.body2XlMedium({final Color color = DsfrColors.grey50})
+    : this(fontSize: 22, fontWeight: FontWeight.w500, color: color);
+
+  const DsfrTextStyle.body2XlBold({final Color color = DsfrColors.grey50})
+    : this(fontSize: 22, fontWeight: FontWeight.bold, color: color);
+
   const DsfrTextStyle.bodyXl({final Color color = DsfrColors.grey50}) : this(fontSize: 20, color: color);
 
   const DsfrTextStyle.bodyXlMedium({final Color color = DsfrColors.grey50})

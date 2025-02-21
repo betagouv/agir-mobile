@@ -11,11 +11,6 @@ sealed class CarSimulatorState extends Equatable {
 }
 
 @immutable
-final class CarSimulatorInitial extends CarSimulatorState {
-  const CarSimulatorInitial();
-}
-
-@immutable
 final class CarSimulatorLoading extends CarSimulatorState {
   const CarSimulatorLoading();
 }

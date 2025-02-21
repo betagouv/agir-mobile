@@ -252,6 +252,11 @@ Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme de
   static const homeActionsLink = 'Voir toutes mes actions';
   static const vousAvezDejaUnCompte = 'Vous avez déjà un compte ?';
   static const vousEtesProprietaireDeVotreLogement = 'Vous êtes propriétaire de votre logement ?';
+  static const votreVehiculeActuel = 'Votre véhicule actuel';
+  static const coutAnnuel = 'Coût annuel';
+  static const emissionsAnnuelles = 'Émissions annuelles';
+  static const euroSymbol = '€';
+  static const kgCO2e = 'kgCO2e';
 
   static String cacherEmail(final String email) {
     final indexArobase = email.characters.findFirst(Characters('@'))!.stringBeforeLength;
