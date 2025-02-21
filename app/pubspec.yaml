@@ -1,7 +1,7 @@
 name: app
 description: "J’agis vous accompagne à chaque étape de la transition écologique."
 publish_to: 'none'
-version: 0.16.9+0
+version: 0.16.10+0
 
 environment:
   sdk: 3.7.0
