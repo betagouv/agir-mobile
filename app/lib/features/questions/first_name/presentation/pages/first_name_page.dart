@@ -4,7 +4,7 @@ import 'package:app/core/presentation/widgets/composants/bottom_bar.dart';
 import 'package:app/core/presentation/widgets/composants/scaffold.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
-import 'package:app/features/authentification/widgets/onboarding_illustration.dart';
+import 'package:app/features/questions/core/presentation/widgets/onboarding_illustration.dart';
 import 'package:app/features/questions/first_name/domain/first_name.dart';
 import 'package:app/features/questions/first_name/presentation/bloc/first_name_bloc.dart';
 import 'package:app/features/questions/first_name/presentation/bloc/first_name_event.dart';

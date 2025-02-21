@@ -36,6 +36,8 @@ class DioHttpClient {
 
   final Dio _dio;
 
+  String get baseUrl => _dio.options.baseUrl;
+
   void add(final Interceptor interceptor) => _dio.interceptors.add(interceptor);
 
   Future<Response<dynamic>> get(final String path) async => _dio.get(path);

@@ -2,7 +2,9 @@ import 'package:app/core/presentation/widgets/composants/alert.dart';
 import 'package:app/core/presentation/widgets/composants/scaffold.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
+import 'package:app/features/authentification/core/presentation/widgets/divider_with_text.dart';
 import 'package:app/features/authentification/creer_compte/presentation/pages/creer_compte_page.dart';
+import 'package:app/features/authentification/france_connect/presentation/widgets/france_connect_section.dart';
 import 'package:app/features/authentification/mot_de_passe_oublie/pages/mot_de_passe_oublie_page.dart';
 import 'package:app/features/authentification/saisie_code/presentation/pages/saisie_code_page.dart';
 import 'package:app/features/authentification/se_connecter/presentation/bloc/se_connecter_bloc.dart';
@@ -32,6 +34,10 @@ class SeConnecterView extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(paddingVerticalPage),
         children: [
+          const FranceConnectSection(),
+          const SizedBox(height: DsfrSpacings.s3w),
+          const DividerWithText(),
+          const SizedBox(height: DsfrSpacings.s3w),
           const Text(Localisation.pageConnexionTitre, style: DsfrTextStyle.headline2()),
           const SizedBox(height: DsfrSpacings.s3w),
           DsfrInput(
@@ -68,12 +74,7 @@ class SeConnecterView extends StatelessWidget {
                   label: Localisation.meConnecter,
                   variant: DsfrButtonVariant.primary,
                   size: DsfrButtonSize.lg,
-                  onPressed:
-                      state
-                          ? () {
-                            context.read<SeConnecterBloc>().add(const SeConnecterConnexionDemandee());
-                          }
-                          : null,
+                  onPressed: state ? () => context.read<SeConnecterBloc>().add(const SeConnecterConnexionDemandee()) : null,
                 ),
           ),
           const SizedBox(height: DsfrSpacings.s2w),

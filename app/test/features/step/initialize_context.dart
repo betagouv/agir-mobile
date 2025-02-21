@@ -15,6 +15,7 @@ Future<void> initializeContext(final WidgetTester tester) async {
   FeatureContext.instance.secureStorage = FlutterSecureStorageFake();
   FeatureContext.instance.packageInfo = const PackageInfoFake(version: '1.2.3', buildNumber: '4');
   FeatureContext.instance.dioMock = DioMock();
+  setLogout();
   setNotification();
   setFirstName();
   setProfile();
@@ -34,6 +35,8 @@ Future<void> initializeContext(final WidgetTester tester) async {
   setServices();
   setBicycleSimulator();
 }
+
+void setLogout() => FeatureContext.instance.dioMock.postM(Endpoints.logout);
 
 void setNotification() {
   FeatureContext.instance.dioMock.deleteM(Endpoints.notificationToken);

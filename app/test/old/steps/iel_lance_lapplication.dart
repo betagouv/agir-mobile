@@ -27,7 +27,7 @@ class _TrackerMock extends Mock implements Tracker {}
 Future<void> ielLanceLapplication(final WidgetTester tester) async {
   final clock = Clock.fixed(DateTime(1992));
   final authenticationService = AuthenticationService(
-    authenticationRepository: AuthenticationStorage(FlutterSecureStorageFake()),
+    authenticationStorage: AuthenticationStorage(FlutterSecureStorageFake()),
     clock: clock,
   );
   if (ScenarioContext().authentificationStatut is Authenticated) {

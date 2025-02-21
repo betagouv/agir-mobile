@@ -44,7 +44,7 @@ class AuthenticationStorage {
     _cachedExpirationDate = ExpirationDate(expirationTime);
   }
 
-  Future<void> deleteToken() async {
+  Future<void> deleteAuthToken() async {
     _cachedUserId = null;
     _cachedExpirationDate = null;
 

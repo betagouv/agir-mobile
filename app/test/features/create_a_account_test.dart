@@ -26,7 +26,7 @@ void main() {
     testWidgets('''Successful account creation''', (tester) async {
       await bddSetUp(tester);
       await theEmailDontExists(tester);
-      await iSee(tester, 'Créer mon compte J’agis');
+      await iSee(tester, 'Créez votre compte J’agis');
       await iEnterInTheField(tester, 'joe@doe.fr', 'Mon adresse email');
       await iEnterInTheField(tester, 'Azertyuiop1&', 'Mot de passe');
       await iAcceptTheTermsOfUse(tester);

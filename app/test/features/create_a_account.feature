@@ -6,7 +6,7 @@ Feature: Create a account
 
   Scenario: Successful account creation
     Given the email don't exists
-    Then I see {'Créer mon compte J’agis'}
+    Then I see {'Créez votre compte J’agis'}
 
     When I enter {'joe@doe.fr'} in the {'Mon adresse email'} field
     When I enter {'Azertyuiop1&'} in the {'Mot de passe'} field

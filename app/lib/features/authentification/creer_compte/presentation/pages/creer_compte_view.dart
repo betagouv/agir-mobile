@@ -3,10 +3,12 @@ import 'package:app/core/presentation/widgets/composants/mot_de_passe/mot_de_pas
 import 'package:app/core/presentation/widgets/composants/scaffold.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/colors.dart';
 import 'package:app/core/presentation/widgets/fondamentaux/rounded_rectangle_border.dart';
+import 'package:app/features/authentification/core/presentation/widgets/divider_with_text.dart';
 import 'package:app/features/authentification/creer_compte/presentation/bloc/creer_compte_bloc.dart';
 import 'package:app/features/authentification/creer_compte/presentation/bloc/creer_compte_event.dart';
 import 'package:app/features/authentification/creer_compte/presentation/bloc/creer_compte_state.dart';
 import 'package:app/features/authentification/creer_compte/presentation/widgets/jaccepte.dart';
+import 'package:app/features/authentification/france_connect/presentation/widgets/france_connect_section.dart';
 import 'package:app/features/authentification/saisie_code/presentation/pages/saisie_code_page.dart';
 import 'package:app/features/authentification/se_connecter/presentation/pages/se_connecter_page.dart';
 import 'package:app/l10n/l10n.dart';
@@ -33,6 +35,10 @@ class CreerCompteView extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(paddingVerticalPage),
         children: [
+          const FranceConnectSection(),
+          const SizedBox(height: DsfrSpacings.s3w),
+          const DividerWithText(),
+          const SizedBox(height: DsfrSpacings.s3w),
           const Text(Localisation.creerMonCompteApp, style: DsfrTextStyle.headline2()),
           const SizedBox(height: DsfrSpacings.s3w),
           DsfrInput(

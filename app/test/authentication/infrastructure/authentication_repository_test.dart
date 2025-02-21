@@ -39,7 +39,7 @@ void main() {
 
     test('Deleting a token', () async {
       // When
-      await repository.deleteToken();
+      await repository.deleteAuthToken();
 
       // Then
       verify(() => mockSecureStorage.delete(key: 'token')).called(1);

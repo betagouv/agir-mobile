@@ -11,10 +11,12 @@ abstract final class Endpoints {
   static String challenge(final String defiId) => '/utilisateurs/{userId}/defis/$defiId';
   static const creationCompte = '/utilisateurs_v2';
   static const events = '/utilisateurs/{userId}/events';
+  static const franceConnectStep2 = '/login_france_connect_step_2';
   static const gamification = '/utilisateurs/{userId}/gamification';
   static const logement = '/utilisateurs/{userId}/logement';
   static const login = '/utilisateurs/login_v2';
   static const loginCode = '/utilisateurs/login_v2_code';
+  static const logout = '/utilisateurs/{userId}/logout';
   static const missionsRecommandees = '/utilisateurs/{userId}/tuiles_missions';
   static String missionsRecommandeesParThematique(final String codeThematique) =>
       '/utilisateurs/{userId}/thematiques/$codeThematique/tuiles_missions';

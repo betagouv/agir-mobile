@@ -81,7 +81,7 @@ class _AppSetupState extends State<AppSetup> {
     );
     await authenticationStorage.init();
 
-    final authenticationService = AuthenticationService(authenticationRepository: authenticationStorage, clock: _clock);
+    final authenticationService = AuthenticationService(authenticationStorage: authenticationStorage, clock: _clock);
     await authenticationService.checkAuthenticationStatus();
 
     return authenticationService;
