@@ -7,6 +7,7 @@ import 'package:app/features/action/presentation/bloc/action_bloc.dart';
 import 'package:app/features/action/presentation/bloc/action_event.dart';
 import 'package:app/features/action/presentation/bloc/action_state.dart';
 import 'package:app/features/actions/domain/action_type.dart';
+import 'package:app/features/car_simulator/presentation/widgets/car_simulator_result.dart';
 import 'package:app/features/services/lvao/presentation/widgets/lvao_horizontal_list.dart';
 import 'package:app/features/services/recipes/action/presentation/widgets/recipe_horizontal_list.dart';
 import 'package:app/l10n/l10n.dart';
@@ -72,12 +73,10 @@ class _Success extends StatelessWidget {
   Widget build(final BuildContext context) {
     final action = state.action;
 
-    const pagePadding = EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w);
-
     return ListView(
       children: [
-        _TitleWithSubTitleView(pagePadding: pagePadding, title: action.title, subTitle: action.subTitle),
-        _WhySection(pagePadding: pagePadding, why: action.why),
+        _TitleWithSubTitleView(title: action.title, subTitle: action.subTitle),
+        _WhySectionView(action.why),
         switch (action) {
           ActionClassic() => _ActionClassicView(action: action),
           ActionSimulator() => _ActionSimulatorView(action: action),
@@ -88,11 +87,12 @@ class _Success extends StatelessWidget {
 }
 
 class _TitleWithSubTitleView extends StatelessWidget {
-  const _TitleWithSubTitleView({required this.pagePadding, required this.title, required this.subTitle});
+  const _TitleWithSubTitleView({required this.title, required this.subTitle});
 
-  final EdgeInsets pagePadding;
   final String title;
   final String subTitle;
+
+  static const padding = EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w);
 
   @override
   Widget build(final BuildContext context) => Padding(
@@ -101,19 +101,18 @@ class _TitleWithSubTitleView extends StatelessWidget {
       spacing: DsfrSpacings.s2w,
       children: [
         Padding(
-          padding: pagePadding,
+          padding: padding,
           child: MarkdownBody(data: title, styleSheet: MarkdownStyleSheet(p: const DsfrTextStyle(fontSize: 28))),
         ),
-        Padding(padding: pagePadding, child: Text(subTitle, style: const DsfrTextStyle.bodyLg())),
+        Padding(padding: padding, child: Text(subTitle, style: const DsfrTextStyle.bodyLg())),
       ],
     ),
   );
 }
 
-class _WhySection extends StatelessWidget {
-  const _WhySection({required this.pagePadding, required this.why});
+class _WhySectionView extends StatelessWidget {
+  const _WhySectionView(this.why);
 
-  final EdgeInsets pagePadding;
   final String why;
 
   @override
@@ -124,10 +123,9 @@ class _WhySection extends StatelessWidget {
     return DecoratedBox(
       decoration: const BoxDecoration(color: Colors.white, boxShadow: actionOmbre),
       child: Padding(
-        padding: pagePadding,
+        padding: const EdgeInsets.symmetric(horizontal: DsfrSpacings.s2w, vertical: DsfrSpacings.s4w),
         child: Column(
           children: [
-            const SizedBox(height: DsfrSpacings.s4w),
             const Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               spacing: DsfrSpacings.s2w,
@@ -180,7 +178,9 @@ class _ActionSimulatorView extends StatelessWidget {
 
   // TODO(erolley): implement the questions repository on top of the new backend routes.
   @override
-  Widget build(final BuildContext context) => Text(action.title);
+  Widget build(final BuildContext context) => switch (action.getId()) {
+    ActionSimulatorId.carSimulator => const CarSimulatorResult(key: Key('car_simulator_result')),
+  };
 }
 
 class _Markdown extends StatelessWidget {
